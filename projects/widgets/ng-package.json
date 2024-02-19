@@ -1,6 +1,12 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/widgets",
+  "assets": [
+    "./**/_*.scss",
+    "./**/*.svg",
+    "./**/*.ttf",
+    "./**/*.otf"
+  ],
   "lib": {
     "entryFile": "src/public-api.ts"
   }

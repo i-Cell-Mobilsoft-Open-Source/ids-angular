@@ -1,0 +1,18 @@
+app-root {
+  .demo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 40px;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .pt-2 {
+    padding-top: 2rem;
+  }
+}

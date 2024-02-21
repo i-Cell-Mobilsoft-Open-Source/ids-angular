@@ -24,6 +24,11 @@
       "ES2022",
       "dom"
     ],
+    "types": [
+      "cypress",
+      "node",
+      "cypress-real-events"
+    ],
     "paths": {
       "@i-cell/widgets/*": [
         "projects/widgets/*",

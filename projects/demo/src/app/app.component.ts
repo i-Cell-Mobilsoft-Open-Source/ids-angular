@@ -15,4 +15,8 @@ export class AppComponent {
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(Variant) as VariantType[];
   public filteredVariants = Object.values(Variant).filter((variant) => !["error", "success", "warning"].includes(variant)) as VariantType[];
+
+  onClick(buttonName: string) {
+    console.log(`${buttonName} button clicked`);
+  }
 }

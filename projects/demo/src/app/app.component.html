@@ -6,15 +6,15 @@
   <button
     type="button"
     idsButton
-    id="{{ appearance + '-' + size + '-' + variant }}-button"
+    id="{{ appearance + '-' + variant + '-' + size }}-button"
     [appearance]="appearance"
     [size]="size"
     [variant]="variant"
+    (click)="onClick(appearance + '-' + variant + '-' + size)"
   >
-    <!-- TODO: SVG icons -->
-    <span icon-leading>A</span>
-    {{ appearance + " " + size + " " + variant }} button
-    <span icon-trailing>B</span>
+    <img icon-leading src="assets/icons/search.svg" aria-hidden="true" alt=""/>
+    {{ appearance + " " + variant + " " + size }} button
+    <img icon-trailing src="assets/icons/done.svg" aria-hidden="true" alt=""/>
   </button>
     }
   }
@@ -27,15 +27,15 @@
   <button
     type="button"
     idsButton
-    id="{{ appearance + '-' + size + '-' + variant }}-disabled-button"
+    id="{{ appearance + '-' + variant + '-' + size }}-disabled-button"
     [appearance]="appearance"
     [size]="size"
     [variant]="variant"
     disabled
   >
-    <span icon-leading>A</span>
-    {{ appearance + " " + size + " " + variant }} button
-    <span icon-trailing>B</span>
+    <img icon-leading src="assets/icons/search.svg" aria-hidden="true" alt=""/>
+    {{ appearance + " " + variant + " " + size }} button
+    <img icon-trailing src="assets/icons/done.svg" aria-hidden="true" alt=""/>
   </button>
     }
   }

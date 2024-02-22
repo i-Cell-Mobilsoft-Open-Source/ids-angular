@@ -22,6 +22,10 @@ export class IdsButtonComponent {
   public appearance = input<AppearanceType | null>(Appearance.FILLED);
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<VariantType | null>(Variant.PRIMARY);
+  public disabled = input(false, {
+    transform: (value: boolean | string) =>
+      value != null && `${value}` !== 'false',
+  });
 
   iconLeading = contentChildren<unknown>('[icon-leading]');
   iconTrailing = contentChildren<unknown>('[icon-trailing]');
@@ -37,6 +41,9 @@ export class IdsButtonComponent {
       .join(' ')
   );
 
+  @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
+    return this.disabled() || null;
+  }
   @HostBinding('class') get classes(): string {
     return this.hostClasses();
   }

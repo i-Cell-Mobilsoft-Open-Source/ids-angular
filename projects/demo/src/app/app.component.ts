@@ -1,13 +1,47 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Menu } from './components/nav/menu.interface';
+import { NavComponent } from './components/nav/nav.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterModule, RouterOutlet, TranslateModule, NavComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'demo';
+  private translate: TranslateService = inject(TranslateService);
+  public menuConfigs: Menu[] = [
+    { name: 'GET_STARTED', children: [] },
+    {
+      name: 'DESIGN_DEVELOP',
+      children: [
+        { name: 'DESIGN_DEVELOP_MENU.DESIGN_TOKENS', path: '/design-tokens' },
+        { name: 'DESIGN_DEVELOP_MENU.FOUNDATION', path: '/foundation' },
+        {
+          name: 'DESIGN_DEVELOP_MENU.COMPONENTS',
+          path: '/components',
+          children: [
+            { name: 'COMPONENTS.BUTTONS', path: '/components/buttons' },
+          ],
+        },
+        {
+          name: 'DESIGN_DEVELOP_MENU.PATTERNS',
+          path: '/patterns',
+        },
+      ],
+    },
+    { name: 'RESOURCES', children: [] },
+  ];
+
+  constructor() {
+    this.translate.addLangs(['hu', 'en']);
+    this.translate.setDefaultLang('en');
+    const browserLang = this.translate.getBrowserLang();
+    this.translate.use(
+      browserLang?.toString().match(/hu|en/) ? browserLang : 'en'
+    );
+  }
 }

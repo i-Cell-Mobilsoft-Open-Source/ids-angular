@@ -1,0 +1,15 @@
+{
+  "TITLE": "iDS",
+  "GET_STARTED": "Get Started",
+  "DESIGN_DEVELOP": "Design & Develop",
+  "DESIGN_DEVELOP_MENU": {
+    "DESIGN_TOKENS": "Design Tokens",
+    "FOUNDATION": "Foundation",
+    "COMPONENTS": "Components",
+    "PATTERNS": "Patterns"
+  },
+  "RESOURCES": "Resources",
+  "COMPONENTS": {
+    "BUTTONS": "Buttons"
+  }
+}

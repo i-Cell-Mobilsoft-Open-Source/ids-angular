@@ -1,0 +1,460 @@
+{
+  "comp": {
+    "cards": {
+      "size": {
+        "border": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.border-width.md}"
+        },
+        "border-none": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.border-width.none}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.md}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.8}"
+        },
+        "padding-bottom": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        },
+        "padding-media-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.spacing.0}"
+        },
+        "padding-media-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.spacing.0}"
+        },
+        "padding-top": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        },
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        }
+      }
+    },
+    "avatar": {
+      "size": {
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "padding-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.full}"
+        },
+        "icon": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.icons-nested.compact}"
+        },
+        "height": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.24}"
+        },
+        "width": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.width.24}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.8}"
+        },
+        "border": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.border-width.sm}"
+        }
+      }
+    },
+    "buttons": {
+      "size": {
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        },
+        "padding-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.6}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.full}"
+        },
+        "icon": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.icons-nested.compact}"
+        },
+        "height": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.24}"
+        },
+        "min-width": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.24}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.4}"
+        },
+        "border": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.border-width.sm}"
+        }
+      }
+    },
+    "icon-button": {
+      "size": {
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "padding-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.full}"
+        },
+        "icon": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.icons-nested.compact}"
+        },
+        "width": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.width.24}"
+        },
+        "height": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.24}"
+        },
+        "border": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.border-width.sm}"
+        }
+      }
+    },
+    "action-panel": {
+      "size": {
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        },
+        "padding-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.md}"
+        },
+        "border": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.border-width.md}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.8}"
+        }
+      }
+    },
+    "divider": {
+      "size": {
+        "width": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.1}"
+        },
+        "height": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.1}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.none}"
+        }
+      }
+    },
+    "action-item-button": {
+      "size": {
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "padding-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.2xs}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.4}"
+        },
+        "icon": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.icons-nested.compact}"
+        },
+        "height": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.24}"
+        },
+        "border-width": {
+          "attributes": {
+            "type": "border-width"
+          },
+          "value": "{smc.reference.container.border-width.sm}"
+        }
+      }
+    },
+    "Paginator": {
+      "size": {
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.4}"
+        }
+      }
+    },
+    "accordion-button": {
+      "size": {
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "padding-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.none}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.4}"
+        },
+        "icon": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.icons-nested.compact}"
+        },
+        "height": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.24}"
+        },
+        "border-width": {
+          "attributes": {
+            "type": "border-width"
+          },
+          "value": "{smc.reference.container.border-width.sm}"
+        }
+      }
+    },
+    "accordion-panel": {
+      "size": {
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.4}"
+        },
+        "padding-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.4}"
+        }
+      }
+    },
+    "accordions": {
+      "size": {
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.none}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.4}"
+        },
+        "border": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.border-width.sm}"
+        }
+      }
+    },
+    "tag": {
+      "size": {
+        "padding-x": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        },
+        "padding-y": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.padding.8}"
+        },
+        "border-radius": {
+          "attributes": {
+            "type": "border-radius"
+          },
+          "value": "{smc.reference.container.border-radius.2xs}"
+        },
+        "icon": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.icons-nested.compact}"
+        },
+        "height": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.size.height.24}"
+        },
+        "gap": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.gap.4}"
+        },
+        "border": {
+          "attributes": {
+            "type": "number"
+          },
+          "value": "{smc.reference.container.border-width.sm}"
+        }
+      }
+    }
+  }
+}

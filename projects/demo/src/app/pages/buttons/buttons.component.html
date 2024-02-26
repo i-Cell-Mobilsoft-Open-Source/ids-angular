@@ -1,0 +1,40 @@
+<h2>Buttons</h2>
+@for (appearance of appearances; track $index) {
+  @for (size of sizes; track $index) {
+    @for (variant of variants; track $index) {
+  <button
+    type="button"
+    idsButton
+    id="{{ appearance + '-' + variant + '-' + size }}-button"
+    [appearance]="appearance"
+    [size]="size"
+    [variant]="variant"
+    (click)="onClick(appearance + '-' + variant + '-' + size)"
+  >
+    <img icon-leading src="assets/icons/search.svg" aria-hidden="true" alt=""/>
+    {{ appearance + " " + variant + " " + size }} button
+    <img icon-trailing src="assets/icons/done.svg" aria-hidden="true" alt=""/>
+  </button>
+    }
+  }
+}
+<h2 class="pt-2">Disabled Buttons</h2>
+@for (appearance of appearances; track $index) {
+  @for (size of sizes; track $index) {
+    @for (variant of filteredVariants; track $index) {
+  <button
+    type="button"
+    idsButton
+    id="{{ appearance + '-' + variant + '-' + size }}-disabled-button"
+    [appearance]="appearance"
+    [size]="size"
+    [variant]="variant"
+    disabled
+  >
+    <img icon-leading src="assets/icons/search.svg" aria-hidden="true" alt=""/>
+    {{ appearance + " " + variant + " " + size }} button
+    <img icon-trailing src="assets/icons/done.svg" aria-hidden="true" alt=""/>
+  </button>
+    }
+  }
+}

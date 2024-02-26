@@ -2,7 +2,13 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "pnpm"
+    "packageManager": "pnpm",
+    "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -104,7 +110,7 @@
       "projectType": "library",
       "root": "projects/widgets",
       "sourceRoot": "projects/widgets/src",
-      "prefix": "lib",
+      "prefix": "ids",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

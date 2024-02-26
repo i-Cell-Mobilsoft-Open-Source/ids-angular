@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -23,10 +24,20 @@
       "ES2022",
       "dom"
     ],
+    "types": [
+      "cypress",
+      "node",
+      "cypress-real-events"
+    ],
     "paths": {
-      "widgets": [
-        "./dist/widgets"
-      ]
+      "@i-cell/widgets/*": [
+        "projects/widgets/*",
+        "projects/widgets"
+      ],
+      "@i-cell/widgets": [
+        "dist/widgets/*",
+        "dist/widgets"
+      ],
     }
   },
   "angularCompilerOptions": {

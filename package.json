@@ -4,9 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:widgets": "ng build widgets",
+    "watch:widgets": "ng build widgets --watch",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "e2e": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -29,8 +31,11 @@
     "@angular-devkit/build-angular": "^17.2.0",
     "@angular/cli": "^17.2.0",
     "@angular/compiler-cli": "^17.2.1",
+    "@types/cypress": "^1.1.3",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.17",
+    "cypress": "^13.6.5",
+    "cypress-real-events": "^1.12.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

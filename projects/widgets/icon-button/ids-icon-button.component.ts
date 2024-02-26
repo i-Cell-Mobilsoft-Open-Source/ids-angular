@@ -6,21 +6,21 @@ import {
   contentChildren,
   input,
 } from '@angular/core';
-import { ButtonAppearance, ButtonAppearanceType } from './types/button-appearance.type';
+import { IconButtonAppearance, IconButtonAppearanceType } from './types/icon-button-appearance.type';
 import { Size, SizeType, Variant, VariantType } from '@i-cell/widgets/core';
 
 @Component({
-  selector: 'button[idsButton]',
+  selector: 'button[idsIconButton]',
   standalone: true,
   imports: [],
-  templateUrl: './ids-button.component.html',
-  styleUrl: './ids-button.component.scss',
+  templateUrl: './ids-icon-button.component.html',
+  styleUrl: './ids-icon-button.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class IdsButtonComponent {
-  private readonly componentClass = 'ids-button';
+export class IdsIconButtonComponent {
+  private readonly componentClass = 'ids-icon-button';
 
-  public appearance = input<ButtonAppearanceType | null>(ButtonAppearance.FILLED);
+  public appearance = input<IconButtonAppearanceType | null>(IconButtonAppearance.FILLED);
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<VariantType | null>(Variant.PRIMARY);
   public disabled = input(false, {
@@ -28,8 +28,7 @@ export class IdsButtonComponent {
       value != null && `${value}` !== 'false',
   });
 
-  iconLeading = contentChildren<unknown>('[icon-leading]');
-  iconTrailing = contentChildren<unknown>('[icon-trailing]');
+  icon = contentChildren<unknown>('[icon]');
 
   private hostClasses = computed(() =>
     [

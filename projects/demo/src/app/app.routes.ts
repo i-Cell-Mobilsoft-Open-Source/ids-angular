@@ -9,6 +9,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'components/icon-button',
+    loadComponent: () =>
+      import('./pages/icon-button/icon-button.component').then(
+        (m) => m.IconButtonComponent
+      ),
+  },
+  {
     path: 'components',
     loadComponent: () =>
       import('./pages/components/components.component').then(

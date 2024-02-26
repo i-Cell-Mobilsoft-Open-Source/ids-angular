@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
 import {
-  ButtonAppearance,
-  ButtonAppearanceType,
-  IdsButtonComponent,
-} from '@i-cell/widgets/button';
+  IconButtonAppearance,
+  IconButtonAppearanceType,
+  IdsIconButtonComponent,
+} from '@i-cell/widgets/icon-button';
 import { IdsIconComponent } from '../../components/icon/ids-icon.component';
-import { mdiMagnify, mdiCheck } from '@mdi/js';
+import { mdiMagnify } from '@mdi/js';
 import { Size, SizeType, Variant, VariantType } from '@i-cell/widgets/core';
 
 @Component({
   standalone: true,
-  selector: 'app-buttons',
-  imports: [IdsButtonComponent, IdsIconComponent],
-  templateUrl: './buttons.component.html',
-  styleUrls: ['./buttons.component.scss'],
+  selector: 'app-icon-button',
+  imports: [IdsIconButtonComponent, IdsIconComponent],
+  templateUrl: './icon-button.component.html',
+  styleUrls: ['./icon-button.component.scss'],
 })
-export class ButtonsComponent {
+export class IconButtonComponent {
   public appearances = Object.values(
-    ButtonAppearance
-  ) as ButtonAppearanceType[];
+    IconButtonAppearance
+  ) as IconButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(Variant) as VariantType[];
   public filteredVariants = Object.values(Variant).filter(
@@ -26,9 +26,8 @@ export class ButtonsComponent {
   ) as VariantType[];
 
   public mdiSearch = mdiMagnify;
-  public mdiDone = mdiCheck;
 
   onClick(buttonName: string) {
-    console.log(`${buttonName} button clicked`);
+    console.log(`${buttonName} icon button clicked`);
   }
 }

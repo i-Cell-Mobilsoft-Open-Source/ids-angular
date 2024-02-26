@@ -1,0 +1,145 @@
+$appearances: filled, outlined, standard;
+$sizes: compact, comfortable, spacious;
+$variants: primary, secondary, brand, error, success, warning, light, dark,
+  surface;
+
+.ids-icon-button {
+  padding: 0px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  &:focus {
+    outline-offset: 2px;
+    opacity: var(--ids-comp-icon-button-size-spacious-border);
+    border-radius: var(--ids-comp-icon-button-size-spacious-border-radius);
+    outline: var(--ids-comp-icon-button-focused-outline-size-outline) solid
+      var(--ids-base-color-dark);
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  @each $size in $sizes {
+    &.ids-icon-button-#{$size} {
+      gap: var(--ids-comp-icon-button-size-#{$size}-gap);
+      width: var(--ids-comp-icon-button-size-#{$size}-width);
+      height: var(--ids-comp-icon-button-size-#{$size}-height);
+      border-radius: var(
+        --ids-comp-icon-button-size-#{$size}-border-radius,
+        1000px
+      );
+
+      @each $appearance in $appearances {
+        @each $variant in $variants {
+          &.ids-icon-button-#{$appearance}.ids-icon-button-#{$variant} {
+            @if $appearance == standard {
+              border: none;
+            } @else {
+              border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
+                solid
+                var(
+                  --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-enabled,
+                  rgba(255, 255, 255, 0)
+                );
+
+              &:hover {
+                border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
+                  solid
+                  var(
+                    --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-hovered,
+                    rgba(255, 255, 255, 0)
+                  );
+              }
+
+              &:focus {
+                border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
+                  solid
+                  var(
+                    --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-focused,
+                    rgba(255, 255, 255, 0)
+                  );
+              }
+
+              &:active {
+                border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
+                  solid
+                  var(
+                    --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-pressed,
+                    rgba(255, 255, 255, 0)
+                  );
+              }
+
+              &:disabled {
+                border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
+                  solid
+                  var(
+                    --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-disabled,
+                    rgba(255, 255, 255, 0)
+                  );
+              }
+            }
+          }
+        }
+      }
+
+      *[icon] {
+        width: var(--ids-comp-icon-button-size-#{$size}-icon);
+        height: var(--ids-comp-icon-button-size-#{$size}-icon);
+      }
+    }
+  }
+
+  @each $appearance in $appearances {
+    @each $variant in $variants {
+      &.ids-icon-button-#{$appearance}.ids-icon-button-#{$variant} {
+        color: var(
+          --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-enabled
+        );
+        background: var(
+          --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-enabled
+        );
+
+        &:hover {
+          background: var(
+            --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-hovered
+          );
+          @if $appearance == standard {
+            color: var(
+              --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-hovered
+            );
+          }
+        }
+
+        &:focus {
+          background: var(
+            --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-focused
+          );
+          color: var(
+            --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-focused
+          );
+        }
+
+        &:active {
+          background: var(
+            --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-pressed
+          );
+          color: var(
+            --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-pressed
+          );
+        }
+
+        &:disabled {
+          background: var(
+            --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-disabled
+          );
+          color: var(
+            --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-disabled
+          );
+        }
+      }
+    }
+  }
+}

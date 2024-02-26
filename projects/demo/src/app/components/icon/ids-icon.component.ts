@@ -12,8 +12,6 @@ import { Component, ViewEncapsulation, input } from '@angular/core';
         color: currentColor;
         stroke: currentColor;
         fill: currentColor;
-        display: inline-block;
-        width: 1.5rem;
       }
     `,
   ],

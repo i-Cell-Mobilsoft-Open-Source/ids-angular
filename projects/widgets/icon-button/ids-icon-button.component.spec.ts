@@ -1,19 +1,19 @@
 // TODO: unit tests
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { IdsButtonComponent } from './ids-button.component';
+// import { IdsIconButtonComponent } from './ids-icon-button.component';
 
-// describe('IdsButtonComponent', () => {
-//   let component: IdsButtonComponent;
-//   let fixture: ComponentFixture<IdsButtonComponent>;
+// describe('IdsIconButtonComponent', () => {
+//   let component: IdsIconButtonComponent;
+//   let fixture: ComponentFixture<IdsIconButtonComponent>;
 
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       imports: [IdsButtonComponent]
+//       imports: [IdsIconButtonComponent]
 //     })
 //     .compileComponents();
 
-//     fixture = TestBed.createComponent(IdsButtonComponent);
+//     fixture = TestBed.createComponent(IdsIconButtonComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

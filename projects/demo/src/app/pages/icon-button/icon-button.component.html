@@ -1,0 +1,36 @@
+<h2>Icon buttons</h2>
+@for (appearance of appearances; track $index) {
+  @for (size of sizes; track $index) {
+    @for (variant of variants; track $index) {
+<button
+  type="button"
+  idsIconButton
+  id="{{ appearance + '-' + variant + '-' + size }}-icon-button"
+  [appearance]="appearance"
+  [size]="size"
+  [variant]="variant"
+  (click)="onClick(appearance + '-' + variant + '-' + size)"
+>
+  <ids-icon icon [icon]="mdiSearch" aria-hidden="true" alt="" />
+</button>
+    }
+  }
+}
+<h2 class="pt-2">Disabled icon buttons</h2>
+@for (appearance of appearances; track $index) {
+  @for (size of sizes; track $index) {
+    @for (variant of filteredVariants; track $index) {
+<button
+  type="button"
+  idsIconButton
+  id="{{ appearance + '-' + variant + '-' + size }}-disabled-icon-button"
+  [appearance]="appearance"
+  [size]="size"
+  [variant]="variant"
+  disabled
+>
+  <ids-icon icon [icon]="mdiSearch" aria-hidden="true" alt="" />
+</button>
+    }
+  }
+}

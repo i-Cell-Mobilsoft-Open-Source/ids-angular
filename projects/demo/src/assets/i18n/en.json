@@ -10,6 +10,7 @@
   },
   "RESOURCES": "Resources",
   "COMPONENTS": {
-    "BUTTONS": "Buttons"
+    "BUTTONS": "Buttons",
+    "ICON_BUTTON": "Icon button"
   }
 }

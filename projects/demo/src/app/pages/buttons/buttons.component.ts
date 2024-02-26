@@ -8,11 +8,13 @@ import {
   Variant,
   VariantType,
 } from '@i-cell/widgets/button';
+import { IdsIconComponent } from '../../components/icon/ids-icon.component';
+import { mdiMagnify, mdiCheck } from '@mdi/js';
 
 @Component({
   standalone: true,
   selector: 'app-buttons',
-  imports: [IdsButtonComponent],
+  imports: [IdsButtonComponent, IdsIconComponent],
   templateUrl: './buttons.component.html',
   styleUrls: ['./buttons.component.scss'],
 })
@@ -23,6 +25,9 @@ export class ButtonsComponent {
   public filteredVariants = Object.values(Variant).filter(
     (variant) => !['error', 'success', 'warning'].includes(variant)
   ) as VariantType[];
+
+  public mdiSearch = mdiMagnify;
+  public mdiDone = mdiCheck;
 
   onClick(buttonName: string) {
     console.log(`${buttonName} button clicked`);

@@ -24,6 +24,7 @@ export class AppComponent {
           name: 'DESIGN_DEVELOP_MENU.COMPONENTS',
           path: '/components',
           children: [
+            { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
             { name: 'COMPONENTS.BUTTONS', path: '/components/buttons' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
           ],

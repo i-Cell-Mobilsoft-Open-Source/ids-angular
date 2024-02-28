@@ -6,8 +6,14 @@ import {
   contentChildren,
   input,
 } from '@angular/core';
-import { IconButtonAppearance, IconButtonAppearanceType } from './types/icon-button-appearance.type';
-import { Size, SizeType, Variant, VariantType } from '@i-cell/widgets/core';
+import {
+  IconButtonAppearance,
+  IconButtonAppearanceType,
+  Size,
+  SizeType,
+  ButtonVariant,
+  ButtonVariantType,
+} from '@i-cell/widgets/core';
 
 @Component({
   selector: 'button[idsIconButton]',
@@ -20,9 +26,11 @@ import { Size, SizeType, Variant, VariantType } from '@i-cell/widgets/core';
 export class IdsIconButtonComponent {
   private readonly componentClass = 'ids-icon-button';
 
-  public appearance = input<IconButtonAppearanceType | null>(IconButtonAppearance.FILLED);
+  public appearance = input<IconButtonAppearanceType | null>(
+    IconButtonAppearance.FILLED
+  );
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<VariantType | null>(Variant.PRIMARY);
+  public variant = input<ButtonVariantType | null>(ButtonVariant.PRIMARY);
   public disabled = input(false, {
     transform: (value: boolean | string) =>
       value != null && `${value}` !== 'false',

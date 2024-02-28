@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
 import {
+  BaseButtonVariant,
+  BaseButtonVariantType,
+  ButtonVariant,
+  ButtonVariantType,
   IconButtonAppearance,
   IconButtonAppearanceType,
-  IdsIconButtonComponent,
-} from '@i-cell/widgets/icon-button';
-import { IdsIconComponent } from '../../components/icon/ids-icon.component';
+  Size,
+  SizeType,
+} from '@i-cell/widgets/core';
+import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
 import { mdiMagnify } from '@mdi/js';
-import { Size, SizeType, Variant, VariantType } from '@i-cell/widgets/core';
+import { IdsIconComponent } from '../../components/icon/ids-icon.component';
 
 @Component({
   standalone: true,
@@ -20,10 +25,8 @@ export class IconButtonComponent {
     IconButtonAppearance
   ) as IconButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(Variant) as VariantType[];
-  public filteredVariants = Object.values(Variant).filter(
-    (variant) => !['error', 'success', 'warning'].includes(variant)
-  ) as VariantType[];
+  public baseVariants = Object.values(BaseButtonVariant) as BaseButtonVariantType[];
+  public variants = Object.values(ButtonVariant) as ButtonVariantType[];
 
   public mdiSearch = mdiMagnify;
 

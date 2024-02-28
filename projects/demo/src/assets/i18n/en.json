@@ -10,6 +10,7 @@
   },
   "RESOURCES": "Resources",
   "COMPONENTS": {
+    "AVATAR": "Avatar",
     "BUTTONS": "Buttons",
     "ICON_BUTTON": "Icon button"
   }

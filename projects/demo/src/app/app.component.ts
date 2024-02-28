@@ -25,6 +25,7 @@ export class AppComponent {
           path: '/components',
           children: [
             { name: 'COMPONENTS.BUTTONS', path: '/components/buttons' },
+            { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
           ],
         },
         {

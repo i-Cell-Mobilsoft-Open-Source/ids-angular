@@ -1,0 +1,34 @@
+<h2>Avatars</h2>
+@for (size of sizes; track $index) {
+  @for (variant of variants; track $index) {
+<button
+  idsAvatar
+  id="{{ variant + '-' + size }}-avatar-monogram"
+  title="{{ variant + '-' + size }}-avatar-monogram"
+  [size]="size"
+  [variant]="variant"
+><span>AB</span></button>
+  }
+}
+
+@for (size of sizes; track $index) {
+  @for (variant of variants; track $index) {
+<button
+  idsAvatar
+  id="{{ variant + '-' + size + '-avatar-user' }}"
+  title="{{ variant + '-' + size + '-avatar-user' }}"
+  [size]="size"
+  [variant]="variant"
+></button>
+  }
+}
+
+@for (size of sizes; track $index) {
+<button
+  idsAvatar
+  id="{{ size + '-avatar-with-image' }}"
+  title="{{ size + '-avatar-with-image' }}"
+  [size]="size"
+  image="https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg"
+></button>
+}

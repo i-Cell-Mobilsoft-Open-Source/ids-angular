@@ -16,7 +16,12 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
     opacity: var(--ids-comp-buttons-size-spacious-border);
     border-radius: var(--ids-comp-buttons-size-spacious-border-radius);
     outline: var(--ids-comp-buttons-focused-outline-size-outline) solid
-      var(--ids-base-color-dark);
+      var(--ids-comp-buttons-focused-outline-color-dark-focused);
+
+    &.ids-button-light {
+      outline: var(--ids-comp-buttons-focused-outline-size-outline) solid
+        var(--ids-comp-buttons-focused-outline-color-light-focused);
+    }
   }
 
   &:active {
@@ -151,10 +156,5 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
         }
       }
     }
-  }
-
-  &.ids-button-light:focus {
-    outline: var(--ids-comp-buttons-focused-outline-size-outline) solid
-      var(--ids-base-color-light);
   }
 }

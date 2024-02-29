@@ -1,15 +1,17 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
+import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, TranslateModule, NavComponent],
+  imports: [RouterModule, RouterOutlet, TranslateModule, NavComponent, IdsSwitchComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
   private translate: TranslateService = inject(TranslateService);

@@ -24,7 +24,14 @@ li > a,
   order: 1;
   align-self: stretch;
   flex-grow: 0;
-  &:hover {
-    background: #f5f5f5;
+  user-select: none;
+}
+html:has(input[color-scheme]:checked) {
+  li > a,
+  .subnav-parent {
+    background: var(--ids-smc-reference-container-color-bg-dark-default);
+    &:hover {
+      background: var(--ids-smc-reference-container-color-bg-dark-lighter-80);
+    }
   }
 }

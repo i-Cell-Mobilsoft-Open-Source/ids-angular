@@ -32,4 +32,11 @@ const tokensRaw = JSON.parse(readFileSync(`./tokens.json`, "utf-8"));
 const root = [":root {"];
 flattenObject(tokensRaw, "--ids");
 root.push("}");
-writeFileSync(`tokens.css`, root.join("\n").replaceAll('ids-component', 'ids-comp'));
+writeFileSync(
+  `tokens.css`,
+  root
+    .join("\n")
+    .replaceAll("ids-component", "ids-comp")
+    .replaceAll("no icon", "no-icon")
+    .replaceAll("colors-colors", "colors")
+);

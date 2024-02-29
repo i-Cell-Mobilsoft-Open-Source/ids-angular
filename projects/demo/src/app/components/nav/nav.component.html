@@ -13,14 +13,7 @@
               <span class="icon"></span
               ><span class="name">{{ menuItem.name! | translate }}</span></a
             ><span #trigger class="more"
-              ><svg
-                version="1.1"
-                viewBox="0 0 24 24"
-                style="display: inline-block; width: 1.5rem"
-              >
-                <path
-                  [attr.d]="menuItem.$open ? iconOpened() : iconClosed()"
-                /></svg></span></span
+              ><ids-icon [icon]="menuItem.$open ? iconOpened() : iconClosed()"></ids-icon></span></span
           ><app-subnav
             [menuItem]="menuItem"
             [trigger]="trigger"

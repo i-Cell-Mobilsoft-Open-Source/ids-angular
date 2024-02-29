@@ -6,15 +6,7 @@ import { Component, ViewEncapsulation, input } from '@angular/core';
   template: `<svg version="1.1" viewBox="0 0 24 24">
     <path [attr.d]="icon()" />
   </svg>`,
-  styles: [
-    `
-      svg {
-        color: currentColor;
-        stroke: currentColor;
-        fill: currentColor;
-      }
-    `,
-  ],
+  styleUrls: ['./ids-icon.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsIconComponent {

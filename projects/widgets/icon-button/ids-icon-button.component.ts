@@ -11,8 +11,8 @@ import {
   IconButtonAppearanceType,
   Size,
   SizeType,
-  ButtonVariant,
-  ButtonVariantType,
+  AllVariants,
+  AllVariantsType,
 } from '@i-cell/widgets/core';
 
 @Component({
@@ -30,7 +30,7 @@ export class IdsIconButtonComponent {
     IconButtonAppearance.FILLED
   );
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<ButtonVariantType | null>(ButtonVariant.PRIMARY);
+  public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
   public disabled = input(false, {
     transform: (value: boolean | string) =>
       value != null && `${value}` !== 'false',

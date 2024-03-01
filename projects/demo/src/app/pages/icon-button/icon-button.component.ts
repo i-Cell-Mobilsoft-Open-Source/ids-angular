@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {
-  BaseButtonVariant,
-  BaseButtonVariantType,
-  ButtonVariant,
-  ButtonVariantType,
+  BrandVariant,
+  BrandVariantType,
+  AllVariants,
+  AllVariantsType,
   IconButtonAppearance,
   IconButtonAppearanceType,
   Size,
@@ -25,8 +25,8 @@ export class IconButtonComponent {
     IconButtonAppearance
   ) as IconButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
-  public baseVariants = Object.values(BaseButtonVariant) as BaseButtonVariantType[];
-  public variants = Object.values(ButtonVariant) as ButtonVariantType[];
+  public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
+  public variants = Object.values(AllVariants) as AllVariantsType[];
 
   public mdiSearch = mdiMagnify;
 

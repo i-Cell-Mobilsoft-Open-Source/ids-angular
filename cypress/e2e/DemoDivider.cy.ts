@@ -2,7 +2,7 @@ import dividerTestData from '../data/dividerTestData';
 import 'cypress-real-events/support';
 
 beforeEach(() => {
-  cy.visit('/components/dividers');
+  cy.visit('/components/divider');
 })
 
 describe('ids Divider Demo test', () => {

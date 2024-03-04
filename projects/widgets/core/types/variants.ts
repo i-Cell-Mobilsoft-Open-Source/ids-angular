@@ -8,18 +8,18 @@ export const BaseVariant = {
 
 export type BaseVariantType = (typeof BaseVariant)[keyof typeof BaseVariant];
 
-export const BaseButtonVariant = {
+export const BrandVariant = {
   ...BaseVariant,
   BRAND: 'brand',
 } as const;
 
-export type BaseButtonVariantType = (typeof BaseButtonVariant)[keyof typeof BaseButtonVariant];
+export type BrandVariantType = (typeof BrandVariant)[keyof typeof BrandVariant];
 
-export const ButtonVariant = {
-  ...BaseButtonVariant,
+export const AllVariants = {
+  ...BrandVariant,
   ERROR: 'error',
   SUCCESS: 'success',
   WARNING: 'warning',
 } as const;
 
-export type ButtonVariantType = (typeof ButtonVariant)[keyof typeof ButtonVariant];
+export type AllVariantsType = (typeof AllVariants)[keyof typeof AllVariants];

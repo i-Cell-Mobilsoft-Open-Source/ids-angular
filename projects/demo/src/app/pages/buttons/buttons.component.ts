@@ -3,10 +3,10 @@ import { IdsButtonComponent } from '@i-cell/widgets/button';
 import {
   ButtonAppearance,
   ButtonAppearanceType,
-  BaseButtonVariant,
-  BaseButtonVariantType,
-  ButtonVariant,
-  ButtonVariantType,
+  BrandVariant,
+  BrandVariantType,
+  AllVariants,
+  AllVariantsType,
   Size,
   SizeType,
 } from '@i-cell/widgets/core';
@@ -25,8 +25,8 @@ export class ButtonsComponent {
     ButtonAppearance
   ) as ButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
-  public baseVariants = Object.values(BaseButtonVariant) as BaseButtonVariantType[];
-  public variants = Object.values(ButtonVariant) as ButtonVariantType[];
+  public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
+  public variants = Object.values(AllVariants) as AllVariantsType[];
 
   public mdiSearch = mdiMagnify;
   public mdiDone = mdiCheck;

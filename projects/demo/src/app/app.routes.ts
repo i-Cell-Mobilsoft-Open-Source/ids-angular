@@ -16,6 +16,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'components/dividers',
+    loadComponent: () =>
+      import('./pages/divider/divider.component').then(
+        (m) => m.DividerComponent
+      ),
+  },
+  {
     path: 'components/icon-button',
     loadComponent: () =>
       import('./pages/icon-button/icon-button.component').then(

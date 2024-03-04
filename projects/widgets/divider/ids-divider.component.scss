@@ -1,0 +1,34 @@
+$orientations: horizontal, vertical;
+$sizes: compact, comfortable, spacious;
+$variants: primary, secondary, brand, error, success, warning, light, dark,
+  surface;
+
+.ids-divider {
+  flex-shrink: 0;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  width: var(--ids-divider-width, 'auto');
+  height: var(--ids-divider-height, '200px');
+
+  @each $size in $sizes {
+    &.ids-divider-#{$size} {
+      border-radius: var(--ids-comp-divider-size-#{$size}-border-radius);
+
+      &.ids-divider-horizontal {
+        height: var(--ids-comp-divider-size-#{$size}-height);
+      }
+      &.ids-divider-vertical {
+        width: var(--ids-comp-divider-size-#{$size}-width);
+      }
+    }
+  }
+
+  @each $variant in $variants {
+    &.ids-divider-#{$variant} {
+      background: var(--ids-comp-divider-color-bg-#{$variant}-enabled);
+    }
+  }
+}

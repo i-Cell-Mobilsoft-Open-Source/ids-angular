@@ -6,37 +6,33 @@ import {
   contentChildren,
   input,
 } from '@angular/core';
+import { IdsActionItemComponent } from '@i-cell/widgets/action-item';
 import {
+  ActionPanelAppearance,
+  ActionPanelAppearanceType,
   AllVariants,
-  AllVariantsType,
-  IconButtonAppearance,
-  IconButtonAppearanceType,
   Size,
   SizeType,
-  coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 
 @Component({
-  selector: 'button[idsIconButton]',
+  selector: 'ids-action-panel,div[idsActionPanel]',
   standalone: true,
-  imports: [],
-  templateUrl: './ids-icon-button.component.html',
-  styleUrl: './ids-icon-button.component.scss',
+  imports: [IdsActionItemComponent],
+  template: '<ng-content></ng-content>',
+  styleUrl: './ids-action-panel.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class IdsIconButtonComponent {
-  private readonly componentClass = 'ids-icon-button';
+export class IdsActionPanelComponent {
+  private readonly componentClass = 'ids-action-panel';
 
-  public appearance = input<IconButtonAppearanceType | null>(
-    IconButtonAppearance.FILLED
+  public appearance = input<ActionPanelAppearanceType | null>(
+    ActionPanelAppearance.FILLED
   );
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
-  public disabled = input(false, {
-    transform: (value: boolean | string) => coerceBooleanAttribute(value),
-  });
+  public variant = input<'light' | null>(AllVariants.LIGHT);
 
-  icon = contentChildren<unknown>('[icon]');
+  actionItems = contentChildren(IdsActionItemComponent);
 
   private hostClasses = computed(() =>
     [
@@ -49,9 +45,6 @@ export class IdsIconButtonComponent {
       .join(' ')
   );
 
-  @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
-    return this.disabled() || null;
-  }
   @HostBinding('class') get classes(): string {
     return this.hostClasses();
   }

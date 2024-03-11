@@ -1,0 +1,65 @@
+$appearances: filled, outlined, elevated;
+$sizes: compact, comfortable, spacious;
+
+.ids-action-panel {
+  display: flex;
+  width: 22.8125rem;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @each $size in $sizes {
+    &.ids-action-panel-#{$size} {
+      gap: var(--ids-comp-action-panel-size-#{$size}-gap);
+      padding: var(--ids-comp-action-panel-size-#{$size}-padding-y)
+        var(--ids-comp-action-panel-size-#{$size}-padding-x);
+      border-radius: var(--ids-comp-action-panel-size-#{$size}-border-radius);
+
+      @each $appearance in $appearances {
+        &.ids-action-panel-#{$appearance} {
+          &.ids-action-panel-outlined {
+            border: var(--ids-comp-action-panel-size-#{$size}-border)
+              solid
+              var(
+                --ids-comp-action-panel-#{$appearance}-color-border-light-enabled
+              );
+          }
+        }
+      }
+    }
+  }
+
+  &.ids-action-panel-filled {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0),
+      0px 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  &.ids-action-panel-outlined {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0),
+      0px 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  &.ids-action-panel-elevated {
+    box-shadow: var(
+        --ids-smc-reference-container-effects-tw-shadow-horizontal-none
+      )
+      var(--ids-smc-reference-container-effects-tw-shadow-vertical-xxl)
+      var(--ids-smc-reference-container-effects-tw-shadow-blur-xxxl)
+      var(--ids-smc-reference-container-effects-tw-shadow-spread-xxs)
+      var(--ids-smc-reference-container-effects-tw-shadow-color-dark-darker);
+  }
+
+  @each $appearance in $appearances {
+    &.ids-action-panel-#{$appearance} {
+      background: var(
+        --ids-comp-action-panel-#{$appearance}-color-bg-light-enabled
+      );
+    }
+  }
+
+  button {
+    &:hover {
+      border-color: transparent;
+    }
+    &:focus {
+      outline: none !important;
+    }
+  }
+}

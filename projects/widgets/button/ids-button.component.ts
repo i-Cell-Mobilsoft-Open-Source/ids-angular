@@ -7,12 +7,13 @@ import {
   input,
 } from '@angular/core';
 import {
+  AllVariants,
+  AllVariantsType,
   ButtonAppearance,
   ButtonAppearanceType,
   Size,
   SizeType,
-  AllVariants,
-  AllVariantsType,
+  coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 
 @Component({
@@ -32,8 +33,7 @@ export class IdsButtonComponent {
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
   public disabled = input(false, {
-    transform: (value: boolean | string) =>
-      value != null && `${value}` !== 'false',
+    transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
   iconLeading = contentChildren<unknown>('[icon-leading]');

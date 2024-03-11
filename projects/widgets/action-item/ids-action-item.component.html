@@ -1,0 +1,7 @@
+@if(iconLeading()) {
+<ng-content select="[icon-leading]"></ng-content>
+}
+<span class="ids-action-item-label">{{ label() }}</span>
+@if(iconTrailing()){
+<ng-content select="[icon-trailing]"></ng-content>
+}

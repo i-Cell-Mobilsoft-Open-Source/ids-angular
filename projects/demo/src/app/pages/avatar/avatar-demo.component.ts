@@ -8,14 +8,14 @@ import {
 } from '@i-cell/widgets/core';
 
 @Component({
-  selector: 'app-avatar',
+  selector: 'app-avatar-demo',
   standalone: true,
   imports: [IdsAvatarComponent],
-  templateUrl: './avatar.component.html',
-  styleUrl: './avatar.component.scss',
+  templateUrl: './avatar-demo.component.html',
+  styleUrl: './avatar-demo.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class AvatarComponent {
+export class AvatarDemoComponent {
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(BaseVariant) as BaseVariantType[];
 }

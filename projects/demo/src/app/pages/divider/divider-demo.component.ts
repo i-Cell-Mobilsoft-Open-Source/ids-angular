@@ -8,14 +8,14 @@ import {
 import { IdsDividerComponent } from '@i-cell/widgets/divider';
 
 @Component({
-  selector: 'app-divider',
+  selector: 'app-divider-demo',
   standalone: true,
   imports: [IdsDividerComponent],
-  templateUrl: './divider.component.html',
-  styleUrl: './divider.component.scss',
+  templateUrl: './divider-demo.component.html',
+  styleUrl: './divider-demo.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class DividerComponent {
+export class DividerDemoComponent {
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(AllVariants) as AllVariantsType[];
 }

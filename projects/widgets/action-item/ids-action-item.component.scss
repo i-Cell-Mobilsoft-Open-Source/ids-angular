@@ -4,25 +4,33 @@ $sizes: "compact", "comfortable", "spacious";
 
 .ids-action-item {
   width: 100%;
-  display: flex;
+  display: inline-flex;
   flex-shrink: 0;
-  font-weight: 700;
   align-items: center;
   justify-content: center;
+
+  .ids-action-item-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-style: normal;
+  }
 
   &.ids-action-item-compact {
     font-size: 12px;
     line-height: 16px;
+    font-weight: 500;
   }
 
   &.ids-action-item-comfortable {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
   }
 
   &.ids-action-item-spacious {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
   }
 
   *[icon-leading],
@@ -35,9 +43,10 @@ $sizes: "compact", "comfortable", "spacious";
 
   @each $size in $sizes {
     &.ids-action-item-#{$size} {
-      gap: var(--ids-comp-action-item-button-size-#{$size}-gap);
-      border-radius: var(--ids-comp-action-item-button-size-#{$size}-border-radius);
-      padding: var(--ids-comp-action-item-button-size-#{$size}-padding-y) var(--ids-comp-menu-item-size-#{$size}-padding-x);
+      gap: var(--ids-comp-size-action-item-button-size-gap-#{$size});
+      border-radius: var(--ids-comp-size-action-item-button-size-border-radius-#{$size});
+      padding: var(--ids-comp-size-action-item-button-size-padding-y-#{$size}) var(--ids-comp-size-action-item-button-size-padding-x-#{$size});
+      height: var(--ids-comp-size-action-item-button-size-height-#{$size});
 
       *[icon-leading],
       *[icon-trailing] {
@@ -48,14 +57,14 @@ $sizes: "compact", "comfortable", "spacious";
       @each $appearance in $appearances {
         @each $variant in $variants {
           &.ids-action-item-#{$appearance}.ids-action-item-#{$variant} {
-            border: var(--ids-comp-action-item-button-size-#{$size}-border, 1px) solid var(--ids-comp-action-item-button-#{$appearance}-color-border-#{$variant}-enabled, rgba(255, 255, 255, 0.00));
+            border: var(--ids-comp-size-action-item-button-size-border-width-#{$size}, 1px) solid var(--ids-comp-action-item-button-#{$appearance}-color-border-#{$variant}-enabled, rgba(255, 255, 255, 0.00));
 
             &:hover {
-              border: var(--ids-comp-action-item-button-size-#{$size}-border, 1px) solid var(--ids-comp-action-item-button-#{$appearance}-color-border-#{$variant}-hovered, rgba(255, 255, 255, 0.00));
+              border: var(--ids-comp-size-action-item-button-size-border-width-#{$size}, 1px) solid var(--ids-comp-action-item-button-#{$appearance}-color-border-#{$variant}-hovered, rgba(255, 255, 255, 0.00));
             }
 
             &:disabled {
-              border: var(--ids-comp-action-item-button-size-#{$size}-border, 1px) solid var(--ids-comp-action-item-button-#{$appearance}-color-border-#{$variant}-disabled, rgba(255, 255, 255, 0.00));
+              border: var(--ids-comp-size-action-item-button-size-border-width-#{$size}, 1px) solid var(--ids-comp-action-item-button-#{$appearance}-color-border-#{$variant}-disabled, rgba(255, 255, 255, 0.00));
             }
           }
         }
@@ -65,25 +74,23 @@ $sizes: "compact", "comfortable", "spacious";
 
   @each $appearance in $appearances {
     &.ids-action-item-#{$appearance} {
-      height: var(--ids-comp-action-item-button-size-#{$appearance}-height);
-
       @each $variant in $variants {
         &.ids-action-item-#{$variant} {
-          color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-#{$variant}-enabled);
+          color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-label-#{$variant}-enabled);
           background:  var(--ids-comp-action-item-button-#{$appearance}-color-bg-#{$variant}-enabled);
 
           &.ids-action-item-active {
-            color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-#{$variant}-active);
+            color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-label-#{$variant}-active);
             background: var(--ids-comp-action-item-button-#{$appearance}-color-bg-#{$variant}-active);
           }
 
           &:hover {
-            color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-#{$variant}-hovered);
+            color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-label-#{$variant}-hovered);
             background: var(--ids-comp-action-item-button-#{$appearance}-color-bg-#{$variant}-hovered);
           }
 
           &:focus {
-            color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-#{$variant}-focused);
+            color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-label-#{$variant}-focused);
             background: var(--ids-comp-action-item-button-#{$appearance}-color-bg-#{$variant}-focused);
           }
 
@@ -92,7 +99,7 @@ $sizes: "compact", "comfortable", "spacious";
           }
 
           &:disabled {
-            color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-#{$variant}-disabled);
+            color: var(--ids-comp-action-item-button-#{$appearance}-color-fg-label-#{$variant}-disabled);
             background: var(--ids-comp-action-item-button-#{$appearance}-color-bg-#{$variant}-disabled);
           }
         }

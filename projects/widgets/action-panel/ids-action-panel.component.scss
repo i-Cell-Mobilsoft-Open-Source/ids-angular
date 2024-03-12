@@ -1,23 +1,22 @@
 $appearances: filled, outlined, elevated;
-$sizes: compact, comfortable, spacious;
+$sizes: compact, comfortable, spacious, dense;
 
 .ids-action-panel {
   display: flex;
-  width: 22.8125rem;
+  width: 22.25rem;
   flex-direction: column;
   align-items: flex-start;
-
   @each $size in $sizes {
+
     &.ids-action-panel-#{$size} {
-      gap: var(--ids-comp-action-panel-size-#{$size}-gap);
-      padding: var(--ids-comp-action-panel-size-#{$size}-padding-y)
-        var(--ids-comp-action-panel-size-#{$size}-padding-x);
-      border-radius: var(--ids-comp-action-panel-size-#{$size}-border-radius);
+      gap: var(--ids-comp-size-action-panel-size-gap-#{$size}, 0.5rem);
+      padding: var(--ids-comp-size-action-panel-size-padding-y-#{$size}, 0.5rem) var(--ids-comp-size-action-panel-size-padding-x-#{$size}, 0.5rem);
+      border-radius: var(--ids-comp-size-action-panel-size-border-radius-#{$size}, 1rem);
 
       @each $appearance in $appearances {
         &.ids-action-panel-#{$appearance} {
           &.ids-action-panel-outlined {
-            border: var(--ids-comp-action-panel-size-#{$size}-border)
+            border: var(--ids-comp-size-action-panel-size-border-#{$size})
               solid
               var(
                 --ids-comp-action-panel-#{$appearance}-color-border-light-enabled

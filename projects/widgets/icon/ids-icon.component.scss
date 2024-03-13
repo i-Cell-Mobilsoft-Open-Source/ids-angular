@@ -1,0 +1,11 @@
+ids-icon {
+  --icon-size: var(--ids-comp-buttons-size-comfortable-icon, 24px);
+  display: inline-block;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+svg {
+  color: currentColor;
+  fill: currentColor;
+}

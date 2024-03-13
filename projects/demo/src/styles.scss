@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+
 @import "./ids/tokens.css";
 
 @tailwind base;
@@ -9,7 +11,17 @@
   box-sizing: border-box;
 }
 
+html:has(input[color-scheme]) {
+  color-scheme: light;
+}
+html:has(input[color-scheme]:checked) {
+  color-scheme: dark;
+}
 body {
-  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: var(--ids-smc-reference-container-color-bg-surface-default);
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  background-color: var(
+    --ids-smc-colors-surface-default
+  );
 }

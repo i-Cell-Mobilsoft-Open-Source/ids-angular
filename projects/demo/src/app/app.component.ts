@@ -1,17 +1,33 @@
-import { Component, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Signal,
+  ViewEncapsulation,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { NavComponent } from './components/nav/ids-nav.component';
 import { Menu } from './components/nav/menu.interface';
-import { NavComponent } from './components/nav/nav.component';
+import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, TranslateModule, NavComponent],
+  imports: [
+    RouterModule,
+    RouterOutlet,
+    TranslateModule,
+    NavComponent,
+    IdsSwitchComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private translate: TranslateService = inject(TranslateService);
   public menuConfigs: Menu[] = [
     { name: 'GET_STARTED', children: [] },
@@ -25,8 +41,8 @@ export class AppComponent {
           path: '/components',
           children: [
             { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
-            { name: 'COMPONENTS.BUTTONS', path: '/components/buttons' },
-            { name: 'COMPONENTS.DIVIDERS', path: '/components/dividers' },
+            { name: 'COMPONENTS.BUTTONS', path: '/components/button' },
+            { name: 'COMPONENTS.DIVIDERS', path: '/components/divider' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
           ],
         },
@@ -38,13 +54,33 @@ export class AppComponent {
     },
     { name: 'RESOURCES', children: [] },
   ];
+  public themeSwitcher = viewChild<ElementRef>('themeSwitcher');
 
   constructor() {
+    this.changeTheme('light');
     this.translate.addLangs(['hu', 'en']);
     this.translate.setDefaultLang('en');
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(
       browserLang?.toString().match(/hu|en/) ? browserLang : 'en'
     );
+  }
+
+  ngOnInit() {
+    this.themeSwitcher()?.nativeElement.addEventListener('change', (e: any) => {
+      this.changeTheme(
+        (e.target as HTMLInputElement)?.checked ? 'dark' : 'light'
+      );
+    });
+  }
+
+  private changeTheme(theme: string) {
+    if (theme === 'dark') {
+      document.documentElement.classList.remove('ids-theme-light');
+      document.documentElement.classList.add('ids-theme-dark');
+    } else if (theme === 'light') {
+      document.documentElement.classList.remove('ids-theme-dark');
+      document.documentElement.classList.add('ids-theme-light');
+    }
   }
 }

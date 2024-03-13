@@ -1,6 +1,6 @@
 @use "sass:map";
 
-$sizes: compact, comfortable, spacious;
+$sizes: compact, comfortable, spacious, dense;
 $variants: primary, secondary, brand, error, success, warning, light, dark,
   surface;
 
@@ -33,7 +33,7 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
     outline: var(--ids-comp-avatar-focused-outline-size-outline, 3px) solid var(--ids-comp-avatar-focused-outline-color-dark-focused, rgba(0, 0, 0, 1));
 
     &.ids-avatar-light {
-      outline: var(--ids-comp-avatar-focused-outline-size-outline) solid var(--ids-comp-avatar-focused-outline-color-light-focused);
+      outline: var(--ids-comp-avatar-focused-outline-size-outline, 3px) solid var(--ids-comp-avatar-focused-outline-color-light-focused);
     }
   }
 
@@ -46,8 +46,8 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
     line-height: 1rem;
     font-size: 0.6875rem;
     letter-spacing: 0.03125rem;
-    width: var(--ids-comp-avatar-size-compact-height, 1.5rem);
-    height: var(--ids-comp-avatar-size-compact-width, 1.5rem);
+    width: var(--ids-comp-size-avatar-size-height-compact, 1.5rem);
+    height: var(--ids-comp-size-avatar-size-width-compact, 1.5rem);
   }
 
   &.ids-avatar-comfortable {
@@ -55,8 +55,8 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
     font-size: 0.875rem;
     line-height: 1.25rem;
     letter-spacing: 0.01563rem;
-    width: var(--ids-comp-avatar-size-comfortable-width, 2.5rem);
-    height: var(--ids-comp-avatar-size-comfortable-height, 2.5rem);
+    width: var(--ids-comp-size-avatar-size-width-comfortable, 2.5rem);
+    height: var(--ids-comp-size-avatar-size-height-comfortable, 2.5rem);
   }
 
   &.ids-avatar-spacious {
@@ -64,39 +64,30 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
     font-style: normal;
     font-size: 1.375rem;
     line-height: 1.75rem;
-    width: var(--ids-comp-avatar-size-spacious-width, 4rem);
-    height: var(--ids-comp-avatar-size-spacious-height, 4rem);
+    width: var(--ids-comp-size-avatar-size-width-spacious, 4rem);
+    height: var(--ids-comp-size-avatar-size-height-spacious, 4rem);
+  }
+
+  &.ids-avatar-dense {
+    // FIXME: proper "dense" constant values
+    font-weight: 500;
+    line-height: 16px;
+    font-size: 10px;
+    letter-spacing: 0.25px;
+    width: var(--ids-comp-size-avatar-size-width-dense, 1.25rem);
+    height: var(--ids-comp-size-avatar-size-height-dense, 1.25rem);
   }
 
   @each $size in $sizes {
     &.ids-avatar-#{$size} {
-      border-radius: var(--ids-comp-avatar-size-#{$size}-border-radius, 62.5rem);
-      padding: var(--ids-comp-avatar-size-#{$size}-padding-y) var(--ids-comp-avatar-size-#{$size}-padding-x);
-
-      &:focus {
-        border-radius: var(--ids-comp-avatar-size-#{$size}-border-radius, 1000px);
-      }
-
-      @each $variant in $variants {
-        &.ids-avatar-#{$variant} {
-          border: var(--ids-comp-avatar-size-#{$size}-border, 1px) solid var(--ids-comp-avatar-color-border-#{$variant}-enabled, rgba(255, 255, 255, 0.00));
-          &:hover {
-            border: var(--ids-comp-avatar-size-#{$size}-border, 1px) solid var(--ids-comp-avatar-color-border-#{$variant}-focused, rgba(255, 255, 255, 0.00));
-          }
-
-          &:focus {
-            border: var(--ids-comp-avatar-size-#{$size}-border, 1px) solid var(--ids-comp-avatar-color-border-#{$variant}-focused, rgba(255, 255, 255, 0.00));
-          }
-
-          &:active {
-            border: var(--ids-comp-avatar-size-#{$size}-border, 1px) solid var(--ids-comp-avatar-color-border-#{$variant}-pressed, rgba(255, 255, 255, 0.00));
-          }
-        }
-      }
+      gap: var(--ids-comp-size-avatar-size-gap-#{$size}, 12px);
+      border-radius: var(--ids-comp-size-avatar-size-border-radius-#{$size}, 62.5rem);
+      padding: var(--ids-comp-size-avatar-size-padding-y-#{$size}) var(--ids-comp-size-avatar-size-padding-x-#{$size});
+      border: var(--ids-comp-size-avatar-size-border-#{$size}, 1px) solid;
 
       .ids-avatar-image {
-        width: var(--ids-comp-avatar-size-#{$size}-width);
-        height: var(--ids-comp-avatar-size-#{$size}-height);
+        width: var(--ids-comp-size-avatar-size-width-#{$size});
+        height: var(--ids-comp-size-avatar-size-height-#{$size});
       }
     }
   }
@@ -105,17 +96,21 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
     &.ids-avatar-#{$variant} {
       color: var(--ids-comp-avatar-color-fg-#{$variant}-enabled);
       background:  var(--ids-comp-avatar-color-bg-#{$variant}-enabled);
+      border-color: var(--ids-comp-avatar-color-border-#{$variant}-enabled, rgba(255, 255, 255, 0.00));
 
       &:hover {
         background: var(--ids-comp-avatar-color-bg-#{$variant}-hovered);
+        border-color: var(--ids-comp-avatar-color-border-#{$variant}-hovered, rgba(255, 255, 255, 0.00));
       }
 
       &:focus {
         background: var(--ids-comp-avatar-color-bg-#{$variant}-focused);
+        border-color: var(--ids-comp-avatar-color-border-#{$variant}-focused, rgba(255, 255, 255, 0.00));
       }
 
       &:active {
         background: var(--ids-comp-avatar-color-bg-#{$variant}-pressed);
+        border-color: var(--ids-comp-avatar-color-border-#{$variant}-pressed, rgba(255, 255, 255, 0.00));
       }
 
       .ids-avatar-icon {

@@ -67,7 +67,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('themeSwitcher', this.themeSwitcher());
     this.themeSwitcher()?.nativeElement.addEventListener('change', (e: any) => {
       this.changeTheme(
         (e.target as HTMLInputElement)?.checked ? 'dark' : 'light'

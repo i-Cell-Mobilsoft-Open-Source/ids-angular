@@ -9,9 +9,9 @@ import {
   Size,
   SizeType,
 } from '@i-cell/widgets/core';
+import { IdsIconComponent } from '@i-cell/widgets/icon';
 import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
 import { mdiMagnify } from '@mdi/js';
-import { IdsIconComponent } from '../../../../../widgets/icon/ids-icon.component';
 
 @Component({
   standalone: true,

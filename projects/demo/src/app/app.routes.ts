@@ -9,14 +9,14 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'components/buttons',
+    path: 'components/button',
     loadComponent: () =>
       import('./pages/button/button-demo.component').then(
         (m) => m.ButtonDemoComponent
       ),
   },
   {
-    path: 'components/dividers',
+    path: 'components/divider',
     loadComponent: () =>
       import('./pages/divider/divider-demo.component').then(
         (m) => m.DividerDemoComponent

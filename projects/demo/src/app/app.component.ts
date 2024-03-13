@@ -41,8 +41,8 @@ export class AppComponent implements OnInit {
           path: '/components',
           children: [
             { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
-            { name: 'COMPONENTS.BUTTONS', path: '/components/buttons' },
-            { name: 'COMPONENTS.DIVIDERS', path: '/components/dividers' },
+            { name: 'COMPONENTS.BUTTONS', path: '/components/button' },
+            { name: 'COMPONENTS.DIVIDERS', path: '/components/divider' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
           ],
         },

@@ -8,7 +8,13 @@ import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, TranslateModule, NavComponent, IdsSwitchComponent],
+  imports: [
+    RouterModule,
+    RouterOutlet,
+    TranslateModule,
+    NavComponent,
+    IdsSwitchComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,

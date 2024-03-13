@@ -1,12 +1,7 @@
 ids-nav {
   @apply flex w-52 flex-col flex-shrink-0;
-  background-color: var(--ids-base-color-light);
+  background-color: var(--ids-smc-colors-surface-lighter-10);
   padding: 0.625rem;
-}
-html:has(input[color-scheme]:checked) {
-  ids-nav {
-    background-color: var(--ids-base-color-dark);
-  }
 }
 
 .nav-label {
@@ -28,7 +23,7 @@ li > a,
   padding: 0.5rem;
   gap: 0.5rem;
   height: 2.5rem;
-  background: var(--ids-smc-reference-container-color-bg-light-default);
+  background: var(--ids-ids-smc-colors-surface-lighter-10);
   border-radius: 0.5rem;
   flex: none;
   order: 1;
@@ -37,19 +32,10 @@ li > a,
   user-select: none;
   &.active,
   &:has(.active) {
-    color: var(--ids-smc-reference-container-color-fg-primary-default);
+    color: var(--ids-smc-colors-primary-darker-20);
   }
   &:hover {
-    background: var(--ids-smc-reference-container-color-bg-light-darker-20);
-  }
-}
-html:has(input[color-scheme]:checked) {
-  li > a,
-  .subnav-parent {
-    background: var(--ids-smc-reference-container-color-bg-dark-default);
-    &:hover {
-      background: var(--ids-smc-reference-container-color-bg-dark-lighter-80);
-    }
+    background: var(--ids-smc-colors-surface-darker-20);
   }
 }
 

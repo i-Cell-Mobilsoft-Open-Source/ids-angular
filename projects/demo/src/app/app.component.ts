@@ -1,8 +1,16 @@
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Signal,
+  ViewEncapsulation,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/ids-nav.component';
+import { Menu } from './components/nav/menu.interface';
 import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 
 @Component({
@@ -19,7 +27,7 @@ import { IdsSwitchComponent } from './components/switch/ids-switch.component';
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private translate: TranslateService = inject(TranslateService);
   public menuConfigs: Menu[] = [
     { name: 'GET_STARTED', children: [] },
@@ -46,13 +54,34 @@ export class AppComponent {
     },
     { name: 'RESOURCES', children: [] },
   ];
+  public themeSwitcher = viewChild<ElementRef>('themeSwitcher');
 
   constructor() {
+    this.changeTheme('light');
     this.translate.addLangs(['hu', 'en']);
     this.translate.setDefaultLang('en');
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(
       browserLang?.toString().match(/hu|en/) ? browserLang : 'en'
     );
+  }
+
+  ngOnInit() {
+    console.log('themeSwitcher', this.themeSwitcher());
+    this.themeSwitcher()?.nativeElement.addEventListener('change', (e: any) => {
+      this.changeTheme(
+        (e.target as HTMLInputElement)?.checked ? 'dark' : 'light'
+      );
+    });
+  }
+
+  private changeTheme(theme: string) {
+    if (theme === 'dark') {
+      document.documentElement.classList.remove('ids-theme-light');
+      document.documentElement.classList.add('ids-theme-dark');
+    } else if (theme === 'light') {
+      document.documentElement.classList.remove('ids-theme-dark');
+      document.documentElement.classList.add('ids-theme-light');
+    }
   }
 }

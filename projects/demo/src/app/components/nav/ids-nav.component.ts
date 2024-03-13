@@ -1,18 +1,10 @@
-import {
-  Component,
-  Input,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Component, ViewEncapsulation, input } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { IdsIconComponent } from '@i-cell/widgets/icon';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 import { Menu } from './menu.interface';
 import { SubnavComponent } from './subnav/ids-subnav.component';
-import { IdsIconComponent } from '../../../../../widgets/icon/ids-icon.component';
-import publicApi from '@i-cell/widgets/src/public-api';
 
 @Component({
   standalone: true,

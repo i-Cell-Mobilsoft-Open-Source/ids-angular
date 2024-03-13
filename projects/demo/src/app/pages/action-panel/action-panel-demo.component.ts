@@ -1,14 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IdsActionItemComponent } from '@i-cell/widgets/action-item';
 import { IdsActionPanelComponent } from '@i-cell/widgets/action-panel';
-import {
-  ActionPanelAppearance,
-  ActionPanelAppearanceType,
-  Size,
-  SizeType,
-} from '@i-cell/widgets/core';
+import { ActionPanelAppearance, ActionPanelAppearanceType, Size, SizeType } from '@i-cell/widgets/core';
+import { IdsIconComponent } from '@i-cell/widgets/icon';
 import { mdiChevronRight, mdiMagnify } from '@mdi/js';
-import { IdsIconComponent } from '../../components/icon/ids-icon.component';
 
 @Component({
   selector: 'app-action-panel-demo',
@@ -19,9 +14,7 @@ import { IdsIconComponent } from '../../components/icon/ids-icon.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionPanelDemoComponent {
-  public appearances = Object.values(
-    ActionPanelAppearance
-  ) as ActionPanelAppearanceType[];
+  public appearances = Object.values(ActionPanelAppearance) as ActionPanelAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
   public items = Array(8);
   public mdiSearch = mdiMagnify;

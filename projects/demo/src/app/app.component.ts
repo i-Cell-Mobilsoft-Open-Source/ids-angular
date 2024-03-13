@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
           name: 'DESIGN_DEVELOP_MENU.COMPONENTS',
           path: '/components',
           children: [
+            { name: 'COMPONENTS.ACTION_PANEL', path: '/components/action-panel' },
             { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
             { name: 'COMPONENTS.BUTTONS', path: '/components/button' },
             { name: 'COMPONENTS.DIVIDERS', path: '/components/divider' },

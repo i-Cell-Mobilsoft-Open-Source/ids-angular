@@ -1,0 +1,18 @@
+<h2>Action Panel</h2>
+@for (appearance of appearances; track $index) {
+  @for (size of sizes; track $index) {
+<h3>{{ appearance + '-' + size + '-panel' }}</h3>
+<ids-action-panel
+  id="{{ appearance + '-' + size + '-panel' }}"
+  [size]="size"
+  [appearance]="appearance"
+>
+  @for (_ of items; track $index) {
+    <button idsActionItem appearance="filled" size="comfortable" [label]="'Menu Item Label ' + $index">
+      <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
+      <ids-icon icon-trailing [icon]="mdiChevron" aria-hidden="true" alt="" />
+    </button>
+  }
+</ids-action-panel>
+  }
+}

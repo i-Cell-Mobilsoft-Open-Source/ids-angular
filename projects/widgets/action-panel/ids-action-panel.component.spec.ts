@@ -1,19 +1,19 @@
 // TODO: unit tests
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { IdsDividerComponent } from './ids-divider.component';
+// import { IdsActionPanelComponent } from './ids-action-panel.component';
 
-// describe('DividerComponent', () => {
-//   let component: IdsDividerComponent;
-//   let fixture: ComponentFixture<IdsDividerComponent>;
+// describe('IdsActionPanelComponent', () => {
+//   let component: IdsActionPanelComponent;
+//   let fixture: ComponentFixture<IdsActionPanelComponent>;
 
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       imports: [IdsDividerComponent]
+//       imports: [IdsActionPanelComponent]
 //     })
 //     .compileComponents();
 
-//     fixture = TestBed.createComponent(IdsDividerComponent);
+//     fixture = TestBed.createComponent(IdsActionPanelComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

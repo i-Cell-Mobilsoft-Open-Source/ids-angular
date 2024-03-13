@@ -10,6 +10,7 @@
   },
   "RESOURCES": "Resources",
   "COMPONENTS": {
+    "ACTION_PANEL": "Action panel",
     "AVATAR": "Avatar",
     "BUTTONS": "Buttons",
     "DIVIDERS": "Dividers",

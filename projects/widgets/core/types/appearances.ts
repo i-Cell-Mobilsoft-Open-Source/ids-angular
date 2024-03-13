@@ -13,3 +13,18 @@ export const IconButtonAppearance = {
 } as const;
 
 export type IconButtonAppearanceType = (typeof IconButtonAppearance)[keyof typeof IconButtonAppearance];
+
+export const ActionPanelAppearance = {
+  FILLED: 'filled',
+  OUTLINED: 'outlined',
+  ELEVATED: 'elevated'
+} as const;
+
+export type ActionPanelAppearanceType = (typeof ActionPanelAppearance)[keyof typeof ActionPanelAppearance];
+
+export const ActionItemAppearance = {
+  FILLED: 'filled',
+  TEXT: 'text'
+} as const;
+
+export type ActionItemAppearanceType = (typeof ActionItemAppearance)[keyof typeof ActionItemAppearance];

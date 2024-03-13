@@ -12,6 +12,7 @@
   "COMPONENTS": {
     "AVATAR": "Avatar",
     "BUTTONS": "Buttons",
+    "DIVIDERS": "Dividers",
     "ICON_BUTTON": "Icon button"
   }
 }

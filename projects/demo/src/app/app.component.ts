@@ -28,6 +28,7 @@ export class AppComponent {
           children: [
             { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
             { name: 'COMPONENTS.BUTTONS', path: '/components/buttons' },
+            { name: 'COMPONENTS.DIVIDERS', path: '/components/dividers' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
           ],
         },

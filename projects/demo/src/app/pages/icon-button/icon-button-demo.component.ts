@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {
-  BaseButtonVariant,
-  BaseButtonVariantType,
-  ButtonVariant,
-  ButtonVariantType,
+  BrandVariant,
+  BrandVariantType,
+  AllVariants,
+  AllVariantsType,
   IconButtonAppearance,
   IconButtonAppearanceType,
   Size,
@@ -15,18 +15,18 @@ import { IdsIconComponent } from '../../../../../widgets/icon/ids-icon.component
 
 @Component({
   standalone: true,
-  selector: 'app-icon-button',
+  selector: 'app-icon-button-demo',
   imports: [IdsIconButtonComponent, IdsIconComponent],
-  templateUrl: './icon-button.component.html',
-  styleUrls: ['./icon-button.component.scss'],
+  templateUrl: './icon-button-demo.component.html',
+  styleUrls: ['./icon-button-demo.component.scss'],
 })
-export class IconButtonComponent {
+export class IconButtonDemoComponent {
   public appearances = Object.values(
     IconButtonAppearance
   ) as IconButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
-  public baseVariants = Object.values(BaseButtonVariant) as BaseButtonVariantType[];
-  public variants = Object.values(ButtonVariant) as ButtonVariantType[];
+  public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
+  public variants = Object.values(AllVariants) as AllVariantsType[];
 
   public mdiSearch = mdiMagnify;
 

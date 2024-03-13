@@ -4,22 +4,29 @@ export const routes: Routes = [
   {
     path: 'components/avatar',
     loadComponent: () =>
-      import('./pages/avatar/avatar.component').then(
-        (m) => m.AvatarComponent
+      import('./pages/avatar/avatar-demo.component').then(
+        (m) => m.AvatarDemoComponent
       ),
   },
   {
-    path: 'components/buttons',
+    path: 'components/button',
     loadComponent: () =>
-      import('./pages/buttons/buttons.component').then(
-        (m) => m.ButtonsComponent
+      import('./pages/button/button-demo.component').then(
+        (m) => m.ButtonDemoComponent
+      ),
+  },
+  {
+    path: 'components/divider',
+    loadComponent: () =>
+      import('./pages/divider/divider-demo.component').then(
+        (m) => m.DividerDemoComponent
       ),
   },
   {
     path: 'components/icon-button',
     loadComponent: () =>
-      import('./pages/icon-button/icon-button.component').then(
-        (m) => m.IconButtonComponent
+      import('./pages/icon-button/icon-button-demo.component').then(
+        (m) => m.IconButtonDemoComponent
       ),
   },
   {

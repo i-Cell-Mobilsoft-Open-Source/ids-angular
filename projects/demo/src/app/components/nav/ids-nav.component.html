@@ -9,16 +9,19 @@
         @if (menuItem.children?.length! > 0) {
         <li>
           <span class="subnav-parent">
-            <a [routerLink]="menuItem.path">
-              <span class="icon"></span
+            <a [routerLink]="menuItem.path" [routerLinkActive]="['active']">
+              <span class="icon"
+                >@if(menuItem.icon) { <ids-icon [icon]="menuItem.icon || ''"></ids-icon> }</span
               ><span class="name">{{ menuItem.name! | translate }}</span></a
             ><span #trigger class="more"
-              ><ids-icon [icon]="menuItem.$open ? iconOpened() : iconClosed()"></ids-icon></span></span
-          ><app-subnav
+              ><ids-icon
+                [icon]="menuItem.$open ? iconOpened() : iconClosed()"
+              ></ids-icon></span></span
+          ><ids-subnav
             [menuItem]="menuItem"
             [trigger]="trigger"
-            (onOpen)="menuItem.$open= $event"
-          ></app-subnav>
+            (onOpen)="menuItem.$open = $event"
+          ></ids-subnav>
         </li>
         } @else {
         <li>

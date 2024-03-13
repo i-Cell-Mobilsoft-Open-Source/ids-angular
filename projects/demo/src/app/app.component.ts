@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Menu } from './components/nav/menu.interface';
-import { NavComponent } from './components/nav/nav.component';
+import { NavComponent } from './components/nav/ids-nav.component';
 import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 
 @Component({

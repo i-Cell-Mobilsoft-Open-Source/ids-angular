@@ -11,7 +11,7 @@ import {
 } from '@i-cell/widgets/core';
 import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
 import { mdiMagnify } from '@mdi/js';
-import { IdsIconComponent } from '../../components/icon/ids-icon.component';
+import { IdsIconComponent } from '../../../../../widgets/icon/ids-icon.component';
 
 @Component({
   standalone: true,

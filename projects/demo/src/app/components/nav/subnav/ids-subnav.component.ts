@@ -5,17 +5,21 @@ import {
   Output,
   viewChild,
   input,
+  ViewEncapsulation,
+  inject,
+  computed,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Menu } from '../menu.interface';
 
 @Component({
   standalone: true,
-  selector: 'app-subnav',
+  selector: 'ids-subnav',
   imports: [RouterModule, TranslateModule],
-  templateUrl: './subnav.component.html',
-  styleUrls: ['./subnav.component.scss'],
+  templateUrl: './ids-subnav.component.html',
+  styleUrls: ['./ids-subnav.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SubnavComponent {
   public menuItem = input.required<Menu>();

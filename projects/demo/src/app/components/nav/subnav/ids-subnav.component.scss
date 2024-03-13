@@ -1,0 +1,13 @@
+ids-subnav {
+  details {
+    position: relative;
+    summary {
+      position: relative;
+      height: 0;
+      &::marker {
+        content: "";
+        display: none;
+      }
+    }
+  }
+}

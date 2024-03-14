@@ -11,7 +11,7 @@
 <div class="flex gap-4">
   @for (size of sizes; track $index) {
     @for (variant of variants; track $index) {
-    <ids-divider id="{{ variant + '-' + size + '-vertical-divider' }}" type="vertical" [size]="size" [variant]="variant" />
+    <ids-divider id="{{ variant + '-' + size + '-vertical-divider' }}" type="vertical" [size]="size" [variant]="variant" height="200px" />
     }
   }
 </div>

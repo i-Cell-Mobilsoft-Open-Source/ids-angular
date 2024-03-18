@@ -15,8 +15,8 @@ export class IdsDividerComponent {
   public type = input<OrientationType | null>(Orientation.HORIZONTAL);
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
-  public width = input<string | null>('auto');
-  public height = input<string | null>('200px');
+  public width = input<string | null>('100%');
+  public height = input<string | null>('100%');
 
   private hostClasses = computed(() =>
     [

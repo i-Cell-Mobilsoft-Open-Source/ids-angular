@@ -1,7 +1,6 @@
 $orientations: horizontal, vertical;
-$sizes: compact, comfortable, spacious;
-$variants: primary, secondary, brand, error, success, warning, light, dark,
-  surface;
+$sizes: compact, comfortable, spacious, dense;
+$variants: primary, secondary, brand, error, success, warning, light, dark, surface;
 
 .ids-divider {
   flex-shrink: 0;
@@ -10,18 +9,18 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
   align-items: center;
   justify-content: center;
   align-self: stretch;
-  width: var(--ids-divider-width, 'auto');
-  height: var(--ids-divider-height, '200px');
+  width: var(--ids-divider-width, 100%);
+  height: var(--ids-divider-height, 100%);
 
   @each $size in $sizes {
     &.ids-divider-#{$size} {
-      border-radius: var(--ids-comp-divider-size-#{$size}-border-radius);
+      border-radius: var(--ids-comp-size-divider-size-border-radius-#{$size});
 
       &.ids-divider-horizontal {
-        height: var(--ids-comp-divider-size-#{$size}-height);
+        height: var(--ids-comp-size-divider-size-height-#{$size});
       }
       &.ids-divider-vertical {
-        width: var(--ids-comp-divider-size-#{$size}-width);
+        width: var(--ids-comp-size-divider-size-width-#{$size});
       }
     }
   }

@@ -11,7 +11,7 @@ import {
 import {
   ActionItemAppearance,
   ActionItemAppearanceType,
-  BaseVariant,
+  SurfaceVariant,
   Size,
   SizeType,
   coerceBooleanAttribute,
@@ -35,7 +35,7 @@ export class IdsActionItemComponent {
     ActionItemAppearance.TEXT
   );
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<'surface' | null>(BaseVariant.SURFACE);
+  public variant = input<'surface' | null>(SurfaceVariant.SURFACE);
   public active = input(false);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),

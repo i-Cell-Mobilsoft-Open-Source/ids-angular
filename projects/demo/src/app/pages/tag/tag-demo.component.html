@@ -1,0 +1,43 @@
+<div class="flex flex-col gap-4">
+  <h2>Tags (as custom elements)</h2>
+  @for (appearance of appearances; track $index) {
+    @for (size of sizes; track $index) {
+      @for (variant of variants; track $index) {
+  <ids-tag
+    id="{{ appearance + '-' + variant + '-' + size }}-tag"
+    tabindex="0"
+    [appearance]="appearance"
+    [size]="size"
+    [variant]="variant"
+    (click)="onClick(appearance + '-' + variant + '-' + size)"
+  >
+    <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
+    {{ appearance + " " + variant + " " + size }} tag
+    <ids-icon icon-trailing [icon]="mdiDone" aria-hidden="true" alt="" />
+  </ids-tag>
+      }
+    }
+  }
+</div>
+<div class="flex flex-col gap-4">
+  <h2>Tags (as buttons)</h2>
+  @for (appearance of appearances; track $index) {
+    @for (size of sizes; track $index) {
+      @for (variant of variants; track $index) {
+  <button
+    idsTag
+    id="{{ appearance + '-' + variant + '-' + size }}-tag"
+    tabindex="0"
+    [appearance]="appearance"
+    [size]="size"
+    [variant]="variant"
+    (click)="onClick(appearance + '-' + variant + '-' + size)"
+  >
+    <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
+    {{ appearance + " " + variant + " " + size }} tag
+    <ids-icon icon-trailing [icon]="mdiDone" aria-hidden="true" alt="" />
+  </button>
+      }
+    }
+  }
+</div>

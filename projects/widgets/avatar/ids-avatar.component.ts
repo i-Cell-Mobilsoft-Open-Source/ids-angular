@@ -6,8 +6,8 @@ import {
   input,
 } from '@angular/core';
 import {
-  BaseVariant,
-  BaseVariantType,
+  SurfaceVariant,
+  SurfaceVariantType,
   Size,
   SizeType,
 } from '@i-cell/widgets/core';
@@ -25,7 +25,7 @@ export class IdsAvatarComponent {
 
   public image = input<string | null>(null);
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<BaseVariantType | null>(BaseVariant.PRIMARY);
+  public variant = input<SurfaceVariantType | null>(SurfaceVariant.PRIMARY);
 
   private hostClasses = computed(() =>
     [

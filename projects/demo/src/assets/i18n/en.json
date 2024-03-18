@@ -14,6 +14,7 @@
     "AVATAR": "Avatar",
     "BUTTONS": "Buttons",
     "DIVIDERS": "Dividers",
-    "ICON_BUTTON": "Icon button"
+    "ICON_BUTTON": "Icon button",
+    "TAG": "Tag"
   }
 }

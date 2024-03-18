@@ -1,7 +1,6 @@
 $appearances: filled, outlined, text;
-$sizes: compact, comfortable, spacious;
-$variants: primary, secondary, brand, error, success, warning, light, dark,
-  surface;
+$sizes: compact, comfortable, spacious, dense;
+$variants: primary, secondary, brand, error, success, warning, light, dark, surface;
 
 .ids-button {
   flex-shrink: 0;
@@ -13,14 +12,10 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
 
   &:focus {
     outline-offset: 2px;
-    opacity: var(--ids-comp-buttons-size-spacious-border);
-    border-radius: var(--ids-comp-buttons-size-spacious-border-radius);
-    outline: var(--ids-comp-buttons-focused-outline-size-outline) solid
-      var(--ids-comp-buttons-focused-outline-color-dark-focused);
+    outline: var(--ids-comp-buttons-focused-outline-size-outline) solid var(--ids-comp-buttons-focused-outline-color-dark-focused);
 
     &.ids-button-light {
-      outline: var(--ids-comp-buttons-focused-outline-size-outline) solid
-        var(--ids-comp-buttons-focused-outline-color-light-focused);
+      outline-color: var(--ids-comp-buttons-focused-outline-color-light-focused);
     }
   }
 
@@ -40,70 +35,17 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
     &.ids-button-#{$size} {
       font-size: 12px;
       line-height: 16px;
-      gap: var(--ids-comp-buttons-size-#{$size}-gap, 4px);
-      height: var(--ids-comp-buttons-size-#{$size}-height, 24px);
-      min-width: var(--ids-comp-buttons-size-#{$size}-min-width, 24px);
-      padding: var(--ids-comp-buttons-size-#{$size}-padding-y, 6px)
-        var(--ids-comp-buttons-size-#{$size}-padding-x, 8px);
-      opacity: var(--ids-comp-buttons-size-#{$size}-border, 1);
-      border-radius: var(
-        --ids-comp-buttons-size-#{$size}-border-radius,
-        1000px
-      );
-
-      @each $appearance in $appearances {
-        @each $variant in $variants {
-          &.ids-button-#{$appearance}.ids-button-#{$variant} {
-            border: var(--ids-comp-buttons-size-#{$size}-border, 1px)
-              solid
-              var(
-                --ids-comp-buttons-#{$appearance}-color-border-#{$variant}-enabled,
-                rgba(255, 255, 255, 0)
-              );
-
-            &:hover {
-              border: var(--ids-comp-buttons-size-#{$size}-border, 1px)
-                solid
-                var(
-                  --ids-comp-buttons-#{$appearance}-color-border-#{$variant}-hovered,
-                  rgba(255, 255, 255, 0)
-                );
-            }
-
-            &:focus {
-              border: var(--ids-comp-buttons-size-#{$size}-border, 1px)
-                solid
-                var(
-                  --ids-comp-buttons-#{$appearance}-color-border-#{$variant}-focused,
-                  rgba(255, 255, 255, 0)
-                );
-            }
-
-            &:active {
-              border: var(--ids-comp-buttons-size-#{$size}-border, 1px)
-                solid
-                var(
-                  --ids-comp-buttons-#{$appearance}-color-border-#{$variant}-pressed,
-                  rgba(255, 255, 255, 0)
-                );
-            }
-
-            &:disabled {
-              border: var(--ids-comp-buttons-size-#{$size}-border, 1px)
-                solid
-                var(
-                  --ids-comp-buttons-#{$appearance}-color-border-#{$variant}-disabled,
-                  rgba(255, 255, 255, 0)
-                );
-            }
-          }
-        }
-      }
+      gap: var(--ids-comp-size-buttons-size-gap-#{$size}, 4px);
+      height: var(--ids-comp-size-buttons-size-height-#{$size}, 24px);
+      min-width: var(--ids-comp-size-buttons-size-min-width-#{$size}, 24px);
+      padding: var(--ids-comp-size-buttons-size-padding-y-#{$size}, 6px) var(--ids-comp-size-buttons-size-padding-x-#{$size}, 8px);
+      border-radius: var(--ids-comp-size-buttons-size-border-radius-#{$size}, 1000px);
+      border: var(--ids-comp-size-buttons-size-border-#{$size}, 1px) solid;
 
       *[icon-leading],
       *[icon-trailing] {
-        width: var(--ids-comp-buttons-size-#{$size}-icon);
-        height: var(--ids-comp-buttons-size-#{$size}-icon);
+        width: var(--ids-comp-size-buttons-size-icon-#{$size});
+        height: var(--ids-comp-size-buttons-size-icon-#{$size});
       }
     }
   }
@@ -111,48 +53,33 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
   @each $appearance in $appearances {
     @each $variant in $variants {
       &.ids-button-#{$appearance}.ids-button-#{$variant} {
-        color: var(
-          --ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-enabled
-        );
-        background: var(
-          --ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-enabled
-        );
+        color: var(--ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-enabled);
+        background: var(--ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-enabled);
+        border-color: var(--ids-comp-buttons-#{$appearance}-color-border-#{$variant}-enabled, rgba(255, 255, 255, 0));
 
         &:hover {
-          background: var(
-            --ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-hovered
-          );
-          color: var(
-            --ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-hovered
-          );
+          background: var(--ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-hovered);
+          color: var(--ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-hovered);
+          border-color: var(--ids-comp-buttons-#{$appearance}-color-border-#{$variant}-hovered, rgba(255, 255, 255, 0));
         }
 
         &:focus {
           outline-offset: 2px;
-          background: var(
-            --ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-focused
-          );
-          color: var(
-            --ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-focused
-          );
+          background: var(--ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-focused);
+          color: var(--ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-focused);
+          border-color: var(--ids-comp-buttons-#{$appearance}-color-border-#{$variant}-focused, rgba(255, 255, 255, 0));
         }
 
         &:active {
-          background: var(
-            --ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-pressed
-          );
-          color: var(
-            --ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-pressed
-          );
+          background: var(--ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-pressed);
+          color: var(--ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-pressed);
+          border-color: var(--ids-comp-buttons-#{$appearance}-color-border-#{$variant}-pressed, rgba(255, 255, 255, 0));
         }
 
         &:disabled {
-          background: var(
-            --ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-disabled
-          );
-          color: var(
-            --ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-disabled
-          );
+          background: var(--ids-comp-buttons-#{$appearance}-color-bg-#{$variant}-disabled);
+          color: var(--ids-comp-buttons-#{$appearance}-color-fg-label-#{$variant}-disabled);
+          border-color: var(--ids-comp-buttons-#{$appearance}-color-border-#{$variant}-disabled, rgba(255, 255, 255, 0));
         }
       }
     }

@@ -1,7 +1,6 @@
 $appearances: filled, outlined, standard;
-$sizes: compact, comfortable, spacious;
-$variants: primary, secondary, brand, error, success, warning, light, dark,
-  surface;
+$sizes: compact, comfortable, spacious, dense;
+$variants: primary, secondary, brand, error, success, warning, light, dark, surface;
 
 .ids-icon-button {
   padding: 0px;
@@ -12,15 +11,12 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
 
   &:focus {
     outline-offset: 2px;
-    opacity: var(--ids-comp-icon-button-size-spacious-border);
     border-radius: var(--ids-comp-icon-button-size-spacious-border-radius);
-    outline: var(--ids-comp-icon-button-focused-outline-size-outline) solid
-      var(--ids-comp-icon-button-focused-outline-color-dark-focused);
+    outline: var(--ids-comp-icon-button-focused-outline-size-outline) solid var(--ids-comp-icon-button-focused-outline-color-dark-focused);
 
     &.ids-icon-button-light {
       background: var(--ids-comp-icon-button-outlined-color-bg-light-focused);
-      outline: var(--ids-comp-icon-button-focused-outline-size-outline) solid
-        var(--ids-comp-icon-button-focused-outline-color-light-focused);
+      outline-color: var(--ids-comp-icon-button-focused-outline-color-light-focused);
     }
   }
 
@@ -30,120 +26,70 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
 
   @each $size in $sizes {
     &.ids-icon-button-#{$size} {
-      gap: var(--ids-comp-icon-button-size-#{$size}-gap);
-      width: var(--ids-comp-icon-button-size-#{$size}-width);
-      height: var(--ids-comp-icon-button-size-#{$size}-height);
-      border-radius: var(
-        --ids-comp-icon-button-size-#{$size}-border-radius,
-        1000px
-      );
-
-      @each $appearance in $appearances {
-        @each $variant in $variants {
-          &.ids-icon-button-#{$appearance}.ids-icon-button-#{$variant} {
-            @if $appearance == standard {
-              border: none;
-            } @else {
-              border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
-                solid
-                var(
-                  --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-enabled,
-                  rgba(255, 255, 255, 0)
-                );
-
-              &:hover {
-                border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
-                  solid
-                  var(
-                    --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-hovered,
-                    rgba(255, 255, 255, 0)
-                  );
-              }
-
-              &:focus {
-                border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
-                  solid
-                  var(
-                    --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-focused,
-                    rgba(255, 255, 255, 0)
-                  );
-              }
-
-              &:active {
-                border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
-                  solid
-                  var(
-                    --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-pressed,
-                    rgba(255, 255, 255, 0)
-                  );
-              }
-
-              &:disabled {
-                border: var(--ids-comp-icon-button-size-#{$size}-border, 1px)
-                  solid
-                  var(
-                    --ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-disabled,
-                    rgba(255, 255, 255, 0)
-                  );
-              }
-            }
-          }
-        }
-      }
+      padding: var(--ids-comp-size-icon-button-size-padding-y-#{$size}, 2px) var(--ids-comp-size-icon-button-size-padding-x-#{$size}, 2px);
+      width: var(--ids-comp-size-icon-button-size-width-#{$size});
+      height: var(--ids-comp-size-icon-button-size-height-#{$size});
+      border-radius: var(--ids-comp-size-icon-button-size-border-radius-#{$size}, 1000px);
+      border: var(--ids-comp-size-icon-button-size-border-#{$size}, 1px) solid;
 
       *[icon] {
-        width: var(--ids-comp-icon-button-size-#{$size}-icon);
-        height: var(--ids-comp-icon-button-size-#{$size}-icon);
+        width: var(--ids-comp-size-icon-button-size-icon-#{$size});
+        height: var(--ids-comp-size-icon-button-size-icon-#{$size});
       }
     }
   }
 
   @each $appearance in $appearances {
-    @each $variant in $variants {
-      &.ids-icon-button-#{$appearance}.ids-icon-button-#{$variant} {
-        color: var(
-          --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-enabled
-        );
-        background: var(
-          --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-enabled
-        );
+    &.ids-icon-button-#{$appearance} {
+      @if $appearance == standard {
+        border: none;
+      }
 
-        &:hover {
-          background: var(
-            --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-hovered
-          );
-          @if $appearance == standard {
-            color: var(
-              --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-hovered
-            );
+      @each $variant in $variants {
+        &.ids-icon-button-#{$variant} {
+          color: var(--ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-enabled);
+          background: var(--ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-enabled);
+
+          @if $appearance != standard {
+            border-color: var(--ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-enabled, rgba(255, 255, 255, 0));
           }
-        }
 
-        &:focus {
-          background: var(
-            --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-focused
-          );
-          color: var(
-            --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-focused
-          );
-        }
+          &:hover {
+            background: var(--ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-hovered);
 
-        &:active {
-          background: var(
-            --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-pressed
-          );
-          color: var(
-            --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-pressed
-          );
-        }
+            @if $appearance == standard {
+              color: var(--ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-hovered);
+            } @else {
+              border-color: var(--ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-hovered, rgba(255, 255, 255, 0));
+            }
+          }
 
-        &:disabled {
-          background: var(
-            --ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-disabled
-          );
-          color: var(
-            --ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-disabled
-          );
+          &:focus {
+            background: var(--ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-focused);
+            color: var(--ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-focused);
+
+            @if $appearance != standard {
+              border-color: var(--ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-focused, rgba(255, 255, 255, 0));
+            }
+          }
+
+          &:active {
+            background: var(--ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-pressed);
+            color: var(--ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-pressed);
+
+            @if $appearance != standard {
+              border-color: var(--ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-pressed, rgba(255, 255, 255, 0));
+            }
+          }
+
+          &:disabled {
+            background: var(--ids-comp-icon-button-#{$appearance}-color-bg-#{$variant}-disabled);
+            color: var(--ids-comp-icon-button-#{$appearance}-color-fg-#{$variant}-disabled);
+
+            @if $appearance != standard {
+              border-color: var(--ids-comp-icon-button-#{$appearance}-color-border-#{$variant}-disabled, rgba(255, 255, 255, 0));
+            }
+          }
         }
       }
     }

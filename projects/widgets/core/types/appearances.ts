@@ -28,3 +28,10 @@ export const ActionItemAppearance = {
 } as const;
 
 export type ActionItemAppearanceType = (typeof ActionItemAppearance)[keyof typeof ActionItemAppearance];
+
+export const TagAppearance = {
+  FILLED: 'filled',
+  OUTLINED: 'outlined'
+} as const;
+
+export type TagAppearanceType = (typeof TagAppearance)[keyof typeof TagAppearance];

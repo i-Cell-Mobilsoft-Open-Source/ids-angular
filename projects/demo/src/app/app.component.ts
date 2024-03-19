@@ -1,12 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Signal,
-  ViewEncapsulation,
-  inject,
-  viewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewEncapsulation, inject, viewChild } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavComponent } from './components/nav/ids-nav.component';
@@ -16,13 +8,7 @@ import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterModule,
-    RouterOutlet,
-    TranslateModule,
-    NavComponent,
-    IdsSwitchComponent,
-  ],
+  imports: [RouterModule, RouterOutlet, TranslateModule, NavComponent, IdsSwitchComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -45,6 +31,7 @@ export class AppComponent implements OnInit {
             { name: 'COMPONENTS.BUTTONS', path: '/components/button' },
             { name: 'COMPONENTS.DIVIDERS', path: '/components/divider' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
+            { name: 'COMPONENTS.TAG', path: '/components/tag' },
           ],
         },
         {
@@ -62,16 +49,12 @@ export class AppComponent implements OnInit {
     this.translate.addLangs(['hu', 'en']);
     this.translate.setDefaultLang('en');
     const browserLang = this.translate.getBrowserLang();
-    this.translate.use(
-      browserLang?.toString().match(/hu|en/) ? browserLang : 'en'
-    );
+    this.translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
   }
 
   ngOnInit() {
     this.themeSwitcher()?.nativeElement.addEventListener('change', (e: any) => {
-      this.changeTheme(
-        (e.target as HTMLInputElement)?.checked ? 'dark' : 'light'
-      );
+      this.changeTheme((e.target as HTMLInputElement)?.checked ? 'dark' : 'light');
     });
   }
 

@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IdsAvatarComponent } from '@i-cell/widgets/avatar';
 import {
-  BaseVariant,
-  BaseVariantType,
+  SurfaceVariant,
+  SurfaceVariantType,
   Size,
   SizeType,
 } from '@i-cell/widgets/core';
@@ -17,5 +17,5 @@ import {
 })
 export class AvatarDemoComponent {
   public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(BaseVariant) as BaseVariantType[];
+  public variants = Object.values(SurfaceVariant) as SurfaceVariantType[];
 }

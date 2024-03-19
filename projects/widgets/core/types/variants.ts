@@ -3,13 +3,19 @@ export const BaseVariant = {
   SECONDARY: 'secondary',
   LIGHT: 'light',
   DARK: 'dark',
-  SURFACE: 'surface'
 } as const;
 
 export type BaseVariantType = (typeof BaseVariant)[keyof typeof BaseVariant];
 
-export const BrandVariant = {
+export const SurfaceVariant = {
   ...BaseVariant,
+  SURFACE: 'surface'
+} as const;
+
+export type SurfaceVariantType = (typeof SurfaceVariant)[keyof typeof SurfaceVariant];
+
+export const BrandVariant = {
+  ...SurfaceVariant,
   BRAND: 'brand',
 } as const;
 

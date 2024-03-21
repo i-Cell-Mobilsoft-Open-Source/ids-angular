@@ -85,6 +85,10 @@ $variants: primary, secondary, brand, error, success, warning, light, dark,
       padding: var(--ids-comp-size-avatar-size-padding-y-#{$size}) var(--ids-comp-size-avatar-size-padding-x-#{$size});
       border: var(--ids-comp-size-avatar-size-border-#{$size}, 1px) solid;
 
+      &:has(.ids-avatar-image) {
+        padding: 0;
+      }
+
       .ids-avatar-image {
         width: var(--ids-comp-size-avatar-size-width-#{$size});
         height: var(--ids-comp-size-avatar-size-height-#{$size});

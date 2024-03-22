@@ -11,11 +11,9 @@ $variants: primary, secondary, brand, error, success, warning, light, dark, surf
 
   &:focus {
     outline-offset: 2px;
-    border-radius: var(--ids-comp-icon-button-size-spacious-border-radius);
     outline: var(--ids-comp-icon-button-focused-outline-size-outline) solid var(--ids-comp-icon-button-focused-outline-color-dark-focused);
 
     &.ids-icon-button-light {
-      background: var(--ids-comp-icon-button-outlined-color-bg-light-focused);
       outline-color: var(--ids-comp-icon-button-focused-outline-color-light-focused);
     }
   }

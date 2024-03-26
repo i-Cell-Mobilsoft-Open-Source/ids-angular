@@ -1,3 +1,4 @@
+import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
   Component,
   HostBinding,
@@ -19,6 +20,7 @@ import {
   selector: 'ids-action-panel,div[idsActionPanel]',
   standalone: true,
   imports: [IdsActionItemComponent],
+  hostDirectives: [CdkMenu, CdkTargetMenuAim],
   template: '<ng-content></ng-content>',
   styleUrl: './ids-action-panel.component.scss',
   encapsulation: ViewEncapsulation.None,

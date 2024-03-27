@@ -62,3 +62,9 @@ $sizes: compact, comfortable, spacious, dense;
     }
   }
 }
+
+.cdk-overlay-connected-position-bounding-box:first-of-type {
+  .cdk-overlay-pane:has(.ids-action-panel) {
+    @apply py-3;
+  }
+}

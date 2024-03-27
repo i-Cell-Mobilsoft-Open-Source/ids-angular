@@ -1,0 +1,96 @@
+<h2 class="grow-0">Action Menu</h2>
+<div class="grow grid grid-cols-[max-content_1fr_max-content] grid-rows-[max-content_1fr_max-content]">
+  <button
+    type="button"
+    idsButton
+    appearance="filled"
+    size="comfortable"
+    variant="primary"
+    [idsActionMenuTriggerFor]="actionMenu"
+    #trigger="idsActionMenuTrigger"
+  >
+    Action menu top-left
+    <ids-icon icon-trailing [icon]="trigger.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+  </button>
+  <button
+    type="button"
+    class="col-start-3 col-end-3"
+    idsButton
+    appearance="filled"
+    size="comfortable"
+    variant="primary"
+    [idsActionMenuTriggerFor]="actionMenu"
+    #trigger="idsActionMenuTrigger"
+  >
+    Action menu top-right
+    <ids-icon icon-trailing [icon]="trigger.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+  </button>
+  <button
+    type="button"
+    class="col-span-3 self-center justify-self-center"
+    idsButton
+    appearance="filled"
+    size="comfortable"
+    variant="primary"
+    [idsActionMenuTriggerFor]="actionMenu"
+    #trigger="idsActionMenuTrigger"
+  >
+    Action menu center
+    <ids-icon icon-trailing [icon]="trigger.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+  </button>
+  <button
+    type="button"
+    idsButton
+    appearance="filled"
+    size="comfortable"
+    variant="primary"
+    [idsActionMenuTriggerFor]="actionMenu"
+    #trigger="idsActionMenuTrigger"
+  >
+    Action menu bottom-left
+    <ids-icon icon-trailing [icon]="trigger.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+  </button>
+  <button
+    type="button"
+    class="col-start-3 col-end-3"
+    idsButton
+    appearance="filled"
+    size="comfortable"
+    variant="primary"
+    [idsActionMenuTriggerFor]="actionMenu"
+    #trigger="idsActionMenuTrigger"
+  >
+    Action menu bottom-right
+    <ids-icon icon-trailing [icon]="trigger.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+  </button>
+
+  <ng-template #actionMenu>
+    <ids-action-panel
+      size="compact"
+      appearance="outlined"
+    >
+      @for (_ of items; track $index) {
+        <button idsActionItem appearance="filled" size="compact" [label]="'Menu Item Label ' + $index">
+          <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
+        </button>
+      }
+      <button idsActionItem appearance="filled" size="compact" label="Menu Item Label 8" [idsActionMenuTriggerFor]="subMenu">
+        <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
+        <ids-icon icon-trailing [icon]="mdiChevronRight" aria-hidden="true" alt="" />
+      </button>
+    </ids-action-panel>
+  </ng-template>
+
+  <ng-template #subMenu>
+    <ids-action-panel
+      size="compact"
+      appearance="outlined"
+    >
+      @for (_ of items; track $index) {
+        <button idsActionItem appearance="filled" size="compact" [label]="'Sub Menu Item Label ' + $index">
+          <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
+        </button>
+      }
+    </ids-action-panel>
+  </ng-template>
+</div>

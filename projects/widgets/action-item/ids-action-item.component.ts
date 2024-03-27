@@ -1,19 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  HostBinding,
-  ViewEncapsulation,
-  computed,
-  contentChild,
-  inject,
-  input,
-} from '@angular/core';
+import { CdkMenuItem } from '@angular/cdk/menu';
+import { Component, ElementRef, HostBinding, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
 import {
   ActionItemAppearance,
   ActionItemAppearanceType,
-  SurfaceVariant,
   Size,
   SizeType,
+  SurfaceVariant,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 
@@ -21,6 +13,7 @@ import {
   selector: 'button[idsActionItem],a[idsActionItem]',
   standalone: true,
   imports: [],
+  hostDirectives: [CdkMenuItem],
   templateUrl: './ids-action-item.component.html',
   styleUrl: './ids-action-item.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -31,9 +24,7 @@ export class IdsActionItemComponent {
   private hostElement = inject(ElementRef).nativeElement as HTMLElement;
 
   public label = input.required<string>();
-  public appearance = input<ActionItemAppearanceType | null>(
-    ActionItemAppearance.TEXT
-  );
+  public appearance = input<ActionItemAppearanceType | null>(ActionItemAppearance.TEXT);
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<'surface' | null>(SurfaceVariant.SURFACE);
   public active = input(false);
@@ -41,8 +32,8 @@ export class IdsActionItemComponent {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
-  iconLeading = contentChild<unknown>('[icon-leading]');
-  iconTrailing = contentChild<unknown>('[icon-trailing]');
+  iconLeading = contentChildren<unknown>('[icon-leading]');
+  iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private hostClasses = computed(() =>
     [

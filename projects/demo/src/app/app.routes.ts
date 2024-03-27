@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'components/action-menu',
+    loadComponent: () => import('./pages/action-menu/action-menu-demo.component').then((m) => m.ActionMenuDemoComponent),
+  },
+  {
     path: 'components/action-panel',
     loadComponent: () => import('./pages/action-panel/action-panel-demo.component').then((m) => m.ActionPanelDemoComponent),
   },

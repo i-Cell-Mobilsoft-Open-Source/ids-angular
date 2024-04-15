@@ -1,0 +1,122 @@
+<h2>Dialog component examples</h2>
+
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog1.open()">Dialog with default header</button>
+<dialog idsDialog #dialog1="idsDialog" mainTitle="Dialog with default header" subTitle="Dialog sub-title here">
+  <!-- content -->
+  <div idsDialogContent>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+  </div>
+  <!-- action buttons -->
+  <div idsDialogActions class="flex flex-row items-end gap-2">
+    <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="onCancelButtonClick(); dialog1.close()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      idsButton
+      appearance="filled"
+      size="comfortable"
+      variant="primary"
+      (click)="onOkButtonClick('some payload'); dialog1.close()"
+    >
+      OK
+    </button>
+  </div>
+</dialog>
+
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog2.open()">Dialog with custom header</button>
+<dialog idsDialog #dialog2="idsDialog" mainTitle="Dialog with custom header">
+  <div *idsDialogHeader>
+    <h2>This is a custom header!</h2>
+  </div>
+  <!-- content -->
+  <div idsDialogContent>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+  </div>
+  <!-- action buttons -->
+  <div idsDialogActions class="flex flex-row items-end gap-2">
+    <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="onCancelButtonClick(); dialog2.close()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      idsButton
+      appearance="filled"
+      size="comfortable"
+      variant="primary"
+      (click)="onOkButtonClick('some payload'); dialog2.close()"
+    >
+      OK
+    </button>
+  </div>
+</dialog>
+
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog3.open()">Dialog with close button</button>
+<dialog idsDialog #dialog3="idsDialog" mainTitle="Dialog with close button" [showCloseButton]="true">
+  <!-- content -->
+  <div idsDialogContent>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+  </div>
+</dialog>
+
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog4.open()">Dialog with transparent backdrop</button>
+<dialog idsDialog #dialog4="idsDialog" mainTitle="Dialog with transparent backdrop" [showCloseButton]="true" [showBackdrop]="false">
+  <!-- content -->
+  <div idsDialogContent>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+  </div>
+</dialog>
+
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog5.open()">Dialog with scrollable content</button>
+<dialog idsDialog #dialog5="idsDialog" mainTitle="Dialog with scrollable content" subTitle="Dialog sub-title here">
+  <!-- content -->
+  <div idsDialogContent>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+  </div>
+  <!-- action buttons -->
+  <div idsDialogActions class="flex flex-row items-end gap-2">
+    <button
+      type="button"
+      idsButton
+      appearance="filled"
+      size="comfortable"
+      variant="primary"
+      (click)="onOkButtonClick('some payload'); dialog5.close()"
+    >
+      OK
+    </button>
+  </div>
+</dialog>
+
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="openCustomDialog()">Custom dynamic dialog</button>

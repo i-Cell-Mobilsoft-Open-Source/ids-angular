@@ -1,0 +1,37 @@
+<section class="ids-dialog-container">
+  <header class="ids-dialog-header">
+    @if (customHeader()) {
+      <h2 [id]="dialogTitleId" class="ids-dialog-title hidden">{{ mainTitle() }}</h2>
+      <ng-container [ngTemplateOutlet]="customHeader()!.template"></ng-container>
+    } @else {
+      <div class="ids-dialog-header-default-content">
+        <h2 [id]="dialogTitleId" class="ids-dialog-title">{{ mainTitle() }}</h2>
+        @if (subTitle()) {
+          <h3 class="ids-dialog-subtitle">{{ subTitle() }}</h3>
+        }
+      </div>
+    }
+
+    @if (showCloseButton()) {
+      <button
+        type="button"
+        class="ids-dialog-close-button"
+        idsIconButton
+        appearance="standard"
+        size="compact"
+        variant="surface"
+        (click)="close()"
+      >
+        <ids-icon [icon]="mdiClose" aria-hidden="true" alt="" />
+      </button>
+    }
+  </header>
+  <div class="ids-dialog-content" [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()">
+    <div idsDetectScrollable #scrollDetector="idsDetectScrollable" class="ids-dialog-content-overflow" >
+      <ng-content select="[idsDialogContent]"></ng-content>
+    </div>
+  </div>
+  <footer class="ids-dialog-actions">
+    <ng-content select="[idsDialogActions]"></ng-content>
+  </footer>
+</section>

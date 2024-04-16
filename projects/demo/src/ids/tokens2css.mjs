@@ -67,7 +67,25 @@ function flattenObject(obj, path = []) {
   pushNewVariable(path, valueRefToCssVar(obj.value));
 }
 
+function correctPercentageUnits(obj) {
+  if (!obj) {
+    console.warn('correctPercentageUnits: argument is not an object');
+    return;
+  }
+  Object.keys(obj).forEach((percentageConfigKey) => {
+    const percentageConfig = obj[percentageConfigKey];
+    obj[percentageConfigKey] = {
+      ...percentageConfig,
+      value: percentageConfig.value.replace('px', '%')
+    }
+  });
+}
+
 const tokensRaw = JSON.parse(readFileSync('./tokens.json', 'utf-8'));
+
+// Figma handles percentage values as numbers between 0 and 100 w/o a specific unit. These values are automatically given "px" units during export.
+correctPercentageUnits(tokensRaw.base.percentage);
+
 const themes = {
   light: ['.ids-theme-light {'],
   dark: ['.ids-theme-dark {']

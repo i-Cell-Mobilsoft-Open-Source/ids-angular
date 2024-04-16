@@ -1,11 +1,18 @@
-ids-icon {
-  --icon-size: var(--ids-comp-buttons-size-comfortable-icon, 24px);
-  display: inline-block;
-  width: var(--icon-size);
-  height: var(--icon-size);
-}
+$sizes: compact, comfortable, spacious, dense;
 
-svg {
-  color: currentColor;
-  fill: currentColor;
+ids-icon {
+  display: inline-flex;
+
+  svg {
+    color: currentColor;
+    fill: currentColor;
+  }
+
+  @each $size in $sizes {
+    &.ids-icon-#{$size} {
+      // FIXME: using icon-button's icon size tokens for now
+      width: var(--ids-comp-size-icon-button-size-icon-#{$size}, 24px);
+      height: var(--ids-comp-size-icon-button-size-icon-#{$size}, 24px);
+    }
+  }
 }

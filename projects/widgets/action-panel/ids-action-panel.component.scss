@@ -37,12 +37,12 @@ $sizes: compact, comfortable, spacious, dense;
   }
   &.ids-action-panel-elevated {
     box-shadow: var(
-        --ids-smc-reference-container-effects-tw-shadow-horizontal-none
+        --ids-smc-reference-container-effects-shadow-horizontal-none
       )
-      var(--ids-smc-reference-container-effects-tw-shadow-vertical-xxl)
-      var(--ids-smc-reference-container-effects-tw-shadow-blur-xxxl)
-      var(--ids-smc-reference-container-effects-tw-shadow-spread-xxs)
-      var(--ids-smc-reference-container-effects-tw-shadow-color-dark-darker);
+      var(--ids-smc-reference-container-effects-shadow-vertical-xxl)
+      var(--ids-smc-reference-container-effects-shadow-blur-xxxl)
+      var(--ids-smc-reference-container-effects-shadow-spread-xxs)
+      var(--ids-smc-reference-container-effects-shadow-color-dark-darker);
   }
 
   @each $appearance in $appearances {

@@ -15,6 +15,17 @@ $sizes: compact, comfortable, spacious, dense;
     border-style: solid;
     cursor: pointer;
 
+    &:focus {
+      outline-offset: 2px;
+      outline-style: solid;
+      outline-width: var(--ids-comp-accordion-summary-focused-outline-size-outline);
+      outline-color: var(--ids-comp-accordion-summary-focused-outline-color-dark-focused);
+
+      .ids-theme-dark & {
+        outline-color: var(--ids-comp-accordion-summary-focused-outline-color-light-focused);
+      }
+    }
+
     .ids-accordion-title {
       flex: 1 0 0;
       overflow: hidden;

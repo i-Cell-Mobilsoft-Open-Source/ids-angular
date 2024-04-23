@@ -10,6 +10,7 @@
   },
   "RESOURCES": "Resources",
   "COMPONENTS": {
+    "ACCORDION": "Accordion",
     "ACTION_MENU": "Action menu",
     "ACTION_PANEL": "Action panel",
     "AVATAR": "Avatar",

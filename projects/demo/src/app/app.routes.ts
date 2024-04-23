@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'components/accordion',
+    loadComponent: () => import('./pages/accordion/accordion-demo.component').then((m) => m.AccordionDemoComponent),
+  },
+  {
     path: 'components/action-menu',
     loadComponent: () => import('./pages/action-menu/action-menu-demo.component').then((m) => m.ActionMenuDemoComponent),
   },

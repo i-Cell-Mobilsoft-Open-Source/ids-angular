@@ -35,3 +35,10 @@ export const TagAppearance = {
 } as const;
 
 export type TagAppearanceType = (typeof TagAppearance)[keyof typeof TagAppearance];
+
+export const AccordionAppearance = {
+  FILLED: 'filled',
+  TEXT: 'text'
+} as const;
+
+export type AccordionAppearanceType = (typeof AccordionAppearance)[keyof typeof AccordionAppearance];

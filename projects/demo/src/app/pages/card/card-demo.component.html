@@ -1,0 +1,77 @@
+<form class="flex flex-col gap-6">
+  <label>
+    Appearance:
+    <select name="appearance" [(ngModel)]="model.appearance">
+      @for (appearance of appearances; track $index) {
+        <option value="{{ appearance }}">{{ appearance }}</option>
+      }
+    </select>
+  </label>
+  <label>
+    Size:
+    <select name="size" [(ngModel)]="model.size">
+      @for (size of sizes; track $index) {
+        <option value="{{ size }}">{{ size }}</option>
+      }
+    </select>
+  </label>
+  <label>
+    Variants:
+    <select name="variant" [(ngModel)]="model.variant">
+      @for (variant of variants; track $index) {
+        <option value="{{ variant }}">{{ variant }}</option>
+      }
+    </select>
+  </label>
+  <label>
+    Orientation:
+    <select name="orientation" [(ngModel)]="model.orientation">
+      @for (orientation of orientations; track $index) {
+        <option value="{{ orientation }}">{{ orientation }}</option>
+      }
+    </select>
+  </label>
+  <label>
+    Clickable:
+    <input type="checkbox" name="clickable" [(ngModel)]="model.clickable">
+  </label>
+  <label>
+    Disabled:
+    <input type="checkbox" name="disabled" [(ngModel)]="model.disabled">
+  </label>
+  <label>
+    Stretch media:
+    <input type="checkbox" name="stretchMedia" [(ngModel)]="model.stretchMedia">
+  </label>
+</form>
+
+@if (model.clickable) {
+<section idsCard [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation" (click)="onClick()" [disabled]="model.disabled">
+  @if (model.orientation === 'vertical') {
+  <header idsCardHeader>
+    <h2 idsCardTitle>This is the title</h2>
+    <h3 idsCardSubtitle>This is the subtitle</h3>
+  </header>
+  }
+  <img idsCardMedia src="https://icellmobilsoft.hu/wp-content/uploads/2017/07/solution-toll-go.jpg" alt="" [stretch]="model.stretchMedia">
+  <ids-card-body>This is the body</ids-card-body>
+  @if (model.orientation === 'vertical') {
+  <footer idsCardFooter>This is the footer</footer>
+  }
+</section>
+}
+@else {
+<section idsCard [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation">
+  @if (model.orientation === 'vertical') {
+  <header idsCardHeader>
+    <h2 idsCardTitle>This is the title</h2>
+    <h3 idsCardSubtitle>This is the subtitle</h3>
+  </header>
+  }
+  <img idsCardMedia src="https://icellmobilsoft.hu/wp-content/uploads/2017/07/solution-toll-go.jpg" alt="" [stretch]="model.stretchMedia">
+  <ids-card-body>This is the body</ids-card-body>
+  @if (model.orientation === 'vertical') {
+  <footer idsCardFooter>This is the footer</footer>
+  }
+</section>
+}

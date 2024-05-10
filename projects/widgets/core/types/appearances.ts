@@ -42,3 +42,11 @@ export const AccordionAppearance = {
 } as const;
 
 export type AccordionAppearanceType = (typeof AccordionAppearance)[keyof typeof AccordionAppearance];
+
+export const CardAppearance = {
+  FILLED: 'filled',
+  OUTLINED: 'outlined',
+  ELEVATED: 'elevated'
+} as const;
+
+export type CardAppearanceType = (typeof CardAppearance)[keyof typeof CardAppearance];

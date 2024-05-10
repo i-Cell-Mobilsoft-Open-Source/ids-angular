@@ -22,6 +22,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/button/button-demo.component').then((m) => m.ButtonDemoComponent),
   },
   {
+    path: 'components/card',
+    loadComponent: () => import('./pages/card/card-demo.component').then((m) => m.CardDemoComponent),
+  },
+  {
     path: 'components/dialog',
     loadComponent: () => import('./pages/dialog/dialog-demo.component').then((m) => m.DialogDemoComponent),
   },

@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
             { name: 'COMPONENTS.ACTION_PANEL', path: '/components/action-panel' },
             { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
             { name: 'COMPONENTS.BUTTONS', path: '/components/button' },
+            { name: 'COMPONENTS.CARD', path: '/components/card' },
             { name: 'COMPONENTS.DIALOG', path: '/components/dialog' },
             { name: 'COMPONENTS.DIVIDERS', path: '/components/divider' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },

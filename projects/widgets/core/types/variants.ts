@@ -26,6 +26,7 @@ export const AllVariants = {
   ERROR: 'error',
   SUCCESS: 'success',
   WARNING: 'warning',
+  INFO: 'info',
 } as const;
 
 export type AllVariantsType = (typeof AllVariants)[keyof typeof AllVariants];

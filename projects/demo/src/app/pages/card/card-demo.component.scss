@@ -1,0 +1,17 @@
+app-card-demo {
+  display: flex;
+  gap: 2rem;
+  margin: 40px;
+
+  .ids-card {
+    &.ids-card-vertical {
+      width: 400px;
+    }
+    &.ids-card-horizontal {
+      width: 600px;
+      .ids-card-media {
+        width: 400px;
+      }
+    }
+  }
+}

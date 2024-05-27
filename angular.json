@@ -39,7 +39,8 @@
               "projects/demo/src/assets"
             ],
             "styles": [
-              "projects/demo/src/styles.scss"
+              "projects/demo/src/styles.scss",
+              "node_modules/@i-cell/ids-tokens/css/tokens.css"
             ],
             "scripts": []
           },

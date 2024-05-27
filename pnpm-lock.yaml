@@ -32,6 +32,9 @@ dependencies:
   '@angular/router':
     specifier: ^17.3.1
     version: 17.3.1(@angular/common@17.3.1)(@angular/core@17.3.1)(@angular/platform-browser@17.3.1)(rxjs@7.8.1)
+  '@i-cell/ids-tokens':
+    specifier: ^0.0.1
+    version: 0.0.1
   '@mdi/js':
     specifier: ^7.4.47
     version: 7.4.47
@@ -2271,6 +2274,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@i-cell/ids-tokens@0.0.1:
+    resolution: {integrity: sha512-1X0h2bHJQVdDvRvWe9Y9vej6kUstA86YbVjxzVrpou/zCMmjtmxIRQH0oCYBpYjNwi+630I+XqnMOevlSMB6eg==}
+    dev: false
 
   /@isaacs/cliui@8.0.2:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}

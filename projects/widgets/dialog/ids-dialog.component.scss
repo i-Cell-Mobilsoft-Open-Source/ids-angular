@@ -7,7 +7,7 @@ $sizes: compact, comfortable, spacious, dense;
   background-color: var(--ids-comp-dialog-container-color-bg-enabled);
   box-shadow: var(--ids-smc-reference-container-effects-shadow-horizontal-none)
     var(--ids-smc-reference-container-effects-shadow-vertical-xxl) var(--ids-smc-reference-container-effects-shadow-blur-xxxl)
-    var(--ids-smc-reference-container-effects-shadow-spread-xxs) var(--ids-smc-reference-container-effects-shadow-color-dark-darker);
+    var(--ids-smc-reference-container-effects-shadow-spread-xxs) var(--ids-smc-reference-container-effects-shadow-color-dark-default);
 
   &::backdrop {
     background-color: transparent;

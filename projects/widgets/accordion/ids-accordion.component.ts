@@ -36,7 +36,7 @@ export class IdsAccordionComponent {
       ...[this.disabled() ? [this._addClassPrefix('disabled')] : []],
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {

@@ -10,7 +10,7 @@
     "test": "ng test",
     "e2e": "cypress run",
     "lint": "ng lint",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -61,6 +61,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^15.2.5",
     "ng-packagr": "^17.1.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",

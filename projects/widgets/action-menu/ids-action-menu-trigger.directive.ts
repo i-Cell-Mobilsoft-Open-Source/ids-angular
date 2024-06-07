@@ -1,5 +1,6 @@
-import { CdkMenuTrigger } from '@angular/cdk/menu';
 import { Directive, inject } from '@angular/core';
+
+import { CdkMenuTrigger } from '@angular/cdk/menu';
 
 @Directive({
   selector: 'button[idsActionMenuTriggerFor]',
@@ -19,15 +20,15 @@ export class IdsActionMenuTriggerDirective {
     return !!this.menuTrigger.isOpen();
   }
 
-  open() {
+  public open(): void {
     this.menuTrigger.open();
   }
 
-  close() {
+  public close(): void {
     this.menuTrigger.close();
   }
 
-  toggle() {
+  public toggle(): void {
     this.menuTrigger.toggle();
   }
 }

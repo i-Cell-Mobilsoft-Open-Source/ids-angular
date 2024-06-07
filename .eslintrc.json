@@ -23,6 +23,7 @@
         "@angular-eslint/sort-lifecycle-methods": ["warn"],
         "@angular-eslint/no-lifecycle-call": ["error"],
         "@angular-eslint/relative-url-prefix": ["error"],
+        "@angular-eslint/no-host-metadata-property": ["error", { "allowStatic": true }],
         "no-self-compare": "error",
         "no-template-curly-in-string": "error",
         "no-unreachable": "warn",
@@ -100,16 +101,7 @@
           {
             "selector": "variable",
             "format": ["camelCase", "UPPER_CASE"],
-            "filter": {
-              "regex": "Enum$",
-              "match": false
-            }
-          },
-          {
-            "selector": "variable",
-            "format": ["PascalCase"],
-            "modifiers": ["const"],
-            "suffix": ["Enum"]
+            "modifiers": ["const"]
           },
           {
             "selector": ["classProperty", "classMethod", "parameterProperty", "accessor"],
@@ -137,7 +129,7 @@
         "@typescript-eslint/prefer-string-starts-ends-with": "error",
         "@typescript-eslint/require-array-sort-compare": "error",
         "@typescript-eslint/return-await": "error",
-        "@typescript-eslint/strict-boolean-expressions": "error",
+        "@typescript-eslint/strict-boolean-expressions": ["error", { "allowNullableString": true }],
         "rxjs/no-ignored-error": "error",
         "rxjs/no-ignored-subscribe": "error",
         "rxjs/no-implicit-any-catch": "off",
@@ -185,6 +177,19 @@
         "@stylistic/type-generic-spacing": ["error"],
         "@stylistic/type-named-tuple-spacing": ["error"],
         "unused-imports/no-unused-imports": "error"
+      }
+    },
+    {
+      "files": ["**/types/*.ts"],
+      "rules": {
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "variable",
+            "format": ["PascalCase"],
+            "modifiers": ["const"]
+          }
+        ]
       }
     },
     {

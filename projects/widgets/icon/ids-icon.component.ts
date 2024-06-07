@@ -1,5 +1,5 @@
 import { Component, HostBinding, ViewEncapsulation, computed, input } from '@angular/core';
-import { SizeType, Size } from '@i-cell/widgets/core';
+import { Size, SizeType } from '@i-cell/widgets/core';
 
 @Component({
   selector: 'ids-icon',
@@ -11,25 +11,25 @@ import { SizeType, Size } from '@i-cell/widgets/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsIconComponent {
-  private readonly componentClass = 'ids-icon';
+  private readonly _componentClass = 'ids-icon';
 
   public icon = input.required<string>();
   public size = input<SizeType | null>(Size.COMFORTABLE);
 
-  private hostClasses = computed(() =>
+  private _hostClasses = computed(() =>
     [
-      this.componentClass,
-      this.addClassPrefix(this.size())
+      this._componentClass,
+      this._addClassPrefix(this.size())
     ]
       .filter(Boolean)
       .join(' ')
   );
 
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 }

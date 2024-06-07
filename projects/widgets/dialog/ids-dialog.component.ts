@@ -1,10 +1,11 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { Component, ElementRef, HostBinding, HostListener, ViewEncapsulation, computed, contentChild, inject, input } from '@angular/core';
 import { IdsDetectScrollableDirective, Size, SizeType } from '@i-cell/widgets/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
-import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
-import { mdiWindowClose } from '@mdi/js';
+
 import { IdsDialogHeaderDirective } from './ids-dialog-header.directive';
+import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
+import { IdsIconComponent } from '@i-cell/widgets/icon';
+import { NgTemplateOutlet } from '@angular/common';
+import { mdiWindowClose } from '@mdi/js';
 
 let uniqueIdCounter = 0;
 
@@ -18,7 +19,7 @@ let uniqueIdCounter = 0;
   exportAs: 'idsDialog',
 })
 export class IdsDialogComponent {
-  private readonly componentClass = 'ids-dialog';
+  private readonly _componentClass = 'ids-dialog';
   public readonly dialogTitleId = `ids-dialog-title-${uniqueIdCounter++}`;
   public readonly mdiClose = mdiWindowClose;
 
@@ -32,18 +33,18 @@ export class IdsDialogComponent {
 
   public customHeader = contentChild(IdsDialogHeaderDirective);
 
-  private hostClasses = computed(() =>
+  private _hostClasses = computed(() =>
     [
-      this.componentClass,
-      this.addClassPrefix(this.size()),
-      ...[this.showBackdrop() ? [this.addClassPrefix('with-backdrop')] : []],
+      this._componentClass,
+      this._addClassPrefix(this.size()),
+      ...[this.showBackdrop() ? [this._addClassPrefix('with-backdrop')] : []],
     ]
       .filter(Boolean)
       .join(' ')
   );
 
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
 
   @HostBinding('attr.aria-labelledby') get ariaLabelledBy(): string {
@@ -51,19 +52,19 @@ export class IdsDialogComponent {
   }
 
   @HostListener('cancel', ['$event'])
-  protected onCancel(e: Event): void {
-    e.preventDefault();
+  protected onCancel(event: Event): void {
+    event.preventDefault();
   }
 
-  open() {
+  public open(): void {
     this.dialog.showModal();
   }
 
-  close() {
+  public close(): void {
     this.dialog.close();
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 }

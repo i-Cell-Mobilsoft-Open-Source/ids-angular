@@ -6,10 +6,10 @@ import {
   input,
 } from '@angular/core';
 import {
-  SurfaceVariant,
-  SurfaceVariantType,
   Size,
   SizeType,
+  SurfaceVariant,
+  SurfaceVariantType,
 } from '@i-cell/widgets/core';
 
 @Component({
@@ -21,29 +21,30 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsAvatarComponent {
-  private readonly componentClass = 'ids-avatar';
+  private readonly _componentClass = 'ids-avatar';
 
   public image = input<string | null>(null);
+  public alt = input<string | null>(null);
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<SurfaceVariantType | null>(SurfaceVariant.PRIMARY);
 
-  private hostClasses = computed(() =>
+  private _hostClasses = computed(() =>
     [
-      this.componentClass,
-      this.addClassPrefix(this.size()),
-      this.addClassPrefix(this.variant()),
+      this._componentClass,
+      this._addClassPrefix(this.size()),
+      this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
       .join(' ')
   );
 
-  @HostBinding('type') _type = 'button';
+  @HostBinding('type') private _type = 'button';
 
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 }

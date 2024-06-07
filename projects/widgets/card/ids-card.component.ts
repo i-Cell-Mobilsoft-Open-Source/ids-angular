@@ -1,5 +1,6 @@
-import { Component, EventEmitter, HostBinding, OnInit, Output, ViewEncapsulation, computed, input, signal } from '@angular/core';
 import { AllVariants, AllVariantsType, CardAppearance, CardAppearanceType, Orientation, OrientationType, Size, SizeType, coerceBooleanAttribute } from '@i-cell/widgets/core';
+import { Component, EventEmitter, HostBinding, OnInit, Output, ViewEncapsulation, computed, input, signal } from '@angular/core';
+
 import { IdsCardHeaderComponent } from './ids-card-header.component';
 
 @Component({
@@ -14,7 +15,7 @@ import { IdsCardHeaderComponent } from './ids-card-header.component';
   encapsulation: ViewEncapsulation.None
 })
 export class IdsCardComponent implements OnInit {
-  private readonly componentClass = 'ids-card';
+  private readonly _componentClass = 'ids-card';
 
   public appearance = input<CardAppearanceType | null>(CardAppearance.FILLED);
   public size = input<SizeType | null>(Size.COMFORTABLE);
@@ -26,39 +27,42 @@ export class IdsCardComponent implements OnInit {
 
   // Old fashion output for now, signal outputs cannot be queried as of now for subscribers
   @Output()
+  // eslint-disable-next-line @angular-eslint/no-output-native
   public click = new EventEmitter();
 
-  private hasClickHandler = signal(false);
+  private _hasClickHandler = signal(false);
 
-  private hostClasses = computed(() =>
+  private _hostClasses = computed(() =>
     [
-      this.componentClass,
-      this.addClassPrefix(this.appearance()),
-      this.addClassPrefix(this.size()),
-      this.addClassPrefix(this.variant()),
-      this.addClassPrefix(this.orientation()),
-      ...[this.disabled() && this.hasClickHandler() ? [this.addClassPrefix('disabled')] : []],
-      ...[this.hasClickHandler() ? [this.addClassPrefix('clickable')] : []],
+      this._componentClass,
+      this._addClassPrefix(this.appearance()),
+      this._addClassPrefix(this.size()),
+      this._addClassPrefix(this.variant()),
+      this._addClassPrefix(this.orientation()),
+      ...[this.disabled() && this._hasClickHandler() ? [this._addClassPrefix('disabled')] : []],
+      ...[this._hasClickHandler() ? [this._addClassPrefix('clickable')] : []],
     ]
       .filter(Boolean)
       .join(' ')
   );
 
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
+  
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
     return this.disabled() || null;
   }
+  
   @HostBinding('attr.tabindex') get tabIndex(): number | null {
-    return this.hasClickHandler() ? 0 : null;
+    return this._hasClickHandler() ? 0 : null;
   }
 
-  ngOnInit(): void {
-    this.hasClickHandler.set(this.click.observed);
+  public ngOnInit(): void {
+    this._hasClickHandler.set(this.click.observed);
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 }

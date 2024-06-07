@@ -1,5 +1,6 @@
 import { AfterViewInit, Directive, OnDestroy, viewChild } from '@angular/core';
 import { Subject, Subscription, fromEvent } from 'rxjs';
+
 import { IdsDialogComponent } from './ids-dialog.component';
 
 @Directive({ standalone: true })
@@ -8,24 +9,24 @@ export abstract class IdsCustomDialogBase<ResultType = unknown> implements After
 
   protected dialog = viewChild.required(IdsDialogComponent);
 
-  private closeSub?: Subscription;
+  private _closeSub?: Subscription;
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.dialog().open();
-    this.closeSub = fromEvent(this.dialog().dialog, 'close').subscribe(() => this.setDialogResult());
+    this._closeSub = fromEvent(this.dialog().dialog, 'close').subscribe({ next: () => this._setDialogResult() });
   }
 
-  ngOnDestroy(): void {
-    this.closeSub?.unsubscribe();
+  public ngOnDestroy(): void {
+    this._closeSub?.unsubscribe();
   }
 
-  close(payload?: ResultType): void {
-    this.closeSub?.unsubscribe();
+  public close(payload?: ResultType): void {
+    this._closeSub?.unsubscribe();
     this.dialog().close();
-    this.setDialogResult(payload);
+    this._setDialogResult(payload);
   }
 
-  private setDialogResult(payload?: ResultType): void {
+  private _setDialogResult(payload?: ResultType): void {
     this.dialogResult.next(payload);
     this.dialogResult.complete();
   }

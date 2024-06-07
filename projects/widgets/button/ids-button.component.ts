@@ -1,12 +1,4 @@
 import {
-  Component,
-  HostBinding,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  input,
-} from '@angular/core';
-import {
   AllVariants,
   AllVariantsType,
   ButtonAppearance,
@@ -15,6 +7,14 @@ import {
   SizeType,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
+import {
+  Component,
+  HostBinding,
+  ViewEncapsulation,
+  computed,
+  contentChildren,
+  input,
+} from '@angular/core';
 
 @Component({
   selector: 'button[idsButton]',
@@ -25,26 +25,27 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsButtonComponent {
-  private readonly componentClass = 'ids-button';
+  private readonly _componentClass = 'ids-button';
 
   public appearance = input<ButtonAppearanceType | null>(
     ButtonAppearance.FILLED
   );
+  
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
-  iconLeading = contentChildren<unknown>('[icon-leading]');
-  iconTrailing = contentChildren<unknown>('[icon-trailing]');
+  public iconLeading = contentChildren<unknown>('[icon-leading]');
+  public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
-  private hostClasses = computed(() =>
+  private _hostClasses = computed(() =>
     [
-      this.componentClass,
-      this.addClassPrefix(this.appearance()),
-      this.addClassPrefix(this.size()),
-      this.addClassPrefix(this.variant()),
+      this._componentClass,
+      this._addClassPrefix(this.appearance()),
+      this._addClassPrefix(this.size()),
+      this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
       .join(' ')
@@ -53,11 +54,12 @@ export class IdsButtonComponent {
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
     return this.disabled() || null;
   }
+  
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 }

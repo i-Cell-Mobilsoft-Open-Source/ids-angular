@@ -7,14 +7,7 @@ import {
   SizeType,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
-import {
-  Component,
-  HostBinding,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  input,
-} from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
 
 @Component({
   selector: 'button[idsButton]',
@@ -27,10 +20,8 @@ import {
 export class IdsButtonComponent {
   private readonly _componentClass = 'ids-button';
 
-  public appearance = input<ButtonAppearanceType | null>(
-    ButtonAppearance.FILLED
-  );
-  
+  public appearance = input<ButtonAppearanceType | null>(ButtonAppearance.FILLED);
+
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
   public disabled = input(false, {
@@ -48,13 +39,13 @@ export class IdsButtonComponent {
       this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
     return this.disabled() || null;
   }
-  
+
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }

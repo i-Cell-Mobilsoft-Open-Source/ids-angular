@@ -23,7 +23,10 @@
         "@angular-eslint/sort-lifecycle-methods": ["warn"],
         "@angular-eslint/no-lifecycle-call": ["error"],
         "@angular-eslint/relative-url-prefix": ["error"],
-        "@angular-eslint/no-host-metadata-property": ["error", { "allowStatic": true }],
+        "@angular-eslint/no-host-metadata-property": [
+          "error",
+          { "allowStatic": true }
+        ],
         "no-self-compare": "error",
         "no-template-curly-in-string": "error",
         "no-unreachable": "warn",
@@ -35,7 +38,10 @@
         "eqeqeq": ["error", "smart"],
         "func-name-matching": ["error", "always"],
         "id-length": ["error", { "min": 2, "max": 30, "exceptions": ["x"] }],
-        "max-lines-per-function": ["error", { "max": 100, "skipBlankLines": true, "skipComments": true }],
+        "max-lines-per-function": [
+          "error",
+          { "max": 100, "skipBlankLines": true, "skipComments": true }
+        ],
         "no-bitwise": "error",
         "no-console": [
           "error",
@@ -85,7 +91,6 @@
         "radix": "warn",
         "require-await": "error",
         "yoda": "error",
-        "import/no-unresolved": "off",
         "@typescript-eslint/explicit-member-accessibility": [
           "error",
           {
@@ -104,7 +109,12 @@
             "modifiers": ["const"]
           },
           {
-            "selector": ["classProperty", "classMethod", "parameterProperty", "accessor"],
+            "selector": [
+              "classProperty",
+              "classMethod",
+              "parameterProperty",
+              "accessor"
+            ],
             "modifiers": ["private"],
             "format": ["camelCase"],
             "leadingUnderscore": "require"
@@ -129,16 +139,29 @@
         "@typescript-eslint/prefer-string-starts-ends-with": "error",
         "@typescript-eslint/require-array-sort-compare": "error",
         "@typescript-eslint/return-await": "error",
-        "@typescript-eslint/strict-boolean-expressions": ["error", { "allowNullableString": true }],
+        "@typescript-eslint/strict-boolean-expressions": [
+          "error",
+          { "allowNullableString": true }
+        ],
         "rxjs/no-ignored-error": "error",
         "rxjs/no-ignored-subscribe": "error",
         "rxjs/no-implicit-any-catch": "off",
         "rxjs/no-topromise": "error",
         "rxjs/no-unsafe-catch": "error",
         "@stylistic/array-bracket-spacing": ["error", "never"],
+        "@stylistic/array-bracket-newline": [
+          "error",
+          { "multiline": true, "minItems": 2 }
+        ],
+        "@stylistic/array-element-newline": [
+          "error",
+          { "multiline": true, "minItems": 2 }
+        ],
+        "@stylistic/arrow-parens": ["error", "always"],
         "@stylistic/arrow-spacing": "error",
         "@stylistic/block-spacing": "error",
         "@stylistic/brace-style": "error",
+        "@stylistic/comma-dangle": ["error", "always-multiline"],
         "@stylistic/comma-spacing": [
           "error",
           {
@@ -149,11 +172,16 @@
         "@stylistic/comma-style": ["error", "last"],
         "@stylistic/computed-property-spacing": ["error", "never"],
         "@stylistic/dot-location": ["error", "property"],
+        "@stylistic/eol-last": ["error", "always"],
         "@stylistic/function-call-spacing": ["error", "never"],
-        "@stylistic/indent": "off",
+        "@stylistic/indent": ["error", 2, { "SwitchCase": 1 }],
         "@stylistic/key-spacing": ["error", { "beforeColon": false }],
         "@stylistic/keyword-spacing": ["error", { "before": true }],
-        "@stylistic/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+        "@stylistic/lines-between-class-members": [
+          "error",
+          "always",
+          { "exceptAfterSingleLine": true }
+        ],
         "@stylistic/max-len": [
           "error",
           {
@@ -166,6 +194,7 @@
         "@stylistic/no-confusing-arrow": "error",
         "@stylistic/no-floating-decimal": "error",
         "@stylistic/object-curly-spacing": ["error", "always"],
+        "@stylistic/quotes": ["error", "single"],
         "@stylistic/rest-spread-spacing": ["error", "never"],
         "@stylistic/semi": ["warn", "always"],
         "@stylistic/semi-spacing": "error",
@@ -176,6 +205,23 @@
         "@stylistic/template-curly-spacing": "error",
         "@stylistic/type-generic-spacing": ["error"],
         "@stylistic/type-named-tuple-spacing": ["error"],
+        "import/no-unresolved": "off",
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              "index",
+              "sibling",
+              "parent",
+              "internal",
+              "external",
+              "builtin",
+              "object",
+              "type"
+            ],
+            "newlines-between": "always"
+          }
+        ],
         "unused-imports/no-unused-imports": "error"
       }
     },
@@ -201,7 +247,10 @@
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:@angular-eslint/template/accessibility"]
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ]
     }
   ]
 }

@@ -1,7 +1,8 @@
+import { IdsDialogComponent } from './ids-dialog.component';
+
 import { AfterViewInit, Directive, OnDestroy, viewChild } from '@angular/core';
 import { Subject, Subscription, fromEvent } from 'rxjs';
 
-import { IdsDialogComponent } from './ids-dialog.component';
 
 @Directive({ standalone: true })
 export abstract class IdsCustomDialogBase<ResultType = unknown> implements AfterViewInit, OnDestroy {

@@ -27,7 +27,7 @@
     }
   </header>
   <div class="ids-dialog-content" [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()">
-    <div idsDetectScrollable #scrollDetector="idsDetectScrollable" class="ids-dialog-content-overflow" >
+    <div idsDetectScrollable #scrollDetector="idsDetectScrollable" class="ids-dialog-content-overflow">
       <ng-content select="[idsDialogContent]"></ng-content>
     </div>
   </div>

@@ -1,7 +1,18 @@
-import { AllVariants, AllVariantsType, CardAppearance, CardAppearanceType, Orientation, OrientationType, Size, SizeType, coerceBooleanAttribute } from '@i-cell/widgets/core';
+import { IdsCardHeaderComponent } from './ids-card-header.component';
+
+import {
+  AllVariants,
+  AllVariantsType,
+  CardAppearance,
+  CardAppearanceType,
+  Orientation,
+  OrientationType,
+  Size,
+  SizeType,
+  coerceBooleanAttribute,
+} from '@i-cell/widgets/core';
 import { Component, EventEmitter, HostBinding, OnInit, Output, ViewEncapsulation, computed, input, signal } from '@angular/core';
 
-import { IdsCardHeaderComponent } from './ids-card-header.component';
 
 @Component({
   selector: 'ids-card,div[idsCard],article[idsCard],aside[idsCard],section[idsCard]',
@@ -12,7 +23,7 @@ import { IdsCardHeaderComponent } from './ids-card-header.component';
     <ng-content select="ids-card-footer,footer[idsCardFooter]"></ng-content>
   `,
   styleUrl: './ids-card.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class IdsCardComponent implements OnInit {
   private readonly _componentClass = 'ids-card';
@@ -43,17 +54,17 @@ export class IdsCardComponent implements OnInit {
       ...[this._hasClickHandler() ? [this._addClassPrefix('clickable')] : []],
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }
-  
+
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
     return this.disabled() || null;
   }
-  
+
   @HostBinding('attr.tabindex') get tabIndex(): number | null {
     return this._hasClickHandler() ? 0 : null;
   }

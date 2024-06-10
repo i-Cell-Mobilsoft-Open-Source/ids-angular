@@ -1,5 +1,4 @@
 import { Directive, inject } from '@angular/core';
-
 import { CdkMenuTrigger } from '@angular/cdk/menu';
 
 @Directive({

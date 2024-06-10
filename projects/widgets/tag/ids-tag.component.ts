@@ -1,5 +1,21 @@
-import { AllVariants, AllVariantsType, Size, SizeType, TagAppearance, TagAppearanceType } from '@i-cell/widgets/core';
-import { Component, ElementRef, HostBinding, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
+import {
+  AllVariants,
+  AllVariantsType,
+  Size,
+  SizeType,
+  TagAppearance,
+  TagAppearanceType,
+} from '@i-cell/widgets/core';
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  ViewEncapsulation,
+  computed,
+  contentChildren,
+  inject,
+  input,
+} from '@angular/core';
 
 @Component({
   selector: 'ids-tag,button[idsTag]',
@@ -22,15 +38,20 @@ export class IdsTagComponent {
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private _hostClasses = computed(() =>
-    [this._componentClass, this._addClassPrefix(this.appearance()), this._addClassPrefix(this.size()), this._addClassPrefix(this.variant())]
+    [
+      this._componentClass,
+      this._addClassPrefix(this.appearance()),
+      this._addClassPrefix(this.size()),
+      this._addClassPrefix(this.variant()),
+    ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('type') get buttonType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
   }
-  
+
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }

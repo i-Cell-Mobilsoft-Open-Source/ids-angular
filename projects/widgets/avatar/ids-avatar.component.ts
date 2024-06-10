@@ -35,7 +35,7 @@ export class IdsAvatarComponent {
       this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('type') private _type = 'button';

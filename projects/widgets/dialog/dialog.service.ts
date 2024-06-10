@@ -1,3 +1,5 @@
+import { IdsCustomDialogBase } from './custom-dialog-base';
+
 import {
   ApplicationRef,
   EnvironmentInjector,
@@ -10,9 +12,7 @@ import {
   createComponent,
   inject,
 } from '@angular/core';
-
 import { DOCUMENT } from '@angular/common';
-import { IdsCustomDialogBase } from './custom-dialog-base';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

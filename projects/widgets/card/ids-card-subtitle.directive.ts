@@ -4,7 +4,7 @@ import { Directive } from '@angular/core';
   selector: '[idsCardSubtitle]',
   standalone: true,
   host: {
-    'class': 'ids-card-subtitle'
-  }
+    class: 'ids-card-subtitle',
+  },
 })
 export class IdsCardSubtitleDirective {}

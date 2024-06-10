@@ -1,4 +1,10 @@
-import { Component, HostBinding, ViewEncapsulation, computed, input } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 import { Size, SizeType } from '@i-cell/widgets/core';
 
 @Component({
@@ -19,10 +25,10 @@ export class IdsIconComponent {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      this._addClassPrefix(this.size())
+      this._addClassPrefix(this.size()),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {

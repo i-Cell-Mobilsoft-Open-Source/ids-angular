@@ -7,7 +7,6 @@ import {
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 import { Component, ElementRef, HostBinding, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
-
 import { CdkMenuItem } from '@angular/cdk/menu';
 
 @Component({
@@ -45,17 +44,17 @@ export class IdsActionItemComponent {
       ...[this.active() ? [this._addClassPrefix('active')] : []],
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('type') get buttonType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
   }
-  
+
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
     return this.disabled() || null;
   }
-  
+
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }

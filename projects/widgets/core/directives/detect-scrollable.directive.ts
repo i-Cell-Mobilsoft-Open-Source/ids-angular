@@ -1,6 +1,7 @@
+import { ResizeObserverService } from '../services/resize-observer.service';
+
 import { Directive, ElementRef, OnDestroy, OnInit, inject, signal } from '@angular/core';
 
-import { ResizeObserverService } from '../services/resize-observer.service';
 
 @Directive({
   selector: '[idsDetectScrollable]',

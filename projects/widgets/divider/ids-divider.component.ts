@@ -1,5 +1,18 @@
-import { AllVariants, AllVariantsType, Orientation, OrientationType, Size, SizeType } from '@i-cell/widgets/core';
-import { Component, HostBinding, ViewEncapsulation, computed, input } from '@angular/core';
+import {
+  AllVariants,
+  AllVariantsType,
+  Orientation,
+  OrientationType,
+  Size,
+  SizeType,
+} from '@i-cell/widgets/core';
+import {
+  Component,
+  HostBinding,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 
 @Component({
   selector: 'ids-divider,div[idsDivider]',
@@ -7,7 +20,7 @@ import { Component, HostBinding, ViewEncapsulation, computed, input } from '@ang
   imports: [],
   template: '',
   styleUrl: './ids-divider.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class IdsDividerComponent {
   private readonly _componentClass = 'ids-divider';
@@ -26,18 +39,18 @@ export class IdsDividerComponent {
       this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }
-  
-  @HostBinding('style.--ids-divider-width') get cssWidth(): string | null  {
+
+  @HostBinding('style.--ids-divider-width') get cssWidth(): string | null {
     return this.width();
   }
-  
-  @HostBinding('style.--ids-divider-height') get cssHeight(): string | null  {
+
+  @HostBinding('style.--ids-divider-height') get cssHeight(): string | null {
     return this.height();
   }
 

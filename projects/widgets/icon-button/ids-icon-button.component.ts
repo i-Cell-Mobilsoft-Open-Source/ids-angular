@@ -28,9 +28,9 @@ export class IdsIconButtonComponent {
   private readonly _componentClass = 'ids-icon-button';
 
   public appearance = input<IconButtonAppearanceType | null>(
-    IconButtonAppearance.FILLED
+    IconButtonAppearance.FILLED,
   );
-  
+
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
   public disabled = input(false, {
@@ -47,13 +47,13 @@ export class IdsIconButtonComponent {
       this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
     return this.disabled() || null;
   }
-  
+
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }

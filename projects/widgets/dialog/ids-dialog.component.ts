@@ -1,7 +1,21 @@
-import { Component, ElementRef, HostBinding, HostListener, ViewEncapsulation, computed, contentChild, inject, input } from '@angular/core';
-import { IdsDetectScrollableDirective, Size, SizeType } from '@i-cell/widgets/core';
-
 import { IdsDialogHeaderDirective } from './ids-dialog-header.directive';
+
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  ViewEncapsulation,
+  computed,
+  contentChild,
+  inject,
+  input,
+} from '@angular/core';
+import {
+  IdsDetectScrollableDirective,
+  Size,
+  SizeType,
+} from '@i-cell/widgets/core';
 import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
 import { NgTemplateOutlet } from '@angular/common';
@@ -12,7 +26,12 @@ let uniqueIdCounter = 0;
 @Component({
   selector: 'dialog[idsDialog]',
   standalone: true,
-  imports: [IdsDetectScrollableDirective, IdsIconComponent, IdsIconButtonComponent, NgTemplateOutlet],
+  imports: [
+    IdsDetectScrollableDirective,
+    IdsIconComponent,
+    IdsIconButtonComponent,
+    NgTemplateOutlet,
+  ],
   templateUrl: './ids-dialog.component.html',
   styleUrl: './ids-dialog.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -40,7 +59,7 @@ export class IdsDialogComponent {
       ...[this.showBackdrop() ? [this._addClassPrefix('with-backdrop')] : []],
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {

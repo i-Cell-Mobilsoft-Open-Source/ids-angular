@@ -2,7 +2,7 @@ export const Size = {
   COMPACT: 'compact',
   COMFORTABLE: 'comfortable',
   SPACIOUS: 'spacious',
-  DENSE: 'dense'
+  DENSE: 'dense',
 } as const;
 
 export type SizeType = (typeof Size)[keyof typeof Size];

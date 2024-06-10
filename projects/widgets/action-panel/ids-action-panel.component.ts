@@ -14,14 +14,16 @@ import {
   contentChildren,
   input,
 } from '@angular/core';
-
 import { IdsActionItemComponent } from '@i-cell/widgets/action-item';
 
 @Component({
   selector: 'ids-action-panel,div[idsActionPanel]',
   standalone: true,
   imports: [IdsActionItemComponent],
-  hostDirectives: [CdkMenu, CdkTargetMenuAim],
+  hostDirectives: [
+    CdkMenu,
+    CdkTargetMenuAim,
+  ],
   template: '<ng-content></ng-content>',
   styleUrl: './ids-action-panel.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -30,9 +32,9 @@ export class IdsActionPanelComponent {
   private readonly _componentClass = 'ids-action-panel';
 
   public appearance = input<ActionPanelAppearanceType | null>(
-    ActionPanelAppearance.FILLED
+    ActionPanelAppearance.FILLED,
   );
-  
+
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<'light' | null>(AllVariants.LIGHT);
 
@@ -46,7 +48,7 @@ export class IdsActionPanelComponent {
       this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {

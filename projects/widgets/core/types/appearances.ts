@@ -1,7 +1,7 @@
 export const ButtonAppearance = {
   FILLED: 'filled',
   OUTLINED: 'outlined',
-  TEXT: 'text'
+  TEXT: 'text',
 } as const;
 
 export type ButtonAppearanceType = (typeof ButtonAppearance)[keyof typeof ButtonAppearance];
@@ -9,7 +9,7 @@ export type ButtonAppearanceType = (typeof ButtonAppearance)[keyof typeof Button
 export const IconButtonAppearance = {
   FILLED: 'filled',
   OUTLINED: 'outlined',
-  STANDARD: 'standard'
+  STANDARD: 'standard',
 } as const;
 
 export type IconButtonAppearanceType = (typeof IconButtonAppearance)[keyof typeof IconButtonAppearance];
@@ -17,28 +17,28 @@ export type IconButtonAppearanceType = (typeof IconButtonAppearance)[keyof typeo
 export const ActionPanelAppearance = {
   FILLED: 'filled',
   OUTLINED: 'outlined',
-  ELEVATED: 'elevated'
+  ELEVATED: 'elevated',
 } as const;
 
 export type ActionPanelAppearanceType = (typeof ActionPanelAppearance)[keyof typeof ActionPanelAppearance];
 
 export const ActionItemAppearance = {
   FILLED: 'filled',
-  TEXT: 'text'
+  TEXT: 'text',
 } as const;
 
 export type ActionItemAppearanceType = (typeof ActionItemAppearance)[keyof typeof ActionItemAppearance];
 
 export const TagAppearance = {
   FILLED: 'filled',
-  OUTLINED: 'outlined'
+  OUTLINED: 'outlined',
 } as const;
 
 export type TagAppearanceType = (typeof TagAppearance)[keyof typeof TagAppearance];
 
 export const AccordionAppearance = {
   FILLED: 'filled',
-  TEXT: 'text'
+  TEXT: 'text',
 } as const;
 
 export type AccordionAppearanceType = (typeof AccordionAppearance)[keyof typeof AccordionAppearance];
@@ -46,7 +46,7 @@ export type AccordionAppearanceType = (typeof AccordionAppearance)[keyof typeof 
 export const CardAppearance = {
   FILLED: 'filled',
   OUTLINED: 'outlined',
-  ELEVATED: 'elevated'
+  ELEVATED: 'elevated',
 } as const;
 
 export type CardAppearanceType = (typeof CardAppearance)[keyof typeof CardAppearance];

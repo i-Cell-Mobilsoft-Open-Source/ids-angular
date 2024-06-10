@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
 import { IdsCardSectionBase } from './card-section-base.directive';
+
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'ids-card-header,header[idsCardHeader]',
@@ -13,8 +14,7 @@ import { IdsCardSectionBase } from './card-section-base.directive';
   `,
   encapsulation: ViewEncapsulation.None,
   host: {
-    'class': 'ids-card-header'
-  }
+    class: 'ids-card-header',
+  },
 })
-export class IdsCardHeaderComponent extends IdsCardSectionBase {
-}
+export class IdsCardHeaderComponent extends IdsCardSectionBase {}

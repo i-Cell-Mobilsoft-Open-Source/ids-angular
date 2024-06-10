@@ -1,5 +1,6 @@
 import { IdsDialogHeaderDirective } from './ids-dialog-header.directive';
 
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -16,9 +17,8 @@ import {
   Size,
   SizeType,
 } from '@i-cell/widgets/core';
-import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
-import { NgTemplateOutlet } from '@angular/common';
+import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
 import { mdiWindowClose } from '@mdi/js';
 
 let uniqueIdCounter = 0;

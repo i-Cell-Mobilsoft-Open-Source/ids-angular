@@ -1,3 +1,4 @@
+import { Component, HostBinding, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
 import {
   AllVariants,
   AllVariantsType,
@@ -7,7 +8,6 @@ import {
   SizeType,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
-import { Component, HostBinding, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
 
 @Component({
   selector: 'button[idsButton]',

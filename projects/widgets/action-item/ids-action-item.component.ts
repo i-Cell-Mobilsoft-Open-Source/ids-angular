@@ -1,3 +1,5 @@
+import { CdkMenuItem } from '@angular/cdk/menu';
+import { Component, ElementRef, HostBinding, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
 import {
   ActionItemAppearance,
   ActionItemAppearanceType,
@@ -6,8 +8,6 @@ import {
   SurfaceVariant,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
-import { Component, ElementRef, HostBinding, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
-import { CdkMenuItem } from '@angular/cdk/menu';
 
 @Component({
   selector: 'button[idsActionItem],a[idsActionItem]',

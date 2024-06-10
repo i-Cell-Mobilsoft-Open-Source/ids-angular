@@ -1,5 +1,6 @@
 import { IdsCardHeaderComponent } from './ids-card-header.component';
 
+import { Component, EventEmitter, HostBinding, OnInit, Output, ViewEncapsulation, computed, input, signal } from '@angular/core';
 import {
   AllVariants,
   AllVariantsType,
@@ -11,7 +12,6 @@ import {
   SizeType,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
-import { Component, EventEmitter, HostBinding, OnInit, Output, ViewEncapsulation, computed, input, signal } from '@angular/core';
 
 
 @Component({

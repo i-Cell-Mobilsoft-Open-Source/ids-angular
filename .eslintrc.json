@@ -219,7 +219,8 @@
               "object",
               "type"
             ],
-            "newlines-between": "always"
+            "newlines-between": "always",
+            "alphabetize": { "order": "asc", "caseInsensitive": true }
           }
         ],
         "unused-imports/no-unused-imports": "error"

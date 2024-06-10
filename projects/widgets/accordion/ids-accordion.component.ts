@@ -1,7 +1,7 @@
-import { AccordionAppearance, AccordionAppearanceType, Size, SizeType, coerceBooleanAttribute } from '@i-cell/widgets/core';
 import { Component, ElementRef, HostBinding, HostListener, ViewEncapsulation, computed, inject, input, signal } from '@angular/core';
-import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
+import { AccordionAppearance, AccordionAppearanceType, Size, SizeType, coerceBooleanAttribute } from '@i-cell/widgets/core';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
+import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 
 @Component({
   selector: 'details[idsAccordion]',

@@ -1,12 +1,4 @@
 import {
-  AllVariants,
-  AllVariantsType,
-  Size,
-  SizeType,
-  TagAppearance,
-  TagAppearanceType,
-} from '@i-cell/widgets/core';
-import {
   Component,
   ElementRef,
   HostBinding,
@@ -16,6 +8,14 @@ import {
   inject,
   input,
 } from '@angular/core';
+import {
+  AllVariants,
+  AllVariantsType,
+  Size,
+  SizeType,
+  TagAppearance,
+  TagAppearanceType,
+} from '@i-cell/widgets/core';
 
 @Component({
   selector: 'ids-tag,button[idsTag]',

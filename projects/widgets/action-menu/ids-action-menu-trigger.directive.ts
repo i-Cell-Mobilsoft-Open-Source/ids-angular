@@ -1,5 +1,5 @@
-import { Directive, inject } from '@angular/core';
 import { CdkMenuTrigger } from '@angular/cdk/menu';
+import { Directive, inject } from '@angular/core';
 
 @Directive({
   selector: 'button[idsActionMenuTriggerFor]',

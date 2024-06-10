@@ -1,4 +1,11 @@
 import {
+  Component,
+  HostBinding,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+import {
   AllVariants,
   AllVariantsType,
   Orientation,
@@ -6,13 +13,6 @@ import {
   Size,
   SizeType,
 } from '@i-cell/widgets/core';
-import {
-  Component,
-  HostBinding,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
 
 @Component({
   selector: 'ids-divider,div[idsDivider]',

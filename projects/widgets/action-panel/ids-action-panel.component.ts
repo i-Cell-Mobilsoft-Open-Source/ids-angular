@@ -1,10 +1,3 @@
-import {
-  ActionPanelAppearance,
-  ActionPanelAppearanceType,
-  AllVariants,
-  Size,
-  SizeType,
-} from '@i-cell/widgets/core';
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
   Component,
@@ -15,6 +8,13 @@ import {
   input,
 } from '@angular/core';
 import { IdsActionItemComponent } from '@i-cell/widgets/action-item';
+import {
+  ActionPanelAppearance,
+  ActionPanelAppearanceType,
+  AllVariants,
+  Size,
+  SizeType,
+} from '@i-cell/widgets/core';
 
 @Component({
   selector: 'ids-action-panel,div[idsActionPanel]',

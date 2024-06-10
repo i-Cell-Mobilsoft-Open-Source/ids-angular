@@ -251,7 +251,23 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended",
         "plugin:@angular-eslint/template/accessibility"
-      ]
+      ],
+      "rules": {
+        "@angular-eslint/template/no-duplicate-attributes": [
+          "error",
+          { "allowStylePrecedenceDuplicates": true }
+        ],
+        "@angular-eslint/template/alt-text": "error",
+        "@angular-eslint/template/button-has-type": "error",
+        "@angular-eslint/template/elements-content": "error",
+        "@angular-eslint/template/label-has-associated-control": "error",
+        "@angular-eslint/template/no-any": "error",
+        "@angular-eslint/template/no-autofocus": "error",
+        "@angular-eslint/template/no-distracting-elements": "error",
+        "@angular-eslint/template/no-interpolation-in-attributes": "error",
+        "@angular-eslint/template/prefer-control-flow": "error",
+        "@angular-eslint/template/valid-aria": "error"
+      }
     }
   ]
 }

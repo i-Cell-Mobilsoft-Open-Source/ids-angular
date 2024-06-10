@@ -266,7 +266,9 @@
         "@angular-eslint/template/no-distracting-elements": "error",
         "@angular-eslint/template/no-interpolation-in-attributes": "error",
         "@angular-eslint/template/prefer-control-flow": "error",
-        "@angular-eslint/template/valid-aria": "error"
+        "@angular-eslint/template/valid-aria": "error",
+        "@angular-eslint/template/attributes-order": "error",
+        "@angular-eslint/template/prefer-self-closing-tags": "error"
       }
     }
   ]

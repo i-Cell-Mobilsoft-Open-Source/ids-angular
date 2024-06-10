@@ -2,11 +2,11 @@
   #content
   [style.display]="content.children.length === 0 ? 'none' : 'block'"
 >
-  <ng-content></ng-content>
+  <ng-content />
 </div>
 @if (content?.children?.length === 0) {
   @if (image(); as image) {
-    <img [src]="image" class="ids-avatar-image" [alt]="alt()" />
+    <img class="ids-avatar-image" [src]="image" [alt]="alt()" />
   } @else {
   <svg
     width="52"

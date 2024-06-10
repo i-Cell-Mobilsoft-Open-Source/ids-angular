@@ -1,7 +1,13 @@
 <summary class="ids-accordion-summary" [attr.tabindex]="disabled() ? -1 : 0">
   <span class="ids-accordion-title">{{ summary() }}</span>
-  <ids-icon icon-trailing [icon]="isOpen() ? mdiChevronUp : mdiChevronDown" [size]="size()" aria-hidden="true" alt="" />
+  <ids-icon
+    icon-trailing
+    aria-hidden="true"
+    alt=""
+    [size]="size()"
+    [icon]="isOpen() ? mdiChevronUp : mdiChevronDown"
+  />
 </summary>
 <article class="ids-accordion-content">
-  <ng-content></ng-content>
+  <ng-content />
 </article>

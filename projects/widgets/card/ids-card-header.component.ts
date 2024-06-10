@@ -2,15 +2,16 @@ import { IdsCardSectionBase } from './card-section-base.directive';
 
 import { Component, ViewEncapsulation } from '@angular/core';
 
+
 @Component({
   selector: 'ids-card-header,header[idsCardHeader]',
   standalone: true,
   imports: [],
   template: `
     <div class="ids-card-header-headline">
-      <ng-content select="ids-card-title, [idsCardTitle], ids-card-subtitle, [idsCardSubtitle]"></ng-content>
+      <ng-content select="ids-card-title, [idsCardTitle], ids-card-subtitle, [idsCardSubtitle]" />
     </div>
-    <ng-content></ng-content>
+    <ng-content />
   `,
   encapsulation: ViewEncapsulation.None,
   host: {

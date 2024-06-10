@@ -1,11 +1,11 @@
 <section class="ids-dialog-container">
   <header class="ids-dialog-header">
     @if (customHeader()) {
-      <h2 [id]="dialogTitleId" class="ids-dialog-title hidden">{{ mainTitle() }}</h2>
-      <ng-container [ngTemplateOutlet]="customHeader()!.template"></ng-container>
+      <h2 class="ids-dialog-title hidden" [id]="dialogTitleId">{{ mainTitle() }}</h2>
+      <ng-container [ngTemplateOutlet]="customHeader()!.template" />
     } @else {
       <div class="ids-dialog-header-default-content">
-        <h2 [id]="dialogTitleId" class="ids-dialog-title">{{ mainTitle() }}</h2>
+        <h2 class="ids-dialog-title" [id]="dialogTitleId">{{ mainTitle() }}</h2>
         @if (subTitle()) {
           <h3 class="ids-dialog-subtitle">{{ subTitle() }}</h3>
         }
@@ -22,16 +22,16 @@
         variant="surface"
         (click)="close()"
       >
-        <ids-icon [icon]="mdiClose" aria-hidden="true" alt="" />
+        <ids-icon aria-hidden="true" alt="" [icon]="mdiClose" />
       </button>
     }
   </header>
   <div class="ids-dialog-content" [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()">
-    <div idsDetectScrollable #scrollDetector="idsDetectScrollable" class="ids-dialog-content-overflow">
-      <ng-content select="[idsDialogContent]"></ng-content>
+    <div #scrollDetector="idsDetectScrollable" idsDetectScrollable class="ids-dialog-content-overflow">
+      <ng-content select="[idsDialogContent]" />
     </div>
   </div>
   <footer class="ids-dialog-actions">
-    <ng-content select="[idsDialogActions]"></ng-content>
+    <ng-content select="[idsDialogActions]" />
   </footer>
 </section>

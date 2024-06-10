@@ -19,8 +19,8 @@ import {
   standalone: true,
   imports: [IdsCardHeaderComponent],
   template: `
-    <ng-content></ng-content>
-    <ng-content select="ids-card-footer,footer[idsCardFooter]"></ng-content>
+    <ng-content />
+    <ng-content select="ids-card-footer,footer[idsCardFooter]" />
   `,
   styleUrl: './ids-card.component.scss',
   encapsulation: ViewEncapsulation.None,

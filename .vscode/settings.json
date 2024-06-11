@@ -1,4 +1,6 @@
 {
   "i18n-ally.localesPaths": ["projects/demo/src/assets/i18n"],
-  "css.customData": [".vscode/css_custom_data.json"]
+  "css.customData": [".vscode/css_custom_data.json"],
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true
 }

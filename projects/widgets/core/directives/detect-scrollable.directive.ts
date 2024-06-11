@@ -1,5 +1,7 @@
-import { Directive, ElementRef, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { ResizeObserverService } from '../services/resize-observer.service';
+
+import { Directive, ElementRef, OnDestroy, OnInit, inject, signal } from '@angular/core';
+
 
 @Directive({
   selector: '[idsDetectScrollable]',
@@ -7,18 +9,19 @@ import { ResizeObserverService } from '../services/resize-observer.service';
   exportAs: 'idsDetectScrollable',
 })
 export class IdsDetectScrollableDirective implements OnInit, OnDestroy {
-  private hostElement = inject(ElementRef).nativeElement;
-  private resizeObserver = inject(ResizeObserverService);
+  private _hostElement = inject(ElementRef).nativeElement;
+  private _resizeObserver = inject(ResizeObserverService);
 
   public isScrollable = signal(false);
 
-  ngOnInit(): void {
-    this.resizeObserver.observe(this.hostElement).subscribe(() => {
-      this.isScrollable.set(this.hostElement.scrollHeight > this.hostElement.clientHeight);
-    });
+  public ngOnInit(): void {
+    this._resizeObserver.observe(this._hostElement).subscribe(() => {
+      this.isScrollable.set(this._hostElement.scrollHeight > this._hostElement.clientHeight);
+    },
+    );
   }
 
-  ngOnDestroy(): void {
-    this.resizeObserver.unobserve(this.hostElement);
+  public ngOnDestroy(): void {
+    this._resizeObserver.unobserve(this._hostElement);
   }
 }

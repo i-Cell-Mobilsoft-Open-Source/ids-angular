@@ -1,7 +1,7 @@
-@if(iconLeading()) {
-<ng-content select="[icon-leading]"></ng-content>
+@if (iconLeading()) {
+  <ng-content select="[icon-leading]" />
 }
-<span class="ids-button-label"><ng-content></ng-content></span>
-@if(iconTrailing()){
-<ng-content select="[icon-trailing]"></ng-content>
+<span class="ids-button-label"><ng-content /></span>
+@if (iconTrailing()) {
+  <ng-content select="[icon-trailing]" />
 }

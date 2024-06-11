@@ -20,38 +20,42 @@ import {
   selector: 'ids-action-panel,div[idsActionPanel]',
   standalone: true,
   imports: [IdsActionItemComponent],
-  hostDirectives: [CdkMenu, CdkTargetMenuAim],
-  template: '<ng-content></ng-content>',
+  hostDirectives: [
+    CdkMenu,
+    CdkTargetMenuAim,
+  ],
+  template: '<ng-content />',
   styleUrl: './ids-action-panel.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsActionPanelComponent {
-  private readonly componentClass = 'ids-action-panel';
+  private readonly _componentClass = 'ids-action-panel';
 
   public appearance = input<ActionPanelAppearanceType | null>(
-    ActionPanelAppearance.FILLED
+    ActionPanelAppearance.FILLED,
   );
+
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<'light' | null>(AllVariants.LIGHT);
 
-  actionItems = contentChildren(IdsActionItemComponent);
+  public actionItems = contentChildren(IdsActionItemComponent);
 
-  private hostClasses = computed(() =>
+  private _hostClasses = computed(() =>
     [
-      this.componentClass,
-      this.addClassPrefix(this.appearance()),
-      this.addClassPrefix(this.size()),
-      this.addClassPrefix(this.variant()),
+      this._componentClass,
+      this._addClassPrefix(this.appearance()),
+      this._addClassPrefix(this.size()),
+      this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 }

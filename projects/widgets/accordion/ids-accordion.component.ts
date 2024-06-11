@@ -12,7 +12,7 @@ import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsAccordionComponent {
-  private readonly componentClass = 'ids-accordion';
+  private readonly _componentClass = 'ids-accordion';
 
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public appearance = input<AccordionAppearanceType | null>(AccordionAppearance.TEXT);
@@ -25,29 +25,29 @@ export class IdsAccordionComponent {
   public mdiChevronDown = mdiChevronDown;
   public mdiChevronUp = mdiChevronUp;
 
-  private details: HTMLDetailsElement = inject(ElementRef).nativeElement;
+  private _details: HTMLDetailsElement = inject(ElementRef).nativeElement;
 
-  private hostClasses = computed(() =>
+  private _hostClasses = computed(() =>
     [
-      this.componentClass,
-      this.addClassPrefix(this.size()),
-      this.addClassPrefix(this.appearance()),
-      ...[this.disabled() ? [this.addClassPrefix('disabled')] : []],
+      this._componentClass,
+      this._addClassPrefix(this.size()),
+      this._addClassPrefix(this.appearance()),
+      ...[this.disabled() ? [this._addClassPrefix('disabled')] : []],
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 
   @HostListener('toggle')
-  private onToggle(): void {
-    this.isOpen.set(this.details.open);
+  private _onToggle(): void {
+    this.isOpen.set(this._details.open);
   }
 }

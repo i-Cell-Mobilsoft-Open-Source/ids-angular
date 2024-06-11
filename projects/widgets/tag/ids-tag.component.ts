@@ -1,5 +1,21 @@
-import { Component, ElementRef, HostBinding, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
-import { AllVariants, AllVariantsType, Size, SizeType, TagAppearance, TagAppearanceType } from '@i-cell/widgets/core';
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  ViewEncapsulation,
+  computed,
+  contentChildren,
+  inject,
+  input,
+} from '@angular/core';
+import {
+  AllVariants,
+  AllVariantsType,
+  Size,
+  SizeType,
+  TagAppearance,
+  TagAppearanceType,
+} from '@i-cell/widgets/core';
 
 @Component({
   selector: 'ids-tag,button[idsTag]',
@@ -10,31 +26,37 @@ import { AllVariants, AllVariantsType, Size, SizeType, TagAppearance, TagAppeara
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsTagComponent {
-  private readonly componentClass = 'ids-tag';
+  private readonly _componentClass = 'ids-tag';
 
-  private hostElement = inject(ElementRef).nativeElement as HTMLElement;
+  private _hostElement = inject(ElementRef).nativeElement as HTMLElement;
 
   public appearance = input<TagAppearanceType | null>(TagAppearance.FILLED);
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
 
-  iconLeading = contentChildren<unknown>('[icon-leading]');
-  iconTrailing = contentChildren<unknown>('[icon-trailing]');
+  public iconLeading = contentChildren<unknown>('[icon-leading]');
+  public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
-  private hostClasses = computed(() =>
-    [this.componentClass, this.addClassPrefix(this.appearance()), this.addClassPrefix(this.size()), this.addClassPrefix(this.variant())]
+  private _hostClasses = computed(() =>
+    [
+      this._componentClass,
+      this._addClassPrefix(this.appearance()),
+      this._addClassPrefix(this.size()),
+      this._addClassPrefix(this.variant()),
+    ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('type') get buttonType(): string | null {
-    return this.hostElement.tagName === 'BUTTON' ? 'button' : null;
-  }
-  @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  @HostBinding('class') get classes(): string {
+    return this._hostClasses();
+  }
+
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 }

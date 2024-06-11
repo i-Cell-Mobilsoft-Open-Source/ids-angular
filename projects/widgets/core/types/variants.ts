@@ -9,7 +9,7 @@ export type BaseVariantType = (typeof BaseVariant)[keyof typeof BaseVariant];
 
 export const SurfaceVariant = {
   ...BaseVariant,
-  SURFACE: 'surface'
+  SURFACE: 'surface',
 } as const;
 
 export type SurfaceVariantType = (typeof SurfaceVariant)[keyof typeof SurfaceVariant];

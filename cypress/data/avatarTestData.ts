@@ -120,7 +120,7 @@ const avatarTestData = {
   black: 'rgb(0, 0, 0) solid 3px',
   hoveredTextBgColors: "rgb(241, 245, 249)",
   allRadius: '1000px',
-  image:"https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg",
+  image: "https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg",
 
 
 

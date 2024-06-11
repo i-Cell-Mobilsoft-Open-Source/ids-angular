@@ -19,15 +19,15 @@ export class IdsActionMenuTriggerDirective {
     return !!this.menuTrigger.isOpen();
   }
 
-  open() {
+  public open(): void {
     this.menuTrigger.open();
   }
 
-  close() {
+  public close(): void {
     this.menuTrigger.close();
   }
 
-  toggle() {
+  public toggle(): void {
     this.menuTrigger.toggle();
   }
 }

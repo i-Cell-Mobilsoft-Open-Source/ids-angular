@@ -1,5 +1,18 @@
-import { Component, HostBinding, ViewEncapsulation, computed, input } from '@angular/core';
-import { AllVariants, AllVariantsType, Orientation, OrientationType, Size, SizeType } from '@i-cell/widgets/core';
+import {
+  Component,
+  HostBinding,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+import {
+  AllVariants,
+  AllVariantsType,
+  Orientation,
+  OrientationType,
+  Size,
+  SizeType,
+} from '@i-cell/widgets/core';
 
 @Component({
   selector: 'ids-divider,div[idsDivider]',
@@ -7,10 +20,10 @@ import { AllVariants, AllVariantsType, Orientation, OrientationType, Size, SizeT
   imports: [],
   template: '',
   styleUrl: './ids-divider.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class IdsDividerComponent {
-  private readonly componentClass = 'ids-divider';
+  private readonly _componentClass = 'ids-divider';
 
   public type = input<OrientationType | null>(Orientation.HORIZONTAL);
   public size = input<SizeType | null>(Size.COMFORTABLE);
@@ -18,28 +31,30 @@ export class IdsDividerComponent {
   public width = input<string | null>('100%');
   public height = input<string | null>('100%');
 
-  private hostClasses = computed(() =>
+  private _hostClasses = computed(() =>
     [
-      this.componentClass,
-      this.addClassPrefix(this.type()),
-      this.addClassPrefix(this.size()),
-      this.addClassPrefix(this.variant()),
+      this._componentClass,
+      this._addClassPrefix(this.type()),
+      this._addClassPrefix(this.size()),
+      this._addClassPrefix(this.variant()),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
-  @HostBinding('style.--ids-divider-width') get cssWidth(): string | null  {
+
+  @HostBinding('style.--ids-divider-width') get cssWidth(): string | null {
     return this.width();
   }
-  @HostBinding('style.--ids-divider-height') get cssHeight(): string | null  {
+
+  @HostBinding('style.--ids-divider-height') get cssHeight(): string | null {
     return this.height();
   }
 
-  private addClassPrefix(className: string | null): string | null {
-    return className ? `${this.componentClass}-${className}` : null;
+  private _addClassPrefix(className: string | null): string | null {
+    return className ? `${this._componentClass}-${className}` : null;
   }
 }

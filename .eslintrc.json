@@ -143,8 +143,6 @@
           "error",
           { "allowNullableString": true }
         ],
-        "rxjs/no-ignored-error": "error",
-        "rxjs/no-ignored-subscribe": "error",
         "rxjs/no-implicit-any-catch": "off",
         "rxjs/no-topromise": "error",
         "rxjs/no-unsafe-catch": "error",

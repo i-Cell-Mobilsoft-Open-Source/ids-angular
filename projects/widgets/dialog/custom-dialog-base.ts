@@ -14,7 +14,9 @@ export abstract class IdsCustomDialogBase<ResultType = unknown> implements After
 
   public ngAfterViewInit(): void {
     this.dialog().open();
-    this._closeSub = fromEvent(this.dialog().dialog, 'close').subscribe({ next: () => this._setDialogResult() });
+    this._closeSub = fromEvent(this.dialog().dialog, 'close').subscribe(() => {
+      this._setDialogResult(); 
+    });
   }
 
   public ngOnDestroy(): void {

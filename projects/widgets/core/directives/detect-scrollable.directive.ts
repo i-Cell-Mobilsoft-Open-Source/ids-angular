@@ -15,11 +15,10 @@ export class IdsDetectScrollableDirective implements OnInit, OnDestroy {
   public isScrollable = signal(false);
 
   public ngOnInit(): void {
-    this._resizeObserver.observe(this._hostElement).subscribe({
-      next: () => {
-        this.isScrollable.set(this._hostElement.scrollHeight > this._hostElement.clientHeight);
-      },
-    });
+    this._resizeObserver.observe(this._hostElement).subscribe(() => {
+      this.isScrollable.set(this._hostElement.scrollHeight > this._hostElement.clientHeight);
+    },
+    );
   }
 
   public ngOnDestroy(): void {

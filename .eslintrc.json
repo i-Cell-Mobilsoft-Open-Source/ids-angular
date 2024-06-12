@@ -226,6 +226,9 @@
     },
     {
       "files": ["**/types/*.ts"],
+      "env": {
+        "jest": true
+      },
       "rules": {
         "@typescript-eslint/naming-convention": [
           "error",

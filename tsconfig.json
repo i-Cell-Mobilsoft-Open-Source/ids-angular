@@ -20,24 +20,11 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
-    "types": [
-      "cypress",
-      "node",
-      "cypress-real-events"
-    ],
+    "lib": ["ES2022", "dom"],
+    "types": ["node", "jest", "cypress", "cypress-real-events"],
     "paths": {
-      "@i-cell/widgets/*": [
-        "projects/widgets/*",
-        "projects/widgets"
-      ],
-      "@i-cell/widgets": [
-        "dist/widgets/*",
-        "dist/widgets"
-      ],
+      "@i-cell/widgets/*": ["projects/widgets/*", "projects/widgets"],
+      "@i-cell/widgets": ["dist/widgets/*", "dist/widgets"]
     }
   },
   "angularCompilerOptions": {
@@ -45,5 +32,6 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": ["./cypress.config.ts", "cypress"]
 }

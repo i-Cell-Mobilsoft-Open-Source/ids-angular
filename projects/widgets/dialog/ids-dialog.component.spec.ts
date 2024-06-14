@@ -21,7 +21,7 @@ describe('IdsDialogComponent', () => {
 
     fixture = TestBed.createComponent(IdsDialogComponent);
     component = fixture.componentInstance;
-    // fixture.componentRef.setInput('mainTitle', 'test title');
+    fixture.componentRef.setInput('mainTitle', 'test title');
     fixture.detectChanges();
   });
 

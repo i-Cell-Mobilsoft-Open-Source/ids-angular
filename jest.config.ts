@@ -1,7 +1,6 @@
 import { Config } from 'jest';
 
 const jestConfig: Config = {
-  // globalSetup: 'jest-preset-angular/global-setup',
   projects: ['<rootDir>/projects/widgets'],
   cacheDirectory: '.jest/cache',
   collectCoverage: true,

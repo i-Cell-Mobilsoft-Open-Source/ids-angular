@@ -129,9 +129,9 @@ importers:
       jest-preset-angular:
         specifier: ^14.1.0
         version: 14.1.0(@angular-devkit/build-angular@17.3.2(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(@types/express@4.17.21)(@types/node@20.11.24)(chokidar@3.6.0)(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(karma@6.4.2)(ng-packagr@17.1.2(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(tailwindcss@3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(tslib@2.6.2)(typescript@5.3.3))(tailwindcss@3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(typescript@5.3.3))(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser-dynamic@17.3.1(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser@17.3.1(@angular/animations@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))))(@babel/core@7.24.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.0))(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(typescript@5.3.3)
-      jest-slow-test-reporter:
-        specifier: ^1.0.0
-        version: 1.0.0
+      jest-slow-test-highlighter:
+        specifier: ^1.0.1
+        version: 1.0.1(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))
       lint-staged:
         specifier: ^15.2.5
         version: 15.2.5
@@ -4172,8 +4172,10 @@ packages:
     resolution: {integrity: sha512-gUnLjgwdGqW7B4LvOIkbKs9WGbn+QLqRQQ9juC6HndeDiezIwhDP+mhMwHWCEcfQ5RUXa6OPnFF8BJh5xegwwQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  jest-slow-test-reporter@1.0.0:
-    resolution: {integrity: sha512-5FG8hlaO7Wdgdo6oQxGiFAKwd1HW51+8/KmQJgUV3bsW3cCXx9TukaoGnHhBl+hwLkCYENynWL1PQnG8DwOV6w==}
+  jest-slow-test-highlighter@1.0.1:
+    resolution: {integrity: sha512-jLc85I6V/BnApWE7MnJ4kiovV8CVBaEhRHCLbXZfzX9pw0Gqcxk9nWQIffqwy8AH+xLnDDoNArFkw+gK+Xi1Uw==}
+    peerDependencies:
+      jest: ^29.0.0
 
   jest-snapshot@29.7.0:
     resolution: {integrity: sha512-Rm0BMWtxBcioHr1/OX5YCP8Uov4riHvKPknOGs804Zg9JGZgmIBkbtlxJC/7Z4msKYVbIJtfU+tKb8xlYNfdkw==}
@@ -11164,7 +11166,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jest-slow-test-reporter@1.0.0: {}
+  jest-slow-test-highlighter@1.0.1(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3))):
+    dependencies:
+      jest: 29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3))
 
   jest-snapshot@29.7.0:
     dependencies:

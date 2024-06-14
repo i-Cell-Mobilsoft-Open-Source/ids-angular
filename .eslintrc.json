@@ -190,6 +190,10 @@
         ],
         "@stylistic/new-parens": "error",
         "@stylistic/no-confusing-arrow": "error",
+        "@stylistic/no-multiple-empty-lines": [
+          "error",
+          { "max": 1, "maxEOF": 1, "maxBOF": 0 }
+        ],
         "@stylistic/no-floating-decimal": "error",
         "@stylistic/object-curly-spacing": ["error", "always"],
         "@stylistic/quotes": ["error", "single"],

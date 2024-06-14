@@ -1,24 +1,23 @@
-// TODO: unit tests
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IdsTagComponent } from './ids-tag.component';
 
-// import { IdsTagComponent } from './ids-tag.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// describe('IdsTagComponent', () => {
-//   let component: IdsTagComponent;
-//   let fixture: ComponentFixture<IdsTagComponent>;
+describe('IdsTagComponent', () => {
+  let component: IdsTagComponent;
+  let fixture: ComponentFixture<IdsTagComponent>;
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       imports: [IdsTagComponent]
-//     })
-//     .compileComponents();
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      imports: [IdsTagComponent],
+    })
+      .compileComponents();
 
-//     fixture = TestBed.createComponent(IdsTagComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+    fixture = TestBed.createComponent(IdsTagComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

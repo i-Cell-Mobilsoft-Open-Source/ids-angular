@@ -1,24 +1,23 @@
-// TODO: tests
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IdsCardComponent } from './ids-card.component';
 
-// import { IdsCardComponent } from './ids-card.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// describe('IdsCardComponent', () => {
-//   let component: IdsCardComponent;
-//   let fixture: ComponentFixture<IdsCardComponent>;
+describe('IdsCardComponent', () => {
+  let component: IdsCardComponent;
+  let fixture: ComponentFixture<IdsCardComponent>;
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       imports: [IdsCardComponent]
-//     })
-//     .compileComponents();
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      imports: [IdsCardComponent],
+    })
+      .compileComponents();
 
-//     fixture = TestBed.createComponent(IdsCardComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+    fixture = TestBed.createComponent(IdsCardComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

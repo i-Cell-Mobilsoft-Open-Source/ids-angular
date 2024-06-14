@@ -1,24 +1,31 @@
-// TODO: tests
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IdsDialogComponent } from './ids-dialog.component';
 
-// import { IdsDialogComponent } from './ids-dialog.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// describe('IdsDialogComponent', () => {
-//   let component: IdsDialogComponent;
-//   let fixture: ComponentFixture<IdsDialogComponent>;
+window.ResizeObserver =
+    jest.fn().mockImplementation(() => ({
+      disconnect: jest.fn(),
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+    }));
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       imports: [IdsDialogComponent]
-//     })
-//     .compileComponents();
+describe('IdsDialogComponent', () => {
+  let component: IdsDialogComponent;
+  let fixture: ComponentFixture<IdsDialogComponent>;
 
-//     fixture = TestBed.createComponent(IdsDialogComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      imports: [IdsDialogComponent],
+    })
+      .compileComponents();
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+    fixture = TestBed.createComponent(IdsDialogComponent);
+    component = fixture.componentInstance;
+    // fixture.componentRef.setInput('mainTitle', 'test title');
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

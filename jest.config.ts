@@ -26,8 +26,11 @@ const jestConfig: Config = {
   reporters: [
     'default',
     [
-      'jest-slow-test-reporter',
-      { 'warnOnSlowerThan': 300, 'color': true },
+      'jest-slow-test-highlighter',
+      {
+        maxTests: 3,
+        slowSeconds: 0.5,
+      },
     ],
   ],
 };

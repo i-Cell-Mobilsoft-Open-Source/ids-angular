@@ -10,7 +10,7 @@
     "test": "jest",
     "test:widgets": "jest --selectProjects widgets",
     "test:widgets:watch": "jest --selectProjects widgets --watch",
-    "test:ci": "jest --runInBand",
+    "test:ci": "jest --runInBand --bail",
     "e2e": "cypress run",
     "lint": "ng lint",
     "prepare": "husky install"

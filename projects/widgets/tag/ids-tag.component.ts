@@ -22,7 +22,6 @@ import {
   standalone: true,
   imports: [],
   templateUrl: './ids-tag.component.html',
-  styleUrl: './ids-tag.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsTagComponent {

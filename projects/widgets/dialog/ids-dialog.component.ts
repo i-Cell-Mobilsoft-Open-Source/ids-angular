@@ -33,7 +33,6 @@ let uniqueIdCounter = 0;
     NgTemplateOutlet,
   ],
   templateUrl: './ids-dialog.component.html',
-  styleUrl: './ids-dialog.component.scss',
   encapsulation: ViewEncapsulation.None,
   exportAs: 'idsDialog',
 })

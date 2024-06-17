@@ -1,4 +1,11 @@
-import { Component, HostBinding, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  ViewEncapsulation,
+  computed,
+  contentChildren,
+  input,
+} from '@angular/core';
 import {
   AllVariants,
   AllVariantsType,
@@ -14,13 +21,14 @@ import {
   standalone: true,
   imports: [],
   templateUrl: './ids-button.component.html',
-  styleUrl: './ids-button.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsButtonComponent {
   private readonly _componentClass = 'ids-button';
 
-  public appearance = input<ButtonAppearanceType | null>(ButtonAppearance.FILLED);
+  public appearance = input<ButtonAppearanceType | null>(
+    ButtonAppearance.FILLED,
+  );
 
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);

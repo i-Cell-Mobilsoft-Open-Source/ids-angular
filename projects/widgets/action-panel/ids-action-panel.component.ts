@@ -25,7 +25,6 @@ import {
     CdkTargetMenuAim,
   ],
   template: '<ng-content />',
-  styleUrl: './ids-action-panel.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsActionPanelComponent {

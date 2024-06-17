@@ -19,7 +19,6 @@ import {
   standalone: true,
   imports: [],
   template: '',
-  styleUrl: './ids-divider.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsDividerComponent {

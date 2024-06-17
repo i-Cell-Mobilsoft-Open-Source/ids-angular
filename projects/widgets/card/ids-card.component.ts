@@ -1,6 +1,16 @@
 import { IdsCardHeaderComponent } from './ids-card-header.component';
 
-import { Component, EventEmitter, HostBinding, OnInit, Output, ViewEncapsulation, computed, input, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+  computed,
+  input,
+  signal,
+} from '@angular/core';
 import {
   AllVariants,
   AllVariantsType,
@@ -13,16 +23,15 @@ import {
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 
-
 @Component({
-  selector: 'ids-card,div[idsCard],article[idsCard],aside[idsCard],section[idsCard]',
+  selector:
+    'ids-card,div[idsCard],article[idsCard],aside[idsCard],section[idsCard]',
   standalone: true,
   imports: [IdsCardHeaderComponent],
   template: `
     <ng-content />
     <ng-content select="ids-card-footer,footer[idsCardFooter]" />
   `,
-  styleUrl: './ids-card.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsCardComponent implements OnInit {
@@ -50,7 +59,11 @@ export class IdsCardComponent implements OnInit {
       this._addClassPrefix(this.size()),
       this._addClassPrefix(this.variant()),
       this._addClassPrefix(this.orientation()),
-      ...[this.disabled() && this._hasClickHandler() ? [this._addClassPrefix('disabled')] : []],
+      ...[
+        this.disabled() && this._hasClickHandler()
+          ? [this._addClassPrefix('disabled')]
+          : [],
+      ],
       ...[this._hasClickHandler() ? [this._addClassPrefix('clickable')] : []],
     ]
       .filter(Boolean)

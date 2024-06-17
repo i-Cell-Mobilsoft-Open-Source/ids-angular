@@ -3,7 +3,7 @@
     Appearance:
     <select name="appearance" [(ngModel)]="model.appearance">
       @for (appearance of appearances; track $index) {
-        <option value="{{ appearance }}">{{ appearance }}</option>
+        <option [value]="appearance">{{ appearance }}</option>
       }
     </select>
   </label>
@@ -11,7 +11,7 @@
     Size:
     <select name="size" [(ngModel)]="model.size">
       @for (size of sizes; track $index) {
-        <option value="{{ size }}">{{ size }}</option>
+        <option [value]="size">{{ size }}</option>
       }
     </select>
   </label>
@@ -19,7 +19,7 @@
     Variants:
     <select name="variant" [(ngModel)]="model.variant">
       @for (variant of variants; track $index) {
-        <option value="{{ variant }}">{{ variant }}</option>
+        <option [value]="variant">{{ variant }}</option>
       }
     </select>
   </label>
@@ -27,7 +27,7 @@
     Orientation:
     <select name="orientation" [(ngModel)]="model.orientation">
       @for (orientation of orientations; track $index) {
-        <option value="{{ orientation }}">{{ orientation }}</option>
+        <option [value]="orientation">{{ orientation }}</option>
       }
     </select>
   </label>
@@ -46,14 +46,15 @@
 </form>
 
 @if (model.clickable) {
-<section idsCard [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation" (click)="onClick()" [disabled]="model.disabled">
+<!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
+<section idsCard [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation" [disabled]="model.disabled" (click)="onClick()">
   @if (model.orientation === 'vertical') {
   <header idsCardHeader>
     <h2 idsCardTitle>This is the title</h2>
     <h3 idsCardSubtitle>This is the subtitle</h3>
   </header>
   }
-  <img idsCardMedia src="https://icellmobilsoft.hu/wp-content/uploads/2017/07/solution-toll-go.jpg" alt="" [stretch]="model.stretchMedia">
+  <img idsCardMedia src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85" alt="" [stretch]="model.stretchMedia">
   <ids-card-body>This is the body</ids-card-body>
   @if (model.orientation === 'vertical') {
   <footer idsCardFooter>This is the footer</footer>
@@ -68,7 +69,7 @@
     <h3 idsCardSubtitle>This is the subtitle</h3>
   </header>
   }
-  <img idsCardMedia src="https://icellmobilsoft.hu/wp-content/uploads/2017/07/solution-toll-go.jpg" alt="" [stretch]="model.stretchMedia">
+  <img idsCardMedia src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85" alt="" [stretch]="model.stretchMedia">
   <ids-card-body>This is the body</ids-card-body>
   @if (model.orientation === 'vertical') {
   <footer idsCardFooter>This is the footer</footer>

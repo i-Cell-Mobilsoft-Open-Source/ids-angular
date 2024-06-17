@@ -17,7 +17,6 @@ import {
   standalone: true,
   imports: [],
   templateUrl: './ids-avatar.component.html',
-  styleUrl: './ids-avatar.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsAvatarComponent {

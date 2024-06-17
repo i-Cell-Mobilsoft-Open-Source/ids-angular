@@ -21,7 +21,6 @@ import {
   standalone: true,
   imports: [],
   templateUrl: './ids-icon-button.component.html',
-  styleUrl: './ids-icon-button.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsIconButtonComponent {

@@ -1,5 +1,21 @@
-import { Component, ElementRef, HostBinding, HostListener, ViewEncapsulation, computed, inject, input, signal } from '@angular/core';
-import { AccordionAppearance, AccordionAppearanceType, Size, SizeType, coerceBooleanAttribute } from '@i-cell/widgets/core';
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
+import {
+  AccordionAppearance,
+  AccordionAppearanceType,
+  Size,
+  SizeType,
+  coerceBooleanAttribute,
+} from '@i-cell/widgets/core';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 
@@ -8,14 +24,16 @@ import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
   standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './ids-accordion.component.html',
-  styleUrl: './ids-accordion.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsAccordionComponent {
   private readonly _componentClass = 'ids-accordion';
 
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public appearance = input<AccordionAppearanceType | null>(AccordionAppearance.TEXT);
+  public appearance = input<AccordionAppearanceType | null>(
+    AccordionAppearance.TEXT,
+  );
+
   public summary = input<string>('');
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),

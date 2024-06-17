@@ -50,12 +50,11 @@ export class IdsDialogService {
 
     const onClose = dialogRef.instance.dialogResult.asObservable();
 
-    onClose.subscribe({
-      next: () => {
-        this._document.body.removeChild(dialogRef.location.nativeElement);
-        dialogRef.destroy();
-      },
-    });
+    onClose.subscribe(() => {
+      this._document.body.removeChild(dialogRef.location.nativeElement);
+      dialogRef.destroy();
+    },
+    );
 
     return onClose;
   }

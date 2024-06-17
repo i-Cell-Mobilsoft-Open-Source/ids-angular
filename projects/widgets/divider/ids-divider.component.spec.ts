@@ -1,24 +1,23 @@
-// TODO: unit tests
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IdsDividerComponent } from './ids-divider.component';
 
-// import { IdsDividerComponent } from './ids-divider.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// describe('DividerComponent', () => {
-//   let component: IdsDividerComponent;
-//   let fixture: ComponentFixture<IdsDividerComponent>;
+describe('DividerComponent', () => {
+  let component: IdsDividerComponent;
+  let fixture: ComponentFixture<IdsDividerComponent>;
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       imports: [IdsDividerComponent]
-//     })
-//     .compileComponents();
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      imports: [IdsDividerComponent],
+    })
+      .compileComponents();
 
-//     fixture = TestBed.createComponent(IdsDividerComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+    fixture = TestBed.createComponent(IdsDividerComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

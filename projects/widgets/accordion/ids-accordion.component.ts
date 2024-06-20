@@ -14,6 +14,7 @@ import {
   AccordionAppearanceType,
   Size,
   SizeType,
+  addClassPrefix,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
@@ -48,9 +49,9 @@ export class IdsAccordionComponent {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.appearance()),
-      ...[this.disabled() ? [this._addClassPrefix('disabled')] : []],
+      addClassPrefix(this._componentClass, this.size()),
+      addClassPrefix(this._componentClass, this.appearance()),
+      ...[this.disabled() ? [addClassPrefix(this._componentClass, 'disabled')] : []],
     ]
       .filter(Boolean)
       .join(' '),
@@ -58,10 +59,6 @@ export class IdsAccordionComponent {
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 
   @HostListener('toggle')

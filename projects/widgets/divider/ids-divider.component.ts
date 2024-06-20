@@ -12,6 +12,7 @@ import {
   OrientationType,
   Size,
   SizeType,
+  addClassPrefix,
 } from '@i-cell/widgets/core';
 
 @Component({
@@ -33,9 +34,9 @@ export class IdsDividerComponent {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      this._addClassPrefix(this.type()),
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.variant()),
+      addClassPrefix(this._componentClass, this.type()),
+      addClassPrefix(this._componentClass, this.size()),
+      addClassPrefix(this._componentClass, this.variant()),
     ]
       .filter(Boolean)
       .join(' '),
@@ -51,9 +52,5 @@ export class IdsDividerComponent {
 
   @HostBinding('style.--ids-divider-height') get cssHeight(): string | null {
     return this.height();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

@@ -16,6 +16,7 @@ import {
   IdsDetectScrollableDirective,
   Size,
   SizeType,
+  addClassPrefix,
 } from '@i-cell/widgets/core';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
 import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
@@ -54,8 +55,8 @@ export class IdsDialogComponent {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      this._addClassPrefix(this.size()),
-      ...[this.showBackdrop() ? [this._addClassPrefix('with-backdrop')] : []],
+      addClassPrefix(this._componentClass, this.size()),
+      ...[this.showBackdrop() ? [addClassPrefix(this._componentClass, 'with-backdrop')] : []],
     ]
       .filter(Boolean)
       .join(' '),
@@ -80,9 +81,5 @@ export class IdsDialogComponent {
 
   public close(): void {
     this.dialog.close();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

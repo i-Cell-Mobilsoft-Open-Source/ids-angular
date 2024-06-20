@@ -13,6 +13,7 @@ import {
   ButtonAppearanceType,
   Size,
   SizeType,
+  addClassPrefix,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 
@@ -42,9 +43,9 @@ export class IdsButtonComponent {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      this._addClassPrefix(this.appearance()),
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.variant()),
+      addClassPrefix(this._componentClass, this.appearance()),
+      addClassPrefix(this._componentClass, this.size()),
+      addClassPrefix(this._componentClass, this.variant()),
     ]
       .filter(Boolean)
       .join(' '),
@@ -56,9 +57,5 @@ export class IdsButtonComponent {
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

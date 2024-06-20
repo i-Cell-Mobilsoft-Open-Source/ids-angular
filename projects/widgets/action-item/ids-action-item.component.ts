@@ -15,6 +15,7 @@ import {
   Size,
   SizeType,
   SurfaceVariant,
+  addClassPrefix,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 
@@ -49,10 +50,10 @@ export class IdsActionItemComponent {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      this._addClassPrefix(this.appearance()),
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.variant()),
-      ...[this.active() ? [this._addClassPrefix('active')] : []],
+      addClassPrefix(this._componentClass, this.appearance()),
+      addClassPrefix(this._componentClass, this.size()),
+      addClassPrefix(this._componentClass, this.variant()),
+      ...[this.active() ? [addClassPrefix(this._componentClass, 'active')] : []],
     ]
       .filter(Boolean)
       .join(' '),
@@ -68,9 +69,5 @@ export class IdsActionItemComponent {
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

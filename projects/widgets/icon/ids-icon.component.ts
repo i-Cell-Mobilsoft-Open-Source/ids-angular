@@ -5,7 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { Size, SizeType } from '@i-cell/widgets/core';
+import { Size, SizeType, addClassPrefix } from '@i-cell/widgets/core';
 
 @Component({
   selector: 'ids-icon',
@@ -25,7 +25,7 @@ export class IdsIconComponent {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      this._addClassPrefix(this.size()),
+      addClassPrefix(this._componentClass, this.size()),
     ]
       .filter(Boolean)
       .join(' '),
@@ -33,9 +33,5 @@ export class IdsIconComponent {
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

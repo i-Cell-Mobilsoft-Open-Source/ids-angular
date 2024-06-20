@@ -20,6 +20,7 @@ import {
   OrientationType,
   Size,
   SizeType,
+  addClassPrefix,
   coerceBooleanAttribute,
 } from '@i-cell/widgets/core';
 
@@ -55,16 +56,16 @@ export class IdsCardComponent implements OnInit {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      this._addClassPrefix(this.appearance()),
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.variant()),
-      this._addClassPrefix(this.orientation()),
+      addClassPrefix(this._componentClass, this.appearance()),
+      addClassPrefix(this._componentClass, this.size()),
+      addClassPrefix(this._componentClass, this.variant()),
+      addClassPrefix(this._componentClass, this.orientation()),
       ...[
         this.disabled() && this._hasClickHandler()
-          ? [this._addClassPrefix('disabled')]
+          ? [addClassPrefix(this._componentClass, 'disabled')]
           : [],
       ],
-      ...[this._hasClickHandler() ? [this._addClassPrefix('clickable')] : []],
+      ...[this._hasClickHandler() ? [addClassPrefix(this._componentClass, 'clickable')] : []],
     ]
       .filter(Boolean)
       .join(' '),
@@ -84,9 +85,5 @@ export class IdsCardComponent implements OnInit {
 
   public ngOnInit(): void {
     this._hasClickHandler.set(this.click.observed);
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

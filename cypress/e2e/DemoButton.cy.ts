@@ -36,6 +36,18 @@ describe('ids Button Demo test', () => {
       });
     });
   });
+  
+  it('Checks the height of button', () => {
+    allCombinations.forEach((item) => {
+      buttonTestData.allHeight.forEach((height) => {
+      const buttonSelector = `#${item.mode}-${item.variant}-${item.size}-button`;
+      cy.get(buttonSelector).should('be.visible').should(($el) => {
+        const style = window.getComputedStyle($el[0]);
+        expect(style.height).to.equal(height[item.size]);
+        });
+      });
+    });
+  });
 
   it('Checks the font-size of button', () => {
     allCombinations.forEach((item) => {
@@ -71,6 +83,21 @@ describe('ids Button Demo test', () => {
           'align-items': common['alignItems'],
           display: common['display'],
           'justify-content': common['justifyContent'],
+        });
+      });
+    });
+  });
+
+  it('Checks common css value of button', () => {
+    allCombinations.forEach((item) => {
+      buttonTestData.common.forEach((common) => {
+        const buttonSelector = `#${item.mode}-${item.variant}-${item.size}-button`;
+        cy.get(buttonSelector).should('be.visible').then(($el) => {
+          expect($el).to.have.css('flex-shrink', common['flexShrink']);
+          expect($el).to.have.css('font-weight', common['fontWeight']);
+          expect($el).to.have.css('align-items', common['alignItems']);
+          expect($el).to.have.css('display', common['display']);
+          expect($el).to.have.css('justify-content', common['justifyContent']);
         });
       });
     });
@@ -205,7 +232,7 @@ describe('ids Button Demo test', () => {
                   .should(($el) => {
                     const styles = window.getComputedStyle($el[0]);
                     expect(styles.backgroundColor).to.equal(
-                      buttonTestData.disabledBgColors
+                      buttonTestData.pressedBgColors
                     );
                     expect(styles.color).to.equal(outlineColor[item.variant]);
                   })
@@ -301,4 +328,20 @@ describe('ids Button Demo test', () => {
       });
     });
   });
+
+  it('Checks all GAP of button', () => {
+    allCombinations.forEach((item) => {
+      buttonTestData.columnGap.forEach((gapColumn) => {
+        buttonTestData.rowGap.forEach((gapRow) => {
+          const buttonSelector = `#${item.mode}-${item.variant}-${item.size}-button`;
+          cy.get(buttonSelector).should('be.visible').should(($el) => {
+            const styles = window.getComputedStyle($el[0]);
+            expect(styles.columnGap).to.equal(gapColumn[item.size]);
+            expect(styles.rowGap).to.equal(gapRow[item.size]);
+          });
+        });
+      });
+    });
+  });
+
 });

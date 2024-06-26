@@ -1,6 +1,6 @@
 const tagTestData = {
   allModes: ["filled", "outlined"] as const,
-  allSizes: ["compact", "comfortable"] as const,
+  allSizes: ["dense", "compact", "comfortable", "spacious"] as const,
   allVariants: [
     "primary",
     "secondary",
@@ -111,55 +111,81 @@ const tagTestData = {
 
   //sizes
   allHeight: [{
+    dense: "20px",
     compact: "24px",
     comfortable: "32px",
+    spacious: "56px",
   }],
   allWidth: [{
     compact: "24px",
     comfortable: "40px",
+    spacious: "56px",
   }],
   allLeadingHeight: [{
+    dense: "16px",
     compact: "20px",
     comfortable: "24px",
+    spacious: "32px",
   }],
   allLeadingWidth: [{
+    dense: "16px",
     compact: "20px",
     comfortable: "24px",
+    spacious: "32px",
   }],
 
   Radius: [{
+    dense: "2px",
     compact: "4px",
     comfortable: "8px",
+    spacious: "1000px",
   }],
 
   topBottomPadding: [{
+    dense: "4px",
     compact: "8px",
     comfortable: "6px",
+    spacious: "16px",
   }],
   leftRightPadding: [{
+    dense: "4px",
     compact: "8px",
     comfortable: "20px",
+    spacious: "24px",
   }],
   allFontSize: [{
+    dense: "16px",
     compact: "12px",
     comfortable: "14px",
+    spacious: "16px",
+  }],
+  allFontWeight: [{
+    dense: "400",
+    compact: "500",
+    comfortable: "500",
+    spacious: "400",
   }],
   allLineHeight: [{
+    dense: "24px",
     compact: "16px",
     comfortable: "20px",
+    spacious: "24px",
   }],
   columnGap: [{
+    dense: "2px",
     compact: "2px",
     comfortable: "8px",
+    spacious: "8px",
   }],
   rowGap: [{
+    dense: "2px",
     compact: "2px",
     comfortable: "8px",
+    spacious: "8px",
   }],
 
   common: [{
     flexShrink: '0',
-    fontWeight: '500',
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center'
@@ -172,7 +198,6 @@ const tagTestData = {
   activeOutlineBg: 'rgba(100, 140, 180, 0.2)',
   disabledBgColors: "rgb(226, 232, 240)",
   disabledTextColors: "rgb(148, 163, 184)",
-  allFontWeight: '500',
 }
 
 export default tagTestData;

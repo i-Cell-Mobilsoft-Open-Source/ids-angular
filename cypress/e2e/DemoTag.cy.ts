@@ -253,27 +253,27 @@ describe('ids tags Demo test', () => {
         });
     });
 
-    xit('Checks color of disabled state tags', () => {
-        allCombinations.forEach((item) => {
-            if (item.variant === 'error' || item.variant === 'success' || item.variant === 'warning') {
-                return;
-            }
-            const button = cy.get(`#${item.mode}-${item.variant}-${item.size}-disabled-tag`);
-            if (item.mode === 'outlined') {
-                button.should(($el) => {
-                    const styles = window.getComputedStyle($el[0]);
-                    expect(styles.backgroundColor).to.equal(tagTestData.white);
-                    expect(styles.color).to.equal(tagTestData.disabledTextColors);
-                });
-            } else {
-                button.should(($el) => {
-                    const styles = window.getComputedStyle($el[0]);
-                    expect(styles.backgroundColor).to.equal(tagTestData.disabledBgColors);
-                    expect(styles.color).to.equal(tagTestData.disabledTextColors);
-                });
-            }
-        });
-    });
+    // it('Checks color of disabled state tags', () => {
+    //     allCombinations.forEach((item) => {
+    //         if (item.variant === 'error' || item.variant === 'success' || item.variant === 'warning') {
+    //             return;
+    //         }
+    //         const button = cy.get(`#${item.mode}-${item.variant}-${item.size}-disabled-tag`);
+    //         if (item.mode === 'outlined') {
+    //             button.should(($el) => {
+    //                 const styles = window.getComputedStyle($el[0]);
+    //                 expect(styles.backgroundColor).to.equal(tagTestData.white);
+    //                 expect(styles.color).to.equal(tagTestData.disabledTextColors);
+    //             });
+    //         } else {
+    //             button.should(($el) => {
+    //                 const styles = window.getComputedStyle($el[0]);
+    //                 expect(styles.backgroundColor).to.equal(tagTestData.disabledBgColors);
+    //                 expect(styles.color).to.equal(tagTestData.disabledTextColors);
+    //             });
+    //         }
+    //     });
+    // });
 
     it('Checks left and right border radius of tags', () => {
         allCombinations.forEach((item) => {

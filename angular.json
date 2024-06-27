@@ -116,6 +116,45 @@
               "projects/widgets/**/*.html"
             ]
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/widgets/.storybook",
+            "browserTarget": "widgets:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-p",
+              "projects/widgets/.storybook/tsconfig.compodoc.json",
+              "-e",
+              "json",
+              "-d",
+              "projects/widgets"
+            ],
+            "port": 6006,
+            "styles": [
+              "projects/demo/src/styles.scss",
+              "node_modules/@i-cell/ids-tokens/css/tokens.css",
+              "node_modules/@i-cell/ids-styles/dist/components.css"
+            ]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/widgets/.storybook",
+            "browserTarget": "widgets:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-p",
+              "projects/widgets/.storybook/tsconfig.compodoc.json",
+              "-e",
+              "json",
+              "-d",
+              "projects/widgets"
+            ],
+            "outputDir": "dist/storybook/widgets"
+          }
         }
       }
     }

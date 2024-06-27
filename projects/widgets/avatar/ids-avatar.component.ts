@@ -31,8 +31,8 @@ export class IdsAvatarComponent {
   private _hostClasses = computed(() =>
     [
       this._componentClass,
-      addClassPrefix(this. _componentClass, this.size()),
-      addClassPrefix(this. _componentClass, this.variant()),
+      addClassPrefix(this._componentClass, this.size()),
+      addClassPrefix(this._componentClass, this.variant()),
     ]
       .filter(Boolean)
       .join(' '),

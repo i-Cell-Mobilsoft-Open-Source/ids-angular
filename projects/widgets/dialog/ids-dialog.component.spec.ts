@@ -2,12 +2,12 @@ import { IdsDialogComponent } from './ids-dialog.component';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-window.ResizeObserver =
-    jest.fn().mockImplementation(() => ({
-      disconnect: jest.fn(),
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-    }));
+window.ResizeObserver
+    = jest.fn().mockImplementation(() => ({
+    disconnect: jest.fn(),
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+  }));
 
 describe('IdsDialogComponent', () => {
   let component: IdsDialogComponent;

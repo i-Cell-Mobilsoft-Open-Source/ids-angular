@@ -3,7 +3,6 @@ import { IdsDialogComponent } from './ids-dialog.component';
 import { AfterViewInit, Directive, OnDestroy, viewChild } from '@angular/core';
 import { Subject, Subscription, fromEvent } from 'rxjs';
 
-
 @Directive({ standalone: true })
 export abstract class IdsCustomDialogBase<ResultType = unknown> implements AfterViewInit, OnDestroy {
   public dialogResult = new Subject<ResultType | undefined>();
@@ -15,7 +14,7 @@ export abstract class IdsCustomDialogBase<ResultType = unknown> implements After
   public ngAfterViewInit(): void {
     this.dialog().open();
     this._closeSub = fromEvent(this.dialog().dialog, 'close').subscribe(() => {
-      this._setDialogResult(); 
+      this._setDialogResult();
     });
   }
 

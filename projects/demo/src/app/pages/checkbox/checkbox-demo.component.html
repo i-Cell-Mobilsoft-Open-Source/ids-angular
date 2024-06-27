@@ -1,0 +1,99 @@
+<h1>Normál (Form api nélkül)</h1>
+@for (variant of variants; track $index) {
+<section [class]="variant">
+  <h2>{{ variant | uppercase }}</h2>
+  @for (size of sizes; track $index) {
+  <h3>{{ size }}</h3>
+  <div class="checkbox-group">
+    <ids-checkbox
+      [label]="label"
+      [size]="size"
+      [variant]="'surface'"
+    />
+    <ids-checkbox
+      [label]="label"
+      [size]="size"
+      [variant]="'surface'"
+      [indeterminate]="true"
+    />
+    <ids-checkbox
+      [label]="label"
+      [size]="size"
+      [variant]="'surface'"
+      [checked]="true"
+    />
+  </div>
+  }
+</section>
+}
+
+<h1>Disabled (Form api nélkül)</h1>
+@for (variant of variants; track $index) {
+<section [class]="variant">
+  <h2>{{ variant | uppercase }}</h2>
+  @for (size of sizes; track $index) {
+  <h3>{{ size }}</h3>
+  <div class="checkbox-group">
+    <ids-checkbox
+      [label]="label"
+      [size]="size"
+      [variant]="variant"
+      [disabled]="true"
+    />
+    <ids-checkbox
+      [label]="label"
+      [size]="size"
+      [variant]="variant"
+      [disabled]="true"
+      [indeterminate]="true"
+    />
+    <ids-checkbox
+      [label]="label"
+      [size]="size"
+      [variant]="variant"
+      [disabled]="true"
+      [checked]="true"
+    />
+  </div>
+  }
+</section>
+}
+
+<h1>Error (Form apival)</h1>
+<form [formGroup]="form">
+  @for (variant of variants; track $index) {
+  <section
+    [class]="variant"
+    [formGroupName]="variant"
+  >
+    <h2>{{ variant | uppercase }}</h2>
+    @for (size of sizes; track $index) {
+    <h3>{{ size }}</h3>
+    <div
+      class="checkbox-group"
+      [formGroupName]="size"
+    >
+      <ids-checkbox
+        formControlName="unselected"
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+      />
+      <ids-checkbox
+        formControlName="indeterminate"
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+        [indeterminate]="true"
+      />
+      <ids-checkbox
+        formControlName="selected"
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+      />
+    </div>
+    }
+  </section>
+  }
+</form>

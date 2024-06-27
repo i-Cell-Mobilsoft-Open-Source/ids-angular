@@ -39,8 +39,8 @@ importers:
         specifier: ^0.0.1
         version: 0.0.1
       '@i-cell/ids-tokens':
-        specifier: ^0.0.1
-        version: 0.0.1
+        specifier: ^0.0.5
+        version: 0.0.5
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -131,7 +131,7 @@ importers:
         version: 29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3))
       jest-preset-angular:
         specifier: ^14.1.0
-        version: 14.1.0(iwler64sh5qi3ldaeo3gdm4jxu)
+        version: 14.1.0(@angular-devkit/build-angular@17.3.2(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(@types/express@4.17.21)(@types/node@20.11.24)(chokidar@3.6.0)(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(karma@6.4.2)(ng-packagr@17.1.2(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(tailwindcss@3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(tslib@2.6.2)(typescript@5.3.3))(tailwindcss@3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(typescript@5.3.3))(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser-dynamic@17.3.1(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser@17.3.1(@angular/animations@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))))(@babel/core@7.24.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.0))(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(typescript@5.3.3)
       jest-slow-test-highlighter:
         specifier: ^1.0.1
         version: 1.0.1(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))
@@ -147,6 +147,9 @@ importers:
       postcss:
         specifier: ^8.4.35
         version: 8.4.35
+      prettier:
+        specifier: ^3.3.2
+        version: 3.3.2
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3))
@@ -1338,8 +1341,8 @@ packages:
   '@i-cell/ids-styles@0.0.1':
     resolution: {integrity: sha512-fmxDuC7weyksdJp+Tr5kfT/7NUXXMuA8mj9fGAU5NUapQuD1ejn+aVyNzq4RZYdslvipvYsKXaNxGwASPTY2Ww==}
 
-  '@i-cell/ids-tokens@0.0.1':
-    resolution: {integrity: sha512-1X0h2bHJQVdDvRvWe9Y9vej6kUstA86YbVjxzVrpou/zCMmjtmxIRQH0oCYBpYjNwi+630I+XqnMOevlSMB6eg==}
+  '@i-cell/ids-tokens@0.0.5':
+    resolution: {integrity: sha512-Y8dfhXye9LKiIAkoqPS/uugu7zyxiTgTir7z2v7KuW3tpmrDaZJg+7Efmiku4hgD4xbaiUDD9RJqJNmjsREYGA==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -5110,6 +5113,11 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
+  prettier@3.3.2:
+    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
     engines: {node: '>=6'}
@@ -7660,7 +7668,7 @@ snapshots:
 
   '@i-cell/ids-styles@0.0.1': {}
 
-  '@i-cell/ids-tokens@0.0.1': {}
+  '@i-cell/ids-tokens@0.0.5': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -11074,8 +11082,8 @@ snapshots:
     optionalDependencies:
       jest-resolve: 29.7.0
 
-  jest-preset-angular@14.1.0(iwler64sh5qi3ldaeo3gdm4jxu):
-    dependencies:
+  ? jest-preset-angular@14.1.0(@angular-devkit/build-angular@17.3.2(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(@types/express@4.17.21)(@types/node@20.11.24)(chokidar@3.6.0)(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(karma@6.4.2)(ng-packagr@17.1.2(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(tailwindcss@3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(tslib@2.6.2)(typescript@5.3.3))(tailwindcss@3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(typescript@5.3.3))(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser-dynamic@17.3.1(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser@17.3.1(@angular/animations@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))))(@babel/core@7.24.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.0))(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(typescript@5.3.3)
+  : dependencies:
       '@angular-devkit/build-angular': 17.3.2(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(@types/express@4.17.21)(@types/node@20.11.24)(chokidar@3.6.0)(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.11.24)(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(karma@6.4.2)(ng-packagr@17.1.2(@angular/compiler-cli@17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3))(tailwindcss@3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(tslib@2.6.2)(typescript@5.3.3))(tailwindcss@3.4.1(ts-node@10.9.2(@types/node@20.11.24)(typescript@5.3.3)))(typescript@5.3.3)
       '@angular/compiler-cli': 17.3.1(@angular/compiler@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(typescript@5.3.3)
       '@angular/core': 17.3.1(rxjs@7.8.1)(zone.js@0.14.3)
@@ -12268,6 +12276,8 @@ snapshots:
       source-map-js: 1.0.2
 
   prelude-ls@1.2.1: {}
+
+  prettier@3.3.2: {}
 
   pretty-bytes@5.6.0: {}
 

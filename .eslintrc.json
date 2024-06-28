@@ -24,12 +24,8 @@
         "@angular-eslint/sort-lifecycle-methods": ["warn"],
         "@angular-eslint/no-lifecycle-call": ["error"],
         "@angular-eslint/relative-url-prefix": ["error"],
-        "@angular-eslint/no-host-metadata-property": [
-          "error",
-          {
-            "allowStatic": true
-          }
-        ],
+        "@angular-eslint/no-host-metadata-property": "off",
+        "@angular-eslint/no-input-rename": "off",
         "no-self-compare": "error",
         "no-template-curly-in-string": "error",
         "no-unreachable": "warn",

@@ -14,7 +14,7 @@
     [indeterminate]="isIndeterminate()"
     [name]="name()"
     [required]="required()"
-    [tabIndex]="isDisabled() ? -1 : tabIndex()"
+    [tabIndex]="(isDisabled() || readonly()) ? -1 : tabIndex()"
     [value]="value()"
     (blur)="onBlur()"
     (click)="onInputClick()"
@@ -67,14 +67,14 @@
     >{{ label() }}</label>
     <span class="ids-validation__required-marker"></span>
   </div>
-  @if (getDisplayedMessages(); as messages) {
+  @if (displayedMessages; as messages) {
   <div class="ids-checkbox__message-container">
     @switch (messages) {
     @case ('error') {
-    <ng-content select="ids-message-error" />
+    <ng-content select="ids-error-message" />
     }
     @case ('hint') {
-    <ng-content select="ids-message-hint" />
+    <ng-content select="ids-hint-message" />
     }
     }
   </div>

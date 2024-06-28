@@ -1,0 +1,19 @@
+$sizes: compact, comfortable, spacious, dense;
+
+.ids-message {
+  display: flex;
+  align-items: flex-start;
+  font-style: normal;
+
+  @each $size in $sizes {
+    &.ids-message-#{$size} {
+      gap: var(--ids-comp-size-forms-message-size-gap-#{$size});
+      padding: var(--ids-comp-size-forms-message-size-padding-y-#{$size}) var(--ids-comp-size-forms-message-size-padding-x-#{$size});
+      font-family: var(--ids-comp-size-forms-message-typography-font-family-#{$size});
+      font-size: var(--ids-comp-size-forms-message-typography-font-size-#{$size});
+      font-weight: var(--ids-comp-size-forms-message-typography-font-weight-#{$size});
+      letter-spacing: var(--ids-comp-size-forms-message-typography-letter-spacing-#{$size});
+      line-height: var(--ids-comp-size-forms-message-typography-line-height-#{$size});
+    }
+  }
+}

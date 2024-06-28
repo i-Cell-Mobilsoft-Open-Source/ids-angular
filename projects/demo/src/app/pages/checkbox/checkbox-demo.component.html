@@ -8,20 +8,26 @@
     <ids-checkbox
       [label]="label"
       [size]="size"
-      [variant]="'surface'"
-    />
+      [variant]="variant"
+    >
+      <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+    </ids-checkbox>
     <ids-checkbox
       [label]="label"
       [size]="size"
-      [variant]="'surface'"
+      [variant]="variant"
       [indeterminate]="true"
-    />
+    >
+      <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+    </ids-checkbox>
     <ids-checkbox
       [label]="label"
       [size]="size"
-      [variant]="'surface'"
+      [variant]="variant"
       [checked]="true"
-    />
+    >
+      <ids-hint-message>És még talán ide is</ids-hint-message>
+    </ids-checkbox>
   </div>
   }
 </section>
@@ -39,21 +45,27 @@
       [size]="size"
       [variant]="variant"
       [disabled]="true"
-    />
+    >
+      <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+    </ids-checkbox>
     <ids-checkbox
       [label]="label"
       [size]="size"
       [variant]="variant"
       [disabled]="true"
       [indeterminate]="true"
-    />
+    >
+      <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+    </ids-checkbox>
     <ids-checkbox
       [label]="label"
       [size]="size"
       [variant]="variant"
       [disabled]="true"
       [checked]="true"
-    />
+    >
+      <ids-hint-message>És még talán ide is</ids-hint-message>
+    </ids-checkbox>
   </div>
   }
 </section>
@@ -78,20 +90,29 @@
         [label]="label"
         [size]="size"
         [variant]="variant"
-      />
+      >
+        <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+        <ids-error-message>Error</ids-error-message>
+      </ids-checkbox>
       <ids-checkbox
         formControlName="indeterminate"
         [label]="label"
         [size]="size"
         [variant]="variant"
         [indeterminate]="true"
-      />
+      >
+        <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+        <ids-error-message>Error</ids-error-message>
+      </ids-checkbox>
       <ids-checkbox
         formControlName="selected"
         [label]="label"
         [size]="size"
         [variant]="variant"
-      />
+      >
+        <ids-hint-message>És még talán ide is</ids-hint-message>
+        <ids-error-message>Error</ids-error-message>
+      </ids-checkbox>
     </div>
     }
   </section>

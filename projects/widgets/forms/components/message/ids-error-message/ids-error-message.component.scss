@@ -1,0 +1,14 @@
+$variants: light, dark, surface;
+
+.ids-message {
+  @each $variant in $variants {
+    &.ids-error-message.ids-message-#{$variant} {
+      .ids-message__icon {
+        color: var(--ids-comp-forms-message-color-fg-icon-#{$variant}-error-enabled);
+      }
+      .ids-message__text {
+        color: var(--ids-comp-forms-message-color-fg-text-#{$variant}-error-enabled);
+      }
+    }
+  }
+}

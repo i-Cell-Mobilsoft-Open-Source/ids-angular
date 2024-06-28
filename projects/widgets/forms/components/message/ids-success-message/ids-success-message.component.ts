@@ -7,10 +7,6 @@ import { IdsMessageDirective } from '@i-cell/widgets/forms';
   standalone: true,
   imports: [],
   templateUrl: '../ids-message.component.html',
-  styleUrls: [
-    '../../../directives/ids-message.scss',
-    './ids-success-message.component.scss',
-  ],
   hostDirectives: [IdsMessageDirective],
   encapsulation: ViewEncapsulation.None,
 })

@@ -11,7 +11,6 @@ import { Subscription, startWith } from 'rxjs';
   standalone: true,
   imports: [],
   templateUrl: '../ids-message.component.html',
-  styleUrl: './ids-error-message.component.scss',
   hostDirectives: [IdsMessageDirective],
   encapsulation: ViewEncapsulation.None,
 })

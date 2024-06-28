@@ -6,10 +6,6 @@ import { IdsMessageDirective } from '@i-cell/widgets/forms';
   standalone: true,
   imports: [],
   templateUrl: '../ids-message.component.html',
-  styleUrls: [
-    '../../../directives/ids-message.scss',
-    './ids-hint-message.component.scss',
-  ],
   host: {
     class: 'ids-hint-message',
   },

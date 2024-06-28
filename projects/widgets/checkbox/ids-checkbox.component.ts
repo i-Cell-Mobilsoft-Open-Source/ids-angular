@@ -17,7 +17,6 @@ let nextUniqueId = 0;
   standalone: true,
   imports: [],
   templateUrl: './ids-checkbox.component.html',
-  styleUrl: './ids-checkbox.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

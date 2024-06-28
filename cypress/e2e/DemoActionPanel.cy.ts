@@ -120,25 +120,25 @@ describe('ids Action Item Button Demo test', () => {
             });
         });
     });
-
+// BUG ticket => IDS-501
     it('Checks box-shadow of Action Panel', () => {
         allCombinations.forEach((item) => {
             const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
             if (item.appearance === 'filled') {
                 cy.get(actionPanelSelector).click().should('be.visible').should(($el) => {
                     const styles = window.getComputedStyle($el[0]);
-                    expect(styles.boxShadow).to.equal(actionPanelTestData.boxShadow);
+                    expect(styles.boxShadow).to.equal('none');
                 });
             }
             else if (item.appearance === 'elevated') {
                 cy.get(actionPanelSelector).click().should('be.visible').should(($el) => {
                     const styles = window.getComputedStyle($el[0]);
-                    expect(styles.boxShadow).to.equal('none');
+                    expect(styles.boxShadow).to.equal(actionPanelTestData.elevatedBoxShadow);
                 });
             } else {
                 cy.get(actionPanelSelector).click().should('be.visible').should(($el) => {
                     const styles = window.getComputedStyle($el[0]);
-                    expect(styles.boxShadow).to.equal(actionPanelTestData.boxShadow);
+                    expect(styles.boxShadow).to.equal(actionPanelTestData.outlineBoxShadow);
                 });
             }
         });

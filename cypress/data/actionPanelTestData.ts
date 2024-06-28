@@ -40,6 +40,8 @@ const actionPanelTestData = {
     dense: '16px'
   }],
   boxShadow: 'rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px',
+  elevatedBoxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px',
+  outlineBoxShadow: 'rgba(0, 0, 0, 0.10) 0px 1px 2px 0px',
 
 }
 

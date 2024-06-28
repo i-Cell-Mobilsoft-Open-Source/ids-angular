@@ -1,17 +1,17 @@
 const avatarTestData = {
-    allModes: ["filled", "outlined", "text"] as const,
-    allSizes: [
-      "compact",
-      "comfortable",
-      "spacious",
-    ] as const,
-    allVariants: [
-      "surface",
-      "primary",
-      "secondary",
-      "light",
-      "dark"
-    ] as const,
+  allModes: ["filled", "outlined", "text"] as const,
+  allSizes: [
+    "compact",
+    "comfortable",
+    "spacious",
+  ] as const,
+  allVariants: [
+    "surface",
+    "primary",
+    "secondary",
+    "light",
+    "dark"
+  ] as const,
 
   //bgColors
   enabledBgColors: [{
@@ -21,7 +21,7 @@ const avatarTestData = {
     light: "rgb(255, 255, 255)",
     dark: "rgb(2, 6, 23)",
   }],
-    hoveredBgColors: [{
+  hoveredBgColors: [{
     surface: "rgb(226, 232, 240)",
     primary: "rgb(0, 47, 189)",
     secondary: "rgb(51, 65, 85)",
@@ -72,23 +72,23 @@ const avatarTestData = {
   }],
 
   paddingBottom: [{
-    compact: "4px",
-    comfortable: "4px",
+    compact: "2px",
+    comfortable: "2px",
     spacious: "6px",
   }],
   paddingLeft: [{
-    compact: "4px",
-    comfortable: "4px",
+    compact: "2px",
+    comfortable: "2px",
     spacious: "6px",
   }],
   paddingRight: [{
-    compact: "4px",
-    comfortable: "4px",
+    compact: "2px",
+    comfortable: "2px",
     spacious: "6px",
   }],
   paddingTop: [{
-    compact: "4px",
-    comfortable: "4px",
+    compact: "2px",
+    comfortable: "2px",
     spacious: "6px",
   }],
 
@@ -116,16 +116,18 @@ const avatarTestData = {
     flexDirection: 'column',
     justifyContent: 'center'
   }],
+
   white2: 'rgb(255, 255, 255) solid 3px',
   black: 'rgb(0, 0, 0) solid 3px',
   hoveredTextBgColors: "rgb(241, 245, 249)",
   allRadius: '1000px',
+  allPadding: '0px',
   image: "https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg",
 
 
 
   avatarImageBgcolors: "rgb(0, 60, 255)",
 
-  }
+}
 
 export default avatarTestData;

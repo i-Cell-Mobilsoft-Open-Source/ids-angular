@@ -28,7 +28,6 @@ const dividerTestData = {
     light: "rgb(255, 255, 255)",
     dark: "rgb(2, 6, 23)",
     surface: "rgb(203, 213, 225)",
-    //surface: "rgb(241, 245, 249)", ez a button szín
   }],
 
   //sizes
@@ -47,11 +46,12 @@ const dividerTestData = {
     flexShrink: '0',
     alignItems: 'center',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: '250px',
+    height: '200px',
+    lineHeight: '24px',
   }],
-  verticalWidth: '250px',
-  verticalHeight: '200px',
-  flexdirection: 'column',
+
   allRadius: '0px',
   allPadding: '0px'
 

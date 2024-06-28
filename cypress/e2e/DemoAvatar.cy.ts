@@ -248,7 +248,7 @@ describe('ids Avatar Demo test', () => {
     });
   });
 
-  it('Checks color of avatar-with-image with FOCUSED state', () => {
+  it('Checks image of avatar-with-image with FOCUSED state', () => {
     allCombinations.forEach((item) => {
       const avatarSelector = cy.get(`#${item.size}-avatar-with-image`);
       avatarSelector.realClick({ pointer: "mouse" }).find('img').should('be.visible').then(imgElement => {
@@ -440,22 +440,15 @@ describe('ids Avatar Demo test', () => {
 
   it('Checks all padding of avatar-with-image', () => {
     allCombinations.forEach((item) => {
-      avatarTestData.paddingTop.forEach((topPadding) => {
-        avatarTestData.paddingRight.forEach((rightPadding) => {
-          avatarTestData.paddingLeft.forEach((leftPadding) => {
-            avatarTestData.paddingBottom.forEach((bottomPadding) => {
-              const avatarSelector = `#${item.size}-avatar-with-image`;
-              cy.get(avatarSelector).should('be.visible').then(($el) => {
-                const styles = window.getComputedStyle($el[0]);
-                expect(styles.paddingTop).to.equal(topPadding[item.size]);
-                expect(styles.paddingRight).to.equal(rightPadding[item.size]);
-                expect(styles.paddingLeft).to.equal(leftPadding[item.size]);
-                expect(styles.paddingBottom).to.equal(bottomPadding[item.size]);
-              });
-            });
-          });
-        });
+      const avatarSelector = `#${item.size}-avatar-with-image`;
+      cy.get(avatarSelector).should('be.visible').then(($el) => {
+        const styles = window.getComputedStyle($el[0]);
+        expect(styles.paddingTop).to.equal(avatarTestData.allPadding);
+        expect(styles.paddingRight).to.equal(avatarTestData.allPadding);
+        expect(styles.paddingLeft).to.equal(avatarTestData.allPadding);
+        expect(styles.paddingBottom).to.equal(avatarTestData.allPadding);
       });
     });
   });
 });
+

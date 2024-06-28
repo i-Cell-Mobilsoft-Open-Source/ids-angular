@@ -14,7 +14,7 @@
     [indeterminate]="isIndeterminate()"
     [name]="name()"
     [required]="required()"
-    [tabIndex]="(isDisabled() || readonly()) ? -1 : tabIndex()"
+    [tabIndex]="!isFocusable() ? -1 : tabIndex()"
     [value]="value()"
     (blur)="onBlur()"
     (click)="onInputClick()"

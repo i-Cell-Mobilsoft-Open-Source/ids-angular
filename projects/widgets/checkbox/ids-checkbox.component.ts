@@ -52,6 +52,7 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
 
   public isChecked = computed(() => this.checkboxState() === CheckboxState.CHECKED);
   public isIndeterminate = computed(() => this.checkboxState() === CheckboxState.INDETERMINATE);
+  public isFocusable = computed(() => !this.isDisabled() && !this.readonly());
   private _hostClasses = computed(() => hostClassGenerator(this._componentClass, [
     this.size(),
     this.variant(),

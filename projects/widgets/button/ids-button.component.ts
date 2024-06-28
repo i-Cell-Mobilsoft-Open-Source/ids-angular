@@ -24,6 +24,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsButtonComponent {
+  /** @ignore */
   private readonly _componentClass = 'ids-button';
 
   public appearance = input<ButtonAppearanceType | null>(
@@ -36,9 +37,12 @@ export class IdsButtonComponent {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
+  /** @ignore */
   public iconLeading = contentChildren<unknown>('[icon-leading]');
+  /** @ignore */
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
+  /** @ignore */
   private _hostClasses = computed(() =>
     [
       this._componentClass,
@@ -50,14 +54,17 @@ export class IdsButtonComponent {
       .join(' '),
   );
 
+  /** @ignore */
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
     return this.disabled() || null;
   }
 
+  /** @ignore */
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }
 
+  /** @ignore */
   private _addClassPrefix(className: string | null): string | null {
     return className ? `${this._componentClass}-${className}` : null;
   }

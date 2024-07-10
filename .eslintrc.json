@@ -154,12 +154,6 @@
         "@typescript-eslint/prefer-string-starts-ends-with": "error",
         "@typescript-eslint/require-array-sort-compare": "error",
         "@typescript-eslint/return-await": "error",
-        "@typescript-eslint/strict-boolean-expressions": [
-          "error",
-          {
-            "allowNullableString": true
-          }
-        ],
         "rxjs/no-implicit-any-catch": "off",
         "rxjs/no-topromise": "error",
         "rxjs/no-unsafe-catch": "error",

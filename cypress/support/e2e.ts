@@ -24,6 +24,6 @@ before(() => {
       globalThis.tokens = readTokens(parsedContent);
     });
   } catch (error) {
-    cy.task('error', 'Could not read tokens:', error);
+    cy.task('log', '[ERROR] Could not read tokens:', error);
   }
 });

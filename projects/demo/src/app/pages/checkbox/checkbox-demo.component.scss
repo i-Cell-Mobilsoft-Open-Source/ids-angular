@@ -46,8 +46,8 @@ section {
 }
 
 .checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   padding-left: 32px;
+  & > *:not(:last-child) {
+    margin-bottom: 16px;
+  }
 }

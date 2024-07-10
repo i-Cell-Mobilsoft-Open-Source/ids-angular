@@ -92,7 +92,10 @@
         [variant]="variant"
       >
         <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
-        <ids-error-message>Error</ids-error-message>
+        <ids-error-message>
+          <span>A mező értéke nem felel meg az elvártnak</span>
+          <span idsMessageSuffix>10/56</span>
+        </ids-error-message>
       </ids-checkbox>
       <ids-checkbox
         formControlName="indeterminate"
@@ -102,7 +105,10 @@
         [indeterminate]="true"
       >
         <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
-        <ids-error-message>Error</ids-error-message>
+        <ids-error-message>
+          <span>A mező értéke nem felel meg az elvártnak</span>
+          <span idsMessageSuffix>11/56</span>
+        </ids-error-message>
       </ids-checkbox>
       <ids-checkbox
         formControlName="selected"
@@ -111,7 +117,10 @@
         [variant]="variant"
       >
         <ids-hint-message>És még talán ide is</ids-hint-message>
-        <ids-error-message>Error</ids-error-message>
+        <ids-error-message>
+          <span>A mező értéke nem felel meg az elvártnak</span>
+          <span idsMessageSuffix>12/56</span>
+        </ids-error-message>
       </ids-checkbox>
     </div>
     }

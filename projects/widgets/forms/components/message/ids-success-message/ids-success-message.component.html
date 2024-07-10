@@ -1,0 +1,15 @@
+<div class="ids-message__icon">
+  @if (prefixes.length) {
+    <ng-content select="[idsMessagePrefix]" />
+  } @else {
+    <ids-icon aria-hidden="true" [icon]="defaultPrefixIcon" />
+  }
+</div>
+<div class="ids-message__text">
+  <ng-content />
+</div>
+@if (suffixes.length) {
+  <div class="ids-message__counter">
+    <ng-content select="[idsMessageSuffix]" />
+  </div>
+}

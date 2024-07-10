@@ -19,7 +19,6 @@ export class IdsMessageDirective implements OnInit, OnChanges {
   private readonly _componentClass = 'ids-message';
 
   private _injector = inject(Injector);
-  private _parent: FormElement<AllVariantsType> | null = null;
 
   public id = input<string, number>(
     `${this._componentClass}-${nextUniqueId++}`,
@@ -54,15 +53,15 @@ export class IdsMessageDirective implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
-    this._parent = this._injector.get<FormElement<AllVariantsType>>(IDS_FORM_ELEMENT, null, { skipSelf: true, optional: true });
-    if (this._parent) {
+    const parent = this._injector.get<FormElement<AllVariantsType>>(IDS_FORM_ELEMENT, null, { skipSelf: true, optional: true });
+    if (parent) {
       if (!this._receivedInputSize) {
-        this._size.set(this._parent.size());
+        this._size.set(parent.size());
       }
       if (!this._receivedInputVariant) {
-        this._variant.set(this._parent.variant());
+        this._variant.set(parent.variant());
       }
-      this._disabled.set(this._parent.isDisabled());
+      this._disabled.set(parent.isDisabled());
     }
   }
 

@@ -1,16 +1,20 @@
-import { Component, HostBinding, Injector, OnDestroy, OnInit, ViewEncapsulation, computed, inject, signal } from '@angular/core';
+import { Component, ContentChildren, HostBinding, Injector, OnDestroy, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { hostClassGenerator } from '@i-cell/widgets/core';
 import { IdsMessageDirective } from '@i-cell/widgets/forms';
+import { IdsMessagePrefixDirective } from '@i-cell/widgets/forms/directives/ids-message-prefix.directive';
+import { IdsMessageSuffixDirective } from '@i-cell/widgets/forms/directives/ids-message-suffix.directive';
 import { IDS_FORM_ELEMENT } from '@i-cell/widgets/forms/tokens/form';
 import { FormElement } from '@i-cell/widgets/forms/types/form-element';
+import { IdsIconComponent } from '@i-cell/widgets/icon';
+import { mdiInformationOutline } from '@mdi/js';
 import { Subscription, startWith } from 'rxjs';
 
 @Component({
   selector: 'ids-error-message',
   standalone: true,
-  imports: [],
-  templateUrl: '../ids-message.component.html',
+  imports: [IdsIconComponent],
+  templateUrl: './ids-error-message.component.html',
   hostDirectives: [IdsMessageDirective],
   encapsulation: ViewEncapsulation.None,
 })
@@ -19,7 +23,6 @@ export class IdsErrorMessageComponent implements OnInit, OnDestroy {
 
   private _subscription?: Subscription;
   private _injector = inject(Injector);
-  private _parent: FormElement<unknown> | null = null;
 
   private _errors = signal<ValidationErrors | null>(null);
   private _hostClasses = computed(() => hostClassGenerator(this._componentClass));
@@ -28,10 +31,15 @@ export class IdsErrorMessageComponent implements OnInit, OnDestroy {
     return this._hostClasses();
   }
 
+  @ContentChildren(IdsMessagePrefixDirective) public prefixes!: QueryList<IdsMessagePrefixDirective>;
+  @ContentChildren(IdsMessageSuffixDirective) public suffixes!: QueryList<IdsMessageSuffixDirective>;
+
+  public defaultPrefixIcon = mdiInformationOutline;
+
   public ngOnInit(): void {
-    this._parent = this._injector.get<FormElement<unknown>>(IDS_FORM_ELEMENT, null, { skipSelf: true, optional: true });
-    if (this._parent) {
-      const control = this._parent.controlDir;
+    const parent = this._injector.get<FormElement<unknown>>(IDS_FORM_ELEMENT, null, { skipSelf: true, optional: true });
+    if (parent) {
+      const control = parent.controlDir;
       this._subscription = control?.statusChanges?.pipe(startWith(control.errors)).subscribe(() => {
         this._errors.set(control.errors);
       });

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxVariant, CheckboxVariantType, IdsCheckboxComponent } from '@i-cell/widgets/checkbox';
 import { Size, SizeType } from '@i-cell/widgets/core';
 import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/widgets/forms';
+import { IdsMessageSuffixDirective } from '@i-cell/widgets/forms/directives/ids-message-suffix.directive';
 
 @Component({
   selector: 'app-checkbox-demo',
@@ -14,6 +15,7 @@ import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from
     ReactiveFormsModule,
     IdsHintMessageComponent,
     IdsErrorMessageComponent,
+    IdsMessageSuffixDirective,
   ],
   templateUrl: './checkbox-demo.component.html',
   styleUrl: './checkbox-demo.component.scss',

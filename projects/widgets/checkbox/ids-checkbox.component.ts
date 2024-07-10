@@ -2,12 +2,12 @@ import { CheckboxVariant, CheckboxVariantType } from './public-api';
 import { CheckBoxChangeEvent } from './types/checkbox-events';
 import { CheckboxState, CheckboxStateType } from './types/checkbox-state';
 
-import { IdsErrorMessageComponent, IdsHintMessageComponent } from '../forms';
+import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '../forms';
 import { IDS_FORM_ELEMENT } from '../forms/tokens/form';
 import { FormElement } from '../forms/types/form-element';
 
 import { AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, Injector, Input, OnChanges, OnInit, Output, QueryList, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation, computed, inject, input, signal } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
 import { Size, SizeType, coerceBooleanAttribute, coerceNumberAttribute, hostClassGenerator } from '@i-cell/widgets/core';
 
 let nextUniqueId = 0;
@@ -215,5 +215,17 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
       return 'hint';
     }
     return undefined;
+  }
+
+  public get hasRequiredValidator(): boolean {
+    const control = this.controlDir?.control;
+    if (!control) {
+      return this.required();
+    }
+    return control.hasValidator(Validators.required)
+      || control.hasValidator(Validators.requiredTrue)
+      || control.hasValidator(IdsValidators.required)
+      || control.hasValidator(IdsValidators.requiredTrue)
+      || control.hasValidator(IdsValidators.requiredFalse);
   }
 }

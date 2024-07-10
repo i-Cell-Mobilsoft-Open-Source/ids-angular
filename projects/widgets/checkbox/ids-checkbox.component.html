@@ -61,11 +61,13 @@
 <div class="ids-checkbox__label-wrapper">
   <div class="ids-checkbox__label-container">
     <label
-      #labelEl
       class="ids-checkbox__label"
       [for]="inputId()"
-    >{{ label() }}</label>
-    <span class="ids-validation__required-marker"></span>
+    >{{ label() }}
+      @if (hasRequiredValidator) {
+      <span class="ids-form-field__required-marker"></span>
+      }
+    </label>
   </div>
   @if (displayedMessages; as messages) {
   <div class="ids-checkbox__message-container">

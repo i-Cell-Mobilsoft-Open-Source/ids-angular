@@ -4,31 +4,31 @@
   <h2>{{ variant | uppercase }}</h2>
   @for (size of sizes; track $index) {
   <h3>{{ size }}</h3>
-  <div class="checkbox-group">
-    <ids-checkbox
-      [label]="label"
-      [size]="size"
-      [variant]="variant"
-    >
-      <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
-    </ids-checkbox>
-    <ids-checkbox
-      [label]="label"
-      [size]="size"
-      [variant]="variant"
-      [indeterminate]="true"
-    >
-      <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
-    </ids-checkbox>
-    <ids-checkbox
-      [label]="label"
-      [size]="size"
-      [variant]="variant"
-      [checked]="true"
-    >
-      <ids-hint-message>És még talán ide is</ids-hint-message>
-    </ids-checkbox>
-  </div>
+  <ul class="checkbox-group">
+    <li><ids-checkbox
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+      >
+        <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+      </ids-checkbox></li>
+    <li><ids-checkbox
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+        [indeterminate]="true"
+      >
+        <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+      </ids-checkbox></li>
+    <li><ids-checkbox
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+        [checked]="true"
+      >
+        <ids-hint-message>És még talán ide is</ids-hint-message>
+      </ids-checkbox></li>
+  </ul>
   }
 </section>
 }
@@ -39,34 +39,34 @@
   <h2>{{ variant | uppercase }}</h2>
   @for (size of sizes; track $index) {
   <h3>{{ size }}</h3>
-  <div class="checkbox-group">
-    <ids-checkbox
-      [label]="label"
-      [size]="size"
-      [variant]="variant"
-      [disabled]="true"
-    >
-      <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
-    </ids-checkbox>
-    <ids-checkbox
-      [label]="label"
-      [size]="size"
-      [variant]="variant"
-      [disabled]="true"
-      [indeterminate]="true"
-    >
-      <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
-    </ids-checkbox>
-    <ids-checkbox
-      [label]="label"
-      [size]="size"
-      [variant]="variant"
-      [disabled]="true"
-      [checked]="true"
-    >
-      <ids-hint-message>És még talán ide is</ids-hint-message>
-    </ids-checkbox>
-  </div>
+  <ul class="checkbox-group">
+    <li><ids-checkbox
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+        [disabled]="true"
+      >
+        <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+      </ids-checkbox></li>
+    <li><ids-checkbox
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+        [disabled]="true"
+        [indeterminate]="true"
+      >
+        <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+      </ids-checkbox></li>
+    <li><ids-checkbox
+        [label]="label"
+        [size]="size"
+        [variant]="variant"
+        [disabled]="true"
+        [checked]="true"
+      >
+        <ids-hint-message>És még talán ide is</ids-hint-message>
+      </ids-checkbox></li>
+  </ul>
   }
 </section>
 }
@@ -81,48 +81,48 @@
     <h2>{{ variant | uppercase }}</h2>
     @for (size of sizes; track $index) {
     <h3>{{ size }}</h3>
-    <div
+    <ul
       class="checkbox-group"
       [formGroupName]="size"
     >
-      <ids-checkbox
-        formControlName="unselected"
-        [label]="label"
-        [size]="size"
-        [variant]="variant"
-      >
-        <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
-        <ids-error-message>
-          <span>A mező értéke nem felel meg az elvártnak</span>
-          <span idsMessageSuffix>10/56</span>
-        </ids-error-message>
-      </ids-checkbox>
-      <ids-checkbox
-        formControlName="indeterminate"
-        [label]="label"
-        [size]="size"
-        [variant]="variant"
-        [indeterminate]="true"
-      >
-        <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
-        <ids-error-message>
-          <span>A mező értéke nem felel meg az elvártnak</span>
-          <span idsMessageSuffix>11/56</span>
-        </ids-error-message>
-      </ids-checkbox>
-      <ids-checkbox
-        formControlName="selected"
-        [label]="label"
-        [size]="size"
-        [variant]="variant"
-      >
-        <ids-hint-message>És még talán ide is</ids-hint-message>
-        <ids-error-message>
-          <span>A mező értéke nem felel meg az elvártnak</span>
-          <span idsMessageSuffix>12/56</span>
-        </ids-error-message>
-      </ids-checkbox>
-    </div>
+      <li><ids-checkbox
+          formControlName="unselected"
+          [label]="label"
+          [size]="size"
+          [variant]="variant"
+        >
+          <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+          <ids-error-message>
+            <span>A mező értéke nem felel meg az elvártnak</span>
+            <span idsMessageSuffix>10/56</span>
+          </ids-error-message>
+        </ids-checkbox></li>
+      <li><ids-checkbox
+          formControlName="indeterminate"
+          [label]="label"
+          [size]="size"
+          [variant]="variant"
+          [indeterminate]="true"
+        >
+          <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+          <ids-error-message>
+            <span>A mező értéke nem felel meg az elvártnak</span>
+            <span idsMessageSuffix>11/56</span>
+          </ids-error-message>
+        </ids-checkbox></li>
+      <li><ids-checkbox
+          formControlName="selected"
+          [label]="label"
+          [size]="size"
+          [variant]="variant"
+        >
+          <ids-hint-message>És még talán ide is</ids-hint-message>
+          <ids-error-message>
+            <span>A mező értéke nem felel meg az elvártnak</span>
+            <span idsMessageSuffix>12/56</span>
+          </ids-error-message>
+        </ids-checkbox></li>
+    </ul>
     }
   </section>
   }

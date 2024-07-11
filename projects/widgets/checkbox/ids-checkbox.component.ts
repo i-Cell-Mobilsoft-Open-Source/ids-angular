@@ -38,7 +38,6 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
 
   public id = input<string>(this._uniqueId);
   public inputId = computed(() => this.id() || this._uniqueId);
-  public label = input<string>();
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });

@@ -6,26 +6,26 @@
   <h3>{{ size }}</h3>
   <ul class="checkbox-group">
     <li><ids-checkbox
-        [label]="label"
         [size]="size"
         [variant]="variant"
       >
+        {{ label }}
         <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
       </ids-checkbox></li>
     <li><ids-checkbox
-        [label]="label"
         [size]="size"
         [variant]="variant"
         [indeterminate]="true"
       >
+        {{ label }}
         <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
       </ids-checkbox></li>
     <li><ids-checkbox
-        [label]="label"
         [size]="size"
         [variant]="variant"
         [checked]="true"
       >
+        {{ label }}
         <ids-hint-message>És még talán ide is</ids-hint-message>
       </ids-checkbox></li>
   </ul>
@@ -41,29 +41,29 @@
   <h3>{{ size }}</h3>
   <ul class="checkbox-group">
     <li><ids-checkbox
-        [label]="label"
         [size]="size"
         [variant]="variant"
         [disabled]="true"
       >
+        {{ label }}
         <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
       </ids-checkbox></li>
     <li><ids-checkbox
-        [label]="label"
         [size]="size"
         [variant]="variant"
         [disabled]="true"
         [indeterminate]="true"
       >
+        {{ label }}
         <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
       </ids-checkbox></li>
     <li><ids-checkbox
-        [label]="label"
         [size]="size"
         [variant]="variant"
         [disabled]="true"
         [checked]="true"
       >
+        {{ label }}
         <ids-hint-message>És még talán ide is</ids-hint-message>
       </ids-checkbox></li>
   </ul>
@@ -87,10 +87,10 @@
     >
       <li><ids-checkbox
           formControlName="unselected"
-          [label]="label"
           [size]="size"
           [variant]="variant"
         >
+          {{ label }}
           <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
           <ids-error-message>
             <span>A mező értéke nem felel meg az elvártnak</span>
@@ -99,11 +99,11 @@
         </ids-checkbox></li>
       <li><ids-checkbox
           formControlName="indeterminate"
-          [label]="label"
           [size]="size"
           [variant]="variant"
           [indeterminate]="true"
         >
+          {{ label }}
           <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
           <ids-error-message>
             <span>A mező értéke nem felel meg az elvártnak</span>
@@ -112,10 +112,10 @@
         </ids-checkbox></li>
       <li><ids-checkbox
           formControlName="selected"
-          [label]="label"
           [size]="size"
           [variant]="variant"
         >
+          {{ label }}
           <ids-hint-message>És még talán ide is</ids-hint-message>
           <ids-error-message>
             <span>A mező értéke nem felel meg az elvártnak</span>

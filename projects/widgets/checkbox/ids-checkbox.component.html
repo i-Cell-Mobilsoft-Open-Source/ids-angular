@@ -63,7 +63,8 @@
     <label
       class="ids-checkbox__label"
       [for]="inputId()"
-    >{{ label() }}
+    >
+      <ng-content />
       @if (hasRequiredValidator) {
       <span class="ids-form-field__required-marker"></span>
       }

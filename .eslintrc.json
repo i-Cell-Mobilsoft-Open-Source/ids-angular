@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["cypress.config.ts"],
+  "ignorePatterns": [],
   "overrides": [
     {
       "files": ["*.ts"],

@@ -1,4 +1,5 @@
-import { CheckboxVariant, CheckboxVariantType } from './public-api';
+import { IDS_CHECKBOX_DEFAULT_OPTIONS, IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY } from './ids-checkbox-config';
+import { CheckboxVariantType } from './public-api';
 import { CheckBoxChangeEvent } from './types/checkbox-events';
 import { CheckboxState, CheckboxStateType } from './types/checkbox-state';
 
@@ -8,9 +9,11 @@ import { FormElement } from '../forms/types/form-element';
 
 import { AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, Injector, Input, OnChanges, OnInit, Output, QueryList, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation, computed, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { Size, SizeType, coerceBooleanAttribute, coerceNumberAttribute, hostClassGenerator } from '@i-cell/widgets/core';
+import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, hostClassGenerator } from '@i-cell/widgets/core';
 
 let nextUniqueId = 0;
+
+const defaults = IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
 
 @Component({
   selector: 'ids-checkbox',
@@ -33,6 +36,8 @@ let nextUniqueId = 0;
 export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   private readonly _componentClass = 'ids-checkbox';
   private _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+  private _injector = inject(Injector);
+  private _defaultOptions = this._injector.get(IDS_CHECKBOX_DEFAULT_OPTIONS, null, { optional: true });
 
   public checkboxState = signal<CheckboxStateType>(CheckboxState.UNCHECKED);
 
@@ -41,10 +46,10 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
-  public size = input<SizeType | null>(Size.COMFORTABLE);
+  public size = input<SizeType | null>(this._defaultOptions?.size || defaults.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
   public value = input<string>();
-  public variant = input<CheckboxVariantType | null>(CheckboxVariant.SURFACE);
+  public variant = input<CheckboxVariantType | null>(this._defaultOptions?.variant || defaults.variant);
 
   public isDisabled = signal(false);
 
@@ -62,7 +67,6 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   private _onTouched: () => unknown = () => {};
 
   private _changeDetectorRef = inject(ChangeDetectorRef);
-  private _injector = inject(Injector);
   public controlDir: NgControl | null = null;
 
   @Input({ transform: coerceBooleanAttribute }) public checked?: boolean;

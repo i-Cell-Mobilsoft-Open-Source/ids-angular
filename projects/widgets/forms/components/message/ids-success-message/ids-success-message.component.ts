@@ -15,7 +15,7 @@ import { mdiCheck } from '@mdi/js';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsSuccessMessageComponent {
-  private readonly _componentClass = 'ids-hint-message';
+  private readonly _componentClass = 'ids-success-message';
 
   private _hostClasses = computed(() => hostClassGenerator(this._componentClass));
 

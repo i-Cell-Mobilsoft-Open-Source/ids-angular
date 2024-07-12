@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { IdsAvatarComponent } from '@i-cell/widgets/avatar';
+import { IdsAvatarComponent } from '@i-cell/ids-angular/avatar';
 import {
   SurfaceVariant,
   SurfaceVariantType,
   Size,
   SizeType,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'app-avatar-demo',

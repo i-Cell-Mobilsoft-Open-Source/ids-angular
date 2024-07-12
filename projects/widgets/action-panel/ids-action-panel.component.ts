@@ -7,14 +7,14 @@ import {
   contentChildren,
   input,
 } from '@angular/core';
-import { IdsActionItemComponent } from '@i-cell/widgets/action-item';
+import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
 import {
   ActionPanelAppearance,
   ActionPanelAppearanceType,
   AllVariants,
   Size,
   SizeType,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-action-panel,div[idsActionPanel]',

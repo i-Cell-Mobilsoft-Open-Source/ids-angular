@@ -16,7 +16,7 @@ import {
   SizeType,
   SurfaceVariant,
   coerceBooleanAttribute,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'button[idsActionItem],a[idsActionItem]',

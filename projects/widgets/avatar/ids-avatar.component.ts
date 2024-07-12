@@ -10,7 +10,7 @@ import {
   SizeType,
   SurfaceVariant,
   SurfaceVariantType,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'button[idsAvatar]',

@@ -23,8 +23,8 @@
     "lib": ["ES2022", "dom"],
     "types": ["node", "jest", "cypress", "cypress-real-events"],
     "paths": {
-      "@i-cell/widgets/*": ["projects/widgets/*", "projects/widgets"],
-      "@i-cell/widgets": ["dist/widgets/*", "dist/widgets"]
+      "@i-cell/ids-angular/*": ["projects/widgets/*", "projects/widgets"],
+      "@i-cell/ids-angular": ["dist/widgets/*", "dist/widgets"]
     }
   },
   "angularCompilerOptions": {

@@ -5,7 +5,7 @@ const jestConfig: Config = {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   moduleNameMapper: {
-    '@i-cell/widgets/(.*)': '<rootDir>/$1',
+    '@i-cell/ids-angular/(.*)': '<rootDir>/$1',
   },
 };
 

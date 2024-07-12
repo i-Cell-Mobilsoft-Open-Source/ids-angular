@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { IdsAccordionComponent } from '@i-cell/widgets/accordion';
-import { AccordionAppearance, AccordionAppearanceType, Size, SizeType } from '@i-cell/widgets/core';
+import { IdsAccordionComponent } from '@i-cell/ids-angular/accordion';
+import { AccordionAppearance, AccordionAppearanceType, Size, SizeType } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'app-accordion-demo',

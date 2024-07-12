@@ -1,0 +1,10 @@
+@if (avatar()) {
+  <ng-content select="[idsAvatar]" />
+}
+@if (iconLeading()) {
+  <ng-content select="[icon-leading]" />
+}
+<span class="ids-chip__label"><ng-content /></span>
+@if (iconTrailing()) {
+  <ng-content select="[icon-trailing]" />
+}

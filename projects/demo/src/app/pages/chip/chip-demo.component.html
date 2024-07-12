@@ -1,0 +1,138 @@
+<!-- eslint-disable @angular-eslint/template/elements-content -->
+<h1>Normál</h1>
+@for (appearance of appearances; track $index) {
+<h2 [class]="appearance">{{ appearance | uppercase }}</h2>
+@for (variant of variants; track $index) {
+<section [class]="variant">
+  <h3>{{ variant | uppercase }}</h3>
+  @for (size of sizes; track $index) {
+  <h4>{{ size }}</h4>
+  <div class="chip-group">
+    <ids-chip
+      [appearance]="appearance"
+      [variant]="variant"
+      [size]="size"
+    >{{ label }}</ids-chip>
+
+    <ids-chip
+      [appearance]="appearance"
+      [variant]="variant"
+      [size]="size"
+    >
+      <ids-icon
+        icon-leading
+        [icon]="cameraIcon"
+      />
+      {{ label }}
+    </ids-chip>
+
+    <ids-chip
+      [appearance]="appearance"
+      [variant]="variant"
+      [size]="size"
+    >
+      <button
+        idsAvatar
+        type="button"
+      ></button>
+      {{ label }}
+    </ids-chip>
+
+    <ids-chip
+      [appearance]="appearance"
+      [variant]="variant"
+      [size]="size"
+    >
+      <button
+        idsAvatar
+        type="button"
+      ></button>
+      {{ label }}
+      <button
+        type="button"
+        idsIconButton
+        icon-trailing
+      >
+        <ids-icon
+          aria-hidden="true"
+          alt=""
+          [icon]="closeIcon"
+        />
+      </button>
+    </ids-chip>
+  </div>
+  }
+</section>
+}
+}
+
+<h1>Disabled</h1>
+@for (appearance of appearances; track $index) {
+<h2 [class]="appearance">{{ appearance | uppercase }}</h2>
+@for (variant of variants; track $index) {
+<section [class]="variant">
+  <h3>{{ variant | uppercase }}</h3>
+  @for (size of sizes; track $index) {
+  <h4>{{ size }}</h4>
+  <div class="chip-group">
+    <ids-chip
+      [appearance]="appearance"
+      [variant]="variant"
+      [size]="size"
+      [disabled]="true"
+    >{{ label }}</ids-chip>
+
+    <ids-chip
+      [appearance]="appearance"
+      [variant]="variant"
+      [size]="size"
+      [disabled]="true"
+    >
+      <ids-icon
+        icon-leading
+        [icon]="cameraIcon"
+      />
+      {{ label }}
+    </ids-chip>
+
+    <ids-chip
+      [appearance]="appearance"
+      [variant]="variant"
+      [size]="size"
+      [disabled]="true"
+    >
+      <button
+        idsAvatar
+        type="button"
+      ></button>
+      {{ label }}
+    </ids-chip>
+
+    <ids-chip
+      [appearance]="appearance"
+      [variant]="variant"
+      [size]="size"
+      [disabled]="true"
+    >
+      <button
+        idsAvatar
+        type="button"
+      ></button>
+      {{ label }}
+      <button
+        type="button"
+        idsIconButton
+        icon-trailing
+      >
+        <ids-icon
+          aria-hidden="true"
+          alt=""
+          [icon]="closeIcon"
+        />
+      </button>
+    </ids-chip>
+  </div>
+  }
+</section>
+}
+}

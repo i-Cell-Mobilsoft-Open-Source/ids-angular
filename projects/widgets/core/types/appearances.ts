@@ -50,3 +50,10 @@ export const CardAppearance = {
 } as const;
 
 export type CardAppearanceType = (typeof CardAppearance)[keyof typeof CardAppearance];
+
+export const ChipAppearance = {
+  FILLED: 'filled',
+  OUTLINED: 'outlined',
+} as const;
+
+export type ChipAppearanceType = (typeof ChipAppearance)[keyof typeof ChipAppearance];

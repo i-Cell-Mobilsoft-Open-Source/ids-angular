@@ -1,8 +1,10 @@
+import { IDS_CHECKBOX_DEFAULT_OPTIONS, IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY } from './ids-checkbox-config';
+import { CheckBoxChangeEvent } from './types/checkbox-events';
 import { CheckboxState, CheckboxStateType } from './types/checkbox-state';
+import { CheckboxVariantType } from './types/checkbox-variant';
 
-import { AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, Injector, Input, OnChanges, OnInit, Output, QueryList, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation, computed, inject, input, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Injector, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation, computed, contentChildren, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { CheckboxVariantType, IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY, IDS_CHECKBOX_DEFAULT_OPTIONS, CheckBoxChangeEvent } from '@i-cell/widgets/checkbox';
 import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createHostClassList } from '@i-cell/widgets/core';
 import { FormElement, IDS_FORM_ELEMENT, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/widgets/forms';
 
@@ -30,9 +32,9 @@ const defaultOptions = IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
 })
 export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   private readonly _componentClass = 'ids-checkbox';
-  private _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private _injector = inject(Injector);
-  private _defaultOptions = {
+  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+  private readonly _injector = inject(Injector);
+  private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_CHECKBOX_DEFAULT_OPTIONS, null, { optional: true }),
   };
@@ -85,8 +87,8 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
 
   @ViewChild('inputEl', { static: true }) private _inputElement!: ElementRef<HTMLInputElement>;
 
-  @ContentChildren(IdsHintMessageComponent, { descendants: true }) private _hintMessages!: QueryList<IdsHintMessageComponent>;
-  @ContentChildren(IdsErrorMessageComponent, { descendants: true }) private _errorMessages!: QueryList<IdsErrorMessageComponent>;
+  private _hintMessages = contentChildren(IdsHintMessageComponent, { descendants: true });
+  private _errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
@@ -209,10 +211,10 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   }
 
   public get displayedMessages(): 'error' | 'hint' | undefined {
-    if (this._errorMessages.length > 0 && this.controlDir?.errors) {
+    if (this._errorMessages().length > 0 && this.controlDir?.errors) {
       return 'error';
     }
-    if (this._hintMessages.length > 0) {
+    if (this._hintMessages().length > 0) {
       return 'hint';
     }
     return undefined;

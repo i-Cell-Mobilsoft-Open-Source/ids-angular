@@ -14,7 +14,15 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+before(() => {
+  try {
+    cy.task('log', 'Reading tokens from JSON');
+    cy.readFile('node_modules/@i-cell/ids-tokens/test/testData.json', 'utf-8').then((parsedContent: object) => {
+      globalThis.tokens = parsedContent;
+    });
+  } catch (error) {
+    cy.task('log', '[ERROR] Could not read tokens:', error);
+  }
+});

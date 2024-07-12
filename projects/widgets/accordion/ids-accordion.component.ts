@@ -14,10 +14,10 @@ import {
   AccordionAppearanceType,
   Size,
   SizeType,
-  addClassPrefix,
   coerceBooleanAttribute,
-} from '@i-cell/widgets/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
+  createHostClassList,
+} from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 
 @Component({
@@ -47,14 +47,11 @@ export class IdsAccordionComponent {
   private _details: HTMLDetailsElement = inject(ElementRef).nativeElement;
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      addClassPrefix(this._componentClass, this.size()),
-      addClassPrefix(this._componentClass, this.appearance()),
-      ...[this.disabled() ? [addClassPrefix(this._componentClass, 'disabled')] : []],
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.size(),
+      this.appearance(),
+      this.disabled() ? 'disabled' : null,
+    ]),
   );
 
   @HostBinding('class') get classes(): string {

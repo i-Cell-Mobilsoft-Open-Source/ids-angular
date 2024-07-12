@@ -301,7 +301,7 @@
         "@angular-eslint/template/attributes-order": "error",
         "@angular-eslint/template/prefer-self-closing-tags": "error",
         "@stylistic/max-len": [
-          "error",
+          "warn",
           {
             "code": 140,
             "ignoreComments": true

@@ -15,9 +15,9 @@ import {
   Size,
   SizeType,
   SurfaceVariant,
-  addClassPrefix,
   coerceBooleanAttribute,
-} from '@i-cell/widgets/core';
+  createHostClassList,
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'button[idsActionItem],a[idsActionItem]',
@@ -48,15 +48,12 @@ export class IdsActionItemComponent {
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      addClassPrefix(this._componentClass, this.appearance()),
-      addClassPrefix(this._componentClass, this.size()),
-      addClassPrefix(this._componentClass, this.variant()),
-      ...[this.active() ? [addClassPrefix(this._componentClass, 'active')] : []],
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.appearance(),
+      this.size(),
+      this.variant(),
+      this.active() ? 'active' : null,
+    ]),
   );
 
   @HostBinding('type') get buttonType(): string | null {

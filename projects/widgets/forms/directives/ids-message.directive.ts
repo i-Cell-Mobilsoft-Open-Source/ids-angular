@@ -1,6 +1,6 @@
 import { Directive, HostBinding, Injector, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, computed, inject, input, signal } from '@angular/core';
-import { AllVariants, AllVariantsType, createHostClassList, Size, SizeType } from '@i-cell/widgets/core';
-import { FormElement, IDS_FORM_ELEMENT } from '@i-cell/widgets/forms';
+import { AllVariants, AllVariantsType, createHostClassList, Size, SizeType } from '@i-cell/ids-angular/core';
+import { FormElement, IDS_FORM_ELEMENT } from '@i-cell/ids-angular/forms';
 
 let nextUniqueId = 0;
 

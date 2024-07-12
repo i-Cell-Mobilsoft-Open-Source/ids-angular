@@ -20,9 +20,9 @@ import {
   OrientationType,
   Size,
   SizeType,
-  addClassPrefix,
   coerceBooleanAttribute,
-} from '@i-cell/widgets/core';
+  createHostClassList,
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector:
@@ -54,21 +54,14 @@ export class IdsCardComponent implements OnInit {
   private _hasClickHandler = signal(false);
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      addClassPrefix(this._componentClass, this.appearance()),
-      addClassPrefix(this._componentClass, this.size()),
-      addClassPrefix(this._componentClass, this.variant()),
-      addClassPrefix(this._componentClass, this.orientation()),
-      ...[
-        this.disabled() && this._hasClickHandler()
-          ? [addClassPrefix(this._componentClass, 'disabled')]
-          : [],
-      ],
-      ...[this._hasClickHandler() ? [addClassPrefix(this._componentClass, 'clickable')] : []],
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.appearance(),
+      this.size(),
+      this.variant(),
+      this.orientation(),
+      this.disabled() && this._hasClickHandler() ? 'disabled' : null,
+      this._hasClickHandler() ? 'clickable' : null,
+    ]),
   );
 
   @HostBinding('class') get classes(): string {

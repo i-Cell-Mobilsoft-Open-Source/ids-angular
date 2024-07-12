@@ -8,12 +8,12 @@ import {
 import {
   AllVariants,
   AllVariantsType,
+  createHostClassList,
   Orientation,
   OrientationType,
   Size,
   SizeType,
-  addClassPrefix,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-divider,div[idsDivider]',
@@ -32,14 +32,11 @@ export class IdsDividerComponent {
   public height = input<string | null>('100%');
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      addClassPrefix(this._componentClass, this.type()),
-      addClassPrefix(this._componentClass, this.size()),
-      addClassPrefix(this._componentClass, this.variant()),
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.type(),
+      this.size(),
+      this.variant(),
+    ]),
   );
 
   @HostBinding('class') get classes(): string {

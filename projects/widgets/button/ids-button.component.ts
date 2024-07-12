@@ -13,9 +13,9 @@ import {
   ButtonAppearanceType,
   Size,
   SizeType,
-  addClassPrefix,
   coerceBooleanAttribute,
-} from '@i-cell/widgets/core';
+  createHostClassList,
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'button[idsButton]',
@@ -45,14 +45,11 @@ export class IdsButtonComponent {
 
   /** @ignore */
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      addClassPrefix(this._componentClass, this.appearance()),
-      addClassPrefix(this._componentClass, this.size()),
-      addClassPrefix(this._componentClass, this.variant()),
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.appearance(),
+      this.size(),
+      this.variant(),
+    ]),
   );
 
   /** @ignore */

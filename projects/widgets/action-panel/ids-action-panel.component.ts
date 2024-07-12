@@ -7,15 +7,15 @@ import {
   contentChildren,
   input,
 } from '@angular/core';
-import { IdsActionItemComponent } from '@i-cell/widgets/action-item';
+import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
 import {
   ActionPanelAppearance,
   ActionPanelAppearanceType,
   AllVariants,
+  createHostClassList,
   Size,
   SizeType,
-  addClassPrefix,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-action-panel,div[idsActionPanel]',
@@ -40,15 +40,11 @@ export class IdsActionPanelComponent {
 
   public actionItems = contentChildren(IdsActionItemComponent);
 
-  private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      addClassPrefix(this._componentClass, this.appearance()),
-      addClassPrefix(this._componentClass, this.size()),
-      addClassPrefix(this._componentClass, this.variant()),
-    ]
-      .filter(Boolean)
-      .join(' '),
+  private _hostClasses = computed(() => createHostClassList(this._componentClass, [
+    this.appearance(),
+    this.size(),
+    this.variant(),
+  ]),
   );
 
   @HostBinding('class') get classes(): string {

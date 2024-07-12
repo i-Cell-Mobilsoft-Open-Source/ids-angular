@@ -6,12 +6,12 @@ import {
   input,
 } from '@angular/core';
 import {
+  createHostClassList,
   Size,
   SizeType,
   SurfaceVariant,
   SurfaceVariantType,
-  addClassPrefix,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'button[idsAvatar]',
@@ -29,13 +29,10 @@ export class IdsAvatarComponent {
   public variant = input<SurfaceVariantType | null>(SurfaceVariant.PRIMARY);
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      addClassPrefix(this._componentClass, this.size()),
-      addClassPrefix(this._componentClass, this.variant()),
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.size(),
+      this.variant(),
+    ]),
   );
 
   @HostBinding('type') private _type = 'button';

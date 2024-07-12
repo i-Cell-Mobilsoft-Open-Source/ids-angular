@@ -1,6 +1,6 @@
 import { InputSignal, Signal } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { SizeType } from '@i-cell/widgets/core';
+import { SizeType } from '@i-cell/ids-angular/core';
 
 export interface FormElement<VariantT> {
   id: InputSignal<string>

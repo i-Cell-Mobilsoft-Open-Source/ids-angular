@@ -11,12 +11,12 @@ import {
 import {
   AllVariants,
   AllVariantsType,
+  createHostClassList,
   Size,
   SizeType,
   TagAppearance,
   TagAppearanceType,
-  addClassPrefix,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-tag,button[idsTag]',
@@ -38,14 +38,11 @@ export class IdsTagComponent {
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      addClassPrefix(this._componentClass, this.appearance()),
-      addClassPrefix(this._componentClass, this.size()),
-      addClassPrefix(this._componentClass, this.variant()),
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.appearance(),
+      this.size(),
+      this.variant(),
+    ]),
   );
 
   @HostBinding('type') get buttonType(): string | null {

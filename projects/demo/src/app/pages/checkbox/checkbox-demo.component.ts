@@ -1,10 +1,10 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CheckboxVariant, CheckboxVariantType, IdsCheckboxComponent } from '@i-cell/widgets/checkbox';
-import { Size, SizeType } from '@i-cell/widgets/core';
-import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/widgets/forms';
-import { IdsMessageSuffixDirective } from '@i-cell/widgets/forms/directives/ids-message-suffix.directive';
+import { CheckboxVariant, CheckboxVariantType, IdsCheckboxComponent } from '@i-cell/ids-angular/checkbox';
+import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms/directives/ids-message-suffix.directive';
 
 @Component({
   selector: 'app-checkbox-demo',

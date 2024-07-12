@@ -1,6 +1,6 @@
 import { Component, ContentChildren, QueryList, ViewEncapsulation } from '@angular/core';
-import { IdsMessageDirective, IdsMessagePrefixDirective, IdsMessageSuffixDirective } from '@i-cell/widgets/forms';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
+import { IdsMessageDirective, IdsMessagePrefixDirective, IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-hint-message',

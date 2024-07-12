@@ -5,8 +5,8 @@ import { CheckboxVariantType } from './types/checkbox-variant';
 
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Injector, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation, computed, contentChildren, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createHostClassList } from '@i-cell/widgets/core';
-import { FormElement, IDS_FORM_ELEMENT, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/widgets/forms';
+import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createHostClassList } from '@i-cell/ids-angular/core';
+import { FormElement, IDS_FORM_ELEMENT, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 
 let nextUniqueId = 0;
 

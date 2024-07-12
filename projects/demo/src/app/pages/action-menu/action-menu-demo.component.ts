@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { IdsActionItemComponent } from '@i-cell/widgets/action-item';
-import { IdsActionMenuTriggerDirective } from '@i-cell/widgets/action-menu';
-import { IdsActionPanelComponent } from '@i-cell/widgets/action-panel';
-import { IdsButtonComponent } from '@i-cell/widgets/button';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
+import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
+import { IdsActionMenuTriggerDirective } from '@i-cell/ids-angular/action-menu';
+import { IdsActionPanelComponent } from '@i-cell/ids-angular/action-panel';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDown, mdiChevronRight, mdiChevronUp, mdiMagnify } from '@mdi/js';
 
 @Component({
@@ -21,6 +21,7 @@ import { mdiChevronDown, mdiChevronRight, mdiChevronUp, mdiMagnify } from '@mdi/
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionMenuDemoComponent {
+  // eslint-disable-next-line no-magic-numbers
   public items = Array(8);
   public mdiSearch = mdiMagnify;
   public mdiChevronDown = mdiChevronDown;

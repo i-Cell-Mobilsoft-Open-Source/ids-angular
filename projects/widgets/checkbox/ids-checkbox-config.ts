@@ -1,7 +1,7 @@
 import { CheckboxVariant, CheckboxVariantType } from './types/checkbox-variant';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/widgets/core';
+import { Size, SizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsCheckboxDefaultOptions {
   size?: SizeType

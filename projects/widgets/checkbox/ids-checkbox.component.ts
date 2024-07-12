@@ -1,19 +1,14 @@
-import { IDS_CHECKBOX_DEFAULT_OPTIONS, IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY } from './ids-checkbox-config';
-import { CheckboxVariantType } from './public-api';
-import { CheckBoxChangeEvent } from './types/checkbox-events';
 import { CheckboxState, CheckboxStateType } from './types/checkbox-state';
-
-import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '../forms';
-import { IDS_FORM_ELEMENT } from '../forms/tokens/form';
-import { FormElement } from '../forms/types/form-element';
 
 import { AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, Injector, Input, OnChanges, OnInit, Output, QueryList, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation, computed, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, hostClassGenerator } from '@i-cell/widgets/core';
+import { CheckboxVariantType, IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY, IDS_CHECKBOX_DEFAULT_OPTIONS, CheckBoxChangeEvent } from '@i-cell/widgets/checkbox';
+import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createHostClassList } from '@i-cell/widgets/core';
+import { FormElement, IDS_FORM_ELEMENT, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/widgets/forms';
 
 let nextUniqueId = 0;
 
-const defaults = IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
 
 @Component({
   selector: 'ids-checkbox',
@@ -37,26 +32,29 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   private readonly _componentClass = 'ids-checkbox';
   private _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   private _injector = inject(Injector);
-  private _defaultOptions = this._injector.get(IDS_CHECKBOX_DEFAULT_OPTIONS, null, { optional: true });
+  private _defaultOptions = {
+    ...defaultOptions,
+    ...this._injector.get(IDS_CHECKBOX_DEFAULT_OPTIONS, null, { optional: true }),
+  };
 
-  public checkboxState = signal<CheckboxStateType>(CheckboxState.UNCHECKED);
+  private _checkboxState = signal<CheckboxStateType>(CheckboxState.UNCHECKED);
 
   public id = input<string>(this._uniqueId);
   public inputId = computed(() => this.id() || this._uniqueId);
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
-  public size = input<SizeType | null>(this._defaultOptions?.size || defaults.size);
+  public size = input<SizeType | null>(this._defaultOptions.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
   public value = input<string>();
-  public variant = input<CheckboxVariantType | null>(this._defaultOptions?.variant || defaults.variant);
+  public variant = input<CheckboxVariantType | null>(this._defaultOptions.variant);
 
   public isDisabled = signal(false);
 
-  public isChecked = computed(() => this.checkboxState() === CheckboxState.CHECKED);
-  public isIndeterminate = computed(() => this.checkboxState() === CheckboxState.INDETERMINATE);
+  public isChecked = computed(() => this._checkboxState() === CheckboxState.CHECKED);
+  public isIndeterminate = computed(() => this._checkboxState() === CheckboxState.INDETERMINATE);
   public isFocusable = computed(() => !this.isDisabled() && !this.readonly());
-  private _hostClasses = computed(() => hostClassGenerator(this._componentClass, [
+  private _hostClasses = computed(() => createHostClassList(this._componentClass, [
     this.size(),
     this.variant(),
     this.isDisabled() ? 'disabled' : null,
@@ -101,11 +99,11 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
       const currentChecked = checkedChange?.currentValue;
       const currentIndeterminate = indeterminateChange?.currentValue;
       if (currentIndeterminate === true) {
-        this.checkboxState.set(CheckboxState.INDETERMINATE);
+        this._checkboxState.set(CheckboxState.INDETERMINATE);
       } else if (currentChecked === true) {
-        this.checkboxState.set(CheckboxState.CHECKED);
+        this._checkboxState.set(CheckboxState.CHECKED);
       } else {
-        this.checkboxState.set(CheckboxState.UNCHECKED);
+        this._checkboxState.set(CheckboxState.UNCHECKED);
       }
     }
   }
@@ -126,9 +124,9 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
 
   public writeValue(value: boolean): void {
     if (this.isIndeterminate()) {
-      this.checkboxState.set(CheckboxState.INDETERMINATE);
+      this._checkboxState.set(CheckboxState.INDETERMINATE);
     } else {
-      this.checkboxState.set(value ? CheckboxState.CHECKED : CheckboxState.UNCHECKED);
+      this._checkboxState.set(value ? CheckboxState.CHECKED : CheckboxState.UNCHECKED);
     }
   }
 
@@ -161,9 +159,9 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
 
   public toggle(): void {
     if (this.isIndeterminate()) {
-      this.checkboxState.set(CheckboxState.CHECKED);
+      this._checkboxState.set(CheckboxState.CHECKED);
     } else {
-      this.checkboxState.set(this.checkboxState() === CheckboxState.CHECKED ? CheckboxState.UNCHECKED : CheckboxState.CHECKED);
+      this._checkboxState.set(this._checkboxState() === CheckboxState.CHECKED ? CheckboxState.UNCHECKED : CheckboxState.CHECKED);
     }
     this._onChange(this.isChecked());
   }
@@ -171,10 +169,10 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   private _handleInputClick(): void {
     if (!this.isDisabled()) {
       if (this.isIndeterminate()) {
-        this.checkboxState.set(CheckboxState.CHECKED);
+        this._checkboxState.set(CheckboxState.CHECKED);
         this.indeterminateChange.emit(this.isIndeterminate());
       } else {
-        this.checkboxState.set(this.checkboxState() === CheckboxState.CHECKED ? CheckboxState.UNCHECKED : CheckboxState.CHECKED);
+        this._checkboxState.set(this._checkboxState() === CheckboxState.CHECKED ? CheckboxState.UNCHECKED : CheckboxState.CHECKED);
       }
 
       this._emitChangeEvent();

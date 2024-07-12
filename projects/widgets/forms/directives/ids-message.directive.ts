@@ -1,10 +1,6 @@
-import { IDS_FORM_ELEMENT } from '../tokens/form';
-import { FormElement } from '../types/form-element';
-
 import { Directive, HostBinding, Injector, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, computed, inject, input, signal } from '@angular/core';
-import { hostClassGenerator } from '@i-cell/widgets/core';
-import { Size, SizeType } from '@i-cell/widgets/core/types/size.type';
-import { AllVariants, AllVariantsType } from '@i-cell/widgets/core/types/variants';
+import { AllVariants, AllVariantsType, createHostClassList, Size, SizeType } from '@i-cell/widgets/core';
+import { FormElement, IDS_FORM_ELEMENT } from '@i-cell/widgets/forms';
 
 let nextUniqueId = 0;
 
@@ -30,7 +26,7 @@ export class IdsMessageDirective implements OnInit, OnChanges {
   private _size = signal<SizeType | null>(Size.COMFORTABLE);
   private _variant = signal<AllVariantsType | null>(AllVariants.SURFACE);
   private _disabled = signal<boolean>(false);
-  private _hostClasses = computed(() => hostClassGenerator(this._componentClass, [
+  private _hostClasses = computed(() => createHostClassList(this._componentClass, [
     this._size(),
     this._variant(),
     this._disabled() ? 'disabled' : null,

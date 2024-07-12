@@ -1,8 +1,6 @@
 import { Component, ContentChildren, HostBinding, QueryList, ViewEncapsulation, computed } from '@angular/core';
-import { hostClassGenerator } from '@i-cell/widgets/core';
-import { IdsMessageDirective } from '@i-cell/widgets/forms';
-import { IdsMessagePrefixDirective } from '@i-cell/widgets/forms/directives/ids-message-prefix.directive';
-import { IdsMessageSuffixDirective } from '@i-cell/widgets/forms/directives/ids-message-suffix.directive';
+import { createHostClassList } from '@i-cell/widgets/core';
+import { IdsMessageDirective, IdsMessagePrefixDirective, IdsMessageSuffixDirective } from '@i-cell/widgets/forms';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
 import { mdiCheck } from '@mdi/js';
 
@@ -17,7 +15,7 @@ import { mdiCheck } from '@mdi/js';
 export class IdsSuccessMessageComponent {
   private readonly _componentClass = 'ids-success-message';
 
-  private _hostClasses = computed(() => hostClassGenerator(this._componentClass));
+  private _hostClasses = computed(() => createHostClassList(this._componentClass));
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();

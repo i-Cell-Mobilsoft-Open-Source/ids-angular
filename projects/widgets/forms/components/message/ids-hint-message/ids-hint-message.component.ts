@@ -1,7 +1,5 @@
 import { Component, ContentChildren, QueryList, ViewEncapsulation } from '@angular/core';
-import { IdsMessageDirective } from '@i-cell/widgets/forms';
-import { IdsMessagePrefixDirective } from '@i-cell/widgets/forms/directives/ids-message-prefix.directive';
-import { IdsMessageSuffixDirective } from '@i-cell/widgets/forms/directives/ids-message-suffix.directive';
+import { IdsMessageDirective, IdsMessagePrefixDirective, IdsMessageSuffixDirective } from '@i-cell/widgets/forms';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
 
 @Component({

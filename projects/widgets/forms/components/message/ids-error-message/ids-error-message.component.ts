@@ -1,11 +1,7 @@
 import { Component, ContentChildren, HostBinding, Injector, OnDestroy, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { hostClassGenerator } from '@i-cell/widgets/core';
-import { IdsMessageDirective } from '@i-cell/widgets/forms';
-import { IdsMessagePrefixDirective } from '@i-cell/widgets/forms/directives/ids-message-prefix.directive';
-import { IdsMessageSuffixDirective } from '@i-cell/widgets/forms/directives/ids-message-suffix.directive';
-import { IDS_FORM_ELEMENT } from '@i-cell/widgets/forms/tokens/form';
-import { FormElement } from '@i-cell/widgets/forms/types/form-element';
+import { createHostClassList } from '@i-cell/widgets/core';
+import { FormElement, IDS_FORM_ELEMENT, IdsMessageDirective, IdsMessagePrefixDirective, IdsMessageSuffixDirective } from '@i-cell/widgets/forms';
 import { IdsIconComponent } from '@i-cell/widgets/icon';
 import { mdiInformationOutline } from '@mdi/js';
 import { Subscription, startWith } from 'rxjs';
@@ -25,7 +21,7 @@ export class IdsErrorMessageComponent implements OnInit, OnDestroy {
   private _injector = inject(Injector);
 
   private _errors = signal<ValidationErrors | null>(null);
-  private _hostClasses = computed(() => hostClassGenerator(this._componentClass));
+  private _hostClasses = computed(() => createHostClassList(this._componentClass));
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();

@@ -1,7 +1,12 @@
+import { IdsMessagePrefixDirective } from './../../../directives/ids-message-prefix.directive';
+import { IdsMessageSuffixDirective } from './../../../directives/ids-message-suffix.directive';
+import { IdsMessageDirective } from './../../../directives/ids-message.directive';
+import { IDS_FORM_ELEMENT } from './../../../tokens/form';
+import { FormElement } from './../../../types/form-element';
+
 import { Component, ContentChildren, HostBinding, Injector, OnDestroy, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { createHostClassList } from '@i-cell/ids-angular/core';
-import { FormElement, IDS_FORM_ELEMENT, IdsMessageDirective, IdsMessagePrefixDirective, IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiInformationOutline } from '@mdi/js';
 import { Subscription, startWith } from 'rxjs';

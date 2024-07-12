@@ -17,7 +17,6 @@ const defaults = IDS_CHIP_DEFAULT_OPTIONS_FACTORY();
   standalone: true,
   imports: [],
   templateUrl: './ids-chip.component.html',
-  styleUrl: './ids-chip.component.scss',
   host: {
     'role': 'button',
   },

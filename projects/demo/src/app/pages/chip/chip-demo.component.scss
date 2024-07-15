@@ -1,5 +1,7 @@
 :host {
   padding: 32px;
+  box-sizing: border-box;
+  display: block;
 }
 
 h1 {
@@ -51,7 +53,7 @@ section {
 }
 
 .chip-group {
-  &>*:not(:last-child) {
+  & > *:not(:last-child) {
     margin-right: 8px;
   }
 }

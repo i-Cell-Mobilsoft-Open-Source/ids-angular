@@ -1,11 +1,19 @@
 ids-nav {
-  @apply flex w-52 flex-col flex-shrink-0;
+  display: flex;
+  width: 13rem;
+  flex-direction: column;
+  flex-shrink: 0;
   background-color: var(--ids-smc-colors-surface-lighter-10);
   padding: 0.625rem;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .nav-label {
-  @apply p-[.625rem];
+  padding: 10px;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.00625rem;

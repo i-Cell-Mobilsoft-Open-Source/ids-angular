@@ -1,40 +1,79 @@
 <h2>Buttons</h2>
-@for (appearance of appearances; track $index) {
-  @for (size of sizes; track $index) {
-    @for (variant of variants; track $index) {
-      <button
-        type="button"
-        idsButton
-        [id]="appearance + '-' + variant + '-' + size + '-button'"
-        [appearance]="appearance"
-        [size]="size"
-        [variant]="variant"
-        (click)="onClick(appearance + '-' + variant + '-' + size)"
-      >
-        <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
-        {{ appearance + " " + variant + " " + size }} button
-        <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
-      </button>
-    }
+<div class="appearance-container">
+  @for (appearance of appearances; track $index) {
+    <div class="appearance-item">
+      <h3>{{ appearance }}</h3>
+      @for (variant of variants; track $index) {
+        <div class="variant" [class]="variant">
+          <h4>{{ variant }}</h4>
+          @for (size of sizes; track $index) {
+            <button
+              type="button"
+              idsButton
+              [id]="appearance + '-' + variant + '-' + size + '-button'"
+              [appearance]="appearance"
+              [size]="size"
+              [variant]="variant"
+              (click)="onClick(appearance + '-' + variant + '-' + size)"
+            >
+              <ids-icon
+                icon-leading
+                aria-hidden="true"
+                alt=""
+                [icon]="mdiSearch"
+              />
+              {{ appearance + " " + variant + " " + size }} button
+              <ids-icon
+                icon-trailing
+                aria-hidden="true"
+                alt=""
+                [icon]="mdiDone"
+              />
+            </button>
+          }
+        </div>
+      }
+    </div>
   }
-}
+</div>
+
 <h2>Disabled Buttons</h2>
-@for (appearance of appearances; track $index) {
-  @for (size of sizes; track $index) {
-    @for (variant of baseVariants; track $index) {
-      <button
-        type="button"
-        idsButton
-        disabled
-        [id]="appearance + '-' + variant + '-' + size + '-disabled-button'"
-        [appearance]="appearance"
-        [size]="size"
-        [variant]="variant"
-      >
-        <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
-        {{ appearance + " " + variant + " " + size }} button
-        <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
-      </button>
-    }
+<div class="appearance-container">
+  @for (appearance of appearances; track $index) {
+    <div class="appearance-item">
+      <h3>{{ appearance }}</h3>
+      @for (variant of baseVariants; track $index) {
+        <div class="variant" [class]="variant">
+          <h4>{{ variant }}</h4>
+          @for (size of sizes; track $index) {
+            <button
+              type="button"
+              idsButton
+              disabled
+              [id]="
+                appearance + '-' + variant + '-' + size + '-disabled-button'
+              "
+              [appearance]="appearance"
+              [size]="size"
+              [variant]="variant"
+            >
+              <ids-icon
+                icon-leading
+                aria-hidden="true"
+                alt=""
+                [icon]="mdiSearch"
+              />
+              {{ appearance + " " + variant + " " + size }} button
+              <ids-icon
+                icon-trailing
+                aria-hidden="true"
+                alt=""
+                [icon]="mdiDone"
+              />
+            </button>
+          }
+        </div>
+      }
+    </div>
   }
-}
+</div>

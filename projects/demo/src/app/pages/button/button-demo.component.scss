@@ -12,3 +12,7 @@ p {
   font-weight: 600;
   margin-bottom: 10px;
 }
+
+h2:not(:first-of-type) {
+  padding-top: 0.5rem;
+}

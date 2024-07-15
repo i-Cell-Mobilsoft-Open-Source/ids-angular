@@ -2,39 +2,39 @@
 @for (appearance of appearances; track $index) {
   @for (size of sizes; track $index) {
     @for (variant of variants; track $index) {
-<button
-  type="button"
-  idsButton
-  id="{{ appearance + '-' + variant + '-' + size }}-button"
-  [appearance]="appearance"
-  [size]="size"
-  [variant]="variant"
-  (click)="onClick(appearance + '-' + variant + '-' + size)"
->
-  <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
-  {{ appearance + " " + variant + " " + size }} button
-  <ids-icon icon-trailing [icon]="mdiDone" aria-hidden="true" alt="" />
-</button>
+      <button
+        type="button"
+        idsButton
+        [id]="appearance + '-' + variant + '-' + size + '-button'"
+        [appearance]="appearance"
+        [size]="size"
+        [variant]="variant"
+        (click)="onClick(appearance + '-' + variant + '-' + size)"
+      >
+        <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+        {{ appearance + " " + variant + " " + size }} button
+        <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+      </button>
     }
   }
 }
-<h2 class="pt-2">Disabled Buttons</h2>
+<h2>Disabled Buttons</h2>
 @for (appearance of appearances; track $index) {
   @for (size of sizes; track $index) {
     @for (variant of baseVariants; track $index) {
-<button
-  type="button"
-  idsButton
-  id="{{ appearance + '-' + variant + '-' + size }}-disabled-button"
-  [appearance]="appearance"
-  [size]="size"
-  [variant]="variant"
-  disabled
->
-  <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
-  {{ appearance + " " + variant + " " + size }} button
-  <ids-icon icon-trailing [icon]="mdiDone" aria-hidden="true" alt="" />
-</button>
+      <button
+        type="button"
+        idsButton
+        disabled
+        [id]="appearance + '-' + variant + '-' + size + '-disabled-button'"
+        [appearance]="appearance"
+        [size]="size"
+        [variant]="variant"
+      >
+        <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+        {{ appearance + " " + variant + " " + size }} button
+        <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+      </button>
     }
   }
 }

@@ -6,7 +6,7 @@ import { IdsIconComponent } from '../icon';
 import { IdsIconButtonComponent } from '../icon-button';
 
 import { Component, computed, contentChildren, effect, ElementRef, HostBinding, HostListener, inject, Injector, input, isDevMode, signal, ViewEncapsulation } from '@angular/core';
-import { ChipAppearanceType, coerceNumberAttribute, SizeType, SurfaceVariantType } from '@i-cell/widgets/core';
+import { ChipAppearanceType, coerceNumberAttribute, SizeType, SurfaceVariantType } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 

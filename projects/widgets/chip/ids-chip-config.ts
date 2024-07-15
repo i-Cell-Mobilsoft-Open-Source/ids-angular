@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ChipAppearance, ChipAppearanceType, Size, SizeType, SurfaceVariant, SurfaceVariantType } from '@i-cell/widgets/core';
+import { ChipAppearance, ChipAppearanceType, Size, SizeType, SurfaceVariant, SurfaceVariantType } from '@i-cell/ids-angular/core';
 
 export interface IdsChipDefaultOptions {
   appearance?: ChipAppearanceType

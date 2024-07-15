@@ -20,6 +20,9 @@ ids-nav {
 }
 
 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   gap: 0.5rem;
 }
 
@@ -38,6 +41,9 @@ li > a,
   align-self: stretch;
   flex-grow: 0;
   user-select: none;
+  text-decoration: none;
+  color: black;
+
   &.active,
   &:has(.active) {
     color: var(--ids-smc-colors-primary-darker-20);
@@ -49,6 +55,10 @@ li > a,
 
 .subnav-parent {
   padding: 0.5rem 1rem;
+  & > a {
+    text-decoration: none;
+    color: black;
+  }
   .more {
     display: flex;
   }

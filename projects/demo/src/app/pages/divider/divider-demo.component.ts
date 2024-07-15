@@ -4,8 +4,8 @@ import {
   AllVariantsType,
   Size,
   SizeType,
-} from '@i-cell/widgets/core';
-import { IdsDividerComponent } from '@i-cell/widgets/divider';
+} from '@i-cell/ids-angular/core';
+import { IdsDividerComponent } from '@i-cell/ids-angular/divider';
 
 @Component({
   selector: 'app-divider-demo',

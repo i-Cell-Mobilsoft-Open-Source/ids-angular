@@ -12,7 +12,7 @@ import {
   OrientationType,
   Size,
   SizeType,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-divider,div[idsDivider]',

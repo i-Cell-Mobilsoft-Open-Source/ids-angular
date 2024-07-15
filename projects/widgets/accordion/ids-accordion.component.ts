@@ -15,8 +15,8 @@ import {
   Size,
   SizeType,
   coerceBooleanAttribute,
-} from '@i-cell/widgets/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
+} from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 
 @Component({

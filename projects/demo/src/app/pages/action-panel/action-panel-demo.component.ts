@@ -1,14 +1,18 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { IdsActionItemComponent } from '@i-cell/widgets/action-item';
-import { IdsActionPanelComponent } from '@i-cell/widgets/action-panel';
-import { ActionPanelAppearance, ActionPanelAppearanceType, Size, SizeType } from '@i-cell/widgets/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
+import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
+import { IdsActionPanelComponent } from '@i-cell/ids-angular/action-panel';
+import { ActionPanelAppearance, ActionPanelAppearanceType, Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronRight, mdiMagnify } from '@mdi/js';
 
 @Component({
   selector: 'app-action-panel-demo',
   standalone: true,
-  imports: [IdsActionPanelComponent, IdsActionItemComponent, IdsIconComponent],
+  imports: [
+    IdsActionPanelComponent,
+    IdsActionItemComponent,
+    IdsIconComponent,
+  ],
   templateUrl: './action-panel-demo.component.html',
   styleUrl: './action-panel-demo.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -16,6 +20,7 @@ import { mdiChevronRight, mdiMagnify } from '@mdi/js';
 export class ActionPanelDemoComponent {
   public appearances = Object.values(ActionPanelAppearance) as ActionPanelAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
+  // eslint-disable-next-line no-magic-numbers
   public items = Array(8);
   public mdiSearch = mdiMagnify;
   public mdiChevron = mdiChevronRight;

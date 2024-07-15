@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IdsButtonComponent } from '@i-cell/widgets/button';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
   ButtonAppearance,
   ButtonAppearanceType,
@@ -9,21 +9,22 @@ import {
   AllVariantsType,
   Size,
   SizeType,
-} from '@i-cell/widgets/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
+} from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck, mdiMagnify } from '@mdi/js';
 
 @Component({
   standalone: true,
   selector: 'app-button-demo',
-  imports: [IdsButtonComponent, IdsIconComponent],
+  imports: [
+    IdsButtonComponent,
+    IdsIconComponent,
+  ],
   templateUrl: './button-demo.component.html',
   styleUrls: ['./button-demo.component.scss'],
 })
 export class ButtonDemoComponent {
-  public appearances = Object.values(
-    ButtonAppearance
-  ) as ButtonAppearanceType[];
+  public appearances = Object.values(ButtonAppearance) as ButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
   public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
   public variants = Object.values(AllVariants) as AllVariantsType[];
@@ -31,7 +32,8 @@ export class ButtonDemoComponent {
   public mdiSearch = mdiMagnify;
   public mdiDone = mdiCheck;
 
-  onClick(buttonName: string) {
+  public onClick(buttonName: string): void {
+    // eslint-disable-next-line no-console
     console.log(`${buttonName} button clicked`);
   }
 }

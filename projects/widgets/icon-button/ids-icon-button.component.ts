@@ -14,7 +14,7 @@ import {
   Size,
   SizeType,
   coerceBooleanAttribute,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'button[idsIconButton]',

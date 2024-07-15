@@ -9,7 +9,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck } from '@mdi/js';
 
 @Component({
@@ -21,39 +21,42 @@ import { mdiCheck } from '@mdi/js';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsSwitchComponent {
-  private readonly componentClass = 'ids-switch';
-  private elem = inject(ElementRef<HTMLLabelElement>);
-  private cdr = inject(ChangeDetectorRef);
+  private readonly _componentClass = 'ids-switch';
+  private _elem = inject(ElementRef<HTMLLabelElement>);
+  private _cdr = inject(ChangeDetectorRef);
   public onIcon = input<string>(mdiCheck);
 
-  checked = signal(
+  public checked = signal(
     (
-      (this.elem.nativeElement as HTMLLabelElement).querySelector(
-        'input'
+      (this._elem.nativeElement as HTMLLabelElement).querySelector(
+        'input',
       ) as HTMLInputElement
-    )?.checked
+    )?.checked,
   );
 
-  private hostClasses = computed(() =>
-    [this.componentClass, this.checked() ? `on` : `off`]
+  private _hostClasses = computed(() =>
+    [
+      this._componentClass,
+      this.checked() ? 'on' : 'off',
+    ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   @HostBinding('class') get classes(): string {
-    return this.hostClasses();
+    return this._hostClasses();
   }
 
   constructor() {
-    this.elem.nativeElement.addEventListener('change', () => {
+    this._elem.nativeElement.addEventListener('change', () => {
       this.checked.set(
         (
-          (this.elem.nativeElement as HTMLLabelElement).querySelector(
-            'input'
+          (this._elem.nativeElement as HTMLLabelElement).querySelector(
+            'input',
           ) as HTMLInputElement
-        )?.checked
+        )?.checked,
       );
-      this.cdr.markForCheck();
+      this._cdr.markForCheck();
     });
   }
 }

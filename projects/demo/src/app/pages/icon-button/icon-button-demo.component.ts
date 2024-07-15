@@ -8,29 +8,31 @@ import {
   IconButtonAppearanceType,
   Size,
   SizeType,
-} from '@i-cell/widgets/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
-import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
+} from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { mdiMagnify } from '@mdi/js';
 
 @Component({
   standalone: true,
   selector: 'app-icon-button-demo',
-  imports: [IdsIconButtonComponent, IdsIconComponent],
+  imports: [
+    IdsIconButtonComponent,
+    IdsIconComponent,
+  ],
   templateUrl: './icon-button-demo.component.html',
   styleUrls: ['./icon-button-demo.component.scss'],
 })
 export class IconButtonDemoComponent {
-  public appearances = Object.values(
-    IconButtonAppearance
-  ) as IconButtonAppearanceType[];
+  public appearances = Object.values(IconButtonAppearance) as IconButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
   public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
   public variants = Object.values(AllVariants) as AllVariantsType[];
 
   public mdiSearch = mdiMagnify;
 
-  onClick(buttonName: string) {
+  public onClick(buttonName: string): void {
+    // eslint-disable-next-line no-console
     console.log(`${buttonName} icon button clicked`);
   }
 }

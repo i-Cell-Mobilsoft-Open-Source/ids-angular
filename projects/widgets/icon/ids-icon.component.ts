@@ -5,7 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { Size, SizeType } from '@i-cell/widgets/core';
+import { Size, SizeType } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-icon',

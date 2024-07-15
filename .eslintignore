@@ -1,3 +1,4 @@
 **/index.ts
 **/public-api.ts
 cypress/
+cypress.config.ts

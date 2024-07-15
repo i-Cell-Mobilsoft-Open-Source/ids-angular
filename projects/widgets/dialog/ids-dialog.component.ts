@@ -16,9 +16,9 @@ import {
   IdsDetectScrollableDirective,
   Size,
   SizeType,
-} from '@i-cell/widgets/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
-import { IdsIconButtonComponent } from '@i-cell/widgets/icon-button';
+} from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { mdiWindowClose } from '@mdi/js';
 
 let uniqueIdCounter = 0;

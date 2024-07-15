@@ -15,7 +15,7 @@ import {
   SizeType,
   TagAppearance,
   TagAppearanceType,
-} from '@i-cell/widgets/core';
+} from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-tag,button[idsTag]',

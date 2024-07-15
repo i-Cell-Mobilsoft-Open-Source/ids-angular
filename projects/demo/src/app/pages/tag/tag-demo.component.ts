@@ -8,15 +8,18 @@ import {
   TagAppearanceType,
   Size,
   SizeType,
-} from '@i-cell/widgets/core';
-import { IdsIconComponent } from '@i-cell/widgets/icon';
-import { IdsTagComponent } from '@i-cell/widgets/tag';
+} from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsTagComponent } from '@i-cell/ids-angular/tag';
 import { mdiCheck, mdiMagnify } from '@mdi/js';
 
 @Component({
   standalone: true,
   selector: 'app-tag-demo',
-  imports: [IdsTagComponent, IdsIconComponent],
+  imports: [
+    IdsTagComponent,
+    IdsIconComponent,
+  ],
   templateUrl: './tag-demo.component.html',
   styleUrls: ['./tag-demo.component.scss'],
 })
@@ -29,7 +32,8 @@ export class TagDemoComponent {
   public mdiSearch = mdiMagnify;
   public mdiDone = mdiCheck;
 
-  onClick(tagName: string) {
+  public onClick(tagName: string): void {
+    // eslint-disable-next-line no-console
     console.log(`${tagName} tag clicked`);
   }
 }

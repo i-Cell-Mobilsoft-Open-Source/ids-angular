@@ -14,6 +14,7 @@ import {
   Size,
   SizeType,
   coerceBooleanAttribute,
+  createHostClassList,
 } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -39,14 +40,11 @@ export class IdsIconButtonComponent {
   public icon = contentChildren<unknown>('[icon]');
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      this._addClassPrefix(this.appearance()),
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.variant()),
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.appearance(),
+      this.size(),
+      this.variant(),
+    ]),
   );
 
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
@@ -55,9 +53,5 @@ export class IdsIconButtonComponent {
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

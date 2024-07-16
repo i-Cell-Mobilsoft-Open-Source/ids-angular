@@ -6,6 +6,7 @@ import {
   input,
 } from '@angular/core';
 import {
+  createHostClassList,
   Size,
   SizeType,
   SurfaceVariant,
@@ -28,22 +29,15 @@ export class IdsAvatarComponent {
   public variant = input<SurfaceVariantType | null>(SurfaceVariant.PRIMARY);
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.variant()),
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.size(),
+      this.variant(),
+    ]),
   );
 
   @HostBinding('type') private _type = 'button';
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

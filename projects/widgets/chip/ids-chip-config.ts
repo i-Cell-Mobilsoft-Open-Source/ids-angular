@@ -8,7 +8,7 @@ export interface IdsChipDefaultOptions {
 }
 
 export const IDS_CHIP_DEFAULT_OPTIONS = new InjectionToken<IdsChipDefaultOptions>(
-  'ids-chip-default-options',
+  'IDS_CHIP_DEFAULT_OPTIONS',
   {
     providedIn: 'root',
     factory: IDS_CHIP_DEFAULT_OPTIONS_FACTORY,

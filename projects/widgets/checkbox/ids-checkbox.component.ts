@@ -155,8 +155,7 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   private _emitChangeEvent(): void {
     this._onChange(this.isChecked());
     this.change.emit(this._createChangeEvent(this.isChecked(), this.value()));
-
-    this._inputElement.nativeElement.checked = this.isChecked();
+    this._syncChecked(this.isChecked());
   }
 
   public toggle(): void {
@@ -178,7 +177,7 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
       }
 
       this._emitChangeEvent();
-      this._inputElement.nativeElement.indeterminate = this.isIndeterminate();
+      this._syncIndeterminate(this.isIndeterminate());
     }
   }
 
@@ -187,6 +186,11 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
       this._onTouched();
       this._changeDetectorRef.markForCheck();
     });
+  }
+
+  private _syncChecked(value: boolean): void {
+    const nativeCheckbox = this._inputElement;
+    nativeCheckbox.nativeElement.checked = value;
   }
 
   private _syncIndeterminate(value: boolean): void {

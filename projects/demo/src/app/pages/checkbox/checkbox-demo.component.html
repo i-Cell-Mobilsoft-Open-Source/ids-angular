@@ -1,0 +1,129 @@
+<h1>Normál (Form api nélkül)</h1>
+@for (variant of variants; track $index) {
+<section [class]="variant">
+  <h2>{{ variant | uppercase }}</h2>
+  @for (size of sizes; track $index) {
+  <h3>{{ size }}</h3>
+  <ul class="checkbox-group">
+    <li><ids-checkbox
+        [size]="size"
+        [variant]="variant"
+      >
+        {{ label }}
+        <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+      </ids-checkbox></li>
+    <li><ids-checkbox
+        [size]="size"
+        [variant]="variant"
+        [indeterminate]="true"
+      >
+        {{ label }}
+        <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+      </ids-checkbox></li>
+    <li><ids-checkbox
+        [size]="size"
+        [variant]="variant"
+        [checked]="true"
+      >
+        {{ label }}
+        <ids-hint-message>És még talán ide is</ids-hint-message>
+      </ids-checkbox></li>
+  </ul>
+  }
+</section>
+}
+
+<h1>Disabled (Form api nélkül)</h1>
+@for (variant of variants; track $index) {
+<section [class]="variant">
+  <h2>{{ variant | uppercase }}</h2>
+  @for (size of sizes; track $index) {
+  <h3>{{ size }}</h3>
+  <ul class="checkbox-group">
+    <li><ids-checkbox
+        [size]="size"
+        [variant]="variant"
+        [disabled]="true"
+      >
+        {{ label }}
+        <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+      </ids-checkbox></li>
+    <li><ids-checkbox
+        [size]="size"
+        [variant]="variant"
+        [disabled]="true"
+        [indeterminate]="true"
+      >
+        {{ label }}
+        <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+      </ids-checkbox></li>
+    <li><ids-checkbox
+        [size]="size"
+        [variant]="variant"
+        [disabled]="true"
+        [checked]="true"
+      >
+        {{ label }}
+        <ids-hint-message>És még talán ide is</ids-hint-message>
+      </ids-checkbox></li>
+  </ul>
+  }
+</section>
+}
+
+<h1>Error (Form apival)</h1>
+<form [formGroup]="form">
+  @for (variant of variants; track $index) {
+  <section
+    [class]="variant"
+    [formGroupName]="variant"
+  >
+    <h2>{{ variant | uppercase }}</h2>
+    @for (size of sizes; track $index) {
+    <h3>{{ size }}</h3>
+    <ul
+      class="checkbox-group"
+      [formGroupName]="size"
+    >
+      <li><ids-checkbox
+          formControlName="unselected"
+          [size]="size"
+          [variant]="variant"
+        >
+          {{ label }}
+          <ids-hint-message>Valami hint szöveg ide jöhetne</ids-hint-message>
+          <ids-error-message>
+            <span>A mező értéke nem felel meg az elvártnak</span>
+            <span idsMessageSuffix>10/56</span>
+          </ids-error-message>
+        </ids-checkbox></li>
+      <li><ids-checkbox
+          formControlName="indeterminate"
+          [size]="size"
+          [variant]="variant"
+          [indeterminate]="true"
+        >
+          {{ label }}
+          <ids-hint-message>Valami hint szöveg akár ide is jöhetne</ids-hint-message>
+          <ids-error-message>
+            <span>A mező értéke nem felel meg az elvártnak</span>
+            <span idsMessageSuffix>11/56</span>
+          </ids-error-message>
+        </ids-checkbox></li>
+      <li><ids-checkbox
+          formControlName="selected"
+          [size]="size"
+          [variant]="variant"
+        >
+          {{ label }}
+          <ids-hint-message>És még talán ide is</ids-hint-message>
+          <ids-error-message>
+            <span>A mező értéke nem felel meg az elvártnak</span>
+            <span idsMessageSuffix>12/56</span>
+          </ids-error-message>
+        </ids-checkbox></li>
+    </ul>
+    }
+  </section>
+  }
+</form>

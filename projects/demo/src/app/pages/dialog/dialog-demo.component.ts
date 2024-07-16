@@ -12,7 +12,6 @@ export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog
   ],
   template: `
     <dialog #dialog3="idsDialog" idsDialog mainTitle="Custom dynamic dialog" [showCloseButton]="true">
-      <!-- content -->
       <div idsDialogContent class="flex flex-col gap-3">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque.
@@ -24,7 +23,6 @@ export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog
         <p>Provided data: {{ providedData }}</p>
         <p>Data from input binding: {{ inputData() }}</p>
       </div>
-      <!-- action buttons -->
       <div idsDialogActions class="flex flex-row items-end gap-2">
         <button
           type="button"

@@ -6,7 +6,7 @@ import { mdiMagnify } from '@mdi/js';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
-type StoryType = IdsButtonComponent & { label?: string; prefixIcon?: boolean; suffixIcon?: boolean };
+type StoryType = IdsButtonComponent & { label?: string, prefixIcon?: boolean, suffixIcon?: boolean };
 
 function selectControlOptions(constObj: { [key: string]: string }, description?: string): object {
   return {

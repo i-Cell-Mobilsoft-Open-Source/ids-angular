@@ -23,7 +23,7 @@ export class IdsDialogService {
 
   public open<C extends IdsCustomDialogBase<R>, R = unknown>(
     component: Type<C>,
-    options?: { providers?: (Provider | StaticProvider)[]; inputs?: { [P in keyof C]?: C[P] extends Signal<infer T> ? T : C[P] } },
+    options?: { providers?: (Provider | StaticProvider)[], inputs?: { [P in keyof C]?: C[P] extends Signal<infer T> ? T : C[P] } },
   ): Observable<R | undefined> {
     let elementInjector = undefined;
 

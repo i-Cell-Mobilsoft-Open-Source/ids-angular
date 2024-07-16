@@ -13,6 +13,7 @@ import {
   input,
 } from '@angular/core';
 import {
+  createHostClassList,
   IdsDetectScrollableDirective,
   Size,
   SizeType,
@@ -52,13 +53,10 @@ export class IdsDialogComponent {
   public customHeader = contentChild(IdsDialogHeaderDirective);
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      this._addClassPrefix(this.size()),
-      ...[this.showBackdrop() ? [this._addClassPrefix('with-backdrop')] : []],
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.size(),
+      this.showBackdrop() ? 'with-backdrop' : null,
+    ]),
   );
 
   @HostBinding('class') get classes(): string {
@@ -80,9 +78,5 @@ export class IdsDialogComponent {
 
   public close(): void {
     this.dialog.close();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

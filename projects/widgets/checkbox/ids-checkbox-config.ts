@@ -9,7 +9,7 @@ export interface IdsCheckboxDefaultOptions {
 }
 
 export const IDS_CHECKBOX_DEFAULT_OPTIONS = new InjectionToken<IdsCheckboxDefaultOptions>(
-  'ids-checkbox-default-options',
+  'IDS_CHECKBOX_DEFAULT_OPTIONS',
   {
     providedIn: 'root',
     factory: IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY,

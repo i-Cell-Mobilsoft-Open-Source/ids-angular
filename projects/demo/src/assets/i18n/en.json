@@ -19,6 +19,7 @@
     "DIALOG": "Dialog",
     "DIVIDERS": "Dividers",
     "ICON_BUTTON": "Icon button",
+    "PAGINATOR": "Paginator",
     "TAG": "Tag"
   }
 }

@@ -1,20 +1,27 @@
-import { Component, ElementRef, OnInit, ViewEncapsulation, inject, viewChild } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavComponent } from './components/nav/ids-nav.component';
 import { Menu } from './components/nav/menu.interface';
 import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 
+import { Component, ElementRef, OnInit, ViewEncapsulation, inject, viewChild } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, TranslateModule, NavComponent, IdsSwitchComponent],
+  imports: [
+    RouterModule,
+    RouterOutlet,
+    TranslateModule,
+    NavComponent,
+    IdsSwitchComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  private translate: TranslateService = inject(TranslateService);
+  private _translate: TranslateService = inject(TranslateService);
   public menuConfigs: Menu[] = [
     { name: 'GET_STARTED', children: [] },
     {
@@ -35,6 +42,7 @@ export class AppComponent implements OnInit {
             { name: 'COMPONENTS.DIALOG', path: '/components/dialog' },
             { name: 'COMPONENTS.DIVIDERS', path: '/components/divider' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
+            { name: 'COMPONENTS.PAGINATOR', path: '/components/paginator' },
             { name: 'COMPONENTS.TAG', path: '/components/tag' },
           ],
         },
@@ -46,23 +54,27 @@ export class AppComponent implements OnInit {
     },
     { name: 'RESOURCES', children: [] },
   ];
+
   public themeSwitcher = viewChild<ElementRef>('themeSwitcher');
 
   constructor() {
-    this.changeTheme('light');
-    this.translate.addLangs(['hu', 'en']);
-    this.translate.setDefaultLang('en');
-    const browserLang = this.translate.getBrowserLang();
-    this.translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
+    this._changeTheme('light');
+    this._translate.addLangs([
+      'hu',
+      'en',
+    ]);
+    this._translate.setDefaultLang('en');
+    const browserLang = this._translate.getBrowserLang();
+    this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
   }
 
-  ngOnInit() {
-    this.themeSwitcher()?.nativeElement.addEventListener('change', (e: any) => {
-      this.changeTheme((e.target as HTMLInputElement)?.checked ? 'dark' : 'light');
+  public ngOnInit(): void {
+    this.themeSwitcher()?.nativeElement.addEventListener('change', (event: Event) => {
+      this._changeTheme((event.target as HTMLInputElement)?.checked ? 'dark' : 'light');
     });
   }
 
-  private changeTheme(theme: string) {
+  private _changeTheme(theme: string): void {
     if (theme === 'dark') {
       document.documentElement.classList.remove('ids-theme-light');
       document.documentElement.classList.add('ids-theme-dark');

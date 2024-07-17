@@ -1,1 +1,11 @@
-<p>paginator-demo works!</p>
+@for (variant of variants; track $index) {
+  <section [class]="variant">
+    <h2>{{ variant | uppercase }}</h2>
+    @for (size of sizes; track $index) {
+      <h3>{{ size }}</h3>
+      <div class="paginator-demo-container">
+        <ids-paginator [length]="length" [size]="size" [variant]="variant" />
+      </div>
+    }
+  </section>
+}

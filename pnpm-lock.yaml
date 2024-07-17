@@ -35,11 +35,11 @@ importers:
         specifier: ^17.3.1
         version: 17.3.1(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser@17.3.1(@angular/animations@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(rxjs@7.8.1)
       "@i-cell/ids-styles":
-        specifier: ^0.0.2
+        specifier: 0.0.2
         version: link:../ids-styles
       "@i-cell/ids-tokens":
-        specifier: 0.0.9
-        version: 0.0.9
+        specifier: 0.0.13
+        version: 0.0.13
       "@mdi/js":
         specifier: ^7.4.47
         version: 7.4.47
@@ -1943,11 +1943,8 @@ packages:
   "@humanwhocodes/object-schema@2.0.3":
     resolution: { integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA== }
 
-  "@i-cell/ids-styles@0.0.1":
-    resolution: { integrity: sha512-fmxDuC7weyksdJp+Tr5kfT/7NUXXMuA8mj9fGAU5NUapQuD1ejn+aVyNzq4RZYdslvipvYsKXaNxGwASPTY2Ww== }
-
-  "@i-cell/ids-tokens@0.0.9":
-    resolution: { integrity: sha512-Ck0KIrj+Qbb6lI3OElyKXOJKvu2W1iAYS5g6TEqzDf7MTuu6eN6RSWsooi1+5xlsawy72NvJuAy+BKRJZuwxUQ== }
+  "@i-cell/ids-tokens@0.0.13":
+    resolution: { integrity: sha512-N+0k588SPOvO2OSvmoMSrqUAR6CF8NqnYySfvBmX/6nTDyfy2D3V0EV6jkC1vpGEn56Sw0+fwd/OEDyUqMZXbg== }
 
   "@isaacs/cliui@8.0.2":
     resolution: { integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA== }
@@ -10853,9 +10850,7 @@ snapshots:
 
   "@humanwhocodes/object-schema@2.0.3": {}
 
-  "@i-cell/ids-styles@0.0.1": {}
-
-  "@i-cell/ids-tokens@0.0.9": {}
+  "@i-cell/ids-tokens@0.0.13": {}
 
   "@isaacs/cliui@8.0.2":
     dependencies:

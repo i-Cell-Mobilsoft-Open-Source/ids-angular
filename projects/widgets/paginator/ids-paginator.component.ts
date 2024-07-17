@@ -5,7 +5,8 @@ import { PaginatorVariantType } from './types/paginator-variant';
 
 import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createHostClassList, SizeType } from '@i-cell/ids-angular/core';
-import { mdiPageFirst, mdiPagePrevious, mdiPageNext, mdiPageLast } from '@mdi/js';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
 import { Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
@@ -15,7 +16,7 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY();
 @Component({
   selector: 'ids-paginator',
   standalone: true,
-  imports: [],
+  imports: [IdsIconComponent],
   templateUrl: './ids-paginator.component.html',
   styleUrl: './ids-paginator.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -95,16 +96,22 @@ export class IdsPaginatorComponent implements OnDestroy {
     return this._pageIndex() < maxPageIndex && this.pageSize() !== 0;
   });
 
-  public isPreviousLinkDisabled = computed(() => this.disabled() || this._hasPreviousPage());
-  public isNextLinkDisabled = computed(() => this.disabled() || this._hasNextPage());
+  public isPreviousLinkDisabled = computed(() => this.disabled() || !this._hasPreviousPage());
+  public isNextLinkDisabled = computed(() => this.disabled() || !this._hasNextPage());
+
+  // eslint-disable-next-line arrow-body-style
+  public pageLinks = computed<string[]>(() => {
+    return this.getPageLinks(this._pageIndex(), this._getNumberOfPages());
+  });
 
   @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
 
   public navigationIcon = {
-    first: mdiPageFirst,
-    prev: mdiPagePrevious,
-    next: mdiPageNext,
-    last: mdiPageLast,
+    first: mdiChevronDoubleLeft,
+    prev: mdiChevronLeft,
+    next: mdiChevronRight,
+    last: mdiChevronDoubleRight,
+    dots: mdiDotsHorizontal,
   };
 
   @HostBinding('class') get classes(): string {
@@ -113,6 +120,10 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   constructor() {
     this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
+  }
+
+  public getPageLinks(pageIndex: number, numberOfPages: number): string[] {
+    return [...Array(numberOfPages).keys()].map((item) => (item + 1).toString());
   }
 
   public stepNextPage(): void {
@@ -152,6 +163,12 @@ export class IdsPaginatorComponent implements OnDestroy {
 
     const previousPageIndex = this._pageIndex();
     this._pageIndex.set(this._getNumberOfPages() - 1);
+    this._emitPageEvent(previousPageIndex);
+  }
+
+  public stepPage(pageIndex: number): void {
+    const previousPageIndex = this._pageIndex();
+    this._pageIndex.set(pageIndex);
     this._emitPageEvent(previousPageIndex);
   }
 

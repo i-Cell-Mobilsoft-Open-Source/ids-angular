@@ -1,0 +1,112 @@
+$sizes: compact, comfortable, spacious, dense;
+$variants: primary, secondary, light, surface;
+
+.ids-paginator {
+  display: inline-flex;
+  justify-content: space-between;
+
+  .ids-paginator__navigation-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    .ids-paginator__page-link-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .ids-paginator__page-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-style: normal;
+
+      :focus {
+        outline-width: var(--ids-comp-paginator-page-links-focused-outline-size-outline);
+      }
+    }
+  }
+
+  .ids-paginator__help-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @each $size in $sizes {
+    &.ids-paginator-#{$size} {
+      .ids-paginator__navigation-container {
+        gap: var(--ids-comp-paginator-size-gap-comfortable);
+
+        .ids-paginator__page-link {
+          height: var(--ids-comp-paginator-page-links-size-height-#{$size});
+          min-width: var(--ids-comp-paginator-page-links-size-min-width-#{$size});
+          padding: var(--ids-comp-paginator-page-links-size-padding-y-#{$size})
+            var(--ids-comp-paginator-page-links-size-padding-x-#{$size});
+          font-family: var(--ids-comp-paginator-page-links-label-typography-font-family-#{$size});
+          font-size: var(--ids-comp-paginator-page-links-label-typography-font-size-#{$size});
+          font-weight: var(--ids-comp-paginator-page-links-label-typography-font-weight-#{$size});
+          letter-spacing: var(--ids-comp-paginator-page-links-label-typography-letter-spacing-#{$size});
+          line-height: var(--ids-comp-paginator-page-links-label-typography-line-height-#{$size});
+          border-radius: var(--ids-comp-paginator-page-links-page-link-size-border-radius-#{$size});
+        }
+      }
+
+      .ids-paginator__help-text {
+        font-family: var(--ids-comp-paginator-help-text-label-typography-font-family-#{$size});
+        font-size: var(--ids-comp-paginator-help-text-label-typography-font-size-#{$size});
+        font-weight: var(--ids-comp-paginator-help-text-label-typography-font-weight-#{$size});
+        letter-spacing: var(--ids-comp-paginator-help-text-label-typography-letter-spacing-#{$size});
+        line-height: var(--ids-comp-paginator-help-text-label-typography-line-height-#{$size});
+        border-radius: var(--ids-comp-paginator-help-text-size-border-radius-#{$size});
+        height: var(--ids-comp-paginator-help-text-size-height-#{$size});
+        padding: var(--ids-comp-paginator-help-text-size-padding-y-#{$size});
+      }
+    }
+  }
+
+  @each $variant in $variants {
+    &.ids-paginator-#{$variant} {
+      .ids-paginator__navigation-container {
+        .ids-paginator__page-link {
+          background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-default);
+          color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-default);
+
+          &.active:not(:disabled) {
+            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-active);
+            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-active);
+          }
+          &:hover {
+            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-hovered);
+            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-hovered);
+          }
+          &:active {
+            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-pressed);
+            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-pressed);
+          }
+          &:focus {
+            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-focused);
+            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-focused);
+          }
+          &:disabled {
+            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-disabled);
+            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-disabled);
+          }
+
+          &.ids-paginator__page-link__arrow:not(:disabled) {
+            color: var(--ids-comp-paginator-page-links-plain-color-fg-icon-#{$variant}-default);
+          }
+        }
+
+        .ids-paginator__page-link__dots {
+          color: var(--ids-comp-paginator-page-links-plain-color-fg-icon-#{$variant}-disabled);
+        }
+      }
+
+      .ids-paginator__help-text {
+        color: var(--ids-comp-paginator-help-text-color-fg-#{$variant}-default);
+      }
+    }
+  }
+}

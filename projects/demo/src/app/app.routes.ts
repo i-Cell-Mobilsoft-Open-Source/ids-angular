@@ -26,6 +26,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/card/card-demo.component').then((module) => module.CardDemoComponent),
   },
   {
+    path: 'components/checkbox',
+    loadComponent: () => import('./pages/checkbox/checkbox-demo.component').then((module) => module.CheckboxDemoComponent),
+  },
+  {
     path: 'components/dialog',
     loadComponent: () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
   },

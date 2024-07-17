@@ -15,6 +15,7 @@ import {
   Size,
   SizeType,
   coerceBooleanAttribute,
+  createHostClassList,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
@@ -46,22 +47,15 @@ export class IdsAccordionComponent {
   private _details: HTMLDetailsElement = inject(ElementRef).nativeElement;
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.appearance()),
-      ...[this.disabled() ? [this._addClassPrefix('disabled')] : []],
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.size(),
+      this.appearance(),
+      this.disabled() ? 'disabled' : null,
+    ]),
   );
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 
   @HostListener('toggle')

@@ -2,7 +2,6 @@ import { IdsCardSectionBase } from './card-section-base.directive';
 
 import { Component, ViewEncapsulation } from '@angular/core';
 
-
 @Component({
   selector: 'ids-card-header,header[idsCardHeader]',
   standalone: true,

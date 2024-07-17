@@ -11,6 +11,7 @@ import {
 import {
   AllVariants,
   AllVariantsType,
+  createHostClassList,
   Size,
   SizeType,
   TagAppearance,
@@ -37,14 +38,11 @@ export class IdsTagComponent {
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private _hostClasses = computed(() =>
-    [
-      this._componentClass,
-      this._addClassPrefix(this.appearance()),
-      this._addClassPrefix(this.size()),
-      this._addClassPrefix(this.variant()),
-    ]
-      .filter(Boolean)
-      .join(' '),
+    createHostClassList(this._componentClass, [
+      this.appearance(),
+      this.size(),
+      this.variant(),
+    ]),
   );
 
   @HostBinding('type') get buttonType(): string | null {
@@ -53,9 +51,5 @@ export class IdsTagComponent {
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
-  }
-
-  private _addClassPrefix(className: string | null): string | null {
-    return className ? `${this._componentClass}-${className}` : null;
   }
 }

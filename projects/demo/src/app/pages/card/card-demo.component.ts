@@ -42,13 +42,13 @@ export class CardDemoComponent {
   public orientations = Object.values(Orientation) as OrientationType[];
 
   public model: {
-    appearance: CardAppearanceType;
-    size: SizeType;
-    variant: AllVariantsType;
-    orientation: OrientationType;
-    clickable: boolean;
-    disabled: string | boolean;
-    stretchMedia: boolean;
+    appearance: CardAppearanceType
+    size: SizeType
+    variant: AllVariantsType
+    orientation: OrientationType
+    clickable: boolean
+    disabled: string | boolean
+    stretchMedia: boolean
   } = {
       appearance: 'filled',
       size: 'comfortable',

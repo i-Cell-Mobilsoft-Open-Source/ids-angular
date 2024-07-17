@@ -3,9 +3,10 @@ import { IdsPaginatorIntl } from './ids-paginator-intl';
 import { PaginatorPageEvent } from './types/paginator-events';
 import { PaginatorVariantType } from './types/paginator-variant';
 
-import { Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, numberAttribute, Output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createHostClassList, SizeType } from '@i-cell/ids-angular/core';
 import { mdiPageFirst, mdiPagePrevious, mdiPageNext, mdiPageLast } from '@mdi/js';
+import { Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
 
@@ -19,10 +20,11 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY();
   styleUrl: './ids-paginator.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class IdsPaginatorComponent {
+export class IdsPaginatorComponent implements OnDestroy {
   private readonly _componentClass = 'ids-paginator';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   private readonly _injector = inject(Injector);
+  private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_PAGINATOR_DEFAULT_OPTIONS, null, { optional: true }),
@@ -46,6 +48,8 @@ export class IdsPaginatorComponent {
     this.variant(),
   ]),
   );
+
+  private _intlChanges?: Subscription;
 
   public safePageSize = computed(() => {
     const pageSize = this.pageSize();
@@ -107,6 +111,10 @@ export class IdsPaginatorComponent {
     return this._hostClasses();
   }
 
+  constructor() {
+    this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
+  }
+
   public stepNextPage(): void {
     if (!this._hasNextPage()) {
       return;
@@ -154,5 +162,9 @@ export class IdsPaginatorComponent {
       pageSize: this.pageSize(),
       length: this.length(),
     });
+  }
+
+  public ngOnDestroy(): void {
+    this._intlChanges?.unsubscribe();
   }
 }

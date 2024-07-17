@@ -5,10 +5,10 @@ import { Subject } from 'rxjs';
 export class IdsPaginatorIntl {
   public readonly changes: Subject<void> = new Subject<void>();
 
-  public nextPageLabel: string = 'Next page';
-  public previousPageLabel: string = 'Previous page';
-  public firstPageLabel: string = 'First page';
-  public lastPageLabel: string = 'Last page';
+  public nextPageLabel: string = 'Go to next page';
+  public previousPageLabel: string = 'Go to previous page';
+  public firstPageLabel: string = 'Go to first page';
+  public lastPageLabel: string = 'Go to last page';
   public pageLabel: string = 'Go to page ';
 
   public getRangeLabel: (page: number, pageSize: number, length: number) => string = (
@@ -17,15 +17,12 @@ export class IdsPaginatorIntl {
     length: number,
   ) => {
     if (length === 0 || pageSize === 0) {
-      return '0 of 0';
+      return 'Page 0 of 0';
     }
 
-    const safeLength = Math.max(length, 0);
-    const startIndex = page * pageSize;
-    const endIndex
-      = startIndex < safeLength ? Math.min(startIndex + pageSize, safeLength) : startIndex + pageSize;
+    const maxPageCount = Math.ceil(length / pageSize);
 
-    return `${startIndex + 1} – ${endIndex} of ${safeLength}`;
+    return `Page ${page + 1} of ${maxPageCount}`;
   };
 }
 

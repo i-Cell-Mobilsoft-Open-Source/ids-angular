@@ -4,7 +4,7 @@ import { PaginatorPageEvent } from './types/paginator-events';
 import { PaginatorVariantType } from './types/paginator-variant';
 
 import { Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, numberAttribute, Output, signal, ViewEncapsulation } from '@angular/core';
-import { SizeType } from '@i-cell/ids-angular/core';
+import { createHostClassList, SizeType } from '@i-cell/ids-angular/core';
 import { mdiPageFirst, mdiPagePrevious, mdiPageNext, mdiPageLast } from '@mdi/js';
 
 let nextUniqueId = 0;
@@ -29,7 +29,7 @@ export class IdsPaginatorComponent {
   };
 
   public readonly intl = this._injector.get(IdsPaginatorIntl);
-  
+
   public id = input<string>(this._uniqueId);
   public pageSize = input<number>(this._defaultOptions.pageSize);
   public pageSizeOptions = input<number[]>(this._defaultOptions.pageSizeOptions);
@@ -54,7 +54,7 @@ export class IdsPaginatorComponent {
     }
     return pageSize;
   });
-  
+
   public safePageSizeOptions = computed(() => {
     const pageSize = this.pageSize();
     const safePageSizeOptions = this.pageSizeOptions().slice();
@@ -68,12 +68,13 @@ export class IdsPaginatorComponent {
   get pageIndex(): number {
     return this._pageIndex();
   }
-  
+
   set pageIndex(value: number) {
     this._pageIndex.set(Math.max(value || 0, 0));
   }
-  
+
   private _pageIndex = signal(0);
+
   private _getNumberOfPages = computed(() => {
     if (!this.pageSize()) {
       return 0;
@@ -81,7 +82,7 @@ export class IdsPaginatorComponent {
     return Math.ceil(this.length() / this.pageSize());
   });
 
-  private _hasPreviousPage = computed(() => 
+  private _hasPreviousPage = computed(() =>
     this._pageIndex() >= 1 && this.pageSize() !== 0,
   );
 
@@ -89,6 +90,9 @@ export class IdsPaginatorComponent {
     const maxPageIndex = this._getNumberOfPages() - 1;
     return this._pageIndex() < maxPageIndex && this.pageSize() !== 0;
   });
+
+  public isPreviousLinkDisabled = computed(() => this.disabled() || this._hasPreviousPage());
+  public isNextLinkDisabled = computed(() => this.disabled() || this._hasNextPage());
 
   @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
 

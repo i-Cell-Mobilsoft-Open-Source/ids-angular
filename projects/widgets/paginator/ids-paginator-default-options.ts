@@ -5,14 +5,15 @@ import { InjectionToken } from '@angular/core';
 import { SizeType, Size } from '@i-cell/ids-angular/core';
 
 export const DEFAULT_PAGE_SIZE = 10;
+
 export interface IdsPaginatorDefaultOptions {
-  pageSize?: number,
-  pageSizeOptions?: number[],
+  pageSize?: number
+  pageSizeOptions?: number[]
   showFirstLastLink?: boolean
   showPageInfo?: boolean
   showPageLinks?: boolean
-  size?: SizeType,
-  variant?: PaginatorVariantType,
+  size?: SizeType
+  variant?: PaginatorVariantType
 }
 
 export const IDS_PAGINATOR_DEFAULT_OPTIONS = new InjectionToken<IdsPaginatorDefaultOptions>(

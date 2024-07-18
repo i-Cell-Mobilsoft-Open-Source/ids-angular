@@ -20,7 +20,7 @@ import {
   Size,
   SizeType,
   coerceBooleanAttribute,
-  createHostClassList,
+  createClassList,
 } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -53,7 +53,7 @@ export class IdsCardComponent implements OnInit {
   private _hasClickHandler = signal(false);
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.appearance(),
       this.size(),
       this.variant(),

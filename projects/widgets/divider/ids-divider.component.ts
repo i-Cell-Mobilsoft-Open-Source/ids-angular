@@ -8,7 +8,7 @@ import {
 import {
   AllVariants,
   AllVariantsType,
-  createHostClassList,
+  createClassList,
   Orientation,
   OrientationType,
   Size,
@@ -32,7 +32,7 @@ export class IdsDividerComponent {
   public height = input<string | null>('100%');
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.type(),
       this.size(),
       this.variant(),

@@ -14,7 +14,7 @@ import {
   Size,
   SizeType,
   coerceBooleanAttribute,
-  createHostClassList,
+  createClassList,
 } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -40,7 +40,7 @@ export class IdsIconButtonComponent {
   public icon = contentChildren<unknown>('[icon]');
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.appearance(),
       this.size(),
       this.variant(),

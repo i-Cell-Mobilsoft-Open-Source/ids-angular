@@ -16,7 +16,7 @@ import {
   SizeType,
   SurfaceVariant,
   coerceBooleanAttribute,
-  createHostClassList,
+  createClassList,
 } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -48,7 +48,7 @@ export class IdsActionItemComponent {
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.appearance(),
       this.size(),
       this.variant(),

@@ -4,13 +4,14 @@ $variants: primary, secondary, light, surface;
 
 .ids-paginator {
   display: inline-flex;
-  justify-content: space-between;
 
   .ids-paginator__navigation-container {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
+    justify-content: flex-start;
+    width: 100%;
 
     .ids-paginator__page-button-container {
       display: flex;
@@ -25,11 +26,32 @@ $variants: primary, secondary, light, surface;
 
       :focus {
         outline-width: var(--ids-comp-paginator-page-links-focused-outline-size-outline);
+        outline-style: solid;
       }
+    }
+
+    .ids-paginator__page-button-arrow {
+      &.first,
+      &.previous {
+        order: 1;
+      }
+    }
+    .ids-paginator__page-button-container {
+      order: 2;
+    }
+    .ids-paginator__page-button-arrow {
+      &.next,
+      &.last {
+        order: 3;
+      }
+    }
+    .ids-paginator__help-text {
+      order: 4;
     }
   }
 
   .ids-paginator__help-text {
+    margin-left: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,6 +92,10 @@ $variants: primary, secondary, light, surface;
 
   @each $variant in $variants {
     &.ids-paginator-#{$variant} {
+      &:focus {
+        outline-color: var(--ids-comp-paginator-page-links-focused-outline-color-#{$variant}-focused);
+      }
+
       .ids-paginator__navigation-container {
         @each $pageButtonAppearance in $pageButtonAppearances {
           .ids-paginator__page-button.ids-paginator__page-button-#{$pageButtonAppearance} {
@@ -97,19 +123,31 @@ $variants: primary, secondary, light, surface;
               color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-label-#{$variant}-disabled);
             }
 
-            &.ids-paginator__page-button__arrow:not(:disabled) {
+            &.ids-paginator__page-button-arrow:not(:disabled) {
               color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-icon-#{$variant}-default);
             }
           }
         }
 
-        .ids-paginator__page-button__dots {
+        .ids-paginator__page-button-dots {
           color: var(--ids-comp-paginator-page-links-plain-color-fg-icon-#{$variant}-disabled);
         }
       }
 
       .ids-paginator__help-text {
         color: var(--ids-comp-paginator-help-text-color-fg-#{$variant}-default);
+      }
+    }
+  }
+
+  &.mobile {
+    .ids-paginator__navigation-container {
+      .ids-paginator__page-button-container {
+        display: none;
+      }
+      .ids-paginator__help-text {
+        order: 2;
+        margin-left: 0;
       }
     }
   }

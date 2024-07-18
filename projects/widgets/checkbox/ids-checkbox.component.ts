@@ -5,7 +5,7 @@ import { CheckboxVariantType } from './types/ids-checkbox-variant';
 
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Injector, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation, computed, contentChildren, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createHostClassList } from '@i-cell/ids-angular/core';
+import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
 import { FormElement, IDS_FORM_ELEMENT, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 
 let nextUniqueId = 0;
@@ -56,7 +56,7 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   public isChecked = computed(() => this._checkboxState() === CheckboxState.CHECKED);
   public isIndeterminate = computed(() => this._checkboxState() === CheckboxState.INDETERMINATE);
   public isFocusable = computed(() => !this.isDisabled() && !this.readonly());
-  private _hostClasses = computed(() => createHostClassList(this._componentClass, [
+  private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.size(),
     this.variant(),
     this.isDisabled() ? 'disabled' : null,

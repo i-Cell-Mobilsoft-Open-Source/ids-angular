@@ -13,7 +13,7 @@ import {
 import {
   AllVariants,
   AllVariantsType,
-  createHostClassList,
+  createClassList,
   Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
@@ -38,7 +38,7 @@ export class IdsTagComponent {
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.appearance(),
       this.size(),
       this.variant(),

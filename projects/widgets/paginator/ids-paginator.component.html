@@ -1,7 +1,7 @@
 <div class="ids-paginator__navigation-container">
   <button
     type="button"
-    class="ids-paginator__page-button__arrow first"
+    class="ids-paginator__page-button-arrow first"
     [class]="pageButtonClasses()"
     [disabled]="isPreviousButtonDisabled()"
     (click)="stepFirstPage()"
@@ -11,7 +11,7 @@
 
   <button
     type="button"
-    class="ids-paginator__page-button__arrow previous"
+    class="ids-paginator__page-button-arrow previous"
     [class]="pageButtonClasses()"
     [disabled]="isPreviousButtonDisabled()"
     (click)="stepPreviousPage()"
@@ -22,7 +22,7 @@
   <div class="ids-paginator__page-button-container">
     @for (pageButton of pageButtons(); track $index) {
       @if (pageButton === "...") {
-        <ids-icon class="ids-paginator__page-button__dots" [icon]="navigationIcon.dots" [size]="size()" />
+        <ids-icon class="ids-paginator__page-button-dots" [icon]="navigationIcon.dots" [size]="size()" />
       } @else {
         <button
           type="button"
@@ -39,7 +39,7 @@
 
   <button
     type="button"
-    class="ids-paginator__page-button__arrow next"
+    class="ids-paginator__page-button-arrow next"
     [class]="pageButtonClasses()"
     [disabled]="isNextButtonDisabled()"
     (click)="stepNextPage()"
@@ -49,13 +49,13 @@
 
   <button
     type="button"
-    class="ids-paginator__page-button__arrow last"
+    class="ids-paginator__page-button-arrow last"
     [class]="pageButtonClasses()"
     [disabled]="isNextButtonDisabled()"
     (click)="stepLastPage()"
   >
     <ids-icon [icon]="navigationIcon.last" [size]="size()" />
   </button>
-</div>
 
-<span class="ids-paginator__help-text">{{ intl.getRangeLabel(pageIndex, safePageSize(), length()) }}</span>
+  <span class="ids-paginator__help-text">{{ intl.getRangeLabel(pageIndex, safePageSize(), length()) }}</span>
+</div>

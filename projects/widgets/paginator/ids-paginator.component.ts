@@ -5,7 +5,7 @@ import { PaginatorPageEvent } from './types/ids-paginator-events';
 import { PaginatorVariantType } from './types/ids-paginator-variant';
 
 import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
-import { createHostClassList, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
 import { Subscription } from 'rxjs';
@@ -45,14 +45,18 @@ export class IdsPaginatorComponent implements OnDestroy {
   public pageButtonAppearance = input<PaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
   public length = input.required<number, number>({ transform: numberAttribute });
   public disabled = input<boolean>(false);
+  public isMobile = signal(true);
 
-  private _hostClasses = computed(() => createHostClassList(this._componentClass, [
-    this.size(),
-    this.variant(),
-  ]),
+  private _hostClasses = computed(() => createClassList(
+    this._componentClass,
+    [
+      this.size(),
+      this.variant(),
+    ],
+    [this.isMobile() ? 'mobile' : null]),
   );
 
-  public pageButtonClasses = computed(() => createHostClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
+  public pageButtonClasses = computed(() => createClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
 
   private _intlChanges?: Subscription;
 

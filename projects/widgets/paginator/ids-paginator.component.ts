@@ -45,7 +45,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   public pageButtonAppearance = input<PaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
   public length = input.required<number, number>({ transform: numberAttribute });
   public disabled = input<boolean>(false);
-  public isMobile = signal(true);
+  public isMobile = signal(false);
 
   private _hostClasses = computed(() => createClassList(
     this._componentClass,

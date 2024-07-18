@@ -4,6 +4,7 @@
     class="ids-paginator__page-button-arrow first"
     [class]="pageButtonClasses()"
     [disabled]="isPreviousButtonDisabled()"
+    [attr.aria-label]="intl.firstPageLabel"
     (click)="stepFirstPage()"
   >
     <ids-icon [icon]="navigationIcon.first" [size]="size()" />
@@ -14,6 +15,7 @@
     class="ids-paginator__page-button-arrow previous"
     [class]="pageButtonClasses()"
     [disabled]="isPreviousButtonDisabled()"
+    [attr.aria-label]="intl.previousPageLabel"
     (click)="stepPreviousPage()"
   >
     <ids-icon [icon]="navigationIcon.prev" [size]="size()" />
@@ -29,6 +31,7 @@
           class="ids-paginator__page-button"
           [class]="pageButtonClasses()"
           [class.active]="+pageButton === pageIndex + 1"
+          [attr.aria-label]="intl.pageLabel + pageButton"
           (click)="stepPage(+pageButton - 1)"
         >
           <span>{{ pageButton }}</span>
@@ -42,6 +45,7 @@
     class="ids-paginator__page-button-arrow next"
     [class]="pageButtonClasses()"
     [disabled]="isNextButtonDisabled()"
+    [attr.aria-label]="intl.nextPageLabel"
     (click)="stepNextPage()"
   >
     <ids-icon [icon]="navigationIcon.next" [size]="size()" />
@@ -52,6 +56,7 @@
     class="ids-paginator__page-button-arrow last"
     [class]="pageButtonClasses()"
     [disabled]="isNextButtonDisabled()"
+    [attr.aria-label]="intl.lastPageLabel"
     (click)="stepLastPage()"
   >
     <ids-icon [icon]="navigationIcon.last" [size]="size()" />

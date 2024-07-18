@@ -36,9 +36,9 @@ export class IdsPaginatorComponent implements OnDestroy {
   public id = input<string>(this._uniqueId);
   public pageSize = input<number>(this._defaultOptions.pageSize);
   public pageSizeOptions = input<number[]>(this._defaultOptions.pageSizeOptions);
-  public showFirstLastLink = input<boolean>(this._defaultOptions.showFirstLastLink);
+  public showFirstLastButton = input<boolean>(this._defaultOptions.showFirstLastButton);
   public showPageInfo = input<boolean>(this._defaultOptions.showPageInfo);
-  public showPageLinks = input<boolean>(this._defaultOptions.showPageLinks);
+  public showPageLButton = input<boolean>(this._defaultOptions.showPageButtons);
   public size = input<SizeType>(this._defaultOptions.size);
   public variant = input<PaginatorVariantType>(this._defaultOptions.variant);
   public length = input.required<number, number>({ transform: numberAttribute });
@@ -96,12 +96,12 @@ export class IdsPaginatorComponent implements OnDestroy {
     return this._pageIndex() < maxPageIndex && this.pageSize() !== 0;
   });
 
-  public isPreviousLinkDisabled = computed(() => this.disabled() || !this._hasPreviousPage());
-  public isNextLinkDisabled = computed(() => this.disabled() || !this._hasNextPage());
+  public isPreviousButtonDisabled = computed(() => this.disabled() || !this._hasPreviousPage());
+  public isNextButtonDisabled = computed(() => this.disabled() || !this._hasNextPage());
 
   // eslint-disable-next-line arrow-body-style
-  public pageLinks = computed<string[]>(() => {
-    return this.getPageLinks(this._pageIndex(), this._getNumberOfPages());
+  public pageButtons = computed<string[]>(() => {
+    return this.getPageButtons(this._pageIndex(), this._getNumberOfPages());
   });
 
   @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
@@ -122,7 +122,7 @@ export class IdsPaginatorComponent implements OnDestroy {
     this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
   }
 
-  public getPageLinks(pageIndex: number, numberOfPages: number): string[] {
+  public getPageButtons(pageIndex: number, numberOfPages: number): string[] {
     return [...Array(numberOfPages).keys()].map((item) => (item + 1).toString());
   }
 

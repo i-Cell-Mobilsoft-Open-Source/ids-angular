@@ -1,8 +1,8 @@
 <div class="ids-paginator__navigation-container">
   <button
     type="button"
-    class="ids-paginator__page-link ids-paginator__page-link__arrow first"
-    [disabled]="isPreviousLinkDisabled()"
+    class="ids-paginator__page-button ids-paginator__page-button__arrow first"
+    [disabled]="isPreviousButtonDisabled()"
     (click)="stepFirstPage()"
   >
     <ids-icon [icon]="navigationIcon.first" [size]="size()" />
@@ -10,25 +10,25 @@
 
   <button
     type="button"
-    class="ids-paginator__page-link ids-paginator__page-link__arrow previous"
-    [disabled]="isPreviousLinkDisabled()"
+    class="ids-paginator__page-button ids-paginator__page-button__arrow previous"
+    [disabled]="isPreviousButtonDisabled()"
     (click)="stepPreviousPage()"
   >
     <ids-icon [icon]="navigationIcon.prev" [size]="size()" />
   </button>
 
-  <div class="ids-paginator__page-link-container">
-    @for (pageLink of pageLinks(); track $index) {
-      @if (pageLink === "...") {
-        <ids-icon class="ids-paginator__page-link__dots" [icon]="navigationIcon.dots" [size]="size()" />
+  <div class="ids-paginator__page-button-container">
+    @for (pageButton of pageButtons(); track $index) {
+      @if (pageButton === "...") {
+        <ids-icon class="ids-paginator__page-button__dots" [icon]="navigationIcon.dots" [size]="size()" />
       } @else {
         <button
           type="button"
-          class="ids-paginator__page-link"
-          [class.active]="+pageLink === pageIndex + 1"
-          (click)="stepPage(+pageLink - 1)"
+          class="ids-paginator__page-button"
+          [class.active]="+pageButton === pageIndex + 1"
+          (click)="stepPage(+pageButton - 1)"
         >
-          <span>{{ pageLink }}</span>
+          <span>{{ pageButton }}</span>
         </button>
       }
     }
@@ -36,8 +36,8 @@
 
   <button
     type="button"
-    class="ids-paginator__page-link ids-paginator__page-link__arrow next"
-    [disabled]="isNextLinkDisabled()"
+    class="ids-paginator__page-button ids-paginator__page-button__arrow next"
+    [disabled]="isNextButtonDisabled()"
     (click)="stepNextPage()"
   >
     <ids-icon [icon]="navigationIcon.next" [size]="size()" />
@@ -45,8 +45,8 @@
 
   <button
     type="button"
-    class="ids-paginator__page-link ids-paginator__page-link__arrow last"
-    [disabled]="isNextLinkDisabled()"
+    class="ids-paginator__page-button ids-paginator__page-button__arrow last"
+    [disabled]="isNextButtonDisabled()"
     (click)="stepLastPage()"
   >
     <ids-icon [icon]="navigationIcon.last" [size]="size()" />

@@ -11,12 +11,12 @@ $variants: primary, secondary, light, surface;
     flex-wrap: nowrap;
     align-items: center;
 
-    .ids-paginator__page-link-container {
+    .ids-paginator__page-button-container {
       display: flex;
       align-items: center;
     }
 
-    .ids-paginator__page-link {
+    .ids-paginator__page-button {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -39,7 +39,7 @@ $variants: primary, secondary, light, surface;
       .ids-paginator__navigation-container {
         gap: var(--ids-comp-paginator-size-gap-comfortable);
 
-        .ids-paginator__page-link {
+        .ids-paginator__page-button {
           height: var(--ids-comp-paginator-page-links-size-height-#{$size});
           min-width: var(--ids-comp-paginator-page-links-size-min-width-#{$size});
           padding: var(--ids-comp-paginator-page-links-size-padding-y-#{$size})
@@ -69,13 +69,17 @@ $variants: primary, secondary, light, surface;
   @each $variant in $variants {
     &.ids-paginator-#{$variant} {
       .ids-paginator__navigation-container {
-        .ids-paginator__page-link {
+        .ids-paginator__page-button {
           background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-default);
           color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-default);
 
           &.active:not(:disabled) {
             background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-active);
             color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-active);
+          }
+          &:focus {
+            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-focused);
+            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-focused);
           }
           &:hover {
             background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-hovered);
@@ -85,21 +89,17 @@ $variants: primary, secondary, light, surface;
             background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-pressed);
             color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-pressed);
           }
-          &:focus {
-            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-focused);
-            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-focused);
-          }
           &:disabled {
             background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-disabled);
             color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-disabled);
           }
 
-          &.ids-paginator__page-link__arrow:not(:disabled) {
+          &.ids-paginator__page-button__arrow:not(:disabled) {
             color: var(--ids-comp-paginator-page-links-plain-color-fg-icon-#{$variant}-default);
           }
         }
 
-        .ids-paginator__page-link__dots {
+        .ids-paginator__page-button__dots {
           color: var(--ids-comp-paginator-page-links-plain-color-fg-icon-#{$variant}-disabled);
         }
       }

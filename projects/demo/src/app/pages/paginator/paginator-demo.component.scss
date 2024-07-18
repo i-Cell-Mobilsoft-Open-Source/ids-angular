@@ -47,6 +47,10 @@ section {
 }
 
 .paginator-demo-container {
+  .ids-paginator {
+    min-width: 50%;
+  }
+
   & > *:not(:last-child) {
     margin-bottom: 16px;
   }

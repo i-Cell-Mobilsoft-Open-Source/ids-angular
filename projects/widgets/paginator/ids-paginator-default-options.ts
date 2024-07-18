@@ -9,9 +9,9 @@ export const DEFAULT_PAGE_SIZE = 10;
 export interface IdsPaginatorDefaultOptions {
   pageSize?: number
   pageSizeOptions?: number[]
-  showFirstLastLink?: boolean
+  showFirstLastButton?: boolean
   showPageInfo?: boolean
-  showPageLinks?: boolean
+  showPageButtons?: boolean
   size?: SizeType
   variant?: PaginatorVariantType
 }
@@ -33,9 +33,9 @@ export function IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY(): Required<IdsPaginatorDe
       50,
       100,
     ],
-    showFirstLastLink: true,
+    showFirstLastButton: true,
     showPageInfo: true,
-    showPageLinks: true,
+    showPageButtons: true,
     size: Size.COMFORTABLE,
     variant: PaginatorVariant.SURFACE,
   };

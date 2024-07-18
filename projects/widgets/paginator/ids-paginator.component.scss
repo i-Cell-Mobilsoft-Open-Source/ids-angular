@@ -1,3 +1,4 @@
+$pageButtonAppearances: plain;
 $sizes: compact, comfortable, spacious, dense;
 $variants: primary, secondary, light, surface;
 
@@ -32,6 +33,7 @@ $variants: primary, secondary, light, surface;
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
   }
 
   @each $size in $sizes {
@@ -69,33 +71,35 @@ $variants: primary, secondary, light, surface;
   @each $variant in $variants {
     &.ids-paginator-#{$variant} {
       .ids-paginator__navigation-container {
-        .ids-paginator__page-button {
-          background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-default);
-          color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-default);
+        @each $pageButtonAppearance in $pageButtonAppearances {
+          .ids-paginator__page-button.ids-paginator__page-button-#{$pageButtonAppearance} {
+            background: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-bg-#{$variant}-default);
+            color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-label-#{$variant}-default);
 
-          &.active:not(:disabled) {
-            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-active);
-            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-active);
-          }
-          &:focus {
-            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-focused);
-            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-focused);
-          }
-          &:hover {
-            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-hovered);
-            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-hovered);
-          }
-          &:active {
-            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-pressed);
-            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-pressed);
-          }
-          &:disabled {
-            background: var(--ids-comp-paginator-page-links-plain-color-bg-#{$variant}-disabled);
-            color: var(--ids-comp-paginator-page-links-plain-color-fg-label-#{$variant}-disabled);
-          }
+            &.active:not(:disabled) {
+              background: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-bg-#{$variant}-active);
+              color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-label-#{$variant}-active);
+            }
+            &:focus {
+              background: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-bg-#{$variant}-focused);
+              color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-label-#{$variant}-focused);
+            }
+            &:hover {
+              background: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-bg-#{$variant}-hovered);
+              color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-label-#{$variant}-hovered);
+            }
+            &:active {
+              background: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-bg-#{$variant}-pressed);
+              color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-label-#{$variant}-pressed);
+            }
+            &:disabled {
+              background: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-bg-#{$variant}-disabled);
+              color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-label-#{$variant}-disabled);
+            }
 
-          &.ids-paginator__page-button__arrow:not(:disabled) {
-            color: var(--ids-comp-paginator-page-links-plain-color-fg-icon-#{$variant}-default);
+            &.ids-paginator__page-button__arrow:not(:disabled) {
+              color: var(--ids-comp-paginator-page-links-#{$pageButtonAppearance}-color-fg-icon-#{$variant}-default);
+            }
           }
         }
 

@@ -52,6 +52,8 @@ export class IdsPaginatorComponent implements OnDestroy {
   ]),
   );
 
+  public pageButtonClasses = computed(() => createHostClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
+
   private _intlChanges?: Subscription;
 
   public safePageSize = computed(() => {

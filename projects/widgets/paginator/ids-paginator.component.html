@@ -1,7 +1,8 @@
 <div class="ids-paginator__navigation-container">
   <button
     type="button"
-    class="ids-paginator__page-button ids-paginator__page-button__arrow first"
+    class="ids-paginator__page-button__arrow first"
+    [class]="pageButtonClasses()"
     [disabled]="isPreviousButtonDisabled()"
     (click)="stepFirstPage()"
   >
@@ -10,7 +11,8 @@
 
   <button
     type="button"
-    class="ids-paginator__page-button ids-paginator__page-button__arrow previous"
+    class="ids-paginator__page-button__arrow previous"
+    [class]="pageButtonClasses()"
     [disabled]="isPreviousButtonDisabled()"
     (click)="stepPreviousPage()"
   >
@@ -25,6 +27,7 @@
         <button
           type="button"
           class="ids-paginator__page-button"
+          [class]="pageButtonClasses()"
           [class.active]="+pageButton === pageIndex + 1"
           (click)="stepPage(+pageButton - 1)"
         >
@@ -36,7 +39,8 @@
 
   <button
     type="button"
-    class="ids-paginator__page-button ids-paginator__page-button__arrow next"
+    class="ids-paginator__page-button__arrow next"
+    [class]="pageButtonClasses()"
     [disabled]="isNextButtonDisabled()"
     (click)="stepNextPage()"
   >
@@ -45,7 +49,8 @@
 
   <button
     type="button"
-    class="ids-paginator__page-button ids-paginator__page-button__arrow last"
+    class="ids-paginator__page-button__arrow last"
+    [class]="pageButtonClasses()"
     [disabled]="isNextButtonDisabled()"
     (click)="stepLastPage()"
   >

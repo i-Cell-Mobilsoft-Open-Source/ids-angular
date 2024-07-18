@@ -4,13 +4,12 @@ import {
   AllVariantsType,
   BrandVariant,
   BrandVariantType,
-  TagAppearance,
-  TagAppearanceType,
   Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsTagComponent } from '@i-cell/ids-angular/tag';
+import { TagAppearance, TagAppearanceType } from '@i-cell/ids-angular/tag/types/ids-tag-appearance';
 import { mdiCheck, mdiMagnify } from '@mdi/js';
 
 @Component({

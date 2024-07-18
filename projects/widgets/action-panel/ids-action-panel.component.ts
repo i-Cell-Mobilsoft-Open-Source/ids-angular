@@ -1,3 +1,5 @@
+import { ActionPanelAppearance, ActionPanelAppearanceType } from './types/ids-action-panel-appearance';
+
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
   Component,
@@ -9,8 +11,6 @@ import {
 } from '@angular/core';
 import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
 import {
-  ActionPanelAppearance,
-  ActionPanelAppearanceType,
   AllVariants,
   createHostClassList,
   Size,

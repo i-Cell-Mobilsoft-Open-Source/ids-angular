@@ -1,3 +1,5 @@
+import { ButtonAppearance, ButtonAppearanceType } from './types/ids-button-appearance';
+
 import {
   Component,
   HostBinding,
@@ -9,8 +11,6 @@ import {
 import {
   AllVariants,
   AllVariantsType,
-  ButtonAppearance,
-  ButtonAppearanceType,
   Size,
   SizeType,
   coerceBooleanAttribute,

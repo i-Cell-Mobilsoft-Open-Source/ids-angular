@@ -1,4 +1,5 @@
 import { IdsCardHeaderComponent } from './ids-card-header.component';
+import { CardAppearance, CardAppearanceType } from './types/ids-card-appearances';
 
 import {
   Component,
@@ -14,8 +15,6 @@ import {
 import {
   AllVariants,
   AllVariantsType,
-  CardAppearance,
-  CardAppearanceType,
   Orientation,
   OrientationType,
   Size,

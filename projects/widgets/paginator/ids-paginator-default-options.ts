@@ -1,5 +1,6 @@
 /* eslint-disable no-magic-numbers */
-import { PaginatorVariant, PaginatorVariantType } from './types/paginator-variant';
+import { PaginatorPageButtonAppearance, PaginatorPageButtonAppearanceType } from './types/ids-paginator-appearance';
+import { PaginatorVariant, PaginatorVariantType } from './types/ids-paginator-variant';
 
 import { InjectionToken } from '@angular/core';
 import { SizeType, Size } from '@i-cell/ids-angular/core';
@@ -14,6 +15,7 @@ export interface IdsPaginatorDefaultOptions {
   showPageButtons?: boolean
   size?: SizeType
   variant?: PaginatorVariantType
+  pageButtonAppearance?: PaginatorPageButtonAppearanceType
 }
 
 export const IDS_PAGINATOR_DEFAULT_OPTIONS = new InjectionToken<IdsPaginatorDefaultOptions>(
@@ -38,5 +40,6 @@ export function IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY(): Required<IdsPaginatorDe
     showPageButtons: true,
     size: Size.COMFORTABLE,
     variant: PaginatorVariant.SURFACE,
+    pageButtonAppearance: PaginatorPageButtonAppearance.PLAIN,
   };
 }

@@ -1,3 +1,5 @@
+import { TagAppearance, TagAppearanceType } from './types/ids-tag-appearance';
+
 import {
   Component,
   ElementRef,
@@ -14,8 +16,6 @@ import {
   createHostClassList,
   Size,
   SizeType,
-  TagAppearance,
-  TagAppearanceType,
 } from '@i-cell/ids-angular/core';
 
 @Component({

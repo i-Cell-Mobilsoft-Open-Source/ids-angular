@@ -1,3 +1,5 @@
+import { AccordionAppearance, AccordionAppearanceType } from './types/ids-accordion-appearance';
+
 import {
   Component,
   ElementRef,
@@ -10,8 +12,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  AccordionAppearance,
-  AccordionAppearanceType,
   Size,
   SizeType,
   coerceBooleanAttribute,

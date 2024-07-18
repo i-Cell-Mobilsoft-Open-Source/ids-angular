@@ -1,3 +1,5 @@
+import { IconButtonAppearance, IconButtonAppearanceType } from './types/ids-icon-button-appearance';
+
 import {
   Component,
   HostBinding,
@@ -9,8 +11,6 @@ import {
 import {
   AllVariants,
   AllVariantsType,
-  IconButtonAppearance,
-  IconButtonAppearanceType,
   Size,
   SizeType,
   coerceBooleanAttribute,

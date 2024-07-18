@@ -4,13 +4,12 @@ import {
   BrandVariantType,
   AllVariants,
   AllVariantsType,
-  IconButtonAppearance,
-  IconButtonAppearanceType,
   Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { IconButtonAppearance, IconButtonAppearanceType } from '@i-cell/ids-angular/icon-button/types/ids-icon-button-appearance';
 import { mdiMagnify } from '@mdi/js';
 
 @Component({

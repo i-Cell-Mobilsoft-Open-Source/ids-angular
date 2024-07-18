@@ -1,3 +1,5 @@
+import { ActionItemAppearance, ActionItemAppearanceType } from './types/ids-action-item-appearance';
+
 import { CdkMenuItem } from '@angular/cdk/menu';
 import {
   Component,
@@ -10,8 +12,6 @@ import {
   input,
 } from '@angular/core';
 import {
-  ActionItemAppearance,
-  ActionItemAppearanceType,
   Size,
   SizeType,
   SurfaceVariant,

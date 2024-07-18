@@ -1,7 +1,8 @@
 import { DEFAULT_PAGE_SIZE, IDS_PAGINATOR_DEFAULT_OPTIONS, IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY } from './ids-paginator-default-options';
 import { IdsPaginatorIntl } from './ids-paginator-intl';
-import { PaginatorPageEvent } from './types/paginator-events';
-import { PaginatorVariantType } from './types/paginator-variant';
+import { PaginatorPageButtonAppearanceType } from './types/ids-paginator-appearance';
+import { PaginatorPageEvent } from './types/ids-paginator-events';
+import { PaginatorVariantType } from './types/ids-paginator-variant';
 
 import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createHostClassList, SizeType } from '@i-cell/ids-angular/core';
@@ -41,6 +42,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   public showPageLButton = input<boolean>(this._defaultOptions.showPageButtons);
   public size = input<SizeType>(this._defaultOptions.size);
   public variant = input<PaginatorVariantType>(this._defaultOptions.variant);
+  public pageButtonAppearance = input<PaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
   public length = input.required<number, number>({ transform: numberAttribute });
   public disabled = input<boolean>(false);
 

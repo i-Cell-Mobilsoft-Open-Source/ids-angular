@@ -7,11 +7,10 @@ import { IdsCardHeaderComponent } from '@i-cell/ids-angular/card/ids-card-header
 import { IdsCardMediaDirective } from '@i-cell/ids-angular/card/ids-card-media.directive';
 import { IdsCardSubtitleDirective } from '@i-cell/ids-angular/card/ids-card-subtitle.directive';
 import { IdsCardTitleDirective } from '@i-cell/ids-angular/card/ids-card-title.directive';
+import { CardAppearance, CardAppearanceType } from '@i-cell/ids-angular/card/types/ids-card-appearances';
 import {
   AllVariants,
   AllVariantsType,
-  CardAppearance,
-  CardAppearanceType,
   Orientation,
   OrientationType,
   Size,

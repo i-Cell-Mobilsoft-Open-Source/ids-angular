@@ -6,7 +6,7 @@ import { PaginatorVariantType } from './types/ids-paginator-variant';
 
 import { isNumberEven } from '../core/utils/even-odd';
 
-import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, Signal, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
@@ -64,22 +64,13 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   private _intlChanges?: Subscription;
 
-  public safePageSize = computed(() => {
-    const pageSize = this.pageSize();
-    if (!pageSize) {
-      return this.pageSizeOptions().length !== 0 ? this.pageSizeOptions()[0] : DEFAULT_PAGE_SIZE;
-    }
-    return pageSize;
-  });
+  public safePageSize: Signal<number> = computed(() =>
+    this._getSafePageSizeAndSafePageSizeOptions(this.pageSizeOptions(), this.pageSize()).safePageSize,
+  );
 
-  public safePageSizeOptions = computed(() => {
-    const pageSize = this.pageSize();
-    const safePageSizeOptions = this.pageSizeOptions().slice();
-    if (!safePageSizeOptions.includes(pageSize)) {
-      safePageSizeOptions.push(pageSize);
-    }
-    return safePageSizeOptions.sort((a, b) => a - b);
-  });
+  public safePageSizeOptions: Signal<number[]> = computed(() =>
+    this._getSafePageSizeAndSafePageSizeOptions(this.pageSizeOptions(), this.pageSize()).safePageSizeOptions,
+  );
 
   @Input({ transform: numberAttribute })
   get pageIndex(): number {
@@ -132,6 +123,27 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   constructor() {
     this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
+  }
+
+  private _getSafePageSizeAndSafePageSizeOptions(
+    pageSizeOptions: number[],
+    pageSize: number,
+  ): { safePageSizeOptions: number[], safePageSize: number } {
+    if (isDevMode() && (!pageSize || pageSize < 0)) {
+      throw new Error('Paginator: invalid pageSize value. Must be a number and greater than 0');
+    }
+
+    const safePageSizeOptions = pageSizeOptions.slice();
+    if (isDevMode() && !safePageSizeOptions.includes(pageSize)) {
+      throw new Error('Paginator: invalid pageSize. pageSizeOptions not includes pageSize. Use an item from pageSizeOptions.');
+    }
+    safePageSizeOptions.sort((a, b) => a - b);
+    const safePageSize: number = safePageSizeOptions.length !== 0 ? safePageSizeOptions[0] : DEFAULT_PAGE_SIZE;
+
+    return {
+      safePageSize,
+      safePageSizeOptions,
+    };
   }
 
   private _getPageButtons(pageIndex: number, numberOfPages: number, showAllPages: boolean, maxDisplayedItemCount: number): string[] {

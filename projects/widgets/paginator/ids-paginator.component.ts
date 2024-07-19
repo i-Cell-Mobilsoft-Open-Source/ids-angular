@@ -144,10 +144,10 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   private _getPageButtons(pageIndex: number, numberOfPages: number, showAllPages: boolean, maxDisplayedItemCount: number): string[] {
     const allPages = [...Array(numberOfPages).keys()].map((item) => (item + 1).toString());
-    return showAllPages ? allPages : this._truncatePageButtons(allPages, pageIndex, maxDisplayedItemCount);
+    return showAllPages ? allPages : this._getTruncatedPages(allPages, pageIndex, maxDisplayedItemCount);
   }
 
-  private _truncatePageButtons(
+  private _getTruncatedPages(
     allPages: string[],
     pageIndex: number,
     maxDisplayedItemCount: number,
@@ -159,8 +159,8 @@ export class IdsPaginatorComponent implements OnDestroy {
     const actualPage = pageIndex + 1;
     const lastPage = +(allPages.at(-1) as string);
     const isTruncatedRight = actualPage <= center;
-    const isTruncatedBoth = actualPage > center && actualPage < lastPage - center;
-    const isTruncatedLeft = actualPage >= lastPage - center;
+    const isTruncatedBoth = actualPage > center && actualPage <= lastPage - center;
+    const isTruncatedLeft = actualPage > lastPage - center;
     const truncation = '...';
 
     if (isTruncatedRight) {

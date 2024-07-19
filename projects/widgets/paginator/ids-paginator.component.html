@@ -21,24 +21,28 @@
     <ids-icon [icon]="navigationIcon.prev" [size]="size()" />
   </button>
 
-  <div class="ids-paginator__page-button-container">
-    @for (pageButton of pageButtons(); track $index) {
-      @if (pageButton === "...") {
-        <ids-icon class="ids-paginator__page-button-dots" [icon]="navigationIcon.dots" [size]="size()" />
-      } @else {
-        <button
-          type="button"
-          class="ids-paginator__page-button"
-          [class]="pageButtonClasses()"
-          [class.active]="+pageButton === pageIndex + 1"
-          [attr.aria-label]="intl.pageLabel + pageButton"
-          (click)="stepPage(+pageButton - 1)"
-        >
-          <span>{{ pageButton }}</span>
-        </button>
+  @if (showPageButtons()) {
+    <div class="ids-paginator__page-button-container">
+      @for (pageButton of pageButtons(); track $index) {
+        @if (pageButton === "...") {
+          <div class="ids-paginator__page-button-truncation">
+            <ids-icon [icon]="navigationIcon.truncation" [size]="size()" />
+          </div>
+        } @else {
+          <button
+            type="button"
+            class="ids-paginator__page-button"
+            [class]="pageButtonClasses()"
+            [class.active]="+pageButton === pageIndex + 1"
+            [attr.aria-label]="intl.pageLabel + pageButton"
+            (click)="stepPage(+pageButton - 1)"
+          >
+            <span>{{ pageButton }}</span>
+          </button>
+        }
       }
-    }
-  </div>
+    </div>
+  }
 
   <button
     type="button"

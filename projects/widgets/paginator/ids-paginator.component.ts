@@ -4,7 +4,9 @@ import { PaginatorPageButtonAppearanceType } from './types/ids-paginator-appeara
 import { PaginatorPageEvent } from './types/ids-paginator-events';
 import { PaginatorVariantType } from './types/ids-paginator-variant';
 
-import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
+import { isNumberEven } from '../core/utils/even-odd';
+
+import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
@@ -39,7 +41,9 @@ export class IdsPaginatorComponent implements OnDestroy {
   public pageSizeOptions = input<number[]>(this._defaultOptions.pageSizeOptions);
   public showFirstLastButton = input<boolean>(this._defaultOptions.showFirstLastButton);
   public showPageInfo = input<boolean>(this._defaultOptions.showPageInfo);
-  public showPageLButton = input<boolean>(this._defaultOptions.showPageButtons);
+  public showPageButtons = input<boolean>(this._defaultOptions.showPageButtons);
+  public showAllPages = input<boolean>(this._defaultOptions.showAllPages);
+  public maxDisplayedItemCount = input<number>(this._defaultOptions.maxDisplayedItemCount);
   public size = input<SizeType>(this._defaultOptions.size);
   public variant = input<PaginatorVariantType>(this._defaultOptions.variant);
   public pageButtonAppearance = input<PaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
@@ -109,7 +113,7 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   // eslint-disable-next-line arrow-body-style
   public pageButtons = computed<string[]>(() => {
-    return this.getPageButtons(this._pageIndex(), this._getNumberOfPages());
+    return this._getPageButtons(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
   });
 
   @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
@@ -119,7 +123,7 @@ export class IdsPaginatorComponent implements OnDestroy {
     prev: mdiChevronLeft,
     next: mdiChevronRight,
     last: mdiChevronDoubleRight,
-    dots: mdiDotsHorizontal,
+    truncation: mdiDotsHorizontal,
   };
 
   @HostBinding('class') get classes(): string {
@@ -130,8 +134,60 @@ export class IdsPaginatorComponent implements OnDestroy {
     this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
   }
 
-  public getPageButtons(pageIndex: number, numberOfPages: number): string[] {
-    return [...Array(numberOfPages).keys()].map((item) => (item + 1).toString());
+  private _getPageButtons(pageIndex: number, numberOfPages: number, showAllPages: boolean, maxDisplayedItemCount: number): string[] {
+    const allPages = [...Array(numberOfPages).keys()].map((item) => (item + 1).toString());
+    return showAllPages ? allPages : this._truncatePageButtons(allPages, pageIndex, maxDisplayedItemCount);
+  }
+
+  private _truncatePageButtons(
+    allPages: string[],
+    pageIndex: number,
+    maxDisplayedItemCount: number,
+  ): string[] {
+    if (isDevMode() && isNumberEven(maxDisplayedItemCount)) {
+      throw new Error('Paginator: maxDisplayedItemCount should be an odd number');
+    }
+    const center = Math.ceil(maxDisplayedItemCount / 2);
+    const actualPage = pageIndex + 1;
+    const lastPage = +(allPages.at(-1) as string);
+    const isTruncatedRight = actualPage <= center;
+    const isTruncatedBoth = actualPage > center && actualPage < lastPage - center;
+    const isTruncatedLeft = actualPage >= lastPage - center;
+    const truncation = '...';
+
+    if (isTruncatedRight) {
+      // eslint-disable-next-line no-magic-numbers
+      const x = maxDisplayedItemCount - 2; // 2 = 1 last page, 1 truncation
+      return [
+        ...allPages.slice(0, x),
+        truncation,
+        lastPage.toString(),
+      ];
+    }
+
+    if (isTruncatedBoth) {
+      // eslint-disable-next-line no-magic-numbers
+      const x = (maxDisplayedItemCount - 5) / 2; // 5 = 1 fist page + 1 last page + 2 truncation + 1 actual page
+      return [
+        '1',
+        truncation,
+        ...allPages.slice(pageIndex - x, pageIndex + x + 1),
+        truncation,
+        lastPage.toString(),
+      ];
+    }
+
+    if (isTruncatedLeft) {
+      // eslint-disable-next-line no-magic-numbers
+      const x = maxDisplayedItemCount - 2; // 2 = 1 last page, 1 truncation
+      return [
+        '1',
+        truncation,
+        ...allPages.slice(lastPage - x),
+      ];
+    }
+
+    return [];
   }
 
   public stepNextPage(): void {

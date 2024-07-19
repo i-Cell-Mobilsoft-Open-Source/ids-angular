@@ -70,7 +70,7 @@
         "no-magic-numbers": [
           "error",
           {
-            "ignore": [0, 1]
+            "ignore": [0, 1, 2, -1]
           }
         ],
         "no-multi-assign": "error",

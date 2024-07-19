@@ -16,6 +16,12 @@ $variants: primary, secondary, light, surface;
     .ids-paginator__page-button-container {
       display: flex;
       align-items: center;
+
+      .ids-paginator__page-button-truncation {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     .ids-paginator__page-button {
@@ -75,6 +81,11 @@ $variants: primary, secondary, light, surface;
           line-height: var(--ids-comp-paginator-page-links-label-typography-line-height-#{$size});
           border-radius: var(--ids-comp-paginator-page-links-page-link-size-border-radius-#{$size});
         }
+
+        .ids-paginator__page-button-truncation {
+          height: var(--ids-comp-paginator-page-links-size-height-#{$size});
+          width: var(--ids-comp-paginator-page-links-size-min-width-#{$size});
+        }
       }
 
       .ids-paginator__help-text {
@@ -129,7 +140,7 @@ $variants: primary, secondary, light, surface;
           }
         }
 
-        .ids-paginator__page-button-dots {
+        .ids-paginator__page-button-truncation {
           color: var(--ids-comp-paginator-page-links-plain-color-fg-icon-#{$variant}-disabled);
         }
       }

@@ -29,5 +29,5 @@ export class PaginatorDemoComponent {
   ];
 
   // eslint-disable-next-line no-magic-numbers
-  public length = 80;
+  public length = 120;
 }

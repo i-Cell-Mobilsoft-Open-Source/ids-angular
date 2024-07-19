@@ -6,6 +6,7 @@ import { InjectionToken } from '@angular/core';
 import { SizeType, Size } from '@i-cell/ids-angular/core';
 
 export const DEFAULT_PAGE_SIZE = 10;
+export const MAX_DISPLAYED_ITEM_COUNT = 7;
 
 export interface IdsPaginatorDefaultOptions {
   pageSize?: number
@@ -13,6 +14,8 @@ export interface IdsPaginatorDefaultOptions {
   showFirstLastButton?: boolean
   showPageInfo?: boolean
   showPageButtons?: boolean
+  showAllPages?: boolean
+  maxDisplayedItemCount?: number
   size?: SizeType
   variant?: PaginatorVariantType
   pageButtonAppearance?: PaginatorPageButtonAppearanceType
@@ -38,6 +41,8 @@ export function IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY(): Required<IdsPaginatorDe
     showFirstLastButton: true,
     showPageInfo: true,
     showPageButtons: true,
+    showAllPages: false,
+    maxDisplayedItemCount: MAX_DISPLAYED_ITEM_COUNT,
     size: Size.COMFORTABLE,
     variant: PaginatorVariant.SURFACE,
     pageButtonAppearance: PaginatorPageButtonAppearance.PLAIN,

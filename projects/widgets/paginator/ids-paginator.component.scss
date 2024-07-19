@@ -151,7 +151,7 @@ $variants: primary, secondary, light, surface;
     }
   }
 
-  &.mobile {
+  &.compact {
     .ids-paginator__navigation-container {
       .ids-paginator__page-button-container {
         display: none;

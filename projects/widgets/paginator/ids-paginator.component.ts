@@ -49,7 +49,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   public pageButtonAppearance = input<PaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
   public length = input.required<number, number>({ transform: numberAttribute });
   public disabled = input<boolean>(false);
-  public isMobile = signal(false);
+  public isCompact = input<boolean>(false);
 
   private _hostClasses = computed(() => createClassList(
     this._componentClass,
@@ -57,7 +57,7 @@ export class IdsPaginatorComponent implements OnDestroy {
       this.size(),
       this.variant(),
     ],
-    [this.isMobile() ? 'mobile' : null]),
+    [this.isCompact() ? 'compact' : null]),
   );
 
   public pageButtonClasses = computed(() => createClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
@@ -104,7 +104,9 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   // eslint-disable-next-line arrow-body-style
   public pageButtons = computed<string[]>(() => {
-    return this._getPageButtons(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
+    return this.isCompact()
+      ? []
+      : this._getPageButtons(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
   });
 
   @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
@@ -206,52 +208,40 @@ export class IdsPaginatorComponent implements OnDestroy {
     if (!this._hasNextPage()) {
       return;
     }
-
-    const previousPageIndex = this._pageIndex();
-    this._pageIndex.update((val) => val + 1);
-    this._emitPageEvent(previousPageIndex);
+    this.stepPage(this._pageIndex() + 1);
   }
 
   public stepPreviousPage(): void {
     if (!this._hasPreviousPage()) {
       return;
     }
-
-    const previousPageIndex = this._pageIndex();
-    this._pageIndex.update((val) => val - 1);
-    this._emitPageEvent(previousPageIndex);
+    this.stepPage(this._pageIndex() - 1);
   }
 
   public stepFirstPage(): void {
     if (!this._hasPreviousPage()) {
       return;
     }
-
-    const previousPageIndex = this._pageIndex();
-    this._pageIndex.set(0);
-    this._emitPageEvent(previousPageIndex);
+    this.stepPage(0);
   }
 
   public stepLastPage(): void {
     if (!this._hasNextPage()) {
       return;
     }
-
-    const previousPageIndex = this._pageIndex();
-    this._pageIndex.set(this._getNumberOfPages() - 1);
-    this._emitPageEvent(previousPageIndex);
+    this.stepPage(this._getNumberOfPages() - 1);
   }
 
   public stepPage(pageIndex: number): void {
     const previousPageIndex = this._pageIndex();
     this._pageIndex.set(pageIndex);
-    this._emitPageEvent(previousPageIndex);
+    this._emitPageEvent(previousPageIndex, pageIndex);
   }
 
-  private _emitPageEvent(previousPageIndex: number): void {
+  private _emitPageEvent(previousPageIndex: number, pageIndex: number): void {
     this.page.emit({
       previousPageIndex,
-      pageIndex: this._pageIndex(),
+      pageIndex,
       pageSize: this.pageSize(),
       length: this.length(),
     });

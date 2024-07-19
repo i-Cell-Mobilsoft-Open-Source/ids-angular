@@ -21,7 +21,6 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY();
   standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './ids-paginator.component.html',
-  styleUrl: './ids-paginator.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsPaginatorComponent implements OnDestroy {

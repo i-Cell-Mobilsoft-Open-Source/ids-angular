@@ -6,7 +6,7 @@ import { PaginatorVariantType } from './types/ids-paginator-variant';
 
 import { isNumberEven } from '../core/utils/even-odd';
 
-import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, Signal, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
@@ -64,13 +64,7 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   private _intlChanges?: Subscription;
 
-  public safePageSize: Signal<number> = computed(() =>
-    this._getSafePageSizeAndSafePageSizeOptions(this.pageSizeOptions(), this.pageSize()).safePageSize,
-  );
-
-  public safePageSizeOptions: Signal<number[]> = computed(() =>
-    this._getSafePageSizeAndSafePageSizeOptions(this.pageSizeOptions(), this.pageSize()).safePageSizeOptions,
-  );
+  public safePageSizeData = computed(() => this._getSafePageSizeData(this.pageSizeOptions(), this.pageSize()));
 
   @Input({ transform: numberAttribute })
   get pageIndex(): number {
@@ -127,7 +121,7 @@ export class IdsPaginatorComponent implements OnDestroy {
     this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
   }
 
-  private _getSafePageSizeAndSafePageSizeOptions(
+  private _getSafePageSizeData(
     pageSizeOptions: number[],
     pageSize: number,
   ): { safePageSizeOptions: number[], safePageSize: number } {

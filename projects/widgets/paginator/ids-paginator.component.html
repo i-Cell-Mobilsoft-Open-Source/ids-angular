@@ -71,6 +71,6 @@
   }
 
   @if (showPageInfo()) {
-    <span class="ids-paginator__help-text">{{ intl.getRangeLabel(pageIndex, safePageSize(), length()) }}</span>
+    <span class="ids-paginator__help-text">{{ intl.getRangeLabel(pageIndex, safePageSizeData().safePageSize, length()) }}</span>
   }
 </div>

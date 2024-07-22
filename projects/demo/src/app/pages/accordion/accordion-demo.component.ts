@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { IdsAccordionComponent } from '@i-cell/ids-angular/accordion';
-import { AccordionAppearance, AccordionAppearanceType } from '@i-cell/ids-angular/accordion/types/ids-accordion-appearance';
+import { AccordionAppearance, AccordionAppearanceType, IdsAccordionComponent } from '@i-cell/ids-angular/accordion';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 
 @Component({

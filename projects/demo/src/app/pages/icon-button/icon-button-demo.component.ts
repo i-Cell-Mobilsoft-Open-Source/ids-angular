@@ -8,8 +8,7 @@ import {
   SizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import { IconButtonAppearance, IconButtonAppearanceType } from '@i-cell/ids-angular/icon-button/types/ids-icon-button-appearance';
+import { IdsIconButtonComponent, IconButtonAppearance, IconButtonAppearanceType } from '@i-cell/ids-angular/icon-button';
 import { mdiMagnify } from '@mdi/js';
 
 @Component({

@@ -1,4 +1,4 @@
-<div class="ids-paginator__navigation-container">
+<nav class="ids-paginator__navigation-container">
   @if (showFirstLastButton()) {
     <button
       type="button"
@@ -24,26 +24,30 @@
   </button>
 
   @if (showPageButtons()) {
-    <div class="ids-paginator__page-button-container">
+    <ul class="ids-paginator__page-button-container">
       @for (pageButton of pageButtons(); track $index) {
-        @if (pageButton === "...") {
-          <div class="ids-paginator__page-button-truncation">
-            <ids-icon [icon]="navigationIcon.truncation" [size]="size()" />
-          </div>
-        } @else {
-          <button
-            type="button"
-            class="ids-paginator__page-button"
-            [class]="pageButtonClasses()"
-            [class.active]="+pageButton === pageIndex + 1"
-            [attr.aria-label]="intl.pageLabel + pageButton"
-            (click)="stepPage(+pageButton - 1)"
-          >
-            <span>{{ pageButton }}</span>
-          </button>
-        }
+        <li>
+          @if (pageButton === "...") {
+            <div class="ids-paginator__page-button-truncation">
+              <ids-icon [icon]="navigationIcon.truncation" [size]="size()" />
+            </div>
+          } @else {
+            <button
+              type="button"
+              class="ids-paginator__page-button"
+              [id]="id() + '__page-button-' + pageButton"
+              [class]="pageButtonClasses()"
+              [class.active]="+pageButton === pageIndex + 1"
+              [attr.aria-label]="intl.pageLabel + pageButton"
+              [attr.aria-current]="+pageButton === pageIndex + 1 ? 'page' : null"
+              (click)="stepPage(+pageButton - 1)"
+            >
+              <span>{{ pageButton }}</span>
+            </button>
+          }
+        </li>
       }
-    </div>
+    </ul>
   }
 
   <button
@@ -73,4 +77,4 @@
   @if (showPageInfo()) {
     <span class="ids-paginator__help-text">{{ intl.getRangeLabel(pageIndex, safePageSizeData().safePageSize, length()) }}</span>
   }
-</div>
+</nav>

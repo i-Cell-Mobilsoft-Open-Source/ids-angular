@@ -6,7 +6,7 @@ import { PaginatorVariantType } from './types/ids-paginator-variant';
 
 import { isNumberEven } from '../core/utils/even-odd';
 
-import { ChangeDetectorRef, Component, computed, EventEmitter, HostBinding, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostBinding, HostListener, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
@@ -21,6 +21,9 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY();
   standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './ids-paginator.component.html',
+  host: {
+    role: 'navigation',
+  },
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsPaginatorComponent implements OnDestroy {
@@ -28,6 +31,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   private readonly _injector = inject(Injector);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly _hostElementRef = inject(ElementRef);
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_PAGINATOR_DEFAULT_OPTIONS, null, { optional: true }),
@@ -55,8 +59,8 @@ export class IdsPaginatorComponent implements OnDestroy {
     [
       this.size(),
       this.variant(),
-    ],
-    [this.isCompact() ? 'compact' : null]),
+      this.isCompact() ? 'compact' : null,
+    ]),
   );
 
   public pageButtonClasses = computed(() => createClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
@@ -64,6 +68,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   private _intlChanges?: Subscription;
 
   public safePageSizeData = computed(() => this._getSafePageSizeData(this.pageSizeOptions(), this.pageSize()));
+  public pageButtonIdPrefix = computed(() => `${this.id()}__page-button-`);
 
   @Input({ transform: numberAttribute })
   get pageIndex(): number {
@@ -112,8 +117,47 @@ export class IdsPaginatorComponent implements OnDestroy {
     truncation: mdiDotsHorizontal,
   };
 
-  @HostBinding('class') get classes(): string {
+  @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
+  }
+
+  @HostBinding('id') get hostId(): string {
+    return this.id();
+  }
+
+  @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
+    event.stopPropagation();
+    // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'PageDown', 'PageUp', 'Home', 'End'];
+
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'PageDown':
+        event.preventDefault();
+        this.stepPreviousPage();
+        break;
+      case 'ArrowRight':
+      case 'PageUp':
+        event.preventDefault();
+        this.stepNextPage();
+        break;
+      case 'Home':
+        event.preventDefault();
+        this.stepFirstPage();
+        break;
+      case 'End':
+        event.preventDefault();
+        this.stepLastPage();
+        break;
+      default:
+        break;
+    }
+
+    if (event.key !== 'Tab' && navigationKeys.includes(event.key)) {
+      const pageButtonId = `${this.pageButtonIdPrefix()}${this._pageIndex() + 1}`; // after navigation pageIndex is new value now
+      const button = this._hostElementRef.nativeElement.querySelector(`button#${pageButtonId}`);
+      button?.focus();
+    }
   }
 
   constructor() {

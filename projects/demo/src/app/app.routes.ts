@@ -42,6 +42,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   },
   {
+    path: 'components/segmented-control',
+    loadComponent: () => import('./pages/segmented-control/segmented-control-demo.component').then(
+      (module) => module.SegmentedControlDemoComponent),
+  },
+  {
     path: 'components/tag',
     loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
   },

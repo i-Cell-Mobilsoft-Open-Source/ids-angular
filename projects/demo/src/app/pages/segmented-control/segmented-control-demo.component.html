@@ -1,4 +1,64 @@
-<ids-segmented-control>
-  <ids-segmented-control-item [label]="'Label 1'" />
-  <ids-segmented-control-item [label]="'Label 2'" />
-</ids-segmented-control>
+<h1>Segmented control</h1>
+@for (appearance of appearances; track $index) {
+  <h2>{{ appearance | uppercase }}</h2>
+  @for (variant of variants; track $index) {
+    <section [class]="variant">
+      <h3>{{ variant | uppercase }}</h3>
+      @for (size of sizes; track $index) {
+        <h4>{{ size }}</h4>
+        <div class="segmented-control-group">
+          <ids-segmented-control [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.lightbulb"></ids-icon>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.account"></ids-icon>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.alarm"></ids-icon>
+            </ids-segmented-control-item>
+          </ids-segmented-control>
+
+          <ids-segmented-control [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-item>Label 1</ids-segmented-control-item>
+            <ids-segmented-control-item>Label 2</ids-segmented-control-item>
+            <ids-segmented-control-item>Label 3</ids-segmented-control-item>
+          </ids-segmented-control>
+
+          <ids-segmented-control [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.lightbulb"></ids-icon>
+              <span>Label 1</span>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.account"></ids-icon>
+              <span>Label 2</span>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.alarm"></ids-icon>
+              <span>Label 3</span>
+            </ids-segmented-control-item>
+          </ids-segmented-control>
+
+          <ids-segmented-control [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.lightbulb"></ids-icon>
+              <span>Label 1</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.account"></ids-icon>
+              <span>Label 2</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item>
+              <ids-icon [icon]="icon.alarm"></ids-icon>
+              <span>Label 3</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-item>
+          </ids-segmented-control>
+        </div>
+      }
+    </section>
+  }
+}

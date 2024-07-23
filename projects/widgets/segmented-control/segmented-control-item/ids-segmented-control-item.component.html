@@ -3,6 +3,8 @@
     <ids-icon [icon]="iconChecked" />
   }
   <ng-content select="ids-icon" />
-  <span>{{ label() }}</span>
+
   <ng-content />
+
+  <ng-content select="[suffixContent]" />
 </button>

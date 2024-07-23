@@ -39,11 +39,12 @@ export class IdsSegmentedControlDirective implements AfterContentInit {
     [
       this.size(),
       this.variant(),
+      this.appearance(),
     ],
   ));
 
   @HostBinding('id') get hostId(): string {
-    return this._hostClasses();
+    return this.id();
   }
 
   @HostBinding('class') get hostClasses(): string {

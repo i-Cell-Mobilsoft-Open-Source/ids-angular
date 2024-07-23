@@ -1,6 +1,7 @@
 import { IdsSegmentedControlDirective } from '../ids-segmented-control.directive';
 
-import { Component, EventEmitter, inject, Injector, input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, computed, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { createHostClassList } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck } from '@mdi/js';
 
@@ -29,6 +30,16 @@ export class IdsSegmentedControlItemComponent implements OnInit {
   public ariaLabelledBy = input<string>('', { alias: 'aria-labeledby' });
 
   @Output() public readonly changes = new EventEmitter<boolean>();
+
+  private _hostClasses = computed(() => createHostClassList(this._componentClass));
+
+  @HostBinding('id') get hostId(): string {
+    return this.id();
+  }
+
+  @HostBinding('class') get hostClasses(): string {
+    return this._hostClasses();
+  }
 
   public ngOnInit(): void {
     const parent = this._injector.get(IdsSegmentedControlDirective, null, { optional: true, skipSelf: true });

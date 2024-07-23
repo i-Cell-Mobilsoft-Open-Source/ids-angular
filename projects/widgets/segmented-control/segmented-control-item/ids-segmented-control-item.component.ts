@@ -1,4 +1,4 @@
-import { IdsSegmentedControlComponent } from '../ids-segmented-control.component';
+import { IdsSegmentedControlDirective } from '../ids-segmented-control.directive';
 
 import { Component, EventEmitter, inject, Injector, input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -21,20 +21,23 @@ export class IdsSegmentedControlItemComponent implements OnInit {
 
   public readonly iconChecked = mdiCheck;
 
-  public checked = input<boolean>(false);
+  public selected: boolean = false;
+
   public id = input<string>(this._uniqueId);
   public label = input<string>();
+  public ariaLabel = input<string>('', { alias: 'aria-label' });
+  public ariaLabelledBy = input<string>('', { alias: 'aria-labeledby' });
 
-  @Output() public readonly changed = new EventEmitter<boolean>();
+  @Output() public readonly changes = new EventEmitter<boolean>();
 
   public ngOnInit(): void {
-    const parent = this._injector.get(IdsSegmentedControlComponent, null, { optional: true, skipSelf: true });
+    const parent = this._injector.get(IdsSegmentedControlDirective, null, { optional: true, skipSelf: true });
     if (!parent) {
       throw new Error('Segmented control item: segmented control item must be inside a segmented control.');
     }
   }
 
   public onClick(): void {
-    this.changed.emit(!this.checked());
+    this.changes.emit(!this.selected);
   }
 }

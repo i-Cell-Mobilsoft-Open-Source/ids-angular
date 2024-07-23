@@ -1,8 +1,8 @@
 <button type="button" (click)="onClick()">
-  @if (checked()) {
+  @if (selected) {
     <ids-icon [icon]="iconChecked" />
   }
   <ng-content select="ids-icon" />
-  <span>{{ label }}</span>
+  <span>{{ label() }}</span>
   <ng-content />
 </button>

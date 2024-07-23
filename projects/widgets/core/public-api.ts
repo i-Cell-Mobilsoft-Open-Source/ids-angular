@@ -6,3 +6,4 @@ export * from './types/size.type';
 export * from './types/variants';
 export * from './utils/coercion';
 export * from './utils/class-prefix';
+export * from './utils/selection-model';

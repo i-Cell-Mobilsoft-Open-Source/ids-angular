@@ -3,22 +3,18 @@ import { IdsSegmentedControlItemComponent } from './segmented-control-item/ids-s
 import { SegmentedControlAppearanceType } from './types/ids-semneted-control-appearance';
 import { SegmentedControlVariantType } from './types/ids-semneted-control-variant';
 
-import { AfterContentInit, Component, computed, contentChildren, HostBinding, inject, Injector, input, isDevMode, ViewEncapsulation } from '@angular/core';
-import { createHostClassList, SizeType } from '@i-cell/ids-angular/core';
+import { AfterContentInit, computed, contentChildren, Directive, HostBinding, inject, Injector, input, isDevMode } from '@angular/core';
+import { createHostClassList, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 
 const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY();
 
-@Component({
-  selector: 'ids-ids-segmented-control',
+@Directive({
+  selector: 'ids-segmented-control',
   standalone: true,
-  imports: [],
-  templateUrl: './ids-segmented-control.component.html',
-  styleUrl: './ids-segmented-control.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
-export class IdsSegmentedControlComponent implements AfterContentInit {
+export class IdsSegmentedControlDirective implements AfterContentInit {
   private readonly _componentClass = 'ids-segmented-control';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   private readonly _injector = inject(Injector);
@@ -34,7 +30,9 @@ export class IdsSegmentedControlComponent implements AfterContentInit {
   public disabled = input<boolean>(false);
   public multiSelect = input<boolean>(false);
 
-  private _items = contentChildren(IdsSegmentedControlItemComponent);
+  private _selectionModel?: SelectionModel<IdsSegmentedControlItemComponent>;
+
+  private _items = contentChildren<IdsSegmentedControlItemComponent>(IdsSegmentedControlItemComponent);
 
   private _hostClasses = computed(() => createHostClassList(
     this._componentClass,
@@ -44,7 +42,11 @@ export class IdsSegmentedControlComponent implements AfterContentInit {
     ],
   ));
 
-  @HostBinding('class') get classes(): string {
+  @HostBinding('id') get hostId(): string {
+    return this._hostClasses();
+  }
+
+  @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
   }
 

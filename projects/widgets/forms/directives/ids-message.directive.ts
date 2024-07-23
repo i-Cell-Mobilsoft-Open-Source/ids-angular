@@ -2,7 +2,7 @@ import { IDS_FORM_ELEMENT } from './../tokens/form';
 import { FormElement } from './../types/form-element';
 
 import { Directive, HostBinding, Injector, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, computed, inject, input, signal } from '@angular/core';
-import { AllVariants, AllVariantsType, createHostClassList, Size, SizeType } from '@i-cell/ids-angular/core';
+import { AllVariants, AllVariantsType, createClassList, Size, SizeType } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 
@@ -28,7 +28,7 @@ export class IdsMessageDirective implements OnInit, OnChanges {
   private _size = signal<SizeType | null>(Size.COMFORTABLE);
   private _variant = signal<AllVariantsType | null>(AllVariants.SURFACE);
   private _disabled = signal<boolean>(false);
-  private _hostClasses = computed(() => createHostClassList(this._componentClass, [
+  private _hostClasses = computed(() => createClassList(this._componentClass, [
     this._size(),
     this._variant(),
     this._disabled() ? 'disabled' : null,

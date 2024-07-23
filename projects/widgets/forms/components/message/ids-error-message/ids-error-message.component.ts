@@ -6,7 +6,7 @@ import { FormElement } from './../../../types/form-element';
 
 import { Component, ContentChildren, HostBinding, Injector, OnDestroy, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { createHostClassList } from '@i-cell/ids-angular/core';
+import { createClassList } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiInformationOutline } from '@mdi/js';
 import { Subscription, startWith } from 'rxjs';
@@ -26,7 +26,7 @@ export class IdsErrorMessageComponent implements OnInit, OnDestroy {
   private _injector = inject(Injector);
 
   private _errors = signal<ValidationErrors | null>(null);
-  private _hostClasses = computed(() => createHostClassList(this._componentClass));
+  private _hostClasses = computed(() => createClassList(this._componentClass));
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();

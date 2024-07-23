@@ -11,8 +11,8 @@ ids-icon {
   @each $size in $sizes {
     &.ids-icon-#{$size} {
       // FIXME: using icon-button's icon size tokens for now
-      width: var(--ids-comp-size-icon-button-size-icon-#{$size}, 24px);
-      height: var(--ids-comp-size-icon-button-size-icon-#{$size}, 24px);
+      width: var(--ids-comp-icon-button-size-icon-#{$size});
+      height: var(--ids-comp-icon-button-size-icon-#{$size});
     }
   }
 }

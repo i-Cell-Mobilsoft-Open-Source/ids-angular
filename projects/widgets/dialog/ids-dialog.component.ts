@@ -13,7 +13,7 @@ import {
   input,
 } from '@angular/core';
 import {
-  createHostClassList,
+  createClassList,
   IdsDetectScrollableDirective,
   Size,
   SizeType,
@@ -53,7 +53,7 @@ export class IdsDialogComponent {
   public customHeader = contentChild(IdsDialogHeaderDirective);
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.size(),
       this.showBackdrop() ? 'with-backdrop' : null,
     ]),

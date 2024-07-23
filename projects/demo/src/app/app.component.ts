@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
             { name: 'COMPONENTS.DIALOG', path: '/components/dialog' },
             { name: 'COMPONENTS.DIVIDERS', path: '/components/divider' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
+            { name: 'COMPONENTS.PAGINATOR', path: '/components/paginator' },
             { name: 'COMPONENTS.TAG', path: '/components/tag' },
           ],
         },

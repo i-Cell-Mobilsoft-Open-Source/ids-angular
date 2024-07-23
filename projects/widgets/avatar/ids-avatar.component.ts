@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import {
-  createHostClassList,
+  createClassList,
   Size,
   SizeType,
   SurfaceVariant,
@@ -29,7 +29,7 @@ export class IdsAvatarComponent {
   public variant = input<SurfaceVariantType | null>(SurfaceVariant.PRIMARY);
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.size(),
       this.variant(),
     ]),

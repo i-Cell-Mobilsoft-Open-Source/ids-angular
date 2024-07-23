@@ -3,7 +3,7 @@ import { IdsMessageSuffixDirective } from './../../../directives/ids-message-suf
 import { IdsMessageDirective } from './../../../directives/ids-message.directive';
 
 import { Component, ContentChildren, HostBinding, QueryList, ViewEncapsulation, computed } from '@angular/core';
-import { createHostClassList } from '@i-cell/ids-angular/core';
+import { createClassList } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck } from '@mdi/js';
 
@@ -18,7 +18,7 @@ import { mdiCheck } from '@mdi/js';
 export class IdsSuccessMessageComponent {
   private readonly _componentClass = 'ids-success-message';
 
-  private _hostClasses = computed(() => createHostClassList(this._componentClass));
+  private _hostClasses = computed(() => createClassList(this._componentClass));
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();

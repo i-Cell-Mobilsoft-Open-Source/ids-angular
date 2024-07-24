@@ -6,7 +6,7 @@ import { SegmentedControlVariantType } from './types/ids-semneted-control-varian
 
 import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, inject, Injector, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, createHostClassList, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, createClassList, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
@@ -47,7 +47,7 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
   public multiSelect = input<boolean>(false);
   public isDisabled = signal<boolean>(false);
 
-  private _hostClasses = computed(() => createHostClassList(
+  private _hostClasses = computed(() => createClassList(
     this._componentClass,
     [
       this.size(),

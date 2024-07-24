@@ -5,3 +5,4 @@ export * from './ids-card-media.directive';
 export * from './ids-card-subtitle.directive';
 export * from './ids-card-title.directive';
 export * from './ids-card.component';
+export * from './types/ids-card-appearances';

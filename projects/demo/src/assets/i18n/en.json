@@ -21,6 +21,7 @@
     "DIVIDERS": "Dividers",
     "ICON_BUTTON": "Icon button",
     "SEGMENTED_CONTROL": "Segmented control",
+    "PAGINATOR": "Paginator",
     "TAG": "Tag"
   }
 }

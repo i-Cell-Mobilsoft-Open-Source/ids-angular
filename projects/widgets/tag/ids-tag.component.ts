@@ -1,3 +1,5 @@
+import { TagAppearance, TagAppearanceType } from './types/ids-tag-appearance';
+
 import {
   Component,
   ElementRef,
@@ -11,11 +13,9 @@ import {
 import {
   AllVariants,
   AllVariantsType,
-  createHostClassList,
+  createClassList,
   Size,
   SizeType,
-  TagAppearance,
-  TagAppearanceType,
 } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -38,7 +38,7 @@ export class IdsTagComponent {
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.appearance(),
       this.size(),
       this.variant(),

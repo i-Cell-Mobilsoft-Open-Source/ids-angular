@@ -5,7 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { createHostClassList, Size, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, Size, SizeType } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-icon',
@@ -23,7 +23,7 @@ export class IdsIconComponent {
   public size = input<SizeType | null>(Size.COMFORTABLE);
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [this.size()]),
+    createClassList(this._componentClass, [this.size()]),
   );
 
   @HostBinding('class') get classes(): string {

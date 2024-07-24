@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
-import { IdsActionPanelComponent } from '@i-cell/ids-angular/action-panel';
-import { ActionPanelAppearance, ActionPanelAppearanceType, Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsActionPanelComponent, ActionPanelAppearance, ActionPanelAppearanceType } from '@i-cell/ids-angular/action-panel';
+import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronRight, mdiMagnify } from '@mdi/js';
 

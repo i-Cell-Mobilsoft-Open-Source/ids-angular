@@ -1,3 +1,5 @@
+import { AccordionAppearance, AccordionAppearanceType } from './types/ids-accordion-appearance';
+
 import {
   Component,
   ElementRef,
@@ -10,12 +12,10 @@ import {
   signal,
 } from '@angular/core';
 import {
-  AccordionAppearance,
-  AccordionAppearanceType,
   Size,
   SizeType,
   coerceBooleanAttribute,
-  createHostClassList,
+  createClassList,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
@@ -47,7 +47,7 @@ export class IdsAccordionComponent {
   private _details: HTMLDetailsElement = inject(ElementRef).nativeElement;
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.size(),
       this.appearance(),
       this.disabled() ? 'disabled' : null,

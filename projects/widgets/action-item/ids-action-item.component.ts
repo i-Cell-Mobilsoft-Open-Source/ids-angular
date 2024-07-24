@@ -1,3 +1,5 @@
+import { ActionItemAppearance, ActionItemAppearanceType } from './types/ids-action-item-appearance';
+
 import { CdkMenuItem } from '@angular/cdk/menu';
 import {
   Component,
@@ -10,13 +12,11 @@ import {
   input,
 } from '@angular/core';
 import {
-  ActionItemAppearance,
-  ActionItemAppearanceType,
   Size,
   SizeType,
   SurfaceVariant,
   coerceBooleanAttribute,
-  createHostClassList,
+  createClassList,
 } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -48,7 +48,7 @@ export class IdsActionItemComponent {
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
   private _hostClasses = computed(() =>
-    createHostClassList(this._componentClass, [
+    createClassList(this._componentClass, [
       this.appearance(),
       this.size(),
       this.variant(),

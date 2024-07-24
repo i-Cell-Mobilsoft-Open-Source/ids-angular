@@ -1,0 +1,81 @@
+<nav class="ids-paginator__navigation-container">
+  @if (showFirstLastButton()) {
+    <button
+      type="button"
+      class="ids-paginator__page-button-arrow first"
+      [class]="pageButtonClasses()"
+      [disabled]="isPreviousButtonDisabled()"
+      [attr.aria-label]="intl.firstPageLabel"
+      (click)="stepFirstPage()"
+    >
+      <ids-icon [icon]="navigationIcon.first" [size]="size()" />
+    </button>
+  }
+
+  <button
+    type="button"
+    class="ids-paginator__page-button-arrow previous"
+    [class]="pageButtonClasses()"
+    [disabled]="isPreviousButtonDisabled()"
+    [attr.aria-label]="intl.previousPageLabel"
+    (click)="stepPreviousPage()"
+  >
+    <ids-icon [icon]="navigationIcon.prev" [size]="size()" />
+  </button>
+
+  @if (showPageButtons()) {
+    <ul class="ids-paginator__page-button-container">
+      @for (pageButton of pageButtons(); track pageButton) {
+        <li>
+          @if (pageButton === "...") {
+            <div class="ids-paginator__page-button-truncation">
+              <ids-icon [icon]="navigationIcon.truncation" [size]="size()" />
+            </div>
+          } @else {
+            <button
+              #pageButtonElement
+              type="button"
+              class="ids-paginator__page-button"
+              [id]="pageButtonIdPrefix() + pageButton"
+              [class]="pageButtonClasses()"
+              [class.active]="+pageButton === pageIndex + 1"
+              [attr.aria-label]="intl.pageLabel + pageButton"
+              [attr.aria-current]="+pageButton === pageIndex + 1 ? 'page' : null"
+              (click)="stepPage(+pageButton - 1)"
+            >
+              <span>{{ pageButton }}</span>
+            </button>
+          }
+        </li>
+      }
+    </ul>
+  }
+
+  <button
+    type="button"
+    class="ids-paginator__page-button-arrow next"
+    [class]="pageButtonClasses()"
+    [disabled]="isNextButtonDisabled()"
+    [attr.aria-label]="intl.nextPageLabel"
+    (click)="stepNextPage()"
+  >
+    <ids-icon [icon]="navigationIcon.next" [size]="size()" />
+  </button>
+
+  @if (showFirstLastButton()) {
+    <button
+      type="button"
+      class="ids-paginator__page-button-arrow last"
+      [class]="pageButtonClasses()"
+      [disabled]="isNextButtonDisabled()"
+      [attr.aria-label]="intl.lastPageLabel"
+      (click)="stepLastPage()"
+    >
+      <ids-icon [icon]="navigationIcon.last" [size]="size()" />
+    </button>
+  }
+
+  @if (showPageInfo()) {
+    <span class="ids-paginator__help-text">{{ intl.getRangeLabel(pageIndex, safePageSizeData().safePageSize, length()) }}</span>
+  }
+</nav>

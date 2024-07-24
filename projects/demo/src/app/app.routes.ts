@@ -47,6 +47,10 @@ export const routes: Routes = [
       (module) => module.SegmentedControlDemoComponent),
   },
   {
+    path: 'components/paginator',
+    loadComponent: () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
+  },
+  {
     path: 'components/tag',
     loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
   },

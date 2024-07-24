@@ -21,6 +21,12 @@ $appearances: filled, outlined;
     display: flex;
     align-items: center;
     border-style: solid;
+    position: relative;
+
+    &:focus {
+      z-index: 1;
+      outline-style: solid;
+    }
   }
 
   @each $size in $sizes {
@@ -44,6 +50,10 @@ $appearances: filled, outlined;
           font-weight: var(--ids-comp-segmented-control-button-typography-font-weight-#{$size});
           letter-spacing: var(--ids-comp-segmented-control-button-typography-letter-spacing-#{$size});
           line-height: var(--ids-comp-segmented-control-button-typography-line-height-#{$size});
+
+          &:focus {
+            outline-width: var(--ids-comp-segmented-control-focused-outline-size-outline-width-#{$size});
+          }
         }
 
         &:first-of-type > button {
@@ -66,10 +76,18 @@ $appearances: filled, outlined;
     }
   }
 
-  @each $appearance in $appearances {
-    &.ids-segmented-control-#{$appearance} {
-      @each $variant in $variants {
-        &.ids-segmented-control-#{$variant} {
+  @each $variant in $variants {
+    &.ids-segmented-control-#{$variant} {
+      .ids-segmented-control-item > button:focus {
+        $lightOrDark: "dark";
+        @if ($variant == "light") {
+          $lightOrDark: "light";
+        }
+        outline-color: var(--ids-comp-segmented-control-focused-outline-color-#{$lightOrDark}-focused);
+      }
+
+      @each $appearance in $appearances {
+        &.ids-segmented-control-#{$appearance} {
           background-color: var(--ids-comp-segmented-control-container-#{$appearance}-color-bg-#{$variant}-default);
           border-color: var(--ids-comp-segmented-control-container-#{$appearance}-color-border-#{$variant}-default);
 

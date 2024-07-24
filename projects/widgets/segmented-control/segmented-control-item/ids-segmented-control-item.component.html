@@ -1,4 +1,17 @@
-<button type="button" (click)="onClick()">
+<button
+  #button
+  type="button"
+  [id]="id()"
+  [attr.role]="multiSelect() ? 'button' : 'radio'"
+  [attr.tabindex]="disabled() ? -1 : tabIndex()"
+  [attr.aria-pressed]="multiSelect() ? selected : null"
+  [attr.aria-checked]="!multiSelect() ? selected : null"
+  [disabled]="disabled() || null"
+  [attr.name]="buttonName()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledBy()"
+  (click)="onClick()"
+>
   @if (selected) {
     <ids-icon [icon]="iconChecked" />
   }

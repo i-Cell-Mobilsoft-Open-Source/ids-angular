@@ -18,13 +18,13 @@ export class SelectionModel<T> {
   public readonly changed = new Subject<SelectionChange<T>>();
 
   constructor(
-    private _multiple = false,
+    private _multiSelect = false,
     initiallySelectedValues?: T[],
     private _emitChanges = true,
     public compareWith?: (o1: T, o2: T) => boolean,
   ) {
     if (initiallySelectedValues && initiallySelectedValues.length) {
-      if (_multiple) {
+      if (_multiSelect) {
         initiallySelectedValues.forEach((value) => this._markSelected(value));
       } else {
         this._markSelected(initiallySelectedValues[0]);
@@ -90,13 +90,13 @@ export class SelectionModel<T> {
   }
 
   public sort(predicate?: (a: T, b: T) => number): void {
-    if (this._multiple && this.selected) {
+    if (this._multiSelect && this.selected) {
       this._selected!.sort(predicate);
     }
   }
 
   public isMultipleSelection(): boolean {
-    return this._multiple;
+    return this._multiSelect;
   }
 
   private _emitChangeEvent(): void {
@@ -118,7 +118,7 @@ export class SelectionModel<T> {
   private _markSelected(value: T): void {
     const concreteValue = this._getConcreteValue(value);
     if (!this.isSelected(concreteValue)) {
-      if (!this._multiple) {
+      if (!this._multiSelect) {
         this._unmarkAll();
       }
 
@@ -152,7 +152,7 @@ export class SelectionModel<T> {
   }
 
   private _verifyValueAssignment(values: T[]): void {
-    if (values.length > 1 && !this._multiple && isDevMode()) {
+    if (values.length > 1 && !this._multiSelect && isDevMode()) {
       throw new Error('Cannot pass multiple values into SelectionModel with single-value mode.');
     }
   }

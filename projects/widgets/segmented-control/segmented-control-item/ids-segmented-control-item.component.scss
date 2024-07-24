@@ -26,6 +26,7 @@ $appearances: filled, outlined;
     &:focus {
       z-index: 1;
       outline-style: solid;
+      outline-offset: 2px;
     }
   }
 

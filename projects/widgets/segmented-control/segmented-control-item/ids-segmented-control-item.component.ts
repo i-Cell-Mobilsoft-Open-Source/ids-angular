@@ -13,7 +13,6 @@ let nextUniqueId = 0;
   standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './ids-segmented-control-item.component.html',
-  styleUrl: './ids-segmented-control-item.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsSegmentedControlItemComponent implements OnInit {

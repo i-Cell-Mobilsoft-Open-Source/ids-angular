@@ -4,7 +4,7 @@ import { IdsSegmentedControlItemChange } from './types/ids-segmented-control-ite
 import { SegmentedControlAppearanceType } from './types/ids-semneted-control-appearance';
 import { SegmentedControlVariantType } from './types/ids-semneted-control-variant';
 
-import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, inject, Injector, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, HostListener, inject, Injector, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
@@ -23,6 +23,10 @@ const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY();
       multi: true,
     },
   ],
+  host: {
+    '[attr.id]': 'id()',
+    '[attr.role]': 'multiSelect() ? "group" : "radiogroup"',
+  },
 })
 export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   private readonly _componentClass = 'ids-segmented-control';
@@ -86,12 +90,51 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
   @Output() public readonly itemChanges = new EventEmitter<IdsSegmentedControlItemChange>();
   @Output() public readonly valueChanges = new EventEmitter<unknown>();
 
-  @HostBinding('id') get hostId(): string {
-    return this.id();
-  }
-
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
+  }
+
+  @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
+    // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', 'Space'];
+    if (!navigationKeys.includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const items = this._items();
+    const target = event.target as HTMLButtonElement;
+    const buttonId = target.id;
+    const index = items.findIndex((item) => item.id() === buttonId);
+
+    switch (event.key) {
+      case 'ArrowLeft': {
+        if (index === 0) {
+          return;
+        }
+        const prevIndex = this._getSiblingItemIndex(index, -1);
+        const prevItem = items[prevIndex];
+        prevItem.focus();
+        break;
+      }
+      case 'ArrowRight': {
+        if (index === (items.length - 1)) {
+          return;
+        }
+        const nextIndex = this._getSiblingItemIndex(index, 1);
+        const nextItem = items[nextIndex];
+        nextItem.focus();
+        break;
+      }
+      case 'Enter':
+      case 'Space': {
+        items[index].onClick();
+        break;
+      }
+      default:
+        return;
+    }
   }
 
   public ngOnInit(): void {
@@ -207,6 +250,18 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
     }
 
     return item.value() === this._rawValue;
+  }
+
+  private _getSiblingItemIndex(index: number, offset: number): number {
+    const items = this._items();
+    const nextIndex = index + offset;
+    if (nextIndex === items.length) {
+      return index;
+    }
+    if (nextIndex === -1) {
+      return index;
+    }
+    return nextIndex;
   }
 
   public ngOnDestroy(): void {

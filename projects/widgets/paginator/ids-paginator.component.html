@@ -39,7 +39,7 @@
               [id]="pageButtonIdPrefix() + pageButton"
               [class]="pageButtonClasses()"
               [class.active]="+pageButton === pageIndex + 1"
-              [attr.aria-label]="intl.pageLabel + pageButton"
+              [attr.aria-label]="intl.getPageLabel(pageButton)"
               [attr.aria-current]="+pageButton === pageIndex + 1 ? 'page' : null"
               (click)="stepPage(+pageButton - 1)"
             >

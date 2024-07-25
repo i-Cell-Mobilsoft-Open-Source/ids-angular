@@ -9,13 +9,10 @@ export class IdsPaginatorIntl {
   public previousPageLabel: string = 'Go to previous page';
   public firstPageLabel: string = 'Go to first page';
   public lastPageLabel: string = 'Go to last page';
-  public pageLabel: string = 'Go to page ';
 
-  public getRangeLabel: (page: number, pageSize: number, length: number) => string = (
-    page: number,
-    pageSize: number,
-    length: number,
-  ) => {
+  public getPageLabel = (page: string): string => `Go to page ${page}`;
+
+  public getRangeLabel = (page: number, pageSize: number, length: number): string => {
     if (length === 0 || pageSize === 0) {
       return 'Page 0 of 0';
     }

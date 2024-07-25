@@ -1,0 +1,93 @@
+<h1>Segmented control</h1>
+<h2>With forms api</h2>
+<p>Selection events logged out to console for this segmented control.</p>
+
+<form [formGroup]="form">
+  <div class="formsapi-block">
+    <h3>Single selection</h3>
+    <ids-segmented-control formControlName="singleSelection" [appearance]="'filled'" [variant]="'primary'" [size]="'comfortable'">
+      <ids-segmented-control-item value="first">Label 1</ids-segmented-control-item>
+      <ids-segmented-control-item value="second">Label 2</ids-segmented-control-item>
+      <ids-segmented-control-item value="third">Label 3</ids-segmented-control-item>
+    </ids-segmented-control>
+  </div>
+  <div class="formsapi-block">
+    <h3>Multi selection</h3>
+    <ids-segmented-control
+      formControlName="multiSelection"
+      [appearance]="'filled'"
+      [variant]="'primary'"
+      [size]="'comfortable'"
+      [multiSelect]="true"
+    >
+      <ids-segmented-control-item value="first">Label 1</ids-segmented-control-item>
+      <ids-segmented-control-item value="second">Label 2</ids-segmented-control-item>
+      <ids-segmented-control-item value="third">Label 3</ids-segmented-control-item>
+    </ids-segmented-control>
+  </div>
+</form>
+
+<h2>Without forms api</h2>
+@for (appearance of appearances; track $index) {
+  <h3>{{ appearance | uppercase }}</h3>
+  @for (variant of variants; track $index) {
+    <section [class]="variant">
+      <h4>{{ variant | uppercase }}</h4>
+      @for (size of sizes; track $index) {
+        <h5>{{ size }}</h5>
+        <div class="segmented-control-group">
+          <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-item value="first">
+              <ids-icon [icon]="icon.lightbulb" />
+            </ids-segmented-control-item>
+            <ids-segmented-control-item value="second">
+              <ids-icon [icon]="icon.account" />
+            </ids-segmented-control-item>
+            <ids-segmented-control-item value="third">
+              <ids-icon [icon]="icon.alarm" />
+            </ids-segmented-control-item>
+          </ids-segmented-control>
+
+          <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-item value="first">Label 1</ids-segmented-control-item>
+            <ids-segmented-control-item value="second">Label 2</ids-segmented-control-item>
+            <ids-segmented-control-item value="third">Label 3</ids-segmented-control-item>
+          </ids-segmented-control>
+
+          <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-item value="first">
+              <ids-icon [icon]="icon.lightbulb" />
+              <span>Label 1</span>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item value="second">
+              <ids-icon [icon]="icon.account" />
+              <span>Label 2</span>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item value="third">
+              <ids-icon [icon]="icon.alarm" />
+              <span>Label 3</span>
+            </ids-segmented-control-item>
+          </ids-segmented-control>
+
+          <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-item value="first">
+              <ids-icon [icon]="icon.lightbulb" />
+              <span>Label 1</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item value="second">
+              <ids-icon [icon]="icon.account" />
+              <span>Label 2</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-item>
+            <ids-segmented-control-item value="third">
+              <ids-icon [icon]="icon.alarm" />
+              <span>Label 3</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-item>
+          </ids-segmented-control>
+        </div>
+      }
+    </section>
+  }
+}

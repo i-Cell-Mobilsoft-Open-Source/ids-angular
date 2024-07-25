@@ -1,0 +1,84 @@
+import { IdsIconComponent } from '../../../../../widgets/icon/ids-icon.component';
+
+import { UpperCasePipe } from '@angular/common';
+import { Component, OnInit, viewChildren } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
+import { IdsSegmentedControlDirective } from '@i-cell/ids-angular/segmented-control/ids-segmented-control.directive';
+import { IdsSegmentedControlItemComponent } from '@i-cell/ids-angular/segmented-control/segmented-control-item/ids-segmented-control-item.component';
+import { mdiAccount, mdiAlarm, mdiLightbulbOnOutline } from '@mdi/js';
+import { Subscription } from 'rxjs';
+
+@Component({
+  selector: 'app-segmented-control-demo',
+  standalone: true,
+  imports: [
+    IdsSegmentedControlDirective,
+    IdsSegmentedControlItemComponent,
+    IdsIconComponent,
+    UpperCasePipe,
+    ReactiveFormsModule,
+  ],
+  templateUrl: './segmented-control-demo.component.html',
+  styleUrl: './segmented-control-demo.component.scss',
+})
+export class SegmentedControlDemoComponent implements OnInit {
+  private readonly _subscription = new Subscription();
+  public icon = {
+    lightbulb: mdiLightbulbOnOutline,
+    account: mdiAccount,
+    alarm: mdiAlarm,
+  };
+
+  public sizes: SizeType[] = [
+    Size.DENSE,
+    Size.COMPACT,
+    Size.COMFORTABLE,
+    Size.SPACIOUS,
+  ];
+
+  public variants: SegmentedControlVariantType[] = [
+    SegmentedControlVariant.PRIMARY,
+    SegmentedControlVariant.SURFACE,
+    SegmentedControlVariant.LIGHT,
+    SegmentedControlVariant.DARK,
+  ];
+
+  public appearances: SegmentedControlAppearanceType[] = [
+    SegmentedControlAppearance.FILLED,
+    SegmentedControlAppearance.OUTLINED,
+  ];
+
+  public form = new FormGroup({
+    singleSelection: new FormControl<string>('first'),
+    multiSelection: new FormControl<string[]>([
+      'first',
+      'third',
+    ]),
+  });
+
+  public testSegmentedControl = viewChildren(IdsSegmentedControlDirective);
+
+  public ngOnInit(): void {
+    this._subscription.add(this.form.controls.singleSelection.valueChanges.subscribe((change) => {
+      console.info('Form control valueChanges:', change);
+    }));
+
+    this._subscription.add(this.form.controls.multiSelection.valueChanges.subscribe((change) => {
+      console.info('Form control valueChanges:', change);
+    }));
+
+    this.testSegmentedControl().forEach((control) => {
+      this._subscription.add(control?.itemChanges.subscribe((change) => {
+        console.info('Segmented control itemChanges:', change);
+      }));
+    });
+
+    this.testSegmentedControl().forEach((control) => {
+      this._subscription.add(control?.valueChanges.subscribe((change) => {
+        console.info('Segmented control valueChanges:', change);
+      }));
+    });
+  }
+}

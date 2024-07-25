@@ -98,10 +98,10 @@ export class IdsPaginatorComponent implements OnDestroy {
   public isNextButtonDisabled = computed(() => this.disabled() || !this._hasNextPage());
 
   // eslint-disable-next-line arrow-body-style
-  public pageButtons = computed<string[]>(() => {
+  public pageButtonLabels = computed<string[]>(() => {
     return this.isCompact()
       ? []
-      : this._getPageButtons(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
+      : this._getPageButtonLabels(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
   });
 
   @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
@@ -182,12 +182,12 @@ export class IdsPaginatorComponent implements OnDestroy {
     };
   }
 
-  private _getPageButtons(pageIndex: number, numberOfPages: number, showAllPages: boolean, maxDisplayedItemCount: number): string[] {
+  private _getPageButtonLabels(pageIndex: number, numberOfPages: number, showAllPages: boolean, maxDisplayedItemCount: number): string[] {
     const allPages = [...Array(numberOfPages).keys()].map((item) => (item + 1).toString());
-    return showAllPages ? allPages : this._getTruncatedPages(allPages, pageIndex, maxDisplayedItemCount);
+    return showAllPages ? allPages : this._getTruncatedPageLabels(allPages, pageIndex, maxDisplayedItemCount);
   }
 
-  private _getTruncatedPages(
+  private _getTruncatedPageLabels(
     allPages: string[],
     pageIndex: number,
     maxDisplayedItemCount: number,

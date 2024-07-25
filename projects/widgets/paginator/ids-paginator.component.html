@@ -25,9 +25,9 @@
 
   @if (showPageButtons()) {
     <ul class="ids-paginator__page-button-container">
-      @for (pageButton of pageButtons(); track pageButton) {
+      @for (pageButtonLabel of pageButtonLabels(); track pageButtonLabel) {
         <li>
-          @if (pageButton === "...") {
+          @if (pageButtonLabel === "...") {
             <div class="ids-paginator__page-button-truncation">
               <ids-icon [icon]="navigationIcon.truncation" [size]="size()" />
             </div>
@@ -36,14 +36,14 @@
               #pageButtonElement
               type="button"
               class="ids-paginator__page-button"
-              [id]="pageButtonIdPrefix() + pageButton"
+              [id]="pageButtonIdPrefix() + pageButtonLabel"
               [class]="pageButtonClasses()"
-              [class.active]="+pageButton === pageIndex + 1"
-              [attr.aria-label]="intl.pageLabel + pageButton"
-              [attr.aria-current]="+pageButton === pageIndex + 1 ? 'page' : null"
-              (click)="stepPage(+pageButton - 1)"
+              [class.active]="+pageButtonLabel === pageIndex + 1"
+              [attr.aria-label]="intl.getPageLabel(pageButtonLabel)"
+              [attr.aria-current]="+pageButtonLabel === pageIndex + 1 ? 'page' : null"
+              (click)="stepPage(+pageButtonLabel - 1)"
             >
-              <span>{{ pageButton }}</span>
+              <span>{{ pageButtonLabel }}</span>
             </button>
           }
         </li>

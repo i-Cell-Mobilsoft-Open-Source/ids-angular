@@ -1,8 +1,8 @@
 import { IdsSegmentedControlDirective } from '../ids-segmented-control.directive';
 import { IdsSegmentedControlItemChange } from '../types/ids-segmented-control-item-change';
 
-import { Component, computed, ElementRef, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { coerceNumberAttribute } from '@i-cell/ids-angular/core';
+import { Component, computed, ElementRef, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck } from '@mdi/js';
 
@@ -24,7 +24,7 @@ export class IdsSegmentedControlItemComponent implements OnInit {
 
   public readonly iconChecked = mdiCheck;
 
-  public selected: boolean = false;
+  public selected = signal<boolean>(false);
 
   public id = input<string>(this._uniqueId);
   public name = input<string>();
@@ -38,6 +38,10 @@ export class IdsSegmentedControlItemComponent implements OnInit {
   public isDisabled = computed(() => this.disabled() || this._parent.isDisabled());
   public multiSelect = computed(() => this._parent.multiSelect());
   public buttonName = computed(() => (this._parent.multiSelect() ? this.name() : this._parent.name()));
+  public ariaPressed = computed(() => (this.multiSelect() ? this.selected() : null));
+  public ariaChecked = computed(() => (!this.multiSelect() ? this.selected() : null));
+  public role = computed(() => (this.multiSelect() ? 'button' : 'radio'));
+  public buttonClasses = computed(() => createClassList(this._componentClass, [this.selected() ? 'selected' : null]));
 
   @ViewChild('button') private _buttonElement!: ElementRef<HTMLButtonElement>;
 
@@ -50,12 +54,12 @@ export class IdsSegmentedControlItemComponent implements OnInit {
   public ngOnInit(): void {
     const parent = this._injector.get(IdsSegmentedControlDirective, null, { optional: true, skipSelf: true });
     if (!parent) {
-      throw new Error('Segmented control item: segmented control item must be inside a segmented control.');
+      throw new Error(createComponentError(this._componentClass, 'component must be direct child of a segmented control'));
     }
     this._parent = parent;
 
-    if (parent.isItemPreSelected(this)) {
-      this.selected = true;
+    if (parent.isItemPreSelectedByValue(this)) {
+      this.selected.set(true);
     }
   }
 

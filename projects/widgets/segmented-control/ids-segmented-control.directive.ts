@@ -6,7 +6,7 @@ import { SegmentedControlVariantType } from './types/ids-semneted-control-varian
 
 import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, HostListener, inject, Injector, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, createClassList, createComponentError, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
@@ -96,7 +96,7 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
 
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', 'Space'];
+    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter'];
     if (!navigationKeys.includes(event.key)) {
       return;
     }
@@ -127,8 +127,7 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
         nextItem.focus();
         break;
       }
-      case 'Enter':
-      case 'Space': {
+      case 'Enter': {
         items[index].onClick();
         break;
       }
@@ -147,10 +146,12 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
     const maxItemCount = 5;
 
     if (isDevMode() && (items.length < minItemCount || items.length > maxItemCount)) {
-      throw new Error('Segmented control: invalid count of segmented control items. Minimum item count is 2, maximum is 5.');
+      throw new Error(
+        createComponentError(this._componentClass, 'invalid count of segmented control items. Minimum item count is 2, maximum is 5.'),
+      );
     }
 
-    this._selectionModel?.select(...this._items().filter((item) => item.selected));
+    this._selectionModel?.select(...this._items().filter((item) => item.selected()));
     this._subscribeItemChanges();
   }
 
@@ -178,7 +179,7 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
           if (!this.multiSelect()) {
             this._clearSelection();
           }
-          source.selected = selected;
+          source.selected.set(selected);
           if (selected) {
             this._selectionModel?.select(source);
           } else {
@@ -201,7 +202,7 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
 
     if (this.multiSelect() && value) {
       if (!Array.isArray(value)) {
-        throw new Error('Segmented control: value must be an array in multiple-selection mode.');
+        throw new Error(createComponentError(this._componentClass, 'value must be an array in multiple-selection mode'));
       }
 
       this._clearSelection();
@@ -215,7 +216,7 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
   private _selectValue(value: unknown): void {
     const correspondingItem = this._items().find((item) => item.value() != null && item.value() === value);
     if (correspondingItem) {
-      correspondingItem.selected = true;
+      correspondingItem.selected.set(true);
       this._selectionModel?.select(correspondingItem);
     }
   }
@@ -223,7 +224,7 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
   private _clearSelection(): void {
     this._selectionModel?.clear();
     this._items().forEach((item) => {
-      item.selected = false;
+      item.selected.set(false);
     });
   }
 
@@ -234,13 +235,13 @@ export class IdsSegmentedControlDirective implements AfterContentInit, OnInit, O
       this._onChange(value);
     } else {
       const selected = this._selectionModel?.selected.map((item) => item.value());
-      const value = selected && selected.length > 0 ? selected : undefined;
+      const value = selected && selected.length > 0 ? selected[0] : undefined;
       this.valueChanges.emit(value);
       this._onChange(value);
     }
   }
 
-  public isItemPreSelected(item: IdsSegmentedControlItemComponent): boolean {
+  public isItemPreSelectedByValue(item: IdsSegmentedControlItemComponent): boolean {
     if (this._rawValue === undefined) {
       return false;
     }

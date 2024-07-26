@@ -62,11 +62,11 @@ export class SegmentedControlDemoComponent implements OnInit {
 
   public ngOnInit(): void {
     this._subscription.add(this.form.controls.singleSelection.valueChanges.subscribe((change) => {
-      console.info('Form control valueChanges:', change);
+      console.info('Single selection form control valueChanges:', change);
     }));
 
     this._subscription.add(this.form.controls.multiSelection.valueChanges.subscribe((change) => {
-      console.info('Form control valueChanges:', change);
+      console.info('Multi selection form control valueChanges:', change);
     }));
 
     this.testSegmentedControl().forEach((control) => {

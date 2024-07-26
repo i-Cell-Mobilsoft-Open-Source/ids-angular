@@ -2,17 +2,18 @@
   #button
   type="button"
   [id]="id()"
-  [attr.role]="multiSelect() ? 'button' : 'radio'"
+  [attr.role]="role()"
   [attr.tabindex]="isDisabled() ? -1 : tabIndex()"
-  [attr.aria-pressed]="multiSelect() ? selected : null"
-  [attr.aria-checked]="!multiSelect() ? selected : null"
+  [attr.aria-pressed]="ariaPressed()"
+  [attr.aria-checked]="ariaChecked()"
   [disabled]="isDisabled() || null"
   [attr.name]="buttonName()"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledBy()"
+  [class]="buttonClasses()"
   (click)="onClick()"
 >
-  @if (selected) {
+  @if (selected()) {
     <ids-icon aria-hidden="true" [icon]="iconChecked" />
   }
   <ng-content select="ids-icon" />

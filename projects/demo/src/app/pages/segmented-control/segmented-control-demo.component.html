@@ -6,9 +6,9 @@
   <div class="formsapi-block">
     <h3>Single selection</h3>
     <ids-segmented-control formControlName="singleSelection" [appearance]="'filled'" [variant]="'primary'" [size]="'comfortable'">
-      <ids-segmented-control-item value="first">Label 1</ids-segmented-control-item>
-      <ids-segmented-control-item value="second">Label 2</ids-segmented-control-item>
-      <ids-segmented-control-item value="third">Label 3</ids-segmented-control-item>
+      <ids-segmented-control-item value="first" label="Label 1" />
+      <ids-segmented-control-item value="second" label="Label 2" />
+      <ids-segmented-control-item value="third" label="Label 3" />
     </ids-segmented-control>
   </div>
   <div class="formsapi-block">
@@ -20,9 +20,9 @@
       [size]="'comfortable'"
       [multiSelect]="true"
     >
-      <ids-segmented-control-item value="first">Label 1</ids-segmented-control-item>
-      <ids-segmented-control-item value="second">Label 2</ids-segmented-control-item>
-      <ids-segmented-control-item value="third">Label 3</ids-segmented-control-item>
+      <ids-segmented-control-item value="first" label="Label 1" />
+      <ids-segmented-control-item value="second" label="Label 2" />
+      <ids-segmented-control-item value="third" label="Label 3" />
     </ids-segmented-control>
   </div>
 </form>
@@ -49,40 +49,34 @@
           </ids-segmented-control>
 
           <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
-            <ids-segmented-control-item value="first">Label 1</ids-segmented-control-item>
-            <ids-segmented-control-item value="second">Label 2</ids-segmented-control-item>
-            <ids-segmented-control-item value="third">Label 3</ids-segmented-control-item>
+            <ids-segmented-control-item value="first" label="Label 1" />
+            <ids-segmented-control-item value="second" label="Label 2" />
+            <ids-segmented-control-item value="third" label="Label 3" />
           </ids-segmented-control>
 
           <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
-            <ids-segmented-control-item value="first">
+            <ids-segmented-control-item value="first" label="Label 1">
               <ids-icon [icon]="icon.lightbulb" />
-              <span>Label 1</span>
             </ids-segmented-control-item>
-            <ids-segmented-control-item value="second">
+            <ids-segmented-control-item value="second" label="Label 2">
               <ids-icon [icon]="icon.account" />
-              <span>Label 2</span>
             </ids-segmented-control-item>
-            <ids-segmented-control-item value="third">
+            <ids-segmented-control-item value="third" label="Label 3">
               <ids-icon [icon]="icon.alarm" />
-              <span>Label 3</span>
             </ids-segmented-control-item>
           </ids-segmented-control>
 
           <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
-            <ids-segmented-control-item value="first">
+            <ids-segmented-control-item value="first" label="Label 1">
               <ids-icon [icon]="icon.lightbulb" />
-              <span>Label 1</span>
               <span suffixContent>$</span>
             </ids-segmented-control-item>
-            <ids-segmented-control-item value="second">
+            <ids-segmented-control-item value="second" label="Label 2">
               <ids-icon [icon]="icon.account" />
-              <span>Label 2</span>
               <span suffixContent>$</span>
             </ids-segmented-control-item>
-            <ids-segmented-control-item value="third">
+            <ids-segmented-control-item value="third" label="Label 3">
               <ids-icon [icon]="icon.alarm" />
-              <span>Label 3</span>
               <span suffixContent>$</span>
             </ids-segmented-control-item>
           </ids-segmented-control>

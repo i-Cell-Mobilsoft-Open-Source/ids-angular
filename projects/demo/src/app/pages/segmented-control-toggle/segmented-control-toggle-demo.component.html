@@ -6,8 +6,9 @@
   <div class="formsapi-block">
     <h3>Single selection</h3>
     <ids-segmented-control-toggle formControlName="singleSelection" [appearance]="'filled'" [variant]="'primary'" [size]="'comfortable'">
-      <ids-segmented-control-toggle-item value="first" name="first">Label 1</ids-segmented-control-toggle-item>
-      <ids-segmented-control-toggle-item value="second" name="second">Label 2</ids-segmented-control-toggle-item>
+      <ids-segmented-control-toggle-item value="first" name="first" label="Label 1" />
+      <ids-segmented-control-toggle-item value="second" name="second" label="Label 2" />
+      <ids-segmented-control-toggle-item value="second" name="second" label="Label 3" />
     </ids-segmented-control-toggle>
   </div>
 </form>
@@ -31,30 +32,34 @@
           </ids-segmented-control-toggle>
 
           <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
-            <ids-segmented-control-toggle-item value="first" name="first">Label 1</ids-segmented-control-toggle-item>
-            <ids-segmented-control-toggle-item value="second" name="second">Label 2</ids-segmented-control-toggle-item>
+            <ids-segmented-control-toggle-item value="first" name="first" label="Label 1" />
+            <ids-segmented-control-toggle-item value="second" name="second" label="Label 2" />
+            <ids-segmented-control-toggle-item value="second" name="second" label="Label 3" />
           </ids-segmented-control-toggle>
 
           <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
-            <ids-segmented-control-toggle-item value="first" name="first">
+            <ids-segmented-control-toggle-item value="first" name="first" label="Label 1">
               <ids-icon [icon]="icon.lightbulb" />
-              <span>Label 1</span>
             </ids-segmented-control-toggle-item>
-            <ids-segmented-control-toggle-item value="second" name="second">
+            <ids-segmented-control-toggle-item value="second" name="second" label="Label 2">
               <ids-icon [icon]="icon.account" />
-              <span>Label 2</span>
+            </ids-segmented-control-toggle-item>
+            <ids-segmented-control-toggle-item value="second" name="second" label="Label 3">
+              <ids-icon [icon]="icon.account" />
             </ids-segmented-control-toggle-item>
           </ids-segmented-control-toggle>
 
           <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
-            <ids-segmented-control-toggle-item value="first" name="first">
+            <ids-segmented-control-toggle-item value="first" name="first" label="Label 1">
               <ids-icon [icon]="icon.lightbulb" />
-              <span>Label 1</span>
               <span suffixContent>$</span>
             </ids-segmented-control-toggle-item>
-            <ids-segmented-control-toggle-item value="second" name="second">
+            <ids-segmented-control-toggle-item value="second" name="second" label="Label 2">
               <ids-icon [icon]="icon.account" />
-              <span>Label 2</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-toggle-item>
+            <ids-segmented-control-toggle-item value="second" name="second" label="Label 3">
+              <ids-icon [icon]="icon.account" />
               <span suffixContent>$</span>
             </ids-segmented-control-toggle-item>
           </ids-segmented-control-toggle>

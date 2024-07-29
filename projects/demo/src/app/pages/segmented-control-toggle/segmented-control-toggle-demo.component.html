@@ -1,0 +1,65 @@
+<h1>Segmented control toggle</h1>
+<h2>With forms api</h2>
+<p>Selection events logged out to console for this segmented control.</p>
+
+<form [formGroup]="form">
+  <div class="formsapi-block">
+    <h3>Single selection</h3>
+    <ids-segmented-control-toggle formControlName="singleSelection" [appearance]="'filled'" [variant]="'primary'" [size]="'comfortable'">
+      <ids-segmented-control-toggle-item value="first" name="first">Label 1</ids-segmented-control-toggle-item>
+      <ids-segmented-control-toggle-item value="second" name="second">Label 2</ids-segmented-control-toggle-item>
+    </ids-segmented-control-toggle>
+  </div>
+</form>
+
+<h2>Without forms api</h2>
+@for (appearance of appearances; track $index) {
+  <h3>{{ appearance | uppercase }}</h3>
+  @for (variant of variants; track $index) {
+    <section [class]="variant">
+      <h4>{{ variant | uppercase }}</h4>
+      @for (size of sizes; track $index) {
+        <h5>{{ size }}</h5>
+        <div class="segmented-control-group">
+          <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-toggle-item value="first" name="first">
+              <ids-icon [icon]="icon.lightbulb" />
+            </ids-segmented-control-toggle-item>
+            <ids-segmented-control-toggle-item value="second" name="second">
+              <ids-icon [icon]="icon.account" />
+            </ids-segmented-control-toggle-item>
+          </ids-segmented-control-toggle>
+
+          <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-toggle-item value="first" name="first">Label 1</ids-segmented-control-toggle-item>
+            <ids-segmented-control-toggle-item value="second" name="second">Label 2</ids-segmented-control-toggle-item>
+          </ids-segmented-control-toggle>
+
+          <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-toggle-item value="first" name="first">
+              <ids-icon [icon]="icon.lightbulb" />
+              <span>Label 1</span>
+            </ids-segmented-control-toggle-item>
+            <ids-segmented-control-toggle-item value="second" name="second">
+              <ids-icon [icon]="icon.account" />
+              <span>Label 2</span>
+            </ids-segmented-control-toggle-item>
+          </ids-segmented-control-toggle>
+
+          <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+            <ids-segmented-control-toggle-item value="first" name="first">
+              <ids-icon [icon]="icon.lightbulb" />
+              <span>Label 1</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-toggle-item>
+            <ids-segmented-control-toggle-item value="second" name="second">
+              <ids-icon [icon]="icon.account" />
+              <span>Label 2</span>
+              <span suffixContent>$</span>
+            </ids-segmented-control-toggle-item>
+          </ids-segmented-control-toggle>
+        </div>
+      }
+    </section>
+  }
+}

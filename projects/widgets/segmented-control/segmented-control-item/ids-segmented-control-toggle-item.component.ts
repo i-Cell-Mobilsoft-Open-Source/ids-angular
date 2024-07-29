@@ -25,7 +25,7 @@ export class IdsSegmentedControlToggleItemComponent
 
   public id = input<string>(this._uniqueId);
 
-  public ngOnInit = (): void => {
+  public ngOnInit(): void {
     const parent = this.injector.get(IdsSegmentedControlToggleDirective, null, { optional: true, skipSelf: true });
     if (!parent) {
       throw new Error(this._getNonExistingParentError());
@@ -35,11 +35,11 @@ export class IdsSegmentedControlToggleItemComponent
     if (parent.isItemPreSelectedByValue(this)) {
       this.selected.set(true);
     }
-  };
+  }
 
-  public onClick = (): void => {
+  public onClick(): void {
     if (!this.selected()) {
       this.changes.emit(new IdsSegmentedControlToggleItemChange(this, this.value()));
     }
-  };
+  }
 }

@@ -25,7 +25,7 @@ export class IdsSegmentedControlItemComponent
 
   public id = input<string>(this._uniqueId);
 
-  public ngOnInit = (): void => {
+  public ngOnInit(): void {
     const parent = this.injector.get(IdsSegmentedControlDirective, null, { optional: true, skipSelf: true });
     if (!parent) {
       throw new Error(this._getNonExistingParentError());
@@ -35,9 +35,9 @@ export class IdsSegmentedControlItemComponent
     if (parent.isItemPreSelectedByValue(this)) {
       this.selected.set(true);
     }
-  };
+  }
 
-  public onClick = (): void => {
+  public onClick(): void {
     this.changes.emit(new IdsSegmentedControlItemChange(this, !this.selected(), this.value()));
-  };
+  }
 }

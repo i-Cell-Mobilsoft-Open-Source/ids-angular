@@ -47,9 +47,9 @@ export abstract class IdsSegmentedControlItemBase<P extends ProbableParent, E ex
     return this._componentClass;
   }
 
-  public abstract ngOnInit: () => void;
+  public abstract ngOnInit(): void;
 
-  public abstract onClick: () => void;
+  public abstract onClick(): void;
 
   public focus(options?: FocusOptions): void {
     this._buttonElement.nativeElement.focus(options);

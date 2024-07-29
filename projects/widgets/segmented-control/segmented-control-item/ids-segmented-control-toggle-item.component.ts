@@ -19,19 +19,19 @@ let nextUniqueId = 0;
 export class IdsSegmentedControlToggleItemComponent
   extends IdsSegmentedControlItemBase<IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemChange>
   implements OnInit {
-  public readonly componentClass = 'ids-segmented-control-toggle-item';
-  public readonly uniqueId = `${this.componentClass}-${++nextUniqueId}`;
+  protected readonly _componentClass = 'ids-segmented-control-toggle-item';
+  protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
-  public parent = signal<IdsSegmentedControlToggleDirective | null>(null);
+  protected _parent = signal<IdsSegmentedControlToggleDirective | null>(null);
 
-  public id = input<string>(this.uniqueId);
+  public id = input<string>(this._uniqueId);
 
   public ngOnInit = (): void => {
     const parent = this.injector.get(IdsSegmentedControlToggleDirective, null, { optional: true, skipSelf: true });
     if (!parent) {
-      throw new Error(this.getNonExistingParentError());
+      throw new Error(this._getNonExistingParentError());
     }
-    this.parent.set(parent);
+    this._parent.set(parent);
 
     if (parent.isItemPreSelectedByValue(this)) {
       this.selected.set(true);

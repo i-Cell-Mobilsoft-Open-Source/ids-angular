@@ -18,19 +18,19 @@ let nextUniqueId = 0;
 export class IdsSegmentedControlItemComponent
   extends IdsSegmentedControlItemBase<IdsSegmentedControlDirective, IdsSegmentedControlItemChange>
   implements OnInit {
-  public readonly componentClass = 'ids-segmented-control-item';
-  public readonly uniqueId = `${this.componentClass}-${++nextUniqueId}`;
+  protected readonly _componentClass = 'ids-segmented-control-item';
+  protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
-  public parent = signal<IdsSegmentedControlDirective | null>(null);
+  protected _parent = signal<IdsSegmentedControlDirective | null>(null);
 
-  public id = input<string>(this.uniqueId);
+  public id = input<string>(this._uniqueId);
 
   public ngOnInit = (): void => {
     const parent = this.injector.get(IdsSegmentedControlDirective, null, { optional: true, skipSelf: true });
     if (!parent) {
-      throw new Error(this.getNonExistingParentError());
+      throw new Error(this._getNonExistingParentError());
     }
-    this.parent.set(parent);
+    this._parent.set(parent);
 
     if (parent.isItemPreSelectedByValue(this)) {
       this.selected.set(true);

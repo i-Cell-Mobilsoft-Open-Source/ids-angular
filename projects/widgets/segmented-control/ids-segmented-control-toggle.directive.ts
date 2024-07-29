@@ -24,26 +24,26 @@ let nextUniqueId = 0;
 })
 export class IdsSegmentedControlToggleDirective
   extends IdsSegmentedControlBase<IdsSegmentedControlToggleItemComponent, IdsSegmentedControlToggleItemChange> {
-  public readonly componentClass = 'ids-segmented-control-toggle';
-  public readonly uniqueId = `${this.componentClass}-${++nextUniqueId}`;
+  protected readonly _componentClass = 'ids-segmented-control-toggle';
+  protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
-  public items = contentChildren<IdsSegmentedControlToggleItemComponent>(IdsSegmentedControlToggleItemComponent);
-  public id = input<string>(this.uniqueId);
+  protected _items = contentChildren<IdsSegmentedControlToggleItemComponent>(IdsSegmentedControlToggleItemComponent);
+  public id = input<string>(this._uniqueId);
   public multiSelect = signal<boolean>(false); // multiselect is always false in toggle. Signal was necessary because of base directive class
 
   @Output() public readonly itemChanges = new EventEmitter<IdsSegmentedControlToggleItemChange>();
 
-  public subscribeItemChanges = (): void => {
-    this.items().forEach((item) => {
-      this.subscription?.add(item.changes.subscribe(
+  protected _subscribeItemChanges = (): void => {
+    this._items().forEach((item) => {
+      this._subscription?.add(item.changes.subscribe(
         (change) => {
           const { source } = change;
-          this.clearSelection();
+          this._clearSelection();
           source.selected.set(true);
-          this.selectionModel?.select(source);
+          this._selectionModel?.select(source);
           this.itemChanges.emit(change);
-          this.emitValueChangeEvent();
-          this.onTouched();
+          this._emitValueChangeEvent();
+          this._onTouched();
         },
       ));
     });

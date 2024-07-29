@@ -23,32 +23,32 @@ let nextUniqueId = 0;
   },
 })
 export class IdsSegmentedControlDirective extends IdsSegmentedControlBase<IdsSegmentedControlItemComponent, IdsSegmentedControlItemChange> {
-  public readonly componentClass = 'ids-segmented-control';
-  public readonly uniqueId = `${this.componentClass}-${++nextUniqueId}`;
+  protected readonly _componentClass = 'ids-segmented-control';
+  protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
-  public items = contentChildren<IdsSegmentedControlItemComponent>(IdsSegmentedControlItemComponent);
-  public id = input<string>(this.uniqueId);
+  protected _items = contentChildren<IdsSegmentedControlItemComponent>(IdsSegmentedControlItemComponent);
+  public id = input<string>(this._uniqueId);
   public multiSelect = input<boolean>(false);
 
   @Output() public readonly itemChanges = new EventEmitter<IdsSegmentedControlItemChange>();
 
-  public subscribeItemChanges = (): void => {
-    this.items().forEach((item) => {
-      this.subscription?.add(item.changes.subscribe(
+  protected _subscribeItemChanges = (): void => {
+    this._items().forEach((item) => {
+      this._subscription?.add(item.changes.subscribe(
         (change) => {
           const { source, selected } = change;
           if (!this.multiSelect()) {
-            this.clearSelection();
+            this._clearSelection();
           }
           source.selected.set(selected);
           if (selected) {
-            this.selectionModel?.select(source);
+            this._selectionModel?.select(source);
           } else {
-            this.selectionModel?.deselect(source);
+            this._selectionModel?.deselect(source);
           }
           this.itemChanges.emit(change);
-          this.emitValueChangeEvent();
-          this.onTouched();
+          this._emitValueChangeEvent();
+          this._onTouched();
         },
       ));
     });

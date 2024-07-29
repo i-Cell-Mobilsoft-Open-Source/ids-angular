@@ -12,11 +12,11 @@ type ProbableEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlIt
 
 @Directive({})
 export abstract class IdsSegmentedControlItemBase<P extends ProbableParent, E extends ProbableEvent> {
-  public abstract readonly componentClass: string;
-  public abstract readonly uniqueId: string;
+  protected abstract readonly _componentClass: string;
+  protected abstract readonly _uniqueId: string;
   public readonly injector = inject(Injector);
 
-  public abstract parent: Signal<P | null>;
+  protected abstract _parent: Signal<P | null>;
 
   public readonly iconChecked = mdiCheck;
 
@@ -31,20 +31,20 @@ export abstract class IdsSegmentedControlItemBase<P extends ProbableParent, E ex
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
 
-  public isDisabled = computed(() => this.disabled() || this.parent()?.isDisabled());
-  public multiSelect = computed(() => this.parent()?.multiSelect());
-  public buttonName = computed(() => (this.parent()?.multiSelect() ? this.name() : this.parent()?.name()));
-  public ariaPressed = computed(() => (this.multiSelect() ? this.selected() : null));
-  public ariaChecked = computed(() => (!this.multiSelect() ? this.selected() : null));
-  public role = computed(() => (this.multiSelect() ? 'button' : 'radio'));
-  public buttonClasses = computed(() => createClassList(this.componentClass, [this.selected() ? 'selected' : null]));
+  public isDisabled = computed(() => this.disabled() || this._parent()?.isDisabled());
+  protected _multiSelect = computed(() => this._parent()?.multiSelect());
+  public buttonName = computed(() => (this._parent()?.multiSelect() ? this.name() : this._parent()?.name()));
+  public ariaPressed = computed(() => (this._multiSelect() ? this.selected() : null));
+  public ariaChecked = computed(() => (!this._multiSelect() ? this.selected() : null));
+  public role = computed(() => (this._multiSelect() ? 'button' : 'radio'));
+  public buttonClasses = computed(() => createClassList(this._componentClass, [this.selected() ? 'selected' : null]));
 
   @ViewChild('button') private _buttonElement!: ElementRef<HTMLButtonElement>;
 
   @Output() public readonly changes = new EventEmitter<E>();
 
   @HostBinding('class') get hostClasses(): string {
-    return this.componentClass;
+    return this._componentClass;
   }
 
   public abstract ngOnInit: () => void;
@@ -55,7 +55,7 @@ export abstract class IdsSegmentedControlItemBase<P extends ProbableParent, E ex
     this._buttonElement.nativeElement.focus(options);
   }
 
-  public getNonExistingParentError(): string {
-    return createComponentError(this.componentClass, 'component must be direct child of a segmented control');
+  protected _getNonExistingParentError(): string {
+    return createComponentError(this._componentClass, 'component must be direct child of a segmented control');
   }
 }

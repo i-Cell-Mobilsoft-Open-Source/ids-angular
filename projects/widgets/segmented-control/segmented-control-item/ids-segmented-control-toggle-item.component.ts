@@ -12,7 +12,6 @@ let nextUniqueId = 0;
   selector: 'ids-segmented-control-toggle-item',
   standalone: true,
   imports: [IdsIconComponent],
-  styleUrl: './ids-segmented-control-toggle-item.component.scss',
   templateUrl: './ids-segmented-control-item.component.html',
   encapsulation: ViewEncapsulation.None,
 })

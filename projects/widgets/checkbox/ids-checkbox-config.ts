@@ -1,4 +1,4 @@
-import { CheckboxVariant, CheckboxVariantType } from './types/checkbox-variant';
+import { CheckboxVariant, CheckboxVariantType } from './types/ids-checkbox-variant';
 
 import { InjectionToken } from '@angular/core';
 import { Size, SizeType } from '@i-cell/ids-angular/core';

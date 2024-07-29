@@ -3,7 +3,7 @@
   "eslint.format.enable": true,
   "editor.formatOnSave": true,
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[ts]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsButtonComponent, ButtonAppearance, ButtonAppearanceType } from '@i-cell/ids-angular/button';
 import {
-  ButtonAppearance,
-  ButtonAppearanceType,
   BrandVariant,
   BrandVariantType,
   AllVariants,

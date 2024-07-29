@@ -1,3 +1,5 @@
+import { ActionPanelAppearance, ActionPanelAppearanceType } from './types/ids-action-panel-appearance';
+
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
   Component,
@@ -9,10 +11,8 @@ import {
 } from '@angular/core';
 import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
 import {
-  ActionPanelAppearance,
-  ActionPanelAppearanceType,
   AllVariants,
-  createHostClassList,
+  createClassList,
   Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
@@ -40,7 +40,7 @@ export class IdsActionPanelComponent {
 
   public actionItems = contentChildren(IdsActionItemComponent);
 
-  private _hostClasses = computed(() => createHostClassList(this._componentClass, [
+  private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.appearance(),
     this.size(),
     this.variant(),

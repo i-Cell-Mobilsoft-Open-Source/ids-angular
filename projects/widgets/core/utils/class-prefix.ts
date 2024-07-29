@@ -2,9 +2,13 @@ export function addClassPrefix(componentClass: string, className: string | null)
   return className ? `${componentClass}-${className}` : null;
 }
 
-export function createHostClassList(componentClass: string, classNames: Array<string | null> = []): string {
+export function createClassList(
+  componentClass: string,
+  appendableClassNames: Array<string | null> = [],
+  nonAppendableClassNames: Array<string | null> = []): string {
   return [
     componentClass,
-    ...classNames.map((className) => addClassPrefix(componentClass, className)),
+    ...appendableClassNames.map((className) => addClassPrefix(componentClass, className)),
+    ...nonAppendableClassNames,
   ].filter(Boolean).join(' ');
 }

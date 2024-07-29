@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
+import { CardAppearance, CardAppearanceType, IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/ids-card-body.directive';
 import { IdsCardFooterDirective } from '@i-cell/ids-angular/card/ids-card-footer.directive';
 import { IdsCardHeaderComponent } from '@i-cell/ids-angular/card/ids-card-header.component';
@@ -10,8 +10,6 @@ import { IdsCardTitleDirective } from '@i-cell/ids-angular/card/ids-card-title.d
 import {
   AllVariants,
   AllVariantsType,
-  CardAppearance,
-  CardAppearanceType,
   Orientation,
   OrientationType,
   Size,

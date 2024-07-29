@@ -33,19 +33,13 @@ export class IdsSegmentedControlToggleDirective
 
   @Output() public readonly itemChanges = new EventEmitter<IdsSegmentedControlToggleItemChange>();
 
-  protected _subscribeItemChanges = (): void => {
-    this._items().forEach((item) => {
-      this._subscription?.add(item.changes.subscribe(
-        (change) => {
-          const { source } = change;
-          this._clearSelection();
-          source.selected.set(true);
-          this._selectionModel?.select(source);
-          this.itemChanges.emit(change);
-          this._emitValueChangeEvent();
-          this._onTouched();
-        },
-      ));
-    });
-  };
+  protected _handleItemChanges(change: IdsSegmentedControlToggleItemChange): void {
+    const { source } = change;
+    this._clearSelection();
+    source.selected.set(true);
+    this._selectionModel?.select(source);
+    this.itemChanges.emit(change);
+    this._emitValueChangeEvent();
+    this._onTouched();
+  }
 }

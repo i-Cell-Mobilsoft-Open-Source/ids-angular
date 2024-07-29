@@ -32,25 +32,19 @@ export class IdsSegmentedControlDirective extends IdsSegmentedControlBase<IdsSeg
 
   @Output() public readonly itemChanges = new EventEmitter<IdsSegmentedControlItemChange>();
 
-  protected _subscribeItemChanges = (): void => {
-    this._items().forEach((item) => {
-      this._subscription?.add(item.changes.subscribe(
-        (change) => {
-          const { source, selected } = change;
-          if (!this.multiSelect()) {
-            this._clearSelection();
-          }
-          source.selected.set(selected);
-          if (selected) {
-            this._selectionModel?.select(source);
-          } else {
-            this._selectionModel?.deselect(source);
-          }
-          this.itemChanges.emit(change);
-          this._emitValueChangeEvent();
-          this._onTouched();
-        },
-      ));
-    });
-  };
+  protected _handleItemChanges(change: IdsSegmentedControlItemChange): void {
+    const { source, selected } = change;
+    if (!this.multiSelect()) {
+      this._clearSelection();
+    }
+    source.selected.set(selected);
+    if (selected) {
+      this._selectionModel?.select(source);
+    } else {
+      this._selectionModel?.deselect(source);
+    }
+    this.itemChanges.emit(change);
+    this._emitValueChangeEvent();
+    this._onTouched();
+  }
 }

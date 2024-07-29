@@ -160,7 +160,17 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     this.isDisabled.set(isDisabled);
   }
 
-  protected abstract _subscribeItemChanges: () => void;
+  private _subscribeItemChanges(): void {
+    this._items().forEach((item) => {
+      this._subscription?.add(item.changes.subscribe(
+        (change) => {
+          this._handleItemChanges(change as E);
+        },
+      ));
+    });
+  }
+
+  protected abstract _handleItemChanges(change: E): void;
 
   private _setSelectionByValue(value: unknown | unknown[]): void {
     this._rawValue = value;

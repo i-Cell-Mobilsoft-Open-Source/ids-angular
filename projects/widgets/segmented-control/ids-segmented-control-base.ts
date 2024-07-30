@@ -199,16 +199,16 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
-  public isItemPreSelectedByValue(item: I): boolean {
+  public isItemPreSelectedByValue(itemValue: unknown): boolean {
     if (this._rawValue === undefined) {
       return false;
     }
 
     if (this.multiSelect() && Array.isArray(this._rawValue)) {
-      return this._rawValue.some((value) => item.value() != null && value === item.value());
+      return this._rawValue.some((value) => itemValue != null && value === itemValue);
     }
 
-    return item.value() === this._rawValue;
+    return itemValue === this._rawValue;
   }
 
   private _getSiblingItemIndex(index: number, offset: number): number {

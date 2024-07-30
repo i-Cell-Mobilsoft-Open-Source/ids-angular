@@ -3,7 +3,7 @@ import { IdsSegmentedControlItemBase } from './ids-segmented-control-item-base';
 import { IdsSegmentedControlDirective } from '../ids-segmented-control.directive';
 import { IdsSegmentedControlItemChange } from '../types/ids-segmented-control-item-change';
 
-import { Component, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 let nextUniqueId = 0;
@@ -21,23 +21,13 @@ export class IdsSegmentedControlItemComponent
   protected readonly _componentClass = 'ids-segmented-control-item';
   protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
-  protected _parent = signal<IdsSegmentedControlDirective | null>(null);
-
   public id = input<string>(this._uniqueId);
 
-  public ngOnInit(): void {
-    const parent = this.injector.get(IdsSegmentedControlDirective, null, { optional: true, skipSelf: true });
-    if (!parent) {
-      throw new Error(this._getNonExistingParentError());
-    }
-    this._parent.set(parent);
-
-    if (parent.isItemPreSelectedByValue(this)) {
-      this.selected.set(true);
-    }
+  protected _getParent(): IdsSegmentedControlDirective | null {
+    return this.injector.get(IdsSegmentedControlDirective, null, { optional: true, skipSelf: true });
   }
 
-  public onClick(): void {
-    this.changes.emit(new IdsSegmentedControlItemChange(this, !this.selected(), this.value()));
+  protected _createItemChangeEvent(): IdsSegmentedControlItemChange {
+    return new IdsSegmentedControlItemChange(this, !this.selected(), this.value());
   }
 }

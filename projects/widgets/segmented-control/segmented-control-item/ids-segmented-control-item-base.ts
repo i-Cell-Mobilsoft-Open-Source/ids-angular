@@ -3,7 +3,7 @@ import { IdsSegmentedControlToggleDirective } from '../ids-segmented-control-tog
 import { IdsSegmentedControlDirective } from '../ids-segmented-control.directive';
 import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from '../types/ids-segmented-control-item-change';
 
-import { computed, Directive, ElementRef, EventEmitter, HostBinding, inject, Injector, input, InputSignal, Output, Signal, signal, ViewChild } from '@angular/core';
+import { computed, Directive, ElementRef, EventEmitter, HostBinding, inject, Injector, input, InputSignal, OnInit, Output, signal, ViewChild } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 import { mdiCheck } from '@mdi/js';
 
@@ -11,12 +11,14 @@ type SegmentedControlParent = IdsSegmentedControlToggleDirective | IdsSegmentedC
 type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
 
 @Directive({})
-export abstract class IdsSegmentedControlItemBase<P extends SegmentedControlParent, E extends SegmentedControlItemEvent> {
+export abstract class IdsSegmentedControlItemBase<P extends SegmentedControlParent, E extends SegmentedControlItemEvent>
+implements OnInit {
   protected abstract readonly _componentClass: string;
   protected abstract readonly _uniqueId: string;
   public readonly injector = inject(Injector);
 
-  protected abstract _parent: Signal<P | null>;
+  // protected abstract _parent: Signal<P | null>;
+  protected _parent = signal<P | null>(null);
 
   public readonly iconChecked = mdiCheck;
 
@@ -47,15 +49,30 @@ export abstract class IdsSegmentedControlItemBase<P extends SegmentedControlPare
     return this._componentClass;
   }
 
-  public abstract ngOnInit(): void;
+  public ngOnInit(): void {
+    const parent = this._getParent();
+    if (!parent) {
+      throw new Error(this._getNonExistingParentError());
+    }
+    this._parent.set(parent);
 
-  public abstract onClick(): void;
+    if (parent.isItemPreSelectedByValue(this.value())) {
+      this.selected.set(true);
+    }
+  }
+
+  protected abstract _getParent(): P | null;
+  protected abstract _createItemChangeEvent(): E;
+
+  public onClick(): void {
+    this.changes.emit(this._createItemChangeEvent());
+  }
 
   public focus(options?: FocusOptions): void {
     this._buttonElement.nativeElement.focus(options);
   }
 
-  protected _getNonExistingParentError(): string {
+  private _getNonExistingParentError(): string {
     return createComponentError(this._componentClass, 'component must be direct child of a segmented control');
   }
 }

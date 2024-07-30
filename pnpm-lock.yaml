@@ -36,11 +36,11 @@ importers:
         specifier: ^17.3.1
         version: 17.3.1(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser@17.3.1(@angular/animations@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(rxjs@7.8.1)
       '@i-cell/ids-styles':
-        specifier: 0.0.4
-        version: 0.0.4
+        specifier: 0.0.6
+        version: 0.0.6
       '@i-cell/ids-tokens':
-        specifier: 0.0.13
-        version: 0.0.13
+        specifier: 0.0.14
+        version: 0.0.14
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -1945,11 +1945,11 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
 
-  '@i-cell/ids-styles@0.0.4':
-    resolution: {integrity: sha512-lMiaRYlfpCZllwnb41KJmU2VZhGTfG1hQNXS3FgvnYXZbxWyfTMp9y0HtlL8lP3yhvaYLzcMvif/odJ3yYZe6g==}
+  '@i-cell/ids-styles@0.0.6':
+    resolution: {integrity: sha512-giZ8E9WJZYQBdHF/i3CN/nIZmtsbkpSHn42hRWeVR5heijRibhe/jbgYpYpbmpA5EaGD7ZRtodHQhiKYKryE4A==}
 
-  '@i-cell/ids-tokens@0.0.13':
-    resolution: {integrity: sha512-N+0k588SPOvO2OSvmoMSrqUAR6CF8NqnYySfvBmX/6nTDyfy2D3V0EV6jkC1vpGEn56Sw0+fwd/OEDyUqMZXbg==}
+  '@i-cell/ids-tokens@0.0.14':
+    resolution: {integrity: sha512-d5/BjG8DlMwDsh62TeRfOlvpwCMFqS6ZT3Up/UCN7gjBjkwXcueIW691/i3PzQVNZeFWa3mgywoYivOhpGvkkw==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -10856,9 +10856,9 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@i-cell/ids-styles@0.0.4': {}
+  '@i-cell/ids-styles@0.0.6': {}
 
-  '@i-cell/ids-tokens@0.0.13': {}
+  '@i-cell/ids-tokens@0.0.14': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:

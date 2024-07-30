@@ -1,6 +1,7 @@
 import { IdsButtonComponent } from './ids-button.component';
+import { ButtonAppearance } from './types/ids-button-appearance';
 
-import { coerceBooleanAttribute, AllVariants, ButtonAppearance, Size } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, AllVariants, Size } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiMagnify } from '@mdi/js';
 import { withActions } from '@storybook/addon-actions/decorator';

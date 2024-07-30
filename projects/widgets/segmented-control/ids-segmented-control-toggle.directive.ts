@@ -8,7 +8,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 let nextUniqueId = 0;
 
 @Directive({
-  selector: 'ids-segmented-control-toggle',
+  selector: 'ids-segmented-control-toggle[ngModel],ids-segmented-control-toggle[formControl],ids-segmented-control-toggle[formControlName]',
   standalone: true,
   providers: [
     {
@@ -39,7 +39,7 @@ export class IdsSegmentedControlToggleDirective
     source.selected.set(true);
     this._selectionModel?.select(source);
     this.itemChanges.emit(change);
-    this._emitValueChangeEvent();
+    this._handleChange();
     this._onTouched();
   }
 }

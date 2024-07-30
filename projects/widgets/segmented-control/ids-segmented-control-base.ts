@@ -12,11 +12,11 @@ import { Subscription } from 'rxjs';
 
 const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY();
 
-type ProbableItem = IdsSegmentedControlToggleItemComponent | IdsSegmentedControlItemComponent;
-type ProbableItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
+type SegmentedControlItem = IdsSegmentedControlToggleItemComponent | IdsSegmentedControlItemComponent;
+type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
 
 @Directive()
-export abstract class IdsSegmentedControlBase<I extends ProbableItem, E extends ProbableItemEvent>
+export abstract class IdsSegmentedControlBase<I extends SegmentedControlItem, E extends SegmentedControlItemEvent>
 implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   protected abstract readonly _componentClass: string;
   protected abstract readonly _uniqueId: string;
@@ -26,7 +26,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     ...this._injector.get(IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS, null, { optional: true }),
   };
 
-  protected readonly _subscription = new Subscription();
+  private readonly _subscription = new Subscription();
 
   protected _selectionModel?: SelectionModel<I>;
   private _rawValue: unknown;
@@ -60,24 +60,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
-  @Input()
-  get value(): unknown {
-    const selected = this._selectionModel ? this._selectionModel.selected : [];
-
-    if (this.multiSelect()) {
-      return selected.map((item) => item.value());
-    }
-
-    return selected[0] ? selected[0].value() : undefined;
-  }
-
-  set value(newValue: unknown) {
-    this._setSelectionByValue(newValue);
-    this.valueChanges.emit(this.value);
-  }
-
   @Output() public abstract readonly itemChanges: EventEmitter<E>;
-  @Output() public readonly valueChanges = new EventEmitter<unknown>();
 
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
@@ -207,16 +190,12 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     });
   }
 
-  protected _emitValueChangeEvent(): void {
+  protected _handleChange(): void {
+    const selectionModelValues = this._selectionModel?.selected.map((item) => item.value());
     if (this.multiSelect()) {
-      const value = this._selectionModel?.selected.map((item) => item.value());
-      this.valueChanges.emit(value);
-      this._onChange(value);
+      this._onChange(selectionModelValues);
     } else {
-      const selected = this._selectionModel?.selected.map((item) => item.value());
-      const value = selected && selected.length > 0 ? selected[0] : undefined;
-      this.valueChanges.emit(value);
-      this._onChange(value);
+      this._onChange(selectionModelValues?.[0]);
     }
   }
 

@@ -7,11 +7,11 @@ import { computed, Directive, ElementRef, EventEmitter, HostBinding, inject, Inj
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 import { mdiCheck } from '@mdi/js';
 
-type ProbableParent = IdsSegmentedControlToggleDirective | IdsSegmentedControlDirective;
-type ProbableEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
+type SegmentedControlParent = IdsSegmentedControlToggleDirective | IdsSegmentedControlDirective;
+type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
 
 @Directive({})
-export abstract class IdsSegmentedControlItemBase<P extends ProbableParent, E extends ProbableEvent> {
+export abstract class IdsSegmentedControlItemBase<P extends SegmentedControlParent, E extends SegmentedControlItemEvent> {
   protected abstract readonly _componentClass: string;
   protected abstract readonly _uniqueId: string;
   public readonly injector = inject(Injector);

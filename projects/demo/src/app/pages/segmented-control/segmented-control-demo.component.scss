@@ -63,11 +63,11 @@ section {
   }
 }
 
-form {
+.row {
   display: flex;
 }
 
-.formsapi-block {
+.col {
   margin-top: 2rem;
   margin-bottom: 1rem;
   flex: 1 1;

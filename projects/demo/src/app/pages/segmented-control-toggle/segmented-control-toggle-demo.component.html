@@ -1,6 +1,5 @@
 <h1>Segmented control toggle</h1>
-<h2>With forms api</h2>
-<p>Selection events logged out to console for this segmented control.</p>
+<p>Selection events logged out to console.</p>
 
 <form [formGroup]="form">
   <div class="formsapi-block">
@@ -13,7 +12,6 @@
   </div>
 </form>
 
-<h2>Without forms api</h2>
 @for (appearance of appearances; track $index) {
   <h3>{{ appearance | uppercase }}</h3>
   @for (variant of variants; track $index) {
@@ -22,7 +20,7 @@
       @for (size of sizes; track $index) {
         <h5>{{ size }}</h5>
         <div class="segmented-control-group">
-          <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+          <ids-segmented-control-toggle ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
             <ids-segmented-control-toggle-item value="first" name="first">
               <ids-icon [icon]="icon.lightbulb" />
             </ids-segmented-control-toggle-item>
@@ -31,13 +29,13 @@
             </ids-segmented-control-toggle-item>
           </ids-segmented-control-toggle>
 
-          <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+          <ids-segmented-control-toggle ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
             <ids-segmented-control-toggle-item value="first" name="first" label="Label 1" />
             <ids-segmented-control-toggle-item value="second" name="second" label="Label 2" />
             <ids-segmented-control-toggle-item value="second" name="second" label="Label 3" />
           </ids-segmented-control-toggle>
 
-          <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+          <ids-segmented-control-toggle ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
             <ids-segmented-control-toggle-item value="first" name="first" label="Label 1">
               <ids-icon [icon]="icon.lightbulb" />
             </ids-segmented-control-toggle-item>
@@ -49,7 +47,7 @@
             </ids-segmented-control-toggle-item>
           </ids-segmented-control-toggle>
 
-          <ids-segmented-control-toggle [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+          <ids-segmented-control-toggle ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
             <ids-segmented-control-toggle-item value="first" name="first" label="Label 1">
               <ids-icon [icon]="icon.lightbulb" />
               <span suffixContent>$</span>

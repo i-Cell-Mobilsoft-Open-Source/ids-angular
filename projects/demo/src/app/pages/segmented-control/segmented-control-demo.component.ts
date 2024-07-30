@@ -1,8 +1,8 @@
 import { IdsIconComponent } from '../../../../../widgets/icon/ids-icon.component';
 
 import { UpperCasePipe } from '@angular/common';
-import { Component, OnInit, viewChildren } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnDestroy, OnInit, viewChildren } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
 import { IdsSegmentedControlDirective } from '@i-cell/ids-angular/segmented-control/ids-segmented-control.directive';
@@ -18,12 +18,13 @@ import { Subscription } from 'rxjs';
     IdsSegmentedControlItemComponent,
     IdsIconComponent,
     UpperCasePipe,
+    FormsModule,
     ReactiveFormsModule,
   ],
   templateUrl: './segmented-control-demo.component.html',
   styleUrl: './segmented-control-demo.component.scss',
 })
-export class SegmentedControlDemoComponent implements OnInit {
+export class SegmentedControlDemoComponent implements OnInit, OnDestroy {
   private readonly _subscription = new Subscription();
   public icon = {
     lightbulb: mdiLightbulbOnOutline,
@@ -51,7 +52,7 @@ export class SegmentedControlDemoComponent implements OnInit {
   ];
 
   public form = new FormGroup({
-    singleSelection: new FormControl<string>('first'),
+    singleSelection: new FormControl<string>('second'),
     multiSelection: new FormControl<string[]>([
       'first',
       'third',
@@ -74,11 +75,9 @@ export class SegmentedControlDemoComponent implements OnInit {
         console.info('Segmented control itemChanges:', change);
       }));
     });
+  }
 
-    this.testSegmentedControl().forEach((control) => {
-      this._subscription.add(control?.valueChanges.subscribe((change) => {
-        console.info('Segmented control valueChanges:', change);
-      }));
-    });
+  public ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 }

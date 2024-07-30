@@ -1,33 +1,34 @@
 <h1>Segmented control</h1>
-<h2>With forms api</h2>
-<p>Selection events logged out to console for this segmented control.</p>
+<p>Selection events logged out to console.</p>
 
 <form [formGroup]="form">
-  <div class="formsapi-block">
-    <h3>Single selection</h3>
-    <ids-segmented-control formControlName="singleSelection" [appearance]="'filled'" [variant]="'primary'" [size]="'comfortable'">
-      <ids-segmented-control-item value="first" label="Label 1" />
-      <ids-segmented-control-item value="second" label="Label 2" />
-      <ids-segmented-control-item value="third" label="Label 3" />
-    </ids-segmented-control>
-  </div>
-  <div class="formsapi-block">
-    <h3>Multi selection</h3>
-    <ids-segmented-control
-      formControlName="multiSelection"
-      [appearance]="'filled'"
-      [variant]="'primary'"
-      [size]="'comfortable'"
-      [multiSelect]="true"
-    >
-      <ids-segmented-control-item value="first" label="Label 1" />
-      <ids-segmented-control-item value="second" label="Label 2" />
-      <ids-segmented-control-item value="third" label="Label 3" />
-    </ids-segmented-control>
+  <div class="row">
+    <div class="col">
+      <h3>Single selection</h3>
+      <ids-segmented-control formControlName="singleSelection" [appearance]="'filled'" [variant]="'primary'" [size]="'comfortable'">
+        <ids-segmented-control-item value="first" label="Label 1" />
+        <ids-segmented-control-item value="second" label="Label 2" />
+        <ids-segmented-control-item value="third" label="Label 3" />
+      </ids-segmented-control>
+    </div>
+
+    <div class="col">
+      <h3>Multi selection</h3>
+      <ids-segmented-control
+        formControlName="multiSelection"
+        [appearance]="'filled'"
+        [variant]="'primary'"
+        [size]="'comfortable'"
+        [multiSelect]="true"
+      >
+        <ids-segmented-control-item value="first" label="Label 1" />
+        <ids-segmented-control-item value="second" label="Label 2" />
+        <ids-segmented-control-item value="third" label="Label 3" />
+      </ids-segmented-control>
+    </div>
   </div>
 </form>
 
-<h2>Without forms api</h2>
 @for (appearance of appearances; track $index) {
   <h3>{{ appearance | uppercase }}</h3>
   @for (variant of variants; track $index) {
@@ -36,7 +37,7 @@
       @for (size of sizes; track $index) {
         <h5>{{ size }}</h5>
         <div class="segmented-control-group">
-          <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+          <ids-segmented-control ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
             <ids-segmented-control-item value="first">
               <ids-icon [icon]="icon.lightbulb" />
             </ids-segmented-control-item>
@@ -48,13 +49,13 @@
             </ids-segmented-control-item>
           </ids-segmented-control>
 
-          <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+          <ids-segmented-control ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
             <ids-segmented-control-item value="first" label="Label 1" />
             <ids-segmented-control-item value="second" label="Label 2" />
             <ids-segmented-control-item value="third" label="Label 3" />
           </ids-segmented-control>
 
-          <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+          <ids-segmented-control ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
             <ids-segmented-control-item value="first" label="Label 1">
               <ids-icon [icon]="icon.lightbulb" />
             </ids-segmented-control-item>
@@ -66,7 +67,7 @@
             </ids-segmented-control-item>
           </ids-segmented-control>
 
-          <ids-segmented-control [value]="'second'" [appearance]="appearance" [variant]="variant" [size]="size">
+          <ids-segmented-control ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
             <ids-segmented-control-item value="first" label="Label 1">
               <ids-icon [icon]="icon.lightbulb" />
               <span suffixContent>$</span>

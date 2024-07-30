@@ -1,5 +1,8 @@
 app-root {
-  @apply grid h-full absolute inset-0;
+  display: grid;
+  height: 100%;
+  position: absolute;
+  inset: 0;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;
   grid-row-gap: 0;
@@ -27,11 +30,19 @@ app-root {
   }
 
   .spacer {
-    @apply flex flex-auto flex-grow flex-shrink-0;
+    display: flex;
+    flex: 1 1 auto;
+    flex-grow: 1;
+    flex-shrink: 0;
   }
 
   header.app-header {
-    @apply w-auto h-24 border-b flex place-items-center min-h-24;
+    width: auto;
+    height: 6rem;
+    min-height: 6rem;
+    border-bottom-width: 1px;
+    place-items: center;
+    display: flex;
     grid-area: 1 / 1 / 1 / -1;
     background-color: var(--ids-smc-colors-surface-lighter-10);
     border-color: var(--ids-smc-colors-surface-darker-20);
@@ -41,6 +52,9 @@ app-root {
 
   main {
     grid-area: 2 / 2 / 3 / 3;
-    @apply flex-1 overflow-auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    overflow: auto;
   }
 }

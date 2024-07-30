@@ -1,67 +1,92 @@
-<h2 class="grow-0">Action Menu</h2>
-<div class="grow grid grid-cols-[max-content_1fr_max-content] grid-rows-[max-content_1fr_max-content]">
+<h2>Action Menu</h2>
+<div class="buttons-container">
   <button
+    #trigger1="idsActionMenuTrigger"
     type="button"
     idsButton
     appearance="filled"
     size="comfortable"
     variant="primary"
     [idsActionMenuTriggerFor]="actionMenu"
-    #trigger1="idsActionMenuTrigger"
   >
     Action menu top-left
-    <ids-icon icon-trailing [icon]="trigger1.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+    <ids-icon
+      icon-trailing
+      aria-hidden="true"
+      alt=""
+      [icon]="trigger1.isOpen ? mdiChevronUp : mdiChevronDown"
+    />
   </button>
   <button
+    #trigger2="idsActionMenuTrigger"
     type="button"
-    class="col-start-3 col-end-3"
+    class="top-right"
     idsButton
     appearance="filled"
     size="comfortable"
     variant="primary"
     [idsActionMenuTriggerFor]="actionMenu"
-    #trigger2="idsActionMenuTrigger"
   >
     Action menu top-right
-    <ids-icon icon-trailing [icon]="trigger2.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+    <ids-icon
+      icon-trailing
+      aria-hidden="true"
+      alt=""
+      [icon]="trigger2.isOpen ? mdiChevronUp : mdiChevronDown"
+    />
   </button>
   <button
+    #trigger3="idsActionMenuTrigger"
     type="button"
-    class="col-span-3 self-center justify-self-center"
+    class="center"
     idsButton
     appearance="filled"
     size="comfortable"
     variant="primary"
     [idsActionMenuTriggerFor]="actionMenu"
-    #trigger3="idsActionMenuTrigger"
   >
     Action menu center
-    <ids-icon icon-trailing [icon]="trigger3.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+    <ids-icon
+      icon-trailing
+      aria-hidden="true"
+      alt=""
+      [icon]="trigger3.isOpen ? mdiChevronUp : mdiChevronDown"
+    />
   </button>
   <button
+    #trigger4="idsActionMenuTrigger"
     type="button"
     idsButton
     appearance="filled"
     size="comfortable"
     variant="primary"
     [idsActionMenuTriggerFor]="actionMenu"
-    #trigger4="idsActionMenuTrigger"
   >
     Action menu bottom-left
-    <ids-icon icon-trailing [icon]="trigger4.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+    <ids-icon
+      icon-trailing
+      aria-hidden="true"
+      alt=""
+      [icon]="trigger4.isOpen ? mdiChevronUp : mdiChevronDown"
+    />
   </button>
   <button
+    #trigger5="idsActionMenuTrigger"
     type="button"
-    class="col-start-3 col-end-3"
+    class="bottom-right"
     idsButton
     appearance="filled"
     size="comfortable"
     variant="primary"
     [idsActionMenuTriggerFor]="actionMenu"
-    #trigger5="idsActionMenuTrigger"
   >
     Action menu bottom-right
-    <ids-icon icon-trailing [icon]="trigger5.isOpen ? mdiChevronUp : mdiChevronDown" aria-hidden="true" alt="" />
+    <ids-icon
+      icon-trailing
+      aria-hidden="true"
+      alt=""
+      [icon]="trigger5.isOpen ? mdiChevronUp : mdiChevronDown"
+    />
   </button>
 
   <ng-template #actionMenu>
@@ -70,13 +95,41 @@
       appearance="outlined"
     >
       @for (_ of items; track $index) {
-        <button idsActionItem appearance="filled" size="compact" [label]="'Menu Item Label ' + $index">
-          <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
-        </button>
+      <button
+        type="button"
+        idsActionItem
+        appearance="filled"
+        size="compact"
+        [label]="'Menu Item Label ' + $index"
+      >
+        <ids-icon
+          icon-leading
+          aria-hidden="true"
+          alt=""
+          [icon]="mdiSearch"
+        />
+      </button>
       }
-      <button idsActionItem appearance="filled" size="compact" label="Menu Item Label 8" [idsActionMenuTriggerFor]="subMenu">
-        <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
-        <ids-icon icon-trailing [icon]="mdiChevronRight" aria-hidden="true" alt="" />
+      <button
+        idsActionItem
+        type="button"
+        appearance="filled"
+        size="compact"
+        label="Menu Item Label 8"
+        [idsActionMenuTriggerFor]="subMenu"
+      >
+        <ids-icon
+          icon-leading
+          aria-hidden="true"
+          alt=""
+          [icon]="mdiSearch"
+        />
+        <ids-icon
+          icon-trailing
+          aria-hidden="true"
+          alt=""
+          [icon]="mdiChevronRight"
+        />
       </button>
     </ids-action-panel>
   </ng-template>
@@ -87,9 +140,20 @@
       appearance="outlined"
     >
       @for (_ of items; track $index) {
-        <button idsActionItem appearance="filled" size="compact" [label]="'Sub Menu Item Label ' + $index">
-          <ids-icon icon-leading [icon]="mdiSearch" aria-hidden="true" alt="" />
-        </button>
+      <button
+        type="button"
+        idsActionItem
+        appearance="filled"
+        size="compact"
+        [label]="'Sub Menu Item Label ' + $index"
+      >
+        <ids-icon
+          icon-leading
+          aria-hidden="true"
+          alt=""
+          [icon]="mdiSearch"
+        />
+      </button>
       }
     </ids-action-panel>
   </ng-template>

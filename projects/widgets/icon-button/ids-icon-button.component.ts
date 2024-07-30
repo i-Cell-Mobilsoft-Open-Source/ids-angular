@@ -16,6 +16,7 @@ import {
   coerceBooleanAttribute,
   createClassList,
 } from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'button[idsIconButton]',
@@ -37,7 +38,7 @@ export class IdsIconButtonComponent {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
-  public icon = contentChildren<unknown>('[icon]');
+  public icon = contentChildren(IdsIconComponent);
 
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [

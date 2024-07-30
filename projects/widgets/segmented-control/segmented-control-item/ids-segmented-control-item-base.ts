@@ -17,7 +17,6 @@ implements OnInit {
   protected abstract readonly _uniqueId: string;
   public readonly injector = inject(Injector);
 
-  // protected abstract _parent: Signal<P | null>;
   protected _parent = signal<P | null>(null);
 
   public readonly iconChecked = mdiCheck;

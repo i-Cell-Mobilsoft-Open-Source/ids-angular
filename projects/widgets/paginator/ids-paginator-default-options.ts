@@ -20,6 +20,7 @@ export interface IdsPaginatorDefaultOptions {
   size?: SizeType
   variant?: PaginatorVariantType
   pageButtonAppearance?: PaginatorPageButtonAppearanceType
+  debounceTime: number
 }
 
 export const IDS_PAGINATOR_DEFAULT_OPTIONS = new InjectionToken<IdsPaginatorDefaultOptions>(
@@ -48,5 +49,6 @@ export function IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY(): Required<IdsPaginatorDe
     size: Size.COMFORTABLE,
     variant: PaginatorVariant.SURFACE,
     pageButtonAppearance: PaginatorPageButtonAppearance.PLAIN,
+    debounceTime: 300,
   };
 }

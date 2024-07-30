@@ -10,7 +10,7 @@ import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostB
 import { createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
-import { Subscription } from 'rxjs';
+import { debounceTime, Subject, Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
 
@@ -33,6 +33,9 @@ export class IdsPaginatorComponent implements OnDestroy {
     ...defaultOptions,
     ...this._injector.get(IDS_PAGINATOR_DEFAULT_OPTIONS, null, { optional: true }),
   };
+
+  private _pageEventDebouncer = new Subject<PaginatorPageEvent>();
+  private _pageEventDebouncerSubscription = new Subscription();
 
   public readonly intl = this._injector.get(IdsPaginatorIntl);
 
@@ -160,6 +163,11 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   constructor() {
     this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
+    this._pageEventDebouncerSubscription = this._pageEventDebouncer.pipe(
+      debounceTime(this._defaultOptions.debounceTime),
+    ).subscribe((pageEvent) => {
+      this.page.emit(pageEvent);
+    });
   }
 
   private _getSafePageSizeData(
@@ -270,11 +278,11 @@ export class IdsPaginatorComponent implements OnDestroy {
   public stepPage(pageIndex: number): void {
     const previousPageIndex = this._pageIndex();
     this._pageIndex.set(pageIndex);
-    this._emitPageEvent(previousPageIndex, pageIndex);
+    this._debouncePageEvent(previousPageIndex, pageIndex);
   }
 
-  private _emitPageEvent(previousPageIndex: number, pageIndex: number): void {
-    this.page.emit({
+  private _debouncePageEvent(previousPageIndex: number, pageIndex: number): void {
+    this._pageEventDebouncer.next({
       previousPageIndex,
       pageIndex,
       pageSize: this.pageSize(),
@@ -284,5 +292,6 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   public ngOnDestroy(): void {
     this._intlChanges?.unsubscribe();
+    this._pageEventDebouncerSubscription.unsubscribe();
   }
 }

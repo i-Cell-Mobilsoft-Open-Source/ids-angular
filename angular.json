@@ -29,7 +29,9 @@
             "outputPath": "dist/demo",
             "index": "projects/demo/src/index.html",
             "browser": "projects/demo/src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -133,7 +135,6 @@
             ],
             "port": 6006,
             "styles": [
-              "projects/demo/src/styles.scss",
               "node_modules/@i-cell/ids-tokens/css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css"
             ]
@@ -153,7 +154,11 @@
               "-d",
               "projects/widgets"
             ],
-            "outputDir": "dist/storybook/widgets"
+            "outputDir": "dist/storybook/widgets",
+            "styles": [
+              "node_modules/@i-cell/ids-tokens/css/tokens.css",
+              "node_modules/@i-cell/ids-styles/dist/components.css"
+            ]
           }
         }
       }

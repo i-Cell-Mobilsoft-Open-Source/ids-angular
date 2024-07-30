@@ -80,7 +80,7 @@
         "no-param-reassign": [
           "error",
           {
-            "props": true
+            "props": false
           }
         ],
         "no-restricted-imports": [
@@ -124,6 +124,12 @@
           {
             "selector": ["classProperty", "classMethod", "parameterProperty", "accessor"],
             "modifiers": ["private"],
+            "format": ["camelCase"],
+            "leadingUnderscore": "require"
+          },
+          {
+            "selector": ["classProperty", "classMethod", "parameterProperty", "accessor"],
+            "modifiers": ["protected"],
             "format": ["camelCase"],
             "leadingUnderscore": "require"
           },

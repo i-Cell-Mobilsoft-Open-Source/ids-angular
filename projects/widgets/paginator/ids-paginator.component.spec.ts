@@ -11,7 +11,7 @@ describe('IdsPaginatorComponent', () => {
       imports: [IdsPaginatorComponent],
     })
       .compileComponents();
-    
+
     fixture = TestBed.createComponent(IdsPaginatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

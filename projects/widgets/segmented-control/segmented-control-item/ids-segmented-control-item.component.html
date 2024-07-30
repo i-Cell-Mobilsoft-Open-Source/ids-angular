@@ -1,0 +1,26 @@
+<button
+  #button
+  type="button"
+  [id]="id()"
+  [attr.role]="role()"
+  [attr.tabindex]="isDisabled() ? -1 : tabIndex()"
+  [attr.aria-pressed]="ariaPressed()"
+  [attr.aria-checked]="ariaChecked()"
+  [disabled]="isDisabled() || null"
+  [attr.name]="buttonName()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledBy()"
+  [class]="buttonClasses()"
+  (click)="onClick()"
+>
+  @if (selected()) {
+    <ids-icon aria-hidden="true" [icon]="iconChecked" />
+  }
+  @if (!selected() || !label()) {
+    <ng-content select="ids-icon" />
+  }
+
+  {{ label() }}
+
+  <ng-content select="[suffixContent]" />
+</button>

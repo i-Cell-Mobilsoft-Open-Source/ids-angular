@@ -42,6 +42,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   },
   {
+    path: 'components/segmented-control',
+    loadComponent: () => import('./pages/segmented-control/segmented-control-demo.component').then(
+      (module) => module.SegmentedControlDemoComponent),
+  },
+  {
+    path: 'components/segmented-control-toggle',
+    loadComponent: () => import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component').then(
+      (module) => module.SegmentedControlToggleDemoComponent),
+  },
+  {
     path: 'components/paginator',
     loadComponent: () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
   },

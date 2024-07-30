@@ -1,0 +1,70 @@
+:host {
+  padding: 32px;
+}
+
+h1 {
+  font-size: 40px;
+}
+h2 {
+  font-size: 32px;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+h3 {
+  font-size: 26px;
+}
+h4 {
+  font-size: 20px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 14px;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+section {
+  padding: 32px;
+
+  &.dark,
+  &.surface {
+    background-color: transparent;
+  }
+  &.light {
+    background-color: #252526;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: white;
+    }
+  }
+
+  h3 {
+    padding-top: 24px;
+  }
+
+  .segmented-control-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    gap: 24px;
+
+    &:not(:last-of-type) {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.formsapi-block {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  flex: 1 1;
+}

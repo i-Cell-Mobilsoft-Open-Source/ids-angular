@@ -12,6 +12,7 @@ export interface IdsPaginatorDefaultOptions {
   pageSize?: number
   pageSizeOptions?: number[]
   showFirstLastButton?: boolean
+  showPrevNextLabel?: boolean
   showPageInfo?: boolean
   showPageButtons?: boolean
   showAllPages?: boolean
@@ -39,6 +40,7 @@ export function IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY(): Required<IdsPaginatorDe
       100,
     ],
     showFirstLastButton: true,
+    showPrevNextLabel: false,
     showPageInfo: true,
     showPageButtons: true,
     showAllPages: false,

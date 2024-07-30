@@ -40,6 +40,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   public pageSize = input<number>(this._defaultOptions.pageSize);
   public pageSizeOptions = input<number[]>(this._defaultOptions.pageSizeOptions);
   public showFirstLastButton = input<boolean>(this._defaultOptions.showFirstLastButton);
+  public showPrevNextLabel = input<boolean>(this._defaultOptions.showPrevNextLabel);
   public showPageInfo = input<boolean>(this._defaultOptions.showPageInfo);
   public showPageButtons = input<boolean>(this._defaultOptions.showPageButtons);
   public showAllPages = input<boolean>(this._defaultOptions.showAllPages);
@@ -49,14 +50,14 @@ export class IdsPaginatorComponent implements OnDestroy {
   public pageButtonAppearance = input<PaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
   public length = input.required<number, number>({ transform: numberAttribute });
   public disabled = input<boolean>(false);
-  public isCompact = input<boolean>(false);
+  public compactLayout = input<boolean>(false);
 
   private _hostClasses = computed(() => createClassList(
     this._componentClass,
     [
       this.size(),
       this.variant(),
-      this.isCompact() ? 'compact' : null,
+      this.compactLayout() ? 'compact-layout' : null,
     ]),
   );
 
@@ -99,7 +100,7 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   // eslint-disable-next-line arrow-body-style
   public pageButtonLabels = computed<string[]>(() => {
-    return this.isCompact()
+    return this.compactLayout()
       ? []
       : this._getPageButtonLabels(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
   });

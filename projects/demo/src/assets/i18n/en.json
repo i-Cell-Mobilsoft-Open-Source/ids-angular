@@ -21,6 +21,7 @@
     "DIVIDERS": "Dividers",
     "ICON_BUTTON": "Icon button",
     "SEGMENTED_CONTROL": "Segmented control",
+    "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
     "PAGINATOR": "Paginator",
     "TAG": "Tag"
   }

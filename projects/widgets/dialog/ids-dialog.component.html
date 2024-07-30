@@ -1,7 +1,6 @@
 <section class="ids-dialog-container">
   <header class="ids-dialog-header">
     @if (customHeader()) {
-      <h2 class="ids-dialog-title hidden" [id]="dialogTitleId">{{ mainTitle() }}</h2>
       <ng-container [ngTemplateOutlet]="customHeader()!.template" />
     } @else {
       <div class="ids-dialog-header-default-content">
@@ -26,8 +25,15 @@
       </button>
     }
   </header>
-  <div class="ids-dialog-content" [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()">
-    <div #scrollDetector="idsDetectScrollable" idsDetectScrollable class="ids-dialog-content-overflow">
+  <div
+    class="ids-dialog-content"
+    [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()"
+  >
+    <div
+      #scrollDetector="idsDetectScrollable"
+      idsDetectScrollable
+      class="ids-dialog-content-overflow"
+    >
       <ng-content select="[idsDialogContent]" />
     </div>
   </div>

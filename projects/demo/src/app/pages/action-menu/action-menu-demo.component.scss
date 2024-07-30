@@ -6,4 +6,38 @@ app-action-menu-demo {
   margin-top: 20px;
   margin-left: 40px;
   margin-bottom: 40px;
+
+  h2 {
+    flex-grow: 0;
+  }
+
+  .buttons-container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    grid-template-rows: max-content 1fr max-content;
+  }
+
+  button {
+    &.top-right {
+      grid-column-start: 3;
+      grid-column-end: 3;
+    }
+
+    &.center {
+      grid-column: span 3 / span 3;
+      align-self: center;
+      justify-self: center;
+    }
+
+    &.bottom-right {
+      grid-column-start: 3;
+      grid-column-end: 3;
+    }
+
+    &.top-right {
+      grid-column-start: 3;
+      grid-column-end: 3;
+    }
+  }
 }

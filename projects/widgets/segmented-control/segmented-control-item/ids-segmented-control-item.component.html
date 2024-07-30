@@ -16,9 +16,11 @@
   @if (selected()) {
     <ids-icon aria-hidden="true" [icon]="iconChecked" />
   }
-  <ng-content select="ids-icon" />
+  @if (!selected() || !label()) {
+    <ng-content select="ids-icon" />
+  }
 
-  <ng-content />
+  {{ label() }}
 
   <ng-content select="[suffixContent]" />
 </button>

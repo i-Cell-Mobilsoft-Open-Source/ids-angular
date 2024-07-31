@@ -53,6 +53,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   private _onChange: (value: unknown) => void = () => {};
   protected _onTouched: () => unknown = () => {};
 
+  @Input() public valueCompareFn?: (o1: I, o2: I) => boolean;
   @Input({ transform: coerceBooleanAttribute })
   set disabled(value: boolean) {
     if (value !== this.disabled) {
@@ -109,7 +110,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   }
 
   public ngOnInit(): void {
-    this._selectionModel = new SelectionModel<I>(this.multiSelect(), undefined, false);
+    this._selectionModel = new SelectionModel<I>(this.multiSelect(), undefined, false, this.valueCompareFn);
   }
 
   public ngAfterContentInit(): void {

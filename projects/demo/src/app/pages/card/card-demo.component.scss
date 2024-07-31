@@ -3,6 +3,12 @@ app-card-demo {
   gap: 2rem;
   margin: 40px;
 
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
   .ids-card {
     &.ids-card-vertical {
       width: 400px;

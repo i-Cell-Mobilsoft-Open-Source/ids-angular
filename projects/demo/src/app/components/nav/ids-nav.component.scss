@@ -1,17 +1,28 @@
 ids-nav {
-  @apply flex w-52 flex-col flex-shrink-0;
+  display: flex;
+  width: 13rem;
+  flex-direction: column;
+  flex-shrink: 0;
   background-color: var(--ids-smc-colors-surface-lighter-10);
   padding: 0.625rem;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .nav-label {
-  @apply p-[.625rem];
+  padding: 0.625rem;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.00625rem;
 }
 
 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   gap: 0.5rem;
 }
 
@@ -29,6 +40,9 @@ li > a,
   align-self: stretch;
   flex-grow: 0;
   user-select: none;
+  text-decoration: none;
+  color: black;
+
   &.active,
   &:has(.active) {
     color: var(--ids-smc-colors-primary-darker-20);
@@ -40,6 +54,10 @@ li > a,
 
 .subnav-parent {
   padding: 0.5rem 1rem;
+  & > a {
+    text-decoration: none;
+    color: black;
+  }
   .more {
     display: flex;
   }

@@ -29,10 +29,15 @@
             "outputPath": "dist/demo",
             "index": "projects/demo/src/index.html",
             "browser": "projects/demo/src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["projects/demo/src/favicon.ico", "projects/demo/src/assets"],
+            "assets": [
+              "projects/demo/src/favicon.ico",
+              "projects/demo/src/assets"
+            ],
             "styles": [
               "projects/demo/src/styles.scss",
               "node_modules/@i-cell/ids-tokens/css/tokens.css",
@@ -109,7 +114,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["projects/widgets/**/*.ts", "projects/widgets/**/*.html"]
+            "lintFilePatterns": [
+              "projects/widgets/**/*.ts",
+              "projects/widgets/**/*.html"
+            ]
           }
         },
         "storybook": {
@@ -118,10 +126,16 @@
             "configDir": "projects/widgets/.storybook",
             "browserTarget": "widgets:build",
             "compodoc": true,
-            "compodocArgs": ["-p", "projects/widgets/.storybook/tsconfig.compodoc.json", "-e", "json", "-d", "projects/widgets"],
+            "compodocArgs": [
+              "-p",
+              "projects/widgets/.storybook/tsconfig.compodoc.json",
+              "-e",
+              "json",
+              "-d",
+              "projects/widgets"
+            ],
             "port": 6006,
             "styles": [
-              "projects/demo/src/styles.scss",
               "node_modules/@i-cell/ids-tokens/css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css"
             ]
@@ -133,8 +147,19 @@
             "configDir": "projects/widgets/.storybook",
             "browserTarget": "widgets:build",
             "compodoc": true,
-            "compodocArgs": ["-p", "projects/widgets/.storybook/tsconfig.compodoc.json", "-e", "json", "-d", "projects/widgets"],
-            "outputDir": "dist/storybook/widgets"
+            "compodocArgs": [
+              "-p",
+              "projects/widgets/.storybook/tsconfig.compodoc.json",
+              "-e",
+              "json",
+              "-d",
+              "projects/widgets"
+            ],
+            "outputDir": "dist/storybook/widgets",
+            "styles": [
+              "node_modules/@i-cell/ids-tokens/css/tokens.css",
+              "node_modules/@i-cell/ids-styles/dist/components.css"
+            ]
           }
         }
       }

@@ -10,7 +10,7 @@ import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostB
 import { createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
-import { Subscription } from 'rxjs';
+import { debounceTime, Subject, Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
 
@@ -34,12 +34,16 @@ export class IdsPaginatorComponent implements OnDestroy {
     ...this._injector.get(IDS_PAGINATOR_DEFAULT_OPTIONS, null, { optional: true }),
   };
 
+  private _pageEventDebouncer = new Subject<PaginatorPageEvent>();
+  private _pageEventDebouncerSubscription = new Subscription();
+
   public readonly intl = this._injector.get(IdsPaginatorIntl);
 
   public id = input<string>(this._uniqueId);
   public pageSize = input<number>(this._defaultOptions.pageSize);
   public pageSizeOptions = input<number[]>(this._defaultOptions.pageSizeOptions);
   public showFirstLastButton = input<boolean>(this._defaultOptions.showFirstLastButton);
+  public showPrevNextLabel = input<boolean>(this._defaultOptions.showPrevNextLabel);
   public showPageInfo = input<boolean>(this._defaultOptions.showPageInfo);
   public showPageButtons = input<boolean>(this._defaultOptions.showPageButtons);
   public showAllPages = input<boolean>(this._defaultOptions.showAllPages);
@@ -49,14 +53,14 @@ export class IdsPaginatorComponent implements OnDestroy {
   public pageButtonAppearance = input<PaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
   public length = input.required<number, number>({ transform: numberAttribute });
   public disabled = input<boolean>(false);
-  public isCompact = input<boolean>(false);
+  public compactLayout = input<boolean>(false);
 
   private _hostClasses = computed(() => createClassList(
     this._componentClass,
     [
       this.size(),
       this.variant(),
-      this.isCompact() ? 'compact' : null,
+      this.compactLayout() ? 'compact-layout' : null,
     ]),
   );
 
@@ -99,7 +103,7 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   // eslint-disable-next-line arrow-body-style
   public pageButtonLabels = computed<string[]>(() => {
-    return this.isCompact()
+    return this.compactLayout()
       ? []
       : this._getPageButtonLabels(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
   });
@@ -159,6 +163,11 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   constructor() {
     this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
+    this._pageEventDebouncerSubscription = this._pageEventDebouncer.pipe(
+      debounceTime(this._defaultOptions.debounceTime),
+    ).subscribe((pageEvent) => {
+      this.page.emit(pageEvent);
+    });
   }
 
   private _getSafePageSizeData(
@@ -269,11 +278,11 @@ export class IdsPaginatorComponent implements OnDestroy {
   public stepPage(pageIndex: number): void {
     const previousPageIndex = this._pageIndex();
     this._pageIndex.set(pageIndex);
-    this._emitPageEvent(previousPageIndex, pageIndex);
+    this._debouncePageEvent(previousPageIndex, pageIndex);
   }
 
-  private _emitPageEvent(previousPageIndex: number, pageIndex: number): void {
-    this.page.emit({
+  private _debouncePageEvent(previousPageIndex: number, pageIndex: number): void {
+    this._pageEventDebouncer.next({
       previousPageIndex,
       pageIndex,
       pageSize: this.pageSize(),
@@ -283,5 +292,6 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   public ngOnDestroy(): void {
     this._intlChanges?.unsubscribe();
+    this._pageEventDebouncerSubscription.unsubscribe();
   }
 }

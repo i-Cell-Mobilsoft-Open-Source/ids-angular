@@ -7,3 +7,24 @@ app-dialog-demo {
   margin-left: 40px;
   margin-bottom: 40px;
 }
+
+.dialog-with-default-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.dialog-with-custom-header {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: 0.5rem;
+}
+
+.dialog-with-scrollable-content {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: 0.5rem;
+}

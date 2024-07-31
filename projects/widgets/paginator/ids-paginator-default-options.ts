@@ -12,6 +12,7 @@ export interface IdsPaginatorDefaultOptions {
   pageSize?: number
   pageSizeOptions?: number[]
   showFirstLastButton?: boolean
+  showPrevNextLabel?: boolean
   showPageInfo?: boolean
   showPageButtons?: boolean
   showAllPages?: boolean
@@ -19,6 +20,7 @@ export interface IdsPaginatorDefaultOptions {
   size?: SizeType
   variant?: PaginatorVariantType
   pageButtonAppearance?: PaginatorPageButtonAppearanceType
+  debounceTime: number
 }
 
 export const IDS_PAGINATOR_DEFAULT_OPTIONS = new InjectionToken<IdsPaginatorDefaultOptions>(
@@ -39,6 +41,7 @@ export function IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY(): Required<IdsPaginatorDe
       100,
     ],
     showFirstLastButton: true,
+    showPrevNextLabel: false,
     showPageInfo: true,
     showPageButtons: true,
     showAllPages: false,
@@ -46,5 +49,6 @@ export function IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY(): Required<IdsPaginatorDe
     size: Size.COMFORTABLE,
     variant: PaginatorVariant.SURFACE,
     pageButtonAppearance: PaginatorPageButtonAppearance.PLAIN,
+    debounceTime: 300,
   };
 }

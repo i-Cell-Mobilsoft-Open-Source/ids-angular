@@ -1,0 +1,24 @@
+<div class="ids-radio-item__input-wrapper">
+  <!-- Render this element first so the input is on top. -->
+  <div class="ids-radio-item__touch-target" (click)="onChange()"></div>
+  <input
+    #input
+    class="ids-radio-item__native-control"
+    [class]="inputClasses()"
+    type="radio"
+    [id]="inputId()"
+    [checked]="selected()"
+    [disabled]="isDisabled()"
+    [attr.name]="name()"
+    [attr.value]="value()"
+    [required]="required()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
+    [attr.aria-describedby]="ariaDescribedBy()"
+    (change)="onChange()"
+  />
+  <div class="ids-radio-item__inner-circle"></div>
+</div>
+<label class="ids-radio-item__label" [for]="inputId()">
+  <ng-content></ng-content>
+</label>

@@ -1,0 +1,95 @@
+<h1>Radio</h1>
+
+@for (variant of variants; track $index) {
+  <section [class]="variant">
+    <h4>{{ variant | uppercase }}</h4>
+    @for (size of sizes; track $index) {
+      <h5>{{ size }}</h5>
+      <div class="radio-group-hv-container">
+        <div>
+          <h6>Vertical</h6>
+          <div class="radio-group-container">
+            <ids-radio-group
+              ngModel="first"
+              orientation="vertical"
+              labelPosition="right"
+              [name]="'radio' + '-' + variant + '-' + size + '-vertical-right'"
+              [size]="size"
+              [variant]="variant"
+            >
+              <ids-radio-item value="first">First</ids-radio-item>
+              <ids-radio-item value="second">Second</ids-radio-item>
+              <ids-radio-item value="third">Third</ids-radio-item>
+            </ids-radio-group>
+            <ids-radio-group
+              ngModel="second"
+              orientation="vertical"
+              labelPosition="left"
+              [name]="'radio' + '-' + variant + '-' + size + 'vertical-left'"
+              [size]="size"
+              [variant]="variant"
+            >
+              <ids-radio-item value="first">First</ids-radio-item>
+              <ids-radio-item value="second">Second</ids-radio-item>
+              <ids-radio-item value="third">Third</ids-radio-item>
+            </ids-radio-group>
+          </div>
+        </div>
+
+        <div>
+          <h6>Horizontal</h6>
+          <div class="radio-group-container">
+            <ids-radio-group
+              ngModel="first"
+              orientation="horizontal"
+              labelPosition="right"
+              [name]="'radio' + '-' + variant + '-' + size + 'horizontal-right'"
+              [size]="size"
+              [variant]="variant"
+            >
+              <ids-radio-item value="first">First</ids-radio-item>
+              <ids-radio-item value="second">Second</ids-radio-item>
+              <ids-radio-item value="third">Third</ids-radio-item>
+            </ids-radio-group>
+            <ids-radio-group
+              ngModel="second"
+              orientation="horizontal"
+              labelPosition="left"
+              [name]="'radio' + '-' + variant + '-' + size + 'horizontal-left'"
+              [size]="size"
+              [variant]="variant"
+            >
+              <ids-radio-item value="first">First</ids-radio-item>
+              <ids-radio-item value="second">Second</ids-radio-item>
+              <ids-radio-item value="third">Third</ids-radio-item>
+            </ids-radio-group>
+            <ids-radio-group
+              ngModel="third"
+              orientation="horizontal"
+              labelPosition="top"
+              [name]="'radio' + '-' + variant + '-' + size + 'horizontal-top'"
+              [size]="size"
+              [variant]="variant"
+            >
+              <ids-radio-item value="first">First</ids-radio-item>
+              <ids-radio-item value="second">Second</ids-radio-item>
+              <ids-radio-item value="third">Third</ids-radio-item>
+            </ids-radio-group>
+            <ids-radio-group
+              ngModel="second"
+              orientation="horizontal"
+              labelPosition="bottom"
+              [name]="'radio' + '-' + variant + '-' + size + 'horizontal-bottom'"
+              [size]="size"
+              [variant]="variant"
+            >
+              <ids-radio-item value="first">First</ids-radio-item>
+              <ids-radio-item value="second">Second</ids-radio-item>
+              <ids-radio-item value="third">Third</ids-radio-item>
+            </ids-radio-group>
+          </div>
+        </div>
+      </div>
+    }
+  </section>
+}

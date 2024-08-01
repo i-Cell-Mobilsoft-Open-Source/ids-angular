@@ -1,0 +1,90 @@
+:host {
+  padding: 32px;
+}
+
+h1 {
+  font-size: 40px;
+}
+h2 {
+  font-size: 32px;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+h3 {
+  font-size: 26px;
+}
+h4 {
+  font-size: 20px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 14px;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+section {
+  padding: 32px;
+
+  &.dark,
+  &.surface {
+    background-color: transparent;
+  }
+  &.light {
+    background-color: #252526;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: white;
+    }
+  }
+
+  h3 {
+    padding-top: 24px;
+  }
+
+  h5 {
+    margin-bottom: 0;
+  }
+  h6 {
+    margin-bottom: 1rem;
+  }
+
+  .radio-group-hv-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4rem;
+
+    & > * {
+      flex: 1 1;
+    }
+  }
+
+  .radio-group-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+
+    & > * {
+      flex: 1 1;
+    }
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  flex: 1 1;
+}

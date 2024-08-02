@@ -350,7 +350,7 @@ $variants: surface, light, dark;
         &.ids-radio-item-selected {
           .ids-radio-item__input-wrapper {
             .ids-radio-item__touch-target:hover {
-              @include radioItemVariantTouchTargetHover($variant, true, false);
+              @include radioItemVariantTouchTargetHover($variant, true, true);
             }
           }
         }

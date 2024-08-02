@@ -66,6 +66,11 @@ export class IdsRadioItemComponent implements OnInit {
     this.changes.emit(new RadioChangeEvent(this, this.value()));
   }
 
+  public touchTargetClick(): void {
+    this._inputElement.nativeElement.focus();
+    this.onChange();
+  }
+
   public focus(options?: FocusOptions): void {
     this._inputElement.nativeElement.focus(options);
   }

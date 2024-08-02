@@ -1,7 +1,7 @@
 $sizes: compact, comfortable, spacious, dense;
 $variants: surface, light, dark;
 
-@mixin radioItemVariant($variant, $selected, $error) {
+@mixin radioItemVariantInput($variant, $selected, $error) {
   $selectedText: "";
   @if ($selected) {
     $selectedText: "selected";
@@ -15,29 +15,51 @@ $variants: surface, light, dark;
 
   &:not(:disabled) {
     border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}#{$errorText}-default);
-    // background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-default);
-
-    &:hover {
-      border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}#{$errorText}-hovered);
-      background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-hovered);
-    }
-    &:active {
-      border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}#{$errorText}-pressed);
-      background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-pressed);
-    }
-    &:focus,
-    &:focus-visible {
-      border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}#{$errorText}-focused);
-      background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-focused);
-      @if ($error != true) {
-        outline-color: var(--ids-comp-radio-input-#{$selectedText}-color-focused-outline-#{$variant}-focused);
-      }
-    }
+    background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-default);
 
     @if ($selected) {
       & + .ids-radio-item__inner-circle {
         border-color: var(--ids-comp-radio-input-selected-inner-circle-color-border-#{$variant}#{$errorText}-default);
         background: var(--ids-comp-radio-input-selected-inner-circle-color-bg-#{$variant}#{$errorText}-default);
+      }
+    }
+
+    &:hover {
+      border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}#{$errorText}-hovered);
+      background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-hovered);
+
+      @if ($selected) {
+        & + .ids-radio-item__inner-circle {
+          border-color: var(--ids-comp-radio-input-selected-inner-circle-color-border-#{$variant}#{$errorText}-hovered);
+          background: var(--ids-comp-radio-input-selected-inner-circle-color-bg-#{$variant}#{$errorText}-hovered);
+        }
+      }
+    }
+    &:active {
+      border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}#{$errorText}-pressed);
+      background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-pressed);
+
+      @if ($selected) {
+        & + .ids-radio-item__inner-circle {
+          border-color: var(--ids-comp-radio-input-selected-inner-circle-color-border-#{$variant}#{$errorText}-pressed);
+          background: var(--ids-comp-radio-input-selected-inner-circle-color-bg-#{$variant}#{$errorText}-pressed);
+        }
+      }
+    }
+    &:focus,
+    &:focus-visible {
+      border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}#{$errorText}-focused);
+      background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-focused);
+
+      @if ($selected) {
+        & + .ids-radio-item__inner-circle {
+          border-color: var(--ids-comp-radio-input-selected-inner-circle-color-border-#{$variant}#{$errorText}-focused);
+          background: var(--ids-comp-radio-input-selected-inner-circle-color-bg-#{$variant}#{$errorText}-focused);
+        }
+      }
+
+      @if ($error != true) {
+        outline-color: var(--ids-comp-radio-input-#{$selectedText}-color-focused-outline-#{$variant}-focused);
       }
     }
   }
@@ -46,6 +68,40 @@ $variants: surface, light, dark;
     &:disabled {
       border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}-disabled);
       background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}-disabled);
+
+      @if ($selected) {
+        & + .ids-radio-item__inner-circle {
+          border-color: var(--ids-comp-radio-input-selected-inner-circle-color-border-#{$variant}#{$errorText}-disabled);
+          background: var(--ids-comp-radio-input-selected-inner-circle-color-bg-#{$variant}#{$errorText}-disabled);
+        }
+      }
+    }
+  }
+}
+
+@mixin radioItemVariantTouchTargetHover($variant, $selected, $error) {
+  $selectedText: "";
+  @if ($selected) {
+    $selectedText: "selected";
+  } @else {
+    $selectedText: "unselected";
+  }
+  $errorText: "";
+  @if ($error == true) {
+    $errorText: "-error";
+  }
+
+  & + input[type="radio"] {
+    &:not(:disabled) {
+      border-color: var(--ids-comp-radio-input-#{$selectedText}-color-border-#{$variant}#{$errorText}-hovered);
+      background-color: var(--ids-comp-radio-input-#{$selectedText}-color-bg-#{$variant}#{$errorText}-hovered);
+
+      @if ($selected) {
+        & + .ids-radio-item__inner-circle {
+          border-color: var(--ids-comp-radio-input-selected-inner-circle-color-border-#{$variant}#{$errorText}-hovered);
+          background: var(--ids-comp-radio-input-selected-inner-circle-color-bg-#{$variant}#{$errorText}-hovered);
+        }
+      }
     }
   }
 }
@@ -103,7 +159,6 @@ $variants: surface, light, dark;
 
       .ids-radio-item__touch-target {
         position: absolute;
-        z-index: 1;
         cursor: pointer;
       }
 
@@ -126,6 +181,7 @@ $variants: surface, light, dark;
           height: 0;
           width: 0;
           border-width: 0;
+          z-index: -1;
         }
 
         &:focus,
@@ -234,11 +290,22 @@ $variants: surface, light, dark;
   @each $variant in $variants {
     .ids-radio-item-#{$variant} {
       .ids-radio-item__input-wrapper {
+        .ids-radio-item__touch-target:hover {
+          @include radioItemVariantTouchTargetHover($variant, false, false);
+        }
         input[type="radio"] {
-          @include radioItemVariant($variant, false, false);
+          @include radioItemVariantInput($variant, false, false);
 
           &:checked {
-            @include radioItemVariant($variant, true, false);
+            @include radioItemVariantInput($variant, true, false);
+          }
+        }
+      }
+
+      &.ids-radio-item-selected {
+        .ids-radio-item__input-wrapper {
+          .ids-radio-item__touch-target:hover {
+            @include radioItemVariantTouchTargetHover($variant, true, false);
           }
         }
       }
@@ -259,6 +326,34 @@ $variants: surface, light, dark;
 
       &.ids-radio-item-disabled .ids-radio-item__label {
         color: var(--ids-comp-radio-label-color-fg-#{$variant}-disabled);
+      }
+    }
+  }
+
+  &.ng-invalid,
+  &.ids-radio-group-invalid {
+    @each $variant in $variants {
+      .ids-radio-item-#{$variant} {
+        .ids-radio-item__input-wrapper {
+          .ids-radio-item__touch-target:hover {
+            @include radioItemVariantTouchTargetHover($variant, false, true);
+          }
+          input[type="radio"] {
+            @include radioItemVariantInput($variant, false, true);
+
+            &:checked {
+              @include radioItemVariantInput($variant, true, true);
+            }
+          }
+        }
+
+        &.ids-radio-item-selected {
+          .ids-radio-item__input-wrapper {
+            .ids-radio-item__touch-target:hover {
+              @include radioItemVariantTouchTargetHover($variant, true, false);
+            }
+          }
+        }
       }
     }
   }

@@ -1,10 +1,8 @@
 <div class="ids-radio-item__input-wrapper">
-  <!-- Render this element first so the input is on top. -->
   <div class="ids-radio-item__touch-target" (click)="onChange()"></div>
   <input
     #input
     class="ids-radio-item__native-control"
-    [class]="inputClasses()"
     type="radio"
     [id]="inputId()"
     [checked]="selected()"
@@ -20,5 +18,5 @@
   <div class="ids-radio-item__inner-circle"></div>
 </div>
 <label class="ids-radio-item__label" [for]="inputId()">
-  <ng-content></ng-content>
+  <ng-content />
 </label>

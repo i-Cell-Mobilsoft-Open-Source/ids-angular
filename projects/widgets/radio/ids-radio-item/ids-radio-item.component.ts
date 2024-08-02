@@ -2,7 +2,7 @@ import { IdsRadioGroupDirective } from '../ids-radio-group.directive';
 import { RadioChangeEvent } from '../types/ids-radio-events';
 
 import { Component, computed, ElementRef, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
-import { addClassPrefix, coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
+import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 
@@ -35,10 +35,10 @@ export class IdsRadioItemComponent implements OnInit {
   public name = computed(() => this._parent()?.name());
   public required = computed(() => this._parent()?.required());
   public ariaChecked = computed(() => this.selected());
-  public inputClasses = computed(() => addClassPrefix(this._componentClass, this.selected() ? 'selected' : null));
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this._parent()?.variant() ?? null,
     this._parent()?.labelPosition() ?? null,
+    this.selected() ? 'selected' : null,
     this.isDisabled() ? 'disabled' : null,
   ]));
 
@@ -53,7 +53,7 @@ export class IdsRadioItemComponent implements OnInit {
   public ngOnInit(): void {
     const parent = this.injector.get(IdsRadioGroupDirective, null, { optional: true, skipSelf: true });
     if (!parent) {
-      throw new Error(this._getNonExistingParentError());
+      throw new Error(createComponentError(this._componentClass, 'component must be direct child of a segmented control'));
     }
     this._parent.set(parent);
 
@@ -68,9 +68,5 @@ export class IdsRadioItemComponent implements OnInit {
 
   public focus(options?: FocusOptions): void {
     this._inputElement.nativeElement.focus(options);
-  }
-
-  private _getNonExistingParentError(): string {
-    return createComponentError(this._componentClass, 'component must be direct child of a segmented control');
   }
 }

@@ -38,7 +38,6 @@ export class IdsRadioItemComponent implements OnInit {
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this._parent()?.variant() ?? null,
     this._parent()?.labelPosition() ?? null,
-    this.selected() ? 'selected' : null,
     this.isDisabled() ? 'disabled' : null,
   ]));
 

@@ -302,7 +302,7 @@ $variants: surface, light, dark;
         }
       }
 
-      &.ids-radio-item-selected {
+      &:has(input[type="radio"]:checked) {
         .ids-radio-item__input-wrapper {
           .ids-radio-item__touch-target:hover {
             @include radioItemVariantTouchTargetHover($variant, true, false);
@@ -347,7 +347,7 @@ $variants: surface, light, dark;
           }
         }
 
-        &.ids-radio-item-selected {
+        &:has(input[type="radio"]:checked) {
           .ids-radio-item__input-wrapper {
             .ids-radio-item__touch-target:hover {
               @include radioItemVariantTouchTargetHover($variant, true, true);

@@ -11,7 +11,6 @@ let nextUniqueId = 0;
   standalone: true,
   imports: [],
   templateUrl: './ids-radio-item.component.html',
-  styleUrl: './ids-radio-item.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsRadioItemComponent implements OnInit {

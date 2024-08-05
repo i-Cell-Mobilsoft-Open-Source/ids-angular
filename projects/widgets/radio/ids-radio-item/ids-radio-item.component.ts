@@ -67,8 +67,17 @@ export class IdsRadioItemComponent implements OnInit {
   }
 
   public touchTargetClick(): void {
-    this._inputElement.nativeElement.focus();
-    this.onChange();
+    if (!this.selected()) {
+      this._inputElement.nativeElement.focus();
+      this.onChange();
+    }
+  }
+
+  public innerCrircleClick(): void {
+    if (!this.selected()) {
+      this._inputElement.nativeElement.focus();
+      this.onChange();
+    }
   }
 
   public focus(options?: FocusOptions): void {

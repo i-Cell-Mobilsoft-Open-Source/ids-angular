@@ -76,16 +76,15 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<OrientationType, string[]> = {
       // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-      horizontal: ['ArrowLeft', 'ArrowRight', 'Enter'],
+      horizontal: ['ArrowLeft', 'ArrowRight', 'Enter', 'Tab'],
       // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-      vertical: ['ArrowUp', 'ArrowDown', 'Enter'],
+      vertical: ['ArrowUp', 'ArrowDown', 'Enter', 'Tab'],
     };
 
     const orientation = this.orientation();
 
-    event.preventDefault();
-
     if (!navigationKeys[orientation].includes(event.key)) {
+      event.preventDefault();
       return;
     }
 
@@ -165,11 +164,10 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   public ngAfterContentInit(): void {
     const items = this._items();
     const minItemCount = 2;
-    const maxItemCount = 5;
 
-    if (isDevMode() && (items.length < minItemCount || items.length > maxItemCount)) {
+    if (isDevMode() && (items.length < minItemCount)) {
       throw new Error(
-        createComponentError(this._componentClass, 'invalid count of segmented control items. Minimum item count is 2, maximum is 5.'),
+        createComponentError(this._componentClass, 'invalid count of radio items. Minimum item count is 2.'),
       );
     }
 

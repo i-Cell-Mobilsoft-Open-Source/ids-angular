@@ -1,0 +1,13 @@
+$sizes: compact, comfortable, spacious, dense;
+
+.ids-form-field {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@each $size in $sizes {
+  &.ids-form-field-#{$size} {
+    gap: var(--ids-comp-forms-field-standard-size-gap-#{$size});
+  }
+}

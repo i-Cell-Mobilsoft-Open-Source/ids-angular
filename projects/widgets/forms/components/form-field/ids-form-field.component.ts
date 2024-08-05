@@ -7,7 +7,7 @@ import { IdsHintMessageComponent } from '../message/ids-hint-message/ids-hint-me
 
 import { Component, computed, contentChildren, HostBinding, inject, Injector, input, isDevMode, viewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
+import { AllVariantsType, createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
 
 const defaultOptions = IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY();
 
@@ -33,6 +33,7 @@ export class IdsFormFieldComponent {
 
   public inputId = computed(() => this._child()?.inputId());
   public size = input<SizeType | null>(this._defaultOptions.size);
+  public variant = input<AllVariantsType | null>(this._defaultOptions.variant);
   private _control = computed(() => this._child()?.controlDir);
   private _hostClasses = computed(() => createClassList(this._componentClass, []),
   );

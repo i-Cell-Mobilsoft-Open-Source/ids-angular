@@ -1,27 +1,25 @@
-<div class="ids-form-field__wrapper">
-  <label [for]="inputId()">
-    <ng-content select="ids-label" />
-    @if (hasRequiredValidator) {
-      <span class="ids-form-field__required-marker"></span>
-    }
-  </label>
+<label class="ids-form-field__label" [for]="inputId()">
+  <ng-content select="ids-label" />
+  @if (hasRequiredValidator) {
+    <span class="ids-form-field__required-marker"></span>
+  }
+</label>
 
-  <div class="ids-form-field__fix-container">
-    <div class="ids-form-field__icon-prefix">
-      <ng-content select="[idsPrefix], [idsIconPrefix]" />
-    </div>
-    <div class="ids-form-field__text-prefix">
-      <ng-content select="[idsTextPrefix]" />
-    </div>
-    <div class="ids-form-field__infix">
-      <ng-content />
-    </div>
-    <div class="ids-form-field__text-suffix">
-      <ng-content select="[idsTextSuffix]" />
-    </div>
-    <div class="ids-form-field__icon-suffix">
-      <ng-content select="[idsSuffix], [idsIconSuffix]" />
-    </div>
+<div class="ids-form-field__fix-container">
+  <div class="ids-form-field__icon-prefix">
+    <ng-content select="[idsPrefix], [idsIconPrefix]" />
+  </div>
+  <div class="ids-form-field__text-prefix">
+    <ng-content select="[idsTextPrefix]" />
+  </div>
+  <div class="ids-form-field__infix">
+    <ng-content />
+  </div>
+  <div class="ids-form-field__text-suffix">
+    <ng-content select="[idsTextSuffix]" />
+  </div>
+  <div class="ids-form-field__icon-suffix">
+    <ng-content select="[idsSuffix], [idsIconSuffix]" />
   </div>
 </div>
 

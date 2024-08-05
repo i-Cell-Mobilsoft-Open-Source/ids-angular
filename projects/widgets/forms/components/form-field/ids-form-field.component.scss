@@ -1,13 +1,46 @@
 $sizes: compact, comfortable, spacious, dense;
+$variants: surface, light;
 
 .ids-form-field {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-}
 
-@each $size in $sizes {
-  &.ids-form-field-#{$size} {
-    gap: var(--ids-comp-forms-field-standard-size-gap-#{$size});
+  & > .ids-form-field__label {
+    flex: 1 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-style: normal;
+  }
+
+  & > .ids-form-field__fix-container {
+    display: flex;
+  }
+
+  @each $size in $sizes {
+    &.ids-form-field-#{$size} {
+      padding: var(--forms-field-standard-label-size-padding-y) 0px;
+      gap: var(--ids-comp-forms-field-standard-size-gap-#{$size});
+
+      & > .ids-form-field__label {
+        font-family: var(--ids-comp-forms-field-standard-label-typography-font-family-#{$size});
+        font-size: var(--ids-comp-forms-field-standard-label-typography-font-size-#{$size});
+        font-weight: var(--ids-comp-forms-field-standard-label-typography-font-weight-#{$size});
+        line-height: var(--ids-comp-forms-field-standard-label-typography-line-height-#{$size});
+        letter-spacing: var(--ids-comp-forms-field-standard-label-typography-letter-spacing-#{$size});
+      }
+
+      & > .ids-form-field__fix-container {
+        gap: var(--ids-comp-forms-text-input-standard-container-size-gap-#{$size});
+      }
+    }
+  }
+
+  @each $variant in $variants {
+    &.ids-form-field-#{$variant} {
+      & > .ids-form-field__label {
+        color: var(--text-field-label-color-fg-#{$variant}-default);
+      }
+    }
   }
 }

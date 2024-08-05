@@ -28,7 +28,7 @@
     "@angular/platform-browser": "^17.3.1",
     "@angular/platform-browser-dynamic": "^17.3.1",
     "@angular/router": "^17.3.1",
-    "@i-cell/ids-styles": "0.0.7",
+    "@i-cell/ids-styles": "0.0.9",
     "@i-cell/ids-tokens": "0.0.15",
     "@mdi/js": "^7.4.47",
     "@ngx-translate/core": "15.0.0",

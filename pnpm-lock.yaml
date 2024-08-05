@@ -36,8 +36,8 @@ importers:
         specifier: ^17.3.1
         version: 17.3.1(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser@17.3.1(@angular/animations@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(rxjs@7.8.1)
       '@i-cell/ids-styles':
-        specifier: 0.0.7
-        version: 0.0.7
+        specifier: 0.0.9
+        version: 0.0.9
       '@i-cell/ids-tokens':
         specifier: 0.0.15
         version: 0.0.15
@@ -1945,8 +1945,8 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
 
-  '@i-cell/ids-styles@0.0.7':
-    resolution: {integrity: sha512-hKBtTkiYnFRTx7CeoS17Jwdf/mUrvIQmg+FyGCPBC6Xv4ayTtgMGP71jeO7j8GKhsfehD9Y3js0UqbeXcMmc7g==}
+  '@i-cell/ids-styles@0.0.9':
+    resolution: {integrity: sha512-ZCbn4q52ogsS5hs5fKr7HAMW9J+QwGU9Ly6s0QbETKTZEt8dyUkTPxsZW7SbJFhGjTQICUCufMvvg/tzObIaCA==}
 
   '@i-cell/ids-tokens@0.0.15':
     resolution: {integrity: sha512-IsRl3+QUCXTM9ruG0MvmnPTrBG4aYwzHD0n+hCNOmhZWokQzXRnrk1+n2pwg4ykvZvR4sHLJxGhrv0FW2XLrTw==}
@@ -10843,7 +10843,7 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@i-cell/ids-styles@0.0.7': {}
+  '@i-cell/ids-styles@0.0.9': {}
 
   '@i-cell/ids-tokens@0.0.15': {}
 

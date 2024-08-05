@@ -74,13 +74,20 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   }
 
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
-    // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter'];
-    if (!navigationKeys.includes(event.key)) {
-      return;
-    }
+    const navigationKeys: Record<OrientationType, string[]> = {
+      // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+      horizontal: ['ArrowLeft', 'ArrowRight', 'Enter'],
+      // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+      vertical: ['ArrowUp', 'ArrowDown', 'Enter'],
+    };
+
+    const orientation = this.orientation();
 
     event.preventDefault();
+
+    if (!navigationKeys[orientation].includes(event.key)) {
+      return;
+    }
 
     const items = this._items();
     const target = event.target as HTMLButtonElement;
@@ -88,7 +95,10 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     const index = items.findIndex((item) => item.inputId() === inputId);
 
     switch (event.key) {
-      case 'ArrowLeft': {
+      case 'ArrowUp': {
+        if (orientation === Orientation.HORIZONTAL) {
+          return;
+        }
         if (index === 0) {
           return;
         }
@@ -97,7 +107,34 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         prevItem.focus();
         break;
       }
+      case 'ArrowLeft': {
+        if (orientation === Orientation.VERTICAL) {
+          return;
+        }
+        if (index === 0) {
+          return;
+        }
+        const prevIndex = this._getSiblingItemIndex(index, -1);
+        const prevItem = items[prevIndex];
+        prevItem.focus();
+        break;
+      }
+      case 'ArrowDown': {
+        if (orientation === Orientation.HORIZONTAL) {
+          return;
+        }
+        if (index === (items.length - 1)) {
+          return;
+        }
+        const nextIndex = this._getSiblingItemIndex(index, 1);
+        const nextItem = items[nextIndex];
+        nextItem.focus();
+        break;
+      }
       case 'ArrowRight': {
+        if (orientation === Orientation.VERTICAL) {
+          return;
+        }
         if (index === (items.length - 1)) {
           return;
         }

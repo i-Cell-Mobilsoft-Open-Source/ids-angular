@@ -101,8 +101,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         if (index === 0) {
           return;
         }
-        const prevIndex = this._getSiblingItemIndex(index, -1);
-        const prevItem = items[prevIndex];
+        const prevItem = items[index - 1];
         prevItem.focus();
         break;
       }
@@ -113,8 +112,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         if (index === 0) {
           return;
         }
-        const prevIndex = this._getSiblingItemIndex(index, -1);
-        const prevItem = items[prevIndex];
+        const prevItem = items[index - 1];
         prevItem.focus();
         break;
       }
@@ -125,8 +123,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         if (index === (items.length - 1)) {
           return;
         }
-        const nextIndex = this._getSiblingItemIndex(index, 1);
-        const nextItem = items[nextIndex];
+        const nextItem = items[index + 1];
         nextItem.focus();
         break;
       }
@@ -137,8 +134,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         if (index === (items.length - 1)) {
           return;
         }
-        const nextIndex = this._getSiblingItemIndex(index, 1);
-        const nextItem = items[nextIndex];
+        const nextItem = items[index + 1];
         nextItem.focus();
         break;
       }
@@ -250,27 +246,11 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     return itemValue === this._rawValue;
   }
 
-  private _getSiblingItemIndex(index: number, offset: number): number {
-    const items = this._items();
-    const nextIndex = index + offset;
-    if (nextIndex === items.length) {
-      return index;
-    }
-    if (nextIndex === -1) {
-      return index;
-    }
-    return nextIndex;
-  }
-
   private _hasInvalidLabelPosition(): boolean {
     const orientation = this.orientation();
     const labelPosition = this.labelPosition();
 
-    if (orientation === Orientation.VERTICAL && Object.values(VerticalPosition).some((pos) => pos === labelPosition)) {
-      return true;
-    }
-
-    return false;
+    return (orientation === Orientation.VERTICAL && Object.values(VerticalPosition).some((pos) => pos === labelPosition));
   }
 
   public ngOnDestroy(): void {

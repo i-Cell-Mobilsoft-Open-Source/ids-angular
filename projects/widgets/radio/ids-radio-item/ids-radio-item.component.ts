@@ -18,7 +18,7 @@ export class IdsRadioItemComponent implements OnInit {
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   public readonly injector = inject(Injector);
 
-  protected _parent = signal<IdsRadioGroupDirective | null>(null);
+  private _parent!: IdsRadioGroupDirective;
 
   public selected = signal<boolean>(false);
 
@@ -30,13 +30,13 @@ export class IdsRadioItemComponent implements OnInit {
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
 
-  public isDisabled = computed(() => this.disabled() || this._parent()?.isDisabled());
-  public name = computed(() => this._parent()?.name());
-  public required = computed(() => this._parent()?.required());
+  public isDisabled = computed(() => this.disabled() || this._parent.isDisabled());
+  public name = computed(() => this._parent.name());
+  public required = computed(() => this._parent.required());
   public ariaChecked = computed(() => this.selected());
   private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this._parent()?.variant() ?? null,
-    this._parent()?.labelPosition() ?? null,
+    this._parent.variant() ?? null,
+    this._parent.labelPosition() ?? null,
     this.isDisabled() ? 'disabled' : null,
   ]));
 
@@ -48,14 +48,16 @@ export class IdsRadioItemComponent implements OnInit {
     return this._hostClasses();
   }
 
-  public ngOnInit(): void {
+  constructor() {
     const parent = this.injector.get(IdsRadioGroupDirective, null, { optional: true, skipSelf: true });
     if (!parent) {
-      throw new Error(createComponentError(this._componentClass, 'component must be direct child of a segmented control'));
+      throw new Error(createComponentError(this._componentClass, 'component must be direct child of a radio group'));
     }
-    this._parent.set(parent);
+    this._parent = parent;
+  }
 
-    if (parent.isItemPreSelectedByValue(this.value())) {
+  public ngOnInit(): void {
+    if (this._parent.isItemPreSelectedByValue(this.value())) {
       this.selected.set(true);
     }
   }

@@ -76,9 +76,9 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<OrientationType, string[]> = {
       // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-      horizontal: ['ArrowLeft', 'ArrowRight', 'Enter'],
+      horizontal: ['ArrowLeft', 'ArrowRight', 'Enter', ' '],
       // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-      vertical: ['ArrowUp', 'ArrowDown', 'Enter'],
+      vertical: ['ArrowUp', 'ArrowDown', 'Enter', ' '],
     };
 
     const orientation = this.orientation();
@@ -140,7 +140,8 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         nextItem.focus();
         break;
       }
-      case 'Enter': {
+      case 'Enter':
+      case ' ': {
         items[index].onChange();
         break;
       }

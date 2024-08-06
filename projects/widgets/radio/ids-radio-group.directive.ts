@@ -82,10 +82,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     };
 
     const orientation = this.orientation();
-    const allNavigationKeys = new Set([
-      ...navigationKeys.horizontal,
-      ...navigationKeys.vertical,
-    ]);
+    const allNavigationKeys = new Set(Object.values(navigationKeys).flat());
 
     if (allNavigationKeys.has(event.key)) {
       event.preventDefault();

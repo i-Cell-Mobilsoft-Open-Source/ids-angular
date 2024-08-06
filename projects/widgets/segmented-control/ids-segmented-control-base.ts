@@ -71,12 +71,11 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', ' '];
 
-    if (event.key !== 'Tab') {
-      event.preventDefault();
-    }
     if (!navigationKeys.includes(event.key)) {
       return;
     }
+
+    event.preventDefault();
 
     const items = this._items();
     const target = event.target as HTMLButtonElement;

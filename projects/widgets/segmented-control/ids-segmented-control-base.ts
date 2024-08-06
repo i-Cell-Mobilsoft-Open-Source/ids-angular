@@ -69,7 +69,8 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
 
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter'];
+    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', ' '];
+
     if (!navigationKeys.includes(event.key)) {
       return;
     }
@@ -86,8 +87,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
         if (index === 0) {
           return;
         }
-        const prevIndex = this._getSiblingItemIndex(index, -1);
-        const prevItem = items[prevIndex];
+        const prevItem = items[index - 1];
         prevItem.focus();
         break;
       }
@@ -95,12 +95,12 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
         if (index === (items.length - 1)) {
           return;
         }
-        const nextIndex = this._getSiblingItemIndex(index, 1);
-        const nextItem = items[nextIndex];
+        const nextItem = items[index + 1];
         nextItem.focus();
         break;
       }
-      case 'Enter': {
+      case 'Enter':
+      case ' ': {
         items[index].onClick();
         break;
       }
@@ -116,11 +116,10 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   public ngAfterContentInit(): void {
     const items = this._items();
     const minItemCount = 2;
-    const maxItemCount = 5;
 
-    if (isDevMode() && (items.length < minItemCount || items.length > maxItemCount)) {
+    if (isDevMode() && (items.length < minItemCount)) {
       throw new Error(
-        createComponentError(this._componentClass, 'invalid count of segmented control items. Minimum item count is 2, maximum is 5.'),
+        createComponentError(this._componentClass, 'invalid count of segmented control items. Minimum item count is 2.'),
       );
     }
 
@@ -210,18 +209,6 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     }
 
     return itemValue === this._rawValue;
-  }
-
-  private _getSiblingItemIndex(index: number, offset: number): number {
-    const items = this._items();
-    const nextIndex = index + offset;
-    if (nextIndex === items.length) {
-      return index;
-    }
-    if (nextIndex === -1) {
-      return index;
-    }
-    return nextIndex;
   }
 
   public ngOnDestroy(): void {

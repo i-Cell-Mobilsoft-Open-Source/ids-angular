@@ -76,15 +76,17 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<OrientationType, string[]> = {
       // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-      horizontal: ['ArrowLeft', 'ArrowRight', 'Enter', 'Tab'],
+      horizontal: ['ArrowLeft', 'ArrowRight', 'Enter'],
       // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
-      vertical: ['ArrowUp', 'ArrowDown', 'Enter', 'Tab'],
+      vertical: ['ArrowUp', 'ArrowDown', 'Enter'],
     };
 
     const orientation = this.orientation();
 
-    if (!navigationKeys[orientation].includes(event.key)) {
+    if (event.key !== 'Tab') {
       event.preventDefault();
+    }
+    if (!navigationKeys[orientation].includes(event.key)) {
       return;
     }
 

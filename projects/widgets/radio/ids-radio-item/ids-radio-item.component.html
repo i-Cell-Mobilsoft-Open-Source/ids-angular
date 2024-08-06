@@ -1,0 +1,22 @@
+<div class="ids-radio-item__input-wrapper">
+  <div class="ids-radio-item__touch-target" (click)="touchTargetClick()"></div>
+  <input
+    #input
+    class="ids-radio-item__native-control"
+    type="radio"
+    [id]="inputId()"
+    [checked]="selected()"
+    [disabled]="isDisabled()"
+    [attr.name]="name()"
+    [attr.value]="value()"
+    [required]="required()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
+    [attr.aria-describedby]="ariaDescribedBy()"
+    (change)="onChange()"
+  />
+  <div class="ids-radio-item__inner-circle" (click)="innerCrircleClick()"></div>
+</div>
+<label class="ids-radio-item__label" [for]="inputId()">
+  <ng-content />
+</label>

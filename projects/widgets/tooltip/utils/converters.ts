@@ -2,7 +2,7 @@ import { TooltipPosition, TooltipPositionType } from '../types/ids-tooltip-posit
 
 import { ExtendedHorizontalPosition, ExtendedPosition, ExtendedVerticalPosition, ExtendedPositionPairType } from '@i-cell/ids-angular/core';
 
-export function tooltipPositionToExtendedPosition(position: TooltipPositionType | null): ExtendedPositionPairType | null {
+export function tooltipPositionToExtendedPosition(position: TooltipPositionType | null | undefined): ExtendedPositionPairType | null {
   if (!position) {
     return null;
   }
@@ -51,7 +51,7 @@ export function tooltipPositionToExtendedPosition(position: TooltipPositionType 
   }
 }
 
-export function extendedPositionToTooltipPosition(position: ExtendedPositionPairType | null): TooltipPositionType | null {
+export function extendedPositionToTooltipPosition(position: ExtendedPositionPairType | null | undefined): TooltipPositionType | null {
   if (!position) {
     return null;
   }

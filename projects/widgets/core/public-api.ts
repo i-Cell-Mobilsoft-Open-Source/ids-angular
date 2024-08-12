@@ -9,4 +9,5 @@ export * from './utils/coercion';
 export * from './utils/create-error';
 export * from './utils/even-odd';
 export * from './utils/selection-model';
-export * from './utils/scroll-clip';
+export * from './utils/position/flexible-connected-position';
+export * from './utils/position/scroll-clip';

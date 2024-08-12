@@ -1,4 +1,4 @@
-import { PositionType } from '../types/position.type';
+import { PositionType } from '../../types/position.type';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 

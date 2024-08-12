@@ -75,7 +75,6 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
       });
 
     this._scrollContainers = this._scrollDispatcher.getAncestorScrollContainers(this._elementRef);
-    this._scrollContainers[0].scrollTo({ top: 560, left: 700 });
 
     this._focusMonitor
       .monitor(this._elementRef)
@@ -100,10 +99,9 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
 
     const instance = componentRef.instance;
     this._tooltipInstance = instance;
-    instance.initValues({
+    instance.initiate({
       triggerElement: this._elementRef.nativeElement,
       scrollContainers: this._scrollContainers,
-      mouseLeaveHideDelay: this.hideDelay(),
       size: this.size(),
       variant: this.variant(),
       originalPosition: this.position(),

@@ -10,7 +10,7 @@ const DEFAULT_HIDE_DELAY = 1_000;
 const DEFAULT_VIEWPORT_MARGIN = 8;
 const DEFAULT_LONGPRESS_DELAY = 500;
 const DEFAULT_TOUCHEND_HIDE_DELAY = 1500;
-const DEFAULT_SCROLL_DEBOUNCE_TIME = 0;
+const DEFAULT_SCROLL_DEBOUNCE_TIME = 20;
 
 export interface IdsTooltipDefaultOptions {
   position?: TooltipPositionType

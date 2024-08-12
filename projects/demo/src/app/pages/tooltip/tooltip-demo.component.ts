@@ -15,5 +15,6 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 export class TooltipDemoComponent {
   public showDelay = 0;
   // eslint-disable-next-line no-magic-numbers
-  public hideDelay = 2_000;
+  public hideDelay = 5_000;
+  public tooltipText = 'Tooltip szövege itt jelenik meg';
 }

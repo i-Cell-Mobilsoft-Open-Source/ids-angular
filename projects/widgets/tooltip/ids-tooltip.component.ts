@@ -6,7 +6,7 @@ import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } 
 import { DOMRectBase, elementClippedFrom } from '../core/utils/scroll-clip';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, HostBinding, HostListener, inject, OnDestroy, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, HostBinding, HostListener, inject, OnDestroy, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, ExtendedHorizontalPosition, ExtendedHorizontalPositionType, ExtendedPositionPairType, ExtendedVerticalPosition, ExtendedVerticalPositionType, HorizontalPosition, Position, PositionType, SizeType, VerticalPosition } from '@i-cell/ids-angular/core';
 import { Observable, Subject } from 'rxjs';
 
@@ -29,6 +29,7 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _onHide: Subject<void> = new Subject();
+  private readonly _tooltipElement = inject<ElementRef<HTMLElement>>(ElementRef);
 
   private _triggerElement?: HTMLElement;
   private _scrollContainers?: CdkScrollable[];
@@ -46,8 +47,6 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
   private _hideTimeoutId: ReturnType<typeof setTimeout> | undefined;
   private _tooltipInitated = false;
-
-  private _tooltipElement = viewChild.required<ElementRef<HTMLElement>>('tooltip');
 
   private _rect = signal<DOMRectBase | null>(null);
   private _positionTop = computed(() => (this._rect() ? `${Math.round(this._rect()!.top)}px` : null));
@@ -135,7 +134,7 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   ExtendedPositionPairType): DOMRectBase {
     const triggerEl = this._triggerElement!;
     const triggerRect = triggerEl.getBoundingClientRect();
-    const tooltipEl = this._tooltipElement().nativeElement;
+    const tooltipEl = this._tooltipElement.nativeElement;
     const width = tooltipEl.offsetWidth;
     const height = tooltipEl.offsetHeight;
     let left = 0;

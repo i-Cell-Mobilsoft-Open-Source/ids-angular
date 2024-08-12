@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip/ids-tooltip.directive';
+import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 @Component({
   selector: 'app-tooltip-demo',

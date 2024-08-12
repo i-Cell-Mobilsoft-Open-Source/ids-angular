@@ -1,7 +1,7 @@
 import { TooltipPositionType } from './types/ids-tooltip-position';
 import { TooltipVariantType } from './types/ids-tooltip-variant';
 import { TooltipTextAlign } from './types/ids-tooltip.type';
-import { positionToTooltipPosition, tooltipPositionToExtendedPosition } from './utils/converters';
+import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } from './utils/converters';
 
 import { DOMRectBase, elementClippedFrom } from '../core/utils/scroll-clip';
 
@@ -39,8 +39,8 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   private _variant?: TooltipVariantType;
   private _originalTooltipPosition = signal<TooltipPositionType | null>(null);
   private _originalPositionPair = computed(() => tooltipPositionToExtendedPosition(this._originalTooltipPosition()));
-  private _fallbackTooltipPosition = computed(() => positionToTooltipPosition(this._fallbackPositionPair()));
   private _fallbackPositionPair = signal<ExtendedPositionPairType | null>(null);
+  private _fallbackTooltipPosition = computed(() => extendedPositionToTooltipPosition(this._fallbackPositionPair()));
   private _textAlign?: TooltipTextAlign;
   private _isVisible = false;
   private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
@@ -49,9 +49,9 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
 
   private _tooltipElement = viewChild.required<ElementRef<HTMLElement>>('tooltip');
 
-  private _coordinate = signal<DOMRectBase | null>(null);
-  private _positionTop = computed(() => (this._coordinate() ? `${Math.round(this._coordinate()!.top)}px` : null));
-  private _positionLeft = computed(() => (this._coordinate() ? `${Math.round(this._coordinate()!.left)}px` : null));
+  private _rect = signal<DOMRectBase | null>(null);
+  private _positionTop = computed(() => (this._rect() ? `${Math.round(this._rect()!.top)}px` : null));
+  private _positionLeft = computed(() => (this._rect() ? `${Math.round(this._rect()!.left)}px` : null));
 
   private _hostClasses = computed(() => createClassList(
     this._componentClass,
@@ -131,8 +131,8 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
 
   private _getNewRect([
     horizontalPosition,
-    verticalPosition]: [ExtendedHorizontalPositionType, ExtendedVerticalPositionType,
-  ]): DOMRectBase {
+    verticalPosition]:
+  ExtendedPositionPairType): DOMRectBase {
     const triggerEl = this._triggerElement!;
     const triggerRect = triggerEl.getBoundingClientRect();
     const tooltipEl = this._tooltipElement().nativeElement;
@@ -176,7 +176,7 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
     const clippedFrom = elementClippedFrom(newRect, this._scrollContainers ?? []);
 
     if (!clippedFrom) {
-      this._coordinate.set(newRect);
+      this._rect.set(newRect);
       this._fallbackPositionPair.set(null);
       return;
     }
@@ -187,7 +187,7 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    this._coordinate.set(this._getNewRect(fallbackPositionPair!));
+    this._rect.set(this._getNewRect(fallbackPositionPair!));
     this._fallbackPositionPair.set(fallbackPositionPair);
   }
 

@@ -51,7 +51,7 @@ export function tooltipPositionToExtendedPosition(position: TooltipPositionType 
   }
 }
 
-export function positionToTooltipPosition(position: ExtendedPositionPairType | null): TooltipPositionType | null {
+export function extendedPositionToTooltipPosition(position: ExtendedPositionPairType | null): TooltipPositionType | null {
   if (!position) {
     return null;
   }

@@ -2,7 +2,7 @@ $sizes: compact, comfortable, spacious, dense;
 $variants: light, dark;
 
 .ids-tooltip {
-  position: absolute;
+  position: fixed;
   display: block;
 
   & > .ids-tooltip__content {
@@ -11,7 +11,7 @@ $variants: light, dark;
     justify-content: center;
     align-items: center;
 
-    & > .ids-tooltip__caret {
+    &::after {
       position: absolute;
       content: " ";
       transform: rotate(-45deg);
@@ -30,7 +30,7 @@ $variants: light, dark;
         letter-spacing: var(--ids-comp-tooltip-label-typography-letter-spacing-#{$size});
         line-height: var(--ids-comp-tooltip-label-typography-line-height-#{$size});
 
-        & > .ids-tooltip__caret {
+        &::after {
           width: var(--ids-comp-tooltip-size-caret-size-#{$size});
           height: var(--ids-comp-tooltip-size-caret-size-#{$size});
         }
@@ -39,53 +39,53 @@ $variants: light, dark;
       &.ids-tooltip-position {
         &-north {
           transform: translateY(calc(0px - var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)));
-          & > .ids-tooltip__content > .ids-tooltip__caret {
+          & > .ids-tooltip__content::after {
             bottom: calc(0px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / 2));
           }
         }
         &-northeast {
           transform: translateY(calc(0px - var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)))
             translateX(calc(-10px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2))));
-          & > .ids-tooltip__content > .ids-tooltip__caret {
+          & > .ids-tooltip__content::after {
             bottom: calc(0px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / 2));
           }
         }
         &-east {
           transform: translateX(calc(var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)));
-          & > .ids-tooltip__content > .ids-tooltip__caret {
+          & > .ids-tooltip__content::after {
             left: calc(0px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / 2));
           }
         }
         &-southeast {
           transform: translateY(calc(var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)))
             translateX(calc(-10px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2))));
-          & > .ids-tooltip__content > .ids-tooltip__caret {
+          & > .ids-tooltip__content::after {
             top: calc(0px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / 2));
           }
         }
         &-south {
           transform: translateY(calc(var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)));
-          & > .ids-tooltip__content > .ids-tooltip__caret {
+          & > .ids-tooltip__content::after {
             top: calc(0px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / 2));
           }
         }
         &-southwest {
           transform: translateY(calc(var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)))
             translateX(calc(10px + var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)));
-          & > .ids-tooltip__content > .ids-tooltip__caret {
+          & > .ids-tooltip__content::after {
             top: calc(0px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / 2));
           }
         }
         &-west {
           transform: translateX(calc(0px - var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)));
-          & > .ids-tooltip__content > .ids-tooltip__caret {
+          & > .ids-tooltip__content::after {
             right: calc(0px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / 2));
           }
         }
         &-northwest {
           transform: translateY(calc(0px - var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)))
             translateX(calc(10px + var(--ids-comp-tooltip-size-caret-size-#{$size}) / sqrt(2)));
-          & > .ids-tooltip__content > .ids-tooltip__caret {
+          & > .ids-tooltip__content::after {
             bottom: calc(0px - (var(--ids-comp-tooltip-size-caret-size-#{$size}) / 2));
           }
         }
@@ -99,7 +99,7 @@ $variants: light, dark;
         background-color: var(--ids-comp-tooltip-color-bg-#{$variant}-default);
         color: var(--ids-comp-tooltip-color-fg-#{$variant}-default);
 
-        & > .ids-tooltip__caret {
+        &::after {
           background: var(--ids-comp-tooltip-color-bg-#{$variant}-default);
         }
       }
@@ -110,14 +110,14 @@ $variants: light, dark;
     &-north,
     &-south {
       text-align: center;
-      & > .ids-tooltip__content > .ids-tooltip__caret {
+      & > .ids-tooltip__content::after {
         left: auto;
         right: auto;
       }
     }
     &-east,
     &-west {
-      & > .ids-tooltip__content > .ids-tooltip__caret {
+      & > .ids-tooltip__content::after {
         top: auto;
         bottom: auto;
       }
@@ -125,14 +125,14 @@ $variants: light, dark;
     &-northeast,
     &-southeast {
       text-align: left;
-      & > .ids-tooltip__content > .ids-tooltip__caret {
+      & > .ids-tooltip__content::after {
         left: 10px;
       }
     }
     &-northwest,
     &-southwest {
       text-align: right;
-      & > .ids-tooltip__content > .ids-tooltip__caret {
+      & > .ids-tooltip__content::after {
         right: 10px;
       }
     }

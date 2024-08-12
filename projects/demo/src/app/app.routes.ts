@@ -56,6 +56,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
   },
   {
+    path: 'components/radio',
+    loadComponent: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
+  },
+  {
     path: 'components/tag',
     loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
   },

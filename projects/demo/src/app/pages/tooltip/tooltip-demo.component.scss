@@ -1,0 +1,23 @@
+:host {
+  margin: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+
+  .grid-item {
+    display: flex;
+    align-items: center;
+    &.left {
+      justify-content: start;
+    }
+    &.center {
+      justify-content: center;
+    }
+    &.right {
+      justify-content: end;
+    }
+  }
+}

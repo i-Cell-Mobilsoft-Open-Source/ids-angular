@@ -8,3 +8,8 @@ export function coerceNumberAttribute(value: unknown, fallbackValue = NaN): numb
   const isNumberValue = !isNaN(Number(value));
   return isNumberValue ? Number(value) : fallbackValue;
 }
+
+/** Converts a bound attribute's value to a string and trim. */
+export function coerceStringAttribute(value: unknown): string {
+  return value ? String(value).trim() : '';
+}

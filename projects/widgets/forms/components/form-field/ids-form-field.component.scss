@@ -13,25 +13,102 @@ $variants: surface, light;
     font-style: normal;
   }
 
-  & > .ids-form-field__fix-container {
+  & > .ids-form-field__field-wrapper {
     display: flex;
+    align-items: center;
+    align-self: stretch;
+    flex-shrink: 0;
+    border-style: solid;
+
+    & > .ids-form-field__field-wrapper__container {
+      display: flex;
+      align-items: center;
+      flex: 1 0 0;
+
+      & > .ids-form-field__leading-icon,
+      & > .ids-form-field__prefix,
+      & > .ids-form-field__duffix,
+      & > .ids-form-field__trailing-icon {
+        display: flex;
+        align-items: center;
+      }
+
+      & > .ids-form-field__infox {
+        display: flex;
+        align-items: center;
+        flex: 1 0 0;
+      }
+    }
+
+    & > .ids-form-field__field-wrapper__action {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-self: stretch;
+      border-style: solid;
+    }
   }
 
   @each $size in $sizes {
     &.ids-form-field-#{$size} {
-      padding: var(--forms-field-standard-label-size-padding-y) 0px;
       gap: var(--ids-comp-forms-field-standard-size-gap-#{$size});
 
       & > .ids-form-field__label {
-        font-family: var(--ids-comp-forms-field-standard-label-typography-font-family-#{$size});
-        font-size: var(--ids-comp-forms-field-standard-label-typography-font-size-#{$size});
-        font-weight: var(--ids-comp-forms-field-standard-label-typography-font-weight-#{$size});
-        line-height: var(--ids-comp-forms-field-standard-label-typography-line-height-#{$size});
-        letter-spacing: var(--ids-comp-forms-field-standard-label-typography-letter-spacing-#{$size});
+        padding: var(--ids-comp-forms-form-field-standard-label-size-padding-y-#{$size}) 0px;
+        font-family: var(--ids-comp-forms-form-field-standard-label-typography-font-family-#{$size});
+        font-size: var(--ids-comp-forms-form-field-standard-label-typography-font-size-#{$size});
+        font-weight: var(--ids-comp-forms-form-field-standard-label-typography-font-weight-#{$size});
+        letter-spacing: var(--ids-comp-forms-form-field-standard-label-typography-letter-spacing-#{$size});
+        line-height: var(--ids-comp-forms-form-field-standard-label-typography-line-height-#{$size});
       }
 
-      & > .ids-form-field__fix-container {
-        gap: var(--ids-comp-forms-text-input-standard-container-size-gap-#{$size});
+      & > .ids-form-field__field-wrapper {
+        min-height: var(--ids-comp-forms-form-field-standard-field-wrapper-size-height-#{$size});
+        padding: var(--ids-comp-forms-form-field-standard-field-wrapper-size-padding-y-#{$size})
+          var(--ids-comp-forms-form-field-standard-field-wrapper-size-padding-x-#{$size});
+        gap: var(--ids-comp-forms-form-field-standard-field-wrapper-size-gap-#{$size});
+        border-radius: var(--ids-comp-forms-form-field-standard-field-wrapper-size-border-radius-#{$size});
+        border-width: var(--ids-comp-forms-form-field-standard-field-wrapper-size-border-width-#{$size});
+
+        & > .ids-form-field__field-wrapper__container {
+          padding: var(--ids-comp-forms-form-field-standard-field-wrapper-container-size-padding-y-#{$size})
+            var(--ids-comp-forms-form-field-standard-field-wrapper-container-size-padding-x-#{$size});
+          gap: var(--ids-comp-forms-form-field-standard-field-wrapper-container-size-gap-#{$size});
+
+          & > .ids-form-field__leading-icon .ids-icon {
+            height: var(--ids-comp-forms-form-field-standard-field-wrapper-leading-icon-size-height-#{$size});
+            width: var(--ids-comp-forms-form-field-standard-field-wrapper-leading-icon-size-width-#{$size});
+          }
+
+          & > .ids-form-field__prefix {
+            font-family: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-typography-font-family-#{$size});
+            font-size: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-typography-font-size-#{$size});
+            font-weight: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-typography-font-weight-#{$size});
+            letter-spacing: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-typography-letter-spacing-#{$size});
+            line-height: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-typography-line-height-#{$size});
+          }
+
+          & > .ids-form-field__suffix {
+            font-family: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-typography-font-family-#{$size});
+            font-size: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-typography-font-size-#{$size});
+            font-weight: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-typography-font-weight-#{$size});
+            letter-spacing: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-typography-letter-spacing-#{$size});
+            line-height: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-typography-line-height-#{$size});
+          }
+
+          & > .ids-form-field__trailing-icon .ids-icon {
+            height: var(--ids-comp-forms-form-field-standard-field-wrapper-trailing-icon-size-height-#{$size});
+            width: var(--ids-comp-forms-form-field-standard-field-wrapper-trailing-icon-size-width-#{$size});
+          }
+        }
+
+        & > .ids-form-field__field-wrapper__action {
+          padding: 0px
+            var(--ids-comp-forms-form-field-standard-field-wrapper-action-size-padding-right-#{$size})
+            0px
+            var(--ids-comp-forms-form-field-standard-field-wrapper-action-size-padding-left-#{$size});
+          border-left-width: var(--ids-comp-forms-form-field-standard-field-wrapper-action-size-border-left-#{$size});
+        }
       }
     }
   }
@@ -39,7 +116,35 @@ $variants: surface, light;
   @each $variant in $variants {
     &.ids-form-field-#{$variant} {
       & > .ids-form-field__label {
-        color: var(--text-field-label-color-fg-#{$variant}-default);
+        color: var(--ids-comp-forms-form-field-standard-label-color-fg-#{$variant}-default);
+      }
+
+      & > .ids-form-field__field-wrapper {
+        border-color: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-border-#{$variant}-default);
+        background: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-bg-#{$variant}-default);
+
+        & > .ids-form-field__field-wrapper__container {
+          & > .ids-form-field__leading-icon .ids-icon {
+            color: var(--ids-comp-forms-form-field-standard-field-wrapper-leading-icon-color-fg-#{$variant}-default);
+          }
+
+          & > .ids-form-field__prefix {
+            color: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-color-fg-#{$variant}-default);
+          }
+
+          & > .ids-form-field__suffix {
+            color: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-color-fg-#{$variant}-default);
+          }
+
+          & > .ids-form-field__trailing-icon .ids-icon {
+            color: var(--ids-comp-forms-form-field-standard-field-wrapper-trailing-icon-color-fg-#{$variant}-default);
+          }
+        }
+
+        & > .ids-form-field__field-wrapper__action {
+          border-left-color: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-border-#{$variant}-default);
+          background: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-bg-#{$variant}-default);
+        }
       }
     }
   }

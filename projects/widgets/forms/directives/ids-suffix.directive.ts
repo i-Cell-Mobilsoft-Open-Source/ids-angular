@@ -1,14 +1,14 @@
 import { Directive, Input } from '@angular/core';
 
 @Directive({
-  selector: '[idsSuffix], [idsIconSuffix], [idsTextSuffix]',
+  selector: '[idsSuffix], [idsTrailingIcon]',
   standalone: true,
 })
 export class IdsSuffixDirective {
-  @Input('matTextSuffix')
-  public set isTextSelector(value: '') {
-    this.isText = true;
+  @Input('idsTrailingIcon')
+  public set idsTrailingIcon(value: '') {
+    this.isTrailingIcon = true;
   }
 
-  public isText = false;
+  public isTrailingIcon = false;
 }

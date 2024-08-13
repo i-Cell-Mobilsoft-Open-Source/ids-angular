@@ -1,5 +1,8 @@
 import { IDS_FORM_FIELD_DEFAULT_OPTIONS, IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY } from './ids-form-field-default-options';
 
+import { IdsActionDirective } from '../../directives/ids-action.directive';
+import { IdsPrefixDirective } from '../../directives/ids-prefix.directive';
+import { IdsSuffixDirective } from '../../directives/ids-suffix.directive';
 import { IDS_FORM_ELEMENT } from '../../tokens/form';
 import { IdsValidators } from '../../validators';
 import { IdsErrorMessageComponent } from '../message/ids-error-message/ids-error-message.component';
@@ -30,7 +33,15 @@ export class IdsFormFieldComponent {
   private _child = viewChild(IDS_FORM_ELEMENT);
   private _hintMessages = contentChildren(IdsHintMessageComponent, { descendants: true });
   private _errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
+  private _actions = contentChildren(IdsActionDirective);
+  private _prefixes = contentChildren(IdsPrefixDirective);
+  private _suffixes = contentChildren(IdsSuffixDirective);
 
+  public hasActions = computed(() => Boolean(this._actions().length));
+  public hasLeadingIcon = computed(() => Boolean(this._prefixes().filter((prefix) => prefix.isLeadingIcon).length));
+  public hasPrefix = computed(() => Boolean(this._prefixes().filter((prefix) => !prefix.isLeadingIcon).length));
+  public hasSuffix = computed(() => Boolean(this._suffixes().filter((suffix) => !suffix.isTrailingIcon).length));
+  public hasTrailingIcon = computed(() => Boolean(this._suffixes().filter((suffix) => suffix.isTrailingIcon).length));
   public inputId = computed(() => this._child()?.inputId());
   public size = input<SizeType | null>(this._defaultOptions.size);
   public variant = input<AllVariantsType | null>(this._defaultOptions.variant);

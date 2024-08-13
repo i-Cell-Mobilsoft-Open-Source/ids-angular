@@ -1,14 +1,14 @@
 import { Directive, Input } from '@angular/core';
 
 @Directive({
-  selector: '[idsPrefix], [idsIconPrefix], [idsTextPrefix]',
+  selector: '[idsPrefix], [idsLeadingIcon]',
   standalone: true,
 })
 export class IdsPrefixDirective {
-  @Input('matTextPrefix')
-  public set isTextSelector(value: '') {
-    this.isText = true;
+  @Input('idsLeadingIcon')
+  public set idsLeadingIcon(value: '') {
+    this.isLeadingIcon = true;
   }
 
-  public isText = false;
+  public isLeadingIcon = false;
 }

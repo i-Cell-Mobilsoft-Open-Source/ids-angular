@@ -88,6 +88,22 @@ $variants: surface, light;
             line-height: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-typography-line-height-#{$size});
           }
 
+          & > .ids-form-field__infix {
+            font-family: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-filled-font-family-#{$size});
+            font-size: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-filled-font-size-#{$size});
+            font-weight: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-filled-font-weight-#{$size});
+            letter-spacing: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-filled-letter-spacing-#{$size});
+            line-height: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-filled-line-height-#{$size});
+
+            input::placeholder {
+              font-family: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-empty-font-family-#{$size});
+              font-size: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-empty-font-size-#{$size});
+              font-weight: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-empty-font-weight-#{$size});
+              letter-spacing: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-empty-letter-spacing-#{$size});
+              line-height: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-empty-line-height-#{$size});
+            }
+          }
+
           & > .ids-form-field__suffix {
             font-family: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-typography-font-family-#{$size});
             font-size: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-typography-font-size-#{$size});
@@ -130,6 +146,14 @@ $variants: surface, light;
 
           & > .ids-form-field__prefix {
             color: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-color-fg-#{$variant}-default);
+          }
+
+          & > .ids-form-field__infix {
+            color: var(--ids-comp-forms-form-field-standard-field-wrapper-input-filled-color-fg-#{$variant}-default);
+
+            input::placeholder {
+              color: var(--ids-comp-forms-form-field-standard-field-wrapper-input-empty-color-fg-#{$variant}-default);
+            }
           }
 
           & > .ids-form-field__suffix {

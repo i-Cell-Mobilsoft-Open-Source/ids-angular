@@ -8,7 +8,7 @@ import { IdsValidators } from '../../validators';
 import { IdsErrorMessageComponent } from '../message/ids-error-message/ids-error-message.component';
 import { IdsHintMessageComponent } from '../message/ids-hint-message/ids-hint-message.component';
 
-import { Component, computed, contentChildren, HostBinding, inject, Injector, input, isDevMode, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, HostBinding, inject, Injector, input, isDevMode, viewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AllVariantsType, createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
 
@@ -21,6 +21,7 @@ const defaultOptions = IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY();
   templateUrl: './ids-form-field.component.html',
   styleUrl: './ids-form-field.component.scss',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsFormFieldComponent {
   private readonly _componentClass = 'ids-form-field';

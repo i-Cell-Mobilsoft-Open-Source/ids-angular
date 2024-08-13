@@ -15,7 +15,6 @@ let nextUniqueId = 0;
   standalone: true,
   imports: [],
   templateUrl: './ids-tooltip.component.html',
-  styleUrl: './ids-tooltip.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

@@ -2,6 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsPaginatorComponent, PaginatorVariant, PaginatorVariantType } from '@i-cell/ids-angular/paginator';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-paginator-demo',
@@ -9,6 +10,7 @@ import { IdsPaginatorComponent, PaginatorVariant, PaginatorVariantType } from '@
   imports: [
     IdsPaginatorComponent,
     UpperCasePipe,
+    TranslateModule,
   ],
   templateUrl: './paginator-demo.component.html',
   styleUrl: './paginator-demo.component.scss',

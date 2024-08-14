@@ -10,6 +10,7 @@ import {
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsTagComponent, TagAppearance, TagAppearanceType } from '@i-cell/ids-angular/tag';
 import { mdiCheck, mdiMagnify } from '@mdi/js';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
@@ -17,6 +18,7 @@ import { mdiCheck, mdiMagnify } from '@mdi/js';
   imports: [
     IdsTagComponent,
     IdsIconComponent,
+    TranslateModule,
   ],
   templateUrl: './tag-demo.component.html',
   styleUrls: ['./tag-demo.component.scss'],

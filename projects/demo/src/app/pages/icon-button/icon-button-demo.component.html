@@ -1,4 +1,6 @@
-<h2>Icon buttons</h2>
+<h1>{{ "COMPONENTS.ICON_BUTTON" | translate }}</h1>
+
+<h2>Default</h2>
 <div class="variant-container">
   @for (variant of variants; track $index) {
     <div class="variant-item" [class]="variant">
@@ -24,7 +26,7 @@
     </div>
   }
 </div>
-<h2>Disabled icon buttons</h2>
+<h2>Disabled</h2>
 <div class="variant-container">
   @for (variant of baseVariants; track $index) {
     <div class="variant-item" [class]="variant">
@@ -37,14 +39,7 @@
               type="button"
               idsIconButton
               disabled
-              [id]="
-                appearance +
-                '-' +
-                variant +
-                '-' +
-                size +
-                '-disabled-icon-button'
-              "
+              [id]="appearance + '-' + variant + '-' + size + '-disabled-icon-button'"
               [appearance]="appearance"
               [size]="size"
               [variant]="variant"

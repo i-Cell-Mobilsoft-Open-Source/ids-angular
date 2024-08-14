@@ -64,7 +64,9 @@ implements OnInit {
   protected abstract _createItemChangeEvent(): E;
 
   public onClick(): void {
-    this.changes.emit(this._createItemChangeEvent());
+    if (this._multiSelect() || !this.selected()) {
+      this.changes.emit(this._createItemChangeEvent());
+    }
   }
 
   public focus(options?: FocusOptions): void {

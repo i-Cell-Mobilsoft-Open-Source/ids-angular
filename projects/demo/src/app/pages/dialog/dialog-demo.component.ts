@@ -1,6 +1,7 @@
-import { Component, InjectionToken, ViewEncapsulation, inject, input } from '@angular/core';
+import { Component, InjectionToken, inject, input } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCustomDialogBase, IdsDialogComponent, IdsDialogHeaderDirective, IdsDialogService } from '@i-cell/ids-angular/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog-token');
 
@@ -52,10 +53,10 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
     IdsButtonComponent,
     IdsDialogComponent,
     IdsDialogHeaderDirective,
+    TranslateModule,
   ],
   templateUrl: './dialog-demo.component.html',
   styleUrl: './dialog-demo.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class DialogDemoComponent {
   private _dialogService = inject(IdsDialogService);

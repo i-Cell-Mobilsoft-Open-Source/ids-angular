@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AllVariants,
   AllVariantsType,
@@ -6,14 +6,17 @@ import {
   SizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsDividerComponent } from '@i-cell/ids-angular/divider';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-divider-demo',
   standalone: true,
-  imports: [IdsDividerComponent],
+  imports: [
+    IdsDividerComponent,
+    TranslateModule,
+  ],
   templateUrl: './divider-demo.component.html',
   styleUrl: './divider-demo.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class DividerDemoComponent {
   public sizes = Object.values(Size) as SizeType[];

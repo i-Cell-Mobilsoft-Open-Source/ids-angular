@@ -1,40 +1,18 @@
-<h2>Dialog component examples</h2>
+<h1>{{ "COMPONENTS.DIALOG" | translate }}</h1>
 
-<button
-  type="button"
-  idsButton
-  appearance="filled"
-  size="comfortable"
-  variant="primary"
-  (click)="dialog1.open()"
->
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog1.open()">
   Dialog with default header
 </button>
-<dialog
-  #dialog1="idsDialog"
-  idsDialog
-  mainTitle="Dialog with default header"
-  subTitle="Dialog sub-title here"
->
+<dialog #dialog1="idsDialog" idsDialog mainTitle="Dialog with default header" subTitle="Dialog sub-title here">
   <!-- content -->
   <div idsDialogContent>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit
-    neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula
-    arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum.
-    Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices nulla nec
-    dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget
-    rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
   </div>
   <!-- action buttons -->
   <div idsDialogActions class="dialog-with-default-header">
-    <button
-      type="button"
-      idsButton
-      appearance="text"
-      size="comfortable"
-      variant="primary"
-      (click)="onCancelButtonClick(); dialog1.close()"
-    >
+    <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="onCancelButtonClick(); dialog1.close()">
       Cancel
     </button>
     <button
@@ -50,14 +28,7 @@
   </div>
 </dialog>
 
-<button
-  type="button"
-  idsButton
-  appearance="filled"
-  size="comfortable"
-  variant="primary"
-  (click)="dialog2.open()"
->
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog2.open()">
   Dialog with custom header
 </button>
 <dialog #dialog2="idsDialog" idsDialog mainTitle="Dialog with custom header">
@@ -66,23 +37,13 @@
   </div>
   <!-- content -->
   <div idsDialogContent>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit
-    neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula
-    arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum.
-    Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices nulla nec
-    dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget
-    rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
   </div>
   <!-- action buttons -->
   <div idsDialogActions class="dialog-with-custom-header">
-    <button
-      type="button"
-      idsButton
-      appearance="text"
-      size="comfortable"
-      variant="primary"
-      (click)="onCancelButtonClick(); dialog2.close()"
-    >
+    <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="onCancelButtonClick(); dialog2.close()">
       Cancel
     </button>
     <button
@@ -98,121 +59,60 @@
   </div>
 </dialog>
 
-<button
-  type="button"
-  idsButton
-  appearance="filled"
-  size="comfortable"
-  variant="primary"
-  (click)="dialog3.open()"
->
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog3.open()">
   Dialog with close button
 </button>
-<dialog
-  #dialog3="idsDialog"
-  idsDialog
-  mainTitle="Dialog with close button"
-  [showCloseButton]="true"
->
+<dialog #dialog3="idsDialog" idsDialog mainTitle="Dialog with close button" [showCloseButton]="true">
   <!-- content -->
   <div idsDialogContent>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit
-    neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula
-    arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum.
-    Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices nulla nec
-    dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget
-    rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
   </div>
 </dialog>
 
-<button
-  type="button"
-  idsButton
-  appearance="filled"
-  size="comfortable"
-  variant="primary"
-  (click)="dialog4.open()"
->
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog4.open()">
   Dialog with transparent backdrop
 </button>
-<dialog
-  #dialog4="idsDialog"
-  idsDialog
-  mainTitle="Dialog with transparent backdrop"
-  [showCloseButton]="true"
-  [showBackdrop]="false"
->
+<dialog #dialog4="idsDialog" idsDialog mainTitle="Dialog with transparent backdrop" [showCloseButton]="true" [showBackdrop]="false">
   <!-- content -->
   <div idsDialogContent>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit
-    neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula
-    arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum.
-    Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices nulla nec
-    dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget
-    rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
   </div>
 </dialog>
 
-<button
-  type="button"
-  idsButton
-  appearance="filled"
-  size="comfortable"
-  variant="primary"
-  (click)="dialog5.open()"
->
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialog5.open()">
   Dialog with scrollable content
 </button>
-<dialog
-  #dialog5="idsDialog"
-  idsDialog
-  mainTitle="Dialog with scrollable content"
-  subTitle="Dialog sub-title here"
->
+<dialog #dialog5="idsDialog" idsDialog mainTitle="Dialog with scrollable content" subTitle="Dialog sub-title here">
   <!-- content -->
   <div idsDialogContent>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit
-    neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula
-    arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum.
-    Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices nulla nec
-    dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget
-    rhoncus felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
-    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem
-    laoreet rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam
-    ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum.
-    Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu
-    venenatis ultricies. Mauris vehicula arcu ac elementum laoreet. Nam eleifend
-    mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
-    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie
-    ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet,
-    consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices
-    quam eu venenatis ultricies. Mauris vehicula arcu ac elementum laoreet. Nam
-    eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id
-    gravida ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum
-    molestie ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor
-    sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse
-    ultrices quam eu venenatis ultricies. Mauris vehicula arcu ac elementum
-    laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque
-    facilisis turpis id gravida ullamcorper. Nam ultrices nulla nec dolor
-    consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus
-    felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac
-    suscipit neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris
-    vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet
-    rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices
-    nulla nec dolor consectetur, condimentum molestie ipsum vestibulum.
-    Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu
-    venenatis ultricies. Mauris vehicula arcu ac elementum laoreet. Nam eleifend
-    mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
-    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie
-    ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet,
-    consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices
-    quam eu venenatis ultricies. Mauris vehicula arcu ac elementum laoreet. Nam
-    eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id
-    gravida ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum
-    molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies.
+    Mauris vehicula arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida
+    ullamcorper. Nam ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum
+    dolor sit amet, consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula
+    arcu ac elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam
+    ultrices nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula arcu ac
+    elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices
+    nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula arcu ac
+    elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices
+    nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula arcu ac
+    elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices
+    nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula arcu ac
+    elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices
+    nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula arcu ac
+    elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices
+    nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis. Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Proin ac suscipit neque. Suspendisse ultrices quam eu venenatis ultricies. Mauris vehicula arcu ac
+    elementum laoreet. Nam eleifend mauris quis lorem laoreet rutrum. Pellentesque facilisis turpis id gravida ullamcorper. Nam ultrices
+    nulla nec dolor consectetur, condimentum molestie ipsum vestibulum. Vestibulum eget rhoncus felis.
   </div>
   <!-- action buttons -->
   <div idsDialogActions class="dialog-with-scrollable-content">
@@ -229,13 +129,6 @@
   </div>
 </dialog>
 
-<button
-  type="button"
-  idsButton
-  appearance="filled"
-  size="comfortable"
-  variant="primary"
-  (click)="openCustomDialog()"
->
+<button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="openCustomDialog()">
   Custom dynamic dialog
 </button>

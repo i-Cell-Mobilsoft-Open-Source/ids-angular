@@ -1,28 +1,25 @@
-<h2>Dividers Horizontal</h2>
-<div class="divider-horizontal">
-  @for (size of sizes; track $index) {
-    @for (variant of variants; track $index) {
-      <ids-divider
-        width="250px"
-        [id]="variant + '-' + size + '-horizontal-divider'"
-        [size]="size"
-        [variant]="variant"
-      />
-    }
-  }
-</div>
+<h1>{{ "COMPONENTS.DIVIDER" | translate }}</h1>
 
-<h2>Dividers Vertical</h2>
-<div class="divider-vertical">
-  @for (size of sizes; track $index) {
-    @for (variant of variants; track $index) {
-      <ids-divider
-        type="vertical"
-        height="200px"
-        [id]="variant + '-' + size + '-vertical-divider'"
-        [size]="size"
-        [variant]="variant"
-      />
-    }
-  }
+<div class="divider-demo__container">
+  <div class="divider-block">
+    <h2>Horizontal</h2>
+    <div class="divider-horizontal">
+      @for (size of sizes; track $index) {
+        @for (variant of variants; track $index) {
+          <ids-divider width="250px" [id]="variant + '-' + size + '-horizontal-divider'" [size]="size" [variant]="variant" />
+        }
+      }
+    </div>
+  </div>
+
+  <div class="divider-block">
+    <h2>Vertical</h2>
+    <div class="divider-vertical">
+      @for (size of sizes; track $index) {
+        @for (variant of variants; track $index) {
+          <ids-divider type="vertical" height="200px" [id]="variant + '-' + size + '-vertical-divider'" [size]="size" [variant]="variant" />
+        }
+      }
+    </div>
+  </div>
 </div>

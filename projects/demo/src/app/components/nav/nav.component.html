@@ -15,22 +15,13 @@
                       <ids-icon [icon]="menuItem.icon || ''" />
                     }</span
                   ><span class="name">{{ menuItem.name! | translate }}</span></a
-                ><span #trigger class="more"
-                  ><ids-icon
-                    [icon]="
-                      menuItem.$open ? iconOpened() : iconClosed()
-                    " /></span></span
-              ><ids-subnav
-                [menuItem]="menuItem"
-                [trigger]="trigger"
-                (onOpen)="menuItem.$open = $event"
-              />
+                ><span #trigger class="more"><ids-icon [icon]="menuItem.$open ? iconOpened() : iconClosed()" /></span></span
+              ><ids-subnav [menuItem]="menuItem" [trigger]="trigger" (opened)="menuItem.$open = $event" />
             </li>
           } @else {
             <li>
               <a [routerLink]="menuItem.path"
-                ><span class="icon"></span
-                ><span class="name">{{ menuItem!.name! | translate }}</span></a
+                ><span class="icon"></span><span class="name">{{ menuItem!.name! | translate }}</span></a
               >
             </li>
           }

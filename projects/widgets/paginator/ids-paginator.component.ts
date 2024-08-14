@@ -4,10 +4,8 @@ import { PaginatorPageButtonAppearanceType } from './types/ids-paginator-appeara
 import { PaginatorPageEvent } from './types/ids-paginator-events';
 import { PaginatorVariantType } from './types/ids-paginator-variant';
 
-import { isNumberEven } from '../core/utils/even-odd';
-
 import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostBinding, HostListener, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
-import { createClassList, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, isNumberEven, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
 import { debounceTime, Subject, Subscription } from 'rxjs';

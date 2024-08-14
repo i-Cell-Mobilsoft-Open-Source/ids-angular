@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CardAppearance, CardAppearanceType, IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/ids-card-body.directive';
@@ -15,6 +15,7 @@ import {
   Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-card-demo',
@@ -28,10 +29,10 @@ import {
     IdsCardTitleDirective,
     IdsCardSubtitleDirective,
     FormsModule,
+    TranslateModule,
   ],
   templateUrl: './card-demo.component.html',
   styleUrl: './card-demo.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class CardDemoComponent {
   public appearances = Object.values(CardAppearance) as CardAppearanceType[];

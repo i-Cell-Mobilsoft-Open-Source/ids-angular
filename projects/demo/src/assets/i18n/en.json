@@ -14,15 +14,17 @@
     "ACTION_MENU": "Action menu",
     "ACTION_PANEL": "Action panel",
     "AVATAR": "Avatar",
-    "BUTTONS": "Buttons",
+    "BUTTON": "Button",
     "CARD": "Card",
     "CHECKBOX": "Checkbox",
     "DIALOG": "Dialog",
-    "DIVIDERS": "Dividers",
+    "DIVIDER": "Divider",
     "ICON_BUTTON": "Icon button",
     "SEGMENTED_CONTROL": "Segmented control",
     "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
     "PAGINATOR": "Paginator",
-    "TAG": "Tag"
+    "RADIO": "Radio",
+    "TAG": "Tag",
+    "TOOLTIP": "Tooltip"
   }
 }

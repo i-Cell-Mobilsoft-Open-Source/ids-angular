@@ -11,7 +11,7 @@ type StoryType = IdsActionPanelComponent & { summary?: string, content?: string 
 
 export default {
   component: IdsActionPanelComponent,
-  title: 'Components/ActionPanel',
+  title: 'Components/Action panel',
   tags: ['autodocs'],
   decorators: [
     moduleMetadata({

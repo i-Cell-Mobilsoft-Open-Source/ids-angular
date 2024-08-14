@@ -28,6 +28,7 @@ import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsAccordionComponent {
+  /** @ignore */
   private readonly _componentClass = 'ids-accordion';
 
   public size = input<SizeType | null>(Size.COMFORTABLE);
@@ -40,12 +41,17 @@ export class IdsAccordionComponent {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
+  /** @ignore */
   public isOpen = signal(false);
+  /** @ignore */
   public mdiChevronDown = mdiChevronDown;
+  /** @ignore */
   public mdiChevronUp = mdiChevronUp;
 
+  /** @ignore */
   private _details: HTMLDetailsElement = inject(ElementRef).nativeElement;
 
+  /** @ignore */
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       this.size(),
@@ -58,6 +64,7 @@ export class IdsAccordionComponent {
     return this._hostClasses();
   }
 
+  /** @ignore */
   @HostListener('toggle')
   private _onToggle(): void {
     this.isOpen.set(this._details.open);

@@ -1,6 +1,8 @@
 import { IdsButtonComponent } from './ids-button.component';
 import { ButtonAppearance } from './types/ids-button-appearance';
 
+import { selectControlOptions } from '../.storybook/utils';
+
 import { coerceBooleanAttribute, AllVariants, Size } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiMagnify } from '@mdi/js';
@@ -8,14 +10,6 @@ import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
 type StoryType = IdsButtonComponent & { label?: string, prefixIcon?: boolean, suffixIcon?: boolean };
-
-function selectControlOptions(constObj: { [key: string]: string }, description?: string): object {
-  return {
-    options: Object.values(constObj),
-    control: { type: 'select' },
-    ...(!!description && { description }),
-  };
-}
 
 export default {
   component: IdsButtonComponent,

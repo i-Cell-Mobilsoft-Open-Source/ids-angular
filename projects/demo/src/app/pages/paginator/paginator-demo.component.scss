@@ -1,29 +1,23 @@
 :host {
-  display: block;
-  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
 }
 
 h1 {
-  font-size: 40px;
-}
-h2 {
-  font-size: 32px;
-}
-h3 {
-  font-size: 26px;
-}
-h4 {
-  font-size: 20px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 14px;
+  margin-top: 0;
 }
 
 section {
-  padding: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2rem;
+  padding: 2rem;
+
+  h2 {
+    grid-area: 1 / 1 / 1 / -1;
+  }
 
   &.dark,
   &.surface {
@@ -40,18 +34,14 @@ section {
       color: white;
     }
   }
-
-  h3 {
-    padding-top: 24px;
-  }
 }
 
 .paginator-demo-container {
   .ids-paginator {
-    min-width: 50%;
+    width: 100%;
   }
 
   & > *:not(:last-child) {
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 }

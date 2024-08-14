@@ -18,7 +18,7 @@ export const IDS_FORM_FIELD_DEFAULT_OPTIONS = new InjectionToken<IdsFormFieldDef
 
 export function IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY(): Required<IdsFormFieldDefaultOptions> {
   return {
-    size: Size.COMFORTABLE,
+    size: Size.COMPACT,
     variant: AllVariants.SURFACE,
   };
 }

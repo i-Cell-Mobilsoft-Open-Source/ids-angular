@@ -8,7 +8,7 @@ import { IdsValidators } from '../../validators';
 import { IdsErrorMessageComponent } from '../message/ids-error-message/ids-error-message.component';
 import { IdsHintMessageComponent } from '../message/ids-hint-message/ids-hint-message.component';
 
-import { ChangeDetectionStrategy, Component, computed, contentChildren, HostBinding, inject, Injector, input, isDevMode, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, HostBinding, inject, Injector, input, isDevMode, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AllVariantsType, createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
 
@@ -31,7 +31,7 @@ export class IdsFormFieldComponent {
     ...this._injector.get(IDS_FORM_FIELD_DEFAULT_OPTIONS, null, { optional: true }),
   };
 
-  private _child = viewChild(IDS_FORM_ELEMENT);
+  private _child = contentChild(IDS_FORM_ELEMENT);
   private _hintMessages = contentChildren(IdsHintMessageComponent, { descendants: true });
   private _errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
   private _actions = contentChildren(IdsActionDirective);
@@ -47,7 +47,10 @@ export class IdsFormFieldComponent {
   public size = input<SizeType | null>(this._defaultOptions.size);
   public variant = input<AllVariantsType | null>(this._defaultOptions.variant);
   private _control = computed(() => this._child()?.controlDir);
-  private _hostClasses = computed(() => createClassList(this._componentClass, []),
+  private _hostClasses = computed(() => createClassList(this._componentClass, [
+    this.size(),
+    this.variant(),
+  ]),
   );
 
   @HostBinding('class') get classes(): string {
@@ -80,5 +83,12 @@ export class IdsFormFieldComponent {
       || control.hasValidator(IdsValidators.required)
       || control.hasValidator(IdsValidators.requiredTrue)
       || control.hasValidator(IdsValidators.requiredFalse);
+  }
+
+  public containerClick(): void {
+    const containerClick = this._child()?.onContainerClick;
+    if (containerClick) {
+      containerClick();
+    }
   }
 }

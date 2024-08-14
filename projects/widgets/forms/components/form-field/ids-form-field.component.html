@@ -6,7 +6,7 @@
 </label>
 
 <div class="ids-form-field__field-wrapper">
-  <div class="ids-form-field__field-wrapper__container">
+  <div class="ids-form-field__field-wrapper__container" (click)="containerClick()">
     @if (hasLeadingIcon()) {
       <div class="ids-form-field__leading-icon">
         <ng-content select="[idsLeadingIcon]" />

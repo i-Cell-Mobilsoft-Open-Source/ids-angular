@@ -2,6 +2,7 @@ import { NavComponent } from './components/nav/ids-nav.component';
 import { Menu } from './components/nav/menu.interface';
 import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import { Component, ElementRef, OnInit, ViewEncapsulation, inject, viewChild } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -15,6 +16,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     TranslateModule,
     NavComponent,
     IdsSwitchComponent,
+    CdkScrollable,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -48,6 +50,7 @@ export class AppComponent implements OnInit {
             { name: 'COMPONENTS.PAGINATOR', path: '/components/paginator' },
             { name: 'COMPONENTS.RADIO', path: '/components/radio' },
             { name: 'COMPONENTS.TAG', path: '/components/tag' },
+            { name: 'COMPONENTS.TOOLTIP', path: '/components/tooltip' },
           ],
         },
         {

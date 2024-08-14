@@ -1,12 +1,5 @@
 <header class="app-header">
-  <svg
-    class="app-logo"
-    width="90"
-    height="40"
-    viewBox="0 0 90 40"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg class="app-logo" width="90" height="40" viewBox="0 0 90 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
@@ -21,51 +14,23 @@
       d="M60.8713 27.7382V12.6699H67.7167C69.3526 12.6699 70.7949 12.9856 72.0434 13.6171C73.2919 14.2342 74.2678 15.1024 74.971 16.2217C75.6742 17.3411 76.0258 18.6685 76.0258 20.2041C76.0258 21.7253 75.6742 23.0527 74.971 24.1864C74.2678 25.3058 73.2919 26.1812 72.0434 26.8126C70.7949 27.4297 69.3526 27.7382 67.7167 27.7382H60.8713ZM64.3586 24.8753H67.5444C68.549 24.8753 69.4172 24.6887 70.1491 24.3156C70.8954 23.9281 71.4694 23.3828 71.8712 22.6796C72.2874 21.9764 72.4955 21.1512 72.4955 20.2041C72.4955 19.2426 72.2874 18.4174 71.8712 17.7286C71.4694 17.0254 70.8954 16.4872 70.1491 16.1141C69.4172 15.7266 68.549 15.5329 67.5444 15.5329H64.3586V24.8753Z"
       fill="currentColor"
     />
-    <path
-      d="M51.9005 21.5495V18.8587H57.9924V21.5495H51.9005Z"
-      fill="#2F60FD"
-    />
-    <path
-      d="M45.5045 27.7382V17.994H48.9918V27.7382H45.5045Z"
-      fill="currentColor"
-    />
-    <path
-      d="M45.5045 16.1352V12.6699H48.9918V16.1352H45.5045Z"
-      fill="currentColor"
-    />
+    <path d="M51.9005 21.5495V18.8587H57.9924V21.5495H51.9005Z" fill="#2F60FD" />
+    <path d="M45.5045 27.7382V17.994H48.9918V27.7382H45.5045Z" fill="currentColor" />
+    <path d="M45.5045 16.1352V12.6699H48.9918V16.1352H45.5045Z" fill="currentColor" />
     <defs>
-      <linearGradient
-        id="paint0_linear_329_2359"
-        x1="57.0179"
-        y1="-0.341331"
-        x2="19.2598"
-        y2="37.4168"
-        gradientUnits="userSpaceOnUse"
-      >
+      <linearGradient id="paint0_linear_329_2359" x1="57.0179" y1="-0.341331" x2="19.2598" y2="37.4168" gradientUnits="userSpaceOnUse">
         <stop stop-color="#013DFF" />
-        <stop
-          offset="1"
-          stop-color="#013DFF"
-          stop-opacity="0"
-        />
+        <stop offset="1" stop-color="#013DFF" stop-opacity="0" />
       </linearGradient>
     </defs>
   </svg>
   <div class="blur"></div>
   <div class="spacer"></div>
-  <label
-    for="color-scheme"
-    idsSwitch
-  >
-    <input
-      #themeSwitcher
-      id="color-scheme"
-      color-scheme
-      type="checkbox"
-    />
+  <label for="color-scheme" idsSwitch>
+    <input #themeSwitcher id="color-scheme" color-scheme type="checkbox" />
   </label>
 </header>
 <ids-nav [menu]="menuConfigs" />
-<main>
+<main cdkScrollable>
   <router-outlet />
 </main>

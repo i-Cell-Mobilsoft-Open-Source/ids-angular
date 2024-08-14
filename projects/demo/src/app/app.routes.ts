@@ -64,6 +64,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
   },
   {
+    path: 'components/tooltip',
+    loadComponent: () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
+  },
+  {
     path: 'components',
     loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
   },

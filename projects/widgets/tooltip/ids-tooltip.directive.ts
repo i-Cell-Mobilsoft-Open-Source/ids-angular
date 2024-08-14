@@ -80,7 +80,6 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
       .monitor(this._elementRef)
       .pipe(takeUntil(this._destroyed))
       .subscribe((origin) => {
-        // Note that the focus monitor runs outside the Angular zone.
         if (!origin) {
           this._ngZone.run(() => this.hide(0));
         } else if (origin === 'keyboard') {
@@ -147,15 +146,12 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   private _setupPointerEnterEventsIfNeeded(): void {
-    // Optimization: Defer hooking up events if there's no message or the tooltip is disabled.
     if (
       this.disabled() || !this.message() || this._passiveListeners.length
     ) {
       return;
     }
 
-    // The mouse events shouldn't be bound on mobile devices, because they can prevent the
-    // first tap from firing its click event or can cause the tooltip to open for clicks.
     if (this._platformSupportsMouseEvents()) {
       this._passiveListeners.push([
         'mouseenter',
@@ -170,8 +166,6 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
       this._passiveListeners.push([
         'touchstart',
         (): void => {
-          // Note that it's important that we don't `preventDefault` here,
-          // because it can prevent click events from firing on the element.
           this._setupPointerExitEventsIfNeeded();
           clearTimeout(this._touchstartTimeout);
 
@@ -253,8 +247,6 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
       const element = this._elementRef.nativeElement;
       const style = element.style;
 
-      // If gestures are set to `auto`, we don't disable text selection on inputs and
-      // textareas, because it prevents the user from typing into them on iOS Safari.
       if (gestures === 'on' || (element.nodeName !== 'INPUT' && element.nodeName !== 'TEXTAREA')) {
         style.userSelect = 'none';
       }
@@ -273,7 +265,6 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
     clearTimeout(this._touchstartTimeout);
 
     if (this._componentRef) {
-      // this._overlayRef.dispose();
       this._tooltipInstance = null;
     }
 

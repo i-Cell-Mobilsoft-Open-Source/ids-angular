@@ -6,7 +6,7 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
 import { computed, ElementRef, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 
-export class FlexibleConnectedPosition {
+export class ConnectedPosition {
   private _rect = signal<DOMRectBase | null>(null);
   public positionTop = computed(() => (this._rect() ? `${Math.round(this._rect()!.top)}px` : null));
   public positionLeft = computed(() => (this._rect() ? `${Math.round(this._rect()!.left)}px` : null));
@@ -30,7 +30,7 @@ export class FlexibleConnectedPosition {
       return;
     }
 
-    const fallbackPositionPair = this._getfallbackPositionPair(clippedFrom);
+    const fallbackPositionPair = this._getFallbackPositionPair(clippedFrom);
     if (!fallbackPositionPair || this._shouldHide(fallbackPositionPair)) {
       this.shouldHide.next();
       return;
@@ -76,7 +76,7 @@ export class FlexibleConnectedPosition {
     return { left, top, height, width, right, bottom };
   }
 
-  private _getfallbackPositionPair(clippedFrom: Set<PositionType>): ExtendedPositionPairType | null {
+  private _getFallbackPositionPair(clippedFrom: Set<PositionType>): ExtendedPositionPairType | null {
     if (
       (clippedFrom.has(Position.TOP) && clippedFrom.has(Position.BOTTOM))
       || (clippedFrom.has(Position.RIGHT) && clippedFrom.has(Position.LEFT))

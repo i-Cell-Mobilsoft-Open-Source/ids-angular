@@ -5,7 +5,7 @@ import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } 
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, HostBinding, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { createClassList, FlexibleConnectedPosition, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, ConnectedPosition, SizeType } from '@i-cell/ids-angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
@@ -28,14 +28,14 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   private readonly _onHide: Subject<void> = new Subject();
   private readonly _tooltipElement = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  private _flexibleConnectedPosition?: FlexibleConnectedPosition;
+  private _connectedPosition?: ConnectedPosition;
   public id = this._uniqueId;
   private _message?: string;
   private _size?: SizeType;
   private _variant?: TooltipVariantType;
   private _originalTooltipPosition: TooltipPositionType | null = null;
   private _fallbackTooltipPosition = computed(() =>
-    extendedPositionToTooltipPosition(this._flexibleConnectedPosition?.fallbackPositionPair()),
+    extendedPositionToTooltipPosition(this._connectedPosition?.fallbackPositionPair()),
   );
 
   private _textAlign?: TooltipTextAlign;
@@ -82,11 +82,11 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   }
 
   @HostBinding('style.top') get hostPositionTop(): string | null | undefined {
-    return this._flexibleConnectedPosition?.positionTop();
+    return this._connectedPosition?.positionTop();
   }
 
   @HostBinding('style.left') get hostPositionLeft(): string | null | undefined {
-    return this._flexibleConnectedPosition?.positionLeft();
+    return this._connectedPosition?.positionLeft();
   }
 
   public ngAfterViewInit(): void {
@@ -110,13 +110,13 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
     const originalPositionPair = tooltipPositionToExtendedPosition(this._originalTooltipPosition)!;
 
     if (values.scrollContainers) {
-      this._flexibleConnectedPosition = new FlexibleConnectedPosition(
+      this._connectedPosition = new ConnectedPosition(
         values.scrollContainers,
         values.triggerElement,
         this._tooltipElement,
         originalPositionPair,
       );
-      this._shouldHideSubscription = this._flexibleConnectedPosition.shouldHide.subscribe(() => this._hideImmediately());
+      this._shouldHideSubscription = this._connectedPosition.shouldHide.subscribe(() => this._hideImmediately());
     }
   }
 
@@ -125,7 +125,7 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    this._flexibleConnectedPosition?.doPosition();
+    this._connectedPosition?.doPosition();
   }
 
   public show(delay: number): void {

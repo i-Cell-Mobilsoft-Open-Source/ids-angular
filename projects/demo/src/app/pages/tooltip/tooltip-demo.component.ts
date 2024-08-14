@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tooltip-demo',
@@ -8,6 +9,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
   imports: [
     IdsTooltipDirective,
     IdsButtonComponent,
+    TranslateModule,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrl: './tooltip-demo.component.scss',

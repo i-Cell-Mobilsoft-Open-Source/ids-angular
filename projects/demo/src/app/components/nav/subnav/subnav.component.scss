@@ -1,0 +1,48 @@
+:host {
+  padding-left: 1rem;
+  display: block;
+
+  details {
+    position: relative;
+    summary {
+      position: relative;
+      height: 0;
+      &::marker {
+        content: "";
+        display: none;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+
+    li > a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0.5rem;
+      gap: 0.5rem;
+      background: var(--ids-smc-colors-surface-lighter-10);
+      border-radius: 0.5rem;
+      flex: none;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+      user-select: none;
+      text-decoration: none;
+      color: inherit;
+
+      &.active,
+      &:has(.active) {
+        color: var(--ids-smc-colors-primary-darker-20);
+      }
+      &:hover {
+        background: var(--ids-smc-colors-surface-darker-20);
+      }
+    }
+  }
+}

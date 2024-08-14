@@ -1,15 +1,15 @@
-<h1>Radio</h1>
+<h1>{{ "COMPONENTS.RADIO" | translate }}</h1>
 
-<h2>Default state</h2>
 @for (variant of variants; track $index) {
   <section [class]="variant">
-    <h3>{{ variant | uppercase }}</h3>
-    @for (size of sizes; track $index) {
-      <h4>{{ size }}</h4>
-      <div class="radio-group-hv-container">
+    <h2>{{ variant | uppercase }}</h2>
+    <div class="radio-column">
+      <h3>Default</h3>
+      @for (size of sizes; track $index) {
+        <h4>{{ size }}</h4>
         <div>
           <h5>Vertical</h5>
-          <div class="radio-group-container">
+          <div class="radio-group-container vertical">
             <ids-radio-group
               ngModel="first"
               orientation="vertical"
@@ -39,7 +39,7 @@
 
         <div>
           <h5>Horizontal</h5>
-          <div class="radio-group-container">
+          <div class="radio-group-container horizontal">
             <ids-radio-group
               ngModel="first"
               orientation="horizontal"
@@ -90,21 +90,16 @@
             </ids-radio-group>
           </div>
         </div>
-      </div>
-    }
-  </section>
-}
+      }
+    </div>
 
-<h2>Disabled state</h2>
-@for (variant of variants; track $index) {
-  <section [class]="variant">
-    <h3>{{ variant | uppercase }}</h3>
-    @for (size of sizes; track $index) {
-      <h4>{{ size }}</h4>
-      <div class="radio-group-hv-container">
+    <div class="radio-column">
+      <h3>Disabled</h3>
+      @for (size of sizes; track $index) {
+        <h4>{{ size }}</h4>
         <div>
           <h5>Vertical</h5>
-          <div class="radio-group-container">
+          <div class="radio-group-container vertical">
             <ids-radio-group
               ngModel="first"
               orientation="vertical"
@@ -136,7 +131,7 @@
 
         <div>
           <h5>Horizontal</h5>
-          <div class="radio-group-container">
+          <div class="radio-group-container horizontal">
             <ids-radio-group
               ngModel="first"
               orientation="horizontal"
@@ -191,21 +186,15 @@
             </ids-radio-group>
           </div>
         </div>
-      </div>
-    }
-  </section>
-}
-
-<h3>Error state</h3>
-@for (variant of variants; track $index) {
-  <section [class]="variant">
-    <h3>{{ variant | uppercase }}</h3>
-    @for (size of sizes; track $index) {
-      <h4>{{ size }}</h4>
-      <div class="radio-group-hv-container">
+      }
+    </div>
+    <div class="radio-column">
+      <h3>Error</h3>
+      @for (size of sizes; track $index) {
+        <h4>{{ size }}</h4>
         <div>
           <h5>Vertical</h5>
-          <div class="radio-group-container">
+          <div class="radio-group-container vertical">
             <ids-radio-group
               ngModel="second"
               orientation="vertical"
@@ -237,7 +226,7 @@
 
         <div>
           <h5>Horizontal</h5>
-          <div class="radio-group-container">
+          <div class="radio-group-container horizontal">
             <ids-radio-group
               ngModel="second"
               orientation="horizontal"
@@ -292,7 +281,7 @@
             </ids-radio-group>
           </div>
         </div>
-      </div>
-    }
+      }
+    </div>
   </section>
 }

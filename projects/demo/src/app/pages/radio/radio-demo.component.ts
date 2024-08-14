@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsRadioGroupDirective, IdsRadioItemComponent, RadioVariant, RadioVariantType } from '@i-cell/ids-angular/radio';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-radio-demo',
@@ -13,6 +14,7 @@ import { IdsRadioGroupDirective, IdsRadioItemComponent, RadioVariant, RadioVaria
     FormsModule,
     ReactiveFormsModule,
     UpperCasePipe,
+    TranslateModule,
   ],
   templateUrl: './radio-demo.component.html',
   styleUrl: './radio-demo.component.scss',

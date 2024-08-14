@@ -5,6 +5,7 @@ import { CheckboxVariant, CheckboxVariantType, IdsCheckboxComponent } from '@i-c
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms/directives/ids-message-suffix.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-checkbox-demo',
@@ -16,12 +17,13 @@ import { IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms/directives/
     IdsHintMessageComponent,
     IdsErrorMessageComponent,
     IdsMessageSuffixDirective,
+    TranslateModule,
   ],
   templateUrl: './checkbox-demo.component.html',
   styleUrl: './checkbox-demo.component.scss',
 })
 export class CheckboxDemoComponent {
-  public label = 'Az Általános Szerződési Feltételeket a mai nappal tudomásul vettem és elfogadom';
+  public label = 'I accept the terms and conditions';
 
   public sizes: SizeType[] = [
     Size.DENSE,
@@ -104,13 +106,4 @@ export class CheckboxDemoComponent {
       }),
     }),
   });
-
-  constructor() {
-    setTimeout(() => {
-      {
-        this.form.get('surface.dense.selected')?.setValue(false);
-      }
-    // eslint-disable-next-line no-magic-numbers
-    }, 3000);
-  }
 }

@@ -57,7 +57,8 @@ export class IdsInputDirective implements DoCheck, FormElementBase {
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
   public readonly = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
   public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
-  public isDisabled = signal(false);
+  private _controlDisabled = signal(false);
+  public isDisabled = computed(() => this.disabled() || this._controlDisabled());
   public errorStateMatcher = input<ErrorStateMatcher>();
 
   public inputId = computed(() => this.id() || this._uniqueId);
@@ -89,6 +90,10 @@ export class IdsInputDirective implements DoCheck, FormElementBase {
   public ngDoCheck(): void {
     if (this.controlDir) {
       this.updateErrorState();
+
+      if (this.controlDir.disabled !== null && this.controlDir.disabled !== this.disabled()) {
+        this._controlDisabled.set(this.controlDir.disabled);
+      }
     }
   }
 
@@ -112,9 +117,12 @@ export class IdsInputDirective implements DoCheck, FormElementBase {
     this._errorStateTracker?.updateErrorState();
   }
 
-  public onContainerClick(): void {
-    if (!this._focused) {
+  /**
+   * Should be an arrow function in order to handle `this` outside of this class
+   */
+  public onContainerClick = (): void => {
+    if (!this._focused && !this.readonly() && !this.isDisabled()) {
       this.focus();
     }
-  }
+  };
 }

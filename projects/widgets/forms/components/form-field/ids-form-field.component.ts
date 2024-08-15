@@ -1,4 +1,5 @@
 import { IDS_FORM_FIELD_DEFAULT_OPTIONS, IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY } from './ids-form-field-default-options';
+import { FormFieldVariantType } from './types/ids-form-field-variant.type';
 
 import { IdsActionDirective } from '../../directives/ids-action.directive';
 import { IdsPrefixDirective } from '../../directives/ids-prefix.directive';
@@ -8,9 +9,10 @@ import { IdsValidators } from '../../validators';
 import { IdsErrorMessageComponent } from '../message/ids-error-message/ids-error-message.component';
 import { IdsHintMessageComponent } from '../message/ids-hint-message/ids-hint-message.component';
 
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, HostBinding, inject, Injector, input, isDevMode, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, HostBinding, inject, Injector, input, isDevMode, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { AllVariantsType, createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
+import { Subject, takeUntil } from 'rxjs';
 
 const defaultOptions = IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY();
 
@@ -23,13 +25,16 @@ const defaultOptions = IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdsFormFieldComponent implements AfterContentInit {
+export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
   private readonly _componentClass = 'ids-form-field';
   private readonly _injector = inject(Injector);
+  private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_FORM_FIELD_DEFAULT_OPTIONS, null, { optional: true }),
   };
+
+  private readonly _destroyed = new Subject<void>();
 
   private _child = contentChild(IDS_FORM_ELEMENT);
   private _hintMessages = contentChildren(IdsHintMessageComponent, { descendants: true });
@@ -45,11 +50,13 @@ export class IdsFormFieldComponent implements AfterContentInit {
   public hasTrailingIcon = computed(() => Boolean(this._suffixes().filter((suffix) => suffix.isTrailingIcon).length));
   public inputId = computed(() => this._child()?.inputId());
   public size = input<SizeType | null>(this._defaultOptions.size);
-  public variant = input<AllVariantsType | null>(this._defaultOptions.variant);
+  public variant = input<FormFieldVariantType | null>(this._defaultOptions.variant);
   private _control = computed(() => this._child()?.controlDir);
+  private _disabled = computed(() => Boolean(this._child()?.isDisabled()));
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.size(),
     this.variant(),
+    this._disabled() ? 'disabled' : null,
   ]),
   );
 
@@ -61,6 +68,9 @@ export class IdsFormFieldComponent implements AfterContentInit {
     if (isDevMode() && !this._child()) {
       throw new Error(createComponentError(this._componentClass, 'no form element was provided'));
     }
+    this._child()?.controlDir?.statusChanges?.pipe(takeUntil(this._destroyed)).subscribe(() => {
+      this._changeDetectorRef.markForCheck();
+    });
   }
 
   public get displayedMessages(): 'error' | 'hint' | undefined {
@@ -90,5 +100,9 @@ export class IdsFormFieldComponent implements AfterContentInit {
     if (containerClick) {
       containerClick();
     }
+  }
+
+  public ngOnDestroy(): void {
+    this._destroyed.next();
   }
 }

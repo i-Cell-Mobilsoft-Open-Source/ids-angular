@@ -11,6 +11,7 @@ export * from './types/form-element';
 export * from './types/message';
 export * from './components/form-field/ids-form-field.component';
 export * from './components/form-field/ids-form-field-default-options';
+export * from './components/form-field/types/ids-form-field-variant.type';
 export * from './components/message/ids-hint-message/ids-hint-message.component';
 export * from './components/message/ids-error-message/ids-error-message.component';
 export * from './components/message/ids-success-message/ids-success-message.component';

@@ -9,7 +9,7 @@ import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, HostBinding, inject, Injector, input, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
-import { coerceStringAttribute, createClassList, SizeType } from '@i-cell/ids-angular/core';
+import { coerceStringAttribute, createClassList, SizeType, WindowResizeService } from '@i-cell/ids-angular/core';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 const defaultOptions = IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY();
@@ -29,6 +29,7 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private readonly _viewContainerRef = inject(ViewContainerRef);
   private readonly _scrollDispatcher = inject(ScrollDispatcher);
   private readonly _document = inject(DOCUMENT);
+  private _globalResizeService = inject(WindowResizeService);
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_TOOLTIP_DEFAULT_OPTIONS, null, { optional: true }),
@@ -70,9 +71,15 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
       )
       .subscribe(() => {
         this._ngZone.run(() => {
-          this._tooltipInstance!.doPosition();
+          this._tooltipInstance?.doPosition();
         });
       });
+
+    this._globalResizeService.resized.subscribe(() => {
+      this._ngZone.run(() => {
+        this._tooltipInstance?.doPosition();
+      });
+    });
 
     this._scrollContainers = this._scrollDispatcher.getAncestorScrollContainers(this._elementRef);
 

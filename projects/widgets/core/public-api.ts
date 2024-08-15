@@ -1,5 +1,7 @@
 export * from './directives/detect-scrollable.directive';
 export * from './services/resize-observer.service';
+export * from './services/window-resize.service';
+export * from './tokens/window-resize-default-options';
 export * from './types/orientation.type';
 export * from './types/position.type';
 export * from './types/size.type';

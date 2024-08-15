@@ -104,10 +104,15 @@ $variants: surface, light;
           border: none;
           background-color: transparent;
           flex: 1 0 0;
+          padding: 0;
 
           &:focus-visible {
             outline: none;
           }
+        }
+
+        textarea {
+          resize: vertical;
         }
       }
     }

@@ -29,6 +29,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsActionPanelComponent {
+  /** @ignore */
   private readonly _componentClass = 'ids-action-panel';
 
   public appearance = input<ActionPanelAppearanceType | null>(
@@ -38,8 +39,10 @@ export class IdsActionPanelComponent {
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<'light' | null>(AllVariants.LIGHT);
 
+  /** @ignore */
   public actionItems = contentChildren(IdsActionItemComponent);
 
+  /** @ignore */
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.appearance(),
     this.size(),

@@ -1,6 +1,8 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsPrefixDirective, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
+import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { FormFieldVariant, FormFieldVariantType, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsPrefixDirective, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsInputDirective } from '@i-cell/ids-angular/forms/components/input/ids-input.directive';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -23,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsErrorMessageComponent,
     FormsModule,
     ReactiveFormsModule,
+    UpperCasePipe,
     TranslateModule,
   ],
   templateUrl: './form-field-demo.component.html',
@@ -32,4 +35,16 @@ export class FormFieldDemoComponent {
   public iconSun = mdiWhiteBalanceSunny;
   public iconMoon = mdiMoonWaningCrescent;
   public searchIcon = mdiMagnify;
+
+  public sizes: SizeType[] = [
+    Size.DENSE,
+    Size.COMPACT,
+    Size.COMFORTABLE,
+    Size.SPACIOUS,
+  ];
+
+  public variants: FormFieldVariantType[] = [
+    FormFieldVariant.SURFACE,
+    FormFieldVariant.LIGHT,
+  ];
 }

@@ -8,7 +8,7 @@ import { IdsValidators } from '../../validators';
 import { IdsErrorMessageComponent } from '../message/ids-error-message/ids-error-message.component';
 import { IdsHintMessageComponent } from '../message/ids-hint-message/ids-hint-message.component';
 
-import { ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, HostBinding, inject, Injector, input, isDevMode, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, HostBinding, inject, Injector, input, isDevMode, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AllVariantsType, createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
 
@@ -23,7 +23,7 @@ const defaultOptions = IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdsFormFieldComponent {
+export class IdsFormFieldComponent implements AfterContentInit {
   private readonly _componentClass = 'ids-form-field';
   private readonly _injector = inject(Injector);
   private readonly _defaultOptions = {
@@ -57,7 +57,7 @@ export class IdsFormFieldComponent {
     return this._hostClasses();
   }
 
-  constructor() {
+  public ngAfterContentInit(): void {
     if (isDevMode() && !this._child()) {
       throw new Error(createComponentError(this._componentClass, 'no form element was provided'));
     }

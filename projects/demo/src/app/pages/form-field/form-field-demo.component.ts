@@ -5,6 +5,7 @@ import { IdsInputDirective } from '@i-cell/ids-angular/forms/components/input/id
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { mdiMagnify, mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-field-demo',
@@ -22,6 +23,7 @@ import { mdiMagnify, mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js
     IdsErrorMessageComponent,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   templateUrl: './form-field-demo.component.html',
   styleUrl: './form-field-demo.component.scss',

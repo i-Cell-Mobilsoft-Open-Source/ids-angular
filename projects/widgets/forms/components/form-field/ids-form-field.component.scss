@@ -1,6 +1,65 @@
 $sizes: compact, comfortable, spacious, dense;
 $variants: surface, light;
 
+@mixin formFieldVariant($variant, $state, $error: false) {
+  $errorText: "";
+  @if ($error == true) {
+    $errorText: "-error";
+  }
+
+  & > .ids-form-field__label {
+    color: var(--ids-comp-forms-form-field-standard-label-color-fg-#{$variant}#{$errorText}-#{$state});
+  }
+
+  & > .ids-form-field__field-wrapper {
+    border-color: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-border-#{$variant}#{$errorText}-#{$state});
+    background: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-bg-#{$variant}#{$errorText}-#{$state});
+
+    & > .ids-form-field__field-wrapper__container {
+      & > .ids-form-field__leading-icon .ids-icon {
+        color: var(--ids-comp-forms-form-field-standard-field-wrapper-leading-icon-color-fg-#{$variant}-#{$state});
+      }
+
+      & > .ids-form-field__prefix {
+        color: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-color-fg-#{$variant}-#{$state});
+      }
+
+      & > .ids-form-field__infix {
+        input,
+        textarea {
+          color: var(--ids-comp-forms-form-field-standard-field-wrapper-input-filled-color-fg-#{$variant}-#{$state});
+
+          &::placeholder {
+            color: var(--ids-comp-forms-form-field-standard-field-wrapper-input-empty-color-fg-#{$variant}-#{$state});
+          }
+        }
+      }
+
+      & > .ids-form-field__suffix {
+        color: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-color-fg-#{$variant}-#{$state});
+      }
+
+      & > .ids-form-field__trailing-icon .ids-icon {
+        color: var(--ids-comp-forms-form-field-standard-field-wrapper-trailing-icon-color-fg-#{$variant}-#{$state});
+      }
+    }
+
+    & > .ids-form-field__field-wrapper__action {
+      border-left-color: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-border-#{$variant}#{$errorText}-#{$state});
+      background: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-bg-#{$variant}-#{$state});
+    }
+
+    &:has(input:focus),
+    &:has(textarea:focus) {
+      $lightOrDark: "dark";
+      @if ($variant == "light") {
+        $lightOrDark: "light";
+      }
+      outline-color: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-focused-outline-color-#{$lightOrDark}-focused);
+    }
+  }
+}
+
 .ids-form-field {
   display: inline-flex;
   flex-direction: column;
@@ -44,7 +103,7 @@ $variants: surface, light;
           appearance: none;
           border: none;
           background-color: transparent;
-          padding: 0;
+          flex: 1 0 0;
 
           &:focus-visible {
             outline: none;
@@ -59,6 +118,12 @@ $variants: surface, light;
       align-items: center;
       align-self: stretch;
       border-left-style: solid;
+    }
+
+    &:has(input:focus),
+    &:has(textarea:focus) {
+      outline-offset: 2px;
+      outline-style: solid;
     }
   }
 
@@ -84,6 +149,7 @@ $variants: surface, light;
         border-width: var(--ids-comp-forms-form-field-standard-field-wrapper-size-border-width-#{$size});
 
         & > .ids-form-field__field-wrapper__container {
+          min-height: var(--ids-comp-forms-form-field-standard-field-wrapper-container-size-min-height-#{$size});
           padding: var(--ids-comp-forms-form-field-standard-field-wrapper-container-size-padding-y-#{$size})
             var(--ids-comp-forms-form-field-standard-field-wrapper-container-size-padding-x-#{$size});
           gap: var(--ids-comp-forms-form-field-standard-field-wrapper-container-size-gap-#{$size});
@@ -102,6 +168,8 @@ $variants: surface, light;
           }
 
           & > .ids-form-field__infix {
+            padding: var(--ids-comp-forms-form-field-standard-field-wrapper-input-size-padding-y-#{$size}) 0;
+
             input,
             textarea {
               font-family: var(--ids-comp-forms-form-field-standard-field-wrapper-input-typography-filled-font-family-#{$size});
@@ -141,52 +209,50 @@ $variants: surface, light;
             var(--ids-comp-forms-form-field-standard-field-wrapper-action-size-padding-left-#{$size});
           border-left-width: var(--ids-comp-forms-form-field-standard-field-wrapper-action-size-border-left-#{$size});
         }
+
+        &:has(input:focus),
+        &:has(textarea:focus) {
+          outline-width: var(--ids-comp-forms-form-field-standard-field-wrapper-focused-outline-outline-#{$size});
+        }
       }
     }
   }
 
   @each $variant in $variants {
     &.ids-form-field-#{$variant} {
-      & > .ids-form-field__label {
-        color: var(--ids-comp-forms-form-field-standard-label-color-fg-#{$variant}-default);
+      @include formFieldVariant($variant, default);
+
+      &:not(.ids-form-field-disabled) {
+        &:hover {
+          @include formFieldVariant($variant, hovered);
+        }
+        &:has(input:focus),
+        &:has(textarea:focus) {
+          @include formFieldVariant($variant, focused);
+        }
+        &:has(input:active),
+        &:has(textarea:active) {
+          @include formFieldVariant($variant, pressed);
+        }
+      }
+      &.ids-form-field-disabled {
+        @include formFieldVariant($variant, disabled);
       }
 
-      & > .ids-form-field__field-wrapper {
-        border-color: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-border-#{$variant}-default);
-        background: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-bg-#{$variant}-default);
+      &:has(.ids-form-field-invalid),
+      &:has(.ng-invalid) {
+        @include formFieldVariant($variant, default, true);
 
-        & > .ids-form-field__field-wrapper__container {
-          & > .ids-form-field__leading-icon .ids-icon {
-            color: var(--ids-comp-forms-form-field-standard-field-wrapper-leading-icon-color-fg-#{$variant}-default);
-          }
-
-          & > .ids-form-field__prefix {
-            color: var(--ids-comp-forms-form-field-standard-field-wrapper-prefix-color-fg-#{$variant}-default);
-          }
-
-          & > .ids-form-field__infix {
-            input,
-            textarea {
-              color: var(--ids-comp-forms-form-field-standard-field-wrapper-input-filled-color-fg-#{$variant}-default);
-
-              &::placeholder {
-                color: var(--ids-comp-forms-form-field-standard-field-wrapper-input-empty-color-fg-#{$variant}-default);
-              }
-            }
-          }
-
-          & > .ids-form-field__suffix {
-            color: var(--ids-comp-forms-form-field-standard-field-wrapper-suffix-color-fg-#{$variant}-default);
-          }
-
-          & > .ids-form-field__trailing-icon .ids-icon {
-            color: var(--ids-comp-forms-form-field-standard-field-wrapper-trailing-icon-color-fg-#{$variant}-default);
-          }
+        &:hover {
+          @include formFieldVariant($variant, hovered, true);
         }
-
-        & > .ids-form-field__field-wrapper__action {
-          border-left-color: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-border-#{$variant}-default);
-          background: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-bg-#{$variant}-default);
+        &:has(input:focus),
+        &:has(textarea:focus) {
+          @include formFieldVariant($variant, focused, true);
+        }
+        &:has(input:active),
+        &:has(textarea:active) {
+          @include formFieldVariant($variant, pressed, true);
         }
       }
     }

@@ -10,6 +10,7 @@ import {
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck, mdiMagnify } from '@mdi/js';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
@@ -17,6 +18,7 @@ import { mdiCheck, mdiMagnify } from '@mdi/js';
   imports: [
     IdsButtonComponent,
     IdsIconComponent,
+    TranslateModule,
   ],
   templateUrl: './button-demo.component.html',
   styleUrls: ['./button-demo.component.scss'],

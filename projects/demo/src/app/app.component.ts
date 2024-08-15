@@ -1,8 +1,9 @@
-import { NavComponent } from './components/nav/ids-nav.component';
 import { Menu } from './components/nav/menu.interface';
+import { NavComponent } from './components/nav/nav.component';
 import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 
-import { Component, ElementRef, OnInit, ViewEncapsulation, inject, viewChild } from '@angular/core';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { Component, ElementRef, OnInit, inject, viewChild } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -15,10 +16,10 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     TranslateModule,
     NavComponent,
     IdsSwitchComponent,
+    CdkScrollable,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
   private _translate: TranslateService = inject(TranslateService);
@@ -37,18 +38,19 @@ export class AppComponent implements OnInit {
             { name: 'COMPONENTS.ACTION_MENU', path: '/components/action-menu' },
             { name: 'COMPONENTS.ACTION_PANEL', path: '/components/action-panel' },
             { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
-            { name: 'COMPONENTS.BUTTONS', path: '/components/button' },
+            { name: 'COMPONENTS.BUTTON', path: '/components/button' },
             { name: 'COMPONENTS.CARD', path: '/components/card' },
             { name: 'COMPONENTS.CHECKBOX', path: '/components/checkbox' },
             { name: 'COMPONENTS.DIALOG', path: '/components/dialog' },
             { name: 'COMPONENTS.DIVIDER', path: '/components/divider' },
             { name: 'COMPONENTS.FORM_FIELD', path: '/components/form-field' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
-            { name: 'COMPONENTS.SEGMENTED_CONTROL', path: '/components/segmented-control' },
-            { name: 'COMPONENTS.SEGMENTED_CONTROL_TOGGLE', path: '/components/segmented-control-toggle' },
             { name: 'COMPONENTS.PAGINATOR', path: '/components/paginator' },
             { name: 'COMPONENTS.RADIO', path: '/components/radio' },
+            { name: 'COMPONENTS.SEGMENTED_CONTROL', path: '/components/segmented-control' },
+            { name: 'COMPONENTS.SEGMENTED_CONTROL_TOGGLE', path: '/components/segmented-control-toggle' },
             { name: 'COMPONENTS.TAG', path: '/components/tag' },
+            { name: 'COMPONENTS.TOOLTIP', path: '/components/tooltip' },
           ],
         },
         {
@@ -60,7 +62,7 @@ export class AppComponent implements OnInit {
     { name: 'RESOURCES', children: [] },
   ];
 
-  public themeSwitcher = viewChild<ElementRef>('themeSwitcher');
+  public themeSwitcher = viewChild<ElementRef<HTMLElement>>('themeSwitcher');
 
   constructor() {
     this._changeTheme('light');

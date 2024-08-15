@@ -1,44 +1,48 @@
-<div class="tag-container">
-  <h2>Tags (as custom elements)</h2>
-  @for (appearance of appearances; track $index) {
-    @for (size of sizes; track $index) {
-      @for (variant of variants; track $index) {
-        <ids-tag
-          tabindex="0"
-          [id]="appearance + '-' + variant + '-' + size + '-tag'"
-          [appearance]="appearance"
-          [size]="size"
-          [variant]="variant"
-          (click)="onClick(appearance + '-' + variant + '-' + size)"
-        >
-          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
-          {{ appearance + " " + variant + " " + size }} tag
-          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
-        </ids-tag>
+<h1>{{ "COMPONENTS.TAG" | translate }}</h1>
+
+<div class="tags">
+  <div class="tag-container">
+    <h2>Tags (as custom elements)</h2>
+    @for (appearance of appearances; track $index) {
+      @for (size of sizes; track $index) {
+        @for (variant of variants; track $index) {
+          <ids-tag
+            tabindex="0"
+            [id]="appearance + '-' + variant + '-' + size + '-tag'"
+            [appearance]="appearance"
+            [size]="size"
+            [variant]="variant"
+            (click)="onClick(appearance + '-' + variant + '-' + size)"
+          >
+            <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+            {{ appearance + " " + variant + " " + size }} tag
+            <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+          </ids-tag>
+        }
       }
     }
-  }
-</div>
-<div class="tag-container">
-  <h2>Tags (as buttons)</h2>
-  @for (appearance of appearances; track $index) {
-    @for (size of sizes; track $index) {
-      @for (variant of variants; track $index) {
-        <button
-          type="button"
-          idsTag
-          tabindex="0"
-          [id]="appearance + '-' + variant + '-' + size + '-tag'"
-          [appearance]="appearance"
-          [size]="size"
-          [variant]="variant"
-          (click)="onClick(appearance + '-' + variant + '-' + size)"
-        >
-          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
-          {{ appearance + " " + variant + " " + size }} tag
-          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
-        </button>
+  </div>
+  <div class="tag-container">
+    <h2>Tags (as buttons)</h2>
+    @for (appearance of appearances; track $index) {
+      @for (size of sizes; track $index) {
+        @for (variant of variants; track $index) {
+          <button
+            type="button"
+            idsTag
+            tabindex="0"
+            [id]="appearance + '-' + variant + '-' + size + '-tag'"
+            [appearance]="appearance"
+            [size]="size"
+            [variant]="variant"
+            (click)="onClick(appearance + '-' + variant + '-' + size)"
+          >
+            <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+            {{ appearance + " " + variant + " " + size }} tag
+            <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+          </button>
+        }
       }
     }
-  }
+  </div>
 </div>

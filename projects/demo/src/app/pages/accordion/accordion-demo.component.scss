@@ -1,8 +1,10 @@
-app-accordion-demo {
-  flex-grow: 1;
+:host {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  box-sizing: border-box;
-  padding: 40px;
+  padding: 2rem;
+}
+
+h1 {
+  margin-top: 0;
 }

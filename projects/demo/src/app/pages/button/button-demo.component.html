@@ -1,4 +1,5 @@
-<h2>Buttons</h2>
+<h1>{{ "COMPONENTS.BUTTON" | translate }}</h1>
+
 <div class="appearance-container">
   @for (appearance of appearances; track $index) {
     <div class="appearance-item">
@@ -16,19 +17,9 @@
               [variant]="variant"
               (click)="onClick(appearance + '-' + variant + '-' + size)"
             >
-              <ids-icon
-                icon-leading
-                aria-hidden="true"
-                alt=""
-                [icon]="mdiSearch"
-              />
+              <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
               {{ appearance + " " + variant + " " + size }} button
-              <ids-icon
-                icon-trailing
-                aria-hidden="true"
-                alt=""
-                [icon]="mdiDone"
-              />
+              <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
             </button>
           }
         </div>
@@ -50,26 +41,14 @@
               type="button"
               idsButton
               disabled
-              [id]="
-                appearance + '-' + variant + '-' + size + '-disabled-button'
-              "
+              [id]="appearance + '-' + variant + '-' + size + '-disabled-button'"
               [appearance]="appearance"
               [size]="size"
               [variant]="variant"
             >
-              <ids-icon
-                icon-leading
-                aria-hidden="true"
-                alt=""
-                [icon]="mdiSearch"
-              />
+              <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
               {{ appearance + " " + variant + " " + size }} button
-              <ids-icon
-                icon-trailing
-                aria-hidden="true"
-                alt=""
-                [icon]="mdiDone"
-              />
+              <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
             </button>
           }
         </div>

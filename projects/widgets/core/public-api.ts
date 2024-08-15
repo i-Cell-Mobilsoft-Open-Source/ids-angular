@@ -1,5 +1,7 @@
 export * from './directives/detect-scrollable.directive';
 export * from './services/resize-observer.service';
+export * from './services/window-resize.service';
+export * from './tokens/window-resize-default-options';
 export * from './types/orientation.type';
 export * from './types/position.type';
 export * from './types/size.type';
@@ -9,3 +11,5 @@ export * from './utils/coercion';
 export * from './utils/create-error';
 export * from './utils/even-odd';
 export * from './utils/selection-model';
+export * from './utils/position/connected-position';
+export * from './utils/position/scroll-clip';

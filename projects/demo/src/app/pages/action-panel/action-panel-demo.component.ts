@@ -1,9 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
 import { IdsActionPanelComponent, ActionPanelAppearance, ActionPanelAppearanceType } from '@i-cell/ids-angular/action-panel';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronRight, mdiMagnify } from '@mdi/js';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-action-panel-demo',
@@ -12,10 +13,10 @@ import { mdiChevronRight, mdiMagnify } from '@mdi/js';
     IdsActionPanelComponent,
     IdsActionItemComponent,
     IdsIconComponent,
+    TranslateModule,
   ],
   templateUrl: './action-panel-demo.component.html',
   styleUrl: './action-panel-demo.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class ActionPanelDemoComponent {
   public appearances = Object.values(ActionPanelAppearance) as ActionPanelAppearanceType[];

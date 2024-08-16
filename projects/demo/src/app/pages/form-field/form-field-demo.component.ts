@@ -2,7 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariant, FormFieldVariantType, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
+import { FormFieldVariant, FormFieldVariantType, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { mdiMagnify, mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js';
@@ -21,6 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsIconButtonComponent,
     IdsIconComponent,
     IdsHintMessageComponent,
+    IdsSuccessMessageComponent,
     IdsErrorMessageComponent,
     FormsModule,
     ReactiveFormsModule,

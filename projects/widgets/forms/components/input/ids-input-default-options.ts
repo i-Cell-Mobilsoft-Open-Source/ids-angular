@@ -1,11 +1,13 @@
 /* eslint-disable no-magic-numbers */
 
 import { AbstractErrorStateMatcher, ErrorStateMatcher } from '../../common/error/error-state';
+import { AbstractSuccessStateMatcher, SuccessStateMatcher } from '../../common/success/success-state';
 
 import { InjectionToken } from '@angular/core';
 
 export interface IdsInputDefaultOptions {
-  errorStateMatcher?: AbstractErrorStateMatcher
+  errorStateMatcher?: typeof AbstractErrorStateMatcher
+  successStateMatcher?: typeof AbstractSuccessStateMatcher
 }
 
 export const IDS_INPUT_DEFAULT_OPTIONS = new InjectionToken<IdsInputDefaultOptions>(
@@ -18,6 +20,7 @@ export const IDS_INPUT_DEFAULT_OPTIONS = new InjectionToken<IdsInputDefaultOptio
 
 export function IDS_INPUT_DEFAULT_OPTIONS_FACTORY(): Required<IdsInputDefaultOptions> {
   return {
-    errorStateMatcher: new ErrorStateMatcher(),
+    errorStateMatcher: ErrorStateMatcher,
+    successStateMatcher: SuccessStateMatcher,
   };
 }

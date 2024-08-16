@@ -270,6 +270,23 @@ $variants: surface, light;
           @include fieldWrapperVariant($variant, pressed, error);
         }
       }
+
+      &.ids-form-field-valid {
+        @include fieldWrapperVariant($variant, default, success);
+        @include fieldLabelVariant($variant, default, success);
+
+        &:hover {
+          @include fieldWrapperVariant($variant, hovered, success);
+        }
+        &:has(input:focus),
+        &:has(textarea:focus) {
+          @include fieldWrapperVariant($variant, focused, success);
+        }
+        &:has(input:active),
+        &:has(textarea:active) {
+          @include fieldWrapperVariant($variant, pressed, success);
+        }
+      }
     }
   }
 }

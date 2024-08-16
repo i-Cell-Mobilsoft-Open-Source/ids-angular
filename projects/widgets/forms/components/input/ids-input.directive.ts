@@ -1,10 +1,11 @@
 import { IDS_INPUT_DEFAULT_OPTIONS, IDS_INPUT_DEFAULT_OPTIONS_FACTORY } from './ids-input-default-options';
 import { IdsInputType } from './types/input.type';
 
-import { ErrorStateTracker, ErrorStateMatcher } from '../../common/error/error-state';
+import { ErrorStateTracker, AbstractErrorStateMatcher } from '../../common/error/error-state';
+import { AbstractSuccessStateMatcher, SuccessStateTracker } from '../../common/success/success-state';
 import { IDS_FORM_FIELD, IdsFormField } from '../../public-api';
 
-import { computed, Directive, effect, ElementRef, HostBinding, inject, Injector, input, isDevMode, DoCheck, signal, HostListener, OnDestroy } from '@angular/core';
+import { computed, Directive, effect, ElementRef, HostBinding, inject, Injector, input, isDevMode, DoCheck, signal, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 import { Subject, takeUntil } from 'rxjs';
@@ -41,24 +42,26 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
     },
   ],
 })
-export class IdsInputDirective implements IdsFormField, DoCheck, OnDestroy {
+export class IdsInputDirective implements IdsFormField, OnInit, DoCheck, OnDestroy {
   private readonly _componentClass = 'ids-paginator';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   private readonly _injector = inject(Injector);
   private readonly _elementRef = inject<ElementRef<HTMLInputElement> | ElementRef<HTMLTextAreaElement>>(ElementRef);
   private readonly _parentFormGroup = this._injector.get(FormGroupDirective, null, { optional: true });
   private readonly _parentForm = this._injector.get(NgForm, null, { optional: true });
-  private readonly _errorStateTracker?: ErrorStateTracker;
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_INPUT_DEFAULT_OPTIONS, null, { optional: true }),
   };
 
-  private readonly _stateChanges = new Subject<void>();
+  private readonly _errorStateChanges = new Subject<void>();
+  private readonly _successStateChanges = new Subject<void>();
   private readonly _destroyed = new Subject<void>();
   public readonly controlDir = this._injector.get(NgControl, null, { optional: true });
 
   private _focused = false;
+  private _errorStateTracker?: ErrorStateTracker;
+  private _successStateTracker?: SuccessStateTracker;
 
   public id = input<string>(this._uniqueId);
   public placeholder = input<string>();
@@ -69,13 +72,16 @@ export class IdsInputDirective implements IdsFormField, DoCheck, OnDestroy {
   public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
   private _controlDisabled = signal(false);
   public isDisabled = computed(() => this.disabled() || this._controlDisabled());
-  public errorStateMatcher = input<ErrorStateMatcher>(this._defaultOptions.errorStateMatcher);
+  public canHandleSuccessState = input<boolean>(false);
+  public errorStateMatcher = input<AbstractErrorStateMatcher>(inject(this._defaultOptions.errorStateMatcher));
+  public successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultOptions.successStateMatcher));
 
   public inputId = computed(() => this.id() || this._uniqueId);
   private _hostClasses = computed(() => createClassList(this._componentClass, []),
   );
 
   public hasErrorState = signal<boolean>(false);
+  public hasSuccessState = signal<boolean>(false);
 
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
@@ -103,15 +109,33 @@ export class IdsInputDirective implements IdsFormField, DoCheck, OnDestroy {
       this.controlDir,
       this._parentFormGroup,
       this._parentForm,
-      this._stateChanges,
+      this._errorStateChanges,
     );
 
-    this._stateChanges.pipe(takeUntil(this._destroyed)).subscribe(() => this.hasErrorState.set(this._errorStateTracker!.hasErrorState));
+    this._errorStateChanges.pipe(
+      takeUntil(this._destroyed),
+    ).subscribe(() => this.hasErrorState.set(this._errorStateTracker!.hasErrorState));
+  }
+
+  public ngOnInit(): void {
+    if (this.canHandleSuccessState()) {
+      this._successStateTracker = new SuccessStateTracker(
+        this.successStateMatcher(),
+        this.controlDir,
+        this._parentFormGroup,
+        this._parentForm,
+        this._successStateChanges,
+      );
+
+      this._successStateChanges.pipe(
+        takeUntil(this._destroyed),
+      ).subscribe(() => this.hasSuccessState.set(this._successStateTracker!.hasSuccessState));
+    }
   }
 
   public ngDoCheck(): void {
     if (this.controlDir) {
-      this.updateErrorState();
+      this.updateErrorAndSuccessState();
 
       if (this.controlDir.disabled !== null && this.controlDir.disabled !== this.disabled()) {
         this._controlDisabled.set(this.controlDir.disabled);
@@ -135,8 +159,9 @@ export class IdsInputDirective implements IdsFormField, DoCheck, OnDestroy {
     }
   }
 
-  public updateErrorState(): void {
+  public updateErrorAndSuccessState(): void {
     this._errorStateTracker?.updateErrorState();
+    this._successStateTracker?.updateSuccessState();
   }
 
   /**

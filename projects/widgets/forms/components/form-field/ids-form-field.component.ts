@@ -8,6 +8,7 @@ import { IDS_FORM_FIELD } from '../../tokens/form';
 import { IdsValidators } from '../../validators';
 import { IdsErrorMessageComponent } from '../message/ids-error-message/ids-error-message.component';
 import { IdsHintMessageComponent } from '../message/ids-hint-message/ids-hint-message.component';
+import { IdsSuccessMessageComponent } from '../message/ids-success-message/ids-success-message.component';
 
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, HostBinding, inject, Injector, input, isDevMode, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
@@ -38,6 +39,7 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
 
   private _child = contentChild(IDS_FORM_FIELD);
   private _hintMessages = contentChildren(IdsHintMessageComponent, { descendants: true });
+  private _successMessages = contentChildren(IdsSuccessMessageComponent, { descendants: true });
   private _errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
   private _actions = contentChildren(IdsActionDirective);
   private _prefixes = contentChildren(IdsPrefixDirective);
@@ -54,17 +56,22 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
   private _control = computed(() => this._child()?.controlDir);
   private _disabled = computed(() => Boolean(this._child()?.isDisabled()));
   private _hasErrorState = computed(() => Boolean(this._child()?.hasErrorState()));
+  private _hasSuccessState = computed(() => Boolean(this._child()?.hasSuccessState()));
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.size(),
     this.variant(),
     this._disabled() ? 'disabled' : null,
     this._hasErrorState() ? 'invalid' : null,
+    this._hasSuccessState() ? 'valid' : null,
   ]),
   );
 
-  public displayedMessages = computed<'error' | 'hint' | undefined>(() => {
+  public displayedMessages = computed<'error' | 'success' | 'hint' | undefined>(() => {
     if (this._errorMessages().length > 0 && this._hasErrorState()) {
       return 'error';
+    }
+    if (this._successMessages().length > 0 && this._hasSuccessState()) {
+      return 'success';
     }
     if (this._hintMessages().length > 0) {
       return 'hint';

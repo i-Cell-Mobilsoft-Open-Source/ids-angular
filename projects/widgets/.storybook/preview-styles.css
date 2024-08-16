@@ -1,7 +1,0 @@
-.sb-show-main #storybook-root:has(.ids-accordion) {
-  max-width: 70%;
-}
-
-.ids-accordion {
-  max-width: 100%;
-}

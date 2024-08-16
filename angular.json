@@ -138,7 +138,7 @@
             "styles": [
               "node_modules/@i-cell/ids-tokens/css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css",
-              "projects/widgets/.storybook/preview-styles.css"
+              "projects/widgets/.storybook/styles.scss"
             ]
           }
         },
@@ -160,7 +160,7 @@
             "styles": [
               "node_modules/@i-cell/ids-tokens/css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css",
-              "projects/widgets/.storybook/preview-styles.css"
+              "projects/widgets/.storybook/styles.scss"
             ]
           }
         }

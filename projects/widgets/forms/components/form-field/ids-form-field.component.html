@@ -39,7 +39,7 @@
 </div>
 
 <div class="ids-form-field__subscript-wrapper">
-  @if (displayedMessages; as messages) {
+  @if (displayedMessages(); as messages) {
     <div class="ids-form-field__message-container">
       @switch (messages) {
         @case ("error") {

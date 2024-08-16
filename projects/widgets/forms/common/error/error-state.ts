@@ -1,9 +1,13 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
 
+export abstract class AbstractErrorStateMatcher {
+  public abstract isErrorState(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean;
+}
+
 @Injectable({ providedIn: 'root' })
-export class ErrorStateMatcher {
+export class ErrorStateMatcher extends AbstractErrorStateMatcher {
   public isErrorState(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean {
     return !!(control && control.invalid && (control.touched || (form && form.submitted)));
   }
@@ -11,14 +15,11 @@ export class ErrorStateMatcher {
 
 export class ErrorStateTracker {
   /** Whether the tracker is currently in an error state. */
-  public errorState = signal<boolean>(false);
-
-  /** User-defined matcher for the error state. */
-  public matcher?: ErrorStateMatcher;
+  public hasErrorState = false;
 
   constructor(
-    private _defaultMatcher: ErrorStateMatcher | null,
-    public ngControl: NgControl | null,
+    private _matcher: ErrorStateMatcher | null,
+    private _ngControl: NgControl | null,
     private _parentFormGroup: FormGroupDirective | null,
     private _parentForm: NgForm | null,
     private _stateChanges?: Subject<void>,
@@ -26,14 +27,14 @@ export class ErrorStateTracker {
 
   /** Updates the error state based on the provided error state matcher. */
   public updateErrorState(): void {
-    const oldState = this.errorState();
+    const oldState = this.hasErrorState;
     const parent = this._parentFormGroup || this._parentForm;
-    const matcher = this.matcher || this._defaultMatcher;
-    const control = this.ngControl ? (this.ngControl.control as AbstractControl) : null;
+    const matcher = this._matcher;
+    const control = this._ngControl ? (this._ngControl.control as AbstractControl) : null;
     const newState = matcher?.isErrorState(control, parent) ?? false;
 
     if (newState !== oldState) {
-      this.errorState.set(newState);
+      this.hasErrorState = newState;
       this._stateChanges?.next();
     }
   }

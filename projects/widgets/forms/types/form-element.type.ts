@@ -12,5 +12,4 @@ export interface FormElementBase {
   isDisabled: Signal<boolean>
   controlDir: NgControl | null
   required: Signal<boolean>
-  onContainerClick?: () => void
 }

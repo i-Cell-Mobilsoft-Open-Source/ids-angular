@@ -1,14 +1,17 @@
+import { IDS_INPUT_DEFAULT_OPTIONS, IDS_INPUT_DEFAULT_OPTIONS_FACTORY } from './ids-input-default-options';
 import { IdsInputType } from './types/input.type';
 
 import { ErrorStateTracker, ErrorStateMatcher } from '../../common/error/error-state';
-import { FormElementBase, IDS_FORM_ELEMENT } from '../../public-api';
+import { IDS_FORM_FIELD, IdsFormField } from '../../public-api';
 
-import { Platform } from '@angular/cdk/platform';
-import { ChangeDetectorRef, computed, Directive, effect, ElementRef, HostBinding, inject, Injector, input, isDevMode, DoCheck, signal, HostListener } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { computed, Directive, effect, ElementRef, HostBinding, inject, Injector, input, isDevMode, DoCheck, signal, HostListener, OnDestroy } from '@angular/core';
+import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
+import { Subject, takeUntil } from 'rxjs';
 
 let nextUniqueId = 0;
+
+const defaultOptions = IDS_INPUT_DEFAULT_OPTIONS_FACTORY();
 
 const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
   'button',
@@ -33,20 +36,27 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
   standalone: true,
   providers: [
     {
-      provide: IDS_FORM_ELEMENT,
+      provide: IDS_FORM_FIELD,
       useExisting: IdsInputDirective,
     },
   ],
 })
-export class IdsInputDirective implements DoCheck, FormElementBase {
+export class IdsInputDirective implements IdsFormField, DoCheck, OnDestroy {
   private readonly _componentClass = 'ids-paginator';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   private readonly _injector = inject(Injector);
-  private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _elementRef = inject<ElementRef<HTMLInputElement> | ElementRef<HTMLTextAreaElement>>(ElementRef);
-  private readonly _platform = inject(Platform);
-  public readonly controlDir = this._injector.get(NgControl, null, { optional: true });
+  private readonly _parentFormGroup = this._injector.get(FormGroupDirective, null, { optional: true });
+  private readonly _parentForm = this._injector.get(NgForm, null, { optional: true });
   private readonly _errorStateTracker?: ErrorStateTracker;
+  private readonly _defaultOptions = {
+    ...defaultOptions,
+    ...this._injector.get(IDS_INPUT_DEFAULT_OPTIONS, null, { optional: true }),
+  };
+
+  private readonly _stateChanges = new Subject<void>();
+  private readonly _destroyed = new Subject<void>();
+  public readonly controlDir = this._injector.get(NgControl, null, { optional: true });
 
   private _focused = false;
 
@@ -59,11 +69,13 @@ export class IdsInputDirective implements DoCheck, FormElementBase {
   public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
   private _controlDisabled = signal(false);
   public isDisabled = computed(() => this.disabled() || this._controlDisabled());
-  public errorStateMatcher = input<ErrorStateMatcher>();
+  public errorStateMatcher = input<ErrorStateMatcher>(this._defaultOptions.errorStateMatcher);
 
   public inputId = computed(() => this.id() || this._uniqueId);
   private _hostClasses = computed(() => createClassList(this._componentClass, []),
   );
+
+  public hasErrorState = signal<boolean>(false);
 
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
@@ -85,6 +97,16 @@ export class IdsInputDirective implements DoCheck, FormElementBase {
     effect(() => {
       this._validateType(this.type());
     });
+
+    this._errorStateTracker = new ErrorStateTracker(
+      this.errorStateMatcher(),
+      this.controlDir,
+      this._parentFormGroup,
+      this._parentForm,
+      this._stateChanges,
+    );
+
+    this._stateChanges.pipe(takeUntil(this._destroyed)).subscribe(() => this.hasErrorState.set(this._errorStateTracker!.hasErrorState));
   }
 
   public ngDoCheck(): void {
@@ -125,4 +147,9 @@ export class IdsInputDirective implements DoCheck, FormElementBase {
       this.focus();
     }
   };
+
+  public ngOnDestroy(): void {
+    this._destroyed.next();
+    this._destroyed.complete();
+  }
 }

@@ -4,7 +4,7 @@ import { FormFieldVariantType } from './types/ids-form-field-variant.type';
 import { IdsActionDirective } from '../../directives/ids-action.directive';
 import { IdsPrefixDirective } from '../../directives/ids-prefix.directive';
 import { IdsSuffixDirective } from '../../directives/ids-suffix.directive';
-import { IDS_FORM_ELEMENT } from '../../tokens/form';
+import { IDS_FORM_FIELD } from '../../tokens/form';
 import { IdsValidators } from '../../validators';
 import { IdsErrorMessageComponent } from '../message/ids-error-message/ids-error-message.component';
 import { IdsHintMessageComponent } from '../message/ids-hint-message/ids-hint-message.component';
@@ -36,7 +36,7 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
 
   private readonly _destroyed = new Subject<void>();
 
-  private _child = contentChild(IDS_FORM_ELEMENT);
+  private _child = contentChild(IDS_FORM_FIELD);
   private _hintMessages = contentChildren(IdsHintMessageComponent, { descendants: true });
   private _errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
   private _actions = contentChildren(IdsActionDirective);
@@ -53,12 +53,24 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
   public variant = input<FormFieldVariantType | null>(this._defaultOptions.variant);
   private _control = computed(() => this._child()?.controlDir);
   private _disabled = computed(() => Boolean(this._child()?.isDisabled()));
+  private _hasErrorState = computed(() => Boolean(this._child()?.hasErrorState()));
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.size(),
     this.variant(),
     this._disabled() ? 'disabled' : null,
+    this._hasErrorState() ? 'invalid' : null,
   ]),
   );
+
+  public displayedMessages = computed<'error' | 'hint' | undefined>(() => {
+    if (this._errorMessages().length > 0 && this._hasErrorState()) {
+      return 'error';
+    }
+    if (this._hintMessages().length > 0) {
+      return 'hint';
+    }
+    return undefined;
+  });
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
@@ -71,16 +83,6 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
     this._child()?.controlDir?.statusChanges?.pipe(takeUntil(this._destroyed)).subscribe(() => {
       this._changeDetectorRef.markForCheck();
     });
-  }
-
-  public get displayedMessages(): 'error' | 'hint' | undefined {
-    if (this._errorMessages().length > 0 && this._control()?.errors) {
-      return 'error';
-    }
-    if (this._hintMessages().length > 0) {
-      return 'hint';
-    }
-    return undefined;
   }
 
   public get hasRequiredValidator(): boolean {

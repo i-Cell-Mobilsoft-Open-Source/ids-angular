@@ -11,6 +11,7 @@ section {
   grid-template-columns: repeat(3, 1fr);
   column-gap: 2rem;
   padding: 2rem;
+  width: fit-content;
 
   h2 {
     grid-area: 1 / 1 / 1 / -1;

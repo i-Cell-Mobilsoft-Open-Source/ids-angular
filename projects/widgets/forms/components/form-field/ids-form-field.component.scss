@@ -1,19 +1,15 @@
 $sizes: compact, comfortable, spacious, dense;
 $variants: surface, light;
 
-@mixin formFieldVariant($variant, $state, $error: false) {
-  $errorText: "";
-  @if ($error == true) {
-    $errorText: "-error";
-  }
-
-  & > .ids-form-field__label {
-    color: var(--ids-comp-forms-form-field-standard-label-color-fg-#{$variant}#{$errorText}-#{$state});
+@mixin fieldWrapperVariant($variant, $state, $validation: null) {
+  $validationText: "";
+  @if ($validation) {
+    $validationText: "-" + $validation;
   }
 
   & > .ids-form-field__field-wrapper {
-    border-color: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-border-#{$variant}#{$errorText}-#{$state});
-    background: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-bg-#{$variant}#{$errorText}-#{$state});
+    border-color: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-border-#{$variant}#{$validationText}-#{$state});
+    background: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-bg-#{$variant}#{$validationText}-#{$state});
 
     & > .ids-form-field__field-wrapper__container {
       & > .ids-form-field__leading-icon .ids-icon {
@@ -45,7 +41,9 @@ $variants: surface, light;
     }
 
     & > .ids-form-field__field-wrapper__action {
-      border-left-color: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-border-#{$variant}#{$errorText}-#{$state});
+      border-left-color: var(
+        --ids-comp-forms-form-field-standard-field-wrapper-action-color-border-#{$variant}#{$validationText}-#{$state}
+      );
       background: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-bg-#{$variant}-#{$state});
     }
 
@@ -57,6 +55,16 @@ $variants: surface, light;
       }
       outline-color: var(--ids-comp-forms-form-field-standard-field-wrapper-container-color-focused-outline-color-#{$lightOrDark}-focused);
     }
+  }
+}
+
+@mixin fieldLabelVariant($variant, $state, $validation: null) {
+  $validationText: "";
+  @if ($validation) {
+    $validationText: "-" + $validation;
+  }
+  & > .ids-form-field__label {
+    color: var(--ids-comp-forms-form-field-standard-label-color-fg-#{$variant}#{$validationText}-#{$state});
   }
 }
 
@@ -225,39 +233,41 @@ $variants: surface, light;
 
   @each $variant in $variants {
     &.ids-form-field-#{$variant} {
-      @include formFieldVariant($variant, default);
+      @include fieldWrapperVariant($variant, default);
+      @include fieldLabelVariant($variant, default);
 
       &:not(.ids-form-field-disabled) {
         &:hover {
-          @include formFieldVariant($variant, hovered);
+          @include fieldWrapperVariant($variant, hovered);
         }
         &:has(input:focus),
         &:has(textarea:focus) {
-          @include formFieldVariant($variant, focused);
+          @include fieldWrapperVariant($variant, focused);
         }
         &:has(input:active),
         &:has(textarea:active) {
-          @include formFieldVariant($variant, pressed);
+          @include fieldWrapperVariant($variant, pressed);
         }
       }
       &.ids-form-field-disabled {
-        @include formFieldVariant($variant, disabled);
+        @include fieldWrapperVariant($variant, disabled);
+        @include fieldLabelVariant($variant, disabled);
       }
 
-      &:has(.ids-form-field-invalid),
-      &:has(.ng-invalid) {
-        @include formFieldVariant($variant, default, true);
+      &.ids-form-field-invalid {
+        @include fieldWrapperVariant($variant, default, error);
+        @include fieldLabelVariant($variant, default, error);
 
         &:hover {
-          @include formFieldVariant($variant, hovered, true);
+          @include fieldWrapperVariant($variant, hovered, error);
         }
         &:has(input:focus),
         &:has(textarea:focus) {
-          @include formFieldVariant($variant, focused, true);
+          @include fieldWrapperVariant($variant, focused, error);
         }
         &:has(input:active),
         &:has(textarea:active) {
-          @include formFieldVariant($variant, pressed, true);
+          @include fieldWrapperVariant($variant, pressed, error);
         }
       }
     }

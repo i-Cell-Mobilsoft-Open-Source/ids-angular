@@ -41,10 +41,8 @@ $variants: surface, light;
     }
 
     & > .ids-form-field__field-wrapper__action {
-      border-left-color: var(
-        --ids-comp-forms-form-field-standard-field-wrapper-action-color-border-#{$variant}#{$validationText}-#{$state}
-      );
-      background: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-bg-#{$variant}-#{$state});
+      border-left-color: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-border-#{$variant}#{$validationText}-default);
+      background: var(--ids-comp-forms-form-field-standard-field-wrapper-action-color-bg-#{$variant}-default);
     }
 
     &:has(input:focus),

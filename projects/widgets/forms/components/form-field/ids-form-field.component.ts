@@ -22,7 +22,6 @@ const defaultOptions = IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY();
   standalone: true,
   imports: [],
   templateUrl: './ids-form-field.component.html',
-  styleUrl: './ids-form-field.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

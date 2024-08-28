@@ -1,0 +1,23 @@
+<h1>{{ "COMPONENTS.SNACKBAR" | translate }}</h1>
+
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.DARK)">Open dark snackbar</button>
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.INFO)">Open info snackbar</button>
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.SUCCESS)">Open success snackbar</button>
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.WARNING)">Open warning snackbar</button>
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.ERROR)">Open error snackbar</button>
+
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.DARK, [{ label: 'Log to console', action: this.action }])">
+  Open dark snackbar with action
+</button>
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.INFO, [{ label: 'Log to console', action: this.action }])">
+  Open info snackbar with action
+</button>
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.SUCCESS, [{ label: 'Log to console', action: this.action }])">
+  Open success snackbar with action
+</button>
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.WARNING, [{ label: 'Log to console', action: this.action }])">
+  Open warning snackbar with action
+</button>
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.ERROR, [{ label: 'Log to console', action: this.action }])">
+  Open error snackbar with action
+</button>

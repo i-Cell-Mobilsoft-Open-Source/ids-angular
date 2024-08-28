@@ -42,6 +42,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   },
   {
+    path: 'components/paginator',
+    loadComponent: () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
+  },
+  {
+    path: 'components/radio',
+    loadComponent: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
+  },
+  {
     path: 'components/segmented-control',
     loadComponent: () => import('./pages/segmented-control/segmented-control-demo.component').then(
       (module) => module.SegmentedControlDemoComponent),
@@ -52,12 +60,8 @@ export const routes: Routes = [
       (module) => module.SegmentedControlToggleDemoComponent),
   },
   {
-    path: 'components/paginator',
-    loadComponent: () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
-  },
-  {
-    path: 'components/radio',
-    loadComponent: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
+    path: 'components/snackbar',
+    loadComponent: () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
   },
   {
     path: 'components/tag',

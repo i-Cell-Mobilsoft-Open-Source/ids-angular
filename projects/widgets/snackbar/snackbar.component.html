@@ -1,0 +1,32 @@
+<div class="ids-snackbar__leading-element">
+  <ids-icon [icon]="icon() ?? defaultIcon()" />
+</div>
+
+<div class="ids-snackbar__message-action-container">
+  <div class="ids-snackbar__message">{{ message() }}</div>
+  <div class="ids-snackbar__action">
+    @for (action of actions(); track $index) {
+      <button
+        type="button"
+        idsButton
+        [size]="size.COMPACT"
+        [appearance]="buttonAppearance.OUTLINED"
+        [variant]="buttonVariant()"
+        (click)="callAction(action.action)"
+      >
+        {{ action.label }}
+      </button>
+    }
+  </div>
+</div>
+
+<button
+  type="button"
+  idsIconButton
+  [size]="size.COMPACT"
+  [appearance]="iconButtonAppearance.STANDARD"
+  [variant]="buttonVariant()"
+  (click)="close()"
+>
+  <ids-icon aria-hidden="true" alt="" [icon]="closeIcon" />
+</button>

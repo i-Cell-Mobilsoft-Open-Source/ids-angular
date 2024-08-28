@@ -1,0 +1,60 @@
+$sizes: compact, comfortable, spacious, dense;
+$variants: dark, info, success, error, warning;
+
+.ids-snackbar-group {
+  position: fixed;
+  display: flex;
+
+  &.ids-snackbar-group-position {
+    &-top-left,
+    &-top-center,
+    &-top-right {
+      flex-direction: column-reverse;
+      &.ids-snackbar-group-reverse-order {
+        flex-direction: column;
+      }
+    }
+    &-bottom-left,
+    &-bottom-center,
+    &-bottom-right {
+      flex-direction: column;
+      &.ids-snackbar-group-reverse-order {
+        flex-direction: column-reverse;
+      }
+    }
+    &-top-center,
+    &-bottom-center {
+      left: auto;
+      right: auto;
+    }
+  }
+
+  @each $size in $sizes {
+    &.ids-snackbar-group-#{$size} {
+      gap: var(--ids-comp-snackbar-group-container-size-gap-comfortable);
+
+      &.ids-snackbar-group-position {
+        $x: var(--ids-comp-snackbar-group-container-size-padding-x-#{$size});
+        $y: var(--ids-comp-snackbar-group-container-size-padding-y-#{$size});
+        &-top-left,
+        &-top-center,
+        &-top-right {
+          top: $y;
+        }
+        &-bottom-left,
+        &-bottom-center,
+        &-bottom-right {
+          bottom: $y;
+        }
+        &-top-left,
+        &-bottom-left {
+          left: $x;
+        }
+        &-top-right,
+        &-bottom-right {
+          right: $x;
+        }
+      }
+    }
+  }
+}

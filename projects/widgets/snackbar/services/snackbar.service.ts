@@ -15,7 +15,9 @@ export class SnackbarService {
   private _viewContainerRef?: ViewContainerRef;
   private _snackbarGroupComponentRef?: ComponentRef<IdsSnackbarGroupComponent>;
   private _snackbarNextUniqueId = 0;
-  public snackbars = signal<IdsSnackbarInnerItem[]>([]);
+  private _snackbars = signal<IdsSnackbarInnerItem[]>([]);
+
+  public snackbars = this._snackbars.asReadonly();
 
   constructor() {
     this._router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
@@ -35,7 +37,7 @@ export class SnackbarService {
     if (!this._snackbarGroupComponentRef) {
       this.createGroup(this._viewContainerRef);
     }
-    this.snackbars.update((snackbars) => {
+    this._snackbars.update((snackbars) => {
       const id = ++this._snackbarNextUniqueId;
       return [
         ...snackbars,
@@ -48,7 +50,7 @@ export class SnackbarService {
   }
 
   public remove(id: number): void {
-    this.snackbars.update((snackbars) => {
+    this._snackbars.update((snackbars) => {
       const index = snackbars.findIndex((snackbar) => snackbar.id === id);
       if (index !== -1) {
         const restSnackbars = [...snackbars];
@@ -60,7 +62,7 @@ export class SnackbarService {
   }
 
   public clear(): void {
-    this.snackbars.set([]);
+    this._snackbars.set([]);
     this._snackbarGroupComponentRef?.destroy();
     this._snackbarGroupComponentRef = undefined;
   }

@@ -1,1 +1,11 @@
-<ng-container #snackbarPlace />
+@for (snackbar of snackbars(); track snackbar.id) {
+  <ids-snackbar
+    [id]="snackbar.id"
+    [message]="snackbar.message"
+    [variant]="snackbar.variant"
+    [icon]="snackbar.icon"
+    [actions]="snackbar.actions"
+    [closeButtonLabel]="snackbar.closeButtonLabel"
+    (closed)="closeSnackbar(snackbar.id)"
+  />
+}

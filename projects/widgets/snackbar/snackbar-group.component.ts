@@ -1,9 +1,10 @@
+import { SnackbarService } from './public-api';
 import { IDS_SNACKBAR_DEFAULT_OPTIONS, IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY } from './snackbar-default-options';
 import { IdsSnackbarComponent } from './snackbar.component';
-import { IdsSnackbarItem } from './types/snackbar-item.type';
+import { IdsSnackbarInnerItem } from './types/snackbar-inner.type';
 import { SnackbarPositionType } from './types/snackbar-position.type';
 
-import { ChangeDetectionStrategy, Component, HostBinding, inject, Injector, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, inject, Signal, ViewEncapsulation } from '@angular/core';
 import { createClassList } from '@i-cell/ids-angular/core';
 
 const defaultOptions = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
@@ -19,14 +20,14 @@ const defaultOptions = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
 })
 export class IdsSnackbarGroupComponent {
   private readonly _componentClass = 'ids-snackbar-group';
-  private readonly _snackbarPlace = viewChild('snackbarPlace', { read: ViewContainerRef });
-  private readonly _injector = inject(Injector);
+  private readonly _snackbarService = inject(SnackbarService);
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_SNACKBAR_DEFAULT_OPTIONS, null, { optional: true }),
+    ...inject(IDS_SNACKBAR_DEFAULT_OPTIONS, { optional: true }),
   };
 
   public position: SnackbarPositionType = this._defaultOptions.position;
+  public snackbars: Signal<IdsSnackbarInnerItem[]> = this._snackbarService.snackbars;
 
   private _hostClasses = createClassList(this._componentClass, [
     this._defaultOptions.size,
@@ -41,19 +42,7 @@ export class IdsSnackbarGroupComponent {
     return this._hostClasses;
   }
 
-  public add(snackbar: IdsSnackbarItem): void {
-    const newSnackbarComponentRef = this._snackbarPlace()?.createComponent(IdsSnackbarComponent);
-    newSnackbarComponentRef?.setInput('message', snackbar.message);
-    newSnackbarComponentRef?.setInput('variant', snackbar.variant);
-    newSnackbarComponentRef?.setInput('icon', snackbar.icon);
-    newSnackbarComponentRef?.setInput('actions', snackbar.actions);
-    newSnackbarComponentRef?.setInput('closeButtonLabel', snackbar.closeButtonLabel);
-    newSnackbarComponentRef?.instance.closed.subscribe(() => {
-      newSnackbarComponentRef.destroy();
-    });
-  }
-
-  public clear(): void {
-    this._snackbarPlace()?.clear();
+  public closeSnackbar(id: number): void {
+    this._snackbarService.remove(id);
   }
 }

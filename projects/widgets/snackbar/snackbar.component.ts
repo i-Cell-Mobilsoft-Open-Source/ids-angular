@@ -9,8 +9,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { mdiAlertCircleOutline, mdiAlertOutline, mdiCheckCircleOutline, mdiClose, mdiInformationSlabCircleOutline } from '@mdi/js';
 
-let nextUniqueId = 0;
-
 @Component({
   selector: 'ids-snackbar',
   standalone: true,
@@ -24,23 +22,22 @@ let nextUniqueId = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[id]': 'id',
+    '[id]': 'uniqueId()',
   },
 })
 export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   private readonly _componentClass = 'ids-snackbar';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
   private _timer?: ReturnType<typeof setTimeout>;
 
-  public readonly id = this._uniqueId;
   public readonly size = Size;
   public readonly iconButtonAppearance = IconButtonAppearance;
   public readonly buttonAppearance = ButtonAppearance;
   public readonly closeIcon = mdiClose;
 
+  public id = input.required<number>();
   public message = input.required<string>();
-  public variant = input<SnackbarVariantType>();
+  public variant = input<SnackbarVariantType | undefined>();
   public icon = input<string | undefined>();
   public actions = input<IdsSnackbarItemAction[] | undefined>([]);
   public closeButtonLabel = input<string | undefined>();
@@ -54,6 +51,8 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
     this.closeButtonLabel() ? 'width-custom-close-button' : null,
   ]));
 
+  public uniqueId = computed(() => `${this._componentClass}-${this.id()}`);
+  public buttonVariant = computed(() => (this.variant() === SnackbarVariant.DARK ? AllVariants.LIGHT : AllVariants.SURFACE));
   public defaultIcon = computed(() => {
     switch (this.variant()) {
       case SnackbarVariant.DARK:
@@ -70,8 +69,6 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
         return mdiAlertOutline;
     }
   });
-
-  public buttonVariant = computed(() => (this.variant() === SnackbarVariant.DARK ? AllVariants.LIGHT : AllVariants.SURFACE));
 
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();

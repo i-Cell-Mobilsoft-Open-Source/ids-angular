@@ -47,6 +47,7 @@ export class IdsSnackbarGroupComponent {
     newSnackbarComponentRef?.setInput('variant', snackbar.variant);
     newSnackbarComponentRef?.setInput('icon', snackbar.icon);
     newSnackbarComponentRef?.setInput('actions', snackbar.actions);
+    newSnackbarComponentRef?.setInput('closeButtonLabel', snackbar.closeButtonLabel);
     newSnackbarComponentRef?.instance.closed.subscribe(() => {
       newSnackbarComponentRef.destroy();
     });

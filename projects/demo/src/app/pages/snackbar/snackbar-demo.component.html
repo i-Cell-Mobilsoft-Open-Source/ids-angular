@@ -21,3 +21,7 @@
 <button type="button" idsButton (click)="openSnackbar(snackbarVariant.ERROR, [{ label: 'Log to console', action: this.action }])">
   Open error snackbar with action
 </button>
+
+<button type="button" idsButton (click)="openSnackbar(snackbarVariant.DARK, [{ label: 'Log to console', action: this.action }], 'Close')">
+  Open dark snackbar with action and closeButtonLabel
+</button>

@@ -35,12 +35,13 @@ export class SnackbarDemoComponent implements OnInit {
     this._snackbarService.setViewContainerRef(this._viewContainerRef);
   }
 
-  public openSnackbar(variant: SnackbarVariantType, actions?: IdsSnackbarItemAction[]): void {
+  public openSnackbar(variant: SnackbarVariantType, actions?: IdsSnackbarItemAction[], closeButtonLabel?: string): void {
     this._snackbarService.add({
       message: `This is a toast with a long content and an action. 
       Notice how the text wraps to multiple lines when the max-width is reached.`,
       variant,
       actions,
+      closeButtonLabel,
     });
   }
 

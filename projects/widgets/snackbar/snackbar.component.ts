@@ -43,12 +43,16 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   public variant = input<SnackbarVariantType>();
   public icon = input<string | undefined>();
   public actions = input<IdsSnackbarItemAction[] | undefined>([]);
+  public closeButtonLabel = input<string | undefined>();
 
   public closed = output<void>();
 
   private _duration = computed(() => Math.max(this.message().length * READ_SPEED_PER_CHAR, MIN_DURATION));
   private _hasActions = computed(() => Boolean(this.actions()?.length));
-  private _hostClasses = computed(() => createClassList(this._componentClass, [this.variant()]));
+  private _hostClasses = computed(() => createClassList(this._componentClass, [
+    this.variant(),
+    this.closeButtonLabel() ? 'width-custom-close-button' : null,
+  ]));
 
   public defaultIcon = computed(() => {
     switch (this.variant()) {

@@ -17,16 +17,30 @@
         {{ action.label }}
       </button>
     }
+    @if (closeButtonLabel(); as closeButtonLabel) {
+      <button
+        type="button"
+        idsButton
+        [size]="size.COMPACT"
+        [appearance]="buttonAppearance.OUTLINED"
+        [variant]="buttonVariant()"
+        (click)="close()"
+      >
+        {{ closeButtonLabel }}
+      </button>
+    }
   </div>
 </div>
 
-<button
-  type="button"
-  idsIconButton
-  [size]="size.COMPACT"
-  [appearance]="iconButtonAppearance.STANDARD"
-  [variant]="buttonVariant()"
-  (click)="close()"
->
-  <ids-icon aria-hidden="true" alt="" [icon]="closeIcon" />
-</button>
+@if (!closeButtonLabel()) {
+  <button
+    type="button"
+    idsIconButton
+    [size]="size.COMPACT"
+    [appearance]="iconButtonAppearance.STANDARD"
+    [variant]="buttonVariant()"
+    (click)="close()"
+  >
+    <ids-icon aria-hidden="true" alt="" [icon]="closeIcon" />
+  </button>
+}

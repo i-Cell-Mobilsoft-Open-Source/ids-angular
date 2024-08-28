@@ -2,6 +2,7 @@ $sizes: compact, comfortable, spacious, dense;
 $variants: dark, info, success, error, warning;
 
 .ids-snackbar {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -20,13 +21,13 @@ $variants: dark, info, success, error, warning;
       var(--ids-smc-reference-container-effects-shadow-blur-lg) var(--ids-smc-reference-container-effects-shadow-spread-xs)
       var(--ids-smc-reference-container-effects-shadow-color-dark-light);
 
-  .ids-snackbar__leading-element {
+  & > .ids-snackbar__leading-element {
     display: flex;
     align-items: center;
     flex-shrink: 0;
   }
 
-  .ids-snackbar__message-action-container {
+  & > .ids-snackbar__message-action-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,21 +35,27 @@ $variants: dark, info, success, error, warning;
     flex: 1 0 0;
     flex-wrap: wrap;
 
-    .ids-snackbar__message {
+    & > .ids-snackbar__message {
       flex: 1 0 0;
       font-style: normal;
     }
 
-    .ids-snackbar__action {
+    & > .ids-snackbar__action {
       display: flex;
       align-items: center;
     }
+  }
+
+  & > .ids-icon-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
   }
 }
 
 @each $size in $sizes {
   .ids-snackbar-group-#{$size} {
-    .ids-snackbar {
+    & > .ids-snackbar {
       padding: var(--ids-comp-snackbar-container-size-padding-y-#{$size}) var(--ids-comp-snackbar-container-size-padding-x-#{$size});
       border-radius: var(--ids-comp-snackbar-container-size-border-radius-#{$size});
       border-top-width: var(--ids-comp-snackbar-container-size-border-top-width-#{$size});
@@ -70,7 +77,7 @@ $variants: dark, info, success, error, warning;
         padding-right: var(--ids-comp-snackbar-message-action-size-padding-right-#{$size});
         row-gap: var(--ids-comp-snackbar-message-action-size-gap-#{$size});
 
-        .ids-snackbar__message {
+        & > .ids-snackbar__message {
           min-width: var(--ids-comp-snackbar-message-size-min-width-#{$size});
           max-width: var(--ids-comp-snackbar-message-size-max-width-#{$size});
           min-height: var(--ids-comp-snackbar-message-size-min-height-#{$size});
@@ -82,7 +89,7 @@ $variants: dark, info, success, error, warning;
           letter-spacing: var(--ids-comp-snackbar-message-typography-letter-spacing-#{$size});
         }
 
-        .ids-snackbar__action {
+        & > .ids-snackbar__action {
           gap: var(--ids-comp-snackbar-actions-size-gap-#{$size});
         }
       }
@@ -90,6 +97,12 @@ $variants: dark, info, success, error, warning;
       & > .ids-icon-button > .ids-icon {
         width: var(--ids-comp-snackbar-icon-button-size-icon-button-#{$size});
         height: var(--ids-comp-snackbar-icon-button-size-icon-button-#{$size});
+      }
+
+      &.ids-snackbar-width-custom-close-button {
+        & > .ids-snackbar__message-action-container {
+          padding-right: 0;
+        }
       }
     }
   }

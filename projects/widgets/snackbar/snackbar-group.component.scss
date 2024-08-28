@@ -24,8 +24,8 @@ $variants: dark, info, success, error, warning;
     }
     &-top-center,
     &-bottom-center {
-      left: auto;
-      right: auto;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 

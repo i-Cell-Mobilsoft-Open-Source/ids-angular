@@ -1,5 +1,9 @@
 @for (snackbar of snackbars(); track snackbar.id) {
   <ids-snackbar
+    [@snackbarAnimation]="{
+      value: 'open',
+      params: _animationParams(),
+    }"
     [id]="snackbar.id"
     [message]="snackbar.message"
     [variant]="snackbar.variant"

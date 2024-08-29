@@ -11,7 +11,7 @@ export interface IdsSnackbarDefaultOptions {
   size?: SizeType
   variant?: SnackbarVariantType
   position?: SnackbarPositionType
-  reverseOrder?: boolean
+  newestAtStartPosition?: boolean
 }
 
 export const IDS_SNACKBAR_DEFAULT_OPTIONS = new InjectionToken<IdsSnackbarDefaultOptions>(
@@ -26,7 +26,7 @@ export function IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY(): (Required<IdsSnackbarDef
   return {
     size: Size.COMFORTABLE,
     variant: SnackbarVariant.DARK,
-    position: SnackbarPosition.BOTTOM_CENTER,
-    reverseOrder: true,
+    position: SnackbarPosition.TOP_CENTER,
+    newestAtStartPosition: false,
   };
 }

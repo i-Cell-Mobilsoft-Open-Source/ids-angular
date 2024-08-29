@@ -1,10 +1,11 @@
+import { snackbarAnimation } from './animations';
 import { SnackbarService } from './public-api';
 import { IDS_SNACKBAR_DEFAULT_OPTIONS, IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY } from './snackbar-default-options';
 import { IdsSnackbarComponent } from './snackbar.component';
 import { IdsSnackbarInnerItem } from './types/snackbar-inner.type';
-import { SnackbarPositionType } from './types/snackbar-position.type';
+import { SnackbarPosition, SnackbarPositionType } from './types/snackbar-position.type';
 
-import { ChangeDetectionStrategy, Component, HostBinding, inject, Signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { createClassList } from '@i-cell/ids-angular/core';
 
 const defaultOptions = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
@@ -17,6 +18,7 @@ const defaultOptions = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
   styleUrl: './snackbar-group.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [snackbarAnimation],
 })
 export class IdsSnackbarGroupComponent {
   private readonly _componentClass = 'ids-snackbar-group';
@@ -26,17 +28,48 @@ export class IdsSnackbarGroupComponent {
     ...inject(IDS_SNACKBAR_DEFAULT_OPTIONS, { optional: true }),
   };
 
-  public position: SnackbarPositionType = this._defaultOptions.position;
+  public position = signal<SnackbarPositionType>(this._defaultOptions.position);
   public snackbars: Signal<IdsSnackbarInnerItem[]> = this._snackbarService.snackbars;
 
   private _hostClasses = createClassList(this._componentClass, [
     this._defaultOptions.size,
     [
       'position',
-      this.position,
+      this.position(),
     ],
-    this._defaultOptions.reverseOrder ? 'reverse-order' : null,
+    this._defaultOptions.newestAtStartPosition ? 'reverse-order' : null,
   ]);
+
+  protected _animationParams = computed<{ translateY: number, translateX: number, height: string }>(() => {
+    switch (this.position()) {
+      case SnackbarPosition.BOTTOM_CENTER:
+        return {
+          translateY: 100,
+          translateX: 0,
+          height: '0',
+        };
+      case SnackbarPosition.TOP_CENTER:
+        return {
+          translateY: -100,
+          translateX: 0,
+          height: '0',
+        };
+      case SnackbarPosition.TOP_LEFT:
+      case SnackbarPosition.BOTTOM_LEFT:
+        return {
+          translateY: 0,
+          translateX: -100,
+          height: '*',
+        };
+      case SnackbarPosition.TOP_RIGHT:
+      case SnackbarPosition.BOTTOM_RIGHT:
+        return {
+          translateY: 0,
+          translateX: 100,
+          height: '*',
+        };
+    }
+  });
 
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses;

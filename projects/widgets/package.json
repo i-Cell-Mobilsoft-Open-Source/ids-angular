@@ -2,6 +2,7 @@
   "name": "@i-cell/ids-angular",
   "version": "0.0.1",
   "peerDependencies": {
+    "@angular/animations": "^17.3.1",
     "@angular/common": "^17.3.1",
     "@angular/core": "^17.3.1"
   },

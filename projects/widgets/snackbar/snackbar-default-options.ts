@@ -26,7 +26,7 @@ export function IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY(): (Required<IdsSnackbarDef
   return {
     size: Size.COMFORTABLE,
     variant: SnackbarVariant.DARK,
-    position: SnackbarPosition.TOP_CENTER,
+    position: SnackbarPosition.BOTTOM_CENTER,
     newestAtStartPosition: false,
   };
 }

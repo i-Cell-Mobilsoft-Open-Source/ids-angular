@@ -77,7 +77,6 @@ $variants: dark, info, success, error, warning;
 
         & > .ids-snackbar__message-action-container {
           min-width: var(--ids-comp-snackbar-container-size-min-width-#{$size});
-          padding-right: var(--ids-comp-snackbar-message-action-size-padding-right-#{$size});
           row-gap: var(--ids-comp-snackbar-message-action-size-gap-#{$size});
 
           & > .ids-snackbar__message {
@@ -101,10 +100,12 @@ $variants: dark, info, success, error, warning;
           width: var(--ids-comp-snackbar-icon-button-size-icon-button-#{$size});
           height: var(--ids-comp-snackbar-icon-button-size-icon-button-#{$size});
         }
+      }
 
-        &.ids-snackbar-width-custom-close-button {
+      &.ids-snackbar-width-close-x-button {
+        & > .ids-snackbar__content-wrapper {
           & > .ids-snackbar__message-action-container {
-            padding-right: 0;
+            padding-right: var(--ids-comp-snackbar-message-action-size-padding-right-#{$size});
           }
         }
       }

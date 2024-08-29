@@ -5,7 +5,9 @@ export interface IdsSnackbarItem {
   variant?: SnackbarVariantType
   icon?: string
   actions?: IdsSnackbarItemAction[]
+  allowDismiss?: boolean
   closeButtonLabel?: string
+  autoClose?: boolean
 }
 
 export interface IdsSnackbarItemAction {

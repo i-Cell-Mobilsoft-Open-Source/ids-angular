@@ -5,3 +5,16 @@
   gap: 1rem;
   padding: 2rem;
 }
+
+section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  .snackbar-funcion {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

@@ -6,6 +6,7 @@ import { Size, SizeType } from '@i-cell/ids-angular/core';
 
 export const READ_SPEED_PER_CHAR = 50;
 export const MIN_DURATION = 2_000;
+export const READ_SPEED_PER_ACTION = 2_000;
 
 export interface IdsSnackbarDefaultOptions {
   size?: SizeType

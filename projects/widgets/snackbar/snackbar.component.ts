@@ -1,10 +1,10 @@
-import { MIN_DURATION, READ_SPEED_PER_CHAR } from './snackbar-default-options';
+import { MIN_DURATION, READ_SPEED_PER_ACTION, READ_SPEED_PER_CHAR } from './snackbar-default-options';
 import { IdsSnackbarItemAction } from './types/snackbar-item.type';
 import { SnackbarVariant, SnackbarVariantType } from './types/snackbar-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, HostBinding, HostListener, input, OnDestroy, output, ViewEncapsulation } from '@angular/core';
 import { ButtonAppearance, IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { AllVariants, createClassList, Size } from '@i-cell/ids-angular/core';
+import { AllVariants, coerceBooleanAttribute, createClassList, Size } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { mdiAlertCircleOutline, mdiAlertOutline, mdiCheckCircleOutline, mdiClose, mdiInformationSlabCircleOutline } from '@mdi/js';
@@ -40,15 +40,21 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   public variant = input<SnackbarVariantType | undefined>();
   public icon = input<string | undefined>();
   public actions = input<IdsSnackbarItemAction[] | undefined>([]);
+  public allowDismiss = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
   public closeButtonLabel = input<string | undefined>();
+  public autoClose = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
 
   public closed = output<void>();
 
-  private _duration = computed(() => Math.max(this.message().length * READ_SPEED_PER_CHAR, MIN_DURATION));
-  private _hasActions = computed(() => Boolean(this.actions()?.length));
+  private _canAutoClose = computed(() => !this.allowDismiss() && this.autoClose());
+  private _duration = computed(() => {
+    const actionReadTime = (this.actions()?.length ?? 0) * READ_SPEED_PER_ACTION;
+    return Math.max(this.message().length * READ_SPEED_PER_CHAR + actionReadTime, MIN_DURATION);
+  });
+
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.variant(),
-    this.closeButtonLabel() ? 'width-custom-close-button' : null,
+    this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
   ]));
 
   public uniqueId = computed(() => `${this._componentClass}-${this.id()}`);
@@ -83,7 +89,7 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   }
 
   private _startTimer(): void {
-    if (!this._hasActions()) {
+    if (this._canAutoClose()) {
       this._timer = setTimeout(() => {
         this.close();
       }, this._duration());
@@ -91,7 +97,7 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   }
 
   private _stopTimer(): void {
-    if (!this._hasActions()) {
+    if (this._canAutoClose()) {
       clearTimeout(this._timer);
     }
   }

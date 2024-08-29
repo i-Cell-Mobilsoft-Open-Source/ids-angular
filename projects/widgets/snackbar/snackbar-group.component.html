@@ -9,7 +9,9 @@
     [variant]="snackbar.variant"
     [icon]="snackbar.icon"
     [actions]="snackbar.actions"
+    [allowDismiss]="snackbar.allowDismiss"
     [closeButtonLabel]="snackbar.closeButtonLabel"
+    [autoClose]="snackbar.autoClose"
     (closed)="closeSnackbar(snackbar.id)"
   />
 }

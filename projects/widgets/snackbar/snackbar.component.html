@@ -18,7 +18,7 @@
           {{ action.label }}
         </button>
       }
-      @if (closeButtonLabel(); as closeButtonLabel) {
+      @if (allowDismiss() && closeButtonLabel(); as closeButtonLabel) {
         <button
           type="button"
           idsButton
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  @if (!closeButtonLabel()) {
+  @if (allowDismiss() && !closeButtonLabel()) {
     <button
       type="button"
       idsIconButton

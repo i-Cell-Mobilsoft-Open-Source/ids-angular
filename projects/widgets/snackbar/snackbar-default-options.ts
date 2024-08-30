@@ -13,6 +13,7 @@ export interface IdsSnackbarDefaultOptions {
   variant?: SnackbarVariantType
   position?: SnackbarPositionType
   newestAtStartPosition?: boolean
+  viewportMargin?: number
 }
 
 export const IDS_SNACKBAR_DEFAULT_OPTIONS = new InjectionToken<IdsSnackbarDefaultOptions>(
@@ -29,5 +30,6 @@ export function IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY(): (Required<IdsSnackbarDef
     variant: SnackbarVariant.DARK,
     position: SnackbarPosition.BOTTOM_CENTER,
     newestAtStartPosition: false,
+    viewportMargin: 16,
   };
 }

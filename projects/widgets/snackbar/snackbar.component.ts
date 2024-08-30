@@ -1,5 +1,5 @@
 import { MIN_DURATION, READ_SPEED_PER_ACTION, READ_SPEED_PER_CHAR } from './snackbar-default-options';
-import { IdsSnackbarItemAction } from './types/snackbar-item.type';
+import { IdsSnackbarAction } from './types/snackbar-data.type';
 import { SnackbarVariant, SnackbarVariantType } from './types/snackbar-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, HostBinding, HostListener, input, OnDestroy, output, ViewEncapsulation } from '@angular/core';
@@ -39,7 +39,7 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   public message = input.required<string>();
   public variant = input<SnackbarVariantType | undefined>();
   public icon = input<string | undefined>();
-  public actions = input<IdsSnackbarItemAction[] | undefined>([]);
+  public actions = input<IdsSnackbarAction[] | undefined>([]);
   public allowDismiss = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
   public closeButtonLabel = input<string | undefined>();
   public autoClose = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });

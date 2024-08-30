@@ -1,16 +1,16 @@
 import { SnackbarVariantType } from './snackbar-variant.type';
 
-export interface IdsSnackbarItem {
+export interface IdsSnackbarData {
   message: string
   variant?: SnackbarVariantType
   icon?: string
-  actions?: IdsSnackbarItemAction[]
+  actions?: IdsSnackbarAction[]
   allowDismiss?: boolean
   closeButtonLabel?: string
   autoClose?: boolean
 }
 
-export interface IdsSnackbarItemAction {
+export interface IdsSnackbarAction {
   label: string
   action: () => void
 }

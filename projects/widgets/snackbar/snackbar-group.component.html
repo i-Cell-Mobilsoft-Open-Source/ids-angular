@@ -12,6 +12,8 @@
     [allowDismiss]="snackbar.allowDismiss"
     [closeButtonLabel]="snackbar.closeButtonLabel"
     [autoClose]="snackbar.autoClose"
+    (@snackbarAnimation.start)="_onAnimateStart()"
+    (@snackbarAnimation.done)="_onAnimateDone()"
     (closed)="closeSnackbar(snackbar.id)"
   />
 }

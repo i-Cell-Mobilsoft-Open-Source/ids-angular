@@ -1,5 +1,5 @@
 export * from './services/snackbar.service';
-export * from './types/snackbar-item.type';
+export * from './types/snackbar-data.type';
 export * from './types/snackbar-position.type';
 export * from './types/snackbar-variant.type';
 export * from './snackbar-default-options';

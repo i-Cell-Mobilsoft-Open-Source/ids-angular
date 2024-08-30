@@ -1,8 +1,8 @@
 import { snackbarAnimation } from './animations';
-import { SnackbarService } from './public-api';
+import { IdsSnackbarService } from './public-api';
 import { IDS_SNACKBAR_DEFAULT_OPTIONS, IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY } from './snackbar-default-options';
 import { IdsSnackbarComponent } from './snackbar.component';
-import { IdsSnackbarInnerItem } from './types/snackbar-inner.type';
+import { IdsSnackbarInnerData } from './types/snackbar-inner-data.type';
 import { SnackbarPosition, SnackbarPositionType } from './types/snackbar-position.type';
 
 import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, signal, Signal, ViewEncapsulation } from '@angular/core';
@@ -22,14 +22,14 @@ const defaultOptions = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
 })
 export class IdsSnackbarGroupComponent {
   private readonly _componentClass = 'ids-snackbar-group';
-  private readonly _snackbarService = inject(SnackbarService);
+  private readonly _snackbarService = inject(IdsSnackbarService);
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...inject(IDS_SNACKBAR_DEFAULT_OPTIONS, { optional: true }),
   };
 
   public position = signal<SnackbarPositionType>(this._defaultOptions.position);
-  public snackbars: Signal<IdsSnackbarInnerItem[]> = this._snackbarService.snackbars;
+  public snackbars: Signal<IdsSnackbarInnerData[]> = this._snackbarService.snackbars;
 
   private _hostClasses = createClassList(this._componentClass, [
     this._defaultOptions.size,
@@ -37,7 +37,7 @@ export class IdsSnackbarGroupComponent {
       'position',
       this.position(),
     ],
-    this._defaultOptions.newestAtStartPosition ? 'reverse-order' : null,
+    this._defaultOptions.newestAtStartPosition ? 'newest-at-start' : null,
   ]);
 
   protected _animationParams = computed<{ translateY: number, translateX: number, height: string }>(() => {
@@ -77,5 +77,20 @@ export class IdsSnackbarGroupComponent {
 
   public closeSnackbar(id: number): void {
     this._snackbarService.remove(id);
+  }
+
+  protected _onAnimateStart(): void {
+    this._updatePosition();
+  }
+
+  protected _onAnimateDone(): void {
+    this._updatePosition();
+    if (this._snackbarService.snackbars().length === 0) {
+      this._snackbarService.clear();
+    }
+  }
+
+  protected _updatePosition(): void {
+    this._snackbarService.update();
   }
 }

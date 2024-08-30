@@ -2,6 +2,8 @@ $sizes: compact, comfortable, spacious, dense;
 $variants: dark, info, success, error, warning;
 
 .ids-snackbar {
+  min-width: max-content;
+
   & > .ids-snackbar__content-wrapper {
     position: relative;
     display: flex;

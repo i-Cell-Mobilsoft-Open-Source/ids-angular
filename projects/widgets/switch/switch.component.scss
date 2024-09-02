@@ -1,0 +1,83 @@
+$sizes: compact, comfortable, spacious, dense;
+$variants: surface, light, primary;
+
+.ids-switch {
+  display: inline-flex;
+  align-items: center;
+
+  & > .ids-switch__button {
+    & > .ids-switch__track {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    & > .ids-switch__handle-track {
+      & > .ids-switch__hanlde {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  & > .ids-switch__label {
+    font-style: normal;
+  }
+
+  @each $size in $sizes {
+    &.ids-switch-#{$size} {
+      gap: var(--ids-comp-switch-container-size-gap);
+
+      & > .ids-switch__button {
+        & > .ids-switch__track {
+          width: var(--ids-comp-switch-track-size-width-#{$size});
+          padding: var(--ids-comp-switch-track-size-padding-y-#{$size}) var(--ids-comp-switch-track-size-padding-x-#{$size});
+          border-radius: var(--ids-comp-switch-handle-size-border-radius);
+        }
+
+        & > .ids-switch__handle-track {
+          & > .ids-switch__hanlde {
+            width: var(--ids-comp-switch-handle-size-width-#{$size});
+            height: var(--ids-comp-switch-handle-size-height-#{$size});
+            border-radius: var(--ids-comp-switch-handle-size-border-radius-#{$size});
+
+            & > .ids-icon {
+              width: var(--ids-comp-switch-icon-size-width-#{$size});
+              height: var(--ids-comp-switch-icon-size-height-#{$size});
+            }
+          }
+        }
+      }
+
+      & > .ids-switch__label {
+        font-family: var(--ids-comp-switch-label-typography-font-family-#{$size});
+        font-size: var(--ids-comp-switch-label-typography-font-size-#{$size});
+        font-weight: var(--ids-comp-switch-label-typography-font-weight-#{$size});
+        line-height: var(--ids-comp-switch-label-typography-line-height-#{$size});
+        letter-spacing: var(--ids-comp-switch-label-typography-letter-spacing-#{$size});
+      }
+    }
+  }
+
+  @each $variant in $variants {
+    &.ids-switch-#{$variant} {
+      & > .ids-switch__button {
+        & > .ids-switch__track {
+          background: var(--ids-comp-switch-track-off-color-bg-#{$variant}-default);
+        }
+
+        & > .ids-switch__handle-track {
+          & > .ids-switch__hanlde {
+            background: var(--ids-comp-switch-handle-off-color-bg-#{$variant}-default);
+          }
+        }
+      }
+
+      & > .ids-switch__label {
+        color: var(--ids-comp-switch-label-color-fg-#{$variant}-default);
+      }
+    }
+  }
+}

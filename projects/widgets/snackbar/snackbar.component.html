@@ -1,4 +1,4 @@
-<div class="ids-snackbar__content-wrapper">
+<div class="ids-snackbar__content-wrapper" cdkTrapFocus cdkTrapFocusAutoCapture="true">
   <div class="ids-snackbar__leading-element">
     <ids-icon [icon]="icon() ?? defaultIcon()" />
   </div>
@@ -21,6 +21,8 @@
       @if (allowDismiss() && closeButtonLabel(); as closeButtonLabel) {
         <button
           type="button"
+          role="button"
+          aria-label="Close notification"
           idsButton
           [size]="size.COMPACT"
           [appearance]="buttonAppearance.OUTLINED"
@@ -36,6 +38,8 @@
   @if (allowDismiss() && !closeButtonLabel()) {
     <button
       type="button"
+      role="button"
+      aria-label="Close notification"
       idsIconButton
       [size]="size.COMPACT"
       [appearance]="iconButtonAppearance.STANDARD"

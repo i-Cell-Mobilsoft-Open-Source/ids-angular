@@ -8,6 +8,7 @@ export interface IdsSnackbarData {
   allowDismiss?: boolean
   closeButtonLabel?: string
   autoClose?: boolean
+  urgent?: boolean
 }
 
 export interface IdsSnackbarAction {

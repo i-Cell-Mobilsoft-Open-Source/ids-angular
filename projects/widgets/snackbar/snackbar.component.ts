@@ -2,6 +2,7 @@ import { MIN_DURATION, READ_SPEED_PER_ACTION, READ_SPEED_PER_CHAR } from './snac
 import { IdsSnackbarAction } from './types/snackbar-data.type';
 import { SnackbarVariant, SnackbarVariantType } from './types/snackbar-variant.type';
 
+import { A11yModule } from '@angular/cdk/a11y';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, HostBinding, HostListener, input, OnDestroy, output, ViewEncapsulation } from '@angular/core';
 import { ButtonAppearance, IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { AllVariants, coerceBooleanAttribute, createClassList, Size } from '@i-cell/ids-angular/core';
@@ -16,6 +17,7 @@ import { mdiAlertCircleOutline, mdiAlertOutline, mdiCheckCircleOutline, mdiClose
     IdsIconButtonComponent,
     IdsIconComponent,
     IdsButtonComponent,
+    A11yModule,
   ],
   templateUrl: './snackbar.component.html',
   styleUrl: './snackbar.component.scss',
@@ -23,6 +25,7 @@ import { mdiAlertCircleOutline, mdiAlertOutline, mdiCheckCircleOutline, mdiClose
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[id]': 'uniqueId()',
+    '[role]': 'role()',
   },
 })
 export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
@@ -43,6 +46,7 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   public allowDismiss = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
   public closeButtonLabel = input<string | undefined>();
   public autoClose = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
+  public urgent = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
 
   public closed = output<void>();
 
@@ -57,6 +61,7 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
     this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
   ]));
 
+  public role = computed(() => (this.urgent() ? 'alert' : 'status'));
   public uniqueId = computed(() => `${this._componentClass}-${this.id()}`);
   public buttonVariant = computed(() => (this.variant() === SnackbarVariant.DARK ? AllVariants.LIGHT : AllVariants.SURFACE));
   public defaultIcon = computed(() => {

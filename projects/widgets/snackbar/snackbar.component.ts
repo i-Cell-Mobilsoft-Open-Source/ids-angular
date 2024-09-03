@@ -51,8 +51,8 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
 
   private _canAutoClose = computed(() => !this.allowDismiss() && this.autoClose());
   private _duration = computed(() => {
-    const actionReadTime = (this.actions()?.length ?? 0) * READ_SPEED_PER_ACTION;
-    return Math.max(this.message().length * READ_SPEED_PER_CHAR + actionReadTime, MIN_DURATION);
+    const actionReadDuration = (this.actions()?.length ?? 0) * READ_SPEED_PER_ACTION;
+    return Math.max(this.message().length * READ_SPEED_PER_CHAR + actionReadDuration, MIN_DURATION);
   });
 
   private _hostClasses = computed(() => createClassList(this._componentClass, [

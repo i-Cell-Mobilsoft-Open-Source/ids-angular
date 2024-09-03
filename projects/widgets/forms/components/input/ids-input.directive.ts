@@ -3,7 +3,8 @@ import { IdsInputType } from './types/input.type';
 
 import { ErrorStateTracker, AbstractErrorStateMatcher } from '../../common/error/error-state';
 import { AbstractSuccessStateMatcher, SuccessStateTracker } from '../../common/success/success-state';
-import { IDS_FORM_FIELD, IdsFormField } from '../../public-api';
+import { IDS_FORM_FIELD } from '../../tokens/form';
+import { IdsFormField } from '../../types/form-field.type';
 
 import { computed, Directive, effect, ElementRef, HostBinding, inject, Injector, input, isDevMode, DoCheck, signal, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';

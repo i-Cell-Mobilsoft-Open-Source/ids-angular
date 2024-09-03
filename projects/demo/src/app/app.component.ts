@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
             { name: 'COMPONENTS.CHECKBOX', path: '/components/checkbox' },
             { name: 'COMPONENTS.DIALOG', path: '/components/dialog' },
             { name: 'COMPONENTS.DIVIDER', path: '/components/divider' },
+            { name: 'COMPONENTS.FORM_FIELD', path: '/components/form-field' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
             { name: 'COMPONENTS.PAGINATOR', path: '/components/paginator' },
             { name: 'COMPONENTS.RADIO', path: '/components/radio' },

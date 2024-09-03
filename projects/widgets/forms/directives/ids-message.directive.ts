@@ -1,5 +1,6 @@
 import { IDS_FORM_ELEMENT } from './../tokens/form';
-import { FormElement } from './../types/form-element';
+
+import { FormElement } from '../types/form-element.type';
 
 import { Directive, HostBinding, Injector, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, computed, inject, input, signal } from '@angular/core';
 import { AllVariants, AllVariantsType, createClassList, Size, SizeType } from '@i-cell/ids-angular/core';

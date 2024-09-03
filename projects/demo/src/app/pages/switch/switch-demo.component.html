@@ -1,0 +1,107 @@
+<h1>{{ "COMPONENTS.SWITCH" | translate }}</h1>
+
+@for (variant of variants; track $index) {
+  <section [class]="variant">
+    <h2>{{ variant | uppercase }}</h2>
+    <div>
+      <h3>Default</h3>
+      @for (size of sizes; track $index) {
+        <h4>{{ size }}</h4>
+        <div class="switch-types">
+          <div>
+            <h5>No icon</h5>
+            <ids-switch label="Label" [ngModel]="true" [size]="size" [variant]="variant" [hasIcon]="false" />
+          </div>
+
+          <div>
+            <h5>Icon on track</h5>
+            <ids-switch label="Label" [ngModel]="true" [size]="size" [variant]="variant" [hasIcon]="true" [iconPosition]="'ontrack'" />
+          </div>
+
+          <div>
+            <h5>Icon on handle</h5>
+            <ids-switch label="Label" [ngModel]="true" [size]="size" [variant]="variant" [hasIcon]="true" [iconPosition]="'onhandle'" />
+          </div>
+        </div>
+      }
+    </div>
+
+    <div>
+      <h3>Disabled (off)</h3>
+      @for (size of sizes; track $index) {
+        <h4>{{ size }}</h4>
+        <div class="switch-types">
+          <div>
+            <h5>No icon</h5>
+            <ids-switch label="Label" disabled [ngModel]="false" [size]="size" [variant]="variant" [hasIcon]="false" />
+          </div>
+
+          <div>
+            <h5>Icon on track</h5>
+            <ids-switch
+              label="Label"
+              disabled
+              [ngModel]="false"
+              [size]="size"
+              [variant]="variant"
+              [hasIcon]="true"
+              [iconPosition]="'ontrack'"
+            />
+          </div>
+
+          <div>
+            <h5>Icon on handle</h5>
+            <ids-switch
+              label="Label"
+              disabled
+              [ngModel]="false"
+              [size]="size"
+              [variant]="variant"
+              [hasIcon]="true"
+              [iconPosition]="'onhandle'"
+            />
+          </div>
+        </div>
+      }
+    </div>
+
+    <div>
+      <h3>Disabled (on)</h3>
+      @for (size of sizes; track $index) {
+        <h4>{{ size }}</h4>
+        <div class="switch-types">
+          <div>
+            <h5>No icon</h5>
+            <ids-switch label="Label" disabled [ngModel]="true" [size]="size" [variant]="variant" [hasIcon]="false" />
+          </div>
+
+          <div>
+            <h5>Icon on track</h5>
+            <ids-switch
+              label="Label"
+              disabled
+              [ngModel]="true"
+              [size]="size"
+              [variant]="variant"
+              [hasIcon]="true"
+              [iconPosition]="'ontrack'"
+            />
+          </div>
+
+          <div>
+            <h5>Icon on handle</h5>
+            <ids-switch
+              label="Label"
+              disabled
+              [ngModel]="true"
+              [size]="size"
+              [variant]="variant"
+              [hasIcon]="true"
+              [iconPosition]="'onhandle'"
+            />
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+}

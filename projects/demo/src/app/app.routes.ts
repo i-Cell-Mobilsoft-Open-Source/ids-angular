@@ -60,6 +60,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
   },
   {
+    path: 'components/switch',
+    loadComponent: () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
+  },
+  {
     path: 'components/tag',
     loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
   },

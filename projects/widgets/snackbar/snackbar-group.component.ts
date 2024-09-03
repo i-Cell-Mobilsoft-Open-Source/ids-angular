@@ -15,7 +15,6 @@ const defaultOptions = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
   standalone: true,
   imports: [IdsSnackbarComponent],
   templateUrl: './snackbar-group.component.html',
-  styleUrl: './snackbar-group.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [snackbarAnimation],

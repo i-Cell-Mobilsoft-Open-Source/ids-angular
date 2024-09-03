@@ -36,11 +36,11 @@ importers:
         specifier: ^17.3.1
         version: 17.3.1(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(@angular/platform-browser@17.3.1(@angular/animations@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(@angular/common@17.3.1(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3))(rxjs@7.8.1))(@angular/core@17.3.1(rxjs@7.8.1)(zone.js@0.14.3)))(rxjs@7.8.1)
       '@i-cell/ids-styles':
-        specifier: 0.0.10
-        version: 0.0.10
+        specifier: 0.0.13
+        version: 0.0.13
       '@i-cell/ids-tokens':
-        specifier: 0.0.16
-        version: 0.0.16
+        specifier: 0.0.22
+        version: 0.0.22
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -1945,11 +1945,11 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
 
-  '@i-cell/ids-styles@0.0.10':
-    resolution: {integrity: sha512-OdPJQbTEJ61CZYONqZYqVRxTCgwMfsYpHaxznTXo5kF2ffwlYIuR0/j74qYQtm0Hi8BjrIxrWsv2Pn7j+thzbA==}
+  '@i-cell/ids-styles@0.0.13':
+    resolution: {integrity: sha512-raKg30idt0LK9F77/hxpTvR1cGsLfTgZpuP897GW5KZnUZ2cd9Se8vWmqI9BbKef9GPoFOK2pP4lUht8CAREug==}
 
-  '@i-cell/ids-tokens@0.0.16':
-    resolution: {integrity: sha512-5DovxSFiPDn3b+kars5OFKC/YY0iTuOHNB4mQ30hIk+dozMS+nRbYRUidw3b90QlnbrvScoGNotlwy8kO7dFHw==}
+  '@i-cell/ids-tokens@0.0.22':
+    resolution: {integrity: sha512-NfdOBFonFgWqpumuvNU1A6C+qZ9nqnqI45kso11lPtEKJHZUrTqqa89JLC55lpLKtRB7Tw9FEgwNmXQ0qGkRuQ==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -10843,9 +10843,9 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@i-cell/ids-styles@0.0.10': {}
+  '@i-cell/ids-styles@0.0.13': {}
 
-  '@i-cell/ids-tokens@0.0.16': {}
+  '@i-cell/ids-tokens@0.0.22': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:

@@ -20,7 +20,6 @@ import { mdiAlertCircleOutline, mdiAlertOutline, mdiCheckCircleOutline, mdiClose
     A11yModule,
   ],
   templateUrl: './snackbar.component.html',
-  styleUrl: './snackbar.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

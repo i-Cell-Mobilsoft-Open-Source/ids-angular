@@ -217,9 +217,20 @@ $variants: surface, light, primary;
 
       &.ids-switch-disabled {
         & > .ids-switch__button {
-          @include switchButtonVariant($variant, disabled, false);
           & + .ids-switch__label {
             @include switchLabelVariant($variant, disabled);
+          }
+        }
+
+        &:not(.ids-switch-on) {
+          & > .ids-switch__button {
+            @include switchButtonVariant($variant, disabled, false);
+          }
+        }
+
+        &.ids-switch-on {
+          & > .ids-switch__button {
+            @include switchButtonVariant($variant, disabled, true);
           }
         }
       }

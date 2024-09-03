@@ -2,7 +2,8 @@ import { IdsMessagePrefixDirective } from './../../../directives/ids-message-pre
 import { IdsMessageSuffixDirective } from './../../../directives/ids-message-suffix.directive';
 import { IdsMessageDirective } from './../../../directives/ids-message.directive';
 import { IDS_FORM_ELEMENT } from './../../../tokens/form';
-import { FormElement } from './../../../types/form-element';
+
+import { FormElement } from '../../../types/form-element.type';
 
 import { Component, ContentChildren, HostBinding, Injector, OnDestroy, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';

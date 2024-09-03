@@ -1,0 +1,57 @@
+<label class="ids-form-field__label" [for]="inputId()">
+  <ng-content select="ids-label" />
+  @if (hasRequiredValidator) {
+    <span class="ids-form-field__required-marker"></span>
+  }
+</label>
+
+<div class="ids-form-field__field-wrapper">
+  <div class="ids-form-field__field-wrapper__container" (click)="containerClick()">
+    @if (hasLeadingIcon()) {
+      <div class="ids-form-field__leading-icon">
+        <ng-content select="[idsLeadingIcon]" />
+      </div>
+    }
+    @if (hasPrefix()) {
+      <div class="ids-form-field__prefix">
+        <ng-content select="[idsPrefix]" />
+      </div>
+    }
+    <div class="ids-form-field__infix">
+      <ng-content />
+    </div>
+    @if (hasSuffix()) {
+      <div class="ids-form-field__suffix">
+        <ng-content select="[idsSuffix]" />
+      </div>
+    }
+    @if (hasTrailingIcon()) {
+      <div class="ids-form-field__trailing-icon">
+        <ng-content select="[idsTrailingIcon]" />
+      </div>
+    }
+  </div>
+  @if (hasActions()) {
+    <div class="ids-form-field__field-wrapper__action">
+      <ng-content select="[idsAction]" />
+    </div>
+  }
+</div>
+
+<div class="ids-form-field__subscript-wrapper">
+  @if (displayedMessages(); as messages) {
+    <div class="ids-form-field__message-container">
+      @switch (messages) {
+        @case ("error") {
+          <ng-content select="ids-error-message" />
+        }
+        @case ("success") {
+          <ng-content select="ids-success-message" />
+        }
+        @case ("hint") {
+          <ng-content select="ids-hint-message" />
+        }
+      }
+    </div>
+  }
+</div>

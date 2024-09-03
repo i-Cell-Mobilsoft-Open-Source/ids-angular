@@ -12,7 +12,6 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   standalone: true,
   imports: [],
   templateUrl: './switch-group.component.html',
-  styleUrl: './switch-group.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

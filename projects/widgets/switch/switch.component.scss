@@ -191,7 +191,7 @@ $variants: surface, light, primary;
           &:focus,
           &:focus-visible {
             @include switchButtonVariant($variant, focused, false);
-            outline-color: var(--ids-comp-switch-focused-outline-surface-focused);
+            outline-color: var(--ids-comp-switch-focused-outline-color-#{$variant}-focused);
             & + .ids-switch__label {
               @include switchLabelVariant($variant, focused);
             }

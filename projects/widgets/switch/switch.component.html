@@ -16,11 +16,17 @@
 >
   <div class="ids-switch__track">
     @if (_hasTrackIcon()) {
-      <ids-icon aria-hidden="true" [icon]="_offIcon" />
-      <ids-icon aria-hidden="true" [icon]="_onIcon" />
+      <div class="ids-switch__track-icon">
+        @if (isChecked()) {
+          <ids-icon aria-hidden="true" [icon]="_onIcon" />
+        }
+      </div>
+      <div class="ids-switch__track-icon">
+        @if (!isChecked()) {
+          <ids-icon aria-hidden="true" [icon]="_offIcon" />
+        }
+      </div>
     }
-  </div>
-  <div class="ids-switch__handle-track">
     <div class="ids-switch__handle">
       @if (_hasHandleIcon()) {
         <ids-icon aria-hidden="true" [icon]="isChecked() ? _onIcon : _offIcon" />
@@ -29,4 +35,4 @@
   </div>
 </button>
 
-<label class="ids-switch__label" [for]="id()"></label>
+<label class="ids-switch__label" [for]="id()">{{ label() }}</label>

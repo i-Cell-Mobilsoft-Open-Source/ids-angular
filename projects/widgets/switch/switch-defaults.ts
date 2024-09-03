@@ -22,7 +22,7 @@ export const IDS_SWITCH_DEFAULT_CONFIG = new InjectionToken<IdsSwitchDefaultConf
 
 export function IDS_SWITCH_DEFAULT_CONFIG_FACTORY(): Required<IdsSwitchDefaultConfig> {
   return {
-    size: Size.COMFORTABLE,
+    size: Size.COMPACT,
     variant: SwitchVariant.SURFACE,
     hasIcon: false,
     iconPosition: SwitchIconPosition.ONHANDLE,

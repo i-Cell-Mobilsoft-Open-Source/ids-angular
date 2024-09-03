@@ -5,7 +5,7 @@ import { SwitchVariantType } from './types/switch-variant';
 import { coerceNumberAttribute } from '../core';
 import { safeValue } from '../core/utils/safe-value';
 
-import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, Injector, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -16,7 +16,7 @@ let nextUniqueId = 0;
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'ids-switch',
+  selector: 'ids-switch[ngModel], ids-switch[formControl], ids-switch[formControlName]',
   standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './switch.component.html',
@@ -34,7 +34,6 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 export class IdsSwitchComponent {
   private readonly _componentClass = 'ids-switch';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private readonly _injector = inject(Injector);
   private readonly _defaultConfig = {
     ...defaultConfig,
     ...inject(IDS_SWITCH_DEFAULT_CONFIG, { optional: true }),
@@ -71,6 +70,7 @@ export class IdsSwitchComponent {
     this.size(),
     this.variant(),
     this.isDisabled() ? 'disabled' : null,
+    this.isChecked() ? 'on' : null,
   ]),
   );
 

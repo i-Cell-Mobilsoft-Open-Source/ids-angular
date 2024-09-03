@@ -1,14 +1,14 @@
 import { switchIconAnimation } from './animations';
 import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY } from './switch-defaults';
+import { IdsSwitchGroupComponent } from './switch-group.component';
 import { SwitchIconPosition } from './types/switch-positions';
 import { SwitchVariantType } from './types/switch-variant';
 
 import { coerceNumberAttribute } from '../core';
-import { safeValue } from '../core/utils/safe-value';
 
 import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, SizeType } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, createClassList, SizeType, safeValue } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck, mdiClose } from '@mdi/js';
 
@@ -41,6 +41,8 @@ export class IdsSwitchComponent {
     ...inject(IDS_SWITCH_DEFAULT_CONFIG, { optional: true }),
   };
 
+  private _switchGroup = inject(IdsSwitchGroupComponent, { optional: true });
+
   protected readonly _onIcon = mdiCheck;
   protected readonly _offIcon = mdiClose;
 
@@ -65,11 +67,15 @@ export class IdsSwitchComponent {
   public labelPosition = input(this._defaultConfig.labelPosition);
   public isDisabled = signal(false);
 
-  protected _hasHandleIcon = computed(() => this.hasIcon() && this.iconPosition() === SwitchIconPosition.ONHANDLE);
-  protected _hasTrackIcon = computed(() => this.hasIcon() && this.iconPosition() === SwitchIconPosition.ONTRACK);
+  protected _safeSize = computed(() => this._switchGroup?.size() ?? this.size());
+  protected _safeHasIcon = computed(() => this._switchGroup?.hasIcon() ?? this.hasIcon());
+  protected _safeIconPosition = computed(() => this._switchGroup?.iconPosition() ?? this.iconPosition());
+  protected _safeLabelPosition = computed(() => this._switchGroup?.labelPosition() ?? this.labelPosition());
+  protected _hasHandleIcon = computed(() => this._safeHasIcon() && this._safeIconPosition() === SwitchIconPosition.ONHANDLE);
+  protected _hasTrackIcon = computed(() => this._safeHasIcon() && this._safeIconPosition() === SwitchIconPosition.ONTRACK);
   private _isFocusable = computed(() => !this.isDisabled() && !this.readonly());
   private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this.size(),
+    this._safeSize(),
     this.variant(),
     this.isDisabled() ? 'disabled' : null,
     this.isChecked() ? 'on' : null,

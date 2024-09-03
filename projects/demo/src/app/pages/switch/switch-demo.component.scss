@@ -12,7 +12,7 @@ section {
   column-gap: 2rem;
   padding: 2rem;
 
-  h2 {
+  h3 {
     grid-area: 1 / 1 / 1 / -1;
   }
 
@@ -32,11 +32,17 @@ section {
     }
   }
 
+  &.switch-group {
+    grid-template-columns: repeat(4, 1fr);
+
+    .switch-groups-container {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
   .switch-types {
     display: flex;
     gap: 2rem;
-    h5 {
-      white-space: nowrap;
-    }
   }
 }

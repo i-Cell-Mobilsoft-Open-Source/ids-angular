@@ -2,7 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IdsSwitchComponent, SwitchVariant, SwitchVariantType } from '@i-cell/ids-angular/switch';
+import { IdsSwitchComponent, IdsSwitchGroupComponent, SwitchVariant, SwitchVariantType } from '@i-cell/ids-angular/switch';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [
     IdsSwitchComponent,
+    IdsSwitchGroupComponent,
     TranslateModule,
     UpperCasePipe,
     FormsModule,

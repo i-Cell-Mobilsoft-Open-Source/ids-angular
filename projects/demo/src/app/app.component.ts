@@ -1,11 +1,13 @@
 import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
-import { IdsSwitchComponent } from './components/switch/ids-switch.component';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { Component, ElementRef, OnInit, inject, viewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { IdsSwitchComponent } from '@i-cell/ids-angular/switch';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +19,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     NavComponent,
     IdsSwitchComponent,
     CdkScrollable,
+    ReactiveFormsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   private _translate: TranslateService = inject(TranslateService);
   public menuConfigs: Menu[] = [
     { name: 'GET_STARTED', children: [] },
@@ -62,7 +65,8 @@ export class AppComponent implements OnInit {
     { name: 'RESOURCES', children: [] },
   ];
 
-  public themeSwitcher = viewChild<ElementRef<HTMLElement>>('themeSwitcher');
+  private _subscription = new Subscription();
+  public darkMode = new FormControl<boolean>(false);
 
   constructor() {
     this._changeTheme('light');
@@ -76,8 +80,8 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.themeSwitcher()?.nativeElement.addEventListener('change', (event: Event) => {
-      this._changeTheme((event.target as HTMLInputElement)?.checked ? 'dark' : 'light');
+    this._subscription = this.darkMode.valueChanges.subscribe((checked) => {
+      this._changeTheme(checked ? 'dark' : 'light');
     });
   }
 
@@ -89,5 +93,9 @@ export class AppComponent implements OnInit {
       document.documentElement.classList.remove('ids-theme-dark');
       document.documentElement.classList.add('ids-theme-light');
     }
+  }
+
+  public ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 }

@@ -112,7 +112,7 @@ $variants: surface, light, primary;
           width: var(--ids-comp-switch-track-size-width-#{$size});
           height: var(--ids-comp-switch-handle-size-height-#{$size});
           padding: var(--ids-comp-switch-track-size-padding-y-#{$size}) var(--ids-comp-switch-track-size-padding-x-#{$size});
-          border-radius: var(--ids-comp-switch-handle-size-border-radius-#{$size});
+          border-radius: var(--ids-comp-switch-track-size-border-radius-#{$size});
           box-sizing: content-box;
 
           & > .ids-switch__track-icon {

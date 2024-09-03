@@ -72,6 +72,10 @@ $variants: surface, light, primary;
         justify-content: center;
         top: auto;
         bottom: auto;
+
+        & > .ids-icon {
+          position: absolute;
+        }
       }
 
       & > .ids-switch__handle {
@@ -80,6 +84,10 @@ $variants: surface, light, primary;
         justify-content: center;
         align-items: center;
         flex-shrink: 0;
+
+        & > .ids-icon {
+          position: absolute;
+        }
       }
     }
   }

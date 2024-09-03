@@ -18,18 +18,22 @@
     @if (_hasTrackIcon()) {
       <div class="ids-switch__track-icon">
         @if (isChecked()) {
-          <ids-icon aria-hidden="true" [icon]="_onIcon" />
+          <ids-icon aria-hidden="true" [icon]="_onIcon" [@switchIconAnimation] />
         }
       </div>
       <div class="ids-switch__track-icon">
         @if (!isChecked()) {
-          <ids-icon aria-hidden="true" [icon]="_offIcon" />
+          <ids-icon aria-hidden="true" [icon]="_offIcon" [@switchIconAnimation] />
         }
       </div>
     }
     <div class="ids-switch__handle">
       @if (_hasHandleIcon()) {
-        <ids-icon aria-hidden="true" [icon]="isChecked() ? _onIcon : _offIcon" />
+        @if (isChecked()) {
+          <ids-icon aria-hidden="true" [icon]="_onIcon" [@switchIconAnimation] />
+        } @else {
+          <ids-icon aria-hidden="true" [icon]="_offIcon" [@switchIconAnimation] />
+        }
       }
     </div>
   </div>

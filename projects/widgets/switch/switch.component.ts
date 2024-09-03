@@ -1,3 +1,4 @@
+import { switchIconAnimation } from './animations';
 import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY } from './switch-defaults';
 import { SwitchIconPosition } from './types/switch-positions';
 import { SwitchVariantType } from './types/switch-variant';
@@ -30,6 +31,7 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
       multi: true,
     },
   ],
+  animations: [switchIconAnimation],
 })
 export class IdsSwitchComponent {
   private readonly _componentClass = 'ids-switch';

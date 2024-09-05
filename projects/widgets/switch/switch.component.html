@@ -12,27 +12,29 @@
   [attr.aria-describedby]="ariaDescribedBy()"
   [attr.aria-required]="required() || null"
   [attr.aria-checked]="isChecked()"
+  [@switchAnimation]="isChecked() ? 'on' : 'off'"
   (click)="handleClick()"
 >
   <div class="ids-switch__track">
     @if (_hasTrackIcon()) {
       <div class="ids-switch__track-icon">
         @if (isChecked()) {
-          <ids-icon aria-hidden="true" [icon]="_onIcon" [@switchIconAnimation] />
+          <ids-icon aria-hidden="true" [icon]="_onIcon" />
         }
       </div>
       <div class="ids-switch__track-icon">
         @if (!isChecked()) {
-          <ids-icon aria-hidden="true" [icon]="_offIcon" [@switchIconAnimation] />
+          <ids-icon aria-hidden="true" [icon]="_offIcon" />
         }
       </div>
     }
     <div class="ids-switch__handle">
       @if (_hasHandleIcon()) {
+        <!-- needs to be here duplicate ids-icon because of animation :enter and :leave -->
         @if (isChecked()) {
-          <ids-icon aria-hidden="true" [icon]="_onIcon" [@switchIconAnimation] />
+          <ids-icon aria-hidden="true" [icon]="_onIcon" />
         } @else {
-          <ids-icon aria-hidden="true" [icon]="_offIcon" [@switchIconAnimation] />
+          <ids-icon aria-hidden="true" [icon]="_offIcon" />
         }
       }
     </div>

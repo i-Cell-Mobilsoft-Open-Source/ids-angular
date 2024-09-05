@@ -1,0 +1,52 @@
+<div class="ids-snackbar__content-wrapper" cdkTrapFocus cdkTrapFocusAutoCapture="true">
+  <div class="ids-snackbar__leading-element">
+    <ids-icon [icon]="icon() ?? defaultIcon()" />
+  </div>
+
+  <div class="ids-snackbar__message-action-container">
+    <div class="ids-snackbar__message">{{ message() }}</div>
+    <div class="ids-snackbar__action">
+      @for (action of actions(); track $index) {
+        <button
+          type="button"
+          idsButton
+          [size]="size.COMPACT"
+          [appearance]="buttonAppearance.OUTLINED"
+          [variant]="buttonVariant()"
+          (click)="callAction(action.action)"
+        >
+          {{ action.label }}
+        </button>
+      }
+      @if (allowDismiss() && closeButtonLabel(); as closeButtonLabel) {
+        <button
+          type="button"
+          role="button"
+          aria-label="Close notification"
+          idsButton
+          [size]="size.COMPACT"
+          [appearance]="buttonAppearance.OUTLINED"
+          [variant]="buttonVariant()"
+          (click)="close()"
+        >
+          {{ closeButtonLabel }}
+        </button>
+      }
+    </div>
+  </div>
+
+  @if (allowDismiss() && !closeButtonLabel()) {
+    <button
+      type="button"
+      role="button"
+      aria-label="Close notification"
+      idsIconButton
+      [size]="size.COMPACT"
+      [appearance]="iconButtonAppearance.STANDARD"
+      [variant]="buttonVariant()"
+      (click)="close()"
+    >
+      <ids-icon aria-hidden="true" alt="" [icon]="closeIcon" />
+    </button>
+  }
+</div>

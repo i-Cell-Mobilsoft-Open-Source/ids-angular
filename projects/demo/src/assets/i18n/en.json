@@ -21,10 +21,11 @@
     "DIVIDER": "Divider",
     "FORM_FIELD": "Form field",
     "ICON_BUTTON": "Icon button",
-    "SEGMENTED_CONTROL": "Segmented control",
-    "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
     "PAGINATOR": "Paginator",
     "RADIO": "Radio",
+    "SEGMENTED_CONTROL": "Segmented control",
+    "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
+    "SNACKBAR": "Snackbar",
     "SWITCH": "Switch",
     "TAG": "Tag",
     "TOOLTIP": "Tooltip"

@@ -1,0 +1,20 @@
+@for (snackbar of snackbars(); track snackbar.id) {
+  <ids-snackbar
+    [@snackbarAnimation]="{
+      value: 'open',
+      params: _animationParams(),
+    }"
+    [id]="snackbar.id"
+    [message]="snackbar.message"
+    [variant]="snackbar.variant"
+    [icon]="snackbar.icon"
+    [actions]="snackbar.actions"
+    [allowDismiss]="snackbar.allowDismiss"
+    [closeButtonLabel]="snackbar.closeButtonLabel"
+    [autoClose]="snackbar.autoClose"
+    [urgent]="snackbar.urgent"
+    (@snackbarAnimation.start)="_onAnimateStart()"
+    (@snackbarAnimation.done)="_onAnimateDone()"
+    (closed)="closeSnackbar(snackbar.id)"
+  />
+}

@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
             { name: 'COMPONENTS.RADIO', path: '/components/radio' },
             { name: 'COMPONENTS.SEGMENTED_CONTROL', path: '/components/segmented-control' },
             { name: 'COMPONENTS.SEGMENTED_CONTROL_TOGGLE', path: '/components/segmented-control-toggle' },
+            { name: 'COMPONENTS.SNACKBAR', path: '/components/snackbar' },
             { name: 'COMPONENTS.TAG', path: '/components/tag' },
             { name: 'COMPONENTS.TOOLTIP', path: '/components/tooltip' },
           ],

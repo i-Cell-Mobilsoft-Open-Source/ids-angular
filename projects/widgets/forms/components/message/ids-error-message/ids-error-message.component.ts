@@ -1,9 +1,9 @@
 import { IdsMessagePrefixDirective } from './../../../directives/ids-message-prefix.directive';
 import { IdsMessageSuffixDirective } from './../../../directives/ids-message-suffix.directive';
 import { IdsMessageDirective } from './../../../directives/ids-message.directive';
-import { IDS_FORM_ELEMENT } from './../../../tokens/form';
 
-import { FormElement } from '../../../types/form-element.type';
+import { IdsFormFieldComponent } from '../../form-field/ids-form-field.component';
+import { IDS_FORM_FIELD } from '../../form-field/tokens/ids-form-field-tokens';
 
 import { Component, ContentChildren, HostBinding, Injector, OnDestroy, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
@@ -39,9 +39,9 @@ export class IdsErrorMessageComponent implements OnInit, OnDestroy {
   public defaultPrefixIcon = mdiInformationOutline;
 
   public ngOnInit(): void {
-    const parent = this._injector.get<FormElement<unknown>>(IDS_FORM_ELEMENT, null, { skipSelf: true, optional: true });
+    const parent = this._injector.get<IdsFormFieldComponent>(IDS_FORM_FIELD, null, { skipSelf: true, optional: true });
     if (parent) {
-      const control = parent.controlDir;
+      const control = parent.control();
       this._subscription = control?.statusChanges?.pipe(startWith(control.errors)).subscribe(() => {
         this._errors.set(control.errors);
       });

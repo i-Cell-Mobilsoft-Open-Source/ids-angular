@@ -32,7 +32,7 @@ implements OnInit {
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
 
-  public isDisabled = computed(() => this.disabled() || this._parent()?.isDisabled());
+  public isDisabled = computed(() => this.disabled() || this._parent()?.disabled());
   protected _multiSelect = computed(() => this._parent()?.multiSelect());
   public buttonName = computed(() => (this._parent()?.multiSelect() ? this.name() : this._parent()?.name()));
   public ariaPressed = computed(() => (this._multiSelect() ? this.selected() : null));

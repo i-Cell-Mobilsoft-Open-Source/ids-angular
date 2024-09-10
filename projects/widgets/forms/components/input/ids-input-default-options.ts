@@ -1,9 +1,5 @@
-/* eslint-disable no-magic-numbers */
-
-import { AbstractErrorStateMatcher, ErrorStateMatcher } from '../../common/error/error-state';
-import { AbstractSuccessStateMatcher, SuccessStateMatcher } from '../../common/success/success-state';
-
 import { InjectionToken } from '@angular/core';
+import { AbstractErrorStateMatcher, AbstractSuccessStateMatcher, ErrorStateMatcher, SuccessStateMatcher } from '@i-cell/ids-angular/forms';
 
 export interface IdsInputDefaultOptions {
   errorStateMatcher?: typeof AbstractErrorStateMatcher

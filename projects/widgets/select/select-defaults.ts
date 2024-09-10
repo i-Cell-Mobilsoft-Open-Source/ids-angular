@@ -1,6 +1,9 @@
 import { InjectionToken } from '@angular/core';
+import { AbstractErrorStateMatcher, AbstractSuccessStateMatcher, ErrorStateMatcher, SuccessStateMatcher } from '@i-cell/ids-angular/forms';
 
 export interface IdsSelectDefaultConfig {
+  errorStateMatcher?: typeof AbstractErrorStateMatcher
+  successStateMatcher?: typeof AbstractSuccessStateMatcher
 }
 
 export const IDS_SELECT_DEFAULT_CONFIG = new InjectionToken<IdsSelectDefaultConfig>(
@@ -13,5 +16,7 @@ export const IDS_SELECT_DEFAULT_CONFIG = new InjectionToken<IdsSelectDefaultConf
 
 export function IDS_SELECT_DEFAULT_CONFIG_FACTORY(): Required<IdsSelectDefaultConfig> {
   return {
+    errorStateMatcher: ErrorStateMatcher,
+    successStateMatcher: SuccessStateMatcher,
   };
 }

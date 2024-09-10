@@ -18,18 +18,26 @@ type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmen
 @Directive()
 export abstract class IdsSegmentedControlBase<I extends SegmentedControlItem, E extends SegmentedControlItemEvent>
 implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
+  /** @ignore */
   protected abstract readonly _componentClass: string;
+  /** @ignore */
   protected abstract readonly _uniqueId: string;
+  /** @ignore */
   private readonly _injector = inject(Injector);
+  /** @ignore */
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS, null, { optional: true }),
   };
 
+  /** @ignore */
   private readonly _subscription = new Subscription();
 
+  /** @ignore */
   protected _selectionModel?: SelectionModel<I>;
+  /** @ignore */
   private _rawValue: unknown;
+  /** @ignore */
   protected abstract _items: Signal<ReadonlyArray<I>>;
 
   public abstract id: InputSignal<string>;
@@ -38,8 +46,10 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   public variant = input<SegmentedControlVariantType>(this._defaultOptions.variant);
   public appearance = input<SegmentedControlAppearanceType>(this._defaultOptions.appearance);
   public abstract multiSelect: InputSignal<boolean> | Signal<boolean>;
+  /** @ignore */
   public isDisabled = signal<boolean>(false);
 
+  /** @ignore */
   private _hostClasses = computed(() => createClassList(
     this._componentClass,
     [
@@ -50,7 +60,9 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     ],
   ));
 
+  /** @ignore */
   private _onChange: (value: unknown) => void = () => {};
+  /** @ignore */
   protected _onTouched: () => unknown = () => {};
 
   @Input() public valueCompareFn?: (o1: I, o2: I) => boolean;
@@ -61,12 +73,15 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
+  /** @ignore */
   @Output() public abstract readonly itemChanges: EventEmitter<E>;
 
+  /** @ignore */
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
   }
 
+  /** @ignore */
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', ' '];
@@ -109,10 +124,12 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
+  /** @ignore */
   public ngOnInit(): void {
     this._selectionModel = new SelectionModel<I>(this.multiSelect(), undefined, false, this.valueCompareFn);
   }
 
+  /** @ignore */
   public ngAfterContentInit(): void {
     const items = this._items();
     const minItemCount = 2;
@@ -127,22 +144,27 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     this._subscribeItemChanges();
   }
 
+  /** @ignore */
   public writeValue(value: unknown | unknown[]): void {
     this._setSelectionByValue(value);
   }
 
+  /** @ignore */
   public registerOnChange(fn: () => void): void {
     this._onChange = fn;
   }
 
+  /** @ignore */
   public registerOnTouched(fn: () => unknown): void {
     this._onTouched = fn;
   }
 
+  /** @ignore */
   public setDisabledState?(isDisabled: boolean): void {
     this.isDisabled.set(isDisabled);
   }
 
+  /** @ignore */
   private _subscribeItemChanges(): void {
     this._items().forEach((item) => {
       this._subscription?.add(item.changes.subscribe(
@@ -153,8 +175,10 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     });
   }
 
+  /** @ignore */
   protected abstract _handleItemChanges(change: E): void;
 
+  /** @ignore */
   private _setSelectionByValue(value: unknown | unknown[]): void {
     this._rawValue = value;
 
@@ -175,6 +199,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
+  /** @ignore */
   private _selectValue(value: unknown): void {
     const correspondingItem = this._items().find((item) => item.value() != null && item.value() === value);
     if (correspondingItem) {
@@ -183,6 +208,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
+  /** @ignore */
   protected _clearSelection(): void {
     this._selectionModel?.clear();
     this._items().forEach((item) => {
@@ -190,6 +216,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     });
   }
 
+  /** @ignore */
   protected _handleChange(): void {
     const selectionModelValues = this._selectionModel?.selected.map((item) => item.value());
     if (this.multiSelect()) {
@@ -199,6 +226,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
+  /** @ignore */
   public isItemPreSelectedByValue(itemValue: unknown): boolean {
     if (this._rawValue === undefined) {
       return false;
@@ -211,6 +239,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
     return itemValue === this._rawValue;
   }
 
+  /** @ignore */
   public ngOnDestroy(): void {
     this._subscription?.unsubscribe();
   }

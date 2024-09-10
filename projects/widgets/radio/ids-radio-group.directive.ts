@@ -24,18 +24,26 @@ const defaultOptions = IDS_RADIO_DEFAULT_OPTIONS_FACTORY();
   ],
 })
 export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+  /** @ignore */
   private readonly _componentClass = 'ids-radio-group';
+  /** @ignore */
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+  /** @ignore */
   private readonly _injector = inject(Injector);
+  /** @ignore */
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_RADIO_DEFAULT_OPTIONS, null, { optional: true }),
   };
 
+  /** @ignore */
   private readonly _subscription = new Subscription();
 
+  /** @ignore */
   private _selectionModel?: SelectionModel<IdsRadioItemComponent>;
+  /** @ignore */
   private _rawValue: unknown;
+  /** @ignore */
   private _items = contentChildren<IdsRadioItemComponent>(IdsRadioItemComponent);
 
   public id = input<string>(this._uniqueId);
@@ -47,6 +55,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   public labelPosition = input<PositionType>(this._defaultOptions.labelPosition);
   public isDisabled = signal<boolean>(false);
 
+  /** @ignore */
   private _hostClasses = computed(() => createClassList(
     this._componentClass,
     [
@@ -56,10 +65,13 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     ],
   ));
 
+  /** @ignore */
   private _onChange: (value: unknown) => void = () => {};
+  /** @ignore */
   private _onTouched: () => unknown = () => {};
 
   @Input() public valueCompareFn?: (o1: IdsRadioItemComponent, o2: IdsRadioItemComponent) => boolean;
+  /** @ignore */
   @Input({ transform: coerceBooleanAttribute })
   set disabled(value: boolean) {
     if (value !== this.disabled) {
@@ -69,10 +81,12 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
 
   @Output() public readonly itemChanges = new EventEmitter<RadioChangeEvent>();
 
+  /** @ignore */
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
   }
 
+  /** @ignore */
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<OrientationType, Set<string>> = {
       // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
@@ -150,6 +164,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     }
   }
 
+  /** @ignore */
   public ngOnInit(): void {
     this._selectionModel = new SelectionModel<IdsRadioItemComponent>(false, undefined, false, this.valueCompareFn);
 
@@ -160,6 +175,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     }
   }
 
+  /** @ignore */
   public ngAfterContentInit(): void {
     const items = this._items();
     const minItemCount = 2;
@@ -174,22 +190,27 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     this._subscribeItemChanges();
   }
 
+  /** @ignore */
   public writeValue(value: unknown | unknown[]): void {
     this._setSelectionByValue(value);
   }
 
+  /** @ignore */
   public registerOnChange(fn: () => void): void {
     this._onChange = fn;
   }
 
+  /** @ignore */
   public registerOnTouched(fn: () => unknown): void {
     this._onTouched = fn;
   }
 
+  /** @ignore */
   public setDisabledState?(isDisabled: boolean): void {
     this.isDisabled.set(isDisabled);
   }
 
+  /** @ignore */
   private _subscribeItemChanges(): void {
     this._items().forEach((item) => {
       this._subscription?.add(item.changes.subscribe(
@@ -200,6 +221,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     });
   }
 
+  /** @ignore */
   private _handleItemChanges(change: RadioChangeEvent): void {
     const { source } = change;
     this._clearSelection();
@@ -210,6 +232,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     this._onTouched();
   }
 
+  /** @ignore */
   private _setSelectionByValue(value: unknown | unknown[]): void {
     this._rawValue = value;
 
@@ -221,6 +244,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     this._selectValue(value);
   }
 
+  /** @ignore */
   private _selectValue(value: unknown): void {
     const correspondingItem = this._items().find((item) => item.value() != null && item.value() === value);
     if (correspondingItem) {
@@ -229,6 +253,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     }
   }
 
+  /** @ignore */
   private _clearSelection(): void {
     this._selectionModel?.clear();
     this._items().forEach((item) => {
@@ -236,11 +261,13 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     });
   }
 
+  /** @ignore */
   private _handleChange(): void {
     const selectionModelValues = this._selectionModel?.selected.map((item) => item.value());
     this._onChange(selectionModelValues?.[0]);
   }
 
+  /** @ignore */
   public isItemPreSelectedByValue(itemValue: unknown): boolean {
     if (this._rawValue === undefined) {
       return false;
@@ -249,6 +276,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     return itemValue === this._rawValue;
   }
 
+  /** @ignore */
   private _hasInvalidLabelPosition(): boolean {
     const orientation = this.orientation();
     const labelPosition = this.labelPosition();
@@ -256,6 +284,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     return (orientation === Orientation.VERTICAL && Object.values(VerticalPosition).some((pos) => pos === labelPosition));
   }
 
+  /** @ignore */
   public ngOnDestroy(): void {
     this._subscription?.unsubscribe();
   }

@@ -25,6 +25,7 @@
     "RADIO": "Radio",
     "SEGMENTED_CONTROL": "Segmented control",
     "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
+    "SELECT": "Select",
     "SNACKBAR": "Snackbar",
     "SWITCH": "Switch",
     "TAG": "Tag",

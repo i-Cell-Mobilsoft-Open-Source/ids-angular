@@ -64,6 +64,10 @@ export const routes: Routes = [
       (module) => module.SegmentedControlToggleDemoComponent),
   },
   {
+    path: 'components/select',
+    loadComponent: () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
+  },
+  {
     path: 'components/snackbar',
     loadComponent: () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
   },

@@ -37,7 +37,7 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase {
   public viewValue = input<string>();
   public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
 
-  public isDisabled = computed(() => this.group?.disabled() || this.disabled());
+  public groupOrOptionIsDisabled = computed(() => this.group?.disabled() || this.disabled());
 
   protected readonly _checkIcon = mdiCheck;
   protected readonly _multiSelect = Boolean(this._parent?.multiSelect);
@@ -47,7 +47,7 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase {
   protected readonly _hostClasses = computed(() => this._getHostClasses([
     this.selected() ? 'selected' : null,
     this._active() ? 'selected' : null,
-    this.isDisabled() ? 'disabled' : null,
+    this.groupOrOptionIsDisabled() ? 'disabled' : null,
     this._multiSelect ? 'multiselect' : null,
   ]));
 

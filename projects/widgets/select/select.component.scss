@@ -1,6 +1,18 @@
 $sizes: compact, comfortable, spacious, dense;
 $variants: surface, light;
 
+@mixin selectOptionVariant($variant, $state) {
+  background: var(--ids-comp-forms-option-color-bg-#{$variant}-#{$state});
+
+  .ids-option__text {
+    color: var(--ids-comp-forms-option-color-fg-text-#{$variant}-#{$state});
+  }
+
+  .ids-icon {
+    color: var(--ids-comp-forms-option-color-fg-icon-#{$variant}-#{$state});
+  }
+}
+
 .ids-select {
   .ids-select__trigger {
     display: flex;
@@ -41,7 +53,7 @@ $variants: surface, light;
   }
 
   @each $variant in $variants {
-    &.ids-select-#{$variatn} {
+    &.ids-select-#{$variant} {
       .ids-select__trigger {
         .ids-select__value {
           .ids-select__placeholder {
@@ -58,7 +70,6 @@ $variants: surface, light;
   flex-direction: column;
   align-items: flex-start;
   flex-shrink: 0;
-  background: var(--ids-comp-forms-select-panel-color-bg-#{$variant}-default);
 
   box-shadow: var(--ids-smc-reference-container-effects-shadow-horizontal-none)
     var(--ids-smc-reference-container-effects-shadow-vertical-xxl) var(--ids-smc-reference-container-effects-shadow-blur-xxxl)
@@ -68,17 +79,11 @@ $variants: surface, light;
     display: flex;
     align-items: center;
     align-self: stretch;
-    background: var(--ids-comp-forms-option-color-bg-#{$variant}-default);
 
     .ids-option__text {
       overflow: hidden;
-      color: var(--ids-comp-forms-option-color-fg-text-#{$variant}-hovered);
       text-overflow: ellipsis;
       font-style: normal;
-    }
-
-    .ids-icon {
-      color: var(--ids-comp-forms-option-color-fg-icon-#{$variant}-hovered);
     }
   }
 
@@ -91,7 +96,6 @@ $variants: surface, light;
       display: flex;
       align-items: center;
       align-self: stretch;
-      color: var(--ids-comp-forms-option-color-group-title-color-fg-text-default);
       font-style: normal;
     }
   }
@@ -120,6 +124,10 @@ $variants: surface, light;
           height: var(--ids-comp-forms-option-item-icon-size-height-#{$size});
           width: var(--ids-comp-forms-option-item-icon-size-width-#{$size});
         }
+
+        &.ids-option-active {
+          outline-style: solid;
+        }
       }
 
       .ids-option-group {
@@ -140,6 +148,37 @@ $variants: surface, light;
             var(--ids-comp-forms-option-group-item-size-padding-right-#{$size})
             var(--ids-comp-forms-option-item-size-padding-y-#{$size})
             var(--ids-comp-forms-option-group-item-size-padding-left-#{$size});
+        }
+      }
+    }
+  }
+
+  @each $variant in $variants {
+    &.ids-select-panel-#{$variant} {
+      background: var(--ids-comp-forms-select-panel-color-bg-#{$variant}-default);
+
+      .ids-option:not(.ids-option-disabled) {
+        @include selectOptionVariant($variant, default);
+        &:hover {
+          @include selectOptionVariant($variant, hovered);
+        }
+        &:active {
+          @include selectOptionVariant($variant, pressed);
+        }
+        &.ids-option-active {
+          @include selectOptionVariant($variant, active);
+          outline-width: var(--forms-form-field-standard-field-wrapper-focused-outline-outline, 3px);
+          outline-color: var(--forms-form-field-standard-field-wrapper-container-color-focused-outline-color-dark-focused, #000);
+        }
+      }
+
+      .ids-option.ids-option-disabled {
+        @include selectOptionVariant($variant, disabled);
+      }
+
+      .ids-option-group {
+        .ids-option-group__text {
+          color: var(--ids-comp-forms-option-color-group-title-color-fg-text-default);
         }
       }
     }

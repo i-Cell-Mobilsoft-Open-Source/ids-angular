@@ -25,9 +25,7 @@
     </defs>
   </svg>
   <div class="blur"></div>
-  <label for="color-scheme" idsSwitch>
-    <input #themeSwitcher id="color-scheme" color-scheme type="checkbox" />
-  </label>
+  <ids-switch [formControl]="darkMode" [size]="'dense'" />
 </header>
 <ids-nav [menu]="menuConfigs" />
 <main cdkScrollable>

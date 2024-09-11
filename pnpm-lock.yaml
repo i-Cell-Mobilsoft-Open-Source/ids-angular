@@ -35,12 +35,12 @@ importers:
         specifier: ^17.3.1
         version: 17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       "@i-cell/ids-styles":
-        specifier: 0.0.13
-        version: 0.0.13
+        specifier: 0.0.14
+        version: 0.0.14
       "@i-cell/ids-tokens":
         specifier: 0.0.24-beta.0
         version: 0.0.24-beta.0
-      "@mdi/js":
+      '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
       "@ngx-translate/core":
@@ -1887,8 +1887,8 @@ packages:
     resolution: { integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA== }
     deprecated: Use @eslint/object-schema instead
 
-  "@i-cell/ids-styles@0.0.13":
-    resolution: { integrity: sha512-raKg30idt0LK9F77/hxpTvR1cGsLfTgZpuP897GW5KZnUZ2cd9Se8vWmqI9BbKef9GPoFOK2pP4lUht8CAREug== }
+  '@i-cell/ids-styles@0.0.14':
+    resolution: {integrity: sha512-DwRAJOJcTVZ0H2Q51Bhnm0trXgSlcg4CDWe6JbsdmcmlWOmbRXhD1/WV1raiXSYgJJYsKj3S3SBmxwwX1N6r1A==}
 
   "@i-cell/ids-tokens@0.0.24-beta.0":
     resolution: { integrity: sha512-V+ujqR1R+vLU0dMwTQfsdco+h4EeC+NGkKMk/fsOi59UaqncFMwmlAcX1g8CVLnw5zVGBP0Bc8Ee2uuqS89SmQ== }
@@ -10320,7 +10320,7 @@ snapshots:
 
   "@humanwhocodes/object-schema@2.0.3": {}
 
-  "@i-cell/ids-styles@0.0.13": {}
+  '@i-cell/ids-styles@0.0.14': {}
 
   "@i-cell/ids-tokens@0.0.24-beta.0": {}
 

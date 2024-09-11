@@ -21,11 +21,12 @@
     "DIVIDER": "Divider",
     "FORM_FIELD": "Form field",
     "ICON_BUTTON": "Icon button",
+    "PAGINATOR": "Paginator",
+    "RADIO": "Radio",
     "SEGMENTED_CONTROL": "Segmented control",
     "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
     "SNACKBAR": "Snackbar",
-    "PAGINATOR": "Paginator",
-    "RADIO": "Radio",
+    "SWITCH": "Switch",
     "TAG": "Tag",
     "TOOLTIP": "Tooltip"
   }

@@ -8,7 +8,7 @@ import { coerceNumberAttribute } from '../core';
 
 import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, SizeType, safeValue } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, createClassList, SizeType, fallbackValue } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck, mdiClose } from '@mdi/js';
 
@@ -49,10 +49,10 @@ export class IdsSwitchComponent {
 
   public isChecked = signal(false);
 
-  public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => safeValue(val, this._uniqueId) });
+  public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
   public label = input<string>();
   public ariaLabel = input<string>();
-  public ariaLabelledBy = input<string | undefined, string>(undefined, { transform: (val) => safeValue(val, this.id()) });
+  public ariaLabelledBy = input<string | undefined, string>(undefined, { transform: (val) => fallbackValue(val, this.id()) });
   public ariaDescribedBy = input<string>();
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
@@ -118,7 +118,7 @@ export class IdsSwitchComponent {
   }
 
   public toggle(): void {
-    if (!this.isDisabled()) {
+    if (!this.isDisabled() && !this.readonly()) {
       this.isChecked.update((checked) => !checked);
       this._onChange(this.isChecked());
       this._onTouched();

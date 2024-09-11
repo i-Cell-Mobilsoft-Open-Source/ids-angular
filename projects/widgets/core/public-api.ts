@@ -10,7 +10,7 @@ export * from './utils/class-prefix';
 export * from './utils/coercion';
 export * from './utils/create-error';
 export * from './utils/even-odd';
-export * from './utils/safe-value';
+export * from './utils/fallback-value';
 export * from './utils/selection-model';
 export * from './utils/position/connected-position';
 export * from './utils/position/scroll-clip';

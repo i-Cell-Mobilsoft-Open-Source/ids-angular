@@ -6,11 +6,13 @@ import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, output, signal, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { mdiCheck } from '@mdi/js';
 
 @Component({
   selector: 'ids-option',
   standalone: true,
-  imports: [],
+  imports: [IdsIconComponent],
   templateUrl: './option.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,7 +39,8 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase {
 
   public isDisabled = computed(() => this.group?.disabled() || this.disabled());
 
-  public readonly multiSelect = Boolean(this._parent?.multiSelect);
+  protected readonly _checkIcon = mdiCheck;
+  protected readonly _multiSelect = Boolean(this._parent?.multiSelect);
 
   public onSelectionChange = output<IdsOptionSelectionChange<T>>();
 
@@ -45,7 +48,7 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase {
     this.selected() ? 'selected' : null,
     this._active() ? 'selected' : null,
     this.isDisabled() ? 'disabled' : null,
-    this.multiSelect ? 'multiselect' : null,
+    this._multiSelect ? 'multiselect' : null,
   ]));
 
   private _handleKeydown(event: KeyboardEvent): void {
@@ -57,7 +60,7 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase {
 
   private _selectViaInteraction(): void {
     if (!this.disabled) {
-      this.selected.set(this.multiSelect ? !this.selected : true);
+      this.selected.set(this._multiSelect ? !this.selected : true);
       this._emitSelectionChangeEvent(true);
     }
   }

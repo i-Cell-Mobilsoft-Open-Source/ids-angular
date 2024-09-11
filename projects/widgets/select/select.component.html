@@ -1,21 +1,14 @@
-<div cdk-overlay-origin class="ids-select-trigger" (click)="open()" #fallbackOverlayOrigin="cdkOverlayOrigin" #trigger>
-  <div class="ids-select-value">
+<div #trigger #fallbackOverlayOrigin="cdkOverlayOrigin" cdk-overlay-origin class="ids-select__trigger" (click)="open()">
+  <div class="ids-select__value">
     @if (_empty()) {
-      <span class="ids-select-placeholder ids-select-min-line">{{ placeholder() }}</span>
+      <span class="ids-select__placeholder">{{ placeholder() }}</span>
     } @else {
-      <span class="ids-select-value-text">
-        <span class="ids-select-min-line">{{ _triggerValue() }}</span>
-      </span>
+      <span class="ids-select__value-text">{{ _triggerValue() }}</span>
     }
   </div>
 
-  <div class="ids-select-arrow-wrapper">
-    <div class="ids-select-arrow">
-      <!-- Use an inline SVG, because it works better than a CSS triangle in high contrast mode. -->
-      <svg viewBox="0 0 24 24" width="24px" height="24px" focusable="false" aria-hidden="true">
-        <path d="M7 10l5 5 5-5z" />
-      </svg>
-    </div>
+  <div class="ids-select__arrow">
+    <ids-icon [icon]="_chevronDownIcon" />
   </div>
 </div>
 
@@ -43,6 +36,6 @@
     [class]="_panelClasses()"
     (keydown)="_handleKeydown($event)"
   >
-    <ng-content></ng-content>
+    <ng-content />
   </div>
 </ng-template>

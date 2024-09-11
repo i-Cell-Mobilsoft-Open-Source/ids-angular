@@ -1,0 +1,147 @@
+$sizes: compact, comfortable, spacious, dense;
+$variants: surface, light;
+
+.ids-select {
+  .ids-select__trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .ids-select__value {
+      flex-grow: 1;
+
+      .ids-select__placeholder {
+      }
+
+      .ids-select__value-text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    .ids-icon {
+      flex-shrink: 0;
+    }
+  }
+
+  @each $size in $sizes {
+    &.ids-select-#{$size} {
+      .ids-select__trigger {
+        .ids-select__value {
+          .ids-select__placeholder {
+            font-family: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-empty-font-family-#{$size});
+            font-size: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-empty-font-size-#{$size});
+            font-weight: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-empty-font-weight-#{$size});
+            letter-spacing: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-empty-letter-spacing-#{$size});
+            line-height: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-empty-line-height-#{$size});
+          }
+        }
+      }
+    }
+  }
+
+  @each $variant in $variants {
+    &.ids-select-#{$variatn} {
+      .ids-select__trigger {
+        .ids-select__value {
+          .ids-select__placeholder {
+            color: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-empty-color-fg-text-#{$variant}-#{$state});
+          }
+        }
+      }
+    }
+  }
+}
+
+.ids-select-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background: var(--ids-comp-forms-select-panel-color-bg-#{$variant}-default);
+
+  box-shadow: var(--ids-smc-reference-container-effects-shadow-horizontal-none)
+    var(--ids-smc-reference-container-effects-shadow-vertical-xxl) var(--ids-smc-reference-container-effects-shadow-blur-xxxl)
+    var(--ids-smc-reference-container-effects-shadow-spread-xxs) var(--ids-smc-reference-container-effects-shadow-color-dark-default);
+
+  .ids-option {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    background: var(--ids-comp-forms-option-color-bg-#{$variant}-default);
+
+    .ids-option__text {
+      overflow: hidden;
+      color: var(--ids-comp-forms-option-color-fg-text-#{$variant}-hovered);
+      text-overflow: ellipsis;
+      font-style: normal;
+    }
+
+    .ids-icon {
+      color: var(--ids-comp-forms-option-color-fg-icon-#{$variant}-hovered);
+    }
+  }
+
+  .ids-option-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .ids-option-group__text {
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+      color: var(--ids-comp-forms-option-color-group-title-color-fg-text-default);
+      font-style: normal;
+    }
+  }
+
+  @each $size in $sizes {
+    &.ids-select-panel-#{$size} {
+      padding: var(--ids-comp-forms-select-panel-size-padding-y-#{$size}) var(--ids-comp-forms-select-panel-size-padding-x-#{$size});
+      gap: var(--ids-comp-forms-select-panel-size-gap-#{$size});
+      border-radius: var(--ids-comp-forms-select-panel-size-border-radius-#{$size});
+
+      .ids-option {
+        height: var(--ids-comp-forms-option-item-size-height-#{$size});
+        padding: var(--ids-comp-forms-option-item-size-padding-y-#{$size}) var(--ids-comp-forms-option-item-size-padding-x-#{$size});
+        gap: var(--ids-comp-forms-option-container-size-gap-#{$size});
+        border-radius: var(--ids-comp-forms-option-item-size-border-radius-#{$size});
+
+        .ids-option__text {
+          font-family: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-filled-font-family-#{$size});
+          font-size: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-filled-font-size-#{$size});
+          font-weight: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-filled-font-weight-#{$size});
+          line-height: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-filled-line-height-#{$size});
+          letter-spacing: var(--ids-comp-forms-form-field-standard-field-wrapper-infix-typography-filled-letter-spacing-#{$size});
+        }
+
+        .ids-icon {
+          height: var(--ids-comp-forms-option-item-icon-size-height-#{$size});
+          width: var(--ids-comp-forms-option-item-icon-size-width-#{$size});
+        }
+      }
+
+      .ids-option-group {
+        gap: var(--ids-comp-forms-option-container-size-gap-#{$size});
+
+        .ids-option-group__text {
+          padding: var(--ids-comp-forms-option-group-title-size-padding-y-#{$size})
+            var(--ids-comp-forms-option-group-title-size-padding-x-#{$size});
+          font-family: var(--ids-comp-forms-option-group-title-typography-font-family-#{$size});
+          font-size: var(--ids-comp-forms-option-group-title-typography-font-size-#{$size});
+          font-weight: var(--ids-comp-forms-option-group-title-typography-font-weight-#{$size});
+          line-height: var(--ids-comp-forms-option-group-title-typography-line-height-#{$size});
+          letter-spacing: var(--ids-comp-forms-option-group-title-typography-letter-spacing-#{$size});
+        }
+
+        .ids-option {
+          padding: var(--ids-comp-forms-option-item-size-padding-y-#{$size})
+            var(--ids-comp-forms-option-group-item-size-padding-right-#{$size})
+            var(--ids-comp-forms-option-item-size-padding-y-#{$size})
+            var(--ids-comp-forms-option-group-item-size-padding-left-#{$size});
+        }
+      }
+    }
+  }
+}

@@ -33,20 +33,28 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   animations: [switchAnimation],
 })
 export class IdsSwitchComponent {
+  /** @ignore **/
   private readonly _componentClass = 'ids-switch';
+  /** @ignore **/
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+  /** @ignore **/
   private readonly _defaultConfig = {
     ...defaultConfig,
     ...inject(IDS_SWITCH_DEFAULT_CONFIG, { optional: true }),
   };
 
+  /** @ignore **/
   private _switchGroup = inject(IdsSwitchGroupComponent, { optional: true });
 
+  /** @ignore **/
   protected readonly _onIcon = mdiCheck;
+  /** @ignore **/
   protected readonly _offIcon = mdiClose;
 
+  /** @ignore **/
   private _switchElement = viewChild<ElementRef<HTMLInputElement>>('switch');
 
+  /** @ignore **/
   public isChecked = signal(false);
 
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
@@ -64,15 +72,24 @@ export class IdsSwitchComponent {
   public hasIcon = input(this._defaultConfig.hasIcon);
   public iconPosition = input(this._defaultConfig.iconPosition);
   public labelPosition = input(this._defaultConfig.labelPosition);
+  /** @ignore **/
   public isDisabled = signal(false);
 
+  /** @ignore **/
   protected _safeSize = computed(() => this._switchGroup?.size() ?? this.size());
+  /** @ignore **/
   protected _safeHasIcon = computed(() => this._switchGroup?.hasIcon() ?? this.hasIcon());
+  /** @ignore **/
   protected _safeIconPosition = computed(() => this._switchGroup?.iconPosition() ?? this.iconPosition());
+  /** @ignore **/
   protected _safeLabelPosition = computed(() => this._switchGroup?.labelPosition() ?? this.labelPosition());
+  /** @ignore **/
   protected _hasHandleIcon = computed(() => this._safeHasIcon() && this._safeIconPosition() === SwitchIconPosition.ONHANDLE);
+  /** @ignore **/
   protected _hasTrackIcon = computed(() => this._safeHasIcon() && this._safeIconPosition() === SwitchIconPosition.ONTRACK);
+  /** @ignore **/
   private _isFocusable = computed(() => !this.isDisabled() && !this.readonly());
+  /** @ignore **/
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this._safeSize(),
     this.variant(),
@@ -81,7 +98,9 @@ export class IdsSwitchComponent {
   ]),
   );
 
+  /** @ignore **/
   private _onChange: (value: unknown) => void = () => { };
+  /** @ignore **/
   private _onTouched: () => unknown = () => { };
 
   @Input({ transform: coerceBooleanAttribute })
@@ -91,32 +110,39 @@ export class IdsSwitchComponent {
     }
   }
 
+  /** @ignore **/
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }
 
+  /** @ignore **/
   public focus(): void {
     if (this._isFocusable()) {
       this._switchElement()?.nativeElement.focus();
     }
   }
 
+  /** @ignore **/
   public writeValue(value: boolean | undefined): void {
     this.isChecked.set(Boolean(value));
   }
 
+  /** @ignore **/
   public registerOnChange(fn: () => void): void {
     this._onChange = fn;
   }
 
+  /** @ignore **/
   public registerOnTouched(fn: () => unknown): void {
     this._onTouched = fn;
   }
 
+  /** @ignore **/
   public setDisabledState?(isDisabled: boolean): void {
     this.isDisabled.set(isDisabled);
   }
 
+  /** @ignore **/
   public toggle(): void {
     if (!this.isDisabled() && !this.readonly()) {
       this.isChecked.update((checked) => !checked);
@@ -125,6 +151,7 @@ export class IdsSwitchComponent {
     }
   }
 
+  /** @ignore **/
   public handleClick(): void {
     if (!this.isDisabled()) {
       this.toggle();

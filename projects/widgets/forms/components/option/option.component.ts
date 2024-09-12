@@ -4,7 +4,7 @@ import { IDS_OPTION_PARENT_COMPONENT } from './option-parent';
 
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck } from '@mdi/js';
@@ -24,32 +24,46 @@ import { mdiCheck } from '@mdi/js';
     '(keydown)': '_handleKeydown($event)',
   },
 })
-export class IdsOptionComponent<T = unknown> extends ComponentBase {
-  protected override readonly _componentName = 'option';
-  private readonly _parent = inject(IDS_OPTION_PARENT_COMPONENT, { optional: true });
+export class IdsOptionComponent<T = unknown> extends ComponentBase implements OnInit {
+  protected override get _componentName(): string {
+    return 'option';
+  }
+
+  private readonly _parent = inject(IDS_OPTION_PARENT_COMPONENT, { skipSelf: true });
   private readonly _element = inject<ElementRef<HTMLElement>>(ElementRef);
   public readonly group = inject(IDS_OPTION_GROUP, { optional: true });
+
+  private _textElement = viewChild.required<ElementRef<HTMLElement>>('text');
 
   public selected = signal<boolean>(false);
   private _active = signal<boolean>(false);
 
   public value = input<T>();
-  public viewValue = input<string>();
+  public explicitViewValue = input<string | null>(null, { alias: 'viewValue' });
   public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
 
   public groupOrOptionIsDisabled = computed(() => this.group?.disabled() || this.disabled());
 
   protected readonly _checkIcon = mdiCheck;
-  protected readonly _multiSelect = Boolean(this._parent?.multiSelect);
+  protected readonly _multiSelect = Boolean(this._parent?.multiSelect());
 
   public onSelectionChange = output<IdsOptionSelectionChange<T>>();
 
+  public viewValue = computed(() => this._textElement().nativeElement.textContent || this.explicitViewValue() || '');
   protected readonly _hostClasses = computed(() => this._getHostClasses([
     this.selected() ? 'selected' : null,
     this._active() ? 'selected' : null,
     this.groupOrOptionIsDisabled() ? 'disabled' : null,
     this._multiSelect ? 'multiselect' : null,
   ]));
+
+  public ngOnInit(): void {
+    const parent = this._parent;
+
+    if (parent.isOptionPreSelectedByValue(this.value())) {
+      this.selected.set(true);
+    }
+  }
 
   private _handleKeydown(event: KeyboardEvent): void {
     if ((event.key === 'ENTER' || event.key === ' ') && !hasModifierKey(event)) {
@@ -59,9 +73,8 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase {
   }
 
   private _selectViaInteraction(): void {
-    if (!this.disabled) {
-      this.selected.set(this._multiSelect ? !this.selected : true);
-      this._emitSelectionChangeEvent(true);
+    if (!this.groupOrOptionIsDisabled()) {
+      this._emitSelectionChangeEvent(!this.selected());
     }
   }
 
@@ -71,20 +84,16 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase {
 
   public select(emitEvent = true): void {
     if (!this.selected()) {
-      this.selected.set(true);
-
       if (emitEvent) {
-        this._emitSelectionChangeEvent();
+        this._emitSelectionChangeEvent(true);
       }
     }
   }
 
   public deselect(emitEvent = true): void {
     if (this.selected()) {
-      this.selected.set(false);
-
       if (emitEvent) {
-        this._emitSelectionChangeEvent();
+        this._emitSelectionChangeEvent(false);
       }
     }
   }
@@ -109,8 +118,10 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase {
     }
   }
 
-  private _emitSelectionChangeEvent(isUserInput = false): void {
-    this.onSelectionChange.emit(new IdsOptionSelectionChange<T>(this, isUserInput));
+  private _emitSelectionChangeEvent(selected: boolean): void {
+    if (this._multiSelect || !this.selected()) {
+      this.onSelectionChange.emit(new IdsOptionSelectionChange<T>(this, selected));
+    }
   }
 }
 

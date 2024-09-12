@@ -1,7 +1,7 @@
 import { createClassList } from '../utils/class-prefix';
-import { fallbackValue } from '../utils/fallback-value';
 
 import { DestroyRef, Directive, inject, InjectionToken, input, Signal } from '@angular/core';
+import { fallbackValue } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 @Directive({
@@ -11,14 +11,17 @@ let nextUniqueId = 0;
   },
 })
 export abstract class ComponentBase {
-  protected readonly _componentName: string = '';
+  protected get _componentName(): string {
+    return '';
+  }
+
   protected readonly _componentClass = `ids-${this._componentName}`;
   protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  protected abstract readonly _hostClasses: Signal<string>;
   protected readonly _destroyRef = inject(DestroyRef);
 
   public readonly id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
 
+  protected abstract _hostClasses: Signal<string>;
   protected _getHostClasses(
     appendableClassNames: Array<string | Array<string | null | undefined> | null | undefined> = [],
     nonAppendableClassNames: Array<string | null> = [],

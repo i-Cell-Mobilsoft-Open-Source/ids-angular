@@ -1,8 +1,9 @@
-import { InjectionToken } from '@angular/core';
+import { InjectionToken, Signal } from '@angular/core';
 
 export interface IdsOptionParentComponent {
-  multiSelect?: boolean
+  multiSelect: Signal<boolean>
   inertGroups?: boolean
+  isOptionPreSelectedByValue(optionValue: unknown): boolean
 }
 
 export const IDS_OPTION_PARENT_COMPONENT = new InjectionToken<IdsOptionParentComponent>(

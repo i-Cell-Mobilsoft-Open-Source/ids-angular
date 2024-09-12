@@ -1,5 +1,8 @@
 @if (_multiSelect) {
   <!-- pseudo checkbox should be here -->
+  @if (selected()) {
+    <ids-icon [icon]="_checkIcon" />
+  }
 }
 
 <div class="ids-option__text" #text><ng-content></ng-content></div>

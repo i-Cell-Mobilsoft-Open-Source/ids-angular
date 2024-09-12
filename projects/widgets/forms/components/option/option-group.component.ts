@@ -22,8 +22,11 @@ export const IDS_OPTION_GROUP = new InjectionToken<IdsOptionGroupComponent>('Ids
   },
 })
 export class IdsOptionGroupComponent extends ComponentBase {
-  protected override readonly _componentName = 'option-group';
-  protected readonly _labelClass = `${this._componentClass}-label`;
+  protected override get _componentName(): string {
+    return 'option-group';
+  }
+
+  protected readonly _labelClass = `${this._componentClass}__label`;
   protected readonly _labelId = `${this._labelClass}-${nextUniqueId++}`;
   private readonly _parent = inject(IDS_OPTION_PARENT_COMPONENT, { optional: true });
   protected readonly _inert = this._parent?.inertGroups ?? false;

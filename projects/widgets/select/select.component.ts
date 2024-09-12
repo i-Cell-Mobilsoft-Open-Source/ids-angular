@@ -1,15 +1,16 @@
 import { IDS_SELECT_DEFAULT_CONFIG, IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectDefaultConfig } from './select-defaults';
 import { selectConnectedPositions } from './select-positions';
 
-import { IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent } from '../forms';
+import { FormFieldVariantType, IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent } from '../forms';
 import { IDS_OPTION_PARENT_COMPONENT } from '../forms/components/option/option-parent';
 
+import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { coerceBooleanAttribute, ComponentBaseWithDefaults, createClassList, createComponentError, SelectionModel } from '@i-cell/ids-angular/core';
+import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
+import { coerceBooleanAttribute, ComponentBaseWithDefaults, createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDown } from '@mdi/js';
@@ -32,18 +33,26 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
   providers: [
     { provide: IDS_FORM_FIELD_CONTROL, useExisting: IdsSelectComponent },
     { provide: IDS_OPTION_PARENT_COMPONENT, useExisting: IdsSelectComponent },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => IdsSelectComponent),
+      multi: true,
+    },
   ],
 })
 export class IdsSelectComponent
   extends ComponentBaseWithDefaults<IdsSelectDefaultConfig>
-  implements OnInit, ControlValueAccessor, IdsFormFieldControl, AfterContentInit {
-  protected override readonly _componentName = 'select';
+  implements IdsFormFieldControl, ControlValueAccessor, OnInit, AfterContentInit {
+  protected override get _componentName(): string {
+    return 'select';
+  }
+
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SELECT_DEFAULT_CONFIG);
   private readonly _elementRef = inject(ElementRef);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _parentFormField = inject(IDS_FORM_FIELD);
-  private readonly _parentForm = inject(NgForm);
-  private readonly _parentFormGroup = inject(FormGroupDirective);
+  private readonly _parentForm = inject(NgForm, { optional: true });
+  private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
 
   protected readonly _connectedPositions = selectConnectedPositions;
   protected readonly _chevronDownIcon = mdiChevronDown;
@@ -52,19 +61,6 @@ export class IdsSelectComponent
 
   protected _preferredOverlayOrigin: CdkOverlayOrigin | ElementRef | undefined;
   protected _overlayWidth: string | number = 0;
-  protected _empty = computed(() => Boolean(this._selectionModel?.isEmpty()));
-  protected _triggerValue = computed(() => {
-    if (this._empty()) {
-      return '';
-    }
-
-    if (this.multiSelect()) {
-      const selectedOptions = this._selectionModel?.selected?.map((option) => option.viewValue());
-      return selectedOptions?.join(', ') || '';
-    }
-
-    return this._selectionModel?.selected?.[0].viewValue() || '';
-  });
 
   public multiSelect = input<boolean>(false);
   public placeholder = input<string>('');
@@ -82,18 +78,24 @@ export class IdsSelectComponent
   public isPanelOpen = signal<boolean>(false);
   public hasErrorState = signal<boolean>(false);
   public hasSuccessState = signal<boolean>(false);
+  private _parentSize = signal<SizeType | null>(null);
+  private _parentVariant = signal<FormFieldVariantType | null>(null);
 
   private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && this.options().length > 0);
-  protected _hostClasses = computed(() => this._getHostClasses([this.disabled() ? 'disabled' : null]));
-  protected _panelClasses = computed(() => createClassList(`${this._componentClass}-panel`, [
-    this._parentFormField?.size(),
-    this._parentFormField?.variant(),
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this._parentSize(),
+    this._parentVariant(),
+    this.disabled() ? 'disabled' : null,
+  ]));
 
+  protected _panelClasses = computed(() => createClassList(`${this._componentClass}-panel`, [
+    this._parentSize(),
+    this._parentVariant(),
   ]));
 
   private _panel = viewChild.required<ElementRef<HTMLElement>>('panel');
   private _overlayDir = viewChild(CdkConnectedOverlay);
-  public options = contentChildren<IdsOptionComponent>(IdsOptionComponent);
+  public options = contentChildren<IdsOptionComponent>(IdsOptionComponent, { descendants: true });
   public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP);
 
   private _errorStateTracker?: ErrorStateTracker;
@@ -105,14 +107,33 @@ export class IdsSelectComponent
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => { };
 
+  protected get _empty(): boolean {
+    return Boolean(this._selectionModel?.isEmpty());
+  }
+
   public get selected(): IdsOptionComponent | IdsOptionComponent[] | undefined {
     return this.multiSelect() ? this._selectionModel?.selected : this._selectionModel?.selected?.[0] || [];
+  }
+
+  protected get _triggerValue(): string {
+    if (this._empty) {
+      return '';
+    }
+
+    if (this.multiSelect()) {
+      const selectedOptions = this._selectionModel?.selected?.map((option) => option.viewValue());
+      return selectedOptions?.join(', ') || '';
+    }
+
+    return this._selectionModel?.selected?.[0].viewValue() || '';
   }
 
   public ngOnInit(): void {
     if (!this._parentFormField) {
       this._createComponentError('Select must be in a form field');
     }
+    this._parentSize.set(this._parentFormField.size());
+    this._parentVariant.set(this._parentFormField.variant());
     this._selectionModel = new SelectionModel<IdsOptionComponent>(this.multiSelect(), undefined, false, this.valueCompareFn());
     this._initErrorStateTracker();
     this._initSuccessStateTracker();
@@ -305,10 +326,10 @@ export class IdsSelectComponent
 
     if (this.multiSelect() && value) {
       if (!Array.isArray(value)) {
-        throw new Error(createComponentError(this._componentClass, 'value must be an array in multiple-selection mode'));
+        throw new Error(this._createComponentError('value must be an array in multiple-selection mode'));
       }
 
-      this._clearSelection();
+      // this._clearSelection();
       value.forEach((currentValue: unknown) => this._selectValue(currentValue));
       this._sortValues();
     } else {
@@ -326,6 +347,8 @@ export class IdsSelectComponent
   }
 
   private _clearSelection(): void {
+    // console.log('clearselection', this._selectionModel?.isEmpty());
+
     this._selectionModel?.clear();
     this.options().forEach((option) => {
       option.selected.set(false);
@@ -338,18 +361,22 @@ export class IdsSelectComponent
       this._onChange(selectionModelValues);
     } else {
       this._onChange(selectionModelValues?.[0]);
+      this.close();
     }
+    this._changeDetectorRef.markForCheck();
   }
 
   public isOptionPreSelectedByValue(optionValue: unknown): boolean {
     if (this._rawValue === undefined) {
+      // console.log('rawValue undefined');
       return false;
     }
 
     if (this.multiSelect() && Array.isArray(this._rawValue)) {
+      // console.log('multiselect');
       return this._rawValue.some((value) => optionValue != null && value === optionValue);
     }
-
+    // console.log('single select', optionValue, this._rawValue);
     return optionValue === this._rawValue;
   }
 
@@ -365,8 +392,8 @@ export class IdsSelectComponent
     this._elementRef.nativeElement.focus(options);
   }
 
-  public onContainerClick(): void {
+  public onContainerClick = (): void => {
     this.focus();
     this.open();
-  }
+  };
 }

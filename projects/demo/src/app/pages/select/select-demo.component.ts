@@ -1,14 +1,20 @@
+/* eslint-disable no-magic-numbers */
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariant, FormFieldVariantType, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
+import { FormFieldVariant, FormFieldVariantType, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
 import { IdsSelectComponent } from '@i-cell/ids-angular/select';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SampleOption = {
   value: string
   viewValue: string
+};
+
+type AnimalOptions = {
+  land: SampleOption[]
+  aquatic: SampleOption[]
 };
 
 @Component({
@@ -26,6 +32,7 @@ type SampleOption = {
     ReactiveFormsModule,
     TranslateModule,
     IdsOptionComponent,
+    IdsOptionGroupComponent,
   ],
   templateUrl: './select-demo.component.html',
   styleUrl: './select-demo.component.scss',
@@ -43,12 +50,27 @@ export class SelectDemoComponent {
     FormFieldVariant.LIGHT,
   ];
 
-  public options: SampleOption[] = [
-    { viewValue: 'Kutya', value: 'kutya' },
-    { viewValue: 'Macska', value: 'macska' },
-    { viewValue: 'Zsiráf', value: 'zsiraf' },
-    { viewValue: 'Krokodil', value: 'korkodil' },
-    { viewValue: 'Orángután', value: 'orangutan' },
-    { viewValue: 'Mammut', value: 'mammut' },
+  public options: AnimalOptions = {
+    land: [
+      { viewValue: 'Kutya', value: 'dog' },
+      { viewValue: 'Macska', value: 'cat' },
+      { viewValue: 'Zsiráf', value: 'giraffe' },
+      { viewValue: 'Orángután', value: 'orangutan' },
+      { viewValue: 'Mamut', value: 'mammoth' },
+      { viewValue: 'Közönséges világoskékpettyes lábatlangyík', value: 'lizard' },
+    ],
+    aquatic: [
+      { viewValue: 'Krokodil', value: 'crocodile' },
+      { viewValue: 'Bálna', value: 'whale' },
+      { viewValue: 'Delfin', value: 'doplhin' },
+      { viewValue: 'Cápa', value: 'shark' },
+    ],
+  };
+
+  public singleSelectionValue: string = this.options['land'][0].value;
+  public multiSelectionValue: string[] = [
+    this.options['land'][0].value,
+    this.options['land'][2].value,
+    this.options['aquatic'][1].value,
   ];
 }

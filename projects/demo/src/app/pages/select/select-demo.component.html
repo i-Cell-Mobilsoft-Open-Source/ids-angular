@@ -11,10 +11,17 @@
         <div class="form-field-item">
           <ids-form-field [size]="size" [variant]="variant">
             <ids-label>Animal</ids-label>
-            <ids-select [ngModel]="options[1].value">
-              @for (option of options; track $index) {
-                <ids-option>{{ option.viewValue }}</ids-option>
-              }
+            <ids-select placeholder="Select animal" [ngModel]="singleSelectionValue">
+              <ids-option-group label="Szárazföldi">
+                @for (option of options.land; track $index) {
+                  <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                }
+              </ids-option-group>
+              <ids-option-group label="Vízi">
+                @for (option of options.aquatic; track $index) {
+                  <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                }
+              </ids-option-group>
             </ids-select>
             <ids-hint-message>Choose an animal</ids-hint-message>
             <ids-error-message>Name is mandatory</ids-error-message>
@@ -27,12 +34,19 @@
         <div class="form-field-item">
           <ids-form-field [size]="size" [variant]="variant">
             <ids-label>Animal</ids-label>
-            <ids-select [ngModel]="[options[1].value, options[3].value]" [multiSelect]="true">
-              @for (option of options; track $index) {
-                <ids-option>{{ option.viewValue }}</ids-option>
-              }
+            <ids-select placeholder="Select animal" [multiSelect]="true" [ngModel]="multiSelectionValue">
+              <ids-option-group label="Szárazföldi">
+                @for (option of options.land; track $index) {
+                  <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                }
+              </ids-option-group>
+              <ids-option-group label="Vízi">
+                @for (option of options.aquatic; track $index) {
+                  <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                }
+              </ids-option-group>
             </ids-select>
-            <ids-hint-message>Choose an animal</ids-hint-message>
+            <ids-hint-message>Choose some animal</ids-hint-message>
             <ids-error-message>Name is mandatory</ids-error-message>
           </ids-form-field>
         </div>
@@ -40,17 +54,24 @@
     </div>
 
     <div class="form-field-column">
-      <h3>Disabled option</h3>
+      <h3>Disabled option or option group</h3>
       <h4>Single select</h4>
       @for (size of sizes; track $index) {
         <h5>{{ size }}</h5>
         <div class="form-field-item">
           <ids-form-field [size]="size" [variant]="variant">
             <ids-label>Animal</ids-label>
-            <ids-select [ngModel]="">
-              @for (option of options; track $index) {
-                <ids-option disabled>{{ option.viewValue }}</ids-option>
-              }
+            <ids-select placeholder="Select animal" [ngModel]="singleSelectionValue">
+              <ids-option-group label="Szárazföldi">
+                @for (option of options["land"]; track $index; let odd = $odd) {
+                  <ids-option [value]="option.value" [disabled]="odd">{{ option.viewValue }}</ids-option>
+                }
+              </ids-option-group>
+              <ids-option-group label="Vízi" [disabled]="true">
+                @for (option of options["aquatic"]; track $index) {
+                  <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                }
+              </ids-option-group>
             </ids-select>
             <ids-hint-message>Choose an animal</ids-hint-message>
             <ids-error-message>Name is mandatory</ids-error-message>
@@ -63,84 +84,19 @@
         <div class="form-field-item">
           <ids-form-field [size]="size" [variant]="variant">
             <ids-label>Animal</ids-label>
-            <ids-select [ngModel]="[]" [multiSelect]="true">
-              @for (option of options; track $index) {
-                <ids-option disabled>{{ option.viewValue }}</ids-option>
-              }
+            <ids-select placeholder="Select animal" [multiSelect]="true" [ngModel]="multiSelectionValue">
+              <ids-option-group label="Szárazföldi">
+                @for (option of options["land"]; track $index; let odd = $odd) {
+                  <ids-option [value]="option.value" [disabled]="odd">{{ option.viewValue }}</ids-option>
+                }
+              </ids-option-group>
+              <ids-option-group label="Vízi" [disabled]="true">
+                @for (option of options["aquatic"]; track $index) {
+                  <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                }
+              </ids-option-group>
             </ids-select>
-            <ids-hint-message>Choose an animal</ids-hint-message>
-            <ids-error-message>Name is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-    </div>
-
-    <div class="form-field-column">
-      <h3>Error</h3>
-      <h4>Single select</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Animal</ids-label>
-            <ids-select [ngModel]="">
-              @for (option of options; track $index) {
-                <ids-option>{{ option.viewValue }}</ids-option>
-              }
-            </ids-select>
-            <ids-hint-message>Choose an animal</ids-hint-message>
-            <ids-error-message>Name is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-      <h4>Multi select</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Animal</ids-label>
-            <ids-select [ngModel]="[]" [multiSelect]="true">
-              @for (option of options; track $index) {
-                <ids-option>{{ option.viewValue }}</ids-option>
-              }
-            </ids-select>
-            <ids-hint-message>Choose an animal</ids-hint-message>
-            <ids-error-message>Name is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-    </div>
-
-    <div class="form-field-column">
-      <h3>Success</h3>
-      <h4>Single select</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Animal</ids-label>
-            <ids-select [ngModel]="">
-              @for (option of options; track $index) {
-                <ids-option>{{ option.viewValue }}</ids-option>
-              }
-            </ids-select>
-            <ids-hint-message>Choose an animal</ids-hint-message>
-            <ids-error-message>Name is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-      <h4>Multi select</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Animal</ids-label>
-            <ids-select [ngModel]="[]" [multiSelect]="true">
-              @for (option of options; track $index) {
-                <ids-option>{{ option.viewValue }}</ids-option>
-              }
-            </ids-select>
-            <ids-hint-message>Choose an animal</ids-hint-message>
+            <ids-hint-message>Choose some animal</ids-hint-message>
             <ids-error-message>Name is mandatory</ids-error-message>
           </ids-form-field>
         </div>

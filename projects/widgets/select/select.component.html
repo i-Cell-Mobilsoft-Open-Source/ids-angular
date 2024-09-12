@@ -1,9 +1,9 @@
 <div #trigger #fallbackOverlayOrigin="cdkOverlayOrigin" cdk-overlay-origin class="ids-select__trigger" (click)="open()">
   <div class="ids-select__value">
-    @if (_empty()) {
+    @if (_empty) {
       <span class="ids-select__placeholder">{{ placeholder() }}</span>
     } @else {
-      <span class="ids-select__value-text">{{ _triggerValue() }}</span>
+      <span class="ids-select__value-text">{{ _triggerValue }}</span>
     }
   </div>
 
@@ -15,13 +15,12 @@
 <ng-template
   cdk-connected-overlay
   cdkConnectedOverlayLockPosition
-  cdkConnectedOverlayHasBackdrop
-  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
   [cdkConnectedOverlayOrigin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
   [cdkConnectedOverlayOpen]="isPanelOpen()"
   [cdkConnectedOverlayPositions]="_connectedPositions"
   [cdkConnectedOverlayWidth]="_overlayWidth"
-  (backdropClick)="close()"
+  [cdkConnectedOverlayPush]="true"
+  (overlayOutsideClick)="close()"
   (attach)="_panelAttached()"
   (detach)="close()"
 >
@@ -29,7 +28,7 @@
     #panel
     role="listbox"
     tabindex="-1"
-    [attr.id]="id + '-panel'"
+    [attr.id]="id() + '-panel'"
     [attr.aria-multiselectable]="multiSelect()"
     [attr.aria-label]="ariaLabel() || null"
     [attr.aria-labelledby]="ariaLabelledby()"

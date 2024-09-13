@@ -1,5 +1,6 @@
 import { IDS_SELECT_DEFAULT_CONFIG, IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectDefaultConfig } from './select-defaults';
 import { selectConnectedPositions } from './select-positions';
+import { IDS_SELECT_TRIGGER, IdsSelectTriggerDirective } from './select-trigger.directive';
 
 import { FormFieldVariantType, IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent } from '../forms';
 import { IDS_OPTION_PARENT_COMPONENT } from '../forms/components/option/option-parent';
@@ -7,7 +8,7 @@ import { IDS_OPTION_PARENT_COMPONENT } from '../forms/components/option/option-p
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, createClassList, SizeType } from '@i-cell/ids-angular/core';
@@ -96,7 +97,8 @@ export class IdsSelectComponent
   private _panel = viewChild.required<ElementRef<HTMLElement>>('panel');
   private _overlayDir = viewChild(CdkConnectedOverlay);
   public options = contentChildren<IdsOptionComponent>(IdsOptionComponent, { descendants: true });
-  public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP);
+  public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
+  protected _customTrigger = contentChild<IdsSelectTriggerDirective>(IDS_SELECT_TRIGGER);
 
   private _errorStateTracker?: ErrorStateTracker;
   private _successStateTracker?: SuccessStateTracker;
@@ -329,7 +331,6 @@ export class IdsSelectComponent
         throw new Error(this._createComponentError('value must be an array in multiple-selection mode'));
       }
 
-      // this._clearSelection();
       value.forEach((currentValue: unknown) => this._selectValue(currentValue));
       this._sortValues();
     } else {
@@ -347,8 +348,6 @@ export class IdsSelectComponent
   }
 
   private _clearSelection(): void {
-    // console.log('clearselection', this._selectionModel?.isEmpty());
-
     this._selectionModel?.clear();
     this.options().forEach((option) => {
       option.selected.set(false);

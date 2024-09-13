@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { FormFieldVariant, FormFieldVariantType, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
-import { IdsSelectComponent } from '@i-cell/ids-angular/select';
+import { IdsSelectComponent, IdsSelectTriggerDirective } from '@i-cell/ids-angular/select';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SampleOption = {
@@ -33,6 +33,7 @@ type AnimalOptions = {
     TranslateModule,
     IdsOptionComponent,
     IdsOptionGroupComponent,
+    IdsSelectTriggerDirective,
   ],
   templateUrl: './select-demo.component.html',
   styleUrl: './select-demo.component.scss',
@@ -52,18 +53,18 @@ export class SelectDemoComponent {
 
   public options: AnimalOptions = {
     land: [
-      { viewValue: 'Kutya', value: 'dog' },
-      { viewValue: 'Macska', value: 'cat' },
-      { viewValue: 'Zsiráf', value: 'giraffe' },
-      { viewValue: 'Orángután', value: 'orangutan' },
-      { viewValue: 'Mamut', value: 'mammoth' },
-      { viewValue: 'Közönséges világoskékpettyes lábatlangyík', value: 'lizard' },
+      { viewValue: 'Dog', value: 'dog' },
+      { viewValue: 'Cat', value: 'cat' },
+      { viewValue: 'Giraffe', value: 'giraffe' },
+      { viewValue: 'Orangutan', value: 'orangutan' },
+      { viewValue: 'Mammoth', value: 'mammoth' },
+      { viewValue: 'Opisthocoelicaudia Skarzynski', value: 'opisthocoelicaudia skarzynski' },
     ],
     aquatic: [
-      { viewValue: 'Krokodil', value: 'crocodile' },
-      { viewValue: 'Bálna', value: 'whale' },
-      { viewValue: 'Delfin', value: 'doplhin' },
-      { viewValue: 'Cápa', value: 'shark' },
+      { viewValue: 'Crocodile', value: 'crocodile' },
+      { viewValue: 'Whale', value: 'whale' },
+      { viewValue: 'Dolphin', value: 'doplhin' },
+      { viewValue: 'Shark', value: 'shark' },
     ],
   };
 
@@ -72,5 +73,24 @@ export class SelectDemoComponent {
     this.options['land'][0].value,
     this.options['land'][2].value,
     this.options['aquatic'][1].value,
+  ];
+
+  public customTriggerValues: string[] = [
+    'Apple',
+    'Banana',
+    'Mango',
+    'Orange',
+    'Strawberry',
+    'Pineapple',
+    'Watermelon',
+    'Grapes',
+    'Blueberry',
+    'Peach',
+  ];
+
+  public cutomTriggerMultiSelectionValue: string[] = [
+    this.customTriggerValues[0],
+    this.customTriggerValues[2],
+    this.customTriggerValues[5],
   ];
 }

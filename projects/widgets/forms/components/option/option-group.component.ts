@@ -28,11 +28,15 @@ export class IdsOptionGroupComponent extends ComponentBase {
 
   protected readonly _labelClass = `${this._componentClass}__label`;
   protected readonly _labelId = `${this._labelClass}-${nextUniqueId++}`;
-  private readonly _parent = inject(IDS_OPTION_PARENT_COMPONENT, { optional: true });
+  private readonly _parent = inject(IDS_OPTION_PARENT_COMPONENT);
   protected readonly _inert = this._parent?.inertGroups ?? false;
 
   public label = input<string>();
   public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
 
-  protected readonly _hostClasses = computed(() => this._getHostClasses([this.disabled() ? 'disabled' : null]));
+  protected readonly _hostClasses = computed(() => this._getHostClasses([
+    this.disabled() ? 'disabled' : null,
+    this._parent.parentSize(),
+    this._parent.parentVariant(),
+  ]));
 }

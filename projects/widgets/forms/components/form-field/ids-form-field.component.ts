@@ -57,8 +57,8 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
   public hasSuffix = computed(() => Boolean(this._suffixes().filter((suffix) => !suffix.isTrailingIcon).length));
   public hasTrailingIcon = computed(() => Boolean(this._suffixes().filter((suffix) => suffix.isTrailingIcon).length));
   public inputId = computed(() => this._child()?.id());
-  public size = input<SizeType | null>(this._defaultOptions.size);
-  public variant = input<FormFieldVariantType | null>(this._defaultOptions.variant);
+  public size = input<SizeType>(this._defaultOptions.size);
+  public variant = input<FormFieldVariantType>(this._defaultOptions.variant);
   public control = computed(() => this._child()?.ngControl);
   public disabled = computed(() => Boolean(this._child()?.disabled()));
   private _hasErrorState = computed(() => Boolean(this._child()?.hasErrorState()));

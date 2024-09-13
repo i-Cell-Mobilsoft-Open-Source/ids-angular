@@ -29,7 +29,7 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase implements On
     return 'option';
   }
 
-  private readonly _parent = inject(IDS_OPTION_PARENT_COMPONENT, { skipSelf: true });
+  private readonly _parent = inject(IDS_OPTION_PARENT_COMPONENT);
   private readonly _element = inject<ElementRef<HTMLElement>>(ElementRef);
   public readonly group = inject(IDS_OPTION_GROUP, { optional: true });
 
@@ -55,6 +55,8 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase implements On
     this._active() ? 'selected' : null,
     this.groupOrOptionIsDisabled() ? 'disabled' : null,
     this._multiSelect ? 'multiselect' : null,
+    this._parent.parentSize(),
+    this._parent.parentVariant(),
   ]));
 
   public ngOnInit(): void {

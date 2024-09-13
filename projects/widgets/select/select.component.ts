@@ -28,7 +28,6 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
     IdsIconComponent,
   ],
   templateUrl: './select.component.html',
-  styleUrl: './select.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -79,19 +78,20 @@ export class IdsSelectComponent
   public isPanelOpen = signal<boolean>(false);
   public hasErrorState = signal<boolean>(false);
   public hasSuccessState = signal<boolean>(false);
-  private _parentSize = signal<SizeType | null>(null);
-  private _parentVariant = signal<FormFieldVariantType | null>(null);
+  public parentSize = signal<SizeType | null>(null);
+  public parentVariant = signal<FormFieldVariantType | null>(null);
 
-  private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && this.options().length > 0);
+  private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && !this.readonly() && this.options().length > 0);
   protected _hostClasses = computed(() => this._getHostClasses([
-    this._parentSize(),
-    this._parentVariant(),
+    this.parentSize(),
+    this.parentVariant(),
     this.disabled() ? 'disabled' : null,
+    this.readonly() ? 'readonly' : null,
   ]));
 
   protected _panelClasses = computed(() => createClassList(`${this._componentClass}-panel`, [
-    this._parentSize(),
-    this._parentVariant(),
+    this.parentSize(),
+    this.parentVariant(),
   ]));
 
   private _panel = viewChild.required<ElementRef<HTMLElement>>('panel');
@@ -134,8 +134,8 @@ export class IdsSelectComponent
     if (!this._parentFormField) {
       this._createComponentError('Select must be in a form field');
     }
-    this._parentSize.set(this._parentFormField.size());
-    this._parentVariant.set(this._parentFormField.variant());
+    this.parentSize.set(this._parentFormField.size());
+    this.parentVariant.set(this._parentFormField.variant());
     this._selectionModel = new SelectionModel<IdsOptionComponent>(this.multiSelect(), undefined, false, this.valueCompareFn());
     this._initErrorStateTracker();
     this._initSuccessStateTracker();
@@ -202,7 +202,7 @@ export class IdsSelectComponent
   }
 
   protected _handleKeydown(event: KeyboardEvent): void {
-    if (!this.disabled()) {
+    if (!this.disabled() && !this.readonly()) {
       this.isPanelOpen() ? this._handleOpenedPanelKeydown(event) : this._handleClosedPanelKeydown(event);
     }
   }

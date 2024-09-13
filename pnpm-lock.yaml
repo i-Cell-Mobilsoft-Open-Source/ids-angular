@@ -39,8 +39,8 @@ importers:
         specifier: 0.0.14
         version: 0.0.14
       '@i-cell/ids-tokens':
-        specifier: 0.0.24-beta.3
-        version: 0.0.24-beta.3
+        specifier: 0.0.24-beta.4
+        version: 0.0.24-beta.4
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -1892,8 +1892,8 @@ packages:
   '@i-cell/ids-styles@0.0.14':
     resolution: {integrity: sha512-DwRAJOJcTVZ0H2Q51Bhnm0trXgSlcg4CDWe6JbsdmcmlWOmbRXhD1/WV1raiXSYgJJYsKj3S3SBmxwwX1N6r1A==}
 
-  '@i-cell/ids-tokens@0.0.24-beta.3':
-    resolution: {integrity: sha512-CioYzO1Sw4lW5d+EwmsT4LI1fPLBzOugiZIlC0pA/BbLQT2LfroMHzAHIjQ1YrdXCjmxaKtZGdEaYN1VA4d+lw==}
+  '@i-cell/ids-tokens@0.0.24-beta.4':
+    resolution: {integrity: sha512-h29i+W4wAJI04nX/nSW8LoPdB/++nUQIfbwjz1ANvtb/iv06A9eTQhIZaeGWc5dfEyssv34U70kIlzdkM+mmeQ==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -10325,7 +10325,7 @@ snapshots:
 
   '@i-cell/ids-styles@0.0.14': {}
 
-  '@i-cell/ids-tokens@0.0.24-beta.3': {}
+  '@i-cell/ids-tokens@0.0.24-beta.4': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:

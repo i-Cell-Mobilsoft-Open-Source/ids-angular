@@ -12,12 +12,12 @@
           <ids-form-field [size]="size" [variant]="variant">
             <ids-label>Animal</ids-label>
             <ids-select placeholder="Select animal" [ngModel]="singleSelectionValue">
-              <ids-option-group label="Szárazföldi">
+              <ids-option-group label="Land">
                 @for (option of options.land; track $index) {
                   <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
                 }
               </ids-option-group>
-              <ids-option-group label="Vízi">
+              <ids-option-group label="Aquatic">
                 @for (option of options.aquatic; track $index) {
                   <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
                 }
@@ -35,12 +35,12 @@
           <ids-form-field [size]="size" [variant]="variant">
             <ids-label>Animal</ids-label>
             <ids-select placeholder="Select animal" [multiSelect]="true" [ngModel]="multiSelectionValue">
-              <ids-option-group label="Szárazföldi">
+              <ids-option-group label="Land">
                 @for (option of options.land; track $index) {
                   <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
                 }
               </ids-option-group>
-              <ids-option-group label="Vízi">
+              <ids-option-group label="Aquatic">
                 @for (option of options.aquatic; track $index) {
                   <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
                 }
@@ -62,12 +62,12 @@
           <ids-form-field [size]="size" [variant]="variant">
             <ids-label>Animal</ids-label>
             <ids-select placeholder="Select animal" [ngModel]="singleSelectionValue">
-              <ids-option-group label="Szárazföldi">
+              <ids-option-group label="Land">
                 @for (option of options["land"]; track $index; let odd = $odd) {
                   <ids-option [value]="option.value" [disabled]="odd">{{ option.viewValue }}</ids-option>
                 }
               </ids-option-group>
-              <ids-option-group label="Vízi" [disabled]="true">
+              <ids-option-group label="Aquatic" [disabled]="true">
                 @for (option of options["aquatic"]; track $index) {
                   <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
                 }
@@ -85,12 +85,12 @@
           <ids-form-field [size]="size" [variant]="variant">
             <ids-label>Animal</ids-label>
             <ids-select placeholder="Select animal" [multiSelect]="true" [ngModel]="multiSelectionValue">
-              <ids-option-group label="Szárazföldi">
+              <ids-option-group label="Land">
                 @for (option of options["land"]; track $index; let odd = $odd) {
                   <ids-option [value]="option.value" [disabled]="odd">{{ option.viewValue }}</ids-option>
                 }
               </ids-option-group>
-              <ids-option-group label="Vízi" [disabled]="true">
+              <ids-option-group label="Aquatic" [disabled]="true">
                 @for (option of options["aquatic"]; track $index) {
                   <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
                 }

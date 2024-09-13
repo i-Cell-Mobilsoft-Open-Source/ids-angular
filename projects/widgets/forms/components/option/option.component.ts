@@ -2,20 +2,34 @@ import { IdsOptionSelectionChange } from './option-events';
 import { IDS_OPTION_GROUP, IdsOptionGroupComponent } from './option-group.component';
 import { IDS_OPTION_PARENT_COMPONENT } from './option-parent';
 
+import { FormFieldVariantType } from '../form-field/types/ids-form-field-variant.type';
+import { IDS_PSEUDO_CHECKBOX_PARENT_COMPONENT, IdsPseudoCheckboxParentComponent } from '../pseudo-checkbox/pseudo-checkbox-parent';
+import { PseudoCheckboxComponent } from '../pseudo-checkbox/pseudo-checkbox.component';
+
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
+import { CheckboxState } from '@i-cell/ids-angular/checkbox';
+import { coerceBooleanAttribute, ComponentBase, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck } from '@mdi/js';
 
 @Component({
   selector: 'ids-option',
   standalone: true,
-  imports: [IdsIconComponent],
+  imports: [
+    IdsIconComponent,
+    PseudoCheckboxComponent,
+  ],
   templateUrl: './option.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: IDS_PSEUDO_CHECKBOX_PARENT_COMPONENT,
+      useExisting: IdsOptionComponent,
+    },
+  ],
   host: {
     'role': 'option',
     '[attr.aria-selected]': 'selected()',
@@ -24,7 +38,9 @@ import { mdiCheck } from '@mdi/js';
     '(keydown)': '_handleKeydown($event)',
   },
 })
-export class IdsOptionComponent<T = unknown> extends ComponentBase implements OnInit {
+export class IdsOptionComponent<T = unknown>
+  extends ComponentBase
+  implements OnInit, IdsPseudoCheckboxParentComponent<FormFieldVariantType> {
   protected override get _componentName(): string {
     return 'option';
   }
@@ -37,6 +53,8 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase implements On
 
   public selected = signal<boolean>(false);
   private _active = signal<boolean>(false);
+  public size = signal<SizeType>(this._parent.parentSize());
+  public variant = signal<FormFieldVariantType>(this._parent.parentVariant());
 
   public value = input<T>();
   public explicitViewValue = input<string | null>(null, { alias: 'viewValue' });
@@ -55,9 +73,11 @@ export class IdsOptionComponent<T = unknown> extends ComponentBase implements On
     this._active() ? 'selected' : null,
     this.groupOrOptionIsDisabled() ? 'disabled' : null,
     this._multiSelect ? 'multiselect' : null,
-    this._parent.parentSize(),
-    this._parent.parentVariant(),
+    this.size(),
+    this.variant(),
   ]));
+
+  protected _pseudoCheckboxState = computed(() => (this.selected() ? CheckboxState.CHECKED : CheckboxState.UNCHECKED));
 
   public ngOnInit(): void {
     const parent = this._parent;

@@ -1,0 +1,22 @@
+<div class="ids-pseudo-checkbox__input-wrapper">
+  <input
+    type="checkbox"
+    [disabled]="disabled()"
+    [attr.aria-checked]="_isIndeterminate() ? 'mixed' : null"
+    [checked]="_isChecked()"
+    [indeterminate]="_isIndeterminate()"
+    (change)="$event.stopPropagation()"
+  />
+  <div class="ids-pseudo-checkbox__icon" aria-hidden="true">
+    @if (_isIndeterminate()) {
+      <svg viewBox="0 0 20 20" focusable="false" aria-hidden="true">
+        <path d="M4 10H15.6667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    }
+    @if (_isChecked()) {
+      <svg viewBox="0 0 20 20" focusable="false" fill="none" aria-hidden="true">
+        <path d="M3 10.5L9 16.5L18 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    }
+  </div>
+</div>

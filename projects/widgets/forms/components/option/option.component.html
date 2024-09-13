@@ -1,11 +1,8 @@
 @if (_multiSelect) {
-  <!-- pseudo checkbox should be here -->
-  @if (selected()) {
-    <ids-icon [icon]="_checkIcon" />
-  }
+  <ids-pseudo-checkbox aria-hidden="true" [disabled]="groupOrOptionIsDisabled()" [checkboxState]="_pseudoCheckboxState()" />
 }
 
-<div class="ids-option__text" #text><ng-content></ng-content></div>
+<div #text class="ids-option__text"><ng-content /></div>
 
 @if (!_multiSelect && selected()) {
   <ids-icon [icon]="_checkIcon" />

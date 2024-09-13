@@ -36,11 +36,11 @@ importers:
         specifier: ^17.3.1
         version: 17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@i-cell/ids-styles':
-        specifier: 0.0.14
-        version: 0.0.14
+        specifier: 0.0.15-beta.0
+        version: 0.0.15-beta.0
       '@i-cell/ids-tokens':
-        specifier: 0.0.24-beta.4
-        version: 0.0.24-beta.4
+        specifier: 0.0.24-beta.5
+        version: 0.0.24-beta.5
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -1889,11 +1889,11 @@ packages:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
 
-  '@i-cell/ids-styles@0.0.14':
-    resolution: {integrity: sha512-DwRAJOJcTVZ0H2Q51Bhnm0trXgSlcg4CDWe6JbsdmcmlWOmbRXhD1/WV1raiXSYgJJYsKj3S3SBmxwwX1N6r1A==}
+  '@i-cell/ids-styles@0.0.15-beta.0':
+    resolution: {integrity: sha512-rsajvP3D8SttcPEcul3x5N7YB8VjFTXO5IJLwT2NU5SZH3cgw8XgDU45vXY+fK1jb7bL8XsPGxAPOXkZLWn0JA==}
 
-  '@i-cell/ids-tokens@0.0.24-beta.4':
-    resolution: {integrity: sha512-h29i+W4wAJI04nX/nSW8LoPdB/++nUQIfbwjz1ANvtb/iv06A9eTQhIZaeGWc5dfEyssv34U70kIlzdkM+mmeQ==}
+  '@i-cell/ids-tokens@0.0.24-beta.5':
+    resolution: {integrity: sha512-gYus5kHm+XdhMr1vBSst/4zjeHLtWdhc2xH2hUo9UEEHIuBQgPkPrGWRJI9x9iy/LB+kqkFe8pUfYteSqsfR7g==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -10323,9 +10323,9 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@i-cell/ids-styles@0.0.14': {}
+  '@i-cell/ids-styles@0.0.15-beta.0': {}
 
-  '@i-cell/ids-tokens@0.0.24-beta.4': {}
+  '@i-cell/ids-tokens@0.0.24-beta.5': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:

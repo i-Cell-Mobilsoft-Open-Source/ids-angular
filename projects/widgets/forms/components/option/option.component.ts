@@ -60,7 +60,7 @@ export class IdsOptionComponent<T = unknown>
   public explicitViewValue = input<string | null>(null, { alias: 'viewValue' });
   public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
 
-  public groupOrOptionIsDisabled = computed(() => this.group?.disabled() || this.disabled());
+  protected _groupOrOptionIsDisabled = computed(() => this.group?.disabled() || this.disabled());
 
   protected readonly _checkIcon = mdiCheck;
   protected readonly _multiSelect = Boolean(this._parent?.multiSelect());
@@ -70,8 +70,8 @@ export class IdsOptionComponent<T = unknown>
   public viewValue = computed(() => this._textElement().nativeElement.textContent || this.explicitViewValue() || '');
   protected readonly _hostClasses = computed(() => this._getHostClasses([
     this.selected() ? 'selected' : null,
-    this._active() ? 'selected' : null,
-    this.groupOrOptionIsDisabled() ? 'disabled' : null,
+    this._active() ? 'active' : null,
+    this._groupOrOptionIsDisabled() ? 'disabled' : null,
     this._multiSelect ? 'multiselect' : null,
     this.size(),
     this.variant(),
@@ -95,7 +95,7 @@ export class IdsOptionComponent<T = unknown>
   }
 
   private _selectViaInteraction(): void {
-    if (!this.groupOrOptionIsDisabled()) {
+    if (!this._groupOrOptionIsDisabled()) {
       this._emitSelectionChangeEvent(!this.selected());
     }
   }

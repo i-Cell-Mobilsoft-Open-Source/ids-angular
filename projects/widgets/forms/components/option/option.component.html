@@ -1,5 +1,5 @@
 @if (_multiSelect) {
-  <ids-pseudo-checkbox aria-hidden="true" [disabled]="groupOrOptionIsDisabled()" [checkboxState]="_pseudoCheckboxState()" />
+  <ids-pseudo-checkbox aria-hidden="true" [disabled]="_groupOrOptionIsDisabled()" [checkboxState]="_pseudoCheckboxState()" />
 }
 
 <div #text class="ids-option__text"><ng-content /></div>

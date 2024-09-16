@@ -11,7 +11,7 @@ import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
-import { coerceBooleanAttribute, ComponentBaseWithDefaults, createClassList, SizeType } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, coerceNumberAttribute, ComponentBaseWithDefaults, createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDown } from '@mdi/js';
@@ -39,6 +39,20 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
       multi: true,
     },
   ],
+  host: {
+    'role': 'combobox',
+    'aria-autocomplete': 'none',
+    'aria-haspopup': 'listbox',
+    '[attr.tabindex]': 'disabled() ? -1 : tabIndex()',
+    '[attr.aria-controls]': 'isPpanelOpen() ? id() + "-panel" : null',
+    '[attr.aria-expanded]': 'isPanelOpen()',
+    '[attr.aria-label]': 'ariaLabel() || null',
+    '[attr.aria-required]': 'required().toString()',
+    '[attr.aria-disabled]': 'disabled().toString()',
+    '[attr.aria-invalid]': 'hasErrorState()',
+    '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
+    '(keydown)': '_handleKeydown($event)',
+  },
 })
 export class IdsSelectComponent
   extends ComponentBaseWithDefaults<IdsSelectDefaultConfig>
@@ -73,6 +87,7 @@ export class IdsSelectComponent
   public ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
   public valueCompareFn = input<(o1: IdsOptionComponent, o2: IdsOptionComponent) => boolean>();
   public sortCompareFn = input<(a: IdsOptionComponent, b: IdsOptionComponent, options: Readonly<IdsOptionComponent[]>) => number>();
+  public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
 
   public disabled = signal<boolean>(false);
   public isPanelOpen = signal<boolean>(false);

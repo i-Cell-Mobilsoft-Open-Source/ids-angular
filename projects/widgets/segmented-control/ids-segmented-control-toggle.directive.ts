@@ -24,15 +24,21 @@ let nextUniqueId = 0;
 })
 export class IdsSegmentedControlToggleDirective
   extends IdsSegmentedControlBase<IdsSegmentedControlToggleItemComponent, IdsSegmentedControlToggleItemChange> {
+  /** @ignore **/
   protected readonly _componentClass = 'ids-segmented-control-toggle';
+  /** @ignore **/
   protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
+  /** @ignore **/
   protected _items = contentChildren<IdsSegmentedControlToggleItemComponent>(IdsSegmentedControlToggleItemComponent);
   public id = input<string>(this._uniqueId);
+  /** @ignore **/
   public multiSelect = signal<boolean>(false); // multiselect is always false in toggle. Signal was necessary because of base directive class
 
+  /** @ignore **/
   @Output() public readonly itemChanges = new EventEmitter<IdsSegmentedControlToggleItemChange>();
 
+  /** @ignore **/
   protected _handleItemChanges(change: IdsSegmentedControlToggleItemChange): void {
     const { source } = change;
     this._clearSelection();

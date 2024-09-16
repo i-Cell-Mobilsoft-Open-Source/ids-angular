@@ -28,13 +28,19 @@ import { mdiAlertCircleOutline, mdiAlertOutline, mdiCheckCircleOutline, mdiClose
   },
 })
 export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
+  /** @ignore **/
   private readonly _componentClass = 'ids-snackbar';
 
+  /** @ignore **/
   private _timer?: ReturnType<typeof setTimeout>;
 
+  /** @ignore **/
   public readonly size = Size;
+  /** @ignore **/
   public readonly iconButtonAppearance = IconButtonAppearance;
+  /** @ignore **/
   public readonly buttonAppearance = ButtonAppearance;
+  /** @ignore **/
   public readonly closeIcon = mdiClose;
 
   public id = input.required<number>();
@@ -49,20 +55,27 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
 
   public closed = output<void>();
 
+  /** @ignore **/
   private _canAutoClose = computed(() => !this.allowDismiss() && this.autoClose());
+  /** @ignore **/
   private _duration = computed(() => {
     const actionReadDuration = (this.actions()?.length ?? 0) * READ_SPEED_PER_ACTION;
     return Math.max(this.message().length * READ_SPEED_PER_CHAR + actionReadDuration, MIN_DURATION);
   });
 
+  /** @ignore **/
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.variant(),
     this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
   ]));
 
+  /** @ignore **/
   public role = computed(() => (this.urgent() ? 'alert' : 'status'));
+  /** @ignore **/
   public uniqueId = computed(() => `${this._componentClass}-${this.id()}`);
+  /** @ignore **/
   public buttonVariant = computed(() => (this.variant() === SnackbarVariant.DARK ? AllVariants.LIGHT : AllVariants.SURFACE));
+  /** @ignore **/
   public defaultIcon = computed(() => {
     switch (this.variant()) {
       case SnackbarVariant.DARK:
@@ -80,18 +93,22 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
     }
   });
 
+  /** @ignore **/
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
   }
 
+  /** @ignore **/
   @HostListener('mouseenter', ['$event']) private _onMouseEnter(): void {
     this._stopTimer();
   }
 
+  /** @ignore **/
   @HostListener('mouseleave', ['$event']) private _onMouseLeave(): void {
     this._startTimer();
   }
 
+  /** @ignore **/
   private _startTimer(): void {
     if (this._canAutoClose()) {
       this._timer = setTimeout(() => {
@@ -100,26 +117,31 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  /** @ignore **/
   private _stopTimer(): void {
     if (this._canAutoClose()) {
       clearTimeout(this._timer);
     }
   }
 
+  /** @ignore **/
   public ngAfterViewInit(): void {
     this._startTimer();
   }
 
+  /** @ignore **/
   public close(): void {
     this._stopTimer();
     this.closed.emit();
   }
 
+  /** @ignore **/
   public callAction(action: () => void): void {
     action();
     this.close();
   }
 
+  /** @ignore **/
   public ngOnDestroy(): void {
     clearTimeout(this._timer);
   }

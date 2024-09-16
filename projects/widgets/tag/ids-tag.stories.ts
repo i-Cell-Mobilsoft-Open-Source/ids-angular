@@ -4,10 +4,11 @@ import { TagAppearance } from './public-api';
 import { selectControlOptions } from '../.storybook/utils';
 import { AllVariants, coerceBooleanAttribute, Size } from '../core';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiMagnify } from '@mdi/js';
 import { withActions } from '@storybook/addon-actions/decorator';
-import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 type StoryType = IdsTagComponent & { label?: string, prefixIcon?: boolean, suffixIcon?: boolean };
 
@@ -18,6 +19,7 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [IdsIconComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
     withActions,
   ],
@@ -29,7 +31,9 @@ export default {
       props,
       template: `
         <ids-tag
-          ${argsToTemplate(props)}
+          [appearance]="appearance"
+          [size]="size"
+          [variant]="variant"
         >
           ${hasPrefixIcon ? `<ids-icon icon-leading icon="${mdiMagnify}" aria-hidden="true" alt="" />` : ''}
           ${label}

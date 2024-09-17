@@ -3,7 +3,9 @@ import tseslint from "typescript-eslint";
 import angular from "angular-eslint";
 import stylisticJs from "@stylistic/eslint-plugin";
 import importPlugin from "eslint-plugin-import";
+import rxjs from "eslint-plugin-rxjs";
 import unusedImports from "eslint-plugin-unused-imports";
+import { fixupPluginRules } from "@eslint/compat";
 
 export default tseslint.config(
   {
@@ -27,6 +29,7 @@ export default tseslint.config(
     plugins: {
       "@stylistic/js": stylisticJs,
       "unused-imports": unusedImports,
+      rxjs: fixupPluginRules(rxjs),
     },
     settings: {
       "import/ignore": ["node_modules"],
@@ -254,9 +257,10 @@ export default tseslint.config(
       "@stylistic/js/template-curly-spacing": "error",
       "@stylistic/js/type-generic-spacing": ["error"],
       "@stylistic/js/type-named-tuple-spacing": ["error"],
-      // "rxjs/no-implicit-any-catch": "off",
-      // "rxjs/no-topromise": "error",
-      // "rxjs/no-unsafe-catch": "error",
+      ...rxjs.configs["recommended"].rules,
+      "rxjs/no-implicit-any-catch": "off",
+      "rxjs/no-topromise": "error",
+      "rxjs/no-unsafe-catch": "error",
       "import/no-unresolved": "off",
       "import/order": [
         "error",

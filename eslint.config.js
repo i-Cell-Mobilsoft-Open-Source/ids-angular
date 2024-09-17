@@ -3,20 +3,6 @@ const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
 const angular = require("angular-eslint");
 const stylistic = require("@stylistic/eslint-plugin");
-const rxjs = require("eslint-plugin-rxjs");
-const importPlugin = require("eslint-plugin-import");
-const unusedImports = require("eslint-plugin-unused-imports");
-
-const ignores = [
-  "src/main.ts",
-  "api/modules/**",
-  "tailwind.config.js",
-  "setup-jest.ts",
-  "**/index.ts",
-  "**/public-api.ts",
-  "cypress/",
-  "cypress.config.ts",
-];
 
 module.exports = tseslint.config(
   {
@@ -27,18 +13,12 @@ module.exports = tseslint.config(
       ...tseslint.configs.recommended,
       ...angular.configs.tsRecommended,
       stylistic.configs["recommended-flat"],
-      // rxjs.configs.recommended,
-      // importPlugin.flatConfigs?.recommended,
     ],
-    plugins: {},
     processor: angular.processInlineTemplates,
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
       parserOptions: {
-        project: "tsconfig.json",
+        project: true,
         tsconfigRootDir: __dirname,
-        sourceType: "module",
       },
     },
     rules: {
@@ -333,6 +313,15 @@ module.exports = tseslint.config(
     },
   },
   {
-    ignores,
+    ignores: [
+      "src/main.ts",
+      "api/modules/**",
+      "tailwind.config.js",
+      "setup-jest.ts",
+      "**/index.ts",
+      "**/public-api.ts",
+      "cypress/",
+      "cypress.config.ts",
+    ],
   },
 );

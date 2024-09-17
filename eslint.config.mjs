@@ -1,12 +1,10 @@
-// @ts-check
-const eslint = require("@eslint/js");
-const tseslint = require("typescript-eslint");
-const tsParser = require("@typescript-eslint/parser");
-const angular = require("angular-eslint");
-const stylistic = require("@stylistic/eslint-plugin");
-const importPlugin = require("eslint-plugin-import");
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import angular from "angular-eslint";
+import stylisticJs from "@stylistic/eslint-plugin";
+import importPlugin from "eslint-plugin-import";
 
-module.exports = tseslint.config(
+export default tseslint.config(
   {
     name: "ts",
     files: ["**/*.ts"],
@@ -14,17 +12,19 @@ module.exports = tseslint.config(
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
       ...angular.configs.tsRecommended,
-      stylistic.configs["recommended-flat"],
       importPlugin.flatConfigs?.recommended,
       importPlugin.flatConfigs?.typescript,
     ],
     processor: angular.processInlineTemplates,
     languageOptions: {
       parserOptions: {
-        project: true,
-        tsconfigRootDir: __dirname,
+        project: "./tsconfig.json",
+        tsconfigRootDir: import.meta.dirname,
+        sourceType: "module",
       },
-      parser: tsParser,
+    },
+    plugins: {
+      "@stylistic/js": stylisticJs,
     },
     settings: {
       "import/ignore": ["node_modules"],
@@ -163,65 +163,65 @@ module.exports = tseslint.config(
       "@angular-eslint/relative-url-prefix": ["error"],
       "@angular-eslint/no-host-metadata-property": "off",
       "@angular-eslint/no-input-rename": "off",
-      "@stylistic/array-bracket-spacing": ["error", "never"],
-      "@stylistic/array-bracket-newline": [
+      "@stylistic/js/array-bracket-spacing": ["error", "never"],
+      "@stylistic/js/array-bracket-newline": [
         "error",
         {
           multiline: true,
           minItems: 2,
         },
       ],
-      "@stylistic/array-element-newline": [
+      "@stylistic/js/array-element-newline": [
         "error",
         {
           multiline: true,
           minItems: 2,
         },
       ],
-      "@stylistic/arrow-parens": ["error", "always"],
-      "@stylistic/arrow-spacing": "error",
-      "@stylistic/block-spacing": "error",
-      "@stylistic/brace-style": ["error", "1tbs", { allowSingleLine: false }],
-      "@stylistic/comma-dangle": ["error", "always-multiline"],
-      "@stylistic/comma-spacing": [
+      "@stylistic/js/arrow-parens": ["error", "always"],
+      "@stylistic/js/arrow-spacing": "error",
+      "@stylistic/js/block-spacing": "error",
+      "@stylistic/js/brace-style": ["error", "1tbs", { allowSingleLine: false }],
+      "@stylistic/js/comma-dangle": ["error", "always-multiline"],
+      "@stylistic/js/comma-spacing": [
         "error",
         {
           before: false,
           after: true,
         },
       ],
-      "@stylistic/comma-style": ["error", "last"],
-      "@stylistic/computed-property-spacing": ["error", "never"],
-      "@stylistic/dot-location": ["error", "property"],
-      "@stylistic/eol-last": ["error", "always"],
-      "@stylistic/function-call-spacing": ["error", "never"],
-      "@stylistic/indent": [
+      "@stylistic/js/comma-style": ["error", "last"],
+      "@stylistic/js/computed-property-spacing": ["error", "never"],
+      "@stylistic/js/dot-location": ["error", "property"],
+      "@stylistic/js/eol-last": ["error", "always"],
+      "@stylistic/js/function-call-spacing": ["error", "never"],
+      "@stylistic/js/indent": [
         "error",
         2,
         {
           SwitchCase: 1,
         },
       ],
-      "@stylistic/key-spacing": [
+      "@stylistic/js/key-spacing": [
         "error",
         {
           beforeColon: false,
         },
       ],
-      "@stylistic/keyword-spacing": [
+      "@stylistic/js/keyword-spacing": [
         "error",
         {
           before: true,
         },
       ],
-      "@stylistic/lines-between-class-members": [
+      "@stylistic/js/lines-between-class-members": [
         "error",
         "always",
         {
           exceptAfterSingleLine: true,
         },
       ],
-      "@stylistic/max-len": [
+      "@stylistic/js/max-len": [
         "error",
         {
           code: 140,
@@ -229,9 +229,9 @@ module.exports = tseslint.config(
           ignoreComments: true,
         },
       ],
-      "@stylistic/new-parens": "error",
-      "@stylistic/no-confusing-arrow": "error",
-      "@stylistic/no-multiple-empty-lines": [
+      "@stylistic/js/new-parens": "error",
+      "@stylistic/js/no-confusing-arrow": "error",
+      "@stylistic/js/no-multiple-empty-lines": [
         "error",
         {
           max: 1,
@@ -239,19 +239,19 @@ module.exports = tseslint.config(
           maxBOF: 0,
         },
       ],
-      "@stylistic/no-floating-decimal": "error",
-      "@stylistic/object-curly-spacing": ["error", "always"],
-      "@stylistic/quotes": ["error", "single"],
-      "@stylistic/rest-spread-spacing": ["error", "never"],
-      "@stylistic/semi": ["warn", "always"],
-      "@stylistic/semi-spacing": "error",
-      "@stylistic/space-before-blocks": "error",
-      "@stylistic/space-before-function-paren": ["error", "never"],
-      "@stylistic/space-in-parens": ["error", "never"],
-      "@stylistic/switch-colon-spacing": "error",
-      "@stylistic/template-curly-spacing": "error",
-      "@stylistic/type-generic-spacing": ["error"],
-      "@stylistic/type-named-tuple-spacing": ["error"],
+      "@stylistic/js/no-floating-decimal": "error",
+      "@stylistic/js/object-curly-spacing": ["error", "always"],
+      "@stylistic/js/quotes": ["error", "single"],
+      "@stylistic/js/rest-spread-spacing": ["error", "never"],
+      "@stylistic/js/semi": ["warn", "always"],
+      "@stylistic/js/semi-spacing": "error",
+      "@stylistic/js/space-before-blocks": "error",
+      "@stylistic/js/space-before-function-paren": ["error", "never"],
+      "@stylistic/js/space-in-parens": ["error", "never"],
+      "@stylistic/js/switch-colon-spacing": "error",
+      "@stylistic/js/template-curly-spacing": "error",
+      "@stylistic/js/type-generic-spacing": ["error"],
+      "@stylistic/js/type-named-tuple-spacing": ["error"],
       // "rxjs/no-implicit-any-catch": "off",
       // "rxjs/no-topromise": "error",
       // "rxjs/no-unsafe-catch": "error",
@@ -296,6 +296,13 @@ module.exports = tseslint.config(
     name: "html",
     files: ["**/*.html"],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
+    languageOptions: {
+      parserOptions: {
+        project: "./tsconfig.json",
+        tsconfigRootDir: import.meta.dirname,
+        sourceType: "module",
+      },
+    },
     rules: {
       "@angular-eslint/template/no-duplicate-attributes": [
         "error",
@@ -309,19 +316,14 @@ module.exports = tseslint.config(
       "@angular-eslint/template/prefer-control-flow": "error",
       "@angular-eslint/template/attributes-order": "error",
       "@angular-eslint/template/prefer-self-closing-tags": "error",
-      "@stylistic/max-len": [
-        "warn",
-        {
-          code: 140,
-          ignoreComments: true,
-        },
-      ],
       "@angular-eslint/template/click-events-have-key-events": "off",
       "@angular-eslint/template/interactive-supports-focus": "off",
     },
   },
   {
     ignores: [
+      "dist/",
+      "coverage/",
       "src/main.ts",
       "api/modules/**",
       "tailwind.config.js",
@@ -330,6 +332,7 @@ module.exports = tseslint.config(
       "**/public-api.ts",
       "cypress/",
       "cypress.config.ts",
+      "projects/widgets/.storybook",
     ],
   },
 );

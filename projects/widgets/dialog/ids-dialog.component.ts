@@ -68,7 +68,7 @@ export class IdsDialogComponent {
   }
 
   @HostListener('cancel', ['$event'])
-  protected onCancel(event: Event): void {
+  protected _onCancel(event: Event): void {
     event.preventDefault();
   }
 

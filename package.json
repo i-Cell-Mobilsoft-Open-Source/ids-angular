@@ -12,7 +12,7 @@
     "test:widgets:watch": "jest --selectProjects widgets --watch",
     "test:ci": "jest --runInBand --bail",
     "e2e": "cypress run",
-    "lint": "ng lint",
+    "lint": "ng lint widgets",
     "prepare": "husky",
     "storybook": "ng run widgets:storybook",
     "build:storybook": "ng run widgets:build-storybook"

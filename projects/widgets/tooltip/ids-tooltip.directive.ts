@@ -137,6 +137,7 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   public toggle(): void {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     this._tooltipInstance?.isVisible ? this.hide() : this.show(undefined);
   }
 

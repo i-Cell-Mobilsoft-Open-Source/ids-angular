@@ -1,8 +1,10 @@
 // @ts-check
 const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
+const tsParser = require("@typescript-eslint/parser");
 const angular = require("angular-eslint");
 const stylistic = require("@stylistic/eslint-plugin");
+const importPlugin = require("eslint-plugin-import");
 
 module.exports = tseslint.config(
   {
@@ -13,6 +15,8 @@ module.exports = tseslint.config(
       ...tseslint.configs.recommended,
       ...angular.configs.tsRecommended,
       stylistic.configs["recommended-flat"],
+      importPlugin.flatConfigs?.recommended,
+      importPlugin.flatConfigs?.typescript,
     ],
     processor: angular.processInlineTemplates,
     languageOptions: {
@@ -20,6 +24,10 @@ module.exports = tseslint.config(
         project: true,
         tsconfigRootDir: __dirname,
       },
+      parser: tsParser,
+    },
+    settings: {
+      "import/ignore": ["node_modules"],
     },
     rules: {
       "no-self-compare": "error",
@@ -247,18 +255,18 @@ module.exports = tseslint.config(
       // "rxjs/no-implicit-any-catch": "off",
       // "rxjs/no-topromise": "error",
       // "rxjs/no-unsafe-catch": "error",
-      // "import/no-unresolved": "off",
-      // "import/order": [
-      //   "error",
-      //   {
-      //     groups: ["index", "sibling", "parent", "internal", "external", "builtin", "object", "type"],
-      //     "newlines-between": "always",
-      //     alphabetize: {
-      //       order: "asc",
-      //       caseInsensitive: true,
-      //     },
-      //   },
-      // ],
+      "import/no-unresolved": "off",
+      "import/order": [
+        "error",
+        {
+          groups: ["index", "sibling", "parent", "internal", "external", "builtin", "object", "type"],
+          "newlines-between": "always",
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
+        },
+      ],
       // "unused-imports/no-unused-imports": "error",
     },
   },

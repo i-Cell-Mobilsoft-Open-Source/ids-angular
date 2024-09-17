@@ -4,11 +4,9 @@ import { IdsSwitchGroupComponent } from './switch-group.component';
 import { SwitchIconPosition } from './types/switch-positions';
 import { SwitchVariantType } from './types/switch-variant';
 
-import { coerceNumberAttribute } from '../core';
-
 import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, SizeType, fallbackValue } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, createClassList, SizeType, fallbackValue, coerceNumberAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiCheck, mdiClose } from '@mdi/js';
 

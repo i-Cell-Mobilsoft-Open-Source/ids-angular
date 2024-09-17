@@ -117,7 +117,8 @@
             "lintFilePatterns": [
               "projects/widgets/**/*.ts",
               "projects/widgets/**/*.html"
-            ]
+            ],
+            "eslintConfig": "projects/widgets/eslint.config.js"
           }
         },
         "storybook": {

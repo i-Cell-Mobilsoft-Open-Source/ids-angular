@@ -7,13 +7,13 @@ import { Subject, Subscription, fromEvent } from 'rxjs';
 export abstract class IdsCustomDialogBase<ResultType = unknown> implements AfterViewInit, OnDestroy {
   public dialogResult = new Subject<ResultType | undefined>();
 
-  protected dialog = viewChild.required(IdsDialogComponent);
+  protected _dialog = viewChild.required(IdsDialogComponent);
 
   private _closeSub?: Subscription;
 
   public ngAfterViewInit(): void {
-    this.dialog().open();
-    this._closeSub = fromEvent(this.dialog().dialog, 'close').subscribe(() => {
+    this._dialog().open();
+    this._closeSub = fromEvent(this._dialog().dialog, 'close').subscribe(() => {
       this._setDialogResult();
     });
   }
@@ -24,7 +24,7 @@ export abstract class IdsCustomDialogBase<ResultType = unknown> implements After
 
   public close(payload?: ResultType): void {
     this._closeSub?.unsubscribe();
-    this.dialog().close();
+    this._dialog().close();
     this._setDialogResult(payload);
   }
 

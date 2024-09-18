@@ -89,9 +89,9 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   /** @ignore */
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<OrientationType, Set<string>> = {
-      // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+      // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       horizontal: new Set(['ArrowLeft', 'ArrowRight', 'Enter', ' ']),
-      // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+      // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       vertical: new Set(['ArrowUp', 'ArrowDown', 'Enter', ' ']),
     };
 

@@ -1,5 +1,3 @@
-/* eslint-disable no-magic-numbers */
-
 import { FormFieldVariant, FormFieldVariantType } from './types/ids-form-field-variant.type';
 
 import { InjectionToken } from '@angular/core';

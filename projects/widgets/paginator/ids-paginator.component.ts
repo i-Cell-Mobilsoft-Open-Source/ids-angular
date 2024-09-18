@@ -153,7 +153,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   /** @ignore */
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     event.stopPropagation();
-    // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+    // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'PageDown', 'PageUp', 'Home', 'End'];
 
     switch (event.key) {
@@ -241,7 +241,6 @@ export class IdsPaginatorComponent implements OnDestroy {
     const truncation = '...';
 
     if (isTruncatedRight) {
-      // eslint-disable-next-line no-magic-numbers
       const x = maxDisplayedItemCount - 2; // 2 = 1 last page, 1 truncation
       return [
         ...allPages.slice(0, x),
@@ -263,7 +262,6 @@ export class IdsPaginatorComponent implements OnDestroy {
     }
 
     if (isTruncatedLeft) {
-      // eslint-disable-next-line no-magic-numbers
       const x = maxDisplayedItemCount - 2; // 2 = 1 last page, 1 truncation
       return [
         '1',

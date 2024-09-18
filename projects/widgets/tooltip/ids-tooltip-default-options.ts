@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { TooltipPosition, TooltipPositionType } from './types/ids-tooltip-position';
 import { TooltipVariant, TooltipVariantType } from './types/ids-tooltip-variant';
 

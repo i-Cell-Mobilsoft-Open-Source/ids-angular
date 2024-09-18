@@ -83,7 +83,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
 
   /** @ignore */
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
-    // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+    // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', ' '];
 
     if (!navigationKeys.includes(event.key)) {

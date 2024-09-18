@@ -40,7 +40,7 @@ export class ConnectedPosition {
     this.fallbackPositionPair.set(fallbackPositionPair);
   }
 
-  // eslint-disable-next-line @stylistic/array-element-newline, @stylistic/array-bracket-newline
+  // eslint-disable-next-line @stylistic/js/array-element-newline, @stylistic/js/array-bracket-newline
   private _getNewRect([horizontalPosition, verticalPosition]: ExtendedPositionPairType): DOMRectBase {
     const triggerEl = this._triggerElement!;
     const triggerRect = triggerEl.getBoundingClientRect();
@@ -85,20 +85,20 @@ export class ConnectedPosition {
     }
     const clippedFromHorizontal = clippedFrom.has(Position.RIGHT) ? Position.RIGHT : Position.LEFT;
     const clippedFromVertical = clippedFrom.has(Position.TOP) ? Position.TOP : Position.BOTTOM;
-    // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+    // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const [currentHorizontal, currentVertical] = this._originalPositionPair!;
     const isClippedHorizontal = Object.values(HorizontalPosition).some((pos) => clippedFrom.has(pos));
     const isClippedVertical = Object.values(VerticalPosition).some((pos) => clippedFrom.has(pos));
     if (isClippedHorizontal && isClippedVertical) {
-      // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+      // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       return [this._getOppositeHorizontalDirection(clippedFromHorizontal), this._getOppositeVerticalDirection(clippedFromVertical)];
     }
     if (isClippedHorizontal) {
-      // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+      // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       return [this._getOppositeHorizontalDirection(clippedFromHorizontal), currentVertical];
     }
     if (isClippedVertical) {
-      // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+      // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       return [currentHorizontal, this._getOppositeVerticalDirection(clippedFromVertical)];
     }
     return null;

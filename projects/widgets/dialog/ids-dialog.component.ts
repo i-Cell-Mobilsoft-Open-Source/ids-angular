@@ -77,8 +77,7 @@ export class IdsDialogComponent {
 
   /** @ignore */
   @HostListener('cancel', ['$event'])
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  protected onCancel(event: Event): void {
+  protected _onCancel(event: Event): void {
     event.preventDefault();
   }
 

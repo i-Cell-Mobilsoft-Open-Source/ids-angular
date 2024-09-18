@@ -1,4 +1,3 @@
-/* eslint-disable @angular-eslint/component-class-suffix */
 import { IdsSegmentedControlToggleDirective } from '../ids-segmented-control-toggle.directive';
 import { IdsSegmentedControlDirective } from '../ids-segmented-control.directive';
 import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from '../types/ids-segmented-control-item-change';

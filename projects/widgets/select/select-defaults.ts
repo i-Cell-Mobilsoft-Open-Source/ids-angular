@@ -4,6 +4,7 @@ import { AbstractErrorStateMatcher, AbstractSuccessStateMatcher, ErrorStateMatch
 export interface IdsSelectDefaultConfig {
   errorStateMatcher?: typeof AbstractErrorStateMatcher
   successStateMatcher?: typeof AbstractSuccessStateMatcher
+  typeaheadDebounceInterval: number
 }
 
 export const IDS_SELECT_DEFAULT_CONFIG = new InjectionToken<IdsSelectDefaultConfig>(
@@ -18,5 +19,6 @@ export function IDS_SELECT_DEFAULT_CONFIG_FACTORY(): Required<IdsSelectDefaultCo
   return {
     errorStateMatcher: ErrorStateMatcher,
     successStateMatcher: SuccessStateMatcher,
+    typeaheadDebounceInterval: 100,
   };
 }

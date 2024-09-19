@@ -8,7 +8,7 @@ import { PseudoCheckboxComponent } from '../pseudo-checkbox/pseudo-checkbox.comp
 
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { CheckboxState } from '@i-cell/ids-angular/checkbox';
 import { coerceBooleanAttribute, ComponentBase, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -33,8 +33,8 @@ import { mdiCheck } from '@mdi/js';
   host: {
     'role': 'option',
     '[attr.aria-selected]': 'selected()',
-    '[attr.aria-disabled]': 'disabled().toString()',
-    '(click)': '_selectViaInteraction()',
+    '[attr.aria-disabled]': 'disabled.toString()',
+    '(click)': 'selectViaInteraction()',
     '(keydown)': '_handleKeydown($event)',
   },
 })
@@ -58,9 +58,11 @@ export class IdsOptionComponent<T = unknown>
 
   public value = input<T>();
   public explicitViewValue = input<string | null>(null, { alias: 'viewValue' });
-  public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public disabledInput = input<boolean, unknown>(false, { alias: 'disabled', transform: coerceBooleanAttribute });
 
-  protected _groupOrOptionIsDisabled = computed(() => this.group?.disabled() || this.disabled());
+  public disabled = false; // Do not delete this class member, until ListKeyManagerOption requires: `disabled: boolean`
+
+  protected _groupOrOptionIsDisabled = computed(() => this.group?.disabled() || this.disabledInput());
 
   protected readonly _checkIcon = mdiCheck;
   protected readonly _multiSelect = Boolean(this._parent?.multiSelect());
@@ -79,6 +81,13 @@ export class IdsOptionComponent<T = unknown>
 
   protected _pseudoCheckboxState = computed(() => (this.selected() ? CheckboxState.CHECKED : CheckboxState.UNCHECKED));
 
+  constructor() {
+    super();
+    effect(() => {  // Do not delete this effect, until ListKeyManagerOption requires: `disabled: boolean`
+      this.disabled = this.disabledInput();
+    });
+  }
+
   public ngOnInit(): void {
     const parent = this._parent;
 
@@ -89,12 +98,12 @@ export class IdsOptionComponent<T = unknown>
 
   private _handleKeydown(event: KeyboardEvent): void {
     if ((event.key === 'ENTER' || event.key === ' ') && !hasModifierKey(event)) {
-      this._selectViaInteraction();
+      this.selectViaInteraction();
       event.preventDefault();
     }
   }
 
-  private _selectViaInteraction(): void {
+  public selectViaInteraction(): void {
     if (!this._groupOrOptionIsDisabled()) {
       this._emitSelectionChangeEvent(!this.selected());
     }
@@ -138,6 +147,10 @@ export class IdsOptionComponent<T = unknown>
     if (this._active()) {
       this._active.set(false);
     }
+  }
+
+  public getLabel(): string {
+    return this.viewValue();
   }
 
   private _emitSelectionChangeEvent(selected: boolean): void {

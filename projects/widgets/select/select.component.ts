@@ -5,10 +5,11 @@ import { IDS_SELECT_TRIGGER, IdsSelectTriggerDirective } from './select-trigger.
 import { FormFieldVariantType, IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent } from '../forms';
 import { IDS_OPTION_PARENT_COMPONENT } from '../forms/components/option/option-parent';
 
+import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild, OnDestroy, effect, isDevMode } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, coerceNumberAttribute, ComponentBaseWithDefaults, createClassList, SizeType } from '@i-cell/ids-angular/core';
@@ -51,11 +52,13 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
     '[attr.aria-disabled]': 'disabled().toString()',
     '[attr.aria-invalid]': 'hasErrorState()',
     '(keydown)': '_handleKeydown($event)',
+    '(focus)': 'focus()',
+    '(blur)': '_onBlur()',
   },
 })
 export class IdsSelectComponent
   extends ComponentBaseWithDefaults<IdsSelectDefaultConfig>
-  implements IdsFormFieldControl, ControlValueAccessor, OnInit, AfterContentInit {
+  implements IdsFormFieldControl, ControlValueAccessor, OnInit, AfterContentInit, OnDestroy {
   protected override get _componentName(): string {
     return 'select';
   }
@@ -63,6 +66,7 @@ export class IdsSelectComponent
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SELECT_DEFAULT_CONFIG);
   private readonly _elementRef = inject(ElementRef);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly _liveAnnouncer = inject(LiveAnnouncer);
   private readonly _parentFormField = inject(IDS_FORM_FIELD);
   private readonly _parentForm = inject(NgForm, { optional: true });
   private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
@@ -84,9 +88,12 @@ export class IdsSelectComponent
   public successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultConfig.successStateMatcher));
   public ariaLabel = input<string>('', { alias: 'aria-label' });
   public ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
-  public valueCompareFn = input<(o1: IdsOptionComponent, o2: IdsOptionComponent) => boolean>();
+  public valueCompareFn = input<(o1: unknown, o2: unknown) => boolean>((o1: unknown, o2: unknown) => o1 === o2);
   public sortCompareFn = input<(a: IdsOptionComponent, b: IdsOptionComponent, options: Readonly<IdsOptionComponent[]>) => number>();
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
+  public typeaheadDebounceInterval = input<number, unknown>(
+    this._defaultConfig.typeaheadDebounceInterval, { transform: coerceNumberAttribute },
+  );
 
   public disabled = signal<boolean>(false);
   public isPanelOpen = signal<boolean>(false);
@@ -94,6 +101,7 @@ export class IdsSelectComponent
   public hasSuccessState = signal<boolean>(false);
   public parentSize = signal<SizeType | null>(null);
   public parentVariant = signal<FormFieldVariantType | null>(null);
+  private _focused = signal<boolean>(false);
 
   private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && !this.readonly() && this.options().length > 0);
   protected _hostClasses = computed(() => this._getHostClasses([
@@ -102,13 +110,13 @@ export class IdsSelectComponent
     this.disabled() ? 'disabled' : null,
     this.readonly() ? 'readonly' : null,
   ]));
-
+  
   protected _panelClasses = computed(() => createClassList(`${this._componentClass}-panel`, [
     this.parentSize(),
     this.parentVariant(),
   ]));
 
-  private _panel = viewChild.required<ElementRef<HTMLElement>>('panel');
+  private _panel = viewChild<ElementRef<HTMLElement>>('panel');
   private _overlayDir = viewChild(CdkConnectedOverlay);
   public options = contentChildren<IdsOptionComponent>(IdsOptionComponent, { descendants: true });
   public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
@@ -118,6 +126,7 @@ export class IdsSelectComponent
   private _successStateTracker?: SuccessStateTracker;
   public ngControl: NgControl | null = null;
 
+  private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
   private _rawValue: unknown | unknown[];
   private _selectionModel?: SelectionModel<IdsOptionComponent>;
   private _onChange: (value: unknown) => void = () => {};
@@ -144,6 +153,13 @@ export class IdsSelectComponent
     return this._selectionModel?.selected?.[0].viewValue() || '';
   }
 
+  constructor() {
+    super();
+    effect(() => {
+      this._keyManager?.withTypeAhead(this.typeaheadDebounceInterval());
+    });
+  }
+
   public ngOnInit(): void {
     if (!this._parentFormField) {
       this._createComponentError('Select must be in a form field');
@@ -153,6 +169,16 @@ export class IdsSelectComponent
     this._selectionModel = new SelectionModel<IdsOptionComponent>(this.multiSelect(), undefined, false, this.valueCompareFn());
     this._initErrorStateTracker();
     this._initSuccessStateTracker();
+  }
+
+  public ngAfterContentInit(): void {
+    this._initKeyManager();
+    this._selectionModel?.select(...this.options().filter((item) => item.selected()));
+    this._subscribeOptionChanges();
+  }
+
+  public ngOnDestroy(): void {
+    this._keyManager?.destroy();
   }
 
   private _initErrorStateTracker(): void {
@@ -185,9 +211,33 @@ export class IdsSelectComponent
     }
   }
 
-  public ngAfterContentInit(): void {
-    this._selectionModel?.select(...this.options().filter((item) => item.selected()));
-    this._subscribeOptionChanges();
+  private _initKeyManager(): void {
+    this._keyManager = new ActiveDescendantKeyManager<IdsOptionComponent>(this.options())
+      .withTypeAhead(this.typeaheadDebounceInterval())
+      .withVerticalOrientation()
+      .withHorizontalOrientation('ltr')
+      .withHomeAndEnd()
+      .withPageUpDown()
+      .withAllowedModifierKeys(['shiftKey'])
+      .skipPredicate(this._skipPredicate);
+
+    this._keyManager.tabOut.subscribe(() => {
+      if (this.isPanelOpen()) {
+        if (!this.multiSelect() && this._keyManager?.activeItem) {
+          this._keyManager.activeItem.selectViaInteraction();
+        }
+        this.focus();
+        this.close();
+      }
+    });
+
+    this._keyManager.change.subscribe(() => {
+      if (this.isPanelOpen() && this._panel()) {
+        this._scrollOptionIntoView(this._keyManager?.activeItemIndex || 0);
+      } else if (!this.isPanelOpen() && !this.multiSelect() && this._keyManager?.activeItem) {
+        this._keyManager.activeItem.selectViaInteraction();
+      }
+    });
   }
 
   private _subscribeOptionChanges(): void {
@@ -222,31 +272,85 @@ export class IdsSelectComponent
   }
 
   private _handleClosedPanelKeydown(event: KeyboardEvent): void {
+    const manager = this._keyManager;
     const key = event.key;
-    const isOpenKey = key === 'ENTER' || key === ' ';
+    const isArrowKey =
+      key === 'ArrowDown' ||
+      key === 'ArrowUp' ||
+      key === 'ArrowLeft' ||
+      key === 'ArrowRight';
+    const isOpenKey = key === 'Enter' || key === ' ';
 
-    if ((isOpenKey && !hasModifierKey(event))) {
+    if (
+      (!manager?.isTyping() && isOpenKey && !hasModifierKey(event)) ||
+      ((this.multiSelect() || event.altKey) && isArrowKey)
+    ) {
       event.preventDefault();
       this.open();
+    } else if (!this.multiSelect()) {
+      const previouslySelectedOption = this.selected;
+      manager?.onKeydown(event);
+      const selectedOption = this.selected;
+
+      if (selectedOption && previouslySelectedOption !== selectedOption) {
+        // eslint-disable-next-line no-magic-numbers
+        this._liveAnnouncer.announce((selectedOption as IdsOptionComponent).viewValue(), 10000);
+      }
     }
   }
 
   private _handleOpenedPanelKeydown(event: KeyboardEvent): void {
+    const manager = this._keyManager;
     const key = event.key;
-    if (key === 'Escape') {
+    const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp';
+    const isTyping = manager?.isTyping();
+    
+    if (isArrowKey && event.altKey) {
+      event.preventDefault();
       this.close();
+    } else if (
+      !isTyping &&
+      (key === 'Enter' || key === ' ') &&
+      manager?.activeItem &&
+      !hasModifierKey(event)
+    ) {
+      event.preventDefault();
+      manager.activeItem.selectViaInteraction();
+    } else if (!isTyping && this.multiSelect() && key === 'a' && event.ctrlKey) {
+      event.preventDefault();
+      const hasDeselectedOptions = this.options().some((opt) => !opt.disabled && !opt.selected());
+
+      this.options().forEach((option) => {
+        if (!option.disabled) {
+          hasDeselectedOptions ? option.select() : option.deselect();
+        }
+      });
+    } else {
+      const previouslyFocusedIndex = manager?.activeItemIndex;
+
+      manager?.onKeydown(event);
+
+      if (
+        this.multiSelect() &&
+        isArrowKey &&
+        event.shiftKey &&
+        manager?.activeItem &&
+        manager?.activeItemIndex !== previouslyFocusedIndex
+      ) {
+        manager?.activeItem.selectViaInteraction();
+      }
     }
   }
 
   private _positioningSettled(): void {
-    this._scrollOptionIntoView(0); // TODO: try to pass index to method without keyManager
+    this._scrollOptionIntoView(this._keyManager?.activeItemIndex || 0);
   }
 
   private _scrollOptionIntoView(index: number): void {
     const option = this.options()[index];
 
     if (option) {
-      const panel: HTMLElement = this._panel().nativeElement;
+      const panel: HTMLElement | undefined = this._panel()!.nativeElement;
       const labelCount = _countGroupLabelsBeforeOption(index, this.options(), this.optionGroups());
       const element = option.getHostElement();
 
@@ -306,12 +410,15 @@ export class IdsSelectComponent
 
     this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
     this.isPanelOpen.set(true);
+    this._keyManager?.withHorizontalOrientation(null);
+    this._highlightCorrectOption();
     this._changeDetectorRef.markForCheck();
   }
 
   public close(): void {
     if (this.isPanelOpen()) {
       this.isPanelOpen.set(false);
+      this._keyManager?.withHorizontalOrientation('ltr');
       this._changeDetectorRef.markForCheck();
       this._onTouched();
     }
@@ -334,6 +441,8 @@ export class IdsSelectComponent
   }
 
   private _setSelectionByValue(value: unknown | unknown[]): void {
+    this.options().forEach((option) => option.setInactiveStyles());
+    this._selectionModel?.clear();
     this._rawValue = value;
 
     if (this.options().length === 0) {
@@ -348,17 +457,38 @@ export class IdsSelectComponent
       value.forEach((currentValue: unknown) => this._selectValue(currentValue));
       this._sortValues();
     } else {
-      this._clearSelection();
-      this._selectValue(value);
+      const correspondingOption = this._selectValue(value);
+      if (correspondingOption) {
+        this._keyManager?.updateActiveItem(correspondingOption);
+      } else if (!this.isPanelOpen()) {
+        this._keyManager?.updateActiveItem(-1);
+      }
     }
   }
 
-  private _selectValue(value: unknown): void {
-    const correspondingOption = this.options().find((option) => option.value() != null && option.value() === value);
+  private _selectValue(value: unknown): IdsOptionComponent | undefined {
+    const correspondingOption = this.options().find((option) => {
+      if (this._selectionModel?.isSelected(option)) {
+        return false;
+      }
+
+      try {
+        const valueCompareFn = this.valueCompareFn();
+        return option.value() != null && valueCompareFn && valueCompareFn(option.value(), value);
+      } catch (error) {
+        if (isDevMode()) {
+          console.warn(error);
+        }
+        return false;
+      }
+    });
+
     if (correspondingOption) {
       correspondingOption.selected.set(true);
       this._selectionModel?.select(correspondingOption);
     }
+
+    return correspondingOption;
   }
 
   private _clearSelection(): void {
@@ -379,17 +509,43 @@ export class IdsSelectComponent
     this._changeDetectorRef.markForCheck();
   }
 
+  private _skipPredicate = (option: IdsOptionComponent): boolean => {
+    if (this.isPanelOpen()) {
+      return false;
+    }
+
+    return option.disabledInput();
+  };
+
+  private _highlightCorrectOption(): void {
+    if (this._keyManager) {
+      if (this._empty) {
+        let firstEnabledOptionIndex = -1;
+        for (let index = 0; index < this.options().length; index++) {
+          const option = this.options()[index]!;
+          if (!option.disabled) {
+            firstEnabledOptionIndex = index;
+            break;
+          }
+        }
+
+        this._keyManager.setActiveItem(firstEnabledOptionIndex);
+      } else {
+        if (this._selectionModel) {
+          this._keyManager.setActiveItem(this._selectionModel.selected[0]);
+        }
+      }
+    }
+  }
+
   public isOptionPreSelectedByValue(optionValue: unknown): boolean {
     if (this._rawValue === undefined) {
-      // console.log('rawValue undefined');
       return false;
     }
 
     if (this.multiSelect() && Array.isArray(this._rawValue)) {
-      // console.log('multiselect');
       return this._rawValue.some((value) => optionValue != null && value === optionValue);
     }
-    // console.log('single select', optionValue, this._rawValue);
     return optionValue === this._rawValue;
   }
 
@@ -399,6 +555,30 @@ export class IdsSelectComponent
     } else {
       this._elementRef.nativeElement.removeAttribute('aria-describedby');
     }
+  }
+
+  private _onFocus(): void {
+    if (!this.disabled()) {
+      this._focused.set(true);
+    }
+  }
+
+  private _onBlur(): void {
+    this._focused.set(false);
+    this._keyManager?.cancelTypeahead();
+
+    if (!this.disabled() && !this.isPanelOpen()) {
+      this._onTouched();
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+
+  private _getAriaActiveDescendant(): string | null {
+    if (this.isPanelOpen() && this._keyManager?.activeItem) {
+      return this._keyManager.activeItem.id();
+    }
+
+    return null;
   }
 
   public focus(options?: FocusOptions): void {

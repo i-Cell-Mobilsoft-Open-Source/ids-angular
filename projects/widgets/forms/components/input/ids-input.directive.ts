@@ -3,7 +3,7 @@ import { IdsInputType } from './types/input.type';
 
 import { AbstractErrorStateMatcher, ErrorStateTracker } from '../../common/error/error-state';
 import { AbstractSuccessStateMatcher, SuccessStateTracker } from '../../common/success/success-state';
-import { IdsFormFieldControl } from '../form-field/ids-form-field-control';
+import { formFieldControlClass, IdsFormFieldControl } from '../form-field/ids-form-field-control';
 import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/ids-form-field-tokens';
 
 import { computed, Directive, effect, ElementRef, HostBinding, inject, Injector, input, isDevMode, DoCheck, signal, HostListener, OnDestroy, OnInit } from '@angular/core';
@@ -78,7 +78,7 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
   public successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultOptions.successStateMatcher));
 
   public inputId = computed(() => this.id() || this._uniqueId);
-  private _hostClasses = computed(() => createClassList(this._componentClass, []),
+  private _hostClasses = computed(() => createClassList(this._componentClass, [], [formFieldControlClass]),
   );
 
   public hasErrorState = signal<boolean>(false);

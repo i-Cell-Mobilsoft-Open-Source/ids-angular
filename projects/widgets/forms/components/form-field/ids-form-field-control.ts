@@ -2,6 +2,8 @@ import { Signal } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
+export const formFieldControlClass = 'ids-form-field-control';
+
 export abstract class IdsFormFieldControl {
   public readonly errorStateChanges!: Observable<void>;
   public readonly successStateChanges!: Observable<void>;

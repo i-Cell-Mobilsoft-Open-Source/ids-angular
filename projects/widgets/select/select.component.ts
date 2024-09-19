@@ -2,9 +2,6 @@ import { IDS_SELECT_DEFAULT_CONFIG, IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelect
 import { selectConnectedPositions } from './select-positions';
 import { IDS_SELECT_TRIGGER, IdsSelectTriggerDirective } from './select-trigger.directive';
 
-import { FormFieldVariantType, IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent } from '../forms';
-import { IDS_OPTION_PARENT_COMPONENT } from '../forms/components/option/option-parent';
-
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
@@ -13,7 +10,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, conten
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, coerceNumberAttribute, ComponentBaseWithDefaults, createClassList, SizeType } from '@i-cell/ids-angular/core';
-import { AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange } from '@i-cell/ids-angular/forms';
+import { FormFieldVariantType, IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { mdiChevronDown } from '@mdi/js';
 import { first, Subject } from 'rxjs';
@@ -109,7 +106,7 @@ export class IdsSelectComponent
     this.parentVariant(),
     this.disabled() ? 'disabled' : null,
     this.readonly() ? 'readonly' : null,
-  ]));
+  ], [formFieldControlClass]));
   
   protected _panelClasses = computed(() => createClassList(`${this._componentClass}-panel`, [
     this.parentSize(),

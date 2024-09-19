@@ -84,6 +84,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
   },
   {
+    path: 'components/icon',
+    loadComponent: () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
+  },
+  {
     path: 'components',
     loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
   },

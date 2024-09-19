@@ -20,6 +20,7 @@
     "DIALOG": "Dialog",
     "DIVIDER": "Divider",
     "FORM_FIELD": "Form field",
+    "ICON": "Icon",
     "ICON_BUTTON": "Icon button",
     "PAGINATOR": "Paginator",
     "RADIO": "Radio",

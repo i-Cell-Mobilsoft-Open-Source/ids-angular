@@ -39,8 +39,8 @@ importers:
         specifier: 0.0.14
         version: 0.0.14
       '@i-cell/ids-tokens':
-        specifier: 0.0.23
-        version: 0.0.23
+        specifier: 0.0.24-beta.5
+        version: 0.0.24-beta.5
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -98,7 +98,7 @@ importers:
         version: 8.2.9(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
       '@storybook/angular':
         specifier: ^8.1.0
-        version: 8.2.9(@angular-devkit/architect@0.1802.4(chokidar@3.6.0))(@angular-devkit/build-angular@18.2.4(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@types/node@20.16.1)(chokidar@3.6.0)(html-webpack-plugin@5.6.0(webpack@5.94.0(esbuild@0.21.5)))(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(ng-packagr@18.2.1(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(tslib@2.7.0)(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(typescript@5.5.4))(@angular-devkit/core@18.2.4(chokidar@3.6.0))(@angular/cli@18.2.4(chokidar@3.6.0))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/forms@18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1))(@angular/platform-browser-dynamic@18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(esbuild@0.21.5)(rxjs@7.8.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)(zone.js@0.14.10)
+        version: 8.2.9(ueqc7p3ubeiv7weagrddz5mbbu)
       '@storybook/blocks':
         specifier: ^8.1.0
         version: 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
@@ -152,7 +152,7 @@ importers:
         version: 29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4))
       jest-preset-angular:
         specifier: ^14.2.4
-        version: 14.2.4(@angular-devkit/build-angular@18.2.4(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@types/node@20.16.1)(chokidar@3.6.0)(html-webpack-plugin@5.6.0(webpack@5.94.0(esbuild@0.21.5)))(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(ng-packagr@18.2.1(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(tslib@2.7.0)(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(typescript@5.5.4))(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser-dynamic@18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))))(@babel/core@7.25.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.25.2))(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(typescript@5.5.4)
+        version: 14.2.4(ncvrjbuxrvyb2nmjpszvi3xroe)
       jest-slow-test-highlighter:
         specifier: ^1.0.1
         version: 1.0.1(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))
@@ -1618,8 +1618,8 @@ packages:
   '@i-cell/ids-styles@0.0.14':
     resolution: {integrity: sha512-DwRAJOJcTVZ0H2Q51Bhnm0trXgSlcg4CDWe6JbsdmcmlWOmbRXhD1/WV1raiXSYgJJYsKj3S3SBmxwwX1N6r1A==}
 
-  '@i-cell/ids-tokens@0.0.23':
-    resolution: {integrity: sha512-k80dc3CKHvz9fAwjQaqmfJpddQg487YqUU5Cw5gF/QP9XnNEUsH7WsiYXRWppbOM7DYGff0IJAzYy+fCPHY8Qw==}
+  '@i-cell/ids-tokens@0.0.24-beta.5':
+    resolution: {integrity: sha512-gYus5kHm+XdhMr1vBSst/4zjeHLtWdhc2xH2hUo9UEEHIuBQgPkPrGWRJI9x9iy/LB+kqkFe8pUfYteSqsfR7g==}
 
   '@inquirer/checkbox@2.5.0':
     resolution: {integrity: sha512-sMgdETOfi2dUHT8r7TT1BTKOwNvdDGFDXYWtQ2J69SvlYNntk9I/gJe7r5yvMwwsuKnYbuRs3pNhx4tgNck5aA==}
@@ -9407,7 +9407,7 @@ snapshots:
 
   '@i-cell/ids-styles@0.0.14': {}
 
-  '@i-cell/ids-tokens@0.0.23': {}
+  '@i-cell/ids-tokens@0.0.24-beta.5': {}
 
   '@inquirer/checkbox@2.5.0':
     dependencies:
@@ -10183,8 +10183,8 @@ snapshots:
       memoizerific: 1.11.3
       storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
 
-  ? '@storybook/angular@8.2.9(@angular-devkit/architect@0.1802.4(chokidar@3.6.0))(@angular-devkit/build-angular@18.2.4(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@types/node@20.16.1)(chokidar@3.6.0)(html-webpack-plugin@5.6.0(webpack@5.94.0(esbuild@0.21.5)))(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(ng-packagr@18.2.1(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(tslib@2.7.0)(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(typescript@5.5.4))(@angular-devkit/core@18.2.4(chokidar@3.6.0))(@angular/cli@18.2.4(chokidar@3.6.0))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/forms@18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1))(@angular/platform-browser-dynamic@18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(esbuild@0.21.5)(rxjs@7.8.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)(zone.js@0.14.10)'
-  : dependencies:
+  '@storybook/angular@8.2.9(ueqc7p3ubeiv7weagrddz5mbbu)':
+    dependencies:
       '@angular-devkit/architect': 0.1802.4(chokidar@3.6.0)
       '@angular-devkit/build-angular': 18.2.4(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@types/node@20.16.1)(chokidar@3.6.0)(html-webpack-plugin@5.6.0(webpack@5.94.0(esbuild@0.21.5)))(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(ng-packagr@18.2.1(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(tslib@2.7.0)(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(typescript@5.5.4)
       '@angular-devkit/core': 18.2.4(chokidar@3.6.0)
@@ -13685,8 +13685,8 @@ snapshots:
     optionalDependencies:
       jest-resolve: 29.7.0
 
-  ? jest-preset-angular@14.2.4(@angular-devkit/build-angular@18.2.4(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@types/node@20.16.1)(chokidar@3.6.0)(html-webpack-plugin@5.6.0(webpack@5.94.0(esbuild@0.21.5)))(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(ng-packagr@18.2.1(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(tslib@2.7.0)(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(typescript@5.5.4))(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser-dynamic@18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))))(@babel/core@7.25.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.25.2))(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(typescript@5.5.4)
-  : dependencies:
+  jest-preset-angular@14.2.4(ncvrjbuxrvyb2nmjpszvi3xroe):
+    dependencies:
       '@angular-devkit/build-angular': 18.2.4(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@types/node@20.16.1)(chokidar@3.6.0)(html-webpack-plugin@5.6.0(webpack@5.94.0(esbuild@0.21.5)))(jest-environment-jsdom@29.7.0)(jest@29.7.0(@types/node@20.16.1)(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(ng-packagr@18.2.1(@angular/compiler-cli@18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(tslib@2.7.0)(typescript@5.5.4))(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4)))(typescript@5.5.4)
       '@angular/compiler-cli': 18.2.4(@angular/compiler@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
       '@angular/core': 18.2.4(rxjs@7.8.1)(zone.js@0.14.10)

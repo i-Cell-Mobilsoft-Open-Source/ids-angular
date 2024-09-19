@@ -29,6 +29,9 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
     },
   ],
   animations: [switchAnimation],
+  host: {
+    '[id]': 'id()',
+  },
 })
 export class IdsSwitchComponent {
   /** @ignore **/

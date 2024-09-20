@@ -45,6 +45,7 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
     '[attr.aria-controls]': 'isPanelOpen() ? id() + "-panel" : null',
     '[attr.aria-expanded]': 'isPanelOpen()',
     '[attr.aria-label]': 'ariaLabel() || null',
+    '[attr.aria-labelledby]': 'ariaLabelledby() || null',
     '[attr.aria-required]': 'required().toString()',
     '[attr.aria-disabled]': 'disabled().toString()',
     '[attr.aria-invalid]': 'hasErrorState()',

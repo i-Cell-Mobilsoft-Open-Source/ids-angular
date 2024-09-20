@@ -68,7 +68,7 @@ export class SelectDemoComponent {
     ],
   };
 
-  public singleSelectionValue: string = this.options['land'][0].value;
+  public singleSelectionValue: string = this.options.land[0].value;
   public multiSelectionValue: string[] = [
     this.options['land'][0].value,
     this.options['land'][2].value,

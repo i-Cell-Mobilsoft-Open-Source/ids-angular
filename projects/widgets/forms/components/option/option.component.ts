@@ -90,6 +90,8 @@ export class IdsOptionComponent<T = unknown>
 
   public ngOnInit(): void {
     const parent = this._parent;
+    this.size.set(parent.parentSize());
+    this.variant.set(parent.parentVariant());
 
     if (parent.isOptionPreSelectedByValue(this.value())) {
       this.selected.set(true);

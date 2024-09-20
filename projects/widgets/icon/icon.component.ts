@@ -18,13 +18,13 @@ const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
   selector: 'ids-icon-v2',
   standalone: true,
   template: '',
-  styleUrls: ['./icon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     '[id]': 'id()',
     '[class]': '_hostClasses()',
     '[attr.aria-hidden]': 'ariaHidden().toString()',
+    '[attr.fontIcon]': 'this.fontIcon()',
     'role': 'img',
   },
 })

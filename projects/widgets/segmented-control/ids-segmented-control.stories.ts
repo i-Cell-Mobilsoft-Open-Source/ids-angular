@@ -37,7 +37,7 @@ export default {
     template: `
           <ids-segmented-control
             ${multiSelect ? '[ngModel]="[\'Option1\']"' : 'ngModel="Option1"'}
-            ${disabled ? 'disabled' : ''}
+            ${disabled() ? 'disabled' : ''}
             size="${size}"
             variant="${variant}"
             appearance="${appearance}"
@@ -58,7 +58,7 @@ export default {
     multiSelect: { control: 'boolean' },
   },
   args: {
-    disabled: false,
+    // disabled: false,
     size: 'comfortable',
     variant: 'primary',
     appearance: 'filled',

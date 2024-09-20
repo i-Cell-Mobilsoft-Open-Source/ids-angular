@@ -132,7 +132,8 @@
               "node_modules/@i-cell/ids-tokens/css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css",
               "projects/widgets/.storybook/styles.scss"
-            ]
+            ],
+            "open": false
           }
         },
         "build-storybook": {

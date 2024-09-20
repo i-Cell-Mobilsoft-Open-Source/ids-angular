@@ -10,33 +10,6 @@ import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angul
 
 type StoryType = IdsSelectComponent & { size?: SizeType, variant?: FormFieldVariantType, 'aria-label': string, 'aria-labelledby': string };
 
-type SampleOption = {
-  value: string
-  viewValue: string
-};
-
-type AnimalOptions = {
-  land: SampleOption[]
-  aquatic: SampleOption[]
-};
-
-const animals: AnimalOptions = {
-  land: [
-    { viewValue: 'Dog', value: 'dog' },
-    { viewValue: 'Cat', value: 'cat' },
-    { viewValue: 'Giraffe', value: 'giraffe' },
-    { viewValue: 'Orangutan', value: 'orangutan' },
-    { viewValue: 'Mammoth', value: 'mammoth' },
-    { viewValue: 'Opisthocoelicaudia Skarzynski', value: 'opisthocoelicaudia skarzynski' },
-  ],
-  aquatic: [
-    { viewValue: 'Crocodile', value: 'crocodile' },
-    { viewValue: 'Whale', value: 'whale' },
-    { viewValue: 'Dolphin', value: 'doplhin' },
-    { viewValue: 'Shark', value: 'shark' },
-  ],
-};
-
 const meta = {
   title: 'Components/Select',
   tags: ['autodocs'],
@@ -109,9 +82,7 @@ export const singleSelect: Story = {
   render: ({ size, variant, placeholder, ...props }) => {
     const singleSelectionValue: string = 'cat';
     return { 
-      props,
-      animals,
-      singleSelectionValue,
+      props: { ...props, singleSelectionValue },
       template: `
         <ids-form-field size="${size}" variant="${variant}">
           <ids-label>Animal</ids-label>
@@ -145,20 +116,18 @@ export const multiSelect: Story = {
     ];
 
     return { 
-      props,
-      animals,
-      multiSelectionValue,
+      props: { ...props, multiSelectionValue },
       template: `
         <ids-form-field size="${size}" variant="${variant}">
           <ids-label>Animal</ids-label>
-          <ids-select placeholder="${placeholder}" [(ngModel)]="multiSelectionValue" ${argsToTemplate(props)}>
+          <ids-select placeholder="${placeholder}" [(ngModel)]="multiSelectionValue" [multiSelect]="true" ${argsToTemplate(props)}>
             <ids-option-group label="Land">
-              <ids-option [value]="'dog'">Dog</ids-option>
-              <ids-option [value]="'cat'">Cat</ids-option>
+              <ids-option value="dog">Dog</ids-option>
+              <ids-option value="cat">Cat</ids-option>
             </ids-option-group>
             <ids-option-group label="Aquatic">
-              <ids-option [value]="'crocodile'">Crocodile</ids-option>
-              <ids-option [value]="'whale'">Whale</ids-option>
+              <ids-option value="crocodile">Crocodile</ids-option>
+              <ids-option value="whale">Whale</ids-option>
             </ids-option-group>
           </ids-select>
           <ids-hint-message>Choose animals</ids-hint-message>

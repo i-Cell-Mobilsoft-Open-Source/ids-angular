@@ -10,6 +10,7 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
     '@storybook/addon-actions',
   ],
+  staticDirs: ['../../demo/src/assets'],
   framework: {
     name: '@storybook/angular',
     options: {},

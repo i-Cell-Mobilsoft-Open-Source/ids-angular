@@ -67,8 +67,10 @@ export class IdsIconV2Component implements OnInit {
   /** @ignore */
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
-      this.size(),
-      `${this.sizeCollection()}collection`,
+      [
+        `${this.sizeCollection()}collection`,
+        this.size(),
+      ],
       this.variant(),
       this._iconSourceType(),
     ]),

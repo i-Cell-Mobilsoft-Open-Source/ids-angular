@@ -4,8 +4,7 @@ import { ButtonAppearance } from './types/ids-button-appearance';
 import { selectControlOptions } from '../.storybook/utils';
 
 import { coerceBooleanAttribute, AllVariants, Size } from '@i-cell/ids-angular/core';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiMagnify } from '@mdi/js';
+import { IdsIconV2Component } from '@i-cell/ids-angular/icon';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
@@ -17,7 +16,7 @@ export default {
   tags: ['autodocs'],
   decorators: [
     moduleMetadata({
-      imports: [IdsIconComponent],
+      imports: [IdsIconV2Component],
     }),
     withActions,
   ],
@@ -40,9 +39,9 @@ export default {
           ${isDisabled ? 'disabled' : ''}
           ${argsToTemplate(props)}
         >
-          ${hasPrefixIcon ? `<ids-icon icon-leading icon="${mdiMagnify}" aria-hidden="true" alt="" />` : ''}
+          ${hasPrefixIcon ? '<ids-icon-v2 icon-leading fontIcon="search" />' : ''}
           ${label}
-          ${hasSuffixIcon ? `<ids-icon icon-trailing icon="${mdiMagnify}" aria-hidden="true" alt="" />` : ''}
+          ${hasSuffixIcon ? '<ids-icon-v2 icon-trailing fontIcon="check" />' : ''}
         </button>
       `,
     };

@@ -1,7 +1,6 @@
 export * from './common/error/error-state';
 export * from './common/success/success-state';
 export * from './components/fieldset/fieldset-row/fieldset-row.component';
-export * from './components/fieldset/types/fieldset-variant.type';
 export * from './components/fieldset/fieldset-default';
 export * from './components/fieldset/fieldset-message.directive';
 export * from './components/fieldset/fieldset.component';
@@ -16,6 +15,7 @@ export * from './components/input/ids-input.directive';
 export * from './components/message/ids-error-message/ids-error-message.component';
 export * from './components/message/ids-hint-message/ids-hint-message.component';
 export * from './components/message/ids-success-message/ids-success-message.component';
+export * from './components/message/types/message-variant.type';
 export * from './components/message/types/message';
 export * from './components/option/option-events';
 export * from './components/option/option-group.component';

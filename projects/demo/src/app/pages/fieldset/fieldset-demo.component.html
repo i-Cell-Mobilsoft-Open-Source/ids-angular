@@ -1,6 +1,41 @@
-<h1>Fieldset</h1>
-<fieldset idsFieldset legend="Ez egy legendás szöveg">
-  <span>almafa</span>
-  <ids-fieldset-row>asd</ids-fieldset-row>
-  <ids-fieldset-row>asdq</ids-fieldset-row>
-</fieldset>
+<h1>{{ "COMPONENTS.FIELDSET" | translate }}</h1>
+@for (variant of variants; track $index) {
+  <section [class]="variant">
+    <h2>{{ variant | uppercase }}</h2>
+    <div class="form-field-column">
+      @for (size of sizes; track $index) {
+        <h3>{{ size }}</h3>
+        <div class="form-field-item">
+          <fieldset idsFieldset legend="This is legend" [size]="size" [variant]="variant">
+            <span idsFieldsetMessage>This is a fieldset message</span>
+            <ids-fieldset-row>
+              <ids-form-field>
+                <ids-label>Your name</ids-label>
+                <ids-icon idsLeadingIcon [icon]="iconSun" />
+                <span idsPrefix>Prefix</span>
+                <input idsInput ngModel="John" placeholder="Type your name" required />
+                <span idsSuffix>Suffix</span>
+                <ids-icon idsTrailingIcon [icon]="iconMoon" />
+                <div idsAction>
+                  <button type="button" idsIconButton variant="surface">
+                    <ids-icon aria-hidden="true" alt="" [icon]="searchIcon" />
+                  </button>
+                </div>
+                <ids-hint-message>Type your name</ids-hint-message>
+                <ids-error-message>Name is mandatory</ids-error-message>
+              </ids-form-field>
+            </ids-fieldset-row>
+            <ids-fieldset-row>
+              <ids-form-field>
+                <ids-label>Story about you</ids-label>
+                <textarea idsInput ngModel="John" placeholder="Type your story" rows="3" required></textarea>
+                <ids-hint-message>Type your story</ids-hint-message>
+                <ids-error-message>Story is mandatory</ids-error-message>
+              </ids-form-field>
+            </ids-fieldset-row>
+          </fieldset>
+        </div>
+      }
+    </div>
+  </section>
+}

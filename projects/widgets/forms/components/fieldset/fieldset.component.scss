@@ -16,6 +16,8 @@ $variants: light, surface;
     width: 100%;
     align-items: stretch;
     font-style: normal;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
   }
 
   & > .ids-fieldset-message {

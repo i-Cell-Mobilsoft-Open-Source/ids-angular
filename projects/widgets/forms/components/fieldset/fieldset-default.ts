@@ -1,10 +1,10 @@
 import { InjectionToken } from '@angular/core';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { FieldsetVariant, FieldsetVariantType } from '@i-cell/ids-angular/forms';
+import { FormFieldVariant, FormFieldVariantType } from '@i-cell/ids-angular/forms';
 
 export interface IdsFieldsetDefaultConfig {
   size?: SizeType
-  variant?: FieldsetVariantType,
+  variant?: FormFieldVariantType,
 }
 
 export const IDS_FIELDSET_DEFAULT_CONFIG = new InjectionToken<IdsFieldsetDefaultConfig>(
@@ -18,7 +18,7 @@ export const IDS_FIELDSET_DEFAULT_CONFIG = new InjectionToken<IdsFieldsetDefault
 export function IDS_FIELDSET_DEFAULT_CONFIG_FACTORY(): Required<IdsFieldsetDefaultConfig> {
   return {
     size: Size.COMPACT,
-    variant: FieldsetVariant.SURFACE,
+    variant: FormFieldVariant.SURFACE,
   };
 }
 

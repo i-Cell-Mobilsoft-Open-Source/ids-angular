@@ -34,3 +34,14 @@ body {
   background-color: var(--ids-smc-colors-surface-default);
   margin: 0;
 }
+
+@font-face {
+  font-family: "IDS Icons";
+  src: url("./assets/fonts/I-DS-font-icon-default.eot");
+  src:
+    local("IDS Icons"),
+    local("I-DS-font-icon-default"),
+    url(./assets/fonts/I-DS-font-icon-default.woff2) format("woff2"),
+    url(./assets/fonts/I-DS-font-icon-default.woff) format("woff"),
+    url(./assets/fonts/I-DS-font-icon-default.ttf) format("truetype");
+}

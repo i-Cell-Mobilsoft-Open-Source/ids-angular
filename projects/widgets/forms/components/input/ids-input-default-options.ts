@@ -1,5 +1,3 @@
-/* eslint-disable no-magic-numbers */
-
 import { AbstractErrorStateMatcher, ErrorStateMatcher } from '../../common/error/error-state';
 import { AbstractSuccessStateMatcher, SuccessStateMatcher } from '../../common/success/success-state';
 

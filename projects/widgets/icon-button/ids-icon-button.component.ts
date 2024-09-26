@@ -26,6 +26,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsIconButtonComponent {
+  /** @ignore */
   private readonly _componentClass = 'ids-icon-button';
 
   public appearance = input<IconButtonAppearanceType | null>(
@@ -38,8 +39,10 @@ export class IdsIconButtonComponent {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
+  /** @ignore */
   public icon = contentChildren(IdsIconComponent);
 
+  /** @ignore */
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       this.appearance(),
@@ -48,10 +51,12 @@ export class IdsIconButtonComponent {
     ]),
   );
 
+  /** @ignore */
   @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
     return this.disabled() || null;
   }
 
+  /** @ignore */
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }

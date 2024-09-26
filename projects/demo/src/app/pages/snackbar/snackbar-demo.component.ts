@@ -8,7 +8,7 @@ const snackbarTexts: string[] = [
   'Lorem ipsum dolor sit amet, consectetur adipisicing.',
   'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic assumenda architecto officia?',
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel nisi, quasi blanditiis enim consectetur quibusdam quos.',
-  // eslint-disable-next-line @stylistic/max-len
+  // eslint-disable-next-line @stylistic/js/max-len
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. A mollitia excepturi magnam repellendus iste, corrupti delectus, quasi voluptate aut dignissimos praesentium natus similique iusto.',
 ];
 
@@ -42,6 +42,7 @@ export class SnackbarDemoComponent implements OnInit {
     autoClose?: boolean,
   ): void {
     const message: string = snackbarTexts[snackbarTextIndex];
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     snackbarTextIndex < snackbarTexts.length - 1 ? snackbarTextIndex++ : snackbarTextIndex = 0;
     this._snackbarService.add({
       message,

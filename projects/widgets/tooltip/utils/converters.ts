@@ -56,7 +56,7 @@ export function extendedPositionToTooltipPosition(position: ExtendedPositionPair
     return null;
   }
 
-  // eslint-disable-next-line @stylistic/array-bracket-newline, @stylistic/array-element-newline
+  // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
   const [hor, vert] = position;
   if (hor === ExtendedHorizontalPosition.CENTER && vert === ExtendedVerticalPosition.TOP) {
     return TooltipPosition.NORTH;

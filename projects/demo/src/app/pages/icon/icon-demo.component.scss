@@ -1,0 +1,48 @@
+:host {
+  padding: 2rem;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2rem;
+  padding: 2rem;
+
+  h2 {
+    grid-area: 1 / 1 / 1 / -1;
+  }
+
+  &.dark,
+  &.surface {
+    background-color: transparent;
+  }
+  &.light {
+    background-color: #252526;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: white;
+    }
+  }
+
+  .icon-sources {
+    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+
+    .icon-source {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+}

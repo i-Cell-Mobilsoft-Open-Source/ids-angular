@@ -19,6 +19,7 @@
     "CHECKBOX": "Checkbox",
     "DIALOG": "Dialog",
     "DIVIDER": "Divider",
+    "FIELDSET": "Fieldset",
     "FORM_FIELD": "Form field",
     "ICON": "Icon",
     "ICON_BUTTON": "Icon button",

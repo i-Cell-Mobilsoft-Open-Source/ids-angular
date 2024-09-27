@@ -3,7 +3,7 @@ name: Build and Publish ids-angular to GitHub Pages
 on:
   push:
     branches:
-      - "github-pages-demo"
+      - main
 
 permissions:
   contents: write
@@ -39,5 +39,5 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: github-pages-demo
+          branch: gh-pages
           folder: dist/ids-angular/browser

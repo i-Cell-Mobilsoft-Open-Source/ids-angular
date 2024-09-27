@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build:widgets": "ng build widgets",
+    "build:ci": "ng build demo --base-href=/ids-angular/",
     "watch:widgets": "ng build widgets --watch",
     "watch": "ng build --watch --configuration development",
     "test": "jest",

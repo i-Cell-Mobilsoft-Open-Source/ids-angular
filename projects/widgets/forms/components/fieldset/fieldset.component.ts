@@ -11,7 +11,6 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
   standalone: true,
   imports: [],
   templateUrl: './fieldset.component.html',
-  styleUrl: './fieldset.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

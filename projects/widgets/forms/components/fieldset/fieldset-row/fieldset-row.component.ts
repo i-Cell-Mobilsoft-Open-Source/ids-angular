@@ -6,7 +6,6 @@ import { ComponentBase } from '@i-cell/ids-angular/core';
   standalone: true,
   imports: [],
   templateUrl: './fieldset-row.component.html',
-  styleUrl: './fieldset-row.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

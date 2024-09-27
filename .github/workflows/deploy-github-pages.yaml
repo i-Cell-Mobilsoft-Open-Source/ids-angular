@@ -40,6 +40,6 @@ jobs:
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.1
-        width:
+        with:
           branch: main
           folder: dist/ids-angular/browser

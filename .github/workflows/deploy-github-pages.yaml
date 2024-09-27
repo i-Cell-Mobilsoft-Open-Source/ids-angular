@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - "github-pages-demo"
 
 permissions:
   contents: write
@@ -40,5 +39,5 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: github-pages-demo
+          branch: gh-pages
           folder: dist/ids-angular/browser

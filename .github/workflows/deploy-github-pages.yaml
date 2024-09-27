@@ -3,7 +3,7 @@ name: Build and Publish ids-angular to GitHub Pages
 on:
   push:
     branches:
-      - "github-pages-demo"
+      - "main"
 
 permissions:
   contents: write
@@ -32,11 +32,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build application
-        run: pnpm run build:ci
+      - name: Install and build
+        run: pnpm install && pnpm run build:ci
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

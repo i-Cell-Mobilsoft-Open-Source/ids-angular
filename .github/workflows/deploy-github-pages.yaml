@@ -3,7 +3,7 @@ name: Build and Publish ids-angular to GitHub Pages
 on:
   push:
     branches:
-      - "main"
+      - "github-pages-demo"
 
 permissions:
   contents: write

@@ -1,0 +1,1 @@
+import{a as t,b as o}from"./chunk-75JNA2NC.js";var e={LEFT:"left",RIGHT:"right"},i=o(t({},e),{CENTER:"center"}),n={TOP:"top",BOTTOM:"bottom"},r=o(t({},n),{CENTER:"center"}),s=t(t({},e),n),c=t(t({},i),r);export{e as a,i as b,n as c,r as d,s as e,c as f};

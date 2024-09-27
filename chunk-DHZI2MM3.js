@@ -1,0 +1,1 @@
+import{a as r,b as a}from"./chunk-75JNA2NC.js";var n={PRIMARY:"primary",SECONDARY:"secondary",LIGHT:"light",DARK:"dark"},t=a(r({},n),{SURFACE:"surface"}),o=a(r({},t),{BRAND:"brand"}),s=a(r({},o),{ERROR:"error",SUCCESS:"success",WARNING:"warning",INFO:"info"});export{t as a,o as b,s as c};

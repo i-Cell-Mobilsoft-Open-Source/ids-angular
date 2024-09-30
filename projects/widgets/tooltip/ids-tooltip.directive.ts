@@ -44,7 +44,7 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private _pointerExitEventsInitialized = false;
   private _scrollContainers?: CdkScrollable[];
 
-  public message = input<string, string>(this._defaultOptions.position, { alias: 'idsTooltip', transform: coerceStringAttribute });
+  public message = input<string, string>('', { alias: 'idsTooltip', transform: coerceStringAttribute });
   public position = input<TooltipPositionType>(this._defaultOptions.position, { alias: 'idsTooltipPosition' });
   public size = input<SizeType>(this._defaultOptions.size, { alias: 'idsTooltipSize' });
   public variant = input<TooltipVariantType>(this._defaultOptions.variant, { alias: 'idsTooltipVariant' });

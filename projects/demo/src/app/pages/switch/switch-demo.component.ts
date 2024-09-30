@@ -20,6 +20,13 @@ type SwitchPublicApi = {
   ariaDescribedBy: string,
 };
 
+type SwitchGroupPublicApi = {
+  size: SizeType,
+  hasIcon: boolean,
+  iconPosition: SwitchIconPositionType,
+  labelPosition: SwitchLabelPositionType,
+};
+
 @Component({
   selector: 'app-switch-demo',
   standalone: true,
@@ -50,6 +57,13 @@ export class SwitchDemoComponent {
     ariaLabel: '',
     ariaLabelledBy: '',
     ariaDescribedBy: '',
+  };
+
+  public groupModel: SwitchGroupPublicApi = {
+    size: Size.COMPACT,
+    hasIcon: false,
+    iconPosition: SwitchIconPosition.ONHANDLE,
+    labelPosition: SwitchLabelPosition.RIGHT,
   };
 
   public sizes = Object.values(Size) as SizeType[];

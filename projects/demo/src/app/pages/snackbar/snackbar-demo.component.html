@@ -1,150 +1,184 @@
 <h1>{{ "COMPONENTS.SNACKBAR" | translate }}</h1>
 
-<section>
-  <div class="snackbar-funcion">
-    <h2>Dismiss not allowed</h2>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.DARK)">Dark</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.INFO)">Info</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.SUCCESS)">Success</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.WARNING)">Warning</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.ERROR)">Error</button>
-  </div>
-  <div class="snackbar-funcion">
-    <h2>Dismiss allowed</h2>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.DARK, undefined, true)">Dark</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.INFO, undefined, true)">Info</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.SUCCESS, undefined, true)">Success</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.WARNING, undefined, true)">Warning</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.ERROR, undefined, true)">Error</button>
-  </div>
-  <div class="snackbar-funcion">
-    <h2>Dismiss allowed, custom close button</h2>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.DARK, undefined, true, 'Close')">Dark</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.INFO, undefined, true, 'Close')">Info</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.SUCCESS, undefined, true, 'Close')">Success</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.WARNING, undefined, true, 'Close')">Warning</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.ERROR, undefined, true, 'Close')">Error</button>
-  </div>
-  <div class="snackbar-funcion">
-    <h2>Dismiss not allowed, auto close</h2>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.DARK, undefined, false, undefined, true)">Dark</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.INFO, undefined, false, undefined, true)">Info</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.SUCCESS, undefined, false, undefined, true)">Success</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.WARNING, undefined, false, undefined, true)">Warning</button>
-    <button type="button" idsButton (click)="openSnackbar(snackbarVariant.ERROR, undefined, false, undefined, true)">Error</button>
-  </div>
-  <div class="snackbar-funcion">
-    <h2>Dismiss not allowed, auto close with action</h2>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.DARK, [{ label: 'Log to console', action: this.action }], false, undefined, true)"
-    >
-      Dark
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.INFO, [{ label: 'Log to console', action: this.action }], false, undefined, true)"
-    >
-      Info
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.SUCCESS, [{ label: 'Log to console', action: this.action }], false, undefined, true)"
-    >
-      Success
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.WARNING, [{ label: 'Log to console', action: this.action }], false, undefined, true)"
-    >
-      Warning
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.ERROR, [{ label: 'Log to console', action: this.action }], false, undefined, true)"
-    >
-      Error
-    </button>
-  </div>
-  <div class="snackbar-funcion">
-    <h2>Dismiss allowed, with action</h2>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.DARK, [{ label: 'Log to console', action: this.action }], true, undefined)"
-    >
-      Dark
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.INFO, [{ label: 'Log to console', action: this.action }], true, undefined)"
-    >
-      Info
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.SUCCESS, [{ label: 'Log to console', action: this.action }], true, undefined)"
-    >
-      Success
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.WARNING, [{ label: 'Log to console', action: this.action }], true, undefined)"
-    >
-      Warning
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.ERROR, [{ label: 'Log to console', action: this.action }], true, undefined)"
-    >
-      Error
-    </button>
-  </div>
-  <div class="snackbar-funcion">
-    <h2>Dismiss allowed, with action, custom close button</h2>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.DARK, [{ label: 'Log to console', action: this.action }], true, 'Close')"
-    >
-      Dark
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.INFO, [{ label: 'Log to console', action: this.action }], true, 'Close')"
-    >
-      Info
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.SUCCESS, [{ label: 'Log to console', action: this.action }], true, 'Close')"
-    >
-      Success
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.WARNING, [{ label: 'Log to console', action: this.action }], true, 'Close')"
-    >
-      Warning
-    </button>
-    <button
-      type="button"
-      idsButton
-      (click)="openSnackbar(snackbarVariant.ERROR, [{ label: 'Log to console', action: this.action }], true, 'Close')"
-    >
-      Error
-    </button>
-  </div>
+<section class="component" [class]="model.variant">
+  <button type="button" idsButton (click)="openSnackbar()">Open snackbar</button>
+</section>
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      Controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>message</td>
+        <td>Snackbar message</td>
+        <td><code>string</code></td>
+        <td>
+          <code>''</code>
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="model.message" />
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Snackbar variant.</td>
+        <td><code>SnackbarVariantType</code></td>
+        <td>
+          <code>{{ variants[0] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>icon</td>
+        <td>Custom icon for snackbar. Overwites default icon. Default icon depends on variant.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>-</code>
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="model.icon" />
+        </td>
+      </tr>
+      <tr>
+        <td>allowDismiss</td>
+        <td>Whether the the user can close the snackbar or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>false</code>
+        </td>
+        <td>
+          <input type="checkbox" [(ngModel)]="model.allowDismiss" />
+        </td>
+      </tr>
+      <tr>
+        <td>closeButtonLabel</td>
+        <td>
+          Custom close button. If any text is provided, the close button will be a button with this text against the default "x" button
+        </td>
+        <td><code>string</code></td>
+        <td>
+          <code>-</code>
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="model.closeButtonLabel" />
+        </td>
+      </tr>
+      <tr>
+        <td>autoClose</td>
+        <td>Whether the snackbar should close automatically or not. The duration is a computed data based on some constant value.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>false</code>
+        </td>
+        <td>
+          <input type="checkbox" [(ngModel)]="model.autoClose" />
+        </td>
+      </tr>
+      <tr>
+        <td>urgent</td>
+        <td>Whether the snackbar is urgent or not. It changes the role of the snackbar.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>false</code>
+        </td>
+        <td>
+          <input type="checkbox" [(ngModel)]="model.urgent" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>useAction</td>
+        <td>When true, a custom action is provided for snackbar.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.useAction" /></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Size is an application-wide default value. It can not be overwritten runtime.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <select disabled [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>position</td>
+        <td>Position is an application-wide default value. It can not be overwritten runtime.</td>
+        <td><code>SnackbarPositionType</code></td>
+        <td>
+          <select disabled [(ngModel)]="model.position">
+            @for (item of positions; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>newestAtStartPosition</td>
+        <td>newestAtStartPosition is an application-wide default value. It can not be overwritten runtime.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" disabled [(ngModel)]="model.newestAtStartPosition" /></td>
+      </tr>
+      <tr>
+        <td>viewportMargin</td>
+        <td>viewportMargin is an application-wide default value.It can not be overwritten runtime.</td>
+        <td><code>boolean</code></td>
+        <td><input type="number" min="0" step="1" disabled [(ngModel)]="model.viewportMargin" /></td>
+      </tr>
+      <tr>
+        <td>useActualViewContainer</td>
+        <td>
+          Snackbars open in snackbar group. This group can connect to the viewport by default, or we can connect to a viewContainerRef. With
+          this boolean, we can switch between actual viewContainerRef or viewPort.
+        </td>
+        <td><code>boolean</code></td>
+        <td>
+          <input
+            type="checkbox"
+            [disabled]="_areSnackbarsOpen()"
+            [(ngModel)]="model.useActualViewContainer"
+            (ngModelChange)="setActualViewContainer()"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>

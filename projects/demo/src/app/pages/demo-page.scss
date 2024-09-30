@@ -28,4 +28,8 @@ section {
       }
     }
   }
+
+  table > tbody > tr > td {
+    max-width: 300px;
+  }
 }

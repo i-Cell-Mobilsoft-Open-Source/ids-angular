@@ -11,9 +11,13 @@
         [variant]="model.variant"
         (click)="onClick(model.appearance + '-' + model.size + '-' + model.variant)"
       >
-        <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+        @if (model.hasLeadingIcon) {
+          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+        }
         {{ model.appearance + "-" + model.size + "-" + model.variant }} tag
-        <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+        @if (model.hasTrailingIcon) {
+          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+        }
       </ids-tag>
     </div>
 
@@ -28,16 +32,23 @@
         [variant]="model.variant"
         (click)="onClick(model.appearance + '-' + model.size + '-' + model.variant)"
       >
-        <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+        @if (model.hasLeadingIcon) {
+          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+        }
         {{ model.appearance + "-" + model.size + "-" + model.variant }} tag
-        <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+        @if (model.hasTrailingIcon) {
+          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+        }
       </button>
     </div>
   </div>
 </section>
-
 <section class="controls">
   <table [cellPadding]="10">
+    <caption>
+      Controls
+    </caption>
+
     <thead>
       <tr>
         <th align="left">Name</th>
@@ -52,7 +63,7 @@
       <tr>
         <td>appearance</td>
         <td>Tag's appearance.</td>
-        <td><code>TooltipPositionType</code></td>
+        <td><code>TagAppearanceType</code></td>
         <td>
           <code>{{ appearances[0] }}</code>
         </td>
@@ -82,7 +93,7 @@
       <tr>
         <td>variant</td>
         <td>Tag's variant.</td>
-        <td><code>TooltipVariantType</code></td>
+        <td><code>AllVariantsType</code></td>
         <td>
           <code>{{ variants[0] }}</code>
         </td>
@@ -93,6 +104,36 @@
             }
           </select>
         </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>hasLeadingIcon</td>
+        <td>Whether the tag has leading icon.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.hasLeadingIcon" /></td>
+      </tr>
+      <tr>
+        <td>hasTrailingIcon</td>
+        <td>Whether the tag has trailing icon.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.hasTrailingIcon" /></td>
       </tr>
     </tbody>
   </table>

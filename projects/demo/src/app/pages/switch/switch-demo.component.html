@@ -1,119 +1,136 @@
 <h1>{{ "COMPONENTS.SWITCH" | translate }}</h1>
 
-<h2>Standalone</h2>
-@for (variant of variants; track $index) {
-  <section [class]="variant">
-    <h3>{{ variant | uppercase }}</h3>
-    <div>
-      <h4>Default</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="switch-types">
-          <ids-switch label="No icon" [ngModel]="true" [size]="size" [variant]="variant" [hasIcon]="false" />
-          <ids-switch
-            label="Icon on track"
-            [ngModel]="true"
-            [size]="size"
-            [variant]="variant"
-            [hasIcon]="true"
-            [iconPosition]="'ontrack'"
-          />
-          <ids-switch
-            label="Icon on handle"
-            [ngModel]="true"
-            [size]="size"
-            [variant]="variant"
-            [hasIcon]="true"
-            [iconPosition]="'onhandle'"
-          />
-        </div>
-      }
-    </div>
+<section class="component" [class]="model.variant">
+  <ids-switch
+    [ngModel]="true"
+    [label]="model.label"
+    [required]="model.required"
+    [readonly]="model.readonly"
+    [size]="model.size"
+    [variant]="model.variant"
+    [hasIcon]="model.hasIcon"
+    [iconPosition]="model.iconPosition"
+    [labelPosition]="model.labelPosition"
+    [disabled]="model.disabled"
+    [aria-label]="model.ariaLabel"
+    [aria-labelledby]="model.ariaLabelledBy"
+    [aria-describedby]="model.ariaDescribedBy"
+  />
+</section>
 
-    <div>
-      <h4>Disabled (off)</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="switch-types">
-          <ids-switch label="No icon" disabled [ngModel]="false" [size]="size" [variant]="variant" [hasIcon]="false" />
-          <ids-switch
-            label="Icon on track"
-            disabled
-            [ngModel]="false"
-            [size]="size"
-            [variant]="variant"
-            [hasIcon]="true"
-            [iconPosition]="'ontrack'"
-          />
-          <ids-switch
-            label="Icon on handle"
-            disabled
-            [ngModel]="false"
-            [size]="size"
-            [variant]="variant"
-            [hasIcon]="true"
-            [iconPosition]="'onhandle'"
-          />
-        </div>
-      }
-    </div>
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      Controls
+    </caption>
 
-    <div>
-      <h4>Disabled (on)</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="switch-types">
-          <ids-switch label="No icon" disabled [ngModel]="true" [size]="size" [variant]="variant" [hasIcon]="false" />
-          <ids-switch
-            label="Icon on track"
-            disabled
-            [ngModel]="true"
-            [size]="size"
-            [variant]="variant"
-            [hasIcon]="true"
-            [iconPosition]="'ontrack'"
-          />
-          <ids-switch
-            label="Icon on handle"
-            disabled
-            [ngModel]="true"
-            [size]="size"
-            [variant]="variant"
-            [hasIcon]="true"
-            [iconPosition]="'onhandle'"
-          />
-        </div>
-      }
-    </div>
-  </section>
-}
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
 
-<h2>Group</h2>
-
-@for (variant of variants; track $index) {
-  <section class="switch-group" [class]="variant">
-    <h3>{{ variant | uppercase }}</h3>
-    @for (size of sizes; track $index) {
-      <div>
-        <h4>{{ size }}</h4>
-        <div class="switch-groups-container">
-          <ids-switch-group [size]="size" [hasIcon]="false">
-            <ids-switch label="One" [ngModel]="true" [variant]="variant" />
-            <ids-switch label="Two" [ngModel]="true" [variant]="variant" />
-            <ids-switch label="Three" [ngModel]="true" [variant]="variant" />
-          </ids-switch-group>
-          <ids-switch-group [size]="size" [hasIcon]="true" [iconPosition]="'ontrack'">
-            <ids-switch label="One" [ngModel]="true" [variant]="variant" />
-            <ids-switch label="Two" [ngModel]="true" [variant]="variant" />
-            <ids-switch label="Three" [ngModel]="true" [variant]="variant" />
-          </ids-switch-group>
-          <ids-switch-group [size]="size" [hasIcon]="true" [iconPosition]="'onhandle'">
-            <ids-switch label="One" [ngModel]="true" [variant]="variant" />
-            <ids-switch label="Two" [ngModel]="true" [variant]="variant" />
-            <ids-switch label="Three" [ngModel]="true" [variant]="variant" />
-          </ids-switch-group>
-        </div>
-      </div>
-    }
-  </section>
-}
+    <tbody>
+      <tr>
+        <td>label</td>
+        <td>Switch label.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>''</code>
+        </td>
+        <td><input type="text" [(ngModel)]="model.label" /></td>
+      </tr>
+      <tr>
+        <td>required</td>
+        <td>Whether the switch is required.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>false</code>
+        </td>
+        <td><input type="checkbox" [(ngModel)]="model.required" /></td>
+      </tr>
+      <tr>
+        <td>readonly</td>
+        <td>Whether the switch is readonly.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>false</code>
+        </td>
+        <td><input type="checkbox" [(ngModel)]="model.readonly" /></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Size of the switch.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ sizes[2] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Variant of the switch.</td>
+        <td><code>SwitchVariantType</code></td>
+        <td>
+          <code>{{ variants[0] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>hasIcon</td>
+        <td>Whether the switch has icon.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>false</code>
+        </td>
+        <td><input type="checkbox" [(ngModel)]="model.hasIcon" /></td>
+      </tr>
+      <tr>
+        <td>iconPosition</td>
+        <td>Where the icon should be shown in switch.</td>
+        <td><code>SwitchVariantType</code></td>
+        <td>
+          <code>{{ iconPositions[0] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.iconPosition">
+            @for (item of iconPositions; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>labelPosition</td>
+        <td>Where the icon should be shown in switch.</td>
+        <td><code>SwitchVariantType</code></td>
+        <td>
+          <code>{{ labelPositions[1] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.labelPosition">
+            @for (item of labelPositions; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

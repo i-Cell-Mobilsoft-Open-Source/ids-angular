@@ -7,11 +7,13 @@
 }
 
 section {
-  &.component {
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
 
+  &.component {
     &.light {
       color: var(--ids-smc-colors-surface-lighter-10);
       background-color: var(--ids-smc-colors-surface-darker-80);
@@ -19,8 +21,11 @@ section {
   }
 
   &.controls {
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
+    table {
+      caption {
+        text-align-last: left;
+        font-weight: 600;
+      }
+    }
   }
 }

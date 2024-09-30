@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   AllVariants,
   AllVariantsType,
@@ -12,6 +13,17 @@ import { IdsTagComponent, TagAppearance, TagAppearanceType } from '@i-cell/ids-a
 import { mdiCheck, mdiMagnify } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
+type TagPublicApi = {
+  appearance: TagAppearanceType,
+  size: SizeType,
+  variant: AllVariantsType,
+};
+
+type TagHelperControls = {
+  hasLeadingIcon: boolean,
+  hasTrailingIcon: boolean,
+};
+
 @Component({
   standalone: true,
   selector: 'app-tag-demo',
@@ -19,11 +31,23 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsTagComponent,
     IdsIconComponent,
     TranslateModule,
+    FormsModule,
   ],
   templateUrl: './tag-demo.component.html',
-  styleUrls: ['./tag-demo.component.scss'],
+  styleUrls: [
+    '../demo-page.scss',
+    './tag-demo.component.scss',
+  ],
 })
 export class TagDemoComponent {
+  public model: TagPublicApi & TagHelperControls = {
+    appearance: TagAppearance.FILLED,
+    size: Size.COMFORTABLE,
+    variant: AllVariants.PRIMARY,
+    hasLeadingIcon: true,
+    hasTrailingIcon: true,
+  };
+
   public appearances = Object.values(TagAppearance) as TagAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
   public baseVariants = Object.values(BrandVariant) as BrandVariantType[];

@@ -13,8 +13,8 @@ section {
     justify-content: center;
 
     &.light {
-      background-color: black;
-      color: white;
+      color: var(--ids-smc-colors-surface-lighter-10);
+      background-color: var(--ids-smc-colors-surface-darker-80);
     }
   }
 

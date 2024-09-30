@@ -9,6 +9,20 @@ import { IdsSegmentedControlItemComponent } from '@i-cell/ids-angular/segmented-
 import { mdiAccount, mdiAlarm, mdiLightbulbOnOutline } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
+type SegmentedControlPublicApi = {
+  size: SizeType,
+  variant: SegmentedControlVariantType,
+  appearance: SegmentedControlAppearanceType,
+  disabled: boolean,
+};
+
+type SegmentedControlHelperControls = {
+  itemHasLabel: boolean,
+  itemHasIcon: boolean,
+  itemHasSuffix: boolean,
+  onlyOneItemIsDisabled: boolean,
+};
+
 @Component({
   selector: 'app-segmented-control-demo',
   standalone: true,
@@ -22,31 +36,30 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
   ],
   templateUrl: './segmented-control-demo.component.html',
-  styleUrl: './segmented-control-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './segmented-control-demo.component.scss',
+  ],
 })
 export class SegmentedControlDemoComponent {
+  public model: SegmentedControlPublicApi & SegmentedControlHelperControls = {
+    size: Size.COMFORTABLE,
+    variant: SegmentedControlVariant.SURFACE,
+    appearance: SegmentedControlAppearance.FILLED,
+    disabled: false,
+    itemHasLabel: true,
+    itemHasIcon: true,
+    itemHasSuffix: true,
+    onlyOneItemIsDisabled: false,
+  };
+
   public icon = {
     lightbulb: mdiLightbulbOnOutline,
     account: mdiAccount,
     alarm: mdiAlarm,
   };
 
-  public sizes: SizeType[] = [
-    Size.DENSE,
-    Size.COMPACT,
-    Size.COMFORTABLE,
-    Size.SPACIOUS,
-  ];
-
-  public variants: SegmentedControlVariantType[] = [
-    SegmentedControlVariant.PRIMARY,
-    SegmentedControlVariant.SURFACE,
-    SegmentedControlVariant.LIGHT,
-    SegmentedControlVariant.DARK,
-  ];
-
-  public appearances: SegmentedControlAppearanceType[] = [
-    SegmentedControlAppearance.FILLED,
-    SegmentedControlAppearance.OUTLINED,
-  ];
+  public sizes = Object.values(Size) as SizeType[];
+  public variants = Object.values(SegmentedControlVariant) as SegmentedControlVariantType[];
+  public appearances = Object.values(SegmentedControlAppearance) as SegmentedControlAppearanceType[];
 }

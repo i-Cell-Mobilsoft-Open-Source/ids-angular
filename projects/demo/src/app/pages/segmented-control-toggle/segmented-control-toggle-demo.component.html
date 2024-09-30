@@ -1,118 +1,157 @@
 <h1>{{ "COMPONENTS.SEGMENTED_CONTROL_TOGGLE" | translate }}</h1>
 
-@for (variant of variants; track $index) {
-  <section [class]="variant">
-    <h2>{{ variant | uppercase }}</h2>
-    <div class="segmented-control-column">
-      <h3>Default</h3>
-      @for (appearance of appearances; track $index) {
-        <h4>{{ appearance | uppercase }}</h4>
-        @for (size of sizes; track $index) {
-          <h5>{{ size }}</h5>
-          <div class="segmented-control-group">
-            <ids-segmented-control-toggle ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
-              <ids-segmented-control-toggle-item value="first" name="first">
-                <ids-icon [icon]="icon.lightbulb" />
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="second" name="second">
-                <ids-icon [icon]="icon.account" />
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="third" name="third">
-                <ids-icon [icon]="icon.alarm" />
-              </ids-segmented-control-toggle-item>
-            </ids-segmented-control-toggle>
-
-            <ids-segmented-control-toggle ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
-              <ids-segmented-control-toggle-item value="first" name="first" label="Label 1" />
-              <ids-segmented-control-toggle-item value="second" name="second" label="Label 2" />
-              <ids-segmented-control-toggle-item value="third" name="third" label="Label 3" />
-            </ids-segmented-control-toggle>
-
-            <ids-segmented-control-toggle ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
-              <ids-segmented-control-toggle-item value="first" name="first" label="Label 1">
-                <ids-icon [icon]="icon.lightbulb" />
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="second" name="second" label="Label 2">
-                <ids-icon [icon]="icon.account" />
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="third" name="third" label="Label 3">
-                <ids-icon [icon]="icon.alarm" />
-              </ids-segmented-control-toggle-item>
-            </ids-segmented-control-toggle>
-
-            <ids-segmented-control-toggle ngModel="second" [appearance]="appearance" [variant]="variant" [size]="size">
-              <ids-segmented-control-toggle-item value="first" name="first" label="Label 1">
-                <ids-icon [icon]="icon.lightbulb" />
-                <span suffixContent>$</span>
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="second" name="second" label="Label 2">
-                <ids-icon [icon]="icon.account" />
-                <span suffixContent>$</span>
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="third" name="third" label="Label 3">
-                <ids-icon [icon]="icon.alarm" />
-                <span suffixContent>$</span>
-              </ids-segmented-control-toggle-item>
-            </ids-segmented-control-toggle>
-          </div>
-        }
+<section class="component" [class]="model.variant">
+  <ids-segmented-control-toggle
+    ngModel="second"
+    [appearance]="model.appearance"
+    [variant]="model.variant"
+    [size]="model.size"
+    [disabled]="model.disabled"
+  >
+    <ids-segmented-control-toggle-item
+      value="first"
+      [label]="model.itemHasLabel ? 'Label 1' : undefined"
+      [disabled]="model.onlyOneItemIsDisabled"
+    >
+      @if (model.itemHasIcon) {
+        <ids-icon [icon]="icon.lightbulb" />
       }
-    </div>
-
-    <div class="segmented-control-column">
-      <h3>Default</h3>
-      @for (appearance of appearances; track $index) {
-        <h4>{{ appearance | uppercase }}</h4>
-        @for (size of sizes; track $index) {
-          <h5>{{ size }}</h5>
-          <div class="segmented-control-group">
-            <ids-segmented-control-toggle ngModel="second" disabled [appearance]="appearance" [variant]="variant" [size]="size">
-              <ids-segmented-control-toggle-item value="first" name="first">
-                <ids-icon [icon]="icon.lightbulb" />
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="second" name="second">
-                <ids-icon [icon]="icon.account" />
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="third" name="third">
-                <ids-icon [icon]="icon.alarm" />
-              </ids-segmented-control-toggle-item>
-            </ids-segmented-control-toggle>
-
-            <ids-segmented-control-toggle ngModel="second" disabled [appearance]="appearance" [variant]="variant" [size]="size">
-              <ids-segmented-control-toggle-item value="first" name="first" label="Label 1" />
-              <ids-segmented-control-toggle-item value="second" name="second" label="Label 2" />
-              <ids-segmented-control-toggle-item value="third" name="third" label="Label 3" />
-            </ids-segmented-control-toggle>
-
-            <ids-segmented-control-toggle ngModel="second" disabled [appearance]="appearance" [variant]="variant" [size]="size">
-              <ids-segmented-control-toggle-item value="first" name="first" label="Label 1">
-                <ids-icon [icon]="icon.lightbulb" />
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="second" name="second" label="Label 2">
-                <ids-icon [icon]="icon.account" />
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="third" name="third" label="Label 3">
-                <ids-icon [icon]="icon.alarm" />
-              </ids-segmented-control-toggle-item>
-            </ids-segmented-control-toggle>
-
-            <ids-segmented-control-toggle ngModel="second" disabled [appearance]="appearance" [variant]="variant" [size]="size">
-              <ids-segmented-control-toggle-item value="first" name="first" label="Label 1">
-                <ids-icon [icon]="icon.lightbulb" />
-                <span suffixContent>$</span>
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="second" name="second" label="Label 2">
-                <ids-icon [icon]="icon.account" />
-                <span suffixContent>$</span>
-              </ids-segmented-control-toggle-item>
-              <ids-segmented-control-toggle-item value="third" name="third" label="Label 3">
-                <ids-icon [icon]="icon.alarm" />
-                <span suffixContent>$</span>
-              </ids-segmented-control-toggle-item>
-            </ids-segmented-control-toggle>
-          </div>
-        }
+      @if (model.itemHasSuffix) {
+        <span suffixContent>$</span>
       }
-    </div>
-  </section>
-}
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="second" [label]="model.itemHasLabel ? 'Label 2' : undefined">
+      @if (model.itemHasIcon) {
+        <ids-icon [icon]="icon.account" />
+      }
+      @if (model.itemHasSuffix) {
+        <span suffixContent>$</span>
+      }
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="third" [label]="model.itemHasLabel ? 'Label 3' : undefined">
+      @if (model.itemHasIcon) {
+        <ids-icon [icon]="icon.alarm" />
+      }
+      @if (model.itemHasSuffix) {
+        <span suffixContent>$</span>
+      }
+    </ids-segmented-control-toggle-item>
+  </ids-segmented-control-toggle>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      Controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>size</td>
+        <td>Size of the segmented control.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ sizes[2] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Variant of the segmented control.</td>
+        <td><code>SegmentedControlVariantType</code></td>
+        <td>
+          <code>{{ variants[0] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>appearance</td>
+        <td>Appearance of the segmented control.</td>
+        <td><code>SegmentedControlAppearanceType</code></td>
+        <td>
+          <code>{{ appearances[0] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.appearance">
+            @for (item of appearances; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the switch is disabled or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>false</code>
+        </td>
+        <td><input type="checkbox" [(ngModel)]="model.disabled" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>itemHasLabel</td>
+        <td>When true, items have labels.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.itemHasLabel" /></td>
+      </tr>
+      <tr>
+        <td>itemHasIcon</td>
+        <td>When true, items have icon.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.itemHasIcon" /></td>
+      </tr>
+      <tr>
+        <td>itemHasSuffix</td>
+        <td>When true, items have suffix.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.itemHasSuffix" /></td>
+      </tr>
+      <tr>
+        <td>onlyOneItemIsDisabled</td>
+        <td>When true, the first item will be disabled.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.onlyOneItemIsDisabled" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

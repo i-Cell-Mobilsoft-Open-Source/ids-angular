@@ -5,7 +5,6 @@
     <div class="tag-type">
       <h2>{{ "COMMON.NON-INTERACTIVE" | translate }}</h2>
       <ids-tag
-        tabindex="0"
         [appearance]="model.appearance"
         [size]="model.size"
         [variant]="model.variant"
@@ -43,10 +42,14 @@
     </div>
   </div>
 </section>
+
 <section class="controls">
   <table [cellPadding]="10">
     <caption>
-      Controls
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
     </caption>
 
     <thead>

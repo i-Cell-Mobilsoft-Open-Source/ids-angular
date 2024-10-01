@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IdsTooltipDirective, TooltipPosition, TooltipPositionType, TooltipTextAlign, TooltipTouchGestures, TooltipVariant, TooltipVariantType } from '@i-cell/ids-angular/tooltip';
+import { IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY, IdsTooltipDirective, TooltipPosition, TooltipPositionType, TooltipTextAlign, TooltipTouchGestures, TooltipVariant, TooltipVariantType } from '@i-cell/ids-angular/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
 type TooltipPublicApi = {
@@ -17,6 +17,8 @@ type TooltipPublicApi = {
   textAlign: TooltipTextAlign | undefined,
 };
 
+const defaultConfig = IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY();
+
 @Component({
   selector: 'app-tooltip-demo',
   standalone: true,
@@ -25,6 +27,7 @@ type TooltipPublicApi = {
     IdsButtonComponent,
     TranslateModule,
     FormsModule,
+    IdsButtonComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrls: [
@@ -34,42 +37,23 @@ type TooltipPublicApi = {
 })
 export class TooltipDemoComponent {
    
-  public model: TooltipPublicApi = {
+  public defaults: TooltipPublicApi = {
     tooltipText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum maxime magnam quae tenetur aliquam repudiandae provident.',
-    position: TooltipPosition.NORTH,
-    size: Size.COMFORTABLE,
-    variant: TooltipVariant.DARK,
-    showDelay: 1_000,
-    hideDelay: 5_000,
+    position: defaultConfig.position,
+    size: defaultConfig.size,
+    variant: defaultConfig.variant,
+    showDelay: defaultConfig.showDelay,
+    hideDelay: defaultConfig.hideDelay,
     disabled: false,
     touchGestures: 'auto',
     textAlign: undefined,
   };
 
-  // Selectable properties
-  public positions: TooltipPositionType[] = [
-    TooltipPosition.NORTH,
-    TooltipPosition.NORTHEAST,
-    TooltipPosition.EAST,
-    TooltipPosition.SOUTHEAST,
-    TooltipPosition.SOUTH,
-    TooltipPosition.SOUTHWEST,
-    TooltipPosition.WEST,
-    TooltipPosition.NORTHWEST,
-  ];
-  
-  public sizes: SizeType[] = [
-    Size.DENSE,
-    Size.COMPACT,
-    Size.COMFORTABLE,
-    Size.SPACIOUS,
-  ];
+  public model: TooltipPublicApi = { ...this.defaults  };
 
-  public variants: TooltipVariantType[] = [
-    TooltipVariant.DARK,
-    TooltipVariant.LIGHT,
-  ];
-
+  public sizes = Object.values(Size) as SizeType[];
+  public variants = Object.values(TooltipVariant) as TooltipVariantType[];
+  public positions = Object.values(TooltipPosition) as TooltipPositionType[];
   public touchGestures: TooltipTouchGestures[] = [
     'auto',
     'on',
@@ -81,5 +65,8 @@ export class TooltipDemoComponent {
     'left',
     'right',
   ];
-  
+
+  public reset(): void {
+    this.model = { ...this.defaults };
+  }
 }

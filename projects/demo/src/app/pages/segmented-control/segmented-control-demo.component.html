@@ -5,11 +5,11 @@
     <div class="segmented-control-group">
       <h2>Single selection</h2>
       <ids-segmented-control
-        ngModel="second"
         [appearance]="model.appearance"
         [variant]="model.variant"
         [size]="model.size"
         [disabled]="model.disabled"
+        [(ngModel)]="singleSelectionValue"
       >
         <ids-segmented-control-item
           value="first"
@@ -45,12 +45,12 @@
     <div class="segmented-control-group">
       <h2>Multi selection</h2>
       <ids-segmented-control
-        [ngModel]="['second']"
         [appearance]="model.appearance"
         [variant]="model.variant"
         [size]="model.size"
         [multiSelect]="true"
         [disabled]="model.disabled"
+        [ngModel]="multiSelectionValue"
       >
         <ids-segmented-control-item
           value="first"
@@ -88,7 +88,10 @@
 <section class="controls">
   <table [cellPadding]="10">
     <caption>
-      Controls
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
     </caption>
 
     <thead>
@@ -107,7 +110,7 @@
         <td>Size of the segmented control.</td>
         <td><code>SizeType</code></td>
         <td>
-          <code>{{ sizes[2] }}</code>
+          <code>{{ defaults.size }}</code>
         </td>
         <td>
           <select [(ngModel)]="model.size">
@@ -122,7 +125,7 @@
         <td>Variant of the segmented control.</td>
         <td><code>SegmentedControlVariantType</code></td>
         <td>
-          <code>{{ variants[0] }}</code>
+          <code>{{ defaults.variant }}</code>
         </td>
         <td>
           <select [(ngModel)]="model.variant">
@@ -137,7 +140,7 @@
         <td>Appearance of the segmented control.</td>
         <td><code>SegmentedControlAppearanceType</code></td>
         <td>
-          <code>{{ appearances[0] }}</code>
+          <code>{{ defaults.appearance }}</code>
         </td>
         <td>
           <select [(ngModel)]="model.appearance">
@@ -149,10 +152,10 @@
       </tr>
       <tr>
         <td>disabled</td>
-        <td>Whether the switch is disabled or not.</td>
+        <td>Whether the segmented control is disabled or not.</td>
         <td><code>boolean</code></td>
         <td>
-          <code>false</code>
+          <code>{{ defaults.disabled }}</code>
         </td>
         <td><input type="checkbox" [(ngModel)]="model.disabled" /></td>
       </tr>

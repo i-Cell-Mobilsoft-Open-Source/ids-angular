@@ -2,7 +2,7 @@ import { Component, computed, inject, OnInit, ViewContainerRef } from '@angular/
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IdsSnackbarAction, IdsSnackbarService, SnackbarPosition, SnackbarPositionType, SnackbarVariant, SnackbarVariantType } from '@i-cell/ids-angular/snackbar';
+import { IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY, IdsSnackbarAction, IdsSnackbarService, SnackbarPosition, SnackbarPositionType, SnackbarVariant, SnackbarVariantType } from '@i-cell/ids-angular/snackbar';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SnackbarPublicApi = {
@@ -24,6 +24,8 @@ type SnackbarHelperControls = {
   useActualViewContainer: boolean
 };
 
+const defaultConfig = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
+
 @Component({
   selector: 'app-snackbar-demo',
   standalone: true,
@@ -39,21 +41,23 @@ type SnackbarHelperControls = {
   ],
 })
 export class SnackbarDemoComponent implements OnInit {
-  public model: SnackbarPublicApi & SnackbarHelperControls = {
+  public defaults: SnackbarPublicApi & SnackbarHelperControls = {
     message: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
-    variant: SnackbarVariant.DARK,
+    variant: defaultConfig.variant,
     icon: undefined,
     allowDismiss: false,
     closeButtonLabel: undefined,
     autoClose: false,
     urgent: false,
     useAction: false,
-    size: Size.COMFORTABLE,
-    position: SnackbarPosition.BOTTOM_CENTER,
-    newestAtStartPosition: false,
-    viewportMargin: 16,
+    size: defaultConfig.size,
+    position: defaultConfig.position,
+    newestAtStartPosition: defaultConfig.newestAtStartPosition,
+    viewportMargin: defaultConfig.viewportMargin,
     useActualViewContainer: true,
   };
+
+  public model: SnackbarPublicApi & SnackbarHelperControls = { ...this.defaults };
 
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(SnackbarVariant) as SnackbarVariantType[];
@@ -89,5 +93,9 @@ export class SnackbarDemoComponent implements OnInit {
     } else {
       this._snackbarService.clearViewContainerRef();
     }
+  }
+
+  public reset(): void {
+    this.model = { ...this.defaults };
   }
 }

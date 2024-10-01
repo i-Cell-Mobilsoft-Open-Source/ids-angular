@@ -51,9 +51,7 @@ export class RadioDemoComponent {
     onlyOneItemIsDisabled: false,
   };
 
-  public model: RadioPublicApi & RadioHelperControls = {
-    ...this.defaults,
-  };
+  public model: RadioPublicApi & RadioHelperControls = { ...this.defaults };
 
   public value = undefined;
 

@@ -1,9 +1,10 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
+import { IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY, IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
 import { mdiAccount, mdiAlarm, mdiLightbulbOnOutline } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -21,6 +22,8 @@ type SegmentedControlToggleHelperControls = {
   onlyOneItemIsDisabled: boolean,
 };
 
+const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY();
+
 @Component({
   selector: 'app-segmented-control-demo',
   standalone: true,
@@ -31,6 +34,7 @@ type SegmentedControlToggleHelperControls = {
     UpperCasePipe,
     FormsModule,
     TranslateModule,
+    IdsButtonComponent,
   ],
   templateUrl: './segmented-control-toggle-demo.component.html',
   styleUrls: [
@@ -39,10 +43,10 @@ type SegmentedControlToggleHelperControls = {
   ],
 })
 export class SegmentedControlToggleDemoComponent {
-  public model: SegmentedControlTogglePublicApi & SegmentedControlToggleHelperControls = {
-    size: Size.COMFORTABLE,
-    variant: SegmentedControlVariant.SURFACE,
-    appearance: SegmentedControlAppearance.FILLED,
+  public defaults: SegmentedControlTogglePublicApi & SegmentedControlToggleHelperControls = {
+    size: defaultConfig.size,
+    variant: defaultConfig.variant,
+    appearance: defaultConfig.appearance,
     disabled: false,
     itemHasLabel: true,
     itemHasIcon: true,
@@ -50,13 +54,22 @@ export class SegmentedControlToggleDemoComponent {
     onlyOneItemIsDisabled: false,
   };
 
+  public model: SegmentedControlTogglePublicApi & SegmentedControlToggleHelperControls = { ...this.defaults };
+
   public icon = {
     lightbulb: mdiLightbulbOnOutline,
     account: mdiAccount,
     alarm: mdiAlarm,
   };
 
+  public value = undefined;
+
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(SegmentedControlVariant) as SegmentedControlVariantType[];
   public appearances = Object.values(SegmentedControlAppearance) as SegmentedControlAppearanceType[];
+  
+  public reset(): void {
+    this.value = undefined;
+    this.model = { ...this.defaults };
+  }
 }

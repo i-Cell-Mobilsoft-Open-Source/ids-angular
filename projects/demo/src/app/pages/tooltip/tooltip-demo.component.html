@@ -21,6 +21,13 @@
 
 <section class="controls">
   <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
+
     <thead>
       <tr>
         <th align="left">Name</th>
@@ -44,7 +51,7 @@
         <td>Tooltip position.</td>
         <td><code>TooltipPositionType</code></td>
         <td>
-          <code>{{ positions[0] }}</code>
+          <code>{{ defaults.position }}</code>
         </td>
         <td>
           <select [(ngModel)]="model.position">
@@ -59,7 +66,7 @@
         <td>Tooltip size.</td>
         <td><code>SizeType</code></td>
         <td>
-          <code>{{ sizes[2] }}</code>
+          <code>{{ defaults.size }}</code>
         </td>
         <td>
           <select [(ngModel)]="model.size">
@@ -74,7 +81,7 @@
         <td>Tooltip variant.</td>
         <td><code>TooltipVariantType</code></td>
         <td>
-          <code>{{ variants[0] }}</code>
+          <code>{{ defaults.variant }}</code>
         </td>
         <td>
           <select [(ngModel)]="model.variant">
@@ -88,28 +95,32 @@
         <td>idsTooltipShowDelay</td>
         <td>Delay in ms to show tooltip after hovered.</td>
         <td><code>number</code></td>
-        <td>0 ms</td>
+        <td>{{ defaults.showDelay }} ms</td>
         <td><input type="text" [(ngModel)]="model.showDelay" /></td>
       </tr>
       <tr>
         <td>idsTooltipHideDelay</td>
         <td>Delay in ms to hide tooltip after blur.</td>
         <td><code>number</code></td>
-        <td>1000 ms</td>
+        <td>{{ defaults.hideDelay }} ms</td>
         <td><input type="text" [(ngModel)]="model.hideDelay" /></td>
       </tr>
       <tr>
         <td>idsTooltipDisabled</td>
         <td>Whether the tooltip should not be shown.</td>
         <td><code>boolean</code></td>
-        <td><code>false</code></td>
+        <td>
+          <code>{{ defaults.disabled }}</code>
+        </td>
         <td><input type="checkbox" [(ngModel)]="model.disabled" /></td>
       </tr>
       <tr>
         <td>idsTooltipTouchGestures</td>
         <td>Behavior of touch gestures.</td>
         <td><code>TooltipTouchGestures</code></td>
-        <td><code>auto</code></td>
+        <td>
+          <code>{{ defaults.touchGestures }}</code>
+        </td>
         <td>
           <select [(ngModel)]="model.touchGestures">
             @for (item of touchGestures; track $index) {
@@ -122,7 +133,9 @@
         <td>idsTooltipTextAlign</td>
         <td>Text aligment of the tooltip.</td>
         <td><code>TooltipTextAlign</code></td>
-        <td><code>-</code></td>
+        <td>
+          <code>{{ defaults.textAlign + "" }}</code>
+        </td>
         <td>
           <select [(ngModel)]="model.textAlign">
             <option [value]="undefined">Undefined</option>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
   AllVariants,
   AllVariantsType,
@@ -32,6 +33,7 @@ type TagHelperControls = {
     IdsIconComponent,
     TranslateModule,
     FormsModule,
+    IdsButtonComponent,
   ],
   templateUrl: './tag-demo.component.html',
   styleUrls: [
@@ -40,13 +42,15 @@ type TagHelperControls = {
   ],
 })
 export class TagDemoComponent {
-  public model: TagPublicApi & TagHelperControls = {
+  public defaults: TagPublicApi & TagHelperControls = {
     appearance: TagAppearance.FILLED,
     size: Size.COMFORTABLE,
     variant: AllVariants.PRIMARY,
     hasLeadingIcon: true,
     hasTrailingIcon: true,
   };
+  
+  public model: TagPublicApi & TagHelperControls = { ...this.defaults };
 
   public appearances = Object.values(TagAppearance) as TagAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
@@ -59,5 +63,9 @@ export class TagDemoComponent {
   public onClick(tagName: string): void {
     // eslint-disable-next-line no-console
     console.log(`${tagName} tag clicked`);
+  }
+
+  public reset(): void {
+    this.model = { ...this.defaults };
   }
 }

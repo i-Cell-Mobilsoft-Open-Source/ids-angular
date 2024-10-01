@@ -3,7 +3,6 @@
 <h2>Standalone</h2>
 <section class="component" [class]="model.variant">
   <ids-switch
-    [ngModel]="true"
     [label]="model.label"
     [required]="model.required"
     [readonly]="model.readonly"
@@ -16,13 +15,17 @@
     [aria-label]="model.ariaLabel"
     [aria-labelledby]="model.ariaLabelledBy"
     [aria-describedby]="model.ariaDescribedBy"
+    [(ngModel)]="value"
   />
 </section>
 
 <section class="controls">
   <table [cellPadding]="10">
     <caption>
-      Controls
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="resetSwitch()">Reset</button>
+      </div>
     </caption>
 
     <thead>
@@ -146,7 +149,6 @@
     [labelPosition]="groupModel.labelPosition"
   >
     <ids-switch
-      [ngModel]="true"
       [label]="model.label"
       [required]="model.required"
       [readonly]="model.readonly"
@@ -155,9 +157,9 @@
       [aria-label]="model.ariaLabel"
       [aria-labelledby]="model.ariaLabelledBy"
       [aria-describedby]="model.ariaDescribedBy"
+      [(ngModel)]="groupValue[0]"
     />
     <ids-switch
-      [ngModel]="true"
       [label]="model.label"
       [required]="model.required"
       [readonly]="model.readonly"
@@ -166,9 +168,9 @@
       [aria-label]="model.ariaLabel"
       [aria-labelledby]="model.ariaLabelledBy"
       [aria-describedby]="model.ariaDescribedBy"
+      [(ngModel)]="groupValue[1]"
     />
     <ids-switch
-      [ngModel]="true"
       [label]="model.label"
       [required]="model.required"
       [readonly]="model.readonly"
@@ -177,6 +179,7 @@
       [aria-label]="model.ariaLabel"
       [aria-labelledby]="model.ariaLabelledBy"
       [aria-describedby]="model.ariaDescribedBy"
+      [(ngModel)]="groupValue[2]"
     />
   </ids-switch-group>
 </section>
@@ -184,7 +187,10 @@
 <section class="controls">
   <table [cellPadding]="10">
     <caption>
-      Controls
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="resetSwitchGroup()">Reset</button>
+      </div>
     </caption>
 
     <thead>

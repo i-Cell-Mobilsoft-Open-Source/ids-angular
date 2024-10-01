@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY, IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
+import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
 import { mdiAccount, mdiAlarm, mdiLightbulbOnOutline } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -22,7 +22,7 @@ type SegmentedControlToggleHelperControls = {
   onlyOneItemIsDisabled: boolean,
 };
 
-const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY();
+const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-segmented-control-demo',

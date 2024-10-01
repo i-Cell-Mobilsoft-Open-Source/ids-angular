@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
+import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
 import { IdsSegmentedControlItemComponent } from '@i-cell/ids-angular/segmented-control/segmented-control-item/segmented-control-item.component';
 import { IdsSegmentedControlDirective } from '@i-cell/ids-angular/segmented-control/segmented-control.directive';
 import { mdiAccount, mdiAlarm, mdiLightbulbOnOutline } from '@mdi/js';
@@ -24,7 +24,7 @@ type SegmentedControlHelperControls = {
   onlyOneItemIsDisabled: boolean,
 };
 
-const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY();
+const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-segmented-control-demo',

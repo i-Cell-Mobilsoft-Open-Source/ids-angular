@@ -2,7 +2,7 @@ import { Component, computed, inject, OnInit, ViewContainerRef } from '@angular/
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY, IdsSnackbarAction, IdsSnackbarService, SnackbarPosition, SnackbarPositionType, SnackbarVariant, SnackbarVariantType } from '@i-cell/ids-angular/snackbar';
+import { IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY, IdsSnackbarAction, IdsSnackbarService, SnackbarPosition, SnackbarPositionType, SnackbarVariant, SnackbarVariantType } from '@i-cell/ids-angular/snackbar';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SnackbarPublicApi = {
@@ -24,7 +24,7 @@ type SnackbarHelperControls = {
   useActualViewContainer: boolean
 };
 
-const defaultConfig = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
+const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-snackbar-demo',

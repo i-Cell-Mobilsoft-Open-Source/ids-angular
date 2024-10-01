@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { PositionType, Size, SizeType, OrientationType, Orientation, Position } from '@i-cell/ids-angular/core';
-import { IDS_RADIO_DEFAULT_OPTIONS_FACTORY, IdsRadioGroupDirective, IdsRadioItemComponent, RadioVariant, RadioVariantType } from '@i-cell/ids-angular/radio';
+import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioGroupDirective, IdsRadioItemComponent, RadioVariant, RadioVariantType } from '@i-cell/ids-angular/radio';
 import { TranslateModule } from '@ngx-translate/core';
 
 type RadioPublicApi = {
@@ -20,7 +20,7 @@ type RadioHelperControls = {
   onlyOneItemIsDisabled: boolean,
 };
 
-const defaultConfig = IDS_RADIO_DEFAULT_OPTIONS_FACTORY();
+const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-radio-demo',

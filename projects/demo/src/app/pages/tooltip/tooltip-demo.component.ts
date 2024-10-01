@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY, IdsTooltipDirective, TooltipPosition, TooltipPositionType, TooltipTextAlign, TooltipTouchGestures, TooltipVariant, TooltipVariantType } from '@i-cell/ids-angular/tooltip';
+import { IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY, IdsTooltipDirective, TooltipPosition, TooltipPositionType, TooltipTextAlign, TooltipTouchGestures, TooltipVariant, TooltipVariantType } from '@i-cell/ids-angular/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
 type TooltipPublicApi = {
@@ -17,7 +17,7 @@ type TooltipPublicApi = {
   textAlign: TooltipTextAlign | undefined,
 };
 
-const defaultConfig = IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY();
+const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-tooltip-demo',

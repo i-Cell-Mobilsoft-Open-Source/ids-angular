@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY, IdsPaginatorComponent, PaginatorPageButtonAppearance, PaginatorPageButtonAppearanceType, PaginatorVariant, PaginatorVariantType } from '@i-cell/ids-angular/paginator';
+import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorComponent, PaginatorPageButtonAppearance, PaginatorPageButtonAppearanceType, PaginatorVariant, PaginatorVariantType } from '@i-cell/ids-angular/paginator';
 import { TranslateModule } from '@ngx-translate/core';
 
 type PaginatorPublicApi = {
@@ -21,7 +21,7 @@ type PaginatorPublicApi = {
   debounceTime: number
 };
 
-const defaultConfig = IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY();
+const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-paginator-demo',

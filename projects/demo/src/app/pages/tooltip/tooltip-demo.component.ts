@@ -36,7 +36,6 @@ const defaultConfig = IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY();
   ],
 })
 export class TooltipDemoComponent {
-   
   public defaults: TooltipPublicApi = {
     tooltipText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum maxime magnam quae tenetur aliquam repudiandae provident.',
     position: defaultConfig.position,

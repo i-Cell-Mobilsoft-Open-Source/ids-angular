@@ -76,14 +76,12 @@ export class IdsRadioItemComponent implements OnInit {
 
   /** @ignore */
   public onChange(): void {
-    if (!this.isDisabled()) {
-      this.changes.emit(new RadioChangeEvent(this, this.value()));
-    }
+    this.changes.emit(new RadioChangeEvent(this, this.value()));
   }
 
   /** @ignore */
   public touchTargetClick(): void {
-    if (!this.selected()) {
+    if (!this.selected() && !this.isDisabled()) {
       this._inputElement.nativeElement.focus();
       this.onChange();
     }
@@ -91,7 +89,7 @@ export class IdsRadioItemComponent implements OnInit {
 
   /** @ignore */
   public innerCrircleClick(): void {
-    if (!this.selected()) {
+    if (!this.selected() && !this.isDisabled()) {
       this._inputElement.nativeElement.focus();
       this.onChange();
     }

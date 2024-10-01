@@ -1,4 +1,4 @@
-import { ActionItemAppearance, ActionItemAppearanceType } from './types/action-item-appearance';
+import { MenuItemAppearance, MenuItemAppearanceType } from './types/menu-item-appearance';
 
 import { CdkMenuItem } from '@angular/cdk/menu';
 import {
@@ -20,21 +20,21 @@ import {
 } from '@i-cell/ids-angular/core';
 
 @Component({
-  selector: 'button[idsActionItem],a[idsActionItem]',
+  selector: 'button[idsMenuItem],a[idsMenuItem]',
   standalone: true,
   imports: [],
   hostDirectives: [CdkMenuItem],
-  templateUrl: './action-item.component.html',
+  templateUrl: './menu-item.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class IdsActionItemComponent {
-  private readonly _componentClass = 'ids-action-item';
+export class IdsMenuItemComponent {
+  private readonly _componentClass = 'ids-menu-item';
 
   private _hostElement = inject(ElementRef).nativeElement as HTMLElement;
 
   public label = input.required<string>();
-  public appearance = input<ActionItemAppearanceType | null>(
-    ActionItemAppearance.TEXT,
+  public appearance = input<MenuItemAppearanceType | null>(
+    MenuItemAppearance.TEXT,
   );
 
   public size = input<SizeType | null>(Size.COMFORTABLE);

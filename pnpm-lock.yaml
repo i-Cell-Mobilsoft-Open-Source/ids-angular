@@ -36,8 +36,8 @@ importers:
         specifier: ^18.2.4
         version: 18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@i-cell/ids-styles':
-        specifier: 0.0.15-beta.10
-        version: 0.0.15-beta.10
+        specifier: 0.0.15-beta.12
+        version: 0.0.15-beta.12
       '@i-cell/ids-tokens':
         specifier: 0.0.24-beta.5
         version: 0.0.24-beta.5
@@ -1615,8 +1615,8 @@ packages:
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
 
-  '@i-cell/ids-styles@0.0.15-beta.10':
-    resolution: {integrity: sha512-jwJuSAX4eXjONJ57IhDEQQc1kCXvi/lcFEpqBJBnO+mBm0AKAM/HrxAO0RJllM6SuhYTvpUc76VtfJLMnyrd+g==}
+  '@i-cell/ids-styles@0.0.15-beta.12':
+    resolution: {integrity: sha512-LOhY7Rb8H7ARXrbI45IRTybSXdIEvRh2crLdM4i5FFnBMTUvu/OseRUEdAqgQ3KjdEUY0ZKD95EK48MxGkQS/w==}
 
   '@i-cell/ids-tokens@0.0.24-beta.5':
     resolution: {integrity: sha512-gYus5kHm+XdhMr1vBSst/4zjeHLtWdhc2xH2hUo9UEEHIuBQgPkPrGWRJI9x9iy/LB+kqkFe8pUfYteSqsfR7g==}
@@ -9405,7 +9405,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
-  '@i-cell/ids-styles@0.0.15-beta.10': {}
+  '@i-cell/ids-styles@0.0.15-beta.12': {}
 
   '@i-cell/ids-tokens@0.0.24-beta.5': {}
 

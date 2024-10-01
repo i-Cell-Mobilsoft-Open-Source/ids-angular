@@ -1,4 +1,4 @@
-import { DEFAULT_PAGE_SIZE, IDS_PAGINATOR_DEFAULT_OPTIONS, IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY } from './paginator-default-options';
+import { DEFAULT_PAGE_SIZE, IDS_PAGINATOR_DEFAULT_CONFIG, IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY } from './paginator-defaults';
 import { IdsPaginatorIntl } from './paginator-intl';
 import { PaginatorPageButtonAppearanceType } from './types/paginator-appearance';
 import { PaginatorPageEvent } from './types/paginator-events';
@@ -12,7 +12,7 @@ import { debounceTime, Subject, Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
 
-const defaultOptions = IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-paginator',
@@ -35,7 +35,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   /** @ignore */
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_PAGINATOR_DEFAULT_OPTIONS, null, { optional: true }),
+    ...this._injector.get(IDS_PAGINATOR_DEFAULT_CONFIG, null, { optional: true }),
   };
 
   /** @ignore */

@@ -8,7 +8,7 @@ import { SizeType, Size } from '@i-cell/ids-angular/core';
 export const DEFAULT_PAGE_SIZE = 10;
 export const MAX_DISPLAYED_ITEM_COUNT = 7;
 
-export interface IdsPaginatorDefaultOptions {
+export interface IdsPaginatorDefaultConfig {
   pageSize?: number
   pageSizeOptions?: number[]
   showFirstLastButton?: boolean
@@ -23,15 +23,15 @@ export interface IdsPaginatorDefaultOptions {
   debounceTime: number
 }
 
-export const IDS_PAGINATOR_DEFAULT_OPTIONS = new InjectionToken<IdsPaginatorDefaultOptions>(
-  'IDS_PAGINATOR_DEFAULT_OPTIONS',
+export const IDS_PAGINATOR_DEFAULT_CONFIG = new InjectionToken<IdsPaginatorDefaultConfig>(
+  'IDS_PAGINATOR_DEFAULT_CONFIG',
   {
     providedIn: 'root',
-    factory: IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY,
+    factory: IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY,
   },
 );
 
-export function IDS_PAGINATOR_DEFAULT_OPTIONS_FACTORY(): Required<IdsPaginatorDefaultOptions> {
+export function IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY(): Required<IdsPaginatorDefaultConfig> {
   return {
     pageSize: DEFAULT_PAGE_SIZE,
     pageSizeOptions: [

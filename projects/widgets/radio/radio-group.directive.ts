@@ -1,4 +1,4 @@
-import { IDS_RADIO_DEFAULT_OPTIONS, IDS_RADIO_DEFAULT_OPTIONS_FACTORY } from './radio-config';
+import { IDS_RADIO_DEFAULT_CONFIG, IDS_RADIO_DEFAULT_CONFIG_FACTORY } from './radio-defaults';
 import { IdsRadioItemComponent } from './radio-item/radio-item.component';
 import { RadioChangeEvent } from './types/radio-events';
 import { RadioVariantType } from './types/radio-variant';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
 
-const defaultOptions = IDS_RADIO_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 
 @Directive({
   selector: 'ids-radio-group',
@@ -33,7 +33,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   /** @ignore */
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_RADIO_DEFAULT_OPTIONS, null, { optional: true }),
+    ...this._injector.get(IDS_RADIO_DEFAULT_CONFIG, null, { optional: true }),
   };
 
   /** @ignore */

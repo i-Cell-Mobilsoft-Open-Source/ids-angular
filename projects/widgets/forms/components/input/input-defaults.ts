@@ -3,20 +3,20 @@ import { AbstractSuccessStateMatcher, SuccessStateMatcher } from '../../common/s
 
 import { InjectionToken } from '@angular/core';
 
-export interface IdsInputDefaultOptions {
+export interface IdsInputDefaultConfig {
   errorStateMatcher?: typeof AbstractErrorStateMatcher
   successStateMatcher?: typeof AbstractSuccessStateMatcher
 }
 
-export const IDS_INPUT_DEFAULT_OPTIONS = new InjectionToken<IdsInputDefaultOptions>(
-  'IDS_INPUT_DEFAULT_OPTIONS',
+export const IDS_INPUT_DEFAULT_CONFIG = new InjectionToken<IdsInputDefaultConfig>(
+  'IDS_INPUT_DEFAULT_CONFIG',
   {
     providedIn: 'root',
-    factory: IDS_INPUT_DEFAULT_OPTIONS_FACTORY,
+    factory: IDS_INPUT_DEFAULT_CONFIG_FACTORY,
   },
 );
 
-export function IDS_INPUT_DEFAULT_OPTIONS_FACTORY(): Required<IdsInputDefaultOptions> {
+export function IDS_INPUT_DEFAULT_CONFIG_FACTORY(): Required<IdsInputDefaultConfig> {
   return {
     errorStateMatcher: ErrorStateMatcher,
     successStateMatcher: SuccessStateMatcher,

@@ -11,7 +11,7 @@ const DEFAULT_LONGPRESS_DELAY = 500;
 const DEFAULT_TOUCHEND_HIDE_DELAY = 1500;
 const DEFAULT_SCROLL_DEBOUNCE_TIME = 20;
 
-export interface IdsTooltipDefaultOptions {
+export interface IdsTooltipDefaultConfig {
   position?: TooltipPositionType
   size?: SizeType
   variant?: TooltipVariantType
@@ -23,15 +23,15 @@ export interface IdsTooltipDefaultOptions {
   scrollDebounceTime?: number
 }
 
-export const IDS_TOOLTIP_DEFAULT_OPTIONS = new InjectionToken<IdsTooltipDefaultOptions>(
-  'IDS_TOOLTIP_DEFAULT_OPTIONS',
+export const IDS_TOOLTIP_DEFAULT_CONFIG = new InjectionToken<IdsTooltipDefaultConfig>(
+  'IDS_TOOLTIP_DEFAULT_CONFIG',
   {
     providedIn: 'root',
-    factory: IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY,
+    factory: IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY,
   },
 );
 
-export function IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY(): Required<IdsTooltipDefaultOptions> {
+export function IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY(): Required<IdsTooltipDefaultConfig> {
   return {
     position: TooltipPosition.NORTH,
     size: Size.COMFORTABLE,

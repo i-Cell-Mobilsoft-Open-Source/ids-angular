@@ -1,4 +1,4 @@
-import { IDS_INPUT_DEFAULT_OPTIONS, IDS_INPUT_DEFAULT_OPTIONS_FACTORY } from './input-default-options';
+import { IDS_INPUT_DEFAULT_CONFIG, IDS_INPUT_DEFAULT_CONFIG_FACTORY } from './input-defaults';
 import { IdsInputType } from './types/input.type';
 
 import { AbstractErrorStateMatcher, ErrorStateTracker } from '../../common/error/error-state';
@@ -13,7 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 let nextUniqueId = 0;
 
-const defaultOptions = IDS_INPUT_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_INPUT_DEFAULT_CONFIG_FACTORY();
 
 const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
   'button',
@@ -52,7 +52,7 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
   private readonly _parentForm = this._injector.get(NgForm, null, { optional: true });
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_INPUT_DEFAULT_OPTIONS, null, { optional: true }),
+    ...this._injector.get(IDS_INPUT_DEFAULT_CONFIG, null, { optional: true }),
   };
 
   public readonly errorStateChanges = new Subject<void>();

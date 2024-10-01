@@ -1,5 +1,5 @@
 import { IdsSnackbarService } from './services/snackbar.service';
-import { IDS_SNACKBAR_DEFAULT_OPTIONS, IdsSnackbarDefaultOptions } from './snackbar-default-options';
+import { IDS_SNACKBAR_DEFAULT_OPTIONS, IdsSnackbarDefaultOptions } from './snackbar-defaults';
 import { IdsSnackbarComponent } from './snackbar.component';
 import { SnackbarVariant } from './types/snackbar-variant.type';
 

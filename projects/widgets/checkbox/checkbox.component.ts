@@ -1,4 +1,4 @@
-import { IDS_CHECKBOX_DEFAULT_OPTIONS, IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY } from './checkbox-config';
+import { IDS_CHECKBOX_DEFAULT_CONFIG, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY } from './checkbox-defaults';
 import { CheckBoxChangeEvent } from './types/checkbox-events';
 import { CheckboxState, CheckboxStateType } from './types/checkbox-state';
 import { CheckboxVariantType } from './types/checkbox-variant';
@@ -10,7 +10,7 @@ import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageCompone
 
 let nextUniqueId = 0;
 
-const defaultOptions = IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
+const defaultCONFIG = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-checkbox',
@@ -38,9 +38,9 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
   /** @ignore */
   private readonly _injector = inject(Injector);
   /** @ignore */
-  private readonly _defaultOptions = {
-    ...defaultOptions,
-    ...this._injector.get(IDS_CHECKBOX_DEFAULT_OPTIONS, null, { optional: true }),
+  private readonly _defaultCONFIG = {
+    ...defaultCONFIG,
+    ...this._injector.get(IDS_CHECKBOX_DEFAULT_CONFIG, null, { optional: true }),
   };
 
   /** @ignore */
@@ -52,10 +52,10 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
-  public size = input<SizeType | null>(this._defaultOptions.size);
+  public size = input<SizeType | null>(this._defaultCONFIG.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
   public value = input<string>();
-  public variant = input<CheckboxVariantType | null>(this._defaultOptions.variant);
+  public variant = input<CheckboxVariantType | null>(this._defaultCONFIG.variant);
 
   /** @ignore */
   public disabled = signal(false);

@@ -1,6 +1,6 @@
 import { snackbarAnimation } from './animations';
 import { IdsSnackbarService } from './public-api';
-import { IDS_SNACKBAR_DEFAULT_OPTIONS, IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY } from './snackbar-default-options';
+import { IDS_SNACKBAR_DEFAULT_CONFIG, IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY } from './snackbar-defaults';
 import { IdsSnackbarComponent } from './snackbar.component';
 import { IdsSnackbarInnerData } from './types/snackbar-inner-data.type';
 import { SnackbarPosition, SnackbarPositionType } from './types/snackbar-position.type';
@@ -8,7 +8,7 @@ import { SnackbarPosition, SnackbarPositionType } from './types/snackbar-positio
 import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { createClassList } from '@i-cell/ids-angular/core';
 
-const defaultOptions = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-snackbar-group',
@@ -24,7 +24,7 @@ export class IdsSnackbarGroupComponent {
   private readonly _snackbarService = inject(IdsSnackbarService);
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...inject(IDS_SNACKBAR_DEFAULT_OPTIONS, { optional: true }),
+    ...inject(IDS_SNACKBAR_DEFAULT_CONFIG, { optional: true }),
   };
 
   public position = signal<SnackbarPositionType>(this._defaultOptions.position);

@@ -1,4 +1,4 @@
-import { IDS_TOOLTIP_DEFAULT_OPTIONS, IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY } from './tooltip-default-options';
+import { IDS_TOOLTIP_DEFAULT_CONFIG, IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY } from './tooltip-defaults';
 import { IdsTooltipComponent } from './tooltip.component';
 import { TooltipPositionType } from './types/tooltip-position';
 import { TooltipVariantType } from './types/tooltip-variant';
@@ -12,7 +12,7 @@ import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, HostBindi
 import { coerceStringAttribute, createClassList, SizeType, WindowResizeService } from '@i-cell/ids-angular/core';
 import { filter, Subject, takeUntil } from 'rxjs';
 
-const defaultOptions = IDS_TOOLTIP_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
 const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true });
 
 @Directive({
@@ -32,7 +32,7 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private _globalResizeService = inject(WindowResizeService);
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_TOOLTIP_DEFAULT_OPTIONS, null, { optional: true }),
+    ...this._injector.get(IDS_TOOLTIP_DEFAULT_CONFIG, null, { optional: true }),
   };
 
   private readonly _passiveListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];

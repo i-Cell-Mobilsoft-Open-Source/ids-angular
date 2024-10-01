@@ -1,4 +1,4 @@
-export * from './segmented-control-default-options';
+export * from './segmented-control-defaults';
 export * from './segmented-control.directive';
 export * from './segmented-control-toggle.directive';
 export * from './segmented-control-item/segmented-control-item.component';

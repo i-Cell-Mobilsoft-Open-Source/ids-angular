@@ -2,7 +2,6 @@ import { ButtonAppearance, ButtonAppearanceType } from './types/button-appearanc
 
 import {
   Component,
-  HostBinding,
   ViewEncapsulation,
   computed,
   contentChildren,
@@ -23,6 +22,11 @@ import {
   imports: [],
   templateUrl: './button.component.html',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+    '[attr.aria-disabled]': 'this.disabled() || null',
+    '[disabled]': 'this.disabled() || null',
+  },
 })
 export class IdsButtonComponent {
   /** @ignore */
@@ -51,14 +55,4 @@ export class IdsButtonComponent {
       this.variant(),
     ]),
   );
-
-  /** @ignore */
-  @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
-    return this.disabled() || null;
-  }
-
-  /** @ignore */
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
 }

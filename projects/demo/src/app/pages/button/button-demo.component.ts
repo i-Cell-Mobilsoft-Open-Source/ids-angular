@@ -8,8 +8,7 @@ import {
   Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiCheck, mdiMagnify } from '@mdi/js';
+import { IdsIconV2Component } from '@i-cell/ids-angular/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -17,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-button-demo',
   imports: [
     IdsButtonComponent,
-    IdsIconComponent,
+    IdsIconV2Component,
     TranslateModule,
   ],
   templateUrl: './button-demo.component.html',
@@ -28,9 +27,6 @@ export class ButtonDemoComponent {
   public sizes = Object.values(Size) as SizeType[];
   public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
   public variants = Object.values(AllVariants) as AllVariantsType[];
-
-  public mdiSearch = mdiMagnify;
-  public mdiDone = mdiCheck;
 
   public onClick(buttonName: string): void {
     // eslint-disable-next-line no-console

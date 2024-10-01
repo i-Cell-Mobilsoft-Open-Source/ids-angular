@@ -17,9 +17,9 @@
               [variant]="variant"
               (click)="onClick(appearance + '-' + variant + '-' + size)"
             >
-              <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+              <ids-icon-v2 icon-leading fontIcon="search" />
               {{ appearance + " " + variant + " " + size }} button
-              <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+              <ids-icon-v2 icon-trailing fontIcon="check" />
             </button>
           }
         </div>
@@ -46,9 +46,9 @@
               [size]="size"
               [variant]="variant"
             >
-              <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+              <ids-icon-v2 icon-leading fontIcon="search" />
               {{ appearance + " " + variant + " " + size }} button
-              <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+              <ids-icon-v2 icon-trailing fontIcon="check" />
             </button>
           }
         </div>

@@ -1,0 +1,7 @@
+<legend [class]="_legendClass">{{ legend() }}</legend>
+@if (_hasMessage()) {
+  <div [class]="_messageClass">
+    <ng-content select="[idsFieldsetMessage]" />
+  </div>
+}
+<ng-content select="ids-fieldset-row" />

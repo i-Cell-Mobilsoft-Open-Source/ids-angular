@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxVariant, CheckboxVariantType, IdsCheckboxComponent } from '@i-cell/ids-angular/checkbox';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
-import { IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms/directives/ids-message-suffix.directive';
+import { IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms/directives/message-suffix.directive';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({

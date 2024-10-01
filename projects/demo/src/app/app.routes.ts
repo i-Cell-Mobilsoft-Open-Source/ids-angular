@@ -38,6 +38,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/divider/divider-demo.component').then((module) => module.DividerDemoComponent),
   },
   {
+    path: 'components/fieldset',
+    loadComponent: () => import('./pages/fieldset/fieldset-demo.component').then((module) => module.FieldsetDemoComponent),
+  },
+  {
     path: 'components/form-field',
     loadComponent: () => import('./pages/form-field/form-field-demo.component').then((module) => module.FormFieldDemoComponent),
   },
@@ -66,6 +70,10 @@ export const routes: Routes = [
     path: 'components/segmented-control-toggle',
     loadComponent: () => import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component').then(
       (module) => module.SegmentedControlToggleDemoComponent),
+  },
+  {
+    path: 'components/select',
+    loadComponent: () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
   },
   {
     path: 'components/snackbar',

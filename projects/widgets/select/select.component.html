@@ -1,0 +1,46 @@
+<div #trigger #fallbackOverlayOrigin="cdkOverlayOrigin" cdk-overlay-origin class="ids-select__trigger" (click)="open()">
+  <div class="ids-select__value">
+    @if (_empty) {
+      <span class="ids-select__placeholder">{{ placeholder() }}</span>
+    } @else {
+      <span class="ids-select__value-text">
+        @if (_customTrigger()) {
+          <ng-content select="ids-select-trigger" />
+        } @else {
+          {{ _triggerValue }}
+        }
+      </span>
+    }
+  </div>
+
+  <div class="ids-select__arrow">
+    <ids-icon [icon]="_chevronDownIcon" />
+  </div>
+</div>
+
+<ng-template
+  cdk-connected-overlay
+  cdkConnectedOverlayLockPosition
+  [cdkConnectedOverlayOrigin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
+  [cdkConnectedOverlayOpen]="isPanelOpen()"
+  [cdkConnectedOverlayPositions]="_connectedPositions"
+  [cdkConnectedOverlayWidth]="_overlayWidth"
+  [cdkConnectedOverlayPush]="true"
+  (overlayOutsideClick)="close()"
+  (attach)="_panelAttached()"
+  (detach)="close()"
+>
+  <div
+    #panel
+    role="listbox"
+    tabindex="-1"
+    [attr.id]="id() + '-panel'"
+    [attr.aria-multiselectable]="multiSelect()"
+    [attr.aria-label]="ariaLabel() || null"
+    [attr.aria-labelledby]="ariaLabelledby()"
+    [class]="_panelClasses()"
+    (keydown)="_handleKeydown($event)"
+  >
+    <ng-content />
+  </div>
+</ng-template>

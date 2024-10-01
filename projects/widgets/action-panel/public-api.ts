@@ -1,2 +1,2 @@
-export * from './ids-action-panel.component';
-export * from './types/ids-action-panel-appearance';
+export * from './action-panel.component';
+export * from './types/action-panel-appearance';

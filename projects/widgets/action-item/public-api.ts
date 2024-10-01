@@ -1,2 +1,2 @@
-export * from './ids-action-item.component';
-export * from './types/ids-action-item-appearance';
+export * from './action-item.component';
+export * from './types/action-item-appearance';

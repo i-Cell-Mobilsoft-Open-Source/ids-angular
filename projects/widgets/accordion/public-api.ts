@@ -1,2 +1,2 @@
-export * from './ids-accordion.component';
-export * from './types/ids-accordion-appearance';
+export * from './accordion.component';
+export * from './types/accordion-appearance';

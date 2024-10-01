@@ -1,6 +1,5 @@
 import {
   Component,
-  HostBinding,
   ViewEncapsulation,
   computed,
   input,
@@ -19,6 +18,10 @@ import {
   imports: [],
   templateUrl: './avatar.component.html',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+    '[type]': 'type()',
+  },
 })
 export class IdsAvatarComponent {
   /** @ignore */
@@ -26,6 +29,7 @@ export class IdsAvatarComponent {
 
   public image = input<string | null>(null);
   public alt = input<string | null>(null);
+  public type = input<string>('button');
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<SurfaceVariantType | null>(SurfaceVariant.PRIMARY);
 
@@ -36,11 +40,4 @@ export class IdsAvatarComponent {
       this.variant(),
     ]),
   );
-
-  /** @ignore */
-  @HostBinding('type') private _type = 'button';
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
 }

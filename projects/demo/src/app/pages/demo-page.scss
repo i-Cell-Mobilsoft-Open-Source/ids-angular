@@ -25,6 +25,11 @@ section {
       caption {
         text-align-last: left;
         font-weight: 600;
+        .caption-group {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
     }
   }

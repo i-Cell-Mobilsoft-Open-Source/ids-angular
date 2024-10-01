@@ -29,7 +29,7 @@ export class IdsRadioItemComponent implements OnInit {
   public inputId = input<string>(this._uniqueId);
   public value = input.required<unknown>();
   public ariaLabel = input<string>('', { alias: 'aria-label' });
-  public ariaLabelledBy = input<string>('', { alias: 'aria-labeledby' });
+  public ariaLabelledBy = input<string>('', { alias: 'aria-labelledby' });
   public ariaDescribedBy = input<string>('', { alias: 'aria-describedby' });
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);

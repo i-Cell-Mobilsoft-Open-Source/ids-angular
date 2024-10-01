@@ -68,11 +68,11 @@
   <ng-template #actionMenu>
     <ids-action-panel size="compact" appearance="outlined">
       @for (_ of items; track $index) {
-        <button type="button" idsActionItem appearance="filled" size="compact" [label]="'Menu Item Label ' + $index">
+        <button type="button" idsMenuItem appearance="filled" size="compact" [label]="'Menu Item Label ' + $index">
           <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
         </button>
       }
-      <button idsActionItem type="button" appearance="filled" size="compact" label="Menu Item Label 8" [idsActionMenuTriggerFor]="subMenu">
+      <button idsMenuItem type="button" appearance="filled" size="compact" label="Menu Item Label 8" [idsActionMenuTriggerFor]="subMenu">
         <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
         <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiChevronRight" />
       </button>
@@ -82,7 +82,7 @@
   <ng-template #subMenu>
     <ids-action-panel size="compact" appearance="outlined">
       @for (_ of items; track $index) {
-        <button type="button" idsActionItem appearance="filled" size="compact" [label]="'Sub Menu Item Label ' + $index">
+        <button type="button" idsMenuItem appearance="filled" size="compact" [label]="'Sub Menu Item Label ' + $index">
           <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
         </button>
       }

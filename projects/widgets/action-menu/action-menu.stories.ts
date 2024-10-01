@@ -1,8 +1,8 @@
 import { IdsActionMenuTriggerDirective } from './action-menu-trigger.directive';
 
-import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
 import { IdsActionPanelComponent } from '@i-cell/ids-angular/action-panel';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 export default {
@@ -22,7 +22,7 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [
-        IdsActionItemComponent,
+        IdsMenuItemComponent,
         IdsActionMenuTriggerDirective,
         IdsActionPanelComponent,
         IdsButtonComponent,
@@ -44,11 +44,11 @@ export default {
         </button>
         <ng-template #actionMenu>
           <ids-action-panel size="compact" appearance="outlined">
-            <button idsActionItem appearance="filled" size="comfortable" label="Menu item 1"></button>
-            <button idsActionItem appearance="filled" size="comfortable" label="Menu item 2"></button>
-            <button idsActionItem appearance="filled" size="comfortable" label="Menu item 3"></button>
-            <button idsActionItem appearance="filled" size="comfortable" label="Menu item 4"></button>
-            <button idsActionItem appearance="filled" size="comfortable" label="Menu item 5"></button>
+            <button idsMenuItem appearance="filled" size="comfortable" label="Menu item 1"></button>
+            <button idsMenuItem appearance="filled" size="comfortable" label="Menu item 2"></button>
+            <button idsMenuItem appearance="filled" size="comfortable" label="Menu item 3"></button>
+            <button idsMenuItem appearance="filled" size="comfortable" label="Menu item 4"></button>
+            <button idsMenuItem appearance="filled" size="comfortable" label="Menu item 5"></button>
           </ids-action-panel>
         </ng-template>
       `,

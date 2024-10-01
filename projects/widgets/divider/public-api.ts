@@ -1,1 +1,1 @@
-export * from './ids-divider.component';
+export * from './divider.component';

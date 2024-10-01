@@ -2,7 +2,7 @@ import { IdsOptionSelectionChange } from './option-events';
 import { IDS_OPTION_GROUP, IdsOptionGroupComponent } from './option-group.component';
 import { IDS_OPTION_PARENT_COMPONENT } from './option-parent';
 
-import { FormFieldVariantType } from '../form-field/types/ids-form-field-variant.type';
+import { FormFieldVariantType } from '../form-field/types/form-field-variant.type';
 import { IDS_PSEUDO_CHECKBOX_PARENT_COMPONENT, IdsPseudoCheckboxParentComponent } from '../pseudo-checkbox/pseudo-checkbox-parent';
 import { PseudoCheckboxComponent } from '../pseudo-checkbox/pseudo-checkbox.component';
 

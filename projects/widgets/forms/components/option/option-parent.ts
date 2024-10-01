@@ -1,4 +1,4 @@
-import { FormFieldVariantType } from '../form-field/types/ids-form-field-variant.type';
+import { FormFieldVariantType } from '../form-field/types/form-field-variant.type';
 
 import { InjectionToken, Signal } from '@angular/core';
 import { SizeType } from '@i-cell/ids-angular/core';

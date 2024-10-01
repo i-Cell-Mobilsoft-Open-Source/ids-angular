@@ -1,2 +1,2 @@
-export * from './ids-icon-button.component';
-export * from './types/ids-icon-button-appearance';
+export * from './icon-button.component';
+export * from './types/icon-button-appearance';

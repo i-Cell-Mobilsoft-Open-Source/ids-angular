@@ -1,2 +1,2 @@
-export * from './ids-tag.component';
-export * from './types/ids-tag-appearance';
+export * from './tag.component';
+export * from './types/tag-appearance';

@@ -1,29 +1,114 @@
 <h1>{{ "COMPONENTS.ICON" | translate }}</h1>
 
-@for (variant of variants; track $index) {
-  <section [class]="variant">
-    <h2>{{ variant | uppercase }}</h2>
-    <div class="icon-sources">
-      <div>
-        <h3>Font Icon</h3>
-        <div class="icon-source">
-          @for (sizeCollection of sizeCollectionType; track $index) {
-            @for (size of sizes; track $index) {
-              <ids-icon-v2 fontIcon="moon" [variant]="variant" [sizeCollection]="sizeCollection" [size]="size" />
-            }
-          }
-        </div>
+<section class="component" [class]="model.variant">
+  <ids-icon-v2
+    [size]="model.size"
+    [sizeCollection]="model.sizeCollection"
+    [variant]="model.variant"
+    [fontIcon]="model.fontIcon"
+    [aria-hidden]="model.ariaHidden"
+  />
+  <ids-icon-v2
+    [size]="model.size"
+    [sizeCollection]="model.sizeCollection"
+    [variant]="model.variant"
+    [svgIcon]="model.svgIconName"
+    [aria-hidden]="model.ariaHidden"
+  />
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
       </div>
-      <div>
-        <h3>Svg Icon</h3>
-        <div class="icon-source">
-          @for (sizeCollection of sizeCollectionType; track $index) {
-            @for (size of sizes; track $index) {
-              <ids-icon-v2 svgIcon="user" [variant]="variant" [sizeCollection]="sizeCollection" [size]="size" />
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>size</td>
+        <td>Icon size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ defaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
             }
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-}
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>sizeCollection</td>
+        <td>Icon size collection.</td>
+        <td><code>IconSizeCollectionType</code></td>
+        <td>
+          <code>{{ defaults.sizeCollection }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.sizeCollection">
+            @for (item of sizeCollections; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Icon variant.</td>
+        <td><code>IconVariantType</code></td>
+        <td>
+          <code>{{ defaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>fontIcon</td>
+        <td>Name of font icon.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>''</code>
+        </td>
+        <td><input type="text" [(ngModel)]="model.fontIcon" /></td>
+      </tr>
+      <tr>
+        <td>svgIcon</td>
+        <td>Name of svg icon file.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>''</code>
+        </td>
+        <td><input type="text" [(ngModel)]="model.svgIconName" /></td>
+      </tr>
+      <tr>
+        <td>aria-hidden</td>
+        <td>Whether the icon button is disabled or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>{{ defaults.ariaHidden }}</code>
+        </td>
+        <td><input type="checkbox" name="ariaHidden" [(ngModel)]="model.ariaHidden" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

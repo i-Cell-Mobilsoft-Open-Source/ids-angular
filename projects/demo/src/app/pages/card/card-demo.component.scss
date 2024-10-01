@@ -1,33 +1,6 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 2rem;
+.ids-card-horizontal {
+  max-height: 300px;
 }
-
-h1 {
-  margin-top: 0;
-}
-
-.card-demo__container {
-  display: flex;
-  gap: 2rem;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .ids-card {
-    &.ids-card-vertical {
-      width: 400px;
-    }
-    &.ids-card-horizontal {
-      width: 600px;
-      .ids-card-media {
-        width: 400px;
-      }
-    }
-  }
+.ids-card-vertical {
+  max-width: 300px;
 }

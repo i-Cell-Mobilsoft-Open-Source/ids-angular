@@ -1,56 +1,8 @@
 <h1>{{ "COMPONENTS.CARD" | translate }}</h1>
 
-<div class="card-demo__container">
-  <form>
-    <label>
-      Appearance:
-      <select name="appearance" [(ngModel)]="model.appearance">
-        @for (appearance of appearances; track $index) {
-          <option [value]="appearance">{{ appearance }}</option>
-        }
-      </select>
-    </label>
-    <label>
-      Size:
-      <select name="size" [(ngModel)]="model.size">
-        @for (size of sizes; track $index) {
-          <option [value]="size">{{ size }}</option>
-        }
-      </select>
-    </label>
-    <label>
-      Variants:
-      <select name="variant" [(ngModel)]="model.variant">
-        @for (variant of variants; track $index) {
-          <option [value]="variant">{{ variant }}</option>
-        }
-      </select>
-    </label>
-    <label>
-      Orientation:
-      <select name="orientation" [(ngModel)]="model.orientation">
-        @for (orientation of orientations; track $index) {
-          <option [value]="orientation">{{ orientation }}</option>
-        }
-      </select>
-    </label>
-    <label>
-      Clickable:
-      <input type="checkbox" name="clickable" [(ngModel)]="model.clickable" />
-    </label>
-    <label>
-      Disabled:
-      <input type="checkbox" name="disabled" [(ngModel)]="model.disabled" />
-    </label>
-    <label>
-      Stretch media:
-      <input type="checkbox" name="stretchMedia" [(ngModel)]="model.stretchMedia" />
-    </label>
-  </form>
-
+<section class="component" [class]="model.variant">
   @if (model.clickable) {
-    <section
-      idsCard
+    <ids-card
       [appearance]="model.appearance"
       [size]="model.size"
       [variant]="model.variant"
@@ -74,9 +26,9 @@
       @if (model.orientation === "vertical") {
         <footer idsCardFooter>This is the footer</footer>
       }
-    </section>
+    </ids-card>
   } @else {
-    <section idsCard [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation">
+    <ids-card [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation">
       @if (model.orientation === "vertical") {
         <header idsCardHeader>
           <h2 idsCardTitle>This is the title</h2>
@@ -93,6 +45,129 @@
       @if (model.orientation === "vertical") {
         <footer idsCardFooter>This is the footer</footer>
       }
-    </section>
+    </ids-card>
   }
-</div>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>appearance</td>
+        <td>Card appearance.</td>
+        <td><code>CardAppearanceType</code></td>
+        <td>
+          <code>{{ defaults.appearance }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.appearance">
+            @for (item of appearances; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Card size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ defaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Card variant.</td>
+        <td><code>AllVariantsType</code></td>
+        <td>
+          <code>{{ defaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>orientation</td>
+        <td>Card orientation.</td>
+        <td><code>OrientationType</code></td>
+        <td>
+          <code>{{ defaults.orientation }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.orientation">
+            @for (item of orientations; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the card is disabled or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>{{ defaults.disabled }}</code>
+        </td>
+        <td><input type="checkbox" name="disabled" [(ngModel)]="model.disabled" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>clickable</td>
+        <td>Whether the card is clickable or not.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.clickable" /></td>
+      </tr>
+      <tr>
+        <td>stretchMedia</td>
+        <td>Whether the image is stretchable or not.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.stretchMedia" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

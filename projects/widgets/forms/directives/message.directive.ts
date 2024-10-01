@@ -1,8 +1,10 @@
 import { IdsFormFieldComponent } from '../components/form-field/form-field.component';
 import { IDS_FORM_FIELD } from '../components/form-field/tokens/form-field-tokens';
+import { FormFieldVariantType } from '../components/form-field/types/form-field-variant.type';
+import { MessageVariant, MessageVariantType } from '../components/message/types/message-variant.type';
 
-import { Directive, HostBinding, Injector, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, computed, inject, input, signal } from '@angular/core';
-import { AllVariants, AllVariantsType, createClassList, Size, SizeType } from '@i-cell/ids-angular/core';
+import { Directive, HostBinding, OnInit, computed, inject, input, signal } from '@angular/core';
+import { createClassList, Size, SizeType } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 
@@ -13,53 +15,34 @@ let nextUniqueId = 0;
     '[id]': 'id()',
   },
 })
-export class IdsMessageDirective implements OnInit, OnChanges {
+export class IdsMessageDirective implements OnInit {
   private readonly _componentClass = 'ids-message';
-
-  private _injector = inject(Injector);
+  private readonly _parent = inject<IdsFormFieldComponent>(IDS_FORM_FIELD, { skipSelf: true, optional: true });
 
   public id = input<string, number>(
     `${this._componentClass}-${nextUniqueId++}`,
     { transform: (value: number) => `${this._componentClass}-${value}` },
   );
 
-  @Input({ alias: 'size' }) public inputSize: SizeType = Size.COMFORTABLE;
-  @Input({ alias: 'variant' }) public inputVariant: unknown;
-  private _size = signal<SizeType | null>(Size.COMFORTABLE);
-  private _variant = signal<AllVariantsType | null>(AllVariants.SURFACE);
+  public size = input<SizeType>(Size.COMFORTABLE);
+  public variant = input<MessageVariantType>(MessageVariant.SURFACE);
+  private _parentSize = signal<SizeType | null | undefined>(this._parent?.size());
+  private _parentVariant = signal<FormFieldVariantType | null | undefined>(this._parent?.variant());
+  private _safeSize = computed(() => this._parentSize() ?? this.size());
+  private _safeVariant = computed(() => this._parentVariant() ?? this.variant());
   private _disabled = signal<boolean>(false);
+  
   private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this._size(),
-    this._variant(),
+    this._safeSize(),
+    this._safeVariant(),
     this._disabled() ? 'disabled' : null,
   ]));
 
-  private _receivedInputSize = false;
-  private _receivedInputVariant = false;
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    const sizeChange = changes['inputSize'] as SimpleChange | undefined;
-    const variantChange = changes['inputVariant'] as SimpleChange | undefined;
-    if (sizeChange) {
-      this._size.set(sizeChange.currentValue);
-      this._receivedInputSize = true;
-    }
-    if (variantChange) {
-      this._size.set(variantChange.currentValue);
-      this._receivedInputVariant = true;
-    }
-  }
-
   public ngOnInit(): void {
-    const parent = this._injector.get<IdsFormFieldComponent>(IDS_FORM_FIELD, null, { skipSelf: true, optional: true });
-    if (parent) {
-      if (!this._receivedInputSize) {
-        this._size.set(parent.size());
-      }
-      if (!this._receivedInputVariant) {
-        this._variant.set(parent.variant());
-      }
-      this._disabled.set(parent.disabled());
+    if (this._parent) {
+      this._parentSize.set(this._parent.safeSize());
+      this._parentVariant.set(this._parent.safeVariant());
+      this._disabled.set(this._parent.disabled());
     }
   }
 

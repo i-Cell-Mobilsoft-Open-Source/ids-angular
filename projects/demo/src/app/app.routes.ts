@@ -38,6 +38,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/divider/divider-demo.component').then((module) => module.DividerDemoComponent),
   },
   {
+    path: 'components/fieldset',
+    loadComponent: () => import('./pages/fieldset/fieldset-demo.component').then((module) => module.FieldsetDemoComponent),
+  },
+  {
     path: 'components/form-field',
     loadComponent: () => import('./pages/form-field/form-field-demo.component').then((module) => module.FormFieldDemoComponent),
   },

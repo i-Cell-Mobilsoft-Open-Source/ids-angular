@@ -1,5 +1,5 @@
 import { IdsActionPanelComponent } from './action-panel.component';
-import { ActionPanelAppearance } from './types/action-panel-appearance';
+import { ActionPanelAppearance } from './types/action-panel-appearance.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 

@@ -9,18 +9,18 @@ import {
   contentChildren,
   input,
 } from '@angular/core';
-import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
 import {
   AllVariants,
   createClassList,
   Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
+import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
 
 @Component({
   selector: 'ids-action-panel,div[idsActionPanel]',
   standalone: true,
-  imports: [IdsActionItemComponent],
+  imports: [IdsMenuItemComponent],
   hostDirectives: [
     CdkMenu,
     CdkTargetMenuAim,
@@ -40,7 +40,7 @@ export class IdsActionPanelComponent {
   public variant = input<'light' | null>(AllVariants.LIGHT);
 
   /** @ignore */
-  public actionItems = contentChildren(IdsActionItemComponent);
+  public actionItems = contentChildren(IdsMenuItemComponent);
 
   /** @ignore */
   private _hostClasses = computed(() => createClassList(this._componentClass, [

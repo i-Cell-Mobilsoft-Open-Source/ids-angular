@@ -1,23 +1,23 @@
-import { IdsActionItemComponent } from './action-item.component';
+import { IdsMenuItemComponent } from './menu-item.component';
 
 import { CdkMenuItem } from '@angular/cdk/menu';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockDirective } from 'ng-mocks';
 
-describe('IdsActionItemComponent', () => {
-  let component: IdsActionItemComponent;
-  let fixture: ComponentFixture<IdsActionItemComponent>;
+describe('IdsMenuItemComponent', () => {
+  let component: IdsMenuItemComponent;
+  let fixture: ComponentFixture<IdsMenuItemComponent>;
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       imports: [
-        IdsActionItemComponent,
+        IdsMenuItemComponent,
         MockDirective(CdkMenuItem),
       ],
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(IdsActionItemComponent);
+    fixture = TestBed.createComponent(IdsMenuItemComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('label', 'test');
     fixture.detectChanges();

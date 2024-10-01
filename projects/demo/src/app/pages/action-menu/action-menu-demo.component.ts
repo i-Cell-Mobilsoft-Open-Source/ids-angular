@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IdsActionItemComponent } from '@i-cell/ids-angular/action-item';
 import { IdsActionMenuTriggerDirective } from '@i-cell/ids-angular/action-menu';
 import { IdsActionPanelComponent } from '@i-cell/ids-angular/action-panel';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
 import { mdiChevronDown, mdiChevronRight, mdiChevronUp, mdiMagnify } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     IdsActionMenuTriggerDirective,
     IdsActionPanelComponent,
-    IdsActionItemComponent,
+    IdsMenuItemComponent,
     IdsButtonComponent,
     IdsIconComponent,
     TranslateModule,

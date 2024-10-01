@@ -1,8 +1,8 @@
 import { IdsActionMenuTriggerDirective } from './action-menu-trigger.directive';
 
-import { IdsActionItemComponent } from '../action-item';
 import { IdsActionPanelComponent } from '../action-panel';
 import { IdsButtonComponent } from '../button';
+import { IdsMenuItemComponent } from '../menu-item';
 
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -24,7 +24,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
       size="compact"
       appearance="outlined"
     >
-      <button type="button" idsActionItem appearance="filled" size="compact" [label]="'Menu Item Label 1'">
+      <button type="button" idsMenuItem appearance="filled" size="compact" [label]="'Menu Item Label 1'">
         Anything
       </button>
     </ids-action-panel>
@@ -44,7 +44,7 @@ describe('IdsActionMenuTriggerDirective', () => {
         TestComponent,
         IdsActionMenuTriggerDirective,
         IdsActionPanelComponent,
-        IdsActionItemComponent,
+        IdsMenuItemComponent,
         IdsButtonComponent,
       ],
     })

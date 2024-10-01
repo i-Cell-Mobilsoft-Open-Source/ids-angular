@@ -40,7 +40,7 @@ export class IconDemoComponent {
     sizeCollection: defaultConfig.sizeCollection,
     variant: defaultConfig.variant,
     fontIcon: 'moon',
-    svgIconName: 'user',
+    svgIconName: 'moon',
     ariaHidden: false,
   };
 

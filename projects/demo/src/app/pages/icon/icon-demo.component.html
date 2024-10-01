@@ -1,20 +1,28 @@
 <h1>{{ "COMPONENTS.ICON" | translate }}</h1>
 
 <section class="component" [class]="model.variant">
-  <ids-icon-v2
-    [size]="model.size"
-    [sizeCollection]="model.sizeCollection"
-    [variant]="model.variant"
-    [fontIcon]="model.fontIcon"
-    [aria-hidden]="model.ariaHidden"
-  />
-  <ids-icon-v2
-    [size]="model.size"
-    [sizeCollection]="model.sizeCollection"
-    [variant]="model.variant"
-    [svgIcon]="model.svgIconName"
-    [aria-hidden]="model.ariaHidden"
-  />
+  <div class="icon-types">
+    <div class="icon-tpye">
+      <h2>Font icon</h2>
+      <ids-icon-v2
+        [size]="model.size"
+        [sizeCollection]="model.sizeCollection"
+        [variant]="model.variant"
+        [fontIcon]="model.fontIcon"
+        [aria-hidden]="model.ariaHidden"
+      />
+    </div>
+    <div class="icon-tpye">
+      <h2>SVG icon</h2>
+      <ids-icon-v2
+        [size]="model.size"
+        [sizeCollection]="model.sizeCollection"
+        [variant]="model.variant"
+        [svgIcon]="model.svgIconName"
+        [aria-hidden]="model.ariaHidden"
+      />
+    </div>
+  </div>
 </section>
 
 <section class="controls">

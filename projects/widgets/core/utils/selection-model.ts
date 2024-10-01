@@ -1,19 +1,22 @@
-import { isDevMode } from '@angular/core';
+import { computed, isDevMode, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export class SelectionModel<T> {
-  private _selection = new Set<T>();
+  private _selection = signal<Set<T>>(new Set<T>());
   private _deselectedToEmit: T[] = [];
   private _selectedToEmit: T[] = [];
-  private _selected?: T[] | null = null;
+  private _selected = signal<T[] | null>(null);
 
   public get selected(): T[] {
-    if (!this._selected) {
-      this._selected = Array.from(this._selection.values());
+    if (!this._selected()) {
+      this._selected.set(Array.from(this._selection().values()));
     }
 
-    return this._selected;
+    return this._selected() || [];
   }
+
+  public isEmpty = computed(() => this._selection().size === 0);
+  public hasValue = computed(() => !this.isEmpty());
 
   public readonly changed = new Subject<SelectionChange<T>>();
 
@@ -53,7 +56,7 @@ export class SelectionModel<T> {
 
   public setSelection(...values: T[]): boolean | void {
     this._verifyValueAssignment(values);
-    const oldValues = this.selected;
+    const oldValues = this.selected || [];
     const newSelectedSet = new Set(values);
     values.forEach((value) => this._markSelected(value));
     oldValues
@@ -78,20 +81,12 @@ export class SelectionModel<T> {
   }
 
   public isSelected(value: T): boolean {
-    return this._selection.has(this._getConcreteValue(value));
-  }
-
-  public isEmpty(): boolean {
-    return this._selection.size === 0;
-  }
-
-  public hasValue(): boolean {
-    return !this.isEmpty();
+    return this._selection().has(this._getConcreteValue(value));
   }
 
   public sort(predicate?: (a: T, b: T) => number): void {
     if (this._multiSelect && this.selected) {
-      this._selected!.sort(predicate);
+      this._selected()!.sort(predicate);
     }
   }
 
@@ -101,7 +96,7 @@ export class SelectionModel<T> {
 
   private _emitChangeEvent(): void {
     // Clear the selected values so they can be re-cached.
-    this._selected = null;
+    this._selected.set(null);
 
     if (this._selectedToEmit.length || this._deselectedToEmit.length) {
       this.changed.next({
@@ -123,7 +118,10 @@ export class SelectionModel<T> {
       }
 
       if (!this.isSelected(concreteValue)) {
-        this._selection.add(concreteValue);
+        this._selection.update((selection) => {
+          selection.add(concreteValue);
+          return selection;
+        });
       }
 
       if (this._emitChanges) {
@@ -136,7 +134,10 @@ export class SelectionModel<T> {
   private _unmarkSelected(value: T): void {
     const concreteValue = this._getConcreteValue(value);
     if (this.isSelected(concreteValue)) {
-      this._selection.delete(concreteValue);
+      this._selection.update((selection) => {
+        selection.delete(concreteValue);
+        return selection;
+      });
 
       if (this._emitChanges) {
         this._deselectedToEmit.push(concreteValue);
@@ -147,7 +148,10 @@ export class SelectionModel<T> {
   /** Clears out the selected values. */
   private _unmarkAll(): void {
     if (!this.isEmpty()) {
-      this._selection.forEach((value) => this._unmarkSelected(value));
+      this._selection.update((selection) => {
+        selection.forEach((value) => this._unmarkSelected(value));
+        return selection;
+      });
     }
   }
 
@@ -165,7 +169,7 @@ export class SelectionModel<T> {
     if (!this.compareWith) {
       return inputValue;
     } else {
-      const safeSelection = selection ?? this._selection;
+      const safeSelection = selection ?? this._selection();
       for (const selectedValue of safeSelection) {
         if (this.compareWith(inputValue, selectedValue)) {
           return selectedValue;

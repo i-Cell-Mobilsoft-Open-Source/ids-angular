@@ -6,7 +6,7 @@ import { CheckboxVariantType } from './types/ids-checkbox-variant';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Injector, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation, computed, contentChildren, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
 import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
-import { FormElement, IDS_FORM_ELEMENT, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 
 let nextUniqueId = 0;
 
@@ -24,13 +24,13 @@ const defaultOptions = IDS_CHECKBOX_DEFAULT_OPTIONS_FACTORY();
       multi: true,
     },
     {
-      provide: IDS_FORM_ELEMENT,
+      provide: IDS_FORM_FIELD_CONTROL,
       useExisting: IdsCheckboxComponent,
     },
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
+export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   /** @ignore */
   private readonly _componentClass = 'ids-checkbox';
   /** @ignore */
@@ -58,19 +58,19 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   public variant = input<CheckboxVariantType | null>(this._defaultOptions.variant);
 
   /** @ignore */
-  public isDisabled = signal(false);
+  public disabled = signal(false);
 
   /** @ignore */
   public isChecked = computed(() => this._checkboxState() === CheckboxState.CHECKED);
   /** @ignore */
   public isIndeterminate = computed(() => this._checkboxState() === CheckboxState.INDETERMINATE);
   /** @ignore */
-  public isFocusable = computed(() => !this.isDisabled() && !this.readonly());
+  public isFocusable = computed(() => !this.disabled() && !this.readonly());
   /** @ignore */
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.size(),
     this.variant(),
-    this.isDisabled() ? 'disabled' : null,
+    this.disabled() ? 'disabled' : null,
   ]),
   );
 
@@ -87,14 +87,6 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
   @Input({ transform: coerceBooleanAttribute }) public checked?: boolean;
 
   @Input({ transform: coerceBooleanAttribute }) public indeterminate?: boolean;
-
-  @Input({ transform: coerceBooleanAttribute })
-  set disabled(value: boolean) {
-    if (value !== this.disabled) {
-      this.isDisabled.set(value);
-      this._changeDetectorRef.markForCheck();
-    }
-  }
 
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() public readonly change = new EventEmitter<CheckBoxChangeEvent>();
@@ -166,7 +158,7 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
 
   /** @ignore */
   public setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+    this.disabled.set(isDisabled);
   }
 
   /** @ignore */
@@ -196,7 +188,7 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
 
   /** @ignore */
   private _handleInputClick(): void {
-    if (!this.isDisabled()) {
+    if (!this.disabled()) {
       if (this.isIndeterminate()) {
         this._checkboxState.set(CheckboxState.CHECKED);
         this.indeterminateChange.emit(this.isIndeterminate());
@@ -242,7 +234,7 @@ export class IdsCheckboxComponent implements FormElement<CheckboxVariantType>, O
       this._handleInputClick();
     }
 
-    if (!this.isDisabled()) {
+    if (!this.disabled()) {
       this._inputElement.nativeElement.focus();
     }
   }

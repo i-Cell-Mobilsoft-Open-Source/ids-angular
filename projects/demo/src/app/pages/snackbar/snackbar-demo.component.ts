@@ -42,7 +42,6 @@ export class SnackbarDemoComponent implements OnInit {
     autoClose?: boolean,
   ): void {
     const message: string = snackbarTexts[snackbarTextIndex];
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     snackbarTextIndex < snackbarTexts.length - 1 ? snackbarTextIndex++ : snackbarTextIndex = 0;
     this._snackbarService.add({
       message,

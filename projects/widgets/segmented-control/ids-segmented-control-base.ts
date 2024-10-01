@@ -7,7 +7,7 @@ import { SegmentedControlVariantType } from './types/ids-semneted-control-varian
 
 import { AfterContentInit, computed, Directive, EventEmitter, HostBinding, HostListener, inject, Injector, Input, input, InputSignal, isDevMode, OnDestroy, OnInit, Output, Signal, signal } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, createComponentError, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, createComponentError, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
 
 const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY();
@@ -36,7 +36,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   /** @ignore */
   protected _selectionModel?: SelectionModel<I>;
   /** @ignore */
-  private _rawValue: unknown;
+  private _rawValue: unknown | unknown[];
   /** @ignore */
   protected abstract _items: Signal<ReadonlyArray<I>>;
 
@@ -47,7 +47,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   public appearance = input<SegmentedControlAppearanceType>(this._defaultOptions.appearance);
   public abstract multiSelect: InputSignal<boolean> | Signal<boolean>;
   /** @ignore */
-  public isDisabled = signal<boolean>(false);
+  public disabled = signal<boolean>(false);
 
   /** @ignore */
   private _hostClasses = computed(() => createClassList(
@@ -56,7 +56,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
       this.size(),
       this.variant(),
       this.appearance(),
-      this.isDisabled() ? 'disabled' : null,
+      this.disabled() ? 'disabled' : null,
     ],
   ));
 
@@ -66,12 +66,6 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   protected _onTouched: () => unknown = () => {};
 
   @Input() public valueCompareFn?: (o1: I, o2: I) => boolean;
-  @Input({ transform: coerceBooleanAttribute })
-  set disabled(value: boolean) {
-    if (value !== this.disabled) {
-      this.isDisabled.set(value);
-    }
-  }
 
   /** @ignore */
   @Output() public abstract readonly itemChanges: EventEmitter<E>;
@@ -161,7 +155,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
 
   /** @ignore */
   public setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+    this.disabled.set(isDisabled);
   }
 
   /** @ignore */
@@ -218,7 +212,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
 
   /** @ignore */
   protected _handleChange(): void {
-    const selectionModelValues = this._selectionModel?.selected.map((item) => item.value());
+    const selectionModelValues = this._selectionModel?.selected?.map((item) => item.value());
     if (this.multiSelect()) {
       this._onChange(selectionModelValues);
     } else {

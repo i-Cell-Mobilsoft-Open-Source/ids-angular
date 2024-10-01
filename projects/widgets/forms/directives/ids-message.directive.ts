@@ -1,6 +1,5 @@
-import { IDS_FORM_ELEMENT } from './../tokens/form';
-
-import { FormElement } from '../types/form-element.type';
+import { IdsFormFieldComponent } from '../components/form-field/ids-form-field.component';
+import { IDS_FORM_FIELD } from '../components/form-field/tokens/ids-form-field-tokens';
 
 import { Directive, HostBinding, Injector, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, computed, inject, input, signal } from '@angular/core';
 import { AllVariants, AllVariantsType, createClassList, Size, SizeType } from '@i-cell/ids-angular/core';
@@ -52,7 +51,7 @@ export class IdsMessageDirective implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
-    const parent = this._injector.get<FormElement<AllVariantsType>>(IDS_FORM_ELEMENT, null, { skipSelf: true, optional: true });
+    const parent = this._injector.get<IdsFormFieldComponent>(IDS_FORM_FIELD, null, { skipSelf: true, optional: true });
     if (parent) {
       if (!this._receivedInputSize) {
         this._size.set(parent.size());
@@ -60,7 +59,7 @@ export class IdsMessageDirective implements OnInit, OnChanges {
       if (!this._receivedInputVariant) {
         this._variant.set(parent.variant());
       }
-      this._disabled.set(parent.isDisabled());
+      this._disabled.set(parent.disabled());
     }
   }
 

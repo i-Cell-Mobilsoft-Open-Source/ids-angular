@@ -263,7 +263,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
 
   /** @ignore */
   private _handleChange(): void {
-    const selectionModelValues = this._selectionModel?.selected.map((item) => item.value());
+    const selectionModelValues = this._selectionModel?.selected?.map((item) => item.value());
     this._onChange(selectionModelValues?.[0]);
   }
 

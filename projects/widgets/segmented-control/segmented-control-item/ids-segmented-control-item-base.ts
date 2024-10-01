@@ -38,7 +38,7 @@ implements OnInit {
   public disabled = input<boolean>(false);
 
   /** @ignore */
-  public isDisabled = computed(() => this.disabled() || this._parent()?.isDisabled());
+  public isDisabled = computed(() => this.disabled() || this._parent()?.disabled());
   /** @ignore */
   protected _multiSelect = computed(() => this._parent()?.multiSelect());
   /** @ignore */

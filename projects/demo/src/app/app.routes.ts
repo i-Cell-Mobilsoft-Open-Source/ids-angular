@@ -46,6 +46,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/form-field/form-field-demo.component').then((module) => module.FormFieldDemoComponent),
   },
   {
+    path: 'components/icon',
+    loadComponent: () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
+  },
+  {
     path: 'components/icon-button',
     loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   },
@@ -86,10 +90,6 @@ export const routes: Routes = [
   {
     path: 'components/tooltip',
     loadComponent: () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
-  },
-  {
-    path: 'components/icon',
-    loadComponent: () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
   },
   {
     path: 'components',

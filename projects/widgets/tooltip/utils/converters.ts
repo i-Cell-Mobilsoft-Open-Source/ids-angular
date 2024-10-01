@@ -1,4 +1,4 @@
-import { TooltipPosition, TooltipPositionType } from '../types/ids-tooltip-position';
+import { TooltipPosition, TooltipPositionType } from '../types/tooltip-position';
 
 import { ExtendedHorizontalPosition, ExtendedPosition, ExtendedVerticalPosition, ExtendedPositionPairType } from '@i-cell/ids-angular/core';
 

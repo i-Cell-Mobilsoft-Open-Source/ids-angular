@@ -17,3 +17,13 @@ div#storybook-root:has(.ids-accordion) {
   }
 }
 
+@font-face {
+  font-family: "IDS Icons";
+  src: url("../../demo/src/assets/fonts/I-DS-font-icon-default.eot");
+  src:
+    local("IDS Icons"),
+    local("I-DS-font-icon-default"),
+    url(../../demo/src/assets/fonts/I-DS-font-icon-default.woff2) format("woff2"),
+    url(../../demo/src/assets/fonts/I-DS-font-icon-default.woff) format("woff"),
+    url(../../demo/src/assets/fonts/I-DS-font-icon-default.ttf) format("truetype");
+}

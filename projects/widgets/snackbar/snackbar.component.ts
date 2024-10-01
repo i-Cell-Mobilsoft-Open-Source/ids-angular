@@ -1,4 +1,4 @@
-import { MIN_DURATION, READ_SPEED_PER_ACTION, READ_SPEED_PER_CHAR } from './snackbar-default-options';
+import { MIN_DURATION, READ_SPEED_PER_ACTION, READ_SPEED_PER_CHAR } from './snackbar-defaults';
 import { IdsSnackbarAction } from './types/snackbar-data.type';
 import { SnackbarVariant, SnackbarVariantType } from './types/snackbar-variant.type';
 

@@ -8,7 +8,7 @@ export const READ_SPEED_PER_CHAR = 50;
 export const MIN_DURATION = 2_000;
 export const READ_SPEED_PER_ACTION = 2_000;
 
-export interface IdsSnackbarDefaultOptions {
+export interface IdsSnackbarDefaultConfig {
   size?: SizeType
   variant?: SnackbarVariantType
   position?: SnackbarPositionType
@@ -16,15 +16,15 @@ export interface IdsSnackbarDefaultOptions {
   viewportMargin?: number
 }
 
-export const IDS_SNACKBAR_DEFAULT_OPTIONS = new InjectionToken<IdsSnackbarDefaultOptions>(
-  'IDS_SNACKBAR_DEFAULT_OPTIONS',
+export const IDS_SNACKBAR_DEFAULT_CONFIG = new InjectionToken<IdsSnackbarDefaultConfig>(
+  'IDS_SNACKBAR_DEFAULT_CONFIG',
   {
     providedIn: 'root',
-    factory: IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY,
+    factory: IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY,
   },
 );
 
-export function IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY(): (Required<IdsSnackbarDefaultOptions>) {
+export function IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY(): (Required<IdsSnackbarDefaultConfig>) {
   return {
     size: Size.COMFORTABLE,
     variant: SnackbarVariant.DARK,

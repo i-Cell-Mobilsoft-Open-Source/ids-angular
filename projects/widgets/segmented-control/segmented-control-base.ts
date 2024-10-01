@@ -1,4 +1,4 @@
-import { IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS, IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY } from './segmented-control-default-options';
+import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY } from './segmented-control-defaults';
 import { IdsSegmentedControlItemComponent } from './segmented-control-item/segmented-control-item.component';
 import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
 import { SegmentedControlAppearanceType } from './types/segmented-control-appearance';
@@ -10,7 +10,7 @@ import { ControlValueAccessor } from '@angular/forms';
 import { createClassList, createComponentError, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
 
-const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
 
 type SegmentedControlItem = IdsSegmentedControlToggleItemComponent | IdsSegmentedControlItemComponent;
 type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
@@ -27,7 +27,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   /** @ignore */
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_SEGMENTED_CONTROL_DEFAULT_OPTIONS, null, { optional: true }),
+    ...this._injector.get(IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, null, { optional: true }),
   };
 
   /** @ignore */

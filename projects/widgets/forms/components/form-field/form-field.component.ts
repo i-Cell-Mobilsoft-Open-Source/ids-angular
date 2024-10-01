@@ -1,4 +1,4 @@
-import { IDS_FORM_FIELD_DEFAULT_OPTIONS, IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY } from './form-field-default-options';
+import { IDS_FORM_FIELD_DEFAULT_CONFIG, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY } from './form-field-defaults';
 import { IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL } from './tokens/form-field-tokens';
 import { FormFieldVariantType } from './types/form-field-variant.type';
 
@@ -16,7 +16,7 @@ import { Validators } from '@angular/forms';
 import { createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
-const defaultOptions = IDS_FORM_FIELD_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-form-field',
@@ -39,7 +39,7 @@ export class IdsFormFieldComponent implements OnInit, AfterContentInit, OnDestro
   private readonly _parentFieldset = inject(IdsFieldsetComponent, { optional: true });
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_FORM_FIELD_DEFAULT_OPTIONS, null, { optional: true }),
+    ...this._injector.get(IDS_FORM_FIELD_DEFAULT_CONFIG, null, { optional: true }),
   };
 
   private readonly _destroyed = new Subject<void>();

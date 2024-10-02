@@ -1,41 +1,119 @@
 <h1>{{ "COMPONENTS.FIELDSET" | translate }}</h1>
-@for (variant of variants; track $index) {
-  <section [class]="variant">
-    <h2>{{ variant | uppercase }}</h2>
-    <div class="form-field-column">
-      @for (size of sizes; track $index) {
-        <h3>{{ size }}</h3>
-        <div class="form-field-item">
-          <fieldset idsFieldset legend="This is legend" [size]="size" [variant]="variant">
-            <span idsFieldsetMessage>This is a fieldset message</span>
-            <ids-fieldset-row>
-              <ids-form-field>
-                <ids-label>Your name</ids-label>
-                <ids-icon idsLeadingIcon [icon]="iconSun" />
-                <span idsPrefix>Prefix</span>
-                <input idsInput ngModel="John" placeholder="Type your name" required />
-                <span idsSuffix>Suffix</span>
-                <ids-icon idsTrailingIcon [icon]="iconMoon" />
-                <div idsAction>
-                  <button type="button" idsIconButton variant="surface">
-                    <ids-icon aria-hidden="true" alt="" [icon]="searchIcon" />
-                  </button>
-                </div>
-                <ids-hint-message>Type your name</ids-hint-message>
-                <ids-error-message>Name is mandatory</ids-error-message>
-              </ids-form-field>
-            </ids-fieldset-row>
-            <ids-fieldset-row>
-              <ids-form-field>
-                <ids-label>Story about you</ids-label>
-                <textarea idsInput ngModel="John" placeholder="Type your story" rows="3" required></textarea>
-                <ids-hint-message>Type your story</ids-hint-message>
-                <ids-error-message>Story is mandatory</ids-error-message>
-              </ids-form-field>
-            </ids-fieldset-row>
-          </fieldset>
-        </div>
-      }
-    </div>
-  </section>
-}
+
+<section class="component" [class]="model.variant">
+  <fieldset idsFieldset [legend]="model.legend" [size]="model.size" [variant]="model.variant">
+    @if (model.showMessage) {
+      <span idsFieldsetMessage>This is a fieldset message</span>
+    }
+    <ids-fieldset-row>
+      <ids-form-field>
+        <ids-label>Label 1</ids-label>
+        <input idsInput ngModel="John" placeholder="One" required />
+        <ids-hint-message>Type your name</ids-hint-message>
+        <ids-error-message>Name is mandatory</ids-error-message>
+      </ids-form-field>
+    </ids-fieldset-row>
+
+    <ids-fieldset-row>
+      <ids-form-field>
+        <ids-label>Label 2</ids-label>
+        <input idsInput ngModel="Wick" placeholder="Two" required />
+        <ids-hint-message>Type your name</ids-hint-message>
+        <ids-error-message>Name is mandatory</ids-error-message>
+      </ids-form-field>
+      <ids-form-field>
+        <ids-label>Label 3</ids-label>
+        <input idsInput ngModel="Vaporub" placeholder="Three" required />
+        <ids-hint-message>Type your name</ids-hint-message>
+        <ids-error-message>Name is mandatory</ids-error-message>
+      </ids-form-field>
+    </ids-fieldset-row>
+  </fieldset>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Fieldset controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>size</td>
+        <td>Fieldset size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ defaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Fieldset variant.</td>
+        <td><code>FormFieldVariantType</code></td>
+        <td>
+          <code>{{ defaults.variant }}</code>
+        </td>
+        <td>
+          <select name="variant" [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>legend</td>
+        <td>Fieldset legend.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>-</code>
+        </td>
+        <td><input type="text" name="legend" [(ngModel)]="model.legend" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Fieldset helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>showMessage</td>
+        <td>Whether to show fieldset message or not</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="showMessage" [(ngModel)]="model.showMessage" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

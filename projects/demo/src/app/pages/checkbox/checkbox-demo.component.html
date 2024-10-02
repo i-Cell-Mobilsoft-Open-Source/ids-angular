@@ -127,19 +127,23 @@
         <td>
           <code>{{ defaults.disabled }}</code>
         </td>
-        <td><input type="checkbox" name="disabled" [formControl]="disabledControl" /></td>
+        <td><input type="checkbox" name="disabled" [(ngModel)]="model.disabled" (ngModelChange)="setDisabledState($event)" /></td>
       </tr>
       <tr>
-        <td>hasError</td>
-        <td>
-          Whether the checkboxes have error or not. When true, requiredTrue validator is set, so the error is shown only when checkbox is
-          not checked (unchecked or indeterminate)
-        </td>
+        <td>hasRequiredValidator</td>
+        <td>Whether the checkboxes have required validator</td>
         <td><code>boolean</code></td>
         <td>
-          <code>{{ defaults.hasError }}</code>
+          <code>{{ defaults.hasRequiredValidator }}</code>
         </td>
-        <td><input type="checkbox" name="disabled" [formControl]="hasErrorControl" /></td>
+        <td>
+          <input
+            type="checkbox"
+            name="hasRequiredValidator"
+            [(ngModel)]="model.hasRequiredValidator"
+            (ngModelChange)="setRequiredValidator($event)"
+          />
+        </td>
       </tr>
     </tbody>
   </table>

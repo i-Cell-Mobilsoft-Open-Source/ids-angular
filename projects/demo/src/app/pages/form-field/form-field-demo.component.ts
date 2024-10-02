@@ -38,7 +38,7 @@ type InputHelperControls = {
   hasRequiredValidator: boolean,
 };
 
-const defaultOptions = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-form-field-demo',
@@ -76,8 +76,8 @@ export class FormFieldDemoComponent implements OnInit {
   public searchIcon = mdiMagnify;
 
   public formFieldDefaults: FormFieldPublicApi & FormFieldHelperControls = {
-    size: defaultOptions.size,
-    variant: defaultOptions.variant,
+    size: defaultConfig.size,
+    variant: defaultConfig.variant,
     hasLeadingIcon: true,
     hasPrefix: true,
     prefix: 'Prefix',

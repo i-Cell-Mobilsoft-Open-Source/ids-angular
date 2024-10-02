@@ -1,155 +1,275 @@
 <h1>{{ "COMPONENTS.FORM_FIELD" | translate }}</h1>
-@for (variant of variants; track $index) {
-  <section [class]="variant">
-    <h2>{{ variant | uppercase }}</h2>
-    <div class="form-field-column">
-      <h3>Default</h3>
-      <h4>Input</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Your name</ids-label>
-            <ids-icon idsLeadingIcon [icon]="iconSun" />
-            <span idsPrefix>Prefix</span>
-            <input idsInput ngModel="John" placeholder="Type your name" required />
-            <span idsSuffix>Suffix</span>
-            <ids-icon idsTrailingIcon [icon]="iconMoon" />
-            <div idsAction>
-              <button type="button" idsIconButton variant="surface">
-                <ids-icon aria-hidden="true" alt="" [icon]="searchIcon" />
-              </button>
-            </div>
-            <ids-hint-message>Type your name</ids-hint-message>
-            <ids-error-message>Name is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-      <h4>Textarea</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Story about you</ids-label>
-            <textarea idsInput ngModel="John" placeholder="Type your story" rows="3" required></textarea>
-            <ids-hint-message>Type your story</ids-hint-message>
-            <ids-error-message>Story is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
+
+<section class="component" [class]="formFieldModel.variant">
+  <form [formGroup]="form">
+    <div>
+      <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
+        <ids-label>{{ formFieldModel.label }}</ids-label>
+        @if (formFieldModel.hasLeadingIcon) {
+          <ids-icon idsLeadingIcon [icon]="iconSun" />
+        }
+        @if (formFieldModel.hasPrefix) {
+          <span idsPrefix>{{ formFieldModel.prefix }}</span>
+        }
+        <input
+          idsInput
+          formControlName="input"
+          [placeholder]="inputModel.placeholder"
+          [readonly]="inputModel.readonly"
+          [canHandleSuccessState]="inputModel.canHandleSuccessState"
+        />
+        @if (formFieldModel.hasSuffix) {
+          <span idsSuffix>{{ formFieldModel.suffix }}</span>
+        }
+        @if (formFieldModel.hasTrailingIcon) {
+          <ids-icon idsTrailingIcon [icon]="iconMoon" />
+        }
+        @if (formFieldModel.hasAction) {
+          <div idsAction>
+            <button type="button" idsIconButton appearance="standard" [variant]="formFieldModel.variant">
+              <ids-icon aria-hidden="true" alt="" [icon]="searchIcon" />
+            </button>
+          </div>
+        }
+        <ids-hint-message>{{ formFieldModel.hintMessage }}</ids-hint-message>
+        <ids-error-message>Name is mandatory</ids-error-message>
+      </ids-form-field>
     </div>
 
-    <div class="form-field-column">
-      <h3>Disabled</h3>
-      <h4>Input</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Your name</ids-label>
-            <ids-icon idsLeadingIcon [icon]="iconSun" />
-            <span idsPrefix>Prefix</span>
-            <input idsInput ngModel="John" placeholder="Type your name" disabled />
-            <span idsSuffix>Suffix</span>
-            <ids-icon idsTrailingIcon [icon]="iconMoon" />
-            <div idsAction>
-              <button type="button" idsIconButton variant="surface">
-                <ids-icon aria-hidden="true" alt="" [icon]="searchIcon" />
-              </button>
-            </div>
-            <ids-hint-message>Type your name</ids-hint-message>
-            <ids-error-message>Name is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-      <h4>Textarea</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Story about you</ids-label>
-            <textarea idsInput ngModel="John" placeholder="Type your story" rows="3" disabled></textarea>
-            <ids-hint-message>Type your story</ids-hint-message>
-            <ids-error-message>Story is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
+    <div>
+      <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
+        <ids-label>{{ formFieldModel.label }}</ids-label>
+        <textarea
+          idsInput
+          rows="3"
+          formControlName="textarea"
+          [placeholder]="inputModel.placeholder"
+          [readonly]="inputModel.readonly"
+          [canHandleSuccessState]="inputModel.canHandleSuccessState"
+        ></textarea>
+        <ids-hint-message>{{ formFieldModel.hintMessage }}</ids-hint-message>
+        <ids-error-message>Name is mandatory</ids-error-message>
+      </ids-form-field>
     </div>
+  </form>
+</section>
 
-    <div class="form-field-column">
-      <h3>Error</h3>
-      <h4>Input</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Your name</ids-label>
-            <ids-icon idsLeadingIcon [icon]="iconSun" />
-            <span idsPrefix>Prefix</span>
-            <input idsInput ngModel="" placeholder="Type your name" required />
-            <span idsSuffix>Suffix</span>
-            <ids-icon idsTrailingIcon [icon]="iconMoon" />
-            <div idsAction>
-              <button type="button" idsIconButton variant="surface">
-                <ids-icon aria-hidden="true" alt="" [icon]="searchIcon" />
-              </button>
-            </div>
-            <ids-hint-message>Type your name</ids-hint-message>
-            <ids-error-message>Name is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-      <h4>Textarea</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Story about you</ids-label>
-            <textarea idsInput ngModel="" placeholder="Type your story" rows="3" required></textarea>
-            <ids-hint-message>Type your story</ids-hint-message>
-            <ids-error-message>Story is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-    </div>
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Form field controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
 
-    <div class="form-field-column">
-      <h3>Success</h3>
-      <h4>Input</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Your name</ids-label>
-            <ids-icon idsLeadingIcon [icon]="iconSun" />
-            <span idsPrefix>Prefix</span>
-            <input idsInput ngModel="John" placeholder="Type your name" required [canHandleSuccessState]="true" />
-            <span idsSuffix>Suffix</span>
-            <ids-icon idsTrailingIcon [icon]="iconMoon" />
-            <div idsAction>
-              <button type="button" idsIconButton variant="surface">
-                <ids-icon aria-hidden="true" alt="" [icon]="searchIcon" />
-              </button>
-            </div>
-            <ids-hint-message>Type your name</ids-hint-message>
-            <ids-success-message>Name is correctly filled</ids-success-message>
-            <ids-error-message>Name is mandatory</ids-error-message>
-          </ids-form-field>
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>size</td>
+        <td>Form field size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ formFieldDefaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="formFieldModel.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Form field variant.</td>
+        <td><code>FormFieldVariantType</code></td>
+        <td>
+          <code>{{ formFieldDefaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="formFieldModel.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Form field helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>hasLeadingIcon</td>
+        <td>Form field has leading icon</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasLeadingIcon" [(ngModel)]="formFieldModel.hasLeadingIcon" /></td>
+      </tr>
+      <tr>
+        <td>hasPrefix</td>
+        <td>Form field has prefix</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasPrefix" [(ngModel)]="formFieldModel.hasPrefix" /></td>
+      </tr>
+      <tr>
+        <td>prefix</td>
+        <td>Form field prefix</td>
+        <td><code>string</code></td>
+        <td><input type="text" name="prefix" [(ngModel)]="formFieldModel.prefix" /></td>
+      </tr>
+      <tr>
+        <td>hasSuffix</td>
+        <td>Form field has suffix</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasSuffix" [(ngModel)]="formFieldModel.hasSuffix" /></td>
+      </tr>
+      <tr>
+        <td>suffix</td>
+        <td>Form field suffix</td>
+        <td><code>string</code></td>
+        <td><input type="text" name="suffix" [(ngModel)]="formFieldModel.suffix" /></td>
+      </tr>
+      <tr>
+        <td>hasTrailingIcon</td>
+        <td>Form field has trailing icon</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasTrailingIcon" [(ngModel)]="formFieldModel.hasTrailingIcon" /></td>
+      </tr>
+      <tr>
+        <td>hasAction</td>
+        <td>Form field has action</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasAction" [(ngModel)]="formFieldModel.hasAction" /></td>
+      </tr>
+      <tr>
+        <td>label</td>
+        <td>Form field label</td>
+        <td><code>string</code></td>
+        <td><input type="text" name="label" [(ngModel)]="formFieldModel.label" /></td>
+      </tr>
+      <tr>
+        <td>hintMessage</td>
+        <td>Hint message</td>
+        <td><code>string</code></td>
+        <td><input type="text" name="hintMessage" [(ngModel)]="formFieldModel.hintMessage" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section class="controls">
+    <table [cellPadding]="10">
+      <caption>
+        <div class="caption-group">
+          <span>Input / textarea controls</span>
+          <button type="button" idsButton (click)="reset()">Reset</button>
         </div>
-      }
-      <h4>Textarea</h4>
-      @for (size of sizes; track $index) {
-        <h5>{{ size }}</h5>
-        <div class="form-field-item">
-          <ids-form-field [size]="size" [variant]="variant">
-            <ids-label>Story about you</ids-label>
-            <textarea idsInput ngModel="John" placeholder="Type your story" rows="3" required [canHandleSuccessState]="true"></textarea>
-            <ids-hint-message>Type your story</ids-hint-message>
-            <ids-success-message>Story is correctly filled</ids-success-message>
-            <ids-error-message>Story is mandatory</ids-error-message>
-          </ids-form-field>
-        </div>
-      }
-    </div>
+      </caption>
+
+      <thead>
+        <tr>
+          <th align="left">Name</th>
+          <th align="left">Description</th>
+          <th align="left">Type</th>
+          <th align="left">Default</th>
+          <th align="left">Value</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>placeholder</td>
+          <td>Input / textarea placeholder.</td>
+          <td><code>string</code></td>
+          <td>
+            <code>{{ inputDefaults.placeholder }}</code>
+          </td>
+          <td><input type="text" name="placeholder" [(ngModel)]="inputModel.placeholder" /></td>
+        </tr>
+        <tr>
+          <td>readonly</td>
+          <td>Whether input / textarea is readonly or not.</td>
+          <td><code>boolean</code></td>
+          <td>
+            <code>{{ inputDefaults.readonly }}</code>
+          </td>
+          <td><input type="checkbox" name="placeholder" [(ngModel)]="inputModel.readonly" /></td>
+        </tr>
+        <tr>
+          <td>disabled</td>
+          <td>Whether input / textarea is disabled or not.</td>
+          <td><code>boolean</code></td>
+          <td>
+            <code>{{ inputDefaults.disabled }}</code>
+          </td>
+          <td><input type="checkbox" name="disabled" [(ngModel)]="inputModel.disabled" (ngModelChange)="setDisabledState($event)" /></td>
+        </tr>
+        <tr>
+          <td>canHandleSuccessState</td>
+          <td>
+            Whether input / textarea can handle success state with a success state matcher. This property works only on init, so it can not
+            be chnaged.
+          </td>
+          <td><code>boolean</code></td>
+          <td>
+            <code>{{ inputDefaults.canHandleSuccessState }}</code>
+          </td>
+          <td><input type="checkbox" name="canHandleSuccessState" disabled [(ngModel)]="inputModel.canHandleSuccessState" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table [cellPadding]="10">
+      <caption>
+        Input / textarea helper controls
+      </caption>
+
+      <thead>
+        <tr>
+          <th align="left">Name</th>
+          <th align="left">Description</th>
+          <th align="left">Type</th>
+          <th align="left">Value</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>hasRequiredValidator</td>
+          <td>Whether input / textarea has required validator.</td>
+          <td><code>boolean</code></td>
+          <td>
+            <input
+              type="checkbox"
+              name="hasRequiredValidator"
+              [(ngModel)]="inputModel.hasRequiredValidator"
+              (ngModelChange)="setRequiredValidator($event)"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </section>
-}
+</section>

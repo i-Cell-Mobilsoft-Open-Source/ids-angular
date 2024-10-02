@@ -42,6 +42,10 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
       useExisting: IdsInputDirective,
     },
   ],
+  host: {
+    '[attr.placeholder]': 'placeholder()',
+    '[attr.disabled]': 'isDisabled() || null',
+  },
 })
 export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, OnDestroy {
   private readonly _componentClass = 'ids-input';

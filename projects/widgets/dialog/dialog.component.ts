@@ -4,8 +4,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ElementRef,
-  HostBinding,
-  HostListener,
   ViewEncapsulation,
   computed,
   contentChild,
@@ -36,6 +34,11 @@ let uniqueIdCounter = 0;
   templateUrl: './dialog.component.html',
   encapsulation: ViewEncapsulation.None,
   exportAs: 'idsDialog',
+  host: {
+    '[class]': '_hostClasses()',
+    '[attr.aria-labelledby]': 'dialogTitleId',
+    '(cancel)': '_onCancel($event)',
+  },
 })
 export class IdsDialogComponent {
   /** @ignore */
@@ -66,18 +69,7 @@ export class IdsDialogComponent {
   );
 
   /** @ignore */
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
-
-  /** @ignore */
-  @HostBinding('attr.aria-labelledby') get ariaLabelledBy(): string {
-    return this.dialogTitleId;
-  }
-
-  /** @ignore */
-  @HostListener('cancel', ['$event'])
-  protected _onCancel(event: Event): void {
+  private _onCancel(event: Event): void {
     event.preventDefault();
   }
 

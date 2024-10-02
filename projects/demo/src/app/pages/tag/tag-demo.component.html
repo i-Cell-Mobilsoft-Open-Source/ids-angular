@@ -1,48 +1,143 @@
 <h1>{{ "COMPONENTS.TAG" | translate }}</h1>
 
-<div class="tags">
-  <div class="tag-container">
-    <h2>Tags (as custom elements)</h2>
-    @for (appearance of appearances; track $index) {
-      @for (size of sizes; track $index) {
-        @for (variant of variants; track $index) {
-          <ids-tag
-            tabindex="0"
-            [id]="appearance + '-' + variant + '-' + size + '-tag'"
-            [appearance]="appearance"
-            [size]="size"
-            [variant]="variant"
-            (click)="onClick(appearance + '-' + variant + '-' + size)"
-          >
-            <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
-            {{ appearance + " " + variant + " " + size }} tag
-            <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
-          </ids-tag>
+<section class="component" [class]="model.variant">
+  <div class="tag-types">
+    <div class="tag-type">
+      <h2>{{ "COMMON.NON-INTERACTIVE" | translate }}</h2>
+      <ids-tag
+        [appearance]="model.appearance"
+        [size]="model.size"
+        [variant]="model.variant"
+        (click)="onClick(model.appearance + '-' + model.size + '-' + model.variant)"
+      >
+        @if (model.hasLeadingIcon) {
+          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
         }
-      }
-    }
-  </div>
-  <div class="tag-container">
-    <h2>Tags (as buttons)</h2>
-    @for (appearance of appearances; track $index) {
-      @for (size of sizes; track $index) {
-        @for (variant of variants; track $index) {
-          <button
-            type="button"
-            idsTag
-            tabindex="0"
-            [id]="appearance + '-' + variant + '-' + size + '-tag'"
-            [appearance]="appearance"
-            [size]="size"
-            [variant]="variant"
-            (click)="onClick(appearance + '-' + variant + '-' + size)"
-          >
-            <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
-            {{ appearance + " " + variant + " " + size }} tag
-            <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
-          </button>
+        {{ model.appearance + "-" + model.size + "-" + model.variant }} tag
+        @if (model.hasTrailingIcon) {
+          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
         }
-      }
-    }
+      </ids-tag>
+    </div>
+
+    <div class="tag-type">
+      <h2>{{ "COMMON.INTERACTIVE" | translate }}</h2>
+      <button
+        type="button"
+        idsTag
+        tabindex="0"
+        [appearance]="model.appearance"
+        [size]="model.size"
+        [variant]="model.variant"
+        (click)="onClick(model.appearance + '-' + model.size + '-' + model.variant)"
+      >
+        @if (model.hasLeadingIcon) {
+          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+        }
+        {{ model.appearance + "-" + model.size + "-" + model.variant }} tag
+        @if (model.hasTrailingIcon) {
+          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+        }
+      </button>
+    </div>
   </div>
-</div>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>appearance</td>
+        <td>Tag's appearance.</td>
+        <td><code>TagAppearanceType</code></td>
+        <td>
+          <code>{{ appearances[0] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.appearance">
+            @for (item of appearances; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Tag's size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ sizes[2] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Tag's variant.</td>
+        <td><code>AllVariantsType</code></td>
+        <td>
+          <code>{{ variants[0] }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>hasLeadingIcon</td>
+        <td>Whether the tag has leading icon.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.hasLeadingIcon" /></td>
+      </tr>
+      <tr>
+        <td>hasTrailingIcon</td>
+        <td>Whether the tag has trailing icon.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.hasTrailingIcon" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

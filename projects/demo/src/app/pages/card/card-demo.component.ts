@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { CardAppearance, CardAppearanceType, IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
 import { IdsCardFooterDirective } from '@i-cell/ids-angular/card/card-footer.directive';
@@ -17,6 +18,19 @@ import {
 } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
+type CardPublicApi = {
+  appearance: CardAppearanceType,
+  size: SizeType,
+  variant: AllVariantsType,
+  orientation: OrientationType,
+  disabled: boolean,
+};
+
+type CardHelperControls = {
+  clickable: boolean,
+  stretchMedia: boolean
+};
+
 @Component({
   selector: 'app-card-demo',
   standalone: true,
@@ -30,9 +44,13 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsCardSubtitleDirective,
     FormsModule,
     TranslateModule,
+    IdsButtonComponent,
   ],
   templateUrl: './card-demo.component.html',
-  styleUrl: './card-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './card-demo.component.scss',
+  ],
 })
 export class CardDemoComponent {
   public appearances = Object.values(CardAppearance) as CardAppearanceType[];
@@ -40,25 +58,23 @@ export class CardDemoComponent {
   public variants = Object.values(AllVariants) as AllVariantsType[];
   public orientations = Object.values(Orientation) as OrientationType[];
 
-  public model: {
-    appearance: CardAppearanceType
-    size: SizeType
-    variant: AllVariantsType
-    orientation: OrientationType
-    clickable: boolean
-    disabled: string | boolean
-    stretchMedia: boolean
-  } = {
-      appearance: 'filled',
-      size: 'comfortable',
-      variant: 'surface',
-      orientation: 'vertical',
-      clickable: false,
-      disabled: false,
-      stretchMedia: true,
-    };
+  public defaults: CardPublicApi & CardHelperControls = {
+    appearance: CardAppearance.FILLED,
+    size: Size.COMFORTABLE,
+    variant: AllVariants.SURFACE,
+    orientation: Orientation.VERTICAL,
+    clickable: false,
+    disabled: false,
+    stretchMedia: true,
+  };
+
+  public model: CardPublicApi & CardHelperControls = { ...this.defaults };
 
   public onClick(): void {
     alert('Click');
+  }
+
+  public reset(): void {
+    this.model = { ...this.defaults };
   }
 }

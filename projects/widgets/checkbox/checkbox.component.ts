@@ -10,7 +10,7 @@ import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageCompone
 
 let nextUniqueId = 0;
 
-const defaultCONFIG = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-checkbox',
@@ -38,8 +38,8 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
   /** @ignore */
   private readonly _injector = inject(Injector);
   /** @ignore */
-  private readonly _defaultCONFIG = {
-    ...defaultCONFIG,
+  private readonly _defaultConfig = {
+    ...defaultConfig,
     ...this._injector.get(IDS_CHECKBOX_DEFAULT_CONFIG, null, { optional: true }),
   };
 
@@ -52,10 +52,10 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
-  public size = input<SizeType | null>(this._defaultCONFIG.size);
+  public size = input<SizeType>(this._defaultConfig.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
   public value = input<string>();
-  public variant = input<CheckboxVariantType | null>(this._defaultCONFIG.variant);
+  public variant = input<CheckboxVariantType>(this._defaultConfig.variant);
 
   /** @ignore */
   public disabled = signal(false);

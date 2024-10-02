@@ -1,6 +1,7 @@
+import { FormFieldVariant, FormFieldVariantType } from '../form-field/types/form-field-variant.type';
+
 import { InjectionToken } from '@angular/core';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariant, FormFieldVariantType } from '@i-cell/ids-angular/forms';
 
 export interface IdsFieldsetDefaultConfig {
   size?: SizeType

@@ -1,10 +1,10 @@
-import { MenuItemAppearance, MenuItemAppearanceType } from './types/menu-item-appearance';
+import { MenuItemAppearance, MenuItemAppearanceType } from './types/menu-item-appearance.type';
+import { MenuItemVariant, MenuItemVariantType } from './types/menu-item-variant.type';
 
 import { CdkMenuItem } from '@angular/cdk/menu';
 import {
   Component,
   ElementRef,
-  HostBinding,
   ViewEncapsulation,
   computed,
   contentChildren,
@@ -14,7 +14,6 @@ import {
 import {
   Size,
   SizeType,
-  SurfaceVariant,
   coerceBooleanAttribute,
   createClassList,
 } from '@i-cell/ids-angular/core';
@@ -26,11 +25,17 @@ import {
   hostDirectives: [CdkMenuItem],
   templateUrl: './menu-item.component.html',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+    '[type]': 'buttonType',
+    '[disabled]': 'disabled() || null',
+    '[attr.aria-disabled]': 'disabled() || null',
+  },
 })
 export class IdsMenuItemComponent {
   private readonly _componentClass = 'ids-menu-item';
 
-  private _hostElement = inject(ElementRef).nativeElement as HTMLElement;
+  private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>).nativeElement;
 
   public label = input.required<string>();
   public appearance = input<MenuItemAppearanceType | null>(
@@ -38,7 +43,7 @@ export class IdsMenuItemComponent {
   );
 
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<'surface' | null>(SurfaceVariant.SURFACE);
+  public variant = input<MenuItemVariantType | null>(MenuItemVariant.SURFACE);
   public active = input(false);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
@@ -56,15 +61,7 @@ export class IdsMenuItemComponent {
     ]),
   );
 
-  @HostBinding('type') get buttonType(): string | null {
+  public get buttonType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
-  }
-
-  @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
-    return this.disabled() || null;
-  }
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
   }
 }

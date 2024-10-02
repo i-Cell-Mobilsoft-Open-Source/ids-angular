@@ -1,16 +1,15 @@
-import { ActionPanelAppearance, ActionPanelAppearanceType } from './types/action-panel-appearance';
+import { ActionPanelAppearance, ActionPanelAppearanceType } from './types/action-panel-appearance.type';
+import { ActionPanelVariant, ActionPanelVariantType } from './types/action-panel-variant.type';
 
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
   Component,
-  HostBinding,
   ViewEncapsulation,
   computed,
   contentChildren,
   input,
 } from '@angular/core';
 import {
-  AllVariants,
   createClassList,
   Size,
   SizeType,
@@ -27,6 +26,9 @@ import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
   ],
   template: '<ng-content />',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+  },
 })
 export class IdsActionPanelComponent {
   /** @ignore */
@@ -37,7 +39,7 @@ export class IdsActionPanelComponent {
   );
 
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<'light' | null>(AllVariants.LIGHT);
+  public variant = input<ActionPanelVariantType | null>(ActionPanelVariant.LIGHT);
 
   /** @ignore */
   public actionItems = contentChildren(IdsMenuItemComponent);
@@ -49,8 +51,4 @@ export class IdsActionPanelComponent {
     this.variant(),
   ]),
   );
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
 }

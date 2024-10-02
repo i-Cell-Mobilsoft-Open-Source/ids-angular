@@ -108,6 +108,10 @@ export class IdsSnackbarService {
     this._viewContainerRef = viewContainerRef;
   }
 
+  public clearViewContainerRef(): void {
+    this._viewContainerRef = undefined;
+  }
+
   public update(): void {
     this._overlayRef?.updatePosition();
   }

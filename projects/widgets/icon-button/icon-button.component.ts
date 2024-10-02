@@ -2,7 +2,6 @@ import { IconButtonAppearance, IconButtonAppearanceType } from './types/icon-but
 
 import {
   Component,
-  HostBinding,
   ViewEncapsulation,
   computed,
   contentChildren,
@@ -24,20 +23,20 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   imports: [],
   templateUrl: './icon-button.component.html',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[attr.class]': '_hostClasses()',
+    '[disabled]': 'disabled() || null',
+    '[attr.aria-disabled]': 'disabled()',
+  },
 })
 export class IdsIconButtonComponent {
   /** @ignore */
   private readonly _componentClass = 'ids-icon-button';
 
-  public appearance = input<IconButtonAppearanceType | null>(
-    IconButtonAppearance.FILLED,
-  );
-
+  public appearance = input<IconButtonAppearanceType | null>(IconButtonAppearance.FILLED);
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
-  public disabled = input(false, {
-    transform: (value: boolean | string) => coerceBooleanAttribute(value),
-  });
+  public disabled = input(false, { transform: coerceBooleanAttribute });
 
   /** @ignore */
   public icon = contentChildren(IdsIconComponent);
@@ -50,14 +49,4 @@ export class IdsIconButtonComponent {
       this.variant(),
     ]),
   );
-
-  /** @ignore */
-  @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
-    return this.disabled() || null;
-  }
-
-  /** @ignore */
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
 }

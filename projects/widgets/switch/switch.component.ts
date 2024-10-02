@@ -31,6 +31,10 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   animations: [switchAnimation],
   host: {
     '[id]': 'id()',
+    '[aria-label]': 'ariaLabel()',
+    '[aria-labelledby]': 'ariaLabelledBy()',
+    '[aria-describedby]': 'ariaDescribedBy()',
+
   },
 })
 export class IdsSwitchComponent {
@@ -60,21 +64,23 @@ export class IdsSwitchComponent {
 
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
   public label = input<string>();
-  public ariaLabel = input<string>();
-  public ariaLabelledBy = input<string | undefined, string>(undefined, { transform: (val) => fallbackValue(val, this.id()) });
-  public ariaDescribedBy = input<string>();
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
   public size = input<SizeType | null>(this._defaultConfig.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
-  public value = input<boolean>();
   public variant = input<SwitchVariantType | null>(this._defaultConfig.variant);
   public hasIcon = input(this._defaultConfig.hasIcon);
   public iconPosition = input(this._defaultConfig.iconPosition);
   public labelPosition = input(this._defaultConfig.labelPosition);
   /** @ignore **/
   public isDisabled = signal(false);
+  public ariaLabel = input<string| null>(null, { alias: 'aria-label' });
+  public ariaLabelledBy = input<string | null, string>(null, 
+    { alias: 'aria-labelledby', transform: (val) => fallbackValue(val, this.id()) },
+  );
+
+  public ariaDescribedBy = input<string | null>(null, { alias: 'aria-describedby' });
 
   /** @ignore **/
   protected _safeSize = computed(() => this._switchGroup?.size() ?? this.size());

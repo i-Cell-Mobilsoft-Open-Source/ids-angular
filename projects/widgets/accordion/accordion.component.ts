@@ -3,8 +3,6 @@ import { AccordionAppearance, AccordionAppearanceType } from './types/accordion-
 import {
   Component,
   ElementRef,
-  HostBinding,
-  HostListener,
   ViewEncapsulation,
   computed,
   inject,
@@ -26,6 +24,10 @@ import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
   imports: [IdsIconComponent],
   templateUrl: './accordion.component.html',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+    '(toggle)': '_onToggle()',
+  },
 })
 export class IdsAccordionComponent {
   /** @ignore */
@@ -60,12 +62,6 @@ export class IdsAccordionComponent {
     ]),
   );
 
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
-
-  /** @ignore */
-  @HostListener('toggle')
   private _onToggle(): void {
     this.isOpen.set(this._details.open);
   }

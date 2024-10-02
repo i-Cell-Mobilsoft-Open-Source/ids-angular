@@ -1,15 +1,226 @@
 <h1>{{ "COMPONENTS.ACTION_PANEL" | translate }}</h1>
 
-@for (appearance of appearances; track $index) {
-  @for (size of sizes; track $index) {
-    <h3>{{ appearance + "-" + size + "-panel" }}</h3>
-    <ids-action-panel [id]="appearance + '-' + size + '-panel'" [size]="size" [appearance]="appearance">
-      @for (_ of items; track $index) {
-        <button type="button" idsMenuItem appearance="filled" size="comfortable" [label]="'Menu Item Label ' + $index">
+<section class="component" [class]="actionPanelModel.testBackgroundColor !== 'light' ? 'light' : 'dark'">
+  <ids-action-panel [appearance]="actionPanelModel.appearance" [size]="actionPanelModel.size" [variant]="actionPanelModel.variant">
+    @for (_ of items; track $index) {
+      <button
+        type="button"
+        idsMenuItem
+        [appearance]="menuItemModel.appearance"
+        [size]="menuItemModel.size"
+        [variant]="menuItemModel.variant"
+        [label]="'Menu item label ' + $index"
+        [disabled]="$index === 0 && menuItemModel.hasDisabledItem"
+      >
+        @if (menuItemModel.hasLeadingIcon) {
           <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+        }
+        @if (menuItemModel.hasTrailingIcon) {
           <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiChevron" />
-        </button>
-      }
-    </ids-action-panel>
-  }
-}
+        }
+      </button>
+    }
+  </ids-action-panel>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Action panel controls</span>
+        <button type="button" idsButton (click)="resetActionPanel()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>appearance</td>
+        <td>Action panel appearance.</td>
+        <td><code>ActionPanelAppearanceType</code></td>
+        <td>
+          <code>{{ actionPanelDefaults.appearance }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="actionPanelModel.appearance">
+            @for (item of actionPanelAappearances; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Action panel size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ actionPanelDefaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="actionPanelModel.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Action panel variant.</td>
+        <td><code>ActionPanelVariantType</code></td>
+        <td>
+          <code>{{ actionPanelDefaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="actionPanelModel.variant">
+            @for (item of actionPanelVariants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Action panel helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>testBackgroundColor</td>
+        <td>Test background color</td>
+        <td><code>light</code> | <code>dark</code></td>
+        <td>
+          <select [(ngModel)]="actionPanelModel.testBackgroundColor">
+            @for (item of actionPanelBackgroundColors; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Menu item controls</span>
+        <button type="button" idsButton (click)="resetMenuItem()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>appearance</td>
+        <td>Menu item appearance.</td>
+        <td><code>MenuItemAppearanceType</code></td>
+        <td>
+          <code>{{ menuItemDefaults.appearance }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="menuItemModel.appearance">
+            @for (item of menuItemAappearances; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Menu item size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ menuItemDefaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="menuItemModel.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Menu item variant.</td>
+        <td><code>MenuItemVariantType</code></td>
+        <td>
+          <code>{{ menuItemDefaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="menuItemModel.variant">
+            @for (item of menuItemVariants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Menu item helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>hasLeadingIcon</td>
+        <td>Whether the menu items have leading icon or not.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasLeadingIcon" [(ngModel)]="menuItemModel.hasLeadingIcon" /></td>
+      </tr>
+      <tr>
+        <td>hasTrailingIcon</td>
+        <td>Whether the menu items have trailing icon or not.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasTrailingIcon" [(ngModel)]="menuItemModel.hasTrailingIcon" /></td>
+      </tr>
+      <tr>
+        <td>hasDisabledItem</td>
+        <td>Whether one menu item is disabled or not. For testing purposes this is the first menu item.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasDisabledItem" [(ngModel)]="menuItemModel.hasDisabledItem" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

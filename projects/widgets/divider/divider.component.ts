@@ -1,6 +1,5 @@
 import {
   Component,
-  HostBinding,
   ViewEncapsulation,
   computed,
   input,
@@ -21,11 +20,16 @@ import {
   imports: [],
   template: '',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+    '[style.--ids-divider-width]': 'width()',
+    '[style.--ids-divider-height]': 'height()',
+  },
 })
 export class IdsDividerComponent {
   private readonly _componentClass = 'ids-divider';
 
-  public type = input<OrientationType | null>(Orientation.HORIZONTAL);
+  public orientation = input<OrientationType | null>(Orientation.HORIZONTAL);
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
   public width = input<string | null>('100%');
@@ -33,21 +37,9 @@ export class IdsDividerComponent {
 
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
-      this.type(),
+      this.orientation(),
       this.size(),
       this.variant(),
     ]),
   );
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
-
-  @HostBinding('style.--ids-divider-width') get cssWidth(): string | null {
-    return this.width();
-  }
-
-  @HostBinding('style.--ids-divider-height') get cssHeight(): string | null {
-    return this.height();
-  }
 }

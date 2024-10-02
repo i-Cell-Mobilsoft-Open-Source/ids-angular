@@ -32,5 +32,9 @@
     "SWITCH": "Switch",
     "TAG": "Tag",
     "TOOLTIP": "Tooltip"
+  },
+  "COMMON": {
+    "INTERACTIVE": "Interactive",
+    "NON-INTERACTIVE": "Non-interactive"
   }
 }

@@ -1,6 +1,6 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { FormFieldVariant, FormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFieldsetComponent, IdsFieldsetMessageDirective, IdsFieldsetRowComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
@@ -40,6 +40,7 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
     IdsSuccessMessageComponent,
     IdsErrorMessageComponent,
     FormsModule,
+    ReactiveFormsModule,
     UpperCasePipe,
     TranslateModule,
     IdsButtonComponent,
@@ -61,13 +62,24 @@ export class FieldsetDemoComponent {
   public defaults: FieldsetPublicApi & FieldsetHelperControls = {
     size: defaultConfig.size,
     variant: defaultConfig.variant,
-    legend: 'Legend',
+    legend: 'Personal data',
     showMessage: true,
   };
 
   public model: FieldsetPublicApi & FieldsetHelperControls = { ...this.defaults };
 
+  public form = new FormGroup({
+    first: new FormControl<string>('John'),
+    last: new FormControl<string>('Wick'),
+    middle: new FormControl<string>('Sam'),
+  });
+
   public reset(): void {
     this.model = { ...this.defaults };
+    this.form.reset({
+      first: 'John',
+      last: 'Wick',
+      middle: 'Sam',
+    });
   }
 }

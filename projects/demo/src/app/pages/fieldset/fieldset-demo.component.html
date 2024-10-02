@@ -1,34 +1,36 @@
 <h1>{{ "COMPONENTS.FIELDSET" | translate }}</h1>
 
 <section class="component" [class]="model.variant">
-  <fieldset idsFieldset [legend]="model.legend" [size]="model.size" [variant]="model.variant">
-    @if (model.showMessage) {
-      <span idsFieldsetMessage>This is a fieldset message</span>
-    }
-    <ids-fieldset-row>
-      <ids-form-field>
-        <ids-label>Label 1</ids-label>
-        <input idsInput ngModel="John" placeholder="One" required />
-        <ids-hint-message>Type your name</ids-hint-message>
-        <ids-error-message>Name is mandatory</ids-error-message>
-      </ids-form-field>
-    </ids-fieldset-row>
+  <form [formGroup]="form">
+    <fieldset idsFieldset [legend]="model.legend" [size]="model.size" [variant]="model.variant">
+      @if (model.showMessage) {
+        <span idsFieldsetMessage>This is a fieldset message</span>
+      }
+      <ids-fieldset-row>
+        <ids-form-field>
+          <ids-label>First name</ids-label>
+          <input idsInput formControlName="first" placeholder="E.g Steve" required />
+          <ids-hint-message>Type your first name</ids-hint-message>
+          <ids-error-message>Name is mandatory</ids-error-message>
+        </ids-form-field>
+      </ids-fieldset-row>
 
-    <ids-fieldset-row>
-      <ids-form-field>
-        <ids-label>Label 2</ids-label>
-        <input idsInput ngModel="Wick" placeholder="Two" required />
-        <ids-hint-message>Type your name</ids-hint-message>
-        <ids-error-message>Name is mandatory</ids-error-message>
-      </ids-form-field>
-      <ids-form-field>
-        <ids-label>Label 3</ids-label>
-        <input idsInput ngModel="Vaporub" placeholder="Three" required />
-        <ids-hint-message>Type your name</ids-hint-message>
-        <ids-error-message>Name is mandatory</ids-error-message>
-      </ids-form-field>
-    </ids-fieldset-row>
-  </fieldset>
+      <ids-fieldset-row>
+        <ids-form-field>
+          <ids-label>Last name</ids-label>
+          <input idsInput formControlName="last" placeholder="E.g Smith" required />
+          <ids-hint-message>Type your last name</ids-hint-message>
+          <ids-error-message>Name is mandatory</ids-error-message>
+        </ids-form-field>
+        <ids-form-field>
+          <ids-label>Middle name</ids-label>
+          <input idsInput formControlName="middle" placeholder="E.g Adam" required />
+          <ids-hint-message>Type your middle name</ids-hint-message>
+          <ids-error-message>Name is mandatory</ids-error-message>
+        </ids-form-field>
+      </ids-fieldset-row>
+    </fieldset>
+  </form>
 </section>
 
 <section class="controls">

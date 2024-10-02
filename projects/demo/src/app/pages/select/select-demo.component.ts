@@ -1,11 +1,33 @@
-/* eslint-disable no-magic-numbers */
-import { UpperCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { KeyValuePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariant, FormFieldVariantType, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
-import { IdsSelectComponent, IdsSelectTriggerDirective } from '@i-cell/ids-angular/select';
+import { FormFieldVariant, FormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectComponent, IdsSelectTriggerDirective } from '@i-cell/ids-angular/select';
 import { TranslateModule } from '@ngx-translate/core';
+
+type FormFieldPublicApi = {
+  size: SizeType,
+  variant: FormFieldVariantType,
+};
+
+const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
+
+type SelectPublicApi = {
+  placeholder: string,
+  readonly: boolean,
+  ariaLabel: string
+  ariaLabelledBy: string
+  typeaheadDebounceInterval: number
+};
+
+type SelectHelperControls = {
+  hasRequiredValidator: boolean,
+  useCustomTrigger: boolean,
+};
+
+const selectDefaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
 type SampleOption = {
   value: string
@@ -34,24 +56,21 @@ type AnimalOptions = {
     IdsOptionComponent,
     IdsOptionGroupComponent,
     IdsSelectTriggerDirective,
+    IdsButtonComponent,
+    KeyValuePipe,
+    TitleCasePipe,
   ],
   templateUrl: './select-demo.component.html',
-  styleUrl: './select-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './select-demo.component.scss',
+  ],
 })
-export class SelectDemoComponent {
-  public sizes: SizeType[] = [
-    Size.DENSE,
-    Size.COMPACT,
-    Size.COMFORTABLE,
-    Size.SPACIOUS,
-  ];
+export class SelectDemoComponent implements OnInit {
+  public sizes = Object.values(Size) as SizeType[];
+  public variants = Object.values(FormFieldVariant) as FormFieldVariantType[];
 
-  public variants: FormFieldVariantType[] = [
-    FormFieldVariant.SURFACE,
-    FormFieldVariant.LIGHT,
-  ];
-
-  public options: AnimalOptions = {
+  public animals: AnimalOptions = {
     land: [
       { viewValue: 'Dog', value: 'dog' },
       { viewValue: 'Cat', value: 'cat' },
@@ -68,29 +87,64 @@ export class SelectDemoComponent {
     ],
   };
 
-  public singleSelectionValue: string = this.options.land[0].value;
+  public singleSelectionValue: string = this.animals.land[0].value;
   public multiSelectionValue: string[] = [
-    this.options['land'][0].value,
-    this.options['land'][2].value,
-    this.options['aquatic'][1].value,
+    this.animals.land[0].value,
+    this.animals.land[2].value,
+    this.animals.aquatic[1].value,
   ];
 
-  public customTriggerValues: string[] = [
-    'Apple',
-    'Banana',
-    'Mango',
-    'Orange',
-    'Strawberry',
-    'Pineapple',
-    'Watermelon',
-    'Grapes',
-    'Blueberry',
-    'Peach',
-  ];
+  public defaults: SelectPublicApi & SelectHelperControls = {
+    placeholder: 'Select animal',
+    readonly: false,
+    ariaLabel: 'arialabeltest',
+    ariaLabelledBy: 'arialabelledbytest',
+    typeaheadDebounceInterval: selectDefaultConfig.typeaheadDebounceInterval,
+    hasRequiredValidator: true,
+    useCustomTrigger: false,
+  };
 
-  public cutomTriggerMultiSelectionValue: string[] = [
-    this.customTriggerValues[0],
-    this.customTriggerValues[2],
-    this.customTriggerValues[5],
-  ];
+  public model: SelectPublicApi & SelectHelperControls = { ...this.defaults };
+
+  public formFieldDefaults: FormFieldPublicApi = {
+    size: formFieldDefaultConfig.size,
+    variant: formFieldDefaultConfig.variant,
+  };
+
+  public formFieldModel: FormFieldPublicApi = { ...this.formFieldDefaults };
+
+  public form = new FormGroup({
+    single: new FormControl<string>(this.singleSelectionValue),
+    multi: new FormControl<string[]>(this.multiSelectionValue),
+  });
+
+  public ngOnInit(): void {
+    this.setRequiredValidator(this.model.hasRequiredValidator);
+  }
+
+  public resetFormField(): void {
+    this.formFieldModel = { ...this.formFieldDefaults };
+  }
+  
+  public resetSelect(): void {
+    this.model = { ...this.defaults };
+    this.form.reset({
+      single: this.singleSelectionValue,
+      multi: this.multiSelectionValue,
+    });
+    this.setRequiredValidator(this.model.hasRequiredValidator);
+  }
+
+  public setRequiredValidator(hasRequiredValidator: boolean): void {
+    if (hasRequiredValidator) {
+      this.form.controls.single.setValidators(IdsValidators.required);
+      this.form.controls.multi.setValidators(IdsValidators.required);
+    } else {
+      this.form.controls.single.clearValidators();
+      this.form.controls.multi.clearValidators();
+    }
+
+    this.form.controls.single.updateValueAndValidity();
+    this.form.controls.multi.updateValueAndValidity();
+  }
 }

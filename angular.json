@@ -26,7 +26,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/demo",
+            "outputPath": "dist/ids-angular",
             "index": "projects/demo/src/index.html",
             "browser": "projects/demo/src/main.ts",
             "polyfills": ["zone.js"],
@@ -46,21 +46,37 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
+                  "maximumWarning": "4kb",
                   "maximumError": "4kb"
                 }
               ],
               "outputHashing": "all"
             },
+            "github": {
+              "outputHashing": "all",
+              "baseHref": "/ids-angular/",
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo/src/environments/environment.ts",
+                  "with": "projects/demo/src/environments/environment.github.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/demo/src/environments/environment.ts",
+                  "with": "projects/demo/src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -132,7 +148,8 @@
               "node_modules/@i-cell/ids-tokens/css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css",
               "projects/widgets/.storybook/styles.scss"
-            ]
+            ],
+            "open": false
           }
         },
         "build-storybook": {

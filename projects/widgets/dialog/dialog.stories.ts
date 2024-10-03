@@ -1,9 +1,9 @@
+import { IdsDialogHeaderDirective } from './dialog-header.directive';
+import { IdsDialogComponent } from './dialog.component';
 import { IdsDialogService } from './dialog.service';
-import { IdsDialogHeaderDirective } from './ids-dialog-header.directive';
-import { IdsDialogComponent } from './ids-dialog.component';
 
 import { selectControlOptions } from '../.storybook/utils';
-import { IdsButtonComponent } from '../button/ids-button.component';
+import { IdsButtonComponent } from '../button/button.component';
 import { Size } from '../core';
 
 import { A11yModule } from '@angular/cdk/a11y';

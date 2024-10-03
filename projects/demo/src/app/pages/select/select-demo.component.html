@@ -1,0 +1,234 @@
+<h1>{{ "COMPONENTS.SELECT" | translate }}</h1>
+
+<section class="component" [class]="formFieldModel.variant">
+  <form [formGroup]="form">
+    <div>
+      <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
+        <ids-label>Animal</ids-label>
+        <ids-select
+          formControlName="single"
+          [placeholder]="model.placeholder"
+          [readonly]="model.readonly"
+          [aria-label]="model.ariaLabel"
+          [aria-labelledby]="model.ariaLabelledBy"
+          [typeaheadDebounceInterval]="model.typeaheadDebounceInterval"
+        >
+          @for (group of animals | keyvalue; track $index) {
+            <ids-option-group [label]="group.key | titlecase">
+              @for (option of group.value; track $index) {
+                <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+              }
+            </ids-option-group>
+          }
+        </ids-select>
+        <ids-hint-message>Choose an animal</ids-hint-message>
+        <ids-error-message>Animal is mandatory</ids-error-message>
+      </ids-form-field>
+    </div>
+
+    <div>
+      <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
+        <ids-label>Animal</ids-label>
+        <ids-select
+          formControlName="multi"
+          [multiSelect]="true"
+          [placeholder]="model.placeholder"
+          [readonly]="model.readonly"
+          [aria-label]="model.ariaLabel"
+          [aria-labelledby]="model.ariaLabelledBy"
+          [typeaheadDebounceInterval]="model.typeaheadDebounceInterval"
+        >
+          @if (model.useCustomTrigger) {
+            <ids-select-trigger>
+              {{ form.controls.multi.value![0] }}
+              @if ((form.controls.multi.value?.length || 0) > 1) {
+                <span class="example-additional-selection">
+                  (+{{ (form.controls.multi.value?.length || 0) - 1 }} {{ form.controls.multi.value?.length === 2 ? "other" : "others" }})
+                </span>
+              }
+            </ids-select-trigger>
+          }
+          <ids-option-group label="Land">
+            @for (option of animals.land; track $index) {
+              <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+            }
+          </ids-option-group>
+          <ids-option-group label="Aquatic">
+            @for (option of animals.aquatic; track $index) {
+              <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+            }
+          </ids-option-group>
+        </ids-select>
+        <ids-hint-message>Choose animals</ids-hint-message>
+        <ids-error-message>Animal is mandatory</ids-error-message>
+      </ids-form-field>
+    </div>
+  </form>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Form field controls</span>
+        <button type="button" idsButton (click)="resetFormField()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>size</td>
+        <td>Form field size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ formFieldDefaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="formFieldModel.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Form field variant.</td>
+        <td><code>FormFieldVariantType</code></td>
+        <td>
+          <code>{{ formFieldDefaults.variant }}</code>
+        </td>
+        <td>
+          <select name="variant" [(ngModel)]="formFieldModel.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Select controls</span>
+        <button type="button" idsButton (click)="resetSelect()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>placeholder</td>
+        <td>Select placeholder.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>-</code>
+        </td>
+        <td><input type="text" name="placeholder" [(ngModel)]="model.placeholder" /></td>
+      </tr>
+      <tr>
+        <td>readonly</td>
+        <td>Whether select is readonly or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>{{ formFieldDefaults.variant }}</code>
+        </td>
+        <td><input type="checkbox" name="readonly" [(ngModel)]="model.readonly" /></td>
+      </tr>
+      <tr>
+        <td>ariaLabel</td>
+        <td>aria-label tag for select.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>-</code>
+        </td>
+        <td><input type="text" name="ariaLabel" [(ngModel)]="model.ariaLabel" /></td>
+      </tr>
+      <tr>
+        <td>ariaLabelledBy</td>
+        <td>aria-labelledby tag for select.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>-</code>
+        </td>
+        <td><input type="text" name="ariaLabelledBy" [(ngModel)]="model.ariaLabelledBy" /></td>
+      </tr>
+      <tr>
+        <td>typeaheadDebounceInterval</td>
+        <td>Number in millisec.</td>
+        <td><code>number</code></td>
+        <td>
+          <code>-</code>
+        </td>
+        <td>
+          <input
+            type="number"
+            min="0"
+            max="3000"
+            step="100"
+            name="typeaheadDebounceInterval"
+            [(ngModel)]="model.typeaheadDebounceInterval"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Select helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>hasRequiredValidator</td>
+        <td>Whether select has required validator or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <input
+            type="checkbox"
+            name="hasRequiredValidator"
+            [(ngModel)]="model.hasRequiredValidator"
+            (ngModelChange)="setRequiredValidator($event)"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>useCustomTrigger</td>
+        <td>Whether select has custom trigger or not.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="useCustomTrigger" [(ngModel)]="model.useCustomTrigger" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

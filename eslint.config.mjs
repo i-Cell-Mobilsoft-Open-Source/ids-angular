@@ -45,7 +45,7 @@ export default tseslint.config(
       "default-case-last": "error",
       eqeqeq: ["error", "smart"],
       "func-name-matching": ["error", "always"],
-      "id-length": ["error", { min: 2, max: 50, exceptions: ["x", "a", "b"] }],
+      "id-length": ["error", { min: 2, max: 50, exceptions: ["x", "a", "b", "i"] }],
       "max-lines-per-function": [
         "error",
         {
@@ -157,6 +157,7 @@ export default tseslint.config(
       ],
       "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+      "@typescript-eslint/no-unused-expressions": ["error", { allowTernary: true }],
       "@typescript-eslint/prefer-reduce-type-parameter": "error",
       "@typescript-eslint/prefer-string-starts-ends-with": "error",
       "@typescript-eslint/require-array-sort-compare": "error",

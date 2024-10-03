@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
-  BrandVariant,
-  BrandVariantType,
   AllVariants,
   AllVariantsType,
   Size,
@@ -12,6 +12,13 @@ import { IdsIconButtonComponent, IconButtonAppearance, IconButtonAppearanceType 
 import { mdiMagnify } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
+type IconButtonPublicApi = {
+  size: SizeType,
+  variant: AllVariantsType,
+  appearance: IconButtonAppearanceType,
+  disabled: boolean,
+};
+
 @Component({
   standalone: true,
   selector: 'app-icon-button-demo',
@@ -19,20 +26,36 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsIconButtonComponent,
     IdsIconComponent,
     TranslateModule,
+    IdsButtonComponent,
+    FormsModule,
   ],
   templateUrl: './icon-button-demo.component.html',
-  styleUrls: ['./icon-button-demo.component.scss'],
+  styleUrls: [
+    '../demo-page.scss',
+    './icon-button-demo.component.scss',
+  ],
 })
 export class IconButtonDemoComponent {
+  public defaults: IconButtonPublicApi = {
+    size: Size.COMFORTABLE,
+    variant: AllVariants.PRIMARY,
+    appearance: IconButtonAppearance.FILLED,
+    disabled: false,
+  };
+
+  public model: IconButtonPublicApi = { ...this.defaults  };
+  
   public appearances = Object.values(IconButtonAppearance) as IconButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
-  public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
   public variants = Object.values(AllVariants) as AllVariantsType[];
 
   public mdiSearch = mdiMagnify;
 
   public onClick(buttonName: string): void {
-    // eslint-disable-next-line no-console
-    console.log(`${buttonName} icon button clicked`);
+    console.info(`${buttonName} icon button clicked`);
+  }
+
+  public reset(): void {
+    this.model = { ...this.defaults };
   }
 }

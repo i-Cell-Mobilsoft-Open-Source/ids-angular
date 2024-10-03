@@ -1,4 +1,4 @@
-import { IdsDialogComponent } from './ids-dialog.component';
+import { IdsDialogComponent } from './dialog.component';
 
 import { AfterViewInit, Directive, OnDestroy, viewChild } from '@angular/core';
 import { Subject, Subscription, fromEvent } from 'rxjs';

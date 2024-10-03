@@ -1,1 +1,1 @@
-export * from './ids-action-menu-trigger.directive';
+export * from './action-menu-trigger.directive';

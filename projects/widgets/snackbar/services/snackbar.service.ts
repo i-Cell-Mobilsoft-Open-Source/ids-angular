@@ -1,4 +1,4 @@
-import { IDS_SNACKBAR_DEFAULT_OPTIONS, IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY } from '../snackbar-default-options';
+import { IDS_SNACKBAR_DEFAULT_CONFIG, IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY } from '../snackbar-defaults';
 import { IdsSnackbarGroupComponent } from '../snackbar-group.component';
 import { getSnackbarFlexibleConnectedPositionStrategy, getSnackbarGlobalPositionStrategy } from '../snackbar-position-strategies';
 import { IdsSnackbarData } from '../types/snackbar-data.type';
@@ -10,7 +10,7 @@ import { inject, Injectable, signal, ViewContainerRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
-const defaultOptions = IDS_SNACKBAR_DEFAULT_OPTIONS_FACTORY();
+const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class IdsSnackbarService {
   private readonly _overlay = inject(Overlay);
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...inject(IDS_SNACKBAR_DEFAULT_OPTIONS, { optional: true }),
+    ...inject(IDS_SNACKBAR_DEFAULT_CONFIG, { optional: true }),
   };
 
   private _overlayRef?: OverlayRef;
@@ -106,6 +106,10 @@ export class IdsSnackbarService {
 
   public setViewContainerRef(viewContainerRef: ViewContainerRef): void {
     this._viewContainerRef = viewContainerRef;
+  }
+
+  public clearViewContainerRef(): void {
+    this._viewContainerRef = undefined;
   }
 
   public update(): void {

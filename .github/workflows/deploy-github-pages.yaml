@@ -1,23 +1,39 @@
-name: Build and Publish Storybook to GitHub Pages
+name: Build and Publish ids-angular to GitHub Pages
 
 on:
   push:
     branches:
-      - "main"
+      - main
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# List of jobs
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.11.1]
+
     steps:
-    - id: storybook-build-publish
-      uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
-      with:
-        path: dist/storybook/widgets
-        install_command: npx pnpm install
-        build_command: npm run build:storybook
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - id: build-publish
+        uses: bitovi/github-actions-angular-to-github-pages@v1.0.0
+        with:
+          install_command: pnpm i
+          build_command: npm run build:github

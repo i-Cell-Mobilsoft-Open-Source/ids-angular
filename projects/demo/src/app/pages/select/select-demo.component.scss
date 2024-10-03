@@ -1,0 +1,15 @@
+form {
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .ids-form-field {
+    width: 100%;
+  }
+}
+
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}

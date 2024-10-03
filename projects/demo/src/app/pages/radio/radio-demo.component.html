@@ -1,287 +1,153 @@
 <h1>{{ "COMPONENTS.RADIO" | translate }}</h1>
 
-@for (variant of variants; track $index) {
-  <section [class]="variant">
-    <h2>{{ variant | uppercase }}</h2>
-    <div class="radio-column">
-      <h3>Default</h3>
-      @for (size of sizes; track $index) {
-        <h4>{{ size }}</h4>
-        <div>
-          <h5>Vertical</h5>
-          <div class="radio-group-container vertical">
-            <ids-radio-group
-              ngModel="first"
-              orientation="vertical"
-              labelPosition="right"
-              [name]="'radio' + '-default-' + variant + '-' + size + '-vertical-right'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="vertical"
-              labelPosition="left"
-              [name]="'radio' + '-default-' + variant + '-' + size + 'vertical-left'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-          </div>
-        </div>
+<section class="component" [class]="model.variant">
+  <ids-radio-group
+    [name]="model.name"
+    [required]="model.required"
+    [disabled]="model.disabled"
+    [size]="model.size"
+    [variant]="model.variant"
+    [orientation]="model.orientation"
+    [labelPosition]="model.labelPosition"
+    [(ngModel)]="value"
+  >
+    <ids-radio-item value="chicken" [disabled]="model.onlyOneItemIsDisabled">Chicken</ids-radio-item>
+    <ids-radio-item value="beef">Beef</ids-radio-item>
+    <ids-radio-item value="pork">Pork</ids-radio-item>
+  </ids-radio-group>
+</section>
 
-        <div>
-          <h5>Horizontal</h5>
-          <div class="radio-group-container horizontal">
-            <ids-radio-group
-              ngModel="first"
-              orientation="horizontal"
-              labelPosition="right"
-              [name]="'radio' + '-default-' + variant + '-' + size + 'horizontal-right'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="horizontal"
-              labelPosition="left"
-              [name]="'radio' + '-default-' + variant + '-' + size + 'horizontal-left'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="third"
-              orientation="horizontal"
-              labelPosition="top"
-              [name]="'radio' + '-default-' + variant + '-' + size + 'horizontal-top'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="horizontal"
-              labelPosition="bottom"
-              [name]="'radio' + '-default-' + variant + '-' + size + 'horizontal-bottom'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-          </div>
-        </div>
-      }
-    </div>
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
 
-    <div class="radio-column">
-      <h3>Disabled</h3>
-      @for (size of sizes; track $index) {
-        <h4>{{ size }}</h4>
-        <div>
-          <h5>Vertical</h5>
-          <div class="radio-group-container vertical">
-            <ids-radio-group
-              ngModel="first"
-              orientation="vertical"
-              labelPosition="right"
-              disabled
-              [name]="'radio' + '-disabled-' + variant + '-' + size + '-vertical-right'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="vertical"
-              labelPosition="left"
-              disabled
-              [name]="'radio' + '-disabled-' + variant + '-' + size + 'vertical-left'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-          </div>
-        </div>
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
 
-        <div>
-          <h5>Horizontal</h5>
-          <div class="radio-group-container horizontal">
-            <ids-radio-group
-              ngModel="first"
-              orientation="horizontal"
-              labelPosition="right"
-              disabled
-              [name]="'radio' + '-disabled-' + variant + '-' + size + 'horizontal-right'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="horizontal"
-              labelPosition="left"
-              disabled
-              [name]="'radio' + '-disabled-' + variant + '-' + size + 'horizontal-left'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="third"
-              orientation="horizontal"
-              labelPosition="top"
-              disabled
-              [name]="'radio' + '-disabled-' + variant + '-' + size + 'horizontal-top'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="horizontal"
-              labelPosition="bottom"
-              disabled
-              [name]="'radio' + '-disabled-' + variant + '-' + size + 'horizontal-bottom'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-          </div>
-        </div>
-      }
-    </div>
-    <div class="radio-column">
-      <h3>Error</h3>
-      @for (size of sizes; track $index) {
-        <h4>{{ size }}</h4>
-        <div>
-          <h5>Vertical</h5>
-          <div class="radio-group-container vertical">
-            <ids-radio-group
-              ngModel="second"
-              orientation="vertical"
-              labelPosition="right"
-              maxlength="5"
-              [name]="'radio' + '-error-' + variant + '-' + size + '-vertical-right'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="vertical"
-              labelPosition="left"
-              maxlength="5"
-              [name]="'radio' + '-error-' + variant + '-' + size + 'vertical-left'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-          </div>
-        </div>
+    <tbody>
+      <tr>
+        <td>name</td>
+        <td>Name for radio items. Name is provided for group, but items get it.</td>
+        <td><code>string</code></td>
+        <td>
+          <code>''</code>
+        </td>
+        <td><input type="text" [(ngModel)]="model.name" /></td>
+      </tr>
+      <tr>
+        <td>required</td>
+        <td>Whether the radio is required or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>{{ defaults.required }}</code>
+        </td>
+        <td><input type="checkbox" [(ngModel)]="model.required" /></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the radio is disabled or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>{{ defaults.disabled }}</code>
+        </td>
+        <td><input type="checkbox" [(ngModel)]="model.disabled" /></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Size of the radio.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ defaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Variant of the radio.</td>
+        <td><code>RadioVariantType</code></td>
+        <td>
+          <code>{{ defaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>orientation</td>
+        <td>Orientation of the radio.</td>
+        <td><code>RadioOrientationType</code></td>
+        <td>
+          <code>{{ defaults.orientation }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.orientation">
+            @for (item of orientations; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>labelPosition</td>
+        <td>Position of the radio's label.</td>
+        <td><code>RadioLabelPositionType</code></td>
+        <td>
+          <code>{{ defaults.labelPosition }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.labelPosition">
+            @for (item of labelPositions; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-        <div>
-          <h5>Horizontal</h5>
-          <div class="radio-group-container horizontal">
-            <ids-radio-group
-              ngModel="second"
-              orientation="horizontal"
-              labelPosition="right"
-              maxlength="5"
-              [name]="'radio' + '-error-' + variant + '-' + size + 'horizontal-right'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="horizontal"
-              labelPosition="left"
-              maxlength="5"
-              [name]="'radio' + '-error-' + variant + '-' + size + 'horizontal-left'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="horizontal"
-              labelPosition="top"
-              maxlength="5"
-              [name]="'radio' + '-error-' + variant + '-' + size + 'horizontal-top'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-            <ids-radio-group
-              ngModel="second"
-              orientation="horizontal"
-              labelPosition="bottom"
-              maxlength="5"
-              [name]="'radio' + '-error-' + variant + '-' + size + 'horizontal-bottom'"
-              [size]="size"
-              [variant]="variant"
-            >
-              <ids-radio-item value="first">First</ids-radio-item>
-              <ids-radio-item value="second">Second</ids-radio-item>
-              <ids-radio-item value="third">Third</ids-radio-item>
-            </ids-radio-group>
-          </div>
-        </div>
-      }
-    </div>
-  </section>
-}
+  <table [cellPadding]="10">
+    <caption>
+      Helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>onlyOneItemIsDisabled</td>
+        <td>When true, the first item will be disabled.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" [(ngModel)]="model.onlyOneItemIsDisabled" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -1,40 +1,8 @@
-:host {
-  padding: 2rem;
-}
-
-h1 {
-  margin-top: 0;
-}
-
-section {
+form {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 2rem;
-  padding: 2rem;
-  width: fit-content;
+  gap: 2rem;
 
-  h2 {
-    grid-area: 1 / 1 / 1 / -1;
-  }
-
-  &.dark,
-  &.surface {
-    background-color: transparent;
-  }
-  &.light {
-    background-color: #252526;
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: white;
-    }
-  }
-
-  .form-field-item {
-    display: flex;
-    flex-direction: column;
+  & > div > .ids-form-field {
+    width: 100%;
   }
 }

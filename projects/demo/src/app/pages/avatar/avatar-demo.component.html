@@ -1,57 +1,104 @@
 <h1>{{ "COMPONENTS.AVATAR" | translate }}</h1>
 
-<div class="avatar-type-container">
-  <h3>Initials</h3>
-  <div class="avatar-type-item">
-    @for (variant of variants; track $index) {
-      <div class="variant" [class]="variant">
-        <h4>{{ variant }}</h4>
-        @for (size of sizes; track $index) {
-          <button
-            type="button"
-            idsAvatar
-            [id]="variant + '-' + size + '-avatar-monogram'"
-            [title]="variant + '-' + size + '-avatar-monogram'"
-            [size]="size"
-            [variant]="variant"
-          >
-            <span>AB</span>
-          </button>
-        }
-      </div>
-    }
-  </div>
-
-  <h3>User</h3>
-  <div class="avatar-type-item">
-    @for (variant of variants; track $index) {
-      <div class="variant" [class]="variant">
-        <h4>{{ variant }}</h4>
-        @for (size of sizes; track $index) {
-          <button
-            type="button"
-            idsAvatar
-            [id]="variant + '-' + size + '-avatar-user'"
-            [title]="variant + '-' + size + '-avatar-user'"
-            [size]="size"
-            [variant]="variant"
-          ></button>
-        }
-      </div>
-    }
-  </div>
-
-  <h3>With image</h3>
-  <div class="avatar-type-item">
-    @for (size of sizes; track $index) {
+<section class="component" [class]="model.variant">
+  <div class="avatar-types">
+    <div class="avatar-type">
+      <h2>Initials</h2>
       <button
         type="button"
         idsAvatar
-        image="https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg"
-        [id]="size + '-avatar-with-image'"
-        [title]="size + '-avatar-with-image'"
-        [size]="size"
+        [id]="model.variant + '-' + model.size + '-avatar-monogram'"
+        [title]="model.variant + '-' + model.size + '-avatar-monogram'"
+        [size]="model.size"
+        [variant]="model.variant"
+      >
+        <span>AB</span>
+      </button>
+    </div>
+    <div class="avatar-type">
+      <h2>User</h2>
+      <button
+        type="button"
+        idsAvatar
+        [id]="model.variant + '-' + model.size + '-avatar-user'"
+        [title]="model.variant + '-' + model.size + '-avatar-user'"
+        [size]="model.size"
+        [variant]="model.variant"
       ></button>
-    }
+    </div>
+    <div class="avatar-type">
+      <h2>With image</h2>
+      <button
+        type="button"
+        idsAvatar
+        [image]="model.image"
+        [id]="model.size + '-avatar-with-image'"
+        [title]="model.size + '-avatar-with-image'"
+        [size]="model.size"
+      ></button>
+    </div>
   </div>
-</div>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>image</td>
+        <td>Image for avatar</td>
+        <td><code>string</code></td>
+        <td>
+          <code>-</code>
+        </td>
+        <td><input type="text" name="image" [(ngModel)]="model.image" /></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Avatar size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ defaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Avatar variant.</td>
+        <td><code>SurfaceVariantType</code></td>
+        <td>
+          <code>{{ defaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

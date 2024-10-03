@@ -1,2 +1,3 @@
-export * from './ids-action-panel.component';
-export * from './types/ids-action-panel-appearance';
+export * from './types/action-panel-appearance.type';
+export * from './types/action-panel-variant.type';
+export * from './action-panel.component';

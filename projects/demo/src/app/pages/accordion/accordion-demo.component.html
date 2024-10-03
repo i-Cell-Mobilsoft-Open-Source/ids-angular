@@ -1,10 +1,78 @@
 <h1>{{ "COMPONENTS.ACCORDION" | translate }}</h1>
 
-@for (appearance of appearances; track $index) {
-  @for (size of sizes; track $index) {
-    <details idsAccordion [summary]="appearance + '-' + size + ' accordion'" [appearance]="appearance" [size]="size">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-      ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    </details>
-  }
-}
+<section class="component">
+  <details idsAccordion [size]="model.size" [appearance]="model.appearance" [summary]="model.summary" [disabled]="model.disabled">
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+    since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+  </details>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>appearance</td>
+        <td>Button appearance.</td>
+        <td><code>IconButtonAppearanceType</code></td>
+        <td>
+          <code>{{ defaults.appearance }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.appearance">
+            @for (item of appearances; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Button size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ defaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>summary</td>
+        <td>Summary for accordion</td>
+        <td><code>string</code></td>
+        <td><code>-</code></td>
+        <td><input type="text" name="summary" [(ngModel)]="model.summary" /></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the button is disabled or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>{{ defaults.disabled }}</code>
+        </td>
+        <td><input type="checkbox" name="disabled" [(ngModel)]="model.disabled" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

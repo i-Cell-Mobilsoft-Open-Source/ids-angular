@@ -22,8 +22,8 @@ import {
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': '_hostClasses()',
-    '[style.--ids-divider-width]': 'width()',
-    '[style.--ids-divider-height]': 'height()',
+    '[style.width]': '_safeWidth()',
+    '[style.height]': '_safeHeight()',
   },
 })
 export class IdsDividerComponent {
@@ -34,6 +34,8 @@ export class IdsDividerComponent {
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
   public width = input<string | null>('100%');
   public height = input<string | null>('100%');
+  private _safeWidth = computed(() => (this.orientation() === Orientation.HORIZONTAL ? this.width() : null));
+  private _safeHeight = computed(() => (this.orientation() === Orientation.VERTICAL ? this.height() : null));
 
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [

@@ -31,9 +31,9 @@
       @for (pageButtonLabel of pageButtonLabels(); track pageButtonLabel) {
         <li>
           @if (pageButtonLabel === "...") {
-            <div class="ids-paginator__page-button-truncation">
+            <button type="button" disabled class="ids-paginator__page-button-truncation" [class]="pageButtonClasses()">
               <ids-icon fontIcon="more-horizontal" [size]="size()" />
-            </div>
+            </button>
           } @else {
             <button
               #pageButtonElement

@@ -7,6 +7,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
 import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 let nextUniqueId = 0;
 
@@ -15,7 +16,7 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 @Component({
   selector: 'ids-checkbox',
   standalone: true,
-  imports: [],
+  imports: [IdsIconComponent],
   templateUrl: './checkbox.component.html',
   providers: [
     {

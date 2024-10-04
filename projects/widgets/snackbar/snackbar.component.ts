@@ -8,7 +8,6 @@ import { ButtonAppearance, IdsButtonComponent } from '@i-cell/ids-angular/button
 import { AllVariants, coerceBooleanAttribute, createClassList, Size } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import { mdiAlertCircleOutline, mdiAlertOutline, mdiCheckCircleOutline, mdiClose, mdiInformationSlabCircleOutline } from '@mdi/js';
 
 @Component({
   selector: 'ids-snackbar',
@@ -40,8 +39,6 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   public readonly iconButtonAppearance = IconButtonAppearance;
   /** @ignore **/
   public readonly buttonAppearance = ButtonAppearance;
-  /** @ignore **/
-  public readonly closeIcon = mdiClose;
 
   public id = input.required<number>();
   public message = input.required<string>();
@@ -76,22 +73,25 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   /** @ignore **/
   public buttonVariant = computed(() => (this.variant() === SnackbarVariant.DARK ? AllVariants.LIGHT : AllVariants.SURFACE));
   /** @ignore **/
-  public defaultIcon = computed(() => {
+  private _defaultIcon = computed<string | null>(() => {
     switch (this.variant()) {
       case SnackbarVariant.DARK:
-        return mdiAlertCircleOutline;
+        return null;
       case SnackbarVariant.INFO:
-        return mdiInformationSlabCircleOutline;
+        return 'exclamation-circle';
       case SnackbarVariant.SUCCESS:
-        return mdiCheckCircleOutline;
+        return 'check-circle';
       case SnackbarVariant.WARNING:
+        return 'exclamation-triangle';
       case SnackbarVariant.ERROR:
-        return mdiAlertOutline;
+        return 'exclamation-circle';
 
       default:
-        return mdiAlertOutline;
+        return null;
     }
   });
+
+  protected _safeIcon = computed(() => this.icon() ?? this._defaultIcon());
 
   /** @ignore **/
   @HostBinding('class') get hostClasses(): string {

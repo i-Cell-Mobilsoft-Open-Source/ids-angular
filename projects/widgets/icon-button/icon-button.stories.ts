@@ -5,7 +5,6 @@ import { selectControlOptions } from '../.storybook/utils';
 
 import { coerceBooleanAttribute, AllVariants, Size } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiMagnify } from '@mdi/js';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
@@ -38,7 +37,7 @@ export default {
           ${isDisabled ? 'disabled' : ''}
           ${argsToTemplate(props)}
         >
-          <ids-icon icon="${mdiMagnify}" aria-hidden="true" alt="" />
+          <ids-icon fontIcon="search" aria-hidden="true" alt="" />
         </button>
       `,
     };

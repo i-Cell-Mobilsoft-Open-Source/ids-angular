@@ -18,7 +18,6 @@ import {
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import { mdiWindowClose } from '@mdi/js';
 
 let uniqueIdCounter = 0;
 
@@ -45,8 +44,6 @@ export class IdsDialogComponent {
   private readonly _componentClass = 'ids-dialog';
   /** @ignore */
   public readonly dialogTitleId = `ids-dialog-title-${uniqueIdCounter++}`;
-  /** @ignore */
-  public readonly mdiClose = mdiWindowClose;
 
   /** @ignore */
   public dialog = inject(ElementRef).nativeElement as HTMLDialogElement;

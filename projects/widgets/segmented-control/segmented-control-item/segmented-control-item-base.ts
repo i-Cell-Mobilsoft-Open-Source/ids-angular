@@ -4,7 +4,6 @@ import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } fr
 
 import { computed, Directive, ElementRef, EventEmitter, HostBinding, inject, Injector, input, InputSignal, OnInit, Output, signal, ViewChild } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
-import { mdiCheck } from '@mdi/js';
 
 type SegmentedControlParent = IdsSegmentedControlToggleDirective | IdsSegmentedControlDirective;
 type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
@@ -21,9 +20,6 @@ implements OnInit {
 
   /** @ignore */
   protected _parent = signal<P | null>(null);
-
-  /** @ignore */
-  public readonly iconChecked = mdiCheck;
 
   /** @ignore */
   public selected = signal<boolean>(false);

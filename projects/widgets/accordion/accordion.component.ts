@@ -16,7 +16,6 @@ import {
   createClassList,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 
 @Component({
   selector: 'details[idsAccordion]',
@@ -45,10 +44,6 @@ export class IdsAccordionComponent {
 
   /** @ignore */
   public isOpen = signal(false);
-  /** @ignore */
-  public mdiChevronDown = mdiChevronDown;
-  /** @ignore */
-  public mdiChevronUp = mdiChevronUp;
 
   /** @ignore */
   private _details: HTMLDetailsElement = inject(ElementRef).nativeElement;

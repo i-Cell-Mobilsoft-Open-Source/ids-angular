@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, 
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, SizeType, fallbackValue, coerceNumberAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiCheck, mdiClose } from '@mdi/js';
 
 let nextUniqueId = 0;
 
@@ -50,11 +49,6 @@ export class IdsSwitchComponent {
 
   /** @ignore **/
   private _switchGroup = inject(IdsSwitchGroupComponent, { optional: true });
-
-  /** @ignore **/
-  protected readonly _onIcon = mdiCheck;
-  /** @ignore **/
-  protected readonly _offIcon = mdiClose;
 
   /** @ignore **/
   private _switchElement = viewChild<ElementRef<HTMLInputElement>>('switch');

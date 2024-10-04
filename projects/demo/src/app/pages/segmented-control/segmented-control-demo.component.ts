@@ -7,7 +7,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
 import { IdsSegmentedControlItemComponent } from '@i-cell/ids-angular/segmented-control/segmented-control-item/segmented-control-item.component';
 import { IdsSegmentedControlDirective } from '@i-cell/ids-angular/segmented-control/segmented-control.directive';
-import { mdiAccount, mdiAlarm, mdiLightbulbOnOutline } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SegmentedControlPublicApi = {
@@ -58,12 +57,6 @@ export class SegmentedControlDemoComponent {
   };
 
   public model: SegmentedControlPublicApi & SegmentedControlHelperControls = { ...this.defaults };
-
-  public icon = {
-    lightbulb: mdiLightbulbOnOutline,
-    account: mdiAccount,
-    alarm: mdiAlarm,
-  };
 
   public singleSelectionValue = undefined;
   public multiSelectionValue = [];

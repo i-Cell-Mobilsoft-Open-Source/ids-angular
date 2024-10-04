@@ -8,7 +8,7 @@
       [attr.aria-label]="intl.firstPageAriaLabel"
       (click)="stepFirstPage()"
     >
-      <ids-icon [icon]="navigationIcon.first" [size]="size()" />
+      <ids-icon fontIcon="chevron-left-2" [size]="size()" />
     </button>
   }
 
@@ -20,7 +20,7 @@
     [attr.aria-label]="intl.previousPageAriaLabel"
     (click)="stepPreviousPage()"
   >
-    <ids-icon [icon]="navigationIcon.prev" [size]="size()" />
+    <ids-icon fontIcon="chevron-left" [size]="size()" />
     @if (showPrevNextLabel() && compactLayout()) {
       <span class="ids-paginator__page-button-arrow__label">{{ intl.previousPageLabel }}</span>
     }
@@ -32,7 +32,7 @@
         <li>
           @if (pageButtonLabel === "...") {
             <div class="ids-paginator__page-button-truncation">
-              <ids-icon [icon]="navigationIcon.truncation" [size]="size()" />
+              <ids-icon fontIcon="more-horizontal" [size]="size()" />
             </div>
           } @else {
             <button
@@ -65,7 +65,7 @@
     @if (showPrevNextLabel() && compactLayout()) {
       <span class="ids-paginator__page-button-arrow__label">{{ intl.nextPageLabel }}</span>
     }
-    <ids-icon [icon]="navigationIcon.next" [size]="size()" />
+    <ids-icon fontIcon="chevron-right" [size]="size()" />
   </button>
 
   @if (showFirstLastButton()) {
@@ -77,7 +77,7 @@
       [attr.aria-label]="intl.lastPageAriaLabel"
       (click)="stepLastPage()"
     >
-      <ids-icon [icon]="navigationIcon.last" [size]="size()" />
+      <ids-icon fontIcon="chevron-right-2" [size]="size()" />
     </button>
   }
 

@@ -4,9 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { FormFieldVariant, FormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFieldsetComponent, IdsFieldsetMessageDirective, IdsFieldsetRowComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import { mdiMagnify, mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
 type FieldsetPublicApi = {
@@ -35,7 +33,6 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
     IdsSuffixDirective,
     IdsActionDirective,
     IdsIconButtonComponent,
-    IdsIconComponent,
     IdsHintMessageComponent,
     IdsSuccessMessageComponent,
     IdsErrorMessageComponent,
@@ -54,10 +51,6 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
 export class FieldsetDemoComponent {
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(FormFieldVariant) as FormFieldVariantType[];
-
-  public iconSun = mdiWhiteBalanceSunny;
-  public iconMoon = mdiMoonWaningCrescent;
-  public searchIcon = mdiMagnify;
 
   public defaults: FieldsetPublicApi & FieldsetHelperControls = {
     size: defaultConfig.size,

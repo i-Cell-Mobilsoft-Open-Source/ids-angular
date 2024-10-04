@@ -1,7 +1,9 @@
 <div class="ids-snackbar__content-wrapper" cdkTrapFocus cdkTrapFocusAutoCapture="true">
-  <div class="ids-snackbar__leading-element">
-    <ids-icon [icon]="icon() ?? defaultIcon()" />
-  </div>
+  @if (_safeIcon(); as safeIcon) {
+    <div class="ids-snackbar__leading-element">
+      <ids-icon [fontIcon]="safeIcon" />
+    </div>
+  }
 
   <div class="ids-snackbar__message-action-container">
     <div class="ids-snackbar__message">{{ message() }}</div>
@@ -46,7 +48,7 @@
       [variant]="buttonVariant()"
       (click)="close()"
     >
-      <ids-icon aria-hidden="true" alt="" [icon]="closeIcon" />
+      <ids-icon aria-hidden="true" alt="" fontIcon="close" />
     </button>
   }
 </div>

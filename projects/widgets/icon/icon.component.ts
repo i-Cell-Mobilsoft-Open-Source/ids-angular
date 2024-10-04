@@ -15,7 +15,7 @@ let nextUniqueId = 0;
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'ids-icon-v2',
+  selector: 'ids-icon',
   standalone: true,
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,7 +28,7 @@ const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
     'role': 'img',
   },
 })
-export class IdsIconV2Component implements OnInit {
+export class IdsIconComponent implements OnInit {
   /** @ignore */
   private readonly _componentClass = 'ids-icon';
   /** @ignore **/

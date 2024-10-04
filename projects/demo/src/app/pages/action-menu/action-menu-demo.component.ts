@@ -6,7 +6,6 @@ import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsMenuItemComponent, MenuItemAppearance, MenuItemAppearanceType, MenuItemVariant, MenuItemVariantType } from '@i-cell/ids-angular/menu-item';
-import { mdiChevronDown, mdiChevronRight, mdiChevronUp, mdiMagnify } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
 type ActionPanelPublicApi = {
@@ -60,11 +59,6 @@ export class ActionMenuDemoComponent {
     'dark',
   ];
 
-  public mdiSearch = mdiMagnify;
-  public mdiChevronDown = mdiChevronDown;
-  public mdiChevronRight = mdiChevronRight;
-  public mdiChevronUp = mdiChevronUp;
-  
   public actionPanelDefaults: ActionPanelPublicApi & ActionPanelHelperControls = {
     appearance: ActionPanelAppearance.FILLED,
     size: Size.COMFORTABLE,

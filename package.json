@@ -31,7 +31,6 @@
     "@angular/router": "^18.2.4",
     "@i-cell/ids-styles": "0.0.15-beta.13",
     "@i-cell/ids-tokens": "0.0.25-beta.2",
-    "@mdi/js": "^7.4.47",
     "@ngx-translate/core": "15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "rxjs": "7.8.1",

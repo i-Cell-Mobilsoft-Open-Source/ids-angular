@@ -21,19 +21,12 @@
         variant="surface"
         (click)="close()"
       >
-        <ids-icon aria-hidden="true" alt="" [icon]="mdiClose" />
+        <ids-icon aria-hidden="true" alt="" fontIcon="close" />
       </button>
     }
   </header>
-  <div
-    class="ids-dialog-content"
-    [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()"
-  >
-    <div
-      #scrollDetector="idsDetectScrollable"
-      idsDetectScrollable
-      class="ids-dialog-content-overflow"
-    >
+  <div class="ids-dialog-content" [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()">
+    <div #scrollDetector="idsDetectScrollable" idsDetectScrollable class="ids-dialog-content-overflow">
       <ng-content select="[idsDialogContent]" />
     </div>
   </div>

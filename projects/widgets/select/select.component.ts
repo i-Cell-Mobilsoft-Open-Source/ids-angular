@@ -12,7 +12,6 @@ import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl,
 import { coerceBooleanAttribute, coerceNumberAttribute, ComponentBaseWithDefaults, createClassList, SizeType } from '@i-cell/ids-angular/core';
 import { FormFieldVariantType, IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiChevronDown } from '@mdi/js';
 import { first, Subject } from 'rxjs';
 
 const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
@@ -70,7 +69,6 @@ export class IdsSelectComponent
   private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
 
   protected readonly _connectedPositions = selectConnectedPositions;
-  protected readonly _chevronDownIcon = mdiChevronDown;
   public readonly errorStateChanges = new Subject<void>();
   public readonly successStateChanges = new Subject<void>();
 

@@ -11,7 +11,6 @@ import {
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsTagComponent, TagAppearance, TagAppearanceType } from '@i-cell/ids-angular/tag';
-import { mdiCheck, mdiMagnify } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
 type TagPublicApi = {
@@ -56,9 +55,6 @@ export class TagDemoComponent {
   public sizes = Object.values(Size) as SizeType[];
   public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
   public variants = Object.values(AllVariants) as AllVariantsType[];
-
-  public mdiSearch = mdiMagnify;
-  public mdiDone = mdiCheck;
 
   public onClick(tagName: string): void {
     // eslint-disable-next-line no-console

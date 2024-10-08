@@ -6,7 +6,7 @@
       <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
         <ids-label>{{ formFieldModel.label }}</ids-label>
         @if (formFieldModel.hasLeadingIcon) {
-          <ids-icon idsLeadingIcon [icon]="iconSun" />
+          <ids-icon idsLeadingIcon fontIcon="sun" />
         }
         @if (formFieldModel.hasPrefix) {
           <span idsPrefix>{{ formFieldModel.prefix }}</span>
@@ -22,12 +22,12 @@
           <span idsSuffix>{{ formFieldModel.suffix }}</span>
         }
         @if (formFieldModel.hasTrailingIcon) {
-          <ids-icon idsTrailingIcon [icon]="iconMoon" />
+          <ids-icon idsTrailingIcon fontIcon="moon" />
         }
         @if (formFieldModel.hasAction) {
           <div idsAction>
             <button type="button" idsIconButton appearance="standard" [variant]="formFieldModel.variant">
-              <ids-icon aria-hidden="true" alt="" [icon]="searchIcon" />
+              <ids-icon aria-hidden="true" alt="" fontIcon="search" />
             </button>
           </div>
         }

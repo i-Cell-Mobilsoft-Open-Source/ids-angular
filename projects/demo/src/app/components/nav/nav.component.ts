@@ -4,7 +4,6 @@ import { SubnavComponent } from './subnav/subnav.component';
 import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -22,6 +21,4 @@ import { TranslateModule } from '@ngx-translate/core';
 export class NavComponent {
   public menu = input<Menu[]>([]);
   public open = false;
-  public iconClosed = input<string>(mdiChevronDown);
-  public iconOpened = input<string>(mdiChevronUp);
 }

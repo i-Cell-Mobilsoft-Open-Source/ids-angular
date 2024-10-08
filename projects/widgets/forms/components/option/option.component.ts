@@ -12,7 +12,6 @@ import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, injec
 import { CheckboxState } from '@i-cell/ids-angular/checkbox';
 import { coerceBooleanAttribute, ComponentBase, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiCheck } from '@mdi/js';
 
 @Component({
   selector: 'ids-option',
@@ -64,7 +63,6 @@ export class IdsOptionComponent<T = unknown>
 
   protected _groupOrOptionIsDisabled = computed(() => this.group?.disabled() || this.disabledInput());
 
-  protected readonly _checkIcon = mdiCheck;
   protected readonly _multiSelect = Boolean(this._parent?.multiSelect());
 
   public onSelectionChange = output<IdsOptionSelectionChange<T>>();

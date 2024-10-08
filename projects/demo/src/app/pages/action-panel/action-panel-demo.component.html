@@ -13,10 +13,10 @@
         [disabled]="$index === 0 && menuItemModel.hasDisabledItem"
       >
         @if (menuItemModel.hasLeadingIcon) {
-          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+          <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
         }
         @if (menuItemModel.hasTrailingIcon) {
-          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiChevron" />
+          <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
         }
       </button>
     }

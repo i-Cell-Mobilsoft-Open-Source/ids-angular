@@ -9,7 +9,6 @@ import {
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent, IconButtonAppearance, IconButtonAppearanceType } from '@i-cell/ids-angular/icon-button';
-import { mdiMagnify } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
 type IconButtonPublicApi = {
@@ -48,8 +47,6 @@ export class IconButtonDemoComponent {
   public appearances = Object.values(IconButtonAppearance) as IconButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(AllVariants) as AllVariantsType[];
-
-  public mdiSearch = mdiMagnify;
 
   public onClick(buttonName: string): void {
     console.info(`${buttonName} icon button clicked`);

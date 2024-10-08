@@ -12,17 +12,20 @@
                 <a [routerLink]="menuItem.path" [routerLinkActive]="['active']">
                   <span class="icon">
                     @if (menuItem.icon) {
-                      <ids-icon [icon]="menuItem.icon || ''" />
-                    }</span
-                  ><span class="name">{{ menuItem.name! | translate }}</span></a
-                ><span #trigger class="more"><ids-icon [icon]="menuItem.$open ? iconOpened() : iconClosed()" /></span></span
-              ><ids-subnav [menuItem]="menuItem" [trigger]="trigger" (opened)="menuItem.$open = $event" />
+                      <ids-icon [fontIcon]="menuItem.icon" />
+                    }
+                  </span>
+                  <span class="name">{{ menuItem.name! | translate }}</span>
+                </a>
+                <span #trigger class="more"><ids-icon [fontIcon]="menuItem.$open ? 'chevron-up' : 'chevron-down'" /></span>
+              </span>
+              <ids-subnav [menuItem]="menuItem" [trigger]="trigger" (opened)="menuItem.$open = $event" />
             </li>
           } @else {
             <li>
-              <a [routerLink]="menuItem.path"
-                ><span class="icon"></span><span class="name">{{ menuItem!.name! | translate }}</span></a
-              >
+              <a [routerLink]="menuItem.path">
+                <span class="icon"></span><span class="name">{{ menuItem!.name! | translate }}</span>
+              </a>
             </li>
           }
         }

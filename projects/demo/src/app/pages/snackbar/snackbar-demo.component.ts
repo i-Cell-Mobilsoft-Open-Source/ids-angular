@@ -75,11 +75,13 @@ export class SnackbarDemoComponent implements OnInit {
   public openSnackbar(): void {
     this._snackbarService.add({
       message: this.model.message,
+      icon: this.model.icon,
       variant: this.model.variant,
       actions: this.model.useAction ? this._customActions : undefined,
       allowDismiss: this.model.allowDismiss,
       closeButtonLabel: this.model.closeButtonLabel,
       autoClose: this.model.autoClose,
+      urgent: this.model.urgent,
     });
   }
 

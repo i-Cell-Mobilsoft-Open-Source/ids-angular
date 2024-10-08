@@ -9,7 +9,7 @@ import {
   Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
-import { IdsIconV2Component } from '@i-cell/ids-angular/icon';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
 type ButtonPublicApi = {
@@ -30,7 +30,7 @@ type ButtonHelperControls = {
   selector: 'app-button-demo',
   imports: [
     IdsButtonComponent,
-    IdsIconV2Component,
+    IdsIconComponent,
     TranslateModule,
     FormsModule,
   ],

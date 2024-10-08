@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IconSizeCollection, IconSizeCollectionType, IconSource, IconVariant, IconVariantType, IDS_ICON_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/icon';
-import { IdsIconV2Component } from '@i-cell/ids-angular/icon/icon.component';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
@@ -22,7 +22,7 @@ type IconPublicApi = {
   standalone: true,
   selector: 'app-icon-demo',
   imports: [
-    IdsIconV2Component,
+    IdsIconComponent,
     UpperCasePipe,
     TranslateModule,
     FormsModule,

@@ -5,7 +5,6 @@ import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
-import { mdiAccount, mdiAlarm, mdiLightbulbOnOutline } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SegmentedControlTogglePublicApi = {
@@ -55,12 +54,6 @@ export class SegmentedControlToggleDemoComponent {
   };
 
   public model: SegmentedControlTogglePublicApi & SegmentedControlToggleHelperControls = { ...this.defaults };
-
-  public icon = {
-    lightbulb: mdiLightbulbOnOutline,
-    account: mdiAccount,
-    alarm: mdiAlarm,
-  };
 
   public value = undefined;
 

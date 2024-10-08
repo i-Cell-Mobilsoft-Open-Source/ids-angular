@@ -14,7 +14,7 @@
   (click)="onClick()"
 >
   @if (selected()) {
-    <ids-icon aria-hidden="true" [icon]="iconChecked" />
+    <ids-icon aria-hidden="true" fontIcon="check" />
   }
   @if (!selected() || !label()) {
     <ng-content select="ids-icon" />

@@ -12,11 +12,11 @@
     (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
   >
     @if (model.hasLeadingIcon) {
-      <ids-icon-v2 icon-leading fontIcon="search" />
+      <ids-icon icon-leading fontIcon="search" />
     }
     {{ model.text }}
     @if (model.hasTrailingIcon) {
-      <ids-icon-v2 icon-trailing fontIcon="check" />
+      <ids-icon icon-trailing fontIcon="check" />
     }
   </button>
 </section>

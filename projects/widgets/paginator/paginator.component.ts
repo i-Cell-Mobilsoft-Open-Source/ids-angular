@@ -7,7 +7,6 @@ import { PaginatorVariantType } from './types/paginator-variant';
 import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostBinding, HostListener, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, isNumberEven, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiChevronDoubleLeft, mdiChevronDoubleRight, mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js';
 import { debounceTime, Subject, Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
@@ -130,15 +129,6 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   /** @ignore */
   @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
-
-  /** @ignore */
-  public navigationIcon = {
-    first: mdiChevronDoubleLeft,
-    prev: mdiChevronLeft,
-    next: mdiChevronRight,
-    last: mdiChevronDoubleRight,
-    truncation: mdiDotsHorizontal,
-  };
 
   /** @ignore */
   @HostBinding('class') get hostClasses(): string {

@@ -3,11 +3,12 @@ import { IDS_PSEUDO_CHECKBOX_PARENT_COMPONENT } from './pseudo-checkbox-parent';
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { CheckboxState, CheckboxStateType } from '@i-cell/ids-angular/checkbox';
 import { coerceBooleanAttribute, ComponentBase, createClassList } from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-pseudo-checkbox',
   standalone: true,
-  imports: [],
+  imports: [IdsIconComponent],
   templateUrl: './pseudo-checkbox.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

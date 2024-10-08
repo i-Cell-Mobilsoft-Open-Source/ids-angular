@@ -11,11 +11,11 @@
         (click)="onClick(model.appearance + '-' + model.size + '-' + model.variant)"
       >
         @if (model.hasLeadingIcon) {
-          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+          <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
         }
         {{ model.appearance + "-" + model.size + "-" + model.variant }} tag
         @if (model.hasTrailingIcon) {
-          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+          <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="check" />
         }
       </ids-tag>
     </div>
@@ -32,11 +32,11 @@
         (click)="onClick(model.appearance + '-' + model.size + '-' + model.variant)"
       >
         @if (model.hasLeadingIcon) {
-          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+          <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
         }
         {{ model.appearance + "-" + model.size + "-" + model.variant }} tag
         @if (model.hasTrailingIcon) {
-          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiDone" />
+          <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="check" />
         }
       </button>
     </div>

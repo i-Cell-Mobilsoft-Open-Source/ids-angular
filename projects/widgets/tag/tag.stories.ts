@@ -6,7 +6,6 @@ import { AllVariants, coerceBooleanAttribute, Size } from '../core';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiMagnify } from '@mdi/js';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
@@ -35,9 +34,9 @@ export default {
           [size]="size"
           [variant]="variant"
         >
-          ${hasPrefixIcon ? `<ids-icon icon-leading icon="${mdiMagnify}" aria-hidden="true" alt="" />` : ''}
+          ${hasPrefixIcon ? '<ids-icon icon-leading fontIcon="search" aria-hidden="true" alt="" />' : ''}
           ${label}
-          ${hasSuffixIcon ? `<ids-icon icon-trailing icon="${mdiMagnify}" aria-hidden="true" alt="" />` : ''}
+          ${hasSuffixIcon ? '<ids-icon icon-trailing fontIcon="search" aria-hidden="true" alt="" />' : ''}
         </ids-tag>
       `,
     };

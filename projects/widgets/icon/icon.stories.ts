@@ -1,13 +1,13 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { selectControlOptions } from '@i-cell/ids-angular/.storybook/utils';
 import { Size } from '@i-cell/ids-angular/core';
-import { IconSizeCollection, IconVariant, IdsIconV2Component } from '@i-cell/ids-angular/icon';
+import { IconSizeCollection, IconVariant, IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
-type StoryType = IdsIconV2Component & { svgIcon?: string };
+type StoryType = IdsIconComponent & { svgIcon?: string };
 
 export default {
-  component: IdsIconV2Component,
+  component: IdsIconComponent,
   title: 'Components/Icon',
   tags: ['autodocs'],
   decorators: [
@@ -18,7 +18,7 @@ export default {
   render: ({ ...props }) => ({
     props,
     template: `
-        <ids-icon-v2 ${argsToTemplate(props)} />
+        <ids-icon ${argsToTemplate(props)} />
       `,
   }),
   argTypes: {

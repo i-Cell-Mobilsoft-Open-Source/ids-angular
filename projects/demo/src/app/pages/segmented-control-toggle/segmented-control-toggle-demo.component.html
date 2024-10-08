@@ -14,7 +14,7 @@
       [disabled]="model.onlyOneItemIsDisabled"
     >
       @if (model.itemHasIcon) {
-        <ids-icon [icon]="icon.lightbulb" />
+        <ids-icon fontIcon="envelope" />
       }
       @if (model.itemHasSuffix) {
         <span suffixContent>$</span>
@@ -22,7 +22,7 @@
     </ids-segmented-control-toggle-item>
     <ids-segmented-control-toggle-item value="second" [label]="model.itemHasLabel ? 'Label 2' : undefined">
       @if (model.itemHasIcon) {
-        <ids-icon [icon]="icon.account" />
+        <ids-icon fontIcon="user" />
       }
       @if (model.itemHasSuffix) {
         <span suffixContent>$</span>
@@ -30,7 +30,7 @@
     </ids-segmented-control-toggle-item>
     <ids-segmented-control-toggle-item value="third" [label]="model.itemHasLabel ? 'Label 3' : undefined">
       @if (model.itemHasIcon) {
-        <ids-icon [icon]="icon.alarm" />
+        <ids-icon fontIcon="clock" />
       }
       @if (model.itemHasSuffix) {
         <span suffixContent>$</span>

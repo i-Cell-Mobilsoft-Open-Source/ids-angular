@@ -36,14 +36,11 @@ importers:
         specifier: ^18.2.4
         version: 18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@i-cell/ids-styles':
-        specifier: 0.0.15-beta.13
-        version: 0.0.15-beta.13
+        specifier: 0.0.15-beta.14
+        version: 0.0.15-beta.14
       '@i-cell/ids-tokens':
-        specifier: 0.0.25-beta.2
-        version: 0.0.25-beta.2
-      '@mdi/js':
-        specifier: ^7.4.47
-        version: 7.4.47
+        specifier: 0.0.25-beta.7
+        version: 0.0.25-beta.7
       '@ngx-translate/core':
         specifier: 15.0.0
         version: 15.0.0(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
@@ -1615,11 +1612,11 @@ packages:
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
 
-  '@i-cell/ids-styles@0.0.15-beta.13':
-    resolution: {integrity: sha512-cmtJh/rIc7d+K+pZaXGR1MUbrTjaW+S/iV9RHBp/Btypthv5vdgrulNMoRssHI6G/7861cD/Tm8ZgH/ZKkjQTg==}
+  '@i-cell/ids-styles@0.0.15-beta.14':
+    resolution: {integrity: sha512-F8NXsdkvfX1afuPA6Q1IvEDrNWd/fYjpDFsugbzlqxfDejYDWtkvfNXjXtoRJB9y4az38yoCr826aBY7T6x0mg==}
 
-  '@i-cell/ids-tokens@0.0.25-beta.2':
-    resolution: {integrity: sha512-IXSGBv9WenV0XT82vZ/1UIPcjSKSszxaniI3rsCBCamrZlt7lZmCokwtE/vZ57SAoi6GVX6zqnFvs449Q67INA==}
+  '@i-cell/ids-tokens@0.0.25-beta.7':
+    resolution: {integrity: sha512-R/TuBukB6dpU5EKYrrlkqAJoQax3o5nb0tB1V2+ykHYbXhNaAE23rSsKRx0avzTe4BpJWpVwYF4VzyHuDTAEGg==}
 
   '@inquirer/checkbox@2.5.0':
     resolution: {integrity: sha512-sMgdETOfi2dUHT8r7TT1BTKOwNvdDGFDXYWtQ2J69SvlYNntk9I/gJe7r5yvMwwsuKnYbuRs3pNhx4tgNck5aA==}
@@ -1843,9 +1840,6 @@ packages:
     resolution: {integrity: sha512-UCrMJQY/gJnOl3XgbWRZZUvGGBuKy6i0YNSptgMzHBjs+QYDYR1Mt/RLTOPy4fzzves65O1EDmlL//OzEqoLlA==}
     cpu: [x64]
     os: [win32]
-
-  '@mdi/js@7.4.47':
-    resolution: {integrity: sha512-KPnNOtm5i2pMabqZxpUz7iQf+mfrYZyKCZ8QNz85czgEt7cuHcGorWfdzUMWYA0SD+a6Hn4FmJ+YhzzzjkTZrQ==}
 
   '@mdx-js/react@3.0.1':
     resolution: {integrity: sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==}
@@ -9405,9 +9399,9 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
-  '@i-cell/ids-styles@0.0.15-beta.13': {}
+  '@i-cell/ids-styles@0.0.15-beta.14': {}
 
-  '@i-cell/ids-tokens@0.0.25-beta.2': {}
+  '@i-cell/ids-tokens@0.0.25-beta.7': {}
 
   '@inquirer/checkbox@2.5.0':
     dependencies:
@@ -9762,8 +9756,6 @@ snapshots:
 
   '@lmdb/lmdb-win32-x64@3.0.13':
     optional: true
-
-  '@mdi/js@7.4.47': {}
 
   '@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1)':
     dependencies:

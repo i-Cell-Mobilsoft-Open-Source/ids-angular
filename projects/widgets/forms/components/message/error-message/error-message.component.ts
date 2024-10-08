@@ -1,4 +1,3 @@
-import { IdsMessagePrefixDirective } from '../../../directives/message-prefix.directive';
 import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.directive';
 import { IdsMessageDirective } from '../../../directives/message.directive';
 import { IdsFormFieldComponent } from '../../form-field/form-field.component';
@@ -8,7 +7,6 @@ import { Component, ContentChildren, HostBinding, Injector, OnDestroy, OnInit, Q
 import { ValidationErrors } from '@angular/forms';
 import { createClassList } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { mdiInformationOutline } from '@mdi/js';
 import { Subscription, startWith } from 'rxjs';
 
 @Component({
@@ -32,10 +30,7 @@ export class IdsErrorMessageComponent implements OnInit, OnDestroy {
     return this._hostClasses();
   }
 
-  @ContentChildren(IdsMessagePrefixDirective) public prefixes!: QueryList<IdsMessagePrefixDirective>;
   @ContentChildren(IdsMessageSuffixDirective) public suffixes!: QueryList<IdsMessageSuffixDirective>;
-
-  public defaultPrefixIcon = mdiInformationOutline;
 
   public ngOnInit(): void {
     const parent = this._injector.get<IdsFormFieldComponent>(IDS_FORM_FIELD, null, { skipSelf: true, optional: true });

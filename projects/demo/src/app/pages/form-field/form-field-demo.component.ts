@@ -6,7 +6,6 @@ import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { FormFieldVariant, FormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import { mdiMagnify, mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js';
 import { TranslateModule } from '@ngx-translate/core';
 
 type FormFieldPublicApi = {
@@ -70,10 +69,6 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 export class FormFieldDemoComponent implements OnInit {
   public sizes = Object.values(Size) as SizeType[];
   public variants = Object.values(FormFieldVariant) as FormFieldVariantType[];
-
-  public iconSun = mdiWhiteBalanceSunny;
-  public iconMoon = mdiMoonWaningCrescent;
-  public searchIcon = mdiMagnify;
 
   public formFieldDefaults: FormFieldPublicApi & FormFieldHelperControls = {
     size: defaultConfig.size,

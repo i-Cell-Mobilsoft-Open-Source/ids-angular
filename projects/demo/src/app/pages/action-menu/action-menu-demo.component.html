@@ -11,7 +11,7 @@
     [idsActionMenuTriggerFor]="actionMenu"
   >
     Action menu top-left
-    <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="trigger1.isOpen ? mdiChevronUp : mdiChevronDown" />
+    <ids-icon icon-trailing aria-hidden="true" alt="" [fontIcon]="trigger1.isOpen ? 'chevron-up' : 'chevron-down'" />
   </button>
 
   <ng-template #actionMenu>
@@ -27,7 +27,7 @@
           [disabled]="$index === 0 && menuItemModel.hasDisabledItem"
         >
           @if (menuItemModel.hasLeadingIcon) {
-            <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+            <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
           }
         </button>
       }
@@ -41,10 +41,10 @@
         [idsActionMenuTriggerFor]="subMenu"
       >
         @if (menuItemModel.hasLeadingIcon) {
-          <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+          <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
         }
         @if (menuItemModel.hasTrailingIcon) {
-          <ids-icon icon-trailing aria-hidden="true" alt="" [icon]="mdiChevronRight" />
+          <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
         }
       </button>
     </ids-action-panel>
@@ -63,7 +63,7 @@
           [disabled]="$index === 0 && menuItemModel.hasDisabledItem"
         >
           @if (menuItemModel.hasLeadingIcon) {
-            <ids-icon icon-leading aria-hidden="true" alt="" [icon]="mdiSearch" />
+            <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
           }
         </button>
       }

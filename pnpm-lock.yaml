@@ -36,11 +36,11 @@ importers:
         specifier: ^18.2.4
         version: 18.2.4(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.4(@angular/animations@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@i-cell/ids-styles':
-        specifier: 0.0.15-beta.13
-        version: 0.0.15-beta.13
+        specifier: 0.0.15-beta.14
+        version: 0.0.15-beta.14
       '@i-cell/ids-tokens':
-        specifier: 0.0.25-beta.5
-        version: 0.0.25-beta.5
+        specifier: 0.0.25-beta.7
+        version: 0.0.25-beta.7
       '@ngx-translate/core':
         specifier: 15.0.0
         version: 15.0.0(@angular/common@18.2.4(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.4(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
@@ -1612,11 +1612,11 @@ packages:
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
 
-  '@i-cell/ids-styles@0.0.15-beta.13':
-    resolution: {integrity: sha512-cmtJh/rIc7d+K+pZaXGR1MUbrTjaW+S/iV9RHBp/Btypthv5vdgrulNMoRssHI6G/7861cD/Tm8ZgH/ZKkjQTg==}
+  '@i-cell/ids-styles@0.0.15-beta.14':
+    resolution: {integrity: sha512-F8NXsdkvfX1afuPA6Q1IvEDrNWd/fYjpDFsugbzlqxfDejYDWtkvfNXjXtoRJB9y4az38yoCr826aBY7T6x0mg==}
 
-  '@i-cell/ids-tokens@0.0.25-beta.5':
-    resolution: {integrity: sha512-+fT7b8wGNENiABhU8I/1zkd7zdUx+6PNw4EcV8DN5fh9wurXBbzMF0rY9nLMsjMShuixXMMEpEbUQId4ydecBg==}
+  '@i-cell/ids-tokens@0.0.25-beta.7':
+    resolution: {integrity: sha512-R/TuBukB6dpU5EKYrrlkqAJoQax3o5nb0tB1V2+ykHYbXhNaAE23rSsKRx0avzTe4BpJWpVwYF4VzyHuDTAEGg==}
 
   '@inquirer/checkbox@2.5.0':
     resolution: {integrity: sha512-sMgdETOfi2dUHT8r7TT1BTKOwNvdDGFDXYWtQ2J69SvlYNntk9I/gJe7r5yvMwwsuKnYbuRs3pNhx4tgNck5aA==}
@@ -9399,9 +9399,9 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
-  '@i-cell/ids-styles@0.0.15-beta.13': {}
+  '@i-cell/ids-styles@0.0.15-beta.14': {}
 
-  '@i-cell/ids-tokens@0.0.25-beta.5': {}
+  '@i-cell/ids-tokens@0.0.25-beta.7': {}
 
   '@inquirer/checkbox@2.5.0':
     dependencies:

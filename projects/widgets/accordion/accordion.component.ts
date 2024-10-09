@@ -1,63 +1,130 @@
-import { AccordionAppearance, AccordionAppearanceType } from './types/accordion-appearance';
+import { IDS_ACCORDION_DEFAULT_CONFIG, IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionDefaultConfig } from './accordion-defaults';
+import { IdsAccordionItemComponent } from './accordion-item/accordion-item.component';
+import { AccordionAppearanceType } from './types/accordion-appearance';
 
+import { CdkAccordion } from '@angular/cdk/accordion';
 import {
+  ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewEncapsulation,
   computed,
+  contentChildren,
   inject,
   input,
-  signal,
+  ViewEncapsulation,
 } from '@angular/core';
-import {
-  Size,
-  SizeType,
-  coerceBooleanAttribute,
-  createClassList,
-} from '@i-cell/ids-angular/core';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { ButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { AllVariantsType, coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, SizeType } from '@i-cell/ids-angular/core';
+
+const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'details[idsAccordion]',
+  selector: 'ids-accordion',
   standalone: true,
-  imports: [IdsIconComponent],
+  imports: [
+    CdkAccordion,
+    IdsButtonComponent,
+  ],
   templateUrl: './accordion.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '_hostClasses()',
-    '(toggle)': '_onToggle()',
+    '(keydown)': '_handleKeyDown($event)',
   },
+  hostDirectives: [
+    {
+      directive: CdkAccordion,
+      inputs: ['multi'],
+    },
+  ],
 })
-export class IdsAccordionComponent {
-  /** @ignore */
-  private readonly _componentClass = 'ids-accordion';
+export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordionDefaultConfig> {
+  protected override get _componentName(): string {
+    return 'accordion';
+  }
+  
+  private _cdkAccordion = inject(CdkAccordion); 
+  private _items = contentChildren<IdsAccordionItemComponent>(IdsAccordionItemComponent);
 
-  public size = input<SizeType | null>(Size.COMFORTABLE);
-  public appearance = input<AccordionAppearanceType | null>(
-    AccordionAppearance.TEXT,
-  );
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ACCORDION_DEFAULT_CONFIG);
+  protected _controlsClass = `${this._componentClass}-controls`;
 
-  public summary = input<string>('');
-  public disabled = input(false, {
-    transform: (value: boolean | string) => coerceBooleanAttribute(value),
-  });
+  public size = input<SizeType | null>(this._defaultConfig.size);
+  public appearance = input<AccordionAppearanceType | null>(this._defaultConfig.appearance);
+  public disabled = input(false, { transform: coerceBooleanAttribute });
+  public hasLeadingIcon = input(this._defaultConfig.hasLeadingIcon, { transform: coerceBooleanAttribute });
+  public hasTrailingIcon = input(this._defaultConfig.hasTrailingIcon, { transform: coerceBooleanAttribute });
+  public multi = input<boolean>(this._defaultConfig.multi);
+  public btnSize = input<SizeType | null>(this._defaultConfig.btnSize);
+  public btnAppearance = input<ButtonAppearanceType | null>(this._defaultConfig.btnAppearance);
+  public btnVariant = input<AllVariantsType | null>(this._defaultConfig.btnVariant);
+  public expandBtnLabel = input<string | null, string>(this._defaultConfig.expandBtnLabel, { transform: coerceStringAttribute });
+  public collapseBtnLabel = input<string | null, string>(this._defaultConfig.collapseBtnLabel, { transform: coerceStringAttribute });
 
-  /** @ignore */
-  public isOpen = signal(false);
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.size(),
+    this.appearance(),
+    this.disabled() ? 'disabled' : null,
+  ]));
+  
+  public openAll(): void {
+    this._cdkAccordion.openAll();
+  }
+  
+  public closeAll(): void {
+    this._cdkAccordion.closeAll();
+  }
 
-  /** @ignore */
-  private _details: HTMLDetailsElement = inject(ElementRef).nativeElement;
-
-  /** @ignore */
-  private _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      this.size(),
-      this.appearance(),
-      this.disabled() ? 'disabled' : null,
-    ]),
-  );
-
-  private _onToggle(): void {
-    this.isOpen.set(this._details.open);
+  private _handleKeyDown(event: KeyboardEvent): void {
+    const navigationKeys = [
+      'Enter',
+      ' ',
+      'ArrowUp',
+      'ArrowDown',
+      'Home',
+      'End',
+    ];
+  
+    if (!navigationKeys.includes(event.key)) {
+      return;
+    }
+  
+    event.preventDefault();
+  
+    const items = this._items();
+    const target = event.target as HTMLButtonElement;
+    const accordionId = target.parentElement!.id;
+    const index = items.findIndex((item) => item.id() === accordionId);
+  
+    switch (event.key) {
+      case 'ArrowUp': {
+        if (index > 0) {
+          const prevItem = items[index - 1];
+          prevItem.focus();
+        }
+        break;
+      }
+      case 'ArrowDown': {
+        if (index < items.length - 1) {
+          const nextItem = items[index + 1];
+          nextItem.focus();
+        }
+        break;
+      }
+      case 'Enter':
+      case ' ': {
+        items[index].toggle();
+        break;
+      }
+      case 'Home': {
+        items[0].focus();
+        break;
+      }
+      case 'End': {
+        items[items.length - 1].focus();
+        break;
+      }
+      default:
+        return;
+    }
   }
 }

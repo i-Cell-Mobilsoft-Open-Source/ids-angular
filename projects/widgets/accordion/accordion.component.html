@@ -1,7 +1,11 @@
-<summary class="ids-accordion-summary" [attr.tabindex]="disabled() ? -1 : 0">
-  <span class="ids-accordion-title">{{ summary() }}</span>
-  <ids-icon icon-trailing aria-hidden="true" alt="" [size]="size()" [fontIcon]="isOpen() ? 'chevron-up' : 'chevron-down'" />
-</summary>
-<article class="ids-accordion-content">
-  <ng-content />
-</article>
+@if (multi()) {
+  <div [class]="_controlsClass">
+    <button type="button" idsButton [appearance]="btnAppearance()" [variant]="btnVariant()" [size]="btnSize()" (click)="openAll()">
+      {{ expandBtnLabel() }}
+    </button>
+    <button type="button" idsButton [appearance]="btnAppearance()" [variant]="btnVariant()" [size]="btnSize()" (click)="closeAll()">
+      {{ collapseBtnLabel() }}
+    </button>
+  </div>
+}
+<ng-content />

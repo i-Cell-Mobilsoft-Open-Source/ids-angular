@@ -1,0 +1,28 @@
+<div
+  #header
+  role="button"
+  [id]="_headerId"
+  [attr.aria-expanded]="isExpanded ? 'true' : 'false'"
+  [attr.aria-controls]="_contentId"
+  [class]="_summaryClass"
+  [attr.tabindex]="disabled() ? -1 : 0"
+  [attr.aria-disabled]="disabled()"
+  (click)="toggle()"
+>
+  @if (_safeHasLeadingIcon()) {
+    <ids-icon icon-leading [fontIcon]="getIcon()" />
+  }
+  <span [class]="_titleClass">{{ summary() }}</span>
+  @if (_safeHasTrailingIcon()) {
+    <ids-icon icon-trailing [fontIcon]="getIcon()" />
+  }
+</div>
+<div
+  role="region"
+  [id]="_contentId"
+  [attr.aria-labelledby]="_headerId"
+  [class]="_contentClass"
+  [@accordionAnimations]="isExpanded ? 'expanded' : 'collapsed'"
+>
+  <ng-content />
+</div>

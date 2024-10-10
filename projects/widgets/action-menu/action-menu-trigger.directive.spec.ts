@@ -1,8 +1,8 @@
 import { IdsActionMenuTriggerDirective } from './action-menu-trigger.directive';
 
-import { IdsActionPanelComponent } from '../action-panel';
 import { IdsButtonComponent } from '../button';
 import { IdsMenuItemComponent } from '../menu-item';
+import { IdsOverlayPanelComponent } from '../overlay-panel';
 
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -20,14 +20,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
   >Action menu top-left</button>
 
   <ng-template #actionMenu>
-    <ids-action-panel
+    <ids-overlay-panel
       size="compact"
       appearance="outlined"
     >
       <button type="button" idsMenuItem appearance="filled" size="compact" [label]="'Menu Item Label 1'">
         Anything
       </button>
-    </ids-action-panel>
+    </ids-overlay-panel>
   </ng-template>
   `,
   schemas: [NO_ERRORS_SCHEMA],
@@ -43,7 +43,7 @@ describe('IdsActionMenuTriggerDirective', () => {
       imports: [
         TestComponent,
         IdsActionMenuTriggerDirective,
-        IdsActionPanelComponent,
+        IdsOverlayPanelComponent,
         IdsMenuItemComponent,
         IdsButtonComponent,
       ],

@@ -10,10 +10,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/action-menu/action-menu-demo.component').then((module) => module.ActionMenuDemoComponent),
   },
   {
-    path: 'components/action-panel',
-    loadComponent: () => import('./pages/action-panel/action-panel-demo.component').then((module) => module.ActionPanelDemoComponent),
-  },
-  {
     path: 'components/avatar',
     loadComponent: () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
   },
@@ -52,6 +48,10 @@ export const routes: Routes = [
   {
     path: 'components/icon-button',
     loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
+  },
+  {
+    path: 'components/overlay-panel',
+    loadComponent: () => import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
   },
   {
     path: 'components/paginator',

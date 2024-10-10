@@ -1,5 +1,5 @@
-import { ActionPanelAppearance, ActionPanelAppearanceType } from './types/action-panel-appearance.type';
-import { ActionPanelVariant, ActionPanelVariantType } from './types/action-panel-variant.type';
+import { OverlayPanelAppearance, OverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
+import { OverlayPanelVariant, OverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
@@ -17,7 +17,7 @@ import {
 import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
 
 @Component({
-  selector: 'ids-action-panel,div[idsActionPanel]',
+  selector: 'ids-overlay-panel,div[idsOverlayPanel]',
   standalone: true,
   imports: [IdsMenuItemComponent],
   hostDirectives: [
@@ -30,16 +30,16 @@ import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
     '[class]': '_hostClasses()',
   },
 })
-export class IdsActionPanelComponent {
+export class IdsOverlayPanelComponent {
   /** @ignore */
-  private readonly _componentClass = 'ids-action-panel';
+  private readonly _componentClass = 'ids-overlay-panel';
 
-  public appearance = input<ActionPanelAppearanceType | null>(
-    ActionPanelAppearance.FILLED,
+  public appearance = input<OverlayPanelAppearanceType | null>(
+    OverlayPanelAppearance.FILLED,
   );
 
   public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<ActionPanelVariantType | null>(ActionPanelVariant.LIGHT);
+  public variant = input<OverlayPanelVariantType | null>(OverlayPanelVariant.LIGHT);
 
   /** @ignore */
   public actionItems = contentChildren(IdsMenuItemComponent);

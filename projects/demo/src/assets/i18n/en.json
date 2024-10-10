@@ -12,7 +12,6 @@
   "COMPONENTS": {
     "ACCORDION": "Accordion",
     "ACTION_MENU": "Action menu",
-    "ACTION_PANEL": "Action panel",
     "AVATAR": "Avatar",
     "BUTTON": "Button",
     "CARD": "Card",
@@ -23,6 +22,7 @@
     "FORM_FIELD": "Form field",
     "ICON": "Icon",
     "ICON_BUTTON": "Icon button",
+    "OVERLAY_PANEL": "Overlay panel",
     "PAGINATOR": "Paginator",
     "RADIO": "Radio",
     "SEGMENTED_CONTROL": "Segmented control",

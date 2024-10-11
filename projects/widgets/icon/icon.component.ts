@@ -29,25 +29,17 @@ const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsIconComponent implements OnInit {
-  /** @ignore */
   private readonly _componentClass = 'ids-icon';
-  /** @ignore **/
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  /** @ignore */
   private readonly _defaultConfig = {
     ...defaultConfig,
     ...inject(IDS_ICON_DEFAULT_CONFIG, { optional: true }),
   };
 
-  /** @ignore */
   private readonly _elementRef = inject(ElementRef<HTMLElement>);
-  /** @ignore */
   private readonly _document = inject(DOCUMENT);
-  /** @ignore */
   private readonly _destroyRef = inject(DestroyRef);
-  /** @ignore */
   private readonly _httpClient = inject(HttpClient);
-  /** @ignore */
   private readonly _sanitizer = inject(DomSanitizer);
   
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
@@ -58,13 +50,10 @@ export class IdsIconComponent implements OnInit {
   public svgIconName = input<string | null, string>(null, { alias: 'svgIcon', transform: coerceStringAttribute });
   public ariaHidden = input<boolean, unknown>(true, { alias: 'aria-hidden', transform: coerceBooleanAttribute });
 
-  /** @ignore */
   protected _svgIcon: SVGElement | null = null;
 
-  /** @ignore */
   protected _iconSourceType = computed(() => (this.fontIcon() ? IconSource.FONT : IconSource.SVG));
 
-  /** @ignore */
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       [
@@ -104,7 +93,6 @@ export class IdsIconComponent implements OnInit {
     }
   }
 
-  /** @ignore */
   private _getSvgElementSource(url: string): void {
     this._httpClient
       .get(url, { responseType: 'text' })
@@ -117,14 +105,12 @@ export class IdsIconComponent implements OnInit {
       });
   } 
   
-  /** @ignore */
   private _setSvgElement(svg: SVGElement): void {
     this._clearSvgElement();
 
     this._elementRef.nativeElement.appendChild(svg);
   }
   
-  /** @ignore */
   private _clearSvgElement(): void {
     const layoutElement: HTMLElement = this._elementRef.nativeElement;
     let childCount = layoutElement.childNodes.length;
@@ -138,7 +124,6 @@ export class IdsIconComponent implements OnInit {
     }
   }
   
-  /** @ignore */
   private _getSvgElement(safeHtml: SafeHtml): SVGElement {
     const div = this._document.createElement('div');
     div.innerHTML = safeHtml as unknown as string;

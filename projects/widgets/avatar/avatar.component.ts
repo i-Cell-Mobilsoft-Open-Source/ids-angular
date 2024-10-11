@@ -24,7 +24,6 @@ import {
   },
 })
 export class IdsAvatarComponent {
-  /** @ignore */
   private readonly _componentClass = 'ids-avatar';
 
   public image = input<string | null>(null);
@@ -33,7 +32,6 @@ export class IdsAvatarComponent {
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<SurfaceVariantType | null>(SurfaceVariant.PRIMARY);
 
-  /** @ignore */
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       this.size(),

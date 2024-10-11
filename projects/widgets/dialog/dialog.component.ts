@@ -40,12 +40,9 @@ let uniqueIdCounter = 0;
   },
 })
 export class IdsDialogComponent {
-  /** @ignore */
   private readonly _componentClass = 'ids-dialog';
-  /** @ignore */
   public readonly dialogTitleId = `ids-dialog-title-${uniqueIdCounter++}`;
 
-  /** @ignore */
   public dialog = inject(ElementRef).nativeElement as HTMLDialogElement;
 
   public size = input<SizeType | null>(Size.COMFORTABLE);
@@ -54,10 +51,8 @@ export class IdsDialogComponent {
   public showCloseButton = input<boolean>(false);
   public showBackdrop = input<boolean>(true);
 
-  /** @ignore */
   public customHeader = contentChild(IdsDialogHeaderDirective);
 
-  /** @ignore */
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       this.size(),
@@ -65,17 +60,14 @@ export class IdsDialogComponent {
     ]),
   );
 
-  /** @ignore */
   private _onCancel(event: Event): void {
     event.preventDefault();
   }
 
-  /** @ignore */
   public open(): void {
     this.dialog.showModal();
   }
 
-  /** @ignore */
   public close(): void {
     this.dialog.close();
   }

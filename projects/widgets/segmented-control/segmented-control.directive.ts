@@ -23,20 +23,15 @@ let nextUniqueId = 0;
   },
 })
 export class IdsSegmentedControlDirective extends IdsSegmentedControlBase<IdsSegmentedControlItemComponent, IdsSegmentedControlItemChange> {
-  /** @ignore */
   protected readonly _componentClass = 'ids-segmented-control';
-  /** @ignore */
   protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
-  /** @ignore */
   protected _items = contentChildren<IdsSegmentedControlItemComponent>(IdsSegmentedControlItemComponent);
   public id = input<string>(this._uniqueId);
   public multiSelect = input<boolean>(false);
 
-  /** @ignore **/
   @Output() public readonly itemChanges = new EventEmitter<IdsSegmentedControlItemChange>();
 
-  /** @ignore **/
   protected _handleItemChanges(change: IdsSegmentedControlItemChange): void {
     const { source, selected } = change;
     if (!this.multiSelect()) {

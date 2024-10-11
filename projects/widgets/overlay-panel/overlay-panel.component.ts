@@ -31,7 +31,6 @@ import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
   },
 })
 export class IdsOverlayPanelComponent {
-  /** @ignore */
   private readonly _componentClass = 'ids-overlay-panel';
 
   public appearance = input<OverlayPanelAppearanceType | null>(
@@ -41,10 +40,8 @@ export class IdsOverlayPanelComponent {
   public size = input<SizeType | null>(Size.COMFORTABLE);
   public variant = input<OverlayPanelVariantType | null>(OverlayPanelVariant.LIGHT);
 
-  /** @ignore */
   public actionItems = contentChildren(IdsMenuItemComponent);
 
-  /** @ignore */
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this.appearance(),
     this.size(),

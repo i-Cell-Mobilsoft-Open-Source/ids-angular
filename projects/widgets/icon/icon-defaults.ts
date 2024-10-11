@@ -1,12 +1,11 @@
-import { IconSizeCollection, IconSizeCollectionType } from './types/icon-size-collection.type';
 import { IconVariant, IconVariantType } from './types/icon-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { Size, SizeCollection, SizeCollectionType, SizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsIconDefaultConfig {
   size?: SizeType
-  sizeCollection?: IconSizeCollectionType
+  sizeCollection?: SizeCollectionType
   variant?: IconVariantType
   iconAssetsPath: string
 }
@@ -22,7 +21,7 @@ export const IDS_ICON_DEFAULT_CONFIG = new InjectionToken<IdsIconDefaultConfig>(
 export function IDS_ICON_DEFAULT_CONFIG_FACTORY(): Required<IdsIconDefaultConfig> {
   return {
     size: Size.COMFORTABLE,
-    sizeCollection: IconSizeCollection.SMALL,
+    sizeCollection: SizeCollection.SMALL,
     variant: IconVariant.SURFACE,
     iconAssetsPath: '',
   };

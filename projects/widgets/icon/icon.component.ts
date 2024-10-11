@@ -1,5 +1,4 @@
 import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY } from './icon-defaults';
-import { IconSizeCollectionType } from './types/icon-size-collection.type';
 import { IconSource } from './types/icon-source.type';
 import { IconVariantType } from './types/icon-variant.type';
 
@@ -8,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { coerceBooleanAttribute, coerceStringAttribute, createClassList, createComponentError, fallbackValue, SizeType } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, coerceStringAttribute, createClassList, createComponentError, fallbackValue, SizeCollectionType, SizeType } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 
@@ -44,7 +43,7 @@ export class IdsIconComponent implements OnInit {
   
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
   public size = input<SizeType | null>(this._defaultConfig.size);
-  public sizeCollection = input<IconSizeCollectionType | null>(this._defaultConfig.sizeCollection);
+  public sizeCollection = input<SizeCollectionType | null>(this._defaultConfig.sizeCollection);
   public variant = input<IconVariantType | null>(this._defaultConfig.variant);
   public fontIcon = input<string | null, string>(null, { transform: coerceStringAttribute });
   public svgIconName = input<string | null, string>(null, { alias: 'svgIcon', transform: coerceStringAttribute });

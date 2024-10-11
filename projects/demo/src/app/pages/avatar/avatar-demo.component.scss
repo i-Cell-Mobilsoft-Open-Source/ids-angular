@@ -1,5 +1,10 @@
 .avatar-types {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   gap: 2rem;
+
+  .avatar-type {
+    text-align: center;
+  }
 }

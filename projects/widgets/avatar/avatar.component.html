@@ -1,11 +1,14 @@
-@switch (avatarType()) {
+@let type = avatarType();
+@switch (type) {
   @case (_avatarType.INITIALS) {
-    
+    <span>{{ initials() }}</span>
   }
   @case (_avatarType.ICON) {
-    <ids-icon fontIcon="user" />
+    <ng-content select="ids-icon">
+      <ids-icon fontIcon="user" />
+    </ng-content>
   }
   @case (_avatarType.IMAGE) {
-    <img [src]="imageSrc()" />
+    <ng-content select="img[src]" />
   }
 }

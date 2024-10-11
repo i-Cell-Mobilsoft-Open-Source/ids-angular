@@ -1,4 +1,4 @@
-import { AvatarType, AvatarTypeType } from './public-api';
+import { AvatarType, AvatarTypeType } from './types/avatar-type.type';
 import { AvatarVariant, AvatarVariantType } from './types/avatar-variant.type';
 
 import { InjectionToken } from '@angular/core';

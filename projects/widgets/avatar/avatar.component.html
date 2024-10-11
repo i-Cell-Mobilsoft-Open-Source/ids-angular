@@ -1,47 +1,14 @@
-<div
-  #content
-  [style.display]="content.children.length === 0 ? 'none' : 'block'"
->
-  <ng-content />
-</div>
-@if (content?.children?.length === 0) {
-@if (image(); as image) {
-<img
-  class="ids-avatar-image"
-  [src]="image"
-  [alt]="alt()"
-/>
-} @else {
-<svg
-  width="52"
-  height="52"
-  viewBox="0 0 52 52"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
-  class="ids-avatar-icon"
->
-  <mask
-    id="mask0_3222_9853"
-    style="mask-type: alpha"
-    maskUnits="userSpaceOnUse"
-    x="7"
-    y="5"
-    width="38"
-    height="47"
-  >
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M7.79999 44.3943C12.0726 39.0451 18.6378 35.6199 26 35.6199C33.3622 35.6199 39.9274 39.0451 44.2 44.3943C39.554 49.0914 33.1154 52 26 52C18.8846 52 12.446 49.0914 7.79999 44.3943ZM37.6569 16.9C37.6569 23.3617 32.4379 28.6 26 28.6C19.562 28.6 14.343 23.3617 14.343 16.9C14.343 10.4382 19.562 5.19995 26 5.19995C32.4379 5.19995 37.6569 10.4382 37.6569 16.9Z"
-    />
-  </mask>
-  <g mask="url(#mask0_3222_9853)">
-    <rect
-      width="52"
-      height="52"
-      fill="currentColor"
-    />
-  </g>
-</svg>
-}
+@let type = avatarType();
+@switch (type) {
+  @case (_avatarType.INITIALS) {
+    <span>{{ initials() }}</span>
+  }
+  @case (_avatarType.ICON) {
+    <ng-content select="ids-icon">
+      <ids-icon fontIcon="user" />
+    </ng-content>
+  }
+  @case (_avatarType.IMAGE) {
+    <ng-content select="img[src]" />
+  }
 }

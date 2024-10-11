@@ -4,38 +4,23 @@
   <div class="avatar-types">
     <div class="avatar-type">
       <h2>Initials</h2>
-      <button
-        type="button"
-        idsAvatar
-        [id]="model.variant + '-' + model.size + '-avatar-monogram'"
-        [title]="model.variant + '-' + model.size + '-avatar-monogram'"
-        [size]="model.size"
-        [variant]="model.variant"
-      >
-        <span>AB</span>
-      </button>
+      <ids-avatar initials="SJ" [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant" />
     </div>
     <div class="avatar-type">
-      <h2>User</h2>
-      <button
-        type="button"
-        idsAvatar
-        [id]="model.variant + '-' + model.size + '-avatar-user'"
-        [title]="model.variant + '-' + model.size + '-avatar-user'"
-        [size]="model.size"
-        [variant]="model.variant"
-      ></button>
+      <h2>Icon</h2>
+      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant">
+        <ids-icon fontIcon="user" />
+      </ids-avatar>
     </div>
     <div class="avatar-type">
       <h2>With image</h2>
-      <button
-        type="button"
-        idsAvatar
-        [image]="model.image"
-        [id]="model.size + '-avatar-with-image'"
-        [title]="model.size + '-avatar-with-image'"
-        [size]="model.size"
-      ></button>
+      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant">
+        <img
+          idsAvatarImage
+          src="https://hips.hearstapps.com/harpersbazaaruk.cdnds.net/16/38/1600x1600/square-1474624165-scarlett-johansson.jpg"
+          alt="Scarlett Johansson"
+        />
+      </ids-avatar>
     </div>
   </div>
 </section>
@@ -61,15 +46,6 @@
 
     <tbody>
       <tr>
-        <td>image</td>
-        <td>Image for avatar</td>
-        <td><code>string</code></td>
-        <td>
-          <code>-</code>
-        </td>
-        <td><input type="text" name="image" [(ngModel)]="model.image" /></td>
-      </tr>
-      <tr>
         <td>size</td>
         <td>Avatar size.</td>
         <td><code>SizeType</code></td>
@@ -85,9 +61,24 @@
         </td>
       </tr>
       <tr>
+        <td>sizeCollection</td>
+        <td>Avatar sizeCollection.</td>
+        <td><code>SizeCollectionType</code></td>
+        <td>
+          <code>{{ defaults.sizeCollection }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.sizeCollection">
+            @for (item of sizeCollections; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
         <td>variant</td>
         <td>Avatar variant.</td>
-        <td><code>SurfaceVariantType</code></td>
+        <td><code>AvatarVariantType</code></td>
         <td>
           <code>{{ defaults.variant }}</code>
         </td>

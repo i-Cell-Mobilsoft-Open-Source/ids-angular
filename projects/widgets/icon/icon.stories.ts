@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { selectControlOptions } from '@i-cell/ids-angular/.storybook/utils';
-import { Size } from '@i-cell/ids-angular/core';
-import { IconSizeCollection, IconVariant, IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { Size, SizeCollection } from '@i-cell/ids-angular/core';
+import { IconVariant, IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
 type StoryType = IdsIconComponent & { svgIcon?: string };
@@ -23,7 +23,7 @@ export default {
   }),
   argTypes: {
     id: { control: 'text' },
-    sizeCollection: selectControlOptions(IconSizeCollection),
+    sizeCollection: selectControlOptions(SizeCollection),
     size: selectControlOptions(Size),
     variant: selectControlOptions(IconVariant),
     fontIcon: { control: 'text' },

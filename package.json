@@ -29,7 +29,7 @@
     "@angular/platform-browser": "^18.2.4",
     "@angular/platform-browser-dynamic": "^18.2.4",
     "@angular/router": "^18.2.4",
-    "@i-cell/ids-styles": "0.0.15-beta.14",
+    "@i-cell/ids-styles": "0.0.15",
     "@i-cell/ids-tokens": "0.0.25-beta.8",
     "@ngx-translate/core": "15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",

@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsActionMenuTriggerDirective } from '@i-cell/ids-angular/action-menu';
-import { ActionPanelAppearance, ActionPanelAppearanceType, ActionPanelVariant, ActionPanelVariantType, IdsActionPanelComponent } from '@i-cell/ids-angular/action-panel';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { Size, SizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsMenuItemComponent, MenuItemAppearance, MenuItemAppearanceType, MenuItemVariant, MenuItemVariantType } from '@i-cell/ids-angular/menu-item';
+import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel/overlay-panel.component';
+import { OverlayPanelAppearance, OverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
+import { OverlayPanelVariant, OverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-variant.type';
 import { TranslateModule } from '@ngx-translate/core';
 
-type ActionPanelPublicApi = {
-  appearance: ActionPanelAppearanceType,
+type OverlayPanelPublicApi = {
+  appearance: OverlayPanelAppearanceType,
   size: SizeType,
-  variant: ActionPanelVariantType,
+  variant: OverlayPanelVariantType,
 };
 
-type ActionPanelHelperControls = {
+type OverlayPanelHelperControls = {
   testBackgroundColor: 'light' | 'dark',
 };
 
@@ -35,7 +37,7 @@ type MenuItemHelperControls = {
   standalone: true,
   imports: [
     IdsActionMenuTriggerDirective,
-    IdsActionPanelComponent,
+    IdsOverlayPanelComponent,
     IdsMenuItemComponent,
     IdsButtonComponent,
     IdsIconComponent,
@@ -49,27 +51,27 @@ type MenuItemHelperControls = {
   ],
 })
 export class ActionMenuDemoComponent {
-  public actionPanelAappearances = Object.values(ActionPanelAppearance) as ActionPanelAppearanceType[];
-  public actionPanelVariants = Object.values(ActionPanelVariant) as ActionPanelVariantType[];
-  public menuItemAappearances = Object.values(MenuItemAppearance) as MenuItemAppearanceType[];
+  public overlayPanelAppearances = Object.values(OverlayPanelAppearance) as OverlayPanelAppearanceType[];
+  public overlayPanelVariants = Object.values(OverlayPanelVariant) as OverlayPanelVariantType[];
+  public menuItemAppearances = Object.values(MenuItemAppearance) as MenuItemAppearanceType[];
   public menuItemVariants = Object.values(MenuItemVariant) as MenuItemVariantType[];
   public sizes = Object.values(Size) as SizeType[];
-  public actionPanelBackgroundColors = [
+  public overlayPanelBackgroundColors = [
     'light',
     'dark',
   ];
 
-  public actionPanelDefaults: ActionPanelPublicApi & ActionPanelHelperControls = {
-    appearance: ActionPanelAppearance.FILLED,
+  public overlayPanelDefaults: OverlayPanelPublicApi & OverlayPanelHelperControls = {
+    appearance: OverlayPanelAppearance.FILLED,
     size: Size.COMFORTABLE,
-    variant: ActionPanelVariant.LIGHT,
+    variant: OverlayPanelVariant.LIGHT,
     testBackgroundColor: 'light',
   };
 
-  public actionPanelModel: ActionPanelPublicApi & ActionPanelHelperControls = { ...this.actionPanelDefaults };
+  public overlayPanelModel: OverlayPanelPublicApi & OverlayPanelHelperControls = { ...this.overlayPanelDefaults };
 
   public menuItemDefaults: MenuItemPublicApi & MenuItemHelperControls = {
-    appearance: ActionPanelAppearance.FILLED,
+    appearance: OverlayPanelAppearance.FILLED,
     size: Size.COMFORTABLE,
     variant: MenuItemVariant.SURFACE,
     hasLeadingIcon: true,
@@ -82,8 +84,8 @@ export class ActionMenuDemoComponent {
   // eslint-disable-next-line no-magic-numbers
   public items = Array(3);
 
-  public resetActionPanel(): void {
-    this.actionPanelModel = { ...this.actionPanelDefaults };
+  public resetOverlayPanel(): void {
+    this.overlayPanelModel = { ...this.overlayPanelDefaults };
   }
 
   public resetMenuItem(): void {

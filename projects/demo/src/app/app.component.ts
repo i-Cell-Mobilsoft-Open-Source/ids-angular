@@ -39,7 +39,6 @@ export class AppComponent implements OnInit, OnDestroy {
           children: [
             { name: 'COMPONENTS.ACCORDION', path: '/components/accordion' },
             { name: 'COMPONENTS.ACTION_MENU', path: '/components/action-menu' },
-            { name: 'COMPONENTS.ACTION_PANEL', path: '/components/action-panel' },
             { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
             { name: 'COMPONENTS.BUTTON', path: '/components/button' },
             { name: 'COMPONENTS.CARD', path: '/components/card' },
@@ -50,6 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
             { name: 'COMPONENTS.FORM_FIELD', path: '/components/form-field' },
             { name: 'COMPONENTS.ICON', path: '/components/icon' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
+            { name: 'COMPONENTS.OVERLAY_PANEL', path: '/components/overlay-panel' },
             { name: 'COMPONENTS.PAGINATOR', path: '/components/paginator' },
             { name: 'COMPONENTS.RADIO', path: '/components/radio' },
             { name: 'COMPONENTS.SEGMENTED_CONTROL', path: '/components/segmented-control' },

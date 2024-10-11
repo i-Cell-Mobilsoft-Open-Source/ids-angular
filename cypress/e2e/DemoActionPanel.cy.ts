@@ -2,7 +2,7 @@ import common = require('mocha/lib/interfaces/common');
 import actionPanelTestData from '../data/actionPanelTestData';
 
 beforeEach(() => {
-    cy.visit('/components/action-panel');
+    cy.visit('/components/overlay-panel');
 })
 
 describe('ids Action Item Button Demo test', () => {
@@ -20,10 +20,10 @@ describe('ids Action Item Button Demo test', () => {
         });
     });
 
-    it('Checks the height of Action Panel', () => {
+    it('Checks the height of Overlay Panel', () => {
         allCombinations.forEach((item) => {
             actionPanelTestData.allWidth.forEach((width) => {
-                const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
+                const actionPanelSelector = `ids-overlay-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
                 cy.get(actionPanelSelector).should('be.visible').should(($el) => {
                     expect($el).to.have.css('width', width[item.size]);
                 });
@@ -31,9 +31,9 @@ describe('ids Action Item Button Demo test', () => {
         });
     });
 
-    it('Checks common css rules of Action Panel', () => {
+    it('Checks common css rules of Overlay Panel', () => {
         allCombinations.forEach((item) => {
-            const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
+            const actionPanelSelector = `ids-overlay-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
             cy.get(actionPanelSelector).should('be.visible').should(($el) => {
                 const styles = window.getComputedStyle($el[0]);
                 expect(styles.display).to.equal(actionPanelTestData.display);
@@ -45,9 +45,9 @@ describe('ids Action Item Button Demo test', () => {
         });
     });
 
-    it('Checks the color of Action Panel', () => {
+    it('Checks the color of Overlay Panel', () => {
         allCombinations.forEach((item) => {
-            const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
+            const actionPanelSelector = `ids-overlay-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
             cy.get(actionPanelSelector).should('be.visible').should(($el) => {
                 const styles = window.getComputedStyle($el[0]);
                 expect(styles.backgroundColor).to.equal(actionPanelTestData.white);
@@ -56,9 +56,9 @@ describe('ids Action Item Button Demo test', () => {
         });
     });
 
-    it('Checks outline border color of Action Panel', () => {
+    it('Checks outline border color of Overlay Panel', () => {
         allCombinations.forEach((item) => {
-            const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
+            const actionPanelSelector = `ids-overlay-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
             if (item.appearance === 'elevated') {
                 cy.get(actionPanelSelector).click().should('be.visible').should(($el) => {
                     const styles = window.getComputedStyle($el[0]);
@@ -81,7 +81,7 @@ describe('ids Action Item Button Demo test', () => {
     it('Checks radius of Panel', () => {
         allCombinations.forEach((item) => {
             actionPanelTestData.allRadius.forEach((radius) => {
-                const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
+                const actionPanelSelector = `ids-overlay-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
                 cy.get(actionPanelSelector).should('be.visible').then(($el) => {
                     const styles = window.getComputedStyle($el[0]);
                     expect(styles.borderTopLeftRadius).to.equal(radius[item.size]);
@@ -93,10 +93,10 @@ describe('ids Action Item Button Demo test', () => {
         });
     });
 
-    it('Checks all padding of Action Panel', () => {
+    it('Checks all padding of Overlay Panel', () => {
         allCombinations.forEach((item) => {
             actionPanelTestData.allPadding.forEach((padding) => {
-                const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
+                const actionPanelSelector = `ids-overlay-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
                 cy.get(actionPanelSelector).should('be.visible').then(($el) => {
                     const styles = window.getComputedStyle($el[0]);
                     expect(styles.paddingTop).to.equal(padding[item.size]);
@@ -108,10 +108,10 @@ describe('ids Action Item Button Demo test', () => {
         });
     });
 
-    it('Checks all GAP of Action Panel', () => {
+    it('Checks all GAP of Overlay Panel', () => {
         allCombinations.forEach((item) => {
             actionPanelTestData.allGap.forEach((gap) => {
-                const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
+                const actionPanelSelector = `ids-overlay-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
                 cy.get(actionPanelSelector).should('be.visible').should(($el) => {
                     const styles = window.getComputedStyle($el[0]);
                     expect(styles.columnGap).to.equal(gap[item.size]);
@@ -121,9 +121,9 @@ describe('ids Action Item Button Demo test', () => {
         });
     });
 // BUG ticket => IDS-501
-    it('Checks box-shadow of Action Panel', () => {
+    it('Checks box-shadow of Overlay Panel', () => {
         allCombinations.forEach((item) => {
-            const actionPanelSelector = `ids-action-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
+            const actionPanelSelector = `ids-overlay-panel[ng-reflect-appearance="${item.appearance}"][ng-reflect-size="${item.size}"]`;
             if (item.appearance === 'filled') {
                 cy.get(actionPanelSelector).click().should('be.visible').should(($el) => {
                     const styles = window.getComputedStyle($el[0]);

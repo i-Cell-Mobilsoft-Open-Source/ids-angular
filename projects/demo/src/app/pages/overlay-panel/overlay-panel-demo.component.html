@@ -1,7 +1,7 @@
-<h1>{{ "COMPONENTS.ACTION_PANEL" | translate }}</h1>
+<h1>{{ "COMPONENTS.OVERLAY_PANEL" | translate }}</h1>
 
-<section class="component" [class]="actionPanelModel.testBackgroundColor !== 'light' ? 'light' : 'dark'">
-  <ids-action-panel [appearance]="actionPanelModel.appearance" [size]="actionPanelModel.size" [variant]="actionPanelModel.variant">
+<section class="component" [class]="overlayPanelModel.testBackgroundColor !== 'light' ? 'light' : 'dark'">
+  <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
     @for (_ of items; track $index) {
       <button
         type="button"
@@ -20,15 +20,15 @@
         }
       </button>
     }
-  </ids-action-panel>
+  </ids-overlay-panel>
 </section>
 
 <section class="controls">
   <table [cellPadding]="10">
     <caption>
       <div class="caption-group">
-        <span>Action panel controls</span>
-        <button type="button" idsButton (click)="resetActionPanel()">Reset</button>
+        <span>Overlay panel controls</span>
+        <button type="button" idsButton (click)="resetOverlayPanel()">Reset</button>
       </div>
     </caption>
 
@@ -45,14 +45,14 @@
     <tbody>
       <tr>
         <td>appearance</td>
-        <td>Action panel appearance.</td>
-        <td><code>ActionPanelAppearanceType</code></td>
+        <td>Overlay panel appearance.</td>
+        <td><code>OverlayPanelAppearanceType</code></td>
         <td>
-          <code>{{ actionPanelDefaults.appearance }}</code>
+          <code>{{ overlayPanelDefaults.appearance }}</code>
         </td>
         <td>
-          <select [(ngModel)]="actionPanelModel.appearance">
-            @for (item of actionPanelAappearances; track $index) {
+          <select [(ngModel)]="overlayPanelModel.appearance">
+            @for (item of overlayPanelAppearances; track $index) {
               <option [value]="item">{{ item }}</option>
             }
           </select>
@@ -60,13 +60,13 @@
       </tr>
       <tr>
         <td>size</td>
-        <td>Action panel size.</td>
+        <td>Overlay panel size.</td>
         <td><code>SizeType</code></td>
         <td>
-          <code>{{ actionPanelDefaults.size }}</code>
+          <code>{{ overlayPanelDefaults.size }}</code>
         </td>
         <td>
-          <select [(ngModel)]="actionPanelModel.size">
+          <select [(ngModel)]="overlayPanelModel.size">
             @for (item of sizes; track $index) {
               <option [value]="item">{{ item }}</option>
             }
@@ -75,14 +75,14 @@
       </tr>
       <tr>
         <td>variant</td>
-        <td>Action panel variant.</td>
-        <td><code>ActionPanelVariantType</code></td>
+        <td>Overlay panel variant.</td>
+        <td><code>OverlayPanelVariantType</code></td>
         <td>
-          <code>{{ actionPanelDefaults.variant }}</code>
+          <code>{{ overlayPanelDefaults.variant }}</code>
         </td>
         <td>
-          <select [(ngModel)]="actionPanelModel.variant">
-            @for (item of actionPanelVariants; track $index) {
+          <select [(ngModel)]="overlayPanelModel.variant">
+            @for (item of overlayPanelVariants; track $index) {
               <option [value]="item">{{ item }}</option>
             }
           </select>
@@ -93,7 +93,7 @@
 
   <table [cellPadding]="10">
     <caption>
-      Action panel helper controls
+      Overlay panel helper controls
     </caption>
 
     <thead>
@@ -111,8 +111,8 @@
         <td>Test background color</td>
         <td><code>light</code> | <code>dark</code></td>
         <td>
-          <select [(ngModel)]="actionPanelModel.testBackgroundColor">
-            @for (item of actionPanelBackgroundColors; track $index) {
+          <select [(ngModel)]="overlayPanelModel.testBackgroundColor">
+            @for (item of overlayPanelBackgroundColors; track $index) {
               <option [value]="item">{{ item }}</option>
             }
           </select>
@@ -149,7 +149,7 @@
         </td>
         <td>
           <select [(ngModel)]="menuItemModel.appearance">
-            @for (item of menuItemAappearances; track $index) {
+            @for (item of menuItemAppearances; track $index) {
               <option [value]="item">{{ item }}</option>
             }
           </select>

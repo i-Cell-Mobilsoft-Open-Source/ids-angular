@@ -30,7 +30,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   },
 })
 export class IdsIconButtonComponent {
-  /** @ignore */
   private readonly _componentClass = 'ids-icon-button';
 
   public appearance = input<IconButtonAppearanceType | null>(IconButtonAppearance.FILLED);
@@ -38,10 +37,8 @@ export class IdsIconButtonComponent {
   public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
-  /** @ignore */
   public icon = contentChildren(IdsIconComponent);
 
-  /** @ignore */
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       this.appearance(),

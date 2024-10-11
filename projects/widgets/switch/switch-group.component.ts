@@ -19,11 +19,8 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsSwitchGroupComponent {
-  /** @ignore **/
   private readonly _componentClass = 'ids-switch-group';
-  /** @ignore **/
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  /** @ignore **/
   private readonly _defaultConfig = {
     ...defaultConfig,
     ...inject(IDS_SWITCH_DEFAULT_CONFIG, { optional: true }),
@@ -35,10 +32,8 @@ export class IdsSwitchGroupComponent {
   public iconPosition = input(this._defaultConfig.iconPosition);
   public labelPosition = input(this._defaultConfig.labelPosition);
 
-  /** @ignore **/
   private _hostClasses = computed(() => createClassList(this._componentClass, [this.size()]));
 
-  /** @ignore **/
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
   }

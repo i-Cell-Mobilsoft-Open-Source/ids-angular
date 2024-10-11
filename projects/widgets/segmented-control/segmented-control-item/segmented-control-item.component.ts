@@ -18,19 +18,15 @@ let nextUniqueId = 0;
 export class IdsSegmentedControlItemComponent
   extends IdsSegmentedControlItemBase<IdsSegmentedControlDirective, IdsSegmentedControlItemChange>
   implements OnInit {
-  /** @ignore */
   protected readonly _componentClass = 'ids-segmented-control-item';
-  /** @ignore */
   protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
   public id = input<string>(this._uniqueId);
 
-  /** @ignore */
   protected _getParent(): IdsSegmentedControlDirective | null {
     return this.injector.get(IdsSegmentedControlDirective, null, { optional: true, skipSelf: true });
   }
 
-  /** @ignore */
   protected _createItemChangeEvent(): IdsSegmentedControlItemChange {
     return new IdsSegmentedControlItemChange(this, !this.selected(), this.value());
   }

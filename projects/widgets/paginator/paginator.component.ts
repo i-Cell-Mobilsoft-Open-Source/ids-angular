@@ -21,28 +21,19 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsPaginatorComponent implements OnDestroy {
-  /** @ignore */
   private readonly _componentClass = 'ids-paginator';
-  /** @ignore */
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  /** @ignore */
   private readonly _injector = inject(Injector);
-  /** @ignore */
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
-  /** @ignore */
   private readonly _hostElementRef = inject(ElementRef);
-  /** @ignore */
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...this._injector.get(IDS_PAGINATOR_DEFAULT_CONFIG, null, { optional: true }),
   };
 
-  /** @ignore */
   private _pageEventDebouncer = new Subject<PaginatorPageEvent>();
-  /** @ignore */
   private _pageEventDebouncerSubscription = new Subscription();
 
-  /** @ignore */
   public readonly intl = this._injector.get(IdsPaginatorIntl);
 
   public id = input<string>(this._uniqueId);
@@ -61,7 +52,6 @@ export class IdsPaginatorComponent implements OnDestroy {
   public disabled = input<boolean>(false);
   public compactLayout = input<boolean>(false);
 
-  /** @ignore */
   private _hostClasses = computed(() => createClassList(
     this._componentClass,
     [
@@ -71,18 +61,13 @@ export class IdsPaginatorComponent implements OnDestroy {
     ]),
   );
 
-  /** @ignore */
   public pageButtonClasses = computed(() => createClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
 
-  /** @ignore */
   private _intlChanges?: Subscription;
 
-  /** @ignore */
   public safePageSizeData = computed(() => this._getSafePageSizeData(this.pageSizeOptions(), this.pageSize()));
-  /** @ignore */
   public pageButtonIdPrefix = computed(() => `${this.id()}__page-button-`);
 
-  /** @ignore */
   @Input({ transform: numberAttribute })
   get pageIndex(): number {
     return this._pageIndex();
@@ -92,10 +77,8 @@ export class IdsPaginatorComponent implements OnDestroy {
     this._pageIndex.set(Math.max(value || 0, 0));
   }
 
-  /** @ignore */
   private _pageIndex = signal(0);
 
-  /** @ignore */
   private _getNumberOfPages = computed(() => {
     if (!this.pageSize()) {
       return 0;
@@ -103,23 +86,18 @@ export class IdsPaginatorComponent implements OnDestroy {
     return Math.ceil(this.length() / this.pageSize());
   });
 
-  /** @ignore */
   private _hasPreviousPage = computed(() =>
     this._pageIndex() >= 1 && this.pageSize() !== 0,
   );
 
-  /** @ignore */
   private _hasNextPage = computed(() => {
     const maxPageIndex = this._getNumberOfPages() - 1;
     return this._pageIndex() < maxPageIndex && this.pageSize() !== 0;
   });
 
-  /** @ignore */
   public isPreviousButtonDisabled = computed(() => this.disabled() || !this._hasPreviousPage());
-  /** @ignore */
   public isNextButtonDisabled = computed(() => this.disabled() || !this._hasNextPage());
 
-  /** @ignore */
   // eslint-disable-next-line arrow-body-style
   public pageButtonLabels = computed<string[]>(() => {
     return this.compactLayout()
@@ -127,20 +105,16 @@ export class IdsPaginatorComponent implements OnDestroy {
       : this._getPageButtonLabels(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
   });
 
-  /** @ignore */
   @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
 
-  /** @ignore */
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
   }
 
-  /** @ignore */
   @HostBinding('id') get hostId(): string {
     return this.id();
   }
 
-  /** @ignore */
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
     event.stopPropagation();
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
@@ -185,7 +159,6 @@ export class IdsPaginatorComponent implements OnDestroy {
     });
   }
 
-  /** @ignore */
   private _getSafePageSizeData(
     pageSizeOptions: number[],
     pageSize: number,
@@ -207,13 +180,11 @@ export class IdsPaginatorComponent implements OnDestroy {
     };
   }
 
-  /** @ignore */
   private _getPageButtonLabels(pageIndex: number, numberOfPages: number, showAllPages: boolean, maxDisplayedItemCount: number): string[] {
     const allPages = [...Array(numberOfPages).keys()].map((item) => (item + 1).toString());
     return showAllPages ? allPages : this._getTruncatedPageLabels(allPages, pageIndex, maxDisplayedItemCount);
   }
 
-  /** @ignore */
   private _getTruncatedPageLabels(
     allPages: string[],
     pageIndex: number,
@@ -263,7 +234,6 @@ export class IdsPaginatorComponent implements OnDestroy {
     return [];
   }
 
-  /** @ignore */
   public stepNextPage(): void {
     if (!this._hasNextPage()) {
       return;
@@ -271,7 +241,6 @@ export class IdsPaginatorComponent implements OnDestroy {
     this.stepPage(this._pageIndex() + 1);
   }
 
-  /** @ignore */
   public stepPreviousPage(): void {
     if (!this._hasPreviousPage()) {
       return;
@@ -279,7 +248,6 @@ export class IdsPaginatorComponent implements OnDestroy {
     this.stepPage(this._pageIndex() - 1);
   }
 
-  /** @ignore */
   public stepFirstPage(): void {
     if (!this._hasPreviousPage()) {
       return;
@@ -287,7 +255,6 @@ export class IdsPaginatorComponent implements OnDestroy {
     this.stepPage(0);
   }
 
-  /** @ignore */
   public stepLastPage(): void {
     if (!this._hasNextPage()) {
       return;
@@ -295,14 +262,12 @@ export class IdsPaginatorComponent implements OnDestroy {
     this.stepPage(this._getNumberOfPages() - 1);
   }
 
-  /** @ignore */
   public stepPage(pageIndex: number): void {
     const previousPageIndex = this._pageIndex();
     this._pageIndex.set(pageIndex);
     this._debouncePageEvent(previousPageIndex, pageIndex);
   }
 
-  /** @ignore */
   private _debouncePageEvent(previousPageIndex: number, pageIndex: number): void {
     this._pageEventDebouncer.next({
       previousPageIndex,
@@ -312,7 +277,6 @@ export class IdsPaginatorComponent implements OnDestroy {
     });
   }
 
-  /** @ignore */
   public ngOnDestroy(): void {
     this._intlChanges?.unsubscribe();
     this._pageEventDebouncerSubscription.unsubscribe();

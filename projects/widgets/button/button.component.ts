@@ -29,7 +29,6 @@ import {
   },
 })
 export class IdsButtonComponent {
-  /** @ignore */
   private readonly _componentClass = 'ids-button';
 
   public appearance = input<ButtonAppearanceType | null>(
@@ -42,12 +41,9 @@ export class IdsButtonComponent {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
-  /** @ignore */
   public iconLeading = contentChildren<unknown>('[icon-leading]');
-  /** @ignore */
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
-  /** @ignore */
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       this.appearance(),

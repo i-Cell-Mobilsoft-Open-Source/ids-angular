@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AccordionAppearance, AccordionAppearanceType, IdsAccordionComponent } from '@i-cell/ids-angular/accordion';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { AccordionAppearance, AccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
+import { ButtonAppearance, ButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { AllVariants, AllVariantsType, Size, SizeType } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 type AccordionPublicApi = {
@@ -10,6 +10,14 @@ type AccordionPublicApi = {
   appearance: AccordionAppearanceType,
   summary: string,
   disabled: boolean,
+  multi: boolean,
+  btnSize: SizeType,
+  btnAppearance: ButtonAppearanceType,
+  btnVariant: AllVariantsType,
+  expandBtnLabel: string,
+  collapseBtnLabel: string,
+  hasLeadingIcon: boolean,
+  hasTrailingIcon: boolean,
 };
 
 @Component({
@@ -17,6 +25,7 @@ type AccordionPublicApi = {
   standalone: true,
   imports: [
     IdsAccordionComponent,
+    IdsAccordionItemComponent,
     TranslateModule,
     FormsModule,
     IdsButtonComponent,
@@ -29,13 +38,23 @@ type AccordionPublicApi = {
 })
 export class AccordionDemoComponent {
   public appearances = Object.values(AccordionAppearance) as AccordionAppearanceType[];
+  public btnAppearances = Object.values(ButtonAppearance) as ButtonAppearanceType[];
   public sizes = Object.values(Size) as SizeType[];
+  public variants = Object.values(AllVariants) as AllVariantsType[];
 
   public defaults: AccordionPublicApi = {
-    appearance: AccordionAppearance.TEXT,
+    appearance: AccordionAppearance.FILLED,
     size: Size.COMFORTABLE,
     summary: 'Summary text',
     disabled: false,
+    multi: false,
+    btnSize: Size.COMPACT,
+    btnAppearance: ButtonAppearance.FILLED,
+    btnVariant: AllVariants.SURFACE,
+    expandBtnLabel: 'Expand all',
+    collapseBtnLabel: 'Collapse all',
+    hasLeadingIcon: false,
+    hasTrailingIcon: true,
   };
   
   public model: AccordionPublicApi = { ...this.defaults };

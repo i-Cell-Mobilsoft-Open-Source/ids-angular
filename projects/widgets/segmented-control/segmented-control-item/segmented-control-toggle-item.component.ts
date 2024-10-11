@@ -18,19 +18,15 @@ let nextUniqueId = 0;
 export class IdsSegmentedControlToggleItemComponent
   extends IdsSegmentedControlItemBase<IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemChange>
   implements OnInit {
-  /** @ignore **/
   protected readonly _componentClass = 'ids-segmented-control-toggle-item';
-  /** @ignore **/
   protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
 
   public id = input<string>(this._uniqueId);
 
-  /** @ignore **/
   protected _getParent(): IdsSegmentedControlToggleDirective | null {
     return this.injector.get(IdsSegmentedControlToggleDirective, null, { optional: true, skipSelf: true });
   }
 
-  /** @ignore **/
   protected _createItemChangeEvent(): IdsSegmentedControlToggleItemChange {
     return new IdsSegmentedControlToggleItemChange(this, this.value());
   }

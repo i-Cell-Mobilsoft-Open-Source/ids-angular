@@ -1,20 +1,24 @@
-import { OverlayPanelAppearance, OverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
-import { OverlayPanelVariant, OverlayPanelVariantType } from './types/overlay-panel-variant.type';
+import { IDS_OVERLAY_PANEL_DEFAULT_CONFIG, IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY, IdsOverlayPanelDefaultConfig } from './overlay-panel-defaults';
+import { OverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
+import { OverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
   Component,
+  InjectionToken,
   ViewEncapsulation,
   computed,
   contentChildren,
+  inject,
   input,
 } from '@angular/core';
 import {
   createClassList,
-  Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
+
+const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-overlay-panel,div[idsOverlayPanel]',
@@ -33,12 +37,12 @@ import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
 export class IdsOverlayPanelComponent {
   private readonly _componentClass = 'ids-overlay-panel';
 
-  public appearance = input<OverlayPanelAppearanceType | null>(
-    OverlayPanelAppearance.FILLED,
-  );
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
-  public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<OverlayPanelVariantType | null>(OverlayPanelVariant.LIGHT);
+  public appearance = input<OverlayPanelAppearanceType | null>(this._defaultConfig.appearance);
+
+  public size = input<SizeType | null>(this._defaultConfig.size);
+  public variant = input<OverlayPanelVariantType | null>(this._defaultConfig.variant);
 
   public actionItems = contentChildren(IdsMenuItemComponent);
 
@@ -48,4 +52,12 @@ export class IdsOverlayPanelComponent {
     this.variant(),
   ]),
   );
+
+  // eslint-disable-next-line @stylistic/js/max-len
+  protected _getDefaultConfig(defaultConfig: Required<IdsOverlayPanelDefaultConfig>, injectionToken: InjectionToken<IdsOverlayPanelDefaultConfig>): Required<IdsOverlayPanelDefaultConfig> {
+    return {
+      ...defaultConfig,
+      ...inject(injectionToken, { optional: true }),
+    };
+  }
 }

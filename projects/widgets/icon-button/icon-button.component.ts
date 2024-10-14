@@ -1,21 +1,24 @@
-import { IconButtonAppearance, IconButtonAppearanceType } from './types/icon-button-appearance';
+import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonDefaultConfig } from './icon-button-defaults';
+import { IconButtonAppearanceType } from './types/icon-button-appearance';
 
 import {
   Component,
+  InjectionToken,
   ViewEncapsulation,
   computed,
   contentChildren,
+  inject,
   input,
 } from '@angular/core';
 import {
-  AllVariants,
   AllVariantsType,
-  Size,
   SizeType,
   coerceBooleanAttribute,
   createClassList,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+
+const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'button[idsIconButton]',
@@ -32,9 +35,11 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 export class IdsIconButtonComponent {
   private readonly _componentClass = 'ids-icon-button';
 
-  public appearance = input<IconButtonAppearanceType | null>(IconButtonAppearance.FILLED);
-  public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_BUTTON_DEFAULT_CONFIG);
+
+  public appearance = input<IconButtonAppearanceType | null>(this._defaultConfig.appearance);
+  public size = input<SizeType | null>(this._defaultConfig.size);
+  public variant = input<AllVariantsType | null>(this._defaultConfig.variant);
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
   public icon = contentChildren(IdsIconComponent);
@@ -46,4 +51,12 @@ export class IdsIconButtonComponent {
       this.variant(),
     ]),
   );
+
+  // eslint-disable-next-line @stylistic/js/max-len
+  protected _getDefaultConfig(defaultConfig: Required<IdsIconButtonDefaultConfig>, injectionToken: InjectionToken<IdsIconButtonDefaultConfig>): Required<IdsIconButtonDefaultConfig> {
+    return {
+      ...defaultConfig,
+      ...inject(injectionToken, { optional: true }),
+    };
+  }
 }

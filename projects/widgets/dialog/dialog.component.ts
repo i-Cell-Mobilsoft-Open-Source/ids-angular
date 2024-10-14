@@ -1,9 +1,11 @@
+import { IDS_DIALOG_DEFAULT_CONFIG, IDS_DIALOG_DEFAULT_CONFIG_FACTORY, IdsDialogDefaultConfig } from './dialog-defaults';
 import { IdsDialogHeaderDirective } from './dialog-header.directive';
 
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ElementRef,
+  InjectionToken,
   ViewEncapsulation,
   computed,
   contentChild,
@@ -13,13 +15,13 @@ import {
 import {
   createClassList,
   IdsDetectScrollableDirective,
-  Size,
   SizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
 let uniqueIdCounter = 0;
+const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'dialog[idsDialog]',
@@ -43,9 +45,11 @@ export class IdsDialogComponent {
   private readonly _componentClass = 'ids-dialog';
   public readonly dialogTitleId = `ids-dialog-title-${uniqueIdCounter++}`;
 
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIALOG_DEFAULT_CONFIG);
+
   public dialog = inject(ElementRef).nativeElement as HTMLDialogElement;
 
-  public size = input<SizeType | null>(Size.COMFORTABLE);
+  public size = input<SizeType | null>(this._defaultConfig.size);
   public mainTitle = input.required<string>();
   public subTitle = input<string>();
   public showCloseButton = input<boolean>(false);
@@ -70,5 +74,13 @@ export class IdsDialogComponent {
 
   public close(): void {
     this.dialog.close();
+  }
+
+  // eslint-disable-next-line @stylistic/js/max-len
+  protected _getDefaultConfig(defaultConfig: Required<IdsDialogDefaultConfig>, injectionToken: InjectionToken<IdsDialogDefaultConfig>): Required<IdsDialogDefaultConfig> {
+    return {
+      ...defaultConfig,
+      ...inject(injectionToken, { optional: true }),
+    };
   }
 }

@@ -13,7 +13,6 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
   standalone: true,
   imports: [IdsCheckboxComponent],
   templateUrl: './checkbox-group.component.html',
-  styleUrl: 'checkbox-group.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

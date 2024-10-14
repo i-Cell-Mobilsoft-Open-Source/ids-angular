@@ -1,34 +1,60 @@
 <h1>{{ "COMPONENTS.CHECKBOX" | translate }}</h1>
 
 <section class="component" [class]="model.variant">
-  <form [formGroup]="form">
-    <ul class="checkbox-group">
-      <li>
-        <ids-checkbox formControlName="unselected" [size]="model.size" [variant]="model.variant" [readonly]="model.readonly">
-          {{ model.label }}
-          <ids-hint-message>{{ model.hintMessage }}</ids-hint-message>
-        </ids-checkbox>
-      </li>
-      <li>
-        <ids-checkbox
-          formControlName="indeterminate"
-          [size]="model.size"
-          [variant]="model.variant"
-          [readonly]="model.readonly"
-          [indeterminate]="true"
-        >
-          {{ model.label }}
-          <ids-hint-message>{{ model.hintMessage }}</ids-hint-message>
-        </ids-checkbox>
-      </li>
-      <li>
-        <ids-checkbox formControlName="selected" [size]="model.size" [variant]="model.variant" [readonly]="model.readonly">
-          {{ model.label }}
-          <ids-hint-message>{{ model.hintMessage }}</ids-hint-message>
-        </ids-checkbox>
-      </li>
-    </ul>
-  </form>
+  <div class="checkbox-demo-group">
+    <form [formGroup]="form">
+      <h2>Items</h2>
+      <ul class="checkbox-group">
+        <li>
+          <ids-checkbox formControlName="unselected" [size]="model.size" [variant]="model.variant" [readonly]="model.readonly">
+            {{ model.label }}
+            @if (model.allowHint) {
+              <ids-hint-message>{{ model.hintMessage }}</ids-hint-message>
+            }
+          </ids-checkbox>
+        </li>
+        <li>
+          <ids-checkbox
+            formControlName="indeterminate"
+            [size]="model.size"
+            [variant]="model.variant"
+            [readonly]="model.readonly"
+            [indeterminate]="true"
+          >
+            {{ model.label }}
+            @if (model.allowHint) {
+              <ids-hint-message>{{ model.hintMessage }}</ids-hint-message>
+            }
+          </ids-checkbox>
+        </li>
+        <li>
+          <ids-checkbox formControlName="selected" [size]="model.size" [variant]="model.variant" [readonly]="model.readonly">
+            {{ model.label }}
+            @if (model.allowHint) {
+              <ids-hint-message>{{ model.hintMessage }}</ids-hint-message>
+            }
+          </ids-checkbox>
+        </li>
+      </ul>
+    </form>
+
+    <form [formGroup]="radioGroupForm">
+      <h2>Group</h2>
+      <ids-checkbox-group
+        [label]="groupModel.groupLabel"
+        [allowParent]="groupModel.allowParent"
+        [parentLabel]="groupModel.parentLabel"
+        [name]="groupModel.name"
+        [size]="groupModel.size"
+        [variant]="groupModel.variant"
+        [orientation]="groupModel.orientation"
+      >
+        <ids-checkbox formControlName="toothBrushing">Tooth brushing</ids-checkbox>
+        <ids-checkbox formControlName="bath">Bath</ids-checkbox>
+        <ids-checkbox formControlName="sleep">Sleep</ids-checkbox>
+      </ids-checkbox-group>
+    </form>
+  </div>
 </section>
 
 <section class="controls">
@@ -115,6 +141,12 @@
         <td><input type="text" name="label" [(ngModel)]="model.label" /></td>
       </tr>
       <tr>
+        <td>allowHint</td>
+        <td>Allow hint message</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="allowHint" [(ngModel)]="model.allowHint" /></td>
+      </tr>
+      <tr>
         <td>hintMessage</td>
         <td>Hint message</td>
         <td><code>string</code></td>
@@ -143,6 +175,102 @@
             [(ngModel)]="model.hasRequiredValidator"
             (ngModelChange)="setRequiredValidator($event)"
           />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      Group controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>label</td>
+        <td>Checkbox group's label.</td>
+        <td><code>string</code></td>
+        <td><code>-</code></td>
+        <td><input type="text" name="groupLabel" [(ngModel)]="groupModel.groupLabel" /></td>
+      </tr>
+      <tr>
+        <td>allowLabel</td>
+        <td>Whether to allow parent checkbox or not.</td>
+        <td><code>boolean</code></td>
+        <td>
+          <code>{{ groupDefaults.allowParent }}</code>
+        </td>
+        <td><input type="checkbox" name="allowParent" [(ngModel)]="groupModel.allowParent" /></td>
+      </tr>
+      <tr>
+        <td>parentLabel</td>
+        <td>Parent checkbox label.</td>
+        <td><code>string</code></td>
+        <td><code>-</code></td>
+        <td><input type="text" name="parentLabel" [(ngModel)]="groupModel.parentLabel" /></td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>Name of checkboxes.</td>
+        <td><code>string</code></td>
+        <td><code>-</code></td>
+        <td><input type="text" name="name" [(ngModel)]="groupModel.name" /></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Checkbox group size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ groupDefaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="groupModel.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Checkbox group variant.</td>
+        <td><code>CheckboxVariantType</code></td>
+        <td>
+          <code>{{ groupDefaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="groupModel.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>orientation</td>
+        <td>Checkbox group orientation.</td>
+        <td><code>OrientationType</code></td>
+        <td>
+          <code>{{ groupDefaults.orientation }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="groupModel.orientation">
+            @for (item of orientations; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
         </td>
       </tr>
     </tbody>

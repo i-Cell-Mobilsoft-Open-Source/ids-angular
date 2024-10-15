@@ -42,9 +42,9 @@ export class IdsIconComponent implements OnInit {
   private readonly _sanitizer = inject(DomSanitizer);
   
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public sizeCollection = input<SizeCollectionType | null>(this._defaultConfig.sizeCollection);
-  public variant = input<IconVariantType | null>(this._defaultConfig.variant);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public sizeCollection = input<SizeCollectionType>(this._defaultConfig.sizeCollection);
+  public variant = input<IconVariantType>(this._defaultConfig.variant);
   public fontIcon = input<string | null, string>(null, { transform: coerceStringAttribute });
   public svgIconName = input<string | null, string>(null, { alias: 'svgIcon', transform: coerceStringAttribute });
   public ariaHidden = input<boolean, unknown>(true, { alias: 'aria-hidden', transform: coerceBooleanAttribute });

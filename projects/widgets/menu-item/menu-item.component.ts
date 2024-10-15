@@ -1,10 +1,12 @@
-import { MenuItemAppearance, MenuItemAppearanceType } from './types/menu-item-appearance.type';
-import { MenuItemVariant, MenuItemVariantType } from './types/menu-item-variant.type';
+import { IDS_MENU_ITEM_DEFAULT_CONFIG, IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY, IdsMenuItemDefaultConfig } from './menu-item-defaults';
+import { MenuItemAppearanceType } from './types/menu-item-appearance.type';
+import { MenuItemVariantType } from './types/menu-item-variant.type';
 
 import { CdkMenuItem } from '@angular/cdk/menu';
 import {
   Component,
   ElementRef,
+  InjectionToken,
   ViewEncapsulation,
   computed,
   contentChildren,
@@ -12,11 +14,12 @@ import {
   input,
 } from '@angular/core';
 import {
-  Size,
   SizeType,
   coerceBooleanAttribute,
   createClassList,
 } from '@i-cell/ids-angular/core';
+
+const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'button[idsMenuItem],a[idsMenuItem]',
@@ -37,13 +40,13 @@ export class IdsMenuItemComponent {
 
   private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>).nativeElement;
 
-  public label = input.required<string>();
-  public appearance = input<MenuItemAppearanceType | null>(
-    MenuItemAppearance.TEXT,
-  );
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_MENU_ITEM_DEFAULT_CONFIG);
 
-  public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<MenuItemVariantType | null>(MenuItemVariant.SURFACE);
+  public label = input.required<string>();
+  public appearance = input<MenuItemAppearanceType>(this._defaultConfig.appearance);
+
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<MenuItemVariantType>(this._defaultConfig.variant);
   public active = input(false);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
@@ -63,5 +66,13 @@ export class IdsMenuItemComponent {
 
   public get buttonType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
+  }
+
+  // eslint-disable-next-line @stylistic/js/max-len
+  protected _getDefaultConfig(defaultConfig: Required<IdsMenuItemDefaultConfig>, injectionToken: InjectionToken<IdsMenuItemDefaultConfig>): Required<IdsMenuItemDefaultConfig> {
+    return {
+      ...defaultConfig,
+      ...inject(injectionToken, { optional: true }),
+    };
   }
 }

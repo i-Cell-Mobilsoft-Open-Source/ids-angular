@@ -30,9 +30,9 @@ export class IdsAvatarComponent extends ComponentBaseWithDefaults<IdsAvatarDefau
   private _imageChild = contentChild(IdsAvatarImageDirective);
 
   public initials = input<string | null>(null);
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public sizeCollection = input<SizeCollectionType | null>(this._defaultConfig.sizeCollection);
-  public variant = input<AvatarVariantType | null>(this._defaultConfig.variant);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public sizeCollection = input<SizeCollectionType>(this._defaultConfig.sizeCollection);
+  public variant = input<AvatarVariantType>(this._defaultConfig.variant);
 
   private _implicitAvatarType = computed(() => {
     if (this._iconChild() && !this._imageChild()) {

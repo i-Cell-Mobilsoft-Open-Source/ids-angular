@@ -21,8 +21,8 @@ export class IdsFieldsetComponent extends ComponentBaseWithDefaults<IdsFieldsetD
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_FIELDSET_DEFAULT_CONFIG);
 
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<FormFieldVariantType | null>(this._defaultConfig.variant);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<FormFieldVariantType>(this._defaultConfig.variant);
   public legend = input<string>('');
   protected _legendClass = `${this._componentClass}-legend`;
   protected _messageClass = `${this._componentClass}-message`;

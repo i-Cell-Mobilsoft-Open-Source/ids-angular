@@ -55,9 +55,9 @@ export class IdsSwitchComponent {
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
-  public size = input<SizeType | null>(this._defaultConfig.size);
+  public size = input<SizeType>(this._defaultConfig.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
-  public variant = input<SwitchVariantType | null>(this._defaultConfig.variant);
+  public variant = input<SwitchVariantType>(this._defaultConfig.variant);
   public hasIcon = input(this._defaultConfig.hasIcon);
   public iconPosition = input(this._defaultConfig.iconPosition);
   public labelPosition = input(this._defaultConfig.labelPosition);

@@ -40,7 +40,7 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _defaultConfig = {
     ...defaultConfig,
-    ...this._injector.get(IDS_CHECKBOX_DEFAULT_CONFIG, null, { optional: true }),
+    ...inject(IDS_CHECKBOX_DEFAULT_CONFIG, { optional: true }),
   };
 
   private _checkboxGroup = inject(IdsCheckboxGroupComponent, { optional: true });

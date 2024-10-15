@@ -1,7 +1,7 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
 import { RadioChangeEvent } from '../types/radio-events';
 
-import { Component, computed, ElementRef, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, computed, ElementRef, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, runInInjectionContext, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
@@ -49,7 +49,10 @@ export class IdsRadioItemComponent implements OnInit {
   }
 
   constructor() {
-    const parent = this.injector.get(IdsRadioGroupDirective, null, { optional: true, skipSelf: true });
+    let parent;
+    runInInjectionContext(this.injector, () => {
+      parent = inject(IdsRadioGroupDirective, { optional: true, skipSelf: true });
+    });
     if (!parent) {
       throw new Error(createComponentError(this._componentClass, 'component must be direct child of a radio group'));
     }

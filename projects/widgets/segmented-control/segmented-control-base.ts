@@ -5,7 +5,7 @@ import { SegmentedControlAppearanceType } from './types/segmented-control-appear
 import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change';
 import { SegmentedControlVariantType } from './types/segmented-control-variant';
 
-import { AfterContentInit, computed, Directive, EventEmitter, HostBinding, HostListener, inject, Injector, Input, input, InputSignal, isDevMode, OnDestroy, OnInit, Output, Signal, signal } from '@angular/core';
+import { AfterContentInit, computed, Directive, EventEmitter, HostBinding, HostListener, inject, Input, input, InputSignal, isDevMode, OnDestroy, OnInit, Output, Signal, signal } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { createClassList, createComponentError, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
@@ -20,10 +20,9 @@ export abstract class IdsSegmentedControlBase<I extends SegmentedControlItem, E 
 implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   protected abstract readonly _componentClass: string;
   protected abstract readonly _uniqueId: string;
-  private readonly _injector = inject(Injector);
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, null, { optional: true }),
+    ...inject(IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, { optional: true }),
   };
 
   private readonly _subscription = new Subscription();

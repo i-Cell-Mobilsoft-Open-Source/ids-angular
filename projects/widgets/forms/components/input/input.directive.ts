@@ -6,7 +6,7 @@ import { AbstractSuccessStateMatcher, SuccessStateTracker } from '../../common/s
 import { formFieldControlClass, IdsFormFieldControl } from '../form-field/form-field-control';
 import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-tokens';
 
-import { computed, Directive, effect, ElementRef, HostBinding, inject, Injector, input, isDevMode, DoCheck, signal, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { computed, Directive, effect, ElementRef, HostBinding, inject, input, isDevMode, DoCheck, signal, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 import { Subject, takeUntil } from 'rxjs';
@@ -50,19 +50,18 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
 export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, OnDestroy {
   private readonly _componentClass = 'ids-input';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private readonly _injector = inject(Injector);
   private readonly _elementRef = inject<ElementRef<HTMLInputElement> | ElementRef<HTMLTextAreaElement>>(ElementRef);
-  private readonly _parentFormGroup = this._injector.get(FormGroupDirective, null, { optional: true });
-  private readonly _parentForm = this._injector.get(NgForm, null, { optional: true });
+  private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
+  private readonly _parentForm = inject(NgForm, { optional: true });
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_INPUT_DEFAULT_CONFIG, null, { optional: true }),
+    ...inject(IDS_INPUT_DEFAULT_CONFIG, { optional: true }),
   };
 
   public readonly errorStateChanges = new Subject<void>();
   public readonly successStateChanges = new Subject<void>();
   private readonly _destroyed = new Subject<void>();
-  public readonly ngControl = this._injector.get(NgControl, null, { optional: true });
+  public readonly ngControl = inject(NgControl, { optional: true });
 
   private _focused = false;
   private _errorStateTracker?: ErrorStateTracker;

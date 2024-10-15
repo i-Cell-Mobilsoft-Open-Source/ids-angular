@@ -8,7 +8,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, HostBinding, inject, Injector, input, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, HostBinding, inject, input, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
 import { coerceStringAttribute, createClassList, SizeType, WindowResizeService } from '@i-cell/ids-angular/core';
 import { filter, Subject, takeUntil } from 'rxjs';
 
@@ -21,7 +21,6 @@ const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true }
 })
 export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private readonly _componentClass = 'ids-tooltip-trigger';
-  private readonly _injector = inject(Injector);
   private readonly _focusMonitor = inject(FocusMonitor);
   private readonly _platform = inject(Platform);
   private readonly _ngZone = inject(NgZone);
@@ -32,7 +31,7 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private _globalResizeService = inject(WindowResizeService);
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_TOOLTIP_DEFAULT_CONFIG, null, { optional: true }),
+    ...inject(IDS_TOOLTIP_DEFAULT_CONFIG, { optional: true }),
   };
 
   private readonly _passiveListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];

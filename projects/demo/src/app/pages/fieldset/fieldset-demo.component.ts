@@ -49,8 +49,8 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class FieldsetDemoComponent {
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(FormFieldVariant) as FormFieldVariantType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<FormFieldVariantType>(FormFieldVariant);
 
   public defaults: FieldsetPublicApi & FieldsetHelperControls = {
     size: defaultConfig.size,

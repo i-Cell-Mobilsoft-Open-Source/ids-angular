@@ -44,9 +44,9 @@ export class DividerDemoComponent {
   };
 
   public model: DividerPublicApi = { ...this.defaults  };
-  public orientations = Object.values(Orientation) as OrientationType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public orientations = Object.values<OrientationType>(Orientation);
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<AllVariantsType>(AllVariants);
 
   public reset(): void {
     this.model = { ...this.defaults };

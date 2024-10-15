@@ -37,10 +37,10 @@ type AccordionPublicApi = {
   ],
 })
 export class AccordionDemoComponent {
-  public appearances = Object.values(AccordionAppearance) as AccordionAppearanceType[];
-  public btnAppearances = Object.values(ButtonAppearance) as ButtonAppearanceType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public appearances = Object.values<AccordionAppearanceType>(AccordionAppearance);
+  public btnAppearances = Object.values<ButtonAppearanceType>(ButtonAppearance);
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<AllVariantsType>(AllVariants);
 
   public defaults: AccordionPublicApi = {
     appearance: AccordionAppearance.FILLED,

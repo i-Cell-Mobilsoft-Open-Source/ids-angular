@@ -50,9 +50,9 @@ export class TooltipDemoComponent {
 
   public model: TooltipPublicApi = { ...this.defaults  };
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(TooltipVariant) as TooltipVariantType[];
-  public positions = Object.values(TooltipPosition) as TooltipPositionType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<TooltipVariantType>(TooltipVariant);
+  public positions = Object.values<TooltipPositionType>(TooltipPosition);
   public touchGestures: TooltipTouchGestures[] = [
     'auto',
     'on',

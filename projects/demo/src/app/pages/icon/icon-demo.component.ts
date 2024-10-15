@@ -46,9 +46,9 @@ export class IconDemoComponent {
 
   public model: IconPublicApi = { ...this.defaults  };
   
-  public sizes = Object.values(Size) as SizeType[];
-  public sizeCollections = Object.values(SizeCollection) as SizeCollectionType[];
-  public variants = Object.values(IconVariant) as IconVariantType[];
+  public sizes = Object.values<SizeType>(Size);
+  public sizeCollections = Object.values<SizeCollectionType>(SizeCollection);
+  public variants = Object.values<IconVariantType>(IconVariant);
 
   public sourceType = IconSource;
 

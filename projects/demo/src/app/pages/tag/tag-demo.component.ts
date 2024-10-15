@@ -51,10 +51,10 @@ export class TagDemoComponent {
   
   public model: TagPublicApi & TagHelperControls = { ...this.defaults };
 
-  public appearances = Object.values(TagAppearance) as TagAppearanceType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public appearances = Object.values<TagAppearanceType>(TagAppearance);
+  public sizes = Object.values<SizeType>(Size);
+  public baseVariants = Object.values<BrandVariantType>(BrandVariant);
+  public variants = Object.values<AllVariantsType>(AllVariants);
 
   public onClick(tagName: string): void {
     // eslint-disable-next-line no-console

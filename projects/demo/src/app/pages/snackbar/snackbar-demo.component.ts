@@ -59,9 +59,9 @@ export class SnackbarDemoComponent implements OnInit {
 
   public model: SnackbarPublicApi & SnackbarHelperControls = { ...this.defaults };
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(SnackbarVariant) as SnackbarVariantType[];
-  public positions = Object.values(SnackbarPosition) as SnackbarPositionType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<SnackbarVariantType>(SnackbarVariant);
+  public positions = Object.values<SnackbarPositionType>(SnackbarPosition);
 
   private readonly _snackbarService = inject(IdsSnackbarService);
   private readonly _viewContainerRef = inject(ViewContainerRef);

@@ -44,9 +44,9 @@ export class IconButtonDemoComponent {
 
   public model: IconButtonPublicApi = { ...this.defaults  };
   
-  public appearances = Object.values(IconButtonAppearance) as IconButtonAppearanceType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public appearances = Object.values<IconButtonAppearanceType>(IconButtonAppearance);
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<AllVariantsType>(AllVariants);
 
   public onClick(buttonName: string): void {
     console.info(`${buttonName} icon button clicked`);

@@ -57,9 +57,9 @@ export class SegmentedControlToggleDemoComponent {
 
   public value = undefined;
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(SegmentedControlVariant) as SegmentedControlVariantType[];
-  public appearances = Object.values(SegmentedControlAppearance) as SegmentedControlAppearanceType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<SegmentedControlVariantType>(SegmentedControlVariant);
+  public appearances = Object.values<SegmentedControlAppearanceType>(SegmentedControlAppearance);
   
   public reset(): void {
     this.value = undefined;

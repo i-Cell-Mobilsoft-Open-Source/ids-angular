@@ -53,10 +53,10 @@ type CardHelperControls = {
   ],
 })
 export class CardDemoComponent {
-  public appearances = Object.values(CardAppearance) as CardAppearanceType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
-  public orientations = Object.values(Orientation) as OrientationType[];
+  public appearances = Object.values<CardAppearanceType>(CardAppearance);
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<AllVariantsType>(AllVariants);
+  public orientations = Object.values<OrientationType>(Orientation);
 
   public defaults: CardPublicApi & CardHelperControls = {
     appearance: CardAppearance.FILLED,

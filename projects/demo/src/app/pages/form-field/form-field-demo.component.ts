@@ -67,8 +67,8 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class FormFieldDemoComponent implements OnInit {
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(FormFieldVariant) as FormFieldVariantType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<FormFieldVariantType>(FormFieldVariant);
 
   public formFieldDefaults: FormFieldPublicApi & FormFieldHelperControls = {
     size: defaultConfig.size,

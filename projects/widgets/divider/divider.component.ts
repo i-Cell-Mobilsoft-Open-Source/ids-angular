@@ -38,8 +38,8 @@ export class IdsDividerComponent {
   public orientation = input<OrientationType | null>(this._defaultConfig.orientation);
   public size = input<SizeType | null>(this._defaultConfig.size);
   public variant = input<AllVariantsType | null>(this._defaultConfig.variant);
-  public width = input<string | null>('100%');
-  public height = input<string | null>('100%');
+  public width = input<string | null>(this._defaultConfig.width);
+  public height = input<string | null>(this._defaultConfig.height);
   private _safeWidth = computed(() => (this.orientation() === Orientation.HORIZONTAL ? this.width() : null));
   private _safeHeight = computed(() => (this.orientation() === Orientation.VERTICAL ? this.height() : null));
 

@@ -52,8 +52,8 @@ export class IdsDialogComponent {
   public size = input<SizeType | null>(this._defaultConfig.size);
   public mainTitle = input.required<string>();
   public subTitle = input<string>();
-  public showCloseButton = input<boolean>(false);
-  public showBackdrop = input<boolean>(true);
+  public showCloseButton = input<boolean>(this._defaultConfig.showCloseButton);
+  public showBackdrop = input<boolean>(this._defaultConfig.showBackdrop);
 
   public customHeader = contentChild(IdsDialogHeaderDirective);
 

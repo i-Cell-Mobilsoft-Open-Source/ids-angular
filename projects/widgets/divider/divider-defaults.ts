@@ -5,6 +5,8 @@ export interface IdsDividerDefaultConfig {
   size?: SizeType,
   variant?: AllVariantsType,
   orientation?: OrientationType,
+  width?: string,
+  height?: string,
 }
 
 export const IDS_DIVIDER_DEFAULT_CONFIG = new InjectionToken<IdsDividerDefaultConfig>(
@@ -20,6 +22,8 @@ export function IDS_DIVIDER_DEFAULT_CONFIG_FACTORY(): Required<IdsDividerDefault
     size: Size.COMFORTABLE,
     variant: AllVariants.PRIMARY,
     orientation: Orientation.HORIZONTAL,
+    width: '100%',
+    height: '100%',
   };
 }
 

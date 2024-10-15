@@ -16,6 +16,7 @@ export * from './components/message/error-message/error-message.component';
 export * from './components/message/hint-message/hint-message.component';
 export * from './components/message/success-message/success-message.component';
 export * from './components/message/types/message';
+export * from './components/message/message-defaults';
 export * from './components/option/option-events';
 export * from './components/option/option-group.component';
 export * from './components/option/option-parent';

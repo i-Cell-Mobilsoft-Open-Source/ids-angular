@@ -158,7 +158,7 @@ export class IdsSelectComponent
 
   public ngOnInit(): void {
     if (!this._parentFormField) {
-      this._createComponentError('Select must be in a form field');
+      throw new Error(this._createComponentError('Select must be in a form field'));
     }
     this.parentSize.set(this._parentFormField.size());
     this.parentVariant.set(this._parentFormField.variant());

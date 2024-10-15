@@ -18,7 +18,7 @@ export const IDS_CHECKBOX_DEFAULT_CONFIG = new InjectionToken<IdsCheckboxDefault
 
 export function IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY(): Required<IdsCheckboxDefaultConfig> {
   return {
-    size: Size.COMFORTABLE,
+    size: Size.COMPACT,
     variant: CheckboxVariant.SURFACE,
   };
 }

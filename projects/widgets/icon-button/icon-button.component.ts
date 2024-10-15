@@ -37,9 +37,9 @@ export class IdsIconButtonComponent {
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_BUTTON_DEFAULT_CONFIG);
 
-  public appearance = input<IconButtonAppearanceType | null>(this._defaultConfig.appearance);
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<AllVariantsType | null>(this._defaultConfig.variant);
+  public appearance = input<IconButtonAppearanceType>(this._defaultConfig.appearance);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<AllVariantsType>(this._defaultConfig.variant);
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
   public icon = contentChildren(IdsIconComponent);

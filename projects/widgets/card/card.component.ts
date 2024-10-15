@@ -41,10 +41,10 @@ export class IdsCardComponent implements OnInit {
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CARD_DEFAULT_CONFIG);
 
-  public appearance = input<CardAppearanceType | null>(this._defaultConfig.appearance);
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<AllVariantsType | null>(this._defaultConfig.variant);
-  public orientation = input<OrientationType | null>(this._defaultConfig.orientation);
+  public appearance = input<CardAppearanceType>(this._defaultConfig.appearance);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<AllVariantsType>(this._defaultConfig.variant);
+  public orientation = input<OrientationType>(this._defaultConfig.orientation);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });

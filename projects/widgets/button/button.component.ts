@@ -36,10 +36,10 @@ export class IdsButtonComponent {
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BUTTON_DEFAULT_CONFIG);
 
-  public appearance = input<ButtonAppearanceType | null>(this._defaultConfig.appearance);
+  public appearance = input<ButtonAppearanceType>(this._defaultConfig.appearance);
 
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<AllVariantsType | null>(this._defaultConfig.variant);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<AllVariantsType>(this._defaultConfig.variant);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });

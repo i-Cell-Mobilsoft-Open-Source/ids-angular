@@ -35,11 +35,11 @@ export class IdsDividerComponent {
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIVIDER_DEFAULT_CONFIG);
 
-  public orientation = input<OrientationType | null>(this._defaultConfig.orientation);
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<AllVariantsType | null>(this._defaultConfig.variant);
-  public width = input<string | null>(this._defaultConfig.width);
-  public height = input<string | null>(this._defaultConfig.height);
+  public orientation = input<OrientationType>(this._defaultConfig.orientation);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<AllVariantsType>(this._defaultConfig.variant);
+  public width = input<string>(this._defaultConfig.width);
+  public height = input<string>(this._defaultConfig.height);
   private _safeWidth = computed(() => (this.orientation() === Orientation.HORIZONTAL ? this.width() : null));
   private _safeHeight = computed(() => (this.orientation() === Orientation.VERTICAL ? this.height() : null));
 

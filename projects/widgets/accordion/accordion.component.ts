@@ -48,17 +48,17 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ACCORDION_DEFAULT_CONFIG);
   protected _controlsClass = `${this._componentClass}-controls`;
 
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public appearance = input<AccordionAppearanceType | null>(this._defaultConfig.appearance);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public appearance = input<AccordionAppearanceType>(this._defaultConfig.appearance);
   public disabled = input(false, { transform: coerceBooleanAttribute });
   public hasLeadingIcon = input(this._defaultConfig.hasLeadingIcon, { transform: coerceBooleanAttribute });
   public hasTrailingIcon = input(this._defaultConfig.hasTrailingIcon, { transform: coerceBooleanAttribute });
   public multi = input<boolean>(this._defaultConfig.multi);
-  public btnSize = input<SizeType | null>(this._defaultConfig.btnSize);
-  public btnAppearance = input<ButtonAppearanceType | null>(this._defaultConfig.btnAppearance);
-  public btnVariant = input<AllVariantsType | null>(this._defaultConfig.btnVariant);
-  public expandBtnLabel = input<string | null, string>(this._defaultConfig.expandBtnLabel, { transform: coerceStringAttribute });
-  public collapseBtnLabel = input<string | null, string>(this._defaultConfig.collapseBtnLabel, { transform: coerceStringAttribute });
+  public btnSize = input<SizeType>(this._defaultConfig.btnSize);
+  public btnAppearance = input<ButtonAppearanceType>(this._defaultConfig.btnAppearance);
+  public btnVariant = input<AllVariantsType>(this._defaultConfig.btnVariant);
+  public expandBtnLabel = input<string, string>(this._defaultConfig.expandBtnLabel, { transform: coerceStringAttribute });
+  public collapseBtnLabel = input<string, string>(this._defaultConfig.collapseBtnLabel, { transform: coerceStringAttribute });
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),

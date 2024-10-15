@@ -49,7 +49,7 @@ export class IdsDialogComponent {
 
   public dialog = inject(ElementRef).nativeElement as HTMLDialogElement;
 
-  public size = input<SizeType | null>(this._defaultConfig.size);
+  public size = input<SizeType>(this._defaultConfig.size);
   public mainTitle = input.required<string>();
   public subTitle = input<string>();
   public showCloseButton = input<boolean>(this._defaultConfig.showCloseButton);

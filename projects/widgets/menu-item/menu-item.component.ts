@@ -43,10 +43,10 @@ export class IdsMenuItemComponent {
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_MENU_ITEM_DEFAULT_CONFIG);
 
   public label = input.required<string>();
-  public appearance = input<MenuItemAppearanceType | null>(this._defaultConfig.appearance);
+  public appearance = input<MenuItemAppearanceType>(this._defaultConfig.appearance);
 
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<MenuItemVariantType | null>(this._defaultConfig.variant);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<MenuItemVariantType>(this._defaultConfig.variant);
   public active = input(false);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),

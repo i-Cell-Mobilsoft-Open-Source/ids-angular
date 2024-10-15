@@ -39,10 +39,10 @@ export class IdsOverlayPanelComponent {
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
-  public appearance = input<OverlayPanelAppearanceType | null>(this._defaultConfig.appearance);
+  public appearance = input<OverlayPanelAppearanceType>(this._defaultConfig.appearance);
 
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<OverlayPanelVariantType | null>(this._defaultConfig.variant);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<OverlayPanelVariantType>(this._defaultConfig.variant);
 
   public actionItems = contentChildren(IdsMenuItemComponent);
 

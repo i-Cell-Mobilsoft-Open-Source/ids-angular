@@ -33,9 +33,9 @@ export class IdsTagComponent {
 
   private _hostElement = inject(ElementRef).nativeElement as HTMLElement;
 
-  public appearance = input<TagAppearanceType | null>(this._defaultConfig.appearance);
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<AllVariantsType | null>(this._defaultConfig.variant);
+  public appearance = input<TagAppearanceType>(this._defaultConfig.appearance);
+  public size = input<SizeType>(this._defaultConfig.size);
+  public variant = input<AllVariantsType>(this._defaultConfig.variant);
 
   public iconLeading = contentChildren<unknown>('[icon-leading]');
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');

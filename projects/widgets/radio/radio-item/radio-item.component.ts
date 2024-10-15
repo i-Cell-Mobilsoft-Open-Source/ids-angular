@@ -73,7 +73,7 @@ export class IdsRadioItemComponent implements OnInit {
     }
   }
 
-  public innerCrircleClick(): void {
+  public innerCircleClick(): void {
     if (!this.selected() && !this.isDisabled()) {
       this._inputElement.nativeElement.focus();
       this.onChange();

@@ -11,7 +11,7 @@ import { IdsErrorMessageComponent } from '../message/error-message/error-message
 import { IdsHintMessageComponent } from '../message/hint-message/hint-message.component';
 import { IdsSuccessMessageComponent } from '../message/success-message/success-message.component';
 
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, HostBinding, inject, Injector, input, isDevMode, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, HostBinding, inject, input, isDevMode, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
 import { Subject, takeUntil } from 'rxjs';
@@ -34,12 +34,11 @@ const defaultOptions = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 })
 export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
   private readonly _componentClass = 'ids-form-field';
-  private readonly _injector = inject(Injector);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _parentFieldset = inject(IdsFieldsetComponent, { optional: true });
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_FORM_FIELD_DEFAULT_CONFIG, null, { optional: true }),
+    ...inject(IDS_FORM_FIELD_DEFAULT_CONFIG, { optional: true }),
   };
 
   private readonly _destroyed = new Subject<void>();

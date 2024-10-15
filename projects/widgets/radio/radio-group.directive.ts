@@ -3,7 +3,7 @@ import { IdsRadioItemComponent } from './radio-item/radio-item.component';
 import { RadioChangeEvent } from './types/radio-events';
 import { RadioVariantType } from './types/radio-variant';
 
-import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, HostListener, inject, Injector, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, HostListener, inject, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, createComponentError, Orientation, OrientationType, PositionType, SelectionModel, SizeType, VerticalPosition } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
@@ -26,10 +26,9 @@ const defaultOptions = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestroy, ControlValueAccessor {
   private readonly _componentClass = 'ids-radio-group';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private readonly _injector = inject(Injector);
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_RADIO_DEFAULT_CONFIG, null, { optional: true }),
+    ...inject(IDS_RADIO_DEFAULT_CONFIG, { optional: true }),
   };
 
   private readonly _subscription = new Subscription();

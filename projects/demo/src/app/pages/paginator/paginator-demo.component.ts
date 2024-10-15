@@ -57,9 +57,9 @@ export class PaginatorDemoComponent {
 
   public model: PaginatorPublicApi = { ...this.defaults  };
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(PaginatorVariant) as PaginatorVariantType[];
-  public pageButtonAppearances = Object.values(PaginatorPageButtonAppearance) as PaginatorPageButtonAppearanceType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<PaginatorVariantType>(PaginatorVariant);
+  public pageButtonAppearances = Object.values<PaginatorPageButtonAppearanceType>(PaginatorPageButtonAppearance);
 
   // eslint-disable-next-line no-magic-numbers
   public length = 120;

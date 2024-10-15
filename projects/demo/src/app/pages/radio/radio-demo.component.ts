@@ -55,10 +55,10 @@ export class RadioDemoComponent {
 
   public value = undefined;
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(RadioVariant) as RadioVariantType[];
-  public orientations = Object.values(Orientation) as OrientationType[];
-  public labelPositions = Object.values(Position) as PositionType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<RadioVariantType>(RadioVariant);
+  public orientations = Object.values<OrientationType>(Orientation);
+  public labelPositions = Object.values<PositionType>(Position);
 
   public reset(): void {
     this.value = undefined;

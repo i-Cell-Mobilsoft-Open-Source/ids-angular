@@ -51,11 +51,11 @@ type MenuItemHelperControls = {
   ],
 })
 export class ActionMenuDemoComponent {
-  public overlayPanelAppearances = Object.values(OverlayPanelAppearance) as OverlayPanelAppearanceType[];
-  public overlayPanelVariants = Object.values(OverlayPanelVariant) as OverlayPanelVariantType[];
-  public menuItemAppearances = Object.values(MenuItemAppearance) as MenuItemAppearanceType[];
-  public menuItemVariants = Object.values(MenuItemVariant) as MenuItemVariantType[];
-  public sizes = Object.values(Size) as SizeType[];
+  public overlayPanelAppearances = Object.values<OverlayPanelAppearanceType>(OverlayPanelAppearance);
+  public overlayPanelVariants = Object.values<OverlayPanelVariantType>(OverlayPanelVariant);
+  public menuItemAppearances = Object.values<MenuItemAppearanceType>(MenuItemAppearance);
+  public menuItemVariants = Object.values<MenuItemVariantType>(MenuItemVariant);
+  public sizes = Object.values<SizeType>(Size);
   public overlayPanelBackgroundColors = [
     'light',
     'dark',

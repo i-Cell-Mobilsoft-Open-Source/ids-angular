@@ -192,7 +192,7 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
 export class DialogDemoComponent {
   private _dialogService = inject(IdsDialogService);
   
-  public sizes = Object.values(Size) as SizeType[];
+  public sizes = Object.values<SizeType>(Size);
   
   public defaults: DialogPublicApi & DialogHelperControls = {
     size: Size.COMFORTABLE,

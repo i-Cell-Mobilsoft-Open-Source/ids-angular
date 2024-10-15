@@ -78,10 +78,10 @@ export class SwitchDemoComponent {
   // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
   public groupValue = [true, true, true];
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(SwitchVariant) as SwitchVariantType[];
-  public iconPositions = Object.values(SwitchIconPosition) as SwitchIconPositionType[];
-  public labelPositions = Object.values(SwitchLabelPosition) as SwitchLabelPositionType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<SwitchVariantType>(SwitchVariant);
+  public iconPositions = Object.values<SwitchIconPositionType>(SwitchIconPosition);
+  public labelPositions = Object.values<SwitchLabelPositionType>(SwitchLabelPosition);
 
   public resetSwitch(): void {
     this.value = true;

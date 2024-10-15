@@ -67,8 +67,8 @@ type AnimalOptions = {
   ],
 })
 export class SelectDemoComponent implements OnInit {
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(FormFieldVariant) as FormFieldVariantType[];
+  public sizes = Object.values<SizeType>(Size);
+  public variants = Object.values<FormFieldVariantType>(FormFieldVariant);
 
   public animals: AnimalOptions = {
     land: [

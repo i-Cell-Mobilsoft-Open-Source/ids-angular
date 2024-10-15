@@ -41,10 +41,10 @@ type ButtonHelperControls = {
   ],
 })
 export class ButtonDemoComponent {
-  public appearances = Object.values(ButtonAppearance) as ButtonAppearanceType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public appearances = Object.values<ButtonAppearanceType>(ButtonAppearance);
+  public sizes = Object.values<SizeType>(Size);
+  public baseVariants = Object.values<BrandVariantType>(BrandVariant);
+  public variants = Object.values<AllVariantsType>(AllVariants);
 
   public defaults: ButtonPublicApi & ButtonHelperControls = {
     appearance: ButtonAppearance.FILLED,

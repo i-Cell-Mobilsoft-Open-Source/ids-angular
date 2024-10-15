@@ -1,0 +1,14 @@
+<label for="" class="ids-checkbox-group__label">{{ groupLabel() }}</label>
+
+@if (allowParent()) {
+  <ids-checkbox
+    [checked]="_parentCheckboxChecked()"
+    [indeterminate]="_parentCheckboxIndeterminate()"
+    (change)="_handleParentChange($event)"
+    >{{ parentCheckboxLabel() }}</ids-checkbox
+  >
+}
+
+<div class="ids-checkbox-group__list">
+  <ng-content select="ids-checkbox" />
+</div>

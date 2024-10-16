@@ -1,7 +1,7 @@
-export const AvatarType = {
+export const IdsAvatarType = {
   INITIALS: 'initials',
   ICON: 'icon',
   IMAGE: 'image',
 } as const;
 
-export type AvatarTypeType = (typeof AvatarType)[keyof typeof AvatarType];
+export type IdsAvatarTypeType = (typeof IdsAvatarType)[keyof typeof IdsAvatarType];

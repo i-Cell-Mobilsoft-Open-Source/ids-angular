@@ -2,17 +2,17 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, SegmentedControlAppearance, SegmentedControlAppearanceType, SegmentedControlVariant, SegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
+import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlAppearance, IdsSegmentedControlAppearanceType, IdsSegmentedControlVariant, IdsSegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
 import { IdsSegmentedControlItemComponent } from '@i-cell/ids-angular/segmented-control/segmented-control-item/segmented-control-item.component';
 import { IdsSegmentedControlDirective } from '@i-cell/ids-angular/segmented-control/segmented-control.directive';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SegmentedControlPublicApi = {
-  size: SizeType,
-  variant: SegmentedControlVariantType,
-  appearance: SegmentedControlAppearanceType,
+  size: IdsSizeType,
+  variant: IdsSegmentedControlVariantType,
+  appearance: IdsSegmentedControlAppearanceType,
   disabled: boolean,
 };
 
@@ -61,9 +61,9 @@ export class SegmentedControlDemoComponent {
   public singleSelectionValue = undefined;
   public multiSelectionValue = [];
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(SegmentedControlVariant) as SegmentedControlVariantType[];
-  public appearances = Object.values(SegmentedControlAppearance) as SegmentedControlAppearanceType[];
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsSegmentedControlVariantType>(IdsSegmentedControlVariant);
+  public appearances = Object.values<IdsSegmentedControlAppearanceType>(IdsSegmentedControlAppearance);
   
   public reset(): void {
     this.singleSelectionValue = undefined;

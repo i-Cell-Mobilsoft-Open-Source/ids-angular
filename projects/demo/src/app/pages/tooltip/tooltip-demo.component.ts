@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY, IdsTooltipDirective, TooltipPosition, TooltipPositionType, TooltipTextAlign, TooltipTouchGestures, TooltipVariant, TooltipVariantType } from '@i-cell/ids-angular/tooltip';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY, IdsTooltipDirective, IdsTooltipPosition, IdsTooltipPositionType, IdsTooltipTextAlign, IdsTooltipTouchGestures, IdsTooltipVariant, IdsTooltipVariantType } from '@i-cell/ids-angular/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
 type TooltipPublicApi = {
   tooltipText: string,
-  position: TooltipPositionType,
-  size: SizeType,
-  variant: TooltipVariantType,
+  position: IdsTooltipPositionType,
+  size: IdsSizeType,
+  variant: IdsTooltipVariantType,
   showDelay: number,
   hideDelay: number,
   disabled: boolean,
-  touchGestures: TooltipTouchGestures,
-  textAlign: TooltipTextAlign | undefined,
+  touchGestures: IdsTooltipTouchGestures,
+  textAlign: IdsTooltipTextAlign | undefined,
 };
 
 const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
@@ -50,16 +50,16 @@ export class TooltipDemoComponent {
 
   public model: TooltipPublicApi = { ...this.defaults  };
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(TooltipVariant) as TooltipVariantType[];
-  public positions = Object.values(TooltipPosition) as TooltipPositionType[];
-  public touchGestures: TooltipTouchGestures[] = [
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsTooltipVariantType>(IdsTooltipVariant);
+  public positions = Object.values<IdsTooltipPositionType>(IdsTooltipPosition);
+  public touchGestures: IdsTooltipTouchGestures[] = [
     'auto',
     'on',
     'off',
   ];
 
-  public textAligns: TooltipTextAlign[] = [
+  public textAligns: IdsTooltipTextAlign[] = [
     'center',
     'left',
     'right',

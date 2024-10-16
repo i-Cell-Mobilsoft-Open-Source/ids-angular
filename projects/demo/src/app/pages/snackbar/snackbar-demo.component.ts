@@ -1,13 +1,13 @@
 import { Component, computed, inject, OnInit, ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY, IdsSnackbarAction, IdsSnackbarService, SnackbarPosition, SnackbarPositionType, SnackbarVariant, SnackbarVariantType } from '@i-cell/ids-angular/snackbar';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY, IdsSnackbarAction, IdsSnackbarService, IdsSnackbarPosition, IdsSnackbarPositionType, IdsSnackbarVariant, IdsSnackbarVariantType } from '@i-cell/ids-angular/snackbar';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SnackbarPublicApi = {
   message: string,
-  variant: SnackbarVariantType,
+  variant: IdsSnackbarVariantType,
   icon: string | undefined,
   allowDismiss: boolean,
   closeButtonLabel: string | undefined,
@@ -17,8 +17,8 @@ type SnackbarPublicApi = {
 
 type SnackbarHelperControls = {
   useAction: boolean,
-  size: SizeType,
-  position: SnackbarPositionType,
+  size: IdsSizeType,
+  position: IdsSnackbarPositionType,
   newestAtStartPosition: boolean
   viewportMargin: number
   useActualViewContainer: boolean
@@ -59,9 +59,9 @@ export class SnackbarDemoComponent implements OnInit {
 
   public model: SnackbarPublicApi & SnackbarHelperControls = { ...this.defaults };
 
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(SnackbarVariant) as SnackbarVariantType[];
-  public positions = Object.values(SnackbarPosition) as SnackbarPositionType[];
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsSnackbarVariantType>(IdsSnackbarVariant);
+  public positions = Object.values<IdsSnackbarPositionType>(IdsSnackbarPosition);
 
   private readonly _snackbarService = inject(IdsSnackbarService);
   private readonly _viewContainerRef = inject(ViewContainerRef);

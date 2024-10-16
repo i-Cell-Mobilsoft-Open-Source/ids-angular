@@ -1,16 +1,16 @@
-import { AccordionAppearance, AccordionAppearanceType } from './types/accordion-appearance';
+import { IdsAccordionAppearance, IdsAccordionAppearanceType } from './types/accordion-appearance.type';
 
 import { InjectionToken } from '@angular/core';
-import { ButtonAppearance, ButtonAppearanceType } from '@i-cell/ids-angular/button';
-import { AllVariants, AllVariantsType, Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsButtonAppearance, IdsButtonAppearanceType } from '@i-cell/ids-angular/button';
+import { IdsAllVariants, IdsAllVariantsType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsAccordionDefaultConfig {
-  size?: SizeType
-  appearance?: AccordionAppearanceType
+  size?: IdsSizeType
+  appearance?: IdsAccordionAppearanceType
   multi?: boolean,
-  btnSize?: SizeType,
-  btnAppearance?: ButtonAppearanceType,
-  btnVariant?: AllVariantsType,
+  btnSize?: IdsSizeType,
+  btnAppearance?: IdsButtonAppearanceType,
+  btnVariant?: IdsAllVariantsType,
   expandBtnLabel?: string,
   collapseBtnLabel?: string,
   hasLeadingIcon?: boolean,
@@ -27,12 +27,12 @@ export const IDS_ACCORDION_DEFAULT_CONFIG = new InjectionToken<IdsAccordionDefau
 
 export function IDS_ACCORDION_DEFAULT_CONFIG_FACTORY(): Required<IdsAccordionDefaultConfig> {
   return {
-    size: Size.COMPACT,
-    appearance: AccordionAppearance.FILLED,
+    size: IdsSize.COMPACT,
+    appearance: IdsAccordionAppearance.FILLED,
     multi: false,
-    btnSize: Size.COMPACT,
-    btnAppearance: ButtonAppearance.FILLED,
-    btnVariant: AllVariants.SURFACE,
+    btnSize: IdsSize.COMPACT,
+    btnAppearance: IdsButtonAppearance.FILLED,
+    btnVariant: IdsAllVariants.SURFACE,
     expandBtnLabel: 'Expand all',
     collapseBtnLabel: 'Collapse all',
     hasLeadingIcon: false,

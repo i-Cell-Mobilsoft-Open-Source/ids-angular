@@ -1,14 +1,14 @@
-import { AvatarType, AvatarTypeType } from './types/avatar-type.type';
-import { AvatarVariant, AvatarVariantType } from './types/avatar-variant.type';
+import { IdsAvatarType, IdsAvatarTypeType } from './types/avatar-type.type';
+import { IdsAvatarVariant, IdsAvatarVariantType } from './types/avatar-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeCollection, SizeCollectionType, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsAvatarDefaultConfig {
-  type: AvatarTypeType
-  size?: SizeType
-  sizeCollection?: SizeCollectionType
-  variant?: AvatarVariantType,
+  type: IdsAvatarTypeType
+  size?: IdsSizeType
+  sizeCollection?: IdsSizeCollectionType
+  variant?: IdsAvatarVariantType,
 }
 
 export const IDS_AVATAR_DEFAULT_CONFIG = new InjectionToken<IdsAvatarDefaultConfig>(
@@ -21,10 +21,10 @@ export const IDS_AVATAR_DEFAULT_CONFIG = new InjectionToken<IdsAvatarDefaultConf
 
 export function IDS_AVATAR_DEFAULT_CONFIG_FACTORY(): Required<IdsAvatarDefaultConfig> {
   return {
-    type: AvatarType.INITIALS,
-    size: Size.COMPACT,
-    sizeCollection: SizeCollection.SMALL,
-    variant: AvatarVariant.PRIMARY,
+    type: IdsAvatarType.INITIALS,
+    size: IdsSize.COMPACT,
+    sizeCollection: IdsSizeCollection.SMALL,
+    variant: IdsAvatarVariant.PRIMARY,
   };
 }
 

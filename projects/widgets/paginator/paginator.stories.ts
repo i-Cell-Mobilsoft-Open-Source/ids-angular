@@ -1,9 +1,9 @@
 import { IdsPaginatorComponent } from './paginator.component';
-import { PaginatorPageButtonAppearance, PaginatorVariant } from './public-api';
+import { IdsPaginatorPageButtonAppearance, IdsPaginatorVariant } from './public-api';
 
 import { selectControlOptions } from '../.storybook/utils';
 
-import { Size } from '@i-cell/ids-angular/core';
+import { IdsSize } from '@i-cell/ids-angular/core';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
@@ -67,9 +67,9 @@ export default {
       control: 'number',
       description: 'The maximum number of items to display in the paginator.',
     },
-    variant: selectControlOptions(PaginatorVariant, 'The variant/style of the paginator'),
-    size: selectControlOptions(Size, 'The size of the paginator component'),
-    pageButtonAppearance: selectControlOptions(PaginatorPageButtonAppearance, 'The appearance of the paginator buttons'),
+    variant: selectControlOptions(IdsPaginatorVariant, 'The variant/style of the paginator'),
+    size: selectControlOptions(IdsSize, 'The size of the paginator component'),
+    pageButtonAppearance: selectControlOptions(IdsPaginatorPageButtonAppearance, 'The appearance of the paginator buttons'),
     length: {
       control: 'number',
       description: 'The total number of items to paginate.',

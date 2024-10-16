@@ -1,8 +1,8 @@
-import { TooltipPosition, TooltipPositionType } from './types/tooltip-position';
-import { TooltipVariant, TooltipVariantType } from './types/tooltip-variant';
+import { IdsTooltipPosition, IdsTooltipPositionType } from './types/tooltip-position.type';
+import { IdsTooltipVariant, IdsTooltipVariantType } from './types/tooltip-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { SizeType, Size } from '@i-cell/ids-angular/core';
+import { IdsSizeType, IdsSize } from '@i-cell/ids-angular/core';
 
 const DEFAULT_SHOW_DELAY = 0;
 const DEFAULT_HIDE_DELAY = 1_000;
@@ -12,9 +12,9 @@ const DEFAULT_TOUCHEND_HIDE_DELAY = 1500;
 const DEFAULT_SCROLL_DEBOUNCE_TIME = 20;
 
 export interface IdsTooltipDefaultConfig {
-  position?: TooltipPositionType
-  size?: SizeType
-  variant?: TooltipVariantType
+  position?: IdsTooltipPositionType
+  size?: IdsSizeType
+  variant?: IdsTooltipVariantType
   showDelay?: number
   hideDelay?: number
   touchLongPressShowDelay?: number
@@ -33,9 +33,9 @@ export const IDS_TOOLTIP_DEFAULT_CONFIG = new InjectionToken<IdsTooltipDefaultCo
 
 export function IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY(): Required<IdsTooltipDefaultConfig> {
   return {
-    position: TooltipPosition.NORTH,
-    size: Size.COMFORTABLE,
-    variant: TooltipVariant.DARK,
+    position: IdsTooltipPosition.NORTH,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsTooltipVariant.DARK,
     showDelay: DEFAULT_SHOW_DELAY,
     hideDelay: DEFAULT_HIDE_DELAY,
     touchLongPressShowDelay: DEFAULT_LONGPRESS_DELAY,

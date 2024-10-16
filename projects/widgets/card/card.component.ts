@@ -1,27 +1,29 @@
+import { IDS_CARD_DEFAULT_CONFIG, IDS_CARD_DEFAULT_CONFIG_FACTORY, IdsCardDefaultConfig } from './card-defaults';
 import { IdsCardHeaderComponent } from './card-header.component';
-import { CardAppearance, CardAppearanceType } from './types/card-appearances';
+import { IdsCardAppearanceType } from './types/card-appearances.type';
 
 import {
   Component,
   EventEmitter,
   HostBinding,
+  InjectionToken,
   OnInit,
   Output,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   signal,
 } from '@angular/core';
 import {
-  AllVariants,
-  AllVariantsType,
-  Orientation,
-  OrientationType,
-  Size,
-  SizeType,
+  IdsAllVariantsType,
+  IdsOrientationType,
+  IdsSizeType,
   coerceBooleanAttribute,
   createClassList,
 } from '@i-cell/ids-angular/core';
+
+const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector:
@@ -37,10 +39,12 @@ import {
 export class IdsCardComponent implements OnInit {
   private readonly _componentClass = 'ids-card';
 
-  public appearance = input<CardAppearanceType | null>(CardAppearance.FILLED);
-  public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<AllVariantsType | null>(AllVariants.SURFACE);
-  public orientation = input<OrientationType | null>(Orientation.VERTICAL);
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CARD_DEFAULT_CONFIG);
+
+  public appearance = input<IdsCardAppearanceType>(this._defaultConfig.appearance);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
+  public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
@@ -77,5 +81,13 @@ export class IdsCardComponent implements OnInit {
 
   public ngOnInit(): void {
     this._hasClickHandler.set(this.click.observed);
+  }
+
+  // eslint-disable-next-line @stylistic/js/max-len
+  protected _getDefaultConfig(defaultConfig: Required<IdsCardDefaultConfig>, injectionToken: InjectionToken<IdsCardDefaultConfig>): Required<IdsCardDefaultConfig> {
+    return {
+      ...defaultConfig,
+      ...inject(injectionToken, { optional: true }),
+    };
   }
 }

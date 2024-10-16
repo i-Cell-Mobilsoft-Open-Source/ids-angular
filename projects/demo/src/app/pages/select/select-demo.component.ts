@@ -2,14 +2,14 @@ import { KeyValuePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariant, FormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectComponent, IdsSelectTriggerDirective } from '@i-cell/ids-angular/select';
 import { TranslateModule } from '@ngx-translate/core';
 
 type FormFieldPublicApi = {
-  size: SizeType,
-  variant: FormFieldVariantType,
+  size: IdsSizeType,
+  variant: IdsFormFieldVariantType,
 };
 
 const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
@@ -67,8 +67,8 @@ type AnimalOptions = {
   ],
 })
 export class SelectDemoComponent implements OnInit {
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(FormFieldVariant) as FormFieldVariantType[];
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsFormFieldVariantType>(IdsFormFieldVariant);
 
   public animals: AnimalOptions = {
     land: [

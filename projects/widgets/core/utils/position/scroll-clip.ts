@@ -1,11 +1,11 @@
-import { PositionType } from '../../types/position.type';
+import { IdsPositionType } from '../../types/position.type';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 
 export type DOMRectBase = Omit<DOMRect, 'x' | 'y' | 'toJSON'>;
 
-export function elementOutsideViewFrom(elementRect: DOMRectBase, scrollContainers: CdkScrollable[]): Set<PositionType> | null {
-  const outsideFrom: Set<PositionType> = new Set();
+export function elementOutsideViewFrom(elementRect: DOMRectBase, scrollContainers: CdkScrollable[]): Set<IdsPositionType> | null {
+  const outsideFrom: Set<IdsPositionType> = new Set();
   scrollContainers.forEach((scrollContainer) => {
     const scrollContainerRect = scrollContainer.getElementRef().nativeElement.getBoundingClientRect();
     if (elementRect.bottom < scrollContainerRect.top) {
@@ -29,8 +29,8 @@ export function elementOutsideViewFrom(elementRect: DOMRectBase, scrollContainer
   return outsideFrom;
 }
 
-export function elementClippedFrom(elementRect: DOMRectBase, scrollContainers: CdkScrollable[]): Set<PositionType> | null {
-  const clippedFrom: Set<PositionType> = new Set();
+export function elementClippedFrom(elementRect: DOMRectBase, scrollContainers: CdkScrollable[]): Set<IdsPositionType> | null {
+  const clippedFrom: Set<IdsPositionType> = new Set();
   scrollContainers.forEach((scrollContainer) => {
     const scrollContainerRect = scrollContainer.getElementRef().nativeElement.getBoundingClientRect();
     if (elementRect.top < scrollContainerRect.top) {

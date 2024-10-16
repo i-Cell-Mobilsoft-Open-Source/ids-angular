@@ -1,12 +1,12 @@
 import { IDS_CHECKBOX_DEFAULT_CONFIG, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY } from './checkbox-defaults';
 import { IdsCheckboxGroupComponent } from './checkbox-group.component';
-import { CheckBoxChangeEvent } from './types/checkbox-events';
-import { CheckboxState, CheckboxStateType } from './types/checkbox-state';
-import { CheckboxVariantType } from './types/checkbox-variant';
+import { IdsCheckBoxChangeEvent } from './types/checkbox-events.class';
+import { IdsCheckboxState, IdsCheckboxStateType } from './types/checkbox-state.type';
+import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { SizeType, coerceBooleanAttribute, coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
+import { IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -40,29 +40,29 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _defaultConfig = {
     ...defaultConfig,
-    ...this._injector.get(IDS_CHECKBOX_DEFAULT_CONFIG, null, { optional: true }),
+    ...inject(IDS_CHECKBOX_DEFAULT_CONFIG, { optional: true }),
   };
 
   private _checkboxGroup = inject(IdsCheckboxGroupComponent, { optional: true });
 
-  private _checkboxState = signal<CheckboxStateType>(CheckboxState.UNCHECKED);
+  private _checkboxState = signal<IdsCheckboxStateType>(IdsCheckboxState.UNCHECKED);
 
   public id = input<string>(this._uniqueId);
   public inputId = computed(() => this.id() || this._uniqueId);
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
-  public size = input<SizeType>(this._defaultConfig.size);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
   public value = input<string>();
-  public variant = input<CheckboxVariantType>(this._defaultConfig.variant);
+  public variant = input<IdsCheckboxVariantType>(this._defaultConfig.variant);
   public checked = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
   public indeterminate = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
 
   public disabled = signal(false);
 
-  public isChecked = computed(() => this._checkboxState() === CheckboxState.CHECKED);
-  public isIndeterminate = computed(() => this._checkboxState() === CheckboxState.INDETERMINATE);
+  public isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
+  public isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
   public isFocusable = computed(() => !this.disabled() && !this.readonly());
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this._safeSize(),
@@ -79,7 +79,7 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
 
   public controlDir: NgControl | null = null;
 
-  public readonly change = output<CheckBoxChangeEvent>();
+  public readonly change = output<IdsCheckBoxChangeEvent>();
   public readonly indeterminateChange = output<boolean>();
 
   private _inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputEl');
@@ -98,11 +98,11 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
       const currentChecked = checkedChange?.currentValue;
       const currentIndeterminate = indeterminateChange?.currentValue;
       if (currentIndeterminate === true) {
-        this._checkboxState.set(CheckboxState.INDETERMINATE);
+        this._checkboxState.set(IdsCheckboxState.INDETERMINATE);
       } else if (currentChecked === true) {
-        this._checkboxState.set(CheckboxState.CHECKED);
+        this._checkboxState.set(IdsCheckboxState.CHECKED);
       } else {
-        this._checkboxState.set(CheckboxState.UNCHECKED);
+        this._checkboxState.set(IdsCheckboxState.UNCHECKED);
       }
     }
   }
@@ -123,9 +123,9 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
 
   public writeValue(value: boolean): void {
     if (this.isIndeterminate()) {
-      this._checkboxState.set(CheckboxState.INDETERMINATE);
+      this._checkboxState.set(IdsCheckboxState.INDETERMINATE);
     } else {
-      this._checkboxState.set(value ? CheckboxState.CHECKED : CheckboxState.UNCHECKED);
+      this._checkboxState.set(value ? IdsCheckboxState.CHECKED : IdsCheckboxState.UNCHECKED);
     }
   }
 
@@ -141,8 +141,8 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
     this.disabled.set(isDisabled);
   }
 
-  protected _createChangeEvent(isChecked: boolean, value: string | undefined): CheckBoxChangeEvent {
-    const event = new CheckBoxChangeEvent();
+  protected _createChangeEvent(isChecked: boolean, value: string | undefined): IdsCheckBoxChangeEvent {
+    const event = new IdsCheckBoxChangeEvent();
     event.source = this;
     event.checked = isChecked;
     event.value = value;
@@ -157,29 +157,29 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
 
   public toggle(): void {
     if (this.isIndeterminate()) {
-      this._checkboxState.set(CheckboxState.CHECKED);
+      this._checkboxState.set(IdsCheckboxState.CHECKED);
     } else {
-      this._checkboxState.set(this._checkboxState() === CheckboxState.CHECKED ? CheckboxState.UNCHECKED : CheckboxState.CHECKED);
+      this._checkboxState.set(this._checkboxState() === IdsCheckboxState.CHECKED ? IdsCheckboxState.UNCHECKED : IdsCheckboxState.CHECKED);
     }
     this._onChange(this.isChecked());
   }
 
   public select(): void {
-    this._checkboxState.set(CheckboxState.CHECKED);
+    this._checkboxState.set(IdsCheckboxState.CHECKED);
     this._onChange(this.isChecked());
   }
   
   public deselect(): void {
-    this._checkboxState.set(CheckboxState.UNCHECKED);
+    this._checkboxState.set(IdsCheckboxState.UNCHECKED);
     this._onChange(this.isChecked());
   }
 
   private _handleInputClick(): void {
     if (this.isIndeterminate()) {
-      this._checkboxState.set(CheckboxState.CHECKED);
+      this._checkboxState.set(IdsCheckboxState.CHECKED);
       this.indeterminateChange.emit(this.isIndeterminate());
     } else {
-      this._checkboxState.set(this._checkboxState() === CheckboxState.CHECKED ? CheckboxState.UNCHECKED : CheckboxState.CHECKED);
+      this._checkboxState.set(this._checkboxState() === IdsCheckboxState.CHECKED ? IdsCheckboxState.UNCHECKED : IdsCheckboxState.CHECKED);
     }
 
     this._emitChangeEvent();

@@ -1,7 +1,7 @@
 import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY } from './switch-defaults';
 
 import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, input, ViewEncapsulation } from '@angular/core';
-import { createClassList, SizeType, fallbackValue } from '@i-cell/ids-angular/core';
+import { createClassList, IdsSizeType, fallbackValue } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 
@@ -27,7 +27,7 @@ export class IdsSwitchGroupComponent {
   };
 
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
-  public size = input<SizeType | null>(this._defaultConfig.size);
+  public size = input<IdsSizeType | null>(this._defaultConfig.size);
   public hasIcon = input(this._defaultConfig.hasIcon);
   public iconPosition = input(this._defaultConfig.iconPosition);
   public labelPosition = input(this._defaultConfig.labelPosition);

@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers */
-import { PaginatorPageButtonAppearance, PaginatorPageButtonAppearanceType } from './types/paginator-appearance';
-import { PaginatorVariant, PaginatorVariantType } from './types/paginator-variant';
+import { IdsPaginatorPageButtonAppearance, IdsPaginatorPageButtonAppearanceType } from './types/paginator-appearance.type';
+import { IdsPaginatorVariant, IdsPaginatorVariantType } from './types/paginator-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { SizeType, Size } from '@i-cell/ids-angular/core';
+import { IdsSizeType, IdsSize } from '@i-cell/ids-angular/core';
 
 export const DEFAULT_PAGE_SIZE = 10;
 export const MAX_DISPLAYED_ITEM_COUNT = 7;
@@ -17,9 +17,9 @@ export interface IdsPaginatorDefaultConfig {
   showPageButtons?: boolean
   showAllPages?: boolean
   maxDisplayedItemCount?: number
-  size?: SizeType
-  variant?: PaginatorVariantType
-  pageButtonAppearance?: PaginatorPageButtonAppearanceType
+  size?: IdsSizeType
+  variant?: IdsPaginatorVariantType
+  pageButtonAppearance?: IdsPaginatorPageButtonAppearanceType
   debounceTime: number
 }
 
@@ -46,9 +46,9 @@ export function IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY(): Required<IdsPaginatorDef
     showPageButtons: true,
     showAllPages: false,
     maxDisplayedItemCount: MAX_DISPLAYED_ITEM_COUNT,
-    size: Size.COMFORTABLE,
-    variant: PaginatorVariant.SURFACE,
-    pageButtonAppearance: PaginatorPageButtonAppearance.PLAIN,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsPaginatorVariant.SURFACE,
+    pageButtonAppearance: IdsPaginatorPageButtonAppearance.PLAIN,
     debounceTime: 300,
   };
 }

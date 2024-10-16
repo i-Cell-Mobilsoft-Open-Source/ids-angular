@@ -2,15 +2,15 @@ import { UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariant, FormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
 
 type FormFieldPublicApi = {
-  size: SizeType,
-  variant: FormFieldVariantType,
+  size: IdsSizeType,
+  variant: IdsFormFieldVariantType,
 };
 
 type FormFieldHelperControls = {
@@ -67,8 +67,8 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class FormFieldDemoComponent implements OnInit {
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(FormFieldVariant) as FormFieldVariantType[];
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsFormFieldVariantType>(IdsFormFieldVariant);
 
   public formFieldDefaults: FormFieldPublicApi & FormFieldHelperControls = {
     size: defaultConfig.size,

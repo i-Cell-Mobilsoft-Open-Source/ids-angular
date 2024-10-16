@@ -1,6 +1,6 @@
-export const Orientation = {
+export const IdsOrientation = {
   VERTICAL: 'vertical',
   HORIZONTAL: 'horizontal',
 } as const;
 
-export type OrientationType = (typeof Orientation)[keyof typeof Orientation];
+export type IdsOrientationType = (typeof IdsOrientation)[keyof typeof IdsOrientation];

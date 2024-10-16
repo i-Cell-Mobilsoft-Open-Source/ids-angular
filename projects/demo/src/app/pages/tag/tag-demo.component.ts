@@ -2,21 +2,21 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
-  AllVariants,
-  AllVariantsType,
-  BrandVariant,
-  BrandVariantType,
-  Size,
-  SizeType,
+  IdsAllVariants,
+  IdsAllVariantsType,
+  IdsBrandVariant,
+  IdsBrandVariantType,
+  IdsSize,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsTagComponent, TagAppearance, TagAppearanceType } from '@i-cell/ids-angular/tag';
+import { IdsTagComponent, IdsTagAppearance, IdsTagAppearanceType } from '@i-cell/ids-angular/tag';
 import { TranslateModule } from '@ngx-translate/core';
 
 type TagPublicApi = {
-  appearance: TagAppearanceType,
-  size: SizeType,
-  variant: AllVariantsType,
+  appearance: IdsTagAppearanceType,
+  size: IdsSizeType,
+  variant: IdsAllVariantsType,
 };
 
 type TagHelperControls = {
@@ -42,19 +42,19 @@ type TagHelperControls = {
 })
 export class TagDemoComponent {
   public defaults: TagPublicApi & TagHelperControls = {
-    appearance: TagAppearance.FILLED,
-    size: Size.COMFORTABLE,
-    variant: AllVariants.PRIMARY,
+    appearance: IdsTagAppearance.FILLED,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsAllVariants.PRIMARY,
     hasLeadingIcon: true,
     hasTrailingIcon: true,
   };
   
   public model: TagPublicApi & TagHelperControls = { ...this.defaults };
 
-  public appearances = Object.values(TagAppearance) as TagAppearanceType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public appearances = Object.values<IdsTagAppearanceType>(IdsTagAppearance);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public baseVariants = Object.values<IdsBrandVariantType>(IdsBrandVariant);
+  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
 
   public onClick(tagName: string): void {
     // eslint-disable-next-line no-console

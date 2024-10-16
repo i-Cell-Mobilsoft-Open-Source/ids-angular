@@ -2,19 +2,19 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
-  AllVariants,
-  AllVariantsType,
-  Size,
-  SizeType,
-  OrientationType, 
-  Orientation } from '@i-cell/ids-angular/core';
+  IdsAllVariants,
+  IdsAllVariantsType,
+  IdsSize,
+  IdsSizeType,
+  IdsOrientationType, 
+  IdsOrientation } from '@i-cell/ids-angular/core';
 import { IdsDividerComponent } from '@i-cell/ids-angular/divider';
 import { TranslateModule } from '@ngx-translate/core';
 
 type DividerPublicApi = {
-  orientation: OrientationType,
-  size: SizeType,
-  variant: AllVariantsType,
+  orientation: IdsOrientationType,
+  size: IdsSizeType,
+  variant: IdsAllVariantsType,
   width: string,
   height: string,
 };
@@ -36,17 +36,17 @@ type DividerPublicApi = {
 })
 export class DividerDemoComponent {
   public defaults: DividerPublicApi = {
-    orientation: Orientation.HORIZONTAL,
-    size: Size.COMFORTABLE,
-    variant: AllVariants.PRIMARY,
+    orientation: IdsOrientation.HORIZONTAL,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsAllVariants.PRIMARY,
     width: '100%',
     height: '100%',
   };
 
   public model: DividerPublicApi = { ...this.defaults  };
-  public orientations = Object.values(Orientation) as OrientationType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public orientations = Object.values<IdsOrientationType>(IdsOrientation);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
 
   public reset(): void {
     this.model = { ...this.defaults };

@@ -1,9 +1,11 @@
-import { TagAppearance, TagAppearanceType } from './types/tag-appearance';
+import { IDS_TAG_DEFAULT_CONFIG, IDS_TAG_DEFAULT_CONFIG_FACTORY, IdsTagDefaultConfig } from './tag-defaults';
+import { IdsTagAppearanceType } from './types/tag-appearance.type';
 
 import {
   Component,
   ElementRef,
   HostBinding,
+  InjectionToken,
   ViewEncapsulation,
   computed,
   contentChildren,
@@ -11,12 +13,12 @@ import {
   input,
 } from '@angular/core';
 import {
-  AllVariants,
-  AllVariantsType,
+  IdsAllVariantsType,
   createClassList,
-  Size,
-  SizeType,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
+
+const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-tag,button[idsTag]',
@@ -27,12 +29,13 @@ import {
 })
 export class IdsTagComponent {
   private readonly _componentClass = 'ids-tag';
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TAG_DEFAULT_CONFIG);
 
   private _hostElement = inject(ElementRef).nativeElement as HTMLElement;
 
-  public appearance = input<TagAppearanceType | null>(TagAppearance.FILLED);
-  public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
+  public appearance = input<IdsTagAppearanceType>(this._defaultConfig.appearance);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
 
   public iconLeading = contentChildren<unknown>('[icon-leading]');
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
@@ -51,5 +54,13 @@ export class IdsTagComponent {
 
   @HostBinding('class') get classes(): string {
     return this._hostClasses();
+  }
+
+  // eslint-disable-next-line @stylistic/js/max-len
+  protected _getDefaultConfig(defaultConfig: Required<IdsTagDefaultConfig>, injectionToken: InjectionToken<IdsTagDefaultConfig>): Required<IdsTagDefaultConfig> {
+    return {
+      ...defaultConfig,
+      ...inject(injectionToken, { optional: true }),
+    };
   }
 }

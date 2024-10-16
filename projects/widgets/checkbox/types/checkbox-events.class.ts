@@ -1,6 +1,6 @@
 import { IdsCheckboxComponent } from '../checkbox.component';
 
-export class CheckBoxChangeEvent {
+export class IdsCheckBoxChangeEvent {
   public source!: IdsCheckboxComponent;
   public checked!: boolean;
   public value?: string;

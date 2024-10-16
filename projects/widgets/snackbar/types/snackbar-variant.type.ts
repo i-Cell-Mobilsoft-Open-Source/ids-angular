@@ -1,4 +1,4 @@
-export const SnackbarVariant = {
+export const IdsSnackbarVariant = {
   DARK: 'dark',
   INFO: 'info',
   SUCCESS: 'success',
@@ -6,4 +6,4 @@ export const SnackbarVariant = {
   WARNING: 'warning',
 } as const;
 
-export type SnackbarVariantType = (typeof SnackbarVariant)[keyof typeof SnackbarVariant];
+export type IdsSnackbarVariantType = (typeof IdsSnackbarVariant)[keyof typeof IdsSnackbarVariant];

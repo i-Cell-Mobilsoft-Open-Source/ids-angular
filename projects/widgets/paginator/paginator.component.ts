@@ -1,11 +1,11 @@
 import { DEFAULT_PAGE_SIZE, IDS_PAGINATOR_DEFAULT_CONFIG, IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY } from './paginator-defaults';
 import { IdsPaginatorIntl } from './paginator-intl';
-import { PaginatorPageButtonAppearanceType } from './types/paginator-appearance';
-import { PaginatorPageEvent } from './types/paginator-events';
-import { PaginatorVariantType } from './types/paginator-variant';
+import { IdsPaginatorPageButtonAppearanceType } from './types/paginator-appearance.type';
+import { IdsPaginatorPageEvent } from './types/paginator-events.class';
+import { IdsPaginatorVariantType } from './types/paginator-variant.type';
 
-import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostBinding, HostListener, inject, Injector, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
-import { createClassList, isNumberEven, SizeType } from '@i-cell/ids-angular/core';
+import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostBinding, HostListener, inject, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
+import { createClassList, isNumberEven, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { debounceTime, Subject, Subscription } from 'rxjs';
 
@@ -23,18 +23,17 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
 export class IdsPaginatorComponent implements OnDestroy {
   private readonly _componentClass = 'ids-paginator';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private readonly _injector = inject(Injector);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _hostElementRef = inject(ElementRef);
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_PAGINATOR_DEFAULT_CONFIG, null, { optional: true }),
+    ...inject(IDS_PAGINATOR_DEFAULT_CONFIG, { optional: true }),
   };
 
-  private _pageEventDebouncer = new Subject<PaginatorPageEvent>();
+  private _pageEventDebouncer = new Subject<IdsPaginatorPageEvent>();
   private _pageEventDebouncerSubscription = new Subscription();
 
-  public readonly intl = this._injector.get(IdsPaginatorIntl);
+  public readonly intl = inject(IdsPaginatorIntl);
 
   public id = input<string>(this._uniqueId);
   public pageSize = input<number>(this._defaultOptions.pageSize);
@@ -45,9 +44,9 @@ export class IdsPaginatorComponent implements OnDestroy {
   public showPageButtons = input<boolean>(this._defaultOptions.showPageButtons);
   public showAllPages = input<boolean>(this._defaultOptions.showAllPages);
   public maxDisplayedItemCount = input<number>(this._defaultOptions.maxDisplayedItemCount);
-  public size = input<SizeType>(this._defaultOptions.size);
-  public variant = input<PaginatorVariantType>(this._defaultOptions.variant);
-  public pageButtonAppearance = input<PaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
+  public size = input<IdsSizeType>(this._defaultOptions.size);
+  public variant = input<IdsPaginatorVariantType>(this._defaultOptions.variant);
+  public pageButtonAppearance = input<IdsPaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
   public length = input.required<number, number>({ transform: numberAttribute });
   public disabled = input<boolean>(false);
   public compactLayout = input<boolean>(false);
@@ -105,7 +104,7 @@ export class IdsPaginatorComponent implements OnDestroy {
       : this._getPageButtonLabels(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
   });
 
-  @Output() public readonly page: EventEmitter<PaginatorPageEvent> = new EventEmitter<PaginatorPageEvent>();
+  @Output() public readonly page: EventEmitter<IdsPaginatorPageEvent> = new EventEmitter<IdsPaginatorPageEvent>();
 
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();

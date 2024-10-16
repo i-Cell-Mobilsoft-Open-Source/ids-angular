@@ -1,4 +1,4 @@
-import { IdsOptionComponent } from './option.component';
+import { IdsOptionComponent } from '../option.component';
 
 export class IdsOptionSelectionChange<T = unknown> {
   constructor(

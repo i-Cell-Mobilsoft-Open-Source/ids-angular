@@ -1,6 +1,6 @@
-export const MenuItemAppearance = {
+export const IdsMenuItemAppearance = {
   FILLED: 'filled',
   TEXT: 'text',
 } as const;
 
-export type MenuItemAppearanceType = (typeof MenuItemAppearance)[keyof typeof MenuItemAppearance];
+export type IdsMenuItemAppearanceType = (typeof IdsMenuItemAppearance)[keyof typeof IdsMenuItemAppearance];

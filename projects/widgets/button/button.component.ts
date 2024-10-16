@@ -1,20 +1,23 @@
-import { ButtonAppearance, ButtonAppearanceType } from './types/button-appearance';
+import { IDS_BUTTON_DEFAULT_CONFIG, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IdsButtonDefaultConfig } from './button-defaults';
+import { IdsButtonAppearanceType } from './types/button-appearance.type';
 
 import {
   Component,
+  InjectionToken,
   ViewEncapsulation,
   computed,
   contentChildren,
+  inject,
   input,
 } from '@angular/core';
 import {
-  AllVariants,
-  AllVariantsType,
-  Size,
-  SizeType,
+  IdsAllVariantsType,
+  IdsSizeType,
   coerceBooleanAttribute,
   createClassList,
 } from '@i-cell/ids-angular/core';
+
+const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'button[idsButton]',
@@ -31,12 +34,12 @@ import {
 export class IdsButtonComponent {
   private readonly _componentClass = 'ids-button';
 
-  public appearance = input<ButtonAppearanceType | null>(
-    ButtonAppearance.FILLED,
-  );
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BUTTON_DEFAULT_CONFIG);
 
-  public size = input<SizeType | null>(Size.COMFORTABLE);
-  public variant = input<AllVariantsType | null>(AllVariants.PRIMARY);
+  public appearance = input<IdsButtonAppearanceType>(this._defaultConfig.appearance);
+
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
@@ -51,4 +54,12 @@ export class IdsButtonComponent {
       this.variant(),
     ]),
   );
+
+  // eslint-disable-next-line @stylistic/js/max-len
+  protected _getDefaultConfig(defaultConfig: Required<IdsButtonDefaultConfig>, injectionToken: InjectionToken<IdsButtonDefaultConfig>): Required<IdsButtonDefaultConfig> {
+    return {
+      ...defaultConfig,
+      ...inject(injectionToken, { optional: true }),
+    };
+  }
 }

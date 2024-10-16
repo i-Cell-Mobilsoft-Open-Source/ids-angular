@@ -1,11 +1,11 @@
-import { CheckboxVariant, CheckboxVariantType } from './types/checkbox-variant';
+import { IdsCheckboxVariant, IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsCheckboxDefaultConfig {
-  size?: SizeType
-  variant?: CheckboxVariantType
+  size?: IdsSizeType
+  variant?: IdsCheckboxVariantType
 }
 
 export const IDS_CHECKBOX_DEFAULT_CONFIG = new InjectionToken<IdsCheckboxDefaultConfig>(
@@ -18,7 +18,7 @@ export const IDS_CHECKBOX_DEFAULT_CONFIG = new InjectionToken<IdsCheckboxDefault
 
 export function IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY(): Required<IdsCheckboxDefaultConfig> {
   return {
-    size: Size.COMPACT,
-    variant: CheckboxVariant.SURFACE,
+    size: IdsSize.COMPACT,
+    variant: IdsCheckboxVariant.SURFACE,
   };
 }

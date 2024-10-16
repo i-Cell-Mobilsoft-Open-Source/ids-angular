@@ -1,18 +1,17 @@
 import { IDS_WINDOW_RESIZE_DEFAULT_OPTIONS, IDS_WINDOW_RESIZE_DEFAULT_OPTIONS_FACTORY } from '../tokens/window-resize-default-options';
 
-import { inject, Injectable, Injector, NgZone, OnDestroy } from '@angular/core';
+import { inject, Injectable, NgZone, OnDestroy } from '@angular/core';
 import { auditTime, fromEvent, Subject, Subscription } from 'rxjs';
 
 const defaultOptions = IDS_WINDOW_RESIZE_DEFAULT_OPTIONS_FACTORY();
 
 @Injectable({ providedIn: 'root' })
 export class WindowResizeService implements OnDestroy {
-  private readonly _injector = inject(Injector);
   private readonly _ngZone = inject(NgZone);
   private readonly _resized = new Subject<void>();
   private readonly _defaultOptions = {
     ...defaultOptions,
-    ...this._injector.get(IDS_WINDOW_RESIZE_DEFAULT_OPTIONS, null, { optional: true }),
+    ...inject(IDS_WINDOW_RESIZE_DEFAULT_OPTIONS, { optional: true }),
   };
 
   private _subscription?: Subscription;

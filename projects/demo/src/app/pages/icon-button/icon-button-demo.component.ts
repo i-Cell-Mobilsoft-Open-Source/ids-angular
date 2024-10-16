@@ -2,19 +2,19 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
-  AllVariants,
-  AllVariantsType,
-  Size,
-  SizeType,
+  IdsAllVariants,
+  IdsAllVariantsType,
+  IdsSize,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent, IconButtonAppearance, IconButtonAppearanceType } from '@i-cell/ids-angular/icon-button';
+import { IdsIconButtonComponent, IdsIconButtonAppearance, IdsIconButtonAppearanceType } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
 
 type IconButtonPublicApi = {
-  size: SizeType,
-  variant: AllVariantsType,
-  appearance: IconButtonAppearanceType,
+  size: IdsSizeType,
+  variant: IdsAllVariantsType,
+  appearance: IdsIconButtonAppearanceType,
   disabled: boolean,
 };
 
@@ -36,17 +36,17 @@ type IconButtonPublicApi = {
 })
 export class IconButtonDemoComponent {
   public defaults: IconButtonPublicApi = {
-    size: Size.COMFORTABLE,
-    variant: AllVariants.PRIMARY,
-    appearance: IconButtonAppearance.FILLED,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsAllVariants.PRIMARY,
+    appearance: IdsIconButtonAppearance.FILLED,
     disabled: false,
   };
 
   public model: IconButtonPublicApi = { ...this.defaults  };
   
-  public appearances = Object.values(IconButtonAppearance) as IconButtonAppearanceType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public appearances = Object.values<IdsIconButtonAppearanceType>(IdsIconButtonAppearance);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
 
   public onClick(buttonName: string): void {
     console.info(`${buttonName} icon button clicked`);

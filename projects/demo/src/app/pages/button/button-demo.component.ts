@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsButtonComponent, ButtonAppearance, ButtonAppearanceType } from '@i-cell/ids-angular/button';
+import { IdsButtonComponent, IdsButtonAppearance, IdsButtonAppearanceType } from '@i-cell/ids-angular/button';
 import {
-  BrandVariant,
-  BrandVariantType,
-  AllVariants,
-  AllVariantsType,
-  Size,
-  SizeType,
+  IdsBrandVariant,
+  IdsBrandVariantType,
+  IdsAllVariants,
+  IdsAllVariantsType,
+  IdsSize,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
 type ButtonPublicApi = {
-  appearance: ButtonAppearanceType,
-  size: SizeType,
-  variant: AllVariantsType,
+  appearance: IdsButtonAppearanceType,
+  size: IdsSizeType,
+  variant: IdsAllVariantsType,
   disabled: boolean,
 };
 
@@ -41,15 +41,15 @@ type ButtonHelperControls = {
   ],
 })
 export class ButtonDemoComponent {
-  public appearances = Object.values(ButtonAppearance) as ButtonAppearanceType[];
-  public sizes = Object.values(Size) as SizeType[];
-  public baseVariants = Object.values(BrandVariant) as BrandVariantType[];
-  public variants = Object.values(AllVariants) as AllVariantsType[];
+  public appearances = Object.values<IdsButtonAppearanceType>(IdsButtonAppearance);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public baseVariants = Object.values<IdsBrandVariantType>(IdsBrandVariant);
+  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
 
   public defaults: ButtonPublicApi & ButtonHelperControls = {
-    appearance: ButtonAppearance.FILLED,
-    size: Size.COMFORTABLE,
-    variant: AllVariants.PRIMARY,
+    appearance: IdsButtonAppearance.FILLED,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsAllVariants.PRIMARY,
     disabled: false,
     text: 'Sample button',
     hasLeadingIcon: true,

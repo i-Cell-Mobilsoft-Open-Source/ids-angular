@@ -1,6 +1,6 @@
 import { IdsSegmentedControlBase } from './segmented-control-base';
 import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
-import { IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change';
+import { IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change.class';
 
 import { contentChildren, Directive, EventEmitter, forwardRef, input, Output, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';

@@ -1,11 +1,11 @@
-import { FormFieldVariant, FormFieldVariantType } from './types/form-field-variant.type';
+import { IdsFormFieldVariant, IdsFormFieldVariantType } from './types/form-field-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsFormFieldDefaultConfig {
-  size?: SizeType
-  variant?: FormFieldVariantType
+  size?: IdsSizeType
+  variant?: IdsFormFieldVariantType
 }
 
 export const IDS_FORM_FIELD_DEFAULT_CONFIG = new InjectionToken<IdsFormFieldDefaultConfig>(
@@ -18,7 +18,7 @@ export const IDS_FORM_FIELD_DEFAULT_CONFIG = new InjectionToken<IdsFormFieldDefa
 
 export function IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY(): Required<IdsFormFieldDefaultConfig> {
   return {
-    size: Size.COMPACT,
-    variant: FormFieldVariant.SURFACE,
+    size: IdsSize.COMPACT,
+    variant: IdsFormFieldVariant.SURFACE,
   };
 }

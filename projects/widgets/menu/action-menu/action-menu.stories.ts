@@ -1,7 +1,8 @@
 import { IdsActionMenuTriggerDirective } from './action-menu-trigger.directive';
 
+import { IdsMenuItemComponent } from '../menu-item/menu-item.component';
+
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 

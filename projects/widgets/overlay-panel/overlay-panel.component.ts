@@ -16,7 +16,7 @@ import {
   createClassList,
   IdsSizeType,
 } from '@i-cell/ids-angular/core';
-import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
+import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu';
 
 const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
 

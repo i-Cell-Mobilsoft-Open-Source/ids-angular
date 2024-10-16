@@ -1,0 +1,15 @@
+<ng-content select="ids-avatar" />
+
+<ng-content select="[idsLeadingIcon]" />
+
+<div class="ids-chip__label">
+  <ng-content />
+</div>
+
+@if (closable()) {
+  <button type="button" idsIconButton (click)="remove()">
+    <ids-icon fontIcon="close" />
+  </button>
+} @else {
+  <ng-content select="button[idsIconButton]" />
+}

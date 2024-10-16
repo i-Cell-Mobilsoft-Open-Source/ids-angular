@@ -1,0 +1,157 @@
+<h1>{{ "COMPONENTS.CHIP" | translate }}</h1>
+
+<section class="component" [class]="model.variant">
+  <div class="chip-group">
+    <ids-chip
+      [appearance]="model.appearance"
+      [size]="model.size"
+      [variant]="model.variant"
+      [closable]="model.closable"
+      [disabled]="model.disabled"
+    >
+      @if (model.hasAvatar) {
+        <ids-avatar>
+          <ids-icon fontIcon="user" />
+        </ids-avatar>
+      }
+      @if (model.hasLeadingIcon) {
+        <ids-icon fontIcon="moon" idsLeadingIcon />
+      }
+      {{ model.label }}
+      @if (model.hasTrailingIconButton) {
+        <button type="button" idsIconButton>
+          <ids-icon fontIcon="camera" />
+        </button>
+      }
+    </ids-chip>
+  </div>
+</section>
+
+<section class="controls">
+  <table [cellPadding]="10">
+    <caption>
+      <div class="caption-group">
+        <span>Controls</span>
+        <button type="button" idsButton (click)="reset()">Reset</button>
+      </div>
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Default</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>appearance</td>
+        <td>Chip appearance.</td>
+        <td><code>ChipAppearanceType</code></td>
+        <td>
+          <code>{{ defaults.appearance }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.appearance">
+            @for (item of appearances; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Chip size.</td>
+        <td><code>SizeType</code></td>
+        <td>
+          <code>{{ defaults.size }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.size">
+            @for (item of sizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>Chip variant.</td>
+        <td><code>ChipVariantType</code></td>
+        <td>
+          <code>{{ defaults.variant }}</code>
+        </td>
+        <td>
+          <select [(ngModel)]="model.variant">
+            @for (item of variants; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>closable</td>
+        <td>Whether the chip is closable or not.</td>
+        <td><code>false</code></td>
+        <td>
+          <code>{{ defaults.closable }}</code>
+        </td>
+        <td><input type="checkbox" name="closable" [(ngModel)]="model.closable" /></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the chip is disabled or not.</td>
+        <td><code>false</code></td>
+        <td>
+          <code>{{ defaults.disabled }}</code>
+        </td>
+        <td><input type="checkbox" name="disabled" [(ngModel)]="model.disabled" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table [cellPadding]="10">
+    <caption>
+      Helper controls
+    </caption>
+
+    <thead>
+      <tr>
+        <th align="left">Name</th>
+        <th align="left">Description</th>
+        <th align="left">Type</th>
+        <th align="left">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>hasAvatar</td>
+        <td>Whether the chip has avatar.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasAvatar" [(ngModel)]="model.hasAvatar" /></td>
+      </tr>
+      <tr>
+        <td>hasLeadingIcon</td>
+        <td>Whether the chip has leading icon.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasLeadingIcon" [(ngModel)]="model.hasLeadingIcon" /></td>
+      </tr>
+      <tr>
+        <td>label</td>
+        <td>Label of chip</td>
+        <td><code>string</code></td>
+        <td><input type="text" name="label" [(ngModel)]="model.label" /></td>
+      </tr>
+      <tr>
+        <td>hasTrailingIconButton</td>
+        <td>Whether the chip has trailing iconButton.</td>
+        <td><code>boolean</code></td>
+        <td><input type="checkbox" name="hasTrailingIconButton" [(ngModel)]="model.hasTrailingIconButton" /></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

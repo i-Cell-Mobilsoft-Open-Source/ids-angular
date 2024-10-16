@@ -16,6 +16,7 @@
     "BUTTON": "Button",
     "CARD": "Card",
     "CHECKBOX": "Checkbox",
+    "CHIP": "Chip",
     "DIALOG": "Dialog",
     "DIVIDER": "Divider",
     "FIELDSET": "Fieldset",

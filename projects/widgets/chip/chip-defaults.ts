@@ -2,12 +2,12 @@ import { IdsChipAppearance, IdsChipAppearanceType } from './public-api';
 import { IdsChipVariant, IdsChipVariantType } from './types/chip-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsChipDefaultConfig {
   closable: boolean
   appearance?: IdsChipAppearanceType
-  size?: SizeType
+  size?: IdsSizeType
   variant?: IdsChipVariantType
 }
 
@@ -23,7 +23,7 @@ export function IDS_CHIP_DEFAULT_CONFIG_FACTORY(): Required<IdsChipDefaultConfig
   return {
     closable: false,
     appearance: IdsChipAppearance.FILLED,
-    size: Size.COMPACT,
+    size: IdsSize.COMPACT,
     variant: IdsChipVariant.SURFACE,
   };
 }

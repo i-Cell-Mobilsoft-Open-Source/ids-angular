@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { IdsAvatarComponent } from '@i-cell/ids-angular/avatar';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsChipAppearance, IdsChipAppearanceType, IdsChipVariant, IdsChipVariantType, IDS_CHIP_DEFAULT_CONFIG_FACTORY, IdsChipComponent } from '@i-cell/ids-angular/chip';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsPrefixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -13,7 +13,7 @@ const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 
 type ChipPublicApi = {
   appearance: IdsChipAppearanceType,
-  size: SizeType,
+  size: IdsSizeType,
   variant: IdsChipVariantType,
   closable: boolean,
   disabled: boolean,
@@ -47,7 +47,7 @@ type ChipHelperControls = {
 })
 export class ChipDemoComponent {
   public appearances = Object.values<IdsChipAppearanceType>(IdsChipAppearance);
-  public sizes = Object.values<SizeType>(Size);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
   public variants = Object.values<IdsChipVariantType>(IdsChipVariant);
 
   public defaults: ChipPublicApi & ChipHelperControls = {

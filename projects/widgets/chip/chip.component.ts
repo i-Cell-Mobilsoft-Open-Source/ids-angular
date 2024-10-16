@@ -4,7 +4,7 @@ import { IdsChipAppearanceType } from './types/chip-appearance.type';
 import { IdsChipVariantType } from './types/chip-variant.type';
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, OnDestroy, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { coerceNumberAttribute, ComponentBaseWithDefaults, SizeType } from '@i-cell/ids-angular/core';
+import { coerceNumberAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
@@ -39,7 +39,7 @@ export class IdsChipComponent extends ComponentBaseWithDefaults<IdsChipDefaultCo
   
   public closable = input<boolean>(this._defaultConfig.closable);
   public appearance = input<IdsChipAppearanceType>(this._defaultConfig.appearance);
-  public size = input<SizeType>(this._defaultConfig.size);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsChipVariantType>(this._defaultConfig.variant);
   public disabled = input<boolean>(false);
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });

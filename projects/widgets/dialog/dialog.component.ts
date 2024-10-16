@@ -15,7 +15,7 @@ import {
 import {
   createClassList,
   IdsDetectScrollableDirective,
-  SizeType,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -49,7 +49,7 @@ export class IdsDialogComponent {
 
   public dialog = inject(ElementRef).nativeElement as HTMLDialogElement;
 
-  public size = input<SizeType>(this._defaultConfig.size);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
   public mainTitle = input.required<string>();
   public subTitle = input<string>();
   public showCloseButton = input<boolean>(this._defaultConfig.showCloseButton);

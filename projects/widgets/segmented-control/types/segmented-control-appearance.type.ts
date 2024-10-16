@@ -1,6 +1,6 @@
-export const SegmentedControlAppearance = {
+export const IdsSegmentedControlAppearance = {
   FILLED: 'filled',
   OUTLINED: 'outlined',
 } as const;
 
-export type SegmentedControlAppearanceType = (typeof SegmentedControlAppearance)[keyof typeof SegmentedControlAppearance];
+export type IdsSegmentedControlAppearanceType = (typeof IdsSegmentedControlAppearance)[keyof typeof IdsSegmentedControlAppearance];

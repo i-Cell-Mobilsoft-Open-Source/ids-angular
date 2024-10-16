@@ -1,6 +1,6 @@
-export const TooltipVariant = {
+export const IdsTooltipVariant = {
   LIGHT: 'light',
   DARK: 'dark',
 } as const;
 
-export type TooltipVariantType = (typeof TooltipVariant)[keyof typeof TooltipVariant];
+export type IdsTooltipVariantType = (typeof IdsTooltipVariant)[keyof typeof IdsTooltipVariant];

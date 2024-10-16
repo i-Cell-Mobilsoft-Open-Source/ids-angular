@@ -38,7 +38,7 @@
       <tr>
         <td>variant</td>
         <td>Snackbar variant.</td>
-        <td><code>SnackbarVariantType</code></td>
+        <td><code>IdsSnackbarVariantType</code></td>
         <td>
           <code>{{ variants[0] }}</code>
         </td>
@@ -134,7 +134,7 @@
       <tr>
         <td>size</td>
         <td>Size is an application-wide default value. It can not be overwritten runtime.</td>
-        <td><code>SizeType</code></td>
+        <td><code>IdsSizeType</code></td>
         <td>
           <select disabled [(ngModel)]="model.size">
             @for (item of sizes; track $index) {
@@ -146,7 +146,7 @@
       <tr>
         <td>position</td>
         <td>Position is an application-wide default value. It can not be overwritten runtime.</td>
-        <td><code>SnackbarPositionType</code></td>
+        <td><code>IdsSnackbarPositionType</code></td>
         <td>
           <select disabled [(ngModel)]="model.position">
             @for (item of positions; track $index) {

@@ -1,5 +1,5 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
-import { RadioChangeEvent } from '../types/radio-events.class';
+import { IdsRadioChangeEvent } from '../types/radio-events.class';
 
 import { Component, computed, ElementRef, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
@@ -42,7 +42,7 @@ export class IdsRadioItemComponent implements OnInit {
 
   @ViewChild('input') private _inputElement!: ElementRef<HTMLButtonElement>;
 
-  @Output() public readonly changes = new EventEmitter<RadioChangeEvent>();
+  @Output() public readonly changes = new EventEmitter<IdsRadioChangeEvent>();
 
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
@@ -63,7 +63,7 @@ export class IdsRadioItemComponent implements OnInit {
   }
 
   public onChange(): void {
-    this.changes.emit(new RadioChangeEvent(this, this.value()));
+    this.changes.emit(new IdsRadioChangeEvent(this, this.value()));
   }
 
   public touchTargetClick(): void {

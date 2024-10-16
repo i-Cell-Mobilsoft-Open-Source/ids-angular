@@ -1,5 +1,5 @@
 import { IDS_MENU_ITEM_DEFAULT_CONFIG, IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY, IdsMenuItemDefaultConfig } from './menu-item-defaults';
-import { MenuItemAppearanceType } from './types/menu-item-appearance.type';
+import { IdsMenuItemAppearanceType } from './types/menu-item-appearance.type';
 import { MenuItemVariantType } from './types/menu-item-variant.type';
 
 import { CdkMenuItem } from '@angular/cdk/menu';
@@ -14,7 +14,7 @@ import {
   input,
 } from '@angular/core';
 import {
-  SizeType,
+  IdsSizeType,
   coerceBooleanAttribute,
   createClassList,
 } from '@i-cell/ids-angular/core';
@@ -43,9 +43,9 @@ export class IdsMenuItemComponent {
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_MENU_ITEM_DEFAULT_CONFIG);
 
   public label = input.required<string>();
-  public appearance = input<MenuItemAppearanceType>(this._defaultConfig.appearance);
+  public appearance = input<IdsMenuItemAppearanceType>(this._defaultConfig.appearance);
 
-  public size = input<SizeType>(this._defaultConfig.size);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<MenuItemVariantType>(this._defaultConfig.variant);
   public active = input(false);
   public disabled = input(false, {

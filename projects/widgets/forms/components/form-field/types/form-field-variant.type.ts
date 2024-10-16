@@ -1,6 +1,6 @@
-export const FormFieldVariant = {
+export const IdsFormFieldVariant = {
   SURFACE: 'surface',
   LIGHT: 'light',
 } as const;
 
-export type FormFieldVariantType = (typeof FormFieldVariant)[keyof typeof FormFieldVariant];
+export type IdsFormFieldVariantType = (typeof IdsFormFieldVariant)[keyof typeof IdsFormFieldVariant];

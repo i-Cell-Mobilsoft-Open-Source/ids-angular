@@ -2,19 +2,19 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IDS_SWITCH_DEFAULT_CONFIG_FACTORY, IdsSwitchComponent, IdsSwitchGroupComponent, SwitchIconPosition, SwitchIconPositionType, SwitchLabelPosition, SwitchLabelPositionType, SwitchVariant, SwitchVariantType } from '@i-cell/ids-angular/switch';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IDS_SWITCH_DEFAULT_CONFIG_FACTORY, IdsSwitchComponent, IdsSwitchGroupComponent, IdsSwitchIconPosition, IdsSwitchIconPositionType, IdsSwitchLabelPosition, IdsSwitchLabelPositionType, IdsSwitchVariant, IdsSwitchVariantType } from '@i-cell/ids-angular/switch';
 import { TranslateModule } from '@ngx-translate/core';
 
 type SwitchPublicApi = {
   label: string,
   required: boolean,
   readonly: boolean,
-  size: SizeType,
-  variant: SwitchVariantType,
+  size: IdsSizeType,
+  variant: IdsSwitchVariantType,
   hasIcon: boolean,
-  iconPosition: SwitchIconPositionType,
-  labelPosition: SwitchLabelPositionType,
+  iconPosition: IdsSwitchIconPositionType,
+  labelPosition: IdsSwitchLabelPositionType,
   disabled: boolean,
   ariaLabel: string,
   ariaLabelledBy: string,
@@ -22,10 +22,10 @@ type SwitchPublicApi = {
 };
 
 type SwitchGroupPublicApi = {
-  size: SizeType,
+  size: IdsSizeType,
   hasIcon: boolean,
-  iconPosition: SwitchIconPositionType,
-  labelPosition: SwitchLabelPositionType,
+  iconPosition: IdsSwitchIconPositionType,
+  labelPosition: IdsSwitchLabelPositionType,
 };
 
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
@@ -78,10 +78,10 @@ export class SwitchDemoComponent {
   // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
   public groupValue = [true, true, true];
 
-  public sizes = Object.values<SizeType>(Size);
-  public variants = Object.values<SwitchVariantType>(SwitchVariant);
-  public iconPositions = Object.values<SwitchIconPositionType>(SwitchIconPosition);
-  public labelPositions = Object.values<SwitchLabelPositionType>(SwitchLabelPosition);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsSwitchVariantType>(IdsSwitchVariant);
+  public iconPositions = Object.values<IdsSwitchIconPositionType>(IdsSwitchIconPosition);
+  public labelPositions = Object.values<IdsSwitchLabelPositionType>(IdsSwitchLabelPosition);
 
   public resetSwitch(): void {
     this.value = true;

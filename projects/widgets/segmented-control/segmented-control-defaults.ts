@@ -1,13 +1,13 @@
-import { SegmentedControlAppearance, SegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
-import { SegmentedControlVariant, SegmentedControlVariantType } from './types/segmented-control-variant.type';
+import { IdsSegmentedControlAppearance, IdsSegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
+import { IdsSegmentedControlVariant, IdsSegmentedControlVariantType } from './types/segmented-control-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsSegmentedControlDefaultConfig {
-  appearance?: SegmentedControlAppearanceType
-  size?: SizeType
-  variant?: SegmentedControlVariantType
+  appearance?: IdsSegmentedControlAppearanceType
+  size?: IdsSizeType
+  variant?: IdsSegmentedControlVariantType
 }
 
 export const IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG = new InjectionToken<IdsSegmentedControlDefaultConfig>(
@@ -20,8 +20,8 @@ export const IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG = new InjectionToken<IdsSegmen
 
 export function IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY(): Required<IdsSegmentedControlDefaultConfig> {
   return {
-    appearance: SegmentedControlAppearance.FILLED,
-    size: Size.COMFORTABLE,
-    variant: SegmentedControlVariant.SURFACE,
+    appearance: IdsSegmentedControlAppearance.FILLED,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsSegmentedControlVariant.SURFACE,
   };
 }

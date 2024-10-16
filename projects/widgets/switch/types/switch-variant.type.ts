@@ -1,7 +1,7 @@
-export const SwitchVariant = {
+export const IdsSwitchVariant = {
   SURFACE: 'surface',
   LIGHT: 'light',
   PRIMARY: 'primary',
 } as const;
 
-export type SwitchVariantType = (typeof SwitchVariant)[keyof typeof SwitchVariant];
+export type IdsSwitchVariantType = (typeof IdsSwitchVariant)[keyof typeof IdsSwitchVariant];

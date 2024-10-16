@@ -1,7 +1,7 @@
 import { IdsSnackbarService } from './services/snackbar.service';
 import { IDS_SNACKBAR_DEFAULT_OPTIONS, IdsSnackbarDefaultOptions } from './snackbar-defaults';
 import { IdsSnackbarComponent } from './snackbar.component';
-import { SnackbarVariant } from './types/snackbar-variant.type';
+import { IdsSnackbarVariant } from './types/snackbar-variant.type';
 
 import { selectControlOptions, injectInjectorToProps } from '../.storybook/utils';
 import { IdsButtonComponent } from '../button';
@@ -67,7 +67,7 @@ export default {
     message: {
       control: 'text',
     },
-    variant: selectControlOptions(SnackbarVariant),
+    variant: selectControlOptions(IdsSnackbarVariant),
     allowDismiss: {
       control: 'boolean',
     },

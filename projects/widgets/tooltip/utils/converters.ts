@@ -1,86 +1,86 @@
-import { TooltipPosition, TooltipPositionType } from '../types/tooltip-position.type';
+import { IdsTooltipPosition, IdsTooltipPositionType } from '../types/tooltip-position.type';
 
-import { ExtendedHorizontalPosition, ExtendedPosition, ExtendedVerticalPosition, ExtendedPositionPairType } from '@i-cell/ids-angular/core';
+import { IdsExtendedHorizontalPosition, IdsExtendedPosition, IdsExtendedVerticalPosition, IdsExtendedPositionPairType } from '@i-cell/ids-angular/core';
 
-export function tooltipPositionToExtendedPosition(position: TooltipPositionType | null | undefined): ExtendedPositionPairType | null {
+export function tooltipPositionToExtendedPosition(position: IdsTooltipPositionType | null | undefined): IdsExtendedPositionPairType | null {
   if (!position) {
     return null;
   }
 
   switch (position) {
-    case TooltipPosition.NORTH:
+    case IdsTooltipPosition.NORTH:
       return [
-        ExtendedPosition.CENTER,
-        ExtendedPosition.TOP,
+        IdsExtendedPosition.CENTER,
+        IdsExtendedPosition.TOP,
       ];
-    case TooltipPosition.NORTHEAST:
+    case IdsTooltipPosition.NORTHEAST:
       return [
-        ExtendedHorizontalPosition.RIGHT,
-        ExtendedVerticalPosition.TOP,
+        IdsExtendedHorizontalPosition.RIGHT,
+        IdsExtendedVerticalPosition.TOP,
       ];
-    case TooltipPosition.EAST:
+    case IdsTooltipPosition.EAST:
       return [
-        ExtendedHorizontalPosition.RIGHT,
-        ExtendedVerticalPosition.CENTER,
+        IdsExtendedHorizontalPosition.RIGHT,
+        IdsExtendedVerticalPosition.CENTER,
       ];
-    case TooltipPosition.SOUTHEAST:
+    case IdsTooltipPosition.SOUTHEAST:
       return [
-        ExtendedHorizontalPosition.RIGHT,
-        ExtendedVerticalPosition.BOTTOM,
+        IdsExtendedHorizontalPosition.RIGHT,
+        IdsExtendedVerticalPosition.BOTTOM,
       ];
-    case TooltipPosition.SOUTH:
+    case IdsTooltipPosition.SOUTH:
       return [
-        ExtendedHorizontalPosition.CENTER,
-        ExtendedVerticalPosition.BOTTOM,
+        IdsExtendedHorizontalPosition.CENTER,
+        IdsExtendedVerticalPosition.BOTTOM,
       ];
-    case TooltipPosition.SOUTHWEST:
+    case IdsTooltipPosition.SOUTHWEST:
       return [
-        ExtendedHorizontalPosition.LEFT,
-        ExtendedVerticalPosition.BOTTOM,
+        IdsExtendedHorizontalPosition.LEFT,
+        IdsExtendedVerticalPosition.BOTTOM,
       ];
-    case TooltipPosition.WEST:
+    case IdsTooltipPosition.WEST:
       return [
-        ExtendedHorizontalPosition.LEFT,
-        ExtendedVerticalPosition.CENTER,
+        IdsExtendedHorizontalPosition.LEFT,
+        IdsExtendedVerticalPosition.CENTER,
       ];
-    case TooltipPosition.NORTHWEST:
+    case IdsTooltipPosition.NORTHWEST:
       return [
-        ExtendedHorizontalPosition.LEFT,
-        ExtendedVerticalPosition.TOP,
+        IdsExtendedHorizontalPosition.LEFT,
+        IdsExtendedVerticalPosition.TOP,
       ];
   }
 }
 
-export function extendedPositionToTooltipPosition(position: ExtendedPositionPairType | null | undefined): TooltipPositionType | null {
+export function extendedPositionToTooltipPosition(position: IdsExtendedPositionPairType | null | undefined): IdsTooltipPositionType | null {
   if (!position) {
     return null;
   }
 
   // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
   const [hor, vert] = position;
-  if (hor === ExtendedHorizontalPosition.CENTER && vert === ExtendedVerticalPosition.TOP) {
-    return TooltipPosition.NORTH;
+  if (hor === IdsExtendedHorizontalPosition.CENTER && vert === IdsExtendedVerticalPosition.TOP) {
+    return IdsTooltipPosition.NORTH;
   }
-  if (hor === ExtendedHorizontalPosition.RIGHT && vert === ExtendedVerticalPosition.TOP) {
-    return TooltipPosition.NORTHEAST;
+  if (hor === IdsExtendedHorizontalPosition.RIGHT && vert === IdsExtendedVerticalPosition.TOP) {
+    return IdsTooltipPosition.NORTHEAST;
   }
-  if (hor === ExtendedHorizontalPosition.RIGHT && vert === ExtendedVerticalPosition.CENTER) {
-    return TooltipPosition.EAST;
+  if (hor === IdsExtendedHorizontalPosition.RIGHT && vert === IdsExtendedVerticalPosition.CENTER) {
+    return IdsTooltipPosition.EAST;
   }
-  if (hor === ExtendedHorizontalPosition.RIGHT && vert === ExtendedVerticalPosition.BOTTOM) {
-    return TooltipPosition.SOUTHEAST;
+  if (hor === IdsExtendedHorizontalPosition.RIGHT && vert === IdsExtendedVerticalPosition.BOTTOM) {
+    return IdsTooltipPosition.SOUTHEAST;
   }
-  if (hor === ExtendedHorizontalPosition.CENTER && vert === ExtendedVerticalPosition.BOTTOM) {
-    return TooltipPosition.SOUTH;
+  if (hor === IdsExtendedHorizontalPosition.CENTER && vert === IdsExtendedVerticalPosition.BOTTOM) {
+    return IdsTooltipPosition.SOUTH;
   }
-  if (hor === ExtendedHorizontalPosition.LEFT && vert === ExtendedVerticalPosition.BOTTOM) {
-    return TooltipPosition.SOUTHWEST;
+  if (hor === IdsExtendedHorizontalPosition.LEFT && vert === IdsExtendedVerticalPosition.BOTTOM) {
+    return IdsTooltipPosition.SOUTHWEST;
   }
-  if (hor === ExtendedHorizontalPosition.LEFT && vert === ExtendedVerticalPosition.CENTER) {
-    return TooltipPosition.WEST;
+  if (hor === IdsExtendedHorizontalPosition.LEFT && vert === IdsExtendedVerticalPosition.CENTER) {
+    return IdsTooltipPosition.WEST;
   }
-  if (hor === ExtendedHorizontalPosition.LEFT && vert === ExtendedVerticalPosition.TOP) {
-    return TooltipPosition.NORTHWEST;
+  if (hor === IdsExtendedHorizontalPosition.LEFT && vert === IdsExtendedVerticalPosition.TOP) {
+    return IdsTooltipPosition.NORTHWEST;
   }
   return null;
 }

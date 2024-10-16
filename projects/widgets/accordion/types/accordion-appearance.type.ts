@@ -1,6 +1,6 @@
-export const AccordionAppearance = {
+export const IdsAccordionAppearance = {
   FILLED: 'filled',
   TEXT: 'text',
 } as const;
 
-export type AccordionAppearanceType = (typeof AccordionAppearance)[keyof typeof AccordionAppearance];
+export type IdsAccordionAppearanceType = (typeof IdsAccordionAppearance)[keyof typeof IdsAccordionAppearance];

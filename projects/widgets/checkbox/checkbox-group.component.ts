@@ -1,10 +1,10 @@
 import { IDS_CHECKBOX_GROUP_DEFAULT_CONFIG, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxGroupDefaultConfig } from './checkbox-group-defaults';
 import { IdsCheckboxComponent } from './checkbox.component';
-import { CheckBoxChangeEvent } from './types/checkbox-events.class';
-import { CheckboxVariantType } from './types/checkbox-variant.type';
+import { IdsCheckBoxChangeEvent } from './types/checkbox-events.class';
+import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, ViewEncapsulation } from '@angular/core';
-import { ComponentBaseWithDefaults, Orientation, OrientationType, SizeType } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -29,9 +29,9 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   public allowParent = input<boolean>(this._defaultConfig.allowParent);
   public parentCheckboxLabel = input<string>('', { alias: 'parentLabel' });
   public name = input<string>();
-  public size = input<SizeType | null>(this._defaultConfig.size);
-  public variant = input<CheckboxVariantType | null>(this._defaultConfig.variant);
-  public orientation = input<OrientationType | null>(this._defaultConfig.orientation);
+  public size = input<IdsSizeType | null>(this._defaultConfig.size);
+  public variant = input<IdsCheckboxVariantType | null>(this._defaultConfig.variant);
+  public orientation = input<IdsOrientationType | null>(this._defaultConfig.orientation);
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
@@ -45,7 +45,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   );
 
   private _invalidParentOrientation = effect(() => {
-    if (this.allowParent() && this.orientation() === Orientation.HORIZONTAL) {
+    if (this.allowParent() && this.orientation() === IdsOrientation.HORIZONTAL) {
       throw new Error(this._createComponentError('Parent checkbox can be used only in vertical orientation'));
     }
   });
@@ -62,7 +62,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
     });
   }
 
-  protected _handleParentChange(event: CheckBoxChangeEvent): void {
+  protected _handleParentChange(event: IdsCheckBoxChangeEvent): void {
     if (event.checked) {
       this.selectAllChild();
     } else {

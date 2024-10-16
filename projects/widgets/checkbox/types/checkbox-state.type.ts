@@ -1,7 +1,7 @@
-export const CheckboxState = {
+export const IdsCheckboxState = {
   UNCHECKED: 'unchecked',
   CHECKED: 'checked',
   INDETERMINATE: 'indeterminate',
 } as const;
 
-export type CheckboxStateType = (typeof CheckboxState)[keyof typeof CheckboxState];
+export type IdsCheckboxStateType = (typeof IdsCheckboxState)[keyof typeof IdsCheckboxState];

@@ -1,8 +1,8 @@
-export const PaginatorVariant = {
+export const IdsPaginatorVariant = {
   SURFACE: 'surface',
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
   LIGHT: 'light',
 } as const;
 
-export type PaginatorVariantType = (typeof PaginatorVariant)[keyof typeof PaginatorVariant];
+export type IdsPaginatorVariantType = (typeof IdsPaginatorVariant)[keyof typeof IdsPaginatorVariant];

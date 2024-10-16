@@ -1,7 +1,7 @@
-export const RadioVariant = {
+export const IdsRadioVariant = {
   SURFACE: 'surface',
   LIGHT: 'light',
   DARK: 'dark',
 } as const;
 
-export type RadioVariantType = (typeof RadioVariant)[keyof typeof RadioVariant];
+export type IdsRadioVariantType = (typeof IdsRadioVariant)[keyof typeof IdsRadioVariant];

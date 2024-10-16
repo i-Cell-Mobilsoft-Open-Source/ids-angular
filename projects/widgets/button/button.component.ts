@@ -1,5 +1,5 @@
 import { IDS_BUTTON_DEFAULT_CONFIG, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IdsButtonDefaultConfig } from './button-defaults';
-import { ButtonAppearanceType } from './types/button-appearance.type';
+import { IdsButtonAppearanceType } from './types/button-appearance.type';
 
 import {
   Component,
@@ -11,8 +11,8 @@ import {
   input,
 } from '@angular/core';
 import {
-  AllVariantsType,
-  SizeType,
+  IdsAllVariantsType,
+  IdsSizeType,
   coerceBooleanAttribute,
   createClassList,
 } from '@i-cell/ids-angular/core';
@@ -36,10 +36,10 @@ export class IdsButtonComponent {
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BUTTON_DEFAULT_CONFIG);
 
-  public appearance = input<ButtonAppearanceType>(this._defaultConfig.appearance);
+  public appearance = input<IdsButtonAppearanceType>(this._defaultConfig.appearance);
 
-  public size = input<SizeType>(this._defaultConfig.size);
-  public variant = input<AllVariantsType>(this._defaultConfig.variant);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });

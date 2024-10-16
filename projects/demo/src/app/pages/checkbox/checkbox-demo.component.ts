@@ -2,15 +2,15 @@ import { UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { CheckboxVariant, CheckboxVariantType, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxComponent, IdsCheckboxGroupComponent } from '@i-cell/ids-angular/checkbox';
-import { Orientation, OrientationType, Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsCheckboxVariant, IdsCheckboxVariantType, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxComponent, IdsCheckboxGroupComponent } from '@i-cell/ids-angular/checkbox';
+import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms/directives/message-suffix.directive';
 import { TranslateModule } from '@ngx-translate/core';
 
 type CheckboxPublicApi = {
-  size: SizeType,
-  variant: CheckboxVariantType,
+  size: IdsSizeType,
+  variant: IdsCheckboxVariantType,
   readonly: boolean,
 };
 
@@ -27,9 +27,9 @@ type CheckboxGroupPublicApi = {
   allowParent: boolean,
   parentLabel: string,
   name: string,
-  size: SizeType,
-  variant: CheckboxVariantType,
-  orientation: OrientationType,
+  size: IdsSizeType,
+  variant: IdsCheckboxVariantType,
+  orientation: IdsOrientationType,
 };
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
@@ -57,9 +57,9 @@ const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class CheckboxDemoComponent implements OnInit {
-  public sizes = Object.values<SizeType>(Size);
-  public variants = Object.values<CheckboxVariantType>(CheckboxVariant);
-  public orientations = Object.values<OrientationType>(Orientation);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsCheckboxVariantType>(IdsCheckboxVariant);
+  public orientations = Object.values<IdsOrientationType>(IdsOrientation);
 
   public defaults: CheckboxPublicApi & CheckboxHelperControls = {
     readonly: false,

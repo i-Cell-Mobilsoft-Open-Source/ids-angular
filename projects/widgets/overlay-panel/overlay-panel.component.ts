@@ -1,6 +1,6 @@
 import { IDS_OVERLAY_PANEL_DEFAULT_CONFIG, IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY, IdsOverlayPanelDefaultConfig } from './overlay-panel-defaults';
-import { OverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
-import { OverlayPanelVariantType } from './types/overlay-panel-variant.type';
+import { IdsOverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
+import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import {
   createClassList,
-  SizeType,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu-item';
 
@@ -39,10 +39,10 @@ export class IdsOverlayPanelComponent {
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
-  public appearance = input<OverlayPanelAppearanceType>(this._defaultConfig.appearance);
+  public appearance = input<IdsOverlayPanelAppearanceType>(this._defaultConfig.appearance);
 
-  public size = input<SizeType>(this._defaultConfig.size);
-  public variant = input<OverlayPanelVariantType>(this._defaultConfig.variant);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsOverlayPanelVariantType>(this._defaultConfig.variant);
 
   public actionItems = contentChildren(IdsMenuItemComponent);
 

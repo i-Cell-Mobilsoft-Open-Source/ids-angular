@@ -1,2 +1,2 @@
-export type TooltipTouchGestures = 'auto' | 'on' | 'off';
-export type TooltipTextAlign = 'center' | 'left' | 'right';
+export type IdsTooltipTouchGestures = 'auto' | 'on' | 'off';
+export type IdsTooltipTextAlign = 'center' | 'left' | 'right';

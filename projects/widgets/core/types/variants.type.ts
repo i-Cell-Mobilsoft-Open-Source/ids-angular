@@ -1,32 +1,32 @@
-export const BaseVariant = {
+export const IdsBaseVariant = {
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
   LIGHT: 'light',
   DARK: 'dark',
 } as const;
 
-export type BaseVariantType = (typeof BaseVariant)[keyof typeof BaseVariant];
+export type IdsBaseVariantType = (typeof IdsBaseVariant)[keyof typeof IdsBaseVariant];
 
-export const SurfaceVariant = {
-  ...BaseVariant,
+export const IdsSurfaceVariant = {
+  ...IdsBaseVariant,
   SURFACE: 'surface',
 } as const;
 
-export type SurfaceVariantType = (typeof SurfaceVariant)[keyof typeof SurfaceVariant];
+export type IdsSurfaceVariantType = (typeof IdsSurfaceVariant)[keyof typeof IdsSurfaceVariant];
 
-export const BrandVariant = {
-  ...SurfaceVariant,
+export const IdsBrandVariant = {
+  ...IdsSurfaceVariant,
   BRAND: 'brand',
 } as const;
 
-export type BrandVariantType = (typeof BrandVariant)[keyof typeof BrandVariant];
+export type IdsBrandVariantType = (typeof IdsBrandVariant)[keyof typeof IdsBrandVariant];
 
-export const AllVariants = {
-  ...BrandVariant,
+export const IdsAllVariants = {
+  ...IdsBrandVariant,
   ERROR: 'error',
   SUCCESS: 'success',
   WARNING: 'warning',
   INFO: 'info',
 } as const;
 
-export type AllVariantsType = (typeof AllVariants)[keyof typeof AllVariants];
+export type IdsAllVariantsType = (typeof IdsAllVariants)[keyof typeof IdsAllVariants];

@@ -1,6 +1,6 @@
-export const SizeCollection = {
+export const IdsSizeCollection = {
   SMALL: 'small',
   BIG: 'big',
 } as const;
 
-export type SizeCollectionType = (typeof SizeCollection)[keyof typeof SizeCollection];
+export type IdsSizeCollectionType = (typeof IdsSizeCollection)[keyof typeof IdsSizeCollection];

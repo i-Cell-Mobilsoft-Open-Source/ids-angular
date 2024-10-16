@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AccordionAppearance, AccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
-import { ButtonAppearance, ButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { AllVariants, AllVariantsType, Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
+import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsAllVariants, IdsAllVariantsType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 type AccordionPublicApi = {
-  size: SizeType,
-  appearance: AccordionAppearanceType,
+  size: IdsSizeType,
+  appearance: IdsAccordionAppearanceType,
   summary: string,
   disabled: boolean,
   multi: boolean,
-  btnSize: SizeType,
-  btnAppearance: ButtonAppearanceType,
-  btnVariant: AllVariantsType,
+  btnSize: IdsSizeType,
+  btnAppearance: IdsButtonAppearanceType,
+  btnVariant: IdsAllVariantsType,
   expandBtnLabel: string,
   collapseBtnLabel: string,
   hasLeadingIcon: boolean,
@@ -37,20 +37,20 @@ type AccordionPublicApi = {
   ],
 })
 export class AccordionDemoComponent {
-  public appearances = Object.values<AccordionAppearanceType>(AccordionAppearance);
-  public btnAppearances = Object.values<ButtonAppearanceType>(ButtonAppearance);
-  public sizes = Object.values<SizeType>(Size);
-  public variants = Object.values<AllVariantsType>(AllVariants);
+  public appearances = Object.values<IdsAccordionAppearanceType>(IdsAccordionAppearance);
+  public btnAppearances = Object.values<IdsButtonAppearanceType>(IdsButtonAppearance);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
 
   public defaults: AccordionPublicApi = {
-    appearance: AccordionAppearance.FILLED,
-    size: Size.COMFORTABLE,
+    appearance: IdsAccordionAppearance.FILLED,
+    size: IdsSize.COMFORTABLE,
     summary: 'Summary text',
     disabled: false,
     multi: false,
-    btnSize: Size.COMPACT,
-    btnAppearance: ButtonAppearance.FILLED,
-    btnVariant: AllVariants.SURFACE,
+    btnSize: IdsSize.COMPACT,
+    btnAppearance: IdsButtonAppearance.FILLED,
+    btnVariant: IdsAllVariants.SURFACE,
     expandBtnLabel: 'Expand all',
     collapseBtnLabel: 'Collapse all',
     hasLeadingIcon: false,

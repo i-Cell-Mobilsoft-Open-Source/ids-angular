@@ -1,9 +1,9 @@
-import { SwitchVariant } from './public-api';
+import { IdsSwitchVariant } from './public-api';
 import { IdsSwitchComponent } from './switch.component';
-import { SwitchIconPosition, SwitchLabelPosition } from './types/switch-positions.type';
+import { IdsSwitchIconPosition, IdsSwitchLabelPosition } from './types/switch-positions.type';
 
 import { selectControlOptions } from '../.storybook/utils';
-import { Size } from '../core';
+import { IdsSize } from '../core';
 
 import { FormsModule } from '@angular/forms';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
@@ -34,16 +34,16 @@ export default {
     `,
   }),
   argTypes: {
-    size: selectControlOptions(Size),
+    size: selectControlOptions(IdsSize),
     hasIcon: {
       control: 'boolean',
     },
-    iconPosition: selectControlOptions(SwitchIconPosition),
-    labelPosition: selectControlOptions(SwitchLabelPosition),
+    iconPosition: selectControlOptions(IdsSwitchIconPosition),
+    labelPosition: selectControlOptions(IdsSwitchLabelPosition),
     value: {
       control: 'boolean',
     },
-    variant: selectControlOptions(SwitchVariant),
+    variant: selectControlOptions(IdsSwitchVariant),
   },
   args: {
     id: 'switch-1',

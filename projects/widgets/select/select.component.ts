@@ -9,8 +9,8 @@ import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild, OnDestroy, effect, isDevMode } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
-import { coerceBooleanAttribute, coerceNumberAttribute, ComponentBaseWithDefaults, createClassList, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariantType, IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass } from '@i-cell/ids-angular/forms';
+import { coerceBooleanAttribute, coerceNumberAttribute, ComponentBaseWithDefaults, createClassList, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsFormFieldVariantType, IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { first, Subject } from 'rxjs';
 
@@ -95,8 +95,8 @@ export class IdsSelectComponent
   public isPanelOpen = signal<boolean>(false);
   public hasErrorState = signal<boolean>(false);
   public hasSuccessState = signal<boolean>(false);
-  public parentSize = signal<SizeType | null>(null);
-  public parentVariant = signal<FormFieldVariantType | null>(null);
+  public parentSize = signal<IdsSizeType | null>(null);
+  public parentVariant = signal<IdsFormFieldVariantType | null>(null);
   private _focused = signal<boolean>(false);
 
   private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && !this.readonly() && this.options().length > 0);

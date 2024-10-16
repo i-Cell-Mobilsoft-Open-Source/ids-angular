@@ -1,10 +1,10 @@
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType, AllVariants, AllVariantsType, OrientationType, Orientation } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType, IdsAllVariants, IdsAllVariantsType, IdsOrientationType, IdsOrientation } from '@i-cell/ids-angular/core';
 
 export interface IdsDividerDefaultConfig {
-  size?: SizeType,
-  variant?: AllVariantsType,
-  orientation?: OrientationType,
+  size?: IdsSizeType,
+  variant?: IdsAllVariantsType,
+  orientation?: IdsOrientationType,
   width?: string,
   height?: string,
 }
@@ -19,9 +19,9 @@ export const IDS_DIVIDER_DEFAULT_CONFIG = new InjectionToken<IdsDividerDefaultCo
 
 export function IDS_DIVIDER_DEFAULT_CONFIG_FACTORY(): Required<IdsDividerDefaultConfig> {
   return {
-    size: Size.COMFORTABLE,
-    variant: AllVariants.PRIMARY,
-    orientation: Orientation.HORIZONTAL,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsAllVariants.PRIMARY,
+    orientation: IdsOrientation.HORIZONTAL,
     width: '100%',
     height: '100%',
   };

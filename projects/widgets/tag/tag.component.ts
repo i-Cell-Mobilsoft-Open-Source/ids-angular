@@ -1,5 +1,5 @@
 import { IDS_TAG_DEFAULT_CONFIG, IDS_TAG_DEFAULT_CONFIG_FACTORY, IdsTagDefaultConfig } from './tag-defaults';
-import { TagAppearanceType } from './types/tag-appearance.type';
+import { IdsTagAppearanceType } from './types/tag-appearance.type';
 
 import {
   Component,
@@ -13,9 +13,9 @@ import {
   input,
 } from '@angular/core';
 import {
-  AllVariantsType,
+  IdsAllVariantsType,
   createClassList,
-  SizeType,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
@@ -33,9 +33,9 @@ export class IdsTagComponent {
 
   private _hostElement = inject(ElementRef).nativeElement as HTMLElement;
 
-  public appearance = input<TagAppearanceType>(this._defaultConfig.appearance);
-  public size = input<SizeType>(this._defaultConfig.size);
-  public variant = input<AllVariantsType>(this._defaultConfig.variant);
+  public appearance = input<IdsTagAppearanceType>(this._defaultConfig.appearance);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
 
   public iconLeading = contentChildren<unknown>('[icon-leading]');
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');

@@ -1,13 +1,13 @@
 import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY } from './segmented-control-defaults';
 import { IdsSegmentedControlItemComponent } from './segmented-control-item/segmented-control-item.component';
 import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
-import { SegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
+import { IdsSegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
 import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change.class';
-import { SegmentedControlVariantType } from './types/segmented-control-variant.type';
+import { IdsSegmentedControlVariantType } from './types/segmented-control-variant.type';
 
 import { AfterContentInit, computed, Directive, EventEmitter, HostBinding, HostListener, inject, Input, input, InputSignal, isDevMode, OnDestroy, OnInit, Output, Signal, signal } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { createClassList, createComponentError, SelectionModel, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, createComponentError, SelectionModel, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
 
 const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
@@ -33,9 +33,9 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
 
   public abstract id: InputSignal<string>;
   public name = input<string>();
-  public size = input<SizeType>(this._defaultOptions.size);
-  public variant = input<SegmentedControlVariantType>(this._defaultOptions.variant);
-  public appearance = input<SegmentedControlAppearanceType>(this._defaultOptions.appearance);
+  public size = input<IdsSizeType>(this._defaultOptions.size);
+  public variant = input<IdsSegmentedControlVariantType>(this._defaultOptions.variant);
+  public appearance = input<IdsSegmentedControlAppearanceType>(this._defaultOptions.appearance);
   public abstract multiSelect: InputSignal<boolean> | Signal<boolean>;
   public disabled = signal<boolean>(false);
 

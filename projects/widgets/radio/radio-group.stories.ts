@@ -1,9 +1,9 @@
 import { IdsRadioGroupDirective } from './radio-group.directive';
 import { IdsRadioItemComponent } from './radio-item/radio-item.component';
-import { RadioVariant } from './types/radio-variant.type';
+import { IdsRadioVariant } from './types/radio-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
-import { Orientation, Position, Size } from '../core';
+import { IdsOrientation, IdsPosition, IdsSize } from '../core';
 
 import { FormsModule } from '@angular/forms';
 import { withActions } from '@storybook/addon-actions/decorator';
@@ -50,10 +50,10 @@ export default {
         `,
   }),
   argTypes: {
-    variant: selectControlOptions(RadioVariant),
-    size: selectControlOptions(Size),
-    orientation: selectControlOptions(Orientation),
-    labelPosition: selectControlOptions(Position),
+    variant: selectControlOptions(IdsRadioVariant),
+    size: selectControlOptions(IdsSize),
+    orientation: selectControlOptions(IdsOrientation),
+    labelPosition: selectControlOptions(IdsPosition),
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
   },

@@ -1,13 +1,13 @@
-export const SwitchIconPosition = {
+export const IdsSwitchIconPosition = {
   ONHANDLE: 'onhandle',
   ONTRACK: 'ontrack',
 } as const;
 
-export type SwitchIconPositionType = (typeof SwitchIconPosition)[keyof typeof SwitchIconPosition];
+export type IdsSwitchIconPositionType = (typeof IdsSwitchIconPosition)[keyof typeof IdsSwitchIconPosition];
 
-export const SwitchLabelPosition = {
+export const IdsSwitchLabelPosition = {
   LEFT: 'left',
   RIGHT: 'right',
 } as const;
 
-export type SwitchLabelPositionType = (typeof SwitchLabelPosition)[keyof typeof SwitchLabelPosition];
+export type IdsSwitchLabelPositionType = (typeof IdsSwitchLabelPosition)[keyof typeof IdsSwitchLabelPosition];

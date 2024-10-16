@@ -1,9 +1,9 @@
 import { IdsIconButtonComponent } from './icon-button.component';
-import { IconButtonAppearance } from './types/icon-button-appearance.type';
+import { IdsIconButtonAppearance } from './types/icon-button-appearance.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 
-import { coerceBooleanAttribute, AllVariants, Size } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, IdsAllVariants, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
@@ -43,9 +43,9 @@ export default {
     };
   },
   argTypes: {
-    appearance: selectControlOptions(IconButtonAppearance, 'The appearance style of the icon button'),
-    size: selectControlOptions(Size, 'The size of the icon button component'),
-    variant: selectControlOptions(AllVariants, 'The variant/style of the icon button'),
+    appearance: selectControlOptions(IdsIconButtonAppearance, 'The appearance style of the icon button'),
+    size: selectControlOptions(IdsSize, 'The size of the icon button component'),
+    variant: selectControlOptions(IdsAllVariants, 'The variant/style of the icon button'),
     disabled: { control: 'boolean', description: 'Determines if the icon button is disabled' },
   },
 } as Meta<StoryType>;

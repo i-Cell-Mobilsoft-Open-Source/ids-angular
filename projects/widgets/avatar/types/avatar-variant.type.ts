@@ -1,4 +1,4 @@
-export const AvatarVariant = {
+export const IdsAvatarVariant = {
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
   SURFACE: 'surface',
@@ -6,4 +6,4 @@ export const AvatarVariant = {
   DARK: 'dark',
 } as const;
 
-export type AvatarVariantType = (typeof AvatarVariant)[keyof typeof AvatarVariant];
+export type IdsAvatarVariantType = (typeof IdsAvatarVariant)[keyof typeof IdsAvatarVariant];

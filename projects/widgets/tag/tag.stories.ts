@@ -1,8 +1,8 @@
 import { IdsTagComponent } from './tag.component';
-import { TagAppearance } from './types/tag-appearance.type';
+import { IdsTagAppearance } from './types/tag-appearance.type';
 
 import { selectControlOptions } from '../.storybook/utils';
-import { AllVariants, coerceBooleanAttribute, Size } from '../core';
+import { IdsAllVariants, coerceBooleanAttribute, IdsSize } from '../core';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -42,9 +42,9 @@ export default {
     };
   },
   argTypes: {
-    appearance: selectControlOptions(TagAppearance),
-    size: selectControlOptions(Size),
-    variant: selectControlOptions(AllVariants),
+    appearance: selectControlOptions(IdsTagAppearance),
+    size: selectControlOptions(IdsSize),
+    variant: selectControlOptions(IdsAllVariants),
     label: { control: 'text', description: 'Projected label text for the tag' },
     prefixIcon: { control: 'boolean', description: 'Projected prefix icon for the tag' },
     suffixIcon: { control: 'boolean', description: 'Projected suffix icon for the tag' },

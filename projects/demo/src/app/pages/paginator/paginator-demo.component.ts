@@ -2,8 +2,8 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorComponent, PaginatorPageButtonAppearance, PaginatorPageButtonAppearanceType, PaginatorVariant, PaginatorVariantType } from '@i-cell/ids-angular/paginator';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorComponent, IdsPaginatorPageButtonAppearance, IdsPaginatorPageButtonAppearanceType, IdsPaginatorVariant, IdsPaginatorVariantType } from '@i-cell/ids-angular/paginator';
 import { TranslateModule } from '@ngx-translate/core';
 
 type PaginatorPublicApi = {
@@ -15,9 +15,9 @@ type PaginatorPublicApi = {
   showPageButtons: boolean
   showAllPages: boolean
   maxDisplayedItemCount: number
-  size: SizeType
-  variant: PaginatorVariantType
-  pageButtonAppearance: PaginatorPageButtonAppearanceType
+  size: IdsSizeType
+  variant: IdsPaginatorVariantType
+  pageButtonAppearance: IdsPaginatorPageButtonAppearanceType
   debounceTime: number
 };
 
@@ -57,9 +57,9 @@ export class PaginatorDemoComponent {
 
   public model: PaginatorPublicApi = { ...this.defaults  };
 
-  public sizes = Object.values<SizeType>(Size);
-  public variants = Object.values<PaginatorVariantType>(PaginatorVariant);
-  public pageButtonAppearances = Object.values<PaginatorPageButtonAppearanceType>(PaginatorPageButtonAppearance);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsPaginatorVariantType>(IdsPaginatorVariant);
+  public pageButtonAppearances = Object.values<IdsPaginatorPageButtonAppearanceType>(IdsPaginatorPageButtonAppearance);
 
   // eslint-disable-next-line no-magic-numbers
   public length = 120;

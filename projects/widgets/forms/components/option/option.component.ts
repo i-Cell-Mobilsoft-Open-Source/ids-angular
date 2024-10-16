@@ -2,15 +2,15 @@ import { IDS_OPTION_GROUP, IdsOptionGroupComponent } from './option-group.compon
 import { IDS_OPTION_PARENT_COMPONENT } from './option-parent';
 import { IdsOptionSelectionChange } from './types/option-events.class';
 
-import { FormFieldVariantType } from '../form-field/types/form-field-variant.type';
+import { IdsFormFieldVariantType } from '../form-field/types/form-field-variant.type';
 import { IDS_PSEUDO_CHECKBOX_PARENT_COMPONENT, IdsPseudoCheckboxParentComponent } from '../pseudo-checkbox/pseudo-checkbox-parent';
 import { PseudoCheckboxComponent } from '../pseudo-checkbox/pseudo-checkbox.component';
 
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { CheckboxState } from '@i-cell/ids-angular/checkbox';
-import { coerceBooleanAttribute, ComponentBase, SizeType } from '@i-cell/ids-angular/core';
+import { IdsCheckboxState } from '@i-cell/ids-angular/checkbox';
+import { coerceBooleanAttribute, ComponentBase, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
@@ -39,7 +39,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 })
 export class IdsOptionComponent<T = unknown>
   extends ComponentBase
-  implements OnInit, IdsPseudoCheckboxParentComponent<FormFieldVariantType> {
+  implements OnInit, IdsPseudoCheckboxParentComponent<IdsFormFieldVariantType> {
   protected override get _componentName(): string {
     return 'option';
   }
@@ -52,8 +52,8 @@ export class IdsOptionComponent<T = unknown>
 
   public selected = signal<boolean>(false);
   private _active = signal<boolean>(false);
-  public size = signal<SizeType>(this._parent.parentSize());
-  public variant = signal<FormFieldVariantType>(this._parent.parentVariant());
+  public size = signal<IdsSizeType>(this._parent.parentSize());
+  public variant = signal<IdsFormFieldVariantType>(this._parent.parentVariant());
 
   public value = input<T>();
   public explicitViewValue = input<string | null>(null, { alias: 'viewValue' });
@@ -77,7 +77,7 @@ export class IdsOptionComponent<T = unknown>
     this.variant(),
   ]));
 
-  protected _pseudoCheckboxState = computed(() => (this.selected() ? CheckboxState.CHECKED : CheckboxState.UNCHECKED));
+  protected _pseudoCheckboxState = computed(() => (this.selected() ? IdsCheckboxState.CHECKED : IdsCheckboxState.UNCHECKED));
 
   constructor() {
     super();

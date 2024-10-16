@@ -1,7 +1,7 @@
-export const CardAppearance = {
+export const IdsCardAppearance = {
   FILLED: 'filled',
   OUTLINED: 'outlined',
   ELEVATED: 'elevated',
 } as const;
 
-export type CardAppearanceType = (typeof CardAppearance)[keyof typeof CardAppearance];
+export type IdsCardAppearanceType = (typeof IdsCardAppearance)[keyof typeof IdsCardAppearance];

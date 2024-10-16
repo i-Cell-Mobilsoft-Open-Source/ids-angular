@@ -1,9 +1,9 @@
-import { SegmentedControlAppearance, SegmentedControlVariant } from './public-api';
+import { IdsSegmentedControlAppearance, IdsSegmentedControlVariant } from './public-api';
 import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
 import { IdsSegmentedControlToggleDirective } from './segmented-control-toggle.directive';
 
 import { selectControlOptions } from '../.storybook/utils';
-import { Size } from '../core';
+import { IdsSize } from '../core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { withActions } from '@storybook/addon-actions/decorator';
@@ -50,9 +50,9 @@ export default {
         `,
   }),
   argTypes: {
-    size: selectControlOptions(Size),
-    variant: selectControlOptions(SegmentedControlVariant),
-    appearance: selectControlOptions(SegmentedControlAppearance),
+    size: selectControlOptions(IdsSize),
+    variant: selectControlOptions(IdsSegmentedControlVariant),
+    appearance: selectControlOptions(IdsSegmentedControlAppearance),
     disabled: { control: 'boolean' },
     multiSelect: { control: false },
   },

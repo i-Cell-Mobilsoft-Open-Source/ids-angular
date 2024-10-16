@@ -1,11 +1,11 @@
-import { MessageVariant, MessageVariantType } from './types/message-variant.type';
+import { IdsMessageVariant, IdsMessageVariantType } from './types/message-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsMessageDefaultConfig {
-  size?: SizeType,
-  variant?: MessageVariantType,
+  size?: IdsSizeType,
+  variant?: IdsMessageVariantType,
 }
 
 export const IDS_MESSAGE_DEFAULT_CONFIG = new InjectionToken<IdsMessageDefaultConfig>(
@@ -18,8 +18,8 @@ export const IDS_MESSAGE_DEFAULT_CONFIG = new InjectionToken<IdsMessageDefaultCo
 
 export function IDS_MESSAGE_DEFAULT_CONFIG_FACTORY(): Required<IdsMessageDefaultConfig> {
   return {
-    size: Size.COMFORTABLE,
-    variant: MessageVariant.SURFACE,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsMessageVariant.SURFACE,
   };
 }
 

@@ -1,7 +1,7 @@
-export const ButtonAppearance = {
+export const IdsButtonAppearance = {
   FILLED: 'filled',
   OUTLINED: 'outlined',
   TEXT: 'text',
 } as const;
 
-export type ButtonAppearanceType = (typeof ButtonAppearance)[keyof typeof ButtonAppearance];
+export type IdsButtonAppearanceType = (typeof IdsButtonAppearance)[keyof typeof IdsButtonAppearance];

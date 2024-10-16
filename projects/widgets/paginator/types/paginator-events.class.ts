@@ -1,4 +1,4 @@
-export class PaginatorPageEvent {
+export class IdsPaginatorPageEvent {
   public pageIndex!: number;
   public previousPageIndex?: number;
   public pageSize!: number;

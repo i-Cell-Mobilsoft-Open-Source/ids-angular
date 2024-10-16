@@ -1,10 +1,10 @@
 import { IDS_AVATAR_DEFAULT_CONFIG, IDS_AVATAR_DEFAULT_CONFIG_FACTORY, IdsAvatarDefaultConfig } from './avatar-defaults';
 import { IdsAvatarImageDirective } from './avatar-image.directive';
-import { AvatarType } from './types/avatar-type.type';
-import { AvatarVariantType } from './types/avatar-variant.type';
+import { IdsAvatarType } from './types/avatar-type.type';
+import { IdsAvatarVariantType } from './types/avatar-variant.type';
 
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChild, input } from '@angular/core';
-import { ComponentBaseWithDefaults, SizeCollectionType, SizeType } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 const defaultConfig = IDS_AVATAR_DEFAULT_CONFIG_FACTORY();
@@ -24,24 +24,24 @@ export class IdsAvatarComponent extends ComponentBaseWithDefaults<IdsAvatarDefau
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_AVATAR_DEFAULT_CONFIG);
   
-  protected readonly _avatarType = AvatarType;
+  protected readonly _avatarType = IdsAvatarType;
 
   private _iconChild = contentChild(IdsIconComponent);
   private _imageChild = contentChild(IdsAvatarImageDirective);
 
   public initials = input<string | null>(null);
-  public size = input<SizeType>(this._defaultConfig.size);
-  public sizeCollection = input<SizeCollectionType>(this._defaultConfig.sizeCollection);
-  public variant = input<AvatarVariantType>(this._defaultConfig.variant);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public sizeCollection = input<IdsSizeCollectionType>(this._defaultConfig.sizeCollection);
+  public variant = input<IdsAvatarVariantType>(this._defaultConfig.variant);
 
   private _implicitAvatarType = computed(() => {
     if (this._iconChild() && !this._imageChild()) {
-      return AvatarType.ICON;
+      return IdsAvatarType.ICON;
     }
     if (this._imageChild() && !this._iconChild()) {
-      return AvatarType.IMAGE;
+      return IdsAvatarType.IMAGE;
     }
-    return AvatarType.INITIALS;
+    return IdsAvatarType.INITIALS;
   });
 
   public avatarType = computed(() => this._implicitAvatarType() ?? this._defaultConfig.type);

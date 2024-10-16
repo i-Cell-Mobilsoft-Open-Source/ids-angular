@@ -1,6 +1,6 @@
 import { IDS_ACCORDION_DEFAULT_CONFIG, IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionDefaultConfig } from './accordion-defaults';
 import { IdsAccordionItemComponent } from './accordion-item/accordion-item.component';
-import { AccordionAppearanceType } from './types/accordion-appearance.type';
+import { IdsAccordionAppearanceType } from './types/accordion-appearance.type';
 
 import { CdkAccordion } from '@angular/cdk/accordion';
 import {
@@ -12,8 +12,8 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { ButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { AllVariantsType, coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, SizeType } from '@i-cell/ids-angular/core';
+import { IdsButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsAllVariantsType, coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 
@@ -48,15 +48,15 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ACCORDION_DEFAULT_CONFIG);
   protected _controlsClass = `${this._componentClass}-controls`;
 
-  public size = input<SizeType>(this._defaultConfig.size);
-  public appearance = input<AccordionAppearanceType>(this._defaultConfig.appearance);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public appearance = input<IdsAccordionAppearanceType>(this._defaultConfig.appearance);
   public disabled = input(false, { transform: coerceBooleanAttribute });
   public hasLeadingIcon = input(this._defaultConfig.hasLeadingIcon, { transform: coerceBooleanAttribute });
   public hasTrailingIcon = input(this._defaultConfig.hasTrailingIcon, { transform: coerceBooleanAttribute });
   public multi = input<boolean>(this._defaultConfig.multi);
-  public btnSize = input<SizeType>(this._defaultConfig.btnSize);
-  public btnAppearance = input<ButtonAppearanceType>(this._defaultConfig.btnAppearance);
-  public btnVariant = input<AllVariantsType>(this._defaultConfig.btnVariant);
+  public btnSize = input<IdsSizeType>(this._defaultConfig.btnSize);
+  public btnAppearance = input<IdsButtonAppearanceType>(this._defaultConfig.btnAppearance);
+  public btnVariant = input<IdsAllVariantsType>(this._defaultConfig.btnVariant);
   public expandBtnLabel = input<string, string>(this._defaultConfig.expandBtnLabel, { transform: coerceStringAttribute });
   public collapseBtnLabel = input<string, string>(this._defaultConfig.collapseBtnLabel, { transform: coerceStringAttribute });
 

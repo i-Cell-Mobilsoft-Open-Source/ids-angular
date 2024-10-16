@@ -1,5 +1,5 @@
-export const PaginatorPageButtonAppearance = {
+export const IdsPaginatorPageButtonAppearance = {
   PLAIN: 'plain',
 } as const;
 
-export type PaginatorPageButtonAppearanceType = (typeof PaginatorPageButtonAppearance)[keyof typeof PaginatorPageButtonAppearance];
+export type IdsPaginatorPageButtonAppearanceType = (typeof IdsPaginatorPageButtonAppearance)[keyof typeof IdsPaginatorPageButtonAppearance];

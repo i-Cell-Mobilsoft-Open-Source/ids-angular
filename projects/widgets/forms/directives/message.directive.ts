@@ -1,11 +1,11 @@
 import { IdsFormFieldComponent } from '../components/form-field/form-field.component';
 import { IDS_FORM_FIELD } from '../components/form-field/tokens/form-field-tokens';
-import { FormFieldVariantType } from '../components/form-field/types/form-field-variant.type';
+import { IdsFormFieldVariantType } from '../components/form-field/types/form-field-variant.type';
 import { IDS_MESSAGE_DEFAULT_CONFIG, IDS_MESSAGE_DEFAULT_CONFIG_FACTORY, IdsMessageDefaultConfig } from '../components/message/message-defaults';
-import { MessageVariantType } from '../components/message/types/message-variant.type';
+import { IdsMessageVariantType } from '../components/message/types/message-variant.type';
 
 import { Directive, HostBinding, InjectionToken, OnInit, computed, inject, input, signal } from '@angular/core';
-import { createClassList, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, IdsSizeType } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 
@@ -28,10 +28,10 @@ export class IdsMessageDirective implements OnInit {
     { transform: (value: number) => `${this._componentClass}-${value}` },
   );
 
-  public size = input<SizeType>(this._defaultConfig.size);
-  public variant = input<MessageVariantType>(this._defaultConfig.variant);
-  private _parentSize = signal<SizeType | null | undefined>(this._parent?.size());
-  private _parentVariant = signal<FormFieldVariantType | null | undefined>(this._parent?.variant());
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsMessageVariantType>(this._defaultConfig.variant);
+  private _parentSize = signal<IdsSizeType | null | undefined>(this._parent?.size());
+  private _parentVariant = signal<IdsFormFieldVariantType | null | undefined>(this._parent?.variant());
   private _safeSize = computed(() => this._parentSize() ?? this.size());
   private _safeVariant = computed(() => this._parentVariant() ?? this.variant());
   private _disabled = signal<boolean>(false);

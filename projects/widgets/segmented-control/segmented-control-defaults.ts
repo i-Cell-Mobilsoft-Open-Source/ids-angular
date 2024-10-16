@@ -1,5 +1,5 @@
-import { SegmentedControlAppearance, SegmentedControlAppearanceType } from './types/segmented-control-appearance';
-import { SegmentedControlVariant, SegmentedControlVariantType } from './types/segmented-control-variant';
+import { SegmentedControlAppearance, SegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
+import { SegmentedControlVariant, SegmentedControlVariantType } from './types/segmented-control-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { Size, SizeType } from '@i-cell/ids-angular/core';

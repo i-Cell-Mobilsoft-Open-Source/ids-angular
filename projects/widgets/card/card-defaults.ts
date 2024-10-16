@@ -1,4 +1,4 @@
-import { CardAppearance, CardAppearanceType } from './types/card-appearances';
+import { CardAppearance, CardAppearanceType } from './types/card-appearances.type';
 
 import { InjectionToken } from '@angular/core';
 import { Size, SizeType, AllVariants, AllVariantsType, OrientationType, Orientation } from '@i-cell/ids-angular/core';

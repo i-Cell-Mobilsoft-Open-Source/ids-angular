@@ -1,6 +1,6 @@
 import { IdsSegmentedControlBase } from './segmented-control-base';
 import { IdsSegmentedControlItemComponent } from './segmented-control-item/segmented-control-item.component';
-import { IdsSegmentedControlItemChange } from './types/segmented-control-item-change';
+import { IdsSegmentedControlItemChange } from './types/segmented-control-item-change.class';
 
 import { contentChildren, Directive, EventEmitter, forwardRef, input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';

@@ -1,7 +1,7 @@
 import { IdsSegmentedControlItemBase } from './segmented-control-item-base';
 
 import { IdsSegmentedControlToggleDirective } from '../segmented-control-toggle.directive';
-import { IdsSegmentedControlToggleItemChange } from '../types/segmented-control-item-change';
+import { IdsSegmentedControlToggleItemChange } from '../types/segmented-control-item-change.class';
 
 import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';

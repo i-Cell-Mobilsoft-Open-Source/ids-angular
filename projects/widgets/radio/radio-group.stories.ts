@@ -1,6 +1,6 @@
 import { IdsRadioGroupDirective } from './radio-group.directive';
 import { IdsRadioItemComponent } from './radio-item/radio-item.component';
-import { RadioVariant } from './types/radio-variant';
+import { RadioVariant } from './types/radio-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 import { Orientation, Position, Size } from '../core';

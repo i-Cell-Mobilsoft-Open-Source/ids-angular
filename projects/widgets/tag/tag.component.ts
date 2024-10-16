@@ -1,5 +1,5 @@
 import { IDS_TAG_DEFAULT_CONFIG, IDS_TAG_DEFAULT_CONFIG_FACTORY, IdsTagDefaultConfig } from './tag-defaults';
-import { TagAppearanceType } from './types/tag-appearance';
+import { TagAppearanceType } from './types/tag-appearance.type';
 
 import {
   Component,

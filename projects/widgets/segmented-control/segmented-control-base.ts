@@ -1,9 +1,9 @@
 import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY } from './segmented-control-defaults';
 import { IdsSegmentedControlItemComponent } from './segmented-control-item/segmented-control-item.component';
 import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
-import { SegmentedControlAppearanceType } from './types/segmented-control-appearance';
-import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change';
-import { SegmentedControlVariantType } from './types/segmented-control-variant';
+import { SegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
+import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change.class';
+import { SegmentedControlVariantType } from './types/segmented-control-variant.type';
 
 import { AfterContentInit, computed, Directive, EventEmitter, HostBinding, HostListener, inject, Input, input, InputSignal, isDevMode, OnDestroy, OnInit, Output, Signal, signal } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';

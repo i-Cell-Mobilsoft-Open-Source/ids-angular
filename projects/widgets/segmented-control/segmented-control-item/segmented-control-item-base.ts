@@ -1,6 +1,6 @@
 import { IdsSegmentedControlToggleDirective } from '../segmented-control-toggle.directive';
 import { IdsSegmentedControlDirective } from '../segmented-control.directive';
-import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from '../types/segmented-control-item-change';
+import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from '../types/segmented-control-item-change.class';
 
 import { computed, Directive, ElementRef, EventEmitter, HostBinding, inject, Injector, input, InputSignal, OnInit, Output, signal, ViewChild } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';

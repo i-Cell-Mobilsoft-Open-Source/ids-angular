@@ -1,4 +1,4 @@
-import { TagAppearance, TagAppearanceType } from './types/tag-appearance';
+import { TagAppearance, TagAppearanceType } from './types/tag-appearance.type';
 
 import { InjectionToken } from '@angular/core';
 import { Size, SizeType, AllVariants, AllVariantsType } from '@i-cell/ids-angular/core';

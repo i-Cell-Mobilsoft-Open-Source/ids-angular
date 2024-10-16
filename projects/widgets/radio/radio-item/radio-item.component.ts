@@ -1,5 +1,5 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
-import { RadioChangeEvent } from '../types/radio-events';
+import { RadioChangeEvent } from '../types/radio-events.class';
 
 import { Component, computed, ElementRef, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';

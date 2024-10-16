@@ -1,8 +1,8 @@
 import { switchAnimation } from './switch-animations';
 import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY } from './switch-defaults';
 import { IdsSwitchGroupComponent } from './switch-group.component';
-import { SwitchIconPosition } from './types/switch-positions';
-import { SwitchVariantType } from './types/switch-variant';
+import { SwitchIconPosition } from './types/switch-positions.type';
+import { SwitchVariantType } from './types/switch-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';

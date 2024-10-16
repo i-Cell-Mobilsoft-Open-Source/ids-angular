@@ -1,6 +1,6 @@
 import { IDS_CARD_DEFAULT_CONFIG, IDS_CARD_DEFAULT_CONFIG_FACTORY, IdsCardDefaultConfig } from './card-defaults';
 import { IdsCardHeaderComponent } from './card-header.component';
-import { CardAppearanceType } from './types/card-appearances';
+import { CardAppearanceType } from './types/card-appearances.type';
 
 import {
   Component,

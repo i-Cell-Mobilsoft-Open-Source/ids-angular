@@ -1,5 +1,5 @@
-import { TooltipPosition, TooltipPositionType } from './types/tooltip-position';
-import { TooltipVariant, TooltipVariantType } from './types/tooltip-variant';
+import { TooltipPosition, TooltipPositionType } from './types/tooltip-position.type';
+import { TooltipVariant, TooltipVariantType } from './types/tooltip-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { SizeType, Size } from '@i-cell/ids-angular/core';

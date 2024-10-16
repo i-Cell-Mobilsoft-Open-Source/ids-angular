@@ -1,5 +1,5 @@
-import { TooltipPositionType } from './types/tooltip-position';
-import { TooltipVariantType } from './types/tooltip-variant';
+import { TooltipPositionType } from './types/tooltip-position.type';
+import { TooltipVariantType } from './types/tooltip-variant.type';
 import { TooltipTextAlign } from './types/tooltip.type';
 import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } from './utils/converters';
 

@@ -1,5 +1,5 @@
 import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonDefaultConfig } from './icon-button-defaults';
-import { IconButtonAppearanceType } from './types/icon-button-appearance';
+import { IconButtonAppearanceType } from './types/icon-button-appearance.type';
 
 import {
   Component,

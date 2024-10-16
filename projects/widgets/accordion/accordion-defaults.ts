@@ -1,4 +1,4 @@
-import { AccordionAppearance, AccordionAppearanceType } from './types/accordion-appearance';
+import { AccordionAppearance, AccordionAppearanceType } from './types/accordion-appearance.type';
 
 import { InjectionToken } from '@angular/core';
 import { ButtonAppearance, ButtonAppearanceType } from '@i-cell/ids-angular/button';

@@ -1,7 +1,7 @@
 import { IDS_CHECKBOX_GROUP_DEFAULT_CONFIG, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxGroupDefaultConfig } from './checkbox-group-defaults';
 import { IdsCheckboxComponent } from './checkbox.component';
-import { CheckBoxChangeEvent } from './types/checkbox-events';
-import { CheckboxVariantType } from './types/checkbox-variant';
+import { CheckBoxChangeEvent } from './types/checkbox-events.class';
+import { CheckboxVariantType } from './types/checkbox-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, ViewEncapsulation } from '@angular/core';
 import { ComponentBaseWithDefaults, Orientation, OrientationType, SizeType } from '@i-cell/ids-angular/core';

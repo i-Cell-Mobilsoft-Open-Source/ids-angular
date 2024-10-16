@@ -1,5 +1,5 @@
-import { SwitchIconPosition, SwitchIconPositionType, SwitchLabelPosition, SwitchLabelPositionType } from './types/switch-positions';
-import { SwitchVariant, SwitchVariantType } from './types/switch-variant';
+import { SwitchIconPosition, SwitchIconPositionType, SwitchLabelPosition, SwitchLabelPositionType } from './types/switch-positions.type';
+import { SwitchVariant, SwitchVariantType } from './types/switch-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { Size, SizeType } from '@i-cell/ids-angular/core';

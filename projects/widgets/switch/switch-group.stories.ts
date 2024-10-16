@@ -1,6 +1,6 @@
 import { IdsSwitchGroupComponent } from './switch-group.component';
 import { IdsSwitchComponent } from './switch.component';
-import { SwitchIconPosition, SwitchLabelPosition } from './types/switch-positions';
+import { SwitchIconPosition, SwitchLabelPosition } from './types/switch-positions.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 import { Size } from '../core';

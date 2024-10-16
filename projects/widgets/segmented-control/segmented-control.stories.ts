@@ -1,7 +1,7 @@
 import { IdsSegmentedControlItemComponent } from './segmented-control-item/segmented-control-item.component';
 import { IdsSegmentedControlDirective } from './segmented-control.directive';
-import { SegmentedControlAppearance } from './types/segmented-control-appearance';
-import { SegmentedControlVariant } from './types/segmented-control-variant';
+import { SegmentedControlAppearance } from './types/segmented-control-appearance.type';
+import { SegmentedControlVariant } from './types/segmented-control-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 import { Size } from '../core';

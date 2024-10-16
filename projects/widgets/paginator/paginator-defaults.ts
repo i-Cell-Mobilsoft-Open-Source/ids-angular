@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
-import { PaginatorPageButtonAppearance, PaginatorPageButtonAppearanceType } from './types/paginator-appearance';
-import { PaginatorVariant, PaginatorVariantType } from './types/paginator-variant';
+import { PaginatorPageButtonAppearance, PaginatorPageButtonAppearanceType } from './types/paginator-appearance.type';
+import { PaginatorVariant, PaginatorVariantType } from './types/paginator-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { SizeType, Size } from '@i-cell/ids-angular/core';

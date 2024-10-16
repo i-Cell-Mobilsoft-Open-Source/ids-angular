@@ -1,4 +1,4 @@
-import { IconButtonAppearance, IconButtonAppearanceType } from './types/icon-button-appearance';
+import { IconButtonAppearance, IconButtonAppearanceType } from './types/icon-button-appearance.type';
 
 import { InjectionToken } from '@angular/core';
 import { Size, SizeType, AllVariants, AllVariantsType } from '@i-cell/ids-angular/core';

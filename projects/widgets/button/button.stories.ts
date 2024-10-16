@@ -1,5 +1,5 @@
 import { IdsButtonComponent } from './button.component';
-import { ButtonAppearance } from './types/button-appearance';
+import { ButtonAppearance } from './types/button-appearance.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 

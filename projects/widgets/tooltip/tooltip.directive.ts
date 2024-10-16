@@ -1,7 +1,7 @@
 import { IDS_TOOLTIP_DEFAULT_CONFIG, IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY } from './tooltip-defaults';
 import { IdsTooltipComponent } from './tooltip.component';
-import { TooltipPositionType } from './types/tooltip-position';
-import { TooltipVariantType } from './types/tooltip-variant';
+import { TooltipPositionType } from './types/tooltip-position.type';
+import { TooltipVariantType } from './types/tooltip-variant.type';
 import { TooltipTextAlign, TooltipTouchGestures } from './types/tooltip.type';
 
 import { FocusMonitor } from '@angular/cdk/a11y';

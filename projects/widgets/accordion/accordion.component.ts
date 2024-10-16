@@ -1,6 +1,6 @@
 import { IDS_ACCORDION_DEFAULT_CONFIG, IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionDefaultConfig } from './accordion-defaults';
 import { IdsAccordionItemComponent } from './accordion-item/accordion-item.component';
-import { AccordionAppearanceType } from './types/accordion-appearance';
+import { AccordionAppearanceType } from './types/accordion-appearance.type';
 
 import { CdkAccordion } from '@angular/cdk/accordion';
 import {

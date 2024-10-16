@@ -1,4 +1,4 @@
-import { RadioVariant, RadioVariantType } from './types/radio-variant';
+import { RadioVariant, RadioVariantType } from './types/radio-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { Orientation, OrientationType, Position, PositionType, Size, SizeType } from '@i-cell/ids-angular/core';

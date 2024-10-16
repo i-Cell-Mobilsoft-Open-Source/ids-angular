@@ -1,5 +1,5 @@
 import { IdsCheckboxComponent } from './checkbox.component';
-import { CheckboxVariant } from './types/checkbox-variant';
+import { CheckboxVariant } from './types/checkbox-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 

@@ -1,8 +1,8 @@
 import { IDS_CHECKBOX_DEFAULT_CONFIG, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY } from './checkbox-defaults';
 import { IdsCheckboxGroupComponent } from './checkbox-group.component';
-import { CheckBoxChangeEvent } from './types/checkbox-events';
-import { CheckboxState, CheckboxStateType } from './types/checkbox-state';
-import { CheckboxVariantType } from './types/checkbox-variant';
+import { CheckBoxChangeEvent } from './types/checkbox-events.class';
+import { CheckboxState, CheckboxStateType } from './types/checkbox-state.type';
+import { CheckboxVariantType } from './types/checkbox-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';

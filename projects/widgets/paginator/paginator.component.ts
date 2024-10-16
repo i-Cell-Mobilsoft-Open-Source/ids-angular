@@ -1,8 +1,8 @@
 import { DEFAULT_PAGE_SIZE, IDS_PAGINATOR_DEFAULT_CONFIG, IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY } from './paginator-defaults';
 import { IdsPaginatorIntl } from './paginator-intl';
-import { PaginatorPageButtonAppearanceType } from './types/paginator-appearance';
-import { PaginatorPageEvent } from './types/paginator-events';
-import { PaginatorVariantType } from './types/paginator-variant';
+import { PaginatorPageButtonAppearanceType } from './types/paginator-appearance.type';
+import { PaginatorPageEvent } from './types/paginator-events.class';
+import { PaginatorVariantType } from './types/paginator-variant.type';
 
 import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostBinding, HostListener, inject, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, isNumberEven, SizeType } from '@i-cell/ids-angular/core';

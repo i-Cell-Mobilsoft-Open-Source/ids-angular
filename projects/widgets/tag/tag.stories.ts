@@ -1,5 +1,5 @@
 import { IdsTagComponent } from './tag.component';
-import { TagAppearance } from './types/tag-appearance';
+import { TagAppearance } from './types/tag-appearance.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 import { AllVariants, coerceBooleanAttribute, Size } from '../core';

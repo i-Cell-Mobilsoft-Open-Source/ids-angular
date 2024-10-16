@@ -1,5 +1,5 @@
 import { IdsIconButtonComponent } from './icon-button.component';
-import { IconButtonAppearance } from './types/icon-button-appearance';
+import { IconButtonAppearance } from './types/icon-button-appearance.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 

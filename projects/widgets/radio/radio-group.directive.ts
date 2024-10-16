@@ -1,7 +1,7 @@
 import { IDS_RADIO_DEFAULT_CONFIG, IDS_RADIO_DEFAULT_CONFIG_FACTORY } from './radio-defaults';
 import { IdsRadioItemComponent } from './radio-item/radio-item.component';
-import { RadioChangeEvent } from './types/radio-events';
-import { RadioVariantType } from './types/radio-variant';
+import { RadioChangeEvent } from './types/radio-events.class';
+import { RadioVariantType } from './types/radio-variant.type';
 
 import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, HostListener, inject, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';

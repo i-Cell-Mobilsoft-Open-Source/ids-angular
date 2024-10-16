@@ -1,8 +1,8 @@
-import { SnackbarVariantType } from './snackbar-variant.type';
+import { IdsSnackbarVariantType } from './snackbar-variant.type';
 
 export interface IdsSnackbarData {
   message: string
-  variant?: SnackbarVariantType
+  variant?: IdsSnackbarVariantType
   icon?: string
   actions?: IdsSnackbarAction[]
   allowDismiss?: boolean

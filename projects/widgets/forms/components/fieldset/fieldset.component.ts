@@ -1,8 +1,8 @@
 import { IdsFieldsetMessageDirective } from './fieldset-message.directive';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
-import { ComponentBaseWithDefaults, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsFieldsetDefaultConfig } from '@i-cell/ids-angular/forms';
+import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsFieldsetDefaultConfig } from '@i-cell/ids-angular/forms';
 
 const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
 
@@ -21,8 +21,8 @@ export class IdsFieldsetComponent extends ComponentBaseWithDefaults<IdsFieldsetD
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_FIELDSET_DEFAULT_CONFIG);
 
-  public size = input<SizeType>(this._defaultConfig.size);
-  public variant = input<FormFieldVariantType>(this._defaultConfig.variant);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsFormFieldVariantType>(this._defaultConfig.variant);
   public legend = input<string>('');
   protected _legendClass = `${this._componentClass}-legend`;
   protected _messageClass = `${this._componentClass}-message`;

@@ -1,7 +1,7 @@
-export const OverlayPanelAppearance = {
+export const IdsOverlayPanelAppearance = {
   FILLED: 'filled',
   OUTLINED: 'outlined',
   ELEVATED: 'elevated',
 } as const;
 
-export type OverlayPanelAppearanceType = (typeof OverlayPanelAppearance)[keyof typeof OverlayPanelAppearance];
+export type IdsOverlayPanelAppearanceType = (typeof IdsOverlayPanelAppearance)[keyof typeof IdsOverlayPanelAppearance];

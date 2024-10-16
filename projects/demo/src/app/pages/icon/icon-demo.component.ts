@@ -2,17 +2,17 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeCollection, SizeCollectionType, SizeType } from '@i-cell/ids-angular/core';
-import { IconSource, IconVariant, IconVariantType, IDS_ICON_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/icon';
+import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsIconSource, IdsIconVariant, IdsIconVariantType, IDS_ICON_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/icon';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
 type IconPublicApi = {
-  size: SizeType,
-  sizeCollection: SizeCollectionType,
-  variant: IconVariantType,
+  size: IdsSizeType,
+  sizeCollection: IdsSizeCollectionType,
+  variant: IdsIconVariantType,
   fontIcon: string
   svgIconName: string,
   ariaHidden: boolean,
@@ -46,15 +46,15 @@ export class IconDemoComponent {
 
   public model: IconPublicApi = { ...this.defaults  };
   
-  public sizes = Object.values<SizeType>(Size);
-  public sizeCollections = Object.values<SizeCollectionType>(SizeCollection);
-  public variants = Object.values<IconVariantType>(IconVariant);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public sizeCollections = Object.values<IdsSizeCollectionType>(IdsSizeCollection);
+  public variants = Object.values<IdsIconVariantType>(IdsIconVariant);
 
-  public sourceType = IconSource;
+  public sourceType = IdsIconSource;
 
-  public sizeCollectionType: SizeCollectionType[] = [
-    SizeCollection.SMALL,
-    SizeCollection.BIG,
+  public sizeCollectionType: IdsSizeCollectionType[] = [
+    IdsSizeCollection.SMALL,
+    IdsSizeCollection.BIG,
   ];
 
   public reset(): void {

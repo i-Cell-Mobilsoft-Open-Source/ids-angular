@@ -1,4 +1,4 @@
-export const TooltipPosition = {
+export const IdsTooltipPosition = {
   NORTH: 'north',
   NORTHEAST: 'northeast',
   EAST: 'east',
@@ -9,4 +9,4 @@ export const TooltipPosition = {
   NORTHWEST: 'northwest',
 } as const;
 
-export type TooltipPositionType = (typeof TooltipPosition)[keyof typeof TooltipPosition];
+export type IdsTooltipPositionType = (typeof IdsTooltipPosition)[keyof typeof IdsTooltipPosition];

@@ -6,4 +6,4 @@ export * from './card-media.directive';
 export * from './card-subtitle.directive';
 export * from './card-title.directive';
 export * from './card.component';
-export * from './types/card-appearances';
+export * from './types/card-appearances.type';

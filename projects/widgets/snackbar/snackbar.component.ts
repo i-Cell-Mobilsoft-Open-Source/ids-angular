@@ -1,13 +1,13 @@
 import { MIN_DURATION, READ_SPEED_PER_ACTION, READ_SPEED_PER_CHAR } from './snackbar-defaults';
 import { IdsSnackbarAction } from './types/snackbar-data.type';
-import { SnackbarVariant, SnackbarVariantType } from './types/snackbar-variant.type';
+import { IdsSnackbarVariant, IdsSnackbarVariantType } from './types/snackbar-variant.type';
 
 import { A11yModule } from '@angular/cdk/a11y';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, HostBinding, HostListener, input, OnDestroy, output, ViewEncapsulation } from '@angular/core';
-import { ButtonAppearance, IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { AllVariants, coerceBooleanAttribute, createClassList, Size } from '@i-cell/ids-angular/core';
+import { IdsButtonAppearance, IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsAllVariants, coerceBooleanAttribute, createClassList, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
 @Component({
   selector: 'ids-snackbar',
@@ -31,13 +31,13 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
 
   private _timer?: ReturnType<typeof setTimeout>;
 
-  public readonly size = Size;
-  public readonly iconButtonAppearance = IconButtonAppearance;
-  public readonly buttonAppearance = ButtonAppearance;
+  public readonly size = IdsSize;
+  public readonly iconButtonAppearance = IdsIconButtonAppearance;
+  public readonly buttonAppearance = IdsButtonAppearance;
 
   public id = input.required<number>();
   public message = input.required<string>();
-  public variant = input<SnackbarVariantType | undefined>();
+  public variant = input<IdsSnackbarVariantType | undefined>();
   public icon = input<string | undefined>();
   public actions = input<IdsSnackbarAction[] | undefined>([]);
   public allowDismiss = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
@@ -60,18 +60,18 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
 
   public role = computed(() => (this.urgent() ? 'alert' : 'status'));
   public uniqueId = computed(() => `${this._componentClass}-${this.id()}`);
-  public buttonVariant = computed(() => (this.variant() === SnackbarVariant.DARK ? AllVariants.LIGHT : AllVariants.SURFACE));
+  public buttonVariant = computed(() => (this.variant() === IdsSnackbarVariant.DARK ? IdsAllVariants.LIGHT : IdsAllVariants.SURFACE));
   private _defaultIcon = computed<string | null>(() => {
     switch (this.variant()) {
-      case SnackbarVariant.DARK:
+      case IdsSnackbarVariant.DARK:
         return null;
-      case SnackbarVariant.INFO:
+      case IdsSnackbarVariant.INFO:
         return 'exclamation-circle';
-      case SnackbarVariant.SUCCESS:
+      case IdsSnackbarVariant.SUCCESS:
         return 'check-circle';
-      case SnackbarVariant.WARNING:
+      case IdsSnackbarVariant.WARNING:
         return 'exclamation-triangle';
-      case SnackbarVariant.ERROR:
+      case IdsSnackbarVariant.ERROR:
         return 'exclamation-circle';
 
       default:

@@ -4,11 +4,12 @@ import { IdsSelectComponent } from './select.component';
 import { selectControlOptions } from '../.storybook/utils';
 
 import { FormsModule } from '@angular/forms';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
-import { FormFieldVariant, FormFieldVariantType, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
-type StoryType = IdsSelectComponent & { size?: SizeType, variant?: FormFieldVariantType, 'aria-label': string, 'aria-labelledby': string };
+// eslint-disable-next-line @stylistic/js/max-len
+type StoryType = IdsSelectComponent & { size?: IdsSizeType, variant?: IdsFormFieldVariantType, 'aria-label': string, 'aria-labelledby': string };
 
 const meta = {
   title: 'Components/Select',
@@ -46,8 +47,8 @@ const meta = {
     },
   },
   argTypes: {
-    size: selectControlOptions(Size),
-    variant: selectControlOptions(FormFieldVariant),
+    size: selectControlOptions(IdsSize),
+    variant: selectControlOptions(IdsFormFieldVariant),
     placeholder: { control: 'text', type: 'string', description: 'Placeholder text' },
     required: { control: 'boolean', type: 'boolean', description: 'Wether the control is required' },
     readonly: { control: 'boolean', type: 'boolean', description: 'Wether the control is readonly' },

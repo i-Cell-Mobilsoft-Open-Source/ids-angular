@@ -1,10 +1,10 @@
 import { IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IdsCheckboxDefaultConfig } from './checkbox-defaults';
 
 import { InjectionToken } from '@angular/core';
-import { Orientation, OrientationType } from '@i-cell/ids-angular/core';
+import { IdsOrientation, IdsOrientationType } from '@i-cell/ids-angular/core';
 
 export interface IdsCheckboxGroupDefaultConfig extends IdsCheckboxDefaultConfig {
-  orientation: OrientationType,
+  orientation: IdsOrientationType,
   allowParent: boolean,
 }
 
@@ -19,7 +19,7 @@ export const IDS_CHECKBOX_GROUP_DEFAULT_CONFIG = new InjectionToken<IdsCheckboxG
 export function IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY(): Required<IdsCheckboxGroupDefaultConfig> {
   return {
     ...IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY(),
-    orientation: Orientation.VERTICAL,
+    orientation: IdsOrientation.VERTICAL,
     allowParent: true,
   };
 }

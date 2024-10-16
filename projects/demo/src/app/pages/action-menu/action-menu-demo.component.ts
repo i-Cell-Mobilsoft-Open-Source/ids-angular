@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsActionMenuTriggerDirective } from '@i-cell/ids-angular/action-menu';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsMenuItemComponent, MenuItemAppearance, MenuItemAppearanceType, MenuItemVariant, MenuItemVariantType } from '@i-cell/ids-angular/menu-item';
+import { IdsMenuItemComponent, IdsMenuItemAppearance, IdsMenuItemAppearanceType, MenuItemVariant, MenuItemVariantType } from '@i-cell/ids-angular/menu-item';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel/overlay-panel.component';
-import { OverlayPanelAppearance, OverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
-import { OverlayPanelVariant, OverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-variant.type';
+import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
+import { IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-variant.type';
 import { TranslateModule } from '@ngx-translate/core';
 
 type OverlayPanelPublicApi = {
-  appearance: OverlayPanelAppearanceType,
-  size: SizeType,
-  variant: OverlayPanelVariantType,
+  appearance: IdsOverlayPanelAppearanceType,
+  size: IdsSizeType,
+  variant: IdsOverlayPanelVariantType,
 };
 
 type OverlayPanelHelperControls = {
@@ -21,8 +21,8 @@ type OverlayPanelHelperControls = {
 };
 
 type MenuItemPublicApi = {
-  appearance: MenuItemAppearanceType,
-  size: SizeType,
+  appearance: IdsMenuItemAppearanceType,
+  size: IdsSizeType,
   variant: MenuItemVariantType,
 };
 
@@ -51,28 +51,28 @@ type MenuItemHelperControls = {
   ],
 })
 export class ActionMenuDemoComponent {
-  public overlayPanelAppearances = Object.values<OverlayPanelAppearanceType>(OverlayPanelAppearance);
-  public overlayPanelVariants = Object.values<OverlayPanelVariantType>(OverlayPanelVariant);
-  public menuItemAppearances = Object.values<MenuItemAppearanceType>(MenuItemAppearance);
+  public overlayPanelAppearances = Object.values<IdsOverlayPanelAppearanceType>(IdsOverlayPanelAppearance);
+  public overlayPanelVariants = Object.values<IdsOverlayPanelVariantType>(IdsOverlayPanelVariant);
+  public menuItemAppearances = Object.values<IdsMenuItemAppearanceType>(IdsMenuItemAppearance);
   public menuItemVariants = Object.values<MenuItemVariantType>(MenuItemVariant);
-  public sizes = Object.values<SizeType>(Size);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
   public overlayPanelBackgroundColors = [
     'light',
     'dark',
   ];
 
   public overlayPanelDefaults: OverlayPanelPublicApi & OverlayPanelHelperControls = {
-    appearance: OverlayPanelAppearance.FILLED,
-    size: Size.COMFORTABLE,
-    variant: OverlayPanelVariant.LIGHT,
+    appearance: IdsOverlayPanelAppearance.FILLED,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsOverlayPanelVariant.LIGHT,
     testBackgroundColor: 'light',
   };
 
   public overlayPanelModel: OverlayPanelPublicApi & OverlayPanelHelperControls = { ...this.overlayPanelDefaults };
 
   public menuItemDefaults: MenuItemPublicApi & MenuItemHelperControls = {
-    appearance: OverlayPanelAppearance.FILLED,
-    size: Size.COMFORTABLE,
+    appearance: IdsOverlayPanelAppearance.FILLED,
+    size: IdsSize.COMFORTABLE,
     variant: MenuItemVariant.SURFACE,
     hasLeadingIcon: true,
     hasTrailingIcon: true,

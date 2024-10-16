@@ -1,15 +1,15 @@
-import { SwitchIconPosition, SwitchIconPositionType, SwitchLabelPosition, SwitchLabelPositionType } from './types/switch-positions';
-import { SwitchVariant, SwitchVariantType } from './types/switch-variant';
+import { IdsSwitchIconPosition, IdsSwitchIconPositionType, IdsSwitchLabelPosition, IdsSwitchLabelPositionType } from './types/switch-positions.type';
+import { IdsSwitchVariant, IdsSwitchVariantType } from './types/switch-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsSwitchDefaultConfig {
-  size?: SizeType
-  variant?: SwitchVariantType
+  size?: IdsSizeType
+  variant?: IdsSwitchVariantType
   hasIcon?: boolean
-  iconPosition: SwitchIconPositionType
-  labelPosition: SwitchLabelPositionType
+  iconPosition: IdsSwitchIconPositionType
+  labelPosition: IdsSwitchLabelPositionType
 }
 
 export const IDS_SWITCH_DEFAULT_CONFIG = new InjectionToken<IdsSwitchDefaultConfig>(
@@ -22,10 +22,10 @@ export const IDS_SWITCH_DEFAULT_CONFIG = new InjectionToken<IdsSwitchDefaultConf
 
 export function IDS_SWITCH_DEFAULT_CONFIG_FACTORY(): Required<IdsSwitchDefaultConfig> {
   return {
-    size: Size.COMPACT,
-    variant: SwitchVariant.SURFACE,
+    size: IdsSize.COMPACT,
+    variant: IdsSwitchVariant.SURFACE,
     hasIcon: false,
-    iconPosition: SwitchIconPosition.ONHANDLE,
-    labelPosition: SwitchLabelPosition.RIGHT,
+    iconPosition: IdsSwitchIconPosition.ONHANDLE,
+    labelPosition: IdsSwitchLabelPosition.RIGHT,
   };
 }

@@ -9,11 +9,11 @@ import {
   input,
 } from '@angular/core';
 import {
-  AllVariantsType,
+  IdsAllVariantsType,
   createClassList,
-  Orientation,
-  OrientationType,
-  SizeType,
+  IdsOrientation,
+  IdsOrientationType,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
@@ -35,13 +35,13 @@ export class IdsDividerComponent {
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIVIDER_DEFAULT_CONFIG);
 
-  public orientation = input<OrientationType>(this._defaultConfig.orientation);
-  public size = input<SizeType>(this._defaultConfig.size);
-  public variant = input<AllVariantsType>(this._defaultConfig.variant);
+  public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
   public width = input<string>(this._defaultConfig.width);
   public height = input<string>(this._defaultConfig.height);
-  private _safeWidth = computed(() => (this.orientation() === Orientation.HORIZONTAL ? this.width() : null));
-  private _safeHeight = computed(() => (this.orientation() === Orientation.VERTICAL ? this.height() : null));
+  private _safeWidth = computed(() => (this.orientation() === IdsOrientation.HORIZONTAL ? this.width() : null));
+  private _safeHeight = computed(() => (this.orientation() === IdsOrientation.VERTICAL ? this.height() : null));
 
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [

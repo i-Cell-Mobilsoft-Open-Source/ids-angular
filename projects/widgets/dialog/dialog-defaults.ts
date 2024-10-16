@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsDialogDefaultConfig {
-  size?: SizeType,
+  size?: IdsSizeType,
   showCloseButton?: boolean,
   showBackdrop?: boolean,
 }
@@ -17,7 +17,7 @@ export const IDS_DIALOG_DEFAULT_CONFIG = new InjectionToken<IdsDialogDefaultConf
 
 export function IDS_DIALOG_DEFAULT_CONFIG_FACTORY(): Required<IdsDialogDefaultConfig> {
   return {
-    size: Size.COMFORTABLE,
+    size: IdsSize.COMFORTABLE,
     showCloseButton: false,
     showBackdrop: true,
   };

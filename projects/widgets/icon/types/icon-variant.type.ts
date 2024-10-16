@@ -1,4 +1,4 @@
-export const IconVariant = {
+export const IdsIconVariant = {
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
   LIGHT: 'light',
@@ -10,4 +10,4 @@ export const IconVariant = {
   SURFACE: 'surface',
 } as const;
 
-export type IconVariantType = (typeof IconVariant)[keyof typeof IconVariant];
+export type IdsIconVariantType = (typeof IdsIconVariant)[keyof typeof IdsIconVariant];

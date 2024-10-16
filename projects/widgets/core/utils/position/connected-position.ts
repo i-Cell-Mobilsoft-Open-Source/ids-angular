@@ -1,6 +1,6 @@
 import { DOMRectBase, elementClippedFrom } from './scroll-clip';
 
-import { ExtendedHorizontalPosition, ExtendedHorizontalPositionType, ExtendedPositionPairType, ExtendedVerticalPosition, ExtendedVerticalPositionType, HorizontalPosition, Position, PositionType, VerticalPosition } from '../../types/position.type';
+import { IdsExtendedHorizontalPosition, IdsExtendedHorizontalPositionType, IdsExtendedPositionPairType, IdsExtendedVerticalPosition, IdsExtendedVerticalPositionType, IdsHorizontalPosition, IdsPosition, IdsPositionType, IdsVerticalPosition } from '../../types/position.type';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { computed, ElementRef, signal } from '@angular/core';
@@ -10,14 +10,14 @@ export class ConnectedPosition {
   private _rect = signal<DOMRectBase | null>(null);
   public positionTop = computed(() => (this._rect() ? `${Math.round(this._rect()!.top)}px` : null));
   public positionLeft = computed(() => (this._rect() ? `${Math.round(this._rect()!.left)}px` : null));
-  public fallbackPositionPair = signal<ExtendedPositionPairType | null>(null);
+  public fallbackPositionPair = signal<IdsExtendedPositionPairType | null>(null);
   public shouldHide = new Subject<void>();
 
   constructor(
     private _scrollContainers: CdkScrollable[],
     private _triggerElement: HTMLElement,
     private _positionedElement: ElementRef<HTMLElement>,
-    private _originalPositionPair: ExtendedPositionPairType,
+    private _originalPositionPair: IdsExtendedPositionPairType,
   ) {}
 
   public doPosition(): void {
@@ -41,7 +41,7 @@ export class ConnectedPosition {
   }
 
   // eslint-disable-next-line @stylistic/js/array-element-newline, @stylistic/js/array-bracket-newline
-  private _getNewRect([horizontalPosition, verticalPosition]: ExtendedPositionPairType): DOMRectBase {
+  private _getNewRect([horizontalPosition, verticalPosition]: IdsExtendedPositionPairType): DOMRectBase {
     const triggerEl = this._triggerElement!;
     const triggerRect = triggerEl.getBoundingClientRect();
     const tooltipEl = this._positionedElement.nativeElement;
@@ -50,24 +50,24 @@ export class ConnectedPosition {
     let left = 0;
     let top = 0;
     switch (horizontalPosition) {
-      case ExtendedHorizontalPosition.LEFT:
+      case IdsExtendedHorizontalPosition.LEFT:
         left = triggerRect.left - tooltipEl.offsetWidth;
         break;
-      case ExtendedHorizontalPosition.CENTER:
+      case IdsExtendedHorizontalPosition.CENTER:
         left = triggerRect.left + triggerEl.clientWidth / 2 - tooltipEl.offsetWidth / 2;
         break;
-      case ExtendedHorizontalPosition.RIGHT:
+      case IdsExtendedHorizontalPosition.RIGHT:
         left = triggerRect.right;
         break;
     }
     switch (verticalPosition) {
-      case ExtendedVerticalPosition.TOP:
+      case IdsExtendedVerticalPosition.TOP:
         top = triggerRect.top - tooltipEl.offsetHeight;
         break;
-      case ExtendedVerticalPosition.CENTER:
+      case IdsExtendedVerticalPosition.CENTER:
         top = triggerRect.top + tooltipEl.offsetHeight / 2 - tooltipEl.offsetHeight / 2;
         break;
-      case ExtendedVerticalPosition.BOTTOM:
+      case IdsExtendedVerticalPosition.BOTTOM:
         top = triggerRect.bottom;
         break;
     }
@@ -76,19 +76,19 @@ export class ConnectedPosition {
     return { left, top, height, width, right, bottom };
   }
 
-  private _getFallbackPositionPair(clippedFrom: Set<PositionType>): ExtendedPositionPairType | null {
+  private _getFallbackPositionPair(clippedFrom: Set<IdsPositionType>): IdsExtendedPositionPairType | null {
     if (
-      (clippedFrom.has(Position.TOP) && clippedFrom.has(Position.BOTTOM))
-      || (clippedFrom.has(Position.RIGHT) && clippedFrom.has(Position.LEFT))
+      (clippedFrom.has(IdsPosition.TOP) && clippedFrom.has(IdsPosition.BOTTOM))
+      || (clippedFrom.has(IdsPosition.RIGHT) && clippedFrom.has(IdsPosition.LEFT))
     ) {
       return null;
     }
-    const clippedFromHorizontal = clippedFrom.has(Position.RIGHT) ? Position.RIGHT : Position.LEFT;
-    const clippedFromVertical = clippedFrom.has(Position.TOP) ? Position.TOP : Position.BOTTOM;
+    const clippedFromHorizontal = clippedFrom.has(IdsPosition.RIGHT) ? IdsPosition.RIGHT : IdsPosition.LEFT;
+    const clippedFromVertical = clippedFrom.has(IdsPosition.TOP) ? IdsPosition.TOP : IdsPosition.BOTTOM;
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const [currentHorizontal, currentVertical] = this._originalPositionPair!;
-    const isClippedHorizontal = Object.values(HorizontalPosition).some((pos) => clippedFrom.has(pos));
-    const isClippedVertical = Object.values(VerticalPosition).some((pos) => clippedFrom.has(pos));
+    const isClippedHorizontal = Object.values(IdsHorizontalPosition).some((pos) => clippedFrom.has(pos));
+    const isClippedVertical = Object.values(IdsVerticalPosition).some((pos) => clippedFrom.has(pos));
     if (isClippedHorizontal && isClippedVertical) {
       // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       return [this._getOppositeHorizontalDirection(clippedFromHorizontal), this._getOppositeVerticalDirection(clippedFromVertical)];
@@ -105,32 +105,32 @@ export class ConnectedPosition {
   }
 
   private _getOppositeHorizontalDirection(
-    direction: ExtendedHorizontalPositionType,
-  ): ExtendedHorizontalPositionType {
+    direction: IdsExtendedHorizontalPositionType,
+  ): IdsExtendedHorizontalPositionType {
     switch (direction) {
-      case ExtendedHorizontalPosition.LEFT:
-        return ExtendedHorizontalPosition.RIGHT;
-      case ExtendedHorizontalPosition.RIGHT:
-        return ExtendedHorizontalPosition.LEFT;
-      case ExtendedHorizontalPosition.CENTER:
-        return ExtendedHorizontalPosition.CENTER;
+      case IdsExtendedHorizontalPosition.LEFT:
+        return IdsExtendedHorizontalPosition.RIGHT;
+      case IdsExtendedHorizontalPosition.RIGHT:
+        return IdsExtendedHorizontalPosition.LEFT;
+      case IdsExtendedHorizontalPosition.CENTER:
+        return IdsExtendedHorizontalPosition.CENTER;
     }
   }
 
   private _getOppositeVerticalDirection(
-    direction: ExtendedVerticalPositionType,
-  ): ExtendedVerticalPositionType {
+    direction: IdsExtendedVerticalPositionType,
+  ): IdsExtendedVerticalPositionType {
     switch (direction) {
-      case ExtendedVerticalPosition.CENTER:
-        return ExtendedVerticalPosition.CENTER;
-      case ExtendedVerticalPosition.TOP:
-        return ExtendedVerticalPosition.BOTTOM;
-      case ExtendedVerticalPosition.BOTTOM:
-        return ExtendedVerticalPosition.TOP;
+      case IdsExtendedVerticalPosition.CENTER:
+        return IdsExtendedVerticalPosition.CENTER;
+      case IdsExtendedVerticalPosition.TOP:
+        return IdsExtendedVerticalPosition.BOTTOM;
+      case IdsExtendedVerticalPosition.BOTTOM:
+        return IdsExtendedVerticalPosition.TOP;
     }
   }
 
-  private _shouldHide(fallbackPositionPair: ExtendedPositionPairType): boolean {
+  private _shouldHide(fallbackPositionPair: IdsExtendedPositionPairType): boolean {
     const fallbackRect = this._getNewRect(fallbackPositionPair);
     const fallbackClippedFrom = elementClippedFrom(fallbackRect, this._scrollContainers ?? []);
     return Boolean(fallbackClippedFrom);

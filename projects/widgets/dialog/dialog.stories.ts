@@ -4,7 +4,7 @@ import { IdsDialogService } from './dialog.service';
 
 import { selectControlOptions } from '../.storybook/utils';
 import { IdsButtonComponent } from '../button/button.component';
-import { Size } from '../core';
+import { IdsSize } from '../core';
 
 import { A11yModule } from '@angular/cdk/a11y';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
@@ -71,7 +71,7 @@ export default {
   `,
   }),
   argTypes: {
-    size: selectControlOptions(Size),
+    size: selectControlOptions(IdsSize),
     mainTitle: { control: 'text' },
     subTitle: { control: 'text' },
     dialogContent: { control: 'text' },

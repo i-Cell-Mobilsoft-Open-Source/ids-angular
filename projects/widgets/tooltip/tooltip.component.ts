@@ -1,11 +1,11 @@
-import { TooltipPositionType } from './types/tooltip-position';
-import { TooltipVariantType } from './types/tooltip-variant';
-import { TooltipTextAlign } from './types/tooltip.type';
+import { IdsTooltipPositionType } from './types/tooltip-position.type';
+import { IdsTooltipVariantType } from './types/tooltip-variant.type';
+import { IdsTooltipTextAlign } from './types/tooltip.type';
 import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } from './utils/converters';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, HostBinding, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { createClassList, ConnectedPosition, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, ConnectedPosition, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
@@ -31,14 +31,14 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   private _connectedPosition?: ConnectedPosition;
   public id = this._uniqueId;
   private _message?: string;
-  private _size?: SizeType;
-  private _variant?: TooltipVariantType;
-  private _originalTooltipPosition: TooltipPositionType | null = null;
+  private _size?: IdsSizeType;
+  private _variant?: IdsTooltipVariantType;
+  private _originalTooltipPosition: IdsTooltipPositionType | null = null;
   private _fallbackTooltipPosition = computed(() =>
     extendedPositionToTooltipPosition(this._connectedPosition?.fallbackPositionPair()),
   );
 
-  private _textAlign?: TooltipTextAlign;
+  private _textAlign?: IdsTooltipTextAlign;
   private _isVisible = false;
   private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
   private _hideTimeoutId: ReturnType<typeof setTimeout> | undefined;
@@ -98,10 +98,10 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
     values: {
       triggerElement: HTMLElement
       scrollContainers?: CdkScrollable[]
-      size?: SizeType
-      variant?: TooltipVariantType
-      originalPosition?: TooltipPositionType
-      textAlign?: TooltipTextAlign
+      size?: IdsSizeType
+      variant?: IdsTooltipVariantType
+      originalPosition?: IdsTooltipPositionType
+      textAlign?: IdsTooltipTextAlign
     }): void {
     this._size = values.size;
     this._variant = values.variant;

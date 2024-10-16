@@ -1,10 +1,10 @@
 import { IdsCheckboxComponent } from './checkbox.component';
-import { CheckboxVariant } from './types/checkbox-variant';
+import { IdsCheckboxVariant } from './types/checkbox-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 
 import { FormsModule } from '@angular/forms';
-import { Size } from '@i-cell/ids-angular/core';
+import { IdsSize } from '@i-cell/ids-angular/core';
 import { IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
@@ -34,8 +34,8 @@ export default {
     }
   ),
   argTypes: {
-    size: selectControlOptions(Size),
-    variant: selectControlOptions(CheckboxVariant),
+    size: selectControlOptions(IdsSize),
+    variant: selectControlOptions(IdsCheckboxVariant),
     checked: { control: 'boolean' },
     indeterminate: { control: 'boolean' },
     required: { control: 'boolean' },

@@ -1,14 +1,14 @@
-import { SnackbarPosition, SnackbarPositionType } from './public-api';
+import { IdsSnackbarPosition, IdsSnackbarPositionType } from './public-api';
 
 import { FlexibleConnectedPositionStrategy, GlobalPositionStrategy } from '@angular/cdk/overlay';
 
 export function getSnackbarFlexibleConnectedPositionStrategy(
   connectedTo: FlexibleConnectedPositionStrategy,
-  snackbarPosition: SnackbarPositionType,
+  snackbarPosition: IdsSnackbarPositionType,
   margin: number,
 ): FlexibleConnectedPositionStrategy {
   switch (snackbarPosition) {
-    case SnackbarPosition.BOTTOM_CENTER:
+    case IdsSnackbarPosition.BOTTOM_CENTER:
       return connectedTo.withPositions([
         {
           originX: 'center',
@@ -18,7 +18,7 @@ export function getSnackbarFlexibleConnectedPositionStrategy(
           offsetY: 0 - margin,
         },
       ]);
-    case SnackbarPosition.TOP_CENTER:
+    case IdsSnackbarPosition.TOP_CENTER:
       return connectedTo.withPositions([
         {
           originX: 'center',
@@ -28,7 +28,7 @@ export function getSnackbarFlexibleConnectedPositionStrategy(
           offsetY: margin,
         },
       ]);
-    case SnackbarPosition.TOP_LEFT:
+    case IdsSnackbarPosition.TOP_LEFT:
       return connectedTo.withPositions([
         {
           originX: 'start',
@@ -39,7 +39,7 @@ export function getSnackbarFlexibleConnectedPositionStrategy(
           offsetY: margin,
         },
       ]);
-    case SnackbarPosition.TOP_RIGHT:
+    case IdsSnackbarPosition.TOP_RIGHT:
       return connectedTo.withPositions([
         {
           originX: 'end',
@@ -50,7 +50,7 @@ export function getSnackbarFlexibleConnectedPositionStrategy(
           offsetY: margin,
         },
       ]);
-    case SnackbarPosition.BOTTOM_LEFT:
+    case IdsSnackbarPosition.BOTTOM_LEFT:
       return connectedTo.withPositions([
         {
           originX: 'start',
@@ -61,7 +61,7 @@ export function getSnackbarFlexibleConnectedPositionStrategy(
           offsetY: 0 - margin,
         },
       ]);
-    case SnackbarPosition.BOTTOM_RIGHT:
+    case IdsSnackbarPosition.BOTTOM_RIGHT:
       return connectedTo.withPositions([
         {
           originX: 'end',
@@ -77,22 +77,22 @@ export function getSnackbarFlexibleConnectedPositionStrategy(
 
 export function getSnackbarGlobalPositionStrategy(
   globalPosition: GlobalPositionStrategy,
-  position: SnackbarPositionType,
+  position: IdsSnackbarPositionType,
   margin: number = 0,
 ): GlobalPositionStrategy {
   const marginPx = `${margin}px`;
   switch (position) {
-    case SnackbarPosition.BOTTOM_CENTER:
+    case IdsSnackbarPosition.BOTTOM_CENTER:
       return globalPosition.bottom(marginPx).centerHorizontally();
-    case SnackbarPosition.TOP_CENTER:
+    case IdsSnackbarPosition.TOP_CENTER:
       return globalPosition.top(marginPx).centerHorizontally();
-    case SnackbarPosition.TOP_LEFT:
+    case IdsSnackbarPosition.TOP_LEFT:
       return globalPosition.top(marginPx).left(marginPx);
-    case SnackbarPosition.TOP_RIGHT:
+    case IdsSnackbarPosition.TOP_RIGHT:
       return globalPosition.top(marginPx).right(marginPx);
-    case SnackbarPosition.BOTTOM_LEFT:
+    case IdsSnackbarPosition.BOTTOM_LEFT:
       return globalPosition.bottom(marginPx).left(marginPx);
-    case SnackbarPosition.BOTTOM_RIGHT:
+    case IdsSnackbarPosition.BOTTOM_RIGHT:
       return globalPosition.bottom(marginPx).right(marginPx);
   }
 }

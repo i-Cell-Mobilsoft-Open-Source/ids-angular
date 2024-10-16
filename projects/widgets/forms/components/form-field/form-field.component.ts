@@ -1,6 +1,6 @@
 import { IDS_FORM_FIELD_DEFAULT_CONFIG, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY } from './form-field-defaults';
 import { IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL } from './tokens/form-field-tokens';
-import { FormFieldVariantType } from './types/form-field-variant.type';
+import { IdsFormFieldVariantType } from './types/form-field-variant.type';
 
 import { IdsActionDirective } from '../../directives/action.directive';
 import { IdsPrefixDirective } from '../../directives/prefix.directive';
@@ -13,7 +13,7 @@ import { IdsSuccessMessageComponent } from '../message/success-message/success-m
 
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, HostBinding, inject, input, isDevMode, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { createClassList, createComponentError, SizeType } from '@i-cell/ids-angular/core';
+import { createClassList, createComponentError, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
 const defaultOptions = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
@@ -58,8 +58,8 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
   public hasSuffix = computed(() => Boolean(this._suffixes().filter((suffix) => !suffix.isTrailingIcon).length));
   public hasTrailingIcon = computed(() => Boolean(this._suffixes().filter((suffix) => suffix.isTrailingIcon).length));
   public inputId = computed(() => this._child()?.id());
-  public size = input<SizeType>(this._defaultOptions.size);
-  public variant = input<FormFieldVariantType>(this._defaultOptions.variant);
+  public size = input<IdsSizeType>(this._defaultOptions.size);
+  public variant = input<IdsFormFieldVariantType>(this._defaultOptions.variant);
   public safeSize = computed(() => this._parentFieldset?.size() ?? this.size());
   public safeVariant = computed(() => this._parentFieldset?.variant() ?? this.variant());
   public control = computed(() => this._child()?.ngControl);

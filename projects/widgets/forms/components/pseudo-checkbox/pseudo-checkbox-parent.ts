@@ -1,8 +1,8 @@
 import { InjectionToken, Signal } from '@angular/core';
-import { SizeType } from '@i-cell/ids-angular/core';
+import { IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsPseudoCheckboxParentComponent<T extends string> {
-  size: Signal<SizeType>
+  size: Signal<IdsSizeType>
   variant: Signal<T>
 }
 

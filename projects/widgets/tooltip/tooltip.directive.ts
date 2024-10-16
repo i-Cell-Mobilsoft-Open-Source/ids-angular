@@ -1,15 +1,15 @@
 import { IDS_TOOLTIP_DEFAULT_CONFIG, IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY } from './tooltip-defaults';
 import { IdsTooltipComponent } from './tooltip.component';
-import { TooltipPositionType } from './types/tooltip-position';
-import { TooltipVariantType } from './types/tooltip-variant';
-import { TooltipTextAlign, TooltipTouchGestures } from './types/tooltip.type';
+import { IdsTooltipPositionType } from './types/tooltip-position.type';
+import { IdsTooltipVariantType } from './types/tooltip-variant.type';
+import { IdsTooltipTextAlign, IdsTooltipTouchGestures } from './types/tooltip.type';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, HostBinding, inject, input, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
-import { coerceStringAttribute, createClassList, SizeType, WindowResizeService } from '@i-cell/ids-angular/core';
+import { coerceStringAttribute, createClassList, IdsSizeType, WindowResizeService } from '@i-cell/ids-angular/core';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 const defaultOptions = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
@@ -44,14 +44,14 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private _scrollContainers?: CdkScrollable[];
 
   public message = input<string, string>('', { alias: 'idsTooltip', transform: coerceStringAttribute });
-  public position = input<TooltipPositionType>(this._defaultOptions.position, { alias: 'idsTooltipPosition' });
-  public size = input<SizeType>(this._defaultOptions.size, { alias: 'idsTooltipSize' });
-  public variant = input<TooltipVariantType>(this._defaultOptions.variant, { alias: 'idsTooltipVariant' });
+  public position = input<IdsTooltipPositionType>(this._defaultOptions.position, { alias: 'idsTooltipPosition' });
+  public size = input<IdsSizeType>(this._defaultOptions.size, { alias: 'idsTooltipSize' });
+  public variant = input<IdsTooltipVariantType>(this._defaultOptions.variant, { alias: 'idsTooltipVariant' });
   public showDelay = input<number>(this._defaultOptions.showDelay, { alias: 'idsTooltipShowDelay' });
   public hideDelay = input<number>(this._defaultOptions.hideDelay, { alias: 'idsTooltipHideDelay' });
   public disabled = input<boolean>(false, { alias: 'idsTooltipDisabled' });
-  public touchGestures = input<TooltipTouchGestures>('auto', { alias: 'idsTooltipTouchGestures' });
-  public textAlign = input<TooltipTextAlign | undefined>(undefined, { alias: 'idsTooltipTextAlign' });
+  public touchGestures = input<IdsTooltipTouchGestures>('auto', { alias: 'idsTooltipTouchGestures' });
+  public textAlign = input<IdsTooltipTextAlign | undefined>(undefined, { alias: 'idsTooltipTextAlign' });
 
   private _hostClasses = computed(() => createClassList(this._componentClass, []),
   );

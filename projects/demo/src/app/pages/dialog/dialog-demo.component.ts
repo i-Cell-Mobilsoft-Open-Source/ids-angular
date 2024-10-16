@@ -1,14 +1,14 @@
 import { Component, InjectionToken, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { Size, SizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsCustomDialogBase, IdsDialogComponent, IdsDialogHeaderDirective, IdsDialogService } from '@i-cell/ids-angular/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 
 export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog-token');
 
 type DialogPublicApi = {
-  size: SizeType,
+  size: IdsSizeType,
   mainTitle: string,
   subTitle: string,
   showCloseButton: boolean,
@@ -192,10 +192,10 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
 export class DialogDemoComponent {
   private _dialogService = inject(IdsDialogService);
   
-  public sizes = Object.values<SizeType>(Size);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
   
   public defaults: DialogPublicApi & DialogHelperControls = {
-    size: Size.COMFORTABLE,
+    size: IdsSize.COMFORTABLE,
     mainTitle: 'Dialog main title',
     subTitle: 'Dialog sub title',
     showCloseButton: false,

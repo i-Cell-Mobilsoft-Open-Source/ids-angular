@@ -1,6 +1,6 @@
-export const OverlayPanelVariant = {
+export const IdsOverlayPanelVariant = {
   LIGHT: 'light',
   SURFACE: 'surface',
 } as const;
 
-export type OverlayPanelVariantType = (typeof OverlayPanelVariant)[keyof typeof OverlayPanelVariant];
+export type IdsOverlayPanelVariantType = (typeof IdsOverlayPanelVariant)[keyof typeof IdsOverlayPanelVariant];

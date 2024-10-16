@@ -1,9 +1,9 @@
 import { IdsButtonComponent } from './button.component';
-import { ButtonAppearance } from './types/button-appearance';
+import { IdsButtonAppearance } from './types/button-appearance.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 
-import { coerceBooleanAttribute, AllVariants, Size } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, IdsAllVariants, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
@@ -47,9 +47,9 @@ export default {
     };
   },
   argTypes: {
-    appearance: selectControlOptions(ButtonAppearance),
-    size: selectControlOptions(Size),
-    variant: selectControlOptions(AllVariants),
+    appearance: selectControlOptions(IdsButtonAppearance),
+    size: selectControlOptions(IdsSize),
+    variant: selectControlOptions(IdsAllVariants),
     disabled: { control: 'boolean' },
     label: { control: 'text', description: 'Projected label text for the button' },
     prefixIcon: { control: 'boolean', description: 'Projected prefix icon for the button' },

@@ -1,11 +1,11 @@
 import { IDS_RADIO_DEFAULT_CONFIG, IDS_RADIO_DEFAULT_CONFIG_FACTORY } from './radio-defaults';
 import { IdsRadioItemComponent } from './radio-item/radio-item.component';
-import { RadioChangeEvent } from './types/radio-events';
-import { RadioVariantType } from './types/radio-variant';
+import { IdsRadioChangeEvent } from './types/radio-events.class';
+import { IdsRadioVariantType } from './types/radio-variant.type';
 
 import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, HostListener, inject, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, createComponentError, Orientation, OrientationType, PositionType, SelectionModel, SizeType, VerticalPosition } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, createClassList, createComponentError, IdsOrientation, IdsOrientationType, IdsPositionType, SelectionModel, IdsSizeType, IdsVerticalPosition } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
 
 let nextUniqueId = 0;
@@ -40,10 +40,10 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
   public id = input<string>(this._uniqueId);
   public name = input.required<string>();
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
-  public size = input<SizeType>(this._defaultOptions.size);
-  public variant = input<RadioVariantType>(this._defaultOptions.variant);
-  public orientation = input<OrientationType>(this._defaultOptions.orientation);
-  public labelPosition = input<PositionType>(this._defaultOptions.labelPosition);
+  public size = input<IdsSizeType>(this._defaultOptions.size);
+  public variant = input<IdsRadioVariantType>(this._defaultOptions.variant);
+  public orientation = input<IdsOrientationType>(this._defaultOptions.orientation);
+  public labelPosition = input<IdsPositionType>(this._defaultOptions.labelPosition);
   public isDisabled = signal<boolean>(false);
 
   private _hostClasses = computed(() => createClassList(
@@ -66,14 +66,14 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     }
   }
 
-  @Output() public readonly itemChanges = new EventEmitter<RadioChangeEvent>();
+  @Output() public readonly itemChanges = new EventEmitter<IdsRadioChangeEvent>();
 
   @HostBinding('class') get hostClasses(): string {
     return this._hostClasses();
   }
 
   @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
-    const navigationKeys: Record<OrientationType, Set<string>> = {
+    const navigationKeys: Record<IdsOrientationType, Set<string>> = {
       // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       horizontal: new Set(['ArrowLeft', 'ArrowRight', 'Enter', ' ']),
       // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
@@ -96,7 +96,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
 
     switch (event.key) {
       case 'ArrowUp': {
-        if (orientation === Orientation.HORIZONTAL) {
+        if (orientation === IdsOrientation.HORIZONTAL) {
           return;
         }
         if (index === 0) {
@@ -107,7 +107,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         break;
       }
       case 'ArrowLeft': {
-        if (orientation === Orientation.VERTICAL) {
+        if (orientation === IdsOrientation.VERTICAL) {
           return;
         }
         if (index === 0) {
@@ -118,7 +118,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         break;
       }
       case 'ArrowDown': {
-        if (orientation === Orientation.HORIZONTAL) {
+        if (orientation === IdsOrientation.HORIZONTAL) {
           return;
         }
         if (index === (items.length - 1)) {
@@ -129,7 +129,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
         break;
       }
       case 'ArrowRight': {
-        if (orientation === Orientation.VERTICAL) {
+        if (orientation === IdsOrientation.VERTICAL) {
           return;
         }
         if (index === (items.length - 1)) {
@@ -199,7 +199,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     });
   }
 
-  private _handleItemChanges(change: RadioChangeEvent): void {
+  private _handleItemChanges(change: IdsRadioChangeEvent): void {
     const { source } = change;
     this._clearSelection();
     source.selected.set(true);
@@ -252,7 +252,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     const orientation = this.orientation();
     const labelPosition = this.labelPosition();
 
-    return (orientation === Orientation.VERTICAL && Object.values(VerticalPosition).some((pos) => pos === labelPosition));
+    return (orientation === IdsOrientation.VERTICAL && Object.values(IdsVerticalPosition).some((pos) => pos === labelPosition));
   }
 
   public ngOnDestroy(): void {

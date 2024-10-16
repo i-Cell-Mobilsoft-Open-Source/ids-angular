@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { CardAppearance, CardAppearanceType, IdsCardComponent } from '@i-cell/ids-angular/card';
+import { IdsCardAppearance, IdsCardAppearanceType, IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
 import { IdsCardFooterDirective } from '@i-cell/ids-angular/card/card-footer.directive';
 import { IdsCardHeaderComponent } from '@i-cell/ids-angular/card/card-header.component';
@@ -9,20 +9,20 @@ import { IdsCardMediaDirective } from '@i-cell/ids-angular/card/card-media.direc
 import { IdsCardSubtitleDirective } from '@i-cell/ids-angular/card/card-subtitle.directive';
 import { IdsCardTitleDirective } from '@i-cell/ids-angular/card/card-title.directive';
 import {
-  AllVariants,
-  AllVariantsType,
-  Orientation,
-  OrientationType,
-  Size,
-  SizeType,
+  IdsAllVariants,
+  IdsAllVariantsType,
+  IdsOrientation,
+  IdsOrientationType,
+  IdsSize,
+  IdsSizeType,
 } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 type CardPublicApi = {
-  appearance: CardAppearanceType,
-  size: SizeType,
-  variant: AllVariantsType,
-  orientation: OrientationType,
+  appearance: IdsCardAppearanceType,
+  size: IdsSizeType,
+  variant: IdsAllVariantsType,
+  orientation: IdsOrientationType,
   disabled: boolean,
 };
 
@@ -53,16 +53,16 @@ type CardHelperControls = {
   ],
 })
 export class CardDemoComponent {
-  public appearances = Object.values<CardAppearanceType>(CardAppearance);
-  public sizes = Object.values<SizeType>(Size);
-  public variants = Object.values<AllVariantsType>(AllVariants);
-  public orientations = Object.values<OrientationType>(Orientation);
+  public appearances = Object.values<IdsCardAppearanceType>(IdsCardAppearance);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
+  public orientations = Object.values<IdsOrientationType>(IdsOrientation);
 
   public defaults: CardPublicApi & CardHelperControls = {
-    appearance: CardAppearance.FILLED,
-    size: Size.COMFORTABLE,
-    variant: AllVariants.SURFACE,
-    orientation: Orientation.VERTICAL,
+    appearance: IdsCardAppearance.FILLED,
+    size: IdsSize.COMFORTABLE,
+    variant: IdsAllVariants.SURFACE,
+    orientation: IdsOrientation.VERTICAL,
     clickable: false,
     disabled: false,
     stretchMedia: true,

@@ -1,13 +1,13 @@
 import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY } from './icon-defaults';
-import { IconSource } from './types/icon-source.type';
-import { IconVariantType } from './types/icon-variant.type';
+import { IdsIconSource } from './types/icon-source.type';
+import { IdsIconVariantType } from './types/icon-variant.type';
 
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { coerceBooleanAttribute, coerceStringAttribute, createClassList, createComponentError, fallbackValue, SizeCollectionType, SizeType } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, coerceStringAttribute, createClassList, createComponentError, fallbackValue, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 
@@ -42,16 +42,16 @@ export class IdsIconComponent implements OnInit {
   private readonly _sanitizer = inject(DomSanitizer);
   
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
-  public size = input<SizeType>(this._defaultConfig.size);
-  public sizeCollection = input<SizeCollectionType>(this._defaultConfig.sizeCollection);
-  public variant = input<IconVariantType>(this._defaultConfig.variant);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public sizeCollection = input<IdsSizeCollectionType>(this._defaultConfig.sizeCollection);
+  public variant = input<IdsIconVariantType>(this._defaultConfig.variant);
   public fontIcon = input<string | null, string>(null, { transform: coerceStringAttribute });
   public svgIconName = input<string | null, string>(null, { alias: 'svgIcon', transform: coerceStringAttribute });
   public ariaHidden = input<boolean, unknown>(true, { alias: 'aria-hidden', transform: coerceBooleanAttribute });
 
   protected _svgIcon: SVGElement | null = null;
 
-  protected _iconSourceType = computed(() => (this.fontIcon() ? IconSource.FONT : IconSource.SVG));
+  protected _iconSourceType = computed(() => (this.fontIcon() ? IdsIconSource.FONT : IdsIconSource.SVG));
 
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [

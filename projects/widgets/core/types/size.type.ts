@@ -1,8 +1,8 @@
-export const Size = {
+export const IdsSize = {
   DENSE: 'dense',
   COMPACT: 'compact',
   COMFORTABLE: 'comfortable',
   SPACIOUS: 'spacious',
 } as const;
 
-export type SizeType = (typeof Size)[keyof typeof Size];
+export type IdsSizeType = (typeof IdsSize)[keyof typeof IdsSize];

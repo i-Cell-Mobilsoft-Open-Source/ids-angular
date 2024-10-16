@@ -2,18 +2,18 @@ import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { PositionType, Size, SizeType, OrientationType, Orientation, Position } from '@i-cell/ids-angular/core';
-import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioGroupDirective, IdsRadioItemComponent, RadioVariant, RadioVariantType } from '@i-cell/ids-angular/radio';
+import { IdsPositionType, IdsSize, IdsSizeType, IdsOrientationType, IdsOrientation, IdsPosition } from '@i-cell/ids-angular/core';
+import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioGroupDirective, IdsRadioItemComponent, IdsRadioVariant, IdsRadioVariantType } from '@i-cell/ids-angular/radio';
 import { TranslateModule } from '@ngx-translate/core';
 
 type RadioPublicApi = {
   name: string
   required: boolean,
   disabled: boolean,
-  size: SizeType,
-  variant: RadioVariantType,
-  orientation: OrientationType,
-  labelPosition: PositionType,
+  size: IdsSizeType,
+  variant: IdsRadioVariantType,
+  orientation: IdsOrientationType,
+  labelPosition: IdsPositionType,
 };
 
 type RadioHelperControls = {
@@ -55,10 +55,10 @@ export class RadioDemoComponent {
 
   public value = undefined;
 
-  public sizes = Object.values<SizeType>(Size);
-  public variants = Object.values<RadioVariantType>(RadioVariant);
-  public orientations = Object.values<OrientationType>(Orientation);
-  public labelPositions = Object.values<PositionType>(Position);
+  public sizes = Object.values<IdsSizeType>(IdsSize);
+  public variants = Object.values<IdsRadioVariantType>(IdsRadioVariant);
+  public orientations = Object.values<IdsOrientationType>(IdsOrientation);
+  public labelPositions = Object.values<IdsPositionType>(IdsPosition);
 
   public reset(): void {
     this.value = undefined;

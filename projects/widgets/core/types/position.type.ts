@@ -1,45 +1,45 @@
-export const HorizontalPosition = {
+export const IdsHorizontalPosition = {
   LEFT: 'left',
   RIGHT: 'right',
 } as const;
 
-export type HorizontalPositionType = (typeof HorizontalPosition)[keyof typeof HorizontalPosition];
+export type IdsHorizontalPositionType = (typeof IdsHorizontalPosition)[keyof typeof IdsHorizontalPosition];
 
-export const ExtendedHorizontalPosition = {
-  ...HorizontalPosition,
+export const IdsExtendedHorizontalPosition = {
+  ...IdsHorizontalPosition,
   CENTER: 'center',
 } as const;
 
-export type ExtendedHorizontalPositionType = (typeof ExtendedHorizontalPosition)[keyof typeof ExtendedHorizontalPosition];
+export type IdsExtendedHorizontalPositionType = (typeof IdsExtendedHorizontalPosition)[keyof typeof IdsExtendedHorizontalPosition];
 
-export const VerticalPosition = {
+export const IdsVerticalPosition = {
   TOP: 'top',
   BOTTOM: 'bottom',
 } as const;
 
-export type VerticalPositionType = (typeof VerticalPosition)[keyof typeof VerticalPosition];
+export type IdsVerticalPositionType = (typeof IdsVerticalPosition)[keyof typeof IdsVerticalPosition];
 
-export const ExtendedVerticalPosition = {
-  ...VerticalPosition,
+export const IdsExtendedVerticalPosition = {
+  ...IdsVerticalPosition,
   CENTER: 'center',
 } as const;
 
-export type ExtendedVerticalPositionType = (typeof ExtendedVerticalPosition)[keyof typeof ExtendedVerticalPosition];
+export type IdsExtendedVerticalPositionType = (typeof IdsExtendedVerticalPosition)[keyof typeof IdsExtendedVerticalPosition];
 
-export const Position = {
-  ...HorizontalPosition,
-  ...VerticalPosition,
+export const IdsPosition = {
+  ...IdsHorizontalPosition,
+  ...IdsVerticalPosition,
 } as const;
 
-export type PositionType = (typeof Position)[keyof typeof Position];
+export type IdsPositionType = (typeof IdsPosition)[keyof typeof IdsPosition];
 
-export type PositionPairType = [HorizontalPositionType, VerticalPositionType];
+export type IdsPositionPairType = [IdsHorizontalPositionType, IdsVerticalPositionType];
 
-export const ExtendedPosition = {
-  ...ExtendedHorizontalPosition,
-  ...ExtendedVerticalPosition,
+export const IdsExtendedPosition = {
+  ...IdsExtendedHorizontalPosition,
+  ...IdsExtendedVerticalPosition,
 } as const;
 
-export type ExtendedPositionType = (typeof ExtendedPosition)[keyof typeof ExtendedPosition];
+export type IdsExtendedPositionType = (typeof IdsExtendedPosition)[keyof typeof IdsExtendedPosition];
 
-export type ExtendedPositionPairType = [ExtendedHorizontalPositionType, ExtendedVerticalPositionType];
+export type IdsExtendedPositionPairType = [IdsExtendedHorizontalPositionType, IdsExtendedVerticalPositionType];

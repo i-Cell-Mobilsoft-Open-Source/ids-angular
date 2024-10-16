@@ -153,28 +153,36 @@
         <td>expandBtnLabel</td>
         <td>Label for expand all button.</td>
         <td><code>string</code></td>
-        <td><code>-</code></td>
+        <td>
+          <code>{{ defaults.expandBtnLabel }}</code>
+        </td>
         <td><input type="text" name="expandBtnLabel" [(ngModel)]="model.expandBtnLabel" /></td>
       </tr>
       <tr>
         <td>collapseBtnLabel</td>
         <td>Label for collapse all button.</td>
         <td><code>string</code></td>
-        <td><code>-</code></td>
+        <td>
+          <code>{{ defaults.collapseBtnLabel }}</code>
+        </td>
         <td><input type="text" name="collapseBtnLabel" [(ngModel)]="model.collapseBtnLabel" /></td>
       </tr>
       <tr>
         <td>hasLeadingIcon</td>
         <td>Whether the button has leading icon or not.</td>
         <td><code>boolean</code></td>
-        <td><code>false</code></td>
+        <td>
+          <code>{{ defaults.hasLeadingIcon }}</code>
+        </td>
         <td><input type="checkbox" name="hasLeadingIcon" [(ngModel)]="model.hasLeadingIcon" /></td>
       </tr>
       <tr>
         <td>hasTrailingIcon</td>
         <td>Whether the button has trailing icon or not.</td>
         <td><code>boolean</code></td>
-        <td><code>true</code></td>
+        <td>
+          <code>{{ defaults.hasTrailingIcon }}</code>
+        </td>
         <td><input type="checkbox" name="hasTrailingIcon" [(ngModel)]="model.hasTrailingIcon" /></td>
       </tr>
     </tbody>

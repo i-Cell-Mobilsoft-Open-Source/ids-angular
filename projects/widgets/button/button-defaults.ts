@@ -1,12 +1,13 @@
 import { IdsButtonAppearance, IdsButtonAppearanceType } from './types/button-appearance.type';
+import { IdsButtonVariant, IdsButtonVariantType } from './types/button-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { IdsSize, IdsSizeType, IdsAllVariants, IdsAllVariantsType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsButtonDefaultConfig {
   appearance?: IdsButtonAppearanceType,
   size?: IdsSizeType,
-  variant?: IdsAllVariantsType,
+  variant?: IdsButtonVariantType,
 }
 
 export const IDS_BUTTON_DEFAULT_CONFIG = new InjectionToken<IdsButtonDefaultConfig>(
@@ -21,7 +22,7 @@ export function IDS_BUTTON_DEFAULT_CONFIG_FACTORY(): Required<IdsButtonDefaultCo
   return {
     appearance: IdsButtonAppearance.FILLED,
     size: IdsSize.COMFORTABLE,
-    variant: IdsAllVariants.PRIMARY,
+    variant: IdsButtonVariant.PRIMARY,
   };
 }
 

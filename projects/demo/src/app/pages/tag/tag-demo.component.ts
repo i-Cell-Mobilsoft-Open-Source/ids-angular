@@ -2,21 +2,17 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
-  IdsAllVariants,
-  IdsAllVariantsType,
-  IdsBrandVariant,
-  IdsBrandVariantType,
   IdsSize,
   IdsSizeType,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsTagComponent, IdsTagAppearance, IdsTagAppearanceType } from '@i-cell/ids-angular/tag';
+import { IdsTagComponent, IdsTagAppearance, IdsTagAppearanceType, IdsTagVariantType, IdsTagVariant } from '@i-cell/ids-angular/tag';
 import { TranslateModule } from '@ngx-translate/core';
 
 type TagPublicApi = {
   appearance: IdsTagAppearanceType,
   size: IdsSizeType,
-  variant: IdsAllVariantsType,
+  variant: IdsTagVariantType,
 };
 
 type TagHelperControls = {
@@ -44,7 +40,7 @@ export class TagDemoComponent {
   public defaults: TagPublicApi & TagHelperControls = {
     appearance: IdsTagAppearance.FILLED,
     size: IdsSize.COMFORTABLE,
-    variant: IdsAllVariants.PRIMARY,
+    variant: IdsTagVariant.PRIMARY,
     hasLeadingIcon: true,
     hasTrailingIcon: true,
   };
@@ -53,8 +49,7 @@ export class TagDemoComponent {
 
   public appearances = Object.values<IdsTagAppearanceType>(IdsTagAppearance);
   public sizes = Object.values<IdsSizeType>(IdsSize);
-  public baseVariants = Object.values<IdsBrandVariantType>(IdsBrandVariant);
-  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
+  public variants = Object.values<IdsTagVariantType>(IdsTagVariant);
 
   public onClick(tagName: string): void {
     // eslint-disable-next-line no-console

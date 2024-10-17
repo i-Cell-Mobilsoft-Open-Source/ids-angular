@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
+import { IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent, IdsAccordionVariant, IdsAccordionVariantType } from '@i-cell/ids-angular/accordion';
 import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsAllVariants, IdsAllVariantsType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 type AccordionPublicApi = {
@@ -13,7 +13,7 @@ type AccordionPublicApi = {
   multi: boolean,
   btnSize: IdsSizeType,
   btnAppearance: IdsButtonAppearanceType,
-  btnVariant: IdsAllVariantsType,
+  btnVariant: IdsAccordionVariantType,
   expandBtnLabel: string,
   collapseBtnLabel: string,
   hasLeadingIcon: boolean,
@@ -40,7 +40,7 @@ export class AccordionDemoComponent {
   public appearances = Object.values<IdsAccordionAppearanceType>(IdsAccordionAppearance);
   public btnAppearances = Object.values<IdsButtonAppearanceType>(IdsButtonAppearance);
   public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
+  public variants = Object.values<IdsAccordionVariantType>(IdsAccordionVariant);
 
   public defaults: AccordionPublicApi = {
     appearance: IdsAccordionAppearance.FILLED,
@@ -50,7 +50,7 @@ export class AccordionDemoComponent {
     multi: false,
     btnSize: IdsSize.COMPACT,
     btnAppearance: IdsButtonAppearance.FILLED,
-    btnVariant: IdsAllVariants.SURFACE,
+    btnVariant: IdsAccordionVariant.SURFACE,
     expandBtnLabel: 'Expand all',
     collapseBtnLabel: 'Collapse all',
     hasLeadingIcon: false,

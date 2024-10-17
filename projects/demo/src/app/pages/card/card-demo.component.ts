@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsCardAppearance, IdsCardAppearanceType, IdsCardComponent } from '@i-cell/ids-angular/card';
+import { IdsCardAppearance, IdsCardAppearanceType, IdsCardComponent, IdsCardVariant, IdsCardVariantType } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
 import { IdsCardFooterDirective } from '@i-cell/ids-angular/card/card-footer.directive';
 import { IdsCardHeaderComponent } from '@i-cell/ids-angular/card/card-header.component';
@@ -9,8 +9,6 @@ import { IdsCardMediaDirective } from '@i-cell/ids-angular/card/card-media.direc
 import { IdsCardSubtitleDirective } from '@i-cell/ids-angular/card/card-subtitle.directive';
 import { IdsCardTitleDirective } from '@i-cell/ids-angular/card/card-title.directive';
 import {
-  IdsAllVariants,
-  IdsAllVariantsType,
   IdsOrientation,
   IdsOrientationType,
   IdsSize,
@@ -21,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 type CardPublicApi = {
   appearance: IdsCardAppearanceType,
   size: IdsSizeType,
-  variant: IdsAllVariantsType,
+  variant: IdsCardVariantType,
   orientation: IdsOrientationType,
   disabled: boolean,
 };
@@ -55,13 +53,13 @@ type CardHelperControls = {
 export class CardDemoComponent {
   public appearances = Object.values<IdsCardAppearanceType>(IdsCardAppearance);
   public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
+  public variants = Object.values<IdsCardVariantType>(IdsCardVariant);
   public orientations = Object.values<IdsOrientationType>(IdsOrientation);
 
   public defaults: CardPublicApi & CardHelperControls = {
     appearance: IdsCardAppearance.FILLED,
     size: IdsSize.COMFORTABLE,
-    variant: IdsAllVariants.SURFACE,
+    variant: IdsCardVariant.SURFACE,
     orientation: IdsOrientation.VERTICAL,
     clickable: false,
     disabled: false,

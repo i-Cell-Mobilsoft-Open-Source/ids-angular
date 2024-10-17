@@ -1,6 +1,7 @@
 import { IDS_ICON_BUTTON_PARENT } from './public-api';
 import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonDefaultConfig } from './tokens/icon-button-defaults';
 import { IdsIconButtonAppearanceType } from './types/icon-button-appearance.type';
+import { IdsIconButtonVariantType } from './types/icon-button-variant.type';
 
 import {
   Component,
@@ -12,7 +13,6 @@ import {
   input,
 } from '@angular/core';
 import {
-  IdsAllVariantsType,
   IdsSizeType,
   coerceBooleanAttribute,
   createClassList,
@@ -42,7 +42,7 @@ export class IdsIconButtonComponent {
 
   public appearance = input<IdsIconButtonAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);
-  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
+  public variant = input<IdsIconButtonVariantType>(this._defaultConfig.variant);
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
   public icon = contentChildren(IdsIconComponent);

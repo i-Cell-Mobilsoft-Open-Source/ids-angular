@@ -1,4 +1,5 @@
 import { IDS_DIVIDER_DEFAULT_CONFIG, IDS_DIVIDER_DEFAULT_CONFIG_FACTORY, IdsDividerDefaultConfig } from './divider-defaults';
+import { IdsDividerVariantType } from './public-api';
 
 import {
   Component,
@@ -9,7 +10,6 @@ import {
   input,
 } from '@angular/core';
 import {
-  IdsAllVariantsType,
   createClassList,
   IdsOrientation,
   IdsOrientationType,
@@ -37,7 +37,7 @@ export class IdsDividerComponent {
 
   public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
   public size = input<IdsSizeType>(this._defaultConfig.size);
-  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
+  public variant = input<IdsDividerVariantType>(this._defaultConfig.variant);
   public width = input<string>(this._defaultConfig.width);
   public height = input<string>(this._defaultConfig.height);
   private _safeWidth = computed(() => (this.orientation() === IdsOrientation.HORIZONTAL ? this.width() : null));

@@ -7,7 +7,6 @@ export * from './types/orientation.type';
 export * from './types/position.type';
 export * from './types/size-collection.type';
 export * from './types/size.type';
-export * from './types/variants.type';
 export * from './utils/position/connected-position';
 export * from './utils/position/scroll-clip';
 export * from './utils/class-prefix';

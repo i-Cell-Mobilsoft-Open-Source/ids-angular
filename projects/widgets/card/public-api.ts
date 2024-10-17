@@ -7,3 +7,4 @@ export * from './card-subtitle.directive';
 export * from './card-title.directive';
 export * from './card.component';
 export * from './types/card-appearances.type';
+export * from './types/card-variant.type';

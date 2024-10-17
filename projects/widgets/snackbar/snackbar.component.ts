@@ -4,8 +4,8 @@ import { IdsSnackbarVariant, IdsSnackbarVariantType } from './types/snackbar-var
 
 import { A11yModule } from '@angular/cdk/a11y';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, HostBinding, HostListener, input, OnDestroy, output, ViewEncapsulation } from '@angular/core';
-import { IdsButtonAppearance, IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsAllVariants, coerceBooleanAttribute, createClassList, IdsSize } from '@i-cell/ids-angular/core';
+import { IdsButtonAppearance, IdsButtonComponent, IdsButtonVariant } from '@i-cell/ids-angular/button';
+import { coerceBooleanAttribute, createClassList, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
@@ -60,7 +60,7 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
 
   public role = computed(() => (this.urgent() ? 'alert' : 'status'));
   public uniqueId = computed(() => `${this._componentClass}-${this.id()}`);
-  public buttonVariant = computed(() => (this.variant() === IdsSnackbarVariant.DARK ? IdsAllVariants.LIGHT : IdsAllVariants.SURFACE));
+  public buttonVariant = computed(() => (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE));
   private _defaultIcon = computed<string | null>(() => {
     switch (this.variant()) {
       case IdsSnackbarVariant.DARK:

@@ -1,5 +1,6 @@
 import { IDS_CARD_DEFAULT_CONFIG, IDS_CARD_DEFAULT_CONFIG_FACTORY, IdsCardDefaultConfig } from './card-defaults';
 import { IdsCardHeaderComponent } from './card-header.component';
+import { IdsCardVariantType } from './public-api';
 import { IdsCardAppearanceType } from './types/card-appearances.type';
 
 import {
@@ -16,7 +17,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  IdsAllVariantsType,
   IdsOrientationType,
   IdsSizeType,
   coerceBooleanAttribute,
@@ -43,7 +43,7 @@ export class IdsCardComponent implements OnInit {
 
   public appearance = input<IdsCardAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);
-  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
+  public variant = input<IdsCardVariantType>(this._defaultConfig.variant);
   public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
   public disabled = input(false, {
     transform: (value: boolean | string) => coerceBooleanAttribute(value),

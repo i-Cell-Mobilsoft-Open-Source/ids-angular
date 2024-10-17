@@ -1,12 +1,13 @@
 import { IdsTagAppearance, IdsTagAppearanceType } from './types/tag-appearance.type';
+import { IdsTagVariant, IdsTagVariantType } from './types/tag-variant.type';
 
 import { InjectionToken } from '@angular/core';
-import { IdsSize, IdsSizeType, IdsAllVariants, IdsAllVariantsType } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsTagDefaultConfig {
   appearance?: IdsTagAppearanceType,
   size?: IdsSizeType,
-  variant?: IdsAllVariantsType,
+  variant?: IdsTagVariantType,
 }
 
 export const IDS_TAG_DEFAULT_CONFIG = new InjectionToken<IdsTagDefaultConfig>(
@@ -21,7 +22,7 @@ export function IDS_TAG_DEFAULT_CONFIG_FACTORY(): Required<IdsTagDefaultConfig> 
   return {
     appearance: IdsTagAppearance.FILLED,
     size: IdsSize.COMFORTABLE,
-    variant: IdsAllVariants.PRIMARY,
+    variant: IdsTagVariant.PRIMARY,
   };
 }
 

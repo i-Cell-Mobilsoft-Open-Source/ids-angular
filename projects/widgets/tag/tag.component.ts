@@ -1,5 +1,6 @@
 import { IDS_TAG_DEFAULT_CONFIG, IDS_TAG_DEFAULT_CONFIG_FACTORY, IdsTagDefaultConfig } from './tag-defaults';
 import { IdsTagAppearanceType } from './types/tag-appearance.type';
+import { IdsTagVariantType } from './types/tag-variant.type';
 
 import {
   Component,
@@ -13,7 +14,6 @@ import {
   input,
 } from '@angular/core';
 import {
-  IdsAllVariantsType,
   createClassList,
   IdsSizeType,
 } from '@i-cell/ids-angular/core';
@@ -35,7 +35,7 @@ export class IdsTagComponent {
 
   public appearance = input<IdsTagAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);
-  public variant = input<IdsAllVariantsType>(this._defaultConfig.variant);
+  public variant = input<IdsTagVariantType>(this._defaultConfig.variant);
 
   public iconLeading = contentChildren<unknown>('[icon-leading]');
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');

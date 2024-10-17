@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsButtonComponent, IdsButtonAppearance, IdsButtonAppearanceType } from '@i-cell/ids-angular/button';
+import { IdsButtonComponent, IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import {
-  IdsBrandVariant,
-  IdsBrandVariantType,
-  IdsAllVariants,
-  IdsAllVariantsType,
   IdsSize,
   IdsSizeType,
 } from '@i-cell/ids-angular/core';
@@ -15,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 type ButtonPublicApi = {
   appearance: IdsButtonAppearanceType,
   size: IdsSizeType,
-  variant: IdsAllVariantsType,
+  variant: IdsButtonVariantType,
   disabled: boolean,
 };
 
@@ -43,13 +39,12 @@ type ButtonHelperControls = {
 export class ButtonDemoComponent {
   public appearances = Object.values<IdsButtonAppearanceType>(IdsButtonAppearance);
   public sizes = Object.values<IdsSizeType>(IdsSize);
-  public baseVariants = Object.values<IdsBrandVariantType>(IdsBrandVariant);
-  public variants = Object.values<IdsAllVariantsType>(IdsAllVariants);
+  public variants = Object.values<IdsButtonVariantType>(IdsButtonVariant);
 
   public defaults: ButtonPublicApi & ButtonHelperControls = {
     appearance: IdsButtonAppearance.FILLED,
     size: IdsSize.COMFORTABLE,
-    variant: IdsAllVariants.PRIMARY,
+    variant: IdsButtonVariant.PRIMARY,
     disabled: false,
     text: 'Sample button',
     hasLeadingIcon: true,

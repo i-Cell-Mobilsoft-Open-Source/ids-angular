@@ -1,4 +1,4 @@
-import { IdsIconButtonAppearance, IdsIconButtonAppearanceType } from './types/icon-button-appearance.type';
+import { IdsIconButtonAppearance, IdsIconButtonAppearanceType } from '../types/icon-button-appearance.type';
 
 import { InjectionToken } from '@angular/core';
 import { IdsSize, IdsSizeType, IdsAllVariants, IdsAllVariantsType } from '@i-cell/ids-angular/core';

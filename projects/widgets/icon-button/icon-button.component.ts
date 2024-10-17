@@ -1,4 +1,5 @@
-import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonDefaultConfig } from './icon-button-defaults';
+import { IDS_ICON_BUTTON_PARENT } from './public-api';
+import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonDefaultConfig } from './tokens/icon-button-defaults';
 import { IdsIconButtonAppearanceType } from './types/icon-button-appearance.type';
 
 import {
@@ -35,6 +36,8 @@ const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
 export class IdsIconButtonComponent {
   private readonly _componentClass = 'ids-icon-button';
 
+  private readonly _iconButtonParent = inject(IDS_ICON_BUTTON_PARENT, { optional: true });
+
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_BUTTON_DEFAULT_CONFIG);
 
   public appearance = input<IdsIconButtonAppearanceType>(this._defaultConfig.appearance);
@@ -44,11 +47,13 @@ export class IdsIconButtonComponent {
 
   public icon = contentChildren(IdsIconComponent);
 
+  private _safeAppearance = computed(() => this._iconButtonParent?.embeddedIconButtonAppearance() ?? this.appearance());
+  private _safeVariant = computed(() => this._iconButtonParent?.embeddedIconButtonVariant() ?? this.variant());
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
-      this.appearance(),
+      this._safeAppearance(),
       this.size(),
-      this.variant(),
+      this._safeVariant(),
     ]),
   );
 

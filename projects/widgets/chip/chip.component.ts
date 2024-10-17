@@ -1,12 +1,12 @@
 import { IDS_CHIP_DEFAULT_CONFIG, IDS_CHIP_DEFAULT_CONFIG_FACTORY, IdsChipDefaultConfig } from './chip-defaults';
 import { IdsChipRemoveDirective } from './chip-remove.directive';
 import { IdsChipAppearanceType } from './types/chip-appearance.type';
-import { IdsChipVariantType } from './types/chip-variant.type';
+import { IdsChipVariant, IdsChipVariantType } from './types/chip-variant.type';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, OnDestroy, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { coerceNumberAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, OnDestroy, signal, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { coerceNumberAttribute, ComponentBaseWithDefaults, IdsAllVariants, IdsAllVariantsType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonComponent, IdsIconButtonParent } from '@i-cell/ids-angular/icon-button';
 
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 
@@ -22,12 +22,18 @@ const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
   styleUrl: './chip.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: IDS_ICON_BUTTON_PARENT,
+      useExisting: IdsChipComponent,
+    },
+  ],
   host: {
-    '[role]': '_safeRole()',
+    '[attr.role]': '_safeRole()',
     '[attr.tabindex]': '_safeTabIndex()',
   },
 })
-export class IdsChipComponent extends ComponentBaseWithDefaults<IdsChipDefaultConfig> implements OnDestroy {
+export class IdsChipComponent extends ComponentBaseWithDefaults<IdsChipDefaultConfig> implements IdsIconButtonParent, OnDestroy {
   protected override get _componentName(): string {
     return 'chip';
   }
@@ -53,16 +59,23 @@ export class IdsChipComponent extends ComponentBaseWithDefaults<IdsChipDefaultCo
     this.disabled() ? 'disabled' : null,
   ]));
 
-  protected _iconButtonVariant = computed(() => {
-    // const chipVariant = this.variant();
-    // switch () {
-    //   case IdsChipVariant.PRIMARY:
-    //     return '';
-    
-    //   default:
-    //     break;
-    // }
+  public embeddedIconButtonVariant = computed<IdsAllVariantsType>(() => {
+    const chipVariant = this.variant();
+    switch (chipVariant) {
+      case IdsChipVariant.PRIMARY:
+      case IdsChipVariant.SECONDARY:
+      case IdsChipVariant.DARK:
+        return IdsAllVariants.LIGHT;
+      
+      case IdsChipVariant.LIGHT:
+        return IdsAllVariants.SECONDARY;
+      
+      case IdsChipVariant.SURFACE:
+        return IdsAllVariants.SURFACE;
+    }
   });
+
+  public embeddedIconButtonAppearance = signal(IdsIconButtonAppearance.STANDARD);
 
   public remove(): void {
     // console.log(this._viewContainerRef);

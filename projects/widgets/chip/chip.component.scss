@@ -120,12 +120,6 @@ $variants: primary, secondary, surface, light, dark;
         &.ids-chip-disabled {
           @include chipState($appearance, $variant, disabled);
         }
-
-        & > .ids-avatar {
-          background: var(--ids-comp-chip-#{$appearance}-avatar-color-bg-default);
-          border-color: var(--ids-comp-chip-#{$appearance}-avatar-color-border-default);
-          color: var(--ids-comp-chip-#{$appearance}-avatar-color-fg-default);
-        }
       }
     }
   }

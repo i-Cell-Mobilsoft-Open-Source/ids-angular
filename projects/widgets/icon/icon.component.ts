@@ -1,4 +1,5 @@
-import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY } from './icon-defaults';
+import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY } from './tokens/icon-defaults';
+import { IDS_ICON_PARENT } from './tokens/icon-parent';
 import { IdsIconSource } from './types/icon-source.type';
 import { IdsIconVariantType } from './types/icon-variant.type';
 
@@ -30,6 +31,7 @@ const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 export class IdsIconComponent implements OnInit {
   private readonly _componentClass = 'ids-icon';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+  private readonly _embeddedParent = inject(IDS_ICON_PARENT, { optional: true });
   private readonly _defaultConfig = {
     ...defaultConfig,
     ...inject(IDS_ICON_DEFAULT_CONFIG, { optional: true }),
@@ -53,13 +55,14 @@ export class IdsIconComponent implements OnInit {
 
   protected _iconSourceType = computed(() => (this.fontIcon() ? IdsIconSource.FONT : IdsIconSource.SVG));
 
+  private _safeVariant = computed(() => this._embeddedParent?.embeddedIconVariant() ?? this.variant());
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       [
         `${this.sizeCollection()}collection`,
         this.size(),
       ],
-      this.variant(),
+      this._safeVariant(),
       this._iconSourceType(),
     ]),
   );

@@ -4,9 +4,10 @@ import { IdsChipAppearanceType } from './types/chip-appearance.type';
 import { IdsChipVariant, IdsChipVariantType } from './types/chip-variant.type';
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, OnDestroy, signal, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { IDS_AVATAR_PARENT, IdsAvatarParent, IdsAvatarVariant, IdsAvatarVariantType } from '@i-cell/ids-angular/avatar';
 import { coerceNumberAttribute, ComponentBaseWithDefaults, IdsAllVariants, IdsAllVariantsType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonComponent, IdsIconButtonParent } from '@i-cell/ids-angular/icon-button';
+import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonComponent, IdsIconButtonParent } from '@i-cell/ids-angular/icon-button';
 
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 
@@ -27,13 +28,19 @@ const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
       provide: IDS_ICON_BUTTON_PARENT,
       useExisting: IdsChipComponent,
     },
+    {
+      provide: IDS_AVATAR_PARENT,
+      useExisting: IdsChipComponent,
+    },
   ],
   host: {
     '[attr.role]': '_safeRole()',
     '[attr.tabindex]': '_safeTabIndex()',
   },
 })
-export class IdsChipComponent extends ComponentBaseWithDefaults<IdsChipDefaultConfig> implements IdsIconButtonParent, OnDestroy {
+export class IdsChipComponent 
+  extends ComponentBaseWithDefaults<IdsChipDefaultConfig> 
+  implements IdsIconButtonParent, IdsAvatarParent, OnDestroy {
   protected override get _componentName(): string {
     return 'chip';
   }
@@ -59,6 +66,7 @@ export class IdsChipComponent extends ComponentBaseWithDefaults<IdsChipDefaultCo
     this.disabled() ? 'disabled' : null,
   ]));
 
+  public embeddedAvatarVariant = computed<IdsAvatarVariantType>(() => IdsAvatarVariant.SURFACE);
   public embeddedIconButtonVariant = computed<IdsAllVariantsType>(() => {
     const chipVariant = this.variant();
     switch (chipVariant) {
@@ -75,7 +83,7 @@ export class IdsChipComponent extends ComponentBaseWithDefaults<IdsChipDefaultCo
     }
   });
 
-  public embeddedIconButtonAppearance = signal(IdsIconButtonAppearance.STANDARD);
+  public embeddedIconButtonAppearance = signal<IdsIconButtonAppearanceType>(IdsIconButtonAppearance.STANDARD);
 
   public remove(): void {
     // console.log(this._viewContainerRef);

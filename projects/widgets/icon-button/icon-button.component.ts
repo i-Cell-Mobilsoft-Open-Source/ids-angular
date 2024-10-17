@@ -29,14 +29,14 @@ const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   host: {
     '[attr.class]': '_hostClasses()',
-    '[disabled]': 'disabled() || null',
-    '[attr.aria-disabled]': 'disabled()',
+    '[attr.disabled]': '_safeDisabled() ? "" : null',
+    '[attr.aria-disabled]': '_safeDisabled()',
   },
 })
 export class IdsIconButtonComponent {
   private readonly _componentClass = 'ids-icon-button';
 
-  private readonly _iconButtonParent = inject(IDS_ICON_BUTTON_PARENT, { optional: true });
+  private readonly _embeddedParent = inject(IDS_ICON_BUTTON_PARENT, { optional: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_BUTTON_DEFAULT_CONFIG);
 
@@ -47,8 +47,9 @@ export class IdsIconButtonComponent {
 
   public icon = contentChildren(IdsIconComponent);
 
-  private _safeAppearance = computed(() => this._iconButtonParent?.embeddedIconButtonAppearance() ?? this.appearance());
-  private _safeVariant = computed(() => this._iconButtonParent?.embeddedIconButtonVariant() ?? this.variant());
+  private _safeAppearance = computed(() => this._embeddedParent?.embeddedIconButtonAppearance() ?? this.appearance());
+  private _safeVariant = computed(() => this._embeddedParent?.embeddedIconButtonVariant() ?? this.variant());
+  private _safeDisabled = computed(() => this._embeddedParent?.disabled() ?? this.disabled());
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       this._safeAppearance(),

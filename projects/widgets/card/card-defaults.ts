@@ -1,5 +1,5 @@
-import { IdsCardVariant, IdsCardVariantType } from './public-api';
 import { IdsCardAppearance, IdsCardAppearanceType } from './types/card-appearances.type';
+import { IdsCardVariant, IdsCardVariantType } from './types/card-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { IdsSize, IdsSizeType, IdsOrientationType, IdsOrientation } from '@i-cell/ids-angular/core';

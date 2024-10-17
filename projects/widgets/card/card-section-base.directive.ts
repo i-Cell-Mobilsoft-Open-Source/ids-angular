@@ -1,10 +1,15 @@
-import { Directive, HostBinding, input } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
+import { createClassList } from '@i-cell/ids-angular/core';
 
-@Directive()
+@Directive({
+  host: {
+    '[class]': '_hostClasses()',
+  },
+})
 export abstract class IdsCardSectionBase {
+  private readonly _componentClass = 'ids-card-section';
+
   public stretch = input(false);
 
-  @HostBinding('class') get classes(): string {
-    return `ids-card-section ${this.stretch() ? 'ids-card-section-stretched' : 'ids-card-section-padded'}`;
-  }
+  private _hostClasses = computed(() => createClassList(this._componentClass, [this.stretch() ? 'stretched' : 'padded']));
 }

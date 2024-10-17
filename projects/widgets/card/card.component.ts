@@ -1,12 +1,11 @@
 import { IDS_CARD_DEFAULT_CONFIG, IDS_CARD_DEFAULT_CONFIG_FACTORY, IdsCardDefaultConfig } from './card-defaults';
 import { IdsCardHeaderComponent } from './card-header.component';
-import { IdsCardVariantType } from './public-api';
 import { IdsCardAppearanceType } from './types/card-appearances.type';
+import { IdsCardVariantType } from './types/card-variant.type';
 
 import {
   Component,
   EventEmitter,
-  HostBinding,
   InjectionToken,
   OnInit,
   Output,
@@ -35,6 +34,11 @@ const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
     <ng-content select="ids-card-footer,footer[idsCardFooter]" />
   `,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+    '[attr.aria-disabled]': 'this.disabled() || null',
+    '[attr.tabindex]': ' this._hasClickHandler() ? 0 : null',
+  },
 })
 export class IdsCardComponent implements OnInit {
   private readonly _componentClass = 'ids-card';
@@ -66,18 +70,6 @@ export class IdsCardComponent implements OnInit {
       this._hasClickHandler() ? 'clickable' : null,
     ]),
   );
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
-
-  @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean | null {
-    return this.disabled() || null;
-  }
-
-  @HostBinding('attr.tabindex') get tabIndex(): number | null {
-    return this._hasClickHandler() ? 0 : null;
-  }
 
   public ngOnInit(): void {
     this._hasClickHandler.set(this.click.observed);

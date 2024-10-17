@@ -3,7 +3,7 @@ import { IdsRadioItemComponent } from './radio-item/radio-item.component';
 import { IdsRadioChangeEvent } from './types/radio-events.class';
 import { IdsRadioVariantType } from './types/radio-variant.type';
 
-import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, HostBinding, HostListener, inject, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, inject, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, createComponentError, IdsOrientation, IdsOrientationType, IdsPositionType, SelectionModel, IdsSizeType, IdsVerticalPosition } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
@@ -22,6 +22,10 @@ const defaultOptions = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
       multi: true,
     },
   ],
+  host: {
+    '[class]': '_hostClasses()',
+    '(keydown)': '_handleKeyDown($event)',
+  },
 })
 export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestroy, ControlValueAccessor {
   private readonly _componentClass = 'ids-radio-group';
@@ -68,11 +72,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
 
   @Output() public readonly itemChanges = new EventEmitter<IdsRadioChangeEvent>();
 
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses();
-  }
-
-  @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
+  private _handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<IdsOrientationType, Set<string>> = {
       // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       horizontal: new Set(['ArrowLeft', 'ArrowRight', 'Enter', ' ']),

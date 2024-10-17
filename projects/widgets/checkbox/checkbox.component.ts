@@ -4,7 +4,7 @@ import { IdsCheckBoxChangeEvent } from './types/checkbox-events.class';
 import { IdsCheckboxState, IdsCheckboxStateType } from './types/checkbox-state.type';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, output, signal, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
 import { IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
@@ -32,6 +32,9 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class]': '_hostClasses()',
+  },
 })
 export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   private readonly _componentClass = 'ids-checkbox';
@@ -86,10 +89,6 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
 
   private _hintMessages = contentChildren(IdsHintMessageComponent, { descendants: true });
   private _errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     const checkedChange = changes['checked'] as SimpleChange | undefined;

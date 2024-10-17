@@ -3,7 +3,7 @@ import { IdsMessageDirective } from '../../../directives/message.directive';
 import { IdsFormFieldComponent } from '../../form-field/form-field.component';
 import { IDS_FORM_FIELD } from '../../form-field/tokens/form-field-tokens';
 
-import { Component, ContentChildren, HostBinding, Injector, OnDestroy, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
+import { Component, ContentChildren, Injector, OnDestroy, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { createClassList } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -16,6 +16,9 @@ import { Subscription, startWith } from 'rxjs';
   templateUrl: './error-message.component.html',
   hostDirectives: [IdsMessageDirective],
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+  },
 })
 export class IdsErrorMessageComponent implements OnInit, OnDestroy {
   private readonly _componentClass = 'ids-error-message';
@@ -25,10 +28,6 @@ export class IdsErrorMessageComponent implements OnInit, OnDestroy {
 
   private _errors = signal<ValidationErrors | null>(null);
   private _hostClasses = computed(() => createClassList(this._componentClass));
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
 
   @ContentChildren(IdsMessageSuffixDirective) public suffixes!: QueryList<IdsMessageSuffixDirective>;
 

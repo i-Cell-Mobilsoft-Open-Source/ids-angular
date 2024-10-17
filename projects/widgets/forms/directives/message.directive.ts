@@ -4,7 +4,7 @@ import { IdsFormFieldVariantType } from '../components/form-field/types/form-fie
 import { IDS_MESSAGE_DEFAULT_CONFIG, IDS_MESSAGE_DEFAULT_CONFIG_FACTORY, IdsMessageDefaultConfig } from '../components/message/message-defaults';
 import { IdsMessageVariantType } from '../components/message/types/message-variant.type';
 
-import { Directive, HostBinding, InjectionToken, OnInit, computed, inject, input, signal } from '@angular/core';
+import { Directive, InjectionToken, OnInit, computed, inject, input, signal } from '@angular/core';
 import { createClassList, IdsSizeType } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
@@ -16,6 +16,7 @@ const defaultConfig = IDS_MESSAGE_DEFAULT_CONFIG_FACTORY();
   standalone: true,
   host: {
     '[id]': 'id()',
+    '[class]': '_hostClasses()',
   },
 })
 export class IdsMessageDirective implements OnInit {
@@ -48,10 +49,6 @@ export class IdsMessageDirective implements OnInit {
       this._parentVariant.set(this._parent.safeVariant());
       this._disabled.set(this._parent.disabled());
     }
-  }
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
   }
 
   // eslint-disable-next-line @stylistic/js/max-len

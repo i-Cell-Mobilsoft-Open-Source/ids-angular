@@ -1,6 +1,7 @@
-import { IdsSegmentedControlAppearance, IdsSegmentedControlVariant } from './public-api';
 import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
 import { IdsSegmentedControlToggleDirective } from './segmented-control-toggle.directive';
+import { IdsSegmentedControlAppearance } from './types/segmented-control-appearance.type';
+import { IdsSegmentedControlVariant } from './types/segmented-control-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 import { IdsSize } from '../core';

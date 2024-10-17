@@ -8,7 +8,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, HostBinding, inject, input, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, inject, input, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
 import { coerceStringAttribute, createClassList, IdsSizeType, WindowResizeService } from '@i-cell/ids-angular/core';
 import { filter, Subject, takeUntil } from 'rxjs';
 
@@ -18,6 +18,9 @@ const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true }
 @Directive({
   selector: '[idsTooltip]',
   standalone: true,
+  host: {
+    '[class]': '_hostClasses()',
+  },
 })
 export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private readonly _componentClass = 'ids-tooltip-trigger';
@@ -55,10 +58,6 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
 
   private _hostClasses = computed(() => createClassList(this._componentClass, []),
   );
-
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses();
-  }
 
   public ngAfterViewInit(): void {
     this._setupPointerEnterEventsIfNeeded();

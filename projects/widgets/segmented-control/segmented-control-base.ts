@@ -5,7 +5,7 @@ import { IdsSegmentedControlAppearanceType } from './types/segmented-control-app
 import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change.class';
 import { IdsSegmentedControlVariantType } from './types/segmented-control-variant.type';
 
-import { AfterContentInit, computed, Directive, EventEmitter, HostBinding, HostListener, inject, Input, input, InputSignal, isDevMode, OnDestroy, OnInit, Output, Signal, signal } from '@angular/core';
+import { AfterContentInit, computed, Directive, EventEmitter, inject, Input, input, InputSignal, isDevMode, OnDestroy, OnInit, Output, Signal, signal } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { createClassList, createComponentError, SelectionModel, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,12 @@ const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
 type SegmentedControlItem = IdsSegmentedControlToggleItemComponent | IdsSegmentedControlItemComponent;
 type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
 
-@Directive()
+@Directive({
+  host: {
+    '[class]': '_hostClasses()',
+    '(keydown)': '_handleKeyDown($event)',
+  },
+})
 export abstract class IdsSegmentedControlBase<I extends SegmentedControlItem, E extends SegmentedControlItemEvent>
 implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   protected abstract readonly _componentClass: string;
@@ -56,11 +61,7 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
 
   @Output() public abstract readonly itemChanges: EventEmitter<E>;
 
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses();
-  }
-
-  @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
+  private _handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', ' '];
 

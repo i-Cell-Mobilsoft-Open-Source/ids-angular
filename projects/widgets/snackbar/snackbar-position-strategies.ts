@@ -1,4 +1,4 @@
-import { IdsSnackbarPosition, IdsSnackbarPositionType } from './public-api';
+import { IdsSnackbarPosition, IdsSnackbarPositionType } from './types/snackbar-position.type';
 
 import { FlexibleConnectedPositionStrategy, GlobalPositionStrategy } from '@angular/cdk/overlay';
 

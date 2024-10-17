@@ -3,7 +3,7 @@ import { IdsSnackbarAction } from './types/snackbar-data.type';
 import { IdsSnackbarVariant, IdsSnackbarVariantType } from './types/snackbar-variant.type';
 
 import { A11yModule } from '@angular/cdk/a11y';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, HostBinding, HostListener, input, OnDestroy, output, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, input, OnDestroy, output, ViewEncapsulation } from '@angular/core';
 import { IdsButtonAppearance, IdsButtonComponent, IdsButtonVariant } from '@i-cell/ids-angular/button';
 import { coerceBooleanAttribute, createClassList, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -24,6 +24,9 @@ import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-ang
   host: {
     '[id]': 'uniqueId()',
     '[role]': 'role()',
+    '[class]': '_hostClasses()',
+    '(mouseenter)': '_onMouseEnter()',
+    '(mouseleave)': '_onMouseLeave()',
   },
 })
 export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
@@ -81,15 +84,11 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
 
   protected _safeIcon = computed(() => this.icon() ?? this._defaultIcon());
 
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses();
-  }
-
-  @HostListener('mouseenter', ['$event']) private _onMouseEnter(): void {
+  private _onMouseEnter(): void {
     this._stopTimer();
   }
 
-  @HostListener('mouseleave', ['$event']) private _onMouseLeave(): void {
+  private _onMouseLeave(): void {
     this._startTimer();
   }
 

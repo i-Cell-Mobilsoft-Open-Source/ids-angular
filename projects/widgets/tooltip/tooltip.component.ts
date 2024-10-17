@@ -4,7 +4,7 @@ import { IdsTooltipTextAlign } from './types/tooltip.type';
 import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } from './utils/converters';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, HostBinding, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { createClassList, ConnectedPosition, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
@@ -19,6 +19,9 @@ let nextUniqueId = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[id]': 'id',
+    '[class]': '_hostClasses()',
+    '[style.top]': '_hostPositionTop()',
+    '[style.left]': '_hostPositionLeft()',
   },
 })
 export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
@@ -77,17 +80,9 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
     this._message = value;
   }
 
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses();
-  }
-
-  @HostBinding('style.top') get hostPositionTop(): string | null | undefined {
-    return this._connectedPosition?.positionTop();
-  }
-
-  @HostBinding('style.left') get hostPositionLeft(): string | null | undefined {
-    return this._connectedPosition?.positionLeft();
-  }
+  private _hostPositionTop = computed(() => this._connectedPosition?.positionTop());
+  
+  private _hostPositionLeft = computed(() => this._connectedPosition?.positionLeft());
 
   public ngAfterViewInit(): void {
     this._tooltipInitiated = true;

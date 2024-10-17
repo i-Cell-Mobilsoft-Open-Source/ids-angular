@@ -4,7 +4,7 @@ import { IdsSwitchGroupComponent } from './switch-group.component';
 import { IdsSwitchIconPosition } from './types/switch-positions.type';
 import { IdsSwitchVariantType } from './types/switch-variant.type';
 
-import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, IdsSizeType, fallbackValue, coerceNumberAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -30,10 +30,10 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   animations: [switchAnimation],
   host: {
     '[id]': 'id()',
+    '[class]': '_hostClasses()',
     '[aria-label]': 'ariaLabel()',
     '[aria-labelledby]': 'ariaLabelledBy()',
     '[aria-describedby]': 'ariaDescribedBy()',
-
   },
 })
 export class IdsSwitchComponent {
@@ -92,10 +92,6 @@ export class IdsSwitchComponent {
     if (value !== this.disabled) {
       this.isDisabled.set(value);
     }
-  }
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
   }
 
   public focus(): void {

@@ -1,10 +1,10 @@
 import { IdsIconButtonAppearanceType } from '../types/icon-button-appearance.type';
+import { IdsIconButtonVariantType } from '../types/icon-button-variant.type';
 
 import { InjectionToken, Signal } from '@angular/core';
-import { IdsAllVariantsType } from '@i-cell/ids-angular/core';
 
 export abstract class IdsIconButtonParent {
-  public readonly embeddedIconButtonVariant!: Signal<IdsAllVariantsType>;
+  public readonly embeddedIconButtonVariant!: Signal<IdsIconButtonVariantType>;
   public readonly embeddedIconButtonAppearance!: Signal<IdsIconButtonAppearanceType>;
   public readonly disabled!: Signal<boolean>;
 };

@@ -5,9 +5,9 @@ import { IdsChipVariant, IdsChipVariantType } from './types/chip-variant.type';
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, OnDestroy, signal, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { IDS_AVATAR_PARENT, IdsAvatarParent, IdsAvatarVariant, IdsAvatarVariantType } from '@i-cell/ids-angular/avatar';
-import { coerceNumberAttribute, ComponentBaseWithDefaults, IdsAllVariants, IdsAllVariantsType, IdsSizeType } from '@i-cell/ids-angular/core';
+import { coerceNumberAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonComponent, IdsIconButtonParent } from '@i-cell/ids-angular/icon-button';
+import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonComponent, IdsIconButtonParent, IdsIconButtonVariant, IdsIconButtonVariantType } from '@i-cell/ids-angular/icon-button';
 
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 
@@ -67,19 +67,19 @@ export class IdsChipComponent
   ]));
 
   public embeddedAvatarVariant = computed<IdsAvatarVariantType>(() => IdsAvatarVariant.SURFACE);
-  public embeddedIconButtonVariant = computed<IdsAllVariantsType>(() => {
+  public embeddedIconButtonVariant = computed<IdsIconButtonVariantType>(() => {
     const chipVariant = this.variant();
     switch (chipVariant) {
       case IdsChipVariant.PRIMARY:
       case IdsChipVariant.SECONDARY:
       case IdsChipVariant.DARK:
-        return IdsAllVariants.LIGHT;
+        return IdsIconButtonVariant.LIGHT;
       
       case IdsChipVariant.LIGHT:
-        return IdsAllVariants.SECONDARY;
+        return IdsIconButtonVariant.SECONDARY;
       
       case IdsChipVariant.SURFACE:
-        return IdsAllVariants.SURFACE;
+        return IdsIconButtonVariant.SURFACE;
     }
   });
 

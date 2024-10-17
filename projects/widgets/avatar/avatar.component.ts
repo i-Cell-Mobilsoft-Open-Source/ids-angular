@@ -70,7 +70,7 @@ export class IdsAvatarComponent extends ComponentBaseWithDefaults<IdsAvatarDefau
   ]));
 
   public embeddedIconVariant = computed<IdsIconVariantType>(() => {
-    const avatarVariant = this.variant();
+    const avatarVariant = this._safeVariant();
     switch (avatarVariant) {
       case IdsAvatarVariant.PRIMARY:
       case IdsAvatarVariant.SECONDARY:

@@ -1,136 +1,25 @@
-<h1>{{ "COMPONENTS.BUTTON" | translate }}</h1>
+<app-tryout [title]="'COMPONENTS.BUTTON' | translate" (resetted)="reset()">
+  <ng-container component>
+    <button
+      type="button"
+      idsButton
+      [id]="model.appearance + '-' + model.variant + '-' + model.size + '-button'"
+      [appearance]="model.appearance"
+      [size]="model.size"
+      [variant]="model.variant"
+      [disabled]="model.disabled"
+      (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
+    >
+      @if (helperModel.hasLeadingIcon) {
+        <ids-icon icon-leading fontIcon="search" />
+      }
+      {{ helperModel.text }}
+      @if (helperModel.hasTrailingIcon) {
+        <ids-icon icon-trailing fontIcon="check" />
+      }
+    </button>
+  </ng-container>
 
-<section class="component" [class]="model.variant">
-  <button
-    type="button"
-    idsButton
-    [id]="model.appearance + '-' + model.variant + '-' + model.size + '-button'"
-    [appearance]="model.appearance"
-    [size]="model.size"
-    [variant]="model.variant"
-    [disabled]="model.disabled"
-    (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
-  >
-    @if (model.hasLeadingIcon) {
-      <ids-icon icon-leading fontIcon="search" />
-    }
-    {{ model.text }}
-    @if (model.hasTrailingIcon) {
-      <ids-icon icon-trailing fontIcon="check" />
-    }
-  </button>
-</section>
-
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>appearance</td>
-        <td>Button appearance.</td>
-        <td><code>IdsIconButtonAppearanceType</code></td>
-        <td>
-          <code>{{ defaults.appearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.appearance">
-            @for (item of appearances; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>Button size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Button variant.</td>
-        <td><code>IdsButtonVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the button is disabled or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.disabled }}</code>
-        </td>
-        <td><input type="checkbox" name="disabled" [(ngModel)]="model.disabled" /></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table [cellPadding]="10">
-    <caption>
-      Helper controls
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>text</td>
-        <td>Text of button</td>
-        <td><code>string</code></td>
-        <td><input type="text" name="text" [(ngModel)]="model.text" /></td>
-      </tr>
-      <tr>
-        <td>hasLeadingIcon</td>
-        <td>Whether the button has leading icon or not.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" name="hasLeadingIcon" [(ngModel)]="model.hasLeadingIcon" /></td>
-      </tr>
-      <tr>
-        <td>hasTrailingIcon</td>
-        <td>Whether the button has trailing icon or not.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" name="hasTrailingIcon" [(ngModel)]="model.hasTrailingIcon" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+  <app-control-table controls [configType]="'input'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+</app-tryout>

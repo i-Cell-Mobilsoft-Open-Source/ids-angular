@@ -1,25 +1,5 @@
-<h1>{{ "COMPONENTS.DIALOG" | translate }}</h1>
-
-<dialog #dialog5="idsDialog" idsDialog mainTitle="Dialog with scrollable content" subTitle="Dialog sub-title here">
-  <!-- content -->
-  <div idsDialogContent></div>
-  <!-- action buttons -->
-  <div idsDialogActions class="dialog-with-scrollable-content">
-    <button
-      type="button"
-      idsButton
-      appearance="filled"
-      size="comfortable"
-      variant="primary"
-      (click)="onOkButtonClick('some payload'); dialog5.close()"
-    >
-      OK
-    </button>
-  </div>
-</dialog>
-
-<section class="component">
-  <div class="dialog-types">
+<app-tryout [title]="'COMPONENTS.DIALOG' | translate" (resetted)="reset()">
+  <div component class="dialog-types">
     <div class="dialog-type">
       <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialogStatic.open()">
         Open static dialog
@@ -34,14 +14,14 @@
         [showCloseButton]="model.showCloseButton"
         [showBackdrop]="model.showBackdrop"
       >
-        @if (model.useCustomHeader) {
+        @if (helperModel.useCustomHeader) {
           <div *idsDialogHeader>
             <h2>This is a custom header!</h2>
           </div>
         }
         <!-- content -->
         <div idsDialogContent>
-          @if (model.useLongContent) {
+          @if (helperModel.useLongContent) {
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio molestias illo tempore quo quod unde ipsa fugit nihil placeat
               dicta eius sit nemo obcaecati soluta nam ea nobis, minima asperiores! Nostrum culpa necessitatibus ratione minima voluptatum
@@ -177,109 +157,25 @@
       </button>
     </div>
   </div>
-</section>
 
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+  <app-control-table controls [configType]="'input'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+</app-tryout>
 
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>size</td>
-        <td>Dialog size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>mainTitle</td>
-        <td>Dialog main title.</td>
-        <td><code>string</code></td>
-        <td>
-          <code>{{ defaults.mainTitle }}</code>
-        </td>
-        <td><input type="text" name="mainTitle" [(ngModel)]="model.mainTitle" /></td>
-      </tr>
-      <tr>
-        <td>subTitle</td>
-        <td>Dialog sub title.</td>
-        <td><code>string</code></td>
-        <td>
-          <code>{{ defaults.subTitle }}</code>
-        </td>
-        <td><input type="text" name="subTitle" [(ngModel)]="model.subTitle" /></td>
-      </tr>
-      <tr>
-        <td>showCloseButton</td>
-        <td>Whether to show close button or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.showCloseButton }}</code>
-        </td>
-        <td><input type="checkbox" name="showCloseButton" [(ngModel)]="model.showCloseButton" /></td>
-      </tr>
-      <tr>
-        <td>showBackdrop</td>
-        <td>Whether to show dialog backdrop or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.showBackdrop }}</code>
-        </td>
-        <td><input type="checkbox" name="showBackdrop" [(ngModel)]="model.showBackdrop" /></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table [cellPadding]="10">
-    <caption>
-      Helper controls
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>useCustomHeader</td>
-        <td>Whether to use custom header or not.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" name="useCustomHeader" [(ngModel)]="model.useCustomHeader" /></td>
-      </tr>
-      <tr>
-        <td>useLongContent</td>
-        <td>Whether to use long content or not. This is for testing scrollable content</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" name="useLongContent" [(ngModel)]="model.useLongContent" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<dialog #dialog5="idsDialog" idsDialog mainTitle="Dialog with scrollable content" subTitle="Dialog sub-title here">
+  <!-- content -->
+  <div idsDialogContent></div>
+  <!-- action buttons -->
+  <div idsDialogActions class="dialog-with-scrollable-content">
+    <button
+      type="button"
+      idsButton
+      appearance="filled"
+      size="comfortable"
+      variant="primary"
+      (click)="onOkButtonClick('some payload'); dialog5.close()"
+    >
+      OK
+    </button>
+  </div>
+</dialog>

@@ -1,11 +1,17 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY, IdsTooltipDirective, IdsTooltipPosition, IdsTooltipPositionType, IdsTooltipTextAlign, IdsTooltipTouchGestures, IdsTooltipVariant, IdsTooltipVariantType } from '@i-cell/ids-angular/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
-type TooltipPublicApi = {
+type TooltipInputs = {
   tooltipText: string,
   position: IdsTooltipPositionType,
   size: IdsSizeType,
@@ -23,6 +29,8 @@ const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
   selector: 'app-tooltip-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsTooltipDirective,
     IdsButtonComponent,
     TranslateModule,
@@ -30,41 +38,86 @@ const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
     IdsButtonComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './tooltip-demo.component.scss',
-  ],
+  styleUrl: './tooltip-demo.component.scss',
 })
 export class TooltipDemoComponent {
-  public defaults: TooltipPublicApi = {
-    tooltipText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum maxime magnam quae tenetur aliquam repudiandae provident.',
-    position: defaultConfig.position,
-    size: defaultConfig.size,
-    variant: defaultConfig.variant,
-    showDelay: defaultConfig.showDelay,
-    hideDelay: defaultConfig.hideDelay,
-    disabled: false,
-    touchGestures: 'auto',
-    textAlign: undefined,
+  protected _inputControlConfig: DemoControlConfig<TooltipInputs> = {
+    tooltipText: {
+      description: 'The text displayed inside the tooltip.',
+      type: 'string',
+      default: '-',
+      // eslint-disable-next-line @stylistic/js/max-len
+      demoDefault: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum maxime magnam quae tenetur aliquam repudiandae provident.',
+      control: 'text',
+    },
+    position: {
+      description: 'The position of the tooltip relative to the target element.',
+      type: 'IdsTooltipPositionType',
+      default: defaultConfig.position,
+      control: 'select',
+      list: convertEnumToStringArray(IdsTooltipPosition),
+    },
+    size: {
+      description: 'The size of the tooltip.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'The variant or style of the tooltip.',
+      type: 'IdsTooltipVariantType',
+      default: defaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsTooltipVariant),
+    },
+    showDelay: {
+      description: 'The delay (in milliseconds) before the tooltip appears after hovering.',
+      type: 'number',
+      default: defaultConfig.showDelay,
+      control: 'text',
+    },
+    hideDelay: {
+      description: 'The delay (in milliseconds) before the tooltip disappears after losing focus.',
+      type: 'number',
+      default: defaultConfig.hideDelay,
+      control: 'text',
+    },
+    disabled: {
+      description: 'Determines if the tooltip is disabled.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    touchGestures: {
+      description: 'Specifies the touch gestures behavior for the tooltip (auto, on, off).',
+      type: 'IdsTooltipTouchGestures',
+      default: 'auto',
+      control: 'select',
+      list: [
+        'auto',
+        'on',
+        'off',
+      ],
+    },
+    textAlign: {
+      description: 'The text alignment inside the tooltip.',
+      type: 'IdsTooltipTextAlign | undefined',
+      default: 'undefined',
+      demoDefault: undefined,
+      control: 'select',
+      list: [
+        'center',
+        'left',
+        'right',
+      ],
+    },
   };
 
-  public model: TooltipPublicApi = { ...this.defaults  };
+  public defaults = getDefaultFromDemoConfig<TooltipInputs>(this._inputControlConfig);
 
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsTooltipVariantType>(IdsTooltipVariant);
-  public positions = Object.values<IdsTooltipPositionType>(IdsTooltipPosition);
-  public touchGestures: IdsTooltipTouchGestures[] = [
-    'auto',
-    'on',
-    'off',
-  ];
-
-  public textAligns: IdsTooltipTextAlign[] = [
-    'center',
-    'left',
-    'right',
-  ];
-
+  public model: TooltipInputs = { ...this.defaults  };
+  
   public reset(): void {
     this.model = { ...this.defaults };
   }

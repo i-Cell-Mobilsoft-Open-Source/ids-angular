@@ -1,0 +1,30 @@
+:host {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+section {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+
+  &.component {
+    &.light {
+      color: var(--ids-smc-colors-surface-lighter-10);
+      background-color: var(--ids-smc-colors-surface-darker-80);
+    }
+  }
+
+  &.controls {
+  }
+}

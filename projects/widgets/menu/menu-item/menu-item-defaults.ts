@@ -21,7 +21,7 @@ export const IDS_MENU_ITEM_DEFAULT_CONFIG = new InjectionToken<IdsMenuItemDefaul
 export function IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY(): Required<IdsMenuItemDefaultConfig> {
   return {
     appearance: IdsMenuItemAppearance.TEXT,
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: MenuItemVariant.SURFACE,
   };
 }

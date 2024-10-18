@@ -21,7 +21,7 @@ export const IDS_TAG_DEFAULT_CONFIG = new InjectionToken<IdsTagDefaultConfig>(
 export function IDS_TAG_DEFAULT_CONFIG_FACTORY(): Required<IdsTagDefaultConfig> {
   return {
     appearance: IdsTagAppearance.FILLED,
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsTagVariant.PRIMARY,
   };
 }

@@ -1,7 +1,5 @@
-<h1>{{ "COMPONENTS.ICON" | translate }}</h1>
-
-<section class="component" [class]="model.variant">
-  <div class="icon-types">
+<app-tryout [title]="'COMPONENTS.ICON' | translate" (resetted)="reset()">
+  <div component class="icon-types">
     <div class="icon-tpye">
       <h2>Font icon</h2>
       <ids-icon
@@ -9,7 +7,7 @@
         [sizeCollection]="model.sizeCollection"
         [variant]="model.variant"
         [fontIcon]="model.fontIcon"
-        [aria-hidden]="model.ariaHidden"
+        [aria-hidden]="model['aria-hidden']"
       />
     </div>
     <div class="icon-tpye">
@@ -18,105 +16,11 @@
         [size]="model.size"
         [sizeCollection]="model.sizeCollection"
         [variant]="model.variant"
-        [svgIcon]="model.svgIconName"
-        [aria-hidden]="model.ariaHidden"
+        [svgIcon]="model.svgIcon"
+        [aria-hidden]="model['aria-hidden']"
       />
     </div>
   </div>
-</section>
 
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>size</td>
-        <td>Icon size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>sizeCollection</td>
-        <td>Icon size collection.</td>
-        <td><code>IdsSizeCollectionType</code></td>
-        <td>
-          <code>{{ defaults.sizeCollection }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.sizeCollection">
-            @for (item of sizeCollections; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Icon variant.</td>
-        <td><code>IdsIconVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>fontIcon</td>
-        <td>Name of font icon.</td>
-        <td><code>string</code></td>
-        <td>
-          <code>''</code>
-        </td>
-        <td><input type="text" [(ngModel)]="model.fontIcon" /></td>
-      </tr>
-      <tr>
-        <td>svgIcon</td>
-        <td>Name of svg icon file.</td>
-        <td><code>string</code></td>
-        <td>
-          <code>''</code>
-        </td>
-        <td><input type="text" [(ngModel)]="model.svgIconName" /></td>
-      </tr>
-      <tr>
-        <td>aria-hidden</td>
-        <td>Whether the icon button is disabled or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.ariaHidden }}</code>
-        </td>
-        <td><input type="checkbox" name="ariaHidden" [(ngModel)]="model.ariaHidden" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+</app-tryout>

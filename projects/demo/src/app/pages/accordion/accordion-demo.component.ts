@@ -1,11 +1,19 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent, IdsAccordionVariant, IdsAccordionVariantType } from '@i-cell/ids-angular/accordion';
-import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
+import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
-type AccordionPublicApi = {
+const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
+
+type AccordionInputs = {
   size: IdsSizeType,
   appearance: IdsAccordionAppearanceType,
   summary: string,
@@ -13,7 +21,7 @@ type AccordionPublicApi = {
   multi: boolean,
   btnSize: IdsSizeType,
   btnAppearance: IdsButtonAppearanceType,
-  btnVariant: IdsAccordionVariantType,
+  btnVariant: IdsButtonVariantType,
   expandBtnLabel: string,
   collapseBtnLabel: string,
   hasLeadingIcon: boolean,
@@ -24,6 +32,8 @@ type AccordionPublicApi = {
   selector: 'app-accordion-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsAccordionComponent,
     IdsAccordionItemComponent,
     TranslateModule,
@@ -31,33 +41,90 @@ type AccordionPublicApi = {
     IdsButtonComponent,
   ],
   templateUrl: './accordion-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './accordion-demo.component.scss',
-  ],
+  styleUrl: './accordion-demo.component.scss',
 })
 export class AccordionDemoComponent {
-  public appearances = Object.values<IdsAccordionAppearanceType>(IdsAccordionAppearance);
-  public btnAppearances = Object.values<IdsButtonAppearanceType>(IdsButtonAppearance);
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsAccordionVariantType>(IdsAccordionVariant);
-
-  public defaults: AccordionPublicApi = {
-    appearance: IdsAccordionAppearance.FILLED,
-    size: IdsSize.COMFORTABLE,
-    summary: 'Summary text',
-    disabled: false,
-    multi: false,
-    btnSize: IdsSize.COMPACT,
-    btnAppearance: IdsButtonAppearance.FILLED,
-    btnVariant: IdsAccordionVariant.SURFACE,
-    expandBtnLabel: 'Expand all',
-    collapseBtnLabel: 'Collapse all',
-    hasLeadingIcon: false,
-    hasTrailingIcon: true,
+  protected _inputControlConfig: DemoControlConfig<AccordionInputs> = {
+    size: {
+      description: 'Accordion size.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    appearance: {
+      description: 'Accordion appearance.',
+      type: 'IdsAccordionAppearanceType',
+      default: defaultConfig.appearance,
+      control: 'select',
+      list: convertEnumToStringArray(IdsAccordionAppearance),
+    },
+    summary: {
+      description: 'Summary of accordion',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Summary text',
+    },
+    disabled: {
+      description: 'Whether the accordion is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    multi: {
+      description: 'Allow multiple accordion items to be open.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    btnSize: {
+      description: 'Button size.',
+      type: 'IdsSizeType',
+      default: defaultConfig.btnSize,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    btnAppearance: {
+      description: 'Button appearance.',
+      type: 'IdsButtonAppearanceType',
+      default: defaultConfig.btnAppearance,
+      control: 'select',
+      list: convertEnumToStringArray(IdsButtonAppearance),
+    },
+    btnVariant: {
+      description: 'Button variant.',
+      type: 'IdsButtonVariantType',
+      default: defaultConfig.btnVariant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsButtonVariant),
+    },
+    expandBtnLabel: {
+      description: 'Label for expand all button.',
+      type: 'string',
+      default: defaultConfig.expandBtnLabel,
+    },
+    collapseBtnLabel: {
+      description: 'Label for collapse all button.',
+      type: 'string',
+      default: defaultConfig.collapseBtnLabel,
+    },
+    hasLeadingIcon: {
+      description: 'Whether the button has leading icon or not.',
+      type: 'boolean',
+      default: defaultConfig.hasLeadingIcon,
+      control: 'checkbox',
+    },
+    hasTrailingIcon: {
+      description: 'Whether the button has trailing icon or not.',
+      type: 'boolean',
+      default: defaultConfig.hasTrailingIcon,
+      control: 'checkbox',
+    },
   };
+
+  public defaults = getDefaultFromDemoConfig<AccordionInputs>(this._inputControlConfig);
   
-  public model: AccordionPublicApi = { ...this.defaults };
+  public model: AccordionInputs = { ...this.defaults };
 
   public reset(): void {
     this.model = { ...this.defaults };

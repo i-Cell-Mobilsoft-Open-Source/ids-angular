@@ -1,0 +1,10 @@
+table {
+  caption {
+    text-align-last: left;
+    font-weight: 600;
+  }
+
+  & > tbody > tr > td {
+    max-width: 300px;
+  }
+}

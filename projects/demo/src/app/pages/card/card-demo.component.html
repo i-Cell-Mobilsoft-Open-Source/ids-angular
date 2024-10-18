@@ -1,173 +1,53 @@
-<h1>{{ "COMPONENTS.CARD" | translate }}</h1>
+<app-tryout [title]="'COMPONENTS.CARD' | translate" (resetted)="reset()">
+  <ng-container component>
+    @if (helperModel.clickable) {
+      <ids-card
+        [appearance]="model.appearance"
+        [size]="model.size"
+        [variant]="model.variant"
+        [orientation]="model.orientation"
+        [disabled]="model.disabled"
+        (click)="onClick()"
+      >
+        @if (model.orientation === "vertical") {
+          <header idsCardHeader>
+            <h2 idsCardTitle>This is the title</h2>
+            <h3 idsCardSubtitle>This is the subtitle</h3>
+          </header>
+        }
+        <img
+          idsCardMedia
+          src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
+          alt=""
+          [stretch]="helperModel.stretchMedia"
+        />
+        <ids-card-body>This is the body</ids-card-body>
+        @if (model.orientation === "vertical") {
+          <footer idsCardFooter>This is the footer</footer>
+        }
+      </ids-card>
+    } @else {
+      <ids-card [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation">
+        @if (model.orientation === "vertical") {
+          <header idsCardHeader>
+            <h2 idsCardTitle>This is the title</h2>
+            <h3 idsCardSubtitle>This is the subtitle</h3>
+          </header>
+        }
+        <img
+          idsCardMedia
+          src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
+          alt=""
+          [stretch]="helperModel.stretchMedia"
+        />
+        <ids-card-body>This is the body</ids-card-body>
+        @if (model.orientation === "vertical") {
+          <footer idsCardFooter>This is the footer</footer>
+        }
+      </ids-card>
+    }
+  </ng-container>
 
-<section class="component" [class]="model.variant">
-  @if (model.clickable) {
-    <ids-card
-      [appearance]="model.appearance"
-      [size]="model.size"
-      [variant]="model.variant"
-      [orientation]="model.orientation"
-      [disabled]="model.disabled"
-      (click)="onClick()"
-    >
-      @if (model.orientation === "vertical") {
-        <header idsCardHeader>
-          <h2 idsCardTitle>This is the title</h2>
-          <h3 idsCardSubtitle>This is the subtitle</h3>
-        </header>
-      }
-      <img
-        idsCardMedia
-        src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
-        alt=""
-        [stretch]="model.stretchMedia"
-      />
-      <ids-card-body>This is the body</ids-card-body>
-      @if (model.orientation === "vertical") {
-        <footer idsCardFooter>This is the footer</footer>
-      }
-    </ids-card>
-  } @else {
-    <ids-card [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation">
-      @if (model.orientation === "vertical") {
-        <header idsCardHeader>
-          <h2 idsCardTitle>This is the title</h2>
-          <h3 idsCardSubtitle>This is the subtitle</h3>
-        </header>
-      }
-      <img
-        idsCardMedia
-        src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
-        alt=""
-        [stretch]="model.stretchMedia"
-      />
-      <ids-card-body>This is the body</ids-card-body>
-      @if (model.orientation === "vertical") {
-        <footer idsCardFooter>This is the footer</footer>
-      }
-    </ids-card>
-  }
-</section>
-
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>appearance</td>
-        <td>Card appearance.</td>
-        <td><code>IdsCardAppearanceType</code></td>
-        <td>
-          <code>{{ defaults.appearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.appearance">
-            @for (item of appearances; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>Card size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Card variant.</td>
-        <td><code>IdsCardVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>orientation</td>
-        <td>Card orientation.</td>
-        <td><code>IdsOrientationType</code></td>
-        <td>
-          <code>{{ defaults.orientation }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.orientation">
-            @for (item of orientations; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the card is disabled or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.disabled }}</code>
-        </td>
-        <td><input type="checkbox" name="disabled" [(ngModel)]="model.disabled" /></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table [cellPadding]="10">
-    <caption>
-      Helper controls
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>clickable</td>
-        <td>Whether the card is clickable or not.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" [(ngModel)]="model.clickable" /></td>
-      </tr>
-      <tr>
-        <td>stretchMedia</td>
-        <td>Whether the image is stretchable or not.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" [(ngModel)]="model.stretchMedia" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+  <app-control-table controls [configType]="'input'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+</app-tryout>

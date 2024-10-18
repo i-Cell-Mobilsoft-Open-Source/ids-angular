@@ -34,7 +34,7 @@ export const IDS_TOOLTIP_DEFAULT_CONFIG = new InjectionToken<IdsTooltipDefaultCo
 export function IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY(): Required<IdsTooltipDefaultConfig> {
   return {
     position: IdsTooltipPosition.NORTH,
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsTooltipVariant.DARK,
     showDelay: DEFAULT_SHOW_DELAY,
     hideDelay: DEFAULT_HIDE_DELAY,

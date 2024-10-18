@@ -1,13 +1,21 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { Component, InjectionToken, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsCustomDialogBase, IdsDialogComponent, IdsDialogHeaderDirective, IdsDialogService } from '@i-cell/ids-angular/dialog';
+import { IDS_DIALOG_DEFAULT_CONFIG_FACTORY, IdsCustomDialogBase, IdsDialogComponent, IdsDialogHeaderDirective, IdsDialogService } from '@i-cell/ids-angular/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 
 export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog-token');
 
-type DialogPublicApi = {
+const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
+
+type DialogInputs = {
   size: IdsSizeType,
   mainTitle: string,
   subTitle: string,
@@ -28,22 +36,24 @@ type DialogHelperControls = {
     IdsDialogHeaderDirective,
   ],
   template: `
+    @let controls = model();
+    @let helperControls = helperModel();
     <dialog
       #dialogDynamic="idsDialog"
       idsDialog
-      [size]="model()!.size"
-      [mainTitle]="model()!.mainTitle"
-      [subTitle]="model()!.subTitle"
-      [showCloseButton]="model()!.showCloseButton"
-      [showBackdrop]="model()!.showBackdrop"
+      [size]="controls!.size"
+      [mainTitle]="controls!.mainTitle"
+      [subTitle]="controls!.subTitle"
+      [showCloseButton]="controls!.showCloseButton"
+      [showBackdrop]="controls!.showBackdrop"
     >
-      @if (model()!.useCustomHeader) {
+      @if (helperControls!.useCustomHeader) {
         <div *idsDialogHeader>
           <h2>This is a custom header!</h2>
         </div>
       }  
       <div idsDialogContent class="flex flex-col gap-3">
-      @if (model()!.useLongContent) {
+      @if (helperControls!.useLongContent) {
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio molestias illo tempore quo quod unde ipsa fugit nihil placeat
               dicta eius sit nemo obcaecati soluta nam ea nobis, minima asperiores! Nostrum culpa necessitatibus ratione minima voluptatum
@@ -169,13 +179,16 @@ type DialogHelperControls = {
 export class CustomDialogComponent extends IdsCustomDialogBase {
   public providedData = inject(CUSTOM_DIALOG_TOKEN);
   public inputData = input('');
-  public model = input<DialogPublicApi & DialogHelperControls>();
+  public model = input<DialogInputs>();
+  public helperModel = input<DialogHelperControls>();
 }
 
 @Component({
   selector: 'app-dialog-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     CustomDialogComponent,
     IdsButtonComponent,
     IdsDialogComponent,
@@ -190,21 +203,62 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
   ],
 })
 export class DialogDemoComponent {
-  private _dialogService = inject(IdsDialogService);
-  
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  
-  public defaults: DialogPublicApi & DialogHelperControls = {
-    size: IdsSize.COMFORTABLE,
-    mainTitle: 'Dialog main title',
-    subTitle: 'Dialog sub title',
-    showCloseButton: false,
-    showBackdrop: true,
-    useCustomHeader: false,
-    useLongContent: false,
+  protected _inputControlConfig: DemoControlConfig<DialogInputs> = {
+    size: {
+      description: 'Dialog size.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    mainTitle: {
+      description: 'Dialog main title.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Dialog main title',
+    },
+    subTitle: {
+      description: 'Dialog sub title.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Dialog sub title',
+    },
+    showCloseButton: {
+      description: 'Whether to show close button or not.',
+      type: 'boolean',
+      default: defaultConfig.showCloseButton,
+      control: 'checkbox',
+    },
+    showBackdrop: {
+      description: 'Whether to show dialog backdrop or not.',
+      type: 'boolean',
+      default: defaultConfig.showBackdrop,
+      control: 'checkbox',
+    },
   };
 
-  public model: DialogPublicApi & DialogHelperControls = { ...this.defaults };
+  protected _helperControlConfig: DemoControlConfig<DialogHelperControls> = {
+    useCustomHeader: {
+      description: 'Whether to use custom header or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    useLongContent: {
+      description: 'Whether to use long content or not. This is for testing scrollable content.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+  };
+
+  public defaults = getDefaultFromDemoConfig<DialogInputs>(this._inputControlConfig);
+  public helperDefaults = getDefaultFromDemoConfig<DialogHelperControls>(this._helperControlConfig);
+
+  public model: DialogInputs = { ...this.defaults };
+  public helperModel: DialogHelperControls = { ...this.helperDefaults };
+
+  private _dialogService = inject(IdsDialogService);
 
   public onOkButtonClick(payload: unknown): void {
     // eslint-disable-next-line no-console
@@ -222,11 +276,13 @@ export class DialogDemoComponent {
       inputs: {
         inputData: 'This text is provided using input binding',
         model: this.model,
+        helperModel: this.helperModel,
       },
     }).subscribe((result) => console.info('Dialog result:', result));
   }
 
   public reset(): void {
     this.model = { ...this.defaults };
+    this.helperModel = { ...this.helperDefaults };
   }
 }

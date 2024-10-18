@@ -7,10 +7,7 @@ import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent, IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType, IDS_BUTTON_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/button';
-import {
-  IdsSize,
-  IdsSizeType,
-} from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -95,10 +92,6 @@ export class ButtonDemoComponent {
       control: 'checkbox',
     },
   };
-  
-  public appearances = Object.values<IdsButtonAppearanceType>(IdsButtonAppearance);
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsButtonVariantType>(IdsButtonVariant);
 
   public defaults = getDefaultFromDemoConfig<ButtonInputs>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<ButtonHelperControls>(this._helperControlConfig);
@@ -112,5 +105,6 @@ export class ButtonDemoComponent {
 
   public reset(): void {
     this.model = { ...this.defaults };
+    this.helperModel = { ...this.helperDefaults };
   }
 }

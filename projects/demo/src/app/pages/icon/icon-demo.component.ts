@@ -1,27 +1,35 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsIconSource, IdsIconVariant, IdsIconVariantType, IDS_ICON_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/icon';
+import { IdsIconVariant, IdsIconVariantType, IDS_ICON_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/icon';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
-type IconPublicApi = {
+type IconInputs = {
   size: IdsSizeType,
   sizeCollection: IdsSizeCollectionType,
   variant: IdsIconVariantType,
   fontIcon: string
-  svgIconName: string,
-  ariaHidden: boolean,
+  svgIcon: string,
+  'aria-hidden': boolean,
 };
 
 @Component({
   standalone: true,
   selector: 'app-icon-demo',
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsIconComponent,
     UpperCasePipe,
     TranslateModule,
@@ -29,34 +37,61 @@ type IconPublicApi = {
     IdsButtonComponent,
   ],
   templateUrl: './icon-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './icon-demo.component.scss',
-  ],
+  styleUrl: './icon-demo.component.scss',
 })
 export class IconDemoComponent {
-  public defaults: IconPublicApi = {
-    size: defaultConfig.size,
-    sizeCollection: defaultConfig.sizeCollection,
-    variant: defaultConfig.variant,
-    fontIcon: 'moon',
-    svgIconName: 'moon',
-    ariaHidden: false,
+  private _iconNames: string[] = [];
+
+  protected _inputControlConfig: DemoControlConfig<IconInputs> = {
+    size: {
+      description: 'Icon size.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    sizeCollection: {
+      description: 'Icon size collection.',
+      type: 'IdsSizeCollectionType',
+      default: defaultConfig.sizeCollection,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSizeCollection),
+    },
+    variant: {
+      description: 'Icon variant.',
+      type: 'IdsIconVariantType',
+      default: defaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsIconVariant),
+    },
+    fontIcon: {
+      description: 'Name of font icon.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'moon',
+      control: 'select',
+      list: this._iconNames,
+    },
+    svgIcon: {
+      description: 'Name of svg icon file',
+      type: 'IdsIconVariantType',
+      default: '-',
+      demoDefault: 'moon',
+      control: 'select',
+      list: this._iconNames,
+    },
+    'aria-hidden': {
+      description: 'Determinate whether the component is hidden or not for screen readers.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
   };
 
-  public model: IconPublicApi = { ...this.defaults  };
+  public defaults = getDefaultFromDemoConfig<IconInputs>(this._inputControlConfig);
+
+  public model: IconInputs = { ...this.defaults  };
   
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public sizeCollections = Object.values<IdsSizeCollectionType>(IdsSizeCollection);
-  public variants = Object.values<IdsIconVariantType>(IdsIconVariant);
-
-  public sourceType = IdsIconSource;
-
-  public sizeCollectionType: IdsSizeCollectionType[] = [
-    IdsSizeCollection.SMALL,
-    IdsSizeCollection.BIG,
-  ];
-
   public reset(): void {
     this.model = { ...this.defaults };
   }

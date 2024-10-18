@@ -1,190 +1,32 @@
-<h1>{{ "COMPONENTS.ACCORDION" | translate }}</h1>
+<app-tryout [title]="'COMPONENTS.ACCORDION' | translate" (resetted)="reset()">
+  <ng-container component>
+    <ids-accordion
+      [multi]="model.multi"
+      [appearance]="model.appearance"
+      [size]="model.size"
+      [disabled]="model.disabled"
+      [expandBtnLabel]="model.expandBtnLabel"
+      [collapseBtnLabel]="model.collapseBtnLabel"
+      [btnSize]="model.btnSize"
+      [btnAppearance]="model.btnAppearance"
+      [btnVariant]="model.btnVariant"
+      [hasLeadingIcon]="model.hasLeadingIcon"
+      [hasTrailingIcon]="model.hasTrailingIcon"
+    >
+      <ids-accordion-item [summary]="model.summary">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+        ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      </ids-accordion-item>
+      <ids-accordion-item [summary]="model.summary">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+        ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      </ids-accordion-item>
+      <ids-accordion-item [summary]="model.summary">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+        ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      </ids-accordion-item>
+    </ids-accordion>
+  </ng-container>
 
-<section class="component">
-  <ids-accordion
-    [multi]="model.multi"
-    [appearance]="model.appearance"
-    [size]="model.size"
-    [disabled]="model.disabled"
-    [expandBtnLabel]="model.expandBtnLabel"
-    [collapseBtnLabel]="model.collapseBtnLabel"
-    [btnSize]="model.btnSize"
-    [btnAppearance]="model.btnAppearance"
-    [btnVariant]="model.btnVariant"
-    [hasLeadingIcon]="model.hasLeadingIcon"
-    [hasTrailingIcon]="model.hasTrailingIcon"
-  >
-    <ids-accordion-item [summary]="model.summary">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-      ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    </ids-accordion-item>
-    <ids-accordion-item [summary]="model.summary">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-      ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    </ids-accordion-item>
-    <ids-accordion-item [summary]="model.summary">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-      ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    </ids-accordion-item>
-  </ids-accordion>
-</section>
-
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>appearance</td>
-        <td>Accordion appearance.</td>
-        <td><code>IdsAccordionAppearanceType</code></td>
-        <td>
-          <code>{{ defaults.appearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.appearance">
-            @for (item of appearances; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>Button size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the button is disabled or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.disabled }}</code>
-        </td>
-        <td><input type="checkbox" name="disabled" [(ngModel)]="model.disabled" /></td>
-      </tr>
-      <tr>
-        <td>Summary</td>
-        <td>Summary of accordion</td>
-        <td><code>string</code></td>
-        <td><code>-</code></td>
-        <td><input type="text" name="summary" [(ngModel)]="model.summary" /></td>
-      </tr>
-      <tr>
-        <td>multi</td>
-        <td>Allow multiple accordion items to be open.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.multi }}</code>
-        </td>
-        <td><input type="checkbox" name="multi" [(ngModel)]="model.multi" /></td>
-      </tr>
-      <tr>
-        <td>btnAppearance</td>
-        <td>Button appearance.</td>
-        <td><code>IdsButtonAppearance</code></td>
-        <td>
-          <code>{{ defaults.btnAppearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.btnAppearance">
-            @for (item of btnAppearances; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>btnVariant</td>
-        <td>Button variant.</td>
-        <td><code>IdsAccordionVariantType</code></td>
-        <td>
-          <code>{{ defaults.btnVariant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.btnVariant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>btnSize</td>
-        <td>Button size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.btnSize }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.btnSize">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>expandBtnLabel</td>
-        <td>Label for expand all button.</td>
-        <td><code>string</code></td>
-        <td>
-          <code>{{ defaults.expandBtnLabel }}</code>
-        </td>
-        <td><input type="text" name="expandBtnLabel" [(ngModel)]="model.expandBtnLabel" /></td>
-      </tr>
-      <tr>
-        <td>collapseBtnLabel</td>
-        <td>Label for collapse all button.</td>
-        <td><code>string</code></td>
-        <td>
-          <code>{{ defaults.collapseBtnLabel }}</code>
-        </td>
-        <td><input type="text" name="collapseBtnLabel" [(ngModel)]="model.collapseBtnLabel" /></td>
-      </tr>
-      <tr>
-        <td>hasLeadingIcon</td>
-        <td>Whether the button has leading icon or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.hasLeadingIcon }}</code>
-        </td>
-        <td><input type="checkbox" name="hasLeadingIcon" [(ngModel)]="model.hasLeadingIcon" /></td>
-      </tr>
-      <tr>
-        <td>hasTrailingIcon</td>
-        <td>Whether the button has trailing icon or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.hasTrailingIcon }}</code>
-        </td>
-        <td><input type="checkbox" name="hasTrailingIcon" [(ngModel)]="model.hasTrailingIcon" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+</app-tryout>

@@ -1,99 +1,14 @@
-<h1>{{ "COMPONENTS.DIVIDER" | translate }}</h1>
+<app-tryout [title]="'COMPONENTS.DIVIDER' | translate" (resetted)="reset()">
+  <div component class="divider-container">
+    <ids-divider
+      [id]="model.variant + '-' + model.size + '-' + model.orientation + '-divider'"
+      [orientation]="model.orientation"
+      [size]="model.size"
+      [variant]="model.variant"
+      [width]="model.width"
+      [height]="model.height"
+    />
+  </div>
 
-<section class="component" [class]="model.variant">
-  <ids-divider
-    [id]="model.variant + '-' + model.size + '-' + model.orientation + '-divider'"
-    [orientation]="model.orientation"
-    [size]="model.size"
-    [variant]="model.variant"
-    [width]="model.width"
-    [height]="model.height"
-  />
-</section>
-
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>orientation</td>
-        <td>Divider orientation.</td>
-        <td><code>IdsOrientationType</code></td>
-        <td>
-          <code>{{ defaults.orientation }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.orientation">
-            @for (item of orientations; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>Divider size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Divider variant.</td>
-        <td><code>IdsDividerVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>width</td>
-        <td>Divider width as css property.</td>
-        <td><code>text</code></td>
-        <td>
-          <code>{{ defaults.width }}</code>
-        </td>
-        <td><input type="text" name="width" [(ngModel)]="model.width" /></td>
-      </tr>
-      <tr>
-        <td>height</td>
-        <td>Divider height as css property.</td>
-        <td><code>text</code></td>
-        <td>
-          <code>{{ defaults.height }}</code>
-        </td>
-        <td><input type="text" name="height" [(ngModel)]="model.height" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+</app-tryout>

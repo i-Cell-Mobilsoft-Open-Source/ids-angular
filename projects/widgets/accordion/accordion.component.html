@@ -1,9 +1,25 @@
 @if (multi()) {
   <div [class]="_controlsClass">
-    <button type="button" idsButton [appearance]="btnAppearance()" [variant]="btnVariant()" [size]="btnSize()" (click)="openAll()">
+    <button
+      type="button"
+      idsButton
+      [appearance]="btnAppearance()"
+      [disabled]="disabled()"
+      [variant]="btnVariant()"
+      [size]="btnSize()"
+      (click)="openAll()"
+    >
       {{ expandBtnLabel() }}
     </button>
-    <button type="button" idsButton [appearance]="btnAppearance()" [variant]="btnVariant()" [size]="btnSize()" (click)="closeAll()">
+    <button
+      type="button"
+      idsButton
+      [appearance]="btnAppearance()"
+      [disabled]="disabled()"
+      [variant]="btnVariant()"
+      [size]="btnSize()"
+      (click)="closeAll()"
+    >
       {{ collapseBtnLabel() }}
     </button>
   </div>

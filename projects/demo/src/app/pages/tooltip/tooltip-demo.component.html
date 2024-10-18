@@ -1,150 +1,24 @@
 <h1>{{ "COMPONENTS.TOOLTIP" | translate }}</h1>
 
-<section class="component" [class]="model.variant">
-  <button
-    type="button"
-    idsButton
-    [variant]="model.variant !== 'light' ? 'primary' : 'light'"
-    [idsTooltip]="model.tooltipText"
-    [idsTooltipPosition]="model.position"
-    [idsTooltipSize]="model.size"
-    [idsTooltipVariant]="model.variant"
-    [idsTooltipShowDelay]="model.showDelay"
-    [idsTooltipHideDelay]="model.hideDelay"
-    [idsTooltipDisabled]="model.disabled"
-    [idsTooltipTouchGestures]="model.touchGestures"
-    [idsTooltipTextAlign]="model.textAlign"
-  >
-    North
-  </button>
-</section>
+<app-tryout [title]="'COMPONENTS.TOOLTIP' | translate" (resetted)="reset()">
+  <ng-container component>
+    <button
+      type="button"
+      idsButton
+      [variant]="model.variant !== 'light' ? 'primary' : 'light'"
+      [idsTooltip]="model.tooltipText"
+      [idsTooltipPosition]="model.position"
+      [idsTooltipSize]="model.size"
+      [idsTooltipVariant]="model.variant"
+      [idsTooltipShowDelay]="model.showDelay"
+      [idsTooltipHideDelay]="model.hideDelay"
+      [idsTooltipDisabled]="model.disabled"
+      [idsTooltipTouchGestures]="model.touchGestures"
+      [idsTooltipTextAlign]="model.textAlign"
+    >
+      North
+    </button>
+  </ng-container>
 
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>idsTooltip</td>
-        <td>Tooltip text</td>
-        <td><code>string</code></td>
-        <td><code>''</code></td>
-        <td><input type="text" [(ngModel)]="model.tooltipText" /></td>
-      </tr>
-      <tr>
-        <td>idsTooltipPosition</td>
-        <td>Tooltip position.</td>
-        <td><code>IdsTooltipPositionType</code></td>
-        <td>
-          <code>{{ defaults.position }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.position">
-            @for (item of positions; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>idsTooltipSize</td>
-        <td>Tooltip size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>idsTooltipVariant</td>
-        <td>Tooltip variant.</td>
-        <td><code>IdsTooltipVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>idsTooltipShowDelay</td>
-        <td>Delay in ms to show tooltip after hovered.</td>
-        <td><code>number</code></td>
-        <td>{{ defaults.showDelay }} ms</td>
-        <td><input type="text" [(ngModel)]="model.showDelay" /></td>
-      </tr>
-      <tr>
-        <td>idsTooltipHideDelay</td>
-        <td>Delay in ms to hide tooltip after blur.</td>
-        <td><code>number</code></td>
-        <td>{{ defaults.hideDelay }} ms</td>
-        <td><input type="text" [(ngModel)]="model.hideDelay" /></td>
-      </tr>
-      <tr>
-        <td>idsTooltipDisabled</td>
-        <td>Whether the tooltip should not be shown.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.disabled }}</code>
-        </td>
-        <td><input type="checkbox" [(ngModel)]="model.disabled" /></td>
-      </tr>
-      <tr>
-        <td>idsTooltipTouchGestures</td>
-        <td>Behavior of touch gestures.</td>
-        <td><code>IdsTooltipTouchGestures</code></td>
-        <td>
-          <code>{{ defaults.touchGestures }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.touchGestures">
-            @for (item of touchGestures; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>idsTooltipTextAlign</td>
-        <td>Text aligment of the tooltip.</td>
-        <td><code>IdsTooltipTextAlign</code></td>
-        <td>
-          <code>{{ defaults.textAlign + "" }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.textAlign">
-            <option [value]="undefined">Undefined</option>
-            @for (item of textAligns; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+</app-tryout>

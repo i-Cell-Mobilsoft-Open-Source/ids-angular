@@ -20,7 +20,7 @@ export const IDS_ICON_DEFAULT_CONFIG = new InjectionToken<IdsIconDefaultConfig>(
 
 export function IDS_ICON_DEFAULT_CONFIG_FACTORY(): Required<IdsIconDefaultConfig> {
   return {
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     sizeCollection: IdsSizeCollection.SMALL,
     variant: IdsIconVariant.SURFACE,
     iconAssetsPath: '',

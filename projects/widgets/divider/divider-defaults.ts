@@ -21,7 +21,7 @@ export const IDS_DIVIDER_DEFAULT_CONFIG = new InjectionToken<IdsDividerDefaultCo
 
 export function IDS_DIVIDER_DEFAULT_CONFIG_FACTORY(): Required<IdsDividerDefaultConfig> {
   return {
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsDividerVariant.PRIMARY,
     orientation: IdsOrientation.HORIZONTAL,
     width: '100%',

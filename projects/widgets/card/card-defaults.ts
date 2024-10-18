@@ -22,7 +22,7 @@ export const IDS_CARD_DEFAULT_CONFIG = new InjectionToken<IdsCardDefaultConfig>(
 export function IDS_CARD_DEFAULT_CONFIG_FACTORY(): Required<IdsCardDefaultConfig> {
   return {
     appearance: IdsCardAppearance.FILLED,
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsCardVariant.SURFACE,
     orientation: IdsOrientation.VERTICAL,
   };

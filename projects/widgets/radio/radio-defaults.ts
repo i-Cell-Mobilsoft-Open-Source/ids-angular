@@ -20,7 +20,7 @@ export const IDS_RADIO_DEFAULT_CONFIG = new InjectionToken<IdsRadioDefaultConfig
 
 export function IDS_RADIO_DEFAULT_CONFIG_FACTORY(): Required<IdsRadioDefaultConfig> {
   return {
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsRadioVariant.SURFACE,
     orientation: IdsOrientation.VERTICAL,
     labelPosition: IdsPosition.RIGHT,

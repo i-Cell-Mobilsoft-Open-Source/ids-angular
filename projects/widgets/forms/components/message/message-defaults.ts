@@ -18,7 +18,7 @@ export const IDS_MESSAGE_DEFAULT_CONFIG = new InjectionToken<IdsMessageDefaultCo
 
 export function IDS_MESSAGE_DEFAULT_CONFIG_FACTORY(): Required<IdsMessageDefaultConfig> {
   return {
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsMessageVariant.SURFACE,
   };
 }

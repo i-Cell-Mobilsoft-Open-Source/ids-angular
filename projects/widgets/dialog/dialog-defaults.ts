@@ -17,7 +17,7 @@ export const IDS_DIALOG_DEFAULT_CONFIG = new InjectionToken<IdsDialogDefaultConf
 
 export function IDS_DIALOG_DEFAULT_CONFIG_FACTORY(): Required<IdsDialogDefaultConfig> {
   return {
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     showCloseButton: false,
     showBackdrop: true,
   };

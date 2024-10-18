@@ -1,7 +1,6 @@
 import { IDS_ACCORDION_DEFAULT_CONFIG, IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionDefaultConfig } from './accordion-defaults';
 import { IdsAccordionItemComponent } from './accordion-item/accordion-item.component';
 import { IdsAccordionAppearanceType } from './types/accordion-appearance.type';
-import { IdsAccordionVariantType } from './types/accordion-variant.type';
 
 import { CdkAccordion } from '@angular/cdk/accordion';
 import {
@@ -13,7 +12,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { IdsButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsButtonAppearanceType, IdsButtonComponent, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
@@ -57,7 +56,7 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   public multi = input<boolean>(this._defaultConfig.multi);
   public btnSize = input<IdsSizeType>(this._defaultConfig.btnSize);
   public btnAppearance = input<IdsButtonAppearanceType>(this._defaultConfig.btnAppearance);
-  public btnVariant = input<IdsAccordionVariantType>(this._defaultConfig.btnVariant);
+  public btnVariant = input<IdsButtonVariantType>(this._defaultConfig.btnVariant);
   public expandBtnLabel = input<string, string>(this._defaultConfig.expandBtnLabel, { transform: coerceStringAttribute });
   public collapseBtnLabel = input<string, string>(this._defaultConfig.collapseBtnLabel, { transform: coerceStringAttribute });
 

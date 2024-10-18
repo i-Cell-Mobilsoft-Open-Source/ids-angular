@@ -21,7 +21,7 @@ export const IDS_OVERLAY_PANEL_DEFAULT_CONFIG = new InjectionToken<IdsOverlayPan
 export function IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY(): Required<IdsOverlayPanelDefaultConfig> {
   return {
     appearance: IdsOverlayPanelAppearance.FILLED,
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsOverlayPanelVariant.LIGHT,
   };
 }

@@ -21,7 +21,7 @@ export const IDS_BUTTON_DEFAULT_CONFIG = new InjectionToken<IdsButtonDefaultConf
 export function IDS_BUTTON_DEFAULT_CONFIG_FACTORY(): Required<IdsButtonDefaultConfig> {
   return {
     appearance: IdsButtonAppearance.FILLED,
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsButtonVariant.PRIMARY,
   };
 }

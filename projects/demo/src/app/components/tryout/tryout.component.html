@@ -1,0 +1,14 @@
+<div class="title">
+  <h1>{{ title() }}</h1>
+  <button type="button" idsIconButton appearance="standard" variant="dark" (click)="_reset()">
+    <ids-icon fontIcon="reset" />
+  </button>
+</div>
+
+<section class="component" [class.light]="_isLightVariant()">
+  <ng-content select="[component]" />
+</section>
+
+<section class="controls">
+  <ng-content select="[controls]" />
+</section>

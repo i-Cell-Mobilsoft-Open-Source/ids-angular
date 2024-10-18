@@ -1,0 +1,47 @@
+<table [attr.cellPadding]="cellPadding()">
+  <caption>
+    <span>{{ configType() | titlecase }} controls</span>
+  </caption>
+
+  <thead>
+    <tr>
+      <th align="left">Name</th>
+      <th align="left">Description</th>
+      <th align="left">Type</th>
+      <th align="left">Default</th>
+      <th align="left">Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (control of _flatControls(); track $index) {
+      <tr>
+        <td>{{ control.name }}</td>
+        <td>{{ control.description }}</td>
+        <td>
+          <code>{{ control.type }}</code>
+        </td>
+        <td>
+          <code>{{ control.default }}</code>
+        </td>
+        <td>
+          @switch (control.control) {
+            @case ("checkbox") {
+              <input type="checkbox" [name]="control.name" [id]="control.name" [(ngModel)]="model()[control.name]" />
+            }
+            @case ("select") {
+              <select [(ngModel)]="model()[control.name]">
+                @for (item of control.list; track $index) {
+                  <option [value]="item">{{ item }}</option>
+                }
+              </select>
+            }
+            @default {
+              <input type="text" [name]="control.name" [id]="control.name" [(ngModel)]="model()[control.name]" />
+            }
+          }
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

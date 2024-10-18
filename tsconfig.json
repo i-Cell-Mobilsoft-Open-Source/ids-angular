@@ -24,7 +24,9 @@
     "types": ["node", "jest", "cypress", "cypress-real-events"],
     "paths": {
       "@i-cell/ids-angular/*": ["projects/widgets/*", "projects/widgets"],
-      "@i-cell/ids-angular": ["dist/widgets/*", "dist/widgets"]
+      "@i-cell/ids-angular": ["dist/widgets/*", "dist/widgets"],
+      "@demo-utils/*": ["projects/demo/src/utils/*"],
+      "@demo-types/*": ["projects/demo/src/types/*"]
     }
   },
   "angularCompilerOptions": {

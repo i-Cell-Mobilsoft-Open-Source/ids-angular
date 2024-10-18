@@ -1,7 +1,7 @@
 export const IdsPaginatorVariant = {
-  SURFACE: 'surface',
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
+  SURFACE: 'surface',
   LIGHT: 'light',
 } as const;
 

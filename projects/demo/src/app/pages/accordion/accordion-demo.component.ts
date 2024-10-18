@@ -93,7 +93,7 @@ export class AccordionDemoComponent {
     },
     btnVariant: {
       description: 'Button variant.',
-      type: 'IdsAccordionVariantType',
+      type: 'IdsButtonVariantType',
       default: defaultConfig.btnVariant,
       control: 'select',
       list: convertEnumToStringArray(IdsButtonVariant),

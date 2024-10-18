@@ -2,7 +2,9 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { UpperCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -14,6 +16,10 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
+
+interface IconData {
+  name: string;
+}
 
 type IconInputs = {
   size: IdsSizeType,
@@ -39,40 +45,12 @@ type IconInputs = {
   templateUrl: './icon-demo.component.html',
   styleUrl: './icon-demo.component.scss',
 })
-export class IconDemoComponent {
-  private _iconNames: string[] = [
-    'adjustments-horizontal',
-    'arrow-left',
-    'arrow-right',
-    'avatar',
-    'bars-3',
-    'camera',
-    'check-circle',
-    'check',
-    'chevron-down',
-    'chevron-left',
-    'chevron-left2',
-    'chevron-right',
-    'chevron-right2',
-    'chevron-up',
-    'clock',
-    'close',
-    'copy',
-    'envelope',
-    'exclamation-circle',
-    'exclamation-triangle',
-    'information',
-    'link',
-    'map-pin',
-    'map',
-    'minus',
-    'moon',
-    'plus',
-    'reset',
-    'search',
-    'sun',
-    'user',
-  ];
+export class IconDemoComponent implements OnInit {
+  private _http = inject(HttpClient);
+
+  private _iconNames = signal<string[]>([]);
+
+  protected readonly _destroyRef = inject(DestroyRef);
 
   protected _inputControlConfig: DemoControlConfig<IconInputs> = {
     size: {
@@ -102,7 +80,7 @@ export class IconDemoComponent {
       default: '-',
       demoDefault: 'moon',
       control: 'select',
-      list: this._iconNames,
+      list: this._iconNames(),
     },
     svgIcon: {
       description: 'Name of svg icon file',
@@ -110,7 +88,7 @@ export class IconDemoComponent {
       default: '-',
       demoDefault: 'moon',
       control: 'select',
-      list: this._iconNames,
+      list: this._iconNames(),
     },
     'aria-hidden': {
       description: 'Determinate whether the component is hidden or not for screen readers.',
@@ -119,6 +97,18 @@ export class IconDemoComponent {
       control: 'checkbox',
     },
   };
+
+  public ngOnInit(): void {
+    this._loadIcons();
+  }
+
+  private _loadIcons(): void {
+    this._http.get<IconData[]>('assets/fonts/I-DS-font-icon-default.json').pipe(
+      takeUntilDestroyed(this._destroyRef),
+    ).subscribe((data) => {
+      this._iconNames.set(data.map((item) => item.name));
+    });
+  }
 
   public defaults = getDefaultFromDemoConfig<IconInputs>(this._inputControlConfig);
 

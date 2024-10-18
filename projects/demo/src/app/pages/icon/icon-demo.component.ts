@@ -40,7 +40,39 @@ type IconInputs = {
   styleUrl: './icon-demo.component.scss',
 })
 export class IconDemoComponent {
-  private _iconNames: string[] = [];
+  private _iconNames: string[] = [
+    'adjustments-horizontal',
+    'arrow-left',
+    'arrow-right',
+    'avatar',
+    'bars-3',
+    'camera',
+    'check-circle',
+    'check',
+    'chevron-down',
+    'chevron-left',
+    'chevron-left2',
+    'chevron-right',
+    'chevron-right2',
+    'chevron-up',
+    'clock',
+    'close',
+    'copy',
+    'envelope',
+    'exclamation-circle',
+    'exclamation-triangle',
+    'information',
+    'link',
+    'map-pin',
+    'map',
+    'minus',
+    'moon',
+    'plus',
+    'reset',
+    'search',
+    'sun',
+    'user',
+  ];
 
   protected _inputControlConfig: DemoControlConfig<IconInputs> = {
     size: {

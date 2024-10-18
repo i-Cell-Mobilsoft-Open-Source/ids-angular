@@ -1,159 +1,22 @@
-<h1>{{ "COMPONENTS.PAGINATOR" | translate }}</h1>
+<app-tryout [title]="'COMPONENTS.PAGINATOR' | translate" (resetted)="reset()">
+  <ng-container component>
+    <ids-paginator
+      [length]="model.length"
+      [pageSize]="model.pageSize"
+      [pageSizeOptions]="model.pageSizeOptions"
+      [showFirstLastButton]="model.showFirstLastButton"
+      [showPrevNextLabel]="model.showPrevNextLabel"
+      [showPageInfo]="model.showPageInfo"
+      [showPageButtons]="model.showPageButtons"
+      [showAllPages]="model.showAllPages"
+      [maxDisplayedItemCount]="model.maxDisplayedItemCount"
+      [size]="model.size"
+      [variant]="model.variant"
+      [pageButtonAppearance]="model.pageButtonAppearance"
+      [disabled]="model.disabled"
+      [compactLayout]="model.compactLayout"
+    />
+  </ng-container>
 
-<section class="component" [class]="model.variant">
-  <ids-paginator
-    [length]="length"
-    [pageSize]="model.pageSize"
-    [pageSizeOptions]="model.pageSizeOptions"
-    [showFirstLastButton]="model.showFirstLastButton"
-    [showPrevNextLabel]="model.showPrevNextLabel"
-    [showPageInfo]="model.showPageInfo"
-    [showPageButtons]="model.showPageButtons"
-    [showAllPages]="model.showAllPages"
-    [maxDisplayedItemCount]="model.maxDisplayedItemCount"
-    [size]="model.size"
-    [variant]="model.variant"
-    [pageButtonAppearance]="model.pageButtonAppearance"
-  />
-</section>
-
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>pageSize</td>
-        <td>Numbers of rows to show per page. Must be an element from pageSizeOptions array, otherwise error is thrown.</td>
-        <td><code>number</code></td>
-        <td>
-          <code>{{ defaults.pageSize }}</code>
-        </td>
-        <td><input type="number" min="1" step="1" [(ngModel)]="model.pageSize" /></td>
-      </tr>
-      <tr>
-        <td>pageSizeOptions</td>
-        <td>Az array of numbers to list choose the number of rows to show per page.</td>
-        <td><code>number[]</code></td>
-        <td>
-          <code>{{ defaults.pageSizeOptions }}</code>
-        </td>
-        <td><input type="text" disabled [(ngModel)]="model.pageSizeOptions" /></td>
-      </tr>
-      <tr>
-        <td>showFirstLastButton</td>
-        <td>Whether to show first and last buttons.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.showFirstLastButton }}</code>
-        </td>
-        <td><input type="checkbox" name="showFirstLastButton" [(ngModel)]="model.showFirstLastButton" /></td>
-      </tr>
-      <tr>
-        <td>showPrevNextLabel</td>
-        <td>Whether to show previous and next labels.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.showPrevNextLabel }}</code>
-        </td>
-        <td><input type="checkbox" name="showPrevNextLabel" [(ngModel)]="model.showPrevNextLabel" /></td>
-      </tr>
-      <tr>
-        <td>showPageInfo</td>
-        <td>Whether to show information block.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.showPageInfo }}</code>
-        </td>
-        <td><input type="checkbox" name="showPageInfo" [(ngModel)]="model.showPageInfo" /></td>
-      </tr>
-      <tr>
-        <td>showPageButtons</td>
-        <td>Whether to show page buttons.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.showPageButtons }}</code>
-        </td>
-        <td><input type="checkbox" name="showPageButtons" [(ngModel)]="model.showPageButtons" /></td>
-      </tr>
-      <tr>
-        <td>showAllPages</td>
-        <td>Whether to show all pages or use the truncation mechanism.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.showAllPages }}</code>
-        </td>
-        <td><input type="checkbox" name="showAllPages" [(ngModel)]="model.showAllPages" /></td>
-      </tr>
-      <tr>
-        <td>maxDisplayedItemCount</td>
-        <td>Number of max displayed items. Used by truncation. Must be an odd number, otherwise error is thrown.</td>
-        <td><code>number</code></td>
-        <td>
-          <code>{{ defaults.maxDisplayedItemCount }}</code>
-        </td>
-        <td><input type="number" min="3" step="2" [(ngModel)]="model.maxDisplayedItemCount" /></td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>Paginator size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Paginator variant.</td>
-        <td><code>IdsPaginatorVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>pageButtonAppearance</td>
-        <td>Appearance of paginator page buttons.</td>
-        <td><code>IdsPaginatorPageButtonAppearanceType</code></td>
-        <td>
-          <code>{{ defaults.pageButtonAppearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.pageButtonAppearance">
-            @for (item of pageButtonAppearances; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+</app-tryout>

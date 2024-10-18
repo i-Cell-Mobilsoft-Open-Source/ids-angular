@@ -5,16 +5,16 @@
   [attr.aria-expanded]="isExpanded ? 'true' : 'false'"
   [attr.aria-controls]="_contentId"
   [class]="_summaryClass"
-  [attr.tabindex]="disabled() ? -1 : 0"
-  [attr.aria-disabled]="disabled()"
+  [attr.tabindex]="_safeDisabled() ? -1 : 0"
+  [attr.aria-disabled]="_safeDisabled()"
   (click)="toggle()"
 >
   @if (_safeHasLeadingIcon()) {
-    <ids-icon icon-leading [fontIcon]="getIcon()" />
+    <ids-icon icon-leading [fontIcon]="_icon" />
   }
   <span [class]="_titleClass">{{ summary() }}</span>
   @if (_safeHasTrailingIcon()) {
-    <ids-icon icon-trailing [fontIcon]="getIcon()" />
+    <ids-icon icon-trailing [fontIcon]="_icon" />
   }
 </div>
 <div

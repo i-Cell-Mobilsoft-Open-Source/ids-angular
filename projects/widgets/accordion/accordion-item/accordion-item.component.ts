@@ -50,29 +50,36 @@ export class IdsAccordionItemComponent extends ComponentBase {
 
   protected _safeHasLeadingIcon = computed(() => this._accordion.hasLeadingIcon() ?? this.hasLeadingIcon());
   protected _safeHasTrailingIcon = computed(() => this._accordion.hasTrailingIcon() ?? this.hasTrailingIcon());
-  
+  protected _safeDisabled = computed(() => this._accordion.disabled() || this.disabled());
+
   protected _hostClasses = computed(() => this._getHostClasses(
-    [this.disabled() || this._accordion.disabled() ? 'disabled' : null],
+    [this._safeDisabled() ? 'disabled' : null],
   ));
 
-  public open(): void {
-    this._accordionItem.open();
-  }
-
-  public close(): void {
-    this._accordionItem.close();
-  }
-
-  public toggle(): void {
-    this._accordionItem.toggle();
-  }
-
-  public getIcon(): string {
+  protected get _icon(): string {
     return this.isExpanded ? 'chevron-up' : 'chevron-down';
   }
 
-  get isExpanded(): boolean {
+  public get isExpanded(): boolean {
     return this._accordionItem.expanded;
+  }
+  
+  public open(): void {
+    if (!this._safeDisabled()) {
+      this._accordionItem.open();
+    }
+  }
+
+  public close(): void {
+    if (!this._safeDisabled()) {
+      this._accordionItem.close();
+    }
+  }
+
+  public toggle(): void {
+    if (!this._safeDisabled()) {
+      this._accordionItem.toggle();
+    }
   }
 
   public focus(options?: FocusOptions): void {

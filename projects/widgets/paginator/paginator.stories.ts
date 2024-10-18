@@ -1,5 +1,6 @@
 import { IdsPaginatorComponent } from './paginator.component';
-import { IdsPaginatorPageButtonAppearance, IdsPaginatorVariant } from './public-api';
+import { IdsPaginatorPageButtonAppearance } from './types/paginator-appearance.type';
+import { IdsPaginatorVariant } from './types/paginator-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 

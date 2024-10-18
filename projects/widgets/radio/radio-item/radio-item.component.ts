@@ -1,7 +1,7 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
 import { IdsRadioChangeEvent } from '../types/radio-events.class';
 
-import { Component, computed, ElementRef, EventEmitter, HostBinding, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, computed, ElementRef, EventEmitter, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
@@ -12,6 +12,9 @@ let nextUniqueId = 0;
   imports: [],
   templateUrl: './radio-item.component.html',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+  },
 })
 export class IdsRadioItemComponent implements OnInit {
   private readonly _componentClass = 'ids-radio-item';
@@ -43,10 +46,6 @@ export class IdsRadioItemComponent implements OnInit {
   @ViewChild('input') private _inputElement!: ElementRef<HTMLButtonElement>;
 
   @Output() public readonly changes = new EventEmitter<IdsRadioChangeEvent>();
-
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses();
-  }
 
   constructor() {
     const parent = this.injector.get(IdsRadioGroupDirective, null, { optional: true, skipSelf: true });

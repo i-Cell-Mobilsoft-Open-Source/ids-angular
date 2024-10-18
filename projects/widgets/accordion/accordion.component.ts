@@ -67,11 +67,15 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   ]));
   
   public openAll(): void {
-    this._cdkAccordion.openAll();
+    if (!this.disabled()) {
+      this._cdkAccordion.openAll();
+    }
   }
   
   public closeAll(): void {
-    this._cdkAccordion.closeAll();
+    if (!this.disabled()) {
+      this._cdkAccordion.closeAll();
+    }
   }
 
   private _handleKeyDown(event: KeyboardEvent): void {

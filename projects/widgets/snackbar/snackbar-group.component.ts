@@ -1,11 +1,11 @@
 import { snackbarAnimation } from './animations';
-import { IdsSnackbarService } from './public-api';
+import { IdsSnackbarService } from './services/snackbar.service';
 import { IDS_SNACKBAR_DEFAULT_CONFIG, IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY } from './snackbar-defaults';
 import { IdsSnackbarComponent } from './snackbar.component';
 import { IdsSnackbarInnerData } from './types/snackbar-inner-data.type';
 import { IdsSnackbarPosition, IdsSnackbarPositionType } from './types/snackbar-position.type';
 
-import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, signal, Signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { createClassList } from '@i-cell/ids-angular/core';
 
 const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
@@ -18,6 +18,9 @@ const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [snackbarAnimation],
+  host: {
+    '[class]': '_hostClasses()',
+  },
 })
 export class IdsSnackbarGroupComponent {
   private readonly _componentClass = 'ids-snackbar-group';
@@ -69,10 +72,6 @@ export class IdsSnackbarGroupComponent {
         };
     }
   });
-
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses;
-  }
 
   public closeSnackbar(id: number): void {
     this._snackbarService.remove(id);

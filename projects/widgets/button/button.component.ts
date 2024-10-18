@@ -27,7 +27,7 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': '_hostClasses()',
-    '[attr.aria-disabled]': 'this.disabled() || null',
+    '[attr.aria-disabled]': 'this.disabled()? "" : null',
     '[disabled]': 'this.disabled() || null',
   },
 })

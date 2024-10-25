@@ -1,4 +1,4 @@
-<label for="" class="ids-checkbox-group__label">{{ groupLabel() }}</label>
+<label class="ids-checkbox-group__label" [for]="id()" [id]="_groupLabelId">{{ groupLabel() }}</label>
 
 @if (allowParent()) {
   <ids-checkbox

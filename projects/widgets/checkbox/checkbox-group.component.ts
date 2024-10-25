@@ -15,6 +15,10 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
   templateUrl: './checkbox-group.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    'role': 'group',
+    '[attr.aria-labelledby]': '_groupLabelId',
+  },
 })
 export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsCheckboxGroupDefaultConfig> {
   protected override get _componentName(): string {
@@ -32,6 +36,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   public size = input<IdsSizeType | null>(this._defaultConfig.size);
   public variant = input<IdsCheckboxVariantType | null>(this._defaultConfig.variant);
   public orientation = input<IdsOrientationType | null>(this._defaultConfig.orientation);
+  protected _groupLabelId = `${this.id()}-label`;
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),

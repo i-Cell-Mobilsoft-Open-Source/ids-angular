@@ -97,8 +97,8 @@ export class SelectDemoComponent implements OnInit {
   public defaults: SelectPublicApi & SelectHelperControls = {
     placeholder: 'Select animal',
     readonly: false,
-    ariaLabel: 'arialabeltest',
-    ariaLabelledBy: 'arialabelledbytest',
+    ariaLabel: 'Animal',
+    ariaLabelledBy: 'Animal',
     typeaheadDebounceInterval: selectDefaultConfig.typeaheadDebounceInterval,
     hasRequiredValidator: true,
     useCustomTrigger: false,

@@ -1,153 +1,21 @@
-<h1>{{ "COMPONENTS.RADIO" | translate }}</h1>
+<app-tryout [title]="'COMPONENTS.RADIO' | translate" [variant]="model.variant" (resetted)="reset()">
+  <ng-container component>
+    <ids-radio-group
+      [name]="model.name"
+      [required]="model.required"
+      [disabled]="model.disabled"
+      [size]="model.size"
+      [variant]="model.variant"
+      [orientation]="model.orientation"
+      [labelPosition]="model.labelPosition"
+      [(ngModel)]="value"
+    >
+      <ids-radio-item value="chicken" [disabled]="helperModel.onlyOneItemIsDisabled">Chicken</ids-radio-item>
+      <ids-radio-item value="beef">Beef</ids-radio-item>
+      <ids-radio-item value="pork">Pork</ids-radio-item>
+    </ids-radio-group>
+  </ng-container>
 
-<section class="component" [class]="model.variant">
-  <ids-radio-group
-    [name]="model.name"
-    [required]="model.required"
-    [disabled]="model.disabled"
-    [size]="model.size"
-    [variant]="model.variant"
-    [orientation]="model.orientation"
-    [labelPosition]="model.labelPosition"
-    [(ngModel)]="value"
-  >
-    <ids-radio-item value="chicken" [disabled]="model.onlyOneItemIsDisabled">Chicken</ids-radio-item>
-    <ids-radio-item value="beef">Beef</ids-radio-item>
-    <ids-radio-item value="pork">Pork</ids-radio-item>
-  </ids-radio-group>
-</section>
-
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>name</td>
-        <td>Name for radio items. Name is provided for group, but items get it.</td>
-        <td><code>string</code></td>
-        <td>
-          <code>''</code>
-        </td>
-        <td><input type="text" [(ngModel)]="model.name" /></td>
-      </tr>
-      <tr>
-        <td>required</td>
-        <td>Whether the radio is required or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.required }}</code>
-        </td>
-        <td><input type="checkbox" [(ngModel)]="model.required" /></td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the radio is disabled or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.disabled }}</code>
-        </td>
-        <td><input type="checkbox" [(ngModel)]="model.disabled" /></td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>Size of the radio.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Variant of the radio.</td>
-        <td><code>IdsRadioVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>orientation</td>
-        <td>Orientation of the radio.</td>
-        <td><code>IdsRadioOrientationType</code></td>
-        <td>
-          <code>{{ defaults.orientation }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.orientation">
-            @for (item of orientations; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>labelPosition</td>
-        <td>Position of the radio's label.</td>
-        <td><code>IdsRadioLabelPositionType</code></td>
-        <td>
-          <code>{{ defaults.labelPosition }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.labelPosition">
-            @for (item of labelPositions; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table [cellPadding]="10">
-    <caption>
-      Helper controls
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>onlyOneItemIsDisabled</td>
-        <td>When true, the first item will be disabled.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" [(ngModel)]="model.onlyOneItemIsDisabled" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+</app-tryout>

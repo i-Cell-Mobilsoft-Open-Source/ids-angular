@@ -1,12 +1,20 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsPositionType, IdsSize, IdsSizeType, IdsOrientationType, IdsOrientation, IdsPosition } from '@i-cell/ids-angular/core';
+import { IdsPositionType, IdsSize, IdsSizeType, IdsOrientationType, IdsPosition, IdsOrientation } from '@i-cell/ids-angular/core';
 import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioGroupDirective, IdsRadioItemComponent, IdsRadioVariant, IdsRadioVariantType } from '@i-cell/ids-angular/radio';
 import { TranslateModule } from '@ngx-translate/core';
 
-type RadioPublicApi = {
+const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
+
+type RadioInputControls = {
   name: string
   required: boolean,
   disabled: boolean,
@@ -20,12 +28,12 @@ type RadioHelperControls = {
   onlyOneItemIsDisabled: boolean,
 };
 
-const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
-
 @Component({
   selector: 'app-radio-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsRadioGroupDirective,
     IdsRadioItemComponent,
     FormsModule,
@@ -34,34 +42,80 @@ const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
     IdsButtonComponent,
   ],
   templateUrl: './radio-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './radio-demo.component.scss',
-  ],
+  styleUrl: './radio-demo.component.scss',
 })
 export class RadioDemoComponent {
-  public defaults: RadioPublicApi & RadioHelperControls = {
-    name: 'numbers',
-    required: false,
-    disabled: false,
-    size: defaultConfig.size,
-    variant: defaultConfig.variant,
-    orientation: defaultConfig.orientation,
-    labelPosition: defaultConfig.labelPosition,
-    onlyOneItemIsDisabled: false,
+  protected _inputControlConfig: DemoControlConfig<RadioInputControls> = {
+    name: {
+      description: 'Name for radio items. Name is provided for group, but items get it.',
+      type: 'string',
+      default: '-',
+    },
+    required: {
+      description: 'Whether the radio is required or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    disabled: {
+      description: 'Whether the radio is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    size: {
+      description: 'Size of the radio.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Variant of the radio.',
+      type: 'IdsRadioVariantType',
+      default: defaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsRadioVariant),
+    },
+    orientation: {
+      description: 'Orientation of the radio.',
+      type: 'IdsRadioVariantType',
+      default: defaultConfig.orientation,
+      control: 'select',
+      list: convertEnumToStringArray(IdsOrientation),
+    },
+    labelPosition: {
+      description: 'Position of the radio\'s label.',
+      type: 'IdsPositionType',
+      default: defaultConfig.labelPosition,
+      control: 'select',
+      list: convertEnumToStringArray(IdsPosition),
+    },
   };
 
-  public model: RadioPublicApi & RadioHelperControls = { ...this.defaults };
+  protected _helperControlConfig: DemoControlConfig<RadioHelperControls> = {
+    onlyOneItemIsDisabled: {
+      description: 'When true, the first item will be disabled. Just for testing purposes.',
+      type: 'boolean',
+      default: true,
+      control: 'checkbox',
+    },
+  };
+
+  public defaults = getDefaultFromDemoConfig<RadioInputControls>(this._inputControlConfig);
+  public helperDefaults = getDefaultFromDemoConfig<RadioHelperControls>(this._helperControlConfig);
+
+  public model: RadioInputControls = { ...this.defaults };
+  public helperModel: RadioHelperControls = { ...this.helperDefaults };
 
   public value = undefined;
 
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsRadioVariantType>(IdsRadioVariant);
-  public orientations = Object.values<IdsOrientationType>(IdsOrientation);
-  public labelPositions = Object.values<IdsPositionType>(IdsPosition);
+  public onClick(buttonName: string): void {
+    console.info(`${buttonName} button clicked`);
+  }
 
   public reset(): void {
-    this.value = undefined;
     this.model = { ...this.defaults };
+    this.helperModel = { ...this.helperDefaults };
   }
 }

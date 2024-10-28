@@ -1,206 +1,88 @@
-<h1>{{ "COMPONENTS.SEGMENTED_CONTROL" | translate }}</h1>
-
-<section class="component" [class]="model.variant">
-  <div class="segmented-control-selection">
-    <div class="segmented-control-group">
-      <h2>Single selection</h2>
-      <ids-segmented-control
-        [appearance]="model.appearance"
-        [variant]="model.variant"
-        [size]="model.size"
-        [disabled]="model.disabled"
-        [(ngModel)]="singleSelectionValue"
-      >
-        <ids-segmented-control-item
-          value="first"
-          [label]="model.itemHasLabel ? 'Label 1' : undefined"
-          [disabled]="model.onlyOneItemIsDisabled"
+<app-tryout [title]="'COMPONENTS.SEGMENTED_CONTROL' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+  <ng-container component>
+    <div component class="segmented-control-grid">
+      <div class="segmented-control-item">
+        <h2>Single selection</h2>
+        <ids-segmented-control
+          [appearance]="model.appearance"
+          [variant]="model.variant"
+          [size]="model.size"
+          [disabled]="model.disabled"
+          [(ngModel)]="singleSelectionValue"
         >
-          @if (model.itemHasIcon) {
-            <ids-icon fontIcon="envelope" />
-          }
-          @if (model.itemHasSuffix) {
-            <span suffixContent>$</span>
-          }
-        </ids-segmented-control-item>
-        <ids-segmented-control-item value="second" [label]="model.itemHasLabel ? 'Label 2' : undefined">
-          @if (model.itemHasIcon) {
-            <ids-icon fontIcon="user" />
-          }
-          @if (model.itemHasSuffix) {
-            <span suffixContent>$</span>
-          }
-        </ids-segmented-control-item>
-        <ids-segmented-control-item value="third" [label]="model.itemHasLabel ? 'Label 3' : undefined">
-          @if (model.itemHasIcon) {
-            <ids-icon fontIcon="clock" />
-          }
-          @if (model.itemHasSuffix) {
-            <span suffixContent>$</span>
-          }
-        </ids-segmented-control-item>
-      </ids-segmented-control>
-    </div>
-
-    <div class="segmented-control-group">
-      <h2>Multi selection</h2>
-      <ids-segmented-control
-        [appearance]="model.appearance"
-        [variant]="model.variant"
-        [size]="model.size"
-        [multiSelect]="true"
-        [disabled]="model.disabled"
-        [ngModel]="multiSelectionValue"
-      >
-        <ids-segmented-control-item
-          value="first"
-          [label]="model.itemHasLabel ? 'Label 1' : undefined"
-          [disabled]="model.onlyOneItemIsDisabled"
-        >
-          @if (model.itemHasIcon) {
-            <ids-icon fontIcon="envelope" />
-          }
-          @if (model.itemHasSuffix) {
-            <span suffixContent>$</span>
-          }
-        </ids-segmented-control-item>
-        <ids-segmented-control-item value="second" [label]="model.itemHasLabel ? 'Label 2' : undefined">
-          @if (model.itemHasIcon) {
-            <ids-icon fontIcon="user" />
-          }
-          @if (model.itemHasSuffix) {
-            <span suffixContent>$</span>
-          }
-        </ids-segmented-control-item>
-        <ids-segmented-control-item value="third" [label]="model.itemHasLabel ? 'Label 3' : undefined">
-          @if (model.itemHasIcon) {
-            <ids-icon fontIcon="clock" />
-          }
-          @if (model.itemHasSuffix) {
-            <span suffixContent>$</span>
-          }
-        </ids-segmented-control-item>
-      </ids-segmented-control>
-    </div>
-  </div>
-</section>
-
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
+          <ids-segmented-control-item
+            value="first"
+            [label]="helperModel.itemHasLabel ? 'Label 1' : undefined"
+            [disabled]="helperModel.onlyOneItemIsDisabled"
+          >
+            @if (helperModel.itemHasIcon) {
+              <ids-icon fontIcon="envelope" />
+            }
+            @if (helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
+            }
+          </ids-segmented-control-item>
+          <ids-segmented-control-item value="second" [label]="helperModel.itemHasLabel ? 'Label 2' : undefined">
+            @if (helperModel.itemHasIcon) {
+              <ids-icon fontIcon="user" />
+            }
+            @if (helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
+            }
+          </ids-segmented-control-item>
+          <ids-segmented-control-item value="third" [label]="helperModel.itemHasLabel ? 'Label 3' : undefined">
+            @if (helperModel.itemHasIcon) {
+              <ids-icon fontIcon="clock" />
+            }
+            @if (helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
+            }
+          </ids-segmented-control-item>
+        </ids-segmented-control>
       </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>size</td>
-        <td>Size of the segmented control.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
+      <div class="segmented-control-item">
+        <h2>Multi selection</h2>
+        <ids-segmented-control
+          [appearance]="model.appearance"
+          [variant]="model.variant"
+          [size]="model.size"
+          [multiSelect]="true"
+          [disabled]="model.disabled"
+          [ngModel]="multiSelectionValue"
+        >
+          <ids-segmented-control-item
+            value="first"
+            [label]="helperModel.itemHasLabel ? 'Label 1' : undefined"
+            [disabled]="helperModel.onlyOneItemIsDisabled"
+          >
+            @if (helperModel.itemHasIcon) {
+              <ids-icon fontIcon="envelope" />
             }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Variant of the segmented control.</td>
-        <td><code>IdsSegmentedControlVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
+            @if (helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
             }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>appearance</td>
-        <td>Appearance of the segmented control.</td>
-        <td><code>IdsSegmentedControlAppearanceType</code></td>
-        <td>
-          <code>{{ defaults.appearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.appearance">
-            @for (item of appearances; track $index) {
-              <option [value]="item">{{ item }}</option>
+          </ids-segmented-control-item>
+          <ids-segmented-control-item value="second" [label]="helperModel.itemHasLabel ? 'Label 2' : undefined">
+            @if (helperModel.itemHasIcon) {
+              <ids-icon fontIcon="user" />
             }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the segmented control is disabled or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.disabled }}</code>
-        </td>
-        <td><input type="checkbox" [(ngModel)]="model.disabled" /></td>
-      </tr>
-    </tbody>
-  </table>
+            @if (helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
+            }
+          </ids-segmented-control-item>
+          <ids-segmented-control-item value="third" [label]="helperModel.itemHasLabel ? 'Label 3' : undefined">
+            @if (helperModel.itemHasIcon) {
+              <ids-icon fontIcon="clock" />
+            }
+            @if (helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
+            }
+          </ids-segmented-control-item>
+        </ids-segmented-control>
+      </div>
+    </div>
+  </ng-container>
 
-  <table [cellPadding]="10">
-    <caption>
-      Helper controls
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>itemHasLabel</td>
-        <td>When true, items have labels.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" [(ngModel)]="model.itemHasLabel" /></td>
-      </tr>
-      <tr>
-        <td>itemHasIcon</td>
-        <td>When true, items have icon.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" [(ngModel)]="model.itemHasIcon" /></td>
-      </tr>
-      <tr>
-        <td>itemHasSuffix</td>
-        <td>When true, items have suffix.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" [(ngModel)]="model.itemHasSuffix" /></td>
-      </tr>
-      <tr>
-        <td>onlyOneItemIsDisabled</td>
-        <td>When true, the first item will be disabled.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" [(ngModel)]="model.onlyOneItemIsDisabled" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+</app-tryout>

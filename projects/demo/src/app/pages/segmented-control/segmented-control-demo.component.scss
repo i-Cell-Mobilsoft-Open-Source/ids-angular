@@ -1,12 +1,5 @@
-.segmented-control-selection {
+.segmented-control-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
-
-.segmented-control-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
+  gap: 3rem;
 }

@@ -86,7 +86,7 @@ export class ButtonDemoComponent {
       control: 'checkbox',
     },
     hasTrailingIcon: {
-      description: 'Whether the button has leading icon or not.',
+      description: 'Whether the button has trailing icon or not.',
       type: 'boolean',
       default: true,
       control: 'checkbox',

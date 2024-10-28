@@ -1,5 +1,5 @@
 import { IdsMenuItemAppearance, IdsMenuItemAppearanceType } from './types/menu-item-appearance.type';
-import { MenuItemVariant, MenuItemVariantType } from './types/menu-item-variant.type';
+import { IdsMenuItemVariant, MenuItemVariantType } from './types/menu-item-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -22,7 +22,7 @@ export function IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY(): Required<IdsMenuItemDefa
   return {
     appearance: IdsMenuItemAppearance.TEXT,
     size: IdsSize.COMPACT,
-    variant: MenuItemVariant.SURFACE,
+    variant: IdsMenuItemVariant.SURFACE,
   };
 }
 

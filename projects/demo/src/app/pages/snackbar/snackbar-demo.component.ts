@@ -43,10 +43,7 @@ const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
     FormsModule,
   ],
   templateUrl: './snackbar-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './snackbar-demo.component.scss',
-  ],
+  styleUrl: './snackbar-demo.component.scss',
 })
 export class SnackbarDemoComponent implements OnInit {
   private readonly _snackbarService = inject(IdsSnackbarService);

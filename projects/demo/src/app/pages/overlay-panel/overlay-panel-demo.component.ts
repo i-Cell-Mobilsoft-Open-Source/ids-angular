@@ -1,25 +1,35 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsMenuItemComponent, IdsMenuItemAppearance, IdsMenuItemAppearanceType, MenuItemVariant, MenuItemVariantType } from '@i-cell/ids-angular/menu';
+import { IdsMenuItemComponent, IdsMenuItemAppearance, IdsMenuItemAppearanceType, IdsMenuItemVariant, MenuItemVariantType, IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/menu';
+import { IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/overlay-panel';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel/overlay-panel.component';
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
 import { IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-variant.type';
 import { TranslateModule } from '@ngx-translate/core';
 
-type OverlayPanelPublicApi = {
+const overlayPanelDefaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
+const menuItemDefaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
+
+type OverlayPanelInputControls = {
   appearance: IdsOverlayPanelAppearanceType,
   size: IdsSizeType,
   variant: IdsOverlayPanelVariantType,
 };
 
 type OverlayPanelHelperControls = {
-  testBackgroundColor: 'light' | 'dark',
+  testBackgroundColor: 'none' | 'dark',
 };
 
-type MenuItemPublicApi = {
+type MenuItemInputControls = {
   appearance: IdsMenuItemAppearanceType,
   size: IdsSizeType,
   variant: MenuItemVariantType,
@@ -35,6 +45,8 @@ type MenuItemHelperControls = {
   selector: 'app-overlay-panel-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsOverlayPanelComponent,
     IdsMenuItemComponent,
     IdsIconComponent,
@@ -43,50 +55,108 @@ type MenuItemHelperControls = {
     IdsButtonComponent,
   ],
   templateUrl: './overlay-panel-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './overlay-panel-demo.component.scss',
-  ],
+  styleUrl: './overlay-panel-demo.component.scss',
 })
 export class OverlayPanelDemoComponent {
-  public overlayPanelAppearances = Object.values<IdsOverlayPanelAppearanceType>(IdsOverlayPanelAppearance);
-  public overlayPanelVariants = Object.values<IdsOverlayPanelVariantType>(IdsOverlayPanelVariant);
-  public menuItemAppearances = Object.values<IdsMenuItemAppearanceType>(IdsMenuItemAppearance);
-  public menuItemVariants = Object.values<MenuItemVariantType>(MenuItemVariant);
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public overlayPanelBackgroundColors = [
-    'light',
-    'dark',
-  ];
-
-  public overlayPanelDefaults: OverlayPanelPublicApi & OverlayPanelHelperControls = {
-    appearance: IdsOverlayPanelAppearance.FILLED,
-    size: IdsSize.COMFORTABLE,
-    variant: IdsOverlayPanelVariant.LIGHT,
-    testBackgroundColor: 'light',
+  protected _overlayPanelInputControlConfig: DemoControlConfig<OverlayPanelInputControls> = {
+    appearance: {
+      description: 'Overlay panel appearance.',
+      type: 'IdsOverlayPanelAppearanceType',
+      default: overlayPanelDefaultConfig.appearance,
+      control: 'select',
+      list: convertEnumToStringArray(IdsOverlayPanelAppearance),
+    },
+    size: {
+      description: 'Overlay panel size.',
+      type: 'IdsSizeType',
+      default: overlayPanelDefaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Overlay panel variant.',
+      type: 'IdsOverlayPanelVariantType',
+      default: overlayPanelDefaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsOverlayPanelVariant),
+    },
   };
 
-  public overlayPanelModel: OverlayPanelPublicApi & OverlayPanelHelperControls = { ...this.overlayPanelDefaults };
-
-  public menuItemDefaults: MenuItemPublicApi & MenuItemHelperControls = {
-    appearance: IdsOverlayPanelAppearance.FILLED,
-    size: IdsSize.COMFORTABLE,
-    variant: MenuItemVariant.SURFACE,
-    hasLeadingIcon: true,
-    hasTrailingIcon: true,
-    hasDisabledItem: false,
+  protected _overlayPanelHelperControlConfig: DemoControlConfig<OverlayPanelHelperControls> = {
+    testBackgroundColor: {
+      description: 'Text of button',
+      type: 'string',
+      default: 'none',
+      control: 'select',
+      list: [
+        'none',
+        'dark',
+      ],
+    },
   };
 
-  public menuItemModel: MenuItemPublicApi & MenuItemHelperControls = { ...this.menuItemDefaults };
+  protected _menuItemInputControlConfig: DemoControlConfig<MenuItemInputControls> = {
+    appearance: {
+      description: 'Menu item appearance.',
+      type: 'IdsMenuItemAppearanceType',
+      default: menuItemDefaultConfig.appearance,
+      control: 'select',
+      list: convertEnumToStringArray(IdsMenuItemAppearance),
+    },
+    size: {
+      description: 'Menu item size.',
+      type: 'IdsSizeType',
+      default: menuItemDefaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Menu item variant.',
+      type: 'IdsMenuItemVariantType',
+      default: menuItemDefaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsMenuItemVariant),
+    },
+  };
+
+  protected _menuItemHelperControlConfig: DemoControlConfig<MenuItemHelperControls> = {
+    hasLeadingIcon: {
+      description: 'Whether the menu items have leading icon or not.',
+      type: 'boolean',
+      default: true,
+      control: 'checkbox',
+    },
+    hasTrailingIcon: {
+      description: 'Whether the menu items have trailing icon or not.',
+      type: 'boolean',
+      default: true,
+      control: 'checkbox',
+    },
+    hasDisabledItem: {
+      description: 'Whether one menu item is disabled or not. For testing purposes this is the first menu item.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+  };
+
+  public overlayPanelDefaults = getDefaultFromDemoConfig<OverlayPanelInputControls>(this._overlayPanelInputControlConfig);
+  public overlayPanelHelperDefaults = getDefaultFromDemoConfig<OverlayPanelHelperControls>(this._overlayPanelHelperControlConfig);
+  public menuItemDefaults = getDefaultFromDemoConfig<MenuItemInputControls>(this._menuItemInputControlConfig);
+  public menuItemHelperDefaults = getDefaultFromDemoConfig<MenuItemHelperControls>(this._menuItemHelperControlConfig);
+
+  public overlayPanelModel: OverlayPanelInputControls = { ...this.overlayPanelDefaults };
+  public overlayPanelHelperModel: OverlayPanelHelperControls = { ...this.overlayPanelHelperDefaults };
+  public menuItemModel: MenuItemInputControls = { ...this.menuItemDefaults };
+  public menuItemHelperModel: MenuItemHelperControls = { ...this.menuItemHelperDefaults };
 
   // eslint-disable-next-line no-magic-numbers
   public items = Array(3);
 
-  public resetOverlayPanel(): void {
+  public reset(): void {
     this.overlayPanelModel = { ...this.overlayPanelDefaults };
-  }
-
-  public resetMenuItem(): void {
+    this.overlayPanelHelperModel = { ...this.overlayPanelHelperDefaults };
     this.menuItemModel = { ...this.menuItemDefaults };
+    this.menuItemHelperModel = { ...this.menuItemHelperDefaults };
   }
 }

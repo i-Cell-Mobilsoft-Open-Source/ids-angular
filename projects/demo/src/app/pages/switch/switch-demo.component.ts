@@ -50,10 +50,7 @@ type SwitchGroupInputControls = {
     IdsButtonComponent,
   ],
   templateUrl: './switch-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './switch-demo.component.scss',
-  ],
+  styleUrl: './switch-demo.component.scss',
 })
 export class SwitchDemoComponent {
   protected _inputControlConfig: DemoControlConfig<SwitchInputControls> = {

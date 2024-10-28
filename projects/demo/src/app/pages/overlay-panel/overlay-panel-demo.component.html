@@ -1,6 +1,6 @@
 <app-tryout
   [title]="'COMPONENTS.OVERLAY_PANEL' | translate"
-  [variant]="overlayPanelHelperModel.testBackgroundColor === 'dark' ? 'light' : 'none'"
+  [hasDarkBackground]="overlayPanelHelperModel.testBackgroundColor === 'dark'"
   (resetted)="reset()"
 >
   <ng-container component>

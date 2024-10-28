@@ -1,4 +1,4 @@
-<app-tryout [title]="'COMPONENTS.RADIO' | translate" [variant]="model.variant" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.RADIO' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <ng-container component>
     <ids-radio-group
       [name]="model.name"

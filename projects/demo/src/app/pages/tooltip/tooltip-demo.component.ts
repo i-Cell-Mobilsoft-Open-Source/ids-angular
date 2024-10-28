@@ -11,7 +11,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY, IdsTooltipDirective, IdsTooltipPosition, IdsTooltipPositionType, IdsTooltipTextAlign, IdsTooltipTouchGestures, IdsTooltipVariant, IdsTooltipVariantType } from '@i-cell/ids-angular/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
-type TooltipInputs = {
+type TooltipInputControls = {
   tooltipText: string,
   position: IdsTooltipPositionType,
   size: IdsSizeType,
@@ -41,7 +41,7 @@ const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
   styleUrl: './tooltip-demo.component.scss',
 })
 export class TooltipDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<TooltipInputs> = {
+  protected _inputControlConfig: DemoControlConfig<TooltipInputControls> = {
     tooltipText: {
       description: 'The text displayed inside the tooltip.',
       type: 'string',
@@ -114,9 +114,9 @@ export class TooltipDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<TooltipInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<TooltipInputControls>(this._inputControlConfig);
 
-  public model: TooltipInputs = { ...this.defaults  };
+  public model: TooltipInputControls = { ...this.defaults  };
   
   public reset(): void {
     this.model = { ...this.defaults };

@@ -20,6 +20,7 @@ const DEFAULT_CONTROL_TABLE_PADDING = 10;
 export class ControlTableComponent<T extends Record<string, unknown>> {
   public cellPadding = input<number>(DEFAULT_CONTROL_TABLE_PADDING);
   public configType = input<'input' | 'helper'>('input');
+  public controlName = input<string | undefined>();
   public controlConfig = input<DemoControlConfig<T>>();
   public model = model.required<T>();
   

@@ -21,7 +21,7 @@ interface IconData {
   name: string;
 }
 
-type IconInputs = {
+type IconInputControls = {
   size: IdsSizeType,
   sizeCollection: IdsSizeCollectionType,
   variant: IdsIconVariantType,
@@ -52,7 +52,7 @@ export class IconDemoComponent implements OnInit {
 
   protected readonly _destroyRef = inject(DestroyRef);
 
-  protected _inputControlConfig: DemoControlConfig<IconInputs> = {
+  protected _inputControlConfig: DemoControlConfig<IconInputControls> = {
     size: {
       description: 'Icon size.',
       type: 'IdsSizeType',
@@ -110,9 +110,9 @@ export class IconDemoComponent implements OnInit {
     });
   }
 
-  public defaults = getDefaultFromDemoConfig<IconInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<IconInputControls>(this._inputControlConfig);
 
-  public model: IconInputs = { ...this.defaults  };
+  public model: IconInputControls = { ...this.defaults  };
   
   public reset(): void {
     this.model = { ...this.defaults };

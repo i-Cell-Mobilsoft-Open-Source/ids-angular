@@ -18,7 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_AVATAR_DEFAULT_CONFIG_FACTORY();
 
-type AvatarInputs = {
+type AvatarInputControls = {
   initials: string,
   size: IdsSizeType,
   sizeCollection: IdsSizeCollectionType,
@@ -41,7 +41,7 @@ type AvatarInputs = {
   styleUrl: './avatar-demo.component.scss',
 })
 export class AvatarDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<AvatarInputs> = {
+  protected _inputControlConfig: DemoControlConfig<AvatarInputControls> = {
     initials: {
       description: 'Avatar initials.',
       type: 'string',
@@ -71,9 +71,9 @@ export class AvatarDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<AvatarInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<AvatarInputControls>(this._inputControlConfig);
 
-  public model: AvatarInputs = { ...this.defaults };
+  public model: AvatarInputControls = { ...this.defaults };
 
   public reset(): void {
     this.model = { ...this.defaults };

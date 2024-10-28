@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
 
-type PaginatorInputs = {
+type PaginatorInputControls = {
   length: number,
   pageSize: number
   pageSizeOptions: number[]
@@ -48,7 +48,7 @@ type PaginatorInputs = {
   styleUrl: './paginator-demo.component.scss',
 })
 export class PaginatorDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<PaginatorInputs> ={
+  protected _inputControlConfig: DemoControlConfig<PaginatorInputControls> ={
     length: {
       description: 'The total number of items to paginate.',
       type: 'number',
@@ -144,9 +144,9 @@ export class PaginatorDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<PaginatorInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<PaginatorInputControls>(this._inputControlConfig);
 
-  public model: PaginatorInputs = { ...this.defaults  };
+  public model: PaginatorInputControls = { ...this.defaults  };
   
   public reset(): void {
     this.model = { ...this.defaults };

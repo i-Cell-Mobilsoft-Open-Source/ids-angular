@@ -17,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
 
-type TagInputs = {
+type TagInputControls = {
   appearance: IdsTagAppearanceType,
   size: IdsSizeType,
   variant: IdsTagVariantType,
@@ -44,7 +44,7 @@ type TagHelperControls = {
   styleUrl: './tag-demo.component.scss',
 })
 export class TagDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<TagInputs> = {
+  protected _inputControlConfig: DemoControlConfig<TagInputControls> = {
     appearance: {
       description: 'Appearance of the tag.',
       type: 'IdsTagAppearanceType',
@@ -83,10 +83,10 @@ export class TagDemoComponent {
     },
   };
   
-  public defaults = getDefaultFromDemoConfig<TagInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<TagInputControls>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<TagHelperControls>(this._helperControlConfig);
 
-  public model: TagInputs = { ...this.defaults };
+  public model: TagInputControls = { ...this.defaults };
   public helperModel: TagHelperControls = { ...this.helperDefaults };
 
   public onClick(tagName: string): void {

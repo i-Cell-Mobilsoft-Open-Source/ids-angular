@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 
-type ButtonInputs = {
+type ButtonInputControls = {
   appearance: IdsButtonAppearanceType,
   size: IdsSizeType,
   variant: IdsButtonVariantType,
@@ -41,7 +41,7 @@ type ButtonHelperControls = {
   styleUrl: './button-demo.component.scss',
 })
 export class ButtonDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<ButtonInputs> = {
+  protected _inputControlConfig: DemoControlConfig<ButtonInputControls> = {
     appearance: {
       description: 'Button appearance.',
       type: 'IdsButtonAppearanceType',
@@ -93,10 +93,10 @@ export class ButtonDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<ButtonInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<ButtonInputControls>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<ButtonHelperControls>(this._helperControlConfig);
 
-  public model: ButtonInputs = { ...this.defaults };
+  public model: ButtonInputControls = { ...this.defaults };
   public helperModel: ButtonHelperControls = { ...this.helperDefaults };
 
   public onClick(buttonName: string): void {

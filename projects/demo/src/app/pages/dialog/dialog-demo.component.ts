@@ -15,7 +15,7 @@ export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog
 
 const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
 
-type DialogInputs = {
+type DialogInputControls = {
   size: IdsSizeType,
   mainTitle: string,
   subTitle: string,
@@ -179,7 +179,7 @@ type DialogHelperControls = {
 export class CustomDialogComponent extends IdsCustomDialogBase {
   public providedData = inject(CUSTOM_DIALOG_TOKEN);
   public inputData = input('');
-  public model = input<DialogInputs>();
+  public model = input<DialogInputControls>();
   public helperModel = input<DialogHelperControls>();
 }
 
@@ -200,7 +200,7 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
   styleUrl: './dialog-demo.component.scss',
 })
 export class DialogDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<DialogInputs> = {
+  protected _inputControlConfig: DemoControlConfig<DialogInputControls> = {
     size: {
       description: 'Dialog size.',
       type: 'IdsSizeType',
@@ -249,10 +249,10 @@ export class DialogDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<DialogInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<DialogInputControls>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<DialogHelperControls>(this._helperControlConfig);
 
-  public model: DialogInputs = { ...this.defaults };
+  public model: DialogInputControls = { ...this.defaults };
   public helperModel: DialogHelperControls = { ...this.helperDefaults };
 
   private _dialogService = inject(IdsDialogService);

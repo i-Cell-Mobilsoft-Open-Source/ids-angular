@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
-type SwitchInputs = {
+type SwitchInputControls = {
   label: string,
   required: boolean,
   readonly: boolean,
@@ -29,7 +29,7 @@ type SwitchInputs = {
   'aria-describedby': string,
 };
 
-type SwitchGroupInputs = {
+type SwitchGroupInputControls = {
   size: IdsSizeType,
   hasIcon: boolean,
   iconPosition: IdsSwitchIconPositionType,
@@ -56,7 +56,7 @@ type SwitchGroupInputs = {
   ],
 })
 export class SwitchDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<SwitchInputs> = {
+  protected _inputControlConfig: DemoControlConfig<SwitchInputControls> = {
     label: {
       description: 'Switch label.',
       type: 'string',
@@ -135,7 +135,7 @@ export class SwitchDemoComponent {
     },
   };
 
-  protected _groupInputControlConfig: DemoControlConfig<SwitchGroupInputs> = {
+  protected _groupInputControlConfig: DemoControlConfig<SwitchGroupInputControls> = {
     size: {
       description: 'Size of the switch.',
       type: 'IdsSizeType',
@@ -165,11 +165,11 @@ export class SwitchDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<SwitchInputs>(this._inputControlConfig);
-  public groupDefaults = getDefaultFromDemoConfig<SwitchGroupInputs>(this._groupInputControlConfig);
+  public defaults = getDefaultFromDemoConfig<SwitchInputControls>(this._inputControlConfig);
+  public groupDefaults = getDefaultFromDemoConfig<SwitchGroupInputControls>(this._groupInputControlConfig);
 
-  public model: SwitchInputs = { ...this.defaults };
-  public groupModel: SwitchGroupInputs = { ...this.groupDefaults };
+  public model: SwitchInputControls = { ...this.defaults };
+  public groupModel: SwitchGroupInputControls = { ...this.groupDefaults };
 
   public value = true;
   // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline

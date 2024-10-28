@@ -19,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
 
-type CardInputs = {
+type CardInputControls = {
   appearance: IdsCardAppearanceType,
   size: IdsSizeType,
   variant: IdsCardVariantType,
@@ -27,9 +27,12 @@ type CardInputs = {
   disabled: boolean,
 };
 
+type CardMediaInputControls = {
+  stretch: boolean
+};
+
 type CardHelperControls = {
   clickable: boolean,
-  stretchMedia: boolean
 };
 
 @Component({
@@ -53,7 +56,7 @@ type CardHelperControls = {
   styleUrl: './card-demo.component.scss',
 })
 export class CardDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<CardInputs> = {
+  protected _inputControlConfig: DemoControlConfig<CardInputControls> = {
     appearance: {
       description: 'Card appearance.',
       type: 'IdsCardAppearanceType',
@@ -90,14 +93,8 @@ export class CardDemoComponent {
     },
   };
 
-  protected _helperControlConfig: DemoControlConfig<CardHelperControls> = {
-    clickable: {
-      description: 'Whether the card is clickable or not.',
-      type: 'boolean',
-      default: false,
-      control: 'checkbox',
-    },
-    stretchMedia: {
+  protected _mediaInputControlConfig: DemoControlConfig<CardMediaInputControls> = {
+    stretch: {
       description: 'Whether the image is stretchable or not.',
       type: 'boolean',
       default: true,
@@ -105,21 +102,22 @@ export class CardDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<CardInputs>(this._inputControlConfig);
+  protected _helperControlConfig: DemoControlConfig<CardHelperControls> = {
+    clickable: {
+      description: 'Whether the card is clickable or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+  };
+
+  public defaults = getDefaultFromDemoConfig<CardInputControls>(this._inputControlConfig);
+  public mediaDefaults = getDefaultFromDemoConfig<CardMediaInputControls>(this._mediaInputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<CardHelperControls>(this._helperControlConfig);
 
-  public model: CardInputs = { ...this.defaults };
+  public model: CardInputControls = { ...this.defaults };
+  public mediaModel: CardMediaInputControls = { ...this.mediaDefaults };
   public helperModel: CardHelperControls = { ...this.helperDefaults };
-
-  // public defaults: CardInputs & CardHelperControls = {
-  //   appearance: IdsCardAppearance.FILLED,
-  //   size: IdsSize.COMFORTABLE,
-  //   variant: IdsCardVariant.SURFACE,
-  //   orientation: IdsOrientation.VERTICAL,
-  //   clickable: false,
-  //   disabled: false,
-  //   stretchMedia: true,
-  // };
 
   public onClick(): void {
     alert('Click');
@@ -127,6 +125,7 @@ export class CardDemoComponent {
 
   public reset(): void {
     this.model = { ...this.defaults };
+    this.mediaModel = { ...this.mediaDefaults };
     this.helperModel = { ...this.helperDefaults };
   }
 }

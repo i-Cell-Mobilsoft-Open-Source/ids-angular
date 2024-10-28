@@ -9,7 +9,7 @@ import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-tokens';
 import { computed, Directive, effect, ElementRef, inject, input, isDevMode, DoCheck, signal, OnDestroy, OnInit } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 let nextUniqueId = 0;
 
@@ -47,6 +47,7 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
     '[class]': '_hostClasses()',
     '[attr.placeholder]': 'placeholder()',
     '[attr.disabled]': 'isDisabled() || null',
+    '[attr.readonly]': 'readonly() || null',
     '(focus)': '_focusChanged(true)',
     '(blur)': '_focusChanged(false)',
   },
@@ -70,6 +71,7 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
   private _focused = false;
   private _errorStateTracker?: ErrorStateTracker;
   private _successStateTracker?: SuccessStateTracker;
+  private _successStateSubscription?: Subscription;
 
   public id = input<string>(this._uniqueId);
   public placeholder = input<string>('');
@@ -91,11 +93,13 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
   public hasErrorState = signal<boolean>(false);
   public hasSuccessState = signal<boolean>(false);
 
-  constructor() {
-    effect(() => {
-      this._validateType(this.type());
-    });
-  }
+  private _validateTypeEffect = effect(() => {
+    this._validateType(this.type());
+  });
+
+  private _canHandleSuccessStateEffect = effect(() => {
+    this._setSuccessStateTracker(this.canHandleSuccessState());
+  });
 
   public setDescribedByIds(ids: string[]): void {
     if (ids.length) {
@@ -107,7 +111,6 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
 
   public ngOnInit(): void {
     this._initErrorStateTracker();
-    this._initSuccessStateTracker();
   }
 
   protected _initErrorStateTracker(): void {
@@ -119,13 +122,13 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
       this.errorStateChanges,
     );
 
-    this.errorStateChanges.pipe(
+    this._successStateSubscription = this.errorStateChanges.pipe(
       takeUntil(this._destroyed),
     ).subscribe(() => this.hasErrorState.set(this._errorStateTracker!.hasErrorState));
   }
 
-  protected _initSuccessStateTracker(): void {
-    if (this.canHandleSuccessState()) {
+  protected _setSuccessStateTracker(canHandleSuccessState: boolean): void {
+    if (canHandleSuccessState) {
       this._successStateTracker = new SuccessStateTracker(
         this.successStateMatcher(),
         this.ngControl,
@@ -137,6 +140,9 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
       this.successStateChanges.pipe(
         takeUntil(this._destroyed),
       ).subscribe(() => this.hasSuccessState.set(this._successStateTracker!.hasSuccessState));
+    } else {
+      this._successStateTracker = undefined;
+      this._successStateSubscription?.unsubscribe();
     }
   }
 

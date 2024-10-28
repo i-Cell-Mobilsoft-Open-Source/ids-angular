@@ -191,5 +191,8 @@ export class FormFieldDemoComponent {
     this.formFieldModel = { ...this.formFieldDefaults };
     this.formFieldHelperModel = { ...this.formFieldHelperDefaults };
     this.inputModel = { ...this.inputDefaults };
+
+    this.input = '';
+    this.textarea = '';
   }
 }

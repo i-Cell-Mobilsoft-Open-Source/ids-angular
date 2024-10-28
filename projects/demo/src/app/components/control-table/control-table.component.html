@@ -26,19 +26,47 @@
           <code>{{ control.default }}</code>
         </td>
         <td>
+          @let disabled = control.disabled ?? false;
+
           @switch (control.control) {
             @case ("checkbox") {
-              <input type="checkbox" [name]="control.name" [id]="control.name" [(ngModel)]="model()[control.name]" />
+              <input
+                type="checkbox"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.()"
+              />
             }
             @case ("select") {
-              <select [(ngModel)]="model()[control.name]">
+              <select [disabled]="disabled" [(ngModel)]="model()[control.name]" (ngModelChange)="control.onModelChange?.()">
                 @for (item of control.list; track $index) {
                   <option [value]="item">{{ item }}</option>
                 }
               </select>
             }
+            @case ("number") {
+              <input
+                type="number"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [attr.min]="control.min"
+                [attr.step]="control.step"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.()"
+              />
+            }
             @default {
-              <input type="text" [name]="control.name" [id]="control.name" [(ngModel)]="model()[control.name]" />
+              <input
+                type="text"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.()"
+              />
             }
           }
         </td>

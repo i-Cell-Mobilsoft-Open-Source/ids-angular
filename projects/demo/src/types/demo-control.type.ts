@@ -1,6 +1,7 @@
 export const DemoControl = {
   CHECKBOX: 'checkbox',
   TEXT: 'text',
+  NUMBER: 'number',
   SELECT: 'select',
 } as const;
 
@@ -13,6 +14,10 @@ export type DemoControlItem<T> = {
   demoDefault?: T[keyof T],
   control?: DemoControlType,
   list?: string[],
+  disabled?: boolean,
+  min?: number,
+  step?: number,
+  onModelChange?: () => void,
 };
 
 export type DemoControlConfig<T> = {

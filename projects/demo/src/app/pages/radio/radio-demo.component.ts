@@ -50,6 +50,7 @@ export class RadioDemoComponent {
       description: 'Name for radio items. Name is provided for group, but items get it.',
       type: 'string',
       default: '-',
+      demoDefault: 'numbers',
     },
     required: {
       description: 'Whether the radio is required or not.',

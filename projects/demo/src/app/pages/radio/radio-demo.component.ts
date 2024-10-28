@@ -97,7 +97,7 @@ export class RadioDemoComponent {
     onlyOneItemIsDisabled: {
       description: 'When true, the first item will be disabled. Just for testing purposes.',
       type: 'boolean',
-      default: true,
+      default: false,
       control: 'checkbox',
     },
   };

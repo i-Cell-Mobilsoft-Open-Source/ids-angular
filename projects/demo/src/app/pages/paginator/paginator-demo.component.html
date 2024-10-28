@@ -1,4 +1,4 @@
-<app-tryout [title]="'COMPONENTS.PAGINATOR' | translate" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.PAGINATOR' | translate" [variant]="model.variant" (resetted)="reset()">
   <ng-container component>
     <ids-paginator
       [length]="model.length"

@@ -1,4 +1,4 @@
-<app-tryout [title]="'COMPONENTS.FORM_FIELD' | translate" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.FORM_FIELD' | translate" [variant]="formFieldModel.variant" (resetted)="reset()">
   <ng-container component>
     <div>
       <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">

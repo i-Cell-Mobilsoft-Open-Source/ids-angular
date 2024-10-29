@@ -31,7 +31,7 @@ const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
   host: {
     '[class]': '_hostClasses()',
     '[type]': 'buttonType',
-    '[disabled]': 'disabled() || null',
+    '[attr.disabled]': 'disabled() ? "" : null',
     '[attr.aria-disabled]': 'disabled() || null',
   },
 })

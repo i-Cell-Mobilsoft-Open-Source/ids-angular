@@ -6,7 +6,7 @@ import { computed, Directive, inject, OnInit } from '@angular/core';
   selector: '[idsChipRemove]',
   standalone: true,
   host: {
-    '[attr.disabled]': '_isChipDisabled()',
+    '[attr.disabled]': '_isChipDisabled() ? "" : null',
     '(click)': 'close()',
   },
 })

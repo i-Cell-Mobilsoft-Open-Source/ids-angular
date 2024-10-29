@@ -46,7 +46,7 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
     '[id]': 'id()',
     '[class]': '_hostClasses()',
     '[attr.placeholder]': 'placeholder()',
-    '[attr.disabled]': 'isDisabled() || null',
+    '[attr.disabled]': 'isDisabled() ? "" : null',
     '(focus)': '_focusChanged(true)',
     '(blur)': '_focusChanged(false)',
   },

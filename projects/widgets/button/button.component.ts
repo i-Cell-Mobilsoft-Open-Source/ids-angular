@@ -28,7 +28,7 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
   host: {
     '[class]': '_hostClasses()',
     '[attr.aria-disabled]': 'this.disabled()? "" : null',
-    '[disabled]': 'this.disabled() || null',
+    '[attr.disabled]': 'this.disabled() ? "" : null',
   },
 })
 export class IdsButtonComponent {

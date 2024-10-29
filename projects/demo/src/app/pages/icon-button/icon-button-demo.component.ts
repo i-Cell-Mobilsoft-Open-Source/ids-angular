@@ -17,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
 
-type IconButtonInputs = {
+type IconButtonInputControls = {
   size: IdsSizeType,
   variant: IdsIconButtonVariantType,
   appearance: IdsIconButtonAppearanceType,
@@ -37,10 +37,13 @@ type IconButtonInputs = {
     FormsModule,
   ],
   templateUrl: './icon-button-demo.component.html',
-  styleUrl: './icon-button-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './icon-button-demo.component.scss',
+  ],
 })
 export class IconButtonDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<IconButtonInputs> = {
+  protected _inputControlConfig: DemoControlConfig<IconButtonInputControls> = {
     size: {
       description: 'Icon Button size.',
       type: 'IdsSizeType',
@@ -74,9 +77,9 @@ export class IconButtonDemoComponent {
     console.info(`${buttonName} icon button clicked`);
   }
 
-  public defaults = getDefaultFromDemoConfig<IconButtonInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<IconButtonInputControls>(this._inputControlConfig);
 
-  public model: IconButtonInputs = { ...this.defaults  };
+  public model: IconButtonInputControls = { ...this.defaults  };
   
   public reset(): void {
     this.model = { ...this.defaults };

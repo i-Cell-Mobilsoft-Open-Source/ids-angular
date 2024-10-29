@@ -159,7 +159,7 @@
   </div>
 
   <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'input'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
 </app-tryout>
 
 <dialog #dialog5="idsDialog" idsDialog mainTitle="Dialog with scrollable content" subTitle="Dialog sub-title here">

@@ -1,6 +1,7 @@
 <table [attr.cellPadding]="cellPadding()">
   <caption>
-    <span>{{ configType() | titlecase }} controls</span>
+    @let name = controlName();
+    <span>{{ (name ? name + " " : "") + (configType() | titlecase) }} controls</span>
   </caption>
 
   <thead>
@@ -16,28 +17,56 @@
   <tbody>
     @for (control of _flatControls(); track $index) {
       <tr>
-        <td>{{ control.name }}</td>
+        <td width="15%">{{ control.name }}</td>
         <td>{{ control.description }}</td>
-        <td>
+        <td width="15%">
           <code>{{ control.type }}</code>
         </td>
-        <td>
+        <td width="10%">
           <code>{{ control.default }}</code>
         </td>
-        <td>
+        <td width="20%">
+          @let disabled = control.disabled ?? false;
+
           @switch (control.control) {
             @case ("checkbox") {
-              <input type="checkbox" [name]="control.name" [id]="control.name" [(ngModel)]="model()[control.name]" />
+              <input
+                type="checkbox"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.()"
+              />
             }
             @case ("select") {
-              <select [(ngModel)]="model()[control.name]">
+              <select [disabled]="disabled" [(ngModel)]="model()[control.name]" (ngModelChange)="control.onModelChange?.()">
                 @for (item of control.list; track $index) {
                   <option [value]="item">{{ item }}</option>
                 }
               </select>
             }
+            @case ("number") {
+              <input
+                type="number"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [attr.min]="control.min"
+                [attr.step]="control.step"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.()"
+              />
+            }
             @default {
-              <input type="text" [name]="control.name" [id]="control.name" [(ngModel)]="model()[control.name]" />
+              <input
+                type="text"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.()"
+              />
             }
           }
         </td>

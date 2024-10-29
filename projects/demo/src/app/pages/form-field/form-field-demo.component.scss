@@ -1,8 +1,5 @@
-form {
+.form-field-grid {
   display: grid;
-  gap: 2rem;
-
-  & > div > .ids-form-field {
-    width: 100%;
-  }
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
 }

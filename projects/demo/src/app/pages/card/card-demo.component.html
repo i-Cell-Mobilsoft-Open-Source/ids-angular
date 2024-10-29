@@ -1,4 +1,4 @@
-<app-tryout [title]="'COMPONENTS.CARD' | translate" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.CARD' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <ng-container component>
     @if (helperModel.clickable) {
       <ids-card
@@ -19,7 +19,7 @@
           idsCardMedia
           src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
           alt=""
-          [stretch]="helperModel.stretchMedia"
+          [stretch]="mediaModel.stretch"
         />
         <ids-card-body>This is the body</ids-card-body>
         @if (model.orientation === "vertical") {
@@ -38,7 +38,7 @@
           idsCardMedia
           src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
           alt=""
-          [stretch]="helperModel.stretchMedia"
+          [stretch]="mediaModel.stretch"
         />
         <ids-card-body>This is the body</ids-card-body>
         @if (model.orientation === "vertical") {
@@ -48,6 +48,21 @@
     }
   </ng-container>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'input'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+  <app-control-table
+    controls
+    [controlName]="'Card'"
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Card media'"
+    [configType]="'input'"
+    [controlConfig]="_mediaInputControlConfig"
+    [(model)]="mediaModel"
+    (resetted)="reset()"
+  />
+  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
 </app-tryout>

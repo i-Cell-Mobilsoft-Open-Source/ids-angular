@@ -1,4 +1,4 @@
-<app-tryout [title]="'COMPONENTS.ICON_BUTTON' | translate" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.ICON_BUTTON' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <ng-container component>
     <button
       type="button"

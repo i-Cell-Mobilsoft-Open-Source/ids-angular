@@ -19,7 +19,7 @@ const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [snackbarAnimation],
   host: {
-    '[class]': '_hostClasses()',
+    '[class]': '_hostClasses',
   },
 })
 export class IdsSnackbarGroupComponent {

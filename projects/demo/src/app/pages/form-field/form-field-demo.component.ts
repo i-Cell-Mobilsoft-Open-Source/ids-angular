@@ -1,14 +1,22 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { UpperCasePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
 
-type FormFieldPublicApi = {
+const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
+
+type FormFieldInputControls = {
   size: IdsSizeType,
   variant: IdsFormFieldVariantType,
 };
@@ -25,24 +33,20 @@ type FormFieldHelperControls = {
   hintMessage: string,
 };
 
-type InputPublicApi = {
+type InputInputControls = {
   placeholder: string,
-  value: string,
   readonly: boolean,
   disabled: boolean,
+  required: boolean,
   canHandleSuccessState: boolean,
 };
-
-type InputHelperControls = {
-  hasRequiredValidator: boolean,
-};
-
-const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-form-field-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsFormFieldComponent,
     IdsLabelDirective,
     IdsInputDirective,
@@ -66,76 +70,132 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
     './form-field-demo.component.scss',
   ],
 })
-export class FormFieldDemoComponent implements OnInit {
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsFormFieldVariantType>(IdsFormFieldVariant);
-
-  public formFieldDefaults: FormFieldPublicApi & FormFieldHelperControls = {
-    size: defaultConfig.size,
-    variant: defaultConfig.variant,
-    hasLeadingIcon: true,
-    hasPrefix: true,
-    prefix: 'Prefix',
-    hasSuffix: true,
-    suffix: 'Suffix',
-    hasTrailingIcon: true,
-    hasAction: true,
-    label: 'Form field label',
-    hintMessage: 'Type a value',
+export class FormFieldDemoComponent {
+  protected _formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
+    size: {
+      description: 'Size of the form field.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Variant of the form field.',
+      type: 'IdsFormFieldVariantType',
+      default: defaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsFormFieldVariant),
+    },
   };
 
-  public formFieldModel: FormFieldPublicApi & FormFieldHelperControls = { ...this.formFieldDefaults };
-
-  public inputDefaults: InputPublicApi & InputHelperControls = {
-    placeholder: 'Placeholder',
-    value: 'Sample value',
-    readonly: false,
-    disabled: false,
-    canHandleSuccessState: true,
-    hasRequiredValidator: true,
+  protected _formFieldHelperControlConfig: DemoControlConfig<FormFieldHelperControls> = {
+    hasLeadingIcon: {
+      description: 'Whether the form field has leading icon or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    hasPrefix: {
+      description: 'Whether the form field has prefix or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    prefix: {
+      description: 'Prefix for form field.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Prefix',
+    },
+    hasSuffix: {
+      description: 'Whether the form field has suffix or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    suffix: {
+      description: 'Suffix for form field.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Suffix',
+    },
+    hasTrailingIcon: {
+      description: 'Whether the form field has trailing icon or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    hasAction: {
+      description: 'Whether the form field has action or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    label: {
+      description: 'Label for form field.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Form field label',
+    },
+    hintMessage: {
+      description: 'Hint message for form field.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Type a value',
+    },
   };
 
-  public inputModel: InputPublicApi & InputHelperControls = { ...this.inputDefaults };
+  protected _inputInputControlConfig: DemoControlConfig<InputInputControls> = {
+    placeholder: {
+      description: 'Input / textarea placeholder.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Placeholder',
+    },
+    readonly: {
+      description: 'Whether input / textarea is readonly or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    disabled: {
+      description: 'Whether input / textarea is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    required: {
+      description: 'Whether input / textarea is required or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    canHandleSuccessState: {
+      // eslint-disable-next-line @stylistic/js/max-len
+      description: 'Whether input / textarea can handle success state with a success state matcher. This property works only on init, so it can not be chnaged.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+  };
 
-  public form = new FormGroup({
-    input: new FormControl<string>(this.inputModel.value),
-    textarea: new FormControl<string>(this.inputModel.value),
-  });
+  public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this._formFieldInputControlConfig);
+  public formFieldHelperDefaults = getDefaultFromDemoConfig<FormFieldHelperControls>(this._formFieldHelperControlConfig);
+  public inputDefaults = getDefaultFromDemoConfig<InputInputControls>(this._inputInputControlConfig);
 
-  public ngOnInit(): void {
-    this.setDisabledState(this.inputModel.disabled);
-    this.setRequiredValidator(this.inputModel.hasRequiredValidator);
-  }
+  public formFieldModel: FormFieldInputControls = { ...this.formFieldDefaults };
+  public formFieldHelperModel: FormFieldHelperControls = { ...this.formFieldHelperDefaults };
+  public inputModel: InputInputControls = { ...this.inputDefaults };
+
+  public input = '';
+  public textarea = '';
 
   public reset(): void {
     this.formFieldModel = { ...this.formFieldDefaults };
+    this.formFieldHelperModel = { ...this.formFieldHelperDefaults };
     this.inputModel = { ...this.inputDefaults };
-    this.setDisabledState(this.inputModel.disabled);
-    this.setRequiredValidator(this.inputModel.hasRequiredValidator);
-    this.form.reset({
-      input: this.inputModel.value,
-      textarea: this.inputModel.value,
-    });
-  }
 
-  public setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) {
-      this.form.disable();
-    } else {
-      this.form.enable();
-    }
-  }
-
-  public setRequiredValidator(hasRequiredValidator: boolean): void {
-    if (hasRequiredValidator) {
-      this.form.controls.input.setValidators(IdsValidators.required);
-      this.form.controls.textarea.setValidators(IdsValidators.required);
-    } else {
-      this.form.controls.input.clearValidators();
-      this.form.controls.textarea.clearValidators();
-    }
-
-    this.form.controls.input.updateValueAndValidity();
-    this.form.controls.textarea.updateValueAndValidity();
+    this.input = '';
+    this.textarea = '';
   }
 }

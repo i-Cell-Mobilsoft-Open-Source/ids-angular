@@ -1,274 +1,109 @@
-<h1>{{ "COMPONENTS.ACTION_MENU" | translate }}</h1>
+<app-tryout
+  [title]="'COMPONENTS.ACTION_MENU' | translate"
+  [hasDarkBackground]="overlayPanelHelperModel.testBackgroundColor === 'dark'"
+  (resetted)="reset()"
+>
+  <ng-container component>
+    <button
+      #trigger1="idsActionMenuTrigger"
+      type="button"
+      idsButton
+      appearance="filled"
+      size="comfortable"
+      variant="primary"
+      [idsActionMenuTriggerFor]="actionMenu"
+    >
+      Action menu top-left
+      <ids-icon icon-trailing aria-hidden="true" alt="" [fontIcon]="trigger1.isOpen ? 'chevron-up' : 'chevron-down'" />
+    </button>
 
-<section class="component" [class]="overlayPanelModel.testBackgroundColor !== 'light' ? 'light' : 'dark'">
-  <button
-    #trigger1="idsActionMenuTrigger"
-    type="button"
-    idsButton
-    appearance="filled"
-    size="comfortable"
-    variant="primary"
-    [idsActionMenuTriggerFor]="actionMenu"
-  >
-    Action menu top-left
-    <ids-icon icon-trailing aria-hidden="true" alt="" [fontIcon]="trigger1.isOpen ? 'chevron-up' : 'chevron-down'" />
-  </button>
-
-  <ng-template #actionMenu>
-    <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
-      @for (_ of items; track $index) {
+    <ng-template #actionMenu>
+      <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
+        @for (_ of items; track $index) {
+          <button
+            type="button"
+            idsMenuItem
+            [appearance]="menuItemModel.appearance"
+            [size]="menuItemModel.size"
+            [variant]="menuItemModel.variant"
+            [label]="'Menu item label ' + $index"
+            [disabled]="$index === 0 && menuItemHelperModel.hasDisabledItem"
+          >
+            @if (menuItemHelperModel.hasLeadingIcon) {
+              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+            }
+          </button>
+        }
         <button
           type="button"
           idsMenuItem
           [appearance]="menuItemModel.appearance"
           [size]="menuItemModel.size"
           [variant]="menuItemModel.variant"
-          [label]="'Menu item label ' + $index"
-          [disabled]="$index === 0 && menuItemModel.hasDisabledItem"
+          [label]="'Menu item label ' + items.length"
+          [idsActionMenuTriggerFor]="subMenu"
         >
-          @if (menuItemModel.hasLeadingIcon) {
+          @if (menuItemHelperModel.hasLeadingIcon) {
             <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
           }
-        </button>
-      }
-      <button
-        type="button"
-        idsMenuItem
-        [appearance]="menuItemModel.appearance"
-        [size]="menuItemModel.size"
-        [variant]="menuItemModel.variant"
-        [label]="'Menu item label ' + items.length"
-        [idsActionMenuTriggerFor]="subMenu"
-      >
-        @if (menuItemModel.hasLeadingIcon) {
-          <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-        }
-        @if (menuItemModel.hasTrailingIcon) {
-          <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
-        }
-      </button>
-    </ids-overlay-panel>
-  </ng-template>
-
-  <ng-template #subMenu>
-    <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
-      @for (_ of items; track $index) {
-        <button
-          type="button"
-          idsMenuItem
-          [appearance]="menuItemModel.appearance"
-          [size]="menuItemModel.size"
-          [variant]="menuItemModel.variant"
-          [label]="'Menu item label ' + $index"
-          [disabled]="$index === 0 && menuItemModel.hasDisabledItem"
-        >
-          @if (menuItemModel.hasLeadingIcon) {
-            <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+          @if (menuItemHelperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
           }
         </button>
-      }
-    </ids-overlay-panel>
-  </ng-template>
-</section>
+      </ids-overlay-panel>
+    </ng-template>
 
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Action panel controls</span>
-        <button type="button" idsButton (click)="resetOverlayPanel()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>appearance</td>
-        <td>Action panel appearance.</td>
-        <td><code>IdsActionPanelAppearanceType</code></td>
-        <td>
-          <code>{{ overlayPanelDefaults.appearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="overlayPanelModel.appearance">
-            @for (item of overlayPanelAppearances; track $index) {
-              <option [value]="item">{{ item }}</option>
+    <ng-template #subMenu>
+      <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
+        @for (_ of items; track $index) {
+          <button
+            type="button"
+            idsMenuItem
+            [appearance]="menuItemModel.appearance"
+            [size]="menuItemModel.size"
+            [variant]="menuItemModel.variant"
+            [label]="'Menu item label ' + $index"
+            [disabled]="$index === 0 && menuItemHelperModel.hasDisabledItem"
+          >
+            @if (menuItemHelperModel.hasLeadingIcon) {
+              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
             }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>Action panel size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ overlayPanelDefaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="overlayPanelModel.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Action panel variant.</td>
-        <td><code>IdsActionPanelVariantType</code></td>
-        <td>
-          <code>{{ overlayPanelDefaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="overlayPanelModel.variant">
-            @for (item of overlayPanelVariants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </button>
+        }
+      </ids-overlay-panel>
+    </ng-template>
+  </ng-container>
 
-  <table [cellPadding]="10">
-    <caption>
-      Action panel helper controls
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>testBackgroundColor</td>
-        <td>Test background color</td>
-        <td><code>light</code> | <code>dark</code></td>
-        <td>
-          <select [(ngModel)]="overlayPanelModel.testBackgroundColor">
-            @for (item of overlayPanelBackgroundColors; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Menu item controls</span>
-        <button type="button" idsButton (click)="resetMenuItem()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>appearance</td>
-        <td>Menu item appearance.</td>
-        <td><code>IdsMenuItemAppearanceType</code></td>
-        <td>
-          <code>{{ menuItemDefaults.appearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="menuItemModel.appearance">
-            @for (item of menuItemAppearances; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>Menu item size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ menuItemDefaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="menuItemModel.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Menu item variant.</td>
-        <td><code>IdsMenuItemVariantType</code></td>
-        <td>
-          <code>{{ menuItemDefaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="menuItemModel.variant">
-            @for (item of menuItemVariants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table [cellPadding]="10">
-    <caption>
-      Menu item helper controls
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>hasLeadingIcon</td>
-        <td>Whether the menu items have leading icon or not.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" name="hasLeadingIcon" [(ngModel)]="menuItemModel.hasLeadingIcon" /></td>
-      </tr>
-      <tr>
-        <td>hasTrailingIcon</td>
-        <td>Whether the menu items have trailing icon or not.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" name="hasTrailingIcon" [(ngModel)]="menuItemModel.hasTrailingIcon" /></td>
-      </tr>
-      <tr>
-        <td>hasDisabledItem</td>
-        <td>Whether one menu item is disabled or not. For testing purposes this is the first menu item.</td>
-        <td><code>boolean</code></td>
-        <td><input type="checkbox" name="hasDisabledItem" [(ngModel)]="menuItemModel.hasDisabledItem" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table
+    controls
+    [controlName]="'Overlay panel'"
+    [configType]="'input'"
+    [controlConfig]="_overlayPanelInputControlConfig"
+    [(model)]="overlayPanelModel"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Overlay panel'"
+    [configType]="'helper'"
+    [controlConfig]="_overlayPanelHelperControlConfig"
+    [(model)]="overlayPanelHelperModel"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Menu item'"
+    [configType]="'input'"
+    [controlConfig]="_menuItemInputControlConfig"
+    [(model)]="menuItemModel"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Menu item'"
+    [configType]="'helper'"
+    [controlConfig]="_menuItemHelperControlConfig"
+    [(model)]="menuItemHelperModel"
+    (resetted)="reset()"
+  />
+</app-tryout>

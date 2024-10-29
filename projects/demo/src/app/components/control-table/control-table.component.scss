@@ -1,10 +1,25 @@
 table {
+  width: 100%;
+
   caption {
     text-align-last: left;
     font-weight: 600;
+    color: var(--ids-smc-colors-surface-darker-60);
+  }
+
+  & > thead > tr > th {
+    font-size: 0.7rem;
+    color: var(--ids-smc-colors-surface-darker-50);
+    font-weight: 500;
   }
 
   & > tbody > tr > td {
-    max-width: 300px;
+    max-width: 400px;
   }
+}
+
+code {
+  background-color: var(--ids-smc-colors-surface-darker-20);
+  border-radius: 4px;
+  padding: 2px 6px;
 }

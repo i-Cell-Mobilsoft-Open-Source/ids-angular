@@ -17,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
 
-type DividerInputs = {
+type DividerInputControls = {
   size: IdsSizeType,
   variant: IdsDividerVariantType,
   orientation: IdsOrientationType,
@@ -37,10 +37,13 @@ type DividerInputs = {
     IdsButtonComponent,
   ],
   templateUrl: './divider-demo.component.html',
-  styleUrl: './divider-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './divider-demo.component.scss',
+  ],
 })
 export class DividerDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<DividerInputs> = {
+  protected _inputControlConfig: DemoControlConfig<DividerInputControls> = {
     orientation: {
       description: 'Divider orientation.',
       type: 'IdsOrientationType',
@@ -76,9 +79,9 @@ export class DividerDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<DividerInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<DividerInputControls>(this._inputControlConfig);
 
-  public model: DividerInputs = { ...this.defaults  };
+  public model: DividerInputControls = { ...this.defaults  };
 
   public reset(): void {
     this.model = { ...this.defaults };

@@ -1,13 +1,19 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFieldsetComponent, IdsFieldsetMessageDirective, IdsFieldsetRowComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
 
-type FieldsetPublicApi = {
+type FieldsetInputControls = {
   size: IdsSizeType,
   variant: IdsFormFieldVariantType,
   legend: string,
@@ -23,6 +29,8 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
   standalone: true,
   selector: 'app-fieldset-demo',
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsFieldsetComponent,
     IdsFieldsetMessageDirective,
     IdsFieldsetRowComponent,
@@ -49,30 +57,52 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class FieldsetDemoComponent {
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsFormFieldVariantType>(IdsFormFieldVariant);
-
-  public defaults: FieldsetPublicApi & FieldsetHelperControls = {
-    size: defaultConfig.size,
-    variant: defaultConfig.variant,
-    legend: 'Personal data',
-    showMessage: true,
+  protected _inputControlConfig: DemoControlConfig<FieldsetInputControls> = {
+    size: {
+      description: 'Fieldset size.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Fieldset variant.',
+      type: 'IdsFormFieldVariantType',
+      default: defaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsFormFieldVariant),
+    },
+    legend: {
+      description: 'Fieldset legend.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Personal data',
+    },
   };
 
-  public model: FieldsetPublicApi & FieldsetHelperControls = { ...this.defaults };
+  protected _helperControlConfig: DemoControlConfig<FieldsetHelperControls> = {
+    showMessage: {
+      description: 'Whether to show fieldset message or not.',
+      type: 'boolean',
+      default: true,
+      control: 'checkbox',
+    },
+  };
 
-  public form = new FormGroup({
-    first: new FormControl<string>('John'),
-    last: new FormControl<string>('Wick'),
-    middle: new FormControl<string>('Sam'),
-  });
+  public defaults = getDefaultFromDemoConfig<FieldsetInputControls>(this._inputControlConfig);
+  public helperDefaults = getDefaultFromDemoConfig<FieldsetHelperControls>(this._helperControlConfig);
+
+  public model: FieldsetInputControls = { ...this.defaults };
+  public helperModel: FieldsetHelperControls = { ...this.helperDefaults };
+
+  public first = 'John';
+  public last = 'Wick';
+  public middle = 'Sam';
 
   public reset(): void {
     this.model = { ...this.defaults };
-    this.form.reset({
-      first: 'John',
-      last: 'Wick',
-      middle: 'Sam',
-    });
+    this.first = 'John';
+    this.last = 'Wick';
+    this.middle = 'Sam';
   }
 }

@@ -1,8 +1,7 @@
-form {
-  width: 20rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+.select-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
 
   .ids-form-field {
     width: 100%;

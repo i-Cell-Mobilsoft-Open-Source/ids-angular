@@ -1,33 +1,38 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { KeyValuePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
 import { IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectComponent, IdsSelectTriggerDirective } from '@i-cell/ids-angular/select';
 import { TranslateModule } from '@ngx-translate/core';
 
-type FormFieldPublicApi = {
+const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
+
+const selectDefaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
+
+type FormFieldInputControls = {
   size: IdsSizeType,
   variant: IdsFormFieldVariantType,
 };
 
-const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
-
-type SelectPublicApi = {
+type SelectInputControls = {
   placeholder: string,
   readonly: boolean,
-  ariaLabel: string
-  ariaLabelledBy: string
+  'aria-label': string
+  'aria-labelledby': string
   typeaheadDebounceInterval: number
 };
 
 type SelectHelperControls = {
-  hasRequiredValidator: boolean,
   useCustomTrigger: boolean,
 };
-
-const selectDefaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
 type SampleOption = {
   value: string
@@ -43,6 +48,8 @@ type AnimalOptions = {
   selector: 'app-select-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsFormFieldComponent,
     IdsLabelDirective,
     IdsSelectComponent,
@@ -51,7 +58,6 @@ type AnimalOptions = {
     IdsErrorMessageComponent,
     UpperCasePipe,
     FormsModule,
-    ReactiveFormsModule,
     TranslateModule,
     IdsOptionComponent,
     IdsOptionGroupComponent,
@@ -66,9 +72,74 @@ type AnimalOptions = {
     './select-demo.component.scss',
   ],
 })
-export class SelectDemoComponent implements OnInit {
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsFormFieldVariantType>(IdsFormFieldVariant);
+export class SelectDemoComponent {
+  protected _formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
+    size: {
+      description: 'Form field size.',
+      type: 'IdsSizeType',
+      default: formFieldDefaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Form field variant.',
+      type: 'IdsFormFieldVariantType',
+      default: formFieldDefaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsFormFieldVariant),
+    },
+  };
+
+  protected _selectInputControlConfig: DemoControlConfig<SelectInputControls> = {
+    placeholder: {
+      description: 'Select placeholder.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Select animal',
+    },
+    readonly: {
+      description: 'Whether select is readonly or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    'aria-label': {
+      description: 'aria-label tag for select.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'animal',
+    },
+    'aria-labelledby': {
+      description: 'aria-labelledby tag for select.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'animal',
+    },
+    typeaheadDebounceInterval: {
+      description: 'Number in millisec. Can not overwrite at runtime.',
+      type: 'number',
+      default: selectDefaultConfig.typeaheadDebounceInterval,
+      min: 0,
+      step: 100,
+      disabled: true,
+    },
+  };
+
+  protected _selectHelperControlConfig: DemoControlConfig<SelectHelperControls> = {
+    useCustomTrigger: {
+      description: 'Whether select has custom trigger or not.',
+      type: 'boolean',
+      default: false,
+    },
+  };
+
+  public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this._formFieldInputControlConfig);
+  public selectDefaults = getDefaultFromDemoConfig<SelectInputControls>(this._selectInputControlConfig);
+  public selectHelperDefaults = getDefaultFromDemoConfig<SelectHelperControls>(this._selectHelperControlConfig);
+
+  public formFieldModel: FormFieldInputControls = { ...this.formFieldDefaults };
+  public selectModel: SelectInputControls = { ...this.selectDefaults };
+  public selectHelperModel: SelectHelperControls = { ...this.selectHelperDefaults };
 
   public animals: AnimalOptions = {
     land: [
@@ -94,57 +165,9 @@ export class SelectDemoComponent implements OnInit {
     this.animals.aquatic[1].value,
   ];
 
-  public defaults: SelectPublicApi & SelectHelperControls = {
-    placeholder: 'Select animal',
-    readonly: false,
-    ariaLabel: 'Animal',
-    ariaLabelledBy: 'Animal',
-    typeaheadDebounceInterval: selectDefaultConfig.typeaheadDebounceInterval,
-    hasRequiredValidator: true,
-    useCustomTrigger: false,
-  };
-
-  public model: SelectPublicApi & SelectHelperControls = { ...this.defaults };
-
-  public formFieldDefaults: FormFieldPublicApi = {
-    size: formFieldDefaultConfig.size,
-    variant: formFieldDefaultConfig.variant,
-  };
-
-  public formFieldModel: FormFieldPublicApi = { ...this.formFieldDefaults };
-
-  public form = new FormGroup({
-    single: new FormControl<string>(this.singleSelectionValue),
-    multi: new FormControl<string[]>(this.multiSelectionValue),
-  });
-
-  public ngOnInit(): void {
-    this.setRequiredValidator(this.model.hasRequiredValidator);
-  }
-
-  public resetFormField(): void {
+  public reset(): void {
     this.formFieldModel = { ...this.formFieldDefaults };
-  }
-  
-  public resetSelect(): void {
-    this.model = { ...this.defaults };
-    this.form.reset({
-      single: this.singleSelectionValue,
-      multi: this.multiSelectionValue,
-    });
-    this.setRequiredValidator(this.model.hasRequiredValidator);
-  }
-
-  public setRequiredValidator(hasRequiredValidator: boolean): void {
-    if (hasRequiredValidator) {
-      this.form.controls.single.setValidators(IdsValidators.required);
-      this.form.controls.multi.setValidators(IdsValidators.required);
-    } else {
-      this.form.controls.single.clearValidators();
-      this.form.controls.multi.clearValidators();
-    }
-
-    this.form.controls.single.updateValueAndValidity();
-    this.form.controls.multi.updateValueAndValidity();
+    this.selectModel = { ...this.selectDefaults };
+    this.selectHelperModel = { ...this.selectHelperDefaults };
   }
 }

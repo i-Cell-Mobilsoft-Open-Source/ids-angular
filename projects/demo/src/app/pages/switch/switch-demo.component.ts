@@ -1,12 +1,20 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SWITCH_DEFAULT_CONFIG_FACTORY, IdsSwitchComponent, IdsSwitchGroupComponent, IdsSwitchIconPosition, IdsSwitchIconPositionType, IdsSwitchLabelPosition, IdsSwitchLabelPositionType, IdsSwitchVariant, IdsSwitchVariantType } from '@i-cell/ids-angular/switch';
 import { TranslateModule } from '@ngx-translate/core';
 
-type SwitchPublicApi = {
+const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
+
+type SwitchInputs = {
   label: string,
   required: boolean,
   readonly: boolean,
@@ -16,24 +24,24 @@ type SwitchPublicApi = {
   iconPosition: IdsSwitchIconPositionType,
   labelPosition: IdsSwitchLabelPositionType,
   disabled: boolean,
-  ariaLabel: string,
-  ariaLabelledBy: string,
-  ariaDescribedBy: string,
+  'aria-label': string,
+  'aria-labelledby': string,
+  'aria-describedby': string,
 };
 
-type SwitchGroupPublicApi = {
+type SwitchGroupInputs = {
   size: IdsSizeType,
   hasIcon: boolean,
   iconPosition: IdsSwitchIconPositionType,
   labelPosition: IdsSwitchLabelPositionType,
 };
 
-const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
-
 @Component({
   selector: 'app-switch-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsSwitchComponent,
     IdsSwitchGroupComponent,
     TranslateModule,
@@ -48,49 +56,130 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class SwitchDemoComponent {
-  public switchDefaults: SwitchPublicApi = {
-    label: 'Switch label',
-    required: false,
-    readonly: false,
-    size: defaultConfig.size,
-    variant: defaultConfig.variant,
-    hasIcon: defaultConfig.hasIcon,
-    iconPosition: defaultConfig.iconPosition,
-    labelPosition: defaultConfig.labelPosition,
-    disabled: false,
-    ariaLabel: '',
-    ariaLabelledBy: '',
-    ariaDescribedBy: '',
+  protected _inputControlConfig: DemoControlConfig<SwitchInputs> = {
+    label: {
+      description: 'Switch label.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Switch label',
+    },
+    required: {
+      description: 'Whether the switch is required or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    readonly: {
+      description: 'Whether the switch is readonly or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    size: {
+      description: 'Size of the switch.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Variant of the switch.',
+      type: 'IdsSwitchVariantType',
+      default: defaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSwitchVariant),
+    },
+    hasIcon: {
+      description: 'Whether the switch has icon.',
+      type: 'boolean',
+      default: defaultConfig.hasIcon,
+      control: 'checkbox',
+    },
+    iconPosition: {
+      description: 'Where the icon should be shown in switch.',
+      type: 'IdsSwitchIconPositionType',
+      default: defaultConfig.iconPosition,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSwitchIconPosition),
+    },
+    labelPosition: {
+      description: 'Where the label should be shown in switch.',
+      type: 'IdsSwitchLabelPositionType',
+      default: defaultConfig.labelPosition,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSwitchLabelPosition),
+    },
+    disabled: {
+      description: 'Whether the switch is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    'aria-label': {
+      description: 'aria-label for switch.',
+      type: 'string',
+      default: '-',
+      demoDefault: '',
+    },
+    'aria-labelledby': {
+      description: 'aria-labelledby for switch.',
+      type: 'string',
+      default: '-',
+      demoDefault: '',
+    },
+    'aria-describedby': {
+      description: 'aria-describedby for switch.',
+      type: 'string',
+      default: '-',
+      demoDefault: '',
+    },
   };
 
-  public model: SwitchPublicApi = { ...this.switchDefaults };
-
-  public switchGroupDefaults: SwitchGroupPublicApi = {
-    size: defaultConfig.size,
-    hasIcon: defaultConfig.hasIcon,
-    iconPosition: defaultConfig.iconPosition,
-    labelPosition: defaultConfig.labelPosition,
+  protected _groupInputControlConfig: DemoControlConfig<SwitchGroupInputs> = {
+    size: {
+      description: 'Size of the switch.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    hasIcon: {
+      description: 'Whether the switch has icon.',
+      type: 'boolean',
+      default: defaultConfig.hasIcon,
+      control: 'checkbox',
+    },
+    iconPosition: {
+      description: 'Where the icon should be shown in switch.',
+      type: 'IdsSwitchIconPositionType',
+      default: defaultConfig.iconPosition,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSwitchIconPosition),
+    },
+    labelPosition: {
+      description: 'Where the label should be shown in switch.',
+      type: 'IdsSwitchLabelPositionType',
+      default: defaultConfig.labelPosition,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSwitchLabelPosition),
+    },
   };
 
-  public groupModel: SwitchGroupPublicApi = { ...this.switchGroupDefaults };
+  public defaults = getDefaultFromDemoConfig<SwitchInputs>(this._inputControlConfig);
+  public groupDefaults = getDefaultFromDemoConfig<SwitchGroupInputs>(this._groupInputControlConfig);
+
+  public model: SwitchInputs = { ...this.defaults };
+  public groupModel: SwitchGroupInputs = { ...this.groupDefaults };
 
   public value = true;
   // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
   public groupValue = [true, true, true];
 
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsSwitchVariantType>(IdsSwitchVariant);
-  public iconPositions = Object.values<IdsSwitchIconPositionType>(IdsSwitchIconPosition);
-  public labelPositions = Object.values<IdsSwitchLabelPositionType>(IdsSwitchLabelPosition);
-
-  public resetSwitch(): void {
+  public reset(): void {
     this.value = true;
-    this.model = { ...this.switchDefaults };
-  }
-
-  public resetSwitchGroup(): void {
+    this.model = { ...this.defaults };
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     this.groupValue = [true, true, true];
-    this.groupModel = { ...this.switchGroupDefaults };
+    this.groupModel = { ...this.groupDefaults };
   }
 }

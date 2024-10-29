@@ -11,7 +11,7 @@ import { IdsErrorMessageComponent } from '../message/error-message/error-message
 import { IdsHintMessageComponent } from '../message/hint-message/hint-message.component';
 import { IdsSuccessMessageComponent } from '../message/success-message/success-message.component';
 
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, HostBinding, inject, input, isDevMode, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, inject, input, isDevMode, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { createClassList, createComponentError, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Subject, takeUntil } from 'rxjs';
@@ -31,6 +31,9 @@ const defaultOptions = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
       useExisting: IdsFormFieldComponent,
     },
   ],
+  host: {
+    '[class]': '_hostClasses()',
+  },
 })
 export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
   private readonly _componentClass = 'ids-form-field';
@@ -87,10 +90,6 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
     }
     return undefined;
   });
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
 
   public ngAfterContentInit(): void {
     if (isDevMode() && !this._child()) {

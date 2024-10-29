@@ -46,7 +46,7 @@ export function IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY(): Required<IdsPaginatorDef
     showPageButtons: true,
     showAllPages: false,
     maxDisplayedItemCount: MAX_DISPLAYED_ITEM_COUNT,
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsPaginatorVariant.SURFACE,
     pageButtonAppearance: IdsPaginatorPageButtonAppearance.PLAIN,
     debounceTime: 300,

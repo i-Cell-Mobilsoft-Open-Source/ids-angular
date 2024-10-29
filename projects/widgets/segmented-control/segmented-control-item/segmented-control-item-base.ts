@@ -2,13 +2,17 @@ import { IdsSegmentedControlToggleDirective } from '../segmented-control-toggle.
 import { IdsSegmentedControlDirective } from '../segmented-control.directive';
 import { IdsSegmentedControlItemChange, IdsSegmentedControlToggleItemChange } from '../types/segmented-control-item-change.class';
 
-import { computed, Directive, ElementRef, EventEmitter, HostBinding, inject, Injector, input, InputSignal, OnInit, Output, signal, ViewChild } from '@angular/core';
+import { computed, Directive, ElementRef, EventEmitter, inject, Injector, input, InputSignal, OnInit, Output, signal, ViewChild } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 
 type SegmentedControlParent = IdsSegmentedControlToggleDirective | IdsSegmentedControlDirective;
 type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
 
-@Directive({})
+@Directive({
+  host: {
+    '[class]': '_componentClass',
+  },
+})
 export abstract class IdsSegmentedControlItemBase<P extends SegmentedControlParent, E extends SegmentedControlItemEvent>
 implements OnInit {
   protected abstract readonly _componentClass: string;
@@ -39,10 +43,6 @@ implements OnInit {
   @ViewChild('button') private _buttonElement!: ElementRef<HTMLButtonElement>;
 
   @Output() public readonly changes = new EventEmitter<E>();
-
-  @HostBinding('class') get hostClasses(): string {
-    return this._componentClass;
-  }
 
   public ngOnInit(): void {
     const parent = this._getParent();

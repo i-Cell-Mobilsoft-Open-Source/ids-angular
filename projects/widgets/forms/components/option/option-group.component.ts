@@ -17,7 +17,7 @@ export const IDS_OPTION_GROUP = new InjectionToken<IdsOptionGroupComponent>('Ids
   providers: [{ provide: IDS_OPTION_GROUP, useExisting: IdsOptionGroupComponent }],
   host: {
     '[attr.role]': '_inert ? null : "group"',
-    '[attr.aria-disabled]': '_inert ? null : disabled.toString()',
+    '[attr.aria-disabled]': '_inert ? null : disabled().toString()',
     '[attr.aria-labelledby]': '_inert ? null : _labelId',
   },
 })

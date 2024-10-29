@@ -6,7 +6,7 @@ import { AbstractSuccessStateMatcher, SuccessStateTracker } from '../../common/s
 import { formFieldControlClass, IdsFormFieldControl } from '../form-field/form-field-control';
 import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-tokens';
 
-import { computed, Directive, effect, ElementRef, HostBinding, inject, input, isDevMode, DoCheck, signal, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { computed, Directive, effect, ElementRef, inject, input, isDevMode, DoCheck, signal, OnDestroy, OnInit } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 import { Subject, takeUntil } from 'rxjs';
@@ -43,8 +43,12 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
     },
   ],
   host: {
+    '[id]': 'id()',
+    '[class]': '_hostClasses()',
     '[attr.placeholder]': 'placeholder()',
     '[attr.disabled]': 'isDisabled() || null',
+    '(focus)': '_focusChanged(true)',
+    '(blur)': '_focusChanged(false)',
   },
 })
 export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, OnDestroy {
@@ -86,22 +90,6 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
 
   public hasErrorState = signal<boolean>(false);
   public hasSuccessState = signal<boolean>(false);
-
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses();
-  }
-
-  @HostBinding('id') get hostId(): string {
-    return this.id();
-  }
-
-  @HostListener('focus', ['$event']) private _onFocus(): void {
-    this._focusChanged(true);
-  }
-
-  @HostListener('blur', ['$event']) private _onBlur(): void {
-    this._focusChanged(false);
-  }
 
   constructor() {
     effect(() => {

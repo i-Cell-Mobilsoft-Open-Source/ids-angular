@@ -5,7 +5,6 @@ import { IdsTagVariantType } from './types/tag-variant.type';
 import {
   Component,
   ElementRef,
-  HostBinding,
   InjectionToken,
   ViewEncapsulation,
   computed,
@@ -26,6 +25,10 @@ const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
   imports: [],
   templateUrl: './tag.component.html',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class]': '_hostClasses()',
+    '[type]': '_setType()',
+  },
 })
 export class IdsTagComponent {
   private readonly _componentClass = 'ids-tag';
@@ -48,12 +51,8 @@ export class IdsTagComponent {
     ]),
   );
 
-  @HostBinding('type') get buttonType(): string | null {
+  private _setType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
-  }
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
   }
 
   // eslint-disable-next-line @stylistic/js/max-len

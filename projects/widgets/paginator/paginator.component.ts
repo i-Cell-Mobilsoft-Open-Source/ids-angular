@@ -4,7 +4,7 @@ import { IdsPaginatorPageButtonAppearanceType } from './types/paginator-appearan
 import { IdsPaginatorPageEvent } from './types/paginator-events.class';
 import { IdsPaginatorVariantType } from './types/paginator-variant.type';
 
-import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, HostBinding, HostListener, inject, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, inject, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, isNumberEven, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { debounceTime, Subject, Subscription } from 'rxjs';
@@ -19,6 +19,11 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
   imports: [IdsIconComponent],
   templateUrl: './paginator.component.html',
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[id]': 'id()',
+    '[class]': '_hostClasses()',
+    '(keydown)': '_handleKeyDown($event)',
+  },
 })
 export class IdsPaginatorComponent implements OnDestroy {
   private readonly _componentClass = 'ids-paginator';
@@ -106,15 +111,7 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   @Output() public readonly page: EventEmitter<IdsPaginatorPageEvent> = new EventEmitter<IdsPaginatorPageEvent>();
 
-  @HostBinding('class') get hostClasses(): string {
-    return this._hostClasses();
-  }
-
-  @HostBinding('id') get hostId(): string {
-    return this.id();
-  }
-
-  @HostListener('keydown', ['$event']) public handleKeyDown(event: KeyboardEvent): void {
+  private _handleKeyDown(event: KeyboardEvent): void {
     event.stopPropagation();
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'PageDown', 'PageUp', 'Home', 'End'];

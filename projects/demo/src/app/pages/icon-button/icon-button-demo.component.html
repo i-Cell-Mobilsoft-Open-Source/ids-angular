@@ -1,94 +1,18 @@
-<h1>{{ "COMPONENTS.ICON_BUTTON" | translate }}</h1>
+<app-tryout [title]="'COMPONENTS.ICON_BUTTON' | translate" (resetted)="reset()">
+  <ng-container component>
+    <button
+      type="button"
+      idsIconButton
+      [id]="model.appearance + '-' + model.variant + '-' + model.size + '-icon-button'"
+      [size]="model.size"
+      [variant]="model.variant"
+      [appearance]="model.appearance"
+      [disabled]="model.disabled"
+      (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
+    >
+      <ids-icon aria-hidden="true" alt="" fontIcon="search" />
+    </button>
+  </ng-container>
 
-<section class="component" [class]="model.variant">
-  <button
-    type="button"
-    idsIconButton
-    [id]="model.appearance + '-' + model.variant + '-' + model.size + '-icon-button'"
-    [size]="model.size"
-    [variant]="model.variant"
-    [appearance]="model.appearance"
-    [disabled]="model.disabled"
-    (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
-  >
-    <ids-icon aria-hidden="true" alt="" fontIcon="search" />
-  </button>
-</section>
-
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>size</td>
-        <td>Icon button size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Icon button variant.</td>
-        <td><code>IdsIconButtonVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>appearance</td>
-        <td>Icon button appearance.</td>
-        <td><code>IdsIconButtonAppearanceType</code></td>
-        <td>
-          <code>{{ defaults.appearance }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.appearance">
-            @for (item of appearances; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the icon button is disabled or not.</td>
-        <td><code>boolean</code></td>
-        <td>
-          <code>{{ defaults.disabled }}</code>
-        </td>
-        <td><input type="checkbox" name="disabled" [(ngModel)]="model.disabled" /></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+</app-tryout>

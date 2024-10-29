@@ -1,5 +1,5 @@
-import { IdsCardVariant, IdsCardVariantType } from './public-api';
 import { IdsCardAppearance, IdsCardAppearanceType } from './types/card-appearances.type';
+import { IdsCardVariant, IdsCardVariantType } from './types/card-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { IdsSize, IdsSizeType, IdsOrientationType, IdsOrientation } from '@i-cell/ids-angular/core';
@@ -22,7 +22,7 @@ export const IDS_CARD_DEFAULT_CONFIG = new InjectionToken<IdsCardDefaultConfig>(
 export function IDS_CARD_DEFAULT_CONFIG_FACTORY(): Required<IdsCardDefaultConfig> {
   return {
     appearance: IdsCardAppearance.FILLED,
-    size: IdsSize.COMFORTABLE,
+    size: IdsSize.COMPACT,
     variant: IdsCardVariant.SURFACE,
     orientation: IdsOrientation.VERTICAL,
   };

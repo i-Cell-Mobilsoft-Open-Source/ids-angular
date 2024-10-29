@@ -1,6 +1,6 @@
 import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY } from './switch-defaults';
 
-import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { createClassList, IdsSizeType, fallbackValue } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
@@ -16,6 +16,7 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[id]': 'id()',
+    '[class]': '_hostClasses()',
   },
 })
 export class IdsSwitchGroupComponent {
@@ -33,8 +34,4 @@ export class IdsSwitchGroupComponent {
   public labelPosition = input(this._defaultConfig.labelPosition);
 
   private _hostClasses = computed(() => createClassList(this._componentClass, [this.size()]));
-
-  @HostBinding('class') get classes(): string {
-    return this._hostClasses();
-  }
 }

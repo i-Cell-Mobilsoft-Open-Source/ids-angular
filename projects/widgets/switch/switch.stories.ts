@@ -1,6 +1,6 @@
-import { IdsSwitchVariant } from './public-api';
 import { IdsSwitchComponent } from './switch.component';
 import { IdsSwitchIconPosition, IdsSwitchLabelPosition } from './types/switch-positions.type';
+import { IdsSwitchVariant } from './types/switch-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 import { IdsSize } from '../core';

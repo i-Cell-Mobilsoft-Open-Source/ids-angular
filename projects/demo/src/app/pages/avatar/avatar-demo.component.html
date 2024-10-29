@@ -1,15 +1,13 @@
-<h1>{{ "COMPONENTS.AVATAR" | translate }}</h1>
-
-<section class="component" [class]="model.variant">
-  <div class="avatar-types">
+<app-tryout [title]="'COMPONENTS.AVATAR' | translate" (resetted)="reset()">
+  <div component class="avatar-types">
     <div class="avatar-type">
       <h2>Initials</h2>
-      <ids-avatar initials="SJ" [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant" />
+      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant" [initials]="model.initials" />
     </div>
     <div class="avatar-type">
       <h2>Icon</h2>
       <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant">
-        <ids-icon svgIcon="user-avatar" />
+        <ids-icon fontIcon="avatar" />
       </ids-avatar>
     </div>
     <div class="avatar-type">
@@ -23,73 +21,6 @@
       </ids-avatar>
     </div>
   </div>
-</section>
 
-<section class="controls">
-  <table [cellPadding]="10">
-    <caption>
-      <div class="caption-group">
-        <span>Controls</span>
-        <button type="button" idsButton (click)="reset()">Reset</button>
-      </div>
-    </caption>
-
-    <thead>
-      <tr>
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">Type</th>
-        <th align="left">Default</th>
-        <th align="left">Value</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>size</td>
-        <td>Avatar size.</td>
-        <td><code>IdsSizeType</code></td>
-        <td>
-          <code>{{ defaults.size }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.size">
-            @for (item of sizes; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>sizeCollection</td>
-        <td>Avatar sizeCollection.</td>
-        <td><code>IdsSizeCollectionType</code></td>
-        <td>
-          <code>{{ defaults.sizeCollection }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.sizeCollection">
-            @for (item of sizeCollections; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>variant</td>
-        <td>Avatar variant.</td>
-        <td><code>IdsAvatarVariantType</code></td>
-        <td>
-          <code>{{ defaults.variant }}</code>
-        </td>
-        <td>
-          <select [(ngModel)]="model.variant">
-            @for (item of variants; track $index) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+</app-tryout>

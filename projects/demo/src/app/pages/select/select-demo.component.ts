@@ -2,7 +2,7 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { KeyValuePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -69,7 +69,7 @@ type AnimalOptions = {
   templateUrl: './select-demo.component.html',
   styleUrl: './select-demo.component.scss',
 })
-export class SelectDemoComponent implements OnInit {
+export class SelectDemoComponent {
   protected _formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
     size: {
       description: 'Form field size.',

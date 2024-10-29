@@ -1,4 +1,4 @@
-<app-tryout [title]="'COMPONENTS.SWITCH' | translate" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.SWITCH' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <div component class="switch-grid">
     <div class="switch-item">
       <h2>Standalone</h2>
@@ -63,9 +63,17 @@
     </div>
   </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
   <app-control-table
     controls
+    [controlName]="'Switch'"
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Switch group'"
     [configType]="'input'"
     [controlConfig]="_groupInputControlConfig"
     [(model)]="groupModel"

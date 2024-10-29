@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 
-type AccordionInputs = {
+type AccordionInputControls = {
   size: IdsSizeType,
   appearance: IdsAccordionAppearanceType,
   summary: string,
@@ -41,10 +41,13 @@ type AccordionInputs = {
     IdsButtonComponent,
   ],
   templateUrl: './accordion-demo.component.html',
-  styleUrl: './accordion-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './accordion-demo.component.scss',
+  ],
 })
 export class AccordionDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<AccordionInputs> = {
+  protected _inputControlConfig: DemoControlConfig<AccordionInputControls> = {
     size: {
       description: 'Accordion size.',
       type: 'IdsSizeType',
@@ -122,9 +125,9 @@ export class AccordionDemoComponent {
     },
   };
 
-  public defaults = getDefaultFromDemoConfig<AccordionInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<AccordionInputControls>(this._inputControlConfig);
   
-  public model: AccordionInputs = { ...this.defaults };
+  public model: AccordionInputControls = { ...this.defaults };
 
   public reset(): void {
     this.model = { ...this.defaults };

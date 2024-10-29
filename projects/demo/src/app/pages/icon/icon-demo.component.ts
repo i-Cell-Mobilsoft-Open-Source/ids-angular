@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { UpperCasePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
@@ -21,7 +21,7 @@ interface IconData {
   name: string;
 }
 
-type IconInputs = {
+type IconInputControls = {
   size: IdsSizeType,
   sizeCollection: IdsSizeCollectionType,
   variant: IdsIconVariantType,
@@ -43,16 +43,16 @@ type IconInputs = {
     IdsButtonComponent,
   ],
   templateUrl: './icon-demo.component.html',
-  styleUrl: './icon-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './icon-demo.component.scss',
+  ],
 })
 export class IconDemoComponent implements OnInit {
-  private _http = inject(HttpClient);
+  private readonly _http = inject(HttpClient);
+  private readonly _destroyRef = inject(DestroyRef);
 
-  private _iconNames = signal<string[]>([]);
-
-  protected readonly _destroyRef = inject(DestroyRef);
-
-  protected _inputControlConfig: DemoControlConfig<IconInputs> = {
+  protected _inputControlConfig: DemoControlConfig<IconInputControls> = {
     size: {
       description: 'Icon size.',
       type: 'IdsSizeType',
@@ -80,7 +80,7 @@ export class IconDemoComponent implements OnInit {
       default: '-',
       demoDefault: 'moon',
       control: 'select',
-      list: this._iconNames(),
+      list: [],
     },
     svgIcon: {
       description: 'Name of svg icon file',
@@ -88,7 +88,7 @@ export class IconDemoComponent implements OnInit {
       default: '-',
       demoDefault: 'moon',
       control: 'select',
-      list: this._iconNames(),
+      list: [],
     },
     'aria-hidden': {
       description: 'Determinate whether the component is hidden or not for screen readers.',
@@ -106,13 +106,18 @@ export class IconDemoComponent implements OnInit {
     this._http.get<IconData[]>('assets/fonts/I-DS-font-icon-default.json').pipe(
       takeUntilDestroyed(this._destroyRef),
     ).subscribe((data) => {
-      this._iconNames.set(data.map((item) => item.name));
+      const list = data.map((item) => item.name);
+      this._inputControlConfig = { 
+        ...this._inputControlConfig, 
+        fontIcon: { ...this._inputControlConfig.fontIcon, list }, 
+        svgIcon: { ...this._inputControlConfig.svgIcon, list },
+      };
     });
   }
 
-  public defaults = getDefaultFromDemoConfig<IconInputs>(this._inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<IconInputControls>(this._inputControlConfig);
 
-  public model: IconInputs = { ...this.defaults  };
+  public model: IconInputControls = { ...this.defaults  };
   
   public reset(): void {
     this.model = { ...this.defaults };

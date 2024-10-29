@@ -1,17 +1,27 @@
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { TryoutComponent } from '../../components/tryout/tryout.component';
+
 import { UpperCasePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
+import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCheckboxVariant, IdsCheckboxVariantType, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxComponent, IdsCheckboxGroupComponent } from '@i-cell/ids-angular/checkbox';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 import { IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms/directives/message-suffix.directive';
 import { TranslateModule } from '@ngx-translate/core';
 
-type CheckboxPublicApi = {
+const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
+const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
+
+type CheckboxInputControls = {
   size: IdsSizeType,
   variant: IdsCheckboxVariantType,
   readonly: boolean,
+  required: boolean,
 };
 
 type CheckboxHelperControls = {
@@ -19,10 +29,9 @@ type CheckboxHelperControls = {
   allowHint: boolean,
   hintMessage: string,
   disabled: boolean,
-  hasRequiredValidator: boolean,
 };
 
-type CheckboxGroupPublicApi = {
+type CheckboxGroupInputControls = {
   groupLabel: string,
   allowParent: boolean,
   parentLabel: string,
@@ -32,13 +41,12 @@ type CheckboxGroupPublicApi = {
   orientation: IdsOrientationType,
 };
 
-const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
-const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
-
 @Component({
   selector: 'app-checkbox-demo',
   standalone: true,
   imports: [
+    TryoutComponent,
+    ControlTableComponent,
     IdsCheckboxComponent,
     IdsCheckboxGroupComponent,
     UpperCasePipe,
@@ -56,83 +64,145 @@ const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
     './checkbox-demo.component.scss',
   ],
 })
-export class CheckboxDemoComponent implements OnInit {
-  public sizes = Object.values<IdsSizeType>(IdsSize);
-  public variants = Object.values<IdsCheckboxVariantType>(IdsCheckboxVariant);
-  public orientations = Object.values<IdsOrientationType>(IdsOrientation);
-
-  public defaults: CheckboxPublicApi & CheckboxHelperControls = {
-    readonly: false,
-    size: defaultConfig.size,
-    variant: defaultConfig.variant,
-    disabled: false,
-    label: 'I accept the terms and conditions',
-    allowHint: true,
-    hintMessage: 'Hint message',
-    hasRequiredValidator: false,
+export class CheckboxDemoComponent {
+  protected _inputControlConfig: DemoControlConfig<CheckboxInputControls> = {
+    size: {
+      description: 'Checkbox size.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Checkbox variant.',
+      type: 'IdsCheckboxVariantType',
+      default: defaultConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsCheckboxVariant),
+    },
+    readonly: {
+      description: 'Whether the checkbox is readonly or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+    required: {
+      description: 'Whether the checkbox is required or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
   };
 
-  public groupDefaults: CheckboxGroupPublicApi = {
-    groupLabel: 'Everyday todos',
-    allowParent: defaultGroupConfig.allowParent,
-    parentLabel: 'Parent todo',
-    name: 'todo',
-    size: defaultGroupConfig.size,
-    variant: defaultGroupConfig.variant,
-    orientation: defaultGroupConfig.orientation,
+  protected _helperControlConfig: DemoControlConfig<CheckboxHelperControls> = {
+    label: {
+      description: 'Label of checkbox',
+      type: 'string',
+      default: '-',
+      demoDefault: 'I accept the terms and conditions',
+    },
+    allowHint: {
+      description: 'Allow hint message',
+      type: 'boolean',
+      default: true,
+      control: 'checkbox',
+    },
+    hintMessage: {
+      description: 'Hint message',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Hint message',
+    },
+    disabled: {
+      description: 'Whether the checkbox is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
   };
 
-  public model: CheckboxPublicApi & CheckboxHelperControls = { ...this.defaults };
+  protected _groupInputControlConfig: DemoControlConfig<CheckboxGroupInputControls> = {
+    groupLabel: {
+      description: 'Checkbox group\'s label.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Everyday todos',
+    },
+    allowParent: {
+      description: 'Whether to allow parent checkbox or not.',
+      type: 'boolean',
+      default: defaultGroupConfig.allowParent,
+      control: 'checkbox',
+    },
+    parentLabel: {
+      description: 'Parent checkbox label.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Parent todo',
+    },
+    name: {
+      description: 'Name for checkboxes.',
+      type: 'string',
+      default: '-',
+      demoDefault: 'todo',
+    },
+    size: {
+      description: 'Checkbox group size.',
+      type: 'IdsSizeType',
+      default: defaultGroupConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: 'Checkbox group variant.',
+      type: 'IdsCheckboxVariantType',
+      default: defaultGroupConfig.variant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsCheckboxVariant),
+    },
+    orientation: {
+      description: 'Checkbox group variant.',
+      type: 'IdsOrientationType',
+      default: defaultGroupConfig.orientation,
+      control: 'select',
+      list: convertEnumToStringArray(IdsOrientation),
+    },
+  };
   
-  public groupModel: CheckboxGroupPublicApi = { ...this.groupDefaults };
-  
-  public form = new FormGroup({
-    unselected: new FormControl(false),
-    indeterminate: new FormControl(false),
-    selected: new FormControl(true),
-  });
+  public defaults = getDefaultFromDemoConfig<CheckboxInputControls>(this._inputControlConfig);
+  public helperDefaults = getDefaultFromDemoConfig<CheckboxHelperControls>(this._helperControlConfig);
+  public groupDefaults = getDefaultFromDemoConfig<CheckboxGroupInputControls>(this._groupInputControlConfig);
 
-  public radioGroupForm = new FormGroup({
-    toothBrushing: new FormControl(true),
-    bath: new FormControl(true),
-    sleep: new FormControl(true),
-  });
+  public model: CheckboxInputControls = { ...this.defaults };
+  public helperModel: CheckboxHelperControls = { ...this.helperDefaults };
+  public groupModel: CheckboxGroupInputControls = { ...this.groupDefaults };
 
-  public ngOnInit(): void {
-    this.setDisabledState(this.model.disabled);
-    this.setRequiredValidator(this.model.hasRequiredValidator);
-  }
-  
   public reset(): void {
     this.model = { ...this.defaults };
+    this.helperModel = { ...this.helperDefaults };
     this.groupModel = { ...this.groupDefaults };
-    this.setDisabledState(this.model.disabled);
-    this.setRequiredValidator(this.model.hasRequiredValidator);
-    this.form.reset({ unselected: false, indeterminate: false, selected: true });
-    this.radioGroupForm.reset({ toothBrushing: true, bath: true, sleep: true });
-  }
 
-  public setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) {
-      this.form.disable();
-    } else {
-      this.form.enable();
-    }
+    this.standalone = {
+      unselected: false,
+      indeterminate: false,
+      selected: true,
+    };
+    this.group = {
+      toothBrushing: true,
+      bath: true,
+      sleep: false,
+    };
   }
-
-  public setRequiredValidator(hasRequiredValidator: boolean): void {
-    if (hasRequiredValidator) {
-      this.form.controls.unselected.setValidators(IdsValidators.required);
-      this.form.controls.indeterminate.setValidators(IdsValidators.required);
-      this.form.controls.selected.setValidators(IdsValidators.required);
-    } else {
-      this.form.controls.unselected.clearValidators();
-      this.form.controls.indeterminate.clearValidators();
-      this.form.controls.selected.clearValidators();
-    }
-
-    this.form.controls.unselected.updateValueAndValidity();
-    this.form.controls.indeterminate.updateValueAndValidity();
-    this.form.controls.selected.updateValueAndValidity();
-  }
+  
+  public standalone = {
+    unselected: false,
+    indeterminate: false,
+    selected: true,
+  };
+  
+  public group = {
+    toothBrushing: true,
+    bath: true,
+    sleep: false,
+  };
 }

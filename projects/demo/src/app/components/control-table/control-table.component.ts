@@ -4,7 +4,7 @@ import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component, computed, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-const DEFAULT_CONTROL_TABLE_PADDING = 10;
+const DEFAULT_CONTROL_TABLE_PADDING = 8;
 
 @Component({
   selector: 'app-control-table',
@@ -20,6 +20,7 @@ const DEFAULT_CONTROL_TABLE_PADDING = 10;
 export class ControlTableComponent<T extends Record<string, unknown>> {
   public cellPadding = input<number>(DEFAULT_CONTROL_TABLE_PADDING);
   public configType = input<'input' | 'helper'>('input');
+  public controlName = input<string | undefined>();
   public controlConfig = input<DemoControlConfig<T>>();
   public model = model.required<T>();
   

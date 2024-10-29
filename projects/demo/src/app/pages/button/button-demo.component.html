@@ -1,4 +1,4 @@
-<app-tryout [title]="'COMPONENTS.BUTTON' | translate" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.BUTTON' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <ng-container component>
     <button
       type="button"
@@ -21,5 +21,5 @@
   </ng-container>
 
   <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'input'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
 </app-tryout>

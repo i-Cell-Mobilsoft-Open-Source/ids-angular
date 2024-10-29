@@ -1,5 +1,5 @@
-export const MenuItemVariant = {
+export const IdsMenuItemVariant = {
   SURFACE: 'surface',
 } as const;
 
-export type MenuItemVariantType = (typeof MenuItemVariant)[keyof typeof MenuItemVariant];
+export type MenuItemVariantType = (typeof IdsMenuItemVariant)[keyof typeof IdsMenuItemVariant];

@@ -14,7 +14,7 @@ import { IdsCardHeaderComponent } from '@i-cell/ids-angular/card/card-header.com
 import { IdsCardMediaDirective } from '@i-cell/ids-angular/card/card-media.directive';
 import { IdsCardSubtitleDirective } from '@i-cell/ids-angular/card/card-subtitle.directive';
 import { IdsCardTitleDirective } from '@i-cell/ids-angular/card/card-title.directive';
-import { IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
@@ -83,7 +83,7 @@ export class CardDemoComponent {
       type: 'IdsOrientationType',
       default: defaultConfig.orientation,
       control: 'select',
-      list: convertEnumToStringArray(IdsCardVariant),
+      list: convertEnumToStringArray(IdsOrientation),
     },
     disabled: {
       description: 'Whether the card is disabled or not.',

@@ -53,7 +53,10 @@ type CardHelperControls = {
     IdsButtonComponent,
   ],
   templateUrl: './card-demo.component.html',
-  styleUrl: './card-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './card-demo.component.scss',
+  ],
 })
 export class CardDemoComponent {
   protected _inputControlConfig: DemoControlConfig<CardInputControls> = {

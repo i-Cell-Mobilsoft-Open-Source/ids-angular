@@ -59,7 +59,10 @@ type CheckboxGroupInputControls = {
     IdsButtonComponent,
   ],
   templateUrl: './checkbox-demo.component.html',
-  styleUrl: './checkbox-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './checkbox-demo.component.scss',
+  ],
 })
 export class CheckboxDemoComponent {
   protected _inputControlConfig: DemoControlConfig<CheckboxInputControls> = {

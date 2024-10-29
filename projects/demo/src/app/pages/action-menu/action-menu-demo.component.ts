@@ -56,7 +56,10 @@ type MenuItemHelperControls = {
     FormsModule,
   ],
   templateUrl: './action-menu-demo.component.html',
-  styleUrl: './action-menu-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './action-menu-demo.component.scss',
+  ],
 })
 export class ActionMenuDemoComponent {
   protected _overlayPanelInputControlConfig: DemoControlConfig<OverlayPanelInputControls> = {

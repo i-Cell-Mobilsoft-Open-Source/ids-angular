@@ -38,7 +38,10 @@ type ButtonHelperControls = {
     FormsModule,
   ],
   templateUrl: './button-demo.component.html',
-  styleUrl: './button-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './button-demo.component.scss',
+  ],
 })
 export class ButtonDemoComponent {
   protected _inputControlConfig: DemoControlConfig<ButtonInputControls> = {

@@ -38,7 +38,10 @@ type AvatarInputControls = {
     FormsModule,
   ],
   templateUrl: './avatar-demo.component.html',
-  styleUrl: './avatar-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './avatar-demo.component.scss',
+  ],
 })
 export class AvatarDemoComponent {
   protected _inputControlConfig: DemoControlConfig<AvatarInputControls> = {

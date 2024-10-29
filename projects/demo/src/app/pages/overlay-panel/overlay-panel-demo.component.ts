@@ -55,7 +55,10 @@ type MenuItemHelperControls = {
     IdsButtonComponent,
   ],
   templateUrl: './overlay-panel-demo.component.html',
-  styleUrl: './overlay-panel-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './overlay-panel-demo.component.scss',
+  ],
 })
 export class OverlayPanelDemoComponent {
   protected _overlayPanelInputControlConfig: DemoControlConfig<OverlayPanelInputControls> = {

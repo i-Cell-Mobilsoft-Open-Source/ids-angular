@@ -51,7 +51,10 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
     IdsButtonComponent,
   ],
   templateUrl: './fieldset-demo.component.html',
-  styleUrl: './fieldset-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './fieldset-demo.component.scss',
+  ],
 })
 export class FieldsetDemoComponent {
   protected _inputControlConfig: DemoControlConfig<FieldsetInputControls> = {

@@ -42,7 +42,10 @@ type RadioHelperControls = {
     IdsButtonComponent,
   ],
   templateUrl: './radio-demo.component.html',
-  styleUrl: './radio-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './radio-demo.component.scss',
+  ],
 })
 export class RadioDemoComponent {
   protected _inputControlConfig: DemoControlConfig<RadioInputControls> = {

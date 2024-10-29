@@ -43,7 +43,10 @@ type IconInputControls = {
     IdsButtonComponent,
   ],
   templateUrl: './icon-demo.component.html',
-  styleUrl: './icon-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './icon-demo.component.scss',
+  ],
 })
 export class IconDemoComponent implements OnInit {
   private readonly _http = inject(HttpClient);

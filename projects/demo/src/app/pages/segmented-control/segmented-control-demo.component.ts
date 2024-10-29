@@ -47,7 +47,10 @@ type SegmentedControlHelperControls = {
     IdsButtonComponent,
   ],
   templateUrl: './segmented-control-demo.component.html',
-  styleUrl: './segmented-control-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './segmented-control-demo.component.scss',
+  ],
 })
 export class SegmentedControlDemoComponent {
   protected _inputControlConfig: DemoControlConfig<SegmentedControlInputControls> = {

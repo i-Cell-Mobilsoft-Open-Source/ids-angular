@@ -67,7 +67,10 @@ type AnimalOptions = {
     TitleCasePipe,
   ],
   templateUrl: './select-demo.component.html',
-  styleUrl: './select-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './select-demo.component.scss',
+  ],
 })
 export class SelectDemoComponent {
   protected _formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {

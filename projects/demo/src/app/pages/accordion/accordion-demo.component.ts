@@ -41,7 +41,10 @@ type AccordionInputControls = {
     IdsButtonComponent,
   ],
   templateUrl: './accordion-demo.component.html',
-  styleUrl: './accordion-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './accordion-demo.component.scss',
+  ],
 })
 export class AccordionDemoComponent {
   protected _inputControlConfig: DemoControlConfig<AccordionInputControls> = {

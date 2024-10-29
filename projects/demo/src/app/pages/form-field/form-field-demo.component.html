@@ -1,6 +1,7 @@
 <app-tryout [title]="'COMPONENTS.FORM_FIELD' | translate" [hasDarkBackground]="formFieldModel.variant === 'light'" (resetted)="reset()">
-  <ng-container component>
+  <div component class="form-field-grid">
     <div>
+      <h2>Input</h2>
       <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
         <ids-label>{{ formFieldHelperModel.label }}</ids-label>
         @if (formFieldHelperModel.hasLeadingIcon) {
@@ -37,6 +38,7 @@
     </div>
 
     <div>
+      <h2>Textarea</h2>
       <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
         <ids-label>{{ formFieldHelperModel.label }}</ids-label>
         <textarea
@@ -53,7 +55,7 @@
         <ids-error-message>Name is mandatory</ids-error-message>
       </ids-form-field>
     </div>
-  </ng-container>
+  </div>
 
   <app-control-table
     controls

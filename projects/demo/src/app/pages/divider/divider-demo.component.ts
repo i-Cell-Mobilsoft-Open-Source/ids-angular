@@ -37,7 +37,10 @@ type DividerInputControls = {
     IdsButtonComponent,
   ],
   templateUrl: './divider-demo.component.html',
-  styleUrl: './divider-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './divider-demo.component.scss',
+  ],
 })
 export class DividerDemoComponent {
   protected _inputControlConfig: DemoControlConfig<DividerInputControls> = {

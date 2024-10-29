@@ -45,7 +45,10 @@ type PaginatorInputControls = {
     IdsButtonComponent,
   ],
   templateUrl: './paginator-demo.component.html',
-  styleUrl: './paginator-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './paginator-demo.component.scss',
+  ],
 })
 export class PaginatorDemoComponent {
   protected _inputControlConfig: DemoControlConfig<PaginatorInputControls> ={

@@ -38,7 +38,10 @@ const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
     IdsButtonComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
-  styleUrl: './tooltip-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './tooltip-demo.component.scss',
+  ],
 })
 export class TooltipDemoComponent {
   protected _inputControlConfig: DemoControlConfig<TooltipInputControls> = {

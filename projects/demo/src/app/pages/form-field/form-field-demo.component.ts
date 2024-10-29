@@ -65,7 +65,10 @@ type InputInputControls = {
     IdsButtonComponent,
   ],
   templateUrl: './form-field-demo.component.html',
-  styleUrl: './form-field-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './form-field-demo.component.scss',
+  ],
 })
 export class FormFieldDemoComponent {
   protected _formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {

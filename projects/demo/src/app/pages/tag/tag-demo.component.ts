@@ -41,7 +41,10 @@ type TagHelperControls = {
     IdsButtonComponent,
   ],
   templateUrl: './tag-demo.component.html',
-  styleUrl: './tag-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './tag-demo.component.scss',
+  ],
 })
 export class TagDemoComponent {
   protected _inputControlConfig: DemoControlConfig<TagInputControls> = {

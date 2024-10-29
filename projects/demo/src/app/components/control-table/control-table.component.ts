@@ -4,7 +4,7 @@ import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component, computed, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-const DEFAULT_CONTROL_TABLE_PADDING = 10;
+const DEFAULT_CONTROL_TABLE_PADDING = 8;
 
 @Component({
   selector: 'app-control-table',

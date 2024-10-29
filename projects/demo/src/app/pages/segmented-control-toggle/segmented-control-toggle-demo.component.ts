@@ -44,7 +44,10 @@ type SegmentedControlToggleHelperControls = {
     IdsButtonComponent,
   ],
   templateUrl: './segmented-control-toggle-demo.component.html',
-  styleUrl: './segmented-control-toggle-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './segmented-control-toggle-demo.component.scss',
+  ],
 })
 export class SegmentedControlToggleDemoComponent {
   protected _inputControlConfig: DemoControlConfig<SegmentedControlToggleInputControls> = {

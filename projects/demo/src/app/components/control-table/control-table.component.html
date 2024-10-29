@@ -17,15 +17,15 @@
   <tbody>
     @for (control of _flatControls(); track $index) {
       <tr>
-        <td>{{ control.name }}</td>
+        <td width="15%">{{ control.name }}</td>
         <td>{{ control.description }}</td>
-        <td>
+        <td width="15%">
           <code>{{ control.type }}</code>
         </td>
-        <td>
+        <td width="10%">
           <code>{{ control.default }}</code>
         </td>
-        <td>
+        <td width="20%">
           @let disabled = control.disabled ?? false;
 
           @switch (control.control) {

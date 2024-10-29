@@ -37,7 +37,10 @@ type IconButtonInputControls = {
     FormsModule,
   ],
   templateUrl: './icon-button-demo.component.html',
-  styleUrl: './icon-button-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './icon-button-demo.component.scss',
+  ],
 })
 export class IconButtonDemoComponent {
   protected _inputControlConfig: DemoControlConfig<IconButtonInputControls> = {

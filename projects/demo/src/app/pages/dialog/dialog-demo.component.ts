@@ -197,7 +197,10 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
     FormsModule,
   ],
   templateUrl: './dialog-demo.component.html',
-  styleUrl: './dialog-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './dialog-demo.component.scss',
+  ],
 })
 export class DialogDemoComponent {
   protected _inputControlConfig: DemoControlConfig<DialogInputControls> = {

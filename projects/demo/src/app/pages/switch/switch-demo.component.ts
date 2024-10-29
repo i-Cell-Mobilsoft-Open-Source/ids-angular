@@ -50,7 +50,10 @@ type SwitchGroupInputControls = {
     IdsButtonComponent,
   ],
   templateUrl: './switch-demo.component.html',
-  styleUrl: './switch-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './switch-demo.component.scss',
+  ],
 })
 export class SwitchDemoComponent {
   protected _inputControlConfig: DemoControlConfig<SwitchInputControls> = {
@@ -116,7 +119,7 @@ export class SwitchDemoComponent {
       description: 'aria-label for switch.',
       type: 'string',
       default: '-',
-      demoDefault: '',
+      demoDefault: 'switch',
     },
     'aria-labelledby': {
       description: 'aria-labelledby for switch.',

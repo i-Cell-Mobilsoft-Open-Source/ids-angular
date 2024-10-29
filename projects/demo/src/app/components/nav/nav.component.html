@@ -9,7 +9,7 @@
           @if (menuItem.children?.length! > 0) {
             <li>
               <span class="subnav-parent">
-                <a [routerLink]="menuItem.path" [routerLinkActive]="['active']">
+                <a #rla="routerLinkActive" [routerLink]="menuItem.path" [routerLinkActive]="['active']">
                   <span class="icon">
                     @if (menuItem.icon) {
                       <ids-icon [fontIcon]="menuItem.icon" />
@@ -19,7 +19,7 @@
                 </a>
                 <span #trigger class="more"><ids-icon [fontIcon]="menuItem.$open ? 'chevron-up' : 'chevron-down'" /></span>
               </span>
-              <ids-subnav [menuItem]="menuItem" [trigger]="trigger" (opened)="menuItem.$open = $event" />
+              <ids-subnav [menuItem]="menuItem" [trigger]="trigger" [open]="rla.isActive" (opened)="menuItem.$open = $event" />
             </li>
           } @else {
             <li>

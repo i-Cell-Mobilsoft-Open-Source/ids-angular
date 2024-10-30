@@ -3,9 +3,9 @@
   <ul>
     @for (child of menuItem().children!; track $index) {
       <li>
-        <a [routerLink]="child.path" [routerLinkActive]="['active']"
-          ><span class="icon"></span
-          ><span class="name">{{ child.name! | translate }}</span>
+        <a #rla="routerLinkActive" [routerLink]="child.path" [routerLinkActive]="['active']">
+          <span class="icon"></span>
+          <span class="name">{{ child.name! | translate }}</span>
         </a>
       </li>
     }

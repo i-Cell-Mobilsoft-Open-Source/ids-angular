@@ -1,6 +1,6 @@
 import { IDS_CHIP_DEFAULT_CONFIG, IDS_CHIP_DEFAULT_CONFIG_FACTORY, IdsChipDefaultConfig } from './chip-defaults';
 import { IdsChipGroupComponent } from './chip-group.component';
-import { IdsChipAppearanceType } from './types/chip-appearance.type';
+import { IdsChipAppearance, IdsChipAppearanceType } from './types/chip-appearance.type';
 import { IdsChipRemoveEvent } from './types/chip-events.type';
 import { IdsChipVariant, IdsChipVariantType } from './types/chip-variant.type';
 
@@ -60,20 +60,24 @@ export class IdsChipComponent
 
   private _safeAppearance = computed(() => this._chipGroup?.appearance() ?? this.appearance());
   private _safeSize = computed(() => this._chipGroup?.size() ?? this.size());
-  private _safeVariant = computed(() => this._chipGroup?.variant() ?? this.variant());
   private _safeDisabled = computed(() => this._chipGroup?.disabled() ?? this.disabled());
   private _safeRole = computed(() => (this.closable() ? null : 'button'));
   private _safeTabIndex = computed(() => (this.closable() || this.disabled() ? -1 : this.tabIndex()));
   protected _hostClasses = computed(() => this._getHostClasses([
     this._safeAppearance(),
     this._safeSize(),
-    this._safeVariant(),
+    this.variant(),
     this._safeDisabled() ? 'disabled' : null,
   ]));
 
   public embeddedAvatarVariant = computed<IdsAvatarVariantType>(() => IdsAvatarVariant.SURFACE);
   public embeddedIconButtonVariant = computed<IdsIconButtonVariantType>(() => {
-    const chipVariant = this._safeVariant();
+    const chipVariant = this.variant();
+    const chipAppearance = this._safeAppearance();
+    if (chipAppearance === IdsChipAppearance.OUTLINED) {
+      return chipVariant;
+    }
+
     switch (chipVariant) {
       case IdsChipVariant.PRIMARY:
       case IdsChipVariant.SECONDARY:

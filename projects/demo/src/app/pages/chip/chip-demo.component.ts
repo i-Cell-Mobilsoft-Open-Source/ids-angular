@@ -33,10 +33,10 @@ type ChipHelperControls = {
   hasTrailingIconButton: boolean,
 };
 
-const chipList = [
-  'carrot',
-  'onion',
-  'mushroom',
+const chipList: { label: string, variant: IdsChipVariantType }[] = [
+  { label: 'carrot',  variant: IdsChipVariant.PRIMARY },
+  { label: 'onion', variant: IdsChipVariant.SECONDARY },
+  { label: 'mushroom', variant: IdsChipVariant.SURFACE },
 ];
 
 @Component({

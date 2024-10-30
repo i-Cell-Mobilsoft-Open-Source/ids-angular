@@ -31,8 +31,8 @@
     <div class="chip-item">
       <h2>Grouped</h2>
       <ids-chip-group [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [disabled]="model.disabled">
-        @for (chipLabel of chipList; track chipLabel) {
-          <ids-chip [closable]="model.removable" (removed)="onChipRemoveFromGroup($event, $index, chipLabel)">
+        @for (chip of chipList; track chip.label) {
+          <ids-chip [closable]="model.removable" [variant]="chip.variant" (removed)="onChipRemoveFromGroup($event, $index, chip.label)">
             @if (helperModel.hasAvatar) {
               <ids-avatar>
                 <ids-icon svgIcon="user-avatar" />
@@ -41,7 +41,7 @@
             @if (helperModel.hasLeadingIcon) {
               <ids-icon fontIcon="moon" idsLeadingIcon />
             }
-            {{ chipLabel }}
+            {{ chip.label }}
             @if (helperModel.hasTrailingIconButton) {
               <button type="button" idsIconButton>
                 <ids-icon fontIcon="camera" />

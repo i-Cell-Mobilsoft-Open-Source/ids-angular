@@ -84,6 +84,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
   },
   {
+    path: 'components/tabs',
+    loadComponent: () => import('./pages/tabs/tabs-demo.component').then((module) => module.TabsDemoComponent),
+  },
+  {
     path: 'components/tag',
     loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
   },

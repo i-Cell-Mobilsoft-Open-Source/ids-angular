@@ -1,0 +1,257 @@
+$sizes: compact, comfortable, spacious, dense;
+$variants: surface, light, primary;
+
+@mixin tabVariant($variant, $selected, $state) {
+  background-color: var(--ids-comp-tab-item-standard-#{$selected}-bg-#{$variant}-#{$state});
+  border-color: var(--ids-comp-tab-item-standard-#{$selected}-border-#{$variant}-#{$state});
+  color: var(--ids-comp-tab-item-standard-#{$selected}-fg-label-#{$variant}-#{$state});
+
+  & > .ids-icon {
+    color: var(--ids-comp-tab-item-standard-#{$selected}-fg-icon-#{$variant}-#{$state});
+  }
+}
+
+.ids-tab-group {
+  display: flex;
+  max-width: 100%;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  &.ids-tab-group-horizontal {
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+
+    & > .container {
+      width: 100%;
+      border-bottom-style: solid;
+      border-bottom-color: var(--ids-comp-tab-tabgroup-color-border-default);
+
+      .ids-tab-group-header {
+        .ids-tab-item {
+          justify-content: center;
+        }
+      }
+    }
+
+    &.ids-tab-group-stretch-tabs > .container .ids-tab-group-header {
+      align-self: stretch;
+
+      .ids-tab-item {
+        flex-grow: 1;
+      }
+    }
+
+    &.ids-tab-group-start > .container .ids-tab-group-header {
+      align-self: flex-start;
+    }
+
+    &.ids-tab-group-center > .container .ids-tab-group-header {
+      align-self: center;
+    }
+
+    &.ids-tab-group-end > .container .ids-tab-group-header {
+      align-self: flex-end;
+    }
+
+    & > .ids-tab-body-content {
+      display: flex;
+      align-items: flex-start;
+      align-self: stretch;
+    }
+
+    .slider {
+      display: flex;
+      position: absolute;
+      left: 0;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+
+      .line {
+        position: relative;
+        align-self: flex-end;
+        box-sizing: border-box;
+        width: 100%;
+        border-bottom-style: solid;
+        opacity: 0;
+      }
+    }
+  }
+
+  &.ids-tab-group-vertical {
+    display: inline-flex;
+    align-items: flex-start;
+    width: 100%;
+
+    & > .container .ids-tab-group-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+
+      .ids-tab-item {
+        align-self: stretch;
+      }
+    }
+
+    & > .ids-tab-body-content {
+      display: flex;
+      justify-content: center;
+      align-self: stretch;
+    }
+  }
+
+  .container {
+    .ids-tab-group-header {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      list-style-type: none;
+      margin: 0;
+
+      .ids-tab-item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+
+        &.ids-tab-item-label {
+          display: inline-block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        &.ids-tab-item-disabled {
+          pointer-events: none;
+          user-select: none;
+        }
+      }
+    }
+  }
+
+  @each $size in $sizes {
+    &.ids-tab-group-#{$size} {
+      padding: var(--ids-comp-tab-container-size-padding-y-#{$size}) var(--ids-comp-tab-container-size-padding-x-#{$size});
+      gap: var(--ids-comp-tab-container-size-gap-#{$size});
+
+      &.ids-tab-group-horizontal {
+        border-bottom-width: var(--ids-comp-tab-item-active-indicator-size-width-#{$size});
+
+        .slider {
+          bottom: calc(
+            0px - calc(var(--ids-comp-tab-item-active-indicator-size-width-#{$size}) + var(--ids-comp-tab-item-size-border-width-#{$size}))
+          );
+        }
+      }
+
+      & > .ids-tab-body-content {
+        padding: var(--ids-comp-tab-tabpanel-size-padding-y-#{$size}) var(--ids-comp-tab-tabpanel-size-padding-x-#{$size});
+      }
+
+      & > .container .ids-tab-group-header {
+        padding: var(--ids-comp-tab-tabgroup-size-padding-y-#{$size}) var(--ids-comp-tab-tabgroup-size-padding-x-#{$size});
+        gap: var(--ids-comp-tab-tabgroup-size-gap-#{$size});
+
+        .ids-tab-item {
+          padding: var(--ids-comp-tab-item-size-padding-y-#{$size}) var(--ids-comp-tab-item-size-padding-x-#{$size});
+          gap: var(--ids-comp-tab-item-size-gap-#{$size});
+          border-radius: var(--ids-comp-tab-item-size-border-radius-#{$size});
+          border-width: var(--ids-comp-tab-item-size-border-width-#{$size});
+          border-style: solid;
+
+          &:focus,
+          &:focus-visible {
+            outline-offset: 2px;
+            outline-width: var(--ids-comp-tab-item-focused-outline-size-outline-#{$size});
+            outline-style: solid;
+          }
+
+          & > .ids-tab-item-label {
+            font-family: var(--ids-comp-tab-item-label-typography-font-family-#{$size});
+            font-size: var(--ids-comp-tab-item-label-typography-font-size-#{$size});
+            font-weight: var(--ids-comp-tab-item-label-typography-font-weight-#{$size});
+            letter-spacing: var(--ids-comp-tab-item-label-typography-letter-spacing-#{$size});
+            line-height: var(--ids-comp-tab-item-label-typography-line-height-#{$size});
+          }
+
+          & > .ids-icon {
+            font-size: var(--ids-comp-tab-item-icon-typography-font-size-#{$size});
+            font-weight: var(--ids-comp-tab-item-icon-typography-font-weight-#{$size});
+            line-height: var(--ids-comp-tab-item-icon-typography-line-height-#{$size});
+            width: var(--ids-comp-tab-item-icon-size-width-#{$size});
+            height: var(--ids-comp-tab-item-icon-size-height-#{$size});
+          }
+
+          & > .slider .line {
+            border-bottom-width: var(--ids-comp-tab-item-active-indicator-size-width-#{$size});
+          }
+        }
+      }
+    }
+  }
+
+  @each $variant in $variants {
+    &.ids-tab-group-#{$variant} {
+      background-color: var(--ids-comp-tab-container-color-bg-default);
+
+      & > .container .ids-tab-group-header {
+        background-color: var(--ids-comp-tab-tabgroup-color-bg-default);
+
+        .ids-tab-item {
+          @include tabVariant($variant, unselected, default);
+
+          &:hover {
+            @include tabVariant($variant, unselected, hovered);
+          }
+
+          &:focus,
+          &:focus-visible {
+            @include tabVariant($variant, unselected, focused);
+            outline-color: var(--ids-comp-tab-item-standard-focused-outline-color-dark-default);
+          }
+
+          &:active {
+            @include tabVariant($variant, unselected, pressed);
+          }
+
+          &.ids-tab-item-disabled {
+            @include tabVariant($variant, unselected, disabled);
+          }
+        }
+
+        .ids-tab-item.ids-tab-item--active {
+          @include tabVariant($variant, selected, default);
+
+          &:hover {
+            @include tabVariant($variant, selected, hovered);
+          }
+
+          &:focus,
+          &:focus-visible {
+            @include tabVariant($variant, selected, focused);
+          }
+
+          &:active {
+            @include tabVariant($variant, selected, pressed);
+          }
+
+          &.ids-tab-item-disabled {
+            @include tabVariant($variant, unselected, disabled);
+          }
+
+          & > .slider .line {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

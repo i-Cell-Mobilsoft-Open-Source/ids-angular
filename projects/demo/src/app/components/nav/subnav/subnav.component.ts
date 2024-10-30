@@ -5,13 +5,11 @@ import {
   ElementRef,
   viewChild,
   input, OnInit,
-  computed,
-  viewChildren,
-  AfterViewInit,
   output,
   ChangeDetectionStrategy,
+  Input,
 } from '@angular/core';
-import { RouterLinkActive, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -25,17 +23,14 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./subnav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SubnavComponent implements OnInit, AfterViewInit {
+export class SubnavComponent implements OnInit {
   public menuItem = input.required<Menu>();
   public trigger = input.required<HTMLElement>();
   public details = viewChild<ElementRef<HTMLDetailsElement>>('details');
 
-  private _active = viewChildren<RouterLinkActive>('rla');
-  public hasActiveSubmenuItem = computed(() => this._active().length);
-
   private _open = false;
 
-  set open(value: boolean) {
+  @Input() set open(value: boolean) {
     this._open = value;
     this.details()!.nativeElement.open = value;
     this.opened.emit(value);
@@ -47,11 +42,5 @@ export class SubnavComponent implements OnInit, AfterViewInit {
     this.trigger().addEventListener('click', () => {
       this.open = !this._open;
     });
-  }
-
-  public ngAfterViewInit(): void {
-    if (this.hasActiveSubmenuItem()) {
-      this.open = true;
-    }
   }
 }

@@ -42,7 +42,7 @@ export class IdsIconComponent implements OnInit {
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _httpClient = inject(HttpClient);
   private readonly _sanitizer = inject(DomSanitizer);
-  
+
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public sizeCollection = input<IdsSizeCollectionType>(this._defaultConfig.sizeCollection);
@@ -74,9 +74,9 @@ export class IdsIconComponent implements OnInit {
         this._svgIcon = null;
         return;
       }
-      
+
       const svgIconSafeUrl = this._sanitizer.sanitize(
-        SecurityContext.RESOURCE_URL, 
+        SecurityContext.RESOURCE_URL,
         this._sanitizer.bypassSecurityTrustResourceUrl(`${this._defaultConfig.iconAssetsPath}/${svgIconName}.svg`),
       );
 
@@ -105,14 +105,14 @@ export class IdsIconComponent implements OnInit {
         this._svgIcon = this._getSvgElement(this._sanitizer.bypassSecurityTrustHtml(svg));
         this._setSvgElement(this._svgIcon);
       });
-  } 
-  
+  }
+
   private _setSvgElement(svg: SVGElement): void {
     this._clearSvgElement();
 
     this._elementRef.nativeElement.appendChild(svg);
   }
-  
+
   private _clearSvgElement(): void {
     const layoutElement: HTMLElement = this._elementRef.nativeElement;
     let childCount = layoutElement.childNodes.length;
@@ -125,7 +125,7 @@ export class IdsIconComponent implements OnInit {
       }
     }
   }
-  
+
   private _getSvgElement(safeHtml: SafeHtml): SVGElement {
     const div = this._document.createElement('div');
     div.innerHTML = safeHtml as unknown as string;

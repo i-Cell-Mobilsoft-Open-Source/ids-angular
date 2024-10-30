@@ -124,3 +124,16 @@ $variants: primary, secondary, surface, light, dark;
     }
   }
 }
+
+.ids-chip-group {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @each $size in $sizes {
+    &.ids-chip-group-#{$size} {
+      padding: var(--ids-comp-chip-group-size-padding-y-#{$size}) var(--ids-comp-chip-group-size-padding-x-#{$size});
+      gap: var(--ids-comp-chip-group-size-gap-#{$size});
+    }
+  }
+}

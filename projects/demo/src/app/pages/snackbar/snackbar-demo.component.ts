@@ -79,7 +79,7 @@ export class SnackbarDemoComponent implements OnInit {
     icon: {
       description: 'Custom icon for snackbar. Overwites default icon. Default icon depends on variant.',
       type: 'string',
-      default: '-', 
+      default: '-',
       demoDefault: '',
     },
     allowDismiss: {
@@ -117,7 +117,7 @@ export class SnackbarDemoComponent implements OnInit {
       control: 'checkbox',
     },
     size: {
-      description: 'Snackbar size. Size is an application-wide default value. Can not be overwrite at runtime.',
+      description: 'Snackbar size. Size is an application-wide default value. Can not overwrite at runtime.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: 'select',
@@ -125,7 +125,7 @@ export class SnackbarDemoComponent implements OnInit {
       disabled: true,
     },
     position: {
-      description: 'Snackbar position. Position is an application-wide default value. Can not be overwrite at runtime.',
+      description: 'Snackbar position. Position is an application-wide default value. Can not overwrite at runtime.',
       type: 'IdsSnackbarPositionType',
       default: defaultConfig.position,
       control: 'select',
@@ -134,14 +134,14 @@ export class SnackbarDemoComponent implements OnInit {
     },
     newestAtStartPosition: {
       // eslint-disable-next-line @stylistic/js/max-len
-      description: 'Whether the newest snackbar opens in start position, or not. newestAtStartPosition is an application-wide default value. Can not be overwrite at runtime.',
+      description: 'Whether the newest snackbar opens in start position, or not. newestAtStartPosition is an application-wide default value. Can not overwrite at runtime.',
       type: 'boolean',
       default: defaultConfig.newestAtStartPosition,
       control: 'checkbox',
       disabled: true,
     },
     viewportMargin: {
-      description: 'Viewport margin. viewportMargin is an application-wide default value. Can not be overwrite at runtime.',
+      description: 'Viewport margin. viewportMargin is an application-wide default value. Can not overwrite at runtime.',
       type: 'number',
       default: defaultConfig.viewportMargin,
       disabled: true,

@@ -5,7 +5,7 @@ import { InjectionToken } from '@angular/core';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsChipDefaultConfig {
-  closable: boolean
+  removable: boolean
   appearance?: IdsChipAppearanceType
   size?: IdsSizeType
   variant?: IdsChipVariantType
@@ -21,7 +21,7 @@ export const IDS_CHIP_DEFAULT_CONFIG = new InjectionToken<IdsChipDefaultConfig>(
 
 export function IDS_CHIP_DEFAULT_CONFIG_FACTORY(): Required<IdsChipDefaultConfig> {
   return {
-    closable: false,
+    removable: false,
     appearance: IdsChipAppearance.FILLED,
     size: IdsSize.COMPACT,
     variant: IdsChipVariant.SURFACE,

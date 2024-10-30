@@ -4,6 +4,7 @@ import { IdsCardAppearanceType } from './types/card-appearances.type';
 import { IdsCardVariantType } from './types/card-variant.type';
 
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   InjectionToken,
@@ -34,6 +35,7 @@ const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
     <ng-content select="ids-card-footer,footer[idsCardFooter]" />
   `,
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': '_hostClasses()',
     '[attr.aria-disabled]': 'this.disabled()? "" : null',

@@ -4,7 +4,7 @@ import { IdsPaginatorPageButtonAppearanceType } from './types/paginator-appearan
 import { IdsPaginatorPageEvent } from './types/paginator-events.class';
 import { IdsPaginatorVariantType } from './types/paginator-variant.type';
 
-import { ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, inject, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, inject, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
 import { createClassList, isNumberEven, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { debounceTime, Subject, Subscription } from 'rxjs';
@@ -19,6 +19,7 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
   imports: [IdsIconComponent],
   templateUrl: './paginator.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[id]': 'id()',
     '[class]': '_hostClasses()',

@@ -3,6 +3,7 @@ import { IdsButtonAppearanceType } from './types/button-appearance.type';
 import { IdsButtonVariantType } from './types/button-variant.type';
 
 import {
+  ChangeDetectionStrategy,
   Component,
   InjectionToken,
   ViewEncapsulation,
@@ -25,6 +26,7 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
   imports: [],
   templateUrl: './button.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': '_hostClasses()',
     '[attr.aria-disabled]': 'this.disabled()? "" : null',

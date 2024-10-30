@@ -4,6 +4,7 @@ import { MenuItemVariantType } from './types/menu-item-variant.type';
 
 import { CdkMenuItem } from '@angular/cdk/menu';
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   InjectionToken,
@@ -28,6 +29,7 @@ const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
   hostDirectives: [CdkMenuItem],
   templateUrl: './menu-item.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': '_hostClasses()',
     '[type]': 'buttonType',

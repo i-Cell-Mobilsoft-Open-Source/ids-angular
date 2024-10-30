@@ -2,7 +2,7 @@ import { IdsDividerComponent } from './divider.component';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('DividerComponent', () => {
+describe('IdsDividerComponent', () => {
   let component: IdsDividerComponent;
   let fixture: ComponentFixture<IdsDividerComponent>;
 

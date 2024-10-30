@@ -2,7 +2,7 @@ import { PseudoCheckboxComponent } from './pseudo-checkbox.component';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('PseudoCheckboxComponent', () => {
+describe('IdsPseudoCheckboxComponent', () => {
   let component: PseudoCheckboxComponent;
   let fixture: ComponentFixture<PseudoCheckboxComponent>;
 

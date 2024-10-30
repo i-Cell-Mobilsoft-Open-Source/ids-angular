@@ -3,6 +3,7 @@ import { IdsDialogHeaderDirective } from './dialog-header.directive';
 
 import { NgTemplateOutlet } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   InjectionToken,
@@ -34,6 +35,7 @@ const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
   ],
   templateUrl: './dialog.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'idsDialog',
   host: {
     '[class]': '_hostClasses()',

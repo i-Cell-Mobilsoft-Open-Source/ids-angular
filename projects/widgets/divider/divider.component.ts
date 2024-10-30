@@ -2,6 +2,7 @@ import { IDS_DIVIDER_DEFAULT_CONFIG, IDS_DIVIDER_DEFAULT_CONFIG_FACTORY, IdsDivi
 import { IdsDividerVariantType } from './public-api';
 
 import {
+  ChangeDetectionStrategy,
   Component,
   InjectionToken,
   ViewEncapsulation,
@@ -24,6 +25,7 @@ const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
   imports: [],
   template: '',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': '_hostClasses()',
     '[style.width]': '_safeWidth()',

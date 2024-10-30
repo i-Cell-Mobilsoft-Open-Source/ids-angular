@@ -4,6 +4,7 @@ import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import {
+  ChangeDetectionStrategy,
   Component,
   InjectionToken,
   ViewEncapsulation,
@@ -30,6 +31,7 @@ const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
   ],
   template: '<ng-content />',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': '_hostClasses()',
   },

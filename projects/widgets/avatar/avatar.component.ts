@@ -29,10 +29,10 @@ export class IdsAvatarComponent extends ComponentBaseWithDefaults<IdsAvatarDefau
     return 'avatar';
   }
 
-  private readonly _embeddedParent = inject(IDS_AVATAR_PARENT, { optional: true });
+  private readonly _parent = inject(IDS_AVATAR_PARENT, { optional: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_AVATAR_DEFAULT_CONFIG);
-  
+
   protected readonly _avatarType = IdsAvatarType;
 
   private _iconChild = contentChild(IdsIconComponent);
@@ -55,7 +55,7 @@ export class IdsAvatarComponent extends ComponentBaseWithDefaults<IdsAvatarDefau
 
   public avatarType = computed(() => this._implicitAvatarType() ?? this._defaultConfig.type);
 
-  private _safeVariant = computed(() => this._embeddedParent?.embeddedAvatarVariant() ?? this.variant());
+  private _parentOrSelfVariant = computed(() => this._parent?.embeddedAvatarVariant() ?? this.variant());
 
   protected _hostClasses = computed(() => this._getHostClasses([
     [
@@ -66,20 +66,20 @@ export class IdsAvatarComponent extends ComponentBaseWithDefaults<IdsAvatarDefau
       `${this.sizeCollection()}collection`,
       this.size(),
     ],
-    this._safeVariant(),
+    this._parentOrSelfVariant(),
   ]));
 
   public embeddedIconVariant = computed<IdsIconVariantType>(() => {
-    const avatarVariant = this._safeVariant();
+    const avatarVariant = this._parentOrSelfVariant();
     switch (avatarVariant) {
       case IdsAvatarVariant.PRIMARY:
       case IdsAvatarVariant.SECONDARY:
       case IdsAvatarVariant.DARK:
         return IdsIconVariant.LIGHT;
-        
+
       case IdsAvatarVariant.SURFACE:
         return IdsIconVariant.SURFACE;
-      
+
       case IdsAvatarVariant.LIGHT:
         return IdsIconVariant.SURFACE;
     }

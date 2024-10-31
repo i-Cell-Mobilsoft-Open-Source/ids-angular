@@ -31,7 +31,7 @@ const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 export class IdsIconComponent implements OnInit {
   private readonly _componentClass = 'ids-icon';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private readonly _embeddedParent = inject(IDS_ICON_PARENT, { optional: true });
+  private readonly _parent = inject(IDS_ICON_PARENT, { optional: true });
   private readonly _defaultConfig = {
     ...defaultConfig,
     ...inject(IDS_ICON_DEFAULT_CONFIG, { optional: true }),
@@ -55,14 +55,14 @@ export class IdsIconComponent implements OnInit {
 
   protected _iconSourceType = computed(() => (this.fontIcon() ? IdsIconSource.FONT : IdsIconSource.SVG));
 
-  private _safeVariant = computed(() => this._embeddedParent?.embeddedIconVariant() ?? this.variant());
+  private _parentOrSelfVariant = computed(() => this._parent?.embeddedIconVariant() ?? this.variant());
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       [
         `${this.sizeCollection()}collection`,
         this.size(),
       ],
-      this._safeVariant(),
+      this._parentOrSelfVariant(),
       this._iconSourceType(),
     ]),
   );

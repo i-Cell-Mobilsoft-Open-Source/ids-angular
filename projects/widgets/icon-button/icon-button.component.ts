@@ -31,14 +31,14 @@ const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.class]': '_hostClasses()',
-    '[attr.disabled]': '_safeDisabled() ? "" : null',
-    '[attr.aria-disabled]': '_safeDisabled()',
+    '[attr.disabled]': '_parentOrSelfDisabled() ? "" : null',
+    '[attr.aria-disabled]': '_parentOrSelfDisabled()',
   },
 })
 export class IdsIconButtonComponent {
   private readonly _componentClass = 'ids-icon-button';
 
-  private readonly _embeddedParent = inject(IDS_ICON_BUTTON_PARENT, { optional: true });
+  private readonly _parent = inject(IDS_ICON_BUTTON_PARENT, { optional: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_BUTTON_DEFAULT_CONFIG);
 
@@ -49,14 +49,14 @@ export class IdsIconButtonComponent {
 
   public icon = contentChildren(IdsIconComponent);
 
-  private _safeAppearance = computed(() => this._embeddedParent?.embeddedIconButtonAppearance() ?? this.appearance());
-  private _safeVariant = computed(() => this._embeddedParent?.embeddedIconButtonVariant() ?? this.variant());
-  private _safeDisabled = computed(() => this._embeddedParent?.disabled() ?? this.disabled());
+  private _parentOrSelfAppearance = computed(() => this._parent?.embeddedIconButtonAppearance() ?? this.appearance());
+  private _parentOrSelfVariant = computed(() => this._parent?.embeddedIconButtonVariant() ?? this.variant());
+  private _parentOrSelfDisabled = computed(() => this._parent?.disabled() ?? this.disabled());
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
-      this._safeAppearance(),
+      this._parentOrSelfAppearance(),
       this.size(),
-      this._safeVariant(),
+      this._parentOrSelfVariant(),
     ]),
   );
 

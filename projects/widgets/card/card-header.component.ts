@@ -1,6 +1,6 @@
 import { IdsCardSectionBase } from './card-section-base.directive';
 
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'ids-card-header,header[idsCardHeader]',
@@ -13,6 +13,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     <ng-content />
   `,
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'ids-card-header',
   },

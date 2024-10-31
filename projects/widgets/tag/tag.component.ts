@@ -3,6 +3,7 @@ import { IdsTagAppearanceType } from './types/tag-appearance.type';
 import { IdsTagVariantType } from './types/tag-variant.type';
 
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   InjectionToken,
@@ -25,6 +26,7 @@ const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
   imports: [],
   templateUrl: './tag.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': '_hostClasses()',
     '[type]': '_setType()',

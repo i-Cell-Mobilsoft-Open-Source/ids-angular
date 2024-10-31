@@ -2,7 +2,7 @@ import { IdsSnackbarGroupComponent } from './snackbar-group.component';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('SnackbarGroupComponent', () => {
+describe('IdsSnackbarGroupComponent', () => {
   let component: IdsSnackbarGroupComponent;
   let fixture: ComponentFixture<IdsSnackbarGroupComponent>;
 

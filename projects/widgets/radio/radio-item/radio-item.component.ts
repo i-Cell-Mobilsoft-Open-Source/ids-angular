@@ -1,7 +1,7 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
 import { IdsRadioChangeEvent } from '../types/radio-events.class';
 
-import { Component, computed, ElementRef, EventEmitter, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
@@ -12,6 +12,7 @@ let nextUniqueId = 0;
   imports: [],
   templateUrl: './radio-item.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': '_hostClasses()',
   },

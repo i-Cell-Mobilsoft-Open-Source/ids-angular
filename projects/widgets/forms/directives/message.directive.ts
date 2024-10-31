@@ -36,7 +36,7 @@ export class IdsMessageDirective implements OnInit {
   private _safeSize = computed(() => this._parentSize() ?? this.size());
   private _safeVariant = computed(() => this._parentVariant() ?? this.variant());
   private _disabled = signal<boolean>(false);
-  
+
   private _hostClasses = computed(() => createClassList(this._componentClass, [
     this._safeSize(),
     this._safeVariant(),
@@ -45,8 +45,8 @@ export class IdsMessageDirective implements OnInit {
 
   public ngOnInit(): void {
     if (this._parent) {
-      this._parentSize.set(this._parent.safeSize());
-      this._parentVariant.set(this._parent.safeVariant());
+      this._parentSize.set(this._parent.parentOrSelfSize());
+      this._parentVariant.set(this._parent.parentOrSelfVariant());
       this._disabled.set(this._parent.disabled());
     }
   }

@@ -4,6 +4,7 @@ import { IdsIconButtonAppearanceType } from './types/icon-button-appearance.type
 import { IdsIconButtonVariantType } from './types/icon-button-variant.type';
 
 import {
+  ChangeDetectionStrategy,
   Component,
   InjectionToken,
   ViewEncapsulation,
@@ -27,6 +28,7 @@ const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
   imports: [],
   templateUrl: './icon-button.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.class]': '_hostClasses()',
     '[attr.disabled]': '_safeDisabled() ? "" : null',

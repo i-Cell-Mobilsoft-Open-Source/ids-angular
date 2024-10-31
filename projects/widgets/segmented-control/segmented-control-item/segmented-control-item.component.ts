@@ -3,7 +3,7 @@ import { IdsSegmentedControlItemBase } from './segmented-control-item-base';
 import { IdsSegmentedControlDirective } from '../segmented-control.directive';
 import { IdsSegmentedControlItemChange } from '../types/segmented-control-item-change.class';
 
-import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnInit, ViewEncapsulation } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 let nextUniqueId = 0;
@@ -14,6 +14,7 @@ let nextUniqueId = 0;
   imports: [IdsIconComponent],
   templateUrl: './segmented-control-item.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsSegmentedControlItemComponent
   extends IdsSegmentedControlItemBase<IdsSegmentedControlDirective, IdsSegmentedControlItemChange>

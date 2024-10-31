@@ -2,15 +2,15 @@ import { IDS_OPTION_GROUP, IdsOptionGroupComponent } from './option-group.compon
 import { IDS_OPTION_PARENT_COMPONENT } from './option-parent';
 import { IdsOptionSelectionChange } from './types/option-events.class';
 
-import { IdsFormFieldVariantType } from '../form-field/types/form-field-variant.type';
-import { IDS_PSEUDO_CHECKBOX_PARENT_COMPONENT, IdsPseudoCheckboxParentComponent } from '../pseudo-checkbox/pseudo-checkbox-parent';
+import { IdsFormFieldVariant, IdsFormFieldVariantType } from '../form-field/types/form-field-variant.type';
+import { IDS_PSEUDO_CHECKBOX_PARENT, IdsPseudoCheckboxParent } from '../pseudo-checkbox/pseudo-checkbox-parent';
 import { PseudoCheckboxComponent } from '../pseudo-checkbox/pseudo-checkbox.component';
 
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { IdsCheckboxState } from '@i-cell/ids-angular/checkbox';
-import { coerceBooleanAttribute, ComponentBase, IdsSizeType } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
@@ -25,7 +25,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
-      provide: IDS_PSEUDO_CHECKBOX_PARENT_COMPONENT,
+      provide: IDS_PSEUDO_CHECKBOX_PARENT,
       useExisting: IdsOptionComponent,
     },
   ],
@@ -39,7 +39,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 })
 export class IdsOptionComponent<T = unknown>
   extends ComponentBase
-  implements OnInit, IdsPseudoCheckboxParentComponent<IdsFormFieldVariantType> {
+  implements OnInit, IdsPseudoCheckboxParent<IdsFormFieldVariantType> {
   protected override get _componentName(): string {
     return 'option';
   }
@@ -52,8 +52,8 @@ export class IdsOptionComponent<T = unknown>
 
   public selected = signal<boolean>(false);
   private _active = signal<boolean>(false);
-  public size = signal<IdsSizeType>(this._parent.parentSize());
-  public variant = signal<IdsFormFieldVariantType>(this._parent.parentVariant());
+  public size = computed(() => this._parent.parentSize());
+  public variant = computed(() =>  this._parent.parentVariant());
 
   public value = input<T>();
   public explicitViewValue = input<string | null>(null, { alias: 'viewValue' });
@@ -78,6 +78,8 @@ export class IdsOptionComponent<T = unknown>
   ]));
 
   protected _pseudoCheckboxState = computed(() => (this.selected() ? IdsCheckboxState.CHECKED : IdsCheckboxState.UNCHECKED));
+  public embeddedPseudoCheckboxSize = computed(() => this.size());
+  public embeddedPseudoCheckboxVariant = signal(IdsFormFieldVariant.SURFACE);
 
   constructor() {
     super();
@@ -88,8 +90,6 @@ export class IdsOptionComponent<T = unknown>
 
   public ngOnInit(): void {
     const parent = this._parent;
-    this.size.set(parent.parentSize());
-    this.variant.set(parent.parentVariant());
 
     if (parent.isOptionPreSelectedByValue(this.value())) {
       this.selected.set(true);
@@ -105,7 +105,7 @@ export class IdsOptionComponent<T = unknown>
 
   public selectViaInteraction(): void {
     if (!this._groupOrOptionIsDisabled()) {
-      this._emitSelectionChangeEvent(!this.selected());
+      this._emitSelectionChangeEvent(!this.selected(), true);
     }
   }
 
@@ -153,9 +153,9 @@ export class IdsOptionComponent<T = unknown>
     return this.viewValue();
   }
 
-  private _emitSelectionChangeEvent(selected: boolean): void {
+  private _emitSelectionChangeEvent(selected: boolean, isUserInput = false): void {
     if (this._multiSelect || !this.selected()) {
-      this.onSelectionChange.emit(new IdsOptionSelectionChange<T>(this, selected));
+      this.onSelectionChange.emit(new IdsOptionSelectionChange<T>(this, selected, isUserInput));
     }
   }
 }

@@ -1,4 +1,5 @@
-import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonDefaultConfig } from './icon-button-defaults';
+import { IDS_ICON_BUTTON_PARENT } from './public-api';
+import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonDefaultConfig } from './tokens/icon-button-defaults';
 import { IdsIconButtonAppearanceType } from './types/icon-button-appearance.type';
 import { IdsIconButtonVariantType } from './types/icon-button-variant.type';
 
@@ -30,12 +31,14 @@ const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.class]': '_hostClasses()',
-    '[disabled]': 'disabled() || null',
-    '[attr.aria-disabled]': 'disabled()',
+    '[attr.disabled]': '_safeDisabled() ? "" : null',
+    '[attr.aria-disabled]': '_safeDisabled()',
   },
 })
 export class IdsIconButtonComponent {
   private readonly _componentClass = 'ids-icon-button';
+
+  private readonly _embeddedParent = inject(IDS_ICON_BUTTON_PARENT, { optional: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_BUTTON_DEFAULT_CONFIG);
 
@@ -46,11 +49,14 @@ export class IdsIconButtonComponent {
 
   public icon = contentChildren(IdsIconComponent);
 
+  private _safeAppearance = computed(() => this._embeddedParent?.embeddedIconButtonAppearance() ?? this.appearance());
+  private _safeVariant = computed(() => this._embeddedParent?.embeddedIconButtonVariant() ?? this.variant());
+  private _safeDisabled = computed(() => this._embeddedParent?.disabled() ?? this.disabled());
   private _hostClasses = computed(() =>
     createClassList(this._componentClass, [
-      this.appearance(),
+      this._safeAppearance(),
       this.size(),
-      this.variant(),
+      this._safeVariant(),
     ]),
   );
 

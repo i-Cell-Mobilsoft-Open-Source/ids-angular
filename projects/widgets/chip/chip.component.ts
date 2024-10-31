@@ -20,7 +20,6 @@ const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
     IdsIconComponent,
   ],
   templateUrl: './chip.component.html',
-  styleUrl: './chip.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

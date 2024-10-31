@@ -59,6 +59,7 @@
 
   <app-control-table
     controls
+    [controlName]="'Form field'"
     [configType]="'input'"
     [controlConfig]="_formFieldInputControlConfig"
     [(model)]="formFieldModel"
@@ -66,6 +67,7 @@
   />
   <app-control-table
     controls
+    [controlName]="'Form field'"
     [configType]="'helper'"
     [controlConfig]="_formFieldHelperControlConfig"
     [(model)]="formFieldHelperModel"
@@ -73,6 +75,7 @@
   />
   <app-control-table
     controls
+    [controlName]="'Input / textarea'"
     [configType]="'input'"
     [controlConfig]="_inputInputControlConfig"
     [(model)]="inputModel"

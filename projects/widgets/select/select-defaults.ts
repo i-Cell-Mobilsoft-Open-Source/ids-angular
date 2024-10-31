@@ -19,6 +19,6 @@ export function IDS_SELECT_DEFAULT_CONFIG_FACTORY(): Required<IdsSelectDefaultCo
   return {
     errorStateMatcher: ErrorStateMatcher,
     successStateMatcher: SuccessStateMatcher,
-    typeaheadDebounceInterval: 100,
+    typeaheadDebounceInterval: 200,
   };
 }

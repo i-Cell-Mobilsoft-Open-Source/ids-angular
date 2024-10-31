@@ -63,15 +63,15 @@ export class IdsFormFieldComponent implements AfterContentInit, OnDestroy {
   public inputId = computed(() => this._child()?.id());
   public size = input<IdsSizeType>(this._defaultOptions.size);
   public variant = input<IdsFormFieldVariantType>(this._defaultOptions.variant);
-  public safeSize = computed(() => this._parentFieldset?.size() ?? this.size());
-  public safeVariant = computed(() => this._parentFieldset?.variant() ?? this.variant());
+  public parentOrSelfSize = computed(() => this._parentFieldset?.size() ?? this.size());
+  public parentOrSelfVariant = computed(() => this._parentFieldset?.variant() ?? this.variant());
   public control = computed(() => this._child()?.ngControl);
   public disabled = computed(() => Boolean(this._child()?.disabled()));
   private _hasErrorState = computed(() => Boolean(this._child()?.hasErrorState()));
   private _hasSuccessState = computed(() => Boolean(this._child()?.hasSuccessState()));
   private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this.safeSize(),
-    this.safeVariant(),
+    this.parentOrSelfSize(),
+    this.parentOrSelfVariant(),
     this.disabled() ? 'disabled' : null,
     this._hasErrorState() ? 'invalid' : null,
     this._hasSuccessState() ? 'valid' : null,

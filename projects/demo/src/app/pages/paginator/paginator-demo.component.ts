@@ -9,7 +9,7 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorComponent, IdsPaginatorPageButtonAppearance, IdsPaginatorPageButtonAppearanceType, IdsPaginatorVariant, IdsPaginatorVariantType } from '@i-cell/ids-angular/paginator';
+import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorComponent, IdsPaginatorPageButtonAppearance, IdsPaginatorPageButtonAppearanceType, IdsPaginatorPageChangeEvent, IdsPaginatorVariant, IdsPaginatorVariantType } from '@i-cell/ids-angular/paginator';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
@@ -77,7 +77,7 @@ export class PaginatorDemoComponent {
       control: 'checkbox',
     },
     showPrevNextLabel: {
-      description: 'Whether to display labels for "Previous" and "Next" buttons.',
+      description: 'Whether to display labels for "Previous" and "Next" buttons. Works only when compactLayout is true.',
       type: 'boolean',
       default: defaultConfig.showPrevNextLabel,
       control: 'checkbox',
@@ -150,8 +150,12 @@ export class PaginatorDemoComponent {
   public defaults = getDefaultFromDemoConfig<PaginatorInputControls>(this._inputControlConfig);
 
   public model: PaginatorInputControls = { ...this.defaults  };
-  
+
   public reset(): void {
     this.model = { ...this.defaults };
+  }
+
+  public onPageChange(event: IdsPaginatorPageChangeEvent): void {
+    console.info(event);
   }
 }

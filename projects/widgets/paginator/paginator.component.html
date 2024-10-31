@@ -30,7 +30,7 @@
     <ul class="ids-paginator__page-button-container">
       @for (pageButtonLabel of pageButtonLabels(); track pageButtonLabel) {
         <li>
-          @if (pageButtonLabel === "...") {
+          @if (pageButtonLabel === "tl" || pageButtonLabel === "tr") {
             <button type="button" disabled class="ids-paginator__page-button-truncation" [class]="pageButtonClasses()">
               <ids-icon fontIcon="more-horizontal" [size]="size()" />
             </button>
@@ -42,9 +42,9 @@
               [id]="pageButtonIdPrefix() + pageButtonLabel"
               [disabled]="disabled()"
               [class]="pageButtonClasses()"
-              [class.active]="+pageButtonLabel === pageIndex + 1"
+              [class.active]="+pageButtonLabel === _pageIndex() + 1"
               [attr.aria-label]="intl.getPageAriaLabel(pageButtonLabel)"
-              [attr.aria-current]="+pageButtonLabel === pageIndex + 1 ? 'page' : null"
+              [attr.aria-current]="+pageButtonLabel === _pageIndex() + 1 ? 'page' : null"
               (click)="stepPage(+pageButtonLabel - 1)"
             >
               <span>{{ pageButtonLabel }}</span>
@@ -83,6 +83,6 @@
   }
 
   <span class="ids-paginator__help-text" [class.sr-only]="!showPageInfo()">{{
-    intl.getRangeLabel(pageIndex, safePageSizeData().safePageSize, length())
+    intl.getRangeLabel(_pageIndex(), safePageSizeData().safePageSize, length())
   }}</span>
 </nav>

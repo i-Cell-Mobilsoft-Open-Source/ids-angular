@@ -63,21 +63,27 @@ export class IdsSwitchComponent {
   public labelPosition = input(this._defaultConfig.labelPosition);
   public isDisabled = signal(false);
   public ariaLabel = input<string| null>(null, { alias: 'aria-label' });
-  public ariaLabelledBy = input<string | null, string>(null, 
+  public ariaLabelledBy = input<string | null, string>(null,
     { alias: 'aria-labelledby', transform: (val) => fallbackValue(val, this.id()) },
   );
 
   public ariaDescribedBy = input<string | null>(null, { alias: 'aria-describedby' });
 
-  protected _safeSize = computed(() => this._switchGroup?.size() ?? this.size());
-  protected _safeHasIcon = computed(() => this._switchGroup?.hasIcon() ?? this.hasIcon());
-  protected _safeIconPosition = computed(() => this._switchGroup?.iconPosition() ?? this.iconPosition());
-  protected _safeLabelPosition = computed(() => this._switchGroup?.labelPosition() ?? this.labelPosition());
-  protected _hasHandleIcon = computed(() => this._safeHasIcon() && this._safeIconPosition() === IdsSwitchIconPosition.ONHANDLE);
-  protected _hasTrackIcon = computed(() => this._safeHasIcon() && this._safeIconPosition() === IdsSwitchIconPosition.ONTRACK);
+  protected _parentOrSelfSize = computed(() => this._switchGroup?.size() ?? this.size());
+  protected _parentOrSelfHasIcon = computed(() => this._switchGroup?.hasIcon() ?? this.hasIcon());
+  protected _parentOrSelfIconPosition = computed(() => this._switchGroup?.iconPosition() ?? this.iconPosition());
+  protected _parentOrSelfLabelPosition = computed(() => this._switchGroup?.labelPosition() ?? this.labelPosition());
+  protected _hasHandleIcon = computed(() =>
+    this._parentOrSelfHasIcon() && this._parentOrSelfIconPosition() === IdsSwitchIconPosition.ONHANDLE,
+  );
+
+  protected _hasTrackIcon = computed(() =>
+    this._parentOrSelfHasIcon() && this._parentOrSelfIconPosition() === IdsSwitchIconPosition.ONTRACK,
+  );
+
   private _isFocusable = computed(() => !this.isDisabled() && !this.readonly());
   private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this._safeSize(),
+    this._parentOrSelfSize(),
     this.variant(),
     this.isDisabled() ? 'disabled' : null,
     this.isChecked() ? 'on' : null,

@@ -68,14 +68,14 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
   public isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
   public isFocusable = computed(() => !this.disabled() && !this.readonly());
   private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this._safeSize(),
-    this._safeVariant(),
+    this._parentOrSelfSize(),
+    this._parentOrSelfVariant(),
     this.disabled() ? 'disabled' : null,
   ]),
   );
 
-  private _safeSize = computed(() => this._checkboxGroup?.size() ?? this.size());
-  private _safeVariant = computed(() => this._checkboxGroup?.variant() ?? this.variant());
+  private _parentOrSelfSize = computed(() => this._checkboxGroup?.size() ?? this.size());
+  private _parentOrSelfVariant = computed(() => this._checkboxGroup?.variant() ?? this.variant());
 
   private _onChange: (value: unknown) => void = () => { };
   private _onTouched: () => unknown = () => { };
@@ -167,7 +167,7 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
     this._checkboxState.set(IdsCheckboxState.CHECKED);
     this._onChange(this.isChecked());
   }
-  
+
   public deselect(): void {
     this._checkboxState.set(IdsCheckboxState.UNCHECKED);
     this._onChange(this.isChecked());

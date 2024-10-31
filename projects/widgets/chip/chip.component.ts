@@ -57,22 +57,22 @@ export class IdsChipComponent
 
   public removed = output<IdsChipRemoveEvent>();
 
-  private _safeAppearance = computed(() => this._chipGroup?.appearance() ?? this.appearance());
-  private _safeSize = computed(() => this._chipGroup?.size() ?? this.size());
-  private _safeDisabled = computed(() => this._chipGroup?.disabled() ?? this.disabled());
+  private _parentOrSelfAppearance = computed(() => this._chipGroup?.appearance() ?? this.appearance());
+  private _parentOrSelfSize = computed(() => this._chipGroup?.size() ?? this.size());
+  private _parentOrSelfDisabled = computed(() => this._chipGroup?.disabled() ?? this.disabled());
   private _safeRole = computed(() => (this.closable() ? null : 'button'));
   private _safeTabIndex = computed(() => (this.closable() || this.disabled() ? -1 : this.tabIndex()));
   protected _hostClasses = computed(() => this._getHostClasses([
-    this._safeAppearance(),
-    this._safeSize(),
+    this._parentOrSelfAppearance(),
+    this._parentOrSelfSize(),
     this.variant(),
-    this._safeDisabled() ? 'disabled' : null,
+    this._parentOrSelfDisabled() ? 'disabled' : null,
   ]));
 
   public embeddedAvatarVariant = computed<IdsAvatarVariantType>(() => IdsAvatarVariant.SURFACE);
   public embeddedIconButtonVariant = computed<IdsIconButtonVariantType>(() => {
     const chipVariant = this.variant();
-    const chipAppearance = this._safeAppearance();
+    const chipAppearance = this._parentOrSelfAppearance();
     if (chipAppearance === IdsChipAppearance.OUTLINED) {
       return chipVariant;
     }

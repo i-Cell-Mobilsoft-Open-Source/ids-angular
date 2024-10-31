@@ -5,15 +5,15 @@
   [attr.aria-expanded]="isExpanded ? 'true' : 'false'"
   [attr.aria-controls]="_contentId"
   [class]="_summaryClass"
-  [attr.tabindex]="_safeDisabled() ? -1 : 0"
-  [attr.aria-disabled]="_safeDisabled()"
+  [attr.tabindex]="_parentOrSelfDisabled() ? -1 : 0"
+  [attr.aria-disabled]="_parentOrSelfDisabled()"
   (click)="toggle()"
 >
-  @if (_safeHasLeadingIcon()) {
+  @if (_parentOrSelfHasLeadingIcon()) {
     <ids-icon icon-leading [fontIcon]="_icon" />
   }
   <span [class]="_titleClass">{{ summary() }}</span>
-  @if (_safeHasTrailingIcon()) {
+  @if (_parentOrSelfHasTrailingIcon()) {
     <ids-icon icon-trailing [fontIcon]="_icon" />
   }
 </div>

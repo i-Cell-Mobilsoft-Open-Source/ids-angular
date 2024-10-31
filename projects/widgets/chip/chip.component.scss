@@ -133,7 +133,8 @@ $variants: primary, secondary, surface, light, dark;
   @each $size in $sizes {
     &.ids-chip-group-#{$size} {
       padding: var(--ids-comp-chip-group-size-padding-y-#{$size}) var(--ids-comp-chip-group-size-padding-x-#{$size});
-      gap: var(--ids-comp-chip-group-size-gap-#{$size});
+      column-gap: var(--ids-comp-chip-group-size-column-gap-#{$size});
+      row-gap: var(--ids-comp-chip-group-size-row-gap-#{$size});
     }
   }
 }

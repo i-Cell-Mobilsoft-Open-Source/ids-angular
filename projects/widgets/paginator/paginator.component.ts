@@ -1,13 +1,14 @@
 import { DEFAULT_PAGE_SIZE, IDS_PAGINATOR_DEFAULT_CONFIG, IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY } from './paginator-defaults';
 import { IdsPaginatorIntl } from './paginator-intl';
 import { IdsPaginatorPageButtonAppearanceType } from './types/paginator-appearance.type';
-import { IdsPaginatorPageEvent } from './types/paginator-events.class';
+import { IdsPaginatorPageChangeEvent } from './types/paginator-events.class';
 import { IdsPaginatorVariantType } from './types/paginator-variant.type';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, inject, Input, input, isDevMode, numberAttribute, OnDestroy, Output, signal, ViewEncapsulation } from '@angular/core';
-import { createClassList, isNumberEven, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, DestroyRef, effect, ElementRef, inject, Input, input, isDevMode, output, signal, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { createClassList, isNumberEven, IdsSizeType, coerceNumberAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { debounceTime, Subject, Subscription } from 'rxjs';
+import { debounceTime, Subject } from 'rxjs';
 
 let nextUniqueId = 0;
 
@@ -26,23 +27,23 @@ const defaultOptions = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
     '(keydown)': '_handleKeyDown($event)',
   },
 })
-export class IdsPaginatorComponent implements OnDestroy {
+export class IdsPaginatorComponent {
   private readonly _componentClass = 'ids-paginator';
   private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _hostElementRef = inject(ElementRef);
+  private readonly _destroyRef = inject(DestroyRef);
   private readonly _defaultOptions = {
     ...defaultOptions,
     ...inject(IDS_PAGINATOR_DEFAULT_CONFIG, { optional: true }),
   };
 
-  private _pageEventDebouncer = new Subject<IdsPaginatorPageEvent>();
-  private _pageEventDebouncerSubscription = new Subscription();
+  private _pageEventDebouncer = new Subject<IdsPaginatorPageChangeEvent>();
 
   public readonly intl = inject(IdsPaginatorIntl);
 
   public id = input<string>(this._uniqueId);
-  public pageSize = input<number>(this._defaultOptions.pageSize);
+  public pageSize = input<number, unknown>(this._defaultOptions.pageSize, { transform: coerceNumberAttribute });
   public pageSizeOptions = input<number[]>(this._defaultOptions.pageSizeOptions);
   public showFirstLastButton = input<boolean>(this._defaultOptions.showFirstLastButton);
   public showPrevNextLabel = input<boolean>(this._defaultOptions.showPrevNextLabel);
@@ -53,7 +54,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   public size = input<IdsSizeType>(this._defaultOptions.size);
   public variant = input<IdsPaginatorVariantType>(this._defaultOptions.variant);
   public pageButtonAppearance = input<IdsPaginatorPageButtonAppearanceType>(this._defaultOptions.pageButtonAppearance);
-  public length = input.required<number, number>({ transform: numberAttribute });
+  public length = input.required<number, number>({ transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
   public compactLayout = input<boolean>(false);
 
@@ -68,12 +69,10 @@ export class IdsPaginatorComponent implements OnDestroy {
 
   public pageButtonClasses = computed(() => createClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
 
-  private _intlChanges?: Subscription;
-
   public safePageSizeData = computed(() => this._getSafePageSizeData(this.pageSizeOptions(), this.pageSize()));
   public pageButtonIdPrefix = computed(() => `${this.id()}__page-button-`);
 
-  @Input({ transform: numberAttribute })
+  @Input({ transform: coerceNumberAttribute })
   get pageIndex(): number {
     return this._pageIndex();
   }
@@ -82,9 +81,18 @@ export class IdsPaginatorComponent implements OnDestroy {
     this._pageIndex.set(Math.max(value || 0, 0));
   }
 
-  private _pageIndex = signal(0);
+  private _pageIndexValidation = effect(() => {
+    const numberOfPages = this._numberOfPages();
+    if (numberOfPages < (this._pageIndex() + 1)) {
+      this.stepPage(0);
+    }
+  },
+  { allowSignalWrites: true },
+  );
 
-  private _getNumberOfPages = computed(() => {
+  protected _pageIndex = signal(0);
+
+  private _numberOfPages = computed(() => {
     if (!this.pageSize()) {
       return 0;
     }
@@ -96,7 +104,7 @@ export class IdsPaginatorComponent implements OnDestroy {
   );
 
   private _hasNextPage = computed(() => {
-    const maxPageIndex = this._getNumberOfPages() - 1;
+    const maxPageIndex = this._numberOfPages() - 1;
     return this._pageIndex() < maxPageIndex && this.pageSize() !== 0;
   });
 
@@ -107,10 +115,12 @@ export class IdsPaginatorComponent implements OnDestroy {
   public pageButtonLabels = computed<string[]>(() => {
     return this.compactLayout()
       ? []
-      : this._getPageButtonLabels(this._pageIndex(), this._getNumberOfPages(), this.showAllPages(), this.maxDisplayedItemCount());
+      : this._getPageButtonLabels(
+        this._pageIndex(), this._numberOfPages(), this.showAllPages(), this.maxDisplayedItemCount(), this.showPageButtons(),
+      );
   });
 
-  @Output() public readonly page: EventEmitter<IdsPaginatorPageEvent> = new EventEmitter<IdsPaginatorPageEvent>();
+  public pageChanged = output<IdsPaginatorPageChangeEvent>();
 
   private _handleKeyDown(event: KeyboardEvent): void {
     event.stopPropagation();
@@ -148,11 +158,15 @@ export class IdsPaginatorComponent implements OnDestroy {
   }
 
   constructor() {
-    this._intlChanges = this.intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
-    this._pageEventDebouncerSubscription = this._pageEventDebouncer.pipe(
+    this.intl.changes.pipe(
+      takeUntilDestroyed(this._destroyRef),
+    ).subscribe(() => this._changeDetectorRef.markForCheck());
+
+    this._pageEventDebouncer.pipe(
       debounceTime(this._defaultOptions.debounceTime),
+      takeUntilDestroyed(this._destroyRef),
     ).subscribe((pageEvent) => {
-      this.page.emit(pageEvent);
+      this.pageChanged.emit(pageEvent);
     });
   }
 
@@ -177,9 +191,18 @@ export class IdsPaginatorComponent implements OnDestroy {
     };
   }
 
-  private _getPageButtonLabels(pageIndex: number, numberOfPages: number, showAllPages: boolean, maxDisplayedItemCount: number): string[] {
+  private _getPageButtonLabels(
+    pageIndex: number, numberOfPages: number, showAllPages: boolean, maxDisplayedItemCount: number, enabled: boolean,
+  ): string[] {
     const allPages = [...Array(numberOfPages).keys()].map((item) => (item + 1).toString());
-    return showAllPages ? allPages : this._getTruncatedPageLabels(allPages, pageIndex, maxDisplayedItemCount);
+    if (!enabled) {
+      return [];
+    }
+    if (showAllPages || numberOfPages <= maxDisplayedItemCount) {
+      return allPages;
+    }
+
+    return this._getTruncatedPageLabels(allPages, pageIndex, maxDisplayedItemCount);
   }
 
   private _getTruncatedPageLabels(
@@ -196,13 +219,12 @@ export class IdsPaginatorComponent implements OnDestroy {
     const isTruncatedRight = actualPage <= center;
     const isTruncatedBoth = actualPage > center && actualPage <= lastPage - center;
     const isTruncatedLeft = actualPage > lastPage - center;
-    const truncation = '...';
 
     if (isTruncatedRight) {
       const x = maxDisplayedItemCount - 2; // 2 = 1 last page, 1 truncation
       return [
         ...allPages.slice(0, x),
-        truncation,
+        'tr',
         lastPage.toString(),
       ];
     }
@@ -212,9 +234,9 @@ export class IdsPaginatorComponent implements OnDestroy {
       const x = (maxDisplayedItemCount - 5) / 2; // 5 = 1 fist page + 1 last page + 2 truncation + 1 actual page
       return [
         '1',
-        truncation,
+        'tl',
         ...allPages.slice(pageIndex - x, pageIndex + x + 1),
-        truncation,
+        'tr',
         lastPage.toString(),
       ];
     }
@@ -223,7 +245,7 @@ export class IdsPaginatorComponent implements OnDestroy {
       const x = maxDisplayedItemCount - 2; // 2 = 1 last page, 1 truncation
       return [
         '1',
-        truncation,
+        'tl',
         ...allPages.slice(lastPage - x),
       ];
     }
@@ -256,7 +278,7 @@ export class IdsPaginatorComponent implements OnDestroy {
     if (!this._hasNextPage()) {
       return;
     }
-    this.stepPage(this._getNumberOfPages() - 1);
+    this.stepPage(this._numberOfPages() - 1);
   }
 
   public stepPage(pageIndex: number): void {
@@ -272,10 +294,5 @@ export class IdsPaginatorComponent implements OnDestroy {
       pageSize: this.pageSize(),
       length: this.length(),
     });
-  }
-
-  public ngOnDestroy(): void {
-    this._intlChanges?.unsubscribe();
-    this._pageEventDebouncerSubscription.unsubscribe();
   }
 }

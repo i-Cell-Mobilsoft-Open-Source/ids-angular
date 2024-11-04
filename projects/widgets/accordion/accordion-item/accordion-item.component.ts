@@ -40,14 +40,14 @@ export class IdsAccordionItemComponent extends ComponentBase {
   protected _summaryClass = `${this._hostClassName}-summary`;
   protected _titleClass = `${this._hostClassName}-title`;
   protected _contentClass = `${this._hostClassName}-content`;
-  protected _headerId = `${this.id()}-header`;
-  protected _contentId = `${this.id()}-content`;
 
   public summary = input<string | null>();
   public disabled = input<boolean>(false);
   public hasLeadingIcon = input(false, { transform: coerceBooleanAttribute });
   public hasTrailingIcon = input(this._accordion.hasTrailingIcon(), { transform: coerceBooleanAttribute });
 
+  protected _headerId = computed(() => `${this.id()}-header`);
+  protected _contentId = computed(() => `${this.id()}-content`);
   protected _parentOrSelfHasLeadingIcon = computed(() => this._accordion.hasLeadingIcon() ?? this.hasLeadingIcon());
   protected _parentOrSelfHasTrailingIcon = computed(() => this._accordion.hasTrailingIcon() ?? this.hasTrailingIcon());
   protected _parentOrSelfDisabled = computed(() => this._accordion.disabled() || this.disabled());

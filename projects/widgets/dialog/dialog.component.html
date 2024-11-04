@@ -4,7 +4,7 @@
       <ng-container [ngTemplateOutlet]="customHeader()!.template" />
     } @else {
       <div class="ids-dialog-header-default-content">
-        <h2 class="ids-dialog-title" [id]="dialogTitleId">{{ mainTitle() }}</h2>
+        <h2 class="ids-dialog-title" [id]="titleId()">{{ mainTitle() }}</h2>
         @if (subTitle()) {
           <h3 class="ids-dialog-subtitle">{{ subTitle() }}</h3>
         }

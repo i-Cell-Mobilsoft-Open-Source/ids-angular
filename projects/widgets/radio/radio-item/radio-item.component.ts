@@ -1,10 +1,8 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
 import { IdsRadioChangeEvent } from '../types/radio-events.class';
 
-import { ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
-import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
-
-let nextUniqueId = 0;
+import { ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, inject, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { coerceNumberAttribute, ComponentBase, createComponentError } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-radio-item',
@@ -13,16 +11,13 @@ let nextUniqueId = 0;
   templateUrl: './radio-item.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[class]': '_hostClasses()',
-  },
 })
-export class IdsRadioItemComponent implements OnInit {
-  private readonly _componentClass = 'ids-radio-item';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  public readonly injector = inject(Injector);
+export class IdsRadioItemComponent extends ComponentBase implements OnInit {
+  protected override get _componentName(): string {
+    return 'radio-item';
+  }
 
-  private _parent!: IdsRadioGroupDirective;
+  private _group = inject(IdsRadioGroupDirective, { optional: true, skipSelf: true });
 
   public selected = signal<boolean>(false);
 
@@ -34,13 +29,13 @@ export class IdsRadioItemComponent implements OnInit {
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
 
-  public isDisabled = computed(() => this.disabled() || this._parent.isDisabled());
-  public name = computed(() => this._parent.name());
-  public required = computed(() => this._parent.required());
+  public isDisabled = computed(() => this.disabled() || this._group?.isDisabled());
+  public name = computed(() => this._group?.name());
+  public required = computed(() => this._group?.required());
   public ariaChecked = computed(() => this.selected());
-  private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this._parent.variant() ?? null,
-    this._parent.labelPosition() ?? null,
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this._group?.variant() ?? null,
+    this._group?.labelPosition() ?? null,
     this.isDisabled() ? 'disabled' : null,
   ]));
 
@@ -48,16 +43,11 @@ export class IdsRadioItemComponent implements OnInit {
 
   @Output() public readonly changes = new EventEmitter<IdsRadioChangeEvent>();
 
-  constructor() {
-    const parent = this.injector.get(IdsRadioGroupDirective, null, { optional: true, skipSelf: true });
-    if (!parent) {
+  public ngOnInit(): void {
+    if (!this._group) {
       throw new Error(createComponentError(this._componentClass, 'component must be direct child of a radio group'));
     }
-    this._parent = parent;
-  }
-
-  public ngOnInit(): void {
-    if (this._parent.isItemPreSelectedByValue(this.value())) {
+    if (this._group.isItemPreSelectedByValue(this.value())) {
       this.selected.set(true);
     }
   }

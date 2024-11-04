@@ -16,7 +16,6 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
 type SwitchInputControls = {
   label: string,
-  required: boolean,
   readonly: boolean,
   size: IdsSizeType,
   variant: IdsSwitchVariantType,
@@ -62,12 +61,6 @@ export class SwitchDemoComponent {
       type: 'string',
       default: '-',
       demoDefault: 'Switch label',
-    },
-    required: {
-      description: 'Whether the switch is required or not.',
-      type: 'boolean',
-      default: false,
-      control: 'checkbox',
     },
     readonly: {
       description: 'Whether the switch is readonly or not.',

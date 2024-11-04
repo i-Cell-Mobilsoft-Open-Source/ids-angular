@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, createComponentError, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
@@ -80,7 +80,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
 
   public ngOnInit(): void {
     if (this.fontIcon() && this.svgIconName()) {
-      throw new Error(createComponentError(this._hostClassName, 'Font icon and svg icon can not be used together!'));
+      throw new Error(this._createHostError('Font icon and svg icon can not be used together!'));
     }
   }
 
@@ -121,7 +121,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
     const svg = div.querySelector('svg') as SVGElement;
 
     if (!svg) {
-      throw new Error(createComponentError(this._hostClassName, 'Svg element creation failed!'));
+      throw new Error(this._createHostError('Svg element creation failed!'));
     }
 
     return svg;

@@ -2,7 +2,7 @@ import { IdsRadioGroupDirective } from '../radio-group.directive';
 import { IdsRadioChangeEvent } from '../types/radio-events.class';
 
 import { ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, inject, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
-import { coerceNumberAttribute, ComponentBase, createComponentError } from '@i-cell/ids-angular/core';
+import { coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-radio-item',
@@ -45,7 +45,7 @@ export class IdsRadioItemComponent extends ComponentBase implements OnInit {
 
   public ngOnInit(): void {
     if (!this._group) {
-      throw new Error(createComponentError(this._hostClassName, 'component must be direct child of a radio group'));
+      throw new Error(this._createHostError('component must be direct child of a radio group'));
     }
     if (this._group.isItemPreSelectedByValue(this.value())) {
       this.selected.set(true);

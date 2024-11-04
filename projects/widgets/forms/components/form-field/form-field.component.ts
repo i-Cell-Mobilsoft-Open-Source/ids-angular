@@ -13,7 +13,7 @@ import { IdsSuccessMessageComponent } from '../message/success-message/success-m
 
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, inject, input, isDevMode, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ComponentBaseWithDefaults, createComponentError, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
 const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
@@ -90,7 +90,7 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
 
   public ngAfterContentInit(): void {
     if (isDevMode() && !this._child()) {
-      throw new Error(createComponentError(this._hostClassName, 'no form element was provided'));
+      throw new Error(this._createHostError('no form element was provided'));
     }
     this._child()?.ngControl?.statusChanges?.pipe(takeUntil(this._destroyed)).subscribe(() => {
       this._changeDetectorRef.markForCheck();

@@ -1,4 +1,4 @@
-import { IDS_INPUT_DEFAULT_CONFIG, IDS_INPUT_DEFAULT_CONFIG_FACTORY } from './input-defaults';
+import { IDS_INPUT_DEFAULT_CONFIG, IDS_INPUT_DEFAULT_CONFIG_FACTORY, IdsInputDefaultConfig } from './input-defaults';
 import { IdsInputType } from './types/input.type';
 
 import { AbstractErrorStateMatcher, ErrorStateTracker } from '../../common/error/error-state';
@@ -8,12 +8,10 @@ import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-tokens';
 
 import { computed, Directive, effect, ElementRef, inject, input, isDevMode, DoCheck, signal, OnDestroy, OnInit } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 
-let nextUniqueId = 0;
-
-const defaultOptions = IDS_INPUT_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_INPUT_DEFAULT_CONFIG_FACTORY();
 
 const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
   'button',
@@ -43,8 +41,6 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
     },
   ],
   host: {
-    '[id]': 'id()',
-    '[class]': '_hostClasses()',
     '[attr.placeholder]': 'placeholder()',
     '[attr.disabled]': 'isDisabled() ? "" : null',
     '[attr.readonly]': 'readonly() ? "" : null',
@@ -52,16 +48,18 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
     '(blur)': '_focusChanged(false)',
   },
 })
-export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, OnDestroy {
-  private readonly _componentClass = 'ids-input';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+export class IdsInputDirective
+  extends ComponentBaseWithDefaults<IdsInputDefaultConfig>
+  implements IdsFormFieldControl, OnInit, DoCheck, OnDestroy {
+  protected override get _hostName(): string {
+    return 'input';
+  }
+
   private readonly _elementRef = inject<ElementRef<HTMLInputElement> | ElementRef<HTMLTextAreaElement>>(ElementRef);
   private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
   private readonly _parentForm = inject(NgForm, { optional: true });
-  private readonly _defaultOptions = {
-    ...defaultOptions,
-    ...inject(IDS_INPUT_DEFAULT_CONFIG, { optional: true }),
-  };
+
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_INPUT_DEFAULT_CONFIG);
 
   public readonly errorStateChanges = new Subject<void>();
   public readonly successStateChanges = new Subject<void>();
@@ -73,7 +71,6 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
   private _successStateTracker?: SuccessStateTracker;
   private _successStateSubscription?: Subscription;
 
-  public id = input<string>(this._uniqueId);
   public placeholder = input<string>('');
   public name = input<string>();
   public type = input<IdsInputType>('text');
@@ -83,11 +80,10 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
   private _controlDisabled = signal(false);
   public isDisabled = computed(() => this.disabled() || this._controlDisabled());
   public canHandleSuccessState = input<boolean>(false);
-  public errorStateMatcher = input<AbstractErrorStateMatcher>(inject(this._defaultOptions.errorStateMatcher));
-  public successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultOptions.successStateMatcher));
+  public errorStateMatcher = input<AbstractErrorStateMatcher>(inject(this._defaultConfig.errorStateMatcher));
+  public successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultConfig.successStateMatcher));
 
-  public inputId = computed(() => this.id() || this._uniqueId);
-  private _hostClasses = computed(() => createClassList(this._componentClass, [], [formFieldControlClass]),
+  protected _hostClasses = computed(() => this._getHostClasses([], [formFieldControlClass]),
   );
 
   public hasErrorState = signal<boolean>(false);
@@ -158,7 +154,7 @@ export class IdsInputDirective implements IdsFormFieldControl, OnInit, DoCheck, 
 
   private _validateType(type: IdsInputType): void {
     if (isDevMode() && IDS_INPUT_INVALID_TYPES.indexOf(type) > -1) {
-      throw createComponentError(this._componentClass, `Input type ${type} is not supportedby idsInput`);
+      throw this._createHostError(`Input type ${type} is not supportedby idsInput`);
     }
   }
 

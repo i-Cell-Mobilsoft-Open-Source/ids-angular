@@ -53,7 +53,6 @@ export class IdsSwitchComponent {
   public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
   public label = input<string>();
   public name = input<string | null>();
-  public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
@@ -87,6 +86,10 @@ export class IdsSwitchComponent {
     this.variant(),
     this.isDisabled() ? 'disabled' : null,
     this.isChecked() ? 'on' : null,
+    [
+      'label',
+      this._parentOrSelfLabelPosition(),
+    ],
   ]),
   );
 

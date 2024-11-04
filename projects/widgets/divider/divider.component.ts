@@ -4,13 +4,12 @@ import { IdsDividerVariantType } from './public-api';
 import {
   ChangeDetectionStrategy,
   Component,
-  InjectionToken,
   ViewEncapsulation,
   computed,
-  inject,
   input,
 } from '@angular/core';
 import {
+  ComponentBaseWithDefaults,
   createClassList,
   IdsOrientation,
   IdsOrientationType,
@@ -27,13 +26,14 @@ const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '_hostClasses()',
     '[style.width]': '_safeWidth()',
     '[style.height]': '_safeHeight()',
   },
 })
-export class IdsDividerComponent {
-  private readonly _componentClass = 'ids-divider';
+export class IdsDividerComponent extends ComponentBaseWithDefaults<IdsDividerDefaultConfig> {
+  protected override get _componentName(): string {
+    return 'divider';
+  }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIVIDER_DEFAULT_CONFIG);
 
@@ -45,19 +45,11 @@ export class IdsDividerComponent {
   private _safeWidth = computed(() => (this.orientation() === IdsOrientation.HORIZONTAL ? this.width() : null));
   private _safeHeight = computed(() => (this.orientation() === IdsOrientation.VERTICAL ? this.height() : null));
 
-  private _hostClasses = computed(() =>
+  protected _hostClasses = computed(() =>
     createClassList(this._componentClass, [
       this.orientation(),
       this.size(),
       this.variant(),
     ]),
   );
-
-  // eslint-disable-next-line @stylistic/js/max-len
-  protected _getDefaultConfig(defaultConfig: Required<IdsDividerDefaultConfig>, injectionToken: InjectionToken<IdsDividerDefaultConfig>): Required<IdsDividerDefaultConfig> {
-    return {
-      ...defaultConfig,
-      ...inject(injectionToken, { optional: true }),
-    };
-  }
 }

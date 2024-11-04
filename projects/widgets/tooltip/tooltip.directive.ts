@@ -9,8 +9,9 @@ import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, inject, input, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { coerceStringAttribute, DirectiveBaseWithDefaults, IdsSizeType, WindowResizeService } from '@i-cell/ids-angular/core';
-import { filter, Subject, takeUntil } from 'rxjs';
+import { filter } from 'rxjs';
 
 const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
 const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true });
@@ -35,7 +36,6 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TOOLTIP_DEFAULT_CONFIG);
 
   private readonly _passiveListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];
-  private readonly _destroyed = new Subject<void>();
 
   private _componentRef?: ComponentRef<IdsTooltipComponent> | null;
   private _tooltipInstance: IdsTooltipComponent | null = null;
@@ -62,7 +62,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     this._scrollDispatcher.ancestorScrolled(this._elementRef, this._defaultConfig.scrollDebounceTime)
       .pipe(
         filter(() => Boolean(this._tooltipInstance)),
-        takeUntil(this._destroyed),
+        takeUntilDestroyed(this._destroyRef),
       )
       .subscribe(() => {
         this._ngZone.run(() => {
@@ -80,7 +80,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
 
     this._focusMonitor
       .monitor(this._elementRef)
-      .pipe(takeUntil(this._destroyed))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((origin) => {
         if (!origin) {
           this._ngZone.run(() => this.hide(0));
@@ -110,7 +110,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     });
     instance
       .afterHidden()
-      .pipe(takeUntil(this._destroyed))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(() => this._destroyComponent());
     this._updateTooltipMessage();
     instance.show(delay);
@@ -277,9 +277,6 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
       nativeElement.removeEventListener(event, listener, passiveListenerOptions);
     });
     this._passiveListeners.length = 0;
-
-    this._destroyed.next();
-    this._destroyed.complete();
 
     this._focusMonitor.stopMonitoring(nativeElement);
   }

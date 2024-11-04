@@ -1,15 +1,13 @@
 import { computed, Directive, input } from '@angular/core';
-import { createClassList } from '@i-cell/ids-angular/core';
+import { DirectiveBase } from '@i-cell/ids-angular/core';
 
-@Directive({
-  host: {
-    '[class]': '_hostClasses()',
-  },
-})
-export abstract class IdsCardSectionBase {
-  private readonly _componentClass = 'ids-card-section';
+@Directive({})
+export abstract class IdsCardSectionBase extends DirectiveBase {
+  protected override get _hostName(): string {
+    return 'card-section';
+  }
 
   public stretch = input(false);
 
-  private _hostClasses = computed(() => createClassList(this._componentClass, [this.stretch() ? 'stretched' : 'padded']));
+  protected _hostClasses = computed(() => this._getHostClasses([this.stretch() ? 'stretched' : 'padded']));
 }

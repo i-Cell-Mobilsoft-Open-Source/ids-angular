@@ -2,21 +2,8 @@ import { IDS_DIALOG_DEFAULT_CONFIG, IDS_DIALOG_DEFAULT_CONFIG_FACTORY, IdsDialog
 import { IdsDialogHeaderDirective } from './dialog-header.directive';
 
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  computed,
-  contentChild,
-  inject,
-  input,
-} from '@angular/core';
-import {
-  ComponentBaseWithDefaults,
-  IdsDetectScrollableDirective,
-  IdsSizeType,
-} from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, contentChild, inject, input } from '@angular/core';
+import { ComponentBaseWithDefaults, IdsDetectScrollableDirective, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 

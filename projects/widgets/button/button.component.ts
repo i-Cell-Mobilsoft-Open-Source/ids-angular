@@ -2,19 +2,8 @@ import { IDS_BUTTON_DEFAULT_CONFIG, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IdsButton
 import { IdsButtonAppearanceType } from './types/button-appearance.type';
 import { IdsButtonVariantType } from './types/button-variant.type';
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  input,
-} from '@angular/core';
-import {
-  ComponentBaseWithDefaults,
-  IdsSizeType,
-  coerceBooleanAttribute,
-} from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
+import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 

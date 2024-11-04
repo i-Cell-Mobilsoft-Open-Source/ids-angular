@@ -11,10 +11,10 @@ import { IdsErrorMessageComponent } from '../message/error-message/error-message
 import { IdsHintMessageComponent } from '../message/hint-message/hint-message.component';
 import { IdsSuccessMessageComponent } from '../message/success-message/success-message.component';
 
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, inject, input, isDevMode, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, inject, input, isDevMode, viewChild, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Validators } from '@angular/forms';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
-import { Subject, takeUntil } from 'rxjs';
 
 const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
@@ -32,7 +32,7 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
     },
   ],
 })
-export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFieldDefaultConfig> implements AfterContentInit, OnDestroy {
+export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFieldDefaultConfig> implements AfterContentInit {
   protected override get _hostName(): string {
     return 'form-field';
   }
@@ -40,8 +40,6 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _parentFieldset = inject(IdsFieldsetComponent, { optional: true });
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_FORM_FIELD_DEFAULT_CONFIG);
-
-  private readonly _destroyed = new Subject<void>();
 
   private _fieldWrapper = viewChild.required<ElementRef<HTMLElement>>('fieldWrapper');
   private _child = contentChild(IDS_FORM_FIELD_CONTROL);
@@ -92,7 +90,7 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
     if (isDevMode() && !this._child()) {
       throw new Error(this._createHostError('no form element was provided'));
     }
-    this._child()?.ngControl?.statusChanges?.pipe(takeUntil(this._destroyed)).subscribe(() => {
+    this._child()?.ngControl?.statusChanges?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this._changeDetectorRef.markForCheck();
     });
   }
@@ -118,9 +116,5 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
     if (containerClick) {
       containerClick(event);
     }
-  }
-
-  public ngOnDestroy(): void {
-    this._destroyed.next();
   }
 }

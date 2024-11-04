@@ -1,11 +1,11 @@
 import { IdsActionMenuTriggerDirective } from './action-menu-trigger.directive';
 
-import { IdsButtonComponent } from '../button';
-import { IdsMenuItemComponent } from '../menu-item';
-import { IdsOverlayPanelComponent } from '../overlay-panel';
+import { IdsMenuItemComponent } from '../menu-item/menu-item.component';
 
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';
 
 @Component({
   standalone: true,

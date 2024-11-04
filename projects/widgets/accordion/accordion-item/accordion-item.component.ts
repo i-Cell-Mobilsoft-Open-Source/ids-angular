@@ -37,9 +37,6 @@ export class IdsAccordionItemComponent extends ComponentBase {
   private _accordion = inject(IdsAccordionComponent, { skipSelf: true });
   private _accordionItem = inject(CdkAccordionItem);
   private _accordionHeader = viewChild.required<ElementRef<HTMLElement>>('header');
-  protected _summaryClass = `${this._hostClassName}-summary`;
-  protected _titleClass = `${this._hostClassName}-title`;
-  protected _contentClass = `${this._hostClassName}-content`;
 
   public summary = input<string | null>();
   public disabled = input<boolean>(false);

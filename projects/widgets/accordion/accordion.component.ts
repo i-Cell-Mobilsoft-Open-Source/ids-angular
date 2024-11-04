@@ -3,15 +3,7 @@ import { IdsAccordionItemComponent } from './accordion-item/accordion-item.compo
 import { IdsAccordionAppearanceType } from './types/accordion-appearance.type';
 
 import { CdkAccordion } from '@angular/cdk/accordion';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  contentChildren,
-  inject,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, ViewEncapsulation } from '@angular/core';
 import { IdsButtonAppearanceType, IdsButtonComponent, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 
@@ -46,7 +38,6 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   private _items = contentChildren<IdsAccordionItemComponent>(IdsAccordionItemComponent);
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ACCORDION_DEFAULT_CONFIG);
-  protected _controlsClass = `${this._hostClassName}-controls`;
 
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public appearance = input<IdsAccordionAppearanceType>(this._defaultConfig.appearance);

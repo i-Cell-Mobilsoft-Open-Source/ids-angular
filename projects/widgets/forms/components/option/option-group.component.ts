@@ -24,7 +24,6 @@ export class IdsOptionGroupComponent extends ComponentBase {
     return 'option-group';
   }
 
-  protected readonly _labelClass = `${this._hostClassName}__label`;
   private readonly _parent = inject(IDS_OPTION_PARENT_COMPONENT);
   protected readonly _inert = this._parent?.inertGroups ?? false;
 

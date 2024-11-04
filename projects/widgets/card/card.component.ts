@@ -3,23 +3,8 @@ import { IdsCardHeaderComponent } from './card-header.component';
 import { IdsCardAppearanceType } from './types/card-appearances.type';
 import { IdsCardVariantType } from './types/card-variant.type';
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewEncapsulation,
-  computed,
-  input,
-  signal,
-} from '@angular/core';
-import {
-  ComponentBaseWithDefaults,
-  IdsOrientationType,
-  IdsSizeType,
-  coerceBooleanAttribute,
-} from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewEncapsulation, computed, input, signal } from '@angular/core';
+import { ComponentBaseWithDefaults, IdsOrientationType, IdsSizeType, coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
 

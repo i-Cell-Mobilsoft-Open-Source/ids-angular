@@ -24,8 +24,6 @@ export class IdsFieldsetComponent extends ComponentBaseWithDefaults<IdsFieldsetD
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsFormFieldVariantType>(this._defaultConfig.variant);
   public legend = input<string>('');
-  protected _legendClass = `${this._hostClassName}-legend`;
-  protected _messageClass = `${this._hostClassName}-message`;
 
   private _fieldsetMessage = contentChildren<IdsFieldsetMessageDirective>(IdsFieldsetMessageDirective);
 

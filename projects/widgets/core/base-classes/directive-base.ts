@@ -1,26 +1,20 @@
 import { createClassList } from '../utils/class-prefix';
 
-import { DestroyRef, Directive, inject, InjectionToken, input, Signal } from '@angular/core';
-import { fallbackValue } from '@i-cell/ids-angular/core';
-
-let nextUniqueId = 0;
+import { DestroyRef, Directive, inject, InjectionToken, Signal } from '@angular/core';
 
 @Directive({
   host: {
-    '[id]': 'id()',
     '[class]': '_hostClasses()',
   },
 })
-export abstract class ComponentBase {
+export abstract class DirectiveBase {
   protected get _componentName(): string {
     return '';
   }
 
   protected readonly _componentClass = `ids-${this._componentName}`;
-  protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  protected readonly _destroyRef = inject(DestroyRef);
 
-  public readonly id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
+  protected readonly _destroyRef = inject(DestroyRef);
 
   protected abstract _hostClasses: Signal<string>;
   protected _getHostClasses(
@@ -35,7 +29,7 @@ export abstract class ComponentBase {
   }
 }
 
-export abstract class ComponentBaseWithDefaults<D> extends ComponentBase {
+export abstract class DirectiveBaseWithDefaults<D> extends DirectiveBase {
   protected abstract readonly _defaultConfig: D;
 
   protected _getDefaultConfig(defaultConfig: Required<D>, injectionToken: InjectionToken<D>): Required<D> {

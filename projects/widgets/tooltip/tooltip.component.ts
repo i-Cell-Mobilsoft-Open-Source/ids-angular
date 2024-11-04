@@ -5,10 +5,8 @@ import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } 
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { createClassList, ConnectedPosition, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ConnectedPosition, IdsSizeType, ComponentBase } from '@i-cell/ids-angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
-
-let nextUniqueId = 0;
 
 @Component({
   selector: 'ids-tooltip',
@@ -18,21 +16,20 @@ let nextUniqueId = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[id]': 'id',
-    '[class]': '_hostClasses()',
     '[style.top]': '_hostPositionTop()',
     '[style.left]': '_hostPositionLeft()',
   },
 })
-export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
-  private readonly _componentClass = 'ids-tooltip';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+export class IdsTooltipComponent extends ComponentBase implements AfterViewInit, OnDestroy {
+  protected override get _componentName(): string {
+    return 'tooltip';
+  }
+
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _onHide: Subject<void> = new Subject();
   private readonly _tooltipElement = inject<ElementRef<HTMLElement>>(ElementRef);
 
   private _connectedPosition?: ConnectedPosition;
-  public id = this._uniqueId;
   private _message?: string;
   private _size?: IdsSizeType;
   private _variant?: IdsTooltipVariantType;
@@ -48,21 +45,18 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   private _tooltipInitiated = false;
   private _shouldHideSubscription?: Subscription;
 
-  private _hostClasses = computed(() => createClassList(
-    this._componentClass,
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this._size,
+    this._variant,
     [
-      this._size,
-      this._variant,
-      [
-        'position',
-        this._fallbackTooltipPosition() ?? this._originalTooltipPosition,
-      ],
-      [
-        'text-align',
-        this._textAlign,
-      ],
-    ]),
-  );
+      'position',
+      this._fallbackTooltipPosition() ?? this._originalTooltipPosition,
+    ],
+    [
+      'text-align',
+      this._textAlign,
+    ],
+  ]));
 
   public get isVisible(): boolean {
     return this._isVisible;
@@ -81,7 +75,7 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   }
 
   private _hostPositionTop = computed(() => this._connectedPosition?.positionTop());
-  
+
   private _hostPositionLeft = computed(() => this._connectedPosition?.positionLeft());
 
   public ngAfterViewInit(): void {

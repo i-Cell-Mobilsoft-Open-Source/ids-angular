@@ -1,4 +1,4 @@
-import { IDS_TOOLTIP_DEFAULT_CONFIG, IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY } from './tooltip-defaults';
+import { IDS_TOOLTIP_DEFAULT_CONFIG, IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY, IdsTooltipDefaultConfig } from './tooltip-defaults';
 import { IdsTooltipComponent } from './tooltip.component';
 import { IdsTooltipPositionType } from './types/tooltip-position.type';
 import { IdsTooltipVariantType } from './types/tooltip-variant.type';
@@ -9,21 +9,21 @@ import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ComponentRef, computed, Directive, ElementRef, inject, input, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
-import { coerceStringAttribute, createClassList, IdsSizeType, WindowResizeService } from '@i-cell/ids-angular/core';
+import { coerceStringAttribute, DirectiveBaseWithDefaults, IdsSizeType, WindowResizeService } from '@i-cell/ids-angular/core';
 import { filter, Subject, takeUntil } from 'rxjs';
 
-const defaultOptions = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
 const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true });
 
 @Directive({
   selector: '[idsTooltip]',
   standalone: true,
-  host: {
-    '[class]': '_hostClasses()',
-  },
 })
-export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
-  private readonly _componentClass = 'ids-tooltip-trigger';
+export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDefaultConfig> implements AfterViewInit, OnDestroy {
+  protected override get _componentName(): string {
+    return 'tooltip-trigger';
+  }
+
   private readonly _focusMonitor = inject(FocusMonitor);
   private readonly _platform = inject(Platform);
   private readonly _ngZone = inject(NgZone);
@@ -31,11 +31,8 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private readonly _viewContainerRef = inject(ViewContainerRef);
   private readonly _scrollDispatcher = inject(ScrollDispatcher);
   private readonly _document = inject(DOCUMENT);
-  private _globalResizeService = inject(WindowResizeService);
-  private readonly _defaultOptions = {
-    ...defaultOptions,
-    ...inject(IDS_TOOLTIP_DEFAULT_CONFIG, { optional: true }),
-  };
+  private readonly _globalResizeService = inject(WindowResizeService);
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TOOLTIP_DEFAULT_CONFIG);
 
   private readonly _passiveListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];
   private readonly _destroyed = new Subject<void>();
@@ -47,22 +44,22 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
   private _scrollContainers?: CdkScrollable[];
 
   public message = input<string, string>('', { alias: 'idsTooltip', transform: coerceStringAttribute });
-  public position = input<IdsTooltipPositionType>(this._defaultOptions.position, { alias: 'idsTooltipPosition' });
-  public size = input<IdsSizeType>(this._defaultOptions.size, { alias: 'idsTooltipSize' });
-  public variant = input<IdsTooltipVariantType>(this._defaultOptions.variant, { alias: 'idsTooltipVariant' });
-  public showDelay = input<number>(this._defaultOptions.showDelay, { alias: 'idsTooltipShowDelay' });
-  public hideDelay = input<number>(this._defaultOptions.hideDelay, { alias: 'idsTooltipHideDelay' });
+  public position = input<IdsTooltipPositionType>(this._defaultConfig.position, { alias: 'idsTooltipPosition' });
+  public size = input<IdsSizeType>(this._defaultConfig.size, { alias: 'idsTooltipSize' });
+  public variant = input<IdsTooltipVariantType>(this._defaultConfig.variant, { alias: 'idsTooltipVariant' });
+  public showDelay = input<number>(this._defaultConfig.showDelay, { alias: 'idsTooltipShowDelay' });
+  public hideDelay = input<number>(this._defaultConfig.hideDelay, { alias: 'idsTooltipHideDelay' });
   public disabled = input<boolean>(false, { alias: 'idsTooltipDisabled' });
   public touchGestures = input<IdsTooltipTouchGestures>('auto', { alias: 'idsTooltipTouchGestures' });
   public textAlign = input<IdsTooltipTextAlign | undefined>(undefined, { alias: 'idsTooltipTextAlign' });
 
-  private _hostClasses = computed(() => createClassList(this._componentClass, []),
+  protected _hostClasses = computed(() => this._getHostClasses([]),
   );
 
   public ngAfterViewInit(): void {
     this._setupPointerEnterEventsIfNeeded();
 
-    this._scrollDispatcher.ancestorScrolled(this._elementRef, this._defaultOptions.scrollDebounceTime)
+    this._scrollDispatcher.ancestorScrolled(this._elementRef, this._defaultConfig.scrollDebounceTime)
       .pipe(
         filter(() => Boolean(this._tooltipInstance)),
         takeUntil(this._destroyed),
@@ -176,7 +173,7 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
 
           this._touchstartTimeout = setTimeout(
             () => this.show(),
-            this._defaultOptions.touchLongPressShowDelay,
+            this._defaultConfig.touchLongPressShowDelay,
           );
         },
       ]);
@@ -220,7 +217,7 @@ export class IdsTooltipDirective implements AfterViewInit, OnDestroy {
       this._disableNativeGesturesIfNecessary();
       const touchendListener = (): void => {
         clearTimeout(this._touchstartTimeout);
-        this.hide(this._defaultOptions.touchendHideDelay);
+        this.hide(this._defaultConfig.touchendHideDelay);
       };
 
       exitListeners.push([

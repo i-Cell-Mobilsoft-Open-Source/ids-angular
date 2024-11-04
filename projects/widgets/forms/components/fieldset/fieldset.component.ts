@@ -30,7 +30,7 @@ export class IdsFieldsetComponent extends ComponentBaseWithDefaults<IdsFieldsetD
   private _fieldsetMessage = contentChildren<IdsFieldsetMessageDirective>(IdsFieldsetMessageDirective);
 
   protected _hasMessage = computed(() => this._fieldsetMessage().length > 0);
-  
+
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
     this.variant(),

@@ -20,7 +20,7 @@ const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true }
   standalone: true,
 })
 export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDefaultConfig> implements AfterViewInit, OnDestroy {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'tooltip-trigger';
   }
 

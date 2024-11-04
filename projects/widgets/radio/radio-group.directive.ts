@@ -27,7 +27,7 @@ const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 export class IdsRadioGroupDirective
   extends ComponentBaseWithDefaults<IdsRadioDefaultConfig>
   implements OnInit, AfterContentInit, ControlValueAccessor {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'radio-group';
   }
 
@@ -146,7 +146,7 @@ export class IdsRadioGroupDirective
 
     if (this._hasInvalidLabelPosition()) {
       throw new Error(
-        createComponentError(this._componentClass, 'invalid `orientation` + `labelPosition` combination.'),
+        createComponentError(this._hostClassName, 'invalid `orientation` + `labelPosition` combination.'),
       );
     }
   }
@@ -157,7 +157,7 @@ export class IdsRadioGroupDirective
 
     if (isDevMode() && (items.length < minItemCount)) {
       throw new Error(
-        createComponentError(this._componentClass, 'invalid count of radio items. Minimum item count is 2.'),
+        createComponentError(this._hostClassName, 'invalid count of radio items. Minimum item count is 2.'),
       );
     }
 

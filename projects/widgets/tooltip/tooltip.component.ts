@@ -21,7 +21,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
   },
 })
 export class IdsTooltipComponent extends ComponentBase implements AfterViewInit, OnDestroy {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'tooltip';
   }
 

@@ -38,7 +38,7 @@ const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordionDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'accordion';
   }
 
@@ -46,7 +46,7 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   private _items = contentChildren<IdsAccordionItemComponent>(IdsAccordionItemComponent);
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ACCORDION_DEFAULT_CONFIG);
-  protected _controlsClass = `${this._componentClass}-controls`;
+  protected _controlsClass = `${this._hostClassName}-controls`;
 
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public appearance = input<IdsAccordionAppearanceType>(this._defaultConfig.appearance);

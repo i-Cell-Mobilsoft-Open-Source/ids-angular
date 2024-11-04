@@ -8,11 +8,11 @@ import { DestroyRef, Directive, inject, InjectionToken, Signal } from '@angular/
   },
 })
 export abstract class DirectiveBase {
-  protected get _componentName(): string {
+  protected get _hostName(): string {
     return '';
   }
 
-  protected readonly _componentClass = `ids-${this._componentName}`;
+  protected readonly _hostClassName = `ids-${this._hostName}`;
 
   protected readonly _destroyRef = inject(DestroyRef);
 
@@ -21,11 +21,11 @@ export abstract class DirectiveBase {
     appendableClassNames: Array<string | Array<string | null | undefined> | null | undefined> = [],
     nonAppendableClassNames: Array<string | null> = [],
   ): string {
-    return createClassList(this._componentClass, appendableClassNames, nonAppendableClassNames);
+    return createClassList(this._hostClassName, appendableClassNames, nonAppendableClassNames);
   }
 
-  protected _createComponentError(message: string): string {
-    return `${this._componentClass}: ${message}`;
+  protected _createHostError(message: string): string {
+    return `${this._hostClassName}: ${message}`;
   }
 }
 

@@ -33,7 +33,7 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'switch';
   }
 

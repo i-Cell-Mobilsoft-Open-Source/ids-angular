@@ -14,7 +14,7 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsSwitchGroupComponent extends ComponentBaseWithDefaults<IdsSwitchDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'switch-group';
   }
 

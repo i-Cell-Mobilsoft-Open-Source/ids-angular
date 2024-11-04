@@ -20,7 +20,7 @@ const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
   animations: [snackbarAnimation],
 })
 export class IdsSnackbarGroupComponent extends ComponentBaseWithDefaults<IdsSnackbarDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'snackbar-group';
   }
 

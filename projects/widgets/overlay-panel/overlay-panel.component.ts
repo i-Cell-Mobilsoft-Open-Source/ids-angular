@@ -32,7 +32,7 @@ const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverlayPanelDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'overlay-panel';
   }
 

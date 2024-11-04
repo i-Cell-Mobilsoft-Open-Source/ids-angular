@@ -34,7 +34,7 @@ const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsIconButtonComponent extends ComponentBaseWithDefaults<IdsIconButtonDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'icon-button';
   }
 

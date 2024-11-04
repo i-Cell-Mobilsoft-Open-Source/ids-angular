@@ -10,7 +10,7 @@ import { ComponentBase } from '@i-cell/ids-angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsFieldsetRowComponent extends ComponentBase {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'fieldset-row';
   }
 

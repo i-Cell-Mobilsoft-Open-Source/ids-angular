@@ -33,7 +33,7 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFieldDefaultConfig> implements AfterContentInit, OnDestroy {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'form-field';
   }
 
@@ -90,7 +90,7 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
 
   public ngAfterContentInit(): void {
     if (isDevMode() && !this._child()) {
-      throw new Error(createComponentError(this._componentClass, 'no form element was provided'));
+      throw new Error(createComponentError(this._hostClassName, 'no form element was provided'));
     }
     this._child()?.ngControl?.statusChanges?.pipe(takeUntil(this._destroyed)).subscribe(() => {
       this._changeDetectorRef.markForCheck();

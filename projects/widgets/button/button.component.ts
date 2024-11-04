@@ -31,7 +31,7 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'button';
   }
 

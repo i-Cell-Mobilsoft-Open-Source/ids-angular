@@ -41,7 +41,7 @@ const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'dialog';
   }
 

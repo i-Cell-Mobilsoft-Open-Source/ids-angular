@@ -24,7 +24,7 @@ const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginatorDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'paginator';
   }
 

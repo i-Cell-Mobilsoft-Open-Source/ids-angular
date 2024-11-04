@@ -58,7 +58,7 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 export class IdsSelectComponent
   extends ComponentBaseWithDefaults<IdsSelectDefaultConfig>
   implements IdsFormFieldControl, ControlValueAccessor, OnInit, AfterContentInit, OnDestroy {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'select';
   }
 
@@ -109,7 +109,7 @@ export class IdsSelectComponent
     this.readonly() ? 'readonly' : null,
   ], [formFieldControlClass]));
 
-  protected _panelClasses = computed(() => createClassList(`${this._componentClass}-panel`, [
+  protected _panelClasses = computed(() => createClassList(`${this._hostClassName}-panel`, [
     this.parentSize(),
     this.parentVariant(),
   ]));
@@ -160,7 +160,7 @@ export class IdsSelectComponent
 
   public ngOnInit(): void {
     if (!this._parentFormField) {
-      throw new Error(this._createComponentError('Select must be in a form field'));
+      throw new Error(this._createHostError('Select must be in a form field'));
     }
     this._selectionModel = new SelectionModel<IdsOptionComponent>(this.multiSelect(), undefined, false, this.valueCompareFn());
     this._initErrorStateTracker();
@@ -460,7 +460,7 @@ export class IdsSelectComponent
 
     if (this.multiSelect() && value) {
       if (!Array.isArray(value)) {
-        throw new Error(this._createComponentError('value must be an array in multiple-selection mode'));
+        throw new Error(this._createHostError('value must be an array in multiple-selection mode'));
       }
 
       value.forEach((currentValue: unknown) => this._selectValue(currentValue));

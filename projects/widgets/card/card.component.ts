@@ -40,7 +40,7 @@ const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsCardComponent extends ComponentBaseWithDefaults<IdsCardDefaultConfig> implements OnInit {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'card';
   }
 

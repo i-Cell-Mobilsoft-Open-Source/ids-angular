@@ -13,7 +13,7 @@ const defaultConfig = IDS_MESSAGE_DEFAULT_CONFIG_FACTORY();
   standalone: true,
 })
 export class IdsMessageDirective extends ComponentBaseWithDefaults<IdsMessageDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'message';
   }
 

@@ -9,7 +9,7 @@ let nextUniqueId = 0;
   },
 })
 export abstract class ComponentBase extends DirectiveBase {
-  protected readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+  protected readonly _uniqueId = `${this._hostClassName}-${++nextUniqueId}`;
 
   public readonly id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
 }

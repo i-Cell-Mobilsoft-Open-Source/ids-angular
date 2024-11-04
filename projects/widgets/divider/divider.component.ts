@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import {
   ComponentBaseWithDefaults,
-  createClassList,
   IdsOrientation,
   IdsOrientationType,
   IdsSizeType,
@@ -31,7 +30,7 @@ const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsDividerComponent extends ComponentBaseWithDefaults<IdsDividerDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'divider';
   }
 
@@ -45,11 +44,10 @@ export class IdsDividerComponent extends ComponentBaseWithDefaults<IdsDividerDef
   private _safeWidth = computed(() => (this.orientation() === IdsOrientation.HORIZONTAL ? this.width() : null));
   private _safeHeight = computed(() => (this.orientation() === IdsOrientation.VERTICAL ? this.height() : null));
 
-  protected _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      this.orientation(),
-      this.size(),
-      this.variant(),
-    ]),
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.orientation(),
+    this.size(),
+    this.variant(),
+  ]),
   );
 }

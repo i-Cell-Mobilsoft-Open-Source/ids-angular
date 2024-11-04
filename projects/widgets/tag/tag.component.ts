@@ -19,7 +19,7 @@ const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsTagComponent extends ComponentBaseWithDefaults<IdsTagDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'tag';
   }
 

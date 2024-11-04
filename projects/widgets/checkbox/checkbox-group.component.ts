@@ -21,7 +21,7 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsCheckboxGroupDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'checkbox-group';
   }
 
@@ -51,7 +51,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
 
   private _invalidParentOrientation = effect(() => {
     if (this.allowParent() && this.orientation() === IdsOrientation.HORIZONTAL) {
-      throw new Error(this._createComponentError('Parent checkbox can be used only in vertical orientation'));
+      throw new Error(this._createHostError('Parent checkbox can be used only in vertical orientation'));
     }
   });
 

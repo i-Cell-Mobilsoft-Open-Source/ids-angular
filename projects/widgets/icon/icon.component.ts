@@ -25,7 +25,7 @@ const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultConfig> implements OnInit {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'icon';
   }
 
@@ -80,7 +80,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
 
   public ngOnInit(): void {
     if (this.fontIcon() && this.svgIconName()) {
-      throw new Error(createComponentError(this._componentClass, 'Font icon and svg icon can not be used together!'));
+      throw new Error(createComponentError(this._hostClassName, 'Font icon and svg icon can not be used together!'));
     }
   }
 
@@ -121,7 +121,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
     const svg = div.querySelector('svg') as SVGElement;
 
     if (!svg) {
-      throw new Error(createComponentError(this._componentClass, 'Svg element creation failed!'));
+      throw new Error(createComponentError(this._hostClassName, 'Svg element creation failed!'));
     }
 
     return svg;

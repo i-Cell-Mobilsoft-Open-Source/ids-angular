@@ -6,7 +6,7 @@ import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -34,7 +34,7 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 export class IdsCheckboxComponent
   extends ComponentBaseWithDefaults<IdsCheckboxDefaultConfig>
   implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'checkbox';
   }
 
@@ -62,7 +62,7 @@ export class IdsCheckboxComponent
   public isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
   public isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
   public isFocusable = computed(() => !this.disabled() && !this.readonly());
-  protected _hostClasses = computed(() => createClassList(this._componentClass, [
+  protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
     this.disabled() ? 'disabled' : null,

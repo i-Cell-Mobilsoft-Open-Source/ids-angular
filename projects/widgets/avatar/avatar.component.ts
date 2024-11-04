@@ -25,7 +25,7 @@ const defaultConfig = IDS_AVATAR_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class IdsAvatarComponent extends ComponentBaseWithDefaults<IdsAvatarDefaultConfig> implements IdsIconParent {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'avatar';
   }
 

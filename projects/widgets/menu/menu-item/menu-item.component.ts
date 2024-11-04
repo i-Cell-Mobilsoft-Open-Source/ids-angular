@@ -23,7 +23,7 @@ const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsMenuItemComponent extends ComponentBaseWithDefaults<IdsMenuItemDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'menu-item';
   }
 

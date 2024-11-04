@@ -13,7 +13,7 @@ import { coerceNumberAttribute, ComponentBase, createComponentError } from '@i-c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsRadioItemComponent extends ComponentBase implements OnInit {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'radio-item';
   }
 
@@ -45,7 +45,7 @@ export class IdsRadioItemComponent extends ComponentBase implements OnInit {
 
   public ngOnInit(): void {
     if (!this._group) {
-      throw new Error(createComponentError(this._componentClass, 'component must be direct child of a radio group'));
+      throw new Error(createComponentError(this._hostClassName, 'component must be direct child of a radio group'));
     }
     if (this._group.isItemPreSelectedByValue(this.value())) {
       this.selected.set(true);

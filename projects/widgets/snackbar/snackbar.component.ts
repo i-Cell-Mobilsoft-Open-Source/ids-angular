@@ -28,7 +28,7 @@ import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-ang
   },
 })
 export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit, OnDestroy {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'snackbar';
   }
 
@@ -61,7 +61,6 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
   ]));
 
   public role = computed(() => (this.urgent() ? 'alert' : 'status'));
-  public uniqueId = computed(() => `${this._componentClass}-${this.id()}`);
   public buttonVariant = computed(() => (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE));
   private _defaultIcon = computed<string | null>(() => {
     switch (this.variant()) {

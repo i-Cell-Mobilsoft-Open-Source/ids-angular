@@ -30,16 +30,16 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   ],
 })
 export class IdsAccordionItemComponent extends ComponentBase {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'accordion-item';
   }
 
   private _accordion = inject(IdsAccordionComponent, { skipSelf: true });
   private _accordionItem = inject(CdkAccordionItem);
   private _accordionHeader = viewChild.required<ElementRef<HTMLElement>>('header');
-  protected _summaryClass = `${this._componentClass}-summary`;
-  protected _titleClass = `${this._componentClass}-title`;
-  protected _contentClass = `${this._componentClass}-content`;
+  protected _summaryClass = `${this._hostClassName}-summary`;
+  protected _titleClass = `${this._hostClassName}-title`;
+  protected _contentClass = `${this._hostClassName}-content`;
   protected _headerId = `${this.id()}-header`;
   protected _contentId = `${this.id()}-content`;
 

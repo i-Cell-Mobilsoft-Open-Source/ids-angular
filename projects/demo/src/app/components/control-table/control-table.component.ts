@@ -23,7 +23,7 @@ export class ControlTableComponent<T extends Record<string, unknown>> {
   public controlName = input<string | undefined>();
   public controlConfig = input<DemoControlConfig<T>>();
   public model = model.required<T>();
-  
+
   public resetted = output<void>();
 
   protected _flatControls = computed(() => {
@@ -40,7 +40,7 @@ export class ControlTableComponent<T extends Record<string, unknown>> {
         name: key,
         ...ctrl,
         list: listToDisplay,
-      }); 
+      });
     });
   });
 

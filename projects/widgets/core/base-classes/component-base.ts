@@ -1,5 +1,8 @@
+import { DirectiveBase } from './directive-base';
+
+import { fallbackValue } from '../utils/fallback-value';
+
 import { Directive, inject, InjectionToken, input } from '@angular/core';
-import { DirectiveBase, fallbackValue } from '@i-cell/ids-angular/core';
 
 let nextUniqueId = 0;
 

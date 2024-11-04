@@ -6,10 +6,11 @@ import { AbstractSuccessStateMatcher, SuccessStateTracker } from '../../common/s
 import { formFieldControlClass, IdsFormFieldControl } from '../form-field/form-field-control';
 import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-tokens';
 
-import { computed, Directive, effect, ElementRef, inject, input, isDevMode, DoCheck, signal, OnDestroy, OnInit } from '@angular/core';
+import { computed, Directive, effect, ElementRef, inject, input, isDevMode, DoCheck, signal, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 const defaultConfig = IDS_INPUT_DEFAULT_CONFIG_FACTORY();
 
@@ -50,7 +51,7 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
 })
 export class IdsInputDirective
   extends ComponentBaseWithDefaults<IdsInputDefaultConfig>
-  implements IdsFormFieldControl, OnInit, DoCheck, OnDestroy {
+  implements IdsFormFieldControl, OnInit, DoCheck {
   protected override get _hostName(): string {
     return 'input';
   }
@@ -63,7 +64,6 @@ export class IdsInputDirective
 
   public readonly errorStateChanges = new Subject<void>();
   public readonly successStateChanges = new Subject<void>();
-  private readonly _destroyed = new Subject<void>();
   public readonly ngControl = inject(NgControl, { optional: true });
 
   private _focused = false;
@@ -119,7 +119,7 @@ export class IdsInputDirective
     );
 
     this._successStateSubscription = this.errorStateChanges.pipe(
-      takeUntil(this._destroyed),
+      takeUntilDestroyed(this._destroyRef),
     ).subscribe(() => this.hasErrorState.set(this._errorStateTracker!.hasErrorState));
   }
 
@@ -134,7 +134,7 @@ export class IdsInputDirective
       );
 
       this.successStateChanges.pipe(
-        takeUntil(this._destroyed),
+        takeUntilDestroyed(this._destroyRef),
       ).subscribe(() => this.hasSuccessState.set(this._successStateTracker!.hasSuccessState));
     } else {
       this._successStateTracker = undefined;
@@ -181,9 +181,4 @@ export class IdsInputDirective
       this.focus();
     }
   };
-
-  public ngOnDestroy(): void {
-    this._destroyed.next();
-    this._destroyed.complete();
-  }
 }

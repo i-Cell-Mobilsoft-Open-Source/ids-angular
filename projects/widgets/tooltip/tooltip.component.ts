@@ -5,8 +5,9 @@ import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } 
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ConnectedPosition, IdsSizeType, ComponentBase } from '@i-cell/ids-angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ids-tooltip',
@@ -43,7 +44,6 @@ export class IdsTooltipComponent extends ComponentBase implements AfterViewInit,
   private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
   private _hideTimeoutId: ReturnType<typeof setTimeout> | undefined;
   private _tooltipInitiated = false;
-  private _shouldHideSubscription?: Subscription;
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this._size,
@@ -105,7 +105,7 @@ export class IdsTooltipComponent extends ComponentBase implements AfterViewInit,
         this._tooltipElement,
         originalPositionPair,
       );
-      this._shouldHideSubscription = this._connectedPosition.shouldHide.subscribe(() => this._hideImmediately());
+      this._connectedPosition.shouldHide.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this._hideImmediately());
     }
   }
 
@@ -165,6 +165,5 @@ export class IdsTooltipComponent extends ComponentBase implements AfterViewInit,
 
   public ngOnDestroy(): void {
     this._onHide.complete();
-    this._shouldHideSubscription?.unsubscribe();
   }
 }

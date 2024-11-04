@@ -26,7 +26,6 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '_hostClasses()',
     '[attr.aria-disabled]': 'this.disabled()? "" : null',
     '[attr.disabled]': 'this.disabled() ? "" : null',
   },

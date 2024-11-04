@@ -35,7 +35,6 @@ const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '_hostClasses()',
     '[attr.aria-disabled]': 'this.disabled()? "" : null',
     '[attr.tabindex]': ' this._hasClickHandler() ? 0 : null',
   },

@@ -41,8 +41,8 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   protected override get _componentName(): string {
     return 'accordion';
   }
-  
-  private _cdkAccordion = inject(CdkAccordion); 
+
+  private _cdkAccordion = inject(CdkAccordion);
   private _items = contentChildren<IdsAccordionItemComponent>(IdsAccordionItemComponent);
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ACCORDION_DEFAULT_CONFIG);
@@ -65,13 +65,13 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
     this.appearance(),
     this.disabled() ? 'disabled' : null,
   ]));
-  
+
   public openAll(): void {
     if (!this.disabled()) {
       this._cdkAccordion.openAll();
     }
   }
-  
+
   public closeAll(): void {
     if (!this.disabled()) {
       this._cdkAccordion.closeAll();
@@ -87,18 +87,18 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
       'Home',
       'End',
     ];
-  
+
     if (!navigationKeys.includes(event.key)) {
       return;
     }
-  
+
     event.preventDefault();
-  
+
     const items = this._items();
     const target = event.target as HTMLButtonElement;
     const accordionId = target.parentElement!.id;
     const index = items.findIndex((item) => item.id() === accordionId);
-  
+
     switch (event.key) {
       case 'ArrowUp': {
         if (index > 0) {

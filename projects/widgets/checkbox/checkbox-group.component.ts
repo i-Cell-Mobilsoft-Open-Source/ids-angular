@@ -24,7 +24,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   protected override get _componentName(): string {
     return 'checkbox-group';
   }
-  
+
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG);
 
   private _childCheckboxes = contentChildren(IdsCheckboxComponent);
@@ -45,7 +45,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   ]));
 
   protected _parentCheckboxChecked = computed(() => this._childCheckboxes().every((child) => child.isChecked()));
-  protected _parentCheckboxIndeterminate = computed(() => 
+  protected _parentCheckboxIndeterminate = computed(() =>
     !this._parentCheckboxChecked() && this._childCheckboxes().some((child) => child.isChecked()),
   );
 
@@ -60,7 +60,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
       child.select();
     });
   }
-  
+
   public deselectAllChild(): void {
     this._childCheckboxes().forEach((child) => {
       child.deselect();

@@ -2,21 +2,8 @@ import { IDS_BUTTON_DEFAULT_CONFIG, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IdsButton
 import { IdsButtonAppearanceType } from './types/button-appearance.type';
 import { IdsButtonVariantType } from './types/button-variant.type';
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  InjectionToken,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  inject,
-  input,
-} from '@angular/core';
-import {
-  IdsSizeType,
-  coerceBooleanAttribute,
-  createClassList,
-} from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
+import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 
@@ -28,40 +15,28 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '_hostClasses()',
     '[attr.aria-disabled]': 'this.disabled()? "" : null',
     '[attr.disabled]': 'this.disabled() ? "" : null',
   },
 })
-export class IdsButtonComponent {
-  private readonly _componentClass = 'ids-button';
+export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'button';
+  }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BUTTON_DEFAULT_CONFIG);
 
   public appearance = input<IdsButtonAppearanceType>(this._defaultConfig.appearance);
-
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsButtonVariantType>(this._defaultConfig.variant);
-  public disabled = input(false, {
-    transform: (value: boolean | string) => coerceBooleanAttribute(value),
-  });
+  public disabled = input(false, { transform: (value: boolean | string) => coerceBooleanAttribute(value) });
 
   public iconLeading = contentChildren<unknown>('[icon-leading]');
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
-  private _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      this.appearance(),
-      this.size(),
-      this.variant(),
-    ]),
-  );
-
-  // eslint-disable-next-line @stylistic/js/max-len
-  protected _getDefaultConfig(defaultConfig: Required<IdsButtonDefaultConfig>, injectionToken: InjectionToken<IdsButtonDefaultConfig>): Required<IdsButtonDefaultConfig> {
-    return {
-      ...defaultConfig,
-      ...inject(injectionToken, { optional: true }),
-    };
-  }
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.appearance(),
+    this.size(),
+    this.variant(),
+  ]));
 }

@@ -5,7 +5,7 @@ import { IdsSnackbarVariant, IdsSnackbarVariantType } from './types/snackbar-var
 import { A11yModule } from '@angular/cdk/a11y';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, input, OnDestroy, output, ViewEncapsulation } from '@angular/core';
 import { IdsButtonAppearance, IdsButtonComponent, IdsButtonVariant } from '@i-cell/ids-angular/button';
-import { coerceBooleanAttribute, createClassList, IdsSize } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, ComponentBase, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
@@ -22,15 +22,15 @@ import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-ang
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[id]': 'uniqueId()',
     '[role]': 'role()',
-    '[class]': '_hostClasses()',
     '(mouseenter)': '_onMouseEnter()',
     '(mouseleave)': '_onMouseLeave()',
   },
 })
-export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
-  private readonly _componentClass = 'ids-snackbar';
+export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit, OnDestroy {
+  protected override get _hostName(): string {
+    return 'snackbar';
+  }
 
   private _timer?: ReturnType<typeof setTimeout>;
 
@@ -38,7 +38,6 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
   public readonly iconButtonAppearance = IdsIconButtonAppearance;
   public readonly buttonAppearance = IdsButtonAppearance;
 
-  public id = input.required<number>();
   public message = input.required<string>();
   public variant = input<IdsSnackbarVariantType | undefined>();
   public icon = input<string | undefined>();
@@ -56,13 +55,12 @@ export class IdsSnackbarComponent implements AfterViewInit, OnDestroy {
     return Math.max(this.message().length * READ_SPEED_PER_CHAR + actionReadDuration, MIN_DURATION);
   });
 
-  private _hostClasses = computed(() => createClassList(this._componentClass, [
+  protected _hostClasses = computed(() => this._getHostClasses([
     this.variant(),
     this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
   ]));
 
   public role = computed(() => (this.urgent() ? 'alert' : 'status'));
-  public uniqueId = computed(() => `${this._componentClass}-${this.id()}`);
   public buttonVariant = computed(() => (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE));
   private _defaultIcon = computed<string | null>(() => {
     switch (this.variant()) {

@@ -40,7 +40,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 export class IdsOptionComponent<T = unknown>
   extends ComponentBase
   implements OnInit, IdsPseudoCheckboxParent<IdsFormFieldVariantType> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'option';
   }
 

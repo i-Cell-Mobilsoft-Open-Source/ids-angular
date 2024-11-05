@@ -1,16 +1,16 @@
 <button
   #button
   type="button"
-  [id]="id()"
-  [attr.role]="role()"
-  [attr.tabindex]="isDisabled() ? -1 : tabIndex()"
-  [attr.aria-pressed]="ariaPressed()"
-  [attr.aria-checked]="ariaChecked()"
-  [disabled]="isDisabled() || null"
-  [attr.name]="buttonName()"
+  [id]="_buttonId()"
+  [attr.role]="_role()"
+  [attr.tabindex]="_parentOrSelfDisabled() ? -1 : tabIndex()"
+  [attr.aria-pressed]="_ariaPressed()"
+  [attr.aria-checked]="_ariaChecked()"
+  [disabled]="_parentOrSelfDisabled() || null"
+  [attr.name]="_buttonName()"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledBy()"
-  [class]="buttonClasses()"
+  [class]="_buttonClasses()"
   (click)="onClick()"
 >
   @if (selected()) {

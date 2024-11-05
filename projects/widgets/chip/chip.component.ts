@@ -40,7 +40,7 @@ const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 export class IdsChipComponent
   extends ComponentBaseWithDefaults<IdsChipDefaultConfig>
   implements IdsIconButtonParent, IdsAvatarParent {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'chip';
   }
 

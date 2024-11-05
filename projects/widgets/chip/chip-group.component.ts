@@ -17,7 +17,7 @@ const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsChipGroupComponent extends ComponentBaseWithDefaults<IdsChipDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'chip-group';
   }
 

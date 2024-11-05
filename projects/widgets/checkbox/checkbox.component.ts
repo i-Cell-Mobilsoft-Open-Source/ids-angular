@@ -1,4 +1,4 @@
-import { IDS_CHECKBOX_DEFAULT_CONFIG, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY } from './checkbox-defaults';
+import { IDS_CHECKBOX_DEFAULT_CONFIG, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IdsCheckboxDefaultConfig } from './checkbox-defaults';
 import { IdsCheckboxGroupComponent } from './checkbox-group.component';
 import { IdsCheckBoxChangeEvent } from './types/checkbox-events.class';
 import { IdsCheckboxState, IdsCheckboxStateType } from './types/checkbox-state.type';
@@ -6,11 +6,9 @@ import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-
-let nextUniqueId = 0;
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 
@@ -32,26 +30,23 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[class]': '_hostClasses()',
-  },
 })
-export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
-  private readonly _componentClass = 'ids-checkbox';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+export class IdsCheckboxComponent
+  extends ComponentBaseWithDefaults<IdsCheckboxDefaultConfig>
+  implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
+  protected override get _hostName(): string {
+    return 'checkbox';
+  }
+
   private readonly _injector = inject(Injector);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly _defaultConfig = {
-    ...defaultConfig,
-    ...inject(IDS_CHECKBOX_DEFAULT_CONFIG, { optional: true }),
-  };
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CHECKBOX_DEFAULT_CONFIG);
 
   private _checkboxGroup = inject(IdsCheckboxGroupComponent, { optional: true });
 
   private _checkboxState = signal<IdsCheckboxStateType>(IdsCheckboxState.UNCHECKED);
 
-  public id = input<string>(this._uniqueId);
-  public inputId = computed(() => this.id() || this._uniqueId);
+  public inputId = computed(() => `${this.id()}-input`);
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
@@ -67,7 +62,7 @@ export class IdsCheckboxComponent implements OnInit, OnChanges, AfterViewInit, C
   public isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
   public isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
   public isFocusable = computed(() => !this.disabled() && !this.readonly());
-  private _hostClasses = computed(() => createClassList(this._componentClass, [
+  protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
     this.disabled() ? 'disabled' : null,

@@ -1,14 +1,14 @@
 import { snackbarAnimation } from './animations';
 import { IdsSnackbarService } from './services/snackbar.service';
-import { IDS_SNACKBAR_DEFAULT_CONFIG, IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY } from './snackbar-defaults';
+import { IDS_SNACKBAR_DEFAULT_CONFIG, IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY, IdsSnackbarDefaultConfig } from './snackbar-defaults';
 import { IdsSnackbarComponent } from './snackbar.component';
 import { IdsSnackbarInnerData } from './types/snackbar-inner-data.type';
 import { IdsSnackbarPosition, IdsSnackbarPositionType } from './types/snackbar-position.type';
 
 import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal, ViewEncapsulation } from '@angular/core';
-import { createClassList } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
-const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-snackbar-group',
@@ -18,29 +18,26 @@ const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [snackbarAnimation],
-  host: {
-    '[class]': '_hostClasses',
-  },
 })
-export class IdsSnackbarGroupComponent {
-  private readonly _componentClass = 'ids-snackbar-group';
-  private readonly _snackbarService = inject(IdsSnackbarService);
-  private readonly _defaultOptions = {
-    ...defaultOptions,
-    ...inject(IDS_SNACKBAR_DEFAULT_CONFIG, { optional: true }),
-  };
+export class IdsSnackbarGroupComponent extends ComponentBaseWithDefaults<IdsSnackbarDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'snackbar-group';
+  }
 
-  public position = signal<IdsSnackbarPositionType>(this._defaultOptions.position);
+  private readonly _snackbarService = inject(IdsSnackbarService);
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SNACKBAR_DEFAULT_CONFIG);
+
+  public position = signal<IdsSnackbarPositionType>(this._defaultConfig.position);
   public snackbars: Signal<IdsSnackbarInnerData[]> = this._snackbarService.snackbars;
 
-  private _hostClasses = createClassList(this._componentClass, [
-    this._defaultOptions.size,
+  protected _hostClasses = computed(() =>  this._getHostClasses([
+    this._defaultConfig.size,
     [
       'position',
       this.position(),
     ],
-    this._defaultOptions.newestAtStartPosition ? 'newest-at-start' : null,
-  ]);
+    this._defaultConfig.newestAtStartPosition ? 'newest-at-start' : null,
+  ]));
 
   protected _animationParams = computed<{ translateY: number, translateX: number, height: string }>(() => {
     switch (this.position()) {

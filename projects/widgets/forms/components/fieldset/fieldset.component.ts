@@ -15,7 +15,7 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsFieldsetComponent extends ComponentBaseWithDefaults<IdsFieldsetDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'fieldset';
   }
 
@@ -24,13 +24,11 @@ export class IdsFieldsetComponent extends ComponentBaseWithDefaults<IdsFieldsetD
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsFormFieldVariantType>(this._defaultConfig.variant);
   public legend = input<string>('');
-  protected _legendClass = `${this._componentClass}-legend`;
-  protected _messageClass = `${this._componentClass}-message`;
 
   private _fieldsetMessage = contentChildren<IdsFieldsetMessageDirective>(IdsFieldsetMessageDirective);
 
   protected _hasMessage = computed(() => this._fieldsetMessage().length > 0);
-  
+
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
     this.variant(),

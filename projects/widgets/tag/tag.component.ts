@@ -2,21 +2,8 @@ import { IDS_TAG_DEFAULT_CONFIG, IDS_TAG_DEFAULT_CONFIG_FACTORY, IdsTagDefaultCo
 import { IdsTagAppearanceType } from './types/tag-appearance.type';
 import { IdsTagVariantType } from './types/tag-variant.type';
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  InjectionToken,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  inject,
-  input,
-} from '@angular/core';
-import {
-  createClassList,
-  IdsSizeType,
-} from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
+import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
 
@@ -28,12 +15,14 @@ const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '_hostClasses()',
-    '[type]': '_setType()',
+    '[type]': '_hostType()',
   },
 })
-export class IdsTagComponent {
-  private readonly _componentClass = 'ids-tag';
+export class IdsTagComponent extends ComponentBaseWithDefaults<IdsTagDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'tag';
+  }
+
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TAG_DEFAULT_CONFIG);
 
   private _hostElement = inject(ElementRef).nativeElement as HTMLElement;
@@ -45,23 +34,13 @@ export class IdsTagComponent {
   public iconLeading = contentChildren<unknown>('[icon-leading]');
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
-  private _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      this.appearance(),
-      this.size(),
-      this.variant(),
-    ]),
-  );
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.appearance(),
+    this.size(),
+    this.variant(),
+  ]));
 
-  private _setType(): string | null {
+  private _hostType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
-  }
-
-  // eslint-disable-next-line @stylistic/js/max-len
-  protected _getDefaultConfig(defaultConfig: Required<IdsTagDefaultConfig>, injectionToken: InjectionToken<IdsTagDefaultConfig>): Required<IdsTagDefaultConfig> {
-    return {
-      ...defaultConfig,
-      ...inject(injectionToken, { optional: true }),
-    };
   }
 }

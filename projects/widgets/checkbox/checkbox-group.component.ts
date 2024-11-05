@@ -17,14 +17,14 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'role': 'group',
-    '[attr.aria-labelledby]': '_groupLabelId',
+    '[attr.aria-labelledby]': '_groupLabelId()',
   },
 })
 export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsCheckboxGroupDefaultConfig> {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'checkbox-group';
   }
-  
+
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG);
 
   private _childCheckboxes = contentChildren(IdsCheckboxComponent);
@@ -36,8 +36,8 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   public size = input<IdsSizeType | null>(this._defaultConfig.size);
   public variant = input<IdsCheckboxVariantType | null>(this._defaultConfig.variant);
   public orientation = input<IdsOrientationType | null>(this._defaultConfig.orientation);
-  protected _groupLabelId = `${this.id()}-label`;
 
+  protected _groupLabelId = computed(() =>  `${this.id()}-label`);
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
     this.variant(),
@@ -45,13 +45,13 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   ]));
 
   protected _parentCheckboxChecked = computed(() => this._childCheckboxes().every((child) => child.isChecked()));
-  protected _parentCheckboxIndeterminate = computed(() => 
+  protected _parentCheckboxIndeterminate = computed(() =>
     !this._parentCheckboxChecked() && this._childCheckboxes().some((child) => child.isChecked()),
   );
 
   private _invalidParentOrientation = effect(() => {
     if (this.allowParent() && this.orientation() === IdsOrientation.HORIZONTAL) {
-      throw new Error(this._createComponentError('Parent checkbox can be used only in vertical orientation'));
+      throw new Error(this._createHostError('Parent checkbox can be used only in vertical orientation'));
     }
   });
 
@@ -60,7 +60,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
       child.select();
     });
   }
-  
+
   public deselectAllChild(): void {
     this._childCheckboxes().forEach((child) => {
       child.deselect();

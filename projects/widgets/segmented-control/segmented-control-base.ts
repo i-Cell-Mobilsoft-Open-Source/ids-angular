@@ -10,7 +10,7 @@ import { ControlValueAccessor } from '@angular/forms';
 import { createClassList, createComponentError, SelectionModel, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Subscription } from 'rxjs';
 
-const defaultOptions = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
 
 type SegmentedControlItem = IdsSegmentedControlToggleItemComponent | IdsSegmentedControlItemComponent;
 type SegmentedControlItemEvent = IdsSegmentedControlToggleItemChange | IdsSegmentedControlItemChange;
@@ -25,8 +25,8 @@ export abstract class IdsSegmentedControlBase<I extends SegmentedControlItem, E 
 implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   protected abstract readonly _componentClass: string;
   protected abstract readonly _uniqueId: string;
-  private readonly _defaultOptions = {
-    ...defaultOptions,
+  private readonly _defaultConfig = {
+    ...defaultConfig,
     ...inject(IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, { optional: true }),
   };
 
@@ -38,9 +38,9 @@ implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
 
   public abstract id: InputSignal<string>;
   public name = input<string>();
-  public size = input<IdsSizeType>(this._defaultOptions.size);
-  public variant = input<IdsSegmentedControlVariantType>(this._defaultOptions.variant);
-  public appearance = input<IdsSegmentedControlAppearanceType>(this._defaultOptions.appearance);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsSegmentedControlVariantType>(this._defaultConfig.variant);
+  public appearance = input<IdsSegmentedControlAppearanceType>(this._defaultConfig.appearance);
   public abstract multiSelect: InputSignal<boolean> | Signal<boolean>;
   public disabled = signal<boolean>(false);
 

@@ -1,16 +1,14 @@
-import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY } from './tokens/icon-defaults';
+import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconDefaultConfig } from './tokens/icon-defaults';
 import { IDS_ICON_PARENT } from './tokens/icon-parent';
 import { IdsIconSource } from './types/icon-source.type';
 import { IdsIconVariantType } from './types/icon-variant.type';
 
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { coerceBooleanAttribute, coerceStringAttribute, createClassList, createComponentError, fallbackValue, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
-
-let nextUniqueId = 0;
+import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
@@ -21,29 +19,24 @@ const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    '[id]': 'id()',
-    '[class]': '_hostClasses()',
     '[attr.aria-hidden]': 'ariaHidden().toString()',
     '[attr.fontIcon]': 'this.fontIcon()',
     'role': 'img',
   },
 })
-export class IdsIconComponent implements OnInit {
-  private readonly _componentClass = 'ids-icon';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultConfig> implements OnInit {
+  protected override get _hostName(): string {
+    return 'icon';
+  }
+
   private readonly _parent = inject(IDS_ICON_PARENT, { optional: true });
-  private readonly _defaultConfig = {
-    ...defaultConfig,
-    ...inject(IDS_ICON_DEFAULT_CONFIG, { optional: true }),
-  };
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_DEFAULT_CONFIG);
 
   private readonly _elementRef = inject(ElementRef<HTMLElement>);
   private readonly _document = inject(DOCUMENT);
-  private readonly _destroyRef = inject(DestroyRef);
   private readonly _httpClient = inject(HttpClient);
   private readonly _sanitizer = inject(DomSanitizer);
 
-  public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public sizeCollection = input<IdsSizeCollectionType>(this._defaultConfig.sizeCollection);
   public variant = input<IdsIconVariantType>(this._defaultConfig.variant);
@@ -56,42 +49,38 @@ export class IdsIconComponent implements OnInit {
   protected _iconSourceType = computed(() => (this.fontIcon() ? IdsIconSource.FONT : IdsIconSource.SVG));
 
   private _parentOrSelfVariant = computed(() => this._parent?.embeddedIconVariant() ?? this.variant());
-  private _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      [
-        `${this.sizeCollection()}collection`,
-        this.size(),
-      ],
-      this._parentOrSelfVariant(),
-      this._iconSourceType(),
-    ]),
-  );
+  protected _hostClasses = computed(() => this._getHostClasses([
+    [
+      `${this.sizeCollection()}collection`,
+      this.size(),
+    ],
+    this._parentOrSelfVariant(),
+    this._iconSourceType(),
+  ]));
 
-  constructor() {
-    effect(() => {
-      const svgIconName = this.svgIconName();
-      if (!svgIconName) {
-        this._svgIcon = null;
-        return;
-      }
+  private _sanitizeSvgIconEffect = effect(() => {
+    const svgIconName = this.svgIconName();
+    if (!svgIconName) {
+      this._svgIcon = null;
+      return;
+    }
 
-      const svgIconSafeUrl = this._sanitizer.sanitize(
-        SecurityContext.RESOURCE_URL,
-        this._sanitizer.bypassSecurityTrustResourceUrl(`${this._defaultConfig.iconAssetsPath}/${svgIconName}.svg`),
-      );
+    const svgIconSafeUrl = this._sanitizer.sanitize(
+      SecurityContext.RESOURCE_URL,
+      this._sanitizer.bypassSecurityTrustResourceUrl(`${this._defaultConfig.iconAssetsPath}/${svgIconName}.svg`),
+    );
 
-      if (!svgIconSafeUrl) {
-        this._svgIcon = null;
-        return;
-      }
+    if (!svgIconSafeUrl) {
+      this._svgIcon = null;
+      return;
+    }
 
-      this._getSvgElementSource(svgIconSafeUrl);
-    });
-  }
+    this._getSvgElementSource(svgIconSafeUrl);
+  });
 
   public ngOnInit(): void {
     if (this.fontIcon() && this.svgIconName()) {
-      throw new Error(createComponentError(this._componentClass, 'Font icon and svg icon can not be used together!'));
+      throw new Error(this._createHostError('Font icon and svg icon can not be used together!'));
     }
   }
 
@@ -132,7 +121,7 @@ export class IdsIconComponent implements OnInit {
     const svg = div.querySelector('svg') as SVGElement;
 
     if (!svg) {
-      throw new Error(createComponentError(this._componentClass, 'Svg element creation failed!'));
+      throw new Error(this._createHostError('Svg element creation failed!'));
     }
 
     return svg;

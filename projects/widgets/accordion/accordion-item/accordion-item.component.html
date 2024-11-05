@@ -1,10 +1,10 @@
 <div
   #header
   role="button"
-  [id]="_headerId"
+  class="ids-accordion-item-summary"
+  [id]="_headerId()"
   [attr.aria-expanded]="isExpanded ? 'true' : 'false'"
-  [attr.aria-controls]="_contentId"
-  [class]="_summaryClass"
+  [attr.aria-controls]="_contentId()"
   [attr.tabindex]="_parentOrSelfDisabled() ? -1 : 0"
   [attr.aria-disabled]="_parentOrSelfDisabled()"
   (click)="toggle()"
@@ -12,16 +12,16 @@
   @if (_parentOrSelfHasLeadingIcon()) {
     <ids-icon icon-leading [fontIcon]="_icon" />
   }
-  <span [class]="_titleClass">{{ summary() }}</span>
+  <span class="ids-accordion-item-title">{{ summary() }}</span>
   @if (_parentOrSelfHasTrailingIcon()) {
     <ids-icon icon-trailing [fontIcon]="_icon" />
   }
 </div>
 <div
   role="region"
-  [id]="_contentId"
-  [attr.aria-labelledby]="_headerId"
-  [class]="_contentClass"
+  class="ids-accordion-item-content"
+  [id]="_contentId()"
+  [attr.aria-labelledby]="_headerId()"
   [@accordionAnimations]="isExpanded ? 'expanded' : 'collapsed'"
 >
   <ng-content />

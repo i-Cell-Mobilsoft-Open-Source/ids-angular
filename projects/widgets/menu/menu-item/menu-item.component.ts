@@ -3,22 +3,8 @@ import { IdsMenuItemAppearanceType } from './types/menu-item-appearance.type';
 import { MenuItemVariantType } from './types/menu-item-variant.type';
 
 import { CdkMenuItem } from '@angular/cdk/menu';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  InjectionToken,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  inject,
-  input,
-} from '@angular/core';
-import {
-  IdsSizeType,
-  coerceBooleanAttribute,
-  createClassList,
-} from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
+import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
 
@@ -31,14 +17,15 @@ const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '_hostClasses()',
     '[type]': 'buttonType',
     '[attr.disabled]': 'disabled() ? "" : null',
     '[attr.aria-disabled]': 'disabled() || null',
   },
 })
-export class IdsMenuItemComponent {
-  private readonly _componentClass = 'ids-menu-item';
+export class IdsMenuItemComponent extends ComponentBaseWithDefaults<IdsMenuItemDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'menu-item';
+  }
 
   private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>).nativeElement;
 
@@ -57,24 +44,14 @@ export class IdsMenuItemComponent {
   public iconLeading = contentChildren<unknown>('[icon-leading]');
   public iconTrailing = contentChildren<unknown>('[icon-trailing]');
 
-  private _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      this.appearance(),
-      this.size(),
-      this.variant(),
-      this.active() ? 'active' : null,
-    ]),
-  );
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.appearance(),
+    this.size(),
+    this.variant(),
+    this.active() ? 'active' : null,
+  ]));
 
   public get buttonType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
-  }
-
-  // eslint-disable-next-line @stylistic/js/max-len
-  protected _getDefaultConfig(defaultConfig: Required<IdsMenuItemDefaultConfig>, injectionToken: InjectionToken<IdsMenuItemDefaultConfig>): Required<IdsMenuItemDefaultConfig> {
-    return {
-      ...defaultConfig,
-      ...inject(injectionToken, { optional: true }),
-    };
   }
 }

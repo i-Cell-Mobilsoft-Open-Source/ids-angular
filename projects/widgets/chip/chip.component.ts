@@ -73,7 +73,6 @@ export class IdsChipComponent
     this._parentOrSelfAppearance(),
     this._parentOrSelfSize(),
     this.variant(),
-    this._safeRemovable() ? 'removable' : null,
   ]));
 
   public embeddedAvatarVariant = computed<IdsAvatarVariantType>(() => IdsAvatarVariant.SURFACE);

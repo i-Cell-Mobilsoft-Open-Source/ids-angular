@@ -1,6 +1,7 @@
 export * from './base-classes/component-base';
 export * from './base-classes/directive-base';
 export * from './directives/detect-scrollable.directive';
+export * from './pipes/sentence-case.pipe';
 export * from './services/resize-observer.service';
 export * from './services/window-resize.service';
 export * from './tokens/window-resize-default-options';

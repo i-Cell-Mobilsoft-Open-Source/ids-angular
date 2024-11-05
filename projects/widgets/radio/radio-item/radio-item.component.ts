@@ -1,7 +1,7 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
 import { IdsRadioChangeEvent } from '../types/radio-events.class';
 
-import { ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, inject, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -41,7 +41,7 @@ export class IdsRadioItemComponent extends ComponentBase implements OnInit {
 
   @ViewChild('input') private _inputElement!: ElementRef<HTMLButtonElement>;
 
-  @Output() public readonly changes = new EventEmitter<IdsRadioChangeEvent>();
+  public readonly changes = output<IdsRadioChangeEvent>();
 
   public ngOnInit(): void {
     if (!this._group) {

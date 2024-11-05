@@ -107,9 +107,9 @@ export class IconDemoComponent implements OnInit {
       takeUntilDestroyed(this._destroyRef),
     ).subscribe((data) => {
       const list = data.map((item) => item.name);
-      this._inputControlConfig = { 
-        ...this._inputControlConfig, 
-        fontIcon: { ...this._inputControlConfig.fontIcon, list }, 
+      this._inputControlConfig = {
+        ...this._inputControlConfig,
+        fontIcon: { ...this._inputControlConfig.fontIcon, list },
         svgIcon: { ...this._inputControlConfig.svgIcon, list },
       };
     });
@@ -118,7 +118,7 @@ export class IconDemoComponent implements OnInit {
   public defaults = getDefaultFromDemoConfig<IconInputControls>(this._inputControlConfig);
 
   public model: IconInputControls = { ...this.defaults  };
-  
+
   public reset(): void {
     this.model = { ...this.defaults };
   }

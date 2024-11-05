@@ -1,13 +1,35 @@
 <app-tryout [title]="'COMPONENTS.CHIP' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <div component class="chip-grid">
     <div class="chip-item">
-      <h2>Standalone</h2>
-      @if (standaloneChipIsVisible) {
-        <ids-chip
+      <h2>{{ "COMMON.NON-INTERACTIVE" | translate }}</h2>
+      <ids-chip [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" (removed)="onChipRemove($event)">
+        @if (helperModel.hasAvatar) {
+          <ids-avatar>
+            <ids-icon svgIcon="user-avatar" />
+          </ids-avatar>
+        }
+        @if (helperModel.hasLeadingIcon) {
+          <ids-icon fontIcon="moon" idsLeadingIcon />
+        }
+        {{ helperModel.label }}
+        @if (helperModel.hasTrailingIconButton) {
+          <button type="button" idsIconButton>
+            <ids-icon fontIcon="envelope" />
+          </button>
+        }
+      </ids-chip>
+    </div>
+
+    <div class="chip-item">
+      <h2>{{ "COMMON.INTERACTIVE" | translate }}</h2>
+      @if (interactivChipIsVisible) {
+        <button
+          idsChip
+          type="button"
           [appearance]="model.appearance"
           [size]="model.size"
           [variant]="model.variant"
-          [closable]="model.removable"
+          [removable]="model.removable"
           [disabled]="model.disabled"
           (removed)="onChipRemove($event)"
         >
@@ -22,37 +44,97 @@
           {{ helperModel.label }}
           @if (helperModel.hasTrailingIconButton) {
             <button type="button" idsIconButton>
-              <ids-icon fontIcon="camera" />
+              <ids-icon fontIcon="envelope" />
             </button>
           }
-        </ids-chip>
+        </button>
       }
     </div>
+
     <div class="chip-item">
-      <h2>Grouped</h2>
-      <ids-chip-group [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [disabled]="model.disabled">
-        @for (chip of chipList; track chip.label) {
-          <ids-chip [closable]="model.removable" [variant]="chip.variant" (removed)="onChipRemoveFromGroup($event, $index, chip.label)">
-            @if (helperModel.hasAvatar) {
-              <ids-avatar>
-                <ids-icon svgIcon="user-avatar" />
-              </ids-avatar>
-            }
-            @if (helperModel.hasLeadingIcon) {
-              <ids-icon fontIcon="moon" idsLeadingIcon />
-            }
-            {{ chip.label }}
-            @if (helperModel.hasTrailingIconButton) {
-              <button type="button" idsIconButton>
-                <ids-icon fontIcon="camera" />
-              </button>
-            }
-          </ids-chip>
-        }
-      </ids-chip-group>
+      <h2>{{ "COMMON.GROUPED" | translate }}</h2>
+      @if (groupHelperModel.chipsAreInteractive) {
+        <ids-chip-group [appearance]="groupModel.appearance" [size]="groupModel.size" [disabled]="groupModel.disabled">
+          @for (chip of chipList; track chip.label) {
+            <button
+              idsChip
+              type="button"
+              [variant]="chip.variant"
+              [removable]="model.removable"
+              (removed)="onChipRemoveFromGroup($event, $index, chip.label)"
+            >
+              @if (helperModel.hasAvatar) {
+                <ids-avatar>
+                  <ids-icon svgIcon="user-avatar" />
+                </ids-avatar>
+              }
+              @if (helperModel.hasLeadingIcon) {
+                <ids-icon fontIcon="moon" idsLeadingIcon />
+              }
+              {{ chip.label }}
+              @if (helperModel.hasTrailingIconButton) {
+                <button type="button" idsIconButton>
+                  <ids-icon fontIcon="envelope" />
+                </button>
+              }
+            </button>
+          }
+        </ids-chip-group>
+      } @else {
+        <ids-chip-group [appearance]="groupModel.appearance" [size]="groupModel.size" [disabled]="groupModel.disabled">
+          @for (chip of chipList; track chip.label) {
+            <ids-chip [variant]="chip.variant">
+              @if (helperModel.hasAvatar) {
+                <ids-avatar>
+                  <ids-icon svgIcon="user-avatar" />
+                </ids-avatar>
+              }
+              @if (helperModel.hasLeadingIcon) {
+                <ids-icon fontIcon="moon" idsLeadingIcon />
+              }
+              {{ chip.label }}
+              @if (helperModel.hasTrailingIconButton) {
+                <button type="button" idsIconButton>
+                  <ids-icon fontIcon="envelope" />
+                </button>
+              }
+            </ids-chip>
+          }
+        </ids-chip-group>
+      }
     </div>
   </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+  <app-control-table
+    controls
+    [controlName]="'Chip'"
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Chip'"
+    [configType]="'helper'"
+    [controlConfig]="_helperControlConfig"
+    [(model)]="helperModel"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Chip group'"
+    [configType]="'input'"
+    [controlConfig]="_groupInputControlConfig"
+    [(model)]="groupModel"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Chip group'"
+    [configType]="'helper'"
+    [controlConfig]="_groupHelperControlConfig"
+    [(model)]="groupHelperModel"
+    (resetted)="reset()"
+  />
 </app-tryout>

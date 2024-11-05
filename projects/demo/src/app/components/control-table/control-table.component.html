@@ -1,7 +1,6 @@
 <table [attr.cellPadding]="cellPadding()">
   <caption>
-    @let name = controlName();
-    <span>{{ (name ? name + " " : "") + (configType() | titlecase) }} controls</span>
+    <span>{{ _caption() | sentenceCase }} controls</span>
   </caption>
 
   <thead>

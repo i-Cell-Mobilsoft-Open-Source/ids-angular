@@ -4,7 +4,7 @@ import { IdsChipAppearance, IdsChipAppearanceType } from './types/chip-appearanc
 import { IdsChipRemoveEvent } from './types/chip-events.type';
 import { IdsChipVariant, IdsChipVariantType } from './types/chip-variant.type';
 
-import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, output, signal, ViewEncapsulation } from '@angular/core';
 import { IDS_AVATAR_PARENT, IdsAvatarParent, IdsAvatarVariant, IdsAvatarVariantType } from '@i-cell/ids-angular/avatar';
 import { coerceNumberAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -13,7 +13,7 @@ import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonAppearanc
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'ids-chip',
+  selector: 'ids-chip, button[idsChip]',
   standalone: true,
   imports: [
     IdsIconButtonComponent,
@@ -35,6 +35,7 @@ const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
   host: {
     '[attr.role]': '_safeRole()',
     '[attr.tabindex]': '_safeTabIndex()',
+    '[attr.disabled]': '_isInteractive && _parentOrSelfDisabled() ? "" : null',
   },
 })
 export class IdsChipComponent
@@ -44,11 +45,15 @@ export class IdsChipComponent
     return 'chip';
   }
 
-  private readonly _chipGroup = inject(IdsChipGroupComponent, { optional: true });
+  private readonly _group = inject(IdsChipGroupComponent, { optional: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CHIP_DEFAULT_CONFIG);
 
-  public closable = input<boolean>(this._defaultConfig.removable);
+  private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
+  private _isInteractive = this._hostElement.tagName === 'BUTTON';
+
+  public removable = input<boolean>(this._defaultConfig.removable);
   public appearance = input<IdsChipAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsChipVariantType>(this._defaultConfig.variant);
@@ -57,16 +62,17 @@ export class IdsChipComponent
 
   public removed = output<IdsChipRemoveEvent>();
 
-  private _parentOrSelfAppearance = computed(() => this._chipGroup?.appearance() ?? this.appearance());
-  private _parentOrSelfSize = computed(() => this._chipGroup?.size() ?? this.size());
-  private _parentOrSelfDisabled = computed(() => this._chipGroup?.disabled() ?? this.disabled());
-  private _safeRole = computed(() => (this.closable() ? null : 'button'));
-  private _safeTabIndex = computed(() => (this.closable() || this.disabled() ? -1 : this.tabIndex()));
+  private _parentOrSelfAppearance = computed(() => this._group?.appearance() ?? this.appearance());
+  private _parentOrSelfSize = computed(() => this._group?.size() ?? this.size());
+  private _parentOrSelfDisabled = computed(() => this._group?.disabled() ?? this.disabled());
+  protected _safeRemovable = computed(() => this._isInteractive && this.removable());
+  private _safeTabIndex = computed(() => (!this._isInteractive || this.removable() || this.disabled() ? -1 : this.tabIndex()));
+  private _safeRole = computed(() => (this._safeRemovable() ? 'presentation' : null));
+
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfAppearance(),
     this._parentOrSelfSize(),
     this.variant(),
-    this._parentOrSelfDisabled() ? 'disabled' : null,
   ]));
 
   public embeddedAvatarVariant = computed<IdsAvatarVariantType>(() => IdsAvatarVariant.SURFACE);

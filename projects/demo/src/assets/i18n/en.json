@@ -36,6 +36,8 @@
   },
   "COMMON": {
     "INTERACTIVE": "Interactive",
-    "NON-INTERACTIVE": "Non-interactive"
+    "NON-INTERACTIVE": "Non-interactive",
+    "STANDALONE": "Standalone",
+    "GROUPED": "Grouped"
   }
 }

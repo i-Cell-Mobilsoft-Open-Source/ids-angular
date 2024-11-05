@@ -1,8 +1,9 @@
 import { DemoControlConfig, DemoControlItem } from '../../../types/demo-control.type';
 
-import { KeyValuePipe, TitleCasePipe } from '@angular/common';
+import { KeyValuePipe } from '@angular/common';
 import { Component, computed, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IdsSentenceCasePipe } from '@i-cell/ids-angular/core';
 
 const DEFAULT_CONTROL_TABLE_PADDING = 8;
 
@@ -11,7 +12,7 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
   standalone: true,
   imports: [
     KeyValuePipe,
-    TitleCasePipe,
+    IdsSentenceCasePipe,
     FormsModule,
   ],
   templateUrl: './control-table.component.html',
@@ -25,6 +26,11 @@ export class ControlTableComponent<T extends Record<string, unknown>> {
   public model = model.required<T>();
 
   public resetted = output<void>();
+
+  protected _caption = computed(() => [
+    this.controlName(),
+    this.configType(),
+  ].join(' '));
 
   protected _flatControls = computed(() => {
     const controls = this.controlConfig();

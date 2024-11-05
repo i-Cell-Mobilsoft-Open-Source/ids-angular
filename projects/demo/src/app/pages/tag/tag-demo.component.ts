@@ -7,15 +7,13 @@ import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import {
-  IdsSize,
-  IdsSizeType,
-} from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsTagComponent, IdsTagAppearanceType, IdsTagVariantType, IdsTagVariant, IDS_TAG_DEFAULT_CONFIG_FACTORY, IdsTagAppearance } from '@i-cell/ids-angular/tag';
+import { IdsTagComponent, IdsTagAppearanceType, IdsTagVariantType, IdsTagVariant, IDS_TAG_DEFAULT_CONFIG_FACTORY, IdsTagAppearance, IDS_TAG_GROUP_DEFAULT_CONFIG_FACTORY, IdsTagGroupComponent } from '@i-cell/ids-angular/tag';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
+const defaultGroupConfig = IDS_TAG_GROUP_DEFAULT_CONFIG_FACTORY();
 
 type TagInputControls = {
   appearance: IdsTagAppearanceType,
@@ -28,6 +26,11 @@ type TagHelperControls = {
   hasTrailingIcon: boolean,
 };
 
+type TagGroupInputControls = {
+  appearance: IdsTagAppearanceType,
+  size: IdsSizeType,
+};
+
 @Component({
   standalone: true,
   selector: 'app-tag-demo',
@@ -35,6 +38,7 @@ type TagHelperControls = {
     TryoutComponent,
     ControlTableComponent,
     IdsTagComponent,
+    IdsTagGroupComponent,
     IdsIconComponent,
     TranslateModule,
     FormsModule,
@@ -85,12 +89,31 @@ export class TagDemoComponent {
       control: 'checkbox',
     },
   };
-  
+
+  protected _groupInputControlConfig: DemoControlConfig<TagGroupInputControls> = {
+    appearance: {
+      description: 'Appearance of the tag.',
+      type: 'IdsTagAppearanceType',
+      default: defaultGroupConfig.appearance,
+      control: 'select',
+      list: convertEnumToStringArray(IdsTagAppearance),
+    },
+    size: {
+      description: 'Size of the tag.',
+      type: 'IdsSizeType',
+      default: defaultGroupConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<TagInputControls>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<TagHelperControls>(this._helperControlConfig);
+  public groupDefaults = getDefaultFromDemoConfig<TagGroupInputControls>(this._groupInputControlConfig);
 
   public model: TagInputControls = { ...this.defaults };
   public helperModel: TagHelperControls = { ...this.helperDefaults };
+  public groupModel: TagGroupInputControls = { ...this.groupDefaults };
 
   public onClick(tagName: string): void {
     console.info(`${tagName} tag clicked`);
@@ -99,5 +122,6 @@ export class TagDemoComponent {
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+    this.groupModel = { ...this.groupDefaults };
   }
 }

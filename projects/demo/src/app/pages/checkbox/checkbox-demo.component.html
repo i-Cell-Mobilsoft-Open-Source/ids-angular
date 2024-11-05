@@ -6,7 +6,7 @@
   <ng-container component>
     <div component class="checkbox-grid">
       <div class="checkbox-item">
-        <h2>Standalone</h2>
+        <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
         <ul class="checkbox-group">
           <li>
             <ids-checkbox
@@ -58,7 +58,7 @@
       </div>
 
       <div class="checkbox-item">
-        <h2>Grouped</h2>
+        <h2>{{ "COMMON.GROUPED" | translate }}</h2>
         <ids-checkbox-group
           [label]="groupModel.groupLabel"
           [allowParent]="groupModel.allowParent"

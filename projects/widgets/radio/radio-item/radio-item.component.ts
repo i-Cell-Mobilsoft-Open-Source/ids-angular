@@ -1,7 +1,7 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
 import { IdsRadioChangeEvent } from '../types/radio-events.class';
 
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -39,7 +39,7 @@ export class IdsRadioItemComponent extends ComponentBase implements OnInit {
     this.isDisabled() ? 'disabled' : null,
   ]));
 
-  @ViewChild('input') private _inputElement!: ElementRef<HTMLButtonElement>;
+  private _inputElement = viewChild.required<ElementRef<HTMLButtonElement>>('input');
 
   public readonly changes = output<IdsRadioChangeEvent>();
 
@@ -58,19 +58,19 @@ export class IdsRadioItemComponent extends ComponentBase implements OnInit {
 
   public touchTargetClick(): void {
     if (!this.selected() && !this.isDisabled()) {
-      this._inputElement.nativeElement.focus();
+      this._inputElement().nativeElement.focus();
       this.onChange();
     }
   }
 
   public innerCircleClick(): void {
     if (!this.selected() && !this.isDisabled()) {
-      this._inputElement.nativeElement.focus();
+      this._inputElement().nativeElement.focus();
       this.onChange();
     }
   }
 
   public focus(options?: FocusOptions): void {
-    this._inputElement.nativeElement.focus(options);
+    this._inputElement().nativeElement.focus(options);
   }
 }

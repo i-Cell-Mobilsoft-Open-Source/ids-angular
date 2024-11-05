@@ -10,7 +10,7 @@ const defaultConfig = IDS_TAG_GROUP_DEFAULT_CONFIG_FACTORY();
   selector: 'ids-tag-group',
   standalone: true,
   imports: [],
-  template: '<ng-content select="ids-tag" />',
+  template: '<ng-content select="ids-tag, a[idsTag]" />',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

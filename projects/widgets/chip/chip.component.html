@@ -6,7 +6,7 @@
   <ng-content />
 </div>
 
-@if (closable()) {
+@if (_safeRemovable()) {
   <button type="button" idsIconButton (click)="remove()">
     <ids-icon fontIcon="close" />
   </button>

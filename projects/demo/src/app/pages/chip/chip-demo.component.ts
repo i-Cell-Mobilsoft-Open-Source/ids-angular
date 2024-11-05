@@ -39,6 +39,10 @@ type ChipGroupInputControls = {
   disabled: boolean,
 };
 
+type ChipGroupHelperControls = {
+  chipsAreInteractive: boolean,
+};
+
 const chipList: { label: string, variant: IdsChipVariantType }[] = [
   { label: 'carrot',  variant: IdsChipVariant.PRIMARY },
   { label: 'onion', variant: IdsChipVariant.SECONDARY },
@@ -154,13 +158,24 @@ export class ChipDemoComponent {
     },
   };
 
+  protected _groupHelperControlConfig: DemoControlConfig<ChipGroupHelperControls> = {
+    chipsAreInteractive: {
+      description: 'Whether the chip group build from interactive chips or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<ChipInputControls>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<ChipHelperControls>(this._helperControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<ChipGroupInputControls>(this._groupInputControlConfig);
+  public groupHelperDefaults = getDefaultFromDemoConfig<ChipGroupHelperControls>(this._groupHelperControlConfig);
 
   public model: ChipInputControls = { ...this.defaults };
   public helperModel: ChipHelperControls = { ...this.helperDefaults };
   public groupModel: ChipGroupInputControls = { ...this.groupDefaults };
+  public groupHelperModel: ChipGroupHelperControls = { ...this.groupHelperDefaults };
 
   public chipList = chipList;
 
@@ -168,16 +183,17 @@ export class ChipDemoComponent {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
     this.groupModel = { ...this.groupDefaults };
-    this.standaloneChipIsVisible = true;
+    this.groupHelperModel = { ...this.groupHelperDefaults };
+    this.interactivChipIsVisible = true;
 
     this.chipList = chipList;
   }
 
-  public standaloneChipIsVisible = true;
+  public interactivChipIsVisible = true;
 
   public onChipRemove(event: IdsChipRemoveEvent): void {
     console.info('chip removed:', event.chip.id());
-    this.standaloneChipIsVisible = false;
+    this.interactivChipIsVisible = false;
   }
 
   public onChipRemoveFromGroup(event: IdsChipRemoveEvent, index: number, label: string): void {

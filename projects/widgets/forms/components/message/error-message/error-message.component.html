@@ -6,7 +6,7 @@
 <div class="ids-message__text">
   <ng-content />
 </div>
-@if (suffixes.length) {
+@if (suffixes().length) {
   <div class="ids-message__suffix">
     <ng-content select="[idsMessageSuffix]" />
   </div>

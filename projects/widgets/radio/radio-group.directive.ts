@@ -3,8 +3,7 @@ import { IdsRadioItemComponent } from './radio-item/radio-item.component';
 import { IdsRadioChangeEvent } from './types/radio-events.class';
 import { IdsRadioVariantType } from './types/radio-variant.type';
 
-import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, Input, input, isDevMode, OnInit, Output, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AfterContentInit, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanAttribute, IdsOrientation, IdsOrientationType, IdsPositionType, SelectionModel, IdsSizeType, IdsVerticalPosition, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
@@ -62,7 +61,7 @@ export class IdsRadioGroupDirective
     }
   }
 
-  @Output() public readonly itemChanges = new EventEmitter<IdsRadioChangeEvent>();
+  public readonly itemChanges = output<IdsRadioChangeEvent>();
 
   private _handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<IdsOrientationType, Set<string>> = {
@@ -183,7 +182,7 @@ export class IdsRadioGroupDirective
 
   private _subscribeItemChanges(): void {
     this._items().forEach((item) => {
-      item.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(
+      item.changes.subscribe(
         (change) => {
           this._handleItemChanges(change);
         },

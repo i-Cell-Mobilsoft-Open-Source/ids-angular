@@ -3,7 +3,7 @@ import { IdsMessageDirective } from '../../../directives/message.directive';
 import { IdsFormFieldComponent } from '../../form-field/form-field.component';
 import { IDS_FORM_FIELD } from '../../form-field/tokens/form-field-tokens';
 
-import { Component, ContentChildren, Injector, OnInit, QueryList, ViewEncapsulation, computed, inject, signal } from '@angular/core';
+import { Component, Injector, OnInit, ViewEncapsulation, computed, contentChildren, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ValidationErrors } from '@angular/forms';
 import { ComponentBase } from '@i-cell/ids-angular/core';
@@ -28,7 +28,7 @@ export class IdsErrorMessageComponent extends ComponentBase implements OnInit {
   private _errors = signal<ValidationErrors | null>(null);
   protected _hostClasses = computed(() => this._getHostClasses([]));
 
-  @ContentChildren(IdsMessageSuffixDirective) public suffixes!: QueryList<IdsMessageSuffixDirective>;
+  public suffixes = contentChildren(IdsMessageSuffixDirective);
 
   public ngOnInit(): void {
     const parent = this._injector.get<IdsFormFieldComponent>(IDS_FORM_FIELD, null, { skipSelf: true, optional: true });

@@ -1,7 +1,7 @@
 <app-tryout [title]="'COMPONENTS.CHIP' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <div component class="chip-grid">
     <div class="chip-item">
-      <h2>Standalone</h2>
+      <h2>{{ "COMMON.NON-INTERACTIVE" | translate }}</h2>
       @if (standaloneChipIsVisible) {
         <ids-chip
           [appearance]="model.appearance"
@@ -29,8 +29,8 @@
       }
     </div>
     <div class="chip-item">
-      <h2>Grouped</h2>
-      <ids-chip-group [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [disabled]="model.disabled">
+      <h2>{{ "COMMON.INTERACTIVE" | translate }}</h2>
+      <ids-chip-group [appearance]="groupModel.appearance" [size]="groupModel.size" [disabled]="groupModel.disabled">
         @for (chip of chipList; track chip.label) {
           <ids-chip [closable]="model.removable" [variant]="chip.variant" (removed)="onChipRemoveFromGroup($event, $index, chip.label)">
             @if (helperModel.hasAvatar) {
@@ -53,6 +53,28 @@
     </div>
   </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+  <app-control-table
+    controls
+    [controlName]="'Chip'"
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Chip'"
+    [configType]="'helper'"
+    [controlConfig]="_helperControlConfig"
+    [(model)]="helperModel"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Chip group'"
+    [configType]="'input'"
+    [controlConfig]="_groupInputControlConfig"
+    [(model)]="groupModel"
+    (resetted)="reset()"
+  />
 </app-tryout>

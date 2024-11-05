@@ -8,8 +8,7 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsAvatarComponent } from '@i-cell/ids-angular/avatar';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsChipAppearance, IdsChipAppearanceType, IdsChipVariant, IdsChipVariantType, IDS_CHIP_DEFAULT_CONFIG_FACTORY, IdsChipComponent, IdsChipRemoveEvent } from '@i-cell/ids-angular/chip';
-import { IdsChipGroupComponent } from '@i-cell/ids-angular/chip/chip-group.component';
+import { IdsChipAppearance, IdsChipAppearanceType, IdsChipVariant, IdsChipVariantType, IDS_CHIP_DEFAULT_CONFIG_FACTORY, IdsChipComponent, IdsChipRemoveEvent, IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY, IdsChipGroupComponent } from '@i-cell/ids-angular/chip';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsPrefixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -17,6 +16,7 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
+const defaultGroupConfig = IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY();
 
 type ChipInputControls = {
   appearance: IdsChipAppearanceType,
@@ -31,6 +31,12 @@ type ChipHelperControls = {
   hasLeadingIcon: boolean,
   label: string,
   hasTrailingIconButton: boolean,
+};
+
+type ChipGroupInputControls = {
+  appearance: IdsChipAppearanceType,
+  size: IdsSizeType,
+  disabled: boolean,
 };
 
 const chipList: { label: string, variant: IdsChipVariantType }[] = [
@@ -125,17 +131,43 @@ export class ChipDemoComponent {
     },
   };
 
+  protected _groupInputControlConfig: DemoControlConfig<ChipGroupInputControls> = {
+    appearance: {
+      description: 'Chip group appearance.',
+      type: 'IdsChipAppearanceType',
+      default: defaultGroupConfig.appearance,
+      control: 'select',
+      list: convertEnumToStringArray(IdsChipAppearance),
+    },
+    size: {
+      description: 'Chip group size.',
+      type: 'IdsSizeType',
+      default: defaultGroupConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+    disabled: {
+      description: 'Whether the chip group is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: 'checkbox',
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<ChipInputControls>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<ChipHelperControls>(this._helperControlConfig);
+  public groupDefaults = getDefaultFromDemoConfig<ChipGroupInputControls>(this._groupInputControlConfig);
 
   public model: ChipInputControls = { ...this.defaults };
   public helperModel: ChipHelperControls = { ...this.helperDefaults };
+  public groupModel: ChipGroupInputControls = { ...this.groupDefaults };
 
   public chipList = chipList;
 
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+    this.groupModel = { ...this.groupDefaults };
     this.standaloneChipIsVisible = true;
 
     this.chipList = chipList;

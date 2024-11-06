@@ -1,0 +1,51 @@
+<div class="ids-notification__content-wrapper">
+  @let fontIcon = icon();
+  @if (fontIcon) {
+    <div class="ids-notification__leading-element">
+      <ids-icon [fontIcon]="fontIcon" />
+    </div>
+  }
+
+  <div class="ids-notification__container">
+    <div class="ids-notification__title-msg-container">
+      <div class="ids-notification__title">
+        {{ title() }}
+      </div>
+      <div class="ids-notification__message">
+        <ng-content />
+      </div>
+    </div>
+    @if (_actionButtons()) {
+      <div class="ids-notification__action">
+        <ng-content select="button[idsNotificationActionButton]" />
+      </div>
+    }
+  </div>
+
+  <div class="ids-notification__close-btn-container" [class]="_closeLabelButtonClass()">
+    @let closeButtonLabel = closeBtnLabel();
+    @if (closeButtonLabel) {
+      <button
+        type="button"
+        aria-label="Close notification"
+        idsButton
+        [size]="closeBtnSize()"
+        [appearance]="closeLabelBtnAppearance()"
+        (click)="_onCloseBtnClicked()"
+      >
+        {{ closeButtonLabel }}
+      </button>
+    } @else {
+      <button
+        type="button"
+        aria-label="Close notification"
+        idsIconButton
+        [size]="closeBtnSize()"
+        [appearance]="closeBtnAppearance()"
+        (click)="_onCloseBtnClicked()"
+      >
+        <ids-icon alt="close icon" fontIcon="close" />
+      </button>
+    }
+  </div>
+</div>

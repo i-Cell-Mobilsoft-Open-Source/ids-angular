@@ -1,0 +1,66 @@
+<app-tryout [title]="'COMPONENTS.NOTIFICATION' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+  <ng-container component>
+    @if (this.displayComponent()) {
+      <ids-notification
+        [appearance]="model.appearance"
+        [variant]="model.variant"
+        [size]="model.size"
+        [icon]="model.icon"
+        [title]="model.title"
+        [closeBtnSize]="model.closeBtnSize"
+        [closeBtnAppearance]="model.closeBtnAppearance"
+        [closeBtnLabel]="model.closeBtnLabel"
+        [closeLabelBtnAppearance]="model.closeLabelBtnAppearance"
+        [urgent]="model.urgent"
+        (closed)="delete()"
+      >
+        This is a notification with a long content and an action. Notice how the text wraps to multiple lines when the max-width is reached.
+        @if (helperModel.showAction1Btn) {
+          <button
+            type="button"
+            idsNotificationActionButton
+            [id]="helperModel.action1Appearance + '-' + helperModel.action1Variant + '-' + helperModel.action1Size + '-button'"
+            [appearance]="helperModel.action1Appearance"
+            [size]="helperModel.action1Size"
+            [variant]="helperModel.action1Variant"
+            [disabled]="helperModel.action1Disabled"
+            (click)="onClick(helperModel.action1Appearance + '-' + helperModel.action1Variant + '-' + helperModel.action1Size)"
+          >
+            @if (helperModel.action1HasLeadingIcon) {
+              <ids-icon icon-leading fontIcon="search" />
+            }
+            {{ helperModel.action1Text }}
+            @if (helperModel.action1HasTrailingIcon) {
+              <ids-icon icon-trailing fontIcon="check" />
+            }
+          </button>
+        }
+        @if (helperModel.showAction2Btn) {
+          <button
+            type="button"
+            idsNotificationActionButton
+            [id]="helperModel.action2Appearance + '-' + helperModel.action2Variant + '-' + helperModel.action2Size + '-button'"
+            [appearance]="helperModel.action2Appearance"
+            [size]="helperModel.action2Size"
+            [variant]="helperModel.action2Variant"
+            [disabled]="helperModel.action2Disabled"
+            (click)="onClick(helperModel.action2Appearance + '-' + helperModel.action2Variant + '-' + helperModel.action2Size)"
+          >
+            @if (helperModel.action2HasLeadingIcon) {
+              <ids-icon icon-leading fontIcon="search" />
+            }
+            {{ helperModel.action2Text }}
+            @if (helperModel.action2HasTrailingIcon) {
+              <ids-icon icon-trailing fontIcon="check" />
+            }
+          </button>
+        }
+      </ids-notification>
+    } @else {
+      <button type="button" idsButton (click)="onResetButtonClick()">Reset</button>
+    }
+  </ng-container>
+
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+</app-tryout>

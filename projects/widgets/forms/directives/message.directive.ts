@@ -1,5 +1,4 @@
 import { IdsFormFieldComponent } from '../components/form-field/form-field.component';
-import { IDS_FORM_FIELD } from '../components/form-field/tokens/form-field-tokens';
 import { IDS_MESSAGE_DEFAULT_CONFIG, IDS_MESSAGE_DEFAULT_CONFIG_FACTORY, IdsMessageDefaultConfig } from '../components/message/message-defaults';
 import { IdsMessageVariantType } from '../components/message/types/message-variant.type';
 
@@ -17,7 +16,7 @@ export class IdsMessageDirective extends ComponentBaseWithDefaults<IdsMessageDef
     return 'message';
   }
 
-  private readonly _parent = inject<IdsFormFieldComponent>(IDS_FORM_FIELD, { skipSelf: true, optional: true });
+  private readonly _parent = inject<IdsFormFieldComponent>(IdsFormFieldComponent, { skipSelf: true, optional: true });
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_MESSAGE_DEFAULT_CONFIG);
 
   public size = input<IdsSizeType>(this._defaultConfig.size);

@@ -1,8 +1,8 @@
 import { IDS_FORM_FIELD_DEFAULT_CONFIG, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsFormFieldDefaultConfig } from './form-field-defaults';
-import { IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL } from './tokens/form-field-tokens';
+import { IDS_FORM_FIELD_CONTROL } from './tokens/form-field-control';
 import { IdsFormFieldVariantType } from './types/form-field-variant.type';
 
-import { IdsActionDirective } from '../../directives/action.directive';
+import { IdsFormFieldActionDirective } from '../../directives/form-field-action.directive';
 import { IdsPrefixDirective } from '../../directives/prefix.directive';
 import { IdsSuffixDirective } from '../../directives/suffix.directive';
 import { IdsValidators } from '../../validators';
@@ -25,12 +25,6 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
   templateUrl: './form-field.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: IDS_FORM_FIELD,
-      useExisting: IdsFormFieldComponent,
-    },
-  ],
 })
 export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFieldDefaultConfig> implements AfterContentInit {
   protected override get _hostName(): string {
@@ -46,7 +40,7 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
   private _hintMessages = contentChildren(IdsHintMessageComponent, { descendants: true });
   private _successMessages = contentChildren(IdsSuccessMessageComponent, { descendants: true });
   private _errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
-  private _actions = contentChildren(IdsActionDirective);
+  private _actions = contentChildren(IdsFormFieldActionDirective);
   private _prefixes = contentChildren(IdsPrefixDirective);
   private _suffixes = contentChildren(IdsSuffixDirective);
 

@@ -9,7 +9,7 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsFormFieldActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
@@ -52,7 +52,7 @@ type InputInputControls = {
     IdsInputDirective,
     IdsPrefixDirective,
     IdsSuffixDirective,
-    IdsActionDirective,
+    IdsFormFieldActionDirective,
     IdsIconButtonComponent,
     IdsIconComponent,
     IdsHintMessageComponent,

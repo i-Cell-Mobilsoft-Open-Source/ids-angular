@@ -1,4 +1,4 @@
-import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconDefaultConfig } from './tokens/icon-defaults';
+import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconDefaultConfig } from './icon-defaults';
 import { IDS_ICON_PARENT } from './tokens/icon-parent';
 import { IdsIconSource } from './types/icon-source.type';
 import { IdsIconVariantType } from './types/icon-variant.type';

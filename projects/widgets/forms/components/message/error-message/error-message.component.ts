@@ -1,7 +1,6 @@
 import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.directive';
 import { IdsMessageDirective } from '../../../directives/message.directive';
 import { IdsFormFieldComponent } from '../../form-field/form-field.component';
-import { IDS_FORM_FIELD } from '../../form-field/tokens/form-field-tokens';
 
 import { Component, Injector, OnInit, ViewEncapsulation, computed, contentChildren, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -31,7 +30,7 @@ export class IdsErrorMessageComponent extends ComponentBase implements OnInit {
   public suffixes = contentChildren(IdsMessageSuffixDirective);
 
   public ngOnInit(): void {
-    const parent = this._injector.get<IdsFormFieldComponent>(IDS_FORM_FIELD, null, { skipSelf: true, optional: true });
+    const parent = this._injector.get<IdsFormFieldComponent>(IdsFormFieldComponent, null, { skipSelf: true, optional: true });
     if (parent) {
       const control = parent.control();
       control?.statusChanges?.pipe(startWith(control.errors), takeUntilDestroyed(this._destroyRef)).subscribe(() => {

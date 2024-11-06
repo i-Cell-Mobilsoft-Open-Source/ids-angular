@@ -1,5 +1,5 @@
-import { IdsAvatarType, IdsAvatarTypeType } from '../types/avatar-type.type';
-import { IdsAvatarVariant, IdsAvatarVariantType } from '../types/avatar-variant.type';
+import { IdsAvatarType, IdsAvatarTypeType } from './types/avatar-type.type';
+import { IdsAvatarVariant, IdsAvatarVariantType } from './types/avatar-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';

@@ -1,4 +1,4 @@
-import { IDS_PSEUDO_CHECKBOX_PARENT } from './pseudo-checkbox-parent';
+import { IDS_PSEUDO_CHECKBOX_PARENT } from './tokens/pseudo-checkbox-parent';
 
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { IdsCheckboxState, IdsCheckboxStateType } from '@i-cell/ids-angular/checkbox';

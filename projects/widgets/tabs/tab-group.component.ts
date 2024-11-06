@@ -26,7 +26,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   protected override get _hostName(): string {
     return 'tab-group';
   }
-  
+
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TAB_GROUP_DEFAULT_CONFIG);
   protected _headerClass = `${this._hostClassName}-header`;
 

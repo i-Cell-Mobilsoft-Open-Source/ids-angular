@@ -2,7 +2,7 @@ import { IdsMessagePrefixDirective } from '../../../directives/message-prefix.di
 import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.directive';
 import { IdsMessageDirective } from '../../../directives/message.directive';
 
-import { Component, ContentChildren, QueryList, ViewEncapsulation } from '@angular/core';
+import { Component, contentChildren, ViewEncapsulation } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
@@ -25,6 +25,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsHintMessageComponent {
-  @ContentChildren(IdsMessagePrefixDirective) public prefixes!: QueryList<IdsMessagePrefixDirective>;
-  @ContentChildren(IdsMessageSuffixDirective) public suffixes!: QueryList<IdsMessageSuffixDirective>;
+  public prefixes = contentChildren(IdsMessagePrefixDirective);
+  public suffixes = contentChildren(IdsMessageSuffixDirective);
 }

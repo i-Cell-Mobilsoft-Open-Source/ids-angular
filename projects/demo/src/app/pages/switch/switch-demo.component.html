@@ -1,10 +1,9 @@
 <app-tryout [title]="'COMPONENTS.SWITCH' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <div component class="switch-grid">
     <div class="switch-item">
-      <h2>Standalone</h2>
+      <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
       <ids-switch
         [label]="model.label"
-        [required]="model.required"
         [readonly]="model.readonly"
         [size]="model.size"
         [variant]="model.variant"
@@ -19,7 +18,7 @@
       />
     </div>
     <div class="switch-item">
-      <h2>Grouped</h2>
+      <h2>{{ "COMMON.GROUPED" | translate }}</h2>
       <ids-switch-group
         [size]="groupModel.size"
         [hasIcon]="groupModel.hasIcon"
@@ -28,7 +27,6 @@
       >
         <ids-switch
           [label]="model.label"
-          [required]="model.required"
           [readonly]="model.readonly"
           [variant]="model.variant"
           [disabled]="model.disabled"
@@ -39,7 +37,6 @@
         />
         <ids-switch
           [label]="model.label"
-          [required]="model.required"
           [readonly]="model.readonly"
           [variant]="model.variant"
           [disabled]="model.disabled"
@@ -50,7 +47,6 @@
         />
         <ids-switch
           [label]="model.label"
-          [required]="model.required"
           [readonly]="model.readonly"
           [variant]="model.variant"
           [disabled]="model.disabled"

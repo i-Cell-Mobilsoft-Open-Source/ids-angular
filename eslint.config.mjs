@@ -246,6 +246,7 @@ export default tseslint.config(
         },
       ],
       "@stylistic/js/no-floating-decimal": "error",
+      "@stylistic/js/no-trailing-spaces": "error",
       "@stylistic/js/object-curly-spacing": ["error", "always"],
       "@stylistic/js/quotes": ["error", "single"],
       "@stylistic/js/rest-spread-spacing": ["error", "never"],

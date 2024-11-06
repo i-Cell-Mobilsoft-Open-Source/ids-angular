@@ -1,5 +1,5 @@
 export function addClassPrefix(
-  componentClass: string,
+  hostClass: string,
   className: string | Array<string | null | undefined> | null | undefined,
 ): string | null {
   if (className == null) {
@@ -10,19 +10,19 @@ export function addClassPrefix(
     if (className.some((item) => item == null)) {
       return null;
     }
-    return `${componentClass}-${className.filter(Boolean).join('-')}`;
+    return `${hostClass}-${className.filter(Boolean).join('-')}`;
   }
 
-  return `${componentClass}-${className}`;
+  return `${hostClass}-${className}`;
 }
 
 export function createClassList(
-  componentClass: string,
+  hostClass: string,
   appendableClassNames: Array<string | Array<string | null | undefined> | null | undefined> = [],
   nonAppendableClassNames: Array<string | null> = []): string {
   return [
-    componentClass,
-    ...appendableClassNames.map((className) => addClassPrefix(componentClass, className)),
+    hostClass,
+    ...appendableClassNames.map((className) => addClassPrefix(hostClass, className)),
     ...nonAppendableClassNames,
   ].filter(Boolean).join(' ');
 }

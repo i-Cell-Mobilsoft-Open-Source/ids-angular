@@ -9,7 +9,7 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsActionDirective, IdsErrorMessageComponent, IdsFieldsetComponent, IdsFieldsetMessageDirective, IdsFieldsetRowComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsFormFieldActionDirective, IdsErrorMessageComponent, IdsFieldsetComponent, IdsFieldsetMessageDirective, IdsFieldsetRowComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -39,7 +39,7 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
     IdsInputDirective,
     IdsPrefixDirective,
     IdsSuffixDirective,
-    IdsActionDirective,
+    IdsFormFieldActionDirective,
     IdsIconButtonComponent,
     IdsHintMessageComponent,
     IdsSuccessMessageComponent,

@@ -1,10 +1,11 @@
 import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonDefaultConfig } from './icon-button-defaults';
+import { IDS_ICON_BUTTON_PARENT } from './public-api';
 import { IdsIconButtonAppearanceType } from './types/icon-button-appearance.type';
 import { IdsIconButtonVariantType } from './types/icon-button-variant.type';
 
 import {
+  ChangeDetectionStrategy,
   Component,
-  InjectionToken,
   ViewEncapsulation,
   computed,
   contentChildren,
@@ -12,9 +13,9 @@ import {
   input,
 } from '@angular/core';
 import {
+  ComponentBaseWithDefaults,
   IdsSizeType,
   coerceBooleanAttribute,
-  createClassList,
 } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -26,14 +27,18 @@ const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
   imports: [],
   templateUrl: './icon-button.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[attr.class]': '_hostClasses()',
-    '[disabled]': 'disabled() || null',
-    '[attr.aria-disabled]': 'disabled()',
+    '[attr.disabled]': '_parentOrSelfDisabled() ? "" : null',
+    '[attr.aria-disabled]': '_parentOrSelfDisabled()',
   },
 })
-export class IdsIconButtonComponent {
-  private readonly _componentClass = 'ids-icon-button';
+export class IdsIconButtonComponent extends ComponentBaseWithDefaults<IdsIconButtonDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'icon-button';
+  }
+
+  private readonly _parent = inject(IDS_ICON_BUTTON_PARENT, { optional: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_BUTTON_DEFAULT_CONFIG);
 
@@ -42,21 +47,14 @@ export class IdsIconButtonComponent {
   public variant = input<IdsIconButtonVariantType>(this._defaultConfig.variant);
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
-  public icon = contentChildren(IdsIconComponent);
+  public icons = contentChildren(IdsIconComponent);
 
-  private _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      this.appearance(),
-      this.size(),
-      this.variant(),
-    ]),
-  );
-
-  // eslint-disable-next-line @stylistic/js/max-len
-  protected _getDefaultConfig(defaultConfig: Required<IdsIconButtonDefaultConfig>, injectionToken: InjectionToken<IdsIconButtonDefaultConfig>): Required<IdsIconButtonDefaultConfig> {
-    return {
-      ...defaultConfig,
-      ...inject(injectionToken, { optional: true }),
-    };
-  }
+  private _parentOrSelfAppearance = computed(() => this._parent?.embeddedIconButtonAppearance() ?? this.appearance());
+  private _parentOrSelfVariant = computed(() => this._parent?.embeddedIconButtonVariant() ?? this.variant());
+  private _parentOrSelfDisabled = computed(() => this._parent?.disabled() ?? this.disabled());
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this._parentOrSelfAppearance(),
+    this.size(),
+    this._parentOrSelfVariant(),
+  ]));
 }

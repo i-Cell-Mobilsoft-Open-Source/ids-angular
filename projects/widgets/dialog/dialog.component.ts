@@ -2,25 +2,11 @@ import { IDS_DIALOG_DEFAULT_CONFIG, IDS_DIALOG_DEFAULT_CONFIG_FACTORY, IdsDialog
 import { IdsDialogHeaderDirective } from './dialog-header.directive';
 
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  InjectionToken,
-  ViewEncapsulation,
-  computed,
-  contentChild,
-  inject,
-  input,
-} from '@angular/core';
-import {
-  createClassList,
-  IdsDetectScrollableDirective,
-  IdsSizeType,
-} from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, contentChild, inject, input } from '@angular/core';
+import { ComponentBaseWithDefaults, IdsDetectScrollableDirective, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
-let uniqueIdCounter = 0;
 const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
 
 @Component({
@@ -34,21 +20,23 @@ const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
   ],
   templateUrl: './dialog.component.html',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'idsDialog',
   host: {
-    '[class]': '_hostClasses()',
-    '[attr.aria-labelledby]': 'dialogTitleId',
+    '[attr.aria-labelledby]': 'titleId()',
     '(cancel)': '_onCancel($event)',
   },
 })
-export class IdsDialogComponent {
-  private readonly _componentClass = 'ids-dialog';
-  public readonly dialogTitleId = `ids-dialog-title-${uniqueIdCounter++}`;
+export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'dialog';
+  }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIALOG_DEFAULT_CONFIG);
 
   public dialog = inject(ElementRef).nativeElement as HTMLDialogElement;
 
+  public titleId = computed(() => `${this.id()}-title`);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public mainTitle = input.required<string>();
   public subTitle = input<string>();
@@ -57,12 +45,10 @@ export class IdsDialogComponent {
 
   public customHeader = contentChild(IdsDialogHeaderDirective);
 
-  private _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      this.size(),
-      this.showBackdrop() ? 'with-backdrop' : null,
-    ]),
-  );
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.size(),
+    this.showBackdrop() ? 'with-backdrop' : null,
+  ]));
 
   private _onCancel(event: Event): void {
     event.preventDefault();
@@ -74,13 +60,5 @@ export class IdsDialogComponent {
 
   public close(): void {
     this.dialog.close();
-  }
-
-  // eslint-disable-next-line @stylistic/js/max-len
-  protected _getDefaultConfig(defaultConfig: Required<IdsDialogDefaultConfig>, injectionToken: InjectionToken<IdsDialogDefaultConfig>): Required<IdsDialogDefaultConfig> {
-    return {
-      ...defaultConfig,
-      ...inject(injectionToken, { optional: true }),
-    };
   }
 }

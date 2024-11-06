@@ -23,12 +23,12 @@ const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupDefaultConfig> implements AfterViewInit {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'tab-group';
   }
   
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TAB_GROUP_DEFAULT_CONFIG);
-  protected _headerClass = `${this._componentClass}-header`;
+  protected _headerClass = `${this._hostClassName}-header`;
 
   protected _items = contentChildren<IdsTabItemComponent>(IdsTabItemComponent);
   private _portalOutlet = viewChild.required<CdkPortalOutlet>(CdkPortalOutlet);

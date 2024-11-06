@@ -5,10 +5,9 @@ import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } 
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { createClassList, ConnectedPosition, IdsSizeType } from '@i-cell/ids-angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
-
-let nextUniqueId = 0;
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ConnectedPosition, IdsSizeType, ComponentBase } from '@i-cell/ids-angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ids-tooltip',
@@ -18,21 +17,20 @@ let nextUniqueId = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[id]': 'id',
-    '[class]': '_hostClasses()',
     '[style.top]': '_hostPositionTop()',
     '[style.left]': '_hostPositionLeft()',
   },
 })
-export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
-  private readonly _componentClass = 'ids-tooltip';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
+export class IdsTooltipComponent extends ComponentBase implements AfterViewInit, OnDestroy {
+  protected override get _hostName(): string {
+    return 'tooltip';
+  }
+
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _onHide: Subject<void> = new Subject();
   private readonly _tooltipElement = inject<ElementRef<HTMLElement>>(ElementRef);
 
   private _connectedPosition?: ConnectedPosition;
-  public id = this._uniqueId;
   private _message?: string;
   private _size?: IdsSizeType;
   private _variant?: IdsTooltipVariantType;
@@ -46,23 +44,19 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
   private _hideTimeoutId: ReturnType<typeof setTimeout> | undefined;
   private _tooltipInitiated = false;
-  private _shouldHideSubscription?: Subscription;
 
-  private _hostClasses = computed(() => createClassList(
-    this._componentClass,
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this._size,
+    this._variant,
     [
-      this._size,
-      this._variant,
-      [
-        'position',
-        this._fallbackTooltipPosition() ?? this._originalTooltipPosition,
-      ],
-      [
-        'text-align',
-        this._textAlign,
-      ],
-    ]),
-  );
+      'position',
+      this._fallbackTooltipPosition() ?? this._originalTooltipPosition,
+    ],
+    [
+      'text-align',
+      this._textAlign,
+    ],
+  ]));
 
   public get isVisible(): boolean {
     return this._isVisible;
@@ -81,7 +75,7 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
   }
 
   private _hostPositionTop = computed(() => this._connectedPosition?.positionTop());
-  
+
   private _hostPositionLeft = computed(() => this._connectedPosition?.positionLeft());
 
   public ngAfterViewInit(): void {
@@ -111,7 +105,7 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
         this._tooltipElement,
         originalPositionPair,
       );
-      this._shouldHideSubscription = this._connectedPosition.shouldHide.subscribe(() => this._hideImmediately());
+      this._connectedPosition.shouldHide.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this._hideImmediately());
     }
   }
 
@@ -171,6 +165,5 @@ export class IdsTooltipComponent implements AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this._onHide.complete();
-    this._shouldHideSubscription?.unsubscribe();
   }
 }

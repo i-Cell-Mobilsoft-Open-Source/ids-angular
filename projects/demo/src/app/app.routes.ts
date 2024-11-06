@@ -26,6 +26,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/checkbox/checkbox-demo.component').then((module) => module.CheckboxDemoComponent),
   },
   {
+    path: 'components/chip',
+    loadComponent: () => import('./pages/chip/chip-demo.component').then((module) => module.ChipDemoComponent),
+  },
+  {
     path: 'components/dialog',
     loadComponent: () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
   },

@@ -43,6 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
             { name: 'COMPONENTS.BUTTON', path: '/components/button' },
             { name: 'COMPONENTS.CARD', path: '/components/card' },
             { name: 'COMPONENTS.CHECKBOX', path: '/components/checkbox' },
+            { name: 'COMPONENTS.CHIP', path: '/components/chip' },
             { name: 'COMPONENTS.DIALOG', path: '/components/dialog' },
             { name: 'COMPONENTS.DIVIDER', path: '/components/divider' },
             { name: 'COMPONENTS.FIELDSET', path: '/components/fieldset' },

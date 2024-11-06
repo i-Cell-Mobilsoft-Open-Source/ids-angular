@@ -1,8 +1,8 @@
 import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.directive';
 import { IdsMessageDirective } from '../../../directives/message.directive';
 
-import { Component, ContentChildren, QueryList, ViewEncapsulation, computed } from '@angular/core';
-import { createClassList } from '@i-cell/ids-angular/core';
+import { Component, ViewEncapsulation, computed, contentChildren } from '@angular/core';
+import { ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
@@ -16,10 +16,12 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
     '[class]': '_hostClasses()',
   },
 })
-export class IdsSuccessMessageComponent {
-  private readonly _componentClass = 'ids-success-message';
+export class IdsSuccessMessageComponent extends ComponentBase {
+  protected override get _hostName(): string {
+    return 'success-message';
+  }
 
-  private _hostClasses = computed(() => createClassList(this._componentClass));
+  protected _hostClasses = computed(() => this._getHostClasses([]));
 
-  @ContentChildren(IdsMessageSuffixDirective) public suffixes!: QueryList<IdsMessageSuffixDirective>;
+  public suffixes = contentChildren(IdsMessageSuffixDirective);
 }

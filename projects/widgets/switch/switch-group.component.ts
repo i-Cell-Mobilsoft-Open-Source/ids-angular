@@ -1,9 +1,7 @@
-import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY } from './switch-defaults';
+import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY, IdsSwitchDefaultConfig } from './switch-defaults';
 
-import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { createClassList, IdsSizeType, fallbackValue } from '@i-cell/ids-angular/core';
-
-let nextUniqueId = 0;
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { IdsSizeType, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
@@ -14,24 +12,18 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   templateUrl: './switch-group.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[id]': 'id()',
-    '[class]': '_hostClasses()',
-  },
 })
-export class IdsSwitchGroupComponent {
-  private readonly _componentClass = 'ids-switch-group';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private readonly _defaultConfig = {
-    ...defaultConfig,
-    ...inject(IDS_SWITCH_DEFAULT_CONFIG, { optional: true }),
-  };
+export class IdsSwitchGroupComponent extends ComponentBaseWithDefaults<IdsSwitchDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'switch-group';
+  }
 
-  public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SWITCH_DEFAULT_CONFIG);
+
   public size = input<IdsSizeType | null>(this._defaultConfig.size);
   public hasIcon = input(this._defaultConfig.hasIcon);
   public iconPosition = input(this._defaultConfig.iconPosition);
   public labelPosition = input(this._defaultConfig.labelPosition);
 
-  private _hostClasses = computed(() => createClassList(this._componentClass, [this.size()]));
+  protected _hostClasses = computed(() => this._getHostClasses([this.size()]));
 }

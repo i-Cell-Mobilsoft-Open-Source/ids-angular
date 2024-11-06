@@ -10,7 +10,7 @@ import { inject, Injectable, signal, ViewContainerRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
-const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +18,8 @@ const defaultOptions = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 export class IdsSnackbarService {
   private readonly _router = inject(Router);
   private readonly _overlay = inject(Overlay);
-  private readonly _defaultOptions = {
-    ...defaultOptions,
+  private readonly _defaultConfig = {
+    ...defaultConfig,
     ...inject(IDS_SNACKBAR_DEFAULT_CONFIG, { optional: true }),
   };
 
@@ -55,14 +55,14 @@ export class IdsSnackbarService {
 
   private _getPositionStrategy(): PositionStrategy {
     const position = this._overlay.position();
-    const margin = this._defaultOptions.viewportMargin;
+    const margin = this._defaultConfig.viewportMargin;
     if (this._viewContainerRef) {
       const connectedTo = position
         .flexibleConnectedTo(this._viewContainerRef.element);
-      return getSnackbarFlexibleConnectedPositionStrategy(connectedTo, this._defaultOptions.position, margin);
+      return getSnackbarFlexibleConnectedPositionStrategy(connectedTo, this._defaultConfig.position, margin);
     } else {
       const globalPosition = position.global();
-      return getSnackbarGlobalPositionStrategy(globalPosition, this._defaultOptions.position, margin);
+      return getSnackbarGlobalPositionStrategy(globalPosition, this._defaultConfig.position, margin);
     }
   }
 

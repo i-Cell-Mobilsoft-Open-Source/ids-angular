@@ -9,7 +9,7 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorComponent, IdsPaginatorPageButtonAppearance, IdsPaginatorPageButtonAppearanceType, IdsPaginatorVariant, IdsPaginatorVariantType } from '@i-cell/ids-angular/paginator';
+import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorComponent, IdsPaginatorPageButtonAppearance, IdsPaginatorPageButtonAppearanceType, IdsPaginatorPageChangeEvent, IdsPaginatorVariant, IdsPaginatorVariantType } from '@i-cell/ids-angular/paginator';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
@@ -56,13 +56,17 @@ export class PaginatorDemoComponent {
       description: 'The total number of items to paginate.',
       type: 'number',
       default: 120,
-      control: 'text',
+      control: 'number',
+      step: 1,
+      min: 0,
     },
     pageSize: {
       description: 'The number of items per page.',
       type: 'number',
       default: defaultConfig.pageSize,
-      control: 'text',
+      control: 'number',
+      step: 1,
+      min: 1,
     },
     pageSizeOptions: {
       description: 'Array of available page size options.',
@@ -77,7 +81,7 @@ export class PaginatorDemoComponent {
       control: 'checkbox',
     },
     showPrevNextLabel: {
-      description: 'Whether to display labels for "Previous" and "Next" buttons.',
+      description: 'Whether to display labels for "Previous" and "Next" buttons. Works only when compactLayout is true.',
       type: 'boolean',
       default: defaultConfig.showPrevNextLabel,
       control: 'checkbox',
@@ -104,7 +108,9 @@ export class PaginatorDemoComponent {
       description: 'The maximum number of items to display in the paginator.',
       type: 'number',
       default: defaultConfig.maxDisplayedItemCount,
-      control: 'text',
+      control: 'number',
+      step: 2,
+      min: 5,
     },
     size: {
       description: 'The size of the paginator component',
@@ -131,7 +137,9 @@ export class PaginatorDemoComponent {
       description: 'The number of items per page.',
       type: 'number',
       default: defaultConfig.debounceTime,
-      control: 'text',
+      control: 'number',
+      step: 1,
+      min: 0,
     },
     disabled: {
       description: 'Whether the paginator is disabled.',
@@ -150,8 +158,12 @@ export class PaginatorDemoComponent {
   public defaults = getDefaultFromDemoConfig<PaginatorInputControls>(this._inputControlConfig);
 
   public model: PaginatorInputControls = { ...this.defaults  };
-  
+
   public reset(): void {
     this.model = { ...this.defaults };
+  }
+
+  public onPageChange(event: IdsPaginatorPageChangeEvent): void {
+    console.info(event);
   }
 }

@@ -1,16 +1,13 @@
-import { IDS_RADIO_DEFAULT_CONFIG, IDS_RADIO_DEFAULT_CONFIG_FACTORY } from './radio-defaults';
+import { IDS_RADIO_DEFAULT_CONFIG, IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioDefaultConfig } from './radio-defaults';
 import { IdsRadioItemComponent } from './radio-item/radio-item.component';
 import { IdsRadioChangeEvent } from './types/radio-events.class';
 import { IdsRadioVariantType } from './types/radio-variant.type';
 
-import { AfterContentInit, computed, contentChildren, Directive, EventEmitter, forwardRef, inject, Input, input, isDevMode, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { AfterContentInit, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, createComponentError, IdsOrientation, IdsOrientationType, IdsPositionType, SelectionModel, IdsSizeType, IdsVerticalPosition } from '@i-cell/ids-angular/core';
-import { Subscription } from 'rxjs';
+import { coerceBooleanAttribute, IdsOrientation, IdsOrientationType, IdsPositionType, SelectionModel, IdsSizeType, IdsVerticalPosition, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
-let nextUniqueId = 0;
-
-const defaultOptions = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 
 @Directive({
   selector: 'ids-radio-group',
@@ -23,41 +20,35 @@ const defaultOptions = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
     },
   ],
   host: {
-    '[class]': '_hostClasses()',
     '(keydown)': '_handleKeyDown($event)',
   },
 })
-export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestroy, ControlValueAccessor {
-  private readonly _componentClass = 'ids-radio-group';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private readonly _defaultOptions = {
-    ...defaultOptions,
-    ...inject(IDS_RADIO_DEFAULT_CONFIG, { optional: true }),
-  };
+export class IdsRadioGroupDirective
+  extends ComponentBaseWithDefaults<IdsRadioDefaultConfig>
+  implements OnInit, AfterContentInit, ControlValueAccessor {
+  protected override get _hostName(): string {
+    return 'radio-group';
+  }
 
-  private readonly _subscription = new Subscription();
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_RADIO_DEFAULT_CONFIG);
 
   private _selectionModel?: SelectionModel<IdsRadioItemComponent>;
   private _rawValue: unknown;
   private _items = contentChildren<IdsRadioItemComponent>(IdsRadioItemComponent);
 
-  public id = input<string>(this._uniqueId);
   public name = input.required<string>();
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
-  public size = input<IdsSizeType>(this._defaultOptions.size);
-  public variant = input<IdsRadioVariantType>(this._defaultOptions.variant);
-  public orientation = input<IdsOrientationType>(this._defaultOptions.orientation);
-  public labelPosition = input<IdsPositionType>(this._defaultOptions.labelPosition);
+  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public variant = input<IdsRadioVariantType>(this._defaultConfig.variant);
+  public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
+  public labelPosition = input<IdsPositionType>(this._defaultConfig.labelPosition);
   public isDisabled = signal<boolean>(false);
 
-  private _hostClasses = computed(() => createClassList(
-    this._componentClass,
-    [
-      this.size(),
-      this.orientation(),
-      this.labelPosition(),
-    ],
-  ));
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.size(),
+    this.orientation(),
+    this.labelPosition(),
+  ]));
 
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => {};
@@ -70,7 +61,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     }
   }
 
-  @Output() public readonly itemChanges = new EventEmitter<IdsRadioChangeEvent>();
+  public readonly itemChanges = output<IdsRadioChangeEvent>();
 
   private _handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<IdsOrientationType, Set<string>> = {
@@ -154,7 +145,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
 
     if (this._hasInvalidLabelPosition()) {
       throw new Error(
-        createComponentError(this._componentClass, 'invalid `orientation` + `labelPosition` combination.'),
+        this._createHostError('invalid `orientation` + `labelPosition` combination.'),
       );
     }
   }
@@ -165,7 +156,7 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
 
     if (isDevMode() && (items.length < minItemCount)) {
       throw new Error(
-        createComponentError(this._componentClass, 'invalid count of radio items. Minimum item count is 2.'),
+        this._createHostError('invalid count of radio items. Minimum item count is 2.'),
       );
     }
 
@@ -191,11 +182,11 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
 
   private _subscribeItemChanges(): void {
     this._items().forEach((item) => {
-      this._subscription?.add(item.changes.subscribe(
+      item.changes.subscribe(
         (change) => {
           this._handleItemChanges(change);
         },
-      ));
+      );
     });
   }
 
@@ -253,9 +244,5 @@ export class IdsRadioGroupDirective implements OnInit, AfterContentInit, OnDestr
     const labelPosition = this.labelPosition();
 
     return (orientation === IdsOrientation.VERTICAL && Object.values(IdsVerticalPosition).some((pos) => pos === labelPosition));
-  }
-
-  public ngOnDestroy(): void {
-    this._subscription?.unsubscribe();
   }
 }

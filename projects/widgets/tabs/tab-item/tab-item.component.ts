@@ -13,13 +13,13 @@ import { coerceBooleanAttribute, coerceStringAttribute, ComponentBase } from '@i
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsTabItemComponent extends ComponentBase {
-  protected override get _componentName(): string {
+  protected override get _hostName(): string {
     return 'tab-item';
   };
 
   private _tabGroup = inject(IdsTabGroupComponent, { skipSelf: true });
   protected _bodyClass = 'ids-tab-body-content';
-  public labelClass = `${this._componentClass}-label`;
+  public labelClass = `${this._hostClassName}-label`;
 
   public label = input<string>();
   public disabled = input<boolean>(false);

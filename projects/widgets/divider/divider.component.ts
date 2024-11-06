@@ -1,20 +1,8 @@
 import { IDS_DIVIDER_DEFAULT_CONFIG, IDS_DIVIDER_DEFAULT_CONFIG_FACTORY, IdsDividerDefaultConfig } from './divider-defaults';
 import { IdsDividerVariantType } from './public-api';
 
-import {
-  Component,
-  InjectionToken,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import {
-  createClassList,
-  IdsOrientation,
-  IdsOrientationType,
-  IdsSizeType,
-} from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
 
@@ -24,14 +12,16 @@ const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
   imports: [],
   template: '',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '_hostClasses()',
     '[style.width]': '_safeWidth()',
     '[style.height]': '_safeHeight()',
   },
 })
-export class IdsDividerComponent {
-  private readonly _componentClass = 'ids-divider';
+export class IdsDividerComponent extends ComponentBaseWithDefaults<IdsDividerDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'divider';
+  }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIVIDER_DEFAULT_CONFIG);
 
@@ -43,19 +33,10 @@ export class IdsDividerComponent {
   private _safeWidth = computed(() => (this.orientation() === IdsOrientation.HORIZONTAL ? this.width() : null));
   private _safeHeight = computed(() => (this.orientation() === IdsOrientation.VERTICAL ? this.height() : null));
 
-  private _hostClasses = computed(() =>
-    createClassList(this._componentClass, [
-      this.orientation(),
-      this.size(),
-      this.variant(),
-    ]),
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.orientation(),
+    this.size(),
+    this.variant(),
+  ]),
   );
-
-  // eslint-disable-next-line @stylistic/js/max-len
-  protected _getDefaultConfig(defaultConfig: Required<IdsDividerDefaultConfig>, injectionToken: InjectionToken<IdsDividerDefaultConfig>): Required<IdsDividerDefaultConfig> {
-    return {
-      ...defaultConfig,
-      ...inject(injectionToken, { optional: true }),
-    };
-  }
 }

@@ -1,15 +1,13 @@
 import { switchAnimation } from './switch-animations';
-import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY } from './switch-defaults';
+import { IDS_SWITCH_DEFAULT_CONFIG, IDS_SWITCH_DEFAULT_CONFIG_FACTORY, IdsSwitchDefaultConfig } from './switch-defaults';
 import { IdsSwitchGroupComponent } from './switch-group.component';
 import { IdsSwitchIconPosition } from './types/switch-positions.type';
 import { IdsSwitchVariantType } from './types/switch-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, createClassList, IdsSizeType, fallbackValue, coerceNumberAttribute } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, IdsSizeType, fallbackValue, coerceNumberAttribute, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-
-let nextUniqueId = 0;
 
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
@@ -29,20 +27,17 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   ],
   animations: [switchAnimation],
   host: {
-    '[id]': 'id()',
-    '[class]': '_hostClasses()',
     '[aria-label]': 'ariaLabel()',
     '[aria-labelledby]': 'ariaLabelledBy()',
     '[aria-describedby]': 'ariaDescribedBy()',
   },
 })
-export class IdsSwitchComponent {
-  private readonly _componentClass = 'ids-switch';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  private readonly _defaultConfig = {
-    ...defaultConfig,
-    ...inject(IDS_SWITCH_DEFAULT_CONFIG, { optional: true }),
-  };
+export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefaultConfig> {
+  protected override get _hostName(): string {
+    return 'switch';
+  }
+
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SWITCH_DEFAULT_CONFIG);
 
   private _switchGroup = inject(IdsSwitchGroupComponent, { optional: true });
 
@@ -50,10 +45,8 @@ export class IdsSwitchComponent {
 
   public isChecked = signal(false);
 
-  public id = input<string, string | undefined>(this._uniqueId, { transform: (val) => fallbackValue(val, this._uniqueId) });
   public label = input<string>();
   public name = input<string | null>();
-  public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
@@ -63,24 +56,34 @@ export class IdsSwitchComponent {
   public labelPosition = input(this._defaultConfig.labelPosition);
   public isDisabled = signal(false);
   public ariaLabel = input<string| null>(null, { alias: 'aria-label' });
-  public ariaLabelledBy = input<string | null, string>(null, 
+  public ariaLabelledBy = input<string | null, string>(null,
     { alias: 'aria-labelledby', transform: (val) => fallbackValue(val, this.id()) },
   );
 
   public ariaDescribedBy = input<string | null>(null, { alias: 'aria-describedby' });
 
-  protected _safeSize = computed(() => this._switchGroup?.size() ?? this.size());
-  protected _safeHasIcon = computed(() => this._switchGroup?.hasIcon() ?? this.hasIcon());
-  protected _safeIconPosition = computed(() => this._switchGroup?.iconPosition() ?? this.iconPosition());
-  protected _safeLabelPosition = computed(() => this._switchGroup?.labelPosition() ?? this.labelPosition());
-  protected _hasHandleIcon = computed(() => this._safeHasIcon() && this._safeIconPosition() === IdsSwitchIconPosition.ONHANDLE);
-  protected _hasTrackIcon = computed(() => this._safeHasIcon() && this._safeIconPosition() === IdsSwitchIconPosition.ONTRACK);
+  protected _parentOrSelfSize = computed(() => this._switchGroup?.size() ?? this.size());
+  protected _parentOrSelfHasIcon = computed(() => this._switchGroup?.hasIcon() ?? this.hasIcon());
+  protected _parentOrSelfIconPosition = computed(() => this._switchGroup?.iconPosition() ?? this.iconPosition());
+  protected _parentOrSelfLabelPosition = computed(() => this._switchGroup?.labelPosition() ?? this.labelPosition());
+  protected _hasHandleIcon = computed(() =>
+    this._parentOrSelfHasIcon() && this._parentOrSelfIconPosition() === IdsSwitchIconPosition.ONHANDLE,
+  );
+
+  protected _hasTrackIcon = computed(() =>
+    this._parentOrSelfHasIcon() && this._parentOrSelfIconPosition() === IdsSwitchIconPosition.ONTRACK,
+  );
+
   private _isFocusable = computed(() => !this.isDisabled() && !this.readonly());
-  private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this._safeSize(),
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this._parentOrSelfSize(),
     this.variant(),
     this.isDisabled() ? 'disabled' : null,
     this.isChecked() ? 'on' : null,
+    [
+      'label',
+      this._parentOrSelfLabelPosition(),
+    ],
   ]),
   );
 

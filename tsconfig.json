@@ -17,10 +17,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
+    "target": "ES2023",
+    "module": "ESNext",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"],
+    "lib": ["ES2023", "dom"],
     "types": ["node", "jest", "cypress", "cypress-real-events"],
     "paths": {
       "@i-cell/ids-angular/*": ["projects/widgets/*", "projects/widgets"],

@@ -15,6 +15,7 @@
       [pageButtonAppearance]="model.pageButtonAppearance"
       [disabled]="model.disabled"
       [compactLayout]="model.compactLayout"
+      (pageChanged)="onPageChange($event)"
     />
   </ng-container>
 

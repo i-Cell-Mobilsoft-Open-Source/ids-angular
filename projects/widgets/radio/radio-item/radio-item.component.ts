@@ -1,10 +1,8 @@
 import { IdsRadioGroupDirective } from '../radio-group.directive';
 import { IdsRadioChangeEvent } from '../types/radio-events.class';
 
-import { Component, computed, ElementRef, EventEmitter, inject, Injector, input, OnInit, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
-import { coerceNumberAttribute, createClassList, createComponentError } from '@i-cell/ids-angular/core';
-
-let nextUniqueId = 0;
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-radio-item',
@@ -12,16 +10,14 @@ let nextUniqueId = 0;
   imports: [],
   templateUrl: './radio-item.component.html',
   encapsulation: ViewEncapsulation.None,
-  host: {
-    '[class]': '_hostClasses()',
-  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdsRadioItemComponent implements OnInit {
-  private readonly _componentClass = 'ids-radio-item';
-  private readonly _uniqueId = `${this._componentClass}-${++nextUniqueId}`;
-  public readonly injector = inject(Injector);
+export class IdsRadioItemComponent extends ComponentBase implements OnInit {
+  protected override get _hostName(): string {
+    return 'radio-item';
+  }
 
-  private _parent!: IdsRadioGroupDirective;
+  private _group = inject(IdsRadioGroupDirective, { optional: true, skipSelf: true });
 
   public selected = signal<boolean>(false);
 
@@ -33,30 +29,25 @@ export class IdsRadioItemComponent implements OnInit {
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
 
-  public isDisabled = computed(() => this.disabled() || this._parent.isDisabled());
-  public name = computed(() => this._parent.name());
-  public required = computed(() => this._parent.required());
+  public isDisabled = computed(() => this.disabled() || this._group?.isDisabled());
+  public name = computed(() => this._group?.name());
+  public required = computed(() => this._group?.required());
   public ariaChecked = computed(() => this.selected());
-  private _hostClasses = computed(() => createClassList(this._componentClass, [
-    this._parent.variant() ?? null,
-    this._parent.labelPosition() ?? null,
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this._group?.variant() ?? null,
+    this._group?.labelPosition() ?? null,
     this.isDisabled() ? 'disabled' : null,
   ]));
 
-  @ViewChild('input') private _inputElement!: ElementRef<HTMLButtonElement>;
+  private _inputElement = viewChild.required<ElementRef<HTMLButtonElement>>('input');
 
-  @Output() public readonly changes = new EventEmitter<IdsRadioChangeEvent>();
-
-  constructor() {
-    const parent = this.injector.get(IdsRadioGroupDirective, null, { optional: true, skipSelf: true });
-    if (!parent) {
-      throw new Error(createComponentError(this._componentClass, 'component must be direct child of a radio group'));
-    }
-    this._parent = parent;
-  }
+  public readonly changes = output<IdsRadioChangeEvent>();
 
   public ngOnInit(): void {
-    if (this._parent.isItemPreSelectedByValue(this.value())) {
+    if (!this._group) {
+      throw new Error(this._createHostError('component must be direct child of a radio group'));
+    }
+    if (this._group.isItemPreSelectedByValue(this.value())) {
       this.selected.set(true);
     }
   }
@@ -67,19 +58,19 @@ export class IdsRadioItemComponent implements OnInit {
 
   public touchTargetClick(): void {
     if (!this.selected() && !this.isDisabled()) {
-      this._inputElement.nativeElement.focus();
+      this._inputElement().nativeElement.focus();
       this.onChange();
     }
   }
 
   public innerCircleClick(): void {
     if (!this.selected() && !this.isDisabled()) {
-      this._inputElement.nativeElement.focus();
+      this._inputElement().nativeElement.focus();
       this.onChange();
     }
   }
 
   public focus(options?: FocusOptions): void {
-    this._inputElement.nativeElement.focus(options);
+    this._inputElement().nativeElement.focus(options);
   }
 }

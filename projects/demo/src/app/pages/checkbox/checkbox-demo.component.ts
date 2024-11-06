@@ -168,7 +168,7 @@ export class CheckboxDemoComponent {
       list: convertEnumToStringArray(IdsOrientation),
     },
   };
-  
+
   public defaults = getDefaultFromDemoConfig<CheckboxInputControls>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<CheckboxHelperControls>(this._helperControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<CheckboxGroupInputControls>(this._groupInputControlConfig);
@@ -193,13 +193,13 @@ export class CheckboxDemoComponent {
       sleep: false,
     };
   }
-  
+
   public standalone = {
     unselected: false,
     indeterminate: false,
     selected: true,
   };
-  
+
   public group = {
     toothBrushing: true,
     bath: true,

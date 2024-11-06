@@ -45,3 +45,12 @@ body {
     url(./assets/fonts/I-DS-font-icon-default.woff) format("woff"),
     url(./assets/fonts/I-DS-font-icon-default.ttf) format("truetype");
 }
+
+@mixin designScrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ids-smc-colors-surface-darker-30) transparent;
+}
+
+* {
+  @include designScrollbar();
+}

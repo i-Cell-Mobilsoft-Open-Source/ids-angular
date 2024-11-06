@@ -1,8 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[idsAction]',
+  selector: '[idsFormFieldAction]',
   standalone: true,
 })
-export class IdsActionDirective {
+export class IdsFormFieldActionDirective {
 }

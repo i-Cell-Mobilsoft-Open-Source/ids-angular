@@ -1,9 +1,8 @@
-import { IDS_OPTION_PARENT_COMPONENT } from './option-parent';
+import { IDS_OPTION_GROUP } from './tokens/option-group';
+import { IDS_OPTION_PARENT_COMPONENT } from './tokens/option-parent';
 
-import { ChangeDetectionStrategy, Component, computed, inject, InjectionToken, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
-
-export const IDS_OPTION_GROUP = new InjectionToken<IdsOptionGroupComponent>('IdsOptionGroup');
 
 @Component({
   selector: 'ids-option-group',

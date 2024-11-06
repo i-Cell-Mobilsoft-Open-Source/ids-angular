@@ -1,6 +1,6 @@
 import { IDS_SELECT_DEFAULT_CONFIG, IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectDefaultConfig } from './select-defaults';
 import { selectConnectedPositions } from './select-positions';
-import { IDS_SELECT_TRIGGER, IdsSelectTriggerDirective } from './select-trigger.directive';
+import { IdsSelectTriggerDirective } from './select-trigger.directive';
 
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, conten
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanAttribute, coerceNumberAttribute, ComponentBaseWithDefaults, createClassList } from '@i-cell/ids-angular/core';
-import { IDS_FORM_FIELD, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass } from '@i-cell/ids-angular/forms';
+import { IDS_FORM_FIELD_CONTROL, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass, IdsFormFieldComponent, IDS_OPTION_GROUP } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { first, Subject } from 'rxjs';
 
@@ -66,7 +66,7 @@ export class IdsSelectComponent
   private readonly _elementRef = inject(ElementRef);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
-  private readonly _parentFormField = inject(IDS_FORM_FIELD);
+  private readonly _parentFormField = inject(IdsFormFieldComponent);
   private readonly _parentForm = inject(NgForm, { optional: true });
   private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
 
@@ -118,7 +118,7 @@ export class IdsSelectComponent
   private _overlayDir = viewChild(CdkConnectedOverlay);
   public options = contentChildren<IdsOptionComponent>(IdsOptionComponent, { descendants: true });
   public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
-  protected _customTrigger = contentChild<IdsSelectTriggerDirective>(IDS_SELECT_TRIGGER);
+  protected _customTrigger = contentChild(IdsSelectTriggerDirective);
 
   private _errorStateTracker?: ErrorStateTracker;
   private _successStateTracker?: SuccessStateTracker;

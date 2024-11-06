@@ -1,10 +1,11 @@
-import { IDS_OPTION_GROUP, IdsOptionGroupComponent } from './option-group.component';
-import { IDS_OPTION_PARENT_COMPONENT } from './option-parent';
+import { IdsOptionGroupComponent } from './option-group.component';
+import { IDS_OPTION_GROUP } from './tokens/option-group';
+import { IDS_OPTION_PARENT_COMPONENT } from './tokens/option-parent';
 import { IdsOptionSelectionChange } from './types/option-events.class';
 
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '../form-field/types/form-field-variant.type';
-import { IDS_PSEUDO_CHECKBOX_PARENT, IdsPseudoCheckboxParent } from '../pseudo-checkbox/pseudo-checkbox-parent';
 import { PseudoCheckboxComponent } from '../pseudo-checkbox/pseudo-checkbox.component';
+import { IDS_PSEUDO_CHECKBOX_PARENT, IdsPseudoCheckboxParent } from '../pseudo-checkbox/tokens/pseudo-checkbox-parent';
 
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';

@@ -1,7 +1,8 @@
 .select-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, 300px);
   gap: 3rem;
+  max-width: 100%;
 
   .ids-form-field {
     width: 100%;

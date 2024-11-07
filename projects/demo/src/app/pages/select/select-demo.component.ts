@@ -130,6 +130,7 @@ export class SelectDemoComponent {
       description: 'Whether select has custom trigger or not.',
       type: 'boolean',
       default: false,
+      control: 'checkbox',
     },
   };
 

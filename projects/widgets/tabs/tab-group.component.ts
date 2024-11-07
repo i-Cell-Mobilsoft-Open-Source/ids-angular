@@ -4,7 +4,7 @@ import { IdsTabGroupPositionType } from './types/tab-group-position.type';
 import { IdsTabGroupVariantType } from './types/tab-group-variant.type';
 
 import { CdkPortalOutlet, PortalModule, TemplatePortal } from '@angular/cdk/portal';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, isDevMode, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -28,7 +28,6 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TAB_GROUP_DEFAULT_CONFIG);
-  protected _headerClass = `${this._hostClassName}-header`;
 
   protected _items = contentChildren<IdsTabItemComponent>(IdsTabItemComponent);
   private _portalOutlet = viewChild.required<CdkPortalOutlet>(CdkPortalOutlet);
@@ -39,6 +38,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
   public stretchTabs = input(this._defaultConfig.stretchTabs, { transform: coerceBooleanAttribute });
   public tabPosition = input<IdsTabGroupPositionType>(this._defaultConfig.tabPosition);
+  public indicatorPosition = input<IdsTabGroupPositionType>(this._defaultConfig.tabPosition);
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
   public selectedTabIndex = signal<number>(0);
@@ -53,7 +53,14 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   ]));
 
   public ngAfterViewInit(): void {
-    if (this._items().length) {
+    const items = this._items();
+    const minItemCount = 2;
+
+    if (isDevMode() && (items.length < minItemCount)) {
+      throw new Error(this._createHostError('Invalid count of tab items. Minimum item count is 2.'));
+    }
+
+    if (items.length) {
       this.selectTab(0);
     }
   }

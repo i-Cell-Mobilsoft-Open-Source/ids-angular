@@ -15,10 +15,26 @@ $variants: surface, light, primary;
   display: flex;
   max-width: 100%;
 
-  .container {
+  .ids-tab-group__container {
     display: flex;
     flex-direction: column;
     position: relative;
+    flex-shrink: 0;
+  }
+
+  .ids-tab-item__indicator {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+
+    .ids-tab-item__line {
+      position: relative;
+      box-sizing: border-box;
+      opacity: 0;
+    }
   }
 
   &.ids-tab-group-horizontal {
@@ -26,19 +42,19 @@ $variants: surface, light, primary;
     align-items: center;
     flex-shrink: 0;
 
-    & > .container {
+    & > .ids-tab-group__container {
       width: 100%;
       border-bottom-style: solid;
       border-bottom-color: var(--ids-comp-tab-tabgroup-color-border-default);
 
-      .ids-tab-group-header {
+      .ids-tab-group__header {
         .ids-tab-item {
           justify-content: center;
         }
       }
     }
 
-    &.ids-tab-group-stretch-tabs > .container .ids-tab-group-header {
+    &.ids-tab-group-stretch-tabs > .ids-tab-group__container .ids-tab-group__header {
       align-self: stretch;
 
       .ids-tab-item {
@@ -46,15 +62,15 @@ $variants: surface, light, primary;
       }
     }
 
-    &.ids-tab-group-start > .container .ids-tab-group-header {
+    &.ids-tab-group-start > .ids-tab-group__container .ids-tab-group__header {
       align-self: flex-start;
     }
 
-    &.ids-tab-group-center > .container .ids-tab-group-header {
+    &.ids-tab-group-center > .ids-tab-group__container .ids-tab-group__header {
       align-self: center;
     }
 
-    &.ids-tab-group-end > .container .ids-tab-group-header {
+    &.ids-tab-group-end > .ids-tab-group__container .ids-tab-group__header {
       align-self: flex-end;
     }
 
@@ -64,23 +80,15 @@ $variants: surface, light, primary;
       align-self: stretch;
     }
 
-    .slider {
-      display: flex;
-      position: absolute;
+    .ids-tab-item__indicator {
       left: 0;
-      justify-content: center;
       width: 100%;
-      height: 100%;
       pointer-events: none;
-      z-index: 1;
 
-      .line {
-        position: relative;
+      .ids-tab-item__line {
         align-self: flex-end;
-        box-sizing: border-box;
         width: 100%;
         border-bottom-style: solid;
-        opacity: 0;
       }
     }
   }
@@ -90,7 +98,7 @@ $variants: surface, light, primary;
     align-items: flex-start;
     width: 100%;
 
-    & > .container .ids-tab-group-header {
+    & > .ids-tab-group__container .ids-tab-group__header {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -106,10 +114,23 @@ $variants: surface, light, primary;
       justify-content: center;
       align-self: stretch;
     }
+
+    .ids-tab-item__indicator {
+      top: 0;
+      left: 0; // Bal oldalon helyezzük el
+      width: 2px;
+
+      .ids-tab-item__line {
+        align-self: flex-start;
+        height: 100%;
+        width: 2px;
+        border-left-style: solid;
+      }
+    }
   }
 
-  .container {
-    .ids-tab-group-header {
+  .ids-tab-group__container {
+    .ids-tab-group__header {
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -122,7 +143,7 @@ $variants: surface, light, primary;
         cursor: pointer;
         position: relative;
 
-        &.ids-tab-item-label {
+        &.ids-tab-item__label {
           display: inline-block;
           text-overflow: ellipsis;
           overflow: hidden;
@@ -145,7 +166,7 @@ $variants: surface, light, primary;
       &.ids-tab-group-horizontal {
         border-bottom-width: var(--ids-comp-tab-item-active-indicator-size-width-#{$size});
 
-        .slider {
+        .ids-tab-item__indicator {
           bottom: calc(
             0px - calc(var(--ids-comp-tab-item-active-indicator-size-width-#{$size}) + var(--ids-comp-tab-item-size-border-width-#{$size}))
           );
@@ -156,7 +177,7 @@ $variants: surface, light, primary;
         padding: var(--ids-comp-tab-tabpanel-size-padding-y-#{$size}) var(--ids-comp-tab-tabpanel-size-padding-x-#{$size});
       }
 
-      & > .container .ids-tab-group-header {
+      & > .ids-tab-group__container .ids-tab-group__header {
         padding: var(--ids-comp-tab-tabgroup-size-padding-y-#{$size}) var(--ids-comp-tab-tabgroup-size-padding-x-#{$size});
         gap: var(--ids-comp-tab-tabgroup-size-gap-#{$size});
 
@@ -174,7 +195,7 @@ $variants: surface, light, primary;
             outline-style: solid;
           }
 
-          & > .ids-tab-item-label {
+          & > .ids-tab-item__label {
             font-family: var(--ids-comp-tab-item-label-typography-font-family-#{$size});
             font-size: var(--ids-comp-tab-item-label-typography-font-size-#{$size});
             font-weight: var(--ids-comp-tab-item-label-typography-font-weight-#{$size});
@@ -190,7 +211,7 @@ $variants: surface, light, primary;
             height: var(--ids-comp-tab-item-icon-size-height-#{$size});
           }
 
-          & > .slider .line {
+          & > .ids-tab-item__indicator .ids-tab-item__line {
             border-bottom-width: var(--ids-comp-tab-item-active-indicator-size-width-#{$size});
           }
         }
@@ -202,7 +223,7 @@ $variants: surface, light, primary;
     &.ids-tab-group-#{$variant} {
       background-color: var(--ids-comp-tab-container-color-bg-default);
 
-      & > .container .ids-tab-group-header {
+      & > .ids-tab-group__container .ids-tab-group__header {
         background-color: var(--ids-comp-tab-tabgroup-color-bg-default);
 
         .ids-tab-item {
@@ -247,7 +268,7 @@ $variants: surface, light, primary;
             @include tabVariant($variant, unselected, disabled);
           }
 
-          & > .slider .line {
+          & > .ids-tab-item__indicator .ids-tab-item__line {
             opacity: 1;
           }
         }

@@ -18,8 +18,7 @@ export class IdsTabItemComponent extends ComponentBase {
   };
 
   private _tabGroup = inject(IdsTabGroupComponent, { skipSelf: true });
-  protected _bodyClass = 'ids-tab-body-content';
-  public labelClass = `${this._hostClassName}-label`;
+  public labelClass = `${this._hostClassName}__label`;
 
   public label = input<string>();
   public disabled = input<boolean>(false);

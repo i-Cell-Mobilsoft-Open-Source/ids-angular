@@ -1,5 +1,5 @@
-<div class="container">
-  <ul [class]="_headerClass">
+<div class="ids-tab-group__container">
+  <ul class="ids-tab-group__header">
     @for (item of _items(); track $index; let i = $index) {
       <li
         [class]="item.hostTabClasses()"
@@ -14,8 +14,8 @@
         @if (item.hasTrailingIcon()) {
           <ids-icon [fontIcon]="item.trailingIcon()" />
         }
-        <span class="slider">
-          <span class="line"></span>
+        <span class="ids-tab-item__indicator">
+          <span class="ids-tab-item__line"></span>
         </span>
       </li>
     }

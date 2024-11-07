@@ -263,12 +263,16 @@ export class NotificationDemoComponent implements OnInit {
   }
 
   public reset(): void {
-    this.displayComponent.set(true);
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
   }
 
   public delete(): void {
     this.displayComponent.set(false);
+  }
+
+  public onResetButtonClick(): void {
+    this.displayComponent.set(true);
+    this.reset();
   }
 }

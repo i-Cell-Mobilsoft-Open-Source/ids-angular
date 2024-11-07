@@ -4,14 +4,12 @@ import { IdsNotificationVariant, IdsNotificationVariantType } from './types/noti
 import { InjectionToken } from '@angular/core';
 import { IdsButtonAppearance, IdsButtonAppearanceType } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsIconButtonAppearance, IdsIconButtonAppearanceType } from '@i-cell/ids-angular/icon-button';
 
 export interface IdsNotificationDefaultConfig {
   appearance?: IdsNotificationAppearanceType,
   size?: IdsSizeType,
   variant?: IdsNotificationVariantType,
   closeButtonSize?: IdsSizeType,
-  closeButtonAppearance?: IdsIconButtonAppearanceType,
   closeLabelButtonAppearance?: IdsButtonAppearanceType,
 }
 
@@ -29,7 +27,6 @@ export function IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY(): Required<IdsNotificat
     size: IdsSize.COMPACT,
     variant: IdsNotificationVariant.DARK,
     closeButtonSize: IdsSize.COMPACT,
-    closeButtonAppearance: IdsIconButtonAppearance.STANDARD,
     closeLabelButtonAppearance: IdsButtonAppearance.OUTLINED,
   };
 }

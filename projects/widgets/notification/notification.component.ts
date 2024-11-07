@@ -51,7 +51,6 @@ export class IdsNotificationComponent extends ComponentBaseWithDefaults<IdsNotif
   public title = input<string>('');
   public urgent = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
   public closeButtonSize = input<IdsSizeType>(this._defaultConfig.closeButtonSize);
-  public closeButtonAppearance = input<IdsIconButtonAppearanceType>(this._defaultConfig.closeButtonAppearance);
   public closeLabelButtonAppearance = input<IdsButtonAppearanceType>(this._defaultConfig.closeLabelButtonAppearance);
   public closeButtonLabel = input<string, string>('', { transform: coerceStringAttribute });
 
@@ -70,7 +69,7 @@ export class IdsNotificationComponent extends ComponentBaseWithDefaults<IdsNotif
     this.variant(),
   ]));
 
-  protected _closeLabelButtonClass = computed(() => (this.closeButtonLabel() ? 'ids-notification__label-Button' : ''));
+  protected _closeLabelButtonClass = computed(() => (this.closeButtonLabel() ? 'ids-notification__label-btn' : ''));
 
   public embeddedButtonVariant = computed<IdsIconButtonVariantType>(() => {
     const notificationVariant = this.variant();

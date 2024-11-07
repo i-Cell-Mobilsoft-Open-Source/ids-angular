@@ -1,7 +1,6 @@
 <app-tryout [title]="'COMPONENTS.DIVIDER' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <div component class="divider-container">
     <ids-divider
-      [id]="model.variant + '-' + model.size + '-' + model.orientation + '-divider'"
       [orientation]="model.orientation"
       [size]="model.size"
       [variant]="model.variant"

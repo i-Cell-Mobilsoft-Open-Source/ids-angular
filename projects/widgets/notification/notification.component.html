@@ -36,14 +36,7 @@
         {{ buttonLabel }}
       </button>
     } @else {
-      <button
-        type="button"
-        aria-label="Close notification"
-        idsIconButton
-        [size]="closeButtonSize()"
-        [appearance]="closeButtonAppearance()"
-        (click)="_close()"
-      >
+      <button type="button" aria-label="Close notification" idsIconButton [size]="closeButtonSize()" (click)="_close()">
         <ids-icon alt="close icon" fontIcon="close" />
       </button>
     }

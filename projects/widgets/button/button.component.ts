@@ -9,7 +9,7 @@ import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute } from '
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'button[idsButton], button[idsNotificationActionButton]',
+  selector: 'button[idsButton], button[idsButton][idsNotificationActionButton]',
   standalone: true,
   imports: [],
   templateUrl: './button.component.html',

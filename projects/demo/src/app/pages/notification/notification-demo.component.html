@@ -19,12 +19,11 @@
             type="button"
             idsButton
             idsNotificationActionButton
-            [id]="helperModel.action1Appearance + '-' + helperModel.action1Variant + '-' + helperModel.action1Size + '-button'"
+            [id]="helperModel.action1Appearance + '-' + helperModel.action1Size + '-button'"
             [appearance]="helperModel.action1Appearance"
             [size]="helperModel.action1Size"
-            [variant]="helperModel.action1Variant"
             [disabled]="helperModel.action1Disabled"
-            (click)="onClick(helperModel.action1Appearance + '-' + helperModel.action1Variant + '-' + helperModel.action1Size)"
+            (click)="onClick(helperModel.action1Appearance + '-' + helperModel.action1Size)"
           >
             @if (helperModel.action1HasLeadingIcon) {
               <ids-icon icon-leading fontIcon="search" />
@@ -40,12 +39,11 @@
             type="button"
             idsButton
             idsNotificationActionButton
-            [id]="helperModel.action2Appearance + '-' + helperModel.action2Variant + '-' + helperModel.action2Size + '-button'"
+            [id]="helperModel.action2Appearance + '-' + helperModel.action2Size + '-button'"
             [appearance]="helperModel.action2Appearance"
             [size]="helperModel.action2Size"
-            [variant]="helperModel.action2Variant"
             [disabled]="helperModel.action2Disabled"
-            (click)="onClick(helperModel.action2Appearance + '-' + helperModel.action2Variant + '-' + helperModel.action2Size)"
+            (click)="onClick(helperModel.action2Appearance + '-' + helperModel.action2Size)"
           >
             @if (helperModel.action2HasLeadingIcon) {
               <ids-icon icon-leading fontIcon="search" />

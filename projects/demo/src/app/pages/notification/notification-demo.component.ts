@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
+import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsNotificationComponent, IdsNotificationActionButtonDirective, IdsNotificationVariantType, IdsNotificationAppearanceType, IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY, IdsNotificationAppearance, IdsNotificationVariant } from '@i-cell/ids-angular/notification';
@@ -31,14 +31,12 @@ type NotificationHelperControls = {
   showAction2Button: boolean,
   action1Appearance: IdsButtonAppearanceType,
   action1Size: IdsSizeType,
-  action1Variant: IdsButtonVariantType,
   action1Disabled: boolean,
   action1Text: string,
   action1HasLeadingIcon: boolean,
   action1HasTrailingIcon: boolean,
   action2Appearance: IdsButtonAppearanceType,
   action2Size: IdsSizeType,
-  action2Variant: IdsButtonVariantType,
   action2Disabled: boolean,
   action2Text: string,
   action2HasLeadingIcon: boolean,
@@ -153,13 +151,6 @@ export class NotificationDemoComponent implements OnInit {
       control: 'select',
       list: convertEnumToStringArray(IdsSize),
     },
-    action1Variant: {
-      description: 'Button variant.',
-      type: 'IdsButtonVariantType',
-      default: IdsButtonVariant.DARK,
-      control: 'select',
-      list: convertEnumToStringArray(IdsButtonVariant),
-    },
     action1Disabled: {
       description: 'Whether the button is disabled or not.',
       type: 'boolean',
@@ -203,13 +194,6 @@ export class NotificationDemoComponent implements OnInit {
       default: IdsSize.COMPACT,
       control: 'select',
       list: convertEnumToStringArray(IdsSize),
-    },
-    action2Variant: {
-      description: 'Button variant.',
-      type: 'IdsButtonVariantType',
-      default: IdsButtonVariant.DARK,
-      control: 'select',
-      list: convertEnumToStringArray(IdsButtonVariant),
     },
     action2Disabled: {
       description: 'Whether the button is disabled or not.',

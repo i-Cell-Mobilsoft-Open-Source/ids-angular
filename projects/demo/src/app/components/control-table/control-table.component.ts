@@ -30,7 +30,7 @@ export class ControlTableComponent<T extends Record<string, unknown>> {
   protected _caption = computed(() => [
     this.controlName(),
     this.configType(),
-  ].join(' '));
+  ].filter(Boolean).join(' '));
 
   protected _flatControls = computed(() => {
     const controls = this.controlConfig();

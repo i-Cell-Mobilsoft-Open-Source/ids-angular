@@ -263,6 +263,7 @@ export class NotificationDemoComponent implements OnInit {
   }
 
   public reset(): void {
+    this.displayComponent.set(true);
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
   }
@@ -271,8 +272,7 @@ export class NotificationDemoComponent implements OnInit {
     this.displayComponent.set(false);
   }
 
-  public onResetButtonClick(): void {
+  public onRestoreButtonClick(): void {
     this.displayComponent.set(true);
-    this.reset();
   }
 }

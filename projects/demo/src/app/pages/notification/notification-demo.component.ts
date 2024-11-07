@@ -1,7 +1,7 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { IconService } from '../../core/services/icon.service';
 
-import { HttpClient } from '@angular/common/http';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -14,10 +14,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonAppearance, IdsIconButtonAppearanceType } from '@i-cell/ids-angular/icon-button';
 import { IdsNotificationComponent, IdsNotificationActionButtonDirective, IdsNotificationVariantType, IdsNotificationAppearanceType, IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY, IdsNotificationAppearance, IdsNotificationVariant } from '@i-cell/ids-angular/notification';
 import { TranslateModule } from '@ngx-translate/core';
-
-interface IconData {
-  name: string;
-}
 
 type NotificationInputControls = {
   size: IdsSizeType,
@@ -70,7 +66,7 @@ const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
   styleUrl: './notification-demo.component.scss',
 })
 export class NotificationDemoComponent implements OnInit {
-  private readonly _http = inject(HttpClient);
+  private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
   public displayComponent = signal<boolean>(true);
 
@@ -255,10 +251,9 @@ export class NotificationDemoComponent implements OnInit {
   }
 
   private _loadIcons(): void {
-    this._http.get<IconData[]>('assets/fonts/I-DS-font-icon-default.json').pipe(
+    this._iconService.loadIcons().pipe(
       takeUntilDestroyed(this._destroyRef),
-    ).subscribe((data) => {
-      const list = data.map((item) => item.name);
+    ).subscribe((list: string[]) => {
       this._inputControlConfig = {
         ...this._inputControlConfig,
         icon: { ...this._inputControlConfig.icon, list },

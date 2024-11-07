@@ -8,10 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
+import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonAppearance, IdsIconButtonAppearanceType } from '@i-cell/ids-angular/icon-button';
 import { IdsNotificationComponent, IdsNotificationActionButtonDirective, IdsNotificationVariantType, IdsNotificationAppearanceType, IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY, IdsNotificationAppearance, IdsNotificationVariant } from '@i-cell/ids-angular/notification';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -22,7 +21,6 @@ type NotificationInputControls = {
   icon: string,
   title: string,
   closeButtonSize: IdsSizeType,
-  closeButtonAppearance: IdsIconButtonAppearanceType,
   closeLabelButtonAppearance: IdsButtonAppearanceType,
   closeButtonLabel: string,
   urgent: boolean,
@@ -33,14 +31,12 @@ type NotificationHelperControls = {
   showAction2Button: boolean,
   action1Appearance: IdsButtonAppearanceType,
   action1Size: IdsSizeType,
-  action1Variant: IdsButtonVariantType,
   action1Disabled: boolean,
   action1Text: string,
   action1HasLeadingIcon: boolean,
   action1HasTrailingIcon: boolean,
   action2Appearance: IdsButtonAppearanceType,
   action2Size: IdsSizeType,
-  action2Variant: IdsButtonVariantType,
   action2Disabled: boolean,
   action2Text: string,
   action2HasLeadingIcon: boolean,
@@ -113,13 +109,6 @@ export class NotificationDemoComponent implements OnInit {
       control: 'select',
       list: convertEnumToStringArray(IdsSize),
     },
-    closeButtonAppearance: {
-      description: 'Close Button appearance.',
-      type: 'IdsIconButtonAppearanceType',
-      default: defaultConfig.closeButtonAppearance,
-      control: 'select',
-      list: convertEnumToStringArray(IdsIconButtonAppearance),
-    },
     closeButtonLabel: {
       description: 'Title of close button',
       type: 'string',
@@ -161,13 +150,6 @@ export class NotificationDemoComponent implements OnInit {
       default: IdsSize.COMPACT,
       control: 'select',
       list: convertEnumToStringArray(IdsSize),
-    },
-    action1Variant: {
-      description: 'Button variant.',
-      type: 'IdsButtonVariantType',
-      default: IdsButtonVariant.DARK,
-      control: 'select',
-      list: convertEnumToStringArray(IdsButtonVariant),
     },
     action1Disabled: {
       description: 'Whether the button is disabled or not.',
@@ -212,13 +194,6 @@ export class NotificationDemoComponent implements OnInit {
       default: IdsSize.COMPACT,
       control: 'select',
       list: convertEnumToStringArray(IdsSize),
-    },
-    action2Variant: {
-      description: 'Button variant.',
-      type: 'IdsButtonVariantType',
-      default: IdsButtonVariant.DARK,
-      control: 'select',
-      list: convertEnumToStringArray(IdsButtonVariant),
     },
     action2Disabled: {
       description: 'Whether the button is disabled or not.',
@@ -272,6 +247,7 @@ export class NotificationDemoComponent implements OnInit {
   }
 
   public reset(): void {
+    this.displayComponent.set(true);
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
   }
@@ -280,8 +256,7 @@ export class NotificationDemoComponent implements OnInit {
     this.displayComponent.set(false);
   }
 
-  public onResetButtonClick(): void {
+  public onRestoreButtonClick(): void {
     this.displayComponent.set(true);
-    this.reset();
   }
 }

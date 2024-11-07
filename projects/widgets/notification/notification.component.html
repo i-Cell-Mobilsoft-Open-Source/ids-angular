@@ -31,7 +31,7 @@
         idsButton
         [size]="closeBtnSize()"
         [appearance]="closeLabelBtnAppearance()"
-        (click)="_onCloseBtnClicked()"
+        (click)="_close()"
       >
         {{ closeButtonLabel }}
       </button>
@@ -42,7 +42,7 @@
         idsIconButton
         [size]="closeBtnSize()"
         [appearance]="closeBtnAppearance()"
-        (click)="_onCloseBtnClicked()"
+        (click)="_close()"
       >
         <ids-icon alt="close icon" fontIcon="close" />
       </button>

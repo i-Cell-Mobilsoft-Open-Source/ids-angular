@@ -120,7 +120,7 @@ export class IdsNotificationComponent extends ComponentBaseWithDefaults<IdsNotif
     }
   });
 
-  protected _onCloseBtnClicked(): void {
+  protected _close(): void {
     this.closed.emit();
   }
 }

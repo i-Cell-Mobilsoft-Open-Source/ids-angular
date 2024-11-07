@@ -11,7 +11,6 @@ import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-con
 import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonAppearance, IdsIconButtonAppearanceType } from '@i-cell/ids-angular/icon-button';
 import { IdsNotificationComponent, IdsNotificationActionButtonDirective, IdsNotificationVariantType, IdsNotificationAppearanceType, IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY, IdsNotificationAppearance, IdsNotificationVariant } from '@i-cell/ids-angular/notification';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -22,7 +21,6 @@ type NotificationInputControls = {
   icon: string,
   title: string,
   closeButtonSize: IdsSizeType,
-  closeButtonAppearance: IdsIconButtonAppearanceType,
   closeLabelButtonAppearance: IdsButtonAppearanceType,
   closeButtonLabel: string,
   urgent: boolean,
@@ -112,13 +110,6 @@ export class NotificationDemoComponent implements OnInit {
       default: defaultConfig.closeButtonSize,
       control: 'select',
       list: convertEnumToStringArray(IdsSize),
-    },
-    closeButtonAppearance: {
-      description: 'Close Button appearance.',
-      type: 'IdsIconButtonAppearanceType',
-      default: defaultConfig.closeButtonAppearance,
-      control: 'select',
-      list: convertEnumToStringArray(IdsIconButtonAppearance),
     },
     closeButtonLabel: {
       description: 'Title of close button',
@@ -272,16 +263,12 @@ export class NotificationDemoComponent implements OnInit {
   }
 
   public reset(): void {
+    this.displayComponent.set(true);
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
   }
 
   public delete(): void {
     this.displayComponent.set(false);
-  }
-
-  public onResetButtonClick(): void {
-    this.displayComponent.set(true);
-    this.reset();
   }
 }

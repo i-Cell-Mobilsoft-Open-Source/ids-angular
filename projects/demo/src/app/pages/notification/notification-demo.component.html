@@ -8,7 +8,6 @@
         [icon]="model.icon"
         [title]="model.title"
         [closeButtonSize]="model.closeButtonSize"
-        [closeButtonAppearance]="model.closeButtonAppearance"
         [closeButtonLabel]="model.closeButtonLabel"
         [closeLabelButtonAppearance]="model.closeLabelButtonAppearance"
         [urgent]="model.urgent"
@@ -59,7 +58,7 @@
         }
       </ids-notification>
     } @else {
-      <button type="button" idsButton (click)="onResetButtonClick()">Reset</button>
+      <button type="button" idsButton (click)="reset()">Restore</button>
     }
   </ng-container>
 

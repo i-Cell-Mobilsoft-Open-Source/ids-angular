@@ -21,16 +21,16 @@ type NotificationInputControls = {
   variant: IdsNotificationVariantType,
   icon: string,
   title: string,
-  closeBtnSize: IdsSizeType,
-  closeBtnAppearance: IdsIconButtonAppearanceType,
-  closeLabelBtnAppearance: IdsButtonAppearanceType,
-  closeBtnLabel: string,
+  closeButtonSize: IdsSizeType,
+  closeButtonAppearance: IdsIconButtonAppearanceType,
+  closeLabelButtonAppearance: IdsButtonAppearanceType,
+  closeButtonLabel: string,
   urgent: boolean,
 };
 
 type NotificationHelperControls = {
-  showAction1Btn: boolean,
-  showAction2Btn: boolean,
+  showAction1Button: boolean,
+  showAction2Button: boolean,
   action1Appearance: IdsButtonAppearanceType,
   action1Size: IdsSizeType,
   action1Variant: IdsButtonVariantType,
@@ -106,30 +106,30 @@ export class NotificationDemoComponent implements OnInit {
       default: '-',
       demoDefault: 'Sample Title',
     },
-    closeBtnSize: {
+    closeButtonSize: {
       description: 'Close Button size.',
       type: 'IdsSizeType',
-      default: defaultConfig.closeBtnSize,
+      default: defaultConfig.closeButtonSize,
       control: 'select',
       list: convertEnumToStringArray(IdsSize),
     },
-    closeBtnAppearance: {
+    closeButtonAppearance: {
       description: 'Close Button appearance.',
       type: 'IdsIconButtonAppearanceType',
-      default: defaultConfig.closeBtnAppearance,
+      default: defaultConfig.closeButtonAppearance,
       control: 'select',
       list: convertEnumToStringArray(IdsIconButtonAppearance),
     },
-    closeBtnLabel: {
+    closeButtonLabel: {
       description: 'Title of close button',
       type: 'string',
       default: '-',
       demoDefault: '',
     },
-    closeLabelBtnAppearance: {
+    closeLabelButtonAppearance: {
       description: 'Close Label Button appearance.',
       type: 'IdsButtonAppearanceType',
-      default: defaultConfig.closeLabelBtnAppearance,
+      default: defaultConfig.closeLabelButtonAppearance,
       control: 'select',
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
@@ -142,7 +142,7 @@ export class NotificationDemoComponent implements OnInit {
   };
 
   protected _helperControlConfig: DemoControlConfig<NotificationHelperControls> = {
-    showAction1Btn: {
+    showAction1Button: {
       description: 'Whether display the button or not',
       type: 'boolean',
       default: false,
@@ -193,7 +193,7 @@ export class NotificationDemoComponent implements OnInit {
       default: false,
       control: 'checkbox',
     },
-    showAction2Btn: {
+    showAction2Button: {
       description: 'Whether display the button or not',
       type: 'boolean',
       default: false,

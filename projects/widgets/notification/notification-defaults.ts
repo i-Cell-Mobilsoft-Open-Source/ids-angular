@@ -10,9 +10,9 @@ export interface IdsNotificationDefaultConfig {
   appearance?: IdsNotificationAppearanceType,
   size?: IdsSizeType,
   variant?: IdsNotificationVariantType,
-  closeBtnSize?: IdsSizeType,
-  closeBtnAppearance?: IdsIconButtonAppearanceType,
-  closeLabelBtnAppearance?: IdsButtonAppearanceType,
+  closeButtonSize?: IdsSizeType,
+  closeButtonAppearance?: IdsIconButtonAppearanceType,
+  closeLabelButtonAppearance?: IdsButtonAppearanceType,
 }
 
 export const IDS_NOTIFICATION_DEFAULT_CONFIG = new InjectionToken<IdsNotificationDefaultConfig>(
@@ -28,9 +28,9 @@ export function IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY(): Required<IdsNotificat
     appearance: IdsNotificationAppearance.OUTLINED,
     size: IdsSize.COMPACT,
     variant: IdsNotificationVariant.DARK,
-    closeBtnSize: IdsSize.COMPACT,
-    closeBtnAppearance: IdsIconButtonAppearance.STANDARD,
-    closeLabelBtnAppearance: IdsButtonAppearance.OUTLINED,
+    closeButtonSize: IdsSize.COMPACT,
+    closeButtonAppearance: IdsIconButtonAppearance.STANDARD,
+    closeLabelButtonAppearance: IdsButtonAppearance.OUTLINED,
   };
 }
 

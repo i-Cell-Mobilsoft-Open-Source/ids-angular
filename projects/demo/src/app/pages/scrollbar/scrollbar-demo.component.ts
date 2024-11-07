@@ -66,7 +66,7 @@ export class ScrollbarDemoComponent {
 
   protected _helperControlConfig: DemoControlConfig<ScrollbarHelperControls> = {
     childFitsInParent: {
-      description: 'Whether .',
+      description: 'Whether the content fits in scrollable div or not. This is for testing scrollbar gutter.',
       type: 'auto | thin | none',
       default: false,
       control: 'checkbox',

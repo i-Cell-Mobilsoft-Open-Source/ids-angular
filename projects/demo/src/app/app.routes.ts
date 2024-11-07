@@ -54,6 +54,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   },
   {
+    path: 'components/notification',
+    loadComponent: () => import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
+  },
+  {
     path: 'components/overlay-panel',
     loadComponent: () => import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
   },

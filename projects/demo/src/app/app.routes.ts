@@ -70,6 +70,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
   },
   {
+    path: 'components/scrollbar',
+    loadComponent: () => import('./pages/scrollbar/scrollbar-demo.component').then((module) => module.ScrollbarDemoComponent),
+  },
+  {
     path: 'components/segmented-control',
     loadComponent: () => import('./pages/segmented-control/segmented-control-demo.component').then(
       (module) => module.SegmentedControlDemoComponent),

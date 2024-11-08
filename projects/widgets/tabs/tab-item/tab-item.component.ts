@@ -1,7 +1,7 @@
 import { IdsTabGroupComponent } from '../tab-group.component';
 
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
-import { coerceBooleanAttribute, coerceStringAttribute, ComponentBase } from '@i-cell/ids-angular/core';
+import { coerceStringAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-tab-item',
@@ -18,15 +18,13 @@ export class IdsTabItemComponent extends ComponentBase {
   };
 
   private _tabGroup = inject(IdsTabGroupComponent, { skipSelf: true });
-  public labelClass = `${this._hostClassName}__label`;
 
   public label = input<string>();
   public disabled = input<boolean>(false);
-  public hasLeadingIcon = input(false, { transform: coerceBooleanAttribute });
   public leadingIcon = input('', { transform: coerceStringAttribute });
-  public hasTrailingIcon = input(false, { transform: coerceBooleanAttribute });
   public trailingIcon = input('', { transform: coerceStringAttribute });
   public content = viewChild.required<TemplateRef<unknown>>(TemplateRef);
+  public panelId = `${this.id()}-panel`;
 
   public safeDisabled = computed(() => this._tabGroup.disabled() || this.disabled());
 

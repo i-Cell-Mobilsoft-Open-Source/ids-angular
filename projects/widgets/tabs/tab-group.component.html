@@ -1,18 +1,23 @@
 <div class="ids-tab-group__container">
-  <ul class="ids-tab-group__header">
+  <ul class="ids-tab-group__header" role="tablist">
     @for (item of _items(); track $index; let i = $index) {
       <li
+        role="tab"
         [class]="item.hostTabClasses()"
         [class.ids-tab-item--active]="selectedTabIndex() === i"
         [attr.tabindex]="item.safeDisabled() ? -1 : 0"
+        [attr.aria-selected]="selectedTabIndex() === i ? 'true' : 'false'"
+        [attr.aria-controls]="item.panelId"
         (click)="selectTab(i)"
       >
-        @if (item.hasLeadingIcon()) {
-          <ids-icon [fontIcon]="item.leadingIcon()" />
+        @let tabLeadingIcon = item.leadingIcon();
+        @let tabTrailingIcon = item.trailingIcon();
+        @if (tabLeadingIcon) {
+          <ids-icon [fontIcon]="tabLeadingIcon" />
         }
-        <span [class]="item.labelClass">{{ item.label() }}</span>
-        @if (item.hasTrailingIcon()) {
-          <ids-icon [fontIcon]="item.trailingIcon()" />
+        <span class="ids-tab-item__label">{{ item.label() }}</span>
+        @if (tabTrailingIcon) {
+          <ids-icon [fontIcon]="tabTrailingIcon" />
         }
         <span class="ids-tab-item__indicator">
           <span class="ids-tab-item__line"></span>

@@ -1,19 +1,42 @@
-<ids-tab-group [stretchTabs]="false">
-  <ids-tab-item label="Alma 0">Alma 0</ids-tab-item>
-  <ids-tab-item label="Alma 1" leadingIcon="user" [hasLeadingIcon]="true">Alma 1</ids-tab-item>
-  <ids-tab-item label="Alma 2" trailingIcon="moon" [hasTrailingIcon]="true"
-    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis sequi aut
-    fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.</ids-tab-item
-  >
-  <ids-tab-item label="Alma 3" leadingIcon="user" trailingIcon="moon" [hasLeadingIcon]="true" [hasTrailingIcon]="true">Alma 3</ids-tab-item>
-</ids-tab-group>
+<app-tryout [title]="'COMPONENTS.TABS' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+  <ng-container component>
+    <ids-tab-group
+      [size]="model.size"
+      [variant]="model.variant"
+      [orientation]="model.orientation"
+      [stretchTabs]="model.stretchTabs"
+      [tabPosition]="model.tabPosition"
+      [indicatorPosition]="model.indicatorPosition"
+      [disabled]="model.disabled"
+    >
+      <ids-tab-item
+        [label]="helperModel.tabItem1Label"
+        [leadingIcon]="helperModel.tabItem1LeadingIcon"
+        [trailingIcon]="helperModel.tabItem1TrailingIcon"
+        [disabled]="helperModel.tabItem1Disabled"
+      >
+        Tab Content 1
+      </ids-tab-item>
+      <ids-tab-item
+        [label]="helperModel.tabItem2Label"
+        [leadingIcon]="helperModel.tabItem2LeadingIcon"
+        [trailingIcon]="helperModel.tabItem2TrailingIcon"
+        [disabled]="helperModel.tabItem2Disabled"
+      >
+        Tab Content 2
+      </ids-tab-item>
+      <ids-tab-item
+        [label]="helperModel.tabItem3Label"
+        [leadingIcon]="helperModel.tabItem3LeadingIcon"
+        [trailingIcon]="helperModel.tabItem3TrailingIcon"
+        [disabled]="helperModel.tabItem3Disabled"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis sequi
+        aut fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.
+      </ids-tab-item>
+    </ids-tab-group>
+  </ng-container>
 
-<ids-tab-group [orientation]="'vertical'">
-  <ids-tab-item label="Alma 0">Alma 0</ids-tab-item>
-  <ids-tab-item label="Alma 1" leadingIcon="user" [hasLeadingIcon]="true"
-    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis sequi aut
-    fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.</ids-tab-item
-  >
-  <ids-tab-item label="Alma 2" trailingIcon="moon" [hasTrailingIcon]="true">Alma 2</ids-tab-item>
-  <ids-tab-item label="Alma 3" leadingIcon="user" trailingIcon="moon" [hasLeadingIcon]="true" [hasTrailingIcon]="true">Alma 3</ids-tab-item>
-</ids-tab-group>
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+</app-tryout>

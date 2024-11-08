@@ -2,6 +2,7 @@ import { IDS_TAB_GROUP_DEFAULT_CONFIG, IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, Ids
 import { IdsTabItemComponent } from './tab-item/tab-item.component';
 import { IdsTabGroupPositionType } from './types/tab-group-position.type';
 import { IdsTabGroupVariantType } from './types/tab-group-variant.type';
+import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
 
 import { CdkPortalOutlet, PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, isDevMode, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
@@ -18,7 +19,6 @@ const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
     IdsIconComponent,
   ],
   templateUrl: './tab-group.component.html',
-  styleUrl: './tab-group.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -38,7 +38,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
   public stretchTabs = input(this._defaultConfig.stretchTabs, { transform: coerceBooleanAttribute });
   public tabPosition = input<IdsTabGroupPositionType>(this._defaultConfig.tabPosition);
-  public indicatorPosition = input<IdsTabGroupPositionType>(this._defaultConfig.tabPosition);
+  public indicatorPosition = input<IdsTabIndicatorPositionType>();
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
   public selectedTabIndex = signal<number>(0);
@@ -50,14 +50,31 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     this.disabled() ? 'disabled' : null,
     this.stretchTabs() && this.orientation() === IdsOrientation.HORIZONTAL ? 'stretch-tabs' : null,
     this.tabPosition() && !this.stretchTabs() ? this.tabPosition() : null,
+    `indicator-${this.indicatorPosition() ?? this.calculateIndicatorPosition()}`,
   ]));
+
+  public calculateIndicatorPosition = computed(() =>
+    (this.orientation() === IdsOrientation.HORIZONTAL ? IdsTabIndicatorPosition.BOTTOM : IdsTabIndicatorPosition.LEFT),
+  );
 
   public ngAfterViewInit(): void {
     const items = this._items();
+    const orientation = this.orientation();
+    const indicatorPosition = this.indicatorPosition();
     const minItemCount = 2;
 
     if (isDevMode() && (items.length < minItemCount)) {
-      throw new Error(this._createHostError('Invalid count of tab items. Minimum item count is 2.'));
+      throw new Error(this._createHostError(`Invalid count of tab items. Minimum item count is ${minItemCount}.`));
+    }
+
+    if (isDevMode() && (orientation === IdsOrientation.HORIZONTAL &&
+      (indicatorPosition && (indicatorPosition === IdsTabIndicatorPosition.LEFT || indicatorPosition === IdsTabIndicatorPosition.RIGHT)))) {
+      throw new Error(this._createHostError(`Can not use ${indicatorPosition} indicator position with Horizontal mode`));
+    }
+
+    if (isDevMode() && (orientation === IdsOrientation.VERTICAL &&
+      (indicatorPosition && (indicatorPosition === IdsTabIndicatorPosition.BOTTOM || indicatorPosition === IdsTabIndicatorPosition.TOP)))) {
+      throw new Error(this._createHostError(`Can not use ${indicatorPosition} indicator position with Vertical mode`));
     }
 
     if (items.length) {

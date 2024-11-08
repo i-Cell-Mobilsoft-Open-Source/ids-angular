@@ -1,8 +1,8 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { IconService } from '../../core/services/icon.service';
 
 import { UpperCasePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -16,10 +16,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
-
-interface IconData {
-  name: string;
-}
 
 type IconInputControls = {
   size: IdsSizeType,
@@ -49,7 +45,7 @@ type IconInputControls = {
   ],
 })
 export class IconDemoComponent implements OnInit {
-  private readonly _http = inject(HttpClient);
+  private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
 
   protected _inputControlConfig: DemoControlConfig<IconInputControls> = {
@@ -103,10 +99,9 @@ export class IconDemoComponent implements OnInit {
   }
 
   private _loadIcons(): void {
-    this._http.get<IconData[]>('assets/fonts/I-DS-font-icon-default.json').pipe(
+    this._iconService.loadIcons().pipe(
       takeUntilDestroyed(this._destroyRef),
-    ).subscribe((data) => {
-      const list = data.map((item) => item.name);
+    ).subscribe((list: string[]) => {
       this._inputControlConfig = {
         ...this._inputControlConfig,
         fontIcon: { ...this._inputControlConfig.fontIcon, list },

@@ -54,6 +54,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   },
   {
+    path: 'components/notification',
+    loadComponent: () => import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
+  },
+  {
     path: 'components/overlay-panel',
     loadComponent: () => import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
   },
@@ -64,6 +68,10 @@ export const routes: Routes = [
   {
     path: 'components/radio',
     loadComponent: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
+  },
+  {
+    path: 'components/scrollbar',
+    loadComponent: () => import('./pages/scrollbar/scrollbar-demo.component').then((module) => module.ScrollbarDemoComponent),
   },
   {
     path: 'components/segmented-control',

@@ -4,7 +4,7 @@ import { IdsInputType } from './types/input.type';
 import { AbstractErrorStateMatcher, ErrorStateTracker } from '../../common/error/error-state';
 import { AbstractSuccessStateMatcher, SuccessStateTracker } from '../../common/success/success-state';
 import { formFieldControlClass, IdsFormFieldControl } from '../form-field/form-field-control';
-import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-tokens';
+import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-control';
 
 import { computed, Directive, effect, ElementRef, inject, input, isDevMode, DoCheck, signal, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

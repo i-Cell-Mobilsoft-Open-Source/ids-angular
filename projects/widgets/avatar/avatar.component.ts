@@ -1,5 +1,5 @@
+import { IDS_AVATAR_DEFAULT_CONFIG, IDS_AVATAR_DEFAULT_CONFIG_FACTORY, IdsAvatarDefaultConfig } from './avatar-defaults';
 import { IdsAvatarImageDirective } from './avatar-image.directive';
-import { IDS_AVATAR_DEFAULT_CONFIG, IDS_AVATAR_DEFAULT_CONFIG_FACTORY, IdsAvatarDefaultConfig } from './tokens/avatar-defaults';
 import { IDS_AVATAR_PARENT } from './tokens/avatar-parent';
 import { IdsAvatarType } from './types/avatar-type.type';
 import { IdsAvatarVariant, IdsAvatarVariantType } from './types/avatar-variant.type';

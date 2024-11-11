@@ -5,7 +5,7 @@ import { IdsTabGroupVariantType } from './types/tab-group-variant.type';
 import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
 
 import { CdkPortalOutlet, PortalModule, TemplatePortal } from '@angular/cdk/portal';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, isDevMode, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, isDevMode, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -22,7 +22,7 @@ const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupDefaultConfig> implements AfterViewInit {
+export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupDefaultConfig> implements AfterContentInit {
   protected override get _hostName(): string {
     return 'tab-group';
   }
@@ -57,7 +57,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     (this.orientation() === IdsOrientation.HORIZONTAL ? IdsTabIndicatorPosition.BOTTOM : IdsTabIndicatorPosition.LEFT),
   );
 
-  public ngAfterViewInit(): void {
+  public ngAfterContentInit(): void {
     const items = this._items();
     const orientation = this.orientation();
     const indicatorPosition = this.indicatorPosition();

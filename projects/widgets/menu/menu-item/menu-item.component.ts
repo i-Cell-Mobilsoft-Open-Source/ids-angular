@@ -5,6 +5,7 @@ import { MenuItemVariantType } from './types/menu-item-variant.type';
 import { CdkMenuItem } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute } from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
 
@@ -41,8 +42,8 @@ export class IdsMenuItemComponent extends ComponentBaseWithDefaults<IdsMenuItemD
     transform: (value: boolean | string) => coerceBooleanAttribute(value),
   });
 
-  public iconLeading = contentChildren<unknown>('[icon-leading]');
-  public iconTrailing = contentChildren<unknown>('[icon-trailing]');
+  public iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
+  public iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),

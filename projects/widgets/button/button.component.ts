@@ -3,6 +3,8 @@ import { IDS_BUTTON_PARENT } from './tokens/button-parent';
 import { IdsButtonAppearanceType } from './types/button-appearance.type';
 import { IdsButtonVariantType } from './types/button-variant.type';
 
+import { IdsIconComponent } from '../icon';
+
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 
@@ -36,8 +38,8 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
 
   private _parentOrSelfVariant = computed(() => this._parent?.embeddedButtonVariant() ?? this.variant());
 
-  public iconLeading = contentChildren<unknown>('[icon-leading]');
-  public iconTrailing = contentChildren<unknown>('[icon-trailing]');
+  public iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
+  public iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),

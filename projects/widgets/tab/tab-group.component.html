@@ -1,0 +1,29 @@
+<div class="ids-tab-group__container">
+  <ul class="ids-tab-group__header" role="tablist">
+    @for (item of _items(); track $index; let i = $index) {
+      <li
+        role="tab"
+        [class]="item.hostTabClasses()"
+        [class.ids-tab--active]="selectedTabIndex() === i"
+        [attr.tabindex]="item.parentOrSelfDisabled() ? -1 : 0"
+        [attr.aria-selected]="selectedTabIndex() === i ? 'true' : 'false'"
+        [attr.aria-controls]="item.panelId"
+        (click)="selectTab(i)"
+      >
+        @let tabLeadingIcon = item.leadingIcon();
+        @let tabTrailingIcon = item.trailingIcon();
+        @if (tabLeadingIcon) {
+          <ids-icon [fontIcon]="tabLeadingIcon" />
+        }
+        <span class="ids-tab__label">{{ item.label() }}</span>
+        @if (tabTrailingIcon) {
+          <ids-icon [fontIcon]="tabTrailingIcon" />
+        }
+        <span class="ids-tab__indicator">
+          <span class="ids-tab__line"></span>
+        </span>
+      </li>
+    }
+  </ul>
+</div>
+<ng-template cdkPortalOutlet />

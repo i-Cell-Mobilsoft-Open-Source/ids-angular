@@ -1,6 +1,7 @@
-section {
-  &.component {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
+.component {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -1,12 +1,9 @@
-import { IdsTooltipPositionType } from './types/tooltip-position.type';
+import { IdsTooltipPositionType } from './public-api';
 import { IdsTooltipVariantType } from './types/tooltip-variant.type';
 import { IdsTooltipTextAlign } from './types/tooltip.type';
-import { extendedPositionToTooltipPosition, tooltipPositionToExtendedPosition } from './utils/converters';
 
-import { CdkScrollable } from '@angular/cdk/scrolling';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ConnectedPosition, IdsSizeType, ComponentBase } from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { IdsSizeType, ComponentBase } from '@i-cell/ids-angular/core';
 import { Observable, Subject } from 'rxjs';
 
 @Component({
@@ -17,150 +14,75 @@ import { Observable, Subject } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[style.top]': '_hostPositionTop()',
-    '[style.left]': '_hostPositionLeft()',
+    '(mouseenter)': '_handleMouseEnter()',
+    '(mouseleave)': '_handleMouseLeave($event)',
+    'aria-hidden': 'true',
+    '[class]': 'tooltipClass()',
   },
 })
-export class IdsTooltipComponent extends ComponentBase implements AfterViewInit, OnDestroy {
+export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
   protected override get _hostName(): string {
     return 'tooltip';
   }
 
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _onHide: Subject<void> = new Subject();
-  private readonly _tooltipElement = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  private _connectedPosition?: ConnectedPosition;
-  private _message?: string;
-  private _size?: IdsSizeType;
-  private _variant?: IdsTooltipVariantType;
-  private _originalTooltipPosition: IdsTooltipPositionType | null = null;
-  private _fallbackTooltipPosition = computed(() =>
-    extendedPositionToTooltipPosition(this._connectedPosition?.fallbackPositionPair()),
-  );
+  public message = input<string>();
+  public position = input<IdsTooltipPositionType>();
+  public size = input<IdsSizeType>();
+  public variant = input<IdsTooltipVariantType>();
+  public textAlign = input<IdsTooltipTextAlign>();
+  public mouseLeaveHideDelay = input<number>(0);
+  public tooltipClass = input<string>();
+  public showPointer = input<boolean>();
 
-  private _textAlign?: IdsTooltipTextAlign;
-  private _isVisible = false;
-  private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
-  private _hideTimeoutId: ReturnType<typeof setTimeout> | undefined;
-  private _tooltipInitiated = false;
+  public triggerElement?: HTMLElement;
+  private _hideTimeout?: ReturnType<typeof setTimeout>;
 
   protected _hostClasses = computed(() => this._getHostClasses([
-    this._size,
-    this._variant,
+    this.size(),
+    this.variant(),
     [
       'position',
-      this._fallbackTooltipPosition() ?? this._originalTooltipPosition,
+      this.position(),
     ],
     [
       'text-align',
-      this._textAlign,
+      this.textAlign(),
     ],
   ]));
 
-  public get isVisible(): boolean {
-    return this._isVisible;
-  }
-
   public get isHideTimerTicking(): boolean {
-    return Boolean(this._hideTimeoutId);
-  }
-
-  public get message(): string | undefined {
-    return this._message;
-  }
-
-  public set message(value: string) {
-    this._message = value;
-  }
-
-  private _hostPositionTop = computed(() => this._connectedPosition?.positionTop());
-
-  private _hostPositionLeft = computed(() => this._connectedPosition?.positionLeft());
-
-  public ngAfterViewInit(): void {
-    this._tooltipInitiated = true;
-    this.doPosition();
-  }
-
-  public initiate(
-    values: {
-      triggerElement: HTMLElement
-      scrollContainers?: CdkScrollable[]
-      size?: IdsSizeType
-      variant?: IdsTooltipVariantType
-      originalPosition?: IdsTooltipPositionType
-      textAlign?: IdsTooltipTextAlign
-    }): void {
-    this._size = values.size;
-    this._variant = values.variant;
-    this._originalTooltipPosition = values.originalPosition ?? null;
-    this._textAlign = values.textAlign;
-    const originalPositionPair = tooltipPositionToExtendedPosition(this._originalTooltipPosition)!;
-
-    if (values.scrollContainers) {
-      this._connectedPosition = new ConnectedPosition(
-        values.scrollContainers,
-        values.triggerElement,
-        this._tooltipElement,
-        originalPositionPair,
-      );
-      this._connectedPosition.shouldHide.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this._hideImmediately());
-    }
-  }
-
-  public doPosition(): void {
-    if (!this._tooltipInitiated) {
-      return;
-    }
-
-    this._connectedPosition?.doPosition();
-  }
-
-  public show(delay: number): void {
-    if (this._hideTimeoutId != null) {
-      clearTimeout(this._hideTimeoutId);
-    }
-
-    this._showTimeoutId = setTimeout(() => {
-      this._setVisibility(true);
-      this._showTimeoutId = undefined;
-    }, delay);
+    return Boolean(this._hideTimeout);
   }
 
   public hide(delay: number): void {
-    if (this._showTimeoutId != null) {
-      clearTimeout(this._showTimeoutId);
-    }
-
-    this._hideTimeoutId = setTimeout(() => {
-      this._setVisibility(false);
-      this._hideTimeoutId = undefined;
+    this._hideTimeout = setTimeout(() => {
+      this._hideTimeout = undefined;
       this._onHide.next();
     }, delay);
   }
 
-  private _hideImmediately(): void {
-    this._setVisibility(false);
-    clearTimeout(this._hideTimeoutId);
-    this._hideTimeoutId = undefined;
-    this._onHide.next();
+  public afterHidden(): Observable<void> {
+    return this._onHide;
   }
 
-  private _setVisibility(isVisible: boolean): void {
-    this._isVisible = isVisible;
+  public abortHide(): void {
+    clearTimeout(this._hideTimeout);
+    this._hideTimeout = undefined;
+  }
 
-    if (isVisible) {
-      this.markForCheck();
+  private _handleMouseEnter(): void {
+    if (this._hideTimeout) {
+      this.abortHide();
     }
   }
 
-  public markForCheck(): void {
-    this._changeDetectorRef.markForCheck();
-  }
-
-  public afterHidden(): Observable<void> {
-    return this._onHide;
+  private _handleMouseLeave({ relatedTarget }: MouseEvent): void {
+    if (!relatedTarget || !this.triggerElement?.contains(relatedTarget as Node)) {
+      this.hide(this.mouseLeaveHideDelay());
+    }
   }
 
   public ngOnDestroy(): void {

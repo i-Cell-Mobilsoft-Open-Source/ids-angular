@@ -1,5 +1,5 @@
 <app-tryout [title]="'COMPONENTS.TOOLTIP' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <ng-container component>
+  <div class="component" component>
     <button
       type="button"
       idsButton
@@ -14,9 +14,10 @@
       [idsTooltipTouchGestures]="model.touchGestures"
       [idsTooltipTextAlign]="model.textAlign"
     >
-      North
+      Hover me
     </button>
-  </ng-container>
+    <p>Hover over the button to show a tooltip on {{ model.position }}.</p>
+  </div>
 
   <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
 </app-tryout>

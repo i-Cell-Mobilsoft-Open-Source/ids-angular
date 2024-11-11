@@ -15,6 +15,7 @@ export interface IdsTooltipDefaultConfig {
   position?: IdsTooltipPositionType
   size?: IdsSizeType
   variant?: IdsTooltipVariantType
+  showPointer?: boolean
   showDelay?: number
   hideDelay?: number
   touchLongPressShowDelay?: number
@@ -36,6 +37,7 @@ export function IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY(): Required<IdsTooltipDefault
     position: IdsTooltipPosition.NORTH,
     size: IdsSize.COMPACT,
     variant: IdsTooltipVariant.DARK,
+    showPointer: true,
     showDelay: DEFAULT_SHOW_DELAY,
     hideDelay: DEFAULT_HIDE_DELAY,
     touchLongPressShowDelay: DEFAULT_LONGPRESS_DELAY,

@@ -1,4 +1,4 @@
-import { IdsChipAppearance, IdsChipAppearanceType } from './public-api';
+import { IdsChipAppearance, IdsChipAppearanceType } from './types/chip-appearance.type';
 import { IdsChipVariant, IdsChipVariantType } from './types/chip-variant.type';
 
 import { InjectionToken } from '@angular/core';

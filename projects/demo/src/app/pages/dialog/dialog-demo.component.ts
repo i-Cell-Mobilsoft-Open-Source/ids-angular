@@ -51,7 +51,7 @@ type DialogHelperControls = {
         <div *idsDialogHeader>
           <h2>This is a custom header!</h2>
         </div>
-      }  
+      }
       <div idsDialogContent class="flex flex-col gap-3">
       @if (helperControls!.useLongContent) {
             <p>
@@ -189,7 +189,6 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
   imports: [
     TryoutComponent,
     ControlTableComponent,
-    CustomDialogComponent,
     IdsButtonComponent,
     IdsDialogComponent,
     IdsDialogHeaderDirective,

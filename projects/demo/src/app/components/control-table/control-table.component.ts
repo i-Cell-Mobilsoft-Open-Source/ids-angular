@@ -1,6 +1,5 @@
 import { DemoControlConfig, DemoControlItem } from '../../../types/demo-control.type';
 
-import { KeyValuePipe } from '@angular/common';
 import { Component, computed, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsSentenceCasePipe } from '@i-cell/ids-angular/core';
@@ -11,7 +10,6 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
   selector: 'app-control-table',
   standalone: true,
   imports: [
-    KeyValuePipe,
     IdsSentenceCasePipe,
     FormsModule,
   ],

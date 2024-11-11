@@ -7,7 +7,7 @@ import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
-import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
+import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -38,7 +38,6 @@ type AccordionInputControls = {
     IdsAccordionItemComponent,
     TranslateModule,
     FormsModule,
-    IdsButtonComponent,
   ],
   templateUrl: './accordion-demo.component.html',
   styleUrls: [
@@ -126,7 +125,7 @@ export class AccordionDemoComponent {
   };
 
   public defaults = getDefaultFromDemoConfig<AccordionInputControls>(this._inputControlConfig);
-  
+
   public model: AccordionInputControls = { ...this.defaults };
 
   public reset(): void {

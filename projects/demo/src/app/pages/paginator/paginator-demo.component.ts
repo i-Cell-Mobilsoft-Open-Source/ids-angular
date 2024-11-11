@@ -1,13 +1,11 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorComponent, IdsPaginatorPageButtonAppearance, IdsPaginatorPageButtonAppearanceType, IdsPaginatorPageChangeEvent, IdsPaginatorVariant, IdsPaginatorVariantType } from '@i-cell/ids-angular/paginator';
 import { TranslateModule } from '@ngx-translate/core';
@@ -39,10 +37,8 @@ type PaginatorInputControls = {
     TryoutComponent,
     ControlTableComponent,
     IdsPaginatorComponent,
-    UpperCasePipe,
     TranslateModule,
     FormsModule,
-    IdsButtonComponent,
   ],
   templateUrl: './paginator-demo.component.html',
   styleUrls: [

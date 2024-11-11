@@ -12,10 +12,7 @@ const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 @Component({
   selector: 'ids-accordion',
   standalone: true,
-  imports: [
-    CdkAccordion,
-    IdsButtonComponent,
-  ],
+  imports: [IdsButtonComponent],
   templateUrl: './accordion.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

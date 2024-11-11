@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
   IdsSize,
   IdsSizeType,
@@ -33,7 +32,6 @@ type IconButtonInputControls = {
     IdsIconButtonComponent,
     IdsIconComponent,
     TranslateModule,
-    IdsButtonComponent,
     FormsModule,
   ],
   templateUrl: './icon-button-demo.component.html',
@@ -80,7 +78,7 @@ export class IconButtonDemoComponent {
   public defaults = getDefaultFromDemoConfig<IconButtonInputControls>(this._inputControlConfig);
 
   public model: IconButtonInputControls = { ...this.defaults  };
-  
+
   public reset(): void {
     this.model = { ...this.defaults };
   }

@@ -3,12 +3,11 @@ import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.di
 import { IdsMessageDirective } from '../../../directives/message.directive';
 
 import { Component, contentChildren, ViewEncapsulation } from '@angular/core';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-hint-message',
   standalone: true,
-  imports: [IdsIconComponent],
+  imports: [],
   templateUrl: './hint-message.component.html',
   host: {
     class: 'ids-hint-message',

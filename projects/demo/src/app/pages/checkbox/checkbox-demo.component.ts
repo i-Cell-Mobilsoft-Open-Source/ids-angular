@@ -1,17 +1,14 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCheckboxVariant, IdsCheckboxVariantType, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxComponent, IdsCheckboxGroupComponent } from '@i-cell/ids-angular/checkbox';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
-import { IdsMessageSuffixDirective } from '@i-cell/ids-angular/forms/directives/message-suffix.directive';
+import { IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
@@ -49,14 +46,10 @@ type CheckboxGroupInputControls = {
     ControlTableComponent,
     IdsCheckboxComponent,
     IdsCheckboxGroupComponent,
-    UpperCasePipe,
     ReactiveFormsModule,
     FormsModule,
     IdsHintMessageComponent,
-    IdsErrorMessageComponent,
-    IdsMessageSuffixDirective,
     TranslateModule,
-    IdsButtonComponent,
   ],
   templateUrl: './checkbox-demo.component.html',
   styleUrls: [

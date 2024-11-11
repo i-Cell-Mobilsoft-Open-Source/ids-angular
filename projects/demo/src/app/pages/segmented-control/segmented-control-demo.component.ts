@@ -1,13 +1,11 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlAppearance, IdsSegmentedControlAppearanceType, IdsSegmentedControlVariant, IdsSegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
@@ -40,11 +38,9 @@ type SegmentedControlHelperControls = {
     IdsSegmentedControlDirective,
     IdsSegmentedControlItemComponent,
     IdsIconComponent,
-    UpperCasePipe,
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    IdsButtonComponent,
   ],
   templateUrl: './segmented-control-demo.component.html',
   styleUrls: [
@@ -118,7 +114,7 @@ export class SegmentedControlDemoComponent {
 
   public singleSelectionValue = undefined;
   public multiSelectionValue = [];
-  
+
   public reset(): void {
     this.singleSelectionValue = undefined;
     this.multiSelectionValue = [];

@@ -2,14 +2,12 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { IconService } from '../../core/services/icon.service';
 
-import { UpperCasePipe } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconVariant, IdsIconVariantType, IDS_ICON_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/icon';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
@@ -33,10 +31,8 @@ type IconInputControls = {
     TryoutComponent,
     ControlTableComponent,
     IdsIconComponent,
-    UpperCasePipe,
     TranslateModule,
     FormsModule,
-    IdsButtonComponent,
   ],
   templateUrl: './icon-demo.component.html',
   styleUrls: [

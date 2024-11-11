@@ -4,17 +4,16 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, signal, Te
 import { coerceStringAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 
 @Component({
-  selector: 'ids-tab-item',
+  selector: 'ids-tab',
   standalone: true,
   imports: [],
-  templateUrl: './tab-item.component.html',
-  styleUrl: './tab-item.component.scss',
+  templateUrl: './tab.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdsTabItemComponent extends ComponentBase {
+export class IdsTabComponent extends ComponentBase {
   protected override get _hostName(): string {
-    return 'tab-item';
+    return 'tab';
   };
 
   private _tabGroup = inject(IdsTabGroupComponent, { skipSelf: true });
@@ -26,11 +25,11 @@ export class IdsTabItemComponent extends ComponentBase {
   public content = viewChild.required<TemplateRef<unknown>>(TemplateRef);
   public panelId = `${this.id()}-panel`;
 
-  public safeDisabled = computed(() => this._tabGroup.disabled() || this.disabled());
+  public parentOrSelfDisabled = computed(() => this._tabGroup.disabled() || this.disabled());
 
   protected _hostClasses = signal(this._getHostClasses([]));
 
   public hostTabClasses = computed(() => this._getHostClasses(
-    [this.safeDisabled() ? 'disabled' : null],
+    [this.parentOrSelfDisabled() ? 'disabled' : null],
   ));
 }

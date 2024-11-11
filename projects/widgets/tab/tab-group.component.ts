@@ -1,5 +1,5 @@
+import { IdsTabComponent } from './tab/tab.component';
 import { IDS_TAB_GROUP_DEFAULT_CONFIG, IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupDefaultConfig } from './tab-group-defaults';
-import { IdsTabItemComponent } from './tab-item/tab-item.component';
 import { IdsTabGroupPositionType } from './types/tab-group-position.type';
 import { IdsTabGroupVariantType } from './types/tab-group-variant.type';
 import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
@@ -29,7 +29,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TAB_GROUP_DEFAULT_CONFIG);
 
-  protected _items = contentChildren<IdsTabItemComponent>(IdsTabItemComponent);
+  protected _items = contentChildren<IdsTabComponent>(IdsTabComponent);
   private _portalOutlet = viewChild.required<CdkPortalOutlet>(CdkPortalOutlet);
   private _viewContainerRef = inject(ViewContainerRef);
 

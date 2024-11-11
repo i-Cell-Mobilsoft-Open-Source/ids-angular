@@ -60,7 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
             { name: 'COMPONENTS.SELECT', path: '/components/select' },
             { name: 'COMPONENTS.SNACKBAR', path: '/components/snackbar' },
             { name: 'COMPONENTS.SWITCH', path: '/components/switch' },
-            { name: 'COMPONENTS.TABS', path: '/components/tabs' },
+            { name: 'COMPONENTS.TAB', path: '/components/tab' },
             { name: 'COMPONENTS.TAG', path: '/components/tag' },
             { name: 'COMPONENTS.TOOLTIP', path: '/components/tooltip' },
           ],

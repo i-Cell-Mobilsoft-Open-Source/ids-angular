@@ -96,8 +96,8 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
   },
   {
-    path: 'components/tabs',
-    loadComponent: () => import('./pages/tabs/tabs-demo.component').then((module) => module.TabsDemoComponent),
+    path: 'components/tab',
+    loadComponent: () => import('./pages/tab/tab-demo.component').then((module) => module.TabsDemoComponent),
   },
   {
     path: 'components/tag',

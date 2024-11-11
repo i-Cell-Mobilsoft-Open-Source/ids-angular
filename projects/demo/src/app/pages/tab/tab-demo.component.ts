@@ -1,5 +1,4 @@
-import { IdsTabGroupComponent } from '../../../../../widgets/tabs/tab-group.component';
-import { IdsTabItemComponent } from '../../../../../widgets/tabs/tab-item/tab-item.component';
+import { IdsTabGroupComponent } from '../../../../../widgets/tab/tab-group.component';
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { IconService } from '../../core/services/icon.service';
@@ -11,7 +10,7 @@ import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupPosition, IdsTabGroupPositionType, IdsTabGroupVariant, IdsTabGroupVariantType, IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from '@i-cell/ids-angular/tabs';
+import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabComponent, IdsTabGroupPosition, IdsTabGroupPositionType, IdsTabGroupVariant, IdsTabGroupVariantType, IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from '@i-cell/ids-angular/tab';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -42,20 +41,20 @@ type TabHelperControls = {
 };
 
 @Component({
-  selector: 'app-tabs-demo',
+  selector: 'app-tab-demo',
   standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,
     IdsTabGroupComponent,
-    IdsTabItemComponent,
+    IdsTabComponent,
     TranslateModule,
     FormsModule,
   ],
-  templateUrl: './tabs-demo.component.html',
+  templateUrl: './tab-demo.component.html',
   styleUrls: [
     '../demo-page.scss',
-    './tabs-demo.component.scss',
+    './tab-demo.component.scss',
   ],
 })
 export class TabsDemoComponent implements OnInit {

@@ -1,4 +1,4 @@
-<app-tryout [title]="'COMPONENTS.TABS' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.TAB' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <ng-container component>
     <ids-tab-group
       [size]="model.size"
@@ -9,23 +9,23 @@
       [indicatorPosition]="model.indicatorPosition"
       [disabled]="model.disabled"
     >
-      <ids-tab-item
+      <ids-tab
         [label]="helperModel.tabItem1Label"
         [leadingIcon]="helperModel.tabItem1LeadingIcon"
         [trailingIcon]="helperModel.tabItem1TrailingIcon"
         [disabled]="helperModel.tabItem1Disabled"
       >
         Tab Content 1
-      </ids-tab-item>
-      <ids-tab-item
+      </ids-tab>
+      <ids-tab
         [label]="helperModel.tabItem2Label"
         [leadingIcon]="helperModel.tabItem2LeadingIcon"
         [trailingIcon]="helperModel.tabItem2TrailingIcon"
         [disabled]="helperModel.tabItem2Disabled"
       >
         Tab Content 2
-      </ids-tab-item>
-      <ids-tab-item
+      </ids-tab>
+      <ids-tab
         [label]="helperModel.tabItem3Label"
         [leadingIcon]="helperModel.tabItem3LeadingIcon"
         [trailingIcon]="helperModel.tabItem3TrailingIcon"
@@ -33,7 +33,7 @@
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis sequi
         aut fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.
-      </ids-tab-item>
+      </ids-tab>
     </ids-tab-group>
   </ng-container>
 

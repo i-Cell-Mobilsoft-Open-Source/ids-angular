@@ -4,8 +4,8 @@
       <li
         role="tab"
         [class]="item.hostTabClasses()"
-        [class.ids-tab-item--active]="selectedTabIndex() === i"
-        [attr.tabindex]="item.safeDisabled() ? -1 : 0"
+        [class.ids-tab--active]="selectedTabIndex() === i"
+        [attr.tabindex]="item.parentOrSelfDisabled() ? -1 : 0"
         [attr.aria-selected]="selectedTabIndex() === i ? 'true' : 'false'"
         [attr.aria-controls]="item.panelId"
         (click)="selectTab(i)"
@@ -15,12 +15,12 @@
         @if (tabLeadingIcon) {
           <ids-icon [fontIcon]="tabLeadingIcon" />
         }
-        <span class="ids-tab-item__label">{{ item.label() }}</span>
+        <span class="ids-tab__label">{{ item.label() }}</span>
         @if (tabTrailingIcon) {
           <ids-icon [fontIcon]="tabTrailingIcon" />
         }
-        <span class="ids-tab-item__indicator">
-          <span class="ids-tab-item__line"></span>
+        <span class="ids-tab__indicator">
+          <span class="ids-tab__line"></span>
         </span>
       </li>
     }

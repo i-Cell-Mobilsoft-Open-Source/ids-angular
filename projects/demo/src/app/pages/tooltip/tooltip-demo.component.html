@@ -13,10 +13,12 @@
       [idsTooltipDisabled]="model.disabled"
       [idsTooltipTouchGestures]="model.touchGestures"
       [idsTooltipTextAlign]="model.textAlign"
+      [idsTooltipShowPointer]="model.showPointer"
     >
       Hover me
     </button>
-    <p>Hover over the button to show a tooltip on {{ model.position }}.</p>
+    <p>Hover over the button to show the tooltip on {{ model.position }}.</p>
+    <p>Hover out from the button to hide the tooltip with hideDelay, or click outside tooltip to hide immediately.</p>
   </div>
 
   <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />

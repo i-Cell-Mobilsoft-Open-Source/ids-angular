@@ -20,7 +20,8 @@ type TooltipInputControls = {
   hideDelay: number,
   disabled: boolean,
   touchGestures: IdsTooltipTouchGestures,
-  textAlign: IdsTooltipTextAlign | undefined,
+  textAlign: IdsTooltipTextAlign,
+  showPointer: boolean,
 };
 
 const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
@@ -104,14 +105,21 @@ export class TooltipDemoComponent {
     },
     textAlign: {
       description: 'The text alignment inside the tooltip.',
-      type: 'IdsTooltipTextAlign | undefined',
-      default: undefined,
+      type: 'IdsTooltipTextAlign',
+      default: 'auto',
       control: 'select',
       list: [
+        'auto',
         'center',
         'left',
         'right',
       ],
+    },
+    showPointer: {
+      description: 'Whether to show tooltip pointer or not.',
+      type: 'boolean',
+      default: defaultConfig.showPointer,
+      control: 'checkbox',
     },
   };
 

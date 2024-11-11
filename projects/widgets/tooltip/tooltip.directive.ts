@@ -60,7 +60,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
   public hideDelay = input<number>(this._defaultConfig.hideDelay, { alias: 'idsTooltipHideDelay' });
   public disabled = input<boolean>(false, { alias: 'idsTooltipDisabled' });
   public touchGestures = input<IdsTooltipTouchGestures>('auto', { alias: 'idsTooltipTouchGestures' });
-  public textAlign = input<IdsTooltipTextAlign | undefined>(undefined, { alias: 'idsTooltipTextAlign' });
+  public textAlign = input<IdsTooltipTextAlign>('auto', { alias: 'idsTooltipTextAlign' });
   public tooltipClass = input<string | undefined>(undefined, { alias: 'idsTooltipClass' });
   public showPointer = input<boolean>(this._defaultConfig.showPointer, { alias: 'idsTooltipShowPointer' });
 
@@ -101,7 +101,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     }
 
     const overlayRef = this._createOverlay();
-    this._detach();
+    // this._detach();
     this._portal =
         this._portal || new ComponentPortal(IdsTooltipComponent, this._viewContainerRef);
     this._componentRef = overlayRef.attach(this._portal);
@@ -239,7 +239,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     position: IdsTooltipPositionType,
     size: IdsSizeType,
     variant: IdsTooltipVariantType,
-    textAlign: IdsTooltipTextAlign | undefined,
+    textAlign: IdsTooltipTextAlign,
     hideDelay: number,
     tooltipClass: string | undefined,
     showPointer: boolean,

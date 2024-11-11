@@ -2,7 +2,7 @@ import { IdsTooltipPositionType } from './public-api';
 import { IdsTooltipVariantType } from './types/tooltip-variant.type';
 import { IdsTooltipTextAlign } from './types/tooltip.type';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { IdsSizeType, ComponentBase } from '@i-cell/ids-angular/core';
 import { Observable, Subject } from 'rxjs';
 
@@ -25,7 +25,6 @@ export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
     return 'tooltip';
   }
 
-  private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _onHide: Subject<void> = new Subject();
 
   public message = input<string>();
@@ -51,6 +50,7 @@ export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
       'text-align',
       this.textAlign(),
     ],
+    this.showPointer() ? 'pointered' : null,
   ]));
 
   public get isHideTimerTicking(): boolean {

@@ -9,6 +9,7 @@ export const IdsButtonVariant = {
   SUCCESS: 'success',
   WARNING: 'warning',
   ERROR: 'error',
+  LIGHT_FIXED: 'light-fixed',
 } as const;
 
 export type IdsButtonVariantType = (typeof IdsButtonVariant)[keyof typeof IdsButtonVariant];

@@ -7,8 +7,8 @@ export function connectedPositionPairToTooltipPosition(positionPair: ConnectionP
 
   if (
     originX=== 'center' &&
-    originY === 'top'&&
-    overlayX === 'center'&&
+    originY === 'top' &&
+    overlayX === 'center' &&
     overlayY === 'bottom'
   ) {
     return IdsTooltipPosition.NORTH;

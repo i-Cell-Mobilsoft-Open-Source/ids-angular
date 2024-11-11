@@ -164,10 +164,8 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     strategy.positionChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((change) => {
       this._updateCurrentPositionClass(change.connectionPair);
 
-      if (this._tooltipInstance) {
-        if (change.scrollableViewProperties.isOverlayClipped && this._tooltipInstance) {
-          this._ngZone.run(() => this.hide(0));
-        }
+      if (change.scrollableViewProperties.isOverlayClipped && this._tooltipInstance) {
+        this._ngZone.run(() => this.hide(0));
       }
     });
 

@@ -1,4 +1,4 @@
-import { IdsTooltipPositionType } from './public-api';
+import { IdsTooltipPositionType } from './types/tooltip-position.type';
 import { IdsTooltipVariantType } from './types/tooltip-variant.type';
 import { IdsTooltipTextAlign } from './types/tooltip.type';
 

@@ -77,9 +77,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
       throw new Error(this._createHostError(`Can not use ${indicatorPosition} indicator position with Vertical mode`));
     }
 
-    if (items.length) {
-      this.selectTab(0);
-    }
+    this.selectTab(0);
   }
 
   public selectTab(index: number): void {

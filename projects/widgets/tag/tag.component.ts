@@ -3,6 +3,8 @@ import { IdsTagGroupComponent } from './tag-group.component';
 import { IdsTagAppearanceType } from './types/tag-appearance.type';
 import { IdsTagVariantType } from './types/tag-variant.type';
 
+import { IdsIconComponent } from '../icon';
+
 import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 
@@ -30,8 +32,8 @@ export class IdsTagComponent extends ComponentBaseWithDefaults<IdsTagDefaultConf
 
   private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  public iconLeading = contentChildren<unknown>('ids-icon[icon-leading]');
-  public iconTrailing = contentChildren<unknown>('ids-icon[icon-trailing]');
+  public iconLeading = contentChildren<IdsIconComponent>('ids-icon[icon-leading]');
+  public iconTrailing = contentChildren<IdsIconComponent>('ids-icon[icon-trailing]');
 
   public appearance = input<IdsTagAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);

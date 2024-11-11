@@ -20,7 +20,8 @@ type TooltipInputControls = {
   hideDelay: number,
   disabled: boolean,
   touchGestures: IdsTooltipTouchGestures,
-  textAlign: IdsTooltipTextAlign | undefined,
+  textAlign: IdsTooltipTextAlign,
+  showPointer: boolean,
 };
 
 const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
@@ -35,7 +36,6 @@ const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
     IdsButtonComponent,
     TranslateModule,
     FormsModule,
-    IdsButtonComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrls: [
@@ -49,8 +49,8 @@ export class TooltipDemoComponent {
       description: 'The text displayed inside the tooltip.',
       type: 'string',
       default: '-',
-      // eslint-disable-next-line @stylistic/js/max-len
-      demoDefault: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum maxime magnam quae tenetur aliquam repudiandae provident.',
+
+      demoDefault: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       control: 'text',
     },
     position: {
@@ -105,22 +105,28 @@ export class TooltipDemoComponent {
     },
     textAlign: {
       description: 'The text alignment inside the tooltip.',
-      type: 'IdsTooltipTextAlign | undefined',
-      default: 'undefined',
-      demoDefault: undefined,
+      type: 'IdsTooltipTextAlign',
+      default: 'auto',
       control: 'select',
       list: [
+        'auto',
         'center',
         'left',
         'right',
       ],
+    },
+    showPointer: {
+      description: 'Whether to show tooltip pointer or not.',
+      type: 'boolean',
+      default: defaultConfig.showPointer,
+      control: 'checkbox',
     },
   };
 
   public defaults = getDefaultFromDemoConfig<TooltipInputControls>(this._inputControlConfig);
 
   public model: TooltipInputControls = { ...this.defaults  };
-  
+
   public reset(): void {
     this.model = { ...this.defaults };
   }

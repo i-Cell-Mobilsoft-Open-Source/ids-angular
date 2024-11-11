@@ -7,7 +7,6 @@ import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsAvatarComponent } from '@i-cell/ids-angular/avatar';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsChipAppearance, IdsChipAppearanceType, IdsChipVariant, IdsChipVariantType, IDS_CHIP_DEFAULT_CONFIG_FACTORY, IdsChipComponent, IdsChipRemoveEvent, IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY, IdsChipGroupComponent } from '@i-cell/ids-angular/chip';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsPrefixDirective } from '@i-cell/ids-angular/forms';
@@ -58,7 +57,6 @@ const chipList: { label: string, variant: IdsChipVariantType }[] = [
     IdsChipGroupComponent,
     IdsChipComponent,
     IdsAvatarComponent,
-    IdsButtonComponent,
     IdsIconComponent,
     IdsIconButtonComponent,
     IdsPrefixDirective,

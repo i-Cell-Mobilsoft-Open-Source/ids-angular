@@ -4,7 +4,7 @@ import { IdsTooltipVariant, IdsTooltipVariantType } from './types/tooltip-varian
 import { InjectionToken } from '@angular/core';
 import { IdsSizeType, IdsSize } from '@i-cell/ids-angular/core';
 
-const DEFAULT_SHOW_DELAY = 0;
+const DEFAULT_SHOW_DELAY = 1_000;
 const DEFAULT_HIDE_DELAY = 1_000;
 const DEFAULT_VIEWPORT_MARGIN = 8;
 const DEFAULT_LONGPRESS_DELAY = 500;
@@ -15,6 +15,7 @@ export interface IdsTooltipDefaultConfig {
   position?: IdsTooltipPositionType
   size?: IdsSizeType
   variant?: IdsTooltipVariantType
+  showPointer?: boolean
   showDelay?: number
   hideDelay?: number
   touchLongPressShowDelay?: number
@@ -36,6 +37,7 @@ export function IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY(): Required<IdsTooltipDefault
     position: IdsTooltipPosition.NORTH,
     size: IdsSize.COMPACT,
     variant: IdsTooltipVariant.DARK,
+    showPointer: true,
     showDelay: DEFAULT_SHOW_DELAY,
     hideDelay: DEFAULT_HIDE_DELAY,
     touchLongPressShowDelay: DEFAULT_LONGPRESS_DELAY,

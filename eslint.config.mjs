@@ -45,7 +45,7 @@ export default tseslint.config(
       "default-case-last": "error",
       eqeqeq: ["error", "smart"],
       "func-name-matching": ["error", "always"],
-      "id-length": ["error", { min: 2, max: 50, exceptions: ["x", "a", "b", "i"] }],
+      "id-length": ["error", { min: 2, max: 50, exceptions: ["x", "y", "a", "b", "i"] }],
       "max-lines-per-function": [
         "error",
         {

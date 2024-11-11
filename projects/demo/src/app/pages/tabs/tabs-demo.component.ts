@@ -53,7 +53,10 @@ type TabHelperControls = {
     FormsModule,
   ],
   templateUrl: './tabs-demo.component.html',
-  styleUrl: './tabs-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './tabs-demo.component.scss',
+  ],
 })
 export class TabsDemoComponent implements OnInit {
   private readonly _iconService = inject(IconService);

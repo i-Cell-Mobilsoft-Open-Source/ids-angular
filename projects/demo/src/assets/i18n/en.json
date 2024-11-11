@@ -27,6 +27,7 @@
     "OVERLAY_PANEL": "Overlay panel",
     "PAGINATOR": "Paginator",
     "RADIO": "Radio",
+    "SCROLLBAR": "Scrollbar",
     "SEGMENTED_CONTROL": "Segmented control",
     "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
     "SELECT": "Select",

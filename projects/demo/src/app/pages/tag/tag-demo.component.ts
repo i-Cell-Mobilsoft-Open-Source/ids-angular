@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsTagComponent, IdsTagAppearanceType, IdsTagVariantType, IdsTagVariant, IDS_TAG_DEFAULT_CONFIG_FACTORY, IdsTagAppearance, IDS_TAG_GROUP_DEFAULT_CONFIG_FACTORY, IdsTagGroupComponent } from '@i-cell/ids-angular/tag';
@@ -42,7 +41,6 @@ type TagGroupInputControls = {
     IdsIconComponent,
     TranslateModule,
     FormsModule,
-    IdsButtonComponent,
   ],
   templateUrl: './tag-demo.component.html',
   styleUrls: [

@@ -1,15 +1,13 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsFormFieldActionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuffixDirective, IdsFormFieldActionDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
@@ -56,13 +54,9 @@ type InputInputControls = {
     IdsIconButtonComponent,
     IdsIconComponent,
     IdsHintMessageComponent,
-    IdsSuccessMessageComponent,
     IdsErrorMessageComponent,
     FormsModule,
-    ReactiveFormsModule,
-    UpperCasePipe,
     TranslateModule,
-    IdsButtonComponent,
   ],
   templateUrl: './form-field-demo.component.html',
   styleUrls: [

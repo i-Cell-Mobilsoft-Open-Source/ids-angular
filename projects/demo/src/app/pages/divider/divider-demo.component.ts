@@ -6,11 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
   IdsSize,
   IdsSizeType,
-  IdsOrientationType, 
+  IdsOrientationType,
   IdsOrientation } from '@i-cell/ids-angular/core';
 import { IDS_DIVIDER_DEFAULT_CONFIG_FACTORY, IdsDividerComponent, IdsDividerVariant, IdsDividerVariantType } from '@i-cell/ids-angular/divider';
 import { TranslateModule } from '@ngx-translate/core';
@@ -34,7 +33,6 @@ type DividerInputControls = {
     IdsDividerComponent,
     TranslateModule,
     FormsModule,
-    IdsButtonComponent,
   ],
   templateUrl: './divider-demo.component.html',
   styleUrls: [

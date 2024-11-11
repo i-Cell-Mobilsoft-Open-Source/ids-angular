@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IDS_CARD_DEFAULT_CONFIG_FACTORY, IdsCardAppearance, IdsCardAppearanceType, IdsCardComponent, IdsCardVariant, IdsCardVariantType } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
 import { IdsCardFooterDirective } from '@i-cell/ids-angular/card/card-footer.directive';
@@ -50,7 +49,6 @@ type CardHelperControls = {
     IdsCardSubtitleDirective,
     FormsModule,
     TranslateModule,
-    IdsButtonComponent,
   ],
   templateUrl: './card-demo.component.html',
   styleUrls: [

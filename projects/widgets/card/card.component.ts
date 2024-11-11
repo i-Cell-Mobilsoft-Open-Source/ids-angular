@@ -1,5 +1,4 @@
 import { IDS_CARD_DEFAULT_CONFIG, IDS_CARD_DEFAULT_CONFIG_FACTORY, IdsCardDefaultConfig } from './card-defaults';
-import { IdsCardHeaderComponent } from './card-header.component';
 import { IdsCardAppearanceType } from './types/card-appearances.type';
 import { IdsCardVariantType } from './types/card-variant.type';
 
@@ -12,7 +11,7 @@ const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
   selector:
     'ids-card,div[idsCard],article[idsCard],aside[idsCard],section[idsCard]',
   standalone: true,
-  imports: [IdsCardHeaderComponent],
+  imports: [],
   template: `
     <ng-content />
     <ng-content select="ids-card-footer,footer[idsCardFooter]" />

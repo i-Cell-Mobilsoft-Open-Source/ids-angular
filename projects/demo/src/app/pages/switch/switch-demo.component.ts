@@ -1,13 +1,11 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SWITCH_DEFAULT_CONFIG_FACTORY, IdsSwitchComponent, IdsSwitchGroupComponent, IdsSwitchIconPosition, IdsSwitchIconPositionType, IdsSwitchLabelPosition, IdsSwitchLabelPositionType, IdsSwitchVariant, IdsSwitchVariantType } from '@i-cell/ids-angular/switch';
 import { TranslateModule } from '@ngx-translate/core';
@@ -44,9 +42,7 @@ type SwitchGroupInputControls = {
     IdsSwitchComponent,
     IdsSwitchGroupComponent,
     TranslateModule,
-    UpperCasePipe,
     FormsModule,
-    IdsButtonComponent,
   ],
   templateUrl: './switch-demo.component.html',
   styleUrls: [

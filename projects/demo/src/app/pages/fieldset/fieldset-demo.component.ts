@@ -1,16 +1,13 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsFormFieldActionDirective, IdsErrorMessageComponent, IdsFieldsetComponent, IdsFieldsetMessageDirective, IdsFieldsetRowComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuccessMessageComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFieldsetComponent, IdsFieldsetMessageDirective, IdsFieldsetRowComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective } from '@i-cell/ids-angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 type FieldsetInputControls = {
@@ -37,18 +34,10 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
     IdsFormFieldComponent,
     IdsLabelDirective,
     IdsInputDirective,
-    IdsPrefixDirective,
-    IdsSuffixDirective,
-    IdsFormFieldActionDirective,
-    IdsIconButtonComponent,
     IdsHintMessageComponent,
-    IdsSuccessMessageComponent,
     IdsErrorMessageComponent,
     FormsModule,
-    ReactiveFormsModule,
-    UpperCasePipe,
     TranslateModule,
-    IdsButtonComponent,
   ],
   templateUrl: './fieldset-demo.component.html',
   styleUrls: [

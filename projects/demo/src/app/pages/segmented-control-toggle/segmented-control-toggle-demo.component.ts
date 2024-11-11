@@ -1,13 +1,11 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent, IdsSegmentedControlAppearance, IdsSegmentedControlAppearanceType, IdsSegmentedControlVariant, IdsSegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
@@ -38,10 +36,8 @@ type SegmentedControlToggleHelperControls = {
     IdsSegmentedControlToggleDirective,
     IdsSegmentedControlToggleItemComponent,
     IdsIconComponent,
-    UpperCasePipe,
     FormsModule,
     TranslateModule,
-    IdsButtonComponent,
   ],
   templateUrl: './segmented-control-toggle-demo.component.html',
   styleUrls: [
@@ -114,7 +110,7 @@ export class SegmentedControlToggleDemoComponent {
   public helperModel: SegmentedControlToggleHelperControls = { ...this.helperDefaults };
 
   public value = undefined;
-  
+
   public reset(): void {
     this.value = undefined;
     this.model = { ...this.defaults };

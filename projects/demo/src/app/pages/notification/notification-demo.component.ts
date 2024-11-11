@@ -24,6 +24,7 @@ type NotificationInputControls = {
   closeLabelButtonAppearance: IdsButtonAppearanceType,
   closeButtonLabel: string,
   urgent: boolean,
+  displayActionsAtBottom: boolean,
 };
 
 type NotificationHelperControls = {
@@ -126,6 +127,12 @@ export class NotificationDemoComponent implements OnInit {
       description: 'Whether the notification is urgent or not. It changes the role of the notification.',
       type: 'boolean',
       default: false,
+      control: 'checkbox',
+    },
+    displayActionsAtBottom: {
+      description: 'Whether display the notification actions at bottom or not.',
+      type: 'boolean',
+      default: defaultConfig.displayActionsAtBottom,
       control: 'checkbox',
     },
   };

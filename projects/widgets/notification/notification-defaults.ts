@@ -11,6 +11,7 @@ export interface IdsNotificationDefaultConfig {
   variant?: IdsNotificationVariantType,
   closeButtonSize?: IdsSizeType,
   closeLabelButtonAppearance?: IdsButtonAppearanceType,
+  displayActionsAtBottom?: boolean,
 }
 
 export const IDS_NOTIFICATION_DEFAULT_CONFIG = new InjectionToken<IdsNotificationDefaultConfig>(
@@ -28,6 +29,7 @@ export function IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY(): Required<IdsNotificat
     variant: IdsNotificationVariant.DARK,
     closeButtonSize: IdsSize.COMPACT,
     closeLabelButtonAppearance: IdsButtonAppearance.OUTLINED,
+    displayActionsAtBottom: false,
   };
 }
 

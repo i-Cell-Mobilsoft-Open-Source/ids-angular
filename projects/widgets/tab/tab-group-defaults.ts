@@ -1,6 +1,6 @@
-import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './public-api';
 import { IdsTabGroupPosition, IdsTabGroupPositionType } from './types/tab-group-position.type';
 import { IdsTabGroupVariant, IdsTabGroupVariantType } from './types/tab-group-variant.type';
+import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
 
 import { InjectionToken } from '@angular/core';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';

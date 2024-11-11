@@ -37,7 +37,6 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
   private readonly _scrollDispatcher = inject(ScrollDispatcher);
   private readonly _overlay = inject(Overlay);
   private readonly _document = inject(DOCUMENT);
-  // private readonly _globalResizeService = inject(WindowResizeService);
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TOOLTIP_DEFAULT_CONFIG);
 
   private readonly _passiveListeners: (readonly [string, EventListenerOrEventListenerObject])[] = [];
@@ -101,7 +100,6 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     }
 
     const overlayRef = this._createOverlay();
-    // this._detach();
     this._portal =
         this._portal || new ComponentPortal(IdsTooltipComponent, this._viewContainerRef);
     this._componentRef = overlayRef.attach(this._portal);

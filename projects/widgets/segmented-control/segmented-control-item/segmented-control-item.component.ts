@@ -1,6 +1,5 @@
 import { IdsSegmentedControlDirective } from '../segmented-control.directive';
 import { IdsSegmentedControlItemChange } from '../types/segmented-control-item-change.class';
-import { SegmentedControlItem } from '../types/segmented-control-item.class';
 
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { addClassPrefix, coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
@@ -14,9 +13,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdsSegmentedControlItemComponent
-  extends ComponentBase
-  implements OnInit, SegmentedControlItem {
+export class IdsSegmentedControlItemComponent extends ComponentBase implements OnInit {
   protected override get _hostName(): string {
     return 'segmented-control-item';
   }

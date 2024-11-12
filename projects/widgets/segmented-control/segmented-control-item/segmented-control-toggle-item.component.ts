@@ -1,6 +1,5 @@
 import { IdsSegmentedControlToggleDirective } from '../segmented-control-toggle.directive';
 import { IdsSegmentedControlToggleItemChange } from '../types/segmented-control-item-change.class';
-import { SegmentedControlItem } from '../types/segmented-control-item.class';
 
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { addClassPrefix, coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
@@ -14,9 +13,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdsSegmentedControlToggleItemComponent
-  extends ComponentBase
-  implements OnInit, SegmentedControlItem {
+export class IdsSegmentedControlToggleItemComponent extends ComponentBase implements OnInit {
   protected override get _hostName(): string {
     return 'segmented-control-toggle-item';
   }
@@ -42,7 +39,7 @@ export class IdsSegmentedControlToggleItemComponent
   protected _role = signal('radio'); // it is signal because of the common template
   protected _buttonName = computed(() => this._group?.name());
   protected _buttonClasses = computed(() => addClassPrefix(this._hostClassName, this.selected() ? 'selected' : null));
-  protected _hostClasses = computed(() => this._getHostClasses([]));
+  protected _hostClasses = computed(() => this._getHostClasses([this._group?.buttonVariant()]));
 
   public readonly changes = output<IdsSegmentedControlToggleItemChange>();
 

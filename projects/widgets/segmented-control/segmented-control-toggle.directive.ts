@@ -1,16 +1,15 @@
-import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlDefaultConfig } from './segmented-control-defaults';
 import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
-import { SegmentedControl } from './types/segmented-contol.class';
-import { IdsSegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
+import { IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleDefaultConfig } from './segmented-control-toggle-defaults';
 import { IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change.class';
-import { IdsSegmentedControlVariantType } from './types/segmented-control-variant.type';
+import { IdsSegmentedControlToggleAppearanceType } from './types/segmented-control-toggle-appearance.type';
+import { IdsSegmentedControlToggleButtonVariantType, IdsSegmentedControlToggleVariantType } from './types/segmented-control-toggle-variant.type';
 
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 
-const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY();
 
 @Directive({
   selector: `ids-segmented-control-toggle[ngModel],
@@ -30,17 +29,16 @@ const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsSegmentedControlToggleDirective
-  extends ComponentBaseWithDefaults<IdsSegmentedControlDefaultConfig>
+  extends ComponentBaseWithDefaults<IdsSegmentedControlToggleDefaultConfig>
   implements
     AfterContentInit,
     OnInit,
-    ControlValueAccessor,
-    SegmentedControl<IdsSegmentedControlToggleItemComponent, IdsSegmentedControlToggleItemChange> {
+    ControlValueAccessor {
   protected override get _hostName(): string {
     return 'segmented-control-toggle';
   }
 
-  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG);
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG);
 
   private _selectionModel?: SelectionModel<IdsSegmentedControlToggleItemComponent>;
   private _rawValue: unknown | unknown[];
@@ -48,8 +46,9 @@ export class IdsSegmentedControlToggleDirective
 
   public name = input<string>();
   public size = input<IdsSizeType>(this._defaultConfig.size);
-  public variant = input<IdsSegmentedControlVariantType>(this._defaultConfig.variant);
-  public appearance = input<IdsSegmentedControlAppearanceType>(this._defaultConfig.appearance);
+  public variant = input<IdsSegmentedControlToggleVariantType>(this._defaultConfig.variant);
+  public buttonVariant = input<IdsSegmentedControlToggleButtonVariantType>(this._defaultConfig.buttonVariant);
+  public appearance = input<IdsSegmentedControlToggleAppearanceType>(this._defaultConfig.appearance);
   public disabled = signal<boolean>(false);
 
   protected _hostClasses = computed(() => this._getHostClasses([

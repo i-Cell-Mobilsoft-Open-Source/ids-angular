@@ -20,7 +20,7 @@ export const IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG = new InjectionToken<IdsSegmen
 
 export function IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY(): Required<IdsSegmentedControlDefaultConfig> {
   return {
-    appearance: IdsSegmentedControlAppearance.FILLED,
+    appearance: IdsSegmentedControlAppearance.OUTLINED,
     size: IdsSize.COMPACT,
     variant: IdsSegmentedControlVariant.SURFACE,
   };

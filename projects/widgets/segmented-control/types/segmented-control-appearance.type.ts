@@ -1,5 +1,4 @@
 export const IdsSegmentedControlAppearance = {
-  FILLED: 'filled',
   OUTLINED: 'outlined',
 } as const;
 

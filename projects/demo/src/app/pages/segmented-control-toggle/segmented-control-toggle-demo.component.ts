@@ -8,15 +8,16 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent, IdsSegmentedControlAppearance, IdsSegmentedControlAppearanceType, IdsSegmentedControlVariant, IdsSegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
+import { IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleAppearance, IdsSegmentedControlToggleAppearanceType, IdsSegmentedControlToggleButtonVariant, IdsSegmentedControlToggleButtonVariantType, IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent, IdsSegmentedControlToggleVariant, IdsSegmentedControlToggleVariantType } from '@i-cell/ids-angular/segmented-control';
 import { TranslateModule } from '@ngx-translate/core';
 
-const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY();
 
 type SegmentedControlToggleInputControls = {
   size: IdsSizeType,
-  variant: IdsSegmentedControlVariantType,
-  appearance: IdsSegmentedControlAppearanceType,
+  variant: IdsSegmentedControlToggleVariantType,
+  buttonVariant: IdsSegmentedControlToggleButtonVariantType,
+  appearance: IdsSegmentedControlToggleAppearanceType,
   disabled: boolean,
 };
 
@@ -56,17 +57,24 @@ export class SegmentedControlToggleDemoComponent {
     },
     variant: {
       description: 'Variant of the segmented control toggle.',
-      type: 'IdsSegmentedControlVariantType',
+      type: 'IdsSegmentedControlToggleVariantType',
       default: defaultConfig.variant,
       control: 'select',
-      list: convertEnumToStringArray(IdsSegmentedControlVariant),
+      list: convertEnumToStringArray(IdsSegmentedControlToggleVariant),
+    },
+    buttonVariant: {
+      description: 'Variant of the segmented control toggle buttons.',
+      type: 'IdsSegmentedControlToggleButtonVariantType',
+      default: defaultConfig.buttonVariant,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSegmentedControlToggleButtonVariant),
     },
     appearance: {
       description: 'Appearance of the segmented control toggle.',
-      type: 'IdsSegmentedControlAppearanceType',
+      type: 'IdsSegmentedControlToggleAppearanceType',
       default: defaultConfig.appearance,
       control: 'select',
-      list: convertEnumToStringArray(IdsSegmentedControlAppearance),
+      list: convertEnumToStringArray(IdsSegmentedControlToggleAppearance),
     },
     disabled: {
       description: 'Whether the segmented control toggle is disabled or not.',

@@ -1,6 +1,5 @@
 import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlDefaultConfig } from './segmented-control-defaults';
 import { IdsSegmentedControlItemComponent } from './segmented-control-item/segmented-control-item.component';
-import { SegmentedControl } from './types/segmented-contol.class';
 import { IdsSegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
 import { IdsSegmentedControlItemChange } from './types/segmented-control-item-change.class';
 import { IdsSegmentedControlVariantType } from './types/segmented-control-variant.type';
@@ -34,8 +33,7 @@ export class IdsSegmentedControlDirective
   implements
     AfterContentInit,
     OnInit,
-    ControlValueAccessor,
-    SegmentedControl<IdsSegmentedControlItemComponent, IdsSegmentedControlItemChange> {
+    ControlValueAccessor {
   protected override get _hostName(): string {
     return 'segmented-control';
   }

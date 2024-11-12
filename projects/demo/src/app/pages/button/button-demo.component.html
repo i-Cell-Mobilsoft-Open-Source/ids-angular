@@ -1,24 +1,60 @@
 <app-tryout [title]="'COMPONENTS.BUTTON' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <ng-container component>
-    <button
-      type="button"
-      idsButton
-      [appearance]="model.appearance"
-      [size]="model.size"
-      [variant]="model.variant"
-      [disabled]="model.disabled"
-      (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
-    >
-      @if (helperModel.hasLeadingIcon) {
-        <ids-icon icon-leading fontIcon="search" />
-      }
-      {{ helperModel.text }}
-      @if (helperModel.hasTrailingIcon) {
-        <ids-icon icon-trailing fontIcon="check" />
-      }
-    </button>
+    <div component class="button-grid">
+      <div class="button-item">
+        <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
+        <button
+          type="button"
+          idsButton
+          [appearance]="model.appearance"
+          [size]="model.size"
+          [variant]="model.variant"
+          [disabled]="model.disabled"
+          (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
+        >
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="search" />
+          }
+          {{ helperModel.text }}
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="check" />
+          }
+        </button>
+      </div>
+
+      <div class="button-item">
+        <h2>{{ "COMMON.GROUPED" | translate }}</h2>
+        <ids-button-group [size]="groupModel.size">
+          <button type="button" idsButton [appearance]="'filled'" [variant]="'primary'">One</button>
+          <button type="button" idsButton [appearance]="'outlined'" [variant]="'success'">Two</button>
+          <button type="button" idsButton [appearance]="'text'" [variant]="'warning'">Three</button>
+        </ids-button-group>
+      </div>
+    </div>
   </ng-container>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
+  <app-control-table
+    controls
+    [controlName]="'Button'"
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Button'"
+    [configType]="'helper'"
+    [controlConfig]="_helperControlConfig"
+    [(model)]="helperModel"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Button group'"
+    [configType]="'input'"
+    [controlConfig]="_groupInputControlConfig"
+    [(model)]="groupModel"
+    (resetted)="reset()"
+  />
 </app-tryout>

@@ -3,10 +3,9 @@ import { IdsTagGroupComponent } from './tag-group.component';
 import { IdsTagAppearanceType } from './types/tag-appearance.type';
 import { IdsTagVariantType } from './types/tag-variant.type';
 
-import { IdsIconComponent } from '../icon';
-
 import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
 

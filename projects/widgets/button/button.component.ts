@@ -1,12 +1,12 @@
 import { IDS_BUTTON_DEFAULT_CONFIG, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IdsButtonDefaultConfig } from './button-defaults';
+import { IdsButtonGroupComponent } from './button-group.component';
 import { IDS_BUTTON_PARENT } from './tokens/button-parent';
 import { IdsButtonAppearanceType } from './types/button-appearance.type';
 import { IdsButtonVariantType } from './types/button-variant.type';
 
-import { IdsIconComponent } from '../icon';
-
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute } from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 
@@ -28,6 +28,7 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
   }
 
   private readonly _parent = inject(IDS_BUTTON_PARENT, { optional: true });
+  private readonly _group = inject(IdsButtonGroupComponent, { optional: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BUTTON_DEFAULT_CONFIG);
 
@@ -36,6 +37,7 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
   public variant = input<IdsButtonVariantType>(this._defaultConfig.variant);
   public disabled = input(false, { transform: (value: boolean | string) => coerceBooleanAttribute(value) });
 
+  private _parentOrSelfSize = computed(() => this._group?.size() ?? this.size());
   private _parentOrSelfVariant = computed(() => this._parent?.embeddedButtonVariant() ?? this.variant());
 
   public iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
@@ -43,7 +45,7 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),
-    this.size(),
+    this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
   ]));
 }

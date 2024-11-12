@@ -12,9 +12,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   templateUrl: './success-message.component.html',
   hostDirectives: [IdsMessageDirective],
   encapsulation: ViewEncapsulation.None,
-  host: {
-    '[class]': '_hostClasses()',
-  },
 })
 export class IdsSuccessMessageComponent extends ComponentBase {
   protected override get _hostName(): string {

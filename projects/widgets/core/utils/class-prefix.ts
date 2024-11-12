@@ -19,7 +19,8 @@ export function addClassPrefix(
 export function createClassList(
   hostClass: string,
   appendableClassNames: Array<string | Array<string | null | undefined> | null | undefined> = [],
-  nonAppendableClassNames: Array<string | null> = []): string {
+  nonAppendableClassNames: Array<string | null> = [],
+): string {
   return [
     hostClass,
     ...appendableClassNames.map((className) => addClassPrefix(hostClass, className)),

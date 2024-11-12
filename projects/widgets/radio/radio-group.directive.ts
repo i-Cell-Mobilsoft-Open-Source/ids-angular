@@ -3,9 +3,10 @@ import { IdsRadioComponent } from './radio.component';
 import { IdsRadioChangeEvent } from './types/radio-events.class';
 import { IdsRadioVariantType } from './types/radio-variant.type';
 
+import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, IdsOrientation, IdsOrientationType, IdsPositionType, SelectionModel, IdsSizeType, IdsVerticalPosition, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
+import { coerceBooleanAttribute, IdsOrientation, IdsOrientationType, IdsPositionType, IdsSizeType, IdsVerticalPosition, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 

@@ -9,7 +9,5 @@ export * from './types/size-collection.type';
 export * from './types/size.type';
 export * from './utils/class-prefix';
 export * from './utils/coercion';
-export * from './utils/create-error';
 export * from './utils/even-odd';
 export * from './utils/fallback-value';
-export * from './utils/selection-model';

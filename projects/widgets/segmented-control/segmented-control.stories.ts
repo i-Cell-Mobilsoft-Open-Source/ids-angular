@@ -1,4 +1,4 @@
-import { IdsSegmentedControlItemComponent } from './segmented-control-item/segmented-control-item.component';
+import { IdsSegmentedControlItemComponent } from './segmented-control-item.component';
 import { IdsSegmentedControlDirective } from './segmented-control.directive';
 import { IdsSegmentedControlAppearance } from './types/segmented-control-appearance.type';
 import { IdsSegmentedControlVariant } from './types/segmented-control-variant.type';
@@ -55,15 +55,11 @@ export default {
     size: selectControlOptions(IdsSize),
     variant: selectControlOptions(IdsSegmentedControlVariant),
     appearance: selectControlOptions(IdsSegmentedControlAppearance),
-    disabled: { control: 'boolean' },
-    multiSelect: { control: 'boolean' },
   },
   args: {
-    // disabled: false,
     size: 'comfortable',
-    variant: 'primary',
-    appearance: 'filled',
-    multiSelect: false,
+    variant: 'light',
+    appearance: 'outlined',
   },
 } as Meta<StoryType>;
 

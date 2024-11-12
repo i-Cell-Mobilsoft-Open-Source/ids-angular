@@ -1,5 +1,5 @@
-import { IdsTabComponent } from './tab/tab.component';
 import { IDS_TAB_GROUP_DEFAULT_CONFIG, IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupDefaultConfig } from './tab-group-defaults';
+import { IdsTabComponent } from './tab.component';
 import { IdsTabGroupPositionType } from './types/tab-group-position.type';
 import { IdsTabGroupVariantType } from './types/tab-group-variant.type';
 import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';

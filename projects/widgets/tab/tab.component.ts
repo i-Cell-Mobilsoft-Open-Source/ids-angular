@@ -1,4 +1,4 @@
-import { IdsTabGroupComponent } from '../tab-group.component';
+import { IdsTabGroupComponent } from './tab-group.component';
 
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
 import { coerceStringAttribute, ComponentBase } from '@i-cell/ids-angular/core';

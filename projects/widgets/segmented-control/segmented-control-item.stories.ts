@@ -1,4 +1,4 @@
-import { IdsSegmentedControlItemComponent } from './segmented-control-item/segmented-control-item.component';
+import { IdsSegmentedControlItemComponent } from './segmented-control-item.component';
 import { IdsSegmentedControlDirective } from './segmented-control.directive';
 
 import { FormsModule } from '@angular/forms';

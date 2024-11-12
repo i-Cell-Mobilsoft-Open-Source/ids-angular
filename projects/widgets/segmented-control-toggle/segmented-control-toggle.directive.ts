@@ -1,54 +1,54 @@
-import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlDefaultConfig } from './segmented-control-defaults';
-import { IdsSegmentedControlItemComponent } from './segmented-control-item.component';
-import { IdsSegmentedControlAppearanceType } from './types/segmented-control-appearance.type';
-import { IdsSegmentedControlItemChange } from './types/segmented-control-item-change.class';
-import { IdsSegmentedControlVariantType } from './types/segmented-control-variant.type';
+import { IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleDefaultConfig } from './segmented-control-toggle-defaults';
+import { IdsSegmentedControlToggleItemComponent } from './segmented-control-toggle-item.component';
+import { IdsSegmentedControlToggleAppearanceType } from './types/segmented-control-toggle-appearance.type';
+import { IdsSegmentedControlToggleItemChange } from './types/segmented-control-toggle-item-change.class';
+import { IdsSegmentedControlToggleButtonVariantType, IdsSegmentedControlToggleVariantType } from './types/segmented-control-toggle-variant.type';
 
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 
-const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
+const defaultConfig = IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY();
 
 @Directive({
-  selector: `ids-segmented-control[ngModel]:not([formControl]):not([formControlName]),
-             ids-segmented-control[formControl]:not([ngModel]):not([formControlName]),
-             ids-segmented-control[formControlName]:not([ngModel]):not([formControl])`,
+  selector: `ids-segmented-control-toggle[ngModel]:not([formControl]):not([formControlName]),
+             ids-segmented-control-toggle[formControl]:not([ngModel]):not([formControlName]),
+             ids-segmented-control-toggle[formControlName]:not([ngModel]):not([formControl])`,
   standalone: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => IdsSegmentedControlDirective),
+      useExisting: forwardRef(() => IdsSegmentedControlToggleDirective),
       multi: true,
     },
   ],
   host: {
-    '[attr.role]': 'multiSelect() ? "group" : "radiogroup"',
+    '[attr.role]': 'radiogroup',
     '(keydown)': '_handleKeyDown($event)',
   },
 })
-export class IdsSegmentedControlDirective
-  extends ComponentBaseWithDefaults<IdsSegmentedControlDefaultConfig>
+export class IdsSegmentedControlToggleDirective
+  extends ComponentBaseWithDefaults<IdsSegmentedControlToggleDefaultConfig>
   implements
     AfterContentInit,
     OnInit,
     ControlValueAccessor {
   protected override get _hostName(): string {
-    return 'segmented-control';
+    return 'segmented-control-toggle';
   }
 
-  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG);
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG);
 
-  private _selectionModel?: SelectionModel<IdsSegmentedControlItemComponent>;
+  private _selectionModel?: SelectionModel<IdsSegmentedControlToggleItemComponent>;
   private _rawValue: unknown | unknown[];
-  private _items = contentChildren<IdsSegmentedControlItemComponent>(IdsSegmentedControlItemComponent);
+  private _items = contentChildren<IdsSegmentedControlToggleItemComponent>(IdsSegmentedControlToggleItemComponent);
 
   public name = input<string>();
   public size = input<IdsSizeType>(this._defaultConfig.size);
-  public variant = input<IdsSegmentedControlVariantType>(this._defaultConfig.variant);
-  public appearance = input<IdsSegmentedControlAppearanceType>(this._defaultConfig.appearance);
-  public multiSelect = input<boolean>(false);
+  public variant = input<IdsSegmentedControlToggleVariantType>(this._defaultConfig.variant);
+  public buttonVariant = input<IdsSegmentedControlToggleButtonVariantType>(this._defaultConfig.buttonVariant);
+  public appearance = input<IdsSegmentedControlToggleAppearanceType>(this._defaultConfig.appearance);
   public disabled = signal<boolean>(false);
 
   protected _hostClasses = computed(() => this._getHostClasses([
@@ -61,9 +61,9 @@ export class IdsSegmentedControlDirective
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => {};
 
-  @Input() public valueCompareFn?: (o1: IdsSegmentedControlItemComponent, o2: IdsSegmentedControlItemComponent) => boolean;
+  @Input() public valueCompareFn?: (o1: IdsSegmentedControlToggleItemComponent, o2: IdsSegmentedControlToggleItemComponent) => boolean;
 
-  public readonly itemChanges = output<IdsSegmentedControlItemChange>();
+  public readonly itemChanges = output<IdsSegmentedControlToggleItemChange>();
 
   private _handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
@@ -108,7 +108,7 @@ export class IdsSegmentedControlDirective
   }
 
   public ngOnInit(): void {
-    this._selectionModel = new SelectionModel<IdsSegmentedControlItemComponent>(this.multiSelect(), undefined, false, this.valueCompareFn);
+    this._selectionModel = new SelectionModel<IdsSegmentedControlToggleItemComponent>(false, undefined, false, this.valueCompareFn);
   }
 
   public ngAfterContentInit(): void {
@@ -149,17 +149,11 @@ export class IdsSegmentedControlDirective
     });
   }
 
-  private _handleItemChanges(change: IdsSegmentedControlItemChange): void {
-    const { source, selected } = change;
-    if (!this.multiSelect()) {
-      this._clearSelection();
-    }
-    source.selected.set(selected);
-    if (selected) {
-      this._selectionModel?.select(source);
-    } else {
-      this._selectionModel?.deselect(source);
-    }
+  private _handleItemChanges(change: IdsSegmentedControlToggleItemChange): void {
+    const { source } = change;
+    this._clearSelection();
+    source.selected.set(true);
+    this._selectionModel?.select(source);
     this.itemChanges.emit(change);
     this._handleChange();
     this._onTouched();
@@ -172,17 +166,9 @@ export class IdsSegmentedControlDirective
       return;
     }
 
-    if (this.multiSelect() && value) {
-      if (!Array.isArray(value)) {
-        throw this._createHostError('value must be an array in multiple-selection mode');
-      }
+    this._clearSelection();
+    this._selectValue(value);
 
-      this._clearSelection();
-      value.forEach((currentValue: unknown) => this._selectValue(currentValue));
-    } else {
-      this._clearSelection();
-      this._selectValue(value);
-    }
   }
 
   private _selectValue(value: unknown): void {
@@ -202,20 +188,12 @@ export class IdsSegmentedControlDirective
 
   private _handleChange(): void {
     const selectionModelValues = this._selectionModel?.selected?.map((item) => item.value());
-    if (this.multiSelect()) {
-      this._onChange(selectionModelValues);
-    } else {
-      this._onChange(selectionModelValues?.[0]);
-    }
+    this._onChange(selectionModelValues?.[0]);
   }
 
   public isItemPreSelectedByValue(itemValue: unknown): boolean {
     if (this._rawValue === undefined) {
       return false;
-    }
-
-    if (this.multiSelect() && Array.isArray(this._rawValue)) {
-      return this._rawValue.some((value) => itemValue != null && value === itemValue);
     }
 
     return itemValue === this._rawValue;

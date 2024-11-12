@@ -1,18 +1,18 @@
-import { IdsRadioItemComponent } from './radio-item.component';
+import { IdsRadioComponent } from './radio.component';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('IdsRadioItemComponent', () => {
-  let component: IdsRadioItemComponent;
-  let fixture: ComponentFixture<IdsRadioItemComponent>;
+describe('IdsRadioComponent', () => {
+  let component: IdsRadioComponent;
+  let fixture: ComponentFixture<IdsRadioComponent>;
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      imports: [IdsRadioItemComponent],
+      imports: [IdsRadioComponent],
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(IdsRadioItemComponent);
+    fixture = TestBed.createComponent(IdsRadioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

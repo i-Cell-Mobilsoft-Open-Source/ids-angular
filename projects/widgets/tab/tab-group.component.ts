@@ -50,10 +50,10 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     this.disabled() ? 'disabled' : null,
     this.stretchTabs() && this.orientation() === IdsOrientation.HORIZONTAL ? 'stretch-tabs' : null,
     this.tabPosition() && !this.stretchTabs() ? this.tabPosition() : null,
-    `indicator-${this.indicatorPosition() ?? this.calculateIndicatorPosition()}`,
+    `indicator-${this.indicatorPosition() ?? this.calculatedIndicatorPosition()}`,
   ]));
 
-  public calculateIndicatorPosition = computed(() =>
+  public calculatedIndicatorPosition = computed(() =>
     (this.orientation() === IdsOrientation.HORIZONTAL ? IdsTabIndicatorPosition.BOTTOM : IdsTabIndicatorPosition.LEFT),
   );
 

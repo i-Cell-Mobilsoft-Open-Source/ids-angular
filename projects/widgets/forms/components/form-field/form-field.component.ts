@@ -82,7 +82,7 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
 
   public ngAfterContentInit(): void {
     if (isDevMode() && !this._child()) {
-      throw new Error(this._createHostError('no form element was provided'));
+      throw this._createHostError('no form element was provided');
     }
     this._child()?.ngControl?.statusChanges?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this._changeDetectorRef.markForCheck();

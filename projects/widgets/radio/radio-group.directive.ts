@@ -144,9 +144,7 @@ export class IdsRadioGroupDirective
     this._selectionModel = new SelectionModel<IdsRadioItemComponent>(false, undefined, false, this.valueCompareFn);
 
     if (this._hasInvalidLabelPosition()) {
-      throw new Error(
-        this._createHostError('invalid `orientation` + `labelPosition` combination.'),
-      );
+      throw this._createHostError('invalid `orientation` + `labelPosition` combination.');
     }
   }
 
@@ -155,9 +153,7 @@ export class IdsRadioGroupDirective
     const minItemCount = 2;
 
     if (isDevMode() && (items.length < minItemCount)) {
-      throw new Error(
-        this._createHostError('invalid count of radio items. Minimum item count is 2.'),
-      );
+      throw this._createHostError('invalid count of radio items. Minimum item count is 2.');
     }
 
     this._selectionModel?.select(...this._items().filter((item) => item.selected()));

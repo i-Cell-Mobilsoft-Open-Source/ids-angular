@@ -51,7 +51,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
 
   private _invalidParentOrientation = effect(() => {
     if (this.allowParent() && this.orientation() === IdsOrientation.HORIZONTAL) {
-      throw new Error(this._createHostError('Parent checkbox can be used only in vertical orientation'));
+      throw this._createHostError('Parent checkbox can be used only in vertical orientation');
     }
   });
 

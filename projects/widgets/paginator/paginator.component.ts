@@ -167,12 +167,12 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
     pageSize: number,
   ): { safePageSizeOptions: number[], safePageSize: number } {
     if (isDevMode() && (!pageSize || pageSize < 0)) {
-      throw new Error('Paginator: invalid pageSize value. Must be a number and greater than 0');
+      throw this._createHostError('invalid pageSize value. Must be a number and greater than 0');
     }
 
     const safePageSizeOptions = pageSizeOptions.slice();
     if (isDevMode() && !safePageSizeOptions.includes(pageSize)) {
-      throw new Error('Paginator: invalid pageSize. pageSizeOptions not includes pageSize. Use an item from pageSizeOptions.');
+      throw this._createHostError('invalid pageSize. pageSizeOptions not includes pageSize. Use an item from pageSizeOptions.');
     }
     safePageSizeOptions.sort((a, b) => a - b);
     const safePageSize: number = safePageSizeOptions.length !== 0 ? safePageSizeOptions[0] : DEFAULT_PAGE_SIZE;
@@ -203,7 +203,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
     maxDisplayedItemCount: number,
   ): string[] {
     if (isDevMode() && isNumberEven(maxDisplayedItemCount)) {
-      throw new Error('Paginator: maxDisplayedItemCount should be an odd number');
+      throw this._createHostError('maxDisplayedItemCount should be an odd number');
     }
     const center = Math.ceil(maxDisplayedItemCount / 2);
     const actualPage = pageIndex + 1;

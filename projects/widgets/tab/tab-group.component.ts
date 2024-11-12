@@ -64,17 +64,17 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     const minItemCount = 2;
 
     if (isDevMode() && (items.length < minItemCount)) {
-      throw new Error(this._createHostError(`Invalid count of tab items. Minimum item count is ${minItemCount}.`));
+      throw this._createHostError(`Invalid count of tab items. Minimum item count is ${minItemCount}.`);
     }
 
     if (isDevMode() && (orientation === IdsOrientation.HORIZONTAL &&
       (indicatorPosition && (indicatorPosition === IdsTabIndicatorPosition.LEFT || indicatorPosition === IdsTabIndicatorPosition.RIGHT)))) {
-      throw new Error(this._createHostError(`Can not use ${indicatorPosition} indicator position with Horizontal mode`));
+      throw this._createHostError(`Can not use ${indicatorPosition} indicator position with Horizontal mode`);
     }
 
     if (isDevMode() && (orientation === IdsOrientation.VERTICAL &&
       (indicatorPosition && (indicatorPosition === IdsTabIndicatorPosition.BOTTOM || indicatorPosition === IdsTabIndicatorPosition.TOP)))) {
-      throw new Error(this._createHostError(`Can not use ${indicatorPosition} indicator position with Vertical mode`));
+      throw this._createHostError(`Can not use ${indicatorPosition} indicator position with Vertical mode`);
     }
 
     this.selectTab(0);

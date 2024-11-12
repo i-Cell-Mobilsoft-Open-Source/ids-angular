@@ -24,8 +24,8 @@ export abstract class DirectiveBase {
     return createClassList(this._hostClassName, appendableClassNames, nonAppendableClassNames);
   }
 
-  protected _createHostError(message: string): string {
-    return `${this._hostClassName}: ${message}`;
+  protected _createHostError(message: string): Error {
+    return new Error(`${this._hostClassName}: ${message}`);
   }
 }
 

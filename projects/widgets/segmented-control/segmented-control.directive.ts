@@ -116,7 +116,7 @@ export class IdsSegmentedControlDirective
     const minItemCount = 2;
 
     if (isDevMode() && (items.length < minItemCount)) {
-      throw new Error(this._createHostError('invalid count of segmented control items. Minimum item count is 2.'));
+      throw this._createHostError('invalid count of segmented control items. Minimum item count is 2.');
     }
 
     this._selectionModel?.select(...this._items().filter((item) => item.selected()));
@@ -174,7 +174,7 @@ export class IdsSegmentedControlDirective
 
     if (this.multiSelect() && value) {
       if (!Array.isArray(value)) {
-        throw new Error(this._createHostError('value must be an array in multiple-selection mode'));
+        throw this._createHostError('value must be an array in multiple-selection mode');
       }
 
       this._clearSelection();

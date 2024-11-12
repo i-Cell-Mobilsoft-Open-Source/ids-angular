@@ -45,7 +45,7 @@ export class IdsRadioItemComponent extends ComponentBase implements OnInit {
 
   public ngOnInit(): void {
     if (!this._group) {
-      throw new Error(this._createHostError('component must be direct child of a radio group'));
+      throw this._createHostError('component must be direct child of a radio group');
     }
     if (this._group.isItemPreSelectedByValue(this.value())) {
       this.selected.set(true);

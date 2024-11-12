@@ -80,7 +80,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
 
   public ngOnInit(): void {
     if (this.fontIcon() && this.svgIconName()) {
-      throw new Error(this._createHostError('Font icon and svg icon can not be used together!'));
+      throw this._createHostError('Font icon and svg icon can not be used together!');
     }
   }
 
@@ -121,7 +121,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
     const svg = div.querySelector('svg') as SVGElement;
 
     if (!svg) {
-      throw new Error(this._createHostError('Svg element creation failed!'));
+      throw this._createHostError('Svg element creation failed!');
     }
 
     return svg;

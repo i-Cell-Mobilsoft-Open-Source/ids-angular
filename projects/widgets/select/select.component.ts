@@ -162,7 +162,7 @@ export class IdsSelectComponent
 
   public ngOnInit(): void {
     if (!this._parentFormField) {
-      throw new Error(this._createHostError('Select must be in a form field'));
+      throw this._createHostError('Select must be in a form field');
     }
     this._selectionModel = new SelectionModel<IdsOptionComponent>(this.multiSelect(), undefined, false, this.valueCompareFn());
     this._initErrorStateTracker();
@@ -462,7 +462,7 @@ export class IdsSelectComponent
 
     if (this.multiSelect() && value) {
       if (!Array.isArray(value)) {
-        throw new Error(this._createHostError('value must be an array in multiple-selection mode'));
+        throw this._createHostError('value must be an array in multiple-selection mode');
       }
 
       value.forEach((currentValue: unknown) => this._selectValue(currentValue));

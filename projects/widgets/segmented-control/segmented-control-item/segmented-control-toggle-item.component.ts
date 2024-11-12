@@ -45,7 +45,7 @@ export class IdsSegmentedControlToggleItemComponent extends ComponentBase implem
 
   public ngOnInit(): void {
     if (!this._group) {
-      throw new Error(this._createHostError('component must be direct child of a segmented control toggle'));
+      throw this._createHostError('component must be direct child of a segmented control toggle');
     }
 
     if (this._group.isItemPreSelectedByValue(this.value())) {

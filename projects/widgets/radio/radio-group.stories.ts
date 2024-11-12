@@ -1,5 +1,5 @@
 import { IdsRadioGroupDirective } from './radio-group.directive';
-import { IdsRadioItemComponent } from './radio-item/radio-item.component';
+import { IdsRadioComponent } from './radio.component';
 import { IdsRadioVariant } from './types/radio-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
@@ -18,7 +18,7 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [
-        IdsRadioItemComponent,
+        IdsRadioComponent,
         FormsModule,
       ],
     }),
@@ -26,7 +26,7 @@ export default {
   ],
   parameters: {
     actions: {
-      handles: ['click ids-radio-item'],
+      handles: ['click ids-radio'],
     },
   },
   render: ({ disabled, required, size, variant, orientation, labelPosition, ...props }) => ({
@@ -43,9 +43,9 @@ export default {
             labelPosition="${labelPosition}"
             ${argsToTemplate(props)}
           >
-            <ids-radio-item value="Option1">Option 1</ids-radio-item>
-            <ids-radio-item value="Option2">Option 2</ids-radio-item>
-            <ids-radio-item value="Option3">Option 3</ids-radio-item>
+            <ids-radio value="Option1">Option 1</ids-radio>
+            <ids-radio value="Option2">Option 2</ids-radio>
+            <ids-radio value="Option3">Option 3</ids-radio>
           </ids-radio-group>
         `,
   }),

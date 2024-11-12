@@ -1,4 +1,4 @@
-import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
+import { IdsSegmentedControlToggleItemComponent } from './segmented-control-toggle-item.component';
 import { IdsSegmentedControlToggleDirective } from './segmented-control-toggle.directive';
 
 import { FormsModule } from '@angular/forms';

@@ -1,13 +1,13 @@
 import { IdsRadioGroupDirective } from './radio-group.directive';
-import { IdsRadioItemComponent } from './radio-item/radio-item.component';
+import { IdsRadioComponent } from './radio.component';
 
 import { FormsModule } from '@angular/forms';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
-type StoryType = IdsRadioItemComponent;
+type StoryType = IdsRadioComponent;
 
 export default {
-  component: IdsRadioItemComponent,
+  component: IdsRadioComponent,
   title: 'Components/Radio',
   tags: ['autodocs'],
   decorators: [
@@ -29,9 +29,9 @@ export default {
             orientation="vertical"
             labelPosition="right"
           >
-            <ids-radio-item value="${value}" ${argsToTemplate(props)}>Option 1</ids-radio-item>
-            <ids-radio-item value="Option2">Option 2</ids-radio-item>
-            <ids-radio-item value="Option3">Option 3</ids-radio-item>
+            <ids-radio value="${value}" ${argsToTemplate(props)}>Option 1</ids-radio>
+            <ids-radio value="Option2">Option 2</ids-radio>
+            <ids-radio value="Option3">Option 3</ids-radio>
           </ids-radio-group>
         `,
   }),

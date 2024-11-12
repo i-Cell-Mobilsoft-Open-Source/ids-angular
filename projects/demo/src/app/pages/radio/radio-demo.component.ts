@@ -7,7 +7,7 @@ import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsPositionType, IdsSize, IdsSizeType, IdsOrientationType, IdsPosition, IdsOrientation } from '@i-cell/ids-angular/core';
-import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioGroupDirective, IdsRadioItemComponent, IdsRadioVariant, IdsRadioVariantType } from '@i-cell/ids-angular/radio';
+import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioGroupDirective, IdsRadioComponent, IdsRadioVariant, IdsRadioVariantType } from '@i-cell/ids-angular/radio';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
@@ -33,7 +33,7 @@ type RadioHelperControls = {
     TryoutComponent,
     ControlTableComponent,
     IdsRadioGroupDirective,
-    IdsRadioItemComponent,
+    IdsRadioComponent,
     FormsModule,
     TranslateModule,
   ],

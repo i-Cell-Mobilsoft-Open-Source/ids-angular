@@ -1,7 +1,7 @@
-import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
+import { IdsSegmentedControlToggleItemComponent } from './segmented-control-toggle-item.component';
 import { IdsSegmentedControlToggleDirective } from './segmented-control-toggle.directive';
-import { IdsSegmentedControlAppearance } from './types/segmented-control-appearance.type';
-import { IdsSegmentedControlVariant } from './types/segmented-control-variant.type';
+import { IdsSegmentedControlToggleAppearance } from './types/segmented-control-toggle-appearance.type';
+import { IdsSegmentedControlToggleButtonVariant, IdsSegmentedControlToggleVariant } from './types/segmented-control-toggle-variant.type';
 
 import { selectControlOptions } from '../.storybook/utils';
 import { IdsSize } from '../core';
@@ -52,16 +52,15 @@ export default {
   }),
   argTypes: {
     size: selectControlOptions(IdsSize),
-    variant: selectControlOptions(IdsSegmentedControlVariant),
-    appearance: selectControlOptions(IdsSegmentedControlAppearance),
-    disabled: { control: 'boolean' },
-    multiSelect: { control: false },
+    variant: selectControlOptions(IdsSegmentedControlToggleVariant),
+    appearance: selectControlOptions(IdsSegmentedControlToggleAppearance),
+    buttonVariant: selectControlOptions(IdsSegmentedControlToggleButtonVariant),
   },
   args: {
-    // disabled: false,
     size: 'comfortable',
-    variant: 'primary',
+    variant: 'light',
     appearance: 'filled',
+    buttonVariant: 'light',
   },
 } as Meta<StoryType>;
 

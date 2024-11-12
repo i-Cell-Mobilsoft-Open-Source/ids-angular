@@ -1,8 +1,8 @@
-<div class="ids-radio-item__input-wrapper">
-  <div class="ids-radio-item__touch-target" (click)="touchTargetClick()"></div>
+<div class="ids-radio__input-wrapper">
+  <div class="ids-radio__touch-target" (click)="touchTargetClick()"></div>
   <input
     #input
-    class="ids-radio-item__native-control"
+    class="ids-radio__native-control"
     type="radio"
     [id]="inputId()"
     [checked]="selected()"
@@ -15,8 +15,8 @@
     [attr.aria-describedby]="ariaDescribedBy()"
     (change)="onChange()"
   />
-  <div class="ids-radio-item__inner-circle" (click)="innerCircleClick()"></div>
+  <div class="ids-radio__inner-circle" (click)="innerCircleClick()"></div>
 </div>
-<label class="ids-radio-item__label" [for]="inputId()">
+<label class="ids-radio__label" [for]="inputId()">
   <ng-content />
 </label>

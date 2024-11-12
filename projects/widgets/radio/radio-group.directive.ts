@@ -1,5 +1,5 @@
 import { IDS_RADIO_DEFAULT_CONFIG, IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioDefaultConfig } from './radio-defaults';
-import { IdsRadioItemComponent } from './radio-item/radio-item.component';
+import { IdsRadioComponent } from './radio.component';
 import { IdsRadioChangeEvent } from './types/radio-events.class';
 import { IdsRadioVariantType } from './types/radio-variant.type';
 
@@ -32,9 +32,9 @@ export class IdsRadioGroupDirective
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_RADIO_DEFAULT_CONFIG);
 
-  private _selectionModel?: SelectionModel<IdsRadioItemComponent>;
+  private _selectionModel?: SelectionModel<IdsRadioComponent>;
   private _rawValue: unknown;
-  private _items = contentChildren<IdsRadioItemComponent>(IdsRadioItemComponent);
+  private _items = contentChildren<IdsRadioComponent>(IdsRadioComponent);
 
   public name = input.required<string>();
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
@@ -53,7 +53,7 @@ export class IdsRadioGroupDirective
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => {};
 
-  @Input() public valueCompareFn?: (o1: IdsRadioItemComponent, o2: IdsRadioItemComponent) => boolean;
+  @Input() public valueCompareFn?: (o1: IdsRadioComponent, o2: IdsRadioComponent) => boolean;
   @Input({ transform: coerceBooleanAttribute })
   set disabled(value: boolean) {
     if (value !== this.disabled) {
@@ -141,7 +141,7 @@ export class IdsRadioGroupDirective
   }
 
   public ngOnInit(): void {
-    this._selectionModel = new SelectionModel<IdsRadioItemComponent>(false, undefined, false, this.valueCompareFn);
+    this._selectionModel = new SelectionModel<IdsRadioComponent>(false, undefined, false, this.valueCompareFn);
 
     if (this._hasInvalidLabelPosition()) {
       throw this._createHostError('invalid `orientation` + `labelPosition` combination.');

@@ -27,12 +27,12 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
 ];
 
 @Directive({
-  selector: `input[idsInput][ngModel],
-             input[idsInput][formControl],
-             input[idsInput][formControlName],
-             textarea[idsInput][ngModel],
-             textarea[idsInput][formControl],
-             textarea[idsInput][formControlName]`,
+  selector: `input[idsInput][ngModel]:not([formControl]):not([formControlName]),
+             input[idsInput][formControl]:not([ngModel]):not([formControlName]),
+             input[idsInput][formControlName]:not([ngModel]):not([formControl]),
+             textarea[idsInput][ngModel]:not([formControl]):not([formControlName]),
+             textarea[idsInput][formControl]:not([ngModel]):not([formControlName]),
+             textarea[idsInput][formControlName]:not([ngModel]):not([formControl])`,
   exportAs: 'idsInput',
   standalone: true,
   providers: [

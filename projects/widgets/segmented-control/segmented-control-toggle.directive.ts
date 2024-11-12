@@ -13,9 +13,9 @@ import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core
 const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
 
 @Directive({
-  selector: `ids-segmented-control-toggle[ngModel],
-             ids-segmented-control-toggle[formControl],
-             ids-segmented-control-toggle[formControlName]`,
+  selector: `ids-segmented-control-toggle[ngModel]:not([formControl]):not([formControlName]),
+             ids-segmented-control-toggle[formControl]:not([ngModel]):not([formControlName]),
+             ids-segmented-control-toggle[formControlName]:not([ngModel]):not([formControl])`,
   standalone: true,
   providers: [
     {

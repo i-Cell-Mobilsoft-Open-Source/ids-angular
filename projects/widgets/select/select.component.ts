@@ -17,7 +17,9 @@ import { first, Subject } from 'rxjs';
 const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'ids-select[ngModel], ids-select[formControl], ids-select[formControlName]',
+  selector: `ids-select[ngModel]:not([formControl]):not([formControlName]),
+              ids-select[formControl]:not([ngModel]):not([formControlName]),
+              ids-select[formControlName]:not([ngModel]):not([formControl])`,
   standalone: true,
   imports: [
     CdkOverlayOrigin,

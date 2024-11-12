@@ -12,7 +12,9 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'ids-switch[ngModel], ids-switch[formControl], ids-switch[formControlName]',
+  selector: `ids-switch[ngModel]:not([formControl]):not([formControlName]),
+             ids-switch[formControl]:not([ngModel]):not([formControlName]),
+             ids-switch[formControlName]:not([ngModel]):not([formControl])`,
   standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './switch.component.html',

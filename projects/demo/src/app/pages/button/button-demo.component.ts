@@ -6,12 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonComponent, IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType, IDS_BUTTON_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/button';
+import { IdsButtonComponent, IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY, IdsButtonGroupComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
+const defaultGroupConfig = IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY();
 
 type ButtonInputControls = {
   appearance: IdsButtonAppearanceType,
@@ -26,6 +27,10 @@ type ButtonHelperControls = {
   hasTrailingIcon: boolean,
 };
 
+type ButtonGroupInputControls = {
+  size: IdsSizeType,
+};
+
 @Component({
   standalone: true,
   selector: 'app-button-demo',
@@ -33,6 +38,7 @@ type ButtonHelperControls = {
     TryoutComponent,
     ControlTableComponent,
     IdsButtonComponent,
+    IdsButtonGroupComponent,
     IdsIconComponent,
     TranslateModule,
     FormsModule,
@@ -96,11 +102,23 @@ export class ButtonDemoComponent {
     },
   };
 
+  protected _groupInputControlConfig: DemoControlConfig<ButtonGroupInputControls> = {
+    size: {
+      description: 'All button size in a group.',
+      type: 'IdsSizeType',
+      default: defaultGroupConfig.size,
+      control: 'select',
+      list: convertEnumToStringArray(IdsSize),
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<ButtonInputControls>(this._inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<ButtonHelperControls>(this._helperControlConfig);
+  public groupDefaults = getDefaultFromDemoConfig<ButtonGroupInputControls>(this._groupInputControlConfig);
 
   public model: ButtonInputControls = { ...this.defaults };
   public helperModel: ButtonHelperControls = { ...this.helperDefaults };
+  public groupModel: ButtonGroupInputControls = { ...this.groupDefaults };
 
   public onClick(buttonName: string): void {
     console.info(`${buttonName} button clicked`);
@@ -109,5 +127,6 @@ export class ButtonDemoComponent {
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+    this.groupModel = { ...this.groupDefaults };
   }
 }

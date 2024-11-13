@@ -35,7 +35,7 @@ export class ControlTableComponent<T extends Record<string, unknown>> {
     if (!controls) {
       return [];
     }
-    return Object.entries<DemoControlItem<T>>(controls).map(([
+    return Object.entries<DemoControlItem<T[keyof T]>>(controls).map(([
       key,
       ctrl,
     ]) => {

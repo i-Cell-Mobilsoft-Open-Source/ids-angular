@@ -10,8 +10,8 @@ export type DemoControlType = (typeof DemoControl)[keyof typeof DemoControl];
 export type DemoControlItem<T> = {
   description: string,
   type: string,
-  default: T[keyof T],
-  demoDefault?: T[keyof T],
+  default: T,
+  demoDefault?: T,
   control?: DemoControlType,
   list?: string[],
   disabled?: boolean,
@@ -21,7 +21,7 @@ export type DemoControlItem<T> = {
 };
 
 export type DemoControlConfig<T> = {
-  [K in keyof T]: DemoControlItem<T>
+  [K in keyof T]: DemoControlItem<T[K]>
 };
 
-export type FlatDemoControlItem<T> = Exclude<DemoControlItem<T>, 'list'> & { name: keyof T, list?: string[] };
+export type FlatDemoControlItem<T> = DemoControlItem<T> & { name: keyof T };

@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IDS_CARD_DEFAULT_CONFIG_FACTORY, IdsCardAppearance, IdsCardAppearanceType, IdsCardComponent, IdsCardVariant, IdsCardVariantType } from '@i-cell/ids-angular/card';
@@ -62,35 +62,35 @@ export class CardDemoComponent {
       description: 'Card appearance.',
       type: 'IdsCardAppearanceType',
       default: defaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsCardAppearance),
     },
     size: {
       description: 'Card size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Card variant.',
       type: 'IdsCardVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsCardVariant),
     },
     orientation: {
       description: 'Card orientation.',
       type: 'IdsOrientationType',
       default: defaultConfig.orientation,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
     disabled: {
       description: 'Whether the card is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -99,7 +99,7 @@ export class CardDemoComponent {
       description: 'Whether the image is stretchable or not.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -108,7 +108,7 @@ export class CardDemoComponent {
       description: 'Whether the card is clickable or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

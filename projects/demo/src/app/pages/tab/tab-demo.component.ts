@@ -6,7 +6,7 @@ import { IconService } from '../../core/services/icon.service';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -65,48 +65,48 @@ export class TabsDemoComponent implements OnInit {
       description: 'Tab size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Tab variant.',
       type: 'IdsTabGroupVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTabGroupVariant),
     },
     orientation: {
       description: 'Tab orientation.',
       type: 'IdsOrientationType',
       default: defaultConfig.orientation,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
     tabPosition: {
       description: 'Tab header position.',
       type: 'IdsTabGroupPositionType',
       default: defaultConfig.tabPosition,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTabGroupPosition),
     },
     indicatorPosition: {
       description: 'Tab indicator position.',
       type: 'IdsTabIndicatorPositionType',
       default: defaultConfig.indicatorPosition,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTabIndicatorPosition),
     },
     stretchTabs: {
       description: 'Whether the tab header is stretched or not.',
       type: 'boolean',
       default: defaultConfig.stretchTabs,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     disabled: {
       description: 'Whether the tab group is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -122,7 +122,7 @@ export class TabsDemoComponent implements OnInit {
       type: 'string',
       default: '-',
       demoDefault: '',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     tabItem1TrailingIcon: {
@@ -130,14 +130,14 @@ export class TabsDemoComponent implements OnInit {
       type: 'string',
       default: '-',
       demoDefault: '',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     tabItem1Disabled: {
       description: 'Whether the tab item is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     tabItem2Label: {
       description: 'Label of Tab',
@@ -150,7 +150,7 @@ export class TabsDemoComponent implements OnInit {
       type: 'string',
       default: '-',
       demoDefault: '',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     tabItem2TrailingIcon: {
@@ -158,14 +158,14 @@ export class TabsDemoComponent implements OnInit {
       type: 'string',
       default: '-',
       demoDefault: '',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     tabItem2Disabled: {
       description: 'Whether the tab item is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     tabItem3Label: {
       description: 'Label of Tab',
@@ -178,7 +178,7 @@ export class TabsDemoComponent implements OnInit {
       type: 'string',
       default: '-',
       demoDefault: '',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     tabItem3TrailingIcon: {
@@ -186,14 +186,14 @@ export class TabsDemoComponent implements OnInit {
       type: 'string',
       default: '-',
       demoDefault: '',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     tabItem3Disabled: {
       description: 'Whether the tab item is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

@@ -5,7 +5,7 @@ import { IconService } from '../../core/services/icon.service';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonComponent } from '@i-cell/ids-angular/button';
@@ -72,21 +72,21 @@ export class NotificationDemoComponent implements OnInit {
       description: 'Notification appearance.',
       type: 'IdsNotificationAppearanceType',
       default: defaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsNotificationAppearance),
     },
     size: {
       description: 'Notification size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Notification variant.',
       type: 'IdsNotificationVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsNotificationVariant),
     },
     icon: {
@@ -94,7 +94,7 @@ export class NotificationDemoComponent implements OnInit {
       type: 'string',
       default: '-',
       demoDefault: '',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     title: {
@@ -107,7 +107,7 @@ export class NotificationDemoComponent implements OnInit {
       description: 'Close Button size.',
       type: 'IdsSizeType',
       default: defaultConfig.closeButtonSize,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     closeButtonLabel: {
@@ -120,20 +120,20 @@ export class NotificationDemoComponent implements OnInit {
       description: 'Close Label Button appearance.',
       type: 'IdsButtonAppearanceType',
       default: defaultConfig.closeLabelButtonAppearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
     urgent: {
       description: 'Whether the notification is urgent or not. It changes the role of the notification.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     displayActionsAtBottom: {
       description: 'Whether display the notification actions at bottom or not.',
       type: 'boolean',
       default: defaultConfig.displayActionsAtBottom,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -142,27 +142,27 @@ export class NotificationDemoComponent implements OnInit {
       description: 'Whether display the button or not',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     action1Appearance: {
       description: 'Button appearance.',
       type: 'IdsButtonAppearanceType',
       default: IdsButtonAppearance.TEXT,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
     action1Size: {
       description: 'Button size.',
       type: 'IdsSizeType',
       default: IdsSize.COMPACT,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     action1Disabled: {
       description: 'Whether the button is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     action1Text: {
       description: 'Text of button',
@@ -174,39 +174,39 @@ export class NotificationDemoComponent implements OnInit {
       description: 'Whether the button has leading icon or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     action1HasTrailingIcon: {
       description: 'Whether the button has trailing icon or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     showAction2Button: {
       description: 'Whether display the button or not',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     action2Appearance: {
       description: 'Button appearance.',
       type: 'IdsButtonAppearanceType',
       default: IdsButtonAppearance.OUTLINED,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
     action2Size: {
       description: 'Button size.',
       type: 'IdsSizeType',
       default: IdsSize.COMPACT,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     action2Disabled: {
       description: 'Whether the button is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     action2Text: {
       description: 'Text of button',
@@ -218,13 +218,13 @@ export class NotificationDemoComponent implements OnInit {
       description: 'Whether the button has leading icon or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     action2HasTrailingIcon: {
       description: 'Whether the button has trailing icon or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

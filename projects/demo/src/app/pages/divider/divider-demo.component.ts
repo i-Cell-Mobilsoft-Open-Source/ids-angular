@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import {
@@ -46,21 +46,21 @@ export class DividerDemoComponent {
       description: 'Divider orientation.',
       type: 'IdsOrientationType',
       default: defaultConfig.orientation,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
     size: {
       description: 'Divider size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Divider variant.',
       type: 'IdsDividerVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsDividerVariant),
     },
     width: {

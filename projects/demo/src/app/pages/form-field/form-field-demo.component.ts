@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -70,14 +70,14 @@ export class FormFieldDemoComponent {
       description: 'Size of the form field.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Variant of the form field.',
       type: 'IdsFormFieldVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsFormFieldVariant),
     },
   };
@@ -87,13 +87,13 @@ export class FormFieldDemoComponent {
       description: 'Whether the form field has leading icon or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hasPrefix: {
       description: 'Whether the form field has prefix or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     prefix: {
       description: 'Prefix for form field.',
@@ -105,7 +105,7 @@ export class FormFieldDemoComponent {
       description: 'Whether the form field has suffix or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     suffix: {
       description: 'Suffix for form field.',
@@ -117,13 +117,13 @@ export class FormFieldDemoComponent {
       description: 'Whether the form field has trailing icon or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hasAction: {
       description: 'Whether the form field has action or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     label: {
       description: 'Label for form field.',
@@ -150,26 +150,26 @@ export class FormFieldDemoComponent {
       description: 'Whether input / textarea is readonly or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     disabled: {
       description: 'Whether input / textarea is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     required: {
       description: 'Whether input / textarea is required or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     canHandleSuccessState: {
       // eslint-disable-next-line @stylistic/js/max-len
       description: 'Whether input / textarea can handle success state with a success state matcher. This property works only on init, so it can not be chnaged.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

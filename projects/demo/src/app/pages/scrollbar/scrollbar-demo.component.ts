@@ -2,7 +2,7 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -36,7 +36,7 @@ export class ScrollbarDemoComponent {
       description: 'Scrollbar color.',
       type: '<thumb color> <track color>',
       default: '-',
-      control: 'text',
+      control: DemoControl.TEXT,
       demoDefault: 'var(--ids-smc-colors-surface-darker-30) transparent',
       disabled: true,
     },
@@ -44,7 +44,7 @@ export class ScrollbarDemoComponent {
       description: 'Scrollbar width',
       type: 'auto | thin | none',
       default: 'auto',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [
         'auto',
         'thin',
@@ -55,7 +55,7 @@ export class ScrollbarDemoComponent {
       description: 'Scrollbar gutter',
       type: 'auto | stable | stable both-edges',
       default: 'auto',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [
         'auto',
         'stable',
@@ -69,7 +69,7 @@ export class ScrollbarDemoComponent {
       description: 'Whether the content fits in scrollable div or not. This is for testing scrollbar gutter.',
       type: 'auto | thin | none',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

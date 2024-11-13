@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent, IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY, IdsButtonGroupComponent } from '@i-cell/ids-angular/button';
@@ -55,28 +55,28 @@ export class ButtonDemoComponent {
       description: 'Button appearance.',
       type: 'IdsButtonAppearanceType',
       default: defaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
     size: {
       description: 'Button size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Button variant.',
       type: 'IdsButtonVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonVariant),
     },
     disabled: {
       description: 'Whether the button is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -92,13 +92,13 @@ export class ButtonDemoComponent {
       description: 'Whether the button has leading icon or not.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hasTrailingIcon: {
       description: 'Whether the button has trailing icon or not.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -107,7 +107,7 @@ export class ButtonDemoComponent {
       description: 'All button size in a group.',
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
   };

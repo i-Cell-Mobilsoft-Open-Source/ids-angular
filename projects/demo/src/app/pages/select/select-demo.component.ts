@@ -4,7 +4,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -74,14 +74,14 @@ export class SelectDemoComponent {
       description: 'Form field size.',
       type: 'IdsSizeType',
       default: formFieldDefaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Form field variant.',
       type: 'IdsFormFieldVariantType',
       default: formFieldDefaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsFormFieldVariant),
     },
   };
@@ -97,7 +97,7 @@ export class SelectDemoComponent {
       description: 'Whether select is readonly or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     'aria-label': {
       description: 'aria-label tag for select.',
@@ -126,7 +126,7 @@ export class SelectDemoComponent {
       description: 'Whether select has custom trigger or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

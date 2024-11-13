@@ -30,7 +30,7 @@ export class SuccessStateTracker {
     const oldState = this.hasSuccessState;
     const parent = this._parentFormGroup || this._parentForm;
     const matcher = this._matcher;
-    const control = this._ngControl ? (this._ngControl.control as AbstractControl) : null;
+    const control = this._ngControl ? (this._ngControl.control) : null;
     const newState = matcher?.isSuccessState(control, parent) ?? false;
 
     if (newState !== oldState) {

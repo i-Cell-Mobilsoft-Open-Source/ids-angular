@@ -34,7 +34,7 @@ export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefau
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIALOG_DEFAULT_CONFIG);
 
-  public dialog = inject(ElementRef).nativeElement as HTMLDialogElement;
+  public dialog = inject<ElementRef<HTMLDialogElement>>(ElementRef).nativeElement;
 
   public titleId = computed(() => `${this.id()}-title`);
   public size = input<IdsSizeType>(this._defaultConfig.size);

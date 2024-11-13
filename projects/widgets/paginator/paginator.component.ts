@@ -207,7 +207,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
     }
     const center = Math.ceil(maxDisplayedItemCount / 2);
     const actualPage = pageIndex + 1;
-    const lastPage = +(allPages.at(-1) as string);
+    const lastPage = +(allPages.at(-1)!);
     const isTruncatedRight = actualPage <= center;
     const isTruncatedBoth = actualPage > center && actualPage <= lastPage - center;
     const isTruncatedLeft = actualPage > lastPage - center;

@@ -118,7 +118,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
   private _getSvgElement(safeHtml: SafeHtml): SVGElement {
     const div = this._document.createElement('div');
     div.innerHTML = safeHtml as unknown as string;
-    const svg = div.querySelector('svg') as SVGElement;
+    const svg = div.querySelector('svg');
 
     if (!svg) {
       throw this._createHostError('Svg element creation failed!');

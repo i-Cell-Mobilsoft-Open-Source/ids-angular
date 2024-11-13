@@ -1,5 +1,6 @@
 <div class="ids-snackbar__content-wrapper" cdkTrapFocus cdkTrapFocusAutoCapture="true">
-  @if (_safeIcon(); as safeIcon) {
+  @let safeIcon = _safeIcon();
+  @if (safeIcon) {
     <div class="ids-snackbar__leading-element">
       <ids-icon [fontIcon]="safeIcon" />
     </div>
@@ -20,7 +21,8 @@
           {{ action.label }}
         </button>
       }
-      @if (allowDismiss() && closeButtonLabel(); as closeButtonLabel) {
+      @let safeCloseButtonLabel = allowDismiss() && closeButtonLabel();
+      @if (safeCloseButtonLabel) {
         <button
           type="button"
           role="button"
@@ -31,7 +33,7 @@
           [variant]="buttonVariant()"
           (click)="close()"
         >
-          {{ closeButtonLabel }}
+          {{ safeCloseButtonLabel }}
         </button>
       }
     </div>

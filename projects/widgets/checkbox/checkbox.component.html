@@ -36,7 +36,8 @@
       }
     </label>
   </div>
-  @if (displayedMessages; as messages) {
+  @let messages = displayedMessages;
+  @if (messages) {
     <div class="ids-checkbox__message-container">
       @switch (messages) {
         @case ("error") {

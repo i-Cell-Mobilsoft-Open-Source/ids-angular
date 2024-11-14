@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import {
@@ -46,28 +46,28 @@ export class IconButtonDemoComponent {
       description: 'Icon Button size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Icon Button variant.',
       type: 'IdsIconButtonVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsIconButtonVariant),
     },
     appearance: {
       description: 'Icon Button appearance.',
       type: 'IdsIconButtonAppearanceType',
       default: defaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsIconButtonAppearance),
     },
     disabled: {
       description: 'Whether the icon button is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

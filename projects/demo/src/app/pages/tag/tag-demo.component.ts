@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -54,21 +54,21 @@ export class TagDemoComponent {
       description: 'Appearance of the tag.',
       type: 'IdsTagAppearanceType',
       default: defaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTagAppearance),
     },
     size: {
       description: 'Size of the tag.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Variant of the tag.',
       type: 'IdsTagVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTagVariant),
     },
   };
@@ -78,13 +78,13 @@ export class TagDemoComponent {
       description: 'Whether the tag has leading icon or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hasTrailingIcon: {
       description: 'Whether the tag has trailing icon or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -93,14 +93,14 @@ export class TagDemoComponent {
       description: 'Appearance of the tag.',
       type: 'IdsTagAppearanceType',
       default: defaultGroupConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTagAppearance),
     },
     size: {
       description: 'Size of the tag.',
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
   };

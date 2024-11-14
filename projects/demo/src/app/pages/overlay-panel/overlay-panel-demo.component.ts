@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -64,21 +64,21 @@ export class OverlayPanelDemoComponent {
       description: 'Overlay panel appearance.',
       type: 'IdsOverlayPanelAppearanceType',
       default: overlayPanelDefaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOverlayPanelAppearance),
     },
     size: {
       description: 'Overlay panel size.',
       type: 'IdsSizeType',
       default: overlayPanelDefaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Overlay panel variant.',
       type: 'IdsOverlayPanelVariantType',
       default: overlayPanelDefaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOverlayPanelVariant),
     },
   };
@@ -88,7 +88,7 @@ export class OverlayPanelDemoComponent {
       description: 'Text of button',
       type: 'string',
       default: 'none',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [
         'none',
         'dark',
@@ -101,21 +101,21 @@ export class OverlayPanelDemoComponent {
       description: 'Menu item appearance.',
       type: 'IdsMenuItemAppearanceType',
       default: menuItemDefaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsMenuItemAppearance),
     },
     size: {
       description: 'Menu item size.',
       type: 'IdsSizeType',
       default: menuItemDefaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Menu item variant.',
       type: 'IdsMenuItemVariantType',
       default: menuItemDefaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsMenuItemVariant),
     },
   };
@@ -125,19 +125,19 @@ export class OverlayPanelDemoComponent {
       description: 'Whether the menu items have leading icon or not.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hasTrailingIcon: {
       description: 'Whether the menu items have trailing icon or not.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hasDisabledItem: {
       description: 'Whether one menu item is disabled or not. For testing purposes this is the first menu item.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

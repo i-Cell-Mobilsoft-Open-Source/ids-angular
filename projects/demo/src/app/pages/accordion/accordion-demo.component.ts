@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
@@ -51,14 +51,14 @@ export class AccordionDemoComponent {
       description: 'Accordion size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     appearance: {
       description: 'Accordion appearance.',
       type: 'IdsAccordionAppearanceType',
       default: defaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsAccordionAppearance),
     },
     summary: {
@@ -71,33 +71,33 @@ export class AccordionDemoComponent {
       description: 'Whether the accordion is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     multi: {
       description: 'Allow multiple accordion items to be open.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     btnSize: {
       description: 'Button size.',
       type: 'IdsSizeType',
       default: defaultConfig.btnSize,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     btnAppearance: {
       description: 'Button appearance.',
       type: 'IdsButtonAppearanceType',
       default: defaultConfig.btnAppearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
     btnVariant: {
       description: 'Button variant.',
       type: 'IdsButtonVariantType',
       default: defaultConfig.btnVariant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonVariant),
     },
     expandBtnLabel: {
@@ -114,13 +114,13 @@ export class AccordionDemoComponent {
       description: 'Whether the button has leading icon or not.',
       type: 'boolean',
       default: defaultConfig.hasLeadingIcon,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hasTrailingIcon: {
       description: 'Whether the button has trailing icon or not.',
       type: 'boolean',
       default: defaultConfig.hasTrailingIcon,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

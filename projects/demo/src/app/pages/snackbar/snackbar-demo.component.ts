@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, computed, inject, OnInit, ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
@@ -73,7 +73,7 @@ export class SnackbarDemoComponent implements OnInit {
       description: 'Snackbar variant.',
       type: 'IdsSnackbarVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSnackbarVariant),
     },
     icon: {
@@ -86,7 +86,7 @@ export class SnackbarDemoComponent implements OnInit {
       description: 'Whether the the user can close the snackbar or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     closeButtonLabel: {
       // eslint-disable-next-line @stylistic/js/max-len
@@ -99,13 +99,13 @@ export class SnackbarDemoComponent implements OnInit {
       description: 'Whether the snackbar should close automatically or not. The duration is a computed data based on some constant value.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     urgent: {
       description: 'Whether the snackbar is urgent or not. It changes the role of the snackbar.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -114,13 +114,13 @@ export class SnackbarDemoComponent implements OnInit {
       description: 'Whether the snackbar is urgent or not. It changes the role of the snackbar.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     size: {
       description: 'Snackbar size. Size is an application-wide default value. Can not overwrite at runtime.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
       disabled: true,
     },
@@ -128,7 +128,7 @@ export class SnackbarDemoComponent implements OnInit {
       description: 'Snackbar position. Position is an application-wide default value. Can not overwrite at runtime.',
       type: 'IdsSnackbarPositionType',
       default: defaultConfig.position,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSnackbarPosition),
       disabled: true,
     },
@@ -137,7 +137,7 @@ export class SnackbarDemoComponent implements OnInit {
       description: 'Whether the newest snackbar opens in start position, or not. newestAtStartPosition is an application-wide default value. Can not overwrite at runtime.',
       type: 'boolean',
       default: defaultConfig.newestAtStartPosition,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
       disabled: true,
     },
     viewportMargin: {
@@ -145,7 +145,7 @@ export class SnackbarDemoComponent implements OnInit {
       type: 'number',
       default: defaultConfig.viewportMargin,
       disabled: true,
-      control: 'number',
+      control: DemoControl.NUMBER,
       min: 0,
       step: 1,
     },
@@ -154,7 +154,7 @@ export class SnackbarDemoComponent implements OnInit {
       description: 'Snackbars open in snackbar group. This group can connect to the viewport by default, or we can connect to a viewContainerRef. With this boolean, we can switch between actual viewContainerRef or viewPort.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
       onModelChange: this.setActualViewContainer,
     },
   };

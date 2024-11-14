@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsAvatarVariantType, IDS_AVATAR_DEFAULT_CONFIG_FACTORY, IdsAvatarComponent, IdsAvatarImageDirective, IdsAvatarVariant } from '@i-cell/ids-angular/avatar';
@@ -55,21 +55,21 @@ export class AvatarDemoComponent {
       description: 'Avatar size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     sizeCollection: {
       description: 'Avatar sizeCollection.',
       type: 'IdsSizeCollectionType',
       default: defaultConfig.sizeCollection,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSizeCollection),
     },
     variant: {
       description: 'Avatar variant.',
       type: 'IdsAvatarVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsAvatarVariant),
     },
   };

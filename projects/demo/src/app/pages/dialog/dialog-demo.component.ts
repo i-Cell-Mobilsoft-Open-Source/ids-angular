@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, InjectionToken, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
@@ -207,7 +207,7 @@ export class DialogDemoComponent {
       description: 'Dialog size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     mainTitle: {
@@ -226,13 +226,13 @@ export class DialogDemoComponent {
       description: 'Whether to show close button or not.',
       type: 'boolean',
       default: defaultConfig.showCloseButton,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     showBackdrop: {
       description: 'Whether to show dialog backdrop or not.',
       type: 'boolean',
       default: defaultConfig.showBackdrop,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -241,13 +241,13 @@ export class DialogDemoComponent {
       description: 'Whether to use custom header or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     useLongContent: {
       description: 'Whether to use long content or not. This is for testing scrollable content.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

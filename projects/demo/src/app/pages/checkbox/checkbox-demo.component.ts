@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsCheckboxVariant, IdsCheckboxVariantType, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxComponent, IdsCheckboxGroupComponent } from '@i-cell/ids-angular/checkbox';
@@ -63,27 +63,27 @@ export class CheckboxDemoComponent {
       description: 'Checkbox size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Checkbox variant.',
       type: 'IdsCheckboxVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsCheckboxVariant),
     },
     readonly: {
       description: 'Whether the checkbox is readonly or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     required: {
       description: 'Whether the checkbox is required or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -98,7 +98,7 @@ export class CheckboxDemoComponent {
       description: 'Allow hint message',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hintMessage: {
       description: 'Hint message',
@@ -110,7 +110,7 @@ export class CheckboxDemoComponent {
       description: 'Whether the checkbox is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -125,7 +125,7 @@ export class CheckboxDemoComponent {
       description: 'Whether to allow parent checkbox or not.',
       type: 'boolean',
       default: defaultGroupConfig.allowParent,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     parentLabel: {
       description: 'Parent checkbox label.',
@@ -143,21 +143,21 @@ export class CheckboxDemoComponent {
       description: 'Checkbox group size.',
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Checkbox group variant.',
       type: 'IdsCheckboxVariantType',
       default: defaultGroupConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsCheckboxVariant),
     },
     orientation: {
       description: 'Checkbox group variant.',
       type: 'IdsOrientationType',
       default: defaultGroupConfig.orientation,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
   };

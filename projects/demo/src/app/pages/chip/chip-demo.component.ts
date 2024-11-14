@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsAvatarComponent } from '@i-cell/ids-angular/avatar';
@@ -75,34 +75,34 @@ export class ChipDemoComponent {
       description: 'Chip appearance.',
       type: 'IdsChipAppearanceType',
       default: defaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsChipAppearance),
     },
     size: {
       description: 'Chip size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Chip variant.',
       type: 'IdsChipVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsChipVariant),
     },
     removable: {
       description: 'Whether the chip is removable or not.',
       type: 'boolean',
       default: defaultConfig.removable,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     disabled: {
       description: 'Whether the chip is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -111,25 +111,25 @@ export class ChipDemoComponent {
       description: 'Whether the chip has avatar.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     hasLeadingIcon: {
       description: 'Whether the chip has leading icon.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     label: {
       description: 'Label of chip',
       type: 'string',
-      default: false,
+      default: '-',
       demoDefault: 'Label',
     },
     hasTrailingIconButton: {
       description: 'Whether the chip has trailing iconButton.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -138,21 +138,21 @@ export class ChipDemoComponent {
       description: 'Chip group appearance.',
       type: 'IdsChipAppearanceType',
       default: defaultGroupConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsChipAppearance),
     },
     size: {
       description: 'Chip group size.',
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     disabled: {
       description: 'Whether the chip group is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -161,7 +161,7 @@ export class ChipDemoComponent {
       description: 'Whether the chip group build from interactive chips or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

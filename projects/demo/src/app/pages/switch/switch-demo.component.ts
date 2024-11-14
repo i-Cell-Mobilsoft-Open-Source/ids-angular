@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -62,47 +62,47 @@ export class SwitchDemoComponent {
       description: 'Whether the switch is readonly or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     size: {
       description: 'Size of the switch.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Variant of the switch.',
       type: 'IdsSwitchVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchVariant),
     },
     hasIcon: {
       description: 'Whether the switch has icon.',
       type: 'boolean',
       default: defaultConfig.hasIcon,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     iconPosition: {
       description: 'Where the icon should be shown in switch.',
       type: 'IdsSwitchIconPositionType',
       default: defaultConfig.iconPosition,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchIconPosition),
     },
     labelPosition: {
       description: 'Where the label should be shown in switch.',
       type: 'IdsSwitchLabelPositionType',
       default: defaultConfig.labelPosition,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchLabelPosition),
     },
     disabled: {
       description: 'Whether the switch is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     'aria-label': {
       description: 'aria-label for switch.',
@@ -129,27 +129,27 @@ export class SwitchDemoComponent {
       description: 'Size of the switch.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     hasIcon: {
       description: 'Whether the switch has icon.',
       type: 'boolean',
       default: defaultConfig.hasIcon,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     iconPosition: {
       description: 'Where the icon should be shown in switch.',
       type: 'IdsSwitchIconPositionType',
       default: defaultConfig.iconPosition,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchIconPosition),
     },
     labelPosition: {
       description: 'Where the label should be shown in switch.',
       type: 'IdsSwitchLabelPositionType',
       default: defaultConfig.labelPosition,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchLabelPosition),
     },
   };

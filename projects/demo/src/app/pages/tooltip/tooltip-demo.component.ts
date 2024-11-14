@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
@@ -51,52 +51,52 @@ export class TooltipDemoComponent {
       default: '-',
 
       demoDefault: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      control: 'text',
+      control: DemoControl.TEXT,
     },
     position: {
       description: 'The position of the tooltip relative to the target element.',
       type: 'IdsTooltipPositionType',
       default: defaultConfig.position,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTooltipPosition),
     },
     size: {
       description: 'The size of the tooltip.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'The variant or style of the tooltip.',
       type: 'IdsTooltipVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTooltipVariant),
     },
     showDelay: {
       description: 'The delay (in milliseconds) before the tooltip appears after hovering.',
       type: 'number',
       default: defaultConfig.showDelay,
-      control: 'text',
+      control: DemoControl.TEXT,
     },
     hideDelay: {
       description: 'The delay (in milliseconds) before the tooltip disappears after losing focus.',
       type: 'number',
       default: defaultConfig.hideDelay,
-      control: 'text',
+      control: DemoControl.TEXT,
     },
     disabled: {
       description: 'Determines if the tooltip is disabled.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     touchGestures: {
       description: 'Specifies the touch gestures behavior for the tooltip (auto, on, off).',
       type: 'IdsTooltipTouchGestures',
       default: 'auto',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [
         'auto',
         'on',
@@ -107,7 +107,7 @@ export class TooltipDemoComponent {
       description: 'The text alignment inside the tooltip.',
       type: 'IdsTooltipTextAlign',
       default: 'auto',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [
         'auto',
         'center',
@@ -119,7 +119,7 @@ export class TooltipDemoComponent {
       description: 'Whether to show tooltip pointer or not.',
       type: 'boolean',
       default: defaultConfig.showPointer,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

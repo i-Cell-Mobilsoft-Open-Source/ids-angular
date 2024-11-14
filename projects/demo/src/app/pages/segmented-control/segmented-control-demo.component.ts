@@ -3,7 +3,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -52,28 +52,28 @@ export class SegmentedControlDemoComponent {
       description: 'Size of the segmented control.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'Variant of the segmented control.',
       type: 'IdsSegmentedControlVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSegmentedControlVariant),
     },
     appearance: {
       description: 'Appearance of the segmented control.',
       type: 'IdsSegmentedControlAppearanceType',
       default: defaultConfig.appearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSegmentedControlAppearance),
     },
     disabled: {
       description: 'Whether the segmented control is disabled or not.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -82,25 +82,25 @@ export class SegmentedControlDemoComponent {
       description: 'When true, items have labels.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     itemHasIcon: {
       description: 'When true, items have icon.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     itemHasSuffix: {
       description: 'When true, items have suffix.',
       type: 'boolean',
       default: true,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     onlyOneItemIsDisabled: {
       description: 'When true, the first item will be disabled. Just for testing purposes.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

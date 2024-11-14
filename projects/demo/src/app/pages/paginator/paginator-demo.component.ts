@@ -1,9 +1,9 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -46,13 +46,13 @@ type PaginatorInputControls = {
     './paginator-demo.component.scss',
   ],
 })
-export class PaginatorDemoComponent {
+export class PaginatorDemoComponent implements OnInit {
   protected _inputControlConfig: DemoControlConfig<PaginatorInputControls> ={
     length: {
       description: 'The total number of items to paginate.',
       type: 'number',
       default: 120,
-      control: 'number',
+      control: DemoControl.NUMBER,
       step: 1,
       min: 0,
     },
@@ -60,51 +60,50 @@ export class PaginatorDemoComponent {
       description: 'The number of items per page.',
       type: 'number',
       default: defaultConfig.pageSize,
-      control: 'number',
-      step: 1,
-      min: 1,
+      control: DemoControl.SELECT,
+      list: [],
     },
     pageSizeOptions: {
       description: 'Array of available page size options.',
       type: 'number[]',
       default: defaultConfig.pageSizeOptions,
-      control: 'text',
+      control: DemoControl.NUMBERARRAY,
     },
     showFirstLastButton: {
       description: 'Whether to show "First" and "Last" buttons in the paginator.',
       type: 'boolean',
       default: defaultConfig.showFirstLastButton,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     showPrevNextLabel: {
       description: 'Whether to display labels for "Previous" and "Next" buttons. Works only when compactLayout is true.',
       type: 'boolean',
       default: defaultConfig.showPrevNextLabel,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     showPageInfo: {
       description: 'Whether to display page information (e.g., "Page 1 of 10").',
       type: 'boolean',
       default: defaultConfig.showPageInfo,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     showPageButtons: {
       description: 'Whether to display individual page buttons.',
       type: 'boolean',
       default: defaultConfig.showPageButtons,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     showAllPages: {
       description: 'Whether to display all pages in the paginator.',
       type: 'boolean',
       default: defaultConfig.showAllPages,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     maxDisplayedItemCount: {
       description: 'The maximum number of items to display in the paginator.',
       type: 'number',
       default: defaultConfig.maxDisplayedItemCount,
-      control: 'number',
+      control: DemoControl.NUMBER,
       step: 2,
       min: 5,
     },
@@ -112,28 +111,28 @@ export class PaginatorDemoComponent {
       description: 'The size of the paginator component',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
       description: 'The variant/style of the paginator',
       type: 'IdsIconButtonVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsPaginatorVariant),
     },
     pageButtonAppearance: {
       description: 'The appearance of the paginator buttons',
       type: 'IdsIconButtonAppearanceType',
       default: defaultConfig.pageButtonAppearance,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsPaginatorPageButtonAppearance),
     },
     debounceTime: {
       description: 'The number of items per page.',
       type: 'number',
       default: defaultConfig.debounceTime,
-      control: 'number',
+      control: DemoControl.NUMBER,
       step: 1,
       min: 0,
     },
@@ -141,13 +140,13 @@ export class PaginatorDemoComponent {
       description: 'Whether the paginator is disabled.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
     compactLayout: {
       description: 'Whether to use a compact layout for the paginator.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 
@@ -159,7 +158,22 @@ export class PaginatorDemoComponent {
     this.model = { ...this.defaults };
   }
 
+  public ngOnInit(): void {
+    this._updatePageSize();
+  }
+
   public onPageChange(event: IdsPaginatorPageChangeEvent): void {
     console.info(event);
+  }
+
+  protected _updatePageSize(): void {
+    const pageSizeOptions = this.model.pageSizeOptions.map((opt) => opt.toString());
+    this._inputControlConfig = {
+      ...this._inputControlConfig,
+      pageSize: {
+        ...this._inputControlConfig.pageSize,
+        list: pageSizeOptions,
+      },
+    };
   }
 }

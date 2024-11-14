@@ -5,7 +5,7 @@ import { IconService } from '../../core/services/icon.service';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -49,21 +49,21 @@ export class IconDemoComponent implements OnInit {
       description: 'Icon size.',
       type: 'IdsSizeType',
       default: defaultConfig.size,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     sizeCollection: {
       description: 'Icon size collection.',
       type: 'IdsSizeCollectionType',
       default: defaultConfig.sizeCollection,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSizeCollection),
     },
     variant: {
       description: 'Icon variant.',
       type: 'IdsIconVariantType',
       default: defaultConfig.variant,
-      control: 'select',
+      control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsIconVariant),
     },
     fontIcon: {
@@ -71,7 +71,7 @@ export class IconDemoComponent implements OnInit {
       type: 'string',
       default: '-',
       demoDefault: 'moon',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     svgIcon: {
@@ -79,14 +79,14 @@ export class IconDemoComponent implements OnInit {
       type: 'IdsIconVariantType',
       default: '-',
       demoDefault: 'moon',
-      control: 'select',
+      control: DemoControl.SELECT,
       list: [],
     },
     'aria-hidden': {
       description: 'Determinate whether the component is hidden or not for screen readers.',
       type: 'boolean',
       default: false,
-      control: 'checkbox',
+      control: DemoControl.CHECKBOX,
     },
   };
 

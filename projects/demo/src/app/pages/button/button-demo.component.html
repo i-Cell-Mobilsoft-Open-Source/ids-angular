@@ -1,4 +1,8 @@
-<app-tryout [title]="'COMPONENTS.BUTTON' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+<app-tryout
+  [title]="'COMPONENTS.BUTTON' | translate"
+  [hasDarkBackground]="model.variant === 'light' || model.variant === 'light-fixed'"
+  (resetted)="reset()"
+>
   <ng-container component>
     <div component class="button-grid">
       <div class="button-item">

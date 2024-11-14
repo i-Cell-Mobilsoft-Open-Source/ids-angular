@@ -1,7 +1,7 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -46,7 +46,7 @@ type PaginatorInputControls = {
     './paginator-demo.component.scss',
   ],
 })
-export class PaginatorDemoComponent {
+export class PaginatorDemoComponent implements OnInit {
   protected _inputControlConfig: DemoControlConfig<PaginatorInputControls> ={
     length: {
       description: 'The total number of items to paginate.',
@@ -60,15 +60,14 @@ export class PaginatorDemoComponent {
       description: 'The number of items per page.',
       type: 'number',
       default: defaultConfig.pageSize,
-      control: DemoControl.NUMBER,
-      step: 1,
-      min: 1,
+      control: DemoControl.SELECT,
+      list: [],
     },
     pageSizeOptions: {
       description: 'Array of available page size options.',
       type: 'number[]',
       default: defaultConfig.pageSizeOptions,
-      control: DemoControl.TEXT,
+      control: DemoControl.NUMBERARRAY,
     },
     showFirstLastButton: {
       description: 'Whether to show "First" and "Last" buttons in the paginator.',
@@ -159,7 +158,22 @@ export class PaginatorDemoComponent {
     this.model = { ...this.defaults };
   }
 
+  public ngOnInit(): void {
+    this._updatePageSize();
+  }
+
   public onPageChange(event: IdsPaginatorPageChangeEvent): void {
     console.info(event);
+  }
+
+  protected _updatePageSize(): void {
+    const pageSizeOptions = this.model.pageSizeOptions.map((opt) => opt.toString());
+    this._inputControlConfig = {
+      ...this._inputControlConfig,
+      pageSize: {
+        ...this._inputControlConfig.pageSize,
+        list: pageSizeOptions,
+      },
+    };
   }
 }

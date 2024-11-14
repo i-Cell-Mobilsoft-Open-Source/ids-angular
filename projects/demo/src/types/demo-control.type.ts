@@ -1,7 +1,9 @@
 export const DemoControl = {
   CHECKBOX: 'checkbox',
   TEXT: 'text',
+  TEXTARRAY: 'textarray',
   NUMBER: 'number',
+  NUMBERARRAY: 'numberarray',
   SELECT: 'select',
 } as const;
 

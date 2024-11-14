@@ -19,5 +19,12 @@
     />
   </ng-container>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+  <app-control-table
+    controls
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
+    (modelChange)="_updatePageSize()"
+    (resetted)="reset()"
+  />
 </app-tryout>

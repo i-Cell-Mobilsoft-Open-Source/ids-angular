@@ -28,7 +28,7 @@
           @let disabled = control.disabled ?? false;
 
           @switch (control.control) {
-            @case ("checkbox") {
+            @case (_demoControl.CHECKBOX) {
               <input
                 type="checkbox"
                 [name]="control.name"
@@ -38,14 +38,14 @@
                 (ngModelChange)="control.onModelChange?.()"
               />
             }
-            @case ("select") {
+            @case (_demoControl.SELECT) {
               <select [disabled]="disabled" [(ngModel)]="model()[control.name]" (ngModelChange)="control.onModelChange?.()">
                 @for (item of control.list; track $index) {
                   <option [value]="item">{{ item }}</option>
                 }
               </select>
             }
-            @case ("number") {
+            @case (_demoControl.NUMBER) {
               <input
                 type="number"
                 [name]="control.name"
@@ -55,6 +55,16 @@
                 [attr.step]="control.step"
                 [(ngModel)]="model()[control.name]"
                 (ngModelChange)="control.onModelChange?.()"
+              />
+            }
+            @case (_demoControl.NUMBERARRAY) {
+              <input
+                type="text"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.()"
               />
             }
             @default {

@@ -60,7 +60,10 @@ const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
     IdsNotificationActionButtonDirective,
   ],
   templateUrl: './notification-demo.component.html',
-  styleUrl: './notification-demo.component.scss',
+  styleUrls: [
+    '../demo-page.scss',
+    './notification-demo.component.scss',
+  ],
 })
 export class NotificationDemoComponent implements OnInit {
   private readonly _iconService = inject(IconService);

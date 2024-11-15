@@ -15,6 +15,7 @@ export default tseslint.config(
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
       ...angular.configs.tsRecommended,
+      ...tseslint.configs.stylistic,
       importPlugin.flatConfigs?.recommended,
       importPlugin.flatConfigs?.typescript,
     ],
@@ -113,6 +114,9 @@ export default tseslint.config(
       radix: "warn",
       "require-await": "error",
       yoda: "error",
+      "@typescript-eslint/array-type": "off",
+      "@typescript-eslint/class-literal-property-style": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/explicit-member-accessibility": [
         "error",
         {
@@ -156,6 +160,7 @@ export default tseslint.config(
         },
       ],
       "@typescript-eslint/explicit-function-return-type": "error",
+      "@typescript-eslint/no-empty-function": "off",
       "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
       "@typescript-eslint/no-unused-expressions": ["error", { allowTernary: true }],
       "@typescript-eslint/prefer-reduce-type-parameter": "error",

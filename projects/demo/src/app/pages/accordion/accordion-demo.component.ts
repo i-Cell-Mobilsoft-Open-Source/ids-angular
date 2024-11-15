@@ -1,7 +1,7 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -46,6 +46,7 @@ type AccordionInputControls = {
   ],
 })
 export class AccordionDemoComponent {
+  private _accordion = viewChild<IdsAccordionComponent>('accordion');
   protected _inputControlConfig: DemoControlConfig<AccordionInputControls> = {
     size: {
       description: 'Accordion size.',
@@ -129,6 +130,7 @@ export class AccordionDemoComponent {
   public model: AccordionInputControls = { ...this.defaults };
 
   public reset(): void {
+    this._accordion()?.closeAll();
     this.model = { ...this.defaults };
   }
 }

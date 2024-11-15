@@ -1,6 +1,7 @@
 <app-tryout [title]="'COMPONENTS.ACCORDION' | translate" (resetted)="reset()">
   <ng-container component>
     <ids-accordion
+      #accordion
       [multi]="model.multi"
       [appearance]="model.appearance"
       [size]="model.size"

@@ -32,7 +32,7 @@ const meta = {
     }),
   ],
   parameters: {
-    controls: { 
+    controls: {
       include: [
         'size',
         'variant',
@@ -43,7 +43,7 @@ const meta = {
         'aria-labelledby',
         'tabIndex',
         'typeaheadDebounceInterval',
-      ], 
+      ],
     },
   },
   argTypes: {
@@ -55,7 +55,7 @@ const meta = {
     'aria-label': { control: 'text', type: 'string', description: 'aria-label text' },
     'aria-labelledby': { control: 'text', type: 'string', description: 'aria-labelledby text' },
     tabIndex: { control: 'number', type: 'number', description: 'tabIndex number', min: -1, step: 1 },
-    typeaheadDebounceInterval: { 
+    typeaheadDebounceInterval: {
       control: 'number', type: 'number', description: 'typeaheadDebounceInterval number in milliseconds', min: 0, step: 1,
     },
   },
@@ -81,8 +81,8 @@ export const singleSelect: Story = {
     placeholder: 'Select an animal',
   },
   render: ({ size, variant, placeholder, ...props }) => {
-    const singleSelectionValue: string = 'cat';
-    return { 
+    const singleSelectionValue = 'cat';
+    return {
       props: { ...props, singleSelectionValue },
       template: `
         <ids-form-field size="${size}" variant="${variant}">
@@ -116,7 +116,7 @@ export const multiSelect: Story = {
       'whale',
     ];
 
-    return { 
+    return {
       props: { ...props, multiSelectionValue },
       template: `
         <ids-form-field size="${size}" variant="${variant}">

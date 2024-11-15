@@ -5,12 +5,12 @@ import { Subject } from 'rxjs';
 export class IdsPaginatorIntl {
   public readonly changes: Subject<void> = new Subject<void>();
 
-  public nextPageLabel: string = 'Next';
-  public previousPageLabel: string = 'Previous';
-  public nextPageAriaLabel: string = 'Go to next page';
-  public previousPageAriaLabel: string = 'Go to previous page';
-  public firstPageAriaLabel: string = 'Go to first page';
-  public lastPageAriaLabel: string = 'Go to last page';
+  public nextPageLabel = 'Next';
+  public previousPageLabel = 'Previous';
+  public nextPageAriaLabel = 'Go to next page';
+  public previousPageAriaLabel = 'Go to previous page';
+  public firstPageAriaLabel = 'Go to first page';
+  public lastPageAriaLabel = 'Go to last page';
 
   public getPageAriaLabel = (page: string): string => `Go to page ${page}`;
 

@@ -25,7 +25,7 @@ export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
     return 'tooltip';
   }
 
-  private readonly _onHide: Subject<void> = new Subject();
+  private readonly _onHide = new Subject<void>();
 
   public message = input<string>();
   public position = input<IdsTooltipPositionType>();

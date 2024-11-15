@@ -78,7 +78,7 @@ export function getSnackbarFlexibleConnectedPositionStrategy(
 export function getSnackbarGlobalPositionStrategy(
   globalPosition: GlobalPositionStrategy,
   position: IdsSnackbarPositionType,
-  margin: number = 0,
+  margin = 0,
 ): GlobalPositionStrategy {
   const marginPx = `${margin}px`;
   switch (position) {

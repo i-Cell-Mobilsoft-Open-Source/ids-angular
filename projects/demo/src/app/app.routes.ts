@@ -111,4 +111,13 @@ export const routes: Routes = [
     path: 'components',
     loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
   },
+  {
+    path: 'index',
+    loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
+  },
+  {
+    path: '',
+    redirectTo: 'index',
+    pathMatch: 'full',
+  },
 ];

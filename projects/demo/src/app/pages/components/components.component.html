@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-16">
+  <app-hero [heroList]="heroLists[0]" />
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    @for (componentList of componentLists; track componentList.id) {
+      <app-card [componentList]="componentList" />
+    }
+  </div>
+</div>

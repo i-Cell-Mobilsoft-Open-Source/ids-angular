@@ -12,7 +12,7 @@
     [name]="name()"
     [required]="required()"
     [tabIndex]="!isFocusable() ? -1 : tabIndex()"
-    [value]="value()"
+    [value]="_nativeValue()"
     (blur)="onBlur()"
     (click)="onInputClick()"
     (change)="$event.stopPropagation()"

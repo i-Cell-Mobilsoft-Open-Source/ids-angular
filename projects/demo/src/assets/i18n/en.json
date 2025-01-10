@@ -34,6 +34,7 @@
     "SNACKBAR": "Snackbar",
     "SWITCH": "Switch",
     "TAB": "Tab",
+    "TABLE": "Table",
     "TAG": "Tag",
     "TOOLTIP": "Tooltip"
   },
@@ -42,5 +43,15 @@
     "NON-INTERACTIVE": "Non-interactive",
     "STANDALONE": "Standalone",
     "GROUPED": "Grouped"
+  },
+  "TABLE": {
+    "COL": {
+      "NAME": "Name",
+      "SYMBOL": "Symbol",
+      "ATOMIC_MASS": "Atomic mass",
+      "MELT": "Melting point",
+      "NUMBER": "Number",
+      "SUMMARY": "Summary"
+    }
   }
 }

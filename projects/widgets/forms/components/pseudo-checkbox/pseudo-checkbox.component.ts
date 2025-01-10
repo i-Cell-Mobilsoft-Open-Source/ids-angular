@@ -1,7 +1,7 @@
 import { IDS_PSEUDO_CHECKBOX_PARENT } from './tokens/pseudo-checkbox-parent';
+import { IdsPseudoCheckboxState, IdsPseudoCheckboxStateType } from './types/pseudo-checkbox-state.type';
 
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { IdsCheckboxState, IdsCheckboxStateType } from '@i-cell/ids-angular/checkbox';
 import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -19,11 +19,11 @@ export class PseudoCheckboxComponent extends ComponentBase {
   }
 
   private readonly _parent = inject(IDS_PSEUDO_CHECKBOX_PARENT, { optional: true });
-  public checkboxState = input<IdsCheckboxStateType>(IdsCheckboxState.UNCHECKED);
+  public checkboxState = input<IdsPseudoCheckboxStateType>(IdsPseudoCheckboxState.UNCHECKED);
   public disabled = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
 
-  protected _isChecked = computed(() => this.checkboxState() === IdsCheckboxState.CHECKED);
-  protected _isIndeterminate = computed(() => this.checkboxState() === IdsCheckboxState.INDETERMINATE);
+  protected _isChecked = computed(() => this.checkboxState() === IdsPseudoCheckboxState.CHECKED);
+  protected _isIndeterminate = computed(() => this.checkboxState() === IdsPseudoCheckboxState.INDETERMINATE);
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parent?.embeddedPseudoCheckboxSize(),

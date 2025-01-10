@@ -1,6 +1,8 @@
 import { IDS_CHECKBOX_GROUP_DEFAULT_CONFIG, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxGroupDefaultConfig } from './checkbox-group-defaults';
 import { IdsCheckboxComponent } from './checkbox.component';
 import { IdsCheckBoxChangeEvent } from './types/checkbox-events.class';
+import { IDS_CHECKBOX_GROUP_CHILD } from './types/checkbox-group-child';
+import { IDS_CHECKBOX_PARENT, IdsCheckboxParent } from './types/checkbox-parent';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, ViewEncapsulation } from '@angular/core';
@@ -19,15 +21,21 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
     'role': 'group',
     '[attr.aria-labelledby]': '_groupLabelId()',
   },
+  providers: [
+    {
+      provide: IDS_CHECKBOX_PARENT,
+      useExisting: IdsCheckboxGroupComponent,
+    },
+  ],
 })
-export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsCheckboxGroupDefaultConfig> {
+export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsCheckboxGroupDefaultConfig> implements IdsCheckboxParent {
   protected override get _hostName(): string {
     return 'checkbox-group';
   }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG);
 
-  private _childCheckboxes = contentChildren(IdsCheckboxComponent);
+  private _childCheckboxes = contentChildren(IDS_CHECKBOX_GROUP_CHILD);
 
   public groupLabel = input<string>('', { alias: 'label' });
   public allowParent = input<boolean>(this._defaultConfig.allowParent);

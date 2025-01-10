@@ -47,6 +47,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsPaginatorVariantType>(this._defaultConfig.variant);
   public pageButtonAppearance = input<IdsPaginatorPageButtonAppearanceType>(this._defaultConfig.pageButtonAppearance);
+  /** The total number of items that are being paginated. */
   public length = input.required<number, number>({ transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
   public compactLayout = input<boolean>(false);
@@ -69,6 +70,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
 
   set pageIndex(value: number) {
     this._pageIndex.set(Math.max(value || 0, 0));
+    this._changeDetectorRef.markForCheck();
   }
 
   private _pageIndexValidation = effect(() => {

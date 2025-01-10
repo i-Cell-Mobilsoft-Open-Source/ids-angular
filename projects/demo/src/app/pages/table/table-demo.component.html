@@ -1,0 +1,44 @@
+@let pageInfo = _dataSource.pageInfo$ | async;
+@let totalRows = pageInfo?.totalRows ?? 0;
+@let currentPageIndex = (pageInfo?.page ?? 1) - 1;
+
+{{ pageInfo | json }}
+
+<ids-paginator
+  [length]="totalRows"
+  [pageIndex]="currentPageIndex"
+  (pageChanged)="_dataSource.page($event)"
+/>
+<!--
+appearance="line-division"
+appearance="zebra"
+appearance="plain"
+-->
+<ids-table
+  #table
+  appearance="line-division"
+  variant="primary"
+  [enableRowSelection]="true"
+  [columnDefs]="_colDefs"
+  [dataSource]="_dataSource"
+  [masterDetail]="true"
+  [detailTemplateName]="'customDetailTemplate'"
+  [detailStickyColumns]="true"
+  [hasDetailRow]="_hasDetailRow"
+  [withBorder]="true"
+  [enableSorting]="true"
+  (sortChange)="_dataSource.sort($event)"
+>
+  <span *idsCellTemplate="'symbol'; let row" class="ids-table-cell-template-translate2">{{ row.symbol }}</span>
+  <ng-template let-value="cellValue" idsCellTemplate="translate1">
+    <span class="ids-table-cell-template-translate1">{{ value | translate }}</span>
+  </ng-template>
+  <span *idsCellTemplate="'translate2'; let value=cellValue" class="ids-table-cell-template-translate2">{{ value | translate }}</span>
+  <span *idsCellTemplate="'customDetailTemplate'; let row" class="ids-table-cell-template-detail">{{ row?.summary }}</span>
+</ids-table>
+<ids-paginator
+  [length]="totalRows"
+  [pageIndex]="currentPageIndex"
+  (pageChanged)="_dataSource.page($event)"
+/>
+<div>{{ table.rowSelection.selected | json }}</div>

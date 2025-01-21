@@ -1,7 +1,7 @@
 import { IdsCellContentComponent } from './components/cell-content/cell-content.component';
 import { IdsTableCellTemplateDirective } from './directives/cell-template';
 import { RowInfoHolderDirective } from './directives/row-info-holder';
-import { IDS_TABLE_DEFAULT_CONFIG, IDS_TABLE_DEFAULT_CONFIG_FACTORY, IdsTableDefaultConfig } from './table-defaults';
+import { DEFAULT_MASTER_DETAIL_TEMPLATE_NAME, IDS_TABLE_DEFAULT_CONFIG, IDS_TABLE_DEFAULT_CONFIG_FACTORY, IdsTableDefaultConfig } from './table-defaults';
 import { IdsTableIntl } from './table-intl';
 import { IdsTableAppearance, IdsTableAppearanceType } from './types/table-appearance.type';
 import { IdsTableCellClickEvent } from './types/table-cell-click-event';
@@ -72,7 +72,7 @@ export class IdsTableComponent<D>
   ];
 
   protected readonly _appearanceZebra = IdsTableAppearance.ZEBRA;
-  protected readonly _defaultMasterDetailTemplateName = 'detail';
+  protected readonly _defaultMasterDetailTemplateName = DEFAULT_MASTER_DETAIL_TEMPLATE_NAME;
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TABLE_DEFAULT_CONFIG);
 
   private _cdRef = inject(ChangeDetectorRef);
@@ -87,29 +87,33 @@ export class IdsTableComponent<D>
   public columnDefs = input.required<IdsTableColumnDef<D>[]>();
   public dataSource = input.required<CdkTableDataSourceInput<D>>();
   /** Flag to have sticky header. */
-  public fixedHeader = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public fixedHeader = input<boolean, unknown>(this._defaultConfig.fixedHeader, { transform: coerceBooleanAttribute });
   /** Enable sorting feature */
-  public enableSorting = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public enableSorting = input<boolean, unknown>(this._defaultConfig.enableSorting, { transform: coerceBooleanAttribute });
   /** Enable master-detail rows */
-  public masterDetail = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public masterDetail = input<boolean, unknown>(this._defaultConfig.masterDetail, { transform: coerceBooleanAttribute });
   /** Name of the detail row renderer template */
-  public detailTemplateName = input(this._defaultMasterDetailTemplateName);
+  public detailTemplateName = input(this._defaultConfig.detailTemplateName);
   /** If true the detail cell will not span sticky and stickyEnd columns. If false the detail cell will span the table's full width */
-  public detailStickyColumns = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public detailStickyColumns = input<boolean, unknown>(this._defaultConfig.detailStickyColumns, { transform: coerceBooleanAttribute });
   /** Whether to show the master-detail column label or not. */
-  public showDetailHeader = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public showDetailHeader = input<boolean, unknown>(this._defaultConfig.showDetailHeader, { transform: coerceBooleanAttribute });
   /** Predicate function to decide whether a data row has details or not */
   public hasDetailRow = input<(index: number, data: D) => boolean>(() => false);
   /** Enable row selection feature */
-  public enableRowSelection = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public enableRowSelection = input<boolean, unknown>(this._defaultConfig.enableRowSelection, { transform: coerceBooleanAttribute });
   /** Clear row selection if the table's content changes */
-  public clearSelectionOnChange = input<boolean, unknown>(true, { transform: coerceBooleanAttribute });
+  public clearSelectionOnChange = input<boolean, unknown>(this._defaultConfig.clearSelectionOnChange,
+    { transform: coerceBooleanAttribute });
+
   /** Predicate function to decide whether a row can be selected or not */
   public isRowSelectable = input<(index: number, data: D) => boolean>(() => true);
   /** Render "no rows to show" overlay below the table instead of as a row */
-  public noRowsToShowOverlayBelow = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public noRowsToShowOverlayBelow = input<boolean, unknown>(this._defaultConfig.noRowsToShowOverlayBelow,
+    { transform: coerceBooleanAttribute });
   /** Whether to show a border around the table or not. */
-  public withBorder = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+
+  public withBorder = input<boolean, unknown>(this._defaultConfig.withBorder, { transform: coerceBooleanAttribute });
   /**
    * The table's appearance type. Availabla options:
    * - "line-division": row backgrounds are uniformly colored and divided by thin border lines

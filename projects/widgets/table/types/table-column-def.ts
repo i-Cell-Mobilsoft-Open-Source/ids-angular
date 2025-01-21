@@ -2,23 +2,28 @@ import { IdsTableCellRenderer } from '../directives/cell-renderer';
 
 import { Type } from '@angular/core';
 
-// FIXME: remove if unused
-// type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
-// type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
-
+/**
+ * Column definition type for the i-DS table component.
+ */
 export type IdsTableColumnDef<D> = {
   /**
-   * Unique column identifier literal
+   * Unique column identifier literal (mandatory).
    */
   id: string;
 
   /**
-   * Column label displayed in the header cell
+   * Column label displayed in the header cell. If no label is provided a custom cell renderer is needed to display a proper column header.
    */
   label?: string;
 
+  /**
+   * Name of the data model object property to display in the column's cell.
+   */
   field?: string;
 
+  /**
+   * Value getter function called by a cell renderer, provides the value to be displayed in the cell.
+   */
   value?: ((rowData: D) => unknown);
 
   /**
@@ -27,22 +32,48 @@ export type IdsTableColumnDef<D> = {
    * - 'strong': the label is displayed in a <strong> tag,
    * - 'numeric': the label is displayed in a localized number format,
    * - 'icon': IDS Font ligature displayes as an icon
-   * If no renderer is provided or the given literal does not match any of the above, the cell's value is displayed as a plain string.
+   * If no renderer is provided or the given literal does not match any of the built-in or external cell renderer names, the cell's value is displayed as a plain string.
+   *
+   * Both renderer types get references to the row data, the column definition and a calculated cell value.
+   * A component renderer gets these through its inputs (see {@link IdsTableCellRenderer}), while a template renderer through its context:
+   * row data is implicit, `colData` provides the column metadata, `cellValue` provides the cell's value, eg.:
+   * ```html
+   * <span *idsCellTemplate="'myTemplate'; let row">{{ row.myProp }}</span>
+   *
+   * <!-- or -->
+   *
+   * <ng-template let-colData="colData" let-value="cellValue" idsCellTemplate="myTemplate2">
+   *   <span>Value of {{ colData.field }} is: {{ value }}</span>
+   * </ng-template>
+   * ```
    */
   headerCellRenderer?: string | Type<IdsTableCellRenderer<D>>;
 
   /**
-   * The data cells' renderer either built-in or external template or component.
+   * The data cells' renderer, either built-in or external template or component.
    * Currently the following built-in renderers are available:
    * - 'strong': the label is displayed in a <strong> tag,
    * - 'numeric': the label is displayed in a localized number format,
    * - 'icon': IDS Font ligature displayes as an icon
-   * If no renderer is provided or the given literal does not match any of the above, the cell's value is displayed as a plain string.
+   * If no renderer is provided or the given literal does not match any of the built-in or external cell renderer names, the cell's value is displayed as a plain string.
+   *
+   * Both renderer types get references to the row data, the column definition and a calculated cell value.
+   * A component renderer gets these through its inputs (see {@link IdsTableCellRenderer}), while a template renderer through its context:
+   * row data is implicit, `colData` provides the column metadata, `cellValue` provides the cell's value, eg.:
+   * ```html
+   * <span *idsCellTemplate="'myTemplate'; let row">{{ row.myProp }}</span>
+   *
+   * <!-- or -->
+   *
+   * <ng-template let-colData="colData" let-value="cellValue" idsCellTemplate="myTemplate2">
+   *   <span>Value of {{ colData.field }} is: {{ value }}</span>
+   * </ng-template>
+   * ```
    */
   cellRenderer?: string | Type<IdsTableCellRenderer<D>>;
 
   /**
-   * Defines if the column is hideable.
+   * Defines if the column is hideable (column visibility feature coming soon...).
    */
   hideable?: boolean;
 
@@ -54,11 +85,6 @@ export type IdsTableColumnDef<D> = {
   sortable?: boolean;
 
   orderName?: string;
-
-  /**
-   * Defines if the column is for actions.
-   */
-  actionColumn?: boolean;
 
   /**
    * Defines if the column should be sticky at the begining of the table.

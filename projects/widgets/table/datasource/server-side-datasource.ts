@@ -5,7 +5,7 @@ import { IdsTableSortInfo } from '../types/table-sort-info';
 
 import { DataSource } from '@angular/cdk/collections';
 import { DEFAULT_PAGE_SIZE, IdsPaginatorPageChangeEvent } from '@i-cell/ids-angular/paginator';
-import { BehaviorSubject, catchError, debounceTime, finalize, merge, Observable, of, Subject, Subscription, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, debounceTime, finalize, map, merge, Observable, of, Subject, Subscription, switchMap, tap } from 'rxjs';
 
 export const DEFAULT_DATA_LOAD_DEBOUNCE_TIME = 100;
 
@@ -22,6 +22,7 @@ export class ServerSideDataSource<D> implements DataSource<D> {
   public data$ = this._dataSubject.asObservable();
   public isLoading$ = this._loadingSubject.asObservable();
   public pageInfo$ = this._pageInfoSubject.asObservable();
+  public pageIndex$ = this.pageInfo$.pipe(map((pageInfo) => ((pageInfo?.page ?? 1) - 1)));
 
   get data(): D[] {
     return this._dataSubject.value;
@@ -46,10 +47,7 @@ export class ServerSideDataSource<D> implements DataSource<D> {
   constructor(
     private _requestFactory: IdsTableRequestFactory<D>,
     private _resetDataAndPagingOnError = false,
-  ) {
-    // eslint-disable-next-line no-console
-    this._pageInfoSubject.subscribe((pageInfo) => console.log('Page info change:', pageInfo));
-  }
+  ) {}
 
   public connect(): Observable<readonly D[]> {
     this._initDataLoading();
@@ -113,28 +111,22 @@ export class ServerSideDataSource<D> implements DataSource<D> {
           }
 
           return request$.pipe(
-            catchError((error) => {
-              // eslint-disable-next-line no-console
-              console.log(error);
-              return of(this._resetDataAndPagingOnError ?
-                {
-                  resultList: [] as D[],
-                  paginationParams: {
-                    page: 1,
-                    totalRows: 0,
-                    rows: this.pageInfo?.rows ?? DEFAULT_PAGE_SIZE,
-                  },
-                }
-                :
-                {
-                  resultList: this.data,
-                  paginationParams: this.pageInfo,
+            catchError(() => of(this._resetDataAndPagingOnError ?
+              {
+                resultList: [] as D[],
+                paginationParams: {
+                  page: 1,
+                  totalRows: 0,
+                  rows: this.pageInfo?.rows ?? DEFAULT_PAGE_SIZE,
                 },
-              );
-            }),
+              }
+              :
+              {
+                resultList: this.data,
+                paginationParams: this.pageInfo,
+              },
+            )),
             tap((response) => {
-              // eslint-disable-next-line no-console
-              console.log(response);
               this.data = response.resultList ?? [];
               this._pageInfoSubject.next(response.paginationParams);
             }),

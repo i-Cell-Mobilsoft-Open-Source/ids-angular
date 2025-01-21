@@ -3,11 +3,13 @@ import { NavComponent } from './components/nav/nav.component';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSwitchComponent } from '@i-cell/ids-angular/switch';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { map, startWith, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +19,7 @@ import { Subscription } from 'rxjs';
     RouterOutlet,
     TranslateModule,
     NavComponent,
+    IdsButtonComponent,
     IdsSwitchComponent,
     CdkScrollable,
     ReactiveFormsModule,
@@ -26,6 +29,9 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private _translate: TranslateService = inject(TranslateService);
+
+  private _subscription = new Subscription();
+
   public menuConfigs: Menu[] = [
     { name: 'GET_STARTED', children: [] },
     {
@@ -75,8 +81,9 @@ export class AppComponent implements OnInit, OnDestroy {
     { name: 'RESOURCES', children: [] },
   ];
 
-  private _subscription = new Subscription();
   public darkMode = new FormControl<boolean>(false);
+
+  public currentLang = toSignal(this._translate.onLangChange.pipe(map(({ lang }) => lang), startWith(this._translate.currentLang)));
 
   constructor() {
     this._changeTheme('light');
@@ -107,5 +114,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this._subscription.unsubscribe();
+  }
+
+  public changeLanguage(lang: 'en' | 'hu'): void {
+    this._translate.use(lang);
   }
 }

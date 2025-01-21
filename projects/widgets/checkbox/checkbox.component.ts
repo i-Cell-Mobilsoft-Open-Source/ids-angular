@@ -35,6 +35,10 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[attr.aria-label]': 'null',
+    '[attr.aria-labelledby]': 'null',
+  },
 })
 export class IdsCheckboxComponent
   extends ComponentBaseWithDefaults<IdsCheckboxDefaultConfig>
@@ -61,6 +65,9 @@ export class IdsCheckboxComponent
   public variant = input<IdsCheckboxVariantType>(this._defaultConfig.variant);
   public checked = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
   public indeterminate = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public ariaLabel = input<string>('', { alias: 'aria-label' });
+  public ariaLabelledby = input<string | null>(null, { alias: 'aria-labelledby' });
+  public ariaDescribedby = input<string>('', { alias: 'aria-describedby' });
 
   public disabled = model(false);
 

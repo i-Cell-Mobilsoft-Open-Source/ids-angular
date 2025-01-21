@@ -17,6 +17,7 @@
         [aria-hidden]="true"
       />
     }
+    <!-- TODO: label-description template (needs further discussion) -->
     @default {
       @let template = _cellTemplate();
       @if (template) {
@@ -24,7 +25,7 @@
         <ng-container *ngTemplateOutlet="template; context: { $implicit: rowData(), colDef: colDef(), cellValue: _cellValue() }" />
       } @else {
         <!-- default basic cell content -->
-        <span class="ids-cell-content ids-cell-content__default">{{ _cellValue() }}</span>
+        <div class="ids-cell-content ids-cell-content__default">{{ _cellValue() }}</div>
       }
     }
   }

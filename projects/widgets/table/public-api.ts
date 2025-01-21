@@ -13,4 +13,6 @@ export * from './types/table-row-keydown-event';
 export * from './types/table-sort-direction';
 export * from './types/table-sort-info';
 export * from './types/table-variant.type';
+export * from './table-defaults';
+export * from './table-intl';
 export * from './table.component';

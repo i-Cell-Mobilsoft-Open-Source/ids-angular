@@ -1,201 +1,20 @@
 <!-- eslint-disable @angular-eslint/template/prefer-self-closing-tags -->
 
+<!-- Empty table message template  -->
 <ng-template #noRowsToShow>
   <div class="ids-table__no-rows-to-show">
     <ng-content select="[idsNoRowsToShow]">No rows to show</ng-content>
   </div>
 </ng-template>
 
+<!-- Default detail cell template (a table showing the non-visible columns) -->
 <ng-template #defaultDetail let-row let-cols="cols" [idsCellTemplate]="_defaultMasterDetailTemplateName">
   <ids-table appearance="zebra" [dataSource]="[row]" [columnDefs]="cols"></ids-table>
 </ng-template>
 
-<ng-template #columnMenu>
-  <!-- <div *ngIf="columnMenuStyle === 'dotsMenu'" class="align-items-center">
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="" role="menu">
-      <mat-icon svgIcon="dots-vertical"></mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <ng-container *ngFor="let col of columnDefinitions">
-        <button mat-menu-item *ngIf="col.hideable" (click)="$event.stopPropagation(); columnSelection.toggle(col)">
-          <mat-checkbox
-            [color]="color"
-            [name]="'column-checkbox--' + col.field"
-            (click)="$event.stopPropagation()"
-            (change)="$event ? columnSelection.toggle(col) : null; onColumnSelectionChange($event, col)"
-            [checked]="columnSelection.isSelected(col)"
-          >
-            <span [innerHTML]="col.label | translate | sanitize"></span>
-          </mat-checkbox>
-        </button>
-      </ng-container>
-    </mat-menu>
-  </div>
-
-  <div *ngIf="columnMenuStyle === 'selectField'" class="align-items-center">
-    <mat-form-field>
-      <mat-label>{{ columnMenuPlaceholder }}</mat-label>
-      <mat-select [formControl]="columnSelectorFormControl" multiple (selectionChange)="handleColumnSelectionChange($event)">
-        <ng-container *ngFor="let colEntry of columnDefinitions">
-          <mat-option *ngIf="colEntry.hideable" [value]="colEntry" (onSelectionChange)="onColumnSelectionChange($event, colEntry)">
-            {{ colEntry.label | translate }}
-          </mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <div *ngIf="columnMenuStyle === 'dragMenu'" class="align-items-center">
-    <button
-      id="drag-menu__button_menu-on"
-      mat-icon-button
-      [attr.aria-label]="'ICELL_DATA_TABLE.DRAG_MENU.ARIA.MENU_ON' | translate"
-      (click)="triggerDragMenu()"
-      cdkOverlayOrigin
-      #dragMenuTrigger="cdkOverlayOrigin"
-    >
-      <mat-icon svgIcon="table-cog"></mat-icon>
-    </button>
-    <ng-template
-      #dragMenu="cdkConnectedOverlay"
-      cdkConnectedOverlay
-      [cdkConnectedOverlayOrigin]="dragMenuTrigger"
-      [cdkConnectedOverlayPositions]="dragMenuPositions"
-      [cdkConnectedOverlayOpen]="isDragMenuOpen"
-      [cdkConnectedOverlayPush]="true"
-      [cdkConnectedOverlayHasBackdrop]="true"
-      cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-      (backdropClick)="triggerDragMenu(false)"
-      (overlayKeydown)="updateDragMenuOpen($event)"
-    >
-      <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true" class="drag-menu mat-elevation-z4">
-        <div class="drag-menu__header">
-          <div class="drag-menu__header_left-wrapper">
-            <mat-icon svgIcon="table-cog"></mat-icon>
-            <h1 class="drag-menu__header_title">{{ 'ICELL_DATA_TABLE.DRAG_MENU.TITLE' | translate | uppercase }}</h1>
-          </div>
-          <div class="drag-menu__header_right-wrapper">
-            <button
-              id="drag-menu__button_switch-all-col-on"
-              mat-flat-button
-              class="drag-menu__header_switch-all-col-on-button"
-              [attr.aria-label]="'ICELL_DATA_TABLE.DRAG_MENU.ARIA.SWITCH_ALL_COL_ON' | translate"
-              (click)="switchAllColTo(true)"
-            >
-              {{ 'ICELL_DATA_TABLE.DRAG_MENU.SWITCH_ALL_COL_ON' | translate }}
-            </button>
-            <button
-              id="drag-menu__button_switch-all-col-off"
-              mat-flat-button
-              class="drag-menu__header_switch-all-col-off-button"
-              [attr.aria-label]="'ICELL_DATA_TABLE.DRAG_MENU.ARIA.SWITCH_ALL_COL_OFF' | translate"
-              (click)="switchAllColTo(false)"
-            >
-              {{ 'ICELL_DATA_TABLE.DRAG_MENU.SWITCH_ALL_COL_OFF' | translate }}
-            </button>
-            <button
-              id="drag-menu__button_close"
-              mat-icon-button
-              class="drag-menu__button"
-              [attr.aria-label]="'ICELL_DATA_TABLE.DRAG_MENU.ARIA.CLOSE' | translate"
-              (click)="triggerDragMenu(false)"
-            >
-              <mat-icon svgIcon="close"></mat-icon>
-            </button>
-          </div>
-        </div>
-        <div cdkDropList class="drag-menu__list" (cdkDropListDropped)="drop($event)">
-          <ng-container *ngFor="let colEntry of dragMenuColDefs; let idx = index">
-            <div [attr.id]="'drag-menu__item_' + colEntry.field" class="drag-menu__list_item" cdkDrag>
-              <div class="drag-menu__list_item-left-wrapper">
-                <mat-slide-toggle
-                  class="drag-menu__slide-toggle"
-                  [name]="'col-toggle--' + colEntry.field"
-                  color="primary"
-                  [checked]="colEntry.visible"
-                  [disabled]="!colEntry.hideable"
-                  (click)="$event.stopPropagation()"
-                  (change)="$event ? (colEntry.visible = !colEntry.visible) : null"
-                ></mat-slide-toggle>
-                <label class="drag-menu__list_item-label">{{ colEntry.label | translate }}</label>
-                <mat-icon *ngIf="!colEntry.hideable" class="drag-menu__button-disabled" svgIcon="lock-outline"></mat-icon>
-              </div>
-              <div class="drag-menu__list_item-right-wrapper">
-                <button
-                  mat-icon-button
-                  class="drag-menu__button"
-                  (click)="moveOnePosition(colEntry, 1)"
-                  [disabled]="idx === dragMenuColDefs.length - 1"
-                >
-                  <mat-icon svgIcon="arrow-down-thin"></mat-icon>
-                </button>
-                <button mat-icon-button class="drag-menu__button" (click)="moveOnePosition(colEntry, -1)" [disabled]="idx === 0">
-                  <mat-icon svgIcon="arrow-up-thin"></mat-icon>
-                </button>
-                <div class="drag-menu__list_item-handle" cdkDragHandle>
-                  <mat-icon svgIcon="drag"></mat-icon>
-                </div>
-              </div>
-              <div class="drag-menu__list_item-placeholder" *cdkDragPlaceholder></div>
-            </div>
-          </ng-container>
-        </div>
-        <div class="drag-menu__footer">
-          <div class="drag-menu__footer_left-wrapper">
-            <button
-              id="drag-menu__button_switch-to-default"
-              mat-flat-button
-              [attr.aria-label]="'ICELL_DATA_TABLE.DRAG_MENU.ARIA.SWITCH_TO_DEFAULT' | translate"
-              class="drag-menu__footer_switch-to-default-button"
-              (click)="switchColDefsToDefault()"
-            >
-              {{ 'ICELL_DATA_TABLE.DRAG_MENU.SWITCH_TO_DEFAULT' | translate }}
-            </button>
-          </div>
-          <div class="drag-menu__footer_right-wrapper">
-            <button
-              id="drag-menu__button_cancel"
-              mat-flat-button
-              [attr.aria-label]="'ICELL_DATA_TABLE.DRAG_MENU.ARIA.CANCEL' | translate"
-              class="drag-menu__footer_cancel-button"
-              (click)="triggerDragMenu(false)"
-            >
-              {{ 'ICELL_DATA_TABLE.DRAG_MENU.CANCEL' | translate }}
-            </button>
-            <button
-              id="drag-menu__button_save"
-              mat-raised-button
-              [attr.aria-label]="'ICELL_DATA_TABLE.DRAG_MENU.ARIA.SAVE' | translate"
-              class="drag-menu__footer_save-button"
-              color="primary"
-              (click)="saveColDefs()"
-            >
-              {{ 'ICELL_DATA_TABLE.DRAG_MENU.SAVE' | translate }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </ng-template>
-  </div> -->
-</ng-template>
-
-<!-- Loading spinner -->
-<!-- <div *ngIf="isLoading() | async" [class.loadOverlay]="true">
-  <mat-spinner [diameter]="50" [color]="color"></mat-spinner>
-</div> -->
-
-<!-- <div *ngIf="showColumnMenu && columnMenuStyle === 'selectField'">
-  <ng-container [ngTemplateOutlet]="columnMenu"></ng-container>
-</div> -->
-
-<!-- <div class="extensions top-extensions" *ngIf="extensions.length > 0">
-  <ng-container *ngFor="let extension of extensions">
-    <ng-container *ngTemplateOutlet="extension; context: { table: context }"></ng-container>
-  </ng-container>
-</div> -->
+<!-- TODO: Loading spinner -->
 
 <div class="ids-table__horizontal-scroll">
-  <!-- matSort -->
   <table
     cdk-table
     cdkDropListGroup
@@ -206,8 +25,7 @@
     >
     <caption><ng-content select="[idsTableCaption]"></ng-content></caption>
 
-    // TODO:
-    <!-- multiselect -->
+    <!-- Column and row definitions for row selection -->
     <ng-container cdkColumnDef="$selectBoxes" sticky>
       <th
         *cdkHeaderCellDef
@@ -216,11 +34,11 @@
         role="cell"
         class="ids-table__header-cell ids-table__header-cell--select-all-rows"
       >
-        <!-- FIXME: ids-checkbox: [aria-label]="checkboxLabel()" -->
         <ids-checkbox
           [indeterminate]="rowSelection.hasValue() && !_isAllSelected()"
           [checked]="rowSelection.hasValue() && _isAllSelected()"
           [disabled]="_isSelectAllDisabled()"
+          [aria-label]="_intl.headerSelectorAriaLabel"
           (change)="$event ? _masterToggle() : null"
         >
         </ids-checkbox>
@@ -230,72 +48,47 @@
         cdk-cell
         class="ids-table__cell ids-table__cell--row-select"
       >
-        <!-- FIXME: hideSelectParameter -->
-        <!-- @let showSelector = hideSelectParameter ? !row[hideSelectParameter] : true;
-        @if (showSelector) { -->
-          <!-- FIXME: ids-checkbox: [aria-label]="checkboxLabel(row)" -->
           <ids-checkbox
-            [disabled]="_disabledRows().has(row)"
+            class="ids-table__checkbox--row-selector"
+            [disabled]="_unselectableRows().has(row)"
             [checked]="rowSelection.isSelected(row)"
             [value]="row"
+            [aria-label]="_intl.rowSelectorAriaLabel"
             (click)="$event.stopPropagation()"
             (change)="$event ? rowSelection.toggle(row) : null"
           >
           </ids-checkbox>
-        <!-- } -->
       </td>
     </ng-container>
 
-    // TODO:
-    <!-- column menu -->
-    <ng-container cdkColumnDef="$columnMenu" stickyEnd>
-      <td *cdkCellDef="let row; let idx = index" cdk-cell class="master-detail-cell">
-        <!-- <button *ngIf="row.actions?.length" mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
-          <mat-icon [svgIcon]="'dots-vertical'"></mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button
-            mat-menu-item
-            *ngFor="let act of row.actions"
-            color="accent"
-            (click)="act.callBack(row)"
-            [innerHTML]="act.label | translate | sanitize"
-          ></button>
-        </mat-menu> -->
-      </td>
-    </ng-container>
-
-    <!-- master-detail column definition -->
+    <!-- Column and row definitions for the master-detail toggle feature -->
     <ng-container cdkColumnDef="$masterDetail" stickyEnd>
-      <!-- FIXME: showDetailHeader -->
-      @let showDetailHeader = false;
       <th
         *cdkHeaderCellDef
         cdk-header-cell
         scope="col"
         class="ids-table__header-cell ids-table__header-cell--master-detail-toggle"
-        [class.ids-table__header-cell--master-detail-toggle-expand]="showDetailHeader"
+        [class.ids-table__header-cell--master-detail-toggle-expand]="showDetailHeader()"
       >
-        <!-- @if (showDetailHeader) {
-          <span>{{ 'MASTER_DETAIL.HEADER' | translate }}</span>
-        } -->
+        @if (showDetailHeader()) {
+          <span>{{ _intl.detailHeaderLabel }}</span>
+        }
       </th>
       <td
         *cdkCellDef="let row; let idx = $index"
         cdk-cell
         class="ids-table__cell ids-table__cell--master-detail-toggle"
-        [class.master-detail-cell--expand]="showDetailHeader"
+        [class.ids-table__cell--master-detail-toggle-expand]="showDetailHeader()"
       >
         @let hasDetail = hasDetailRow()(idx, row);
-        @let rowExpanded = _expandedRows.has(row) || _allRowsExpanded();
+        @let rowExpanded = _expandedRows.has(row);
         @if (hasDetail) {
-          <!-- TODO: aria-label Intl -->
           <button
             type="button"
             idsIconButton
+            class="ids-table__button--master-detail"
             [attr.aria-expanded]="rowExpanded || false"
-            [attr.aria-label]="'MASTER_DETAIL.BUTTON'"
-            [class.ids-table__button--master-detail]="hasDetail"
+            [attr.aria-label]="_intl.getDetailExpandButtonAriaLabel(row) || null"
             (click)="_handleMasterDetailClick(row)"
           >
             <ids-icon aria-hidden="true" alt="" [fontIcon]="rowExpanded ? 'chevron-up' : 'chevron-down'" />
@@ -303,9 +96,10 @@
         }
       </td>
     </ng-container>
+    <!-- Column definition for the detail cells -->
     <ng-container cdkColumnDef="$expandedDetail">
       <td *cdkCellDef="let row; let idx = index" cdk-cell class="ids-table__cell ids-table__detail-cell" [attr.colspan]="_detailColSpan()">
-        <div class="ids-table__detail-cell--content-wrapper" [@detailExpand]="_expandedRows.has(row) || _allRowsExpanded() ? 'expanded' : 'collapsed'">
+        <div class="ids-table__detail-cell--content-wrapper" [@detailExpand]="_expandedRows.has(row) ? 'expanded' : 'collapsed'">
           @let isDefaultTemplate = _detailTemplate() === _defaulDetailTemplate();
           @let context = isDefaultTemplate ? { $implicit: row, cols: _hiddenColumns() } : { $implicit: row };
           <ng-container *ngTemplateOutlet="_detailTemplate() ?? defaultDetail; context: context"></ng-container>
@@ -313,6 +107,7 @@
       </td>
     </ng-container>
 
+    <!-- Column definitions for sticky empty cells -->
     <ng-container cdkColumnDef="$empty" sticky>
       <td *cdkCellDef="let row; let idx = index" cdk-cell class="ids-table__cell"></td>
     </ng-container>
@@ -320,79 +115,52 @@
       <td *cdkCellDef="let row; let idx = index" cdk-cell class="ids-table__cell"></td>
     </ng-container>
 
-
-    <!-- setup grouping headers -->
-    <!-- <ng-container *ngFor="let col of groupingHeaders; let colIndex = index; let isLast = last" cdkColumnDef="{{ col.name }}">
-      <th *cdkHeaderCellDef cdk-header-cell [colSpan]="col.colspan" [class]="col.classes || ''">
-        <span [innerHTML]="col.label | translate | sanitize"></span>
-      </th>
-    </ng-container> -->
-
-    <!-- setup data columns -->
+    <!-- Column and row definitions for the actual data -->
     @for (col of columnDefs(); track col.id; let colIndex = $index; let isLast = $last ) {
       <ng-container
         [cdkColumnDef]="col.id"
         [sticky]="col.sticky && !col.stickyEnd"
         [stickyEnd]="col.stickyEnd && !col.sticky"
       >
-         @if (col.actionColumn) {
-          <th
-            *cdkHeaderCellDef
-            cdk-header-cell
-            class="ids-table__header-cell ids-table__header-cell--actions"
-            scope="col"
-            [class]="col.columnClasses || ''"
-            [id]="id() + '-header-' + col.id"
-          >
-            <!-- FIXME: showColumnMenu, columnMenuStyle -->
-            @let showColumnMenu = false;
-            @let columnMenuStyle = null;
-
-            @if (showColumnMenu && (columnMenuStyle === 'dotsMenu' || columnMenuStyle === 'dragMenu')) {
-              <ng-container [ngTemplateOutlet]="columnMenu"></ng-container>
-            }
-          </th>
-        } @else {
-          @let colSortable = col.sortable && enableSorting();
-          @let orderName = col.orderName || col.field || col.id;
-          <th
-            *cdkHeaderCellDef
-            cdk-header-cell
-            class="ids-table__header-cell"
-            idsHeaderCellContent
-            scope="col"
-            [class.ids-table__header-cell--sortable]="colSortable"
-            [class]="col.columnClasses || ''"
-            [colDef]="col"
-            [externalCellTemplates]="_cellTemplatesByName()"
-            [id]="id() + '-header-' + col.id"
-          >
-            @if (colSortable) {
-              <!-- FIXME: [class.grey]="!_isSorted(orderName)" kell a button-re? -->
-              <button
-                type="button"
-                idsIconButton
-                colEnd
-                class="ids-table__header-cell--sort-button"
-                [attr.aria-label]="_sortButtonLabel(col)"
-                (click)="_handleSortClick(orderName)"
-              >
-                @let sortDirection = _sortState()?.sortBy === orderName ? _sortState()?.direction : null;
-                @switch (sortDirection) {
-                  @case ('asc') {
-                    <ids-icon [fontIcon]="'chevron-up'"></ids-icon>
-                  }
-                  @case ('desc') {
-                    <ids-icon [fontIcon]="'chevron-down'"></ids-icon>
-                  }
-                  @default {
-                    <ids-icon [fontIcon]="'adjustments-horizontal'"></ids-icon>
-                  }
+        @let colSortable = col.sortable && enableSorting();
+        @let orderName = col.orderName || col.field || col.id;
+        @let sortDirection = colSortable && _sortState()?.sortBy === orderName ? _sortState()?.direction : null;
+        @let nextSortDirection = _getNextSortDirectionFor(orderName);
+        <th
+          *cdkHeaderCellDef
+          cdk-header-cell
+          class="ids-table__header-cell"
+          idsHeaderCellContent
+          scope="col"
+          [class.ids-table__header-cell--sortable]="colSortable"
+          [class]="col.columnClasses || ''"
+          [colDef]="col"
+          [externalCellTemplates]="_cellTemplatesByName()"
+          [id]="id() + '-header-' + col.id"
+        >
+          @if (colSortable) {
+            <button
+              type="button"
+              idsIconButton
+              colEnd
+              class="ids-table__header-cell--sort-button"
+              [attr.aria-label]="_intl.getSortButtonAriaLabel(col, nextSortDirection)"
+              (click)="_handleSortClick(orderName)"
+            >
+              @switch (sortDirection) {
+                @case ('asc') {
+                  <ids-icon [fontIcon]="'chevron-up'"></ids-icon>
                 }
-              </button>
-            }
-          </th>
-        }
+                @case ('desc') {
+                  <ids-icon [fontIcon]="'chevron-down'"></ids-icon>
+                }
+                @default {
+                  <ids-icon [fontIcon]="'adjustments-horizontal'"></ids-icon>
+                }
+              }
+            </button>
+          }
+        </th>
 
         @if (col.identifier) {
           <th
@@ -424,24 +192,21 @@
       </ng-container>
     }
 
-    <!-- header row render -->
-    <!-- @if (hasGroupingHeaders()) {
-      <tr *cdkHeaderRowDef="groupingColumns" cdk-header-row></tr>
-    } -->
+    <!-- Header row render definition -->
     <tr *cdkHeaderRowDef="_actualColumns(); sticky: fixedHeader()" cdk-header-row class="ids-table__header-row"></tr>
 
-    <!-- row render -->
+    <!-- Row render definition -->
     <tr
       *cdkRowDef="let row; columns: _actualColumns(); let idx = dataIndex"
       cdk-row
       class="ids-table__row"
       [rowInfo]="{ rowData: row, index: idx }"
-      [ngClass]="[rowClass()(row), (appearance() !== _appearanceZebra || idx % 2 === 0) ? 'ids-table__row--surface' : 'ids-table__row--secondary']"
+      [ngClass]="(appearance() !== _appearanceZebra || idx % 2 === 0) ? 'ids-table__row--surface' : 'ids-table__row--secondary'"
       (click)="_handleRowClick($event, row)"
       (keydown)="_handleRowKeyDown($event, row)"
     ></tr>
 
-    <!-- detail row render -->
+    <!-- Detail row render definition -->
     @if (masterDetail()) {
       <tr
         *cdkRowDef="let row; columns: _detailRowTemplates(); when: hasDetailRow()"
@@ -451,7 +216,7 @@
       ></tr>
     }
 
-    <!-- noDataRow -->
+    <!-- Empty table message (inside the table) -->
     @if (!noRowsToShowOverlayBelow()) {
       <tr *cdkNoDataRow class="ids-table__row">
         <td class="ids-table__cell" [attr.colspan]="_actualColumns().length">
@@ -461,14 +226,7 @@
     }
   </table>
 </div>
-<!-- FIXME: extensions -->
-<!-- @if (extensions.length > 0) {
-  <div class="extensions bottom-extensions">
-    @for (extension of extensions; track $index) {
-      <ng-container *ngTemplateOutlet="extension; context: { table: context }"></ng-container>
-    }
-  </div>
-} -->
+<!-- Empty table message (outside the table) -->
 @if (noRowsToShowOverlayBelow() && _hasNoRows()) {
   <ng-container [ngTemplateOutlet]="noRowsToShow"></ng-container>
 }

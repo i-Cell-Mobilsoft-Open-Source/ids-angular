@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { compare } from '@i-cell/ids-angular/core';
 import { IdsTableRequestPaginationData, IdsTableResponseData, IdsTableSortDirection, IdsTableSortInfo } from '@i-cell/ids-angular/table';
-import { map, Observable, throwError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TableDemoService {
@@ -14,11 +14,6 @@ export class TableDemoService {
 
   public getPeriodicTable(paginationData: IdsTableRequestPaginationData | null, sortInfo: IdsTableSortInfo | null):
   Observable<IdsTableResponseData<PeriodicTableElement>> {
-    // eslint-disable-next-line no-magic-numbers
-    if (Math.random() < 0.5) {
-      return throwError(() => new Error('bla'));
-    }
-
     // eslint-disable-next-line no-magic-numbers
     const rows = paginationData?.rows || 10;
     const page = paginationData?.page || 1;

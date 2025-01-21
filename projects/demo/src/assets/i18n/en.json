@@ -1,5 +1,4 @@
 {
-  "TITLE": "iDS",
   "GET_STARTED": "Get Started",
   "DESIGN_DEVELOP": "Design & Develop",
   "DESIGN_DEVELOP_MENU": {
@@ -52,6 +51,18 @@
       "MELT": "Melting point",
       "NUMBER": "Number",
       "SUMMARY": "Summary"
+    },
+    "ARIA": {
+      "HEADER_SELECTOR": "Select/deselect all rows",
+      "ROW_SELECTOR": "Select/deselect row"
+    },
+    "LABEL": {
+      "DETAIL_HEADER": "Actions"
+    },
+    "BUTTON": {
+      "EXPAND_DETAILS": "Expand details",
+      "COLLAPSE_DETAILS": "Collapse details",
+      "CHANGE_LANGUAGE": "Change language"
     }
   }
 }

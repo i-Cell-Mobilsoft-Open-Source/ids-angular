@@ -6,11 +6,11 @@ import { IdsOptionSelectionChange } from './types/option-events.class';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '../form-field/types/form-field-variant.type';
 import { PseudoCheckboxComponent } from '../pseudo-checkbox/pseudo-checkbox.component';
 import { IDS_PSEUDO_CHECKBOX_PARENT, IdsPseudoCheckboxParent } from '../pseudo-checkbox/tokens/pseudo-checkbox-parent';
+import { IdsPseudoCheckboxState } from '../pseudo-checkbox/types/pseudo-checkbox-state.type';
 
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { IdsCheckboxState } from '@i-cell/ids-angular/checkbox';
 import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -78,7 +78,7 @@ export class IdsOptionComponent<T = unknown>
     this.variant(),
   ]));
 
-  protected _pseudoCheckboxState = computed(() => (this.selected() ? IdsCheckboxState.CHECKED : IdsCheckboxState.UNCHECKED));
+  protected _pseudoCheckboxState = computed(() => (this.selected() ? IdsPseudoCheckboxState.CHECKED : IdsPseudoCheckboxState.UNCHECKED));
   public embeddedPseudoCheckboxSize = computed(() => this.size());
   public embeddedPseudoCheckboxVariant = signal(IdsFormFieldVariant.SURFACE);
 

@@ -27,6 +27,11 @@
     </svg>
     <div class="blur"></div>
   </div>
+  <div class="spacer"></div>
+  <div class="language-chooser">
+    <button idsButton type="button" variant="primary" [disabled]="currentLang() === 'en'" (click)="changeLanguage('en')">EN</button>
+    <button idsButton type="button" variant="secondary" [disabled]="currentLang() === 'hu'" (click)="changeLanguage('hu')">HU</button>
+  </div>
   <ids-switch [formControl]="darkMode" [size]="'dense'" />
 </header>
 <ids-nav [menu]="menuConfigs" />

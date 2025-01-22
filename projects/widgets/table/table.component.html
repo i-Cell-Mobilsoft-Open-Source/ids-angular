@@ -1,0 +1,232 @@
+<!-- eslint-disable @angular-eslint/template/prefer-self-closing-tags -->
+
+<!-- Empty table message template  -->
+<ng-template #noRowsToShow>
+  <div class="ids-table__no-rows-to-show">
+    <ng-content select="[idsNoRowsToShow]">No rows to show</ng-content>
+  </div>
+</ng-template>
+
+<!-- Default detail cell template (a table showing the non-visible columns) -->
+<ng-template #defaultDetail let-row let-cols="cols" [idsCellTemplate]="_defaultMasterDetailTemplateName">
+  <ids-table appearance="zebra" [dataSource]="[row]" [columnDefs]="cols"></ids-table>
+</ng-template>
+
+<!-- TODO: Loading spinner -->
+
+<div class="ids-table__horizontal-scroll">
+  <table
+    cdk-table
+    cdkDropListGroup
+    multiTemplateDataRows
+    [id]="id()"
+    [dataSource]="dataSource()"
+    (contentChanged)="_tableContentChanged()"
+    >
+    <caption><ng-content select="[idsTableCaption]"></ng-content></caption>
+
+    <!-- Column and row definitions for row selection -->
+    <ng-container cdkColumnDef="$selectBoxes" sticky>
+      <th
+        *cdkHeaderCellDef
+        cdk-header-cell
+        scope="col"
+        role="cell"
+        class="ids-table__header-cell ids-table__header-cell--select-all-rows"
+      >
+        <ids-checkbox
+          [indeterminate]="rowSelection.hasValue() && !_isAllSelected()"
+          [checked]="rowSelection.hasValue() && _isAllSelected()"
+          [disabled]="_isSelectAllDisabled()"
+          [aria-label]="_intl.headerSelectorAriaLabel"
+          (change)="$event ? _masterToggle() : null"
+        >
+        </ids-checkbox>
+      </th>
+      <td
+        *cdkCellDef="let row; let idx = index"
+        cdk-cell
+        class="ids-table__cell ids-table__cell--row-select"
+      >
+          <ids-checkbox
+            class="ids-table__checkbox--row-selector"
+            [disabled]="_unselectableRows().has(row)"
+            [checked]="rowSelection.isSelected(row)"
+            [value]="row"
+            [aria-label]="_intl.rowSelectorAriaLabel"
+            (click)="$event.stopPropagation()"
+            (change)="$event ? rowSelection.toggle(row) : null"
+          >
+          </ids-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Column and row definitions for the master-detail toggle feature -->
+    <ng-container cdkColumnDef="$masterDetail" stickyEnd>
+      <th
+        *cdkHeaderCellDef
+        cdk-header-cell
+        scope="col"
+        class="ids-table__header-cell ids-table__header-cell--master-detail-toggle"
+        [class.ids-table__header-cell--master-detail-toggle-expand]="showDetailHeader()"
+      >
+        @if (showDetailHeader()) {
+          <span>{{ _intl.detailHeaderLabel }}</span>
+        }
+      </th>
+      <td
+        *cdkCellDef="let row; let idx = $index"
+        cdk-cell
+        class="ids-table__cell ids-table__cell--master-detail-toggle"
+        [class.ids-table__cell--master-detail-toggle-expand]="showDetailHeader()"
+      >
+        @let hasDetail = hasDetailRow()(idx, row);
+        @let rowExpanded = _expandedRows.has(row);
+        @if (hasDetail) {
+          <button
+            type="button"
+            idsIconButton
+            class="ids-table__button--master-detail"
+            [attr.aria-expanded]="rowExpanded || false"
+            [attr.aria-label]="_intl.getDetailExpandButtonAriaLabel(row) || null"
+            (click)="_handleMasterDetailClick(row)"
+          >
+            <ids-icon aria-hidden="true" alt="" [fontIcon]="rowExpanded ? 'chevron-up' : 'chevron-down'" />
+          </button>
+        }
+      </td>
+    </ng-container>
+    <!-- Column definition for the detail cells -->
+    <ng-container cdkColumnDef="$expandedDetail">
+      <td *cdkCellDef="let row; let idx = index" cdk-cell class="ids-table__cell ids-table__detail-cell" [attr.colspan]="_detailColSpan()">
+        <div class="ids-table__detail-cell--content-wrapper" [@detailExpand]="_expandedRows.has(row) ? 'expanded' : 'collapsed'">
+          @let isDefaultTemplate = _detailTemplate() === _defaulDetailTemplate();
+          @let context = isDefaultTemplate ? { $implicit: row, cols: _hiddenColumns() } : { $implicit: row };
+          <ng-container *ngTemplateOutlet="_detailTemplate() ?? defaultDetail; context: context"></ng-container>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Column definitions for sticky empty cells -->
+    <ng-container cdkColumnDef="$empty" sticky>
+      <td *cdkCellDef="let row; let idx = index" cdk-cell class="ids-table__cell"></td>
+    </ng-container>
+    <ng-container cdkColumnDef="$emptyEnd" stickyEnd>
+      <td *cdkCellDef="let row; let idx = index" cdk-cell class="ids-table__cell"></td>
+    </ng-container>
+
+    <!-- Column and row definitions for the actual data -->
+    @for (col of columnDefs(); track col.id; let colIndex = $index; let isLast = $last ) {
+      <ng-container
+        [cdkColumnDef]="col.id"
+        [sticky]="col.sticky && !col.stickyEnd"
+        [stickyEnd]="col.stickyEnd && !col.sticky"
+      >
+        @let colSortable = col.sortable && enableSorting();
+        @let orderName = col.orderName || col.field || col.id;
+        @let sortDirection = colSortable && _sortState()?.sortBy === orderName ? _sortState()?.direction : null;
+        @let nextSortDirection = _getNextSortDirectionFor(orderName);
+        <th
+          *cdkHeaderCellDef
+          cdk-header-cell
+          class="ids-table__header-cell"
+          idsHeaderCellContent
+          scope="col"
+          [class.ids-table__header-cell--sortable]="colSortable"
+          [class]="col.columnClasses || ''"
+          [colDef]="col"
+          [externalCellTemplates]="_cellTemplatesByName()"
+          [id]="id() + '-header-' + col.id"
+        >
+          @if (colSortable) {
+            <button
+              type="button"
+              idsIconButton
+              colEnd
+              class="ids-table__header-cell--sort-button"
+              [attr.aria-label]="_intl.getSortButtonAriaLabel(col, nextSortDirection)"
+              (click)="_handleSortClick(orderName)"
+            >
+              @switch (sortDirection) {
+                @case ('asc') {
+                  <ids-icon [fontIcon]="'chevron-up'"></ids-icon>
+                }
+                @case ('desc') {
+                  <ids-icon [fontIcon]="'chevron-down'"></ids-icon>
+                }
+                @default {
+                  <ids-icon [fontIcon]="'adjustments-horizontal'"></ids-icon>
+                }
+              }
+            </button>
+          }
+        </th>
+
+        @if (col.identifier) {
+          <th
+            *cdkCellDef="let row; let idx = index"
+            cdk-cell
+            idsCellContent
+            class="ids-table__cell ids-table__cell--identifier"
+            role="gridcell"
+            scope="row"
+            [class]="col.cellClasses || ''"
+            [colDef]="col"
+            [rowData]="row"
+            [externalCellTemplates]="_cellTemplatesByName()"
+            (click)="_handleCellClick($event, row, col)"
+          ></th>
+        } @else {
+          <td
+            *cdkCellDef="let row; let idx = index"
+            cdk-cell
+            class="ids-table__cell"
+            idsCellContent
+            [class]="col.cellClasses || ''"
+            [colDef]="col"
+            [rowData]="row"
+            [externalCellTemplates]="_cellTemplatesByName()"
+            (click)="_handleCellClick($event, row, col)"
+          ></td>
+        }
+      </ng-container>
+    }
+
+    <!-- Header row render definition -->
+    <tr *cdkHeaderRowDef="_actualColumns(); sticky: fixedHeader()" cdk-header-row class="ids-table__header-row"></tr>
+
+    <!-- Row render definition -->
+    <tr
+      *cdkRowDef="let row; columns: _actualColumns(); let idx = dataIndex"
+      cdk-row
+      class="ids-table__row"
+      [rowInfo]="{ rowData: row, index: idx }"
+      [ngClass]="(appearance() !== _appearanceZebra || idx % 2 === 0) ? 'ids-table__row--surface' : 'ids-table__row--secondary'"
+      (click)="_handleRowClick($event, row)"
+      (keydown)="_handleRowKeyDown($event, row)"
+    ></tr>
+
+    <!-- Detail row render definition -->
+    @if (masterDetail()) {
+      <tr
+        *cdkRowDef="let row; columns: _detailRowTemplates(); when: hasDetailRow()"
+        cdk-row
+        class="ids-table__detail-row ids-table__row--surface"
+        [class.ids-table__detail-row--expanded]="_expandedRows.has(row) || _allRowsExpanded()"
+      ></tr>
+    }
+
+    <!-- Empty table message (inside the table) -->
+    @if (!noRowsToShowOverlayBelow()) {
+      <tr *cdkNoDataRow class="ids-table__row">
+        <td class="ids-table__cell" [attr.colspan]="_actualColumns().length">
+          <ng-container [ngTemplateOutlet]="noRowsToShow"></ng-container>
+        </td>
+      </tr>
+    }
+  </table>
+</div>
+<!-- Empty table message (outside the table) -->
+@if (noRowsToShowOverlayBelow() && _hasNoRows()) {
+  <ng-container [ngTemplateOutlet]="noRowsToShow"></ng-container>
+}

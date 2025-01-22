@@ -100,6 +100,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/tab/tab-demo.component').then((module) => module.TabsDemoComponent),
   },
   {
+    path: 'components/table',
+    loadComponent: () => import('./pages/table/table-demo.component').then((module) => module.TableDemoComponent),
+  },
+  {
     path: 'components/tag',
     loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
   },

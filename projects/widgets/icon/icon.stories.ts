@@ -1,7 +1,9 @@
+import { IdsIconComponent } from './icon.component';
+import { IdsIconVariant } from './types/icon-variant.type';
+
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { selectControlOptions } from '@i-cell/ids-angular/.storybook/utils';
 import { IdsSize, IdsSizeCollection } from '@i-cell/ids-angular/core';
-import { IdsIconVariant, IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
 type StoryType = IdsIconComponent & { svgIcon?: string };

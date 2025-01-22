@@ -23,6 +23,7 @@ export * from './components/option/types/option-events.class';
 export * from './components/option/option-group.component';
 export * from './components/option/option.component';
 export * from './components/pseudo-checkbox/tokens/pseudo-checkbox-parent';
+export * from './components/pseudo-checkbox/types/pseudo-checkbox-state.type';
 export * from './components/pseudo-checkbox/pseudo-checkbox.component';
 export * from './directives/form-field-action.directive';
 export * from './directives/label.directive';

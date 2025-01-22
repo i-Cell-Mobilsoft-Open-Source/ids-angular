@@ -29,7 +29,6 @@ type SegmentedControlHelperControls = {
 
 @Component({
   selector: 'app-segmented-control-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

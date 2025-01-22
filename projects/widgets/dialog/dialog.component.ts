@@ -11,7 +11,6 @@ const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'dialog[idsDialog]',
-  standalone: true,
   imports: [
     IdsDetectScrollableDirective,
     IdsIconComponent,

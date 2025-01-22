@@ -11,7 +11,6 @@ const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-overlay-panel,div[idsOverlayPanel]',
-  standalone: true,
   imports: [],
   hostDirectives: [
     CdkMenu,

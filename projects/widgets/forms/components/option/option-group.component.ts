@@ -6,7 +6,6 @@ import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core'
 
 @Component({
   selector: 'ids-option-group',
-  standalone: true,
   imports: [],
   templateUrl: './option-group.component.html',
   encapsulation: ViewEncapsulation.None,

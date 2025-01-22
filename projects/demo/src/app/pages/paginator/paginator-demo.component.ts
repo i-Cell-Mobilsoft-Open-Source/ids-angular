@@ -32,7 +32,6 @@ type PaginatorInputControls = {
 
 @Component({
   selector: 'app-paginator-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

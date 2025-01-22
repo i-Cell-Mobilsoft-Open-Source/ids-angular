@@ -5,7 +5,6 @@ import { coerceStringAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-tab',
-  standalone: true,
   imports: [],
   templateUrl: './tab.component.html',
   encapsulation: ViewEncapsulation.None,

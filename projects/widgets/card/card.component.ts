@@ -8,9 +8,7 @@ import { ComponentBaseWithDefaults, IdsOrientationType, IdsSizeType, coerceBoole
 const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector:
-    'ids-card,div[idsCard],article[idsCard],aside[idsCard],section[idsCard]',
-  standalone: true,
+  selector: 'ids-card,div[idsCard],article[idsCard],aside[idsCard],section[idsCard]',
   imports: [],
   template: `
     <ng-content />

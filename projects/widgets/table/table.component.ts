@@ -27,7 +27,6 @@ const defaultConfig = IDS_TABLE_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-table',
-  standalone: true,
   imports: [
     IdsCellContentComponent,
     IdsCheckboxComponent,

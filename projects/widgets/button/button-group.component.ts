@@ -7,7 +7,6 @@ const defaultConfig = IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-button-group',
-  standalone: true,
   imports: [],
   template: '<ng-content select="button[idsButton], button[idsIconButton]">',
   encapsulation: ViewEncapsulation.None,

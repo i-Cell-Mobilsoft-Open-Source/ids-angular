@@ -16,7 +16,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-option',
-  standalone: true,
   imports: [
     IdsIconComponent,
     PseudoCheckboxComponent,

@@ -42,7 +42,6 @@ type TabHelperControls = {
 
 @Component({
   selector: 'app-tab-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

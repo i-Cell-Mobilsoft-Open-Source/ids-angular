@@ -34,7 +34,6 @@ const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-snackbar-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

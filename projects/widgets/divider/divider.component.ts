@@ -8,7 +8,6 @@ const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-divider,div[idsDivider]',
-  standalone: true,
   imports: [],
   template: '',
   encapsulation: ViewEncapsulation.None,

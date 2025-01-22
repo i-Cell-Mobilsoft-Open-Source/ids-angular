@@ -7,7 +7,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-success-message',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './success-message.component.html',
   hostDirectives: [IdsMessageDirective],

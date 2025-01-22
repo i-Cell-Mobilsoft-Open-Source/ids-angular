@@ -174,7 +174,6 @@ type DialogHelperControls = {
       </div>
     </dialog>
   `,
-  standalone: true,
 })
 export class CustomDialogComponent extends IdsCustomDialogBase {
   public providedData = inject(CUSTOM_DIALOG_TOKEN);
@@ -185,7 +184,6 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
 
 @Component({
   selector: 'app-dialog-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

@@ -42,7 +42,6 @@ type MenuItemHelperControls = {
 
 @Component({
   selector: 'app-overlay-panel-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

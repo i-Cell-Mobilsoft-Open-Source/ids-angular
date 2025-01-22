@@ -20,7 +20,6 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-form-field',
-  standalone: true,
   imports: [],
   templateUrl: './form-field.component.html',
   encapsulation: ViewEncapsulation.None,

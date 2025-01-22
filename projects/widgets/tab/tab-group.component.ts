@@ -13,7 +13,6 @@ const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-tab-group',
-  standalone: true,
   imports: [
     PortalModule,
     IdsIconComponent,

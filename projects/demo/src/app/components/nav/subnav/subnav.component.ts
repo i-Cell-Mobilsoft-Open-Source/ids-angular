@@ -13,7 +13,6 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  standalone: true,
   selector: 'ids-subnav',
   imports: [
     RouterModule,

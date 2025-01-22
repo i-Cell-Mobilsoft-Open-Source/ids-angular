@@ -50,7 +50,6 @@ const chipList: { label: string, variant: IdsChipVariantType }[] = [
 
 @Component({
   selector: 'app-chip-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

@@ -14,7 +14,6 @@ const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-chip, button[idsChip]',
-  standalone: true,
   imports: [
     IdsIconButtonComponent,
     IdsIconComponent,

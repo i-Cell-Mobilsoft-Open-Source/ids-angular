@@ -8,7 +8,6 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
 
 @Component({
   selector: 'app-control-table',
-  standalone: true,
   imports: [
     IdsSentenceCasePipe,
     FormsModule,

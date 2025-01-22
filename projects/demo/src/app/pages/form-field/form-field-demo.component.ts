@@ -41,7 +41,6 @@ type InputInputControls = {
 
 @Component({
   selector: 'app-form-field-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

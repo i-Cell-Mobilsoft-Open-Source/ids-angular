@@ -6,7 +6,6 @@ import { Component, contentChildren, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'ids-hint-message',
-  standalone: true,
   imports: [],
   templateUrl: './hint-message.component.html',
   host: {

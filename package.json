@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build:widgets": "ng build widgets",
+    "build:prod:widgets": "ng build widgets --configuration=production",
     "build:github": "ng build demo --configuration=github",
     "watch:widgets": "ng build widgets --watch",
     "watch": "ng build --watch --configuration development",

@@ -16,7 +16,8 @@
     "lint": "ng lint widgets",
     "prepare": "husky",
     "storybook": "ng run widgets:storybook",
-    "build:storybook": "ng run widgets:build-storybook"
+    "build:storybook": "ng run widgets:build-storybook",
+    "prepublishOnly": "ng build widgets --configuration=production"
   },
   "private": true,
   "dependencies": {

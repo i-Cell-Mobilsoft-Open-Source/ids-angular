@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Git
+      - name: Validate version input
         run: |
           echo "Validating version format (must adhere to the SemVer format)"
           echo "${{ github.event.inputs.version }}" | grep -P '^(?:\d|[1-9]\d+)\.(?:\d|[1-9]\d+)\.(?:\d|[1-9]\d+)$'

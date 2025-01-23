@@ -8,7 +8,6 @@ import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ids-tooltip',
-  standalone: true,
   imports: [],
   templateUrl: './tooltip.component.html',
   encapsulation: ViewEncapsulation.None,

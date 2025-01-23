@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'ids-card-header,header[idsCardHeader]',
-  standalone: true,
   imports: [],
   template: `
     <div class="ids-card-header-headline">

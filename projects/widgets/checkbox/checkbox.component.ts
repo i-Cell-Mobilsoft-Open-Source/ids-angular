@@ -15,7 +15,6 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-checkbox',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './checkbox.component.html',
   providers: [

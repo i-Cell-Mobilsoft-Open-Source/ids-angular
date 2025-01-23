@@ -43,7 +43,6 @@ type MenuItemHelperControls = {
 
 @Component({
   selector: 'app-action-menu-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

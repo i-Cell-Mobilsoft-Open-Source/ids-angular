@@ -40,7 +40,6 @@ type CheckboxGroupInputControls = {
 
 @Component({
   selector: 'app-checkbox-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

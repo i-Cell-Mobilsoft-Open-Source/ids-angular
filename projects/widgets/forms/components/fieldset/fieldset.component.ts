@@ -10,7 +10,6 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'fieldset[idsFieldset]',
-  standalone: true,
   imports: [],
   templateUrl: './fieldset.component.html',
   encapsulation: ViewEncapsulation.None,

@@ -20,7 +20,6 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
   selector: `ids-select[ngModel]:not([formControl]):not([formControlName]),
               ids-select[formControl]:not([ngModel]):not([formControlName]),
               ids-select[formControlName]:not([ngModel]):not([formControl])`,
-  standalone: true,
   imports: [
     CdkOverlayOrigin,
     CdkConnectedOverlay,

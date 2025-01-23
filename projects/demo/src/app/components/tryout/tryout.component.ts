@@ -4,7 +4,6 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
 @Component({
   selector: 'app-tryout',
-  standalone: true,
   imports: [
     IdsIconButtonComponent,
     IdsIconComponent,

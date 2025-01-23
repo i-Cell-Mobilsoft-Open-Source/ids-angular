@@ -36,7 +36,6 @@ type CardHelperControls = {
 
 @Component({
   selector: 'app-card-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

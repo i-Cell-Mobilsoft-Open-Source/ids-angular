@@ -14,7 +14,6 @@ const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-paginator',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './paginator.component.html',
   encapsulation: ViewEncapsulation.None,
@@ -79,9 +78,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
     if (pageIndex > 0 && numberOfPages < (pageIndex + 1)) {
       this.stepPage(0);
     }
-  },
-  { allowSignalWrites: true },
-  );
+  });
 
   protected _pageIndex = computed(() => Math.max(coerceNumberAttribute(this.pageIndex()) || 0, 0));
 

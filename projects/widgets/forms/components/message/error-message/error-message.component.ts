@@ -11,7 +11,6 @@ import { startWith } from 'rxjs';
 
 @Component({
   selector: 'ids-error-message',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './error-message.component.html',
   hostDirectives: [IdsMessageDirective],

@@ -12,7 +12,6 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-checkbox-group',
-  standalone: true,
   imports: [IdsCheckboxComponent],
   templateUrl: './checkbox-group.component.html',
   encapsulation: ViewEncapsulation.None,

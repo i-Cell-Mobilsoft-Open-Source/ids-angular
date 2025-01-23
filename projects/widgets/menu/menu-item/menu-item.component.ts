@@ -11,7 +11,6 @@ const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'button[idsMenuItem],a[idsMenuItem]',
-  standalone: true,
   imports: [],
   hostDirectives: [CdkMenuItem],
   templateUrl: './menu-item.component.html',

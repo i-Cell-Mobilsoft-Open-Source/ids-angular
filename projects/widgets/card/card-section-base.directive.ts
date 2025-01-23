@@ -1,7 +1,9 @@
 import { computed, Directive, input } from '@angular/core';
 import { DirectiveBase } from '@i-cell/ids-angular/core';
 
-@Directive({})
+@Directive({
+  standalone: false,
+})
 export abstract class IdsCardSectionBase extends DirectiveBase {
   protected override get _hostName(): string {
     return 'card-section';

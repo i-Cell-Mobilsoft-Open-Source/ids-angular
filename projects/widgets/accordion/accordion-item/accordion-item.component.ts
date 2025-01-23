@@ -8,7 +8,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-accordion-item',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './accordion-item.component.html',
   encapsulation: ViewEncapsulation.None,

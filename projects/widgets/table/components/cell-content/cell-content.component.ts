@@ -14,7 +14,6 @@ import { map, startWith } from 'rxjs';
  */
 @Component({
   selector: 'th[idsCellContent],td[idsCellContent],th[idsHeaderCellContent],td[idsHeaderCellContent]',
-  standalone: true,
   templateUrl: './cell-content.component.html',
   imports: [
     IdsIconComponent,

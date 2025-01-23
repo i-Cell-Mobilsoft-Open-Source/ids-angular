@@ -13,7 +13,6 @@ import { map, startWith, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     RouterModule,
     RouterOutlet,

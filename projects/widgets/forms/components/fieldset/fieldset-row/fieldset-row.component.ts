@@ -3,7 +3,6 @@ import { ComponentBase } from '@i-cell/ids-angular/core';
 
 @Component({
   selector: 'ids-fieldset-row',
-  standalone: true,
   imports: [],
   templateUrl: './fieldset-row.component.html',
   encapsulation: ViewEncapsulation.None,

@@ -8,7 +8,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-segmented-control-toggle-item',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './segmented-control-toggle-item.component.html',
   encapsulation: ViewEncapsulation.None,

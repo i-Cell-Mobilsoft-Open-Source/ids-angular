@@ -13,7 +13,6 @@ const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-notification',
-  standalone: true,
   imports: [
     IdsIconComponent,
     IdsButtonComponent,

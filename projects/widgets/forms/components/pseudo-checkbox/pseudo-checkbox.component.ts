@@ -7,7 +7,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-pseudo-checkbox',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './pseudo-checkbox.component.html',
   encapsulation: ViewEncapsulation.None,

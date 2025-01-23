@@ -48,7 +48,6 @@ const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-notification-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

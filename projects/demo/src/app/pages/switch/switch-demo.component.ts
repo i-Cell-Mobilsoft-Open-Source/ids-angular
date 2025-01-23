@@ -35,7 +35,6 @@ type SwitchGroupInputControls = {
 
 @Component({
   selector: 'app-switch-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

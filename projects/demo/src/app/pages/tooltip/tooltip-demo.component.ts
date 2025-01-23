@@ -28,7 +28,6 @@ const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-tooltip-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

@@ -31,7 +31,6 @@ type TagGroupInputControls = {
 };
 
 @Component({
-  standalone: true,
   selector: 'app-tag-demo',
   imports: [
     TryoutComponent,

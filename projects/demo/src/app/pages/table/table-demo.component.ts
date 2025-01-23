@@ -44,7 +44,6 @@ type TranslateLabelsType = keyof TranslateLabelsToIntlPropNamesType;
 
 @Component({
   selector: 'ids-table-translate-cell-renderer',
-  standalone: true,
   imports: [TranslateModule],
   template: '{{ cellValue() | translate }}',
 })
@@ -67,7 +66,6 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
 
 @Component({
   selector: 'app-table-demo',
-  standalone: true,
   imports: [
     ControlTableComponent,
     IdsButtonComponent,

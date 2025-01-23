@@ -1,0 +1,75 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (e.g., 1.0.0, see semver.org)"
+        required: true
+      notes:
+        description: "Release notes"
+        required: false
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Git
+        run: |
+          echo "Validating version format (must adhere to the SemVer format)"
+          echo "${{ github.event.inputs.version }}" | grep -P '^(?:\d|[1-9]\d+)\.(?:\d|[1-9]\d+)\.(?:\d|[1-9]\d+)$'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "icellmobilsoft-robot"
+          git config --global user.email "68945943+icellmobilsoft-robot@users.noreply.github.com"
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Update package.json version
+        working-directory: ./projects/widgets
+        run: |
+          npm version ${{ github.event.inputs.version }} --no-git-tag-version
+
+      - name: Commit & push version bump
+        run: |
+          git add ./projects/widgets/package.json
+          git commit -m "chore: bump version to ${{ github.event.inputs.version }}"
+
+      - name: Push to main(protected) branch
+        uses: CasperWA/push-protected@v2
+        with:
+          token: ${{ secrets.ICELL_GIT_PAT }}
+          branch: main
+          unprotect_reviews: true
+
+      - name: Create Tag
+        run: |
+          git tag -a ${{ github.event.inputs.version }} -m "${{ github.event.inputs.version }}"
+          git push origin ${{ github.event.inputs.version }}
+
+      - name: Publish to npm with npm
+        run: npm publish --access public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          token: ${{ secrets.ICELL_GIT_PAT }}
+          tag: ${{ github.event.inputs.version }}
+          name: "v${{ github.event.inputs.version }}"
+          body: ${{ github.event.inputs.notes || '' }}
+          draft: false
+          prerelease: false
+

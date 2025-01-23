@@ -45,6 +45,14 @@ jobs:
         run: |
           npm run build:prod:widgets
 
+      - name: Publish package to npm registry
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+          npm config set scope "@i-cell"
+          npm publish --access public ./dist/widgets
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Commit & push version bump
         run: |
           git add ./projects/widgets/package.json
@@ -61,11 +69,6 @@ jobs:
         run: |
           git tag -a ${{ github.event.inputs.version }} -m "${{ github.event.inputs.version }}"
           git push origin ${{ github.event.inputs.version }}
-
-      - name: Publish to npm with npm
-        run: npm publish --access public ./dist/widgets
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1.14.0

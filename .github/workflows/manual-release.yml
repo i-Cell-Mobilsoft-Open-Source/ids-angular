@@ -41,6 +41,10 @@ jobs:
         run: |
           npm version ${{ github.event.inputs.version }} --no-git-tag-version
 
+      - name: Build library project
+        run: |
+          npm run build:prod:widgets
+
       - name: Commit & push version bump
         run: |
           git add ./projects/widgets/package.json
@@ -59,7 +63,7 @@ jobs:
           git push origin ${{ github.event.inputs.version }}
 
       - name: Publish to npm with npm
-        run: npm publish --access public
+        run: npm publish --access public ./dist/widgets
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 

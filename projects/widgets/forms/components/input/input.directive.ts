@@ -64,7 +64,7 @@ export class IdsInputDirective
 
   public readonly errorStateChanges = new Subject<void>();
   public readonly successStateChanges = new Subject<void>();
-  public readonly ngControl = inject(NgControl, { optional: true });
+  public readonly ngControl = inject(NgControl);
 
   private _focused = false;
   private _errorStateTracker?: ErrorStateTracker;
@@ -118,7 +118,7 @@ export class IdsInputDirective
       this.errorStateChanges,
     );
 
-    this._successStateSubscription = this.errorStateChanges.pipe(
+    this.errorStateChanges.pipe(
       takeUntilDestroyed(this._destroyRef),
     ).subscribe(() => this.hasErrorState.set(this._errorStateTracker!.hasErrorState));
   }
@@ -133,7 +133,7 @@ export class IdsInputDirective
         this.successStateChanges,
       );
 
-      this.successStateChanges.pipe(
+      this._successStateSubscription = this.successStateChanges.pipe(
         takeUntilDestroyed(this._destroyRef),
       ).subscribe(() => this.hasSuccessState.set(this._successStateTracker!.hasSuccessState));
     } else {

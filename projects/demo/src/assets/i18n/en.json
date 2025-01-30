@@ -43,6 +43,17 @@
     "STANDALONE": "Standalone",
     "GROUPED": "Grouped"
   },
+  "FORM_FIELD": {
+    "LABEL": {
+      "NAME": "Name"
+    },
+    "ERROR": {
+      "REQUIRED": "{{fieldName}} is required.",
+      "MINLENGTH": "{{fieldName}} must be at least {{minLength}} long.",
+      "PATTERN": "{{fieldName}} is invalid."
+    },
+    "SUCCESS": "{{fieldName}} is valid."
+  },
   "TABLE": {
     "COL": {
       "NAME": "Name",

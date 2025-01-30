@@ -43,6 +43,17 @@
     "STANDALONE": "Különálló",
     "GROUPED": "Csoportban"
   },
+  "FORM_FIELD": {
+    "LABEL": {
+      "NAME": "Név"
+    },
+    "ERROR": {
+      "REQUIRED": "{{fieldName}} kitöltése kötelező",
+      "MINLENGTH": "{{fieldName}} túl rövid. Legalább {{requiredLength}} karaktert kell megadni.",
+      "PATTERN": "{{fieldName}} értéke érvénytelen."
+    },
+    "SUCCESS": "{{fieldName}} értéke helyes."
+  },
   "TABLE": {
     "COL": {
       "NAME": "Megnevezés",

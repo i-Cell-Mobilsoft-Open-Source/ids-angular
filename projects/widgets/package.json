@@ -1,6 +1,6 @@
 {
   "name": "@i-cell/ids-angular",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "i-Cell Design System UI Kit components for Angular",
   "publishConfig": {
@@ -15,6 +15,7 @@
     "Barsi Balázs",
     "Bátori László",
     "Nagy Gábor",
+    "Onofer Dávid",
     "Soós Árpád"
   ],
   "license": "MIT",

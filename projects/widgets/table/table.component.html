@@ -126,6 +126,7 @@
         [stickyEnd]="col.stickyEnd && !col.sticky"
       >
         @let colSortable = col.sortable && enableSorting();
+        @let colNumeric = col.cellRenderer === 'numeric';
         @let orderName = col.orderName || col.field || col.id;
         @let sortDirection = colSortable && _sortState()?.sortBy === orderName ? _sortState()?.direction : null;
         @let nextSortDirection = _getNextSortDirectionFor(orderName);
@@ -136,6 +137,7 @@
           idsHeaderCellContent
           scope="col"
           [class.ids-table__header-cell--sortable]="colSortable"
+          [class.ids-table__header-cell--numeric]="colNumeric"
           [class]="col.columnClasses || ''"
           [colDef]="col"
           [externalCellTemplates]="_cellTemplatesByName()"

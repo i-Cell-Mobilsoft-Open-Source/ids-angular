@@ -39,7 +39,7 @@ export function IDS_TABLE_DEFAULT_CONFIG_FACTORY(): Required<IdsTableDefaultConf
     enableSorting: false,
     masterDetail: false,
     detailTemplateName: DEFAULT_MASTER_DETAIL_TEMPLATE_NAME,
-    detailStickyColumns: false,
+    detailStickyColumns: true,
     showDetailHeader: false,
     enableRowSelection: false,
     clearSelectionOnChange: true,

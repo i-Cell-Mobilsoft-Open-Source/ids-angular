@@ -34,11 +34,14 @@
         role="cell"
         class="ids-table__header-cell ids-table__header-cell--select-all-rows"
       >
+        @let isRowSelected = rowSelection.hasValue();
+        @let isTableVariantPrimary = variant() === 'primary';
         <ids-checkbox
-          [indeterminate]="rowSelection.hasValue() && !_isAllSelected()"
-          [checked]="rowSelection.hasValue() && _isAllSelected()"
+          [indeterminate]="isRowSelected && !_isAllSelected()"
+          [checked]="isRowSelected && _isAllSelected()"
           [disabled]="_isSelectAllDisabled()"
           [aria-label]="_intl.headerSelectorAriaLabel"
+          [variant]="isTableVariantPrimary && isRowSelected ? 'light' : 'surface'"
           (change)="$event ? _masterToggle() : null"
         >
         </ids-checkbox>

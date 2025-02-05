@@ -141,7 +141,7 @@ export class IdsTableComponent<D>
     const tableVariant = this.variant();
     switch (tableVariant) {
       case IdsTableVariant.PRIMARY:
-        return IdsIconButtonVariant.LIGHT;
+        return IdsIconButtonVariant.SURFACE;
       default:
         return tableVariant;
     }

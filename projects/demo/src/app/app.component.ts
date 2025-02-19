@@ -55,6 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
             { name: 'COMPONENTS.FORM_FIELD', path: '/components/form-field' },
             { name: 'COMPONENTS.ICON', path: '/components/icon' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
+            { name: 'COMPONENTS.MENU_ITEM', path: '/components/menu-item' },
             { name: 'COMPONENTS.NOTIFICATION', path: '/components/notification' },
             { name: 'COMPONENTS.OVERLAY_PANEL', path: '/components/overlay-panel' },
             { name: 'COMPONENTS.PAGINATOR', path: '/components/paginator' },

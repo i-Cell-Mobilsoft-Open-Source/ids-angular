@@ -8,7 +8,7 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsMenuItemComponent, IdsMenuItemAppearance, IdsMenuItemAppearanceType, IdsMenuItemVariant, MenuItemVariantType, IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/menu';
+import { IdsMenuItemComponent, IdsMenuItemAppearance, IdsMenuItemAppearanceType, IdsMenuItemVariant, IdsMenuItemVariantType, IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/menu';
 import { IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/overlay-panel';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel/overlay-panel.component';
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
@@ -31,7 +31,7 @@ type OverlayPanelHelperControls = {
 type MenuItemInputControls = {
   appearance: IdsMenuItemAppearanceType,
   size: IdsSizeType,
-  variant: MenuItemVariantType,
+  variant: IdsMenuItemVariantType,
 };
 
 type MenuItemHelperControls = {

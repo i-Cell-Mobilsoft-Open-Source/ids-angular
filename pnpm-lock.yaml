@@ -36,11 +36,11 @@ importers:
         specifier: ^19.1.2
         version: 19.1.2(@angular/common@19.1.2(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0))(@angular/platform-browser@19.1.2(@angular/animations@19.1.2(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@19.1.2(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0)))(rxjs@7.8.1)
       '@i-cell/ids-styles':
-        specifier: 0.0.32
-        version: 0.0.32
+        specifier: 0.0.33
+        version: 0.0.33
       '@i-cell/ids-tokens':
-        specifier: 0.0.28
-        version: 0.0.28
+        specifier: 0.0.29
+        version: 0.0.29
       '@ngx-translate/core':
         specifier: 16.0.4
         version: 16.0.4(@angular/common@19.1.2(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0))
@@ -1903,11 +1903,11 @@ packages:
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
 
-  '@i-cell/ids-styles@0.0.32':
-    resolution: {integrity: sha512-C+kESLmpvJ92aKGxXnohB1l6fw6zjK9UwqQ/8weTIGakaOkk6wFaxIwnIanZ60nit7xa+kmGEywKYV7BUMsWDQ==}
+  '@i-cell/ids-styles@0.0.33':
+    resolution: {integrity: sha512-C5xF2dVAWihgmUkmO5xswajoYupbAa3VWFQaEX3tIqcZMPysO25ymawzD8fTN6NPAH9cYyCZLTFZ+8xNgY7Mjw==}
 
-  '@i-cell/ids-tokens@0.0.28':
-    resolution: {integrity: sha512-YElpdcZge0xf58/QIqdRB7x+I2dtX+QStZvewQj36lYHU/CSzvFKjCKkIVD+gKdxtVYS1X2y0qjfS7x366V8IQ==}
+  '@i-cell/ids-tokens@0.0.29':
+    resolution: {integrity: sha512-Cz0trmJ6AIDVstOAH1J4x8QT6L8cb61kIYBrSm5Bi1iDP4uch3tBUxVIaoSs2HsdPymzFiIUR4lII9k4k0WEnQ==}
 
   '@inquirer/checkbox@4.0.6':
     resolution: {integrity: sha512-PgP35JfmGjHU0LSXOyRew0zHuA9N6OJwOlos1fZ20b7j8ISeAdib3L+n0jIxBtX958UeEpte6xhG/gxJ5iUqMw==}
@@ -10482,9 +10482,9 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
-  '@i-cell/ids-styles@0.0.32': {}
+  '@i-cell/ids-styles@0.0.33': {}
 
-  '@i-cell/ids-tokens@0.0.28': {}
+  '@i-cell/ids-tokens@0.0.29': {}
 
   '@inquirer/checkbox@4.0.6(@types/node@20.16.1)':
     dependencies:

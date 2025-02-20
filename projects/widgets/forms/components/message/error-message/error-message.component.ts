@@ -7,10 +7,10 @@ import { IdsErrorMessageMapping } from '../types/error-message-mapping';
 
 import { Component, ViewEncapsulation, computed, contentChildren, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { AbstractControl, FormControlStatus } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { map, Observable, of, switchMap, tap } from 'rxjs';
+import { of, startWith, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'ids-error-message',
@@ -40,8 +40,7 @@ export class IdsErrorMessageComponent extends ComponentBase {
     super();
     toObservable(this._parent.control).pipe(
       tap((controlDir) => this._control.set(controlDir?.control ?? null)),
-      map((controlDir) => controlDir?.statusChanges ?? of(null)),
-      switchMap((statusChanges: Observable<FormControlStatus | null>) => statusChanges),
+      switchMap(() => this._control()?.statusChanges.pipe(startWith(this._control()?.status)) ?? of(null)),
       takeUntilDestroyed(this._destroyRef),
     ).subscribe((status) => {
       if (status === 'INVALID') {

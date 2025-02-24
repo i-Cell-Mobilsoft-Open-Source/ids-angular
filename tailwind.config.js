@@ -1,9 +1,20 @@
 /** @type {import('tailwindcss').Config} */
+const tailwindTokens = require('./tailwind-tokens');
+
 
 module.exports = {
   content: ["./projects/**/*.{html,ts}"],
   theme: {
     extend: {
+      colors: {
+        ...tailwindTokens.colors,
+      },
+      spacing: {
+        ...tailwindTokens.spacing,
+      },
+      borderRadius: {
+        ...tailwindTokens.borderRadius,
+      },
       fontSize: {
         '3xl': ['1.75rem', {
           lineHeight: '1.218',

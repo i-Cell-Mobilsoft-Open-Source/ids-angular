@@ -62,7 +62,7 @@ export const COMPONENT_LIST = [
   {
     id: 11,
     title: 'Form field',
-    imageUrl: 'https://example.com/form-field.png',
+    imageUrl: '../../../assets/images/tn/ids-icon-form-field-tn@2x.png',
     imageLink: '#/components/form-field',
   },
   {
@@ -80,19 +80,19 @@ export const COMPONENT_LIST = [
   {
     id: 14,
     title: 'Notification',
-    imageUrl: 'https://example.com/notification.png',
+    imageUrl: '../../../assets/images/tn/ids-icon-notification-tn@2x.png',
     imageLink: '#/components/notification',
   },
   {
     id: 15,
     title: 'Overlay panel',
-    imageUrl: 'https://example.com/overlay-panel.png',
+    imageUrl: '../../../assets/images/tn/ids-icon-overlay-tn@2x.png',
     imageLink: '#/components/overlay-panel',
   },
   {
     id: 16,
     title: 'Paginator',
-    imageUrl: 'https://example.com/paginator.png',
+    imageUrl: '../../../assets/images/tn/ids-icon-paginator-tn@2x.png',
     imageLink: '#/components/paginator',
   },
   {
@@ -128,7 +128,7 @@ export const COMPONENT_LIST = [
   {
     id: 22,
     title: 'Snackbar',
-    imageUrl: 'https://example.com/snackbar.png',
+    imageUrl: '../../../assets/images/tn/ids-icon-snackbar-tn@2x.png',
     imageLink: '#/components/snackbar',
   },
   {
@@ -140,7 +140,7 @@ export const COMPONENT_LIST = [
   {
     id: 24,
     title: 'Tab',
-    imageUrl: 'https://example.com/tab.png',
+    imageUrl: '../../../assets/images/tn/ids-icon-tab-tn@2x.png',
     imageLink: '#/components/tab',
   },
   {

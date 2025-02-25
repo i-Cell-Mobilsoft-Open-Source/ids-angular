@@ -87,7 +87,12 @@ module.exports = {
           lineHeight: '1.75rem;',
           letterSpacing: '0rem;',
           fontWeight: '400',
-        }],   
+        }],
+        'title-large-prominent': ['1.375rem', {
+          lineHeight: '1.75rem;',
+          letterSpacing: '0rem;',
+          fontWeight: '700',
+        }],  
         'title-sm-large': ['1.25rem', {
           lineHeight: '1.625rem',
           letterSpacing: '0rem;',

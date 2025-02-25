@@ -1,4 +1,6 @@
+import { Badge } from '../../model/badge';
 import { ContentCard } from '../../model/contentCard';
+import { BadgeComponent } from '../badge/badge.component';
 import { ImageComponent } from '../image/image.component';
 
 import { Component, Input } from '@angular/core';
@@ -16,11 +18,15 @@ import { IdsCardMediaDirective } from '@i-cell/ids-angular/card/card-media.direc
     IdsCardHeaderComponent,
     IdsCardMediaDirective,
     IdsCardBodyDirective,
+    BadgeComponent,
   ],
   templateUrl: './content-card.component.html',
   styleUrl: './content-card.component.scss',
 })
-export class ContentCardComponent implements ContentCard {
+export class ContentCardComponent implements Badge, ContentCard  {
   @Input()
   public orientation: 'horizontal' | 'vertical' = 'vertical'; // Default to "vertical";
+
+  @Input()
+  public state?: 'do' | 'dont'; // ✅ Optional Input
 }

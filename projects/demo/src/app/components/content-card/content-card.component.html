@@ -1,15 +1,28 @@
-<ids-card variant="light" appearance="elevated" size="compact" [orientation]="orientation">
-  <div class="relative">
+<ids-card
+  variant="surface"
+  appearance="filled"
+  size="compact"
+  [orientation]="orientation"
+  [class]="orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
+>
+  <div class="relative" [class]="orientation === 'horizontal' ? ' md:w-1/2 ' : ''">
     @if (state) {
       <app-badge [state]="state" />
     }
-    <app-image [orientation]="orientation" />
+    <app-image [orientation]="orientation" [state]="state" />
   </div>
-  <ids-card-body>
-    <div class="flex flex-col gap-4 relative">
-      <div class="flex flex-col gap-ids-container-gap-8">
-        <h3 class="text-title-large-prominent">Card title</h3>
-        <p class="text-body-medium">Write a short description. One or two sentences.</p>
+  <ids-card-body [class]="orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''">
+    <div class="flex flex-col gap-ids-container-gap-16">
+      <div class="flex flex-col gap-0 relative">
+        <span class="text-body-small-prominent text-ids-page-fg-surface-lighter-20">overtitle</span>
+        <div class="flex flex-col gap-ids-container-gap-8">
+          <h3 class="text-title-large-prominent text-ids-page-fg-surface-default">Card title</h3>
+          <p class="text-body-medium text-ids-page-fg-surface-lighter-10">Write a short description. One or two sentences.</p>
+        </div>
+      </div>
+      <div class="flex gap-ids-container-gap-8 justify-end w-full">
+        <button type="button" idsButton appearance="outlined" size="compact" variant="primary">hello africa</button>
+        <button type="button" idsButton appearance="filled" size="compact" variant="primary">hello africa</button>
       </div>
     </div>
   </ids-card-body>

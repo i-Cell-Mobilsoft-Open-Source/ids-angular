@@ -112,7 +112,12 @@ module.exports = {
           lineHeight: '1.25rem;',
           letterSpacing: '0.00625rem;',
           fontWeight: '500',
-        }],           
+        }],     
+        'title-small-prominent': ['0.875rem', {
+          lineHeight: '1.25rem;',
+          letterSpacing: '0.00625rem;',
+          fontWeight: '500',
+        }],   
         'body-large': ['1rem', {
           lineHeight: '1.5rem',
           letterSpacing: '0.03125rem;',
@@ -133,6 +138,11 @@ module.exports = {
           letterSpacing: '0rem',
           fontWeight: '400',
         }],
+        'body-small-prominent': ['0.75rem', {
+          lineHeight: '1rem',
+          letterSpacing: '0rem',
+          fontWeight: '600',
+        }],        
         'label-large-extra-prominent': [' 0.875rem', {
           lineHeight: '1.25rem',
           letterSpacing: '0.00625rem',
@@ -164,6 +174,11 @@ module.exports = {
           fontWeight: '500',
         }],            
       }, 
+      aspectRatio: {
+        '1/1': '1 / 1',
+        '16/9': '16 / 9',
+        '16/10': '16 / 10',
+      },
     },
   },
   plugins: [],

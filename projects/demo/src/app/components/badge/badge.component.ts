@@ -13,6 +13,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 export class BadgeComponent  implements  Badge  {
 
   @Input()
-  public state: 'do' | 'dont' = 'do'; // ✅ Receive state from parent
+  public state?: 'do' | 'dont'; // ✅ Receive state from parent
 
 }

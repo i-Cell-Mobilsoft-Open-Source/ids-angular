@@ -1,3 +1,4 @@
+import { CONTENTCARD_LIST } from '../../../utils/contentCardListData';
 import { HERO_LIST } from '../../../utils/heroListData';
 import { INDEX_LIST } from '../../../utils/indexListData';
 import { CardComponent } from '../../components/card/card.component';
@@ -22,4 +23,6 @@ import { IdsCardComponent } from '@i-cell/ids-angular/card';
 export class IndexComponent {
   public indexLists = INDEX_LIST;
   public heroLists = HERO_LIST;
+  public contentCardLists = CONTENTCARD_LIST;
+
 }

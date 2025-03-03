@@ -2,28 +2,48 @@
   variant="surface"
   appearance="filled"
   size="compact"
-  [orientation]="orientation"
-  [class]="orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
+  [orientation]="contentCardList.orientation"
+  [class]="contentCardList.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
 >
-  <div class="relative" [class]="orientation === 'horizontal' ? ' md:w-1/2 ' : ''">
-    @if (state) {
-      <app-badge [state]="state" />
-    }
-    <app-image [orientation]="orientation" [state]="state" />
-  </div>
-  <ids-card-body [class]="orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''">
+  @if (contentCardList.imageURL) {
+    <div class="relative" [class]="contentCardList.orientation === 'horizontal' ? ' md:w-1/2 ' : ''">
+      @if (contentCardList.state) {
+        <app-badge [state]="contentCardList.state" />
+      }
+      <app-image
+        [aspectRatio]="contentCardList.aspectRatio"
+        [imageBgColorVariant]="contentCardList.imageBgColorVariant"
+        [orientation]="contentCardList.orientation"
+        [state]="contentCardList.state"
+        [imageURL]="contentCardList.imageURL"
+      />
+    </div>
+  }
+  <ids-card-body [class]="contentCardList.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''">
     <div class="flex flex-col gap-ids-container-gap-16">
       <div class="flex flex-col gap-0 relative">
-        <span class="text-body-small-prominent text-ids-page-fg-surface-lighter-20">overtitle</span>
+        @if (contentCardList.overTitle) {
+          <span class="text-body-small-prominent text-ids-page-fg-surface-lighter-20">{{ contentCardList.overTitle }}</span>
+        }
         <div class="flex flex-col gap-ids-container-gap-8">
-          <h3 class="text-title-large-prominent text-ids-page-fg-surface-default">Card title</h3>
-          <p class="text-body-medium text-ids-page-fg-surface-lighter-10">Write a short description. One or two sentences.</p>
+          @if (contentCardList.title) {
+            <h3 class="text-title-large-prominent text-ids-page-fg-surface-default">{{ contentCardList.title }}</h3>
+          }
+          @if (contentCardList.description) {
+            <p class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ contentCardList.description }}</p>
+          }
         </div>
       </div>
-      <div class="flex gap-ids-container-gap-8 justify-end w-full">
-        <button type="button" idsButton appearance="outlined" size="compact" variant="primary">hello africa</button>
-        <button type="button" idsButton appearance="filled" size="compact" variant="primary">hello africa</button>
-      </div>
+      @if (contentCardList.buttonOne || contentCardList.buttonTwo) {
+        <div class="flex gap-ids-container-gap-8 justify-end w-full">
+          @if (contentCardList.buttonOne) {
+            <button type="button" idsButton appearance="outlined" size="compact" variant="primary">{{ contentCardList.buttonOne }}</button>
+          }
+          @if (contentCardList.buttonTwo) {
+            <button type="button" idsButton appearance="filled" size="compact" variant="primary">{{ contentCardList.buttonTwo }}</button>
+          }
+        </div>
+      }
     </div>
   </ids-card-body>
 </ids-card>

@@ -13,8 +13,8 @@
       </a>
     }
   </div>
-  <app-content-card orientation="horizontal" [state]="'dont'" />
-  <app-content-card orientation="vertical" [state]="'do'" />
-  <app-content-card orientation="horizontal" />
-  <app-content-card orientation="vertical" />
+
+  @for (contentCardList of contentCardLists; track contentCardList.id) {
+    <app-content-card [contentCardList]="contentCardList" />
+  }
 </div>

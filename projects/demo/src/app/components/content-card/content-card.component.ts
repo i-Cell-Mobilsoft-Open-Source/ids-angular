@@ -1,5 +1,6 @@
-import { Badge } from '../../model/badge';
+// import { Badge } from '../../model/badge';
 import { ContentCard } from '../../model/contentCard';
+// import { Image } from '../../model/image';
 import { BadgeComponent } from '../badge/badge.component';
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { ImageComponent } from '../image/image.component';
@@ -32,10 +33,17 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   templateUrl: './content-card.component.html',
   styleUrl: './content-card.component.scss',
 })
-export class ContentCardComponent implements Badge, ContentCard  {
-  @Input()
-  public orientation: 'horizontal' | 'vertical' = 'vertical'; // Default to "vertical";
+export class ContentCardComponent  {
+
+  // @Input()
+  // public state: 'do' | 'dont' = 'dont'; // ✅ Optional Input
+
+  // @Input()
+  // public aspectRatio: '1/1' | '16/9' | '16/10' = '16/9';
+
+  // @Input()
+  // public imageBgColorVariant: 'surface' | 'primary' | 'light' = 'surface';
 
   @Input()
-  public state?: 'do' | 'dont'; // ✅ Optional Input
+  public contentCardList!: ContentCard;
 }

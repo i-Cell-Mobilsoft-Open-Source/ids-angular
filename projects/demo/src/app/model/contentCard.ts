@@ -2,7 +2,9 @@ export interface ContentCard  {
   id?: number;
   orientation: 'horizontal' | 'vertical';
   aspectRatio?: '1/1' | '16/9' | '16/10';
+  imageURL?: string;
   imageBgColorVariant?: 'surface' | 'primary' | 'light';
+  imageCaption?: string;
   overTitle?: string;
   title?: string;
   description?: string;
@@ -10,5 +12,4 @@ export interface ContentCard  {
   buttonOne?: string;
   buttonTwo?: string;
   state?: 'do' | 'dont';
-  imageURL?: string;
 }

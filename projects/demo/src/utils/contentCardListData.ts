@@ -4,13 +4,14 @@ export const CONTENTCARD_LIST = [
     orientation: 'horizontal',
     aspectRatio: '16/9',
     imageBgColorVariant: 'light',
+    imageURL: '../../../assets/images/illustration/ids-illu-comp-general@2x.png',
+    imageCaption: 'this is a caption',
     overTitle: 'Breaking News',
     title: 'Angular Best Practices',
     description: 'Learn how to pass objects properly in Angular!',
     buttonOne: 'Read More',
     buttonTwo: 'Subscribe',
     state: 'do',
-    imageURL: '../../../assets/images/illustration/ids-illu-comp-general@2x.png',
   },
   {
     id: 2,
@@ -40,6 +41,10 @@ export const CONTENTCARD_LIST = [
   {
     id: 4,
     orientation: 'horizontal',
+    title: 'hello',
     description: 'Discover the latest features in Angular and how to use them effectively.',
+    imageURL: '../../../assets/images/illustration/ids-illu-comp-general@2x.png',
+    buttonOne: 'Explore',
+    buttonTwo: 'Watch Video',
   },
 ] as const;

@@ -2,7 +2,7 @@ import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
@@ -25,6 +25,7 @@ import { map, startWith, Subscription } from 'rxjs';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit, OnDestroy {
   private _translate: TranslateService = inject(TranslateService);

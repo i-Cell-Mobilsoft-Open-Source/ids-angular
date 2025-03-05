@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-16">
+  <app-hero [heroList]="heroLists[0]" />
+  <ids-tab-group>
+    <ids-tab label="Guidelines">
+      <div class="flex flex-col gap-ids-container-gap-32">
+        <div class="flex justify-between items-center">
+          <ids-chip appearance="outlined" variant="surface" size="dense"> Updated 25 Feb 2025 </ids-chip>
+          <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
+        </div>
+        @for (contentCardList of contentCardLists; track contentCardList.id) {
+          <app-content-card [contentCardList]="contentCardList" />
+        }
+      </div>
+    </ids-tab>
+    <ids-tab label="Demo and Code"> Tab Content 2 </ids-tab>
+    <ids-tab label="API">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis sequi
+      aut fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.
+    </ids-tab>
+  </ids-tab-group>
+</div>

@@ -1,9 +1,10 @@
 <ids-card
-  variant="surface"
   appearance="filled"
   size="compact"
+  [variant]="safeVariant"
   [orientation]="contentCardList.orientation"
   [class]="contentCardList.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
+  [class.transparent-bg]="contentCardList.transparent === true"
 >
   @if (contentCardList.imageURL) {
     <div class="relative" [class]="contentCardList.orientation === 'horizontal' ? ' md:w-1/2 ' : ''">

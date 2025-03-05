@@ -7,6 +7,7 @@ import { HeroComponent } from '../../components/hero/hero.component';
 
 import { Component } from '@angular/core';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
+import { IdsTabComponent } from '@i-cell/ids-angular/tab';
 
 @Component({
   selector: 'app-index',
@@ -16,6 +17,7 @@ import { IdsCardComponent } from '@i-cell/ids-angular/card';
     CardComponent,
     IdsCardComponent,
     ContentCardComponent,
+    IdsTabComponent,
   ],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss',

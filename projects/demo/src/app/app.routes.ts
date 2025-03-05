@@ -1,6 +1,11 @@
+import { OneComponentComponent } from './pages/components/one-component/one-component.component';
+
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  {
+    path: 'components/one-component', component: OneComponentComponent,
+  },
   {
     path: 'components/accordion',
     loadComponent: () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),

@@ -7,7 +7,7 @@ import { ImageComponent } from '../image/image.component';
 
 import { Component, Input } from '@angular/core';
 import { IdsButtonComponent, IdsButtonGroupComponent } from '@i-cell/ids-angular/button';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
+import { IdsCardComponent, IdsCardVariantType } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
 import { IdsCardFooterDirective } from '@i-cell/ids-angular/card/card-footer.directive';
 import { IdsCardHeaderComponent } from '@i-cell/ids-angular/card/card-header.component';
@@ -44,6 +44,16 @@ export class ContentCardComponent  {
   // @Input()
   // public imageBgColorVariant: 'surface' | 'primary' | 'light' = 'surface';
 
+  public contentCard: ContentCard = {
+    variant: undefined,
+    orientation: 'horizontal',
+  };
+
+  get safeVariant(): IdsCardVariantType {
+    return this.contentCard.variant ?? 'surface'; // Ensuring a default value
+  }
+
   @Input()
   public contentCardList!: ContentCard;
+
 }

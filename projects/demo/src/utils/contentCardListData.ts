@@ -1,6 +1,7 @@
 export const CONTENTCARD_LIST = [
   {
     id: 1,
+    variant: 'surface',
     orientation: 'horizontal',
     aspectRatio: '16/9',
     imageBgColorVariant: 'light',
@@ -12,9 +13,11 @@ export const CONTENTCARD_LIST = [
     buttonOne: 'Read More',
     buttonTwo: 'Subscribe',
     state: 'do',
+    transparent: true,
   },
   {
     id: 2,
+    variant: 'surface',
     orientation: 'vertical',
     aspectRatio: '1/1',
     imageBgColorVariant: 'primary',
@@ -46,5 +49,11 @@ export const CONTENTCARD_LIST = [
     imageURL: '../../../assets/images/illustration/ids-illu-comp-general@2x.png',
     buttonOne: 'Explore',
     buttonTwo: 'Watch Video',
+  },
+  {
+    id: 5,
+    orientation: 'vertical',
+    transparent: true,
+    description: 'Discover the latest features in Angular and how to use them effectively.',
   },
 ] as const;

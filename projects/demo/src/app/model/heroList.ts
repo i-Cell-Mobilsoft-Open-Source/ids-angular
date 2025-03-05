@@ -3,4 +3,5 @@ export interface HeroList {
   title: string;
   description: string;
   imageUrl: string;
+  isBackButton?: boolean;
 }

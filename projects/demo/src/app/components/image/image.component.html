@@ -9,5 +9,7 @@
   <div class="rounded-ids-container-xs overflow-hidden" [class]="getBorderClass() + ' ' + getColorVariantClass()">
     <img alt="hello" class="object-cover" [src]="imageURL" [class]="getAspectRatioClass()" />
   </div>
-  <figcaption class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ imageCaption }}</figcaption>
+  @if (imageCaption) {
+    <figcaption class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ imageCaption }}</figcaption>
+  }
 </figure>

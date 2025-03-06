@@ -7,9 +7,51 @@
           <ids-chip appearance="outlined" variant="surface" size="dense"> Updated 25 Feb 2025 </ids-chip>
           <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
         </div>
-        @for (contentCardList of contentCardLists; track contentCardList.id) {
-          <app-content-card [contentCardList]="contentCardList" />
-        }
+        <section class="flex flex-col gap-ids-container-gap-16">
+          <h2 class="text-headline-medium-prominent">Usage</h2>
+          @if (contentCardLists.length > 0) {
+            <app-content-card [contentCardList]="contentCardLists[0]" />
+          }
+          @if (contentCardLists.length > 1) {
+            <app-content-card [contentCardList]="contentCardLists[1]" />
+          }
+        </section>
+        <section class="flex flex-col gap-ids-container-gap-16">
+          <h2 class="text-headline-medium-prominent">Anatomy</h2>
+          @if (contentCardLists.length > 2) {
+            <app-content-card [contentCardList]="contentCardLists[2]" />
+          }
+        </section>
+        <section class="flex flex-col gap-ids-container-gap-16">
+          <h2 class="text-headline-medium-prominent">Variant</h2>
+          @if (contentCardLists.length > 3) {
+            <app-content-card [contentCardList]="contentCardLists[3]" />
+          }
+        </section>
+        <section class="flex flex-col gap-ids-container-gap-16">
+          <h2 class="text-headline-medium-prominent">Size</h2>
+          @if (contentCardLists.length > 4) {
+            <app-content-card [contentCardList]="contentCardLists[4]" />
+          }
+        </section>
+        <section class="flex flex-col gap-ids-container-gap-16">
+          <h2 class="text-headline-medium-prominent">Usage Guidelines</h2>
+          @if (contentCardLists.length > 5) {
+            <app-content-card [contentCardList]="contentCardLists[5]" />
+          }
+          @if (contentCardLists.length > 6) {
+            <app-content-card [contentCardList]="contentCardLists[6]" />
+          }
+        </section>
+        <section class="flex flex-col gap-ids-container-gap-16">
+          <h2 class="text-headline-medium-prominent">Accessibility</h2>
+          @if (contentCardLists.length > 7) {
+            <app-content-card [contentCardList]="contentCardLists[7]" />
+          }
+          @if (contentCardLists.length > 8) {
+            <app-content-card [contentCardList]="contentCardLists[8]" />
+          }
+        </section>
       </div>
     </ids-tab>
     <ids-tab label="Demo and Code"> Tab Content 2 </ids-tab>

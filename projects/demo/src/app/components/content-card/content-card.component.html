@@ -2,47 +2,47 @@
   appearance="filled"
   size="compact"
   [variant]="safeVariant"
-  [orientation]="contentCardList.orientation"
-  [class]="contentCardList.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
-  [class.transparent-bg]="contentCardList.transparent === true"
+  [orientation]="contentCardData.orientation"
+  [class]="contentCardData.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
+  [class.transparent-bg]="contentCardData.transparent === true"
 >
-  @if (contentCardList.imageURL) {
-    <div class="relative" [class]="contentCardList.orientation === 'horizontal' ? ' md:w-full ' : ''">
-      @if (contentCardList.state) {
-        <app-badge [state]="contentCardList.state" />
+  @if (contentCardData.imageURL) {
+    <div class="relative" [class]="contentCardData.orientation === 'horizontal' ? ' md:w-full ' : ''">
+      @if (contentCardData.state) {
+        <app-badge [state]="contentCardData.state" />
       }
       <app-image
-        [aspectRatio]="contentCardList.aspectRatio"
-        [imageBgColorVariant]="contentCardList.imageBgColorVariant"
-        [orientation]="contentCardList.orientation"
-        [state]="contentCardList.state"
-        [imageURL]="contentCardList.imageURL"
-        [imageCaption]="contentCardList.imageCaption"
+        [aspectRatio]="contentCardData.aspectRatio"
+        [imageBgColorVariant]="contentCardData.imageBgColorVariant"
+        [orientation]="contentCardData.orientation"
+        [state]="contentCardData.state"
+        [imageURL]="contentCardData.imageURL"
+        [imageCaption]="contentCardData.imageCaption"
       />
     </div>
   }
-  <ids-card-body [class]="contentCardList.orientation === 'horizontal' ? 'flex flex-col md:flex-row md:w-full ' : ''">
+  <ids-card-body [class]="contentCardData.orientation === 'horizontal' ? 'flex flex-col md:flex-row md:w-full ' : ''">
     <div class="flex flex-col gap-ids-container-gap-16 w-full">
       <div class="flex flex-col gap-0 relative">
-        @if (contentCardList.overTitle) {
-          <span class="text-body-small-prominent text-ids-page-fg-surface-lighter-20">{{ contentCardList.overTitle }}</span>
+        @if (contentCardData.overTitle) {
+          <span class="text-body-small-prominent text-ids-page-fg-surface-lighter-20">{{ contentCardData.overTitle }}</span>
         }
         <div class="flex flex-col gap-ids-container-gap-8">
-          @if (contentCardList.title) {
-            <h3 class="text-title-large-prominent text-ids-page-fg-surface-default">{{ contentCardList.title }}</h3>
+          @if (contentCardData.title) {
+            <h3 class="text-title-large-prominent text-ids-page-fg-surface-default">{{ contentCardData.title }}</h3>
           }
-          @if (contentCardList.description) {
-            <p class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ contentCardList.description }}</p>
+          @if (contentCardData.description) {
+            <p class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ contentCardData.description }}</p>
           }
         </div>
       </div>
-      @if (contentCardList.buttonOne || contentCardList.buttonTwo) {
+      @if (contentCardData.buttonOne || contentCardData.buttonTwo) {
         <div class="flex gap-ids-container-gap-8 justify-end w-full">
-          @if (contentCardList.buttonOne) {
-            <button type="button" idsButton appearance="outlined" size="compact" variant="primary">{{ contentCardList.buttonOne }}</button>
+          @if (contentCardData.buttonOne) {
+            <button type="button" idsButton appearance="outlined" size="compact" variant="primary">{{ contentCardData.buttonOne }}</button>
           }
-          @if (contentCardList.buttonTwo) {
-            <button type="button" idsButton appearance="filled" size="compact" variant="primary">{{ contentCardList.buttonTwo }}</button>
+          @if (contentCardData.buttonTwo) {
+            <button type="button" idsButton appearance="filled" size="compact" variant="primary">{{ contentCardData.buttonTwo }}</button>
           }
         </div>
       }

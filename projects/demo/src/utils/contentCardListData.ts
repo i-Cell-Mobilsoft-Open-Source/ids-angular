@@ -1,4 +1,4 @@
-export const CONTENTCARD_LIST = [
+export const CONTENTCARD_DATA = [
   {
     // id: 1,
     // variant: 'surface',

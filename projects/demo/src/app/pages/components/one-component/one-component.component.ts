@@ -1,6 +1,6 @@
 import { IdsTabGroupComponent } from '../../../../../../widgets/tab/tab-group.component';
 import { HERO_LIST } from '../../../../utils/componentHeroListData';
-import { CONTENTCARD_LIST } from '../../../../utils/contentCardListData';
+import { CONTENTCARD_DATA } from '../../../../utils/contentCardListData';
 import { ContentCardComponent } from '../../../components/content-card/content-card.component';
 import { HeroComponent } from '../../../components/hero/hero.component';
 
@@ -27,5 +27,5 @@ import { IdsTabComponent } from '@i-cell/ids-angular/tab';
 })
 export class OneComponentComponent {
   public heroLists = HERO_LIST;
-  public contentCardLists = CONTENTCARD_LIST;
+  public contentCardDatas = CONTENTCARD_DATA;
 }

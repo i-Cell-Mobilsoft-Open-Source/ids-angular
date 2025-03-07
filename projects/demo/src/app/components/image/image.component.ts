@@ -26,7 +26,8 @@ export class ImageComponent implements Badge, ContentCard, Image  {
 
   @Input() public imageURL?: string;  // Optional imageURL
 
-  @Input() public imageCaption?: string;  // Optional imageCaption
+  @Input() public imageCaption?: string;
+  // Optional imageCaption
 
   public getBorderClass(): string {
     switch (this.state) {

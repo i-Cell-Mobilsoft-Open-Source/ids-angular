@@ -35,15 +35,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 })
 export class ContentCardComponent  {
 
-  // @Input()
-  // public state: 'do' | 'dont' = 'dont'; // ✅ Optional Input
-
-  // @Input()
-  // public aspectRatio: '1/1' | '16/9' | '16/10' = '16/9';
-
-  // @Input()
-  // public imageBgColorVariant: 'surface' | 'primary' | 'light' = 'surface';
-
   public contentCard: ContentCard = {
     variant: undefined,
     orientation: 'horizontal',
@@ -54,6 +45,6 @@ export class ContentCardComponent  {
   }
 
   @Input()
-  public contentCardList!: ContentCard;
+  public contentCardData!: ContentCard;
 
 }

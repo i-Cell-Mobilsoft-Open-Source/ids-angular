@@ -2,7 +2,6 @@
 import { ContentCard } from '../../model/contentCard';
 // import { Image } from '../../model/image';
 import { BadgeComponent } from '../badge/badge.component';
-import { ButtonsComponent } from '../buttons/buttons.component';
 import { ImageComponent } from '../image/image.component';
 
 import { Component, Input } from '@angular/core';
@@ -28,7 +27,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
     IdsButtonComponent,
     IdsButtonGroupComponent,
     IdsIconComponent,
-    ButtonsComponent,
   ],
   templateUrl: './content-card.component.html',
   styleUrl: './content-card.component.scss',

@@ -1,6 +1,7 @@
 import { ComponentList } from '../../model/componentList';
 
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 
 @Component({
@@ -8,7 +9,10 @@ import { IdsCardComponent } from '@i-cell/ids-angular/card';
   standalone: true,
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
-  imports: [IdsCardComponent],
+  imports: [
+    IdsCardComponent,
+    RouterModule,
+  ],
 })
 export class CardComponent {
   @Input()

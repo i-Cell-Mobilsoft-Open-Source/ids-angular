@@ -7,7 +7,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'ids-segmented-control-item',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './segmented-control-item.component.html',
   encapsulation: ViewEncapsulation.None,

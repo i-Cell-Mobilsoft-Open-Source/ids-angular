@@ -14,7 +14,7 @@
               [variant]="model.variant"
               [readonly]="model.readonly"
               [required]="model.required"
-              [disabled]="helperModel.disabled"
+              [disabled]="model.disabled"
               [(ngModel)]="standalone.unselected"
             >
               {{ helperModel.label }}
@@ -29,7 +29,7 @@
               [variant]="model.variant"
               [readonly]="model.readonly"
               [required]="model.required"
-              [disabled]="helperModel.disabled"
+              [disabled]="model.disabled"
               [indeterminate]="true"
               [(ngModel)]="standalone.indeterminate"
             >
@@ -45,7 +45,7 @@
               [variant]="model.variant"
               [readonly]="model.readonly"
               [required]="model.required"
-              [disabled]="helperModel.disabled"
+              [disabled]="model.disabled"
               [(ngModel)]="standalone.selected"
             >
               {{ helperModel.label }}

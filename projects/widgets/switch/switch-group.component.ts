@@ -7,7 +7,6 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-switch-group',
-  standalone: true,
   imports: [],
   templateUrl: './switch-group.component.html',
   encapsulation: ViewEncapsulation.None,

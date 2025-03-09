@@ -30,7 +30,6 @@ type AccordionInputControls = {
 
 @Component({
   selector: 'app-accordion-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

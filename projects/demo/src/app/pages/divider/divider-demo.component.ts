@@ -26,7 +26,6 @@ type DividerInputControls = {
 
 @Component({
   selector: 'app-divider-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

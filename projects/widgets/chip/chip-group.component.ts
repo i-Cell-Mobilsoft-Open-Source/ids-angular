@@ -9,7 +9,6 @@ const defaultConfig = IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-chip-group',
-  standalone: true,
   imports: [],
   template: '<ng-content select="ids-chip, button[idsChip]" />',
   encapsulation: ViewEncapsulation.None,

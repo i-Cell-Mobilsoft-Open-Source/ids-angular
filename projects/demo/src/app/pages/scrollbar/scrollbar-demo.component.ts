@@ -21,7 +21,6 @@ type ScrollbarHelperControls = {
 
 @Component({
   selector: 'app-scrollbar-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

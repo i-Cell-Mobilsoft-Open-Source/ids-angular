@@ -12,7 +12,6 @@ const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-snackbar-group',
-  standalone: true,
   imports: [IdsSnackbarComponent],
   templateUrl: './snackbar-group.component.html',
   encapsulation: ViewEncapsulation.None,

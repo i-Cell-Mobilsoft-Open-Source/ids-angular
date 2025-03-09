@@ -1,0 +1,34 @@
+<ng-content select="[colStart]" />
+
+@if (_cellRendererComp()) {
+  <ng-container *ngComponentOutlet="_cellRendererComp(); inputs: { rowData: rowData(), colDef: colDef(), cellValue: _cellValue() }" />
+} @else {
+  @switch (_cellTemplateName()) {
+    @case ('strong') {
+      <strong class="ids-cell-content ids-cell-content__strong">{{ _cellValue() }}</strong>
+    }
+    @case ('numeric') {
+      <div class="ids-cell-content ids-cell-content__numeric">{{ _numericCellValue() }}</div>
+    }
+    @case ('icon') {
+      <ids-icon
+        class="ids-cell-content ids-cell-content__icon"
+        [fontIcon]="_stringCellValue()"
+        [aria-hidden]="true"
+      />
+    }
+    <!-- TODO: label-description template (needs further discussion) -->
+    @default {
+      @let template = _cellTemplate();
+      @if (template) {
+        <!-- external template ref -->
+        <ng-container *ngTemplateOutlet="template; context: { $implicit: rowData(), colDef: colDef(), cellValue: _cellValue() }" />
+      } @else {
+        <!-- default basic cell content -->
+        <div class="ids-cell-content ids-cell-content__default">{{ _cellValue() }}</div>
+      }
+    }
+  }
+}
+
+<ng-content select="[colEnd]" />

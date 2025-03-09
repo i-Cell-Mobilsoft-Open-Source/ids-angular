@@ -1,0 +1,21 @@
+.table-wrapper {
+  width: 100%;
+  line-height: 1.5;
+
+  .table-master-detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .ids-table-cell-template-detail {
+    padding: 1rem;
+  }
+
+  .table-demo_cell__numeric {
+    & > .ids-cell-content {
+      text-align: end;
+    }
+  }
+}

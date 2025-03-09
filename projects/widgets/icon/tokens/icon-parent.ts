@@ -1,5 +1,6 @@
+import { IdsIconVariantType } from '../types/icon-variant.type';
+
 import { InjectionToken, Signal } from '@angular/core';
-import { IdsIconVariantType } from '@i-cell/ids-angular/icon';
 
 export abstract class IdsIconParent {
   public readonly embeddedIconVariant!: Signal<IdsIconVariantType>;

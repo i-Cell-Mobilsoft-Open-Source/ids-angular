@@ -1,10 +1,14 @@
 <div class="ids-message__prefix">
   <ng-content select="[idsMessagePrefix]">
-    <ids-icon aria-hidden="true" fontIcon="exclamation-circle" />
+    <ids-icon aria-hidden="true" fontIcon="exclamation-circle" variant="error" />
   </ng-content>
 </div>
 <div class="ids-message__text">
-  <ng-content />
+  @let validationError = _validationError();
+  @if (validationError) {
+    @let messageString = _getValidationErrorMessage(validationError.message);
+    {{ messageString }}
+  }
 </div>
 @if (suffixes().length) {
   <div class="ids-message__suffix">

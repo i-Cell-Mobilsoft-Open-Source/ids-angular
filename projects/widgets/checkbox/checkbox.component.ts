@@ -1,12 +1,13 @@
 import { IDS_CHECKBOX_DEFAULT_CONFIG, IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IdsCheckboxDefaultConfig } from './checkbox-defaults';
-import { IdsCheckboxGroupComponent } from './checkbox-group.component';
 import { IdsCheckBoxChangeEvent } from './types/checkbox-events.class';
+import { IDS_CHECKBOX_GROUP_CHILD, IdsCheckboxGroupChild } from './types/checkbox-group-child';
+import { IDS_CHECKBOX_PARENT } from './types/checkbox-parent';
 import { IdsCheckboxState, IdsCheckboxStateType } from './types/checkbox-state.type';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, output, signal, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, model, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute, isString } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -14,7 +15,6 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-checkbox',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './checkbox.component.html',
   providers: [
@@ -27,13 +27,21 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
       provide: IDS_FORM_FIELD_CONTROL,
       useExisting: IdsCheckboxComponent,
     },
+    {
+      provide: IDS_CHECKBOX_GROUP_CHILD,
+      useExisting: IdsCheckboxComponent,
+    },
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[attr.aria-label]': 'null',
+    '[attr.aria-labelledby]': 'null',
+  },
 })
 export class IdsCheckboxComponent
   extends ComponentBaseWithDefaults<IdsCheckboxDefaultConfig>
-  implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
+  implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor, IdsCheckboxGroupChild {
   protected override get _hostName(): string {
     return 'checkbox';
   }
@@ -42,7 +50,7 @@ export class IdsCheckboxComponent
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CHECKBOX_DEFAULT_CONFIG);
 
-  private _checkboxGroup = inject(IdsCheckboxGroupComponent, { optional: true });
+  private _checkboxGroup = inject(IDS_CHECKBOX_PARENT, { optional: true });
 
   private _checkboxState = signal<IdsCheckboxStateType>(IdsCheckboxState.UNCHECKED);
 
@@ -52,12 +60,15 @@ export class IdsCheckboxComponent
   public readonly = input(false, { transform: coerceBooleanAttribute });
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public tabIndex = input(0, { transform: coerceNumberAttribute });
-  public value = input<string>();
+  public value = input<unknown>();
   public variant = input<IdsCheckboxVariantType>(this._defaultConfig.variant);
   public checked = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
   public indeterminate = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public ariaLabel = input<string>('', { alias: 'aria-label' });
+  public ariaLabelledby = input<string | null>(null, { alias: 'aria-labelledby' });
+  public ariaDescribedby = input<string>('', { alias: 'aria-describedby' });
 
-  public disabled = signal(false);
+  public disabled = model(false);
 
   public isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
   public isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
@@ -68,6 +79,11 @@ export class IdsCheckboxComponent
     this.disabled() ? 'disabled' : null,
   ]),
   );
+
+  protected _nativeValue = computed(() => {
+    const value = this.value();
+    return isString(value) ? value : undefined;
+  });
 
   private _parentOrSelfSize = computed(() => this._checkboxGroup?.size() ?? this.size());
   private _parentOrSelfVariant = computed(() => this._checkboxGroup?.variant() ?? this.variant());
@@ -135,7 +151,7 @@ export class IdsCheckboxComponent
     this.disabled.set(isDisabled);
   }
 
-  protected _createChangeEvent(isChecked: boolean, value: string | undefined): IdsCheckBoxChangeEvent {
+  protected _createChangeEvent(isChecked: boolean, value: unknown): IdsCheckBoxChangeEvent {
     const event = new IdsCheckBoxChangeEvent();
     event.source = this;
     event.checked = isChecked;

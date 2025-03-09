@@ -32,7 +32,6 @@ type ButtonGroupInputControls = {
 };
 
 @Component({
-  standalone: true,
   selector: 'app-button-demo',
   imports: [
     TryoutComponent,

@@ -1,1 +1,80 @@
-{}
+{
+  "GET_STARTED": "Bevezetés",
+  "DESIGN_DEVELOP": "Tervezés & Fejlesztés",
+  "DESIGN_DEVELOP_MENU": {
+    "DESIGN_TOKENS": "Design Tokenek",
+    "FOUNDATION": "Foundation",
+    "COMPONENTS": "Komponensek",
+    "PATTERNS": "Minták"
+  },
+  "RESOURCES": "Forrásanyagok",
+  "COMPONENTS": {
+    "ACCORDION": "Accordion",
+    "ACTION_MENU": "Action menu",
+    "AVATAR": "Avatar",
+    "BUTTON": "Button",
+    "CARD": "Card",
+    "CHECKBOX": "Checkbox",
+    "CHIP": "Chip",
+    "DIALOG": "Dialog",
+    "DIVIDER": "Divider",
+    "FIELDSET": "Fieldset",
+    "FORM_FIELD": "Form field",
+    "ICON": "Icon",
+    "ICON_BUTTON": "Icon button",
+    "MENU_ITEM": "Menu item",
+    "NOTIFICATION": "Notification",
+    "OVERLAY_PANEL": "Overlay panel",
+    "PAGINATOR": "Paginator",
+    "RADIO": "Radio",
+    "SCROLLBAR": "Scrollbar",
+    "SEGMENTED_CONTROL": "Segmented control",
+    "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
+    "SELECT": "Select",
+    "SNACKBAR": "Snackbar",
+    "SWITCH": "Switch",
+    "TAB": "Tab",
+    "TABLE": "Table",
+    "TAG": "Tag",
+    "TOOLTIP": "Tooltip"
+  },
+  "COMMON": {
+    "INTERACTIVE": "Interaktív",
+    "NON-INTERACTIVE": "Nem Interaktív",
+    "STANDALONE": "Különálló",
+    "GROUPED": "Csoportban"
+  },
+  "FORM_FIELD": {
+    "LABEL": {
+      "NAME": "Név"
+    },
+    "ERROR": {
+      "REQUIRED": "{{fieldName}} kitöltése kötelező",
+      "MINLENGTH": "{{fieldName}} túl rövid. Legalább {{requiredLength}} karaktert kell megadni.",
+      "PATTERN": "{{fieldName}} értéke érvénytelen."
+    },
+    "SUCCESS": "{{fieldName}} értéke helyes."
+  },
+  "TABLE": {
+    "COL": {
+      "NAME": "Megnevezés",
+      "SYMBOL": "Vegyjel",
+      "ATOMIC_MASS": "Atomtömeg",
+      "MELT": "Olvadáspont",
+      "NUMBER": "Rendszám",
+      "SUMMARY": "Leírás"
+    },
+    "ARIA": {
+      "HEADER_SELECTOR": "Összes sor kiválasztása, kiválasztás törlése",
+      "ROW_SELECTOR": "Sor kiválasztása, kiválasztás törlése"
+    },
+    "LABEL": {
+      "DETAIL_HEADER": "Műveletek"
+    },
+    "BUTTON": {
+      "EXPAND_DETAILS": "Részletek kinyitása",
+      "COLLAPSE_DETAILS": "Részletek becsukása",
+      "CHANGE_LANGUAGE": "Nyelvváltás"
+    }
+  }
+}

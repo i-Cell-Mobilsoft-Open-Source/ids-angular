@@ -1,13 +1,37 @@
 {
   "name": "@i-cell/ids-angular",
-  "version": "0.0.1",
+  "version": "0.1.4",
+  "private": false,
+  "description": "i-Cell Design System UI Kit components for Angular",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-Cell-Mobilsoft-Open-Source/ids-angular.git"
+  },
+  "contributors": [
+    "Barsi Balázs",
+    "Bátori László",
+    "Nagy Gábor",
+    "Onofer Dávid",
+    "Soós Árpád"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/i-Cell-Mobilsoft-Open-Source/ids-angular/issues"
+  },
+  "homepage": "https://github.com/i-Cell-Mobilsoft-Open-Source/ids-angular#readme",
   "peerDependencies": {
-    "@angular/animations": "^17.3.1",
-    "@angular/cdk": "^17.3.1",
-    "@angular/common": "^17.3.1",
-    "@angular/core": "^17.3.1",
-    "@angular/forms": "^17.3.1",
-    "@angular/router": "^17.3.1"
+    "@angular/animations": "^19.1.2",
+    "@angular/cdk": "^19.1.0",
+    "@angular/common": "^19.1.2",
+    "@angular/core": "^19.1.2",
+    "@angular/forms": "^19.1.2",
+    "@angular/platform-browser": "^19.1.2",
+    "@angular/router": "^19.1.2",
+    "@i-cell/ids-styles": "0.0.34"
   },
   "dependencies": {
     "tslib": "^2.3.0"

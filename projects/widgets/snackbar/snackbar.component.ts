@@ -11,7 +11,6 @@ import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-ang
 
 @Component({
   selector: 'ids-snackbar',
-  standalone: true,
   imports: [
     IdsIconButtonComponent,
     IdsIconComponent,

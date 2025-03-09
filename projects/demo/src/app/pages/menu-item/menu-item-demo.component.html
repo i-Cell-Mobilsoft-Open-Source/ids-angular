@@ -1,0 +1,69 @@
+<app-tryout
+  [title]="'COMPONENTS.MENU_ITEM' | translate"
+  [hasDarkBackground]="menuItemHelperModel.testBackgroundColor === 'dark'"
+  (resetted)="reset()"
+>
+  <ng-container component>
+    <div cdkMenuBar class="menu-bar">
+      <div>
+        <h2>Button</h2>
+        <div idsActiveIndicator [active]="menuItemHelperModel.active" [class.extra-height]="menuItemHelperModel.active && menuItemHelperModel.extraHeight">
+          <button
+            type="button"
+            idsMenuItem
+            [appearance]="menuItemModel.appearance"
+            [size]="menuItemModel.size"
+            [variant]="menuItemModel.variant"
+            [label]="menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+            [disabled]="menuItemModel.disabled"
+          >
+            @if (menuItemHelperModel.hasLeadingIcon) {
+              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+            }
+            @if (menuItemHelperModel.hasTrailingIcon) {
+              <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
+            }
+          </button>
+        </div>
+      </div>
+      <div>
+        <h2>Link</h2>
+        <div idsActiveIndicator [active]="menuItemHelperModel.active" [class.extra-height]="menuItemHelperModel.active && menuItemHelperModel.extraHeight">
+          <a
+            idsMenuItem
+            routerLink="/components/menu-item"
+            [appearance]="menuItemModel.appearance"
+            [size]="menuItemModel.size"
+            [variant]="menuItemModel.variant"
+            [label]="menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+            [disabled]="menuItemModel.disabled"
+          >
+            @if (menuItemHelperModel.hasLeadingIcon) {
+              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+            }
+            @if (menuItemHelperModel.hasTrailingIcon) {
+              <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
+            }
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <app-control-table
+    controls
+    [controlName]="'Menu item'"
+    [configType]="'input'"
+    [controlConfig]="_menuItemInputControlConfig"
+    [(model)]="menuItemModel"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'Menu item'"
+    [configType]="'helper'"
+    [controlConfig]="_menuItemHelperControlConfig"
+    [(model)]="menuItemHelperModel"
+    (resetted)="reset()"
+  />
+</app-tryout>

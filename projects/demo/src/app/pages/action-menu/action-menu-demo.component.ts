@@ -9,7 +9,7 @@ import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-con
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsActionMenuTriggerDirective, IdsMenuItemComponent, IdsMenuItemAppearance, IdsMenuItemAppearanceType, IdsMenuItemVariant, MenuItemVariantType, IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/menu';
+import { IdsActionMenuTriggerDirective, IdsMenuItemComponent, IdsMenuItemAppearance, IdsMenuItemAppearanceType, IdsMenuItemVariant, IdsMenuItemVariantType, IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/menu';
 import { IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/overlay-panel';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel/overlay-panel.component';
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
@@ -32,18 +32,18 @@ type OverlayPanelHelperControls = {
 type MenuItemInputControls = {
   appearance: IdsMenuItemAppearanceType,
   size: IdsSizeType,
-  variant: MenuItemVariantType,
+  variant: IdsMenuItemVariantType,
 };
 
 type MenuItemHelperControls = {
   hasLeadingIcon: boolean,
   hasTrailingIcon: boolean,
   hasDisabledItem: boolean,
+  showFirstItemLabel: boolean;
 };
 
 @Component({
   selector: 'app-action-menu-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,
@@ -140,6 +140,12 @@ export class ActionMenuDemoComponent {
       description: 'Whether one menu item is disabled or not. For testing purposes this is the first menu item.',
       type: 'boolean',
       default: false,
+      control: DemoControl.CHECKBOX,
+    },
+    showFirstItemLabel: {
+      description: 'Show or hide the menu item\'s label. For testing purposes this is the first menu item.',
+      type: 'boolean',
+      default: menuItemDefaultConfig.showLabel,
       control: DemoControl.CHECKBOX,
     },
   };

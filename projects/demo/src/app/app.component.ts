@@ -2,30 +2,36 @@ import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSwitchComponent } from '@i-cell/ids-angular/switch';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { map, startWith, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     RouterModule,
     RouterOutlet,
     TranslateModule,
     NavComponent,
+    IdsButtonComponent,
     IdsSwitchComponent,
     CdkScrollable,
     ReactiveFormsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit, OnDestroy {
   private _translate: TranslateService = inject(TranslateService);
+
+  private _subscription = new Subscription();
+
   public menuConfigs: Menu[] = [
     {
       name: 'GET_STARTED', children: [{ name: 'Home', path: '/index' }] },
@@ -51,6 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
             { name: 'COMPONENTS.FORM_FIELD', path: '/components/form-field' },
             { name: 'COMPONENTS.ICON', path: '/components/icon' },
             { name: 'COMPONENTS.ICON_BUTTON', path: '/components/icon-button' },
+            { name: 'COMPONENTS.MENU_ITEM', path: '/components/menu-item' },
             { name: 'COMPONENTS.NOTIFICATION', path: '/components/notification' },
             { name: 'COMPONENTS.OVERLAY_PANEL', path: '/components/overlay-panel' },
             { name: 'COMPONENTS.PAGINATOR', path: '/components/paginator' },
@@ -62,6 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
             { name: 'COMPONENTS.SNACKBAR', path: '/components/snackbar' },
             { name: 'COMPONENTS.SWITCH', path: '/components/switch' },
             { name: 'COMPONENTS.TAB', path: '/components/tab' },
+            { name: 'COMPONENTS.TABLE', path: '/components/table' },
             { name: 'COMPONENTS.TAG', path: '/components/tag' },
             { name: 'COMPONENTS.TOOLTIP', path: '/components/tooltip' },
           ],
@@ -75,8 +83,9 @@ export class AppComponent implements OnInit, OnDestroy {
     { name: 'RESOURCES', children: [] },
   ];
 
-  private _subscription = new Subscription();
   public darkMode = new FormControl<boolean>(false);
+
+  public currentLang = toSignal(this._translate.onLangChange.pipe(map(({ lang }) => lang), startWith(this._translate.currentLang)));
 
   constructor() {
     this._changeTheme('light');
@@ -107,5 +116,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this._subscription.unsubscribe();
+  }
+
+  public changeLanguage(lang: 'en' | 'hu'): void {
+    this._translate.use(lang);
   }
 }

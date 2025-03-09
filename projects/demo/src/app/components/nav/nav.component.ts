@@ -7,7 +7,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  standalone: true,
   selector: 'ids-nav',
   imports: [
     RouterModule,

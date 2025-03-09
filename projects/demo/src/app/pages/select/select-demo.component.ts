@@ -45,7 +45,6 @@ type AnimalOptions = {
 
 @Component({
   selector: 'app-select-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

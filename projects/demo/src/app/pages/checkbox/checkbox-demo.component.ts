@@ -19,13 +19,13 @@ type CheckboxInputControls = {
   variant: IdsCheckboxVariantType,
   readonly: boolean,
   required: boolean,
+  disabled: boolean,
 };
 
 type CheckboxHelperControls = {
   label: string,
   allowHint: boolean,
   hintMessage: string,
-  disabled: boolean,
 };
 
 type CheckboxGroupInputControls = {
@@ -40,7 +40,6 @@ type CheckboxGroupInputControls = {
 
 @Component({
   selector: 'app-checkbox-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,
@@ -85,6 +84,12 @@ export class CheckboxDemoComponent {
       default: false,
       control: DemoControl.CHECKBOX,
     },
+    disabled: {
+      description: 'Whether the checkbox is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.CHECKBOX,
+    },
   };
 
   protected _helperControlConfig: DemoControlConfig<CheckboxHelperControls> = {
@@ -105,12 +110,6 @@ export class CheckboxDemoComponent {
       type: 'string',
       default: '-',
       demoDefault: 'Hint message',
-    },
-    disabled: {
-      description: 'Whether the checkbox is disabled or not.',
-      type: 'boolean',
-      default: false,
-      control: DemoControl.CHECKBOX,
     },
   };
 

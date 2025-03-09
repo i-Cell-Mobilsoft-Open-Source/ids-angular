@@ -59,6 +59,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   },
   {
+    path: 'components/menu-item',
+    loadComponent: () => import('./pages/menu-item/menu-item-demo.component').then((module) => module.MenuItemDemoComponent),
+  },
+  {
     path: 'components/notification',
     loadComponent: () => import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
   },
@@ -103,6 +107,10 @@ export const routes: Routes = [
   {
     path: 'components/tab',
     loadComponent: () => import('./pages/tab/tab-demo.component').then((module) => module.TabsDemoComponent),
+  },
+  {
+    path: 'components/table',
+    loadComponent: () => import('./pages/table/table-demo.component').then((module) => module.TableDemoComponent),
   },
   {
     path: 'components/tag',

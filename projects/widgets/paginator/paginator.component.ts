@@ -4,7 +4,7 @@ import { IdsPaginatorPageButtonAppearanceType } from './types/paginator-appearan
 import { IdsPaginatorPageChangeEvent } from './types/paginator-events.class';
 import { IdsPaginatorVariantType } from './types/paginator-variant.type';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, effect, ElementRef, inject, Input, input, isDevMode, output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, effect, ElementRef, inject, input, isDevMode, model, output, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { createClassList, isNumberEven, IdsSizeType, coerceNumberAttribute, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -14,7 +14,6 @@ const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-paginator',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './paginator.component.html',
   encapsulation: ViewEncapsulation.None,
@@ -47,6 +46,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsPaginatorVariantType>(this._defaultConfig.variant);
   public pageButtonAppearance = input<IdsPaginatorPageButtonAppearanceType>(this._defaultConfig.pageButtonAppearance);
+  /** The total number of items that are being paginated. */
   public length = input.required<number, number>({ transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
   public compactLayout = input<boolean>(false);
@@ -62,25 +62,25 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
   public safePageSizeData = computed(() => this._getSafePageSizeData(this.pageSizeOptions(), this.pageSize()));
   public pageButtonIdPrefix = computed(() => `${this.id()}__page-button-`);
 
-  @Input({ transform: coerceNumberAttribute })
-  get pageIndex(): number {
-    return this._pageIndex();
-  }
-
-  set pageIndex(value: number) {
-    this._pageIndex.set(Math.max(value || 0, 0));
-  }
+  /**
+   * The index (0 based!) of the currently selected page.
+   *
+   * Usage note (!):
+   * In case paging initiates an async process to update the data and an error occurs the pageIndex needs to be reset to the previous value from the outside.
+   * If `pageIndex` is only 1-way bound (input) the model signal's value won't be updated, it needs 2-way binding!
+   * Possible cause: https://github.com/angular/angular/issues/57124
+   */
+  public pageIndex = model(0);
 
   private _pageIndexValidation = effect(() => {
+    const pageIndex = this._pageIndex();
     const numberOfPages = this._numberOfPages();
-    if (numberOfPages < (this._pageIndex() + 1)) {
+    if (pageIndex > 0 && numberOfPages < (pageIndex + 1)) {
       this.stepPage(0);
     }
-  },
-  { allowSignalWrites: true },
-  );
+  });
 
-  protected _pageIndex = signal(0);
+  protected _pageIndex = computed(() => Math.max(coerceNumberAttribute(this.pageIndex()) || 0, 0));
 
   private _numberOfPages = computed(() => {
     if (!this.pageSize()) {
@@ -275,7 +275,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
 
   public stepPage(pageIndex: number): void {
     const previousPageIndex = this._pageIndex();
-    this._pageIndex.set(pageIndex);
+    this.pageIndex.set(pageIndex);
     this._debouncePageEvent(previousPageIndex, pageIndex);
   }
 

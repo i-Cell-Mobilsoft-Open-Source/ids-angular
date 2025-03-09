@@ -52,7 +52,7 @@ type DialogHelperControls = {
           <h2>This is a custom header!</h2>
         </div>
       }
-      <div idsDialogContent class="flex flex-col gap-3">
+      <div idsDialogContent class="flex-col-gap-3">
       @if (helperControls!.useLongContent) {
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio molestias illo tempore quo quod unde ipsa fugit nihil placeat
@@ -160,7 +160,7 @@ type DialogHelperControls = {
         <p>Provided data: {{ providedData }}</p>
         <p>Data from input binding: {{ inputData() }}</p>
       </div>
-      <div idsDialogActions class="flex flex-row items-end gap-2">
+      <ng-container idsDialogActions>
         <button
           type="button"
           idsButton
@@ -171,10 +171,19 @@ type DialogHelperControls = {
         >
           OK
         </button>
-      </div>
+      </ng-container>
     </dialog>
   `,
-  standalone: true,
+  styles: `
+    p {
+      margin: 0;
+    }
+    .flex-col-gap-3 {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+  `,
 })
 export class CustomDialogComponent extends IdsCustomDialogBase {
   public providedData = inject(CUSTOM_DIALOG_TOKEN);
@@ -185,7 +194,6 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
 
 @Component({
   selector: 'app-dialog-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

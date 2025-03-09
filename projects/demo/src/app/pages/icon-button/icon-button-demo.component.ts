@@ -24,7 +24,6 @@ type IconButtonInputControls = {
 };
 
 @Component({
-  standalone: true,
   selector: 'app-icon-button-demo',
   imports: [
     TryoutComponent,

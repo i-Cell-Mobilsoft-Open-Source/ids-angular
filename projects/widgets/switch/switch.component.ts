@@ -15,7 +15,6 @@ const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
   selector: `ids-switch[ngModel]:not([formControl]):not([formControlName]),
              ids-switch[formControl]:not([ngModel]):not([formControlName]),
              ids-switch[formControlName]:not([ngModel]):not([formControl])`,
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './switch.component.html',
   encapsulation: ViewEncapsulation.None,

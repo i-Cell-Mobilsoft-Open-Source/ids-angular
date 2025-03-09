@@ -28,7 +28,6 @@ type RadioHelperControls = {
 
 @Component({
   selector: 'app-radio-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

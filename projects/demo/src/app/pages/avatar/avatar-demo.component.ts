@@ -27,7 +27,6 @@ type AvatarInputControls = {
 
 @Component({
   selector: 'app-avatar-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     ControlTableComponent,

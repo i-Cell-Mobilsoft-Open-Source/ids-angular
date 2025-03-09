@@ -23,7 +23,6 @@ type FieldsetHelperControls = {
 const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  standalone: true,
   selector: 'app-fieldset-demo',
   imports: [
     TryoutComponent,

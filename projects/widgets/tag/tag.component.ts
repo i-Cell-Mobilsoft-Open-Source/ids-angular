@@ -11,7 +11,6 @@ const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-tag,a[idsTag]',
-  standalone: true,
   imports: [],
   templateUrl: './tag.component.html',
   encapsulation: ViewEncapsulation.None,

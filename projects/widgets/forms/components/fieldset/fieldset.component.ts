@@ -1,14 +1,15 @@
+import { IDS_FIELDSET_DEFAULT_CONFIG, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsFieldsetDefaultConfig } from './fieldset-defaults';
 import { IdsFieldsetMessageDirective } from './fieldset-message.directive';
+
+import { IdsFormFieldVariantType } from '../form-field/types/form-field-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsFieldsetDefaultConfig } from '@i-cell/ids-angular/forms';
 
 const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'fieldset[idsFieldset]',
-  standalone: true,
   imports: [],
   templateUrl: './fieldset.component.html',
   encapsulation: ViewEncapsulation.None,

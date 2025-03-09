@@ -12,7 +12,6 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'button[idsButton]',
-  standalone: true,
   imports: [],
   templateUrl: './button.component.html',
   encapsulation: ViewEncapsulation.None,

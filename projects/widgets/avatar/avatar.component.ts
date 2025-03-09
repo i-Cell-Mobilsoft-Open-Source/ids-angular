@@ -12,7 +12,6 @@ const defaultConfig = IDS_AVATAR_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-avatar',
-  standalone: true,
   imports: [IdsIconComponent],
   templateUrl: './avatar.component.html',
   encapsulation: ViewEncapsulation.None,

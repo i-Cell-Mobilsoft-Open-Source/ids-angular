@@ -58,3 +58,23 @@ body {
 // h1 {
 //   font-size: var(--ids-smc-reference-typography-font-size-72);
 // }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}

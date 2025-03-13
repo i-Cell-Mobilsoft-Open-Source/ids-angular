@@ -10,7 +10,7 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
 import { ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { of, startWith, switchMap, tap } from 'rxjs';
+import { asapScheduler, observeOn, of, startWith, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'ids-error-message',
@@ -38,7 +38,8 @@ export class IdsErrorMessageComponent extends ComponentBase {
 
   constructor() {
     super();
-    toObservable(this._parent.control).pipe(
+    toObservable(this._parent.controlDir).pipe(
+      observeOn(asapScheduler),
       tap((controlDir) => this._control.set(controlDir?.control ?? null)),
       switchMap(() => this._control()?.statusChanges.pipe(startWith(this._control()?.status)) ?? of(null)),
       takeUntilDestroyed(this._destroyRef),

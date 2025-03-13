@@ -19,7 +19,7 @@ export type DemoControlItem<T> = {
   disabled?: boolean,
   min?: number,
   step?: number,
-  onModelChange?: () => void,
+  onModelChange?: (() => void) | ((value?: T) => void),
 };
 
 export type DemoControlConfig<T> = {

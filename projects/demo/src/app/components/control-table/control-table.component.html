@@ -35,11 +35,11 @@
                 [id]="control.name"
                 [disabled]="disabled"
                 [(ngModel)]="model()[control.name]"
-                (ngModelChange)="control.onModelChange?.()"
+                (ngModelChange)="control.onModelChange?.($event)"
               />
             }
             @case (_demoControl.SELECT) {
-              <select [disabled]="disabled" [(ngModel)]="model()[control.name]" (ngModelChange)="control.onModelChange?.()">
+              <select [disabled]="disabled" [(ngModel)]="model()[control.name]" (ngModelChange)="control.onModelChange?.($event)">
                 @for (item of control.list; track $index) {
                   <option [value]="item">{{ item }}</option>
                 }
@@ -54,7 +54,7 @@
                 [attr.min]="control.min"
                 [attr.step]="control.step"
                 [(ngModel)]="model()[control.name]"
-                (ngModelChange)="control.onModelChange?.()"
+                (ngModelChange)="control.onModelChange?.($event)"
               />
             }
             @case (_demoControl.NUMBERARRAY) {
@@ -64,7 +64,7 @@
                 [id]="control.name"
                 [disabled]="disabled"
                 [(ngModel)]="model()[control.name]"
-                (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.()"
+                (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.($event)"
               />
             }
             @default {
@@ -74,7 +74,7 @@
                 [id]="control.name"
                 [disabled]="disabled"
                 [(ngModel)]="model()[control.name]"
-                (ngModelChange)="control.onModelChange?.()"
+                (ngModelChange)="control.onModelChange?.($event)"
               />
             }
           }

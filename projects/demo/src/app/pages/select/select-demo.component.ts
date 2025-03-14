@@ -8,7 +8,7 @@ import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent } from '@i-cell/ids-angular/forms';
+import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsErrorDefinitionDirective, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
 import { IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectComponent, IdsSelectTriggerDirective } from '@i-cell/ids-angular/select';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -23,10 +23,13 @@ type FormFieldInputControls = {
 
 type SelectInputControls = {
   placeholder: string,
+  required: boolean,
+  disabled: boolean,
   readonly: boolean,
-  'aria-label': string
-  'aria-labelledby': string
-  typeaheadDebounceInterval: number
+  'aria-label': string,
+  'aria-labelledby': string,
+  typeaheadDebounceInterval: number,
+  canHandleSuccessState: boolean,
 };
 
 type SelectHelperControls = {
@@ -52,7 +55,9 @@ type AnimalOptions = {
     IdsLabelDirective,
     IdsSelectComponent,
     IdsHintMessageComponent,
+    IdsSuccessMessageComponent,
     IdsErrorMessageComponent,
+    IdsErrorDefinitionDirective,
     FormsModule,
     TranslateModule,
     IdsOptionComponent,
@@ -92,14 +97,26 @@ export class SelectDemoComponent {
       default: '-',
       demoDefault: 'Select animal',
     },
+    required: {
+      description: 'Whether the select is required or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.CHECKBOX,
+    },
+    disabled: {
+      description: 'Whether the select is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.CHECKBOX,
+    },
     readonly: {
-      description: 'Whether select is readonly or not.',
+      description: 'Whether the select is readonly or not.',
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,
     },
     'aria-label': {
-      description: 'aria-label tag for select.',
+      description: 'aria-label tag for the select.',
       type: 'string',
       default: '-',
       demoDefault: 'animal',
@@ -118,11 +135,17 @@ export class SelectDemoComponent {
       step: 100,
       disabled: true,
     },
+    canHandleSuccessState: {
+      description: 'Whether the select can handle success state with a success state matcher.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.CHECKBOX,
+    },
   };
 
   protected _selectHelperControlConfig: DemoControlConfig<SelectHelperControls> = {
     useCustomTrigger: {
-      description: 'Whether select has custom trigger or not.',
+      description: 'Whether the select has a custom trigger or not.',
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,
@@ -154,7 +177,7 @@ export class SelectDemoComponent {
     ],
   };
 
-  public singleSelectionValue: string = this.animals.land[0].value;
+  public singleSelectionValue: string | null = null;
   public multiSelectionValue: string[] = [
     this.animals.land[0].value,
     this.animals.land[2].value,
@@ -165,5 +188,12 @@ export class SelectDemoComponent {
     this.formFieldModel = { ...this.formFieldDefaults };
     this.selectModel = { ...this.selectDefaults };
     this.selectHelperModel = { ...this.selectHelperDefaults };
+
+    this.singleSelectionValue = null;
+    this.multiSelectionValue = [
+      this.animals.land[0].value,
+      this.animals.land[2].value,
+      this.animals.aquatic[1].value,
+    ];
   }
 }

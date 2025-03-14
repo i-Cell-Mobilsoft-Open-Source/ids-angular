@@ -7,10 +7,13 @@
           <ids-label>Animal</ids-label>
           <ids-select
             [placeholder]="selectModel.placeholder"
+            [required]="selectModel.required"
+            [disabled]="selectModel.disabled"
             [readonly]="selectModel.readonly"
             [aria-label]="selectModel['aria-label']"
             [aria-labelledby]="selectModel['aria-labelledby']"
             [typeaheadDebounceInterval]="selectModel.typeaheadDebounceInterval"
+            [canHandleSuccessState]="selectModel.canHandleSuccessState"
             [(ngModel)]="singleSelectionValue"
           >
             @for (group of animals | keyvalue; track $index) {
@@ -22,7 +25,10 @@
             }
           </ids-select>
           <ids-hint-message>Choose an animal</ids-hint-message>
-          <ids-error-message>Animal is mandatory</ids-error-message>
+          <ids-error-message>
+            <ids-error-def code="required">Animal is mandatory</ids-error-def>
+          </ids-error-message>
+          <ids-success-message>Animal field is valid</ids-success-message>
         </ids-form-field>
       </div>
 
@@ -33,10 +39,13 @@
           <ids-select
             [multiSelect]="true"
             [placeholder]="selectModel.placeholder"
+            [required]="selectModel.required"
+            [disabled]="selectModel.disabled"
             [readonly]="selectModel.readonly"
             [aria-label]="selectModel['aria-label']"
             [aria-labelledby]="selectModel['aria-labelledby']"
             [typeaheadDebounceInterval]="selectModel.typeaheadDebounceInterval"
+            [canHandleSuccessState]="selectModel.canHandleSuccessState"
             [(ngModel)]="multiSelectionValue"
           >
             @if (selectHelperModel.useCustomTrigger) {
@@ -61,7 +70,10 @@
             </ids-option-group>
           </ids-select>
           <ids-hint-message>Choose animals</ids-hint-message>
-          <ids-error-message>Animal is mandatory</ids-error-message>
+          <ids-error-message>
+            <ids-error-def code="required">Animal is mandatory</ids-error-def>
+          </ids-error-message>
+          <ids-success-message>Animal field is valid</ids-success-message>
         </ids-form-field>
       </div>
     </div>
@@ -69,6 +81,7 @@
 
   <app-control-table
     controls
+    [controlName]="'Form field'"
     [configType]="'input'"
     [controlConfig]="_formFieldInputControlConfig"
     [(model)]="formFieldModel"
@@ -76,6 +89,7 @@
   />
   <app-control-table
     controls
+    [controlName]="'Select'"
     [configType]="'input'"
     [controlConfig]="_selectInputControlConfig"
     [(model)]="selectModel"
@@ -83,6 +97,7 @@
   />
   <app-control-table
     controls
+    [controlName]="'Select'"
     [configType]="'helper'"
     [controlConfig]="_selectHelperControlConfig"
     [(model)]="selectHelperModel"

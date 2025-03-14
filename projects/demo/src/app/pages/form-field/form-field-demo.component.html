@@ -3,7 +3,7 @@
 <app-tryout [title]="'COMPONENTS.FORM_FIELD' | translate" [hasDarkBackground]="formFieldModel.variant === 'light'" (resetted)="reset()">
   <div component class="form-field-grid">
     <div>
-      <h2>Input</h2>
+      <h2>Input (template driven)</h2>
       <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
         <ids-label>{{ formFieldHelperModel.label }}</ids-label>
         @if (formFieldHelperModel.hasLeadingIcon) {
@@ -51,27 +51,25 @@
     </div>
 
     <div>
-      <h2>Textarea</h2>
+      <h2>Textarea (model driven)</h2>
       <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
         <ids-label>{{ formFieldHelperModel.label }}</ids-label>
         <textarea
-          #textareaModel="ngModel"
           idsInput
           rows="3"
           pattern="[a-zA-Z]+(?:\s[a-zA-Z]+)?"
           [minlength]="3"
           [placeholder]="inputModel.placeholder"
           [readonly]="inputModel.readonly"
-          [disabled]="inputModel.disabled"
           [required]="inputModel.required"
           [canHandleSuccessState]="inputModel.canHandleSuccessState"
-          [(ngModel)]="textarea"
+          [formControl]="textarea"
         ></textarea>
         <ids-hint-message>{{ formFieldHelperModel.hintMessage }}</ids-hint-message>
         <ids-error-message>
           <ids-error-def code="required">{{ 'FORM_FIELD.ERROR.REQUIRED' | translate: { fieldName } }}</ids-error-def>
           <ids-error-def code="minlength">
-            @let textareaRequiredLength = textareaModel.control.errors?.['minlength']?.requiredLength;
+            @let textareaRequiredLength = textarea.errors?.['minlength']?.requiredLength;
             {{ 'FORM_FIELD.ERROR.MINLENGTH' | translate: { fieldName, requiredLength: textareaRequiredLength } }}
           </ids-error-def>
           <ids-error-def code="pattern">{{ 'FORM_FIELD.ERROR.PATTERN' | translate: { fieldName } }}</ids-error-def>

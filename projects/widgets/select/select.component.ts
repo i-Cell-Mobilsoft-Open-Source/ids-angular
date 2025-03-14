@@ -6,13 +6,13 @@ import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild, OnDestroy, effect, isDevMode } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild, OnDestroy, effect, isDevMode, booleanAttribute, Injector, AfterViewInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
-import { coerceBooleanAttribute, coerceNumberAttribute, ComponentBaseWithDefaults, createClassList } from '@i-cell/ids-angular/core';
+import { coerceNumberAttribute, ComponentBaseWithDefaults, createClassList } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_CONTROL, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass, IdsFormFieldComponent, IDS_OPTION_GROUP } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { first, Subject } from 'rxjs';
+import { first, Subject, Subscription } from 'rxjs';
 
 const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
@@ -58,12 +58,13 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 })
 export class IdsSelectComponent
   extends ComponentBaseWithDefaults<IdsSelectDefaultConfig>
-  implements IdsFormFieldControl, ControlValueAccessor, OnInit, AfterContentInit, OnDestroy {
+  implements IdsFormFieldControl, ControlValueAccessor, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   protected override get _hostName(): string {
     return 'select';
   }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SELECT_DEFAULT_CONFIG);
+  private readonly _injector = inject(Injector);
   private readonly _elementRef = inject(ElementRef);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
@@ -80,8 +81,8 @@ export class IdsSelectComponent
 
   public multiSelect = input<boolean>(false);
   public placeholder = input<string>('');
-  public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
-  public readonly = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public required = input<boolean, unknown>(false, { transform: booleanAttribute });
+  public readonly = input<boolean, unknown>(false, { transform: booleanAttribute });
   public canHandleSuccessState = input<boolean>(false);
   public errorStateMatcher = input<AbstractErrorStateMatcher>(inject(this._defaultConfig.errorStateMatcher));
   public successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultConfig.successStateMatcher));
@@ -94,7 +95,26 @@ export class IdsSelectComponent
     this._defaultConfig.typeaheadDebounceInterval, { transform: coerceNumberAttribute },
   );
 
-  public disabled = signal<boolean>(false);
+  public ngControl = signal<NgControl | null>(null);
+
+  /** Handles the `disabled` input binding */
+  public disabledInput = input<boolean, unknown>(false, { transform: booleanAttribute, alias: 'disabled' });
+  /** Stores the `disabled` state internally */
+  private _disabled = signal(this.disabledInput());
+  /** The input's `disabled` state as a read-only signal (to enable/disable the contol programmatically, use the FormControl's related API) */
+  public disabled = computed(() => this._disabled());
+
+  /** This effect is triggered if the `disabled` attribute binding changes and delegates the change to the underlying FormControl */
+  private _disabledInputEffect = effect(() => {
+    const enableOrDisable = this.disabledInput() ? 'disable' : 'enable';
+    const controlDir = this.ngControl();
+
+    // The NgControl's `control` property might not be initialized so we delay the enable/disable call
+    // (the FormControl's enable/disable method call will trigger the CVA's setDisabledState() callback
+    // which sets the "main" disabled signal)
+    queueMicrotask(() => controlDir?.control?.[enableOrDisable]());
+  });
+
   public isPanelOpen = signal<boolean>(false);
   public hasErrorState = signal<boolean>(false);
   public hasSuccessState = signal<boolean>(false);
@@ -123,7 +143,11 @@ export class IdsSelectComponent
 
   private _errorStateTracker?: ErrorStateTracker;
   private _successStateTracker?: SuccessStateTracker;
-  public ngControl: NgControl | null = null;
+  private _successStateSubscription?: Subscription;
+
+  private _canHandleSuccessStateEffect = effect(() => {
+    this._setSuccessStateTracker(this.canHandleSuccessState());
+  });
 
   private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
   private _rawValue: unknown | unknown[];
@@ -136,7 +160,7 @@ export class IdsSelectComponent
   }
 
   public get selected(): IdsOptionComponent | IdsOptionComponent[] | undefined {
-    return this.multiSelect() ? this._selectionModel?.selected : this._selectionModel?.selected?.[0] || [];
+    return this.multiSelect() ? this._selectionModel?.selected : this._selectionModel?.selected?.[0];
   }
 
   protected get _triggerValue(): string {
@@ -157,6 +181,9 @@ export class IdsSelectComponent
     effect(() => {
       this._keyManager?.withTypeAhead(this.typeaheadDebounceInterval());
     });
+
+    // Get the NgControl reference as soon as we can
+    queueMicrotask(() => this.ngControl.set(this._injector.get(NgControl, null, { self: true })));
   }
 
   public ngOnInit(): void {
@@ -165,13 +192,24 @@ export class IdsSelectComponent
     }
     this._selectionModel = new SelectionModel<IdsOptionComponent>(this.multiSelect(), undefined, false, this.valueCompareFn());
     this._initErrorStateTracker();
-    this._initSuccessStateTracker();
   }
 
   public ngAfterContentInit(): void {
     this._initKeyManager();
     this._selectionModel?.select(...this.options().filter((item) => item.selected()));
     this._subscribeOptionChanges();
+  }
+
+  public ngAfterViewInit(): void {
+    const controlDir = this.ngControl();
+    if (controlDir?.control) {
+      controlDir.control.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.updateErrorAndSuccessState());
+    }
+  }
+
+  public updateErrorAndSuccessState(): void {
+    this._errorStateTracker?.updateErrorState();
+    this._successStateTracker?.updateSuccessState();
   }
 
   public ngOnDestroy(): void {
@@ -181,7 +219,7 @@ export class IdsSelectComponent
   private _initErrorStateTracker(): void {
     this._errorStateTracker = new ErrorStateTracker(
       this.errorStateMatcher(),
-      this.ngControl,
+      this.ngControl(),
       this._parentFormGroup,
       this._parentForm,
       this.errorStateChanges,
@@ -192,19 +230,25 @@ export class IdsSelectComponent
     ).subscribe(() => this.hasErrorState.set(this._errorStateTracker!.hasErrorState));
   }
 
-  private _initSuccessStateTracker(): void {
-    if (this.canHandleSuccessState()) {
+  protected _setSuccessStateTracker(canHandleSuccessState: boolean): void {
+    if (canHandleSuccessState) {
       this._successStateTracker = new SuccessStateTracker(
         this.successStateMatcher(),
-        this.ngControl,
+        this.ngControl(),
         this._parentFormGroup,
         this._parentForm,
         this.successStateChanges,
       );
 
-      this.successStateChanges.pipe(
+      this._successStateSubscription = this.successStateChanges.pipe(
         takeUntilDestroyed(this._destroyRef),
       ).subscribe(() => this.hasSuccessState.set(this._successStateTracker!.hasSuccessState));
+
+      this._successStateTracker.updateSuccessState();
+    } else {
+      this._successStateTracker = undefined;
+      this._successStateSubscription?.unsubscribe();
+      this.hasSuccessState.set(false);
     }
   }
 
@@ -300,11 +344,11 @@ export class IdsSelectComponent
     } else if (!this.multiSelect()) {
       const previouslySelectedOption = this.selected;
       manager?.onKeydown(event);
-      const selectedOption = this.selected;
+      const selectedOption = this.selected as IdsOptionComponent;
 
-      if (selectedOption && previouslySelectedOption !== selectedOption) {
+      if (selectedOption?.viewValue() && previouslySelectedOption !== selectedOption) {
         // eslint-disable-next-line no-magic-numbers
-        this._liveAnnouncer.announce((selectedOption as IdsOptionComponent).viewValue(), 10000);
+        this._liveAnnouncer.announce(selectedOption.viewValue(), 10000);
       }
     }
   }
@@ -434,6 +478,7 @@ export class IdsSelectComponent
     }
   }
 
+  // #region ControlValueAccessor implementation
   public writeValue(value: unknown | unknown[]): void {
     this._setSelectionByValue(value);
   }
@@ -446,9 +491,11 @@ export class IdsSelectComponent
     this._onTouched = fn;
   }
 
-  public setDisabledState?(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
+  public setDisabledState(isDisabled: boolean): void {
+    this._disabled.set(isDisabled);
+    this._changeDetectorRef.markForCheck();
   }
+  // #endregion
 
   private _setSelectionByValue(value: unknown | unknown[]): void {
     this.options().forEach((option) => option.setInactiveStyles());
@@ -595,7 +642,9 @@ export class IdsSelectComponent
   }
 
   public onContainerClick = (): void => {
-    this.focus();
-    this.open();
+    if (!this._focused && !this.readonly() && !this.disabled()) {
+      this.focus();
+      this.open();
+    }
   };
 }

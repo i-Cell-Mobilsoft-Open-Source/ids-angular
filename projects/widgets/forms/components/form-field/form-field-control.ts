@@ -9,7 +9,7 @@ export abstract class IdsFormFieldControl {
   public readonly successStateChanges!: Observable<void>;
   public readonly id!: Signal<string>;
   public readonly placeholder!: Signal<string>;
-  public readonly ngControl!: NgControl | null;
+  public readonly ngControl!: Signal<NgControl | null>;
   public readonly disabled!: Signal<boolean>;
   public readonly required!: Signal<boolean>;
   public readonly hasErrorState!: Signal<boolean>;

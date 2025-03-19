@@ -1,10 +1,10 @@
 <section class="ids-dialog-container">
   <header class="ids-dialog-header">
-    @if (customHeader()) {
-      <ng-container [ngTemplateOutlet]="customHeader()!.template" />
+    @if (_customHeader()) {
+      <ng-container [ngTemplateOutlet]="_customHeader()!.template" />
     } @else {
       <div class="ids-dialog-header-default-content">
-        <h2 class="ids-dialog-title" [id]="titleId()">{{ mainTitle() }}</h2>
+        <h2 class="ids-dialog-title" [id]="_titleId()">{{ mainTitle() }}</h2>
         @if (subTitle()) {
           <h3 class="ids-dialog-subtitle">{{ subTitle() }}</h3>
         }

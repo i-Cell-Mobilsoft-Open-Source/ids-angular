@@ -46,7 +46,7 @@ export class IdsIconButtonComponent extends ComponentBaseWithDefaults<IdsIconBut
   public variant = input<IdsIconButtonVariantType>(this._defaultConfig.variant);
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
-  public icons = contentChildren(IdsIconComponent);
+  protected _icons = contentChildren(IdsIconComponent);
 
   private _parentOrSelfAppearance = computed(() => this._parent?.embeddedIconButtonAppearance() ?? this.appearance());
   private _parentOrSelfVariant = computed(() => this._parent?.embeddedIconButtonVariant() ?? this.variant());

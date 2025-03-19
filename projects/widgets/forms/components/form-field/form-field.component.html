@@ -1,4 +1,4 @@
-<label class="ids-form-field__label" [for]="inputId()">
+<label class="ids-form-field__label" [for]="_inputId()">
   <ng-content select="ids-label" />
   @if (hasRequiredValidator()) {
     <span class="ids-form-field__required-marker"></span>
@@ -7,12 +7,12 @@
 
 <div #fieldWrapper class="ids-form-field__field-wrapper">
   <div class="ids-form-field__field-wrapper__container" (click)="containerClick($event)">
-    @if (hasLeadingIcon()) {
+    @if (_hasLeadingIcon()) {
       <div class="ids-form-field__leading-icon">
         <ng-content select="ids-icon[idsLeadingIcon]" />
       </div>
     }
-    @if (hasPrefix()) {
+    @if (_hasPrefix()) {
       <div class="ids-form-field__prefix">
         <ng-content select="[idsPrefix]" />
       </div>
@@ -20,18 +20,18 @@
     <div class="ids-form-field__infix">
       <ng-content />
     </div>
-    @if (hasSuffix()) {
+    @if (_hasSuffix()) {
       <div class="ids-form-field__suffix">
         <ng-content select="[idsSuffix]" />
       </div>
     }
-    @if (hasTrailingIcon()) {
+    @if (_hasTrailingIcon()) {
       <div class="ids-form-field__trailing-icon">
         <ng-content select="ids-icon[idsTrailingIcon]" />
       </div>
     }
   </div>
-  @if (hasActions()) {
+  @if (_hasActions()) {
     <div class="ids-form-field__field-wrapper__action">
       <ng-content select="[idsFormFieldAction]" />
     </div>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="ids-form-field__subscript-wrapper">
-  @let messages = displayedMessages();
+  @let messages = _displayedMessages();
   @if (messages) {
     <div class="ids-form-field__message-container">
       @switch (messages) {

@@ -3,26 +3,26 @@
   role="switch"
   type="button"
   class="ids-switch__button"
-  [tabIndex]="isDisabled() ? -1 : tabIndex()"
-  [disabled]="isDisabled()"
+  [tabIndex]="_isDisabled() ? -1 : tabIndex()"
+  [disabled]="_isDisabled()"
   [id]="id()"
   [name]="name()"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledBy()"
   [attr.aria-describedby]="ariaDescribedBy()"
-  [attr.aria-checked]="isChecked()"
-  [@switchAnimation]="isChecked() ? 'on' : 'off'"
-  (click)="handleClick()"
+  [attr.aria-checked]="_isChecked()"
+  [@switchAnimation]="_isChecked() ? 'on' : 'off'"
+  (click)="_handleClick()"
 >
   <div class="ids-switch__track">
     @if (_hasTrackIcon()) {
       <div class="ids-switch__track-icon">
-        @if (isChecked()) {
+        @if (_isChecked()) {
           <ids-icon aria-hidden="true" fontIcon="check" />
         }
       </div>
       <div class="ids-switch__track-icon">
-        @if (!isChecked()) {
+        @if (!_isChecked()) {
           <ids-icon aria-hidden="true" fontIcon="close" />
         }
       </div>
@@ -30,7 +30,7 @@
     <div class="ids-switch__handle">
       @if (_hasHandleIcon()) {
         <!-- needs to be here duplicate ids-icon because of animation :enter and :leave -->
-        @if (isChecked()) {
+        @if (_isChecked()) {
           <ids-icon aria-hidden="true" fontIcon="check" />
         } @else {
           <ids-icon aria-hidden="true" fontIcon="close" />

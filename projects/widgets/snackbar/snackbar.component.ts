@@ -34,8 +34,8 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
   private _timer?: ReturnType<typeof setTimeout>;
 
   protected readonly _size = IdsSize;
-  public readonly iconButtonAppearance = IdsIconButtonAppearance;
-  public readonly buttonAppearance = IdsButtonAppearance;
+  protected readonly _iconButtonAppearance = IdsIconButtonAppearance;
+  protected readonly _buttonAppearance = IdsButtonAppearance;
 
   public message = input.required<string>();
   public variant = input<IdsSnackbarVariantType | undefined>();

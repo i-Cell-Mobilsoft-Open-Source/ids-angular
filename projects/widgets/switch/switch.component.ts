@@ -120,7 +120,7 @@ export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefau
     this._isDisabled.set(isDisabled);
   }
 
-  private _toggle(): void {
+  public toggle(): void {
     if (!this._isDisabled() && !this.readonly()) {
       this._isChecked.update((checked) => !checked);
       this._onChange(this._isChecked());
@@ -130,7 +130,7 @@ export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefau
 
   protected _handleClick(): void {
     if (!this._isDisabled()) {
-      this._toggle();
+      this.toggle();
     }
   }
 }

@@ -41,6 +41,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
   protected _selectedTabIndex = signal<number>(0);
+  public selectedTabIndex = this._selectedTabIndex.asReadonly();
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),

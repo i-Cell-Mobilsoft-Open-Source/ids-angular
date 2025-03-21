@@ -14,7 +14,7 @@
           type="button"
           idsButton
           [size]="_size.COMPACT"
-          [appearance]="buttonAppearance.OUTLINED"
+          [appearance]="_buttonAppearance.OUTLINED"
           [variant]="_buttonVariant()"
           (click)="callAction(action.action)"
         >
@@ -29,7 +29,7 @@
           aria-label="Close notification"
           idsButton
           [size]="_size.COMPACT"
-          [appearance]="buttonAppearance.OUTLINED"
+          [appearance]="_buttonAppearance.OUTLINED"
           [variant]="_buttonVariant()"
           (click)="close()"
         >
@@ -46,7 +46,7 @@
       aria-label="Close notification"
       idsIconButton
       [size]="_size.COMPACT"
-      [appearance]="iconButtonAppearance.STANDARD"
+      [appearance]="_iconButtonAppearance.STANDARD"
       [variant]="_buttonVariant()"
       (click)="close()"
     >

@@ -1,7 +1,8 @@
 import { InjectionToken } from '@angular/core';
+import { IdsCheckboxStateType } from '@i-cell/ids-angular/checkbox';
 
 export interface IdsCheckboxGroupChild {
-  isChecked(): boolean;
+  checkboxState(): IdsCheckboxStateType;
   deselect(): void;
   select(): void;
 }

@@ -53,6 +53,7 @@ export class IdsCheckboxComponent
   private _checkboxGroup = inject(IDS_CHECKBOX_PARENT, { optional: true });
 
   private _checkboxState = signal<IdsCheckboxStateType>(IdsCheckboxState.UNCHECKED);
+  public checkboxState = this._checkboxState.asReadonly();
 
   protected _inputId = computed(() => `${this.id()}-input`);
   public name = input<string | null>();
@@ -70,7 +71,7 @@ export class IdsCheckboxComponent
 
   public disabled = model(false);
 
-  public isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
+  protected _isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
   protected _isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
   protected _isFocusable = computed(() => !this.disabled() && !this.readonly());
   protected _hostClasses = computed(() => this._getHostClasses([
@@ -160,9 +161,9 @@ export class IdsCheckboxComponent
   }
 
   private _emitChangeEvent(): void {
-    this._onChange(this.isChecked());
-    this.change.emit(this._createChangeEvent(this.isChecked(), this.value()));
-    this._syncChecked(this.isChecked());
+    this._onChange(this._isChecked());
+    this.change.emit(this._createChangeEvent(this._isChecked(), this.value()));
+    this._syncChecked(this._isChecked());
   }
 
   public toggle(): void {
@@ -171,17 +172,17 @@ export class IdsCheckboxComponent
     } else {
       this._checkboxState.set(this._checkboxState() === IdsCheckboxState.CHECKED ? IdsCheckboxState.UNCHECKED : IdsCheckboxState.CHECKED);
     }
-    this._onChange(this.isChecked());
+    this._onChange(this._isChecked());
   }
 
   public select(): void {
     this._checkboxState.set(IdsCheckboxState.CHECKED);
-    this._onChange(this.isChecked());
+    this._onChange(this._isChecked());
   }
 
   public deselect(): void {
     this._checkboxState.set(IdsCheckboxState.UNCHECKED);
-    this._onChange(this.isChecked());
+    this._onChange(this._isChecked());
   }
 
   private _handleInputClick(): void {

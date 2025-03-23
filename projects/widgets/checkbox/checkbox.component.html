@@ -3,14 +3,14 @@
   <input
     #inputEl
     type="checkbox"
-    [class.ids-checkbox--selected]="isChecked()"
+    [class.ids-checkbox--selected]="_isChecked()"
     [id]="_inputId()"
     [disabled]="disabled()"
     [attr.aria-checked]="_isIndeterminate() ? 'mixed' : null"
     [attr.aria-label]="ariaLabel() || null"
     [attr.aria-labelledby]="ariaLabelledby()"
     [attr.aria-describedby]="ariaDescribedby()"
-    [checked]="isChecked()"
+    [checked]="_isChecked()"
     [indeterminate]="_isIndeterminate()"
     [name]="name()"
     [required]="required()"
@@ -24,7 +24,7 @@
     @if (_isIndeterminate()) {
       <ids-icon fontIcon="minus" aria-hidden="true" />
     }
-    @if (isChecked()) {
+    @if (_isChecked()) {
       <ids-icon fontIcon="check" aria-hidden="true" />
     }
   </div>

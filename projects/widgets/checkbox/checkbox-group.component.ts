@@ -3,10 +3,10 @@ import { IdsCheckboxComponent } from './checkbox.component';
 import { IdsCheckBoxChangeEvent } from './types/checkbox-events.class';
 import { IDS_CHECKBOX_GROUP_CHILD } from './types/checkbox-group-child';
 import { IDS_CHECKBOX_PARENT, IdsCheckboxParent } from './types/checkbox-parent';
+import { IdsCheckboxState } from './types/checkbox-state.type';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, ViewEncapsulation } from '@angular/core';
-import { IdsCheckboxState } from '@i-cell/ids-angular/checkbox/types/checkbox-state.type';
 import { ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();

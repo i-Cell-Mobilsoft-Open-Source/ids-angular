@@ -13,6 +13,7 @@
     [attr.aria-label]="ariaLabel()"
     [attr.aria-labelledby]="ariaLabelledBy()"
     [attr.aria-describedby]="ariaDescribedBy()"
+    [attr.aria-checked]="_ariaChecked()"
     (change)="onChange()"
   />
   <div class="ids-radio__inner-circle" (click)="_innerCircleClick()"></div>

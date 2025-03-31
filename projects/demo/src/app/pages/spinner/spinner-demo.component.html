@@ -1,6 +1,19 @@
-
-<div>
-  <ids-spinner
-
+<app-tryout [title]="'COMPONENTS.SPINNER' | translate" [hasDarkBackground]="model.variant === 'light'">
+  <div component >
+    <ids-spinner
+      [sizeCollection]="model.sizeCollection"
+      [size]="model.size"
+      [variant]="model.variant"
+      [isTrack]="model.isTrack"
+      [aria-label]="'loading'"
+    />
+  </div>
+  <app-control-table
+    controls
+    [controlName]="'Spinner'"
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
   />
-</div>
+
+</app-tryout>

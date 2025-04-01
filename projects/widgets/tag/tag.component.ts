@@ -30,8 +30,8 @@ export class IdsTagComponent extends ComponentBaseWithDefaults<IdsTagDefaultConf
 
   private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  public iconLeading = contentChildren<IdsIconComponent>('ids-icon[icon-leading]');
-  public iconTrailing = contentChildren<IdsIconComponent>('ids-icon[icon-trailing]');
+  protected _iconLeading = contentChildren<IdsIconComponent>('ids-icon[icon-leading]');
+  protected _iconTrailing = contentChildren<IdsIconComponent>('ids-icon[icon-trailing]');
 
   public appearance = input<IdsTagAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);

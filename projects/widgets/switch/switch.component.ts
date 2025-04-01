@@ -44,7 +44,7 @@ export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefau
 
   private _switchElement = viewChild<ElementRef<HTMLInputElement>>('switch');
 
-  public isChecked = signal(false);
+  protected _isChecked = signal(false);
 
   public label = input<string>();
   public name = input<string | null>();
@@ -55,7 +55,7 @@ export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefau
   public hasIcon = input(this._defaultConfig.hasIcon);
   public iconPosition = input(this._defaultConfig.iconPosition);
   public labelPosition = input(this._defaultConfig.labelPosition);
-  public isDisabled = signal(false);
+  protected _isDisabled = signal(false);
   public ariaLabel = input<string| null>(null, { alias: 'aria-label' });
   public ariaLabelledBy = input<string | null, string>(null,
     { alias: 'aria-labelledby', transform: (val) => fallbackValue(val, this.id()) },
@@ -75,12 +75,12 @@ export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefau
     this._parentOrSelfHasIcon() && this._parentOrSelfIconPosition() === IdsSwitchIconPosition.ONTRACK,
   );
 
-  private _isFocusable = computed(() => !this.isDisabled() && !this.readonly());
+  private _isFocusable = computed(() => !this._isDisabled() && !this.readonly());
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfSize(),
     this.variant(),
-    this.isDisabled() ? 'disabled' : null,
-    this.isChecked() ? 'on' : null,
+    this._isDisabled() ? 'disabled' : null,
+    this._isChecked() ? 'on' : null,
     [
       'label',
       this._parentOrSelfLabelPosition(),
@@ -94,7 +94,7 @@ export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefau
   @Input({ transform: coerceBooleanAttribute })
   set disabled(value: boolean) {
     if (value !== this.disabled) {
-      this.isDisabled.set(value);
+      this._isDisabled.set(value);
     }
   }
 
@@ -105,7 +105,7 @@ export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefau
   }
 
   public writeValue(value: boolean | undefined): void {
-    this.isChecked.set(Boolean(value));
+    this._isChecked.set(Boolean(value));
   }
 
   public registerOnChange(fn: () => void): void {
@@ -117,19 +117,19 @@ export class IdsSwitchComponent extends ComponentBaseWithDefaults<IdsSwitchDefau
   }
 
   public setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+    this._isDisabled.set(isDisabled);
   }
 
   public toggle(): void {
-    if (!this.isDisabled() && !this.readonly()) {
-      this.isChecked.update((checked) => !checked);
-      this._onChange(this.isChecked());
+    if (!this._isDisabled() && !this.readonly()) {
+      this._isChecked.update((checked) => !checked);
+      this._onChange(this._isChecked());
       this._onTouched();
     }
   }
 
-  public handleClick(): void {
-    if (!this.isDisabled()) {
+  protected _handleClick(): void {
+    if (!this._isDisabled()) {
       this.toggle();
     }
   }

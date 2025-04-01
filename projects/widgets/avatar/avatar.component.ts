@@ -52,14 +52,14 @@ export class IdsAvatarComponent extends ComponentBaseWithDefaults<IdsAvatarDefau
     return IdsAvatarType.INITIALS;
   });
 
-  public avatarType = computed(() => this._implicitAvatarType() ?? this._defaultConfig.type);
+  protected _currentAvatarType = computed(() => this._implicitAvatarType() ?? this._defaultConfig.type);
 
   private _parentOrSelfVariant = computed(() => this._parent?.embeddedAvatarVariant() ?? this.variant());
 
   protected _hostClasses = computed(() => this._getHostClasses([
     [
       'type',
-      this.avatarType(),
+      this._currentAvatarType(),
     ],
     [
       `${this.sizeCollection()}collection`,

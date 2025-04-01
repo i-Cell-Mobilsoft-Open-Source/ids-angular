@@ -39,8 +39,8 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
   private _parentOrSelfSize = computed(() => this._group?.size() ?? this.size());
   private _parentOrSelfVariant = computed(() => this._parent?.embeddedButtonVariant() ?? this.variant());
 
-  public iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
-  public iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
+  protected _iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
+  protected _iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),

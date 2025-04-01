@@ -1,10 +1,10 @@
-@if (iconLeading()) {
+@if (_iconLeading()) {
   <ng-content select="ids-icon[icon-leading]" />
 }
 @if (label()) {
   <div class="ids-menu-item-label--wrapper"><span class="ids-menu-item-label">{{ label() }}</span></div>
 }
 
-@if (iconTrailing()) {
+@if (_iconTrailing()) {
   <ng-content select="ids-icon[icon-trailing]" />
 }

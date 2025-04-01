@@ -39,8 +39,8 @@ export class IdsMenuItemComponent extends ComponentBaseWithDefaults<IdsMenuItemD
   public variant = input<IdsMenuItemVariantType>(this._defaultConfig.variant);
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
-  public iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
-  public iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
+  protected _iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
+  protected _iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),
@@ -50,7 +50,7 @@ export class IdsMenuItemComponent extends ComponentBaseWithDefaults<IdsMenuItemD
     !this.label() ? 'no-label' : null,
   ]));
 
-  public get buttonType(): string | null {
+  private get _buttonType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
   }
 
@@ -58,7 +58,7 @@ export class IdsMenuItemComponent extends ComponentBaseWithDefaults<IdsMenuItemD
     super();
 
     effect(() => {
-      if (this.buttonType) {
+      if (this._buttonType) {
         return;
       }
 

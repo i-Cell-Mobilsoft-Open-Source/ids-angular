@@ -1,21 +1,22 @@
 <div class="ids-radio__input-wrapper">
-  <div class="ids-radio__touch-target" (click)="touchTargetClick()"></div>
+  <div class="ids-radio__touch-target" (click)="_touchTargetClick()"></div>
   <input
     #input
     class="ids-radio__native-control"
     type="radio"
     [id]="inputId()"
     [checked]="selected()"
-    [disabled]="isDisabled()"
-    [attr.name]="name()"
+    [disabled]="_isDisabled()"
+    [attr.name]="_name()"
     [attr.value]="value()"
-    [required]="required()"
+    [required]="_required()"
     [attr.aria-label]="ariaLabel()"
     [attr.aria-labelledby]="ariaLabelledBy()"
     [attr.aria-describedby]="ariaDescribedBy()"
+    [attr.aria-checked]="_ariaChecked()"
     (change)="onChange()"
   />
-  <div class="ids-radio__inner-circle" (click)="innerCircleClick()"></div>
+  <div class="ids-radio__inner-circle" (click)="_innerCircleClick()"></div>
 </div>
 <label class="ids-radio__label" [for]="inputId()">
   <ng-content />

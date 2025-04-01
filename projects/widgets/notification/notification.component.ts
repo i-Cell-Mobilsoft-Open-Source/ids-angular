@@ -22,7 +22,7 @@ const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[role]': 'role()',
+    '[role]': '_role()',
   },
   providers: [
     {
@@ -61,7 +61,7 @@ export class IdsNotificationComponent extends ComponentBaseWithDefaults<IdsNotif
 
   public closed = output<void>();
 
-  public role = computed(() => (this.urgent() ? 'alert' : 'status'));
+  private _role = computed(() => (this.urgent() ? 'alert' : 'status'));
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),

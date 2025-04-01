@@ -22,7 +22,7 @@ const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'idsDialog',
   host: {
-    '[attr.aria-labelledby]': 'titleId()',
+    '[attr.aria-labelledby]': '_titleId()',
     '(cancel)': '_onCancel($event)',
   },
 })
@@ -35,14 +35,14 @@ export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefau
 
   public dialog = inject<ElementRef<HTMLDialogElement>>(ElementRef).nativeElement;
 
-  public titleId = computed(() => `${this.id()}-title`);
+  protected _titleId = computed(() => `${this.id()}-title`);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public mainTitle = input.required<string>();
   public subTitle = input<string>();
   public showCloseButton = input<boolean>(this._defaultConfig.showCloseButton);
   public showBackdrop = input<boolean>(this._defaultConfig.showBackdrop);
 
-  public customHeader = contentChild(IdsDialogHeaderDirective);
+  protected _customHeader = contentChild(IdsDialogHeaderDirective);
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),

@@ -42,29 +42,30 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
   private _prefixes = contentChildren(IdsPrefixDirective);
   private _suffixes = contentChildren(IdsSuffixDirective);
 
-  public hasActions = computed(() => Boolean(this._actions().length));
-  public hasLeadingIcon = computed(() => Boolean(this._prefixes().filter((prefix) => prefix.isLeadingIcon).length));
-  public hasPrefix = computed(() => Boolean(this._prefixes().filter((prefix) => !prefix.isLeadingIcon).length));
-  public hasSuffix = computed(() => Boolean(this._suffixes().filter((suffix) => !suffix.isTrailingIcon).length));
-  public hasTrailingIcon = computed(() => Boolean(this._suffixes().filter((suffix) => suffix.isTrailingIcon).length));
-  public inputId = computed(() => this._child().id());
+  protected _hasActions = computed(() => Boolean(this._actions().length));
+  protected _hasLeadingIcon = computed(() => Boolean(this._prefixes().filter((prefix) => prefix.isLeadingIcon).length));
+  protected _hasPrefix = computed(() => Boolean(this._prefixes().filter((prefix) => !prefix.isLeadingIcon).length));
+  protected _hasSuffix = computed(() => Boolean(this._suffixes().filter((suffix) => !suffix.isTrailingIcon).length));
+  protected _hasTrailingIcon = computed(() => Boolean(this._suffixes().filter((suffix) => suffix.isTrailingIcon).length));
+  protected _inputId = computed(() => this._child()?.id());
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsFormFieldVariantType>(this._defaultConfig.variant);
   public parentOrSelfSize = computed(() => this._parentFieldset?.size() ?? this.size());
   public parentOrSelfVariant = computed(() => this._parentFieldset?.variant() ?? this.variant());
   public controlDir = computed(() => this._child().ngControl());
-  public disabled = computed(() => Boolean(this._child().disabled()));
-  private _hasErrorState = computed(() => Boolean(this._child().hasErrorState()));
-  private _hasSuccessState = computed(() => Boolean(this._child().hasSuccessState()));
+  private _hasErrorState = computed(() => Boolean(this._child()?.hasErrorState()));
+  public disabled = computed(() => Boolean(this._child()?.disabled()));
+  private _hasSuccessState = computed(() => Boolean(this._child()?.hasSuccessState()));
   protected _hostClasses = computed(() => this._getHostClasses([
     this.parentOrSelfSize(),
     this.parentOrSelfVariant(),
     this.disabled() ? 'disabled' : null,
     this._hasErrorState() ? 'invalid' : null,
     this._hasSuccessState() ? 'valid' : null,
-  ]));
+  ]),
+  );
 
-  public displayedMessages = computed<'error' | 'success' | 'hint' | undefined>(() => {
+  protected _displayedMessages = computed<'error' | 'success' | 'hint' | undefined>(() => {
     if (this._errorMessages().length > 0 && this._hasErrorState()) {
       return 'error';
     }

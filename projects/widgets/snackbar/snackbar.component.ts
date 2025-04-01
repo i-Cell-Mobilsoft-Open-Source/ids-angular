@@ -21,7 +21,7 @@ import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-ang
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[role]': 'role()',
+    '[role]': '_role()',
     '(mouseenter)': '_onMouseEnter()',
     '(mouseleave)': '_onMouseLeave()',
   },
@@ -33,9 +33,9 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
 
   private _timer?: ReturnType<typeof setTimeout>;
 
-  public readonly size = IdsSize;
-  public readonly iconButtonAppearance = IdsIconButtonAppearance;
-  public readonly buttonAppearance = IdsButtonAppearance;
+  protected readonly _size = IdsSize;
+  protected readonly _iconButtonAppearance = IdsIconButtonAppearance;
+  protected readonly _buttonAppearance = IdsButtonAppearance;
 
   public message = input.required<string>();
   public variant = input<IdsSnackbarVariantType | undefined>();
@@ -59,8 +59,10 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
     this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
   ]));
 
-  public role = computed(() => (this.urgent() ? 'alert' : 'status'));
-  public buttonVariant = computed(() => (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE));
+  private _role = computed(() => (this.urgent() ? 'alert' : 'status'));
+  protected _buttonVariant = computed(() =>
+    (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE));
+
   private _defaultIcon = computed<string | null>(() => {
     switch (this.variant()) {
       case IdsSnackbarVariant.DARK:

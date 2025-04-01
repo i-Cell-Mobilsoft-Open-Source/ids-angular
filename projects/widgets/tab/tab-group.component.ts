@@ -40,7 +40,8 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   public indicatorPosition = input<IdsTabIndicatorPositionType>();
   public disabled = input(false, { transform: coerceBooleanAttribute });
 
-  public selectedTabIndex = signal<number>(0);
+  protected _selectedTabIndex = signal<number>(0);
+  public selectedTabIndex = this._selectedTabIndex.asReadonly();
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
@@ -49,10 +50,10 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     this.disabled() ? 'disabled' : null,
     this.stretchTabs() && this.orientation() === IdsOrientation.HORIZONTAL ? 'stretch-tabs' : null,
     this.tabPosition() && !this.stretchTabs() ? this.tabPosition() : null,
-    `indicator-${this.indicatorPosition() ?? this.calculatedIndicatorPosition()}`,
+    `indicator-${this.indicatorPosition() ?? this._calculatedIndicatorPosition()}`,
   ]));
 
-  public calculatedIndicatorPosition = computed(() =>
+  private _calculatedIndicatorPosition = computed(() =>
     (this.orientation() === IdsOrientation.HORIZONTAL ? IdsTabIndicatorPosition.BOTTOM : IdsTabIndicatorPosition.LEFT),
   );
 
@@ -80,7 +81,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   }
 
   public selectTab(index: number): void {
-    this.selectedTabIndex.set(index);
+    this._selectedTabIndex.set(index);
     const selectedItem = this._items().at(index);
     const selectedPortal = new TemplatePortal(selectedItem!.content(), this._viewContainerRef);
 

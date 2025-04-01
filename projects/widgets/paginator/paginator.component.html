@@ -3,9 +3,9 @@
     <button
       type="button"
       class="ids-paginator__page-button-arrow first"
-      [class]="pageButtonClasses()"
-      [disabled]="isPreviousButtonDisabled()"
-      [attr.aria-label]="intl.firstPageAriaLabel"
+      [class]="_pageButtonClasses()"
+      [disabled]="_isPreviousButtonDisabled()"
+      [attr.aria-label]="_intl.firstPageAriaLabel"
       (click)="stepFirstPage()"
     >
       <ids-icon fontIcon="chevron-double-left" [size]="size()" />
@@ -15,23 +15,23 @@
   <button
     type="button"
     class="ids-paginator__page-button-arrow previous"
-    [class]="pageButtonClasses()"
-    [disabled]="isPreviousButtonDisabled()"
-    [attr.aria-label]="intl.previousPageAriaLabel"
+    [class]="_pageButtonClasses()"
+    [disabled]="_isPreviousButtonDisabled()"
+    [attr.aria-label]="_intl.previousPageAriaLabel"
     (click)="stepPreviousPage()"
   >
     <ids-icon fontIcon="chevron-left" [size]="size()" />
     @if (showPrevNextLabel() && compactLayout()) {
-      <span class="ids-paginator__page-button-arrow__label">{{ intl.previousPageLabel }}</span>
+      <span class="ids-paginator__page-button-arrow__label">{{ _intl.previousPageLabel }}</span>
     }
   </button>
 
   @if (showPageButtons() && !compactLayout()) {
     <ul class="ids-paginator__page-button-container">
-      @for (pageButtonLabel of pageButtonLabels(); track pageButtonLabel) {
+      @for (pageButtonLabel of _pageButtonLabels(); track pageButtonLabel) {
         <li>
           @if (pageButtonLabel === "tl" || pageButtonLabel === "tr") {
-            <button type="button" disabled class="ids-paginator__page-button-truncation" [class]="pageButtonClasses()">
+            <button type="button" disabled class="ids-paginator__page-button-truncation" [class]="_pageButtonClasses()">
               <ids-icon fontIcon="more-horizontal" [size]="size()" />
             </button>
           } @else {
@@ -39,11 +39,11 @@
               #pageButtonElement
               type="button"
               class="ids-paginator__page-button"
-              [id]="pageButtonIdPrefix() + pageButtonLabel"
+              [id]="_pageButtonIdPrefix() + pageButtonLabel"
               [disabled]="disabled()"
-              [class]="pageButtonClasses()"
+              [class]="_pageButtonClasses()"
               [class.active]="+pageButtonLabel === _pageIndex() + 1"
-              [attr.aria-label]="intl.getPageAriaLabel(pageButtonLabel)"
+              [attr.aria-label]="_intl.getPageAriaLabel(pageButtonLabel)"
               [attr.aria-current]="+pageButtonLabel === _pageIndex() + 1 ? 'page' : null"
               (click)="stepPage(+pageButtonLabel - 1)"
             >
@@ -58,13 +58,13 @@
   <button
     type="button"
     class="ids-paginator__page-button-arrow next"
-    [class]="pageButtonClasses()"
-    [disabled]="isNextButtonDisabled()"
-    [attr.aria-label]="intl.nextPageAriaLabel"
+    [class]="_pageButtonClasses()"
+    [disabled]="_isNextButtonDisabled()"
+    [attr.aria-label]="_intl.nextPageAriaLabel"
     (click)="stepNextPage()"
   >
     @if (showPrevNextLabel() && compactLayout()) {
-      <span class="ids-paginator__page-button-arrow__label">{{ intl.nextPageLabel }}</span>
+      <span class="ids-paginator__page-button-arrow__label">{{ _intl.nextPageLabel }}</span>
     }
     <ids-icon fontIcon="chevron-right" [size]="size()" />
   </button>
@@ -73,9 +73,9 @@
     <button
       type="button"
       class="ids-paginator__page-button-arrow last"
-      [class]="pageButtonClasses()"
-      [disabled]="isNextButtonDisabled()"
-      [attr.aria-label]="intl.lastPageAriaLabel"
+      [class]="_pageButtonClasses()"
+      [disabled]="_isNextButtonDisabled()"
+      [attr.aria-label]="_intl.lastPageAriaLabel"
       (click)="stepLastPage()"
     >
       <ids-icon fontIcon="chevron-double-right" [size]="size()" />
@@ -83,6 +83,6 @@
   }
 
   <span class="ids-paginator__help-text" [class.sr-only]="!showPageInfo()">{{
-    intl.getRangeLabel(_pageIndex(), safePageSizeData().safePageSize, length())
+    _intl.getRangeLabel(_pageIndex(), _safePageSizeData().safePageSize, length())
   }}</span>
 </nav>

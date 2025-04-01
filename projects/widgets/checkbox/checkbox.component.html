@@ -3,28 +3,28 @@
   <input
     #inputEl
     type="checkbox"
-    [class.ids-checkbox--selected]="isChecked()"
-    [id]="inputId()"
+    [class.ids-checkbox--selected]="_isChecked()"
+    [id]="_inputId()"
     [disabled]="disabled()"
-    [attr.aria-checked]="isIndeterminate() ? 'mixed' : null"
+    [attr.aria-checked]="_isIndeterminate() ? 'mixed' : null"
     [attr.aria-label]="ariaLabel() || null"
     [attr.aria-labelledby]="ariaLabelledby()"
     [attr.aria-describedby]="ariaDescribedby()"
-    [checked]="isChecked()"
-    [indeterminate]="isIndeterminate()"
+    [checked]="_isChecked()"
+    [indeterminate]="_isIndeterminate()"
     [name]="name()"
     [required]="required()"
-    [tabIndex]="!isFocusable() ? -1 : tabIndex()"
+    [tabIndex]="!_isFocusable() ? -1 : tabIndex()"
     [value]="_nativeValue()"
     (blur)="onBlur()"
     (click)="onInputClick()"
     (change)="$event.stopPropagation()"
   />
   <div class="ids-checkbox__icon" aria-hidden="true">
-    @if (isIndeterminate()) {
+    @if (_isIndeterminate()) {
       <ids-icon fontIcon="minus" aria-hidden="true" />
     }
-    @if (isChecked()) {
+    @if (_isChecked()) {
       <ids-icon fontIcon="check" aria-hidden="true" />
     }
   </div>
@@ -32,9 +32,9 @@
 
 <div class="ids-checkbox__label-wrapper">
   <div class="ids-checkbox__label-container">
-    <label class="ids-checkbox__label" [for]="inputId()">
+    <label class="ids-checkbox__label" [for]="_inputId()">
       <ng-content />
-      @if (hasRequiredValidator) {
+      @if (_hasRequiredValidator) {
         <span class="ids-form-field__required-marker"></span>
       }
     </label>

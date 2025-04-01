@@ -53,8 +53,9 @@ export class IdsCheckboxComponent
   private _checkboxGroup = inject(IDS_CHECKBOX_PARENT, { optional: true });
 
   private _checkboxState = signal<IdsCheckboxStateType>(IdsCheckboxState.UNCHECKED);
+  public checkboxState = this._checkboxState.asReadonly();
 
-  public inputId = computed(() => `${this.id()}-input`);
+  protected _inputId = computed(() => `${this.id()}-input`);
   public name = input<string | null>();
   public required = input(false, { transform: coerceBooleanAttribute });
   public readonly = input(false, { transform: coerceBooleanAttribute });
@@ -70,9 +71,9 @@ export class IdsCheckboxComponent
 
   public disabled = model(false);
 
-  public isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
-  public isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
-  public isFocusable = computed(() => !this.disabled() && !this.readonly());
+  protected _isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
+  protected _isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
+  protected _isFocusable = computed(() => !this.disabled() && !this.readonly());
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
@@ -132,7 +133,7 @@ export class IdsCheckboxComponent
   }
 
   public writeValue(value: boolean): void {
-    if (this.isIndeterminate()) {
+    if (this._isIndeterminate()) {
       this._checkboxState.set(IdsCheckboxState.INDETERMINATE);
     } else {
       this._checkboxState.set(value ? IdsCheckboxState.CHECKED : IdsCheckboxState.UNCHECKED);
@@ -160,40 +161,40 @@ export class IdsCheckboxComponent
   }
 
   private _emitChangeEvent(): void {
-    this._onChange(this.isChecked());
-    this.change.emit(this._createChangeEvent(this.isChecked(), this.value()));
-    this._syncChecked(this.isChecked());
+    this._onChange(this._isChecked());
+    this.change.emit(this._createChangeEvent(this._isChecked(), this.value()));
+    this._syncChecked(this._isChecked());
   }
 
   public toggle(): void {
-    if (this.isIndeterminate()) {
+    if (this._isIndeterminate()) {
       this._checkboxState.set(IdsCheckboxState.CHECKED);
     } else {
       this._checkboxState.set(this._checkboxState() === IdsCheckboxState.CHECKED ? IdsCheckboxState.UNCHECKED : IdsCheckboxState.CHECKED);
     }
-    this._onChange(this.isChecked());
+    this._onChange(this._isChecked());
   }
 
   public select(): void {
     this._checkboxState.set(IdsCheckboxState.CHECKED);
-    this._onChange(this.isChecked());
+    this._onChange(this._isChecked());
   }
 
   public deselect(): void {
     this._checkboxState.set(IdsCheckboxState.UNCHECKED);
-    this._onChange(this.isChecked());
+    this._onChange(this._isChecked());
   }
 
   private _handleInputClick(): void {
-    if (this.isIndeterminate()) {
+    if (this._isIndeterminate()) {
       this._checkboxState.set(IdsCheckboxState.CHECKED);
-      this.indeterminateChange.emit(this.isIndeterminate());
+      this.indeterminateChange.emit(this._isIndeterminate());
     } else {
       this._checkboxState.set(this._checkboxState() === IdsCheckboxState.CHECKED ? IdsCheckboxState.UNCHECKED : IdsCheckboxState.CHECKED);
     }
 
     this._emitChangeEvent();
-    this._syncIndeterminate(this.isIndeterminate());
+    this._syncIndeterminate(this._isIndeterminate());
   }
 
   public onBlur(): void {
@@ -239,7 +240,7 @@ export class IdsCheckboxComponent
     return undefined;
   }
 
-  public get hasRequiredValidator(): boolean {
+  protected get _hasRequiredValidator(): boolean {
     const control = this.controlDir?.control;
     if (!control) {
       return this.required();

@@ -1,8 +1,4 @@
-import { Badge } from '../../model/badge';
-import { ContentCard } from '../../model/contentCard';
-import { Image } from '../../model/image';
-
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-image',
@@ -11,37 +7,33 @@ import { Component, Input } from '@angular/core';
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
 })
-export class ImageComponent implements Badge, ContentCard, Image  {
-  @Input()
-  public orientation: 'horizontal' | 'vertical' = 'vertical'; // Default is vertical
+export class ImageComponent   {
 
-  @Input()
-  public state?: 'do' | 'dont'; // ✅ Optional Input
+  public orientation = input<'horizontal' | 'vertical' | undefined>('vertical');
 
-  @Input()
-  public aspectRatio?: '1/1' | '16/9' | '16/10' = '16/9';
+  public state = input<'do' | 'dont' | undefined>();
 
-  @Input()
-  public imageBgColorVariant?: 'surface' | 'primary' | 'light' = 'surface';
+  public aspectRatio = input<'1/1' | '16/9' | '16/10' | undefined>('16/9');
 
-  @Input() public imageURL?: string;  // Optional imageURL
+  public imageBgColorVariant = input<'surface' | 'primary' | 'light' | undefined>('surface');
 
-  @Input() public imageCaption?: string;
-  // Optional imageCaption
+  public imageURL = input<string>();
+
+  public imageCaption = input<string>();
 
   public getBorderClass(): string {
-    switch (this.state) {
+    switch (this.state()) {
       case 'do':
-        return 'border-solid border-ids-container-border-success-default border-2';
+        return '!border-solid !border-ids-container-border-success-default !border-2';
       case 'dont':
-        return 'border-solid border-ids-container-border-warning-default border-2';
+        return '!border-solid !border-ids-container-border-warning-default !border-2';
       default:
         return ''; // Default class
     }
   };
 
   public getAspectRatioClass(): string {
-    switch (this.aspectRatio) {
+    switch (this.aspectRatio()) {
       case '1/1':
         return 'aspect-1/1';
       case '16/9':
@@ -54,7 +46,7 @@ export class ImageComponent implements Badge, ContentCard, Image  {
   };
 
   public getColorVariantClass(): string {
-    switch (this.imageBgColorVariant) {
+    switch (this.imageBgColorVariant()) {
       case 'primary':
         return 'bg-ids-container-bg-surface-darker-20';
       case 'surface':

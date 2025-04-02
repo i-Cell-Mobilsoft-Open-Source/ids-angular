@@ -1,5 +1,5 @@
 import { IdsTabGroupComponent } from '../../../../../../widgets/tab/tab-group.component';
-import { HERO_LIST } from '../../../../utils/componentHeroListData';
+import { HERO_DATA } from '../../../../utils/componentHeroListData';
 import { CONTENTCARD_DATA } from '../../../../utils/contentCardListData';
 import { ContentCardComponent } from '../../../components/content-card/content-card.component';
 import { HeroComponent } from '../../../components/hero/hero.component';
@@ -7,7 +7,6 @@ import { GraphqlService } from '../../../services/graphql.service';
 
 import { Component, OnInit } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
 
@@ -22,22 +21,21 @@ interface GraphQLResponse {
 }
 
 @Component({
-  selector: 'app-one-component',
+  selector: 'app-component-details',
   standalone: true,
   imports: [
     HeroComponent,
-    IdsCardComponent,
     ContentCardComponent,
     IdsTabComponent,
     IdsTabGroupComponent,
     IdsChipComponent,
     IdsButtonComponent,
   ],
-  templateUrl: './one-component.component.html',
-  styleUrl: './one-component.component.scss',
+  templateUrl: './component-details.component.html',
+  styleUrl: './component-details.component.scss',
 })
-export class OneComponentComponent implements OnInit {
-  public heroLists = HERO_LIST;
+export class ComponentDetailsComponent implements OnInit {
+  public heroDatas = HERO_DATA;
   public contentCardDatas = CONTENTCARD_DATA;
   public collections: Collection[] = [];
 

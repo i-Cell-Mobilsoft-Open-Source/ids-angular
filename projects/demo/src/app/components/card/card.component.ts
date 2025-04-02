@@ -1,6 +1,6 @@
-import { ComponentList } from '../../model/componentList';
+import { ComponentData } from '../../model/componentData';
 
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 
@@ -15,6 +15,5 @@ import { IdsCardComponent } from '@i-cell/ids-angular/card';
   ],
 })
 export class CardComponent {
-  @Input()
-  public componentList!: ComponentList;
+  public componentData = input.required<ComponentData>();
 }

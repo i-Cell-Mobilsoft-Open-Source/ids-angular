@@ -1,4 +1,4 @@
-export const COMPONENT_LIST = [
+export const COMPONENT_DATA = [
   {
     id: 1,
     title: 'Accordion',

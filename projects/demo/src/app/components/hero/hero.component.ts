@@ -1,6 +1,6 @@
-import { HeroList } from '../../model/heroList';
+import { HeroData } from '../../model/heroData';
 
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
@@ -15,7 +15,5 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent {
-
-  @Input()
-  public heroList!: HeroList;
+  public heroData = input.required<HeroData>();
 }

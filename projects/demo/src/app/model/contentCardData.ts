@@ -1,4 +1,4 @@
-export interface ContentCard  {
+export interface ContentCardData  {
   variant?: 'surface' | 'light' | 'dark' ;
   id?: number;
   orientation: 'horizontal' | 'vertical';

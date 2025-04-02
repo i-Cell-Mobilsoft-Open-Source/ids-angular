@@ -1,13 +1,13 @@
 <div class="flex flex-col gap-16">
-  <app-hero [heroList]="heroLists[1]" />
+  <app-hero [heroData]="heroDatas[1]" />
   <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-    @for (indexList of indexLists; track indexList.id) {
-      <a class="h-full flex" [href]="indexList.imageLink">
+    @for (indexData of indexDatas; track indexData.id) {
+      <a class="h-full flex" [href]="indexData.imageLink">
         <ids-card variant="light" appearance="elevated">
           <article class="flex flex-col p-4 gap-4 relative">
-            <img class="bg-gray-100 rounded-lg" [src]="indexList.imageUrl" [alt]="indexList.title" />
-            <h3 class="text-title-medium-prominent">{{ indexList.title }}</h3>
-            <p>{{ indexList.description }}</p>
+            <img class="bg-gray-100 rounded-lg" [src]="indexData.imageUrl" [alt]="indexData.title" />
+            <h3 class="text-title-medium-prominent">{{ indexData.title }}</h3>
+            <p>{{ indexData.description }}</p>
           </article>
         </ids-card>
       </a>

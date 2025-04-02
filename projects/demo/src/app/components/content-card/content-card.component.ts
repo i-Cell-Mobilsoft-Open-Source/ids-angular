@@ -1,17 +1,13 @@
 // import { Badge } from '../../model/badge';
-import { ContentCard } from '../../model/contentCard';
+import { ContentCardData } from '../../model/contentCardData';
 // import { Image } from '../../model/image';
 import { BadgeComponent } from '../badge/badge.component';
 import { ImageComponent } from '../image/image.component';
 
-import { Component, Input } from '@angular/core';
-import { IdsButtonComponent, IdsButtonGroupComponent } from '@i-cell/ids-angular/button';
+import { Component, input } from '@angular/core';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCardComponent, IdsCardVariantType } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
-import { IdsCardFooterDirective } from '@i-cell/ids-angular/card/card-footer.directive';
-import { IdsCardHeaderComponent } from '@i-cell/ids-angular/card/card-header.component';
-import { IdsCardMediaDirective } from '@i-cell/ids-angular/card/card-media.directive';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
   selector: 'app-content-card',
@@ -19,21 +15,16 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   imports: [
     ImageComponent,
     IdsCardComponent,
-    IdsCardHeaderComponent,
-    IdsCardMediaDirective,
     IdsCardBodyDirective,
     BadgeComponent,
-    IdsCardFooterDirective,
     IdsButtonComponent,
-    IdsButtonGroupComponent,
-    IdsIconComponent,
   ],
   templateUrl: './content-card.component.html',
   styleUrl: './content-card.component.scss',
 })
 export class ContentCardComponent  {
 
-  public contentCard: ContentCard = {
+  public contentCard: ContentCardData = {
     variant: undefined,
     orientation: 'horizontal',
   };
@@ -42,7 +33,6 @@ export class ContentCardComponent  {
     return this.contentCard.variant ?? 'surface'; // Ensuring a default value
   }
 
-  @Input()
-  public contentCardData!: ContentCard;
+  public contentCardData = input.required<ContentCardData>();
 
 }

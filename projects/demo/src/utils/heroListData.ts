@@ -1,4 +1,4 @@
-export const HERO_LIST  = [
+export const HERO_DATA  = [
   {
     id: 1,
     title: 'Components',

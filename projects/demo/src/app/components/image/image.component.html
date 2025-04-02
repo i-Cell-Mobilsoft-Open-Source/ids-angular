@@ -1,7 +1,7 @@
 <figure
   class="flex flex-col justify-center items-center gap-ids-container-gap-8"
   [class]="
-    orientation === 'vertical'
+    orientation() === 'vertical'
       ? 'w-full px-ids-container-padding-16 pt-ids-container-padding-16'
       : 'h-full px-ids-container-padding-16 pt-ids-container-padding-16 md:pl-ids-container-padding-16 md:pr-ids-container-padding-24 md:py-ids-container-padding-16'
   "
@@ -10,9 +10,9 @@
     class="rounded-ids-container-xs overflow-hidden w-full flex flex-col justify-center items-center"
     [class]="getBorderClass() + ' ' + getColorVariantClass()"
   >
-    <img alt="hello" class="object-contain w-full h-48 lg:w-1/2 lg:h-auto" [src]="imageURL" [class]="getAspectRatioClass()" />
+    <img alt="hello" class="object-contain w-full h-48 lg:w-1/2 lg:h-auto" [src]="imageURL()" [class]="getAspectRatioClass()" />
   </div>
-  @if (imageCaption) {
-    <figcaption class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ imageCaption }}</figcaption>
+  @if (imageCaption()) {
+    <figcaption class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ imageCaption() }}</figcaption>
   }
 </figure>

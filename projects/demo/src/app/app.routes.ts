@@ -1,10 +1,10 @@
-import { OneComponentComponent } from './pages/components/one-component/one-component.component';
+import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
 
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'components/one-component', component: OneComponentComponent,
+    path: 'components/component-details', component: ComponentDetailsComponent,
   },
   {
     path: 'components/accordion',

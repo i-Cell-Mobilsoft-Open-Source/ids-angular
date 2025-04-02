@@ -1,4 +1,4 @@
-export interface ComponentList {
+export interface ComponentData {
   id: number;
   title: string;
   imageUrl: string;

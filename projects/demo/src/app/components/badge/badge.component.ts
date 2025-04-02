@@ -1,6 +1,4 @@
-import { Badge } from '../../model/badge';
-
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 
 @Component({
@@ -10,9 +8,8 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
   templateUrl: './badge.component.html',
   styleUrl: './badge.component.scss',
 })
-export class BadgeComponent  implements  Badge  {
+export class BadgeComponent  {
 
-  @Input()
-  public state?: 'do' | 'dont'; // ✅ Receive state from parent
+  public state = input<'do' | 'dont' | undefined>();
 
 }

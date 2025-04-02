@@ -1,5 +1,5 @@
 /* eslint-disable @stylistic/js/max-len */
-export const INDEX_LIST  = [
+export const INDEX_DATA = [
   { id: 1,
     title: 'Design tokens',
     description: 'Configuration variables or values in the design system that define visual properties. (e.g. colours, fonts, sizes)',

@@ -7,6 +7,14 @@
           <ids-chip appearance="outlined" variant="surface" size="dense"> Updated 25 Feb 2025 </ids-chip>
           <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
         </div>
+        @if (collections.length > 0) {
+          <ul>
+            @for (collection of collections; track collection) {
+              <li>{{ collection.title }}</li>
+            }
+          </ul>
+        }
+
         <section class="flex flex-col gap-ids-container-gap-16">
           <h2 class="text-headline-medium-prominent">Usage</h2>
           @if (contentCardDatas.length > 0) {

@@ -4,9 +4,9 @@
       <li
         role="tab"
         [class]="item.hostTabClasses()"
-        [class.ids-tab--active]="selectedTabIndex() === i"
+        [class.ids-tab--active]="_selectedTabIndex() === i"
         [attr.tabindex]="item.parentOrSelfDisabled() ? -1 : 0"
-        [attr.aria-selected]="selectedTabIndex() === i ? 'true' : 'false'"
+        [attr.aria-selected]="_selectedTabIndex() === i ? 'true' : 'false'"
         [attr.aria-controls]="item.panelId"
         (click)="selectTab(i)"
       >

@@ -28,14 +28,14 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
 
-  public isDisabled = computed(() => this.disabled() || this._group?.isDisabled());
-  public name = computed(() => this._group?.name());
-  public required = computed(() => this._group?.required());
-  public ariaChecked = computed(() => this.selected());
+  protected _isDisabled = computed(() => this.disabled() || this._group?.isDisabled());
+  protected _name = computed(() => this._group?.name());
+  protected _required = computed(() => this._group?.required());
+  protected _ariaChecked = computed(() => this.selected());
   protected _hostClasses = computed(() => this._getHostClasses([
     this._group?.variant() ?? null,
     this._group?.labelPosition() ?? null,
-    this.isDisabled() ? 'disabled' : null,
+    this._isDisabled() ? 'disabled' : null,
   ]));
 
   private _inputElement = viewChild.required<ElementRef<HTMLButtonElement>>('input');
@@ -55,15 +55,15 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
     this.changes.emit(new IdsRadioChangeEvent(this, this.value()));
   }
 
-  public touchTargetClick(): void {
-    if (!this.selected() && !this.isDisabled()) {
+  protected _touchTargetClick(): void {
+    if (!this.selected() && !this._isDisabled()) {
       this._inputElement().nativeElement.focus();
       this.onChange();
     }
   }
 
-  public innerCircleClick(): void {
-    if (!this.selected() && !this.isDisabled()) {
+  protected _innerCircleClick(): void {
+    if (!this.selected() && !this._isDisabled()) {
       this._inputElement().nativeElement.focus();
       this.onChange();
     }

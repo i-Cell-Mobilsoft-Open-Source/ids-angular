@@ -33,7 +33,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
 
   private _pageEventDebouncer = new Subject<IdsPaginatorPageChangeEvent>();
 
-  public readonly intl = inject(IdsPaginatorIntl);
+  protected readonly _intl = inject(IdsPaginatorIntl);
 
   public pageSize = input<number, unknown>(this._defaultConfig.pageSize, { transform: coerceNumberAttribute });
   public pageSizeOptions = input<number[]>(this._defaultConfig.pageSizeOptions);
@@ -57,10 +57,10 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
     this.compactLayout() ? 'compact-layout' : null,
   ]));
 
-  public pageButtonClasses = computed(() => createClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
+  protected _pageButtonClasses = computed(() => createClassList('ids-paginator__page-button', [this.pageButtonAppearance()]));
 
-  public safePageSizeData = computed(() => this._getSafePageSizeData(this.pageSizeOptions(), this.pageSize()));
-  public pageButtonIdPrefix = computed(() => `${this.id()}__page-button-`);
+  protected _safePageSizeData = computed(() => this._getSafePageSizeData(this.pageSizeOptions(), this.pageSize()));
+  protected _pageButtonIdPrefix = computed(() => `${this.id()}__page-button-`);
 
   /**
    * The index (0 based!) of the currently selected page.
@@ -98,11 +98,11 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
     return this._pageIndex() < maxPageIndex && this.pageSize() !== 0;
   });
 
-  public isPreviousButtonDisabled = computed(() => this.disabled() || !this._hasPreviousPage());
-  public isNextButtonDisabled = computed(() => this.disabled() || !this._hasNextPage());
+  protected _isPreviousButtonDisabled = computed(() => this.disabled() || !this._hasPreviousPage());
+  protected _isNextButtonDisabled = computed(() => this.disabled() || !this._hasNextPage());
 
   // eslint-disable-next-line arrow-body-style
-  public pageButtonLabels = computed<string[]>(() => {
+  protected _pageButtonLabels = computed<string[]>(() => {
     return this.compactLayout()
       ? []
       : this._getPageButtonLabels(
@@ -141,7 +141,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
     }
 
     if (event.key !== 'Tab' && navigationKeys.includes(event.key)) {
-      const pageButtonId = `${this.pageButtonIdPrefix()}${this._pageIndex() + 1}`; // after navigation pageIndex is new value now
+      const pageButtonId = `${this._pageButtonIdPrefix()}${this._pageIndex() + 1}`; // after navigation pageIndex is new value now
       const button = this._hostElementRef.nativeElement.querySelector(`button#${pageButtonId}`);
       button?.focus();
     }
@@ -150,7 +150,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
   constructor() {
     super();
 
-    this.intl.changes.pipe(
+    this._intl.changes.pipe(
       takeUntilDestroyed(this._destroyRef),
     ).subscribe(() => this._changeDetectorRef.markForCheck());
 

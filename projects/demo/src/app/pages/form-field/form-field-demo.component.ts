@@ -2,7 +2,7 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -57,6 +57,7 @@ type InputInputControls = {
     IdsErrorDefinitionDirective,
     IdsSuccessMessageComponent,
     FormsModule,
+    ReactiveFormsModule,
     TranslateModule,
   ],
   templateUrl: './form-field-demo.component.html',
@@ -158,16 +159,29 @@ export class FormFieldDemoComponent {
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,
+      onModelChange: (disable?: boolean) => {
+        if (disable) {
+          this.textarea.disable();
+        } else {
+          this.textarea.enable();
+        }
+      },
     },
     required: {
       description: 'Whether input / textarea is required or not.',
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,
+      onModelChange: (isRequired?: boolean) => {
+        if (isRequired) {
+          this.textarea.addValidators(Validators.required);
+        } else {
+          this.textarea.removeValidators(Validators.required);
+        }
+      },
     },
     canHandleSuccessState: {
-      // eslint-disable-next-line @stylistic/js/max-len
-      description: 'Whether input / textarea can handle success state with a success state matcher. This property works only on init, so it can not be chnaged.',
+      description: 'Whether input / textarea can handle success state with a success state matcher.',
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,
@@ -183,7 +197,7 @@ export class FormFieldDemoComponent {
   public inputModel: InputInputControls = { ...this.inputDefaults };
 
   public input = '';
-  public textarea = '';
+  public textarea = new FormControl('');
 
   public reset(): void {
     this.formFieldModel = { ...this.formFieldDefaults };
@@ -191,6 +205,6 @@ export class FormFieldDemoComponent {
     this.inputModel = { ...this.inputDefaults };
 
     this.input = '';
-    this.textarea = '';
+    this.textarea.setValue('');
   }
 }

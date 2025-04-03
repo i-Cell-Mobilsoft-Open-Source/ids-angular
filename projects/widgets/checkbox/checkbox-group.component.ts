@@ -3,6 +3,7 @@ import { IdsCheckboxComponent } from './checkbox.component';
 import { IdsCheckBoxChangeEvent } from './types/checkbox-events.class';
 import { IDS_CHECKBOX_GROUP_CHILD } from './types/checkbox-group-child';
 import { IDS_CHECKBOX_PARENT, IdsCheckboxParent } from './types/checkbox-parent';
+import { IdsCheckboxState } from './types/checkbox-state.type';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, ViewEncapsulation } from '@angular/core';
@@ -51,9 +52,13 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
     this.orientation(),
   ]));
 
-  protected _parentCheckboxChecked = computed(() => this._childCheckboxes().every((child) => child.isChecked()));
+  protected _parentCheckboxChecked = computed(() =>
+    this._childCheckboxes().every((child) =>
+      child.checkboxState() === IdsCheckboxState.CHECKED));
+
   protected _parentCheckboxIndeterminate = computed(() =>
-    !this._parentCheckboxChecked() && this._childCheckboxes().some((child) => child.isChecked()),
+    !this._parentCheckboxChecked() && this._childCheckboxes().some((child) =>
+      child.checkboxState() === IdsCheckboxState.CHECKED),
   );
 
   private _invalidParentOrientation = effect(() => {

@@ -8,6 +8,7 @@ export interface IdsIconDefaultConfig {
   sizeCollection?: IdsSizeCollectionType
   variant?: IdsIconVariantType
   iconAssetsPath: string
+  fontNameMappings: Record<string, string>
 }
 
 export const IDS_ICON_DEFAULT_CONFIG = new InjectionToken<IdsIconDefaultConfig>(
@@ -24,5 +25,6 @@ export function IDS_ICON_DEFAULT_CONFIG_FACTORY(): Required<IdsIconDefaultConfig
     sizeCollection: IdsSizeCollection.SMALL,
     variant: IdsIconVariant.SURFACE,
     iconAssetsPath: '',
+    fontNameMappings: {},
   };
 }

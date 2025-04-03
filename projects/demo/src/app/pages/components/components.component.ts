@@ -1,6 +1,6 @@
 import { COMPONENT_DATA } from '../../../utils/componentListData';
 import { HERO_DATA } from '../../../utils/heroListData';
-import { CardComponent } from '../../components/card/card.component';
+import { ArticleCardComponent } from '../../components/article-card/article-card.component';
 import { HeroComponent } from '../../components/hero/hero.component';
 
 import { Component } from '@angular/core';
@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
   templateUrl: './components.component.html',
   imports: [
     HeroComponent,
-    CardComponent,
+    ArticleCardComponent,
   ],
 })
 export class ComponentsComponent {

@@ -5,15 +5,15 @@ import { RouterModule } from '@angular/router';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-article-card',
   standalone: true,
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.scss',
+  templateUrl: './article-card.component.html',
+  styleUrl: './article-card.component.scss',
   imports: [
     IdsCardComponent,
     RouterModule,
   ],
 })
-export class CardComponent {
+export class ArticleCardComponent {
   public componentData = input.required<ComponentData>();
 }

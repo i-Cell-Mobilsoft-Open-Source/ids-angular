@@ -5,9 +5,12 @@ import { Component } from '@angular/core';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IDS_SPINNER_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/spinner/spinner-defaults';
 import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner/spinner.component';
 import { IdsSpinnerVariant, IdsSpinnerVariantType } from '@i-cell/ids-angular/spinner/types/spinner-variant.type';
 import { TranslatePipe } from '@ngx-translate/core';
+
+const defaultConfig = IDS_SPINNER_DEFAULT_CONFIG_FACTORY();
 
 type SpinnerInputControls = {
   size: IdsSizeType,
@@ -33,28 +36,28 @@ export class SpinnerDemoComponent {
     size: {
       description: 'Spinner size.',
       type: 'IdsSizeType',
-      default: IdsSize.DENSE,
+      default: defaultConfig.size,
       list: Object.values(IdsSize),
       control: 'select',
     },
     variant: {
       description: 'Spinner variant.',
       type: 'IdsSpinnerVariantType',
-      default: IdsSpinnerVariant.SURFACE,
+      default: defaultConfig.variant,
       list: Object.values(IdsSpinnerVariant),
       control: 'select',
     },
     sizeCollection: {
       description: 'Spinner size collection.',
       type: 'IdsSizeCollectionType',
-      default: IdsSizeCollection.BIG,
+      default: defaultConfig.sizeCollection,
       list: Object.values(IdsSizeCollection),
       control: 'select',
     },
     isTrack: {
       description: 'Spinner is track.',
       type: 'boolean',
-      default: true,
+      default: defaultConfig.isTrack,
       control: 'checkbox',
     },
   };
@@ -62,5 +65,9 @@ export class SpinnerDemoComponent {
   public defaults = getDefaultFromDemoConfig<SpinnerInputControls>(this._inputControlConfig);
 
   public model: SpinnerInputControls = { ...this.defaults };
+
+  public reset(): void {
+    this.model = { ...this.defaults };
+  }
 
 }

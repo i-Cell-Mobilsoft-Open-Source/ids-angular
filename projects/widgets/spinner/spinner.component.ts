@@ -37,8 +37,6 @@ export class IdsSpinnerComponent extends ComponentBaseWithDefaults<IdsSpinnerDef
   }
 
   protected _hostClasses = computed(() => this._getHostClasses([
-    this.size(),
-    this.sizeCollection(),
     this.variant(),
     [
       `${this.sizeCollection()}collection`,

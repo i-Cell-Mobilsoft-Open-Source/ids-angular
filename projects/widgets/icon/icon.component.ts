@@ -20,7 +20,7 @@ const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   host: {
     '[attr.aria-hidden]': 'ariaHidden().toString()',
-    '[attr.fontIcon]': 'this.fontIcon()',
+    '[attr.fontIcon]': 'this._safeFontIcon()',
     'role': 'img',
   },
 })
@@ -45,6 +45,16 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
   public ariaHidden = input<boolean, unknown>(true, { alias: 'aria-hidden', transform: coerceBooleanAttribute });
 
   protected _svgIcon: SVGElement | null = null;
+
+  protected _safeFontIcon = computed(() => {
+    const iconName = this.fontIcon();
+    if (!iconName) {
+      return iconName;
+    }
+    const fontNameMappings = this._defaultConfig.fontNameMappings;
+    const mappedIconName = fontNameMappings[iconName];
+    return mappedIconName ?? iconName;
+  });
 
   protected _iconSourceType = computed(() => (this.fontIcon() ? IdsIconSource.FONT : IdsIconSource.SVG));
 

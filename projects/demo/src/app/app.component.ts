@@ -67,6 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
             { name: 'COMPONENTS.SEGMENTED_CONTROL_TOGGLE', path: '/components/segmented-control-toggle' },
             { name: 'COMPONENTS.SELECT', path: '/components/select' },
             { name: 'COMPONENTS.SNACKBAR', path: '/components/snackbar' },
+            { name: 'COMPONENTS.SPINNER', path: '/components/spinner' },
             { name: 'COMPONENTS.SWITCH', path: '/components/switch' },
             { name: 'COMPONENTS.TAB', path: '/components/tab' },
             { name: 'COMPONENTS.TABLE', path: '/components/table' },

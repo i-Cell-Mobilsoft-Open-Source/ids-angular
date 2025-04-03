@@ -101,6 +101,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
   },
   {
+    path: 'components/spinner',
+    loadComponent: () => import('./pages/spinner/spinner-demo.component').then((module) => module.SpinnerDemoComponent),
+  },
+  {
     path: 'components/switch',
     loadComponent: () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
   },

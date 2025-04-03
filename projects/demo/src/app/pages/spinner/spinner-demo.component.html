@@ -1,0 +1,20 @@
+<app-tryout [title]="'COMPONENTS.SPINNER' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+  <div component >
+    <ids-spinner
+      [sizeCollection]="model.sizeCollection"
+      [size]="model.size"
+      [variant]="model.variant"
+      [isTrack]="model.isTrack"
+      [aria-label]="'loading'"
+    />
+  </div>
+  <app-control-table
+    controls
+    [controlName]="'Spinner'"
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
+    (resetted)="reset()"
+  />
+
+</app-tryout>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GraphqlService {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  constructor(private apollo: Apollo) {}
+
+  private _apollo = inject(Apollo);
 
   public getCollections(): Observable<unknown> {
-    return this.apollo.query({
+    return this._apollo.query({
       query: gql`
         query Andris {
           collections {

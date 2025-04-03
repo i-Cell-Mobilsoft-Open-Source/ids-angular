@@ -5,7 +5,7 @@ import { ContentCardComponent } from '../../../components/content-card/content-c
 import { HeroComponent } from '../../../components/hero/hero.component';
 import { GraphqlService } from '../../../services/graphql.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
@@ -39,11 +39,10 @@ export class ComponentDetailsComponent implements OnInit {
   public contentCardDatas = CONTENTCARD_DATA;
   public collections: Collection[] = [];
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  constructor(private graphqlService: GraphqlService) {}
+  private _graphqlService = inject(GraphqlService);
 
   public ngOnInit(): void {
-    this.graphqlService.getCollections().subscribe({
+    this._graphqlService.getCollections().subscribe({
       next: (response) => {
         const typedResponse = response as GraphQLResponse;
         if (typedResponse?.data?.collections) {

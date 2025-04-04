@@ -33,7 +33,8 @@ export class AppComponent implements OnInit, OnDestroy {
   private _subscription = new Subscription();
 
   public menuConfigs: Menu[] = [
-    { name: 'GET_STARTED', children: [] },
+    {
+      name: 'GET_STARTED', children: [{ name: 'Home', path: '/index' }] },
     {
       name: 'DESIGN_DEVELOP',
       children: [

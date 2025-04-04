@@ -1,6 +1,11 @@
+import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
+
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  {
+    path: 'components/component-details', component: ComponentDetailsComponent,
+  },
   {
     path: 'components/accordion',
     loadComponent: () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
@@ -122,5 +127,14 @@ export const routes: Routes = [
   {
     path: 'components',
     loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
+  },
+  {
+    path: 'index',
+    loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
+  },
+  {
+    path: '',
+    redirectTo: 'index',
+    pathMatch: 'full',
   },
 ];

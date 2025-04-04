@@ -52,7 +52,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
       return iconName;
     }
     const fontNameMappings = this._defaultConfig.fontNameMappings;
-    const mappedIconName = fontNameMappings[iconName];
+    const mappedIconName = fontNameMappings?.[iconName];
     return mappedIconName ?? iconName;
   });
 

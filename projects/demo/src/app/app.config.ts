@@ -29,7 +29,7 @@ export const appConfig: ApplicationConfig = {
       return {
         cache: new InMemoryCache(),
         link: httpLink.create({
-          uri: 'https://statamic.icellmobilsoft.hu/graphql', // Update with your Statamic GraphQL URL
+          uri: 'https://statamic-test.test/graphql', // Update with your Statamic GraphQL URL
         }),
       };
     }),

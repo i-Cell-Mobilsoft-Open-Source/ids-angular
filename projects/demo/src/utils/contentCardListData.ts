@@ -5,7 +5,7 @@ export const CONTENTCARD_DATA = [
     // orientation: 'horizontal',
     // aspectRatio: '16/9',
     // imageBgColorVariant: 'light',
-    // imageURL: '../../../assets/images/illustration/ids-illu-comp-general@2x.png',
+    // imageURL: 'assets/images/illustration/ids-illu-comp-general@2x.png',
     // imageCaption: 'this is a caption',
     // overTitle: 'Breaking News',
     // title: 'Angular Best Practices',
@@ -34,7 +34,7 @@ export const CONTENTCARD_DATA = [
     aspectRatio: '16/9',
     imageBgColorVariant: 'surface',
     description: '1. container: the element that encompasses all parts of the component.',
-    imageURL: '../../../assets/images/component-tn/checkbox-anatomy@2x.png',
+    imageURL: 'assets/images/component-tn/checkbox-anatomy@2x.png',
     variant: 'surface',
   },
   {
@@ -44,7 +44,7 @@ export const CONTENTCARD_DATA = [
     imageBgColorVariant: 'light',
     title: '3 variants are in use',
     description: '1. Surface',
-    imageURL: '../../../assets/images/component-tn/checkbox-variants@2x.png',
+    imageURL: 'assets/images/component-tn/checkbox-variants@2x.png',
     transparent: true,
   },
   {
@@ -54,7 +54,7 @@ export const CONTENTCARD_DATA = [
     imageBgColorVariant: 'light',
     title: '4 sizes are in use',
     description: '1. Dense',
-    imageURL: '../../../assets/images/component-tn/checkbox-size@2x.png',
+    imageURL: 'assets/images/component-tn/checkbox-size@2x.png',
     transparent: true,
   },
   {
@@ -65,7 +65,7 @@ export const CONTENTCARD_DATA = [
     title: 'Alignment',
     // eslint-disable-next-line @stylistic/js/max-len
     description: 'If selecting a single option excludes the possibility of choosing any other, a radio component must be used instead of a checkbox component. Do not use the checkbox component in situations where you simply toggle a function on or off.',
-    imageURL: '../../../assets/images/component-tn/checkbox-alignment-do@2x.png',
+    imageURL: 'assets/images/component-tn/checkbox-alignment-do@2x.png',
     transparent: true,
     state: 'do',
   },
@@ -74,7 +74,7 @@ export const CONTENTCARD_DATA = [
     orientation: 'horizontal',
     aspectRatio: '16/9',
     imageBgColorVariant: 'light',
-    imageURL: '../../../assets/images/component-tn/checkbox-alignment-dont@2x.png',
+    imageURL: 'assets/images/component-tn/checkbox-alignment-dont@2x.png',
     transparent: true,
     state: 'dont',
   },

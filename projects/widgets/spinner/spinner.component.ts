@@ -3,10 +3,10 @@ import {
   IDS_SPINNER_DEFAULT_CONFIG_FACTORY,
   IdsSpinnerDefaultConfig,
 } from './spinner-defaults';
+import { IdsSpinnerVariantType } from './types/spinner-variant.type';
 
 import { Component, computed, input } from '@angular/core';
 import { ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
-import { IdsSpinnerVariantType } from '@i-cell/ids-angular/spinner/types/spinner-variant.type';
 
 const defaultConfig = IDS_SPINNER_DEFAULT_CONFIG_FACTORY();
 

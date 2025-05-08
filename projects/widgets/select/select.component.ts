@@ -8,11 +8,11 @@ import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild, OnDestroy, effect, isDevMode, booleanAttribute, Injector, AfterViewInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
+import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm, ValueChangeEvent } from '@angular/forms';
 import { coerceNumberAttribute, ComponentBaseWithDefaults, createClassList } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_CONTROL, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass, IdsFormFieldComponent, IDS_OPTION_GROUP } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { first, Subject, Subscription } from 'rxjs';
+import { filter, first, Subject, Subscription } from 'rxjs';
 
 const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
@@ -191,6 +191,19 @@ export class IdsSelectComponent
       throw this._createHostError('Select must be in a form field');
     }
     this._selectionModel = new SelectionModel<IdsOptionComponent>(this.multiSelect(), undefined, false, this.valueCompareFn());
+    queueMicrotask(() => {
+      const control = this.ngControl()?.control;
+      if (control) {
+        control.events
+          .pipe(
+            filter((event) => event instanceof ValueChangeEvent),
+            takeUntilDestroyed(this._destroyRef),
+          )
+          .subscribe(() => {
+            this._changeDetectorRef.markForCheck();
+          });
+      }
+    });
     this._initErrorStateTracker();
   }
 

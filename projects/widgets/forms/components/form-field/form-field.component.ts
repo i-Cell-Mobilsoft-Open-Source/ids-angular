@@ -53,9 +53,10 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
   public parentOrSelfSize = computed(() => this._parentFieldset?.size() ?? this.size());
   public parentOrSelfVariant = computed(() => this._parentFieldset?.variant() ?? this.variant());
   public controlDir = computed(() => this._child().ngControl());
-  private _hasErrorState = computed(() => Boolean(this._child()?.hasErrorState()));
-  public disabled = computed(() => Boolean(this._child()?.disabled()));
-  private _hasSuccessState = computed(() => Boolean(this._child()?.hasSuccessState()));
+  public disabled = computed(() => Boolean(this._child().disabled()));
+  public readonly = computed(() => Boolean(this._child().readonly()));
+  private _hasErrorState = computed(() => Boolean(this._child().hasErrorState()));
+  private _hasSuccessState = computed(() => Boolean(this._child().hasSuccessState()));
   protected _hostClasses = computed(() => this._getHostClasses([
     this.parentOrSelfSize(),
     this.parentOrSelfVariant(),

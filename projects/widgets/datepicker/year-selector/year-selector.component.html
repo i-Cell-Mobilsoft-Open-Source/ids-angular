@@ -1,0 +1,23 @@
+<div class="ids-year-selector__years-grid  ids-calendar-grid">
+  @for (year of _years(); track $index) {
+    @let isSelected = _isYearSelected(year);
+    @let isFocused = _isYearFocused(year);
+    @let isCurrentYear = _isCurrentYear(year);
+    @let tabIndex = isFocused ? 0 : -1;
+    @let isDisabled = _isYearDisabled(year);
+    <div class="ids-calendar-cell">
+      <button
+        type="button"
+        class="ids-year-selector__year-button ids-calendar-button"
+        [attr.disabled]="isDisabled || null"
+        [attr.aria-pressed]="isSelected"
+        [attr.aria-current]="isCurrentYear"
+        [tabIndex]="tabIndex"
+        [class.ids-year-selector__year-button--current-year]="isCurrentYear"
+        [class.ids-calendar-button-selected]="isSelected"
+        [class.ids-calendar-button-focused]="isFocused"
+        (click)="_selectYear($event, year)"
+        >{{ year }}</button>
+    </div>
+  }
+</div>

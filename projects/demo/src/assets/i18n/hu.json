@@ -16,6 +16,7 @@
     "CARD": "Card",
     "CHECKBOX": "Checkbox",
     "CHIP": "Chip",
+    "DATEPICKER": "Date picker",
     "DIALOG": "Dialog",
     "DIVIDER": "Divider",
     "FIELDSET": "Fieldset",
@@ -47,12 +48,17 @@
   },
   "FORM_FIELD": {
     "LABEL": {
-      "NAME": "Név"
+      "NAME": "Név",
+      "DATE_TEMPLATE": "Dátum választó (template driven)",
+      "DATE_MODEL": "Dátum választó (model driven)"
     },
     "ERROR": {
       "REQUIRED": "{{fieldName}} kitöltése kötelező",
       "MINLENGTH": "{{fieldName}} túl rövid. Legalább {{requiredLength}} karaktert kell megadni.",
-      "PATTERN": "{{fieldName}} értéke érvénytelen."
+      "PATTERN": "{{fieldName}} értéke érvénytelen.",
+      "DATE_FORMAT": "{{fieldName}} formátuma érvénytelen.",
+      "DATE_MIN": "{{fieldName}} túl korai.",
+      "DATE_MAX": "{{fieldName}} túl késői."
     },
     "SUCCESS": "{{fieldName}} értéke helyes."
   },

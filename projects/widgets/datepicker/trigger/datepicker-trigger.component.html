@@ -1,0 +1,13 @@
+<button
+  type="button"
+  idsIconButton
+  aria-haspopup="true"
+  [size]="'dense'"
+  [variant]="'surface'"
+  [disabled]="_parent.disabled()"
+  [attr.aria-label]="ariaLabel() || _intl.triggerButtonLabel"
+  [attr.aria-expanded]="datepicker() ? datepicker().opened() : null"
+  (click)="datepicker().open()"
+>
+  <ids-icon aria-hidden="true" fontIcon="calendar-days" [attr.alt]="ariaLabel() || _intl.triggerButtonLabel" />
+</button>

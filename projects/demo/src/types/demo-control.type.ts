@@ -5,6 +5,7 @@ export const DemoControl = {
   NUMBER: 'number',
   NUMBERARRAY: 'numberarray',
   SELECT: 'select',
+  DATE: 'date',
 } as const;
 
 export type DemoControlType = (typeof DemoControl)[keyof typeof DemoControl];

@@ -1,0 +1,50 @@
+<div class="ids-calendar__header">
+  <button
+    type="button"
+    idsIconButton
+    [size]="_headerButtonSize()"
+    [variant]="'surface'"
+    [appearance]="'standard'"
+    [disabled]="!_hasPrevPage()"
+    [attr.aria-label]="_prevPageLabel()"
+    (click)="_gotoPrevPage()"
+  >
+    <ids-icon aria-hidden="true" alt="" fontIcon="chevron-left" [sizeCollection]="'big'" />
+  </button>
+  <button
+    type="button"
+    idsButton
+    [size]="_headerButtonSize()"
+    [variant]="'surface'"
+    [appearance]="'text'"
+    [attr.aria-label]="_switchViewLabel()"
+    [attr.aria-description]="_headerLabel()"
+    (click)="_switchView()"
+  >
+    {{ _headerLabel() }}
+    <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-down" />
+  </button>
+  <button
+    type="button"
+    idsIconButton
+    [size]="_headerButtonSize()"
+    [variant]="'surface'"
+    [appearance]="'standard'"
+    [disabled]="!_hasNextPage()"
+    [attr.aria-label]="_nextPageLabel()"
+    (click)="_gotoNextPage()"
+  >
+    <ids-icon aria-hidden="true" alt="" fontIcon="chevron-right" />
+  </button>
+</div>
+@switch (_view()) {
+  @case ('day') {
+    <ids-day-selector [value]="value()" [min]="min()" [max]="max()" [(focusedDate)]="_focusedDate" (selected)="_selectDate($event)" />
+  }
+  @case ('month') {
+    <ids-month-selector [value]="value()" [min]="min()" [max]="max()" [(focusedDate)]="_focusedDate" (selected)="_selectMonth($event)" />
+  }
+  @case ('year') {
+    <ids-year-selector [value]="value()" [min]="min()" [max]="max()" [(focusedDate)]="_focusedDate" (selected)="_selectYear($event)" />
+  }
+}

@@ -1,0 +1,25 @@
+<div class="ids-month-selector__months-grid  ids-calendar-grid">
+  @for (monthLabel of _monthLabels(); track $index; let month = $index) {
+    @let isSelected = _isMonthSelected(month);
+    @let isFocused = _isMonthFocused(month);
+    @let isCurrentMonth = _isCurrentMonth(month);
+    @let tabIndex = isFocused ? 0 : -1;
+    @let isDisabled = _isMonthDisabled(month);
+    @let ariaLabel = _intl.getMonthAriaLabel(_getMonthAsDate(month));
+    <div class="ids-calendar-cell">
+      <button
+        type="button"
+        class="ids-month-selector__month-button ids-calendar-button"
+        [attr.disabled]="isDisabled || null"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-pressed]="isSelected"
+        [attr.aria-current]="isCurrentMonth"
+        [tabIndex]="tabIndex"
+        [class.ids-month-selector__month-button--current-month]="isCurrentMonth"
+        [class.ids-calendar-button-selected]="isSelected"
+        [class.ids-calendar-button-focused]="isFocused"
+        (click)="_selectMonth($event, month)"
+        >{{ monthLabel }}</button>
+    </div>
+  }
+</div>

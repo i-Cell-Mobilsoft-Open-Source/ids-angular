@@ -35,6 +35,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/chip/chip-demo.component').then((module) => module.ChipDemoComponent),
   },
   {
+    path: 'components/datepicker',
+    loadComponent: () => import('./pages/datepicker/datepicker-demo.component').then((module) => module.DatepickerDemoComponent),
+  },
+  {
     path: 'components/dialog',
     loadComponent: () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
   },

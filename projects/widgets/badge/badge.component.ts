@@ -1,3 +1,4 @@
+import { BadgeLimitPipe } from './badge-limit.pipe';
 import { IdsBadgeAppearanceType } from './types/badge-appearance.type';
 import { IdsBadgeVariantType } from './types/badge-variant.type';
 
@@ -6,10 +7,8 @@ import {
   Component,
   computed,
   contentChildren,
-  Injector,
   input,
 } from '@angular/core';
-import { BadgeLimitPipe } from '@i-cell/ids-angular/badge/badge-limit.pipe';
 import { ComponentBase, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -17,7 +16,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   selector: 'ids-badge',
   standalone: true,
   templateUrl: './badge.component.html',
-  styleUrls: ['./badge.component.scss'],
   imports: [
     BadgeLimitPipe,
     NgClass,
@@ -33,13 +31,9 @@ export class IdsBadgeComponent extends ComponentBase  {
   public label = input<string>('');
   public size = input<IdsSizeType>();
   public limit = input<null | number>(null);
+  public showLeadingElement = input<boolean>(false);
 
   protected _iconLeading = contentChildren<IdsIconComponent>('ids-icon[icon-leading]');
-
-  constructor(
-    private _injector: Injector) {
-    super();
-  }
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),

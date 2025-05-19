@@ -3,22 +3,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'badgeLimit',
   standalone: true,
-  pure: true,
+  pure: false,
 })
 export class BadgeLimitPipe implements PipeTransform {
-  public transform(value: string, max: number | null): string {
+  public transform(value: string, max: number | string | null): string {
     if (value === null || value === undefined || value === '') {
       return '';
     }
 
     const num = Number(value);
+    const maxNum = Number(max);
 
-    // Ha szám, és a max is érvényes szám
-    if (!isNaN(num) && typeof max === 'number') {
-      return num > max ? `${max}+` : `${num}`;
+    if (!isNaN(num) && !isNaN(maxNum)) {
+      return num > maxNum ? `${maxNum}+` : `${num}`;
     }
 
-    // Nem szám → változatlanul visszaadjuk stringként
     return String(value);
   }
 }

@@ -10,7 +10,6 @@ import {
   IdsBadgeVariant,
   IdsBadgeVariantType,
 } from '@i-cell/ids-angular/badge';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -31,7 +30,6 @@ const defaultConfig = IDS_BADGE_DEFAULT_CONFIG_FACTORY();
   imports: [
     IdsBadgeDirective,
     IdsIconComponent,
-    IdsButtonComponent,
     TryoutComponent,
     TranslatePipe,
     ControlTableComponent,

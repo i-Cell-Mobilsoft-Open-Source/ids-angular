@@ -1,5 +1,5 @@
 <app-tryout
-[title]="'COMPONENTS.BADGE' | translate">
+[title]="'COMPONENTS.BADGE' | translate" (resetted)="reset()">
   <div component>
     <div
       idsBadge
@@ -17,55 +17,6 @@
       }
       Text
     </div>
-    <button
-      type="button"
-      idsButton
-    >
-      @if (model.hasLeadingIcon) {
-        <ids-icon
-          icon-leading
-          fontIcon="search"
-        />
-      }
-      Text
-    </button>
-    <button
-      type="button"
-      idsBadge
-      idsButton
-      [badgeVariant]="model.variant"
-      [badgeSize]="model.size"
-      [badgeLabel]="model.label"
-      [badgeShowLeadingElement]="model.hasLeadingIcon"
-      [badgeLimit]="model.limit"
-    >
-      @if (model.hasLeadingIcon) {
-        <ids-icon
-          icon-leading
-          fontIcon="search"
-        />
-      }
-      Text
-    </button>
-    <button
-      type="button"
-      idsBadge
-      idsButton
-      [size]="'spacious'"
-      [badgeVariant]="model.variant"
-      [badgeSize]="model.size"
-      [badgeLabel]="model.label"
-      [badgeShowLeadingElement]="model.hasLeadingIcon"
-      [badgeLimit]="model.limit"
-    >
-      @if (model.hasLeadingIcon) {
-        <ids-icon
-          icon-leading
-          fontIcon="search"
-        />
-      }
-      Text
-    </button>
   </div>
 
   <app-control-table

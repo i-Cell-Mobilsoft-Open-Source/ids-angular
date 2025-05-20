@@ -57,6 +57,16 @@
                 (ngModelChange)="control.onModelChange?.($event)"
               />
             }
+            @case (_demoControl.DATE) {
+              <input
+                type="date"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)"
+              />
+            }
             @case (_demoControl.NUMBERARRAY) {
               <input
                 type="text"

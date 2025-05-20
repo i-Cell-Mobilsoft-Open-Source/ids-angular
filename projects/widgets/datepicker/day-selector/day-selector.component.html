@@ -1,0 +1,31 @@
+<div class="ids-day-selector__days-grid ids-calendar-grid">
+  @for (label of _weekdayLabels(); track $index) {
+    <div class="ids-calendar-cell">
+      <span class="ids-day-selector__header--label ids-calendar-weekday-label">{{ label }}</span>
+    </div>
+  }
+  @for (day of _days(); track $index) {
+    @let dayLabel = day.getDate();
+    @let isSelected = _isDateSelected(day);
+    @let isFocused = _isDateFocused(day);
+    @let isToday = _isDateToday(day);
+    @let isDisabled = _isDateDisabled(day) || !_isDateInCurrentMonth(day);
+    @let tabIndex = isFocused ? 0 : -1;
+    @let ariaLabel = _intl.getDayAriaLabel(day);
+    <div class="ids-calendar-cell" [class.ids-calendar-cell-selected]="isSelected">
+      <button
+        type="button"
+        class="ids-day-selector__day-button ids-calendar-button"
+        [attr.disabled]="isDisabled || null"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-pressed]="isSelected"
+        [attr.aria-current]="isToday"
+        [tabIndex]="tabIndex"
+        [class.ids-calendar-button-today]="isToday"
+        [class.ids-calendar-button-selected]="isSelected"
+        [class.ids-calendar-button-focused]="isFocused"
+        (click)="_selectDate($event, day)"
+      >{{ dayLabel }}</button>
+    </div>
+  }
+</div>

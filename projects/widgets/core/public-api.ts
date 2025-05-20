@@ -12,6 +12,6 @@ export * from './utils/class-prefix';
 export * from './utils/coercion';
 export * from './utils/compare';
 export * from './utils/date';
-export * from './utils/even-odd';
+export * from './utils/number';
 export * from './utils/fallback-value';
 export * from './utils/string';

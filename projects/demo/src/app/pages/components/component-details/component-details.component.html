@@ -1,5 +1,10 @@
 <div class="flex flex-col gap-16">
-  <app-hero [heroData]="heroDatas[0]" />
+  <!-- <app-hero [heroData]="heroDatas[0]" /> -->
+
+  @if (heroData; as hero) {
+    <app-hero [heroData]="hero" />
+  }
+
   <ids-tab-group>
     <ids-tab label="Guidelines">
       <div class="flex flex-col gap-ids-container-gap-32">
@@ -7,15 +12,10 @@
           <ids-chip appearance="outlined" variant="surface" size="dense"> Updated 25 Feb 2025 </ids-chip>
           <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
         </div>
-        @if (collections.length > 0) {
-          <ul>
-            @for (collection of collections; track collection) {
-              <li>{{ collection.title }}</li>
-            }
-          </ul>
+        @for (card of contentCardDataList; track card.id) {
+          <app-content-card [contentCardData]="card" />
         }
-
-        <section class="flex flex-col gap-ids-container-gap-16">
+        <!-- <section class="flex flex-col gap-ids-container-gap-16">
           <h2 class="text-headline-medium-prominent">Usage</h2>
           @if (contentCardDatas.length > 0) {
             <app-content-card [contentCardData]="contentCardDatas[0]" />
@@ -59,7 +59,7 @@
           @if (contentCardDatas.length > 8) {
             <app-content-card [contentCardData]="contentCardDatas[8]" />
           }
-        </section>
+        </section> -->
       </div>
     </ids-tab>
     <ids-tab label="Demo and Code"> Tab Content 2 </ids-tab>

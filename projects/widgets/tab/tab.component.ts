@@ -22,7 +22,7 @@ export class IdsTabComponent extends ComponentBase {
   public leadingIcon = input('', { transform: coerceStringAttribute });
   public trailingIcon = input('', { transform: coerceStringAttribute });
   public content = viewChild.required<TemplateRef<unknown>>(TemplateRef);
-  public panelId = `${this.id()}-panel`;
+  public panelId = computed<string>(() => `${this.id()}-panel`);
 
   public parentOrSelfDisabled = computed(() => this._tabGroup.disabled() || this.disabled());
 

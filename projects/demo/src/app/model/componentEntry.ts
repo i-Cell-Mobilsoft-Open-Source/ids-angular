@@ -37,7 +37,7 @@ export interface SetContentCard {
     img_aspect_ratio?: { value: '1/1' | '16/9' | '16/10' };
     img_bg_color?: { value: 'surface' | 'primary' | 'light' };
     bg_transparent?: boolean;
-    state?: { value: 'do' | 'dont' };
+    state?: { value: 'do' | 'dont' | 'no_state' };
   };
 }
 

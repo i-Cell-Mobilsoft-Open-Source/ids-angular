@@ -1,7 +1,7 @@
 @if (state()) {
   <div
     class="absolute flex justify-center left-8 top-8 items-center rounded-ids-container-full w-ids-container-size-width-24 h-ids-container-size-height-24"
-    [class]="state() === 'do' ? 'bg-ids-container-bg-success-default' : 'bg-ids-container-bg-error-default'"
+    [class]="getBgClass()"
   >
     <ids-icon size="compact" sizeCollection="small" variant="light" aria-hidden="true" [fontIcon]="state() === 'do' ? 'check' : 'close'" />
   </div>

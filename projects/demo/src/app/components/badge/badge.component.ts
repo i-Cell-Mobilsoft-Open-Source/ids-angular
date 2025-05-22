@@ -10,6 +10,19 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 })
 export class BadgeComponent  {
 
-  public state = input<'do' | 'dont' | undefined>();
+  public state = input<'do' | 'dont' | 'no_state' | undefined>();
+
+  public getBgClass(): string {
+    switch (this.state()) {
+      case 'do':
+        return 'bg-ids-container-bg-success-default';
+      case 'dont':
+        return 'bg-ids-container-bg-error-default';
+      case 'no_state':
+        return '';
+      default:
+        return ''; // Default class
+    }
+  };
 
 }

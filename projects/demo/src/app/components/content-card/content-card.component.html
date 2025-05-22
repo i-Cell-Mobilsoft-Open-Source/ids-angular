@@ -2,7 +2,7 @@
 <ids-card
   appearance="filled"
   size="compact"
-  [variant]="safeVariant"
+  [variant]="data.variant || 'surface'"
   [orientation]="data.orientation"
   [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
   [class.transparent-bg]="data.transparent === true"

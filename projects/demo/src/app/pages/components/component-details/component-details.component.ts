@@ -57,13 +57,15 @@ export class ComponentDetailsComponent implements OnInit {
             ? `${environment.cmsBaseUrl}${card.group_image?.img_light_mode?.[0]?.url}`
             : '',
           imageCaption: card.group_image?.img_caption,
+          aspectRatio: card.group_image?.img_aspect_ratio?.value ?? '1/1',
           state: card.group_image?.state?.value,
           imageBgColorVariant: card.group_image?.img_bg_color?.value ?? 'surface',
           heading: card?.content_heading,
           overTitle: card.content?.content_over_title,
           title: card.content?.content_title,
           description: card.content?.content_description,
-          buttonOne: card.button?.button?.button_label,
+          buttonOne: Array.isArray(card.button?.button) ? card.button?.button[0]?.button_label : undefined,
+          buttonTwo: Array.isArray(card.button?.button) ? card.button?.button[1]?.button_label : undefined,
         }));
       }
     });

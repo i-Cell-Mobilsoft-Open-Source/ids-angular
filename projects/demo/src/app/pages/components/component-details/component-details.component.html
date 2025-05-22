@@ -15,7 +15,7 @@
 
         @for (card of contentCardDataList; track card.id) {
           @if (card.heading) {
-            <h2>{{ card.heading }}</h2>
+            <h2 class="text-headline-small-prominent text-ids-page-fg-surface-default">{{ card.heading }}</h2>
           }
           <app-content-card [contentCardData]="card" />
         }

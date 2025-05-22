@@ -11,7 +11,7 @@ export class ImageComponent   {
 
   public orientation = input<'horizontal' | 'vertical' | undefined>('vertical');
 
-  public state = input<'do' | 'dont' | undefined>();
+  public state = input<'do' | 'dont' | 'no_state' | undefined>();
 
   public aspectRatio = input<'1/1' | '16/9' | '16/10' | undefined>('16/9');
 

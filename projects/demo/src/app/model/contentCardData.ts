@@ -12,7 +12,7 @@ export interface ContentCardData {
   caption?: string;
   buttonOne?: string;
   buttonTwo?: string;
-  state?: 'do' | 'dont';
+  state?: 'no_state' | 'do' | 'dont';
   transparent?: boolean;
   heading?: string;
   content_heading?: string;

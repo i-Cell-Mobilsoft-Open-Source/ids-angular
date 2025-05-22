@@ -14,6 +14,7 @@ export interface SetContentCard {
   __typename: 'Set_Content_Card';
   type: 'card';
   id: string;
+  content_heading?: string;
   content: {
     content_over_title: string;
     content_title: string;
@@ -33,6 +34,10 @@ export interface SetContentCard {
     img_caption?: string;
     img_light_mode?: { url: string }[];
     img_dark_mode?: { url: string }[];
+    img_aspect_ratio?: { value: '1/1' | '16/9' | '16/10' };
+    img_bg_color?: { value: 'surface' | 'primary' | 'light' };
+    bg_transparent?: boolean;
+    state?: { value: 'do' | 'dont' };
   };
 }
 

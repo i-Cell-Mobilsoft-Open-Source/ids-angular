@@ -57,6 +57,9 @@ export class ComponentDetailsComponent implements OnInit {
             ? `${environment.cmsBaseUrl}${card.group_image?.img_light_mode?.[0]?.url}`
             : '',
           imageCaption: card.group_image?.img_caption,
+          state: card.group_image?.state?.value,
+          imageBgColorVariant: card.group_image?.img_bg_color?.value ?? 'surface',
+          heading: card?.content_heading,
           overTitle: card.content?.content_over_title,
           title: card.content?.content_title,
           description: card.content?.content_description,

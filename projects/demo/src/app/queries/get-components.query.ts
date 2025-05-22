@@ -18,6 +18,7 @@ export const GET_COMPONENTS = gql`
         content {
           ... on Set_Content_Card {
             id
+            content_heading
             content {
               content_over_title
               content_title
@@ -44,6 +45,16 @@ export const GET_COMPONENTS = gql`
               }
               img_light_mode {
                 url
+              }
+              img_aspect_ratio {
+                value
+              }
+              img_bg_color {
+                value
+              }
+              bg_transparent
+              state {
+                value
               }
             }
           }

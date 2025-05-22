@@ -12,7 +12,11 @@
           <ids-chip appearance="outlined" variant="surface" size="dense"> Updated 25 Feb 2025 </ids-chip>
           <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
         </div>
+
         @for (card of contentCardDataList; track card.id) {
+          @if (card.heading) {
+            <h2>{{ card.heading }}</h2>
+          }
           <app-content-card [contentCardData]="card" />
         }
         <!-- <section class="flex flex-col gap-ids-container-gap-16">

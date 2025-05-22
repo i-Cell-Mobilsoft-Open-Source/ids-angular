@@ -1,5 +1,5 @@
-export interface ContentCardData  {
-  variant?: 'surface' | 'light' | 'dark' ;
+export interface ContentCardData {
+  variant?: 'surface' | 'light' | 'dark';
   id?: number;
   orientation: 'horizontal' | 'vertical';
   aspectRatio?: '1/1' | '16/9' | '16/10';
@@ -14,4 +14,6 @@ export interface ContentCardData  {
   buttonTwo?: string;
   state?: 'do' | 'dont';
   transparent?: boolean;
+  heading?: string;
+  content_heading?: string;
 }

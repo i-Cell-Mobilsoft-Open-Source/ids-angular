@@ -19,6 +19,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
   },
   {
+    path: 'components/badge',
+    loadComponent: () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
+  },
+  {
     path: 'components/button',
     loadComponent: () => import('./pages/button/button-demo.component').then((module) => module.ButtonDemoComponent),
   },

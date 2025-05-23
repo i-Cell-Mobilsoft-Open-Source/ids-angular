@@ -13,11 +13,15 @@
           <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
         </div>
 
-        @for (card of contentCardDataList; track card.id) {
-          @if (card.heading) {
-            <h2 class="text-headline-small-prominent text-ids-page-fg-surface-default">{{ card.heading }}</h2>
+        @for (item of componentBlocks; track trackByBlock) {
+          @if (item.type === "heading") {
+            <h2 class="text-headline-small-prominent text-ids-page-fg-surface-default">
+              {{ item.heading }}
+            </h2>
           }
-          <app-content-card [contentCardData]="card" />
+          @if (item.type === "card") {
+            <app-content-card [contentCardData]="item" />
+          }
         }
         <!-- <section class="flex flex-col gap-ids-container-gap-16">
           <h2 class="text-headline-medium-prominent">Usage</h2>

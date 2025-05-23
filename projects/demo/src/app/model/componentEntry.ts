@@ -27,6 +27,7 @@ export interface SetContentCard {
     };
   };
   card_properties?: {
+    card_bg_transparent ?: boolean;
     card_orientation?: { value: 'horizontal' | 'vertical' };
     card_variant?: { value: 'surface' | 'light' | 'dark' };
   };

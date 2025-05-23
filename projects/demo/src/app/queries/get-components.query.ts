@@ -18,7 +18,6 @@ export const GET_COMPONENTS = gql`
         content {
           ... on Set_Content_Card {
             id
-            content_heading
             content {
               content_over_title
               content_title
@@ -31,6 +30,7 @@ export const GET_COMPONENTS = gql`
               }
             }
             card_properties {
+              card_bg_transparent
               card_orientation {
                 value
               }

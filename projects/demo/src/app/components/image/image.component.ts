@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-image',
@@ -7,7 +7,7 @@ import { Component, input } from '@angular/core';
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
 })
-export class ImageComponent   {
+export class ImageComponent implements OnInit, OnDestroy   {
 
   public orientation = input<'horizontal' | 'vertical' | undefined>('vertical');
 
@@ -18,8 +18,14 @@ export class ImageComponent   {
   public imageBgColorVariant = input<'surface' | 'primary' | 'light' | undefined>('surface');
 
   public imageURL = input<string>();
+  public imageUrlLight = input.required<string>();
+  public imageUrlDark = input.required<string>();
 
   public imageCaption = input<string>();
+
+  public data = input.required<{
+    transparent?: boolean;
+  }>();
 
   public getBorderClass(): string {
     switch (this.state()) {
@@ -58,4 +64,32 @@ export class ImageComponent   {
     }
   }
 
+  public currentImageUrl = '';
+  private _observer: MutationObserver | undefined;
+
+  public ngOnInit(): void {
+    this._updateImageBasedOnTheme();
+
+    this._observer = new MutationObserver(() => {
+      this._updateImageBasedOnTheme();
+    });
+
+    this._observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  }
+
+  public ngOnDestroy(): void {
+    this._observer?.disconnect();
+  }
+
+  private _updateImageBasedOnTheme(): void {
+    const htmlClassList = document.documentElement.classList;
+    if (htmlClassList.contains('ids-theme-dark')) {
+      this.currentImageUrl = this.imageUrlDark() || this.imageUrlLight() || '';
+    } else {
+      this.currentImageUrl = this.imageUrlLight() || this.imageUrlDark() || '';
+    }
+  }
 }

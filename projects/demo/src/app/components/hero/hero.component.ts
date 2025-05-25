@@ -1,5 +1,6 @@
 import { HeroData } from '../../model/heroData';
 
+import { Location } from '@angular/common';
 import { Component, input, OnDestroy, OnInit } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -47,5 +48,11 @@ export class HeroComponent implements OnDestroy, OnInit {
       const dark = data.imageUrlDark || '';
       this.currentImageUrl = htmlClassList.contains('ids-theme-dark') ? dark : light;
     }
+  }
+
+  constructor(private _location: Location) { }
+
+  public goBack(): void {
+    this._location.back();
   }
 }

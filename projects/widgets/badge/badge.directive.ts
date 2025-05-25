@@ -32,11 +32,11 @@ export class IdsBadgeDirective extends DirectiveBaseWithDefaults<IdsBadgeDefault
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BADGE_DEFAULT_CONFIG);
 
   public appearance = input<IdsBadgeAppearanceType>(this._defaultConfig.appearance, { alias: 'badgeAppearance' });
-  public label = input<string>(this._defaultConfig.variant, { alias: 'badgeLabel' });
+  public label = input<string>('', { alias: 'badgeLabel' });
   public size = input<IdsSizeType>(this._defaultConfig.size, { alias: 'badgeSize' });
   public variant = input<IdsBadgeVariantType>(this._defaultConfig.variant, { alias: 'badgeVariant' });
   public limit = input<number | null>(null, { alias: 'badgeLimit' });
-  public showLeadingElement = input<boolean>(true, { alias: 'badgeShowLeadingElement' });
+  public showLeadingElement = input<boolean>(this._defaultConfig.showLeadingElement, { alias: 'badgeShowLeadingElement' });
 
   constructor(
     private _elementRef: ElementRef<HTMLElement>,

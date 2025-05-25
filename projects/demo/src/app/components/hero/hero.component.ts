@@ -38,10 +38,14 @@ export class HeroComponent implements OnDestroy, OnInit {
 
   private _updateImageBasedOnTheme(): void {
     const htmlClassList = document.documentElement.classList;
-    if (htmlClassList.contains('ids-theme-dark')) {
-      this.currentImageUrl = this.heroData().imageUrlDark || this.heroData().imageUrlLight || '';
+    const data = this.heroData(); // if you're using signal
+
+    if (data.localImageUrl) {
+      this.currentImageUrl = data.localImageUrl;
     } else {
-      this.currentImageUrl = this.heroData().imageUrlLight || this.heroData().imageUrlDark || '';
+      const light = data.imageUrlLight || '';
+      const dark = data.imageUrlDark || '';
+      this.currentImageUrl = htmlClassList.contains('ids-theme-dark') ? dark : light;
     }
   }
 }

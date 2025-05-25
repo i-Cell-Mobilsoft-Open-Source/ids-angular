@@ -50,6 +50,7 @@ export class ComponentDetailsComponent implements OnInit {
       this.heroData = {
         id: Number(component.id),
         title: component.title,
+        isBackButton: true,
         description: component.comp_description,
         imageUrl: component.comp_img_light_mode?.[0]?.url
           ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}`

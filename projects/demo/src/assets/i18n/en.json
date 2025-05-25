@@ -17,6 +17,7 @@
     "CARD": "Card",
     "CHECKBOX": "Checkbox",
     "CHIP": "Chip",
+    "DATEPICKER": "Date picker",
     "DIALOG": "Dialog",
     "DIVIDER": "Divider",
     "FIELDSET": "Fieldset",
@@ -48,12 +49,16 @@
   },
   "FORM_FIELD": {
     "LABEL": {
-      "NAME": "Name"
+      "NAME": "Name",
+      "DATE": "Date"
     },
     "ERROR": {
       "REQUIRED": "{{fieldName}} is required.",
       "MINLENGTH": "{{fieldName}} must be at least {{minLength}} long.",
-      "PATTERN": "{{fieldName}} is invalid."
+      "PATTERN": "{{fieldName}} is invalid.",
+      "DATE_FORMAT": "{{fieldName}} format invalid.",
+      "DATE_MIN": "{{fieldName}} too early.",
+      "DATE_MAX": "{{fieldName}} too late."
     },
     "SUCCESS": "{{fieldName}} is valid."
   },

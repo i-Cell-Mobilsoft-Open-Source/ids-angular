@@ -30,14 +30,17 @@ type TabHelperControls = {
   tabItem1Disabled: boolean,
   tabItem1LeadingIcon: string,
   tabItem1TrailingIcon: string,
+  tabItem1Id: string,
   tabItem2Label: string,
   tabItem2Disabled: boolean,
   tabItem2LeadingIcon: string,
   tabItem2TrailingIcon: string,
+  tabItem2Id: string,
   tabItem3Label: string,
   tabItem3Disabled: boolean,
   tabItem3LeadingIcon: string,
   tabItem3TrailingIcon: string,
+  tabItem3Id: string,
 };
 
 @Component({
@@ -138,6 +141,12 @@ export class TabsDemoComponent implements OnInit {
       default: false,
       control: DemoControl.CHECKBOX,
     },
+    tabItem1Id: {
+      description: 'Id of Tab Item 1',
+      type: 'string',
+      default: '-',
+      demoDefault: 'tab-1',
+    },
     tabItem2Label: {
       description: 'Label of Tab',
       type: 'string',
@@ -166,6 +175,12 @@ export class TabsDemoComponent implements OnInit {
       default: false,
       control: DemoControl.CHECKBOX,
     },
+    tabItem2Id: {
+      description: 'Id of Tab Item 2',
+      type: 'string',
+      default: '-',
+      demoDefault: 'tab-2',
+    },
     tabItem3Label: {
       description: 'Label of Tab',
       type: 'string',
@@ -193,6 +208,12 @@ export class TabsDemoComponent implements OnInit {
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,
+    },
+    tabItem3Id: {
+      description: 'Id of Tab Item 3',
+      type: 'string',
+      default: '-',
+      demoDefault: 'tab-3',
     },
   };
 

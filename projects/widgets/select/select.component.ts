@@ -6,13 +6,13 @@ import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, viewChild, ViewEncapsulation, AfterContentInit, forwardRef, contentChild, OnDestroy, effect, isDevMode, booleanAttribute, Injector, AfterViewInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, effect, ElementRef, forwardRef, inject, input, isDevMode, OnDestroy, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, NgForm, ValueChangeEvent } from '@angular/forms';
-import { coerceNumberAttribute, ComponentBaseWithDefaults, createClassList } from '@i-cell/ids-angular/core';
-import { IDS_FORM_FIELD_CONTROL, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, AbstractSuccessStateMatcher, AbstractErrorStateMatcher, ErrorStateTracker, SuccessStateTracker, _getOptionScrollPosition, _countGroupLabelsBeforeOption, IdsOptionSelectionChange, IDS_OPTION_PARENT_COMPONENT, formFieldControlClass, IdsFormFieldComponent, IDS_OPTION_GROUP } from '@i-cell/ids-angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValueChangeEvent } from '@angular/forms';
+import { coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
+import { _countGroupLabelsBeforeOption, _getOptionScrollPosition, AbstractErrorStateMatcher, AbstractSuccessStateMatcher, formFieldControlClass, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IDS_OPTION_PARENT_COMPONENT, IdsFormFieldComponent, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, IdsOptionSelectionChange } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { filter, first, Subject, Subscription } from 'rxjs';
+import { filter, first } from 'rxjs';
 
 const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
@@ -57,35 +57,26 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
   },
 })
 export class IdsSelectComponent
-  extends ComponentBaseWithDefaults<IdsSelectDefaultConfig>
-  implements IdsFormFieldControl, ControlValueAccessor, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+  extends IdsFormFieldControl<IdsSelectDefaultConfig>
+  implements ControlValueAccessor, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   protected override get _hostName(): string {
     return 'select';
   }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SELECT_DEFAULT_CONFIG);
-  private readonly _injector = inject(Injector);
-  private readonly _elementRef = inject(ElementRef);
+  protected readonly _elementRef = inject(ElementRef);
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
   private readonly _parentFormField = inject(IdsFormFieldComponent);
-  private readonly _parentForm = inject(NgForm, { optional: true });
-  private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
 
   protected readonly _connectedPositions = selectConnectedPositions;
-  public readonly errorStateChanges = new Subject<void>();
-  public readonly successStateChanges = new Subject<void>();
 
   protected _preferredOverlayOrigin: CdkOverlayOrigin | ElementRef | undefined;
   protected _overlayWidth: string | number = 0;
 
   public multiSelect = input<boolean>(false);
-  public placeholder = input<string>('');
-  public required = input<boolean, unknown>(false, { transform: booleanAttribute });
-  public readonly = input<boolean, unknown>(false, { transform: booleanAttribute });
-  public canHandleSuccessState = input<boolean>(false);
-  public errorStateMatcher = input<AbstractErrorStateMatcher>(inject(this._defaultConfig.errorStateMatcher));
-  public successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultConfig.successStateMatcher));
+  public readonly errorStateMatcher = input<AbstractErrorStateMatcher>(inject(this._defaultConfig.errorStateMatcher));
+  public readonly successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultConfig.successStateMatcher));
   public ariaLabel = input<string>('', { alias: 'aria-label' });
   public ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
   public valueCompareFn = input<(o1: unknown, o2: unknown) => boolean>((o1: unknown, o2: unknown) => o1 === o2);
@@ -95,29 +86,7 @@ export class IdsSelectComponent
     this._defaultConfig.typeaheadDebounceInterval, { transform: coerceNumberAttribute },
   );
 
-  public ngControl = signal<NgControl | null>(null);
-
-  /** Handles the `disabled` input binding */
-  public disabledInput = input<boolean, unknown>(false, { transform: booleanAttribute, alias: 'disabled' });
-  /** Stores the `disabled` state internally */
-  private _disabled = signal(this.disabledInput());
-  /** The input's `disabled` state as a read-only signal (to enable/disable the contol programmatically, use the FormControl's related API) */
-  public disabled = computed(() => this._disabled());
-
-  /** This effect is triggered if the `disabled` attribute binding changes and delegates the change to the underlying FormControl */
-  private _disabledInputEffect = effect(() => {
-    const enableOrDisable = this.disabledInput() ? 'disable' : 'enable';
-    const controlDir = this.ngControl();
-
-    // The NgControl's `control` property might not be initialized so we delay the enable/disable call
-    // (the FormControl's enable/disable method call will trigger the CVA's setDisabledState() callback
-    // which sets the "main" disabled signal)
-    queueMicrotask(() => controlDir?.control?.[enableOrDisable]());
-  });
-
   public isPanelOpen = signal<boolean>(false);
-  public hasErrorState = signal<boolean>(false);
-  public hasSuccessState = signal<boolean>(false);
   public parentSize = computed(() => this._parentFormField.parentOrSelfSize());
   public parentVariant = computed(() => this._parentFormField.parentOrSelfVariant());
   private _focused = signal<boolean>(false);
@@ -140,14 +109,6 @@ export class IdsSelectComponent
   public options = contentChildren<IdsOptionComponent>(IdsOptionComponent, { descendants: true });
   public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
   protected _customTrigger = contentChild(IdsSelectTriggerDirective);
-
-  private _errorStateTracker?: ErrorStateTracker;
-  private _successStateTracker?: SuccessStateTracker;
-  private _successStateSubscription?: Subscription;
-
-  private _canHandleSuccessStateEffect = effect(() => {
-    this._setSuccessStateTracker(this.canHandleSuccessState());
-  });
 
   private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
   private _rawValue: unknown | unknown[];
@@ -181,12 +142,11 @@ export class IdsSelectComponent
     effect(() => {
       this._keyManager?.withTypeAhead(this.typeaheadDebounceInterval());
     });
-
-    // Get the NgControl reference as soon as we can
-    queueMicrotask(() => this.ngControl.set(this._injector.get(NgControl, null, { self: true })));
   }
 
-  public ngOnInit(): void {
+  public override ngOnInit(): void {
+    super.ngOnInit();
+
     if (!this._parentFormField) {
       throw this._createHostError('Select must be in a form field');
     }
@@ -227,42 +187,6 @@ export class IdsSelectComponent
 
   public ngOnDestroy(): void {
     this._keyManager?.destroy();
-  }
-
-  private _initErrorStateTracker(): void {
-    this._errorStateTracker = new ErrorStateTracker(
-      this.errorStateMatcher(),
-      this.ngControl(),
-      this._parentFormGroup,
-      this._parentForm,
-      this.errorStateChanges,
-    );
-
-    this.errorStateChanges.pipe(
-      takeUntilDestroyed(this._destroyRef),
-    ).subscribe(() => this.hasErrorState.set(this._errorStateTracker!.hasErrorState));
-  }
-
-  protected _setSuccessStateTracker(canHandleSuccessState: boolean): void {
-    if (canHandleSuccessState) {
-      this._successStateTracker = new SuccessStateTracker(
-        this.successStateMatcher(),
-        this.ngControl(),
-        this._parentFormGroup,
-        this._parentForm,
-        this.successStateChanges,
-      );
-
-      this._successStateSubscription = this.successStateChanges.pipe(
-        takeUntilDestroyed(this._destroyRef),
-      ).subscribe(() => this.hasSuccessState.set(this._successStateTracker!.hasSuccessState));
-
-      this._successStateTracker.updateSuccessState();
-    } else {
-      this._successStateTracker = undefined;
-      this._successStateSubscription?.unsubscribe();
-      this.hasSuccessState.set(false);
-    }
   }
 
   private _initKeyManager(): void {
@@ -616,14 +540,6 @@ export class IdsSelectComponent
       return this._rawValue.some((value) => optionValue != null && value === optionValue);
     }
     return optionValue === this._rawValue;
-  }
-
-  public setDescribedByIds(ids: string[]): void {
-    if (ids.length) {
-      this._elementRef.nativeElement.setAttribute('aria-describedby', ids.join(' '));
-    } else {
-      this._elementRef.nativeElement.removeAttribute('aria-describedby');
-    }
   }
 
   private _onFocus(): void {

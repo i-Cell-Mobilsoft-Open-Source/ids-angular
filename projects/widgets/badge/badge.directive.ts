@@ -11,7 +11,7 @@ import {
   ComponentRef,
   computed,
   Directive, effect, EffectRef,
-  ElementRef,
+  ElementRef, inject,
   Injector,
   input, OnDestroy,
   OnInit, runInInjectionContext,
@@ -28,6 +28,9 @@ const defaultConfig = IDS_BADGE_DEFAULT_CONFIG_FACTORY();
 export class IdsBadgeDirective extends DirectiveBaseWithDefaults<IdsBadgeDefaultConfig> implements OnInit, OnDestroy {
   private _badgeRef!: ComponentRef<IdsBadgeComponent>;
   private _iconEffectRef?: EffectRef;
+  private readonly _elementRef = inject(ElementRef<HTMLElement>);
+  private readonly _viewContainerRef = inject(ViewContainerRef);
+  private readonly _injector = inject(Injector);
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BADGE_DEFAULT_CONFIG);
 
@@ -37,14 +40,6 @@ export class IdsBadgeDirective extends DirectiveBaseWithDefaults<IdsBadgeDefault
   public variant = input<IdsBadgeVariantType>(this._defaultConfig.variant, { alias: 'badgeVariant' });
   public limit = input<number | null>(null, { alias: 'badgeLimit' });
   public showLeadingElement = input<boolean>(this._defaultConfig.showLeadingElement, { alias: 'badgeShowLeadingElement' });
-
-  constructor(
-    private _elementRef: ElementRef<HTMLElement>,
-    private _viewContainerRef: ViewContainerRef,
-    private _injector: Injector,
-  ) {
-    super();
-  }
 
   public ngOnInit(): void {
     const originalEl = this._elementRef.nativeElement;

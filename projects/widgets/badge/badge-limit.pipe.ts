@@ -11,6 +11,10 @@ export class BadgeLimitPipe implements PipeTransform {
       return '';
     }
 
+    if (max === null || max === undefined || max === '') {
+      return String(value);
+    }
+
     const num = Number(value);
     const maxNum = Number(max);
 

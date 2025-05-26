@@ -3,11 +3,12 @@
     @for (item of _items(); track $index; let i = $index) {
       <li
         role="tab"
+        [id]="item.id()"
         [class]="item.hostTabClasses()"
         [class.ids-tab--active]="_selectedTabIndex() === i"
         [attr.tabindex]="item.parentOrSelfDisabled() ? -1 : 0"
         [attr.aria-selected]="_selectedTabIndex() === i ? 'true' : 'false'"
-        [attr.aria-controls]="item.panelId"
+        [attr.aria-controls]="item.panelId()"
         (click)="selectTab(i)"
       >
         @let tabLeadingIcon = item.leadingIcon();

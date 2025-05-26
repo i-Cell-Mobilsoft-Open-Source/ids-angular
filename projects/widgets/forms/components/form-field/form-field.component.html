@@ -1,8 +1,8 @@
 <label class="ids-form-field__label" [for]="_inputId()">
-  <ng-content select="ids-label" />
   @if (hasRequiredValidator()) {
     <span class="ids-form-field__required-marker"></span>
   }
+  <ng-content select="ids-label" />
 </label>
 
 <div #fieldWrapper class="ids-form-field__field-wrapper">

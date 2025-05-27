@@ -2,7 +2,7 @@
   <div class="col-span-7 flex flex-col justify-center">
     <div class="flex items-center mb-12 gap-ids-container-gap-16">
       @if (heroData().isBackButton) {
-        <button type="button" idsIconButton size="comfortable" variant="surface" appearance="standard">
+        <button type="button" idsIconButton size="comfortable" variant="surface" appearance="standard" (click)="goBack()">
           <ids-icon aria-hidden="true" alt="" fontIcon="arrow-left" />
         </button>
       }
@@ -13,6 +13,6 @@
     </p>
   </div>
   <div class="col-span-5">
-    <img [src]="heroData().imageUrl" [alt]="heroData().title" />
+    <img [src]="currentImageUrl" [alt]="heroData().title" />
   </div>
 </div>

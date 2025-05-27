@@ -4,4 +4,7 @@ export interface HeroData {
   description: string;
   imageUrl: string;
   isBackButton?: boolean;
+  imageUrlLight?: string;
+  imageUrlDark?: string;
+  localImageUrl?: string;
 }

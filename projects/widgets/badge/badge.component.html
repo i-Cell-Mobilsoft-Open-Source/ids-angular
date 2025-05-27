@@ -1,0 +1,6 @@
+<div [ngClass]="!showLeadingElement() && !label() ? 'ids-badge__container-no-element' : 'ids-badge__container'">
+  @if (_iconLeading()) {
+    <ng-content select="ids-icon[icon-leading]"/>
+  }
+  <span class="ids-badge__label" aria-live="polite">{{ label() | badgeLimit:limit() }}</span>
+</div>

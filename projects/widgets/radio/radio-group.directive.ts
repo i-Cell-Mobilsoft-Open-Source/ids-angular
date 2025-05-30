@@ -35,7 +35,7 @@ export class IdsRadioGroupDirective
 
   private _selectionModel?: SelectionModel<IdsRadioComponent>;
   private _rawValue: unknown;
-  private _items = contentChildren<IdsRadioComponent>(IdsRadioComponent);
+  private _items = contentChildren<IdsRadioComponent>(IdsRadioComponent, { descendants: true });
 
   public name = input.required<string>();
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });

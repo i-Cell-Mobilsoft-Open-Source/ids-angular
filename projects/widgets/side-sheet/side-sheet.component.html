@@ -1,0 +1,10 @@
+@if (open() && type() === _idsSideSheetType.OVERLAY) {
+  <div class="overlay" (click)="close()"></div>
+  <div class="side-sheet-container" @slideInOut>
+    <button type="button" class="close-btn" (click)="close()">×</button>
+    <ng-content/>
+  </div>
+}
+@if (open() && type() === _idsSideSheetType.INLINE) {
+  <div>inline</div>
+}

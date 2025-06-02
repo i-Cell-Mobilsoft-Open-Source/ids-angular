@@ -1,20 +1,46 @@
 <app-tryout [title]="'COMPONENTS.RADIO' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <ng-container component>
-    <ids-radio-group
-      [name]="model.name"
-      [required]="model.required"
-      [disabled]="model.disabled"
-      [size]="model.size"
-      [variant]="model.variant"
-      [orientation]="model.orientation"
-      [labelPosition]="model.labelPosition"
-      [(ngModel)]="value"
-    >
-      <ids-radio value="chicken" [disabled]="helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
-      <ids-radio value="beef">Beef</ids-radio>
-      <ids-radio value="pork">Pork</ids-radio>
-    </ids-radio-group>
-  </ng-container>
+  <div component class="flex gap-12">
+    <div  class="flex flex-col gap-4">
+      <h2>Simple group</h2>
+      <ids-radio-group
+        [name]="model.name + '-simple'"
+        [required]="model.required"
+        [disabled]="model.disabled"
+        [size]="model.size"
+        [variant]="model.variant"
+        [orientation]="model.orientation"
+        [labelPosition]="model.labelPosition"
+        [(ngModel)]="simpleValue"
+      >
+        <ids-radio value="chicken" [disabled]="helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
+        <ids-radio value="beef">Beef</ids-radio>
+        <ids-radio value="pork">Pork</ids-radio>
+      </ids-radio-group>
+    </div>
+    <div  class="flex flex-col gap-4">
+      <h2>Wrapped in cards</h2>
+      <ids-radio-group
+        [name]="model.name + '-cards'"
+        [required]="model.required"
+        [disabled]="model.disabled"
+        [size]="model.size"
+        [variant]="model.variant"
+        [orientation]="model.orientation"
+        [labelPosition]="model.labelPosition"
+        [(ngModel)]="wrappedValue"
+      >
+        <ids-card appearance="outlined" size="comfortable">
+          <ids-radio value="chicken" [disabled]="helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
+        </ids-card>
+        <ids-card appearance="outlined" size="comfortable">
+          <ids-radio value="beef">Beef</ids-radio>
+        </ids-card>
+        <ids-card appearance="outlined" size="comfortable">
+          <ids-radio value="pork">Pork</ids-radio>
+        </ids-card>
+      </ids-radio-group>
+    </div>
+  </div>
 
   <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
   <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />

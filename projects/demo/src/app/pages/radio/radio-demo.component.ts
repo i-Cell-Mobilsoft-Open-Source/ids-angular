@@ -1,11 +1,12 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsPositionType, IdsSize, IdsSizeType, IdsOrientationType, IdsPosition, IdsOrientation } from '@i-cell/ids-angular/core';
 import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioGroupDirective, IdsRadioComponent, IdsRadioVariant, IdsRadioVariantType } from '@i-cell/ids-angular/radio';
 import { TranslateModule } from '@ngx-translate/core';
@@ -31,6 +32,7 @@ type RadioHelperControls = {
   imports: [
     TryoutComponent,
     ControlTableComponent,
+    IdsCardComponent,
     IdsRadioGroupDirective,
     IdsRadioComponent,
     FormsModule,
@@ -41,6 +43,7 @@ type RadioHelperControls = {
     '../demo-page.scss',
     './radio-demo.component.scss',
   ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RadioDemoComponent {
   protected _inputControlConfig: DemoControlConfig<RadioInputControls> = {
@@ -107,7 +110,8 @@ export class RadioDemoComponent {
   public model: RadioInputControls = { ...this.defaults };
   public helperModel: RadioHelperControls = { ...this.helperDefaults };
 
-  public value = undefined;
+  public simpleValue = undefined;
+  public wrappedValue = undefined;
 
   public onClick(buttonName: string): void {
     console.info(`${buttonName} button clicked`);

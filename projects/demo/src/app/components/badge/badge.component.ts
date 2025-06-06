@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 
 @Component({
@@ -12,7 +12,7 @@ export class BadgeComponent  {
 
   public state = input<'do' | 'dont' | 'no_state' | undefined>();
 
-  public getBgClass(): string {
+  public bgClass = computed<string>(() => {
     switch (this.state()) {
       case 'do':
         return 'bg-ids-container-bg-success-default';
@@ -21,8 +21,8 @@ export class BadgeComponent  {
       case 'no_state':
         return '';
       default:
-        return ''; // Default class
+        return '';
     }
-  };
+  });
 
 }

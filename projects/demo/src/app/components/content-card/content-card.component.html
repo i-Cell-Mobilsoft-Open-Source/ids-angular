@@ -2,7 +2,7 @@
 <ids-card
   appearance="filled"
   size="compact"
-  [variant]="safeVariant"
+  [variant]="data.variant || 'surface'"
   [orientation]="data.orientation"
   [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
   [class.transparent-bg]="data.transparent === true"
@@ -17,8 +17,10 @@
         [imageBgColorVariant]="data.imageBgColorVariant"
         [orientation]="data.orientation"
         [state]="data.state"
-        [imageURL]="data.imageURL"
         [imageCaption]="data.imageCaption"
+        [imageUrlLight]="contentCardData().imageUrlLight ?? ''"
+        [imageUrlDark]="contentCardData().imageUrlDark ?? ''"
+        [data]="imageData()"
       />
     </div>
   }
@@ -33,19 +35,37 @@
             <h3 class="text-title-large-prominent text-ids-page-fg-surface-default">{{ data.title }}</h3>
           }
           @if (data.description) {
-            <p class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ data.description }}</p>
+            <div [innerHTML]="data.description | safeHtml"></div>
+            <!-- <p class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ data.description }}</p> -->
           }
         </div>
       </div>
       @if (data.buttonOne || data.buttonTwo) {
         <div class="flex gap-ids-container-gap-8 justify-end w-full">
           @if (data.buttonOne) {
-            <button type="button" idsButton appearance="outlined" size="compact" variant="primary">
+            <button
+              type="button"
+              idsButton
+              appearance="outlined"
+              size="compact"
+              variant="primary"
+              (click)="handleButtonClick(data.buttonOneUrl)"
+            >
               {{ data.buttonOne }}
             </button>
           }
+
           @if (data.buttonTwo) {
-            <button type="button" idsButton appearance="filled" size="compact" variant="primary">{{ data.buttonTwo }}</button>
+            <button
+              type="button"
+              idsButton
+              appearance="filled"
+              size="compact"
+              variant="primary"
+              (click)="handleButtonClick(data.buttonTwoUrl)"
+            >
+              {{ data.buttonTwo }}
+            </button>
           }
         </div>
       }

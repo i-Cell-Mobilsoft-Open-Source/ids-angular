@@ -34,7 +34,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public menuConfigs: Menu[] = [
     {
-      name: 'GET_STARTED', children: [{ name: 'Home', path: '/index' }] },
+      name: 'GET_STARTED', children: [
+        { name: 'Home', path: '/index' },
+        { name: 'Issue report', path: '/issue-report' },
+      ],
+    },
     {
       name: 'DESIGN_DEVELOP',
       children: [

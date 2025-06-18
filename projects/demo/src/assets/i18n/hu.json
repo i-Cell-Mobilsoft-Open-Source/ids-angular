@@ -32,6 +32,7 @@
     "SCROLLBAR": "Scrollbar",
     "SEGMENTED_CONTROL": "Segmented control",
     "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
+    "SIDE_NAV": "Side navigation",
     "SELECT": "Select",
     "SNACKBAR": "Snackbar",
     "SPINNER": "Spinner",
@@ -83,6 +84,33 @@
       "EXPAND_DETAILS": "Részletek kinyitása",
       "COLLAPSE_DETAILS": "Részletek becsukása",
       "CHANGE_LANGUAGE": "Nyelvváltás"
+    }
+  },
+  "SIDE_NAV": {
+    "SECTION": {
+      "WITHOUT_ITEMS": "Oldalsó navigációs szekció elemek nélkül",
+      "WITH_ITEMS": "Oldalsó navigációs szekció elemekkel",
+      "WITH_LEADING_ICON": "Oldalsó navigációs szekció vezető ikonnal",
+      "WITH_TRAILING_ICON": "Oldalsó navigációs szekció követő ikonnal",
+      "WITH_LEADING_AND_TRAILING_ICON": "Oldalsó navigációs szekció vezető és követő ikonnal"
+    },
+    "ITEM": {
+      "WITHOUT_ICONS": "Oldalsó navigációs elem ikonok nélkül",
+      "WITH_LEADING_ICON": "Oldalsó navigációs elem vezető ikonnal",
+      "WITH_TRAILING_ICON": "Oldalsó navigációs elem követő ikonnal",
+      "WITH_LEADING_AND_TRAILING_ICON": "Oldalsó navigációs elem vezető és követő ikonnal",
+      "WITH_SUB_ITEMS_AND_WITHOUT_ICONS": "Oldalsó navigációs elem alelemekkel és ikonok nélkül",
+      "WITH_SUB_ITEMS_AND_WITH_LEADING_ICON": "Oldalsó navigációs elem alelemekkel és vezető ikonnal"
+    },
+    "BUTTON_ITEM": {
+      "WITH_SUB_ITEMS_AND_WITHOUT_ICONS": "Oldalsó navigációs gomb elem alelemekkel és ikonok nélkül",
+      "WITH_SUB_ITEMS_AND_WITH_LEADING_ICON": "Oldalsó navigációs gomb elem alelemekkel és vezető ikonnal"
+    },
+    "SUB_ITEM": {
+      "WITHOUT_ICONS": "Oldalsó navigációs al elem ikonok nélkül",
+      "WITH_LEADING_ICON": "Oldalsó navigációs al elem vezető ikonnal",
+      "WITH_TRAILING_ICON": "Oldalsó navigációs al elem követő ikonnal",
+      "WITH_LEADING_AND_TRAILING_ICON": "Oldalsó navigációs al elem vezető és követő ikonnal"
     }
   }
 }

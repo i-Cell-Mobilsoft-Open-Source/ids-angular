@@ -105,6 +105,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
   },
   {
+    path: 'components/side-nav',
+    loadComponent: () => import('./pages/side-nav/side-nav-demo.component').then((module) => module.SideNavDemoComponent),
+  },
+  {
     path: 'components/snackbar',
     loadComponent: () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
   },

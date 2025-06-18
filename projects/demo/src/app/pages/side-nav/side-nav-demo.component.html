@@ -1,0 +1,7 @@
+<app-tryout [title]="'COMPONENTS.SIDE_NAV' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+  <ng-container component>
+    <ids-side-nav [menu]="menuConfigs" [hasDarkBackground]="model.variant === 'light'" />
+  </ng-container>
+
+  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
+</app-tryout>

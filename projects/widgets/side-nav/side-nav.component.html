@@ -1,0 +1,95 @@
+<nav>
+  @for (menuConfig of menu(); track $index) {
+    <section>
+      @if (menuConfig.name) {
+        <div class="sidenav-element">
+          @if (menuConfig.leadingIcon) {
+            <span class="icon">
+              <ids-icon [fontIcon]="menuConfig.leadingIcon" />
+            </span>
+          }
+          <h2 class="nav-label" [class.light]="hasDarkBackground()">{{ menuConfig.name | translate }}</h2>
+          @if (menuConfig.trailingIcon) {
+            <span class="icon">
+              <ids-icon [fontIcon]="menuConfig.trailingIcon" />
+            </span>
+          }
+        </div>
+      }
+      <ul>
+        @for (menuItem of menuConfig.children; track $index) {
+          @if (menuItem.children?.length! > 0) {
+            <li class="side-nav__list-item">
+              @if(menuItem.path) {
+                <span class="subnav-parent" [class.light]="hasDarkBackground()" [class.active]="menuItem.isActive">
+                  <a #trigger #rla="routerLinkActive" class="sidenav-element link" [routerLink]="menuItem.path" [routerLinkActive]="['active']">
+                    @if (menuItem.leadingIcon) {
+                      <span class="icon">
+                        <ids-icon [fontIcon]="menuItem.leadingIcon" />
+                      </span>
+                    }
+                    <!-- TODO: sizes? -->
+                    @if(menuItem.name) {
+                      <span class="label">{{ menuItem.name! | translate }}</span>
+                    }
+                    <!-- TODO: icon size? -->
+                    <ids-icon [fontIcon]="menuItem.$open ? 'chevron-up' : 'chevron-down'" />
+                  </a>
+                </span>
+                <ids-subnav [hasDarkBackground]="hasDarkBackground()" [menuItem]="menuItem" [trigger]="trigger" [open]="rla.isActive" (opened)="menuItem.$open = $event" />
+              } @else {
+                <div class="subnav-parent" [class.light]="hasDarkBackground()" [class.active]="menuItem.isActive">
+                  <span class="sidenav-element link">
+                    @if (menuItem.leadingIcon) {
+                      <span class="icon">
+                        <ids-icon [fontIcon]="menuItem.leadingIcon" />
+                      </span>
+                    }
+                    <!-- TODO: sizes? -->
+                    @if(menuItem.name) {
+                      <span class="label">{{ menuItem.name! | translate }}</span>
+                    }
+                  </span>
+                  <button
+                    type="button"
+                    class="more"
+                    idsIconButton
+                    [size]="'compact'"
+                    [variant]="'surface'"
+                    [appearance]="'standard'"
+                    [disabled]="menuItem.isDisabled"
+                    (click)="menuItem.$open = !menuItem.$open"
+                  >
+                    <span #trigger></span>
+                    <!-- TODO: icon size? -->
+                    <ids-icon aria-hidden="true" alt="" [fontIcon]="menuItem.$open ? 'chevron-up' : 'chevron-down'" />
+                  </button>
+                </div>
+                <ids-subnav [hasDarkBackground]="hasDarkBackground()" [menuItem]="menuItem" [trigger]="trigger" [open]="!!menuItem.$open" (opened)="menuItem.$open = $event" />
+              }
+            </li>
+          } @else {
+            <li class="side-nav__list-item">
+              <!-- TODO: focus state? -->
+              <a class="sidenav-element link" [class.light]="hasDarkBackground()" [routerLink]="menuItem.path" [class.active]="menuItem.isActive">
+                @if (menuItem.leadingIcon) {
+                  <span class="icon">
+                    <ids-icon [fontIcon]="menuItem.leadingIcon" />
+                  </span>
+                }
+                @if(menuItem.name) {
+                  <span class="label">{{ menuItem.name! | translate }}</span>
+                }
+                @if (menuItem.trailingIcon) {
+                  <span class="icon">
+                    <ids-icon [fontIcon]="menuItem.trailingIcon" />
+                  </span>
+                }
+              </a>
+            </li>
+          }
+        }
+      </ul>
+    </section>
+  }
+</nav>

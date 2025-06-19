@@ -7,9 +7,12 @@ import { ContentCardData } from '../../../model/contentCardData';
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
 
 type ComponentBlock =
@@ -26,6 +29,9 @@ type ComponentBlock =
     IdsTabGroupComponent,
     IdsChipComponent,
     IdsButtonComponent,
+    IdsCardComponent,
+    IdsIconComponent,
+    IdsIconButtonComponent,
   ],
   templateUrl: './component-details.component.html',
   styleUrl: './component-details.component.scss',
@@ -120,5 +126,16 @@ export class ComponentDetailsComponent implements OnInit {
 
   public trackByCardOrHeading(index: number, item: ComponentBlock): string | number {
     return item.type === 'card' ? item.id ?? `card-${index}` : `heading-${index}`;
+  }
+
+  public isOpen = signal(false);
+  public isDark = signal(false);
+
+  public toggleFooter(): void {
+    this.isOpen.update((open) => !open);
+  }
+
+  public toggleDark(): void {
+    this.isDark.update((dark) => !dark);
   }
 }

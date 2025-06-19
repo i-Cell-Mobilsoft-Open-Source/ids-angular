@@ -62,7 +62,7 @@
           </div>
           <div
             class="h-[712px] flex transition-colors duration-300"
-            [class.bg-black]="isDark()"
+            [class.bg-gray-900]="isDark()"
             [class.text-white]="isDark()"
             [class.bg-ids-container-bg-surface-darker-10]="!isDark()"
           >
@@ -74,13 +74,7 @@
             </div>
           </div>
           @if (isOpen()) {
-            <div
-              class="p-4 bg-ids-container-bg-surface-lighter-10 rounded-b-2xl relative h-[375px] overflow-y-auto"
-              id="footer"
-              [class.bg-black]="isDark()"
-              [class.text-white]="isDark()"
-              [class.bg-ids-container-bg-surface-darker-10]="!isDark()"
-            >
+            <div class="p-4 bg-ids-container-bg-surface-lighter-10 rounded-b-2xl relative h-[375px] overflow-y-auto" id="footer">
               <div class="absolute top-4 right-4">
                 <button type="button" idsButton appearance="outlined" size="comfortable" variant="primary" id="copy">
                   Copy code

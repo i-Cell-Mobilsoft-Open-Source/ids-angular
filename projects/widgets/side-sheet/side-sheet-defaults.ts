@@ -15,6 +15,8 @@ export interface IdsSideSheetDefaultConfig {
   isBackdrop: boolean
   isClosable: boolean
   isShowFooter: boolean
+  isShowHeader: boolean
+  isStatic: boolean
 }
 
 export const IDS_SIDE_SHEET_DEFAULT_CONFIG = new InjectionToken<IdsSideSheetDefaultConfig>(
@@ -27,12 +29,14 @@ export const IDS_SIDE_SHEET_DEFAULT_CONFIG = new InjectionToken<IdsSideSheetDefa
 
 export function IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY(): Required<IdsSideSheetDefaultConfig> {
   return {
-    type: IdsSideSheetType.OVERLAY, //TODO: Change to INLINE when inline side sheet is implemented
+    type: IdsSideSheetType.INLINE,
     position: IdsSideSheetPosition.START,
     header: IdsSideSheetHeader.DEFAULT,
     isScrollable: false,
     isBackdrop: true,
     isClosable: true,
     isShowFooter: true,
+    isShowHeader: true,
+    isStatic: false,
   };
 };

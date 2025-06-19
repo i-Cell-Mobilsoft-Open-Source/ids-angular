@@ -1,10 +1,79 @@
+<ng-template #content>
+  <ng-content/>
+</ng-template>
+
+<ng-template #customHeader>
+  <ng-content select="[slot='customHeader']"/>
+</ng-template>
+
+<ng-template #footer>
+  <ng-content select="[slot='footer']"/>
+</ng-template>
+
 @if (open() && type() === _idsSideSheetType.OVERLAY) {
-  <div class="overlay" (click)="close()"></div>
-  <div class="side-sheet-container" @slideInOut>
-    <button type="button" class="close-btn" (click)="close()">×</button>
-    <ng-content/>
+  <div class="overlay" (click)="_close()"></div>
+  <div class="side-sheet-container" [class.right]="position() === _idsSideSheetPositionType.END" [@slideInOut]="position()">
+    @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
+      <div class="custom-header-top-row">
+        <button class="close-btn" type="button" idsIconButton [variant]="'surface'" [appearance]="'standard'" (click)="_close()">
+          <ids-icon aria-hidden="true" alt="" fontIcon="close" />
+        </button>
+      </div>
+    }
+    <app-side-sheet-header
+    [header]="header()"
+    [title]="title()"
+    [backButton]="backButton()"
+    [isClosable]="isClosable()"
+    (closed)="_close()"
+    (backClicked)="_onBack()"
+    >
+      @if (header() === _idsSideSheetHeaderType.CUSTOM) {
+        <ng-container *ngTemplateOutlet="customHeader"/>
+      }
+    </app-side-sheet-header>
+    <div class="side-sheet-content">
+      <ng-container *ngTemplateOutlet="content"/>
+    </div>
+    @if (isShowFooter()) {
+      <div class="side-sheet-footer">
+        <ng-container *ngTemplateOutlet="footer"/>
+      </div>
+    }
   </div>
 }
 @if (open() && type() === _idsSideSheetType.INLINE) {
-  <div>inline</div>
+  <div class="side-sheet-container-inline" [@slideInOut]="position()">
+
+    <div class="custom-header-top-row">
+      <ng-content  select="[slot='customTrigger']"/>
+
+      @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM || _hasCustomTrigger()) {
+        <button class="close-btn" type="button" idsIconButton [variant]="'surface'" [appearance]="'standard'" (click)="_close()">
+          <ids-icon aria-hidden="true" alt="" fontIcon="close" />
+        </button>
+      }
+    </div>
+
+    <app-side-sheet-header
+      [header]="header()"
+      [title]="title()"
+      [backButton]="backButton()"
+      [isClosable]="isClosable() && !_hasCustomTrigger()"
+      (closed)="_close()"
+      (backClicked)="_onBack()"
+    >
+      @if (header() === _idsSideSheetHeaderType.CUSTOM) {
+        <ng-container *ngTemplateOutlet="customHeader"/>
+      }
+    </app-side-sheet-header>
+    <div class="side-sheet-content">
+      <ng-container *ngTemplateOutlet="content"/>
+    </div>
+    @if (isShowFooter()) {
+      <div class="side-sheet-footer">
+        <ng-container *ngTemplateOutlet="footer"/>
+      </div>
+    }
+  </div>
 }

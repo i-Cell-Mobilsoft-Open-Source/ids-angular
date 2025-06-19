@@ -1,0 +1,23 @@
+@if (header() === _idsSideSheetHeaderType.DEFAULT) {
+  <div class="default-side-sheet-header">
+    <div class="left-content">
+      @if (backButton()) {
+        <button class="back-btn" type="button" idsIconButton [variant]="'surface'" [appearance]="'standard'" (click)="_onBack()">
+          <ids-icon aria-hidden="true" alt="" fontIcon="arrow-left" />
+        </button>
+      }
+      <h2>{{ title() }}</h2>
+    </div>
+    @if (isClosable()) {
+      <button class="close-btn" type="button" idsIconButton [variant]="'surface'" [appearance]="'standard'" (click)="_close()">
+        <ids-icon aria-hidden="true" alt="" fontIcon="close" />
+      </button>
+    }
+  </div>
+}
+
+@else if (header() === _idsSideSheetHeaderType.CUSTOM) {
+  <div class="custom-side-sheet-header">
+    <ng-content/>
+  </div>
+}

@@ -1,4 +1,77 @@
-<button type="button" (click)="_show = true">open side sheet</button>
-<ids-side-sheet [open]="_show" (closed)="_show = false">
-  <h2>side sheet</h2>
-</ids-side-sheet>
+@if (model.position !== 'end') {
+  <ids-side-sheet
+    [open]="_show"
+    [type]="model.type"
+    [title]="model.title"
+    [header]="model.header"
+    [isShowFooter]="model.isShowFooter"
+    [isClosable]="model.isClosable"
+    [isShowHeader]="model.isShowHeader"
+    [position]="model.position"
+    [backButton]="model.backButton"
+    (closed)="_show = false"
+    (backClicked)="onBackButtonClick()"
+  >
+    <div slot="customHeader"><h2>CUSTOM HEADER</h2></div>
+    <div slot="footer"><h2>FOOTER</h2></div>
+    @if(model.hasCustomTrigger) {
+      <div #customTrigger slot="customTrigger">
+        <button
+          idsIconButton
+          type="button"
+          appearance="standard"
+          variant="surface"
+        >
+          <ids-icon aria-hidden="true" alt="" fontIcon="bars-3"  />
+        </button>
+      </div>
+    }
+    <h2>side sheet</h2>
+  </ids-side-sheet>
+}
+
+<app-tryout [title]="'COMPONENTS.SIDE-SHEET' | translate" (resetted)="reset()">
+  <div component>
+    <button type="button" idsButton (click)="_show = true">open side sheet</button>
+  </div>
+  <app-control-table
+    controls
+    [controlName]="'Side Sheet'"
+    [configType]="'input'"
+    [controlConfig]="_inputControlConfig"
+    [(model)]="model"
+    (resetted)="reset()"
+  />
+</app-tryout>
+
+@if (model.position === 'end') {
+  <ids-side-sheet
+    [open]="_show"
+    [type]="model.type"
+    [title]="model.title"
+    [header]="model.header"
+    [isShowFooter]="model.isShowFooter"
+    [isClosable]="model.isClosable"
+    [isShowHeader]="model.isShowHeader"
+    [position]="model.position"
+    [backButton]="model.backButton"
+    (closed)="_show = false"
+    (backClicked)="onBackButtonClick()"
+  >
+    <div slot="customHeader"><h2>CUSTOM HEADER RIGHT</h2></div>
+    <div slot="footer"><h2>FOOTER</h2></div>
+    @if(model.hasCustomTrigger) {
+      <div #customTrigger slot="customTrigger">
+        <button
+          idsIconButton
+          type="button"
+          appearance="standard"
+          variant="surface"
+        >
+          <ids-icon aria-hidden="true" alt="" fontIcon="bars-3"  />
+        </button>
+      </div>
+    }
+    <h2>side sheet RIGHT</h2>
+  </ids-side-sheet>
+}

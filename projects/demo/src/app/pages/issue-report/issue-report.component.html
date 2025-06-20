@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-16">
+  <app-hero [heroData]="heroData()" />
+  <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+    @for (indexData of indexDatas; track indexData.id) {
+      <a class="h-full flex" [href]="indexData.buttonLink">
+        <ids-card variant="light" appearance="elevated">
+          <article class="flex flex-col h-full lg:flex-row p-4 gap-6 relative lg:items-center">
+            <img class="bg-gray-100 rounded-lg w-20 h-20" [src]="getImageUrl(indexData)" [alt]="indexData.title" />
+            <div class="flex flex-col gap-4">
+              <h3 class="text-title-medium-prominent">{{ indexData.title }}</h3>
+              <p class="text-ids-page-fg-surface-lighter-10">{{ indexData.description }}</p>
+            </div>
+            <button type="button" idsIconButton size="comfortable" variant="primary" appearance="standard">
+              <ids-icon aria-hidden="true" alt="" fontIcon="arrow-right" />
+            </button>
+          </article>
+        </ids-card>
+      </a>
+    }
+  </div>
+</div>

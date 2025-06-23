@@ -4,7 +4,7 @@ import { IdsRadioChangeEvent } from './types/radio-events.class';
 import { IdsRadioVariantType } from './types/radio-variant.type';
 
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterContentInit, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
+import { AfterContentChecked, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanAttribute, IdsOrientation, IdsOrientationType, IdsPositionType, IdsSizeType, IdsVerticalPosition, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
@@ -26,7 +26,7 @@ const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 })
 export class IdsRadioGroupDirective
   extends ComponentBaseWithDefaults<IdsRadioDefaultConfig>
-  implements OnInit, AfterContentInit, ControlValueAccessor {
+  implements OnInit, AfterContentChecked, ControlValueAccessor {
   protected override get _hostName(): string {
     return 'radio-group';
   }
@@ -149,7 +149,7 @@ export class IdsRadioGroupDirective
     }
   }
 
-  public ngAfterContentInit(): void {
+  public ngAfterContentChecked(): void {
     const items = this._items();
     const minItemCount = 2;
 

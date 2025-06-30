@@ -1,5 +1,8 @@
 <div class="flex flex-col gap-16">
-  <app-hero [heroData]="heroData()" />
+  <!-- <app-hero [heroData]="heroData()" /> -->
+  @if (heroData; as hero) {
+    <app-hero [heroData]="hero" />
+  }
   <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
     @for (indexData of indexDatas; track indexData.id) {
       <a class="h-full flex" [href]="indexData.buttonLink">

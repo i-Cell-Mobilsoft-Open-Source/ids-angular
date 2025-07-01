@@ -5,6 +5,7 @@ import {
   IdsSideSheetHeader, IdsSideSheetPosition,
   IdsSideSheetType,
 } from '@i-cell/ids-angular/side-sheet/types/side-sheet.type';
+import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 @Component({
   selector: 'app-side-sheet-header',
@@ -13,6 +14,7 @@ import {
   imports: [
     IdsIconComponent,
     IdsIconButtonComponent,
+    IdsTooltipDirective,
   ],
   styleUrls: ['./side-sheet-header.component.scss'],
 })
@@ -27,6 +29,7 @@ export class SideSheetHeaderComponent {
   public header = input();
   public backButton = input();
   public isClosable = input();
+  public closeTooltipText = input<string>('');
 
   protected _close(): void {
     this.closed.emit();

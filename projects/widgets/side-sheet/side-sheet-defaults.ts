@@ -6,6 +6,7 @@ import {
 } from './types/side-sheet.type';
 
 import { InjectionToken } from '@angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsSideSheetDefaultConfig {
   type: IdsSideSheetTypeType
@@ -17,6 +18,8 @@ export interface IdsSideSheetDefaultConfig {
   isShowFooter: boolean
   isShowHeader: boolean
   isStatic: boolean
+  closeTooltipText: string
+  size: IdsSizeType
 }
 
 export const IDS_SIDE_SHEET_DEFAULT_CONFIG = new InjectionToken<IdsSideSheetDefaultConfig>(
@@ -30,7 +33,7 @@ export const IDS_SIDE_SHEET_DEFAULT_CONFIG = new InjectionToken<IdsSideSheetDefa
 export function IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY(): Required<IdsSideSheetDefaultConfig> {
   return {
     type: IdsSideSheetType.INLINE,
-    position: IdsSideSheetPosition.START,
+    position: IdsSideSheetPosition.LEFT,
     header: IdsSideSheetHeader.DEFAULT,
     isScrollable: false,
     isBackdrop: true,
@@ -38,5 +41,7 @@ export function IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY(): Required<IdsSideSheetDe
     isShowFooter: true,
     isShowHeader: true,
     isStatic: false,
+    closeTooltipText: '',
+    size: IdsSize.COMPACT,
   };
 };

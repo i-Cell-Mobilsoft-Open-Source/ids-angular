@@ -6,8 +6,8 @@ export const IdsSideSheetType = {
 export type IdsSideSheetTypeType = (typeof IdsSideSheetType)[keyof typeof IdsSideSheetType];
 
 export const IdsSideSheetPosition = {
-  START: 'start',
-  END: 'end',
+  LEFT: 'left',
+  RIGHT: 'right',
 } as const;
 
 export type IdsSideSheetPositionType = (typeof IdsSideSheetPosition)[keyof typeof IdsSideSheetPosition];

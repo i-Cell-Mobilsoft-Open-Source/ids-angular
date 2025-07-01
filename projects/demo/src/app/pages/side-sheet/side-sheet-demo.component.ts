@@ -1,13 +1,20 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Location } from '@angular/common';
+import { Location, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsSize } from '@i-cell/ids-angular/core';
+import {
+  IdsErrorMessageComponent,
+  IdsFormFieldComponent,
+  IdsHintMessageComponent,
+  IdsInputDirective, IdsLabelDirective,
+} from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/side-sheet/side-sheet-defaults';
 import { IdsSideSheetComponent } from '@i-cell/ids-angular/side-sheet/side-sheet.component';
 import {
@@ -30,7 +37,8 @@ type SideSheetInputControls = {
   isClosable: boolean;
   isShowFooter: boolean;
   isShowHeader: boolean;
-  hasCustomTrigger?: boolean;
+  closeTooltipText: string;
+  size: string;
 };
 
 @Component({
@@ -41,7 +49,13 @@ type SideSheetInputControls = {
     IdsSideSheetComponent,
     IdsButtonComponent,
     TranslatePipe,
-    IdsIconButtonComponent,
+    NgTemplateOutlet,
+    FormsModule,
+    IdsErrorMessageComponent,
+    IdsFormFieldComponent,
+    IdsHintMessageComponent,
+    IdsInputDirective,
+    IdsLabelDirective,
     IdsIconComponent,
   ],
   templateUrl: './side-sheet-demo.component.html',
@@ -118,11 +132,18 @@ export class SideSheetDemoComponent {
       default: true,
       control: 'checkbox',
     },
-    hasCustomTrigger: {
-      description: 'Is side sheet custom trigger shown. (only in inline mode)',
-      type: 'boolean',
-      default: false,
-      control: 'checkbox',
+    closeTooltipText: {
+      description: 'Tooltip text for the close button.',
+      type: 'string',
+      default: defaultConfig.closeTooltipText,
+      control: 'text',
+    },
+    size: {
+      description: 'Side sheet size.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      list: Object.values(IdsSize),
+      control: 'select',
     },
   };
 
@@ -139,5 +160,13 @@ export class SideSheetDemoComponent {
   }
 
   protected _show = false;
+
+  protected _firstName = '';
+  protected _lastName = '';
+  protected _email = '';
+  protected _phoneNumber = '';
+  protected _shippingAddress = '';
+  protected _city = '';
+  protected _postalCode = '';
 
 }

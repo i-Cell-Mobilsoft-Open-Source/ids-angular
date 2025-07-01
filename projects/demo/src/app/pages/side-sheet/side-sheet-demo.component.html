@@ -1,33 +1,75 @@
-@if (model.position !== 'end') {
+<ng-template #sideSheet>
   <ids-side-sheet
     [open]="_show"
     [type]="model.type"
     [title]="model.title"
     [header]="model.header"
+    [isBackdrop]="model.isBackdrop"
     [isShowFooter]="model.isShowFooter"
     [isClosable]="model.isClosable"
     [isShowHeader]="model.isShowHeader"
     [position]="model.position"
     [backButton]="model.backButton"
+    [closeTooltipText]="model.closeTooltipText"
     (closed)="_show = false"
     (backClicked)="onBackButtonClick()"
   >
-    <div slot="customHeader"><h2>CUSTOM HEADER</h2></div>
-    <div slot="footer"><h2>FOOTER</h2></div>
-    @if(model.hasCustomTrigger) {
-      <div #customTrigger slot="customTrigger">
-        <button
-          idsIconButton
-          type="button"
-          appearance="standard"
-          variant="surface"
-        >
-          <ids-icon aria-hidden="true" alt="" fontIcon="bars-3"  />
-        </button>
-      </div>
-    }
-    <h2>side sheet</h2>
+    <div slot="customHeader">
+      <header>
+        <h2>Customer</h2>
+      </header>
+    </div>
+    <div slot="footer">
+      <button
+        type="button"
+        idsButton
+        [size]="'spacious'"
+      >
+        <ids-icon fontIcon="check" aria-hidden="true" />
+        <span>Save</span>
+      </button>
+    </div>
+    <div class="side-sheet-content">
+      <ids-form-field>
+        <ids-label>First name</ids-label>
+        <input idsInput placeholder="E.g. Steve" required [(ngModel)]="_firstName" />
+      </ids-form-field>
+
+      <ids-form-field>
+        <ids-label>Last name</ids-label>
+        <input idsInput placeholder="E.g. Johnson" required [(ngModel)]="_lastName" />
+      </ids-form-field>
+
+      <ids-form-field>
+        <ids-label>Email address</ids-label>
+        <input idsInput type="email" placeholder="E.g. steve@example.com" required [(ngModel)]="_email" />
+      </ids-form-field>
+
+      <ids-form-field>
+        <ids-label>Phone number</ids-label>
+        <input idsInput type="tel" placeholder="E.g. +1 234 567 8901" [(ngModel)]="_phoneNumber" />
+      </ids-form-field>
+
+      <ids-form-field>
+        <ids-label>Shipping address</ids-label>
+        <input idsInput placeholder="E.g. 123 Main St" required [(ngModel)]="_shippingAddress" />
+      </ids-form-field>
+
+      <ids-form-field>
+        <ids-label>City</ids-label>
+        <input idsInput placeholder="E.g. New York" required [(ngModel)]="_city" />
+      </ids-form-field>
+
+      <ids-form-field>
+        <ids-label>Postal code</ids-label>
+        <input idsInput placeholder="E.g. 10001" required [(ngModel)]="_postalCode" />
+      </ids-form-field>
+    </div>
   </ids-side-sheet>
+</ng-template>
+
+@if (model.position !== 'end') {
+  <ng-container *ngTemplateOutlet="sideSheet"/>
 }
 
 <app-tryout [title]="'COMPONENTS.SIDE-SHEET' | translate" (resetted)="reset()">
@@ -45,33 +87,5 @@
 </app-tryout>
 
 @if (model.position === 'end') {
-  <ids-side-sheet
-    [open]="_show"
-    [type]="model.type"
-    [title]="model.title"
-    [header]="model.header"
-    [isShowFooter]="model.isShowFooter"
-    [isClosable]="model.isClosable"
-    [isShowHeader]="model.isShowHeader"
-    [position]="model.position"
-    [backButton]="model.backButton"
-    (closed)="_show = false"
-    (backClicked)="onBackButtonClick()"
-  >
-    <div slot="customHeader"><h2>CUSTOM HEADER RIGHT</h2></div>
-    <div slot="footer"><h2>FOOTER</h2></div>
-    @if(model.hasCustomTrigger) {
-      <div #customTrigger slot="customTrigger">
-        <button
-          idsIconButton
-          type="button"
-          appearance="standard"
-          variant="surface"
-        >
-          <ids-icon aria-hidden="true" alt="" fontIcon="bars-3"  />
-        </button>
-      </div>
-    }
-    <h2>side sheet RIGHT</h2>
-  </ids-side-sheet>
+  <ng-container *ngTemplateOutlet="sideSheet"/>
 }

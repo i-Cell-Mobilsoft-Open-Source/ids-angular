@@ -40,6 +40,7 @@ export const GET_COMPONENTS = gql`
               }
             }
             group_image {
+              filled_in_container
               img_caption
               img_dark_mode {
                 url

@@ -11,6 +11,19 @@ export interface ComponentEntry {
   content: ComponentContent[];
 }
 
+export interface PageEntry {
+  id: string;
+  title: string;
+  slug: string;
+  hero_description: string;
+  hero?: {
+    hero_description: string;
+  }
+  hero_image_light?: { url: string };
+  hero_image_dark?: { url: string };
+  content: ComponentContent[];
+}
+
 export type ComponentContent = SetContentCard | SetContentHeading;
 
 export interface SetContentCard {
@@ -30,11 +43,13 @@ export interface SetContentCard {
     };
   };
   card_properties?: {
+    appearance?: { value: 'filled' | 'elevated' };
     card_bg_transparent ?: boolean;
     card_orientation?: { value: 'horizontal' | 'vertical' };
     card_variant?: { value: 'surface' | 'light' | 'dark' };
   };
   group_image?: {
+    filled_in_container?: boolean;
     img_caption?: string;
     img_light_mode?: { url: string }[];
     img_dark_mode?: { url: string }[];

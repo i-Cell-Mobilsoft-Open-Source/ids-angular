@@ -1,9 +1,10 @@
 import { environment } from '../../../environments/environment.development';
 import { ISSUE_DATA } from '../../../utils/issueListData';
+import { ContentCardComponent } from '../../components/content-card/content-card.component';
 import { HeroComponent } from '../../components/hero/hero.component';
 import { ContentCardData } from '../../model/contentCardData';
 import { HeroData } from '../../model/heroData';
-import { ComponentEntry } from '../../model/pageEntry';
+import { PageEntry } from '../../model/pageEntry';
 import { GraphqlService } from '../../services/graphql.service';
 
 import { Component, OnInit, inject, OnDestroy, signal } from '@angular/core';
@@ -21,6 +22,7 @@ type ComponentBlock =
     HeroComponent,
     IdsIconButtonComponent,
     IdsIconComponent,
+    ContentCardComponent,
   ],
   templateUrl: './issue-report.component.html',
   styleUrl: './issue-report.component.scss',
@@ -46,6 +48,8 @@ export class IssueReportComponent implements OnInit, OnDestroy {
   private _graphqlService = inject(GraphqlService);
 
   public ngOnInit(): void {
+    // eslint-disable-next-line no-console
+    console.log('ngOnInit running');
     this._updateTheme();
 
     this._observer = new MutationObserver(() => {
@@ -57,7 +61,7 @@ export class IssueReportComponent implements OnInit, OnDestroy {
       attributeFilter: ['class'],
     });
     this._graphqlService.getPages().subscribe((result) => {
-      const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
+      const typedResult = result as { data: { entries: { data: PageEntry[] } } };
       const components = typedResult.data.entries.data;
 
       if (components.length === 0) {
@@ -71,16 +75,22 @@ export class IssueReportComponent implements OnInit, OnDestroy {
         title: component.title,
         isBackButton: true,
         description: component.hero_description,
-        imageUrl: component.comp_img_light_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}`
+        imageUrl: component.hero_image_light?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
           : '',
-        imageUrlLight: component.comp_img_light_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}`
+        imageUrlLight: component.hero_image_light?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
           : '',
-        imageUrlDark: component.comp_img_dark_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_dark_mode[0].url}`
+        imageUrlDark: component.hero_image_dark?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_dark.url}`
           : '',
       };
+      // eslint-disable-next-line no-console
+      console.log('hero_image_light:', component.hero_image_light);
+      // eslint-disable-next-line no-console
+      console.log('Component from CMS:', component);
+      // eslint-disable-next-line no-console
+      console.log('hero_image_light:', component.hero_image_light);
 
       const blocks: ComponentBlock[] = [];
 
@@ -93,11 +103,14 @@ export class IssueReportComponent implements OnInit, OnDestroy {
         }
 
         if (block.__typename === 'Set_Content_Card') {
+          // eslint-disable-next-line no-console
+          console.log('Aspect Ratio:', block.group_image?.img_aspect_ratio?.value);
           blocks.push({
             type: 'card',
             id: Number(block.id),
             orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
             variant: block.card_properties?.card_variant?.value ?? 'surface',
+            appearance: block.card_properties?.appearance?.value ?? 'filled',
             transparent: block.card_properties?.card_bg_transparent ?? false,
             state: block.group_image?.state?.value,
             imageURL: block.group_image?.img_light_mode?.[0]?.url
@@ -112,6 +125,7 @@ export class IssueReportComponent implements OnInit, OnDestroy {
             imageCaption: block.group_image?.img_caption,
             imageBgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
             imageBGTransparent: block.group_image?.bg_transparent ?? false,
+            aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
             overTitle: block.content?.content_over_title,
             title: block.content?.content_title,
             description: block.content?.content_description,

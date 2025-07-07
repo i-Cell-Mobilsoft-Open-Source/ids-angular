@@ -1,7 +1,7 @@
 @let data = contentCardData();
 <ids-card
-  appearance="filled"
   size="compact"
+  [appearance]="data.appearance || 'filled'"
   [variant]="data.variant || 'surface'"
   [orientation]="data.orientation"
   [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"

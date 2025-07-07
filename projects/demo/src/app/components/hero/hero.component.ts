@@ -1,4 +1,5 @@
 import { HeroData } from '../../model/heroData';
+import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
 import { Location } from '@angular/common';
 import { Component, input, OnDestroy, OnInit } from '@angular/core';
@@ -11,6 +12,7 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
   imports: [
     IdsIconComponent,
     IdsIconButtonComponent,
+    SafeHtmlPipe,
   ],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',

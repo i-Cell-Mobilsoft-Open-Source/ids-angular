@@ -76,6 +76,17 @@ export class ImageComponent implements OnInit, OnDestroy   {
     }
   });
 
+  public containerPaddingClass = computed<string>(() =>  {
+    switch (this.filledInContainer()) {
+      case true:
+        return 'p-0';
+      case false:
+        return 'p-4';
+      default:
+        return 'p-4'; // Default value
+    }
+  });
+
   public currentImageUrl = '';
   private _observer: MutationObserver | undefined;
 

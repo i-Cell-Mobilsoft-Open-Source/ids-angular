@@ -6,6 +6,10 @@
   border-style: solid !important;
 }
 
-.ids-card-section-padded {
+.special-horizontal-filled {
   @apply pl-4 lg:pl-0 !important;
+}
+
+.special-horizontal-filled-2 {
+  @apply pl-4  !important;
 }

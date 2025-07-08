@@ -23,6 +23,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
   },
   {
+    path: 'components/breadcrumb',
+    loadComponent: () => import('./pages/breadcrumb/breadcrumb-demo.component').then((module) => module.BreadcrumbDemoComponent),
+  },
+  {
     path: 'components/button',
     loadComponent: () => import('./pages/button/button-demo.component').then((module) => module.ButtonDemoComponent),
   },

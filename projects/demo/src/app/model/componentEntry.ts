@@ -30,6 +30,7 @@ export interface SetContentCard {
     card_bg_transparent ?: boolean;
     card_orientation?: { value: 'horizontal' | 'vertical' };
     card_variant?: { value: 'surface' | 'light' | 'dark' };
+    appearance?: { value: 'filled' | 'elevated' };
   };
   group_image?: {
     img_caption?: string;
@@ -38,6 +39,7 @@ export interface SetContentCard {
     img_aspect_ratio?: { value: '1/1' | '16/9' | '16/10' };
     img_bg_color?: { value: 'surface' | 'primary' | 'light' };
     bg_transparent?: boolean;
+    filled_in_container?: boolean;
     state?: { value: 'do' | 'dont' | 'no_state' };
   };
 }

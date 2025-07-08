@@ -31,6 +31,9 @@ export const GET_COMPONENTS = gql`
               }
             }
             card_properties {
+              appearance {
+                value
+              }              
               card_bg_transparent
               card_orientation {
                 value

@@ -8,9 +8,6 @@ import { PageEntry } from '../../model/pageEntry';
 import { GraphqlService } from '../../services/graphql.service';
 
 import { Component, OnInit, inject, OnDestroy, signal } from '@angular/core';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 type ComponentBlock =
   | { type: 'heading'; heading: string }
   | (ContentCardData & { type: 'card' });
@@ -18,10 +15,7 @@ type ComponentBlock =
 @Component({
   selector: 'app-issue-report',
   imports: [
-    IdsCardComponent,
     HeroComponent,
-    IdsIconButtonComponent,
-    IdsIconComponent,
     ContentCardComponent,
   ],
   templateUrl: './issue-report.component.html',
@@ -32,24 +26,11 @@ export class IssueReportComponent implements OnInit, OnDestroy {
   public heroData?: HeroData;
   public componentBlocks: ComponentBlock[] = [];
 
-  // public heroData = signal<HeroData>({
-  //   title: 'Issue report',
-  //   description:
-  //     // eslint-disable-next-line @stylistic/js/max-len
-  //     'Welcome to the Issue Report page! Here, you can  submit requests for improvements to the i-DS Design System or report specific design or development issues. However, before submitting a new request or bug report, please check the issue list to make sure it hasn’t already been reported by someone else.',
-  //   id: 0,
-  //   imageUrl: '',
-  //   imageUrlLight: 'assets/images/heros/ids-issue-hero@2x.png',
-  //   imageUrlDark: 'assets/images/heros/ids-issue-hero-dark@2x.png',
-  // });
-
   private _observer: MutationObserver | undefined;
   private _isDarkTheme = signal<boolean>(false);
   private _graphqlService = inject(GraphqlService);
 
   public ngOnInit(): void {
-    // eslint-disable-next-line no-console
-    console.log('ngOnInit running');
     this._updateTheme();
 
     this._observer = new MutationObserver(() => {
@@ -85,12 +66,6 @@ export class IssueReportComponent implements OnInit, OnDestroy {
           ? `${environment.cmsBaseUrl}${component.hero_image_dark.url}`
           : '',
       };
-      // eslint-disable-next-line no-console
-      console.log('hero_image_light:', component.hero_image_light);
-      // eslint-disable-next-line no-console
-      console.log('Component from CMS:', component);
-      // eslint-disable-next-line no-console
-      console.log('hero_image_light:', component.hero_image_light);
 
       const blocks: ComponentBlock[] = [];
 
@@ -103,12 +78,6 @@ export class IssueReportComponent implements OnInit, OnDestroy {
         }
 
         if (block.__typename === 'Set_Content_Card') {
-          // eslint-disable-next-line no-console
-          console.log('group_image from GraphQL:', block.group_image);
-          // eslint-disable-next-line no-console
-          console.log('filled_in_container from GraphQL:', block.group_image?.filled_in_container);
-          // eslint-disable-next-line no-console
-          console.log('Aspect Ratio:', block.group_image?.img_aspect_ratio?.value);
           blocks.push({
             type: 'card',
             id: Number(block.id),

@@ -1,3 +1,11 @@
 .transparent-bg {
   background-color: transparent !important;
 }
+
+.ids-card .ids-button {
+  border-style: solid !important;
+}
+
+.ids-card-section-padded {
+  @apply pl-4 lg:pl-0 !important;
+}

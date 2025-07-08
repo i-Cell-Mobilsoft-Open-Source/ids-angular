@@ -21,4 +21,6 @@ export interface ContentCardData {
   heading?: string;
   content_heading?: string;
   imageBGTransparent?: boolean
+  appearance?: 'filled' | 'elevated';
+  filledInContainer?: boolean;
 }

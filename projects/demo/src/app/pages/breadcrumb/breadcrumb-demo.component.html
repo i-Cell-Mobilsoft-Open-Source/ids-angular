@@ -1,0 +1,38 @@
+<app-tryout 
+  [title]="'COMPONENTS.BREADCRUMB' | translate" 
+  [hasDarkBackground]="breadcrumbModel.variant === 'light'" 
+  (resetted)="reset()"
+>
+  <div component class="text-center">
+    <ids-breadcrumb
+      [hieararchy]="hierarchy"
+      [size]="breadcrumbModel.size"
+      [variant]="breadcrumbModel.variant"
+      [dividerType]="breadcrumbModel.dividerType"
+      [overlayAppearance]="overlayPanelModel.appearance"
+      [overlaySize]="overlayPanelModel.size"
+      [overlayVariant]="overlayPanelModel.variant"
+    />
+    <ids-notification title="Note" variant="warning" size="compact" class="block w-1/2 text-left place-self-center mt-10">
+      Breadcrumb size changes won't be applied on truncation panel due to overlay limitations (initial values are passed to the panel).
+    </ids-notification>
+  </div>
+
+  <app-control-table
+    controls
+    [controlName]="'Breadcrumb'"
+    [configType]="'input'"
+    [controlConfig]="_breadcrumbInputControlConfig"
+    [(model)]="breadcrumbModel"
+    (resetted)="reset()"
+  />  
+
+  <app-control-table
+    controls
+    [controlName]="'Overlay panel'"
+    [configType]="'input'"
+    [controlConfig]="_overlayPanelInputControlConfig"
+    [(model)]="overlayPanelModel"
+    (resetted)="reset()"
+  />
+</app-tryout>

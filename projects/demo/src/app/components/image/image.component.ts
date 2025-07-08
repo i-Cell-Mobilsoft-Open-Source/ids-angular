@@ -20,6 +20,7 @@ export class ImageComponent implements OnInit, OnDestroy   {
   public imageURL = input<string>();
   public imageUrlLight = input.required<string>();
   public imageUrlDark = input.required<string>();
+  public filledInContainer = input<boolean>(false);
 
   public imageCaption = input<string>();
 
@@ -64,10 +65,23 @@ export class ImageComponent implements OnInit, OnDestroy   {
     }
   });
 
+  public imgFilledClass = computed<string>(() =>  {
+    switch (this.filledInContainer()) {
+      case true:
+        return 'object-cover lg:w-full lg:h-full';
+      case false:
+        return 'object-contain lg:w-1/2 lg:h-auto';
+      default:
+        return 'object-contain lg:w-1/2 lg:h-auto'; // Default value
+    }
+  });
+
   public currentImageUrl = '';
   private _observer: MutationObserver | undefined;
 
   public ngOnInit(): void {
+    // eslint-disable-next-line no-console
+    console.log('[ImageComponent] filledInContainer:', this.filledInContainer());
     this._updateImageBasedOnTheme();
 
     this._observer = new MutationObserver(() => {

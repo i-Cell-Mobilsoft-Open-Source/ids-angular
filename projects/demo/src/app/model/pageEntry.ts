@@ -31,6 +31,7 @@ export interface SetContentCard {
   type: 'card';
   id: string;
   content_heading?: string;
+  filled_in_container?: boolean;
   content: {
     content_over_title: string;
     content_title: string;

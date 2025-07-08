@@ -104,6 +104,10 @@ export class IssueReportComponent implements OnInit, OnDestroy {
 
         if (block.__typename === 'Set_Content_Card') {
           // eslint-disable-next-line no-console
+          console.log('group_image from GraphQL:', block.group_image);
+          // eslint-disable-next-line no-console
+          console.log('filled_in_container from GraphQL:', block.group_image?.filled_in_container);
+          // eslint-disable-next-line no-console
           console.log('Aspect Ratio:', block.group_image?.img_aspect_ratio?.value);
           blocks.push({
             type: 'card',
@@ -112,6 +116,7 @@ export class IssueReportComponent implements OnInit, OnDestroy {
             variant: block.card_properties?.card_variant?.value ?? 'surface',
             appearance: block.card_properties?.appearance?.value ?? 'filled',
             transparent: block.card_properties?.card_bg_transparent ?? false,
+            filledInContainer: block.group_image?.filled_in_container ?? false,
             state: block.group_image?.state?.value,
             imageURL: block.group_image?.img_light_mode?.[0]?.url
               ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`

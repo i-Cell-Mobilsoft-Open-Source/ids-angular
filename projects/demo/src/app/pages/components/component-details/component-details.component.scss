@@ -1,0 +1,13 @@
+ids-chip,
+#copy {
+  border-style: solid;
+}
+#demo {
+  gap: 0px !important;
+}
+#footer {
+  @apply border-t border-solid border-ids-page-fg-surface-lighter-40;
+}
+#header {
+  @apply border-b border-solid border-ids-page-fg-surface-lighter-40;
+}

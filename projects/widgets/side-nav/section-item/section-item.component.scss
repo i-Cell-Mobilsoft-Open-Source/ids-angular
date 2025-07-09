@@ -2,18 +2,6 @@
   padding-left: 1rem;
   display: block;
 
-  details {
-    position: relative;
-    summary {
-      position: relative;
-      height: 0;
-      &::marker {
-        content: "";
-        display: none;
-      }
-    }
-  }
-
   ul {
     list-style: none;
     margin: 0;

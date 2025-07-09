@@ -9,7 +9,7 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core/types/size.type';
 import { IdsSideNavComponent } from '@i-cell/ids-angular/side-nav';
-import { Menu } from '@i-cell/ids-angular/side-nav/menu.interface';
+import { MenuConfig } from '@i-cell/ids-angular/side-nav/menu.interface';
 import { IdsSideNavAppearance, IdsSideNavAppearanceType } from '@i-cell/ids-angular/side-nav/types/side-nav-appearance.type';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -21,13 +21,13 @@ export const idsSideNavVariant = {
 type IdsSideNavVariantType = (typeof idsSideNavVariant)[keyof typeof idsSideNavVariant];
 
 type SideNavControls = {
-  appearance: IdsSideNavAppearanceType,
-  size: IdsSizeType,
-  disabled: boolean,
-  variant: IdsSideNavVariantType,
-  label: string,
-  leadingIcon?: string,
-  trailingIcon?: string,
+  appearance: IdsSideNavAppearanceType;
+  size: IdsSizeType;
+  disabled: boolean;
+  variant: IdsSideNavVariantType;
+  label: string;
+  leadingIcon?: string;
+  trailingIcon?: string;
 };
 
 @Component({
@@ -86,67 +86,104 @@ export class SideNavDemoComponent implements OnInit {
 
   public model: SideNavControls = { ...this.defaults };
 
-  public menuConfigs: Menu[] = [
-    {
-      name: 'SIDE_NAV.SECTION.WITHOUT_ITEMS',
-    },
-    {
-      name: 'SIDE_NAV.SECTION.WITH_LEADING_ICON',
-      leadingIcon: 'sun',
-    },
-    {
-      name: 'SIDE_NAV.SECTION.WITH_TRAILING_ICON',
-      trailingIcon: 'sun',
-    },
-    {
-      name: 'SIDE_NAV.SECTION.WITH_LEADING_AND_TRAILING_ICON',
-      leadingIcon: 'sun',
-      trailingIcon: 'sun',
-    },
-    {
-      name: 'SIDE_NAV.SECTION.WITH_ITEMS',
-      children: [
-        { name: 'SIDE_NAV.ITEM.WITHOUT_ICONS', isActive: true },
-        { name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON', leadingIcon: 'sun' },
-        { name: 'SIDE_NAV.ITEM.WITH_TRAILING_ICON', trailingIcon: 'sun' },
-        { name: 'SIDE_NAV.ITEM.WITH_LEADING_AND_TRAILING_ICON', leadingIcon: 'sun', trailingIcon: 'sun' },
-        {
-          name: 'SIDE_NAV.BUTTON_ITEM.WITH_SUB_ITEMS_AND_WITHOUT_ICONS',
-          children: [
-            { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/1' },
-            { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/2' },
-          ],
+  public menuConfig: MenuConfig = {
+    sections: [
+      {
+        title: {
+          name: 'SIDE_NAV.SECTION.WITHOUT_ITEMS',
+          type: 'TITLE',
         },
-        {
-          name: 'SIDE_NAV.BUTTON_ITEM.WITH_SUB_ITEMS_AND_WITH_LEADING_ICON',
+        items: [],
+      },
+      {
+        title: {
+          name: 'SIDE_NAV.SECTION.WITH_LEADING_ICON',
+          type: 'TITLE',
           leadingIcon: 'sun',
-          children: [
-            { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/3' },
-            { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/4' },
-          ],
         },
-        {
-          name: 'SIDE_NAV.ITEM.WITH_SUB_ITEMS_AND_WITHOUT_ICONS',
-          path: '/example-path/11',
-          children: [
-            { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/5' },
-            { name: 'SIDE_NAV.SUB_ITEM.WITH_LEADING_ICON', path: '/example-path/6', leadingIcon: 'sun' },
-            { name: 'SIDE_NAV.SUB_ITEM.WITH_TRAILING_ICON', path: '/example-path/7', trailingIcon: 'sun' },
-            { name: 'SIDE_NAV.SUB_ITEM.WITH_LEADING_AND_TRAILING_ICON', path: '/example-path/8', leadingIcon: 'sun', trailingIcon: 'sun' },
-          ],
+        items: [],
+      },
+      {
+        title: {
+          name: 'SIDE_NAV.SECTION.WITH_TRAILING_ICON',
+          type: 'TITLE',
+          trailingIcon: 'sun',
         },
-        {
-          name: 'SIDE_NAV.ITEM.WITH_SUB_ITEMS_AND_WITH_LEADING_ICON',
+        items: [],
+      },
+      {
+        title: {
+          name: 'SIDE_NAV.SECTION.WITH_LEADING_AND_TRAILING_ICON',
+          type: 'TITLE',
           leadingIcon: 'sun',
-          path: '/example-path/12',
-          children: [
-            { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/9' },
-            { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/10' },
-          ],
+          trailingIcon: 'sun',
         },
-      ],
-    },
-  ];
+        items: [],
+      },
+      {
+        title: {
+          name: 'SIDE_NAV.SECTION.WITH_ITEMS',
+          type: 'TITLE',
+        },
+        items: [
+          { name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON', type: 'ITEM', leadingIcon: 'sun',
+            items: [
+              { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', type: 'ITEM' },
+              { name: 'SIDE_NAV.SUB_ITEM.WITH', type: 'ITEM' },
+            ],
+          },
+          // { name: 'SIDE_NAV.ITEM.WITHOUT_ICONS', type: 'ITEM', path: '/example-path/1' },
+        ],
+      },
+    ],
+  };
+
+  // TODO: remove after new menuConfig is implemented
+  // public menuConfigs: MenuItem[] = [
+  // {
+  //   name: 'SIDE_NAV.SECTION.WITH_ITEMS',
+  //   items: [
+  //     { name: 'SIDE_NAV.ITEM.WITHOUT_ICONS', isActive: true },
+  //     { name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON', leadingIcon: 'sun' },
+  //     { name: 'SIDE_NAV.ITEM.WITH_TRAILING_ICON', trailingIcon: 'sun' },
+  //     { name: 'SIDE_NAV.ITEM.WITH_LEADING_AND_TRAILING_ICON', leadingIcon: 'sun', trailingIcon: 'sun' },
+  //     {
+  //       name: 'SIDE_NAV.BUTTON_ITEM.WITH_SUB_ITEMS_AND_WITHOUT_ICONS',
+  //       items: [
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/1' },
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/2' },
+  //       ],
+  //     },
+  //     {
+  //       name: 'SIDE_NAV.BUTTON_ITEM.WITH_SUB_ITEMS_AND_WITH_LEADING_ICON',
+  //       leadingIcon: 'sun',
+  //       items: [
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/3' },
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/4' },
+  //       ],
+  //     },
+  //     {
+  //       name: 'SIDE_NAV.ITEM.WITH_SUB_ITEMS_AND_WITHOUT_ICONS',
+  //       path: '/example-path/11',
+  //       items: [
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/5' },
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITH_LEADING_ICON', path: '/example-path/6', leadingIcon: 'sun' },
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITH_TRAILING_ICON', path: '/example-path/7', trailingIcon: 'sun' },
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITH_LEADING_AND_TRAILING_ICON', path: '/example-path/8', leadingIcon: 'sun', trailingIcon: 'sun' },
+  //       ],
+  //     },
+  //     {
+  //       name: 'SIDE_NAV.ITEM.WITH_SUB_ITEMS_AND_WITH_LEADING_ICON',
+  //       leadingIcon: 'sun',
+  //       path: '/example-path/12',
+  //       items: [
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/9' },
+  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/10' },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // ];
 
   public ngOnInit(): void {
     this._loadIcons();
@@ -157,13 +194,13 @@ export class SideNavDemoComponent implements OnInit {
   }
 
   private _loadIcons(): void {
-    this._iconService.loadIcons().pipe(
-      takeUntilDestroyed(this._destroyRef),
-    ).subscribe(() => {
-      this._inputControlConfig = {
-        ...this._inputControlConfig,
-      };
-    });
+    this._iconService
+      .loadIcons()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => {
+        this._inputControlConfig = {
+          ...this._inputControlConfig,
+        };
+      });
   }
-
 }

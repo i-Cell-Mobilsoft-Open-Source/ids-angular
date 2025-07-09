@@ -1,8 +1,6 @@
-import { Menu } from './menu.interface';
-import { SubnavComponent } from './subnav/subnav.component';
-
-import { IdsIconComponent } from '../icon';
-import { IdsIconButtonComponent } from '../icon-button';
+import { MenuConfig } from './menu.interface';
+import { SectionItemComponent } from './section-item/section-item.component';
+import { SectionTitleComponent } from './section-title/section-title.component';
 
 import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -13,9 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     RouterModule,
     TranslateModule,
-    IdsIconButtonComponent,
-    IdsIconComponent,
-    SubnavComponent,
+    SectionItemComponent,
+    SectionTitleComponent,
   ],
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.scss',
@@ -23,9 +20,5 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IdsSideNavComponent {
-  public hasDarkBackground = input<boolean>(false);
-  public leadingIcon = input<string | undefined>();
-  public trailingIcon = input<string | undefined>();
-  public menu = input<Menu[]>([]);
-  public open = false;
+  public menu = input<MenuConfig>();
 }

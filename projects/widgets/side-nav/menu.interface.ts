@@ -1,10 +1,21 @@
-export interface Menu {
+export interface MenuConfig {
+  sections: MenuSection[];
+}
+
+export interface MenuSection {
+  title: MenuItem;
+  items: MenuItem[];
+}
+
+export interface MenuItem {
+  type: 'ITEM' | 'TITLE';
   name?: string;
   path?: string;
-  children?: Menu[];
+  items?: MenuItem[];
   $open?: boolean;
   leadingIcon?: string;
   trailingIcon?: string;
   isDisabled?: boolean;
   isActive?: boolean;
+  hasDarkBackground?: boolean;
 }

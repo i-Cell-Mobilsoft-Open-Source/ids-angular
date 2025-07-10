@@ -1,70 +1,80 @@
-@if(itemConfig().path) {
-  <a class="sidenav-element" [class.light]="itemConfig().hasDarkBackground" [routerLink]="itemConfig().path" [routerLinkActive]="['active']">
-    <ng-container [ngTemplateOutlet]="itemTemplate" />
-    @if (itemConfig().items?.length) {
-      <span class="icon">
-        <ids-icon [fontIcon]="isOpen ? 'chevron-up' : 'chevron-down'" />
-      </span>
-    }
-  </a>
-  <!-- FIXME: fix details to be shown -->
-  <!-- <details #details> -->
+<ng-container *ngTemplateOutlet="sectionItem; context: { config: itemConfig() }" />
+
+<ng-template #sectionItem let-config="config">
+  @if (config.path) {
+    <a
+      class="sidenav-element"
+      [class.light]="config.hasDarkBackground"
+      [routerLink]="config.path"
+      [routerLinkActive]="['active']"
+    >
+      <ng-container [ngTemplateOutlet]="itemTemplate" />
+      @if (config.items?.length) {
+        <span class="icon">
+          <ids-icon [fontIcon]="isOpen ? 'chevron-up' : 'chevron-down'" />
+        </span>
+      }
+    </a>
+    <!-- FIXME: fix details to be shown -->
+    <!-- <details #details> -->
     <!-- <summary #summary></summary> -->
-    @if (itemConfig().items?.length) {
+    @if (config.items?.length) {
       <ul>
-        @for (subItem of itemConfig().items; track $index) {
+        @for (subItem of config.items; track $index) {
           <li>
-            <ids-section-item [itemConfig]="subItem" />
+            <ng-container *ngTemplateOutlet="sectionItem; context: { config: subItem }" />
           </li>
         }
       </ul>
     }
-  <!-- </details> -->
-} @else {
-  <div class="sidenav-element" [class.light]="itemConfig().hasDarkBackground" [class.active]="itemConfig().isActive">
-    <ng-container [ngTemplateOutlet]="itemTemplate" />
-    <button
-      type="button"
-      class="more"
-      idsIconButton
-      [size]="'compact'"
-      [variant]="'surface'"
-      [appearance]="'standard'"
-      [disabled]="itemConfig().isDisabled"
-      (click)="isOpen = !isOpen"
-    >
-      <span #trigger></span>
-      <!-- TODO: icon size? -->
-      <ids-icon aria-hidden="true" alt="" [fontIcon]="isOpen ? 'chevron-up' : 'chevron-down'" />
-    </button>
+    <!-- </details> -->
+  } @else {
+    <div class="sidenav-element" [class.light]="config.hasDarkBackground" [class.active]="config.isActive">
+      <ng-container *ngTemplateOutlet="itemTemplate; context: { config: config}" />
+      <button
+        id="section-item__button_toggle"
+        type="button"
+        class="more"
+        idsIconButton
+        [size]="'compact'"
+        [variant]="'surface'"
+        [appearance]="'standard'"
+        [disabled]="config.isDisabled"
+        (click)="isOpen = !isOpen"
+      >
+        <!-- <span #trigger></span> -->
+        <!-- TODO: icon size? -->
+        <ids-icon aria-hidden="true" alt="" [fontIcon]="isOpen ? 'chevron-up' : 'chevron-down'" />
+      </button>
+    </div>
     <!-- FIXME: fix details to be shown -->
-    <!-- <details #details> -->
-      <!-- <summary #summary></summary> -->
-      @if (itemConfig().items?.length) {
+    <details #details [open]="isOpen">
+      <summary #summary></summary>
+      @if (config.items?.length) {
         <ul>
-          @for (subItem of itemConfig().items; track $index) {
+          @for (subItem of config.items; track $index) {
             <li>
-              <ids-section-item [itemConfig]="subItem" />
+              <ng-container *ngTemplateOutlet="sectionItem; context: { config: subItem }" />
             </li>
           }
         </ul>
       }
-    <!-- </details> -->
-  </div>
-}
+    </details>
+  }
+</ng-template>
 
-<ng-template #itemTemplate>
-  @if (itemConfig().leadingIcon) {
+<ng-template #itemTemplate let-config="config">
+  @if (config.leadingIcon) {
     <span class="icon">
-      <ids-icon [fontIcon]="itemConfig().leadingIcon || ''" />
+      <ids-icon [fontIcon]="config.leadingIcon || ''" />
     </span>
   }
-  @if (itemConfig().name) {
-    <span class="name">{{ (itemConfig().name  || '') | translate }}</span>
+  @if (config.name) {
+    <span class="name">{{ config.name || "" | translate }}</span>
   }
-  @if (itemConfig().trailingIcon && !itemConfig().items?.length) {
+  @if (config.trailingIcon && !config.items?.length) {
     <span class="icon">
-      <ids-icon [fontIcon]="itemConfig().trailingIcon || ''" />
+      <ids-icon [fontIcon]="config.trailingIcon || ''" />
     </span>
   }
 </ng-template>

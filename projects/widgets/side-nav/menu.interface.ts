@@ -9,6 +9,8 @@ export interface MenuSection {
 
 export interface MenuItem {
   type: 'ITEM' | 'TITLE';
+  // TODO: remove id if not needed
+  id?: string;
   name?: string;
   path?: string;
   items?: MenuItem[];

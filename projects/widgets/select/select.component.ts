@@ -144,9 +144,7 @@ export class IdsSelectComponent
     });
   }
 
-  public override ngOnInit(): void {
-    super.ngOnInit();
-
+  public ngOnInit(): void {
     if (!this._parentFormField) {
       throw this._createHostError('Select must be in a form field');
     }
@@ -174,10 +172,12 @@ export class IdsSelectComponent
   }
 
   public ngAfterViewInit(): void {
-    const controlDir = this.ngControl();
-    if (controlDir?.control) {
-      controlDir.control.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.updateErrorAndSuccessState());
-    }
+    queueMicrotask(() => {
+      const controlDir = this.ngControl();
+      if (controlDir?.control) {
+        controlDir.control.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.updateErrorAndSuccessState());
+      }
+    });
   }
 
   public updateErrorAndSuccessState(): void {

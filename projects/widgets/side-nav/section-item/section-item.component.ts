@@ -31,9 +31,10 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class SectionItemComponent /*implements OnInit*/ {
   public itemConfig = input.required<MenuItem>();
+  // TODO: remove unnecessary elements
   // public details = viewChild<ElementRef<HTMLDetailsElement>>('details');
   // public trigger = viewChild<HTMLElement>('trigger');
-  public isOpen = false;
+  // public isOpen = false;
 
   // @Input() set open(value: boolean) {
   //   this.isOpen = value;

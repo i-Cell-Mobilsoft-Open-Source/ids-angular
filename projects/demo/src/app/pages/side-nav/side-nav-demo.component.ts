@@ -140,13 +140,15 @@ export class SideNavDemoComponent implements OnInit {
           type: 'TITLE',
         },
         items: [
-          { name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON', type: 'ITEM', leadingIcon: 'sun', id: '1',
+          { name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON', type: 'ITEM', leadingIcon: 'sun', id: '1', isActive: true,
             items: [
-              { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', type: 'ITEM' },
-              { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', type: 'ITEM' },
+              { name: 'Child 1', type: 'ITEM' },
+              { name: 'Child 2', type: 'ITEM', items: [
+                { name: 'GrandChild 1', type: 'ITEM' },
+                { name: 'GrandChild 2', type: 'ITEM' },
+              ] },
             ],
           },
-          // { name: 'SIDE_NAV.ITEM.WITHOUT_ICONS', type: 'ITEM', path: '/example-path/1' },
         ],
       },
     ],

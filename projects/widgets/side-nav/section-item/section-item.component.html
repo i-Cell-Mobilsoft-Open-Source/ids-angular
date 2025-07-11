@@ -11,23 +11,23 @@
       <ng-container [ngTemplateOutlet]="itemTemplate" />
       @if (config.items?.length) {
         <span class="icon">
-          <ids-icon [fontIcon]="isOpen ? 'chevron-up' : 'chevron-down'" />
+          <ids-icon [fontIcon]="config.$open ? 'chevron-up' : 'chevron-down'" />
         </span>
       }
     </a>
-    <!-- FIXME: fix details to be shown -->
-    <!-- <details #details> -->
-    <!-- <summary #summary></summary> -->
-    @if (config.items?.length) {
-      <ul>
-        @for (subItem of config.items; track $index) {
-          <li>
-            <ng-container *ngTemplateOutlet="sectionItem; context: { config: subItem }" />
-          </li>
-        }
-      </ul>
-    }
-    <!-- </details> -->
+    <!-- TODO: refactor not using details (maybe simple div what is hidden when child elements are closed) -->
+    <details #details>
+      <summary #summary></summary>
+      @if (config.items?.length) {
+        <ul>
+          @for (subItem of config.items; track $index) {
+            <li>
+              <ng-container *ngTemplateOutlet="sectionItem; context: { config: subItem }" />
+            </li>
+          }
+        </ul>
+      }
+    </details>
   } @else {
     <div class="sidenav-element" [class.light]="config.hasDarkBackground" [class.active]="config.isActive">
       <ng-container *ngTemplateOutlet="itemTemplate; context: { config: config}" />
@@ -40,15 +40,16 @@
         [variant]="'surface'"
         [appearance]="'standard'"
         [disabled]="config.isDisabled"
-        (click)="isOpen = !isOpen"
+        (click)="config.$open = !config.$open"
       >
+        <!-- TODO: remove if not necessary -->
         <!-- <span #trigger></span> -->
         <!-- TODO: icon size? -->
-        <ids-icon aria-hidden="true" alt="" [fontIcon]="isOpen ? 'chevron-up' : 'chevron-down'" />
+        <ids-icon aria-hidden="true" alt="" [fontIcon]="config.$open ? 'chevron-up' : 'chevron-down'" />
       </button>
     </div>
-    <!-- FIXME: fix details to be shown -->
-    <details #details [open]="isOpen">
+    <!-- TODO: refactor not using details (maybe simple div what is hidden when child elements are closed) -->
+    <details #details [open]="config.$open">
       <summary #summary></summary>
       @if (config.items?.length) {
         <ul>

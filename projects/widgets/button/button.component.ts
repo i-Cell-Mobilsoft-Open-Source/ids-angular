@@ -11,7 +11,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'button[idsButton]',
+  selector: 'button[idsButton], a[idsButton]',
   imports: [],
   templateUrl: './button.component.html',
   encapsulation: ViewEncapsulation.None,

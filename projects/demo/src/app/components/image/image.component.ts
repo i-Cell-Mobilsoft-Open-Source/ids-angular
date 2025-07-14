@@ -1,13 +1,14 @@
+import { NgClass } from '@angular/common'; // <-- Import NgClass
 import { Component, input, OnInit, OnDestroy, computed } from '@angular/core';
 
 @Component({
   selector: 'app-image',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
 })
-export class ImageComponent implements OnInit, OnDestroy   {
+export class ImageComponent implements OnInit, OnDestroy {
 
   public orientation = input<'horizontal' | 'vertical' | undefined>('vertical');
 
@@ -39,7 +40,7 @@ export class ImageComponent implements OnInit, OnDestroy   {
     }
   });
 
-  public aspectRatioClass = computed<string>(() =>  {
+  public aspectRatioClass = computed<string>(() => {
     switch (this.aspectRatio()) {
       case '1/1':
         return 'aspect-1/1';
@@ -52,7 +53,7 @@ export class ImageComponent implements OnInit, OnDestroy   {
     }
   });
 
-  public colorVariantClass = computed<string>(() =>  {
+  public colorVariantClass = computed<string>(() => {
     switch (this.imageBgColorVariant()) {
       case 'primary':
         return 'bg-ids-container-bg-surface-darker-20';
@@ -65,34 +66,22 @@ export class ImageComponent implements OnInit, OnDestroy   {
     }
   });
 
-  public imgFilledClass = computed<string>(() =>  {
-    switch (this.filledInContainer()) {
-      case true:
-        return 'object-cover lg:w-full lg:h-full';
-      case false:
-        return 'object-contain lg:w-1/2 lg:h-auto';
-      default:
-        return 'object-contain lg:w-1/2 lg:h-auto'; // Default value
-    }
-  });
+  public imgFilledClass = computed<string>(() =>
+    (this.filledInContainer()
+      ? 'object-cover lg:w-full lg:h-full'
+      : 'object-contain lg:w-1/2 lg:h-auto'
+    ),
+  );
 
-  public containerPaddingClass = computed<string>(() =>  {
-    switch (this.filledInContainer()) {
-      case true:
-        return 'p-0';
-      case false:
-        return 'p-4';
-      default:
-        return 'p-4'; // Default value
-    }
-  });
+  public containerPaddingClass = computed<string>(() =>
+    (this.filledInContainer()
+      ? 'p-0' : 'p-4'),
+  );
 
   public currentImageUrl = '';
   private _observer: MutationObserver | undefined;
 
   public ngOnInit(): void {
-    // eslint-disable-next-line no-console
-    console.log('[ImageComponent] filledInContainer:', this.filledInContainer());
     this._updateImageBasedOnTheme();
 
     this._observer = new MutationObserver(() => {

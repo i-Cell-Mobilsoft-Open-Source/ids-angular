@@ -8,7 +8,7 @@
 >
   <div
     class="rounded-ids-container-xs overflow-hidden w-full flex flex-col justify-center items-center"
-    [class]="borderClass() + ' ' + colorVariantClass() + ' ' + containerPaddingClass()"
+    [ngClass]="[borderClass(), colorVariantClass(), containerPaddingClass()]"
     [class.transparent-bg]="data().transparent === true"
   >
     <img alt="hello" class="w-full h-48" [src]="currentImageUrl" [class]="aspectRatioClass() + ' ' + imgFilledClass()" />

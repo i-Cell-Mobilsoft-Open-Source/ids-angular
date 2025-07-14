@@ -5,7 +5,7 @@ import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 import { BadgeComponent } from '../badge/badge.component';
 import { ImageComponent } from '../image/image.component';
 
-import { Component, computed, input, OnInit } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
@@ -24,14 +24,9 @@ import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directi
   templateUrl: './content-card.component.html',
   styleUrl: './content-card.component.scss',
 })
-export class ContentCardComponent implements OnInit {
+export class ContentCardComponent  {
 
   public contentCardData = input.required<ContentCardData>();
-
-  public ngOnInit(): void {
-    // eslint-disable-next-line no-console
-    console.log('[ContentCardComponent] filledInContainer:', this.contentCardData().filledInContainer);
-  }
 
   public handleButtonClick(url?: string): void {
     if (!url) {

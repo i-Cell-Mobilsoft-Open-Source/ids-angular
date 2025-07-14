@@ -8,9 +8,6 @@
       }
       <h1 class="text-display-medium-prominent">{{ heroData().title }}</h1>
     </div>
-    <!-- <p class="text-body-large"> 
-      {{ heroData().description }}
-    </p> -->
     <div [innerHTML]="heroData().description | safeHtml"></div>
   </div>
   <div class="col-span-5">

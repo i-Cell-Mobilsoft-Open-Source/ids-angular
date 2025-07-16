@@ -85,7 +85,9 @@ export class ComponentDetailsComponent implements OnInit {
             id: Number(block.id),
             orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
             variant: block.card_properties?.card_variant?.value ?? 'surface',
+            appearance: block.card_properties?.appearance?.value ?? 'filled',
             transparent: block.card_properties?.card_bg_transparent ?? false,
+            filledInContainer: block.group_image?.filled_in_container ?? false,
             state: block.group_image?.state?.value,
             imageURL: block.group_image?.img_light_mode?.[0]?.url
               ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`

@@ -1,7 +1,7 @@
 @let data = contentCardData();
 <ids-card
-  appearance="filled"
   size="compact"
+  [appearance]="data.appearance || 'filled'"
   [variant]="data.variant || 'surface'"
   [orientation]="data.orientation"
   [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
@@ -21,10 +21,19 @@
         [imageUrlLight]="contentCardData().imageUrlLight ?? ''"
         [imageUrlDark]="contentCardData().imageUrlDark ?? ''"
         [data]="imageData()"
+        [filledInContainer]="data.filledInContainer ?? false"
       />
     </div>
   }
-  <ids-card-body [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row md:w-full ' : ''">
+  <ids-card-body
+    [class]="
+      data.orientation === 'horizontal'
+        ? data.filledInContainer === true
+          ? 'flex flex-col md:flex-row md:w-full special-horizontal-filled'
+          : 'flex flex-col md:flex-row md:w-full special-horizontal-filled-2 '
+        : ''
+    "
+  >
     <div class="flex flex-col gap-ids-container-gap-16 w-full">
       <div class="flex flex-col gap-0 relative">
         @if (data.overTitle) {
@@ -36,7 +45,6 @@
           }
           @if (data.description) {
             <div [innerHTML]="data.description | safeHtml"></div>
-            <!-- <p class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ data.description }}</p> -->
           }
         </div>
       </div>

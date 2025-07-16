@@ -1,3 +1,15 @@
 .transparent-bg {
   background-color: transparent !important;
 }
+
+.ids-card .ids-button {
+  border-style: solid !important;
+}
+
+.special-horizontal-filled {
+  @apply pl-4 lg:pl-0 !important;
+}
+
+.special-horizontal-filled-2 {
+  @apply pl-4 !important;
+}

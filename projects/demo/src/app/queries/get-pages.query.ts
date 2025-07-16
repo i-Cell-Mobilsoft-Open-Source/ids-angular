@@ -1,29 +1,23 @@
 import { gql } from '@apollo/client/core';
 
-export const GET_COMPONENTS = gql`
+export const GET_PAGES = gql`
 {
-  entries(collection: "components") {
+  entries(collection: "pages") {
     data {
       title
-      ... on Entry_Components_Component {
+      ... on Entry_Pages_Page {
         id
-        title
         slug
-        comp_description
-        comp_img_light_mode {
+        hero_description
+        hero_image_dark {
           url
         }
-        comp_img_dark_mode {
+        hero_image_light {
           url
         }
         content {
           ... on Set_Content_Card {
             id
-            content {
-              content_over_title
-              content_title
-              content_description
-            }
             button {
               button {
                 button_url
@@ -33,7 +27,7 @@ export const GET_COMPONENTS = gql`
             card_properties {
               appearance {
                 value
-              }              
+              }
               card_bg_transparent
               card_orientation {
                 value
@@ -42,8 +36,12 @@ export const GET_COMPONENTS = gql`
                 value
               }
             }
+            content {
+              content_title
+              content_over_title
+              content_description
+            }
             group_image {
-              filled_in_container
               img_caption
               img_dark_mode {
                 url
@@ -61,6 +59,7 @@ export const GET_COMPONENTS = gql`
               state {
                 value
               }
+              filled_in_container
             }
           }
           ... on Set_Content_Heading {
@@ -70,5 +69,5 @@ export const GET_COMPONENTS = gql`
       }
     }
   }
-}
+  }
 `;

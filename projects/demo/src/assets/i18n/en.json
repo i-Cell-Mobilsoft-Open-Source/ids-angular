@@ -32,6 +32,7 @@
     "SCROLLBAR": "Scrollbar",
     "SEGMENTED_CONTROL": "Segmented control",
     "SEGMENTED_CONTROL_TOGGLE": "Segmented control toggle",
+    "SIDE_NAV": "Side navigation",
     "SELECT": "Select",
     "SNACKBAR": "Snackbar",
     "SPINNER": "Spinner",
@@ -82,6 +83,33 @@
       "EXPAND_DETAILS": "Expand details",
       "COLLAPSE_DETAILS": "Collapse details",
       "CHANGE_LANGUAGE": "Change language"
+    }
+  },
+  "SIDE_NAV": {
+    "SECTION": {
+      "WITHOUT_ITEMS": "Sidenav section without items",
+      "WITH_ITEMS": "Sidenav section with items",
+      "WITH_LEADING_ICON": "Sidenav section with leading icon",
+      "WITH_TRAILING_ICON": "Sidenav section with trailing icon",
+      "WITH_LEADING_AND_TRAILING_ICON": "Sidenav section with leading and trailing icon"
+    },
+    "ITEM": {
+      "WITHOUT_ICONS": "Sidenav item without icons",
+      "WITH_LEADING_ICON": "Sidenav item with leading icon",
+      "WITH_TRAILING_ICON": "Sidenav item with trailing icon",
+      "WITH_LEADING_AND_TRAILING_ICON": "Sidenav item with leading and trailing icon",
+      "WITH_SUB_ITEMS_AND_WITHOUT_ICONS": "Sidenav item with sub items and without icons",
+      "WITH_SUB_ITEMS_AND_WITH_LEADING_ICON": "Sidenav item with sub items and with leading icon"
+    },
+    "BUTTON_ITEM": {
+      "WITH_SUB_ITEMS_AND_WITHOUT_ICONS": "Sidenav button item with sub items and without icons",
+      "WITH_SUB_ITEMS_AND_WITH_LEADING_ICON": "Sidenav button item with sub items and with leading icon"
+    },
+    "SUB_ITEM": {
+      "WITHOUT_ICONS": "Sidenav sub item without icons",
+      "WITH_LEADING_ICON": "Sidenav sub item with leading icon",
+      "WITH_TRAILING_ICON": "Sidenav sub item with trailing icon",
+      "WITH_LEADING_AND_TRAILING_ICON": "Sidenav sub item with leading and trailing icon"
     }
   }
 }

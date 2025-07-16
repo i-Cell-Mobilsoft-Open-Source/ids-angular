@@ -1,0 +1,15 @@
+<div class="sidenav-element">
+  @if (titleConfig().leadingIcon) {
+    <span class="icon">
+      <ids-icon [fontIcon]="titleConfig().leadingIcon || ''" />
+    </span>
+  }
+  @if (titleConfig().name) {
+    <h2 class="name" [class.light]="hasDarkBackground()">{{ (titleConfig().name || '') | translate }}</h2>
+  }
+  @if (titleConfig().trailingIcon) {
+    <span class="icon">
+      <ids-icon [fontIcon]="titleConfig().trailingIcon || ''" />
+    </span>
+  }
+</div>

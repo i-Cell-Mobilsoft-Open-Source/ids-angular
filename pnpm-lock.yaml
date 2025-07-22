@@ -39,8 +39,8 @@ importers:
         specifier: ^3.13.5
         version: 3.13.5(@types/react@18.3.4)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@i-cell/ids-styles':
-        specifier: ^0.0.40
-        version: 0.0.40
+        specifier: ^0.0.42
+        version: 0.0.42
       '@i-cell/ids-tokens':
         specifier: 0.0.31
         version: 0.0.31
@@ -1938,8 +1938,8 @@ packages:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
 
-  '@i-cell/ids-styles@0.0.40':
-    resolution: {integrity: sha512-d3kpc6bPlZnfvbSy4DhnbEwPoa5b3Gli0buO7OH1DfqwBcp5yRyfAoDHk6h1P44EzwK0sYoG5DB5gzOHRBcWdQ==}
+  '@i-cell/ids-styles@0.0.42':
+    resolution: {integrity: sha512-MC4Tr7RtgbeGzt0NBq2sIpR5qc152DsHYle4r/LtVAm7sN9mQ+DiwYARN4g13MktFoUJhxMXetbEprG/3sFQSA==}
 
   '@i-cell/ids-tokens@0.0.31':
     resolution: {integrity: sha512-YNeAemlHzWoTUeNhFrovohmx6aQBsVnl4gLRRJb3kMPuTt65s+jZaWj/ycXRN0scW9XTrH+pPI0azKiu+KvW2w==}
@@ -10641,7 +10641,7 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@i-cell/ids-styles@0.0.40': {}
+  '@i-cell/ids-styles@0.0.42': {}
 
   '@i-cell/ids-tokens@0.0.31': {}
 

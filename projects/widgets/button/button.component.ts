@@ -4,7 +4,8 @@ import { IDS_BUTTON_PARENT } from './tokens/button-parent';
 import { IdsButtonAppearanceType } from './types/button-appearance.type';
 import { IdsButtonVariantType } from './types/button-variant.type';
 
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, contentChildren, effect, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -28,6 +29,8 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
 
   private readonly _parent = inject(IDS_BUTTON_PARENT, { optional: true });
   private readonly _group = inject(IdsButtonGroupComponent, { optional: true });
+  private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>).nativeElement;
+  private _routerLink = inject(RouterLink, { optional: true, self: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BUTTON_DEFAULT_CONFIG);
 
@@ -42,9 +45,48 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
   protected _iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
   protected _iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
 
+  private get _buttonType(): string | null {
+    return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
+  }
+
+  constructor() {
+    super();
+
+    effect(() => {
+      if (this._buttonType) {
+        return;
+      }
+
+      const link = this._hostElement as HTMLAnchorElement;
+
+      if (this.disabled()) {
+        this._disableLink(link);
+      } else {
+        this._enableLink(link);
+      }
+    });
+  }
+
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),
     this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
+    this.disabled() ? 'disabled' : null,
   ]));
+
+  private _disableLink(link: HTMLAnchorElement): void {
+    if (!this._routerLink) {
+      link.setAttribute('data-href', link.href);
+    }
+    link.removeAttribute('href');
+  }
+
+  private _enableLink(link: HTMLAnchorElement): void {
+    const prevHref = this._routerLink?.href ?? link.getAttribute('data-href') ?? '';
+
+    if (prevHref) {
+      link.href = prevHref;
+      link.removeAttribute('data-href');
+    }
+  }
 }

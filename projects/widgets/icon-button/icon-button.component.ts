@@ -6,12 +6,15 @@ import { IdsIconButtonVariantType } from './types/icon-button-variant.type';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   contentChildren,
+  effect,
   inject,
   input,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ComponentBaseWithDefaults,
   IdsSizeType,
@@ -38,6 +41,8 @@ export class IdsIconButtonComponent extends ComponentBaseWithDefaults<IdsIconBut
   }
 
   private readonly _parent = inject(IDS_ICON_BUTTON_PARENT, { optional: true });
+  private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>).nativeElement;
+  private _routerLink = inject(RouterLink, { optional: true, self: true });
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_BUTTON_DEFAULT_CONFIG);
 
@@ -55,5 +60,44 @@ export class IdsIconButtonComponent extends ComponentBaseWithDefaults<IdsIconBut
     this._parentOrSelfAppearance(),
     this.size(),
     this._parentOrSelfVariant(),
+    this.disabled() ? 'disabled' : null,
   ]));
+
+  private get _buttonType(): string | null {
+    return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
+  }
+
+  constructor() {
+    super();
+
+    effect(() => {
+      if (this._buttonType) {
+        return;
+      }
+
+      const link = this._hostElement as HTMLAnchorElement;
+
+      if (this.disabled()) {
+        this._disableLink(link);
+      } else {
+        this._enableLink(link);
+      }
+    });
+  }
+
+  private _disableLink(link: HTMLAnchorElement): void {
+    if (!this._routerLink) {
+      link.setAttribute('data-href', link.href);
+    }
+    link.removeAttribute('href');
+  }
+
+  private _enableLink(link: HTMLAnchorElement): void {
+    const prevHref = this._routerLink?.href ?? link.getAttribute('data-href') ?? '';
+
+    if (prevHref) {
+      link.href = prevHref;
+      link.removeAttribute('data-href');
+    }
+  }
 }

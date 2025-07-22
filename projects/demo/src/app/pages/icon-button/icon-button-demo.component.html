@@ -1,17 +1,22 @@
 <app-tryout [title]="'COMPONENTS.ICON_BUTTON' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
   <ng-container component>
-    <button
-      type="button"
-      idsIconButton
-      [size]="model.size"
-      [variant]="model.variant"
-      [appearance]="model.appearance"
-      [disabled]="model.disabled"
-      (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
-    >
-      <ids-icon aria-hidden="true" alt="" fontIcon="search" />
-    </button>
-    <!-- TODO: add a tag variant of idsIconButton (and maybe checkbox to control table to toggle which variant to show) -->
+    @if (model.asLink) {
+      <a href="" idsIconButton [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [disabled]="model.disabled">
+        <ids-icon aria-hidden="true" alt="" fontIcon="search" />
+      </a>
+    } @else {
+      <button
+        type="button"
+        idsIconButton
+        [size]="model.size"
+        [variant]="model.variant"
+        [appearance]="model.appearance"
+        [disabled]="model.disabled"
+        (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
+      >
+        <ids-icon aria-hidden="true" alt="" fontIcon="search" />
+      </button>
+    }
   </ng-container>
 
   <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />

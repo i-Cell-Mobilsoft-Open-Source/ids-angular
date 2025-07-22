@@ -7,24 +7,29 @@
     <div component class="button-grid">
       <div class="button-item">
         <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
-        <button
-          type="button"
-          idsButton
-          [appearance]="model.appearance"
-          [size]="model.size"
-          [variant]="model.variant"
-          [disabled]="model.disabled"
-          (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
-        >
-          @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="search" />
-          }
-          {{ helperModel.text }}
-          @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="check" />
-          }
-        </button>
-        <!-- TODO: add a tag variant of idsButton (and maybe checkbox to control table to toggle which variant to show) -->
+        @if (model.asLink) {
+          <a href="" idsButton [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [disabled]="model.disabled">
+            {{ helperModel.text }}
+          </a>
+        } @else {
+          <button
+            type="button"
+            idsButton
+            [appearance]="model.appearance"
+            [size]="model.size"
+            [variant]="model.variant"
+            [disabled]="model.disabled"
+            (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
+          >
+            @if (helperModel.hasLeadingIcon) {
+              <ids-icon icon-leading fontIcon="search" />
+            }
+            {{ helperModel.text }}
+            @if (helperModel.hasTrailingIcon) {
+              <ids-icon icon-trailing fontIcon="check" />
+            }
+          </button>
+        }
       </div>
 
       <div class="button-item">

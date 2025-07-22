@@ -19,6 +19,7 @@ type ButtonInputControls = {
   size: IdsSizeType,
   variant: IdsButtonVariantType,
   disabled: boolean,
+  asLink: boolean,
 };
 
 type ButtonHelperControls = {
@@ -73,6 +74,12 @@ export class ButtonDemoComponent {
     },
     disabled: {
       description: 'Whether the button is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.CHECKBOX,
+    },
+    asLink: {
+      description: 'Whether the idsButton is a link (or button).',
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,

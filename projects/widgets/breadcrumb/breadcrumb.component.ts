@@ -10,7 +10,7 @@ import { IdsOverlayPanelAppearanceType, IdsOverlayPanelVariantType } from '../ov
 import { IdsTooltipDirective } from '../tooltip';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, effect, ElementRef, inject, input, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, input, signal } from '@angular/core';
 import { ComponentBaseWithDefaults, createClassList, IdsSizeType, ResizeObserverService } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY();
@@ -44,11 +44,25 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
   public overlayVariant = input<IdsOverlayPanelVariantType>(this._defaultConfig.overlayVariant);
 
   // The breadcrumbs that are currently visible in the breadcrumb component
-  protected _breadcrumbs = signal<(IdsBreadcrumbHierarchyType & { hasTooltip?: boolean })[]>([]);
+  protected _breadcrumbs = computed<(IdsBreadcrumbHierarchyType & { hasTooltip?: boolean })[]>(() =>
+    this.hierarchy().slice(this._truncationIndex()),
+  );
+
   // The breadcrumbs that are currently truncated and shown on overlay
-  protected _truncation = signal<(IdsBreadcrumbHierarchyType & { hasTooltip?: boolean })[]>([]);
+  protected _truncation = computed<(IdsBreadcrumbHierarchyType & { hasTooltip?: boolean })[]>(() =>
+    this.hierarchy().slice(0, this._truncationIndex()),
+  );
+
   // The maximum number of breadcrumbs that can be shown (without truncation)
-  private _maxLengthVisible = signal<number>(0);
+  private _maxLength = signal<number>(0);
+
+  // The index at which the breadcrumb truncation starts
+  private _truncationIndex = computed(() => {
+    const hierarchyLength = this.hierarchy().length;
+    const maxLength = this._maxLength();
+    return hierarchyLength > maxLength ? Math.min(hierarchyLength - maxLength, hierarchyLength - 1) : 0;
+  });
+
   private _hostElement = inject(ElementRef).nativeElement;
   private _resizeObserver = inject(ResizeObserverService);
 
@@ -68,27 +82,10 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
 
   constructor() {
     super();
-    this._resizeObserver.observe(this._hostElement.parentElement).subscribe(() => this._calcMaxLengthVisible());
-
-    effect(() => {
-      const hieararchy = this.hierarchy();
-      const maxLengthVisible = this._maxLengthVisible();
-
-      if (hieararchy.length) {
-        if (hieararchy.length > maxLengthVisible) {
-          // breadcrumb page (last item) is always visible
-          const truncateAt = Math.min(hieararchy.length - maxLengthVisible, hieararchy.length - 1);
-          this._breadcrumbs.set(hieararchy.slice(truncateAt));
-          this._truncation.set(hieararchy.slice(0, truncateAt));
-        } else {
-          this._breadcrumbs.set(hieararchy);
-          this._truncation.set([]);
-        }
-      }
-    });
+    this._resizeObserver.observe(this._hostElement.parentElement).subscribe(() => this._calcmaxLength());
   }
 
-  private _calcMaxLengthVisible(): void {
+  private _calcmaxLength(): void {
     const containerElementWidth = this._hostElement.parentElement.clientWidth;
     const breadcrumbElementMaxWidth = this._getCssVariableValue(`--ids-comp-breadcrumb-navigation-link-size-max-width-${this.size()}`);
     const dividerWidth =
@@ -97,7 +94,7 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
         : { dense: 4, compact: 5, comfortable: 6, spacious: 7 }[this.size()];
     const gapWidth = this._getCssVariableValue(`--ids-comp-breadcrumb-size-gap-${this.size()}`);
     const breadcrumbItemMaxWidth = breadcrumbElementMaxWidth + (gapWidth * 2 + dividerWidth) / 2;
-    this._maxLengthVisible.set(Math.floor(containerElementWidth / breadcrumbItemMaxWidth));
+    this._maxLength.set(Math.floor(containerElementWidth / breadcrumbItemMaxWidth));
   }
 
   private _getCssVariableValue(variableName: string): number {

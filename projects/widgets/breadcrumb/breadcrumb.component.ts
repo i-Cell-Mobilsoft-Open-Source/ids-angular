@@ -35,7 +35,7 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
   }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BREADCRUMB_DEFAULT_CONFIG);
-  public hieararchy = input<IdsBreadcrumbHierarchyType[]>([]);
+  public hierarchy = input<IdsBreadcrumbHierarchyType[]>([]);
   public dividerType = input<IdsBreadcrumbDividerType>(this._defaultConfig.dividerType);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsBreadcrumbVariantType>(this._defaultConfig.variant);
@@ -71,7 +71,7 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
     this._resizeObserver.observe(this._hostElement.parentElement).subscribe(() => this._calcMaxLengthVisible());
 
     effect(() => {
-      const hieararchy = this.hieararchy();
+      const hieararchy = this.hierarchy();
       const maxLengthVisible = this._maxLengthVisible();
 
       if (hieararchy.length) {

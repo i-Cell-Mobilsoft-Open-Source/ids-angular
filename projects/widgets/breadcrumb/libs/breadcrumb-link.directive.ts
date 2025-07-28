@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
   ],
   host: {
     class: 'ids-breadcrumb-link',
-    '[attr.aria-disabled]': 'this.disabled()? "" : null',
+    '[attr.aria-disabled]': 'this.disabled() ? "" : null',
     '[attr.disabled]': 'this.disabled() ? "" : null',
   },
 })

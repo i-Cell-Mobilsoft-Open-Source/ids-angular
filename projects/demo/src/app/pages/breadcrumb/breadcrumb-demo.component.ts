@@ -114,14 +114,6 @@ export class BreadcrumbDemoComponent {
       path: '/components',
     },
     {
-      label: 'Accordion',
-      path: '/components/accordion',
-    },
-    {
-      label: 'Button',
-      path: '/components/button',
-    },
-    {
       label: 'Breadcrumb',
       path: '/breadcrumb',
     },

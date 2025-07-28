@@ -21,6 +21,7 @@ type IconButtonInputControls = {
   variant: IdsIconButtonVariantType,
   appearance: IdsIconButtonAppearanceType,
   disabled: boolean,
+  asLink: boolean,
 };
 
 @Component({
@@ -64,6 +65,12 @@ export class IconButtonDemoComponent {
     },
     disabled: {
       description: 'Whether the icon button is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.CHECKBOX,
+    },
+    asLink: {
+      description: 'Whether the idsIconButton is a link (or button).',
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,

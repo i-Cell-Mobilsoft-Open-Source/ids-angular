@@ -1,13 +1,14 @@
+import { NgClass } from '@angular/common'; // <-- Import NgClass
 import { Component, input, OnInit, OnDestroy, computed } from '@angular/core';
 
 @Component({
   selector: 'app-image',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',
 })
-export class ImageComponent implements OnInit, OnDestroy   {
+export class ImageComponent implements OnInit, OnDestroy {
 
   public orientation = input<'horizontal' | 'vertical' | undefined>('vertical');
 
@@ -20,6 +21,7 @@ export class ImageComponent implements OnInit, OnDestroy   {
   public imageURL = input<string>();
   public imageUrlLight = input.required<string>();
   public imageUrlDark = input.required<string>();
+  public filledInContainer = input<boolean>(false);
 
   public imageCaption = input<string>();
 
@@ -38,7 +40,7 @@ export class ImageComponent implements OnInit, OnDestroy   {
     }
   });
 
-  public aspectRatioClass = computed<string>(() =>  {
+  public aspectRatioClass = computed<string>(() => {
     switch (this.aspectRatio()) {
       case '1/1':
         return 'aspect-1/1';
@@ -51,7 +53,7 @@ export class ImageComponent implements OnInit, OnDestroy   {
     }
   });
 
-  public colorVariantClass = computed<string>(() =>  {
+  public colorVariantClass = computed<string>(() => {
     switch (this.imageBgColorVariant()) {
       case 'primary':
         return 'bg-ids-container-bg-surface-darker-20';
@@ -63,6 +65,18 @@ export class ImageComponent implements OnInit, OnDestroy   {
         return 'surface'; // Default value
     }
   });
+
+  public imgFilledClass = computed<string>(() =>
+    (this.filledInContainer()
+      ? 'object-cover lg:w-full lg:h-full'
+      : 'object-contain lg:w-1/2 lg:h-auto'
+    ),
+  );
+
+  public containerPaddingClass = computed<string>(() =>
+    (this.filledInContainer()
+      ? 'p-0' : 'p-4'),
+  );
 
   public currentImageUrl = '';
   private _observer: MutationObserver | undefined;

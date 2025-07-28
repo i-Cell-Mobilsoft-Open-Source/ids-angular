@@ -6,7 +6,7 @@ import { AbstractSuccessStateMatcher } from '../../common/success/success-state'
 import { formFieldControlClass, IdsFormFieldControl } from '../form-field/form-field-control';
 import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-control';
 
-import { AfterViewInit, computed, Directive, effect, ElementRef, inject, input, isDevMode, OnInit } from '@angular/core';
+import { AfterViewInit, computed, Directive, effect, ElementRef, inject, input, isDevMode } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlEvent, StatusChangeEvent } from '@angular/forms';
 
@@ -47,7 +47,7 @@ const IDS_INPUT_INVALID_TYPES: IdsInputType[] = [
     '(blur)': '_focusChanged(false)',
   },
 })
-export class IdsInputDirective extends IdsFormFieldControl<IdsInputDefaultConfig> implements OnInit, AfterViewInit {
+export class IdsInputDirective extends IdsFormFieldControl<IdsInputDefaultConfig> implements AfterViewInit {
   protected override get _hostName(): string {
     return 'input';
   }
@@ -71,11 +71,13 @@ export class IdsInputDirective extends IdsFormFieldControl<IdsInputDefaultConfig
   });
 
   public ngAfterViewInit(): void {
-    const control = this.ngControl()?.control;
-    if (control) {
-      this._disabled.set(control.status === 'DISABLED');
-      control.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((event) => this.updateControlState(event));
-    }
+    queueMicrotask(() => {
+      const control = this.ngControl()?.control;
+      if (control) {
+        this._disabled.set(control.status === 'DISABLED');
+        control.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((event) => this.updateControlState(event));
+      }
+    });
   }
 
   private _validateType(type: IdsInputType): void {

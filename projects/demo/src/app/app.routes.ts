@@ -145,6 +145,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
   },
   {
+    path: 'issue-report',
+    loadComponent: () => import('./pages/issue-report/issue-report.component').then((module) => module.IssueReportComponent),
+  },
+  {
     path: '',
     redirectTo: 'index',
     pathMatch: 'full',

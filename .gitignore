@@ -47,3 +47,5 @@ cypress/screenshots/*
 
 *storybook.log
 projects/widgets/documentation.json
+
+*.tgz

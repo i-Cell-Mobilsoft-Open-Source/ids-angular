@@ -1,50 +1,48 @@
-import { IdsTabGroupComponent } from '../../../../../../widgets/tab/tab-group.component';
-import { environment } from '../../../../environments/environment.development';
-import { ContentCardComponent } from '../../../components/content-card/content-card.component';
-import { HeroComponent } from '../../../components/hero/hero.component';
-import { ComponentEntry } from '../../../model/componentEntry';
-import { ContentCardData } from '../../../model/contentCardData';
-import { HeroData } from '../../../model/heroData';
-import { GraphqlService } from '../../../services/graphql.service';
+import { environment } from '../../../environments/environment.development';
+import { ISSUE_DATA } from '../../../utils/issueListData';
+import { ContentCardComponent } from '../../components/content-card/content-card.component';
+import { HeroComponent } from '../../components/hero/hero.component';
+import { ContentCardData } from '../../model/contentCardData';
+import { HeroData } from '../../model/heroData';
+import { PageEntry } from '../../model/pageEntry';
+import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
-import { IdsChipComponent } from '@i-cell/ids-angular/chip';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import { IdsTabComponent } from '@i-cell/ids-angular/tab';
-
+import { Component, OnInit, inject, OnDestroy, signal } from '@angular/core';
 type ComponentBlock =
   | { type: 'heading'; heading: string }
   | (ContentCardData & { type: 'card' });
 
 @Component({
-  selector: 'app-component-details',
-  standalone: true,
+  selector: 'app-issue-report',
   imports: [
     HeroComponent,
     ContentCardComponent,
-    IdsTabComponent,
-    IdsTabGroupComponent,
-    IdsChipComponent,
-    IdsButtonComponent,
-    IdsCardComponent,
-    IdsIconComponent,
-    IdsIconButtonComponent,
   ],
-  templateUrl: './component-details.component.html',
-  styleUrl: './component-details.component.scss',
+  templateUrl: './issue-report.component.html',
+  styleUrl: './issue-report.component.scss',
 })
-export class ComponentDetailsComponent implements OnInit {
+export class IssueReportComponent implements OnInit, OnDestroy {
+  public indexDatas = ISSUE_DATA;
   public heroData?: HeroData;
   public componentBlocks: ComponentBlock[] = [];
 
+  private _observer: MutationObserver | undefined;
+  private _isDarkTheme = signal<boolean>(false);
   private _graphqlService = inject(GraphqlService);
 
   public ngOnInit(): void {
-    this._graphqlService.getComponents().subscribe((result) => {
-      const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
+    this._updateTheme();
+
+    this._observer = new MutationObserver(() => {
+      this._updateTheme();
+    });
+
+    this._observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    this._graphqlService.getPages().subscribe((result) => {
+      const typedResult = result as { data: { entries: { data: PageEntry[] } } };
       const components = typedResult.data.entries.data;
 
       if (components.length === 0) {
@@ -57,15 +55,15 @@ export class ComponentDetailsComponent implements OnInit {
         id: Number(component.id),
         title: component.title,
         isBackButton: true,
-        description: component.comp_description,
-        imageUrl: component.comp_img_light_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}`
+        description: component.hero_description,
+        imageUrl: component.hero_image_light?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
           : '',
-        imageUrlLight: component.comp_img_light_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}`
+        imageUrlLight: component.hero_image_light?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
           : '',
-        imageUrlDark: component.comp_img_dark_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_dark_mode[0].url}`
+        imageUrlDark: component.hero_image_dark?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_dark.url}`
           : '',
       };
 
@@ -101,6 +99,7 @@ export class ComponentDetailsComponent implements OnInit {
             imageCaption: block.group_image?.img_caption,
             imageBgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
             imageBGTransparent: block.group_image?.bg_transparent ?? false,
+            aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
             overTitle: block.content?.content_over_title,
             title: block.content?.content_title,
             description: block.content?.content_description,
@@ -130,14 +129,17 @@ export class ComponentDetailsComponent implements OnInit {
     return item.type === 'card' ? item.id ?? `card-${index}` : `heading-${index}`;
   }
 
-  public isOpen = signal(false);
-  public isDark = signal(false);
-
-  public toggleFooter(): void {
-    this.isOpen.update((open) => !open);
+  public ngOnDestroy(): void {
+    this._observer?.disconnect();
   }
 
-  public toggleDark(): void {
-    this.isDark.update((dark) => !dark);
+  public getImageUrl(indexData: unknown): string {
+    const data = indexData as { imageUrlDark: string; imageUrlLight: string };
+    return this._isDarkTheme() ? data.imageUrlDark : data.imageUrlLight;
+  }
+
+  private _updateTheme(): void {
+    const htmlClassList = document.documentElement.classList;
+    this._isDarkTheme.set(htmlClassList.contains('ids-theme-dark'));
   }
 }

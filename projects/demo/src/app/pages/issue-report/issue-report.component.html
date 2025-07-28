@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-16">
+  @if (heroData; as hero) {
+    <app-hero [heroData]="hero" />
+  }
+  <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+    @for (item of componentBlocks; track trackByBlock) {
+      @if (item.type === "heading") {
+        <h2 class="text-headline-small-prominent text-ids-page-fg-surface-default">
+          {{ item.heading }}
+        </h2>
+      }
+      @if (item.type === "card") {
+        <app-content-card [contentCardData]="item" />
+      }
+    }
+  </div>
+</div>

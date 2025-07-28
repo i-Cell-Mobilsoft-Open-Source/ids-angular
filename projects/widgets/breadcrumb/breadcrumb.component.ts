@@ -4,14 +4,15 @@ import { IdsBreadcrumbLinkDirective } from './libs/breadcrumb-link.directive';
 import { IdsBreadcrumbListDirective } from './libs/breadcrumb-list.directive';
 import { IdsBreadcrumbPageDirective } from './libs/breadcrumb-page.directive';
 import { IdsBreadcrumbTruncationComponent } from './libs/breadcrumb-truncation.component';
-import { IdsBreadcrumbDivider, IdsBreadcrumbDividerType, IdsBreadcrumbHierarchyType, IdsBreadcrumbVariantType } from './public-api';
-
-import { IdsOverlayPanelAppearanceType, IdsOverlayPanelVariantType } from '../overlay-panel';
-import { IdsTooltipDirective } from '../tooltip';
+import { IdsBreadcrumbDivider, IdsBreadcrumbDividerType } from './types/breadcrumb-divider.type';
+import { IdsBreadcrumbHierarchyType } from './types/breadcrumb-hierarchy.type';
+import { IdsBreadcrumbVariantType } from './types/breadcrumb-variant.type';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, ElementRef, inject, input, signal } from '@angular/core';
 import { ComponentBaseWithDefaults, createClassList, IdsSizeType, ResizeObserverService } from '@i-cell/ids-angular/core';
+import { IdsOverlayPanelAppearanceType, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel';
+import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 const defaultConfig = IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY();
 

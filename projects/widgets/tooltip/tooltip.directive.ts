@@ -253,9 +253,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
   }
 
   private _setupPointerEnterEventsIfNeeded(): void {
-    if (
-      this.disabled() || !this.message() || this._passiveListeners.length
-    ) {
+    if (!this.message() || this._passiveListeners.length) {
       return;
     }
 

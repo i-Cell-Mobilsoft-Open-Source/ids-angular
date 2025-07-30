@@ -1,0 +1,81 @@
+<ng-container *ngTemplateOutlet="sectionItem; context: { config: itemConfig() }" />
+
+<ng-template #sectionItem let-config="config">
+  @if (config.path) {
+    <a
+      class="sidenav-element"
+      [class.light]="config.hasDarkBackground"
+      [routerLink]="config.path"
+      [routerLinkActive]="['active']"
+    >
+      <ng-container [ngTemplateOutlet]="itemTemplate" />
+      @if (config.items?.length) {
+        <span class="icon">
+          <ids-icon [fontIcon]="config.$open ? 'chevron-up' : 'chevron-down'" />
+        </span>
+      }
+    </a>
+    <!-- TODO: refactor not using details (maybe simple div what is hidden when child elements are closed) -->
+    <details #details>
+      <summary #summary></summary>
+      @if (config.items?.length) {
+        <ul>
+          @for (subItem of config.items; track $index) {
+            <li>
+              <ng-container *ngTemplateOutlet="sectionItem; context: { config: subItem }" />
+            </li>
+          }
+        </ul>
+      }
+    </details>
+  } @else {
+    <div class="sidenav-element" [class.light]="config.hasDarkBackground" [class.active]="config.isActive">
+      <ng-container *ngTemplateOutlet="itemTemplate; context: { config: config}" />
+      <button
+        id="section-item__button_toggle"
+        type="button"
+        class="more"
+        idsIconButton
+        [size]="'compact'"
+        [variant]="'surface'"
+        [appearance]="'standard'"
+        [disabled]="config.isDisabled"
+        (click)="config.$open = !config.$open"
+      >
+        <!-- TODO: remove if not necessary -->
+        <!-- <span #trigger></span> -->
+        <!-- TODO: icon size? -->
+        <ids-icon aria-hidden="true" alt="" [fontIcon]="config.$open ? 'chevron-up' : 'chevron-down'" />
+      </button>
+    </div>
+    <!-- TODO: refactor not using details (maybe simple div what is hidden when child elements are closed) -->
+    <details #details [open]="config.$open">
+      <summary #summary></summary>
+      @if (config.items?.length) {
+        <ul>
+          @for (subItem of config.items; track $index) {
+            <li>
+              <ng-container *ngTemplateOutlet="sectionItem; context: { config: subItem }" />
+            </li>
+          }
+        </ul>
+      }
+    </details>
+  }
+</ng-template>
+
+<ng-template #itemTemplate let-config="config">
+  @if (config.leadingIcon) {
+    <span class="icon">
+      <ids-icon [fontIcon]="config.leadingIcon || ''" />
+    </span>
+  }
+  @if (config.name) {
+    <span class="name">{{ config.name || "" | translate }}</span>
+  }
+  @if (config.trailingIcon && !config.items?.length) {
+    <span class="icon">
+      <ids-icon [fontIcon]="config.trailingIcon || ''" />
+    </span>
+  }
+</ng-template>

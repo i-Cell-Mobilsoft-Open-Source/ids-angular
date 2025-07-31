@@ -2,10 +2,9 @@ import { IdsBreadcrumbDividerType, IdsBreadcrumbDivider } from './types/breadcru
 import { IdsBreadcrumbHierarchyType } from './types/breadcrumb-hierarchy.type';
 import { IdsBreadcrumbVariantType, IdsBreadcrumbVariant } from './types/breadcrumb-variant.type';
 
-import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType, IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from '../overlay-panel';
-
 import { InjectionToken } from '@angular/core';
 import { IdsSizeType, IdsSize } from '@i-cell/ids-angular/core';
+import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType, IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel';
 
 export interface IdsBreadcrumbDefaultConfig {
   hierarchy: IdsBreadcrumbHierarchyType[];

@@ -16,7 +16,5 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SectionTitleComponent {
-  public hasDarkBackground = input<boolean>(false);
   public titleConfig = input.required<MenuItem>();
-
 }

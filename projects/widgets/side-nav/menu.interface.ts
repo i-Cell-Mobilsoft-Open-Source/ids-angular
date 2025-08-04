@@ -9,8 +9,6 @@ export interface MenuSection {
 
 export interface MenuItem {
   type: 'ITEM' | 'TITLE';
-  // TODO: remove id if not needed
-  id?: string;
   name?: string;
   path?: string;
   items?: MenuItem[];
@@ -20,4 +18,6 @@ export interface MenuItem {
   isDisabled?: boolean;
   isActive?: boolean;
   hasDarkBackground?: boolean;
+  // TODO: remove if not needed
+  // isSubmenuIndent
 }

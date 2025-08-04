@@ -66,6 +66,9 @@ export class SideNavDemoComponent implements OnInit {
       type: 'boolean',
       default: false,
       control: DemoControl.CHECKBOX,
+      onModelChange: (disable?: boolean) => {
+        this._resetMenuConfig(!!disable);
+      },
     },
     label: {
       description: 'Text of the label.',
@@ -126,7 +129,10 @@ export class SideNavDemoComponent implements OnInit {
           type: 'TITLE',
         },
         items: [
-          { name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON', type: 'ITEM', leadingIcon: 'sun', id: '1',
+          {
+            name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON',
+            type: 'ITEM',
+            leadingIcon: 'sun',
             items: [
               { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', type: 'ITEM' },
               { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', type: 'ITEM' },
@@ -140,66 +146,27 @@ export class SideNavDemoComponent implements OnInit {
           type: 'TITLE',
         },
         items: [
-          { name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON', type: 'ITEM', leadingIcon: 'sun', id: '1', isActive: true,
+          {
+            name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON',
+            type: 'ITEM',
+            leadingIcon: 'sun',
+            isActive: true,
             items: [
               { name: 'Child 1', type: 'ITEM' },
-              { name: 'Child 2', type: 'ITEM', items: [
-                { name: 'GrandChild 1', type: 'ITEM' },
-                { name: 'GrandChild 2', type: 'ITEM' },
-              ] },
+              {
+                name: 'Child 2',
+                type: 'ITEM',
+                items: [
+                  { name: 'GrandChild 1', type: 'ITEM' },
+                  { name: 'GrandChild 2', type: 'ITEM' },
+                ],
+              },
             ],
           },
         ],
       },
     ],
   };
-
-  // TODO: remove after new menuConfig is implemented
-  // public menuConfigs: MenuItem[] = [
-  // {
-  //   name: 'SIDE_NAV.SECTION.WITH_ITEMS',
-  //   items: [
-  //     { name: 'SIDE_NAV.ITEM.WITHOUT_ICONS', isActive: true },
-  //     { name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON', leadingIcon: 'sun' },
-  //     { name: 'SIDE_NAV.ITEM.WITH_TRAILING_ICON', trailingIcon: 'sun' },
-  //     { name: 'SIDE_NAV.ITEM.WITH_LEADING_AND_TRAILING_ICON', leadingIcon: 'sun', trailingIcon: 'sun' },
-  //     {
-  //       name: 'SIDE_NAV.BUTTON_ITEM.WITH_SUB_ITEMS_AND_WITHOUT_ICONS',
-  //       items: [
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/1' },
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/2' },
-  //       ],
-  //     },
-  //     {
-  //       name: 'SIDE_NAV.BUTTON_ITEM.WITH_SUB_ITEMS_AND_WITH_LEADING_ICON',
-  //       leadingIcon: 'sun',
-  //       items: [
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/3' },
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/4' },
-  //       ],
-  //     },
-  //     {
-  //       name: 'SIDE_NAV.ITEM.WITH_SUB_ITEMS_AND_WITHOUT_ICONS',
-  //       path: '/example-path/11',
-  //       items: [
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/5' },
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITH_LEADING_ICON', path: '/example-path/6', leadingIcon: 'sun' },
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITH_TRAILING_ICON', path: '/example-path/7', trailingIcon: 'sun' },
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITH_LEADING_AND_TRAILING_ICON', path: '/example-path/8', leadingIcon: 'sun', trailingIcon: 'sun' },
-  //       ],
-  //     },
-  //     {
-  //       name: 'SIDE_NAV.ITEM.WITH_SUB_ITEMS_AND_WITH_LEADING_ICON',
-  //       leadingIcon: 'sun',
-  //       path: '/example-path/12',
-  //       items: [
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/9' },
-  //         { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', path: '/example-path/10' },
-  //       ],
-  //     },
-  //   ],
-  // },
-  // ];
 
   public ngOnInit(): void {
     this._loadIcons();
@@ -218,5 +185,88 @@ export class SideNavDemoComponent implements OnInit {
           ...this._inputControlConfig,
         };
       });
+  }
+
+  // TODO: Simplify the reset logic and set more options to reset
+  private _resetMenuConfig(isDisabled: boolean): void {
+    this.menuConfig = {
+      sections: [
+        {
+          title: {
+            name: 'SIDE_NAV.SECTION.WITHOUT_ITEMS',
+            type: 'TITLE',
+          },
+          items: [],
+        },
+        {
+          title: {
+            name: 'SIDE_NAV.SECTION.WITH_LEADING_ICON',
+            type: 'TITLE',
+            leadingIcon: 'sun',
+          },
+          items: [],
+        },
+        {
+          title: {
+            name: 'SIDE_NAV.SECTION.WITH_TRAILING_ICON',
+            type: 'TITLE',
+            trailingIcon: 'sun',
+          },
+          items: [],
+        },
+        {
+          title: {
+            name: 'SIDE_NAV.SECTION.WITH_LEADING_AND_TRAILING_ICON',
+            type: 'TITLE',
+            leadingIcon: 'sun',
+            trailingIcon: 'sun',
+          },
+          items: [],
+        },
+        {
+          title: {
+            name: 'SIDE_NAV.SECTION.WITH_ITEMS',
+            type: 'TITLE',
+          },
+          items: [
+            {
+              name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON',
+              type: 'ITEM',
+              leadingIcon: 'sun',
+              items: [
+                { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', type: 'ITEM' },
+                { name: 'SIDE_NAV.SUB_ITEM.WITHOUT_ICONS', type: 'ITEM' },
+              ],
+            },
+          ],
+        },
+        {
+          title: {
+            name: 'SIDE_NAV.SECTION.WITH_ITEMS',
+            type: 'TITLE',
+          },
+          items: [
+            {
+              name: 'SIDE_NAV.ITEM.WITH_LEADING_ICON',
+              type: 'ITEM',
+              leadingIcon: 'sun',
+              isActive: true,
+              isDisabled: isDisabled,
+              items: [
+                { name: 'Child 1', type: 'ITEM' },
+                {
+                  name: 'Child 2',
+                  type: 'ITEM',
+                  items: [
+                    { name: 'GrandChild 1', type: 'ITEM' },
+                    { name: 'GrandChild 2', type: 'ITEM' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
   }
 }

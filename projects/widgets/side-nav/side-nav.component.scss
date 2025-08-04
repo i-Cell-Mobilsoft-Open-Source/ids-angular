@@ -29,10 +29,8 @@ ul {
   gap: 0.25rem;
 }
 
-.side-nav__list-item:focus-within {
-  outline: 2px solid var(--ids-smc-colors-primary-darker-20);
-  outline-offset: 2px;
-  border-radius: 0.25rem;
+.side-nav__list-item {
+  // TODO: remove if not necessary (also from the template)
 }
 
 li > a,

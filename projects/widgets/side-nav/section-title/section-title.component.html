@@ -5,7 +5,7 @@
     </span>
   }
   @if (titleConfig().name) {
-    <h2 class="name" [class.light]="hasDarkBackground()">{{ (titleConfig().name || '') | translate }}</h2>
+    <h2 class="name" [class.light]="titleConfig().hasDarkBackground">{{ (titleConfig().name || '') | translate }}</h2>
   }
   @if (titleConfig().trailingIcon) {
     <span class="icon">

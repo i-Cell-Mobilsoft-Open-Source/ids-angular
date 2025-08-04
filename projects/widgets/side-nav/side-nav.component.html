@@ -1,0 +1,14 @@
+<nav>
+  @for (section of menu()!.sections; track $index) {
+    <section>
+      <ids-section-title [titleConfig]="section.title" />
+      <ul>
+        @for (menuItem of section.items; track $index) {
+          <li class="side-nav__list-item">
+            <ids-section-item [itemConfig]="menuItem" />
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</nav>

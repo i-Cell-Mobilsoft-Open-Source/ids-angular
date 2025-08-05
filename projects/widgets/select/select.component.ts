@@ -435,7 +435,10 @@ export class IdsSelectComponent
   // #endregion
 
   private _setSelectionByValue(value: unknown | unknown[]): void {
-    this.options().forEach((option) => option.setInactiveStyles());
+    this.options().forEach((option) => {
+      option.setInactiveStyles();
+      option.selected.set(false);
+    });
     this._selectionModel?.clear();
     this._rawValue = value;
 
@@ -461,14 +464,14 @@ export class IdsSelectComponent
   }
 
   private _selectValue(value: unknown): IdsOptionComponent | undefined {
+    const valueCompareFn = this.valueCompareFn();
     const correspondingOption = this.options().find((option) => {
       if (this._selectionModel?.isSelected(option)) {
         return false;
       }
 
       try {
-        const valueCompareFn = this.valueCompareFn();
-        return option.value() != null && valueCompareFn && valueCompareFn(option.value(), value);
+        return valueCompareFn?.(option.value(), value);
       } catch (error) {
         if (isDevMode()) {
           console.warn(error);

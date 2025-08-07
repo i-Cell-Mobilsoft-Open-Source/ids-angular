@@ -12,7 +12,7 @@
 
 @if (open() && type() === _idsSideSheetType.OVERLAY) {
   @if(isBackdrop()) {
-    <div class="ids-side-sheet-overlay" (click)="_close()"></div>
+    <div class="ids-side-sheet-backdrop" (click)="_close()"></div>
   }
   <div class="ids-side-sheet-container" [class.right]="position() === _idsSideSheetPositionType.RIGHT" [@slideInOut]="position()">
     @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
@@ -34,6 +34,7 @@
       'ids-default-side-sheet-header': header() !== _idsSideSheetHeaderType.CUSTOM
     }"
     [header]="header()"
+    [isShowHeader]="isShowHeader()"
     [title]="title()"
     [backButton]="backButton()"
     [isClosable]="isClosable()"
@@ -45,14 +46,12 @@
         <ng-container *ngTemplateOutlet="customHeader"/>
       }
     </app-side-sheet-header>
-    <div class="side-sheet-content">
+    <div class="side-sheet-content" [ngClass]="{ 'scrollable': isScrollable() }">
       <ng-container *ngTemplateOutlet="content"/>
     </div>
-    @if (isShowFooter()) {
       <div class="side-sheet-footer">
         <ng-container *ngTemplateOutlet="footer"/>
       </div>
-    }
   </div>
 }
 @if (open() && type() === _idsSideSheetType.INLINE) {
@@ -80,6 +79,7 @@
         'ids-default-side-sheet-header': header() !== _idsSideSheetHeaderType.CUSTOM
       }"
       [header]="header()"
+      [isShowHeader]="isShowHeader()"
       [title]="title()"
       [backButton]="backButton()"
       [isClosable]="isClosable()"
@@ -91,13 +91,11 @@
         <ng-container *ngTemplateOutlet="customHeader"/>
       }
     </app-side-sheet-header>
-    <div class="side-sheet-content">
+    <div class="side-sheet-content" [ngClass]="{ 'scrollable': isScrollable() }">
       <ng-container *ngTemplateOutlet="content"/>
     </div>
-    @if (isShowFooter()) {
       <div class="side-sheet-footer">
         <ng-container *ngTemplateOutlet="footer"/>
       </div>
-    }
   </div>
 }

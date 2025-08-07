@@ -17,4 +17,11 @@ export const IdsSideSheetHeader = {
   CUSTOM: 'custom',
 } as const;
 
+export const IdsBackdropType = {
+  DEFAULT: 'default',
+  TRANSPARENT: 'transparent',
+} as const;
+
+export type IdsBackdropTypeType = (typeof IdsBackdropType)[keyof typeof IdsBackdropType];
+
 export type IdsSideSheetHeaderType = (typeof IdsSideSheetHeader)[keyof typeof IdsSideSheetHeader];

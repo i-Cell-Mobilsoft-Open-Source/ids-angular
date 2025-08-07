@@ -1,10 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import {
-  IdsSideSheetHeader, IdsSideSheetPosition,
-  IdsSideSheetType,
-} from '@i-cell/ids-angular/side-sheet/types/side-sheet.type';
+import { IdsSideSheetHeader } from '@i-cell/ids-angular/side-sheet/types/side-sheet.type';
 import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 @Component({
@@ -19,9 +16,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
   styleUrls: ['./side-sheet-header.component.scss'],
 })
 export class SideSheetHeaderComponent {
-  protected _idsSideSheetType = IdsSideSheetType;
   protected _idsSideSheetHeaderType = IdsSideSheetHeader;
-  protected _idsSideSheetPositionType = IdsSideSheetPosition;
   public closed = output();
   public backClicked = output();
 
@@ -29,6 +24,7 @@ export class SideSheetHeaderComponent {
   public header = input();
   public backButton = input();
   public isClosable = input();
+  public isShowHeader = input<boolean>(false);
   public closeTooltipText = input<string>('');
 
   protected _close(): void {

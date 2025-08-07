@@ -7,17 +7,17 @@ import { FormsModule } from '@angular/forms';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsSize } from '@i-cell/ids-angular/core';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import {
-  IdsErrorMessageComponent,
   IdsFormFieldComponent,
-  IdsHintMessageComponent,
   IdsInputDirective, IdsLabelDirective,
 } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/side-sheet/side-sheet-defaults';
 import { IdsSideSheetComponent } from '@i-cell/ids-angular/side-sheet/side-sheet.component';
 import {
+  IdsBackdropType,
+  IdsBackdropTypeType,
   IdsSideSheetHeader, IdsSideSheetHeaderType,
   IdsSideSheetPosition, IdsSideSheetPositionType,
   IdsSideSheetType,
@@ -34,6 +34,8 @@ type SideSheetInputControls = {
   backButton: boolean;
   isScrollable: boolean;
   isBackdrop: boolean;
+  backdropType: IdsBackdropTypeType;
+  backdropOpacity: IdsSizeType;
   isClosable: boolean;
   isShowFooter: boolean;
   isShowHeader: boolean;
@@ -51,9 +53,7 @@ type SideSheetInputControls = {
     TranslatePipe,
     NgTemplateOutlet,
     FormsModule,
-    IdsErrorMessageComponent,
     IdsFormFieldComponent,
-    IdsHintMessageComponent,
     IdsInputDirective,
     IdsLabelDirective,
     IdsIconComponent,
@@ -69,6 +69,13 @@ export class SideSheetDemoComponent {
   private readonly _location = inject(Location);
 
   protected _inputControlConfig: DemoControlConfig<SideSheetInputControls> = {
+    size: {
+      description: 'Side sheet size.',
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      list: Object.values(IdsSize),
+      control: 'select',
+    },
     type: {
       description: 'Side sheet type.',
       type: 'IdsSideSheetType',
@@ -114,6 +121,20 @@ export class SideSheetDemoComponent {
       default: defaultConfig.isBackdrop,
       control: 'checkbox',
     },
+    backdropType: {
+      description: 'Backdrop type.',
+      type: 'IdsBackdropType',
+      default: defaultConfig.backdropType,
+      list: Object.values(IdsBackdropType),
+      control: 'select',
+    },
+    backdropOpacity: {
+      description: 'Backdrop opacity.',
+      type: 'IdsSizeType',
+      default: IdsSize.COMPACT,
+      list: Object.values(IdsSize),
+      control: 'select',
+    },
     isClosable: {
       description: 'Is side sheet closable.',
       type: 'boolean',
@@ -127,7 +148,7 @@ export class SideSheetDemoComponent {
       control: 'checkbox',
     },
     isShowHeader: {
-      description: 'Is side sheet header shown.',
+      description: 'Controls the visibility of the header. Applies only when using the default header type.',
       type: 'boolean',
       default: true,
       control: 'checkbox',
@@ -137,13 +158,6 @@ export class SideSheetDemoComponent {
       type: 'string',
       default: defaultConfig.closeTooltipText,
       control: 'text',
-    },
-    size: {
-      description: 'Side sheet size.',
-      type: 'IdsSizeType',
-      default: defaultConfig.size,
-      list: Object.values(IdsSize),
-      control: 'select',
     },
   };
 

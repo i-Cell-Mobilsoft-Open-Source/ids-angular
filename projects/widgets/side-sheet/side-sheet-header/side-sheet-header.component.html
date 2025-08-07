@@ -1,4 +1,4 @@
-@if (header() === _idsSideSheetHeaderType.DEFAULT) {
+@if (header() === _idsSideSheetHeaderType.DEFAULT && isShowHeader()) {
   <div class="left-content">
     @if (backButton()) {
       <button class="back-btn" type="button" idsIconButton [variant]="'surface'" [appearance]="'standard'" (click)="_onBack()">

@@ -1,4 +1,6 @@
 import {
+  IdsBackdropType,
+  IdsBackdropTypeType,
   IdsSideSheetHeader,
   IdsSideSheetHeaderType, IdsSideSheetPosition,
   IdsSideSheetPositionType, IdsSideSheetType,
@@ -14,6 +16,8 @@ export interface IdsSideSheetDefaultConfig {
   header: IdsSideSheetHeaderType
   isScrollable: boolean
   isBackdrop: boolean
+  backdropType: IdsBackdropTypeType
+  backdropOpacity: IdsSizeType
   isClosable: boolean
   isShowFooter: boolean
   isShowHeader: boolean
@@ -37,6 +41,8 @@ export function IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY(): Required<IdsSideSheetDe
     header: IdsSideSheetHeader.DEFAULT,
     isScrollable: false,
     isBackdrop: true,
+    backdropType: IdsBackdropType.DEFAULT,
+    backdropOpacity: IdsSize.COMPACT,
     isClosable: true,
     isShowFooter: true,
     isShowHeader: true,

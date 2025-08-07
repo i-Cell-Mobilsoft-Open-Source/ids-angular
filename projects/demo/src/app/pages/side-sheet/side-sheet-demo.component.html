@@ -5,12 +5,15 @@
     [title]="model.title"
     [header]="model.header"
     [isBackdrop]="model.isBackdrop"
-    [isShowFooter]="model.isShowFooter"
+    [isScrollable]="model.isScrollable"
     [isClosable]="model.isClosable"
     [isShowHeader]="model.isShowHeader"
     [position]="model.position"
     [backButton]="model.backButton"
     [closeTooltipText]="model.closeTooltipText"
+    [size]="model.size"
+    [backdropType]="model.backdropType"
+    [backdropOpacity]="model.backdropOpacity"
     (closed)="_show = false"
     (backClicked)="onBackButtonClick()"
   >
@@ -19,17 +22,20 @@
         <h2>Customer</h2>
       </header>
     </div>
-    <div slot="footer">
-      <button
-        type="button"
-        idsButton
-        [size]="'spacious'"
-      >
-        <ids-icon fontIcon="check" aria-hidden="true" />
-        <span>Save</span>
-      </button>
-    </div>
-    <div class="side-sheet-content">
+    @if (model.isShowFooter) {
+      <div slot="footer">
+        <button
+          type="button"
+          class="demo-save-btn"
+          idsButton
+          [size]="'comfortable'"
+          [variant]="'success'"
+        >
+          <span>Save</span>
+        </button>
+      </div>
+    }
+    <div>
       <ids-form-field>
         <ids-label>First name</ids-label>
         <input idsInput placeholder="E.g. Steve" required [(ngModel)]="_firstName" />
@@ -68,7 +74,7 @@
   </ids-side-sheet>
 </ng-template>
 
-@if (model.position !== 'end') {
+@if (model.position !== 'right') {
   <ng-container *ngTemplateOutlet="sideSheet"/>
 }
 
@@ -86,6 +92,6 @@
   />
 </app-tryout>
 
-@if (model.position === 'end') {
+@if (model.position === 'right') {
   <ng-container *ngTemplateOutlet="sideSheet"/>
 }

@@ -1,4 +1,5 @@
 import {
+  IdsBackdropTypeType,
   IdsSideSheetPosition, IdsSideSheetPositionType,
   IdsSideSheetType,
   IdsSideSheetTypeType,
@@ -76,12 +77,13 @@ export class IdsSideSheetComponent extends ComponentBaseWithDefaults<IdsSideShee
   public header = input(this._defaultConfig.header);
   public backButton = input(false);
   public isBackdrop = input(this._defaultConfig.isBackdrop);
+  public backdropType = input<IdsBackdropTypeType | string>(this._defaultConfig.backdropType);
+  public backdropOpacity = input<IdsSizeType | string>(this._defaultConfig.backdropOpacity);
   public isScrollable = input(this._defaultConfig.isScrollable);
   public isClosable = input(this._defaultConfig.isClosable);
-  public isShowFooter = input(this._defaultConfig.isShowFooter);
   public isShowHeader = input(this._defaultConfig.isShowHeader);
   public closeTooltipText = input<string>('');
-  public size = input<IdsSizeType>(this._defaultConfig.size);
+  public size = input<IdsSideSheetTypeType | string>(this._defaultConfig.size);
 
   protected _close(): void {
     this.closed.emit();
@@ -93,10 +95,16 @@ export class IdsSideSheetComponent extends ComponentBaseWithDefaults<IdsSideShee
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.type(),
+    this.size(),
     [
       `${this.position()}`,
       this.size(),
     ],
+    [
+      `${this.position()}-opacity`,
+      this.backdropOpacity(),
+    ],
+    this.backdropType(),
   ]));
 
 }

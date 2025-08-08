@@ -12,7 +12,6 @@ import {
   IdsFormFieldComponent,
   IdsInputDirective, IdsLabelDirective,
 } from '@i-cell/ids-angular/forms';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/side-sheet/side-sheet-defaults';
 import { IdsSideSheetComponent } from '@i-cell/ids-angular/side-sheet/side-sheet.component';
 import {
@@ -56,7 +55,6 @@ type SideSheetInputControls = {
     IdsFormFieldComponent,
     IdsInputDirective,
     IdsLabelDirective,
-    IdsIconComponent,
   ],
   templateUrl: './side-sheet-demo.component.html',
   styleUrls: ['./side-sheet-demo.component.scss'],

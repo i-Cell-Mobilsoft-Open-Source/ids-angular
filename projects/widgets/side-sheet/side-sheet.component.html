@@ -14,7 +14,13 @@
   @if(isBackdrop()) {
     <div class="ids-side-sheet-backdrop" (click)="_close()"></div>
   }
-  <div class="ids-side-sheet-container" [class.right]="position() === _idsSideSheetPositionType.RIGHT" [@slideInOut]="position()">
+  <div
+    class="ids-side-sheet-container"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="side-sheet-title"
+    [class.right]="position() === _idsSideSheetPositionType.RIGHT"
+    [@slideInOut]="position()">
     @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
       <div class="ids-custom-header-top-row">
         <button
@@ -55,7 +61,13 @@
   </div>
 }
 @if (open() && type() === _idsSideSheetType.INLINE) {
-  <div class="ids-side-sheet-container-inline" [class.right]="position() === _idsSideSheetPositionType.RIGHT" [@slideInOut]="position()">
+  <div
+    class="ids-side-sheet-container-inline"
+    role="region"
+    aria-labelledby="side-sheet-title"
+    cdkTrapFocus
+    [class.right]="position() === _idsSideSheetPositionType.RIGHT"
+    [@slideInOut]="position()">
 
     <div class="ids-custom-header-top-row">
       @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {

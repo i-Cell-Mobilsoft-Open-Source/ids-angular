@@ -6,6 +6,7 @@ import {
 } from './types/side-sheet.type';
 
 import { trigger, transition, style, animate } from '@angular/animations';
+import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
@@ -55,6 +56,8 @@ const defaultConfig = IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY();
     SideSheetHeaderComponent,
     IdsTooltipDirective,
     NgClass,
+    A11yModule,
+    CdkTrapFocus,
   ],
 })
 export class IdsSideSheetComponent extends ComponentBaseWithDefaults<IdsSideSheetDefaultConfig> {

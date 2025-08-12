@@ -1,9 +1,15 @@
 import {
+  IDS_SIDE_SHEET_DEFAULT_CONFIG,
+  IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY,
+  IdsSideSheetDefaultConfig,
+} from './side-sheet-defaults';
+import { SideSheetHeaderComponent } from './side-sheet-header/side-sheet-header.component';
+import {
   IdsBackdropTypeType,
   IdsSideSheetPosition, IdsSideSheetPositionType,
   IdsSideSheetType,
   IdsSideSheetTypeType,
-} from './types/side-sheet.type';
+  IdsSideSheetHeader } from './types/side-sheet.type';
 
 import { trigger, transition, style, animate } from '@angular/animations';
 import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
@@ -17,13 +23,6 @@ import {
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import {
-  IDS_SIDE_SHEET_DEFAULT_CONFIG,
-  IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY,
-  IdsSideSheetDefaultConfig,
-} from '@i-cell/ids-angular/side-sheet/side-sheet-defaults';
-import { SideSheetHeaderComponent } from '@i-cell/ids-angular/side-sheet/side-sheet-header/side-sheet-header.component';
-import { IdsSideSheetHeader } from '@i-cell/ids-angular/side-sheet/types/side-sheet.type';
 import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 const defaultConfig = IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY();

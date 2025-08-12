@@ -1,7 +1,8 @@
+import { IdsSideSheetHeader } from '../types/side-sheet.type';
+
 import { Component, input, output } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
-import { IdsSideSheetHeader } from '@i-cell/ids-angular/side-sheet/types/side-sheet.type';
 import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 @Component({
@@ -13,7 +14,6 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
     IdsIconButtonComponent,
     IdsTooltipDirective,
   ],
-  styleUrls: ['./side-sheet-header.component.scss'],
 })
 export class SideSheetHeaderComponent {
   protected _idsSideSheetHeaderType = IdsSideSheetHeader;

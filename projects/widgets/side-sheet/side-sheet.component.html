@@ -12,19 +12,19 @@
 
 @if (open() && type() === _idsSideSheetType.OVERLAY) {
   @if(isBackdrop()) {
-    <div class="ids-side-sheet-backdrop" (click)="_close()"></div>
+    <div class="ids-side-sheet__backdrop" (click)="_close()"></div>
   }
   <div
-    class="ids-side-sheet-container"
+    class="ids-side-sheet__container"
     role="dialog"
     aria-modal="true"
     aria-labelledby="side-sheet-title"
     [class.right]="position() === _idsSideSheetPositionType.RIGHT"
     [@slideInOut]="position()">
     @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
-      <div class="ids-custom-header-top-row">
+      <div class="ids-side-sheet__header--custom-top-row">
         <button
-          class="close-btn"
+          class="ids-side-sheet__close-btn"
           type="button" idsIconButton
           [variant]="'surface'" [appearance]="'standard'"
           [idsTooltip]="closeTooltipText()"
@@ -36,8 +36,8 @@
     }
     <app-side-sheet-header
     [ngClass]="{
-      'ids-custom-side-sheet-header': header() === _idsSideSheetHeaderType.CUSTOM,
-      'ids-default-side-sheet-header': header() !== _idsSideSheetHeaderType.CUSTOM
+      'ids-side-sheet__header--custom': header() === _idsSideSheetHeaderType.CUSTOM,
+      'ids-side-sheet__header--default': header() !== _idsSideSheetHeaderType.CUSTOM
     }"
     [header]="header()"
     [isShowHeader]="isShowHeader()"
@@ -52,27 +52,27 @@
         <ng-container *ngTemplateOutlet="customHeader"/>
       }
     </app-side-sheet-header>
-    <div class="side-sheet-content" [ngClass]="{ 'scrollable': isScrollable() }">
+    <div class="ids-side-sheet__content" [ngClass]="{ 'ids-side-sheet__content--scrollable': isScrollable() }">
       <ng-container *ngTemplateOutlet="content"/>
     </div>
-      <div class="ids-side-sheet-footer">
+      <div class="ids-side-sheet__footer">
         <ng-container *ngTemplateOutlet="footer"/>
       </div>
   </div>
 }
 @if (open() && type() === _idsSideSheetType.INLINE) {
   <div
-    class="ids-side-sheet-container-inline"
+    class="ids-side-sheet__container--inline"
     role="region"
     aria-labelledby="side-sheet-title"
     cdkTrapFocus
     [class.right]="position() === _idsSideSheetPositionType.RIGHT"
     [@slideInOut]="position()">
 
-    <div class="ids-custom-header-top-row">
+    <div class="ids-side-sheet__header--custom-top-row">
       @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
         <button
-          class="close-btn"
+          class="ids-side-sheet__close-btn"
           type="button"
           idsIconButton
           [variant]="'surface'"
@@ -87,8 +87,8 @@
 
     <app-side-sheet-header
       [ngClass]="{
-        'ids-custom-side-sheet-header': header() === _idsSideSheetHeaderType.CUSTOM,
-        'ids-default-side-sheet-header': header() !== _idsSideSheetHeaderType.CUSTOM
+        'ids-side-sheet__header--custom': header() === _idsSideSheetHeaderType.CUSTOM,
+        'ids-side-sheet__header--default': header() !== _idsSideSheetHeaderType.CUSTOM
       }"
       [header]="header()"
       [isShowHeader]="isShowHeader()"
@@ -103,10 +103,10 @@
         <ng-container *ngTemplateOutlet="customHeader"/>
       }
     </app-side-sheet-header>
-    <div class="side-sheet-content" [ngClass]="{ 'scrollable': isScrollable() }">
+    <div class="ids-side-sheet__content" [ngClass]="{ 'ids-side-sheet__content--scrollable': isScrollable() }">
       <ng-container *ngTemplateOutlet="content"/>
     </div>
-      <div class="ids-side-sheet-footer">
+      <div class="ids-side-sheet__footer">
         <ng-container *ngTemplateOutlet="footer"/>
       </div>
   </div>

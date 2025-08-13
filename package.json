@@ -41,6 +41,8 @@
     "@ngx-translate/http-loader": "^16.0.1",
     "apollo-angular": "^10.0.3",
     "graphql": "^16.10.0",
+    "jest-environment-jsdom": "^30.0.0",
+    "jsdom": "^26.1.0",
     "rxjs": "7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

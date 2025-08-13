@@ -22,7 +22,7 @@
     [class.right]="position() === _idsSideSheetPositionType.RIGHT"
     [@slideInOut]="position()">
     @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
-      <div class="ids-side-sheet__header--custom-top-row">
+      <div class="ids-side-sheet__header-custom-top-row">
         <button
           class="ids-side-sheet__close-btn"
           type="button" idsIconButton
@@ -69,7 +69,7 @@
     [class.right]="position() === _idsSideSheetPositionType.RIGHT"
     [@slideInOut]="position()">
 
-    <div class="ids-side-sheet__header--custom-top-row">
+    <div class="ids-side-sheet__header-custom-top-row">
       @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
         <button
           class="ids-side-sheet__close-btn"

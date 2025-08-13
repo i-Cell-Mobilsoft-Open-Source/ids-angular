@@ -1,5 +1,5 @@
 @if (header() === _idsSideSheetHeaderType.DEFAULT && isShowHeader()) {
-  <div class="ids-side-sheet__header--left-content">
+  <div class="ids-side-sheet__header-left-content">
     @if (backButton()) {
       <button class="back-btn" type="button" idsIconButton [variant]="'surface'" [appearance]="'standard'" (click)="_onBack()">
         <ids-icon aria-hidden="true" alt="" fontIcon="arrow-left" />
@@ -9,7 +9,7 @@
   </div>
   @if (isClosable()) {
     <button
-      class="ids-side-sheet__header--close-btn"
+      class="ids-side-sheet__header-close-btn"
       type="button"
       idsIconButton
       [variant]="'surface'"

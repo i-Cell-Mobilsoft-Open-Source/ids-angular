@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-16">
-  <app-hero [heroData]="heroDatas[0]" />
+  <app-hero [heroData]="heroData()" />
   <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
     @for (componentData of componentDatas; track componentData.id) {
       <app-article-card [componentData]="componentData" />

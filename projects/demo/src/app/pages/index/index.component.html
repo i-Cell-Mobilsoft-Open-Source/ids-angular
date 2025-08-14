@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-16">
-  <app-hero [heroData]="heroDatas[1]" />
+  <app-hero [heroData]="heroData()" />
   <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
     @for (indexData of indexDatas; track indexData.id) {
       <a class="h-full flex" [href]="indexData.imageLink">

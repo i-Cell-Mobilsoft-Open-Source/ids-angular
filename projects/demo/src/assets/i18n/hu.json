@@ -1,5 +1,6 @@
 {
   "GET_STARTED": "Bevezetés",
+  "GET_STARTED_MENU": "Issue reportolás",
   "DESIGN_DEVELOP": "Tervezés & Fejlesztés",
   "DESIGN_DEVELOP_MENU": {
     "DESIGN_TOKENS": "Design Tokenek",
@@ -13,6 +14,7 @@
     "ACTION_MENU": "Action menu",
     "AVATAR": "Avatar",
     "BADGE": "Badge",
+    "BREADCRUMB": "Breadcrumb",
     "BUTTON": "Button",
     "CARD": "Card",
     "CHECKBOX": "Checkbox",

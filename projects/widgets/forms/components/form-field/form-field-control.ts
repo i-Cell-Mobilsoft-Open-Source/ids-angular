@@ -1,7 +1,7 @@
 import { AbstractErrorStateMatcher, ErrorStateTracker } from '../../common/error/error-state';
 import { AbstractSuccessStateMatcher, SuccessStateTracker } from '../../common/success/success-state';
 
-import { booleanAttribute, computed, Directive, effect, ElementRef, inject, Injector, input, OnInit, Signal, signal } from '@angular/core';
+import { booleanAttribute, computed, Directive, effect, ElementRef, inject, Injector, input, Signal, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
@@ -10,7 +10,7 @@ import { Subject, Subscription } from 'rxjs';
 export const formFieldControlClass = 'ids-form-field-control';
 
 @Directive()
-export abstract class IdsFormFieldControl<D = unknown> extends ComponentBaseWithDefaults<D> implements OnInit {
+export abstract class IdsFormFieldControl<D = unknown> extends ComponentBaseWithDefaults<D> {
   protected readonly _injector = inject(Injector);
   protected readonly _parentForm = inject(NgForm, { optional: true });
   protected readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
@@ -68,11 +68,10 @@ export abstract class IdsFormFieldControl<D = unknown> extends ComponentBaseWith
     super();
 
     // Get the NgControl reference as soon as we can
-    queueMicrotask(() => this.ngControl.set(this._injector.get(NgControl, null, { self: true })));
-  }
-
-  public ngOnInit(): void {
-    this._initErrorStateTracker();
+    queueMicrotask(() => {
+      this.ngControl.set(this._injector.get(NgControl, null, { self: true }));
+      this._initErrorStateTracker();
+    });
   }
 
   public setDescribedByIds(ids: string[]): void {

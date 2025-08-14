@@ -1,3 +1,3 @@
 export type Environment = {
-  baseUrl: string
+  baseUrl: string;
 };

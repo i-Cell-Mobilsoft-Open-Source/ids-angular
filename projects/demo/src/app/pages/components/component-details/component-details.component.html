@@ -1,5 +1,10 @@
 <div class="flex flex-col gap-16">
-  <app-hero [heroData]="heroDatas[0]" />
+  <!-- <app-hero [heroData]="heroDatas[0]" /> -->
+
+  @if (heroData; as hero) {
+    <app-hero [heroData]="hero" />
+  }
+
   <ids-tab-group>
     <ids-tab label="Guidelines">
       <div class="flex flex-col gap-ids-container-gap-32">
@@ -7,62 +12,83 @@
           <ids-chip appearance="outlined" variant="surface" size="dense"> Updated 25 Feb 2025 </ids-chip>
           <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
         </div>
-        @if (collections.length > 0) {
-          <ul>
-            @for (collection of collections; track collection) {
-              <li>{{ collection.title }}</li>
-            }
-          </ul>
-        }
 
-        <section class="flex flex-col gap-ids-container-gap-16">
-          <h2 class="text-headline-medium-prominent">Usage</h2>
-          @if (contentCardDatas.length > 0) {
-            <app-content-card [contentCardData]="contentCardDatas[0]" />
+        @for (item of componentBlocks; track trackByBlock) {
+          @if (item.type === "heading") {
+            <h2>
+              {{ item.heading }}
+            </h2>
           }
-          @if (contentCardDatas.length > 1) {
-            <app-content-card [contentCardData]="contentCardDatas[1]" />
+          @if (item.type === "card") {
+            <app-content-card [contentCardData]="item" />
           }
-        </section>
-        <section class="flex flex-col gap-ids-container-gap-16">
-          <h2 class="text-headline-medium-prominent">Anatomy</h2>
-          @if (contentCardDatas.length > 2) {
-            <app-content-card [contentCardData]="contentCardDatas[2]" />
-          }
-        </section>
-        <section class="flex flex-col gap-ids-container-gap-16">
-          <h2 class="text-headline-medium-prominent">Variant</h2>
-          @if (contentCardDatas.length > 3) {
-            <app-content-card [contentCardData]="contentCardDatas[3]" />
-          }
-        </section>
-        <section class="flex flex-col gap-ids-container-gap-16">
-          <h2 class="text-headline-medium-prominent">Size</h2>
-          @if (contentCardDatas.length > 4) {
-            <app-content-card [contentCardData]="contentCardDatas[4]" />
-          }
-        </section>
-        <section class="flex flex-col gap-ids-container-gap-16">
-          <h2 class="text-headline-medium-prominent">Usage Guidelines</h2>
-          @if (contentCardDatas.length > 5) {
-            <app-content-card [contentCardData]="contentCardDatas[5]" />
-          }
-          @if (contentCardDatas.length > 6) {
-            <app-content-card [contentCardData]="contentCardDatas[6]" />
-          }
-        </section>
-        <section class="flex flex-col gap-ids-container-gap-16">
-          <h2 class="text-headline-medium-prominent">Accessibility</h2>
-          @if (contentCardDatas.length > 7) {
-            <app-content-card [contentCardData]="contentCardDatas[7]" />
-          }
-          @if (contentCardDatas.length > 8) {
-            <app-content-card [contentCardData]="contentCardDatas[8]" />
-          }
-        </section>
+        }
       </div>
     </ids-tab>
-    <ids-tab label="Demo and Code"> Tab Content 2 </ids-tab>
+    <ids-tab label="Demo and Code">
+      <div class="flex flex-col gap-ids-container-gap-32 w-full justify-start items-start">
+        <ids-chip appearance="outlined" variant="surface" size="dense"> Updated 25 Feb 2025 </ids-chip>
+        <h2>Examples</h2>
+        <ids-card appearance="elevated" variant="light" size="compact" class="w-full" id="demo">
+          <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center p-4" id="header">
+            <h3>Component preview</h3>
+            <div class="flex flex-col lg:flex-row lg:items-center gap-ids-container-gap-8">
+              <button
+                type="button"
+                idsIconButton
+                appearance="standard"
+                size="comfortable"
+                variant="primary"
+                [attr.aria-pressed]="isDark()"
+                (click)="toggleDark()"
+              >
+                <ids-icon icon-leading [fontIcon]="isDark() ? 'sun' : 'moon'" />
+              </button>
+              <button
+                type="button"
+                idsButton
+                appearance="text"
+                size="comfortable"
+                variant="primary"
+                class="flex items-center gap-2"
+                (click)="toggleFooter()"
+              >
+                {{ isOpen() ? "Hide code" : "Show code" }}
+                <ids-icon icon-leading [fontIcon]="isOpen() ? 'visibility-off-filled' : 'visibility-filled'" />
+                <ids-icon icon-trailing size="compact" class="ml-1" [fontIcon]="isOpen() ? 'chevron-up' : 'chevron-down'" />
+              </button>
+              <button type="button" idsButton appearance="text" size="comfortable" variant="primary">Reset controls</button>
+            </div>
+          </div>
+          <div
+            class="h-[712px] flex flex-col lg:flex-row transition-colors duration-300"
+            [class.bg-gray-900]="isDark()"
+            [class.text-white]="isDark()"
+            [class.bg-ids-container-bg-surface-darker-10]="!isDark()"
+          >
+            <div class="w-full h-full lg:w-2/3 flex justify-center items-center">
+              <h3>Component</h3>
+            </div>
+            <div
+              class="w-full lg:w-1/3 p-ids-container-padding-24 text-ids-container-bg-surface-darker-95 bg-ids-container-bg-surface-lighter-10"
+            >
+              controls
+            </div>
+          </div>
+          @if (isOpen()) {
+            <div class="p-4 bg-ids-container-bg-surface-lighter-10 rounded-b-2xl relative h-[375px] overflow-y-auto" id="footer">
+              <div class="absolute top-4 right-4">
+                <button type="button" idsButton appearance="outlined" size="comfortable" variant="primary" id="copy">
+                  Copy code
+                  <ids-icon icon-leading fontIcon="copy-filled" />
+                </button>
+              </div>
+              <p>Code</p>
+            </div>
+          }
+        </ids-card>
+      </div>
+    </ids-tab>
     <ids-tab label="API">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis sequi
       aut fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.

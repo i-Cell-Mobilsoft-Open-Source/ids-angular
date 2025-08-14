@@ -12,8 +12,7 @@ import { ConnectionPositionPair, FlexibleConnectedPositionStrategy, Overlay, Ove
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
-import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ComponentRef, computed, Directive, effect, ElementRef, inject, input, NgZone, OnDestroy, signal, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ComponentRef, computed, Directive, effect, ElementRef, inject, input, NgZone, OnDestroy, signal, ViewContainerRef, DOCUMENT } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { coerceStringAttribute, DirectiveBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 

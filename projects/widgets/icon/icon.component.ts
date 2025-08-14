@@ -3,9 +3,8 @@ import { IDS_ICON_PARENT } from './tokens/icon-parent';
 import { IdsIconSource } from './types/icon-source.type';
 import { IdsIconVariantType } from './types/icon-variant.type';
 
-import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation, DOCUMENT } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';

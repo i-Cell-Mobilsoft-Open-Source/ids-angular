@@ -27,7 +27,7 @@ export class SideSheetHeaderComponent {
   public isShowHeader = input<boolean>(false);
   public closeTooltipText = input<string>('');
 
-  protected _close(): void {
+  protected _onClose(): void {
     this.closed.emit();
   }
 

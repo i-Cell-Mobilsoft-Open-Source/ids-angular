@@ -39,11 +39,11 @@ importers:
         specifier: ^3.13.5
         version: 3.13.5(@types/react@18.3.4)(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@i-cell/ids-styles':
-        specifier: ^0.0.43
-        version: 0.0.43
+        specifier: ^0.0.45
+        version: 0.0.45
       '@i-cell/ids-tokens':
-        specifier: 0.0.34
-        version: 0.0.34
+        specifier: 0.0.35
+        version: 0.0.35
       '@ngx-translate/core':
         specifier: 16.0.4
         version: 16.0.4(@angular/common@19.1.2(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.2(rxjs@7.8.1)(zone.js@0.15.0))
@@ -1938,11 +1938,11 @@ packages:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
 
-  '@i-cell/ids-styles@0.0.43':
-    resolution: {integrity: sha512-QUAREc1/p9Pqui0IEN6APdhW39+md6GZTr/FATG75FcolfoGMpwPV30jen2xg4BX9RISMpYW+ew7tya3dS5t1A==}
+  '@i-cell/ids-styles@0.0.45':
+    resolution: {integrity: sha512-BgUw/l+42eQNa0IZdZ+QW2mG9wsCrB/8mE/Twc5H5GnDL1yJ74/Gmd4/E2fINk3tyrulA5N7HiRchOuOo0jevw==}
 
-  '@i-cell/ids-tokens@0.0.34':
-    resolution: {integrity: sha512-1ivL3ccXe07ptdOfr52BVzHdWK8EcgPGzxBsyfOarcOYLfaPNvuhh8DveRQJokttCTNHDHm6sZVgvNQMVZgYAQ==}
+  '@i-cell/ids-tokens@0.0.35':
+    resolution: {integrity: sha512-iBLovTzkCYSjcCQJSgj6MAFi3dQMz3DVXK/KVP7cy7v9f4W3RlWQLDUPKQjI9Keg9zNQYbWvswupiasrkdhvYw==}
 
   '@inquirer/checkbox@4.0.6':
     resolution: {integrity: sha512-PgP35JfmGjHU0LSXOyRew0zHuA9N6OJwOlos1fZ20b7j8ISeAdib3L+n0jIxBtX958UeEpte6xhG/gxJ5iUqMw==}
@@ -10641,9 +10641,9 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@i-cell/ids-styles@0.0.43': {}
+  '@i-cell/ids-styles@0.0.45': {}
 
-  '@i-cell/ids-tokens@0.0.34': {}
+  '@i-cell/ids-tokens@0.0.35': {}
 
   '@inquirer/checkbox@4.0.6(@types/node@20.16.1)':
     dependencies:

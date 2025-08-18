@@ -68,7 +68,7 @@
     "@types/cypress": "^1.1.6",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.19.11",
-    "angular-eslint": "18.3.1",
+    "angular-eslint": "20.1.1",
     "autoprefixer": "^10.4.21",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
@@ -90,6 +90,6 @@
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
     "typescript": "~5.8.3",
-    "typescript-eslint": "8.2.0"
+    "typescript-eslint": "^8.39.1"
   }
 }

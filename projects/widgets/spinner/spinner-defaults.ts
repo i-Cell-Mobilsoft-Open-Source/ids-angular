@@ -11,7 +11,7 @@ export interface IdsSpinnerDefaultConfig {
 }
 
 export const IDS_SPINNER_DEFAULT_CONFIG = new InjectionToken<IdsSpinnerDefaultConfig>(
-  'IDS_ICON_DEFAULT_CONFIG',
+  'IDS_SPINNER_DEFAULT_CONFIG',
   {
     providedIn: 'root',
     factory: IDS_SPINNER_DEFAULT_CONFIG_FACTORY,

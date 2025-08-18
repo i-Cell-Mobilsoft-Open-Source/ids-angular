@@ -109,6 +109,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
   },
   {
+    path: 'components/side-sheet',
+    loadComponent: () => import('./pages/side-sheet/side-sheet-demo.component').then((module) => module.SideSheetDemoComponent),
+  },
+  {
     path: 'components/snackbar',
     loadComponent: () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
   },

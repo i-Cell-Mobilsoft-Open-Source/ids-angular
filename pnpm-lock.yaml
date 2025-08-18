@@ -130,8 +130,8 @@ importers:
         specifier: 9.0.0-alpha.2
         version: 9.0.0-alpha.2(storybook@9.1.2(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.0.6(@types/node@20.19.11)(jiti@1.21.7)(less@4.3.0)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.1)))
       '@stylistic/eslint-plugin':
-        specifier: ^2.13.0
-        version: 2.13.0(eslint@9.33.0(jiti@1.21.7))(typescript@5.8.3)
+        specifier: ^5.2.3
+        version: 5.2.3(eslint@9.33.0(jiti@1.21.7))
       '@types/cypress':
         specifier: ^1.1.6
         version: 1.1.6
@@ -2738,11 +2738,11 @@ packages:
     peerDependencies:
       storybook: ^9.0.0-alpha.2
 
-  '@stylistic/eslint-plugin@2.13.0':
-    resolution: {integrity: sha512-RnO1SaiCFHn666wNz2QfZEFxvmiNRqhzaMXHXxXXKt+MEP7aajlPxUSMIQpKAaJfverpovEYqjBOXDq6dDcaOQ==}
+  '@stylistic/eslint-plugin@5.2.3':
+    resolution: {integrity: sha512-oY7GVkJGVMI5benlBDCaRrSC1qPasafyv5dOBLLv5MTilMGnErKhO6ziEfodDDIZbo5QxPUNW360VudJOFODMw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
-      eslint: '>=8.40.0'
+      eslint: '>=9.0.0'
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -9125,6 +9125,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@babel/plugin-transform-async-generator-functions@7.28.0(@babel/core@7.27.7)':
+    dependencies:
+      '@babel/core': 7.27.7
+      '@babel/helper-plugin-utils': 7.27.1
+      '@babel/helper-remap-async-to-generator': 7.27.1(@babel/core@7.27.7)
+      '@babel/traverse': 7.28.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@babel/plugin-transform-async-to-generator@7.27.1(@babel/core@7.25.8)':
     dependencies:
       '@babel/core': 7.25.8
@@ -9844,7 +9853,7 @@ snapshots:
       '@babel/plugin-syntax-import-attributes': 7.27.1(@babel/core@7.27.7)
       '@babel/plugin-syntax-unicode-sets-regex': 7.18.6(@babel/core@7.27.7)
       '@babel/plugin-transform-arrow-functions': 7.27.1(@babel/core@7.27.7)
-      '@babel/plugin-transform-async-generator-functions': 7.27.1(@babel/core@7.27.7)
+      '@babel/plugin-transform-async-generator-functions': 7.28.0(@babel/core@7.27.7)
       '@babel/plugin-transform-async-to-generator': 7.27.1(@babel/core@7.27.7)
       '@babel/plugin-transform-block-scoped-functions': 7.27.1(@babel/core@7.27.7)
       '@babel/plugin-transform-block-scoping': 7.28.0(@babel/core@7.27.7)
@@ -11429,17 +11438,15 @@ snapshots:
       '@vitest/spy': 2.0.5
       storybook: 9.1.2(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.0.6(@types/node@20.19.11)(jiti@1.21.7)(less@4.3.0)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.1))
 
-  '@stylistic/eslint-plugin@2.13.0(eslint@9.33.0(jiti@1.21.7))(typescript@5.8.3)':
+  '@stylistic/eslint-plugin@5.2.3(eslint@9.33.0(jiti@1.21.7))':
     dependencies:
-      '@typescript-eslint/utils': 8.39.1(eslint@9.33.0(jiti@1.21.7))(typescript@5.8.3)
+      '@eslint-community/eslint-utils': 4.7.0(eslint@9.33.0(jiti@1.21.7))
+      '@typescript-eslint/types': 8.39.1
       eslint: 9.33.0(jiti@1.21.7)
       eslint-visitor-keys: 4.2.1
       espree: 10.4.0
       estraverse: 5.3.0
       picomatch: 4.0.3
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
 
   '@testing-library/dom@10.4.0':
     dependencies:

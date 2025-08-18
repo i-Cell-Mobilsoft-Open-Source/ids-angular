@@ -1,0 +1,113 @@
+<ng-template #content>
+  <ng-content/>
+</ng-template>
+
+<ng-template #customHeader>
+  <ng-content select="[slot='customHeader']"/>
+</ng-template>
+
+<ng-template #footer>
+  <ng-content select="[slot='footer']"/>
+</ng-template>
+
+@if (open() && type() === _idsSideSheetType.OVERLAY) {
+  @if(isBackdrop()) {
+    <div class="ids-side-sheet__backdrop" (click)="_close()"></div>
+  }
+  <div
+    class="ids-side-sheet__container"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="side-sheet-title"
+    [class.right]="position() === _idsSideSheetPositionType.RIGHT"
+    [@slideInOut]="position()">
+    @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
+      <div class="ids-side-sheet__header-custom-top-row">
+        <button
+          class="ids-side-sheet__close-btn"
+          type="button" idsIconButton
+          [variant]="'surface'" [appearance]="'standard'"
+          [idsTooltip]="closeTooltipText()"
+          (click)="_close()"
+        >
+          <ids-icon aria-hidden="true" alt="" fontIcon="close" />
+        </button>
+      </div>
+    }
+    <app-side-sheet-header
+      [ngClass]="{
+        'ids-side-sheet__header--custom': header() === _idsSideSheetHeaderType.CUSTOM,
+        'ids-side-sheet__header--default': header() !== _idsSideSheetHeaderType.CUSTOM
+      }"
+      [header]="header()"
+      [isShowHeader]="isShowHeader()"
+      [title]="title()"
+      [backButton]="backButton()"
+      [isClosable]="isClosable()"
+      [closeTooltipText]="closeTooltipText()"
+      (closed)="_close()"
+      (backClicked)="_onBack()"
+    >
+      @if (header() === _idsSideSheetHeaderType.CUSTOM) {
+        <ng-container *ngTemplateOutlet="customHeader"/>
+      }
+    </app-side-sheet-header>
+    <div class="ids-side-sheet__content" [ngClass]="{ 'ids-side-sheet__content--scrollable': isScrollable() }">
+      <ng-container *ngTemplateOutlet="content"/>
+    </div>
+      <div class="ids-side-sheet__footer">
+        <ng-container *ngTemplateOutlet="footer"/>
+      </div>
+  </div>
+}
+@if (open() && type() === _idsSideSheetType.INLINE) {
+  <div
+    class="ids-side-sheet__container--inline"
+    role="region"
+    aria-labelledby="side-sheet-title"
+    cdkTrapFocus
+    [class.right]="position() === _idsSideSheetPositionType.RIGHT"
+    [@slideInOut]="position()">
+    @if(isClosable() && header() === _idsSideSheetHeaderType.CUSTOM) {
+      <div class="ids-side-sheet__header-custom-top-row">
+
+          <button
+            class="ids-side-sheet__close-btn"
+            type="button"
+            idsIconButton
+            [variant]="'surface'"
+            [appearance]="'standard'"
+            [idsTooltip]="closeTooltipText()"
+            (click)="_close()"
+          >
+            <ids-icon aria-hidden="true" alt="" fontIcon="close" />
+          </button>
+      </div>
+    }
+
+    <app-side-sheet-header
+      [ngClass]="{
+        'ids-side-sheet__header--custom': header() === _idsSideSheetHeaderType.CUSTOM,
+        'ids-side-sheet__header--default': header() !== _idsSideSheetHeaderType.CUSTOM
+      }"
+      [header]="header()"
+      [isShowHeader]="isShowHeader()"
+      [title]="title()"
+      [backButton]="backButton()"
+      [isClosable]="isClosable()"
+      [closeTooltipText]="closeTooltipText()"
+      (closed)="_close()"
+      (backClicked)="_onBack()"
+    >
+      @if (header() === _idsSideSheetHeaderType.CUSTOM) {
+        <ng-container *ngTemplateOutlet="customHeader"/>
+      }
+    </app-side-sheet-header>
+    <div class="ids-side-sheet__content" [ngClass]="{ 'ids-side-sheet__content--scrollable': isScrollable() }">
+      <ng-container *ngTemplateOutlet="content"/>
+    </div>
+      <div class="ids-side-sheet__footer">
+        <ng-container *ngTemplateOutlet="footer"/>
+      </div>
+  </div>
+}

@@ -1,4 +1,3 @@
-/* eslint-disable @stylistic/js/max-len */
 export const ISSUE_DATA = [
   { id: 1,
     title: 'New request',

@@ -1,7 +1,5 @@
 import { routes } from './app.routes';
 
-import { environment } from '../environments/environment';
-
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom, inject } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -9,12 +7,12 @@ import { provideRouter, withHashLocation } from '@angular/router';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { IDS_ICON_DEFAULT_CONFIG, IdsIconDefaultConfig } from '@i-cell/ids-angular/icon';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TRANSLATE_HTTP_LOADER_CONFIG, TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideApollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 
-export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(httpClient, `${environment.baseUrl}/assets/i18n/`);
+export function HttpLoaderFactory(): TranslateHttpLoader {
+  return new TranslateHttpLoader();
 }
 
 const iconDefaultConfig: IdsIconDefaultConfig = {
@@ -45,5 +43,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAnimations(),
     { provide: IDS_ICON_DEFAULT_CONFIG, useValue: iconDefaultConfig },
+    { provide: TRANSLATE_HTTP_LOADER_CONFIG, useValue: {} },
   ],
 };

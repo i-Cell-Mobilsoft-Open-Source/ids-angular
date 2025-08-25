@@ -13,7 +13,7 @@
           <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
         </div>
 
-        @for (item of componentBlocks; track trackByBlock) {
+        @for (item of componentBlocks; track $index) {
           @if (item.type === "heading") {
             <h2>
               {{ item.heading }}

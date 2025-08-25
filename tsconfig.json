@@ -15,18 +15,36 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2023",
     "module": "ESNext",
     "useDefineForClassFields": false,
-    "lib": ["ES2023", "dom"],
-    "types": ["node", "jest", "cypress", "cypress-real-events"],
+    "lib": [
+      "ES2023",
+      "dom"
+    ],
+    "types": [
+      "node",
+      "jest",
+      "cypress",
+      "cypress-real-events"
+    ],
     "paths": {
-      "@i-cell/ids-angular/*": ["projects/widgets/*", "projects/widgets"],
-      "@i-cell/ids-angular": ["dist/widgets/*", "dist/widgets"],
-      "@demo-utils/*": ["projects/demo/src/utils/*"],
-      "@demo-types/*": ["projects/demo/src/types/*"]
+      "@i-cell/ids-angular/*": [
+        "projects/widgets/*",
+        "projects/widgets"
+      ],
+      "@i-cell/ids-angular": [
+        "dist/widgets/*",
+        "dist/widgets"
+      ],
+      "@demo-utils/*": [
+        "projects/demo/src/utils/*"
+      ],
+      "@demo-types/*": [
+        "projects/demo/src/types/*"
+      ]
     }
   },
   "angularCompilerOptions": {

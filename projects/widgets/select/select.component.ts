@@ -472,7 +472,7 @@ export class IdsSelectComponent
 
       try {
         return valueCompareFn?.(option.value(), value);
-      } catch (error) {
+      } catch(error) {
         if (isDevMode()) {
           console.warn(error);
         }
@@ -574,7 +574,7 @@ export class IdsSelectComponent
   }
 
   public onContainerClick = (): void => {
-    if (!this._focused && !this.readonly() && !this.disabled()) {
+    if (!this._focused() && !this.readonly() && !this.disabled()) {
       this.focus();
       this.open();
     }

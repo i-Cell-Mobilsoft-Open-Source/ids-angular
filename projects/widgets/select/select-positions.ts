@@ -18,13 +18,11 @@ export const selectConnectedPositions: ConnectedPosition[] = [
     originY: 'top',
     overlayX: 'start',
     overlayY: 'bottom',
-    panelClass: 'ids-select-panel-above',
   },
   {
     originX: 'end',
     originY: 'top',
     overlayX: 'end',
     overlayY: 'bottom',
-    panelClass: 'ids-select-panel-above',
   },
 ];

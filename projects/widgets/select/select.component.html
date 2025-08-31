@@ -17,7 +17,6 @@
     <ids-icon fontIcon="chevron-down" />
   </div>
 </div>
-
 <ng-template
   cdk-connected-overlay
   cdkConnectedOverlayLockPosition
@@ -25,7 +24,6 @@
   [cdkConnectedOverlayOpen]="isPanelOpen()"
   [cdkConnectedOverlayPositions]="_connectedPositions"
   [cdkConnectedOverlayWidth]="_overlayWidth"
-  [cdkConnectedOverlayPush]="true"
   (overlayOutsideClick)="close()"
   (attach)="_panelAttached()"
   (detach)="close()"

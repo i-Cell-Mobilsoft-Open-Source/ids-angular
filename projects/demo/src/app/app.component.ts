@@ -1,11 +1,13 @@
 import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
+import { GraphqlService, NavigationQueryResult } from './services/graphql.service';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { DestroyRef, inject as angularInject, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { toSignal, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { ApolloQueryResult } from '@apollo/client/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSwitchComponent } from '@i-cell/ids-angular/switch';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -28,7 +30,7 @@ import { map, startWith, Subscription } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private _translate: TranslateService = inject(TranslateService);
+  private _translate: TranslateService = angularInject(TranslateService);
 
   private _subscription = new Subscription();
 
@@ -96,6 +98,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public currentLang = toSignal(this._translate.onLangChange.pipe(map(({ lang }) => lang), startWith(this._translate.currentLang)));
 
+  public dynamicMenu: Menu[] = [];
+  private _destroyRef = angularInject(DestroyRef);
+
   constructor() {
     this._changeTheme('light');
     this._translate.addLangs([
@@ -105,6 +110,22 @@ export class AppComponent implements OnInit, OnDestroy {
     this._translate.setDefaultLang('en');
     const browserLang = this._translate.getBrowserLang();
     this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
+
+    const graphqlService = angularInject(GraphqlService);
+    graphqlService.getNavigation().pipe(
+      takeUntilDestroyed(this._destroyRef),
+    ).subscribe((result: ApolloQueryResult<NavigationQueryResult>) => {
+      const navTree = result.data.navs?.[0]?.tree || [];
+      this.dynamicMenu = this._mapStatamicNavToMenu(navTree);
+    });
+  }
+
+  private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
+    return tree.map((node) => ({
+      name: node.page?.title,
+      path: node.page?.slug ? `/${node.page.slug}` : undefined,
+      children: node.children ? this._mapStatamicNavToMenu(node.children) : [],
+    }));
   }
 
   public ngOnInit(): void {
@@ -130,4 +151,11 @@ export class AppComponent implements OnInit, OnDestroy {
   public changeLanguage(lang: 'en' | 'hu'): void {
     this._translate.use(lang);
   }
+}
+
+// Add StatamicNavNode type
+interface StatamicNavNode {
+  depth: number;
+  page?: { title?: string; id?: string; slug?: string };
+  children?: StatamicNavNode[];
 }

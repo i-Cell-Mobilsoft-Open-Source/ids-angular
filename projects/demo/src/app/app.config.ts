@@ -35,7 +35,6 @@ export const appConfig: ApplicationConfig = {
         enforceLoading: false,
         useHttpBackend: false,
       }),
-      fallbackLang: 'en',
     }),
     provideAnimations(),
     { provide: IDS_ICON_DEFAULT_CONFIG, useValue: iconDefaultConfig },

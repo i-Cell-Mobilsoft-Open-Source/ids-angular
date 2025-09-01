@@ -8,12 +8,14 @@ import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
+import { combineLatest, map } from 'rxjs';
 
 type ComponentBlock =
   | { type: 'heading'; heading: string }
@@ -41,18 +43,35 @@ export class ComponentDetailsComponent implements OnInit {
   public componentBlocks: ComponentBlock[] = [];
 
   private _graphqlService = inject(GraphqlService);
+  private _route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this._graphqlService.getComponents().subscribe((result) => {
-      const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
-      const components = typedResult.data.entries.data;
-
-      if (components.length === 0) {
+    combineLatest([
+      this._route.paramMap,
+      this._graphqlService.getComponents(),
+    ]).pipe(
+      map(([
+        params,
+        result,
+      ]) => {
+        const slug = params.get('slug');
+        const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
+        const components = typedResult.data.entries.data;
+        return { slug, components };
+      }),
+    ).subscribe(({ slug, components }) => {
+      if (!components || components.length === 0) {
+        this.heroData = undefined;
+        this.componentBlocks = [];
         return;
       }
-
-      const component = components[0];
-
+      let component: ComponentEntry | undefined = undefined;
+      if (slug) {
+        component = components.find((entry) => entry.slug === slug);
+      }
+      if (!component) {
+        component = components[0];
+      }
       this.heroData = {
         id: Number(component.id),
         title: component.title,
@@ -68,9 +87,7 @@ export class ComponentDetailsComponent implements OnInit {
           ? `${environment.cmsBaseUrl}${component.comp_img_dark_mode[0].url}`
           : '',
       };
-
       const blocks: ComponentBlock[] = [];
-
       for (const block of component.content) {
         if (block.__typename === 'Set_Content_Heading') {
           blocks.push({
@@ -78,7 +95,6 @@ export class ComponentDetailsComponent implements OnInit {
             heading: block.heading,
           });
         }
-
         if (block.__typename === 'Set_Content_Card') {
           blocks.push({
             type: 'card',
@@ -111,7 +127,6 @@ export class ComponentDetailsComponent implements OnInit {
           });
         }
       }
-
       this.componentBlocks = blocks;
     });
   }

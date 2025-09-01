@@ -4,6 +4,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'components/:slug',
+    component: ComponentDetailsComponent,
+  },
+  {
     path: 'components/component-details', component: ComponentDetailsComponent,
   },
   {

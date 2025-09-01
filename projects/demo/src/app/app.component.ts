@@ -123,7 +123,8 @@ export class AppComponent implements OnInit, OnDestroy {
   private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
     return tree.map((node) => ({
       name: node.page?.title,
-      path: node.page?.slug ? `/${node.page.slug}` : undefined,
+      // If node is a component (has a slug), link to /components/:slug
+      path: node.page?.slug ? `/components/${node.page.slug}` : undefined,
       children: node.children ? this._mapStatamicNavToMenu(node.children) : [],
     }));
   }

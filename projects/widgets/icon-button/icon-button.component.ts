@@ -54,11 +54,20 @@ export class IdsIconButtonComponent extends ComponentBaseWithDefaults<IdsIconBut
   protected _icons = contentChildren(IdsIconComponent);
 
   private _parentOrSelfAppearance = computed(() => this._parent?.embeddedIconButtonAppearance() ?? this.appearance());
+  private _parentOrSelfSize = computed(() => {
+    const embeddedIconButtonSize = this._parent?.embeddedIconButtonSize;
+    return embeddedIconButtonSize ? embeddedIconButtonSize() : this.size();
+  });
+
   private _parentOrSelfVariant = computed(() => this._parent?.embeddedIconButtonVariant() ?? this.variant());
-  private _parentOrSelfDisabled = computed(() => this._parent?.disabled() ?? this.disabled());
+  private _parentOrSelfDisabled = computed(() => {
+    const parentDisabled = this._parent?.disabled;
+    return parentDisabled ? parentDisabled() : this.disabled();
+  });
+
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfAppearance(),
-    this.size(),
+    this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
     this.disabled() ? 'disabled' : null,
   ]));

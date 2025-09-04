@@ -25,14 +25,14 @@
   },
   "homepage": "https://github.com/i-Cell-Mobilsoft-Open-Source/ids-angular#readme",
   "peerDependencies": {
-    "@angular/animations": "^19.1.2",
-    "@angular/cdk": "^19.1.0",
-    "@angular/common": "^19.1.2",
-    "@angular/core": "^19.1.2",
-    "@angular/forms": "^19.1.2",
-    "@angular/platform-browser": "^19.1.2",
-    "@angular/router": "^19.1.2",
-    "@i-cell/ids-styles": "^0.0.47"
+    "@angular/animations": "^20.1.7",
+    "@angular/cdk": "^20.1.6",
+    "@angular/common": "^20.1.7",
+    "@angular/core": "^20.1.7",
+    "@angular/forms": "^20.1.7",
+    "@angular/platform-browser": "^20.1.7",
+    "@angular/router": "^20.1.7",
+    "@i-cell/ids-styles": "^0.0.48"
   },
   "dependencies": {
     "tslib": "^2.3.0"

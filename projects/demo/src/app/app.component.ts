@@ -101,6 +101,8 @@ export class AppComponent implements OnInit, OnDestroy {
   public dynamicMenu: Menu[] = [];
   private _destroyRef = angularInject(DestroyRef);
 
+  private _componentLevelDepth: number | undefined;
+
   constructor() {
     this._changeTheme('light');
     this._translate.addLangs([
@@ -116,17 +118,52 @@ export class AppComponent implements OnInit, OnDestroy {
       takeUntilDestroyed(this._destroyRef),
     ).subscribe((result: ApolloQueryResult<NavigationQueryResult>) => {
       const navTree = result.data.navs?.[0]?.tree || [];
+      this._componentLevelDepth = this._findDeepestLevel(navTree);
       this.dynamicMenu = this._mapStatamicNavToMenu(navTree);
     });
   }
 
+  // Find the deepest level in the Statamic navigation tree
+  private _findDeepestLevel(tree: readonly StatamicNavNode[], currentDepth = 0): number {
+    if (!tree || tree.length === 0) {
+      return currentDepth;
+    }
+    return Math.max(
+      ...tree.map((node: StatamicNavNode) =>
+        this._findDeepestLevel(node.children ?? [], node.depth),
+      ),
+    );
+  }
+
   private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
-    return tree.map((node) => ({
-      name: node.page?.title,
-      // If node is a component (has a slug), link to /components/:slug
-      path: node.page?.slug ? `/components/${node.page.slug}` : undefined,
-      children: node.children ? this._mapStatamicNavToMenu(node.children) : [],
-    }));
+    let menu = tree.map((node) => {
+      let path: string | undefined = undefined;
+      if (node.page?.slug) {
+        // Only link to /components/:slug for component-level items (depth >= _componentLevelDepth)
+        if (this._componentLevelDepth !== undefined && node.depth >= this._componentLevelDepth) {
+          path = `/components/${node.page.slug}`;
+        } else {
+          path = `/${node.page.slug}`;
+        }
+      }
+      return {
+        name: node.page?.title,
+        path,
+        children: node.children ? this._mapStatamicNavToMenu(node.children) : [],
+      };
+    });
+
+    // Sort only at the component level
+    if (tree.length > 0 && this._componentLevelDepth !== undefined && tree[0].depth === this._componentLevelDepth) {
+      menu = [...menu].sort((a, b) => {
+        if (a.name && b.name) {
+          return a.name.localeCompare(b.name);
+        }
+        return 0;
+      });
+    }
+
+    return menu;
   }
 
   public ngOnInit(): void {

@@ -136,7 +136,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
-    let menu = tree.map((node) => {
+    return tree.map((node) => {
       let path: string | undefined = undefined;
       if (node.page?.slug) {
         // Only link to /components/:slug for component-level items (depth >= _componentLevelDepth)
@@ -152,18 +152,6 @@ export class AppComponent implements OnInit, OnDestroy {
         children: node.children ? this._mapStatamicNavToMenu(node.children) : [],
       };
     });
-
-    // Sort only at the component level
-    if (tree.length > 0 && this._componentLevelDepth !== undefined && tree[0].depth === this._componentLevelDepth) {
-      menu = [...menu].sort((a, b) => {
-        if (a.name && b.name) {
-          return a.name.localeCompare(b.name);
-        }
-        return 0;
-      });
-    }
-
-    return menu;
   }
 
   public ngOnInit(): void {

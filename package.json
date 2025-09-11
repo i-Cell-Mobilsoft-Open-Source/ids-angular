@@ -34,7 +34,7 @@
     "@angular/platform-browser-dynamic": "^20.1.7",
     "@angular/router": "^20.1.7",
     "@apollo/client": "^3.13.9",
-    "@i-cell/ids-styles": "^0.0.48",
+    "@i-cell/ids-styles": "^0.0.49",
     "@i-cell/ids-tokens": "0.0.36",
     "@ngx-translate/core": "17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",

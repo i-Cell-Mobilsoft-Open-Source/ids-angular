@@ -18,6 +18,6 @@
   />
   <div class="ids-radio__inner-circle" (click)="_innerCircleClick()"></div>
 </div>
-<label class="ids-radio__label" [for]="inputId()">
+<label class="ids-radio__label" [for]="inputId()" (click)="_touchTargetClick()">
   <ng-content />
 </label>

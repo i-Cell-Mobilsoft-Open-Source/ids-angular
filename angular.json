@@ -82,7 +82,7 @@
             },
             "github": {
               "outputHashing": "all",
-              "baseHref": "/ids-angular/",
+              "baseHref": "/",
               "fileReplacements": [
                 {
                   "replace": "projects/demo/src/environments/environment.ts",

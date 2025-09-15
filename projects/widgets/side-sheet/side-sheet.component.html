@@ -28,6 +28,7 @@
           type="button" idsIconButton
           [variant]="'surface'" [appearance]="'standard'"
           [idsTooltip]="closeTooltipText()"
+          [idsTooltipIgnoreClipped]="true"
           (click)="_close()"
         >
           <ids-icon aria-hidden="true" alt="" fontIcon="close" />
@@ -78,6 +79,7 @@
             [variant]="'surface'"
             [appearance]="'standard'"
             [idsTooltip]="closeTooltipText()"
+            [idsTooltipIgnoreClipped]="true"
             (click)="_close()"
           >
             <ids-icon aria-hidden="true" alt="" fontIcon="close" />

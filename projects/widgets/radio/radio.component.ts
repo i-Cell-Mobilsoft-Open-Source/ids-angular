@@ -32,6 +32,7 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
   protected _name = computed(() => this._group?.name());
   protected _required = computed(() => this._group?.required());
   protected _ariaChecked = computed(() => this.selected());
+  protected _inputId = computed(() => (this.inputId() === this._uniqueId ? `${this._uniqueId}-native` : this.inputId()));
   protected _hostClasses = computed(() => this._getHostClasses([
     this._group?.variant() ?? null,
     this._group?.labelPosition() ?? null,

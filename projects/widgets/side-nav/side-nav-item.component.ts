@@ -1,8 +1,7 @@
 import { IDS_SIDE_NAV_PARENT } from './tokens/ids-side-nav-parent';
 
-import { animate, style, transition, trigger } from '@angular/animations';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, contentChild, contentChildren, inject, input, TemplateRef } from '@angular/core';
+import { Component, computed, contentChild, contentChildren, effect, inject, input, TemplateRef, untracked } from '@angular/core';
 import { Router } from '@angular/router';
 import { coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -29,10 +28,10 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
       [class.ids-side-nav-item-expandable-summary]="_expandable()"
       [attr.tabindex]="!disabled() ? 0 : null"
       [attr.disabled]="disabled() ? '' : null"
-      [attr.is-active]="_active() ? '' : null"
-      [attr.is-active-indicator]="_active() && _parent?.hasActiveIndicator() ? '' : null"
+      [attr.is-active]="active() ? '' : null"
+      [attr.is-active-indicator]="active() && _parent?.hasActiveIndicator() ? '' : null"
       [attr.aria-disabled]="disabled() ? '' : null"
-      [attr.aria-current]="_active()"
+      [attr.aria-current]="active()"
       [attr.aria-expanded]="!_expandable() ? null : _expanded ? 'true' : 'false'"
       [attr.aria-label]="label()"
       (keydown)="_onKeyDown($event)"
@@ -53,39 +52,26 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
         </button>
       }
     </a>
-    @if (_expandable() && _expanded) {
-      <ul @enterLeave class="ids-side-nav-item-expandable-submenu">
+    @if (_expandable()) {
+      <ul class="ids-side-nav-item-expandable-submenu"  [class.expanded]="_expanded">
         <ng-content select="ids-side-nav-item,[idsSideNavItem]" />
         <ng-container *ngTemplateOutlet="_contentTemplate()" />
       </ul>
     }
-    <ng-content select="ng-template"/>
+    <ng-content select="ng-template" />
   `,
   host: {
     class: 'ids-side-nav-item',
     '[class.ids-side-nav-item-expandable]': '_expandable()',
     '[role]': '_expandable() ? "group" : "treeitem"',
   },
-  animations: [
-    trigger('enterLeave', [
-      transition(':enter', [
-        style({ height: 0, opacity: 0 }),
-        animate('150ms ease-out', style({ height: '*' })),
-        animate('150ms ease-in', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('150ms ease-out', style({ opacity: 0 })),
-        animate('150ms ease-in', style({ height: 0 })),
-      ]),
-    ]),
-  ],
 })
 export class IdsSideNavItemComponent {
   public disabled = input(false, { transform: (value: boolean | string) => coerceBooleanAttribute(value) });
   public label = input.required<string>();
   public target = input<string>('');
   public templateChildren = input<TemplateRef<HTMLElement>>();
-  protected _active = computed(() =>
+  public active = computed(() =>
     this._router.isActive(this.target(), { paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored' }),
   );
 
@@ -96,16 +82,34 @@ export class IdsSideNavItemComponent {
   protected readonly _parent = inject(IDS_SIDE_NAV_PARENT, { optional: true });
   protected readonly _contentTemplate = contentChild('idsSideNavItemChildren', { read: TemplateRef });
   private readonly _contentChildren = contentChildren(IdsSideNavItemComponent);
-  private readonly _router = inject(Router);
+  private readonly _router = inject(Router, { skipSelf: true });
+
+  constructor() {
+    effect(() => {
+      const sideNavChildren = this._contentChildren();
+
+      untracked(() => {
+        sideNavChildren.forEach((child) => {
+          if (child.active()) {
+            this._expanded = true;
+          }
+        });
+      });
+    });
+  }
 
   protected _onClick(event: MouseEvent): void {
     if (this.disabled()) {
       return;
     }
-    if ([
-      'button',
-      'ids-icon',
-    ].includes((event.target as Element).localName)) {
+    const eventTarget = event.target as Element;
+
+    if (!this.target()) {
+      this._toggle();
+    } else if (
+      eventTarget.localName === 'button' ||
+      (eventTarget.localName === 'ids-icon' && !eventTarget.hasAttribute('icon-leading') && !eventTarget.hasAttribute('icon-trailing'))
+    ) {
       this._toggle();
     } else {
       this._navigate();

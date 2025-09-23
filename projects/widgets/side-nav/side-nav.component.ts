@@ -1,11 +1,20 @@
 import { IDS_SIDE_NAV_DEFAULT_CONFIG, IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY, IdsSideNavDefaultConfig } from './side-nav-defaults';
 import { IDS_SIDE_NAV_PARENT } from './tokens/ids-side-nav-parent';
+import { IDS_SIDE_NAV_ROUTER } from './tokens/ids-side-nav-router';
 import { IdsSideNavAppearanceType } from './types/side-nav-appearance.type';
 import { IdsSideNavVariantType } from './types/side-nav-variant.type';
 
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearanceType, IdsIconButtonVariantType, IdsIconButtonParent } from '@i-cell/ids-angular/icon-button';
+import {
+  IDS_ICON_BUTTON_PARENT,
+  IdsIconButtonAppearanceType,
+  IdsIconButtonVariantType,
+  IdsIconButtonParent,
+} from '@i-cell/ids-angular/icon-button';
+import { filter } from 'rxjs';
 
 const defaultConfig = IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY();
 
@@ -29,6 +38,10 @@ const defaultConfig = IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY();
       provide: IDS_SIDE_NAV_PARENT,
       useExisting: IdsSideNavComponent,
     },
+    {
+      provide: IDS_SIDE_NAV_ROUTER,
+      useExisting: Router,
+    },
   ],
 })
 export class IdsSideNavComponent extends ComponentBaseWithDefaults<IdsSideNavDefaultConfig> implements IdsIconButtonParent {
@@ -37,12 +50,18 @@ export class IdsSideNavComponent extends ComponentBaseWithDefaults<IdsSideNavDef
   }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_SIDE_NAV_DEFAULT_CONFIG);
+  protected readonly _router = inject(IDS_SIDE_NAV_ROUTER);
 
   public appearance = input<IdsSideNavAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsSideNavVariantType>(this._defaultConfig.variant);
   public hasLabel = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasLabel));
   public hasActiveIndicator = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasActiveIndicator));
+  public navigationChange = toSignal(
+    this._router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+    ),
+  );
 
   public embeddedIconButtonAppearance = computed<IdsIconButtonAppearanceType>(() => this.appearance());
   public embeddedIconButtonVariant = computed<IdsIconButtonVariantType>(() => this.variant());

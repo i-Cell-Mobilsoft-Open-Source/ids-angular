@@ -1,8 +1,8 @@
 import { IDS_SIDE_NAV_PARENT } from './tokens/ids-side-nav-parent';
+import { IDS_SIDE_NAV_ROUTER } from './tokens/ids-side-nav-router';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, contentChild, contentChildren, effect, inject, input, TemplateRef, untracked } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, computed, contentChild, contentChildren, inject, input, linkedSignal, TemplateRef } from '@angular/core';
 import { coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -32,7 +32,7 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
       [attr.is-active-indicator]="active() && _parent?.hasActiveIndicator() ? '' : null"
       [attr.aria-disabled]="disabled() ? '' : null"
       [attr.aria-current]="active()"
-      [attr.aria-expanded]="!_expandable() ? null : _expanded ? 'true' : 'false'"
+      [attr.aria-expanded]="!_expandable() ? null : _expanded() ? 'true' : 'false'"
       [attr.aria-label]="label()"
       (keydown)="_onKeyDown($event)"
       (click)="_onClick($event)"
@@ -48,12 +48,12 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
       }
       @if (_expandable()) {
         <button idsIconButton type="button" [disabled]="disabled()">
-          <ids-icon aria-hidden="true" alt="" [fontIcon]="_expanded ? 'chevron-up' : 'chevron-down'" />
+          <ids-icon aria-hidden="true" alt="" [fontIcon]="_expanded() ? 'chevron-up' : 'chevron-down'" />
         </button>
       }
     </a>
     @if (_expandable()) {
-      <ul class="ids-side-nav-item-expandable-submenu"  [class.expanded]="_expanded">
+      <ul class="ids-side-nav-item-expandable-submenu" [class.expanded]="_expanded()">
         <ng-content select="ids-side-nav-item,[idsSideNavItem]" />
         <ng-container *ngTemplateOutlet="_contentTemplate()" />
       </ul>
@@ -71,32 +71,23 @@ export class IdsSideNavItemComponent {
   public label = input.required<string>();
   public target = input<string>('');
   public templateChildren = input<TemplateRef<HTMLElement>>();
-  public active = computed(() =>
-    this._router.isActive(this.target(), { paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored' }),
-  );
+  public active = computed(() => {
+    this._parent?.navigationChange();
+    return this._router.isActive(this.target(), { paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored' });
+  });
 
   protected _expandable = computed(() => this._contentChildren().length > 0 || this._contentTemplate());
-  protected _expanded = false;
+  protected _expanded = linkedSignal(() => {
+    this._parent?.navigationChange();
+    return this._contentChildren().some((child) => child.active());
+  });
+
   protected _iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
   protected _iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
   protected readonly _parent = inject(IDS_SIDE_NAV_PARENT, { optional: true });
   protected readonly _contentTemplate = contentChild('idsSideNavItemChildren', { read: TemplateRef });
   private readonly _contentChildren = contentChildren(IdsSideNavItemComponent);
-  private readonly _router = inject(Router, { skipSelf: true });
-
-  constructor() {
-    effect(() => {
-      const sideNavChildren = this._contentChildren();
-
-      untracked(() => {
-        sideNavChildren.forEach((child) => {
-          if (child.active()) {
-            this._expanded = true;
-          }
-        });
-      });
-    });
-  }
+  private readonly _router = inject(IDS_SIDE_NAV_ROUTER, { skipSelf: true });
 
   protected _onClick(event: MouseEvent): void {
     if (this.disabled()) {
@@ -143,7 +134,7 @@ export class IdsSideNavItemComponent {
 
   protected _toggle(): void {
     if (this._expandable()) {
-      this._expanded = !this._expanded;
+      this._expanded.set(!this._expanded());
     }
   }
 

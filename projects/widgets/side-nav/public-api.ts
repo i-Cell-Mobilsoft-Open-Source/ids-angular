@@ -1,3 +1,4 @@
+export * from './tokens/ids-side-nav-router';
 export * from './types/side-nav-variant.type';
 export * from './types/side-nav-appearance.type';
 export * from './side-nav-defaults';

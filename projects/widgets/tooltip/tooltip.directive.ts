@@ -61,6 +61,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
   public textAlign = input<IdsTooltipTextAlign>('auto', { alias: 'idsTooltipTextAlign' });
   public tooltipClass = input<string | undefined>(undefined, { alias: 'idsTooltipClass' });
   public showPointer = input<boolean>(this._defaultConfig.showPointer, { alias: 'idsTooltipShowPointer' });
+  public ignoreClipped = input<boolean>(false, { alias: 'idsTooltipIgnoreClipped' });
 
   protected _hostClasses = computed(() => this._getHostClasses([]));
 
@@ -163,7 +164,10 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     strategy.positionChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((change) => {
       this._updateCurrentPositionClass(change.connectionPair);
 
-      if (change.scrollableViewProperties.isOverlayClipped && this._tooltipInstance) {
+      if (!this.ignoreClipped() &&
+        change.scrollableViewProperties.isOverlayClipped &&
+        this._tooltipInstance
+      ) {
         this._ngZone.run(() => this.hide(0));
       }
     });

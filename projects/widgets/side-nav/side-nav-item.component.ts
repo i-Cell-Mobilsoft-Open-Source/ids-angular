@@ -6,6 +6,7 @@ import { Component, computed, contentChild, contentChildren, inject, input, link
 import { coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 /**
  * Side navigation item
@@ -20,10 +21,13 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
   imports: [
     IdsIconComponent,
     IdsIconButtonComponent,
+    IdsTooltipDirective,
     NgTemplateOutlet,
   ],
   template: `
     <a
+      idsTooltipPosition="east"
+      [idsTooltip]="_parent?.hasLabel() ? '' : label()"
       [class.ids-side-nav-item-single]="!_expandable()"
       [class.ids-side-nav-item-expandable-summary]="_expandable()"
       [attr.tabindex]="!disabled() ? 0 : null"

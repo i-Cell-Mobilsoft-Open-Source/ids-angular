@@ -12,57 +12,57 @@
       <ids-side-nav-section>
         <ids-side-nav-title label="Built with component selectors">
           @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="moon" />
+            <ids-icon icon-leading fontIcon="cart" />
           }
           @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="moon" />
+            <ids-icon icon-trailing fontIcon="cart" />
           }
         </ids-side-nav-title>
         <ids-side-nav-item label="Design Tokens" target="design-tokens" [disabled]="helperModel.disabled">
           @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="adjustments-horizontal" />
+            <ids-icon icon-leading fontIcon="filter" />
           }
           @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="adjustments-horizontal" />
+            <ids-icon icon-trailing fontIcon="filter" />
           }
         </ids-side-nav-item>
         <ids-side-nav-item label="Home" target="/" [disabled]="helperModel.disabled">
           @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="home-filled" />
+            <ids-icon icon-leading fontIcon="home" />
           }
           @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="home-filled" />
+            <ids-icon icon-trailing fontIcon="home" />
           }
         </ids-side-nav-item>
         <ids-side-nav-item label="Components" target="components" [disabled]="helperModel.disabled">
           @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="more-horizontal" />
+            <ids-icon icon-leading fontIcon="more-horiz" />
           }
           @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="more-horizontal" />
+            <ids-icon icon-trailing fontIcon="more-horiz" />
           }
           <ids-side-nav-item [label]="helperModel.text" [target]="helperModel.target" [disabled]="helperModel.disabled">
             @if (helperModel.hasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="question-mark-circle-filled" />
+              <ids-icon icon-leading fontIcon="help-circle" />
             }
             @if (helperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="question-mark-circle-filled" />
+              <ids-icon icon-trailing fontIcon="help-circle" />
             }
           </ids-side-nav-item>
           <ids-side-nav-item label="Avatar" target="components/avatar" [disabled]="helperModel.disabled">
             @if (helperModel.hasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="user" />
+              <ids-icon icon-leading fontIcon="account" />
             }
             @if (helperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="user" />
+              <ids-icon icon-trailing fontIcon="account" />
             }
           </ids-side-nav-item>
           <ids-side-nav-item label="Side Navigation" target="components/side-nav" [disabled]="helperModel.disabled">
             @if (helperModel.hasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="bars-3" />
+              <ids-icon icon-leading fontIcon="menu" />
             }
             @if (helperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="bars-3" />
+              <ids-icon icon-trailing fontIcon="menu" />
             }
           </ids-side-nav-item>
         </ids-side-nav-item>
@@ -74,34 +74,34 @@
       <ul idsSideNavSection>
         <li idsSideNavTitle label="Built with semantic elements">
           @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="sun" />
+            <ids-icon icon-leading fontIcon="cctv" />
           }
           @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="sun" />
+            <ids-icon icon-trailing fontIcon="cctv" />
           }
         </li>
         <li idsSideNavItem label="Design Tokens" target="design-tokens" [disabled]="helperModel.disabled">
           @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="adjustments-horizontal" />
+            <ids-icon icon-leading fontIcon="filter" />
           }
           @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="adjustments-horizontal" />
+            <ids-icon icon-trailing fontIcon="filter" />
           }
         </li>
         <li idsSideNavItem label="Home" target="/" [disabled]="helperModel.disabled">
           @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="home-filled" />
+            <ids-icon icon-leading fontIcon="home" />
           }
           @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="home-filled" />
+            <ids-icon icon-trailing fontIcon="home" />
           }
         </li>
         <li idsSideNavItem label="Components" target="components" [disabled]="helperModel.disabled">
           @if (helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="more-horizontal" />
+            <ids-icon icon-leading fontIcon="more-horiz" />
           }
           @if (helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="more-horizontal" />
+            <ids-icon icon-trailing fontIcon="more-horiz" />
           }
           <!-- in this case children should be listed in a template, marked with '#idsSideNavItemChildren' variable name-->
           <ng-template #idsSideNavItemChildren>

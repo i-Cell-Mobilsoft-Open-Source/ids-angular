@@ -41,7 +41,7 @@ export default {
         >
           ${hasPrefixIcon ? '<ids-icon icon-leading fontIcon="search" />' : ''}
           ${label}
-          ${hasSuffixIcon ? '<ids-icon icon-trailing fontIcon="check" />' : ''}
+          ${hasSuffixIcon ? '<ids-icon icon-trailing fontIcon="done" />' : ''}
         </button>
       `,
     };

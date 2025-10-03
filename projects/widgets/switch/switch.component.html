@@ -18,7 +18,7 @@
     @if (_hasTrackIcon()) {
       <div class="ids-switch__track-icon">
         @if (_isChecked()) {
-          <ids-icon aria-hidden="true" fontIcon="check" />
+          <ids-icon aria-hidden="true" fontIcon="done" />
         }
       </div>
       <div class="ids-switch__track-icon">
@@ -31,7 +31,7 @@
       @if (_hasHandleIcon()) {
         <!-- needs to be here duplicate ids-icon because of animation :enter and :leave -->
         @if (_isChecked()) {
-          <ids-icon aria-hidden="true" fontIcon="check" />
+          <ids-icon aria-hidden="true" fontIcon="done" />
         } @else {
           <ids-icon aria-hidden="true" fontIcon="close" />
         }

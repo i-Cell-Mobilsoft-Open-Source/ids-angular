@@ -37,13 +37,13 @@ body {
 
 @font-face {
   font-family: "IDS Icons";
-  src: url("./assets/fonts/I-DS-font-icon-default.eot");
+  src: url("./assets/fonts/I-DS-font-icon-material.eot");
   src:
     local("IDS Icons"),
-    local("I-DS-font-icon-default"),
-    url(./assets/fonts/I-DS-font-icon-default.woff2) format("woff2"),
-    url(./assets/fonts/I-DS-font-icon-default.woff) format("woff"),
-    url(./assets/fonts/I-DS-font-icon-default.ttf) format("truetype");
+    local("I-DS-font-icon-material"),
+    url(./assets/fonts/I-DS-font-icon-material.woff2) format("woff2"),
+    url(./assets/fonts/I-DS-font-icon-material.woff) format("woff"),
+    url(./assets/fonts/I-DS-font-icon-material.ttf) format("truetype");
 }
 
 @mixin designScrollbar {

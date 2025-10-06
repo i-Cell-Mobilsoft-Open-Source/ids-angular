@@ -116,6 +116,3 @@ jobs:
             echo "Pushing $t"
             docker push "$t"
           done
-
-      - name: Summary
-        run: echo "Final tags: ${{ steps.tags.outputs.TAG_LIST }}"

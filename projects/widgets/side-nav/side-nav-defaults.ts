@@ -10,6 +10,7 @@ export interface IdsSideNavDefaultConfig {
   variant?: IdsSideNavVariantType,
   hasActiveIndicator?: boolean,
   hasLabel?: boolean,
+  hasTooltip?: boolean,
 }
 
 export const IDS_SIDE_NAV_DEFAULT_CONFIG = new InjectionToken<IdsSideNavDefaultConfig>(
@@ -27,6 +28,7 @@ export function IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY(): Required<IdsSideNavDefaul
     variant: IdsSideNavVariant.SURFACE,
     hasActiveIndicator: false,
     hasLabel: true,
+    hasTooltip: false,
   };
 }
 

@@ -55,8 +55,9 @@ export class IdsSideNavComponent extends ComponentBaseWithDefaults<IdsSideNavDef
   public appearance = input<IdsSideNavAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsSideNavVariantType>(this._defaultConfig.variant);
-  public hasLabel = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasLabel));
   public hasActiveIndicator = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasActiveIndicator));
+  public hasLabel = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasLabel));
+  public hasTooltip = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasTooltip));
   public navigationChange = toSignal(
     this._router.events.pipe(
       filter((event) => event instanceof NavigationEnd),

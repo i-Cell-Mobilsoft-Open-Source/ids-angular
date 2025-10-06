@@ -24,6 +24,7 @@ type SideNavHelperControls = {
   disabled: boolean,
   hasActiveIndicator: boolean,
   hasLabel: boolean,
+  hasTooltip: boolean,
 };
 
 const sideNavDefaultConfig = IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY();
@@ -109,6 +110,12 @@ export class SideNavDemoComponent {
       description: 'Whether the side nav has label or not.',
       type: 'boolean',
       default: true,
+      control: DemoControl.CHECKBOX,
+    },
+    hasTooltip: {
+      description: 'Whether the side nav item has tooltip or not.',
+      type: 'boolean',
+      default: false,
       control: DemoControl.CHECKBOX,
     },
   };

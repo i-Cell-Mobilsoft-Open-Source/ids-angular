@@ -1,0 +1,101 @@
+<ids-card appearance="filled" class="control-card-group">
+  <header idsCardHeader>
+    <h2 idsCardTitle>{{ _caption() | sentenceCase }} controls</h2>
+  </header>
+
+    <ids-card-body style="overflow: visible;">
+    @for (control of _flatControls(); track $index) {
+      <div class="control-row">
+                <div class="control-name">{{ control.name }}</div>
+
+                <div class="control-input">
+          @let disabled = control.disabled ?? false;
+
+          @switch (control.control) {
+            @case (_demoControl.CHECKBOX) {
+              <ids-checkbox
+                type="checkbox"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)"
+              />
+            }
+            @case (_demoControl.SELECT) {
+              <ids-form-field style="width: 100%; z-index: 10; position: relative;">
+                <ids-select [disabled]="disabled" [(ngModel)]="model()[control.name]" (ngModelChange)="control.onModelChange?.($event)" style="width: 100%;">
+                  <ids-option-group>
+                  @for (item of control.list; track $index) {
+                    <ids-option [value]="item">{{ item }}</ids-option>
+                  }
+                  </ids-option-group>
+                </ids-select>
+              </ids-form-field>
+            }
+            @case (_demoControl.NUMBER) {
+              <ids-form-field style="width: 100%; z-index: 10; position: relative;">
+                <input
+                  idsInput
+                  type="number"
+                  [name]="control.name"
+                  [id]="control.name"
+                  [disabled]="disabled"
+                  [attr.min]="control.min"
+                  [attr.step]="control.step"
+                  [(ngModel)]="model()[control.name]"
+                  (ngModelChange)="control.onModelChange?.($event)"
+                  style="width: 100%;"
+                />
+              </ids-form-field>
+            }
+            <!-- @case (_demoControl.RANGE) {
+              <input
+                type="number"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [attr.min]="control.min"
+                [attr.step]="control.step"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)"
+                style="width: 100%;"               />
+            } -->
+            @case (_demoControl.DATE) {
+              <input
+                type="date"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)"
+                style="width: 100%;"               />
+            }
+            @case (_demoControl.NUMBERARRAY) {
+              <input
+                type="text"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.($event)"
+                style="width: 100%;"               />
+            }
+            @default {
+              <ids-form-field>
+                <input idsInput
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)"
+                style="width: 100%;" 
+                />
+              </ids-form-field>
+            }
+          }
+        </div>
+      </div>
+    }
+  </ids-card-body>
+</ids-card>

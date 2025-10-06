@@ -472,7 +472,7 @@ export class IdsSelectComponent
 
       try {
         return valueCompareFn?.(option.value(), value);
-      } catch (error) {
+      } catch(error) {
         if (isDevMode()) {
           console.warn(error);
         }

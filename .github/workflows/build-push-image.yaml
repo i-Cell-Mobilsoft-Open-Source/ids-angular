@@ -18,14 +18,28 @@ permissions:
   contents: read
   packages: write
 
+concurrency:
+  group: build-docker-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}
+  DOCKER_BUILDKIT: 1
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Short-circuit (docs only)
+        if: github.event_name == 'push'
+        run: |
+          changed=$(git diff --name-only HEAD~1 || true)
+          echo "$changed" | grep -Ev '^(README|docs|\.github/ISSUE_TEMPLATE)' >/dev/null || {
+            echo "Only docs changed, skipping."; exit 78;
+          } || true
+        continue-on-error: true
+
       - name: Resolve ref
         id: ref
         run: |
@@ -39,6 +53,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.ref.outputs.REF }}
+          fetch-depth: 0
 
       - name: Enable Corepack / pnpm
         run: corepack enable
@@ -55,28 +70,39 @@ jobs:
       - name: Build Angular
         run: pnpm run build:github
 
-      - name: List dist
-        run: ls -R dist || true
+      - name: Verify build output (fail if empty)
+        run: |
+          set -e
+          if [ ! -d dist ] || [ -z "$(find dist -type f -maxdepth 4 -print -quit 2>/dev/null)" ]; then
+            echo "ERROR: dist is empty. Build failed or wrong output path."
+            ls -R dist || true
+            exit 1
+          fi
+          echo "Dist contents OK."
+          find dist -maxdepth 2 -type d -print
 
       - name: Compute tags
         id: tags
         run: |
-          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
-            EVENT="${{ github.event_name }}"
-            REF_NAME="${{ steps.ref.outputs.REF }}"
-            SAFE_REF=$(echo "$REF_NAME" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//' | cut -c1-60)
-            TAG_LIST=""
-            if [ "$EVENT" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF_NAME" = "main" ]; then
-              TAG_LIST="$IMAGE_NAME:latest $IMAGE_NAME:${SAFE_REF}-${SHORT_SHA}"
-            elif [ "$EVENT" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-              RAW_TAG="$REF_NAME"
-              STRIPPED=$(echo "$RAW_TAG" | sed 's/^v//')
-              TAG_LIST="$IMAGE_NAME:$RAW_TAG $IMAGE_NAME:$STRIPPED $IMAGE_NAME:latest"
-            else
-              TAG_LIST="$IMAGE_NAME:${SAFE_REF}-${SHORT_SHA}"
-            fi
-            echo "TAG_LIST=$TAG_LIST" >> $GITHUB_OUTPUT
-            echo "Tags: $TAG_LIST"
+          set -euo pipefail
+          REF_NAME='${{ steps.ref.outputs.REF }}'
+          SHORT_SHA=$(echo '${{ github.sha }}' | cut -c1-7)
+          sanitize() {
+            echo "$1" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//' | cut -c1-60
+          }
+          TAG_LIST=""
+          if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF_NAME" = "main" ]; then
+            TAG_LIST="${IMAGE_NAME}:latest ${IMAGE_NAME}:main-${SHORT_SHA}"
+          elif [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            RAW="$REF_NAME"
+            STRIPPED=$(echo "$RAW" | sed 's/^v//')
+            TAG_LIST="${IMAGE_NAME}:$RAW ${IMAGE_NAME}:$STRIPPED ${IMAGE_NAME}:latest"
+          else
+            SAFE_REF=$(sanitize "$REF_NAME")
+            TAG_LIST="${IMAGE_NAME}:$SAFE_REF-${SHORT_SHA}"
+          fi
+          echo "TAG_LIST=$TAG_LIST" >> $GITHUB_OUTPUT
+          echo "Tags: $TAG_LIST"
 
       - name: Login GHCR
         if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true' }}
@@ -88,20 +114,24 @@ jobs:
 
       - name: Build image
         run: |
-          TAG_ARGS=""
-          for T in ${{ steps.tags.outputs.TAG_LIST }}; do
-            TAG_ARGS="$TAG_ARGS -t $T"
-          done
-          echo "docker build $TAG_ARGS ."
-          docker build $TAG_ARGS .
+          set -e
+            TAG_ARGS=""
+            for T in ${{ steps.tags.outputs.TAG_LIST }}; do
+              TAG_ARGS="$TAG_ARGS -t $T"
+            done
+            echo "docker build $TAG_ARGS ."
+            docker build $TAG_ARGS .
 
       - name: Push image(s)
         if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true' }}
         run: |
+          set -e
           for T in ${{ steps.tags.outputs.TAG_LIST }}; do
             echo "Pushing $T"
             docker push "$T"
           done
 
       - name: Summary
-        run: echo "Pushed tags: ${{ steps.tags.outputs.TAG_LIST }}"
+        run: |
+          echo "Pushed tags:"
+          echo "${{ steps.tags.outputs.TAG_LIST }}"

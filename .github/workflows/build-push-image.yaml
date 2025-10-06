@@ -92,4 +92,5 @@ jobs:
         run: docker push "${{ steps.tag.outputs.FINAL_TAG }}"
 
       - name: Summary
-        run: echo "Pushed: '${{ steps.tag.outputs.FINAL_TAG }}'"
+        run: |
+          echo "Pushed: ${{ steps.tag.outputs.FINAL_TAG }}"

@@ -1,0 +1,107 @@
+name: Build & Push Docker Image
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch or tag to build (defaults to the branch you start the run from)"
+        required: false
+      push_image:
+        description: "Push image? (true/false)"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Resolve ref
+        id: ref
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.ref }}" ]; then
+            echo "REF=${{ github.event.inputs.ref }}" >> $GITHUB_OUTPUT
+          else
+            echo "REF=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.ref.outputs.REF }}
+
+      - name: Enable Corepack / pnpm
+        run: corepack enable
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Angular
+        run: pnpm run build:github
+
+      - name: List dist
+        run: ls -R dist || true
+
+      - name: Compute tags
+        id: tags
+        run: |
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+            EVENT="${{ github.event_name }}"
+            REF_NAME="${{ steps.ref.outputs.REF }}"
+            SAFE_REF=$(echo "$REF_NAME" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//' | cut -c1-60)
+            TAG_LIST=""
+            if [ "$EVENT" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF_NAME" = "main" ]; then
+              TAG_LIST="$IMAGE_NAME:latest $IMAGE_NAME:${SAFE_REF}-${SHORT_SHA}"
+            elif [ "$EVENT" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+              RAW_TAG="$REF_NAME"
+              STRIPPED=$(echo "$RAW_TAG" | sed 's/^v//')
+              TAG_LIST="$IMAGE_NAME:$RAW_TAG $IMAGE_NAME:$STRIPPED $IMAGE_NAME:latest"
+            else
+              TAG_LIST="$IMAGE_NAME:${SAFE_REF}-${SHORT_SHA}"
+            fi
+            echo "TAG_LIST=$TAG_LIST" >> $GITHUB_OUTPUT
+            echo "Tags: $TAG_LIST"
+
+      - name: Login GHCR
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true' }}
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image
+        run: |
+          TAG_ARGS=""
+          for T in ${{ steps.tags.outputs.TAG_LIST }}; do
+            TAG_ARGS="$TAG_ARGS -t $T"
+          done
+          echo "docker build $TAG_ARGS ."
+          docker build $TAG_ARGS .
+
+      - name: Push image(s)
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true' }}
+        run: |
+          for T in ${{ steps.tags.outputs.TAG_LIST }}; do
+            echo "Pushing $T"
+            docker push "$T"
+          done
+
+      - name: Summary
+        run: echo "Pushed tags: ${{ steps.tags.outputs.TAG_LIST }}"

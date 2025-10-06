@@ -1,53 +1,33 @@
-import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { ButtonGroupInputControls, ButtonHelperControls, ButtonInputControls } from './button-demo.component';
+
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
+import { ButtonDemoControlsComponent } from '../button-refactor/button-demo-controls.component';
 
 import { Component } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY, IdsButtonGroupComponent, IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsButtonAppearance, IdsButtonVariant, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/button';
+import { IdsSize } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
-const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY();
-
-export type ButtonInputControls = {
-  appearance: IdsButtonAppearanceType,
-  size: IdsSizeType,
-  variant: IdsButtonVariantType,
-  disabled: boolean,
-  asLink: boolean,
-};
-
-export type ButtonHelperControls = {
-  text: string,
-  hasLeadingIcon: boolean,
-  hasTrailingIcon: boolean,
-};
-
-export type ButtonGroupInputControls = {
-  size: IdsSizeType,
-};
+const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'app-button-demo',
+  selector: 'app-button-demo-control',
   standalone: true,
   imports: [
-    TryoutComponent,
-    IdsButtonComponent,
-    IdsButtonGroupComponent,
-    IdsIconComponent,
+
+    TryoutControlComponent,
     TranslateModule,
+    ButtonDemoControlsComponent,
   ],
-  templateUrl: './button-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './button-demo.component.scss',
-  ],
+  templateUrl: './button-demo-control.component.html',
+  //styleUrls: ['./button-demo-content.component.scss'], // Létre kell hozni
 })
 
-export class ButtonDemoComponent {
+export class ButtonDemoControlComponent {
 
   protected _inputControlConfig: DemoControlConfig<ButtonInputControls> = {
     appearance: {
@@ -124,14 +104,4 @@ export class ButtonDemoComponent {
   public model: ButtonInputControls = { ...this.defaults };
   public helperModel: ButtonHelperControls = { ...this.helperDefaults };
   public groupModel: ButtonGroupInputControls = { ...this.groupDefaults };
-
-  public onClick(buttonName: string): void {
-    console.info(`${buttonName} button clicked`);
-  }
-
-  public reset(): void {
-    this.model = { ...this.defaults };
-    this.helperModel = { ...this.helperDefaults };
-    this.groupModel = { ...this.groupDefaults };
-  }
 }

@@ -1,0 +1,28 @@
+
+  <app-control-table-small
+  controls
+  [controlName]="'Button'"
+  [configType]="'input'"
+  [controlConfig]="inputControlConfig"
+  [model]="model"
+  (modelChange)="onModelChange($event)"
+  (resetted)="resetted.emit()"
+  />
+  <app-control-table-small
+  controls
+  [controlName]="'Button'"
+  [configType]="'helper'"
+  [controlConfig]="helperControlConfig"
+  [model]="helperModel"
+  (modelChange)="onHelperModelChange($event)"
+  (resetted)="resetted.emit()"
+  />
+  <app-control-table-small
+  controls
+  [controlName]="'Button group'"
+  [configType]="'input'"
+  [controlConfig]="groupInputControlConfig"
+  [model]="groupModel"
+  (modelChange)="onGroupModelChange($event)"
+  (resetted)="resetted.emit()"
+  />

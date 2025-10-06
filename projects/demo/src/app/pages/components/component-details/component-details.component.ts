@@ -6,6 +6,8 @@ import { ComponentEntry } from '../../../model/componentEntry';
 import { ContentCardData } from '../../../model/contentCardData';
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
+import { ButtonDemoControlComponent } from '../../button/button-demo-control.component';
+import { ButtonDemoComponent } from '../../button/button-demo.component';
 
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -34,10 +36,16 @@ type ComponentBlock =
     IdsCardComponent,
     IdsIconComponent,
     IdsIconButtonComponent,
+    ButtonDemoComponent,
+    // IdsFormFieldComponent,
+    // ControlTableComponent,
+    // ControlTableComponent,
+    ButtonDemoControlComponent,
   ],
   templateUrl: './component-details.component.html',
   styleUrl: './component-details.component.scss',
 })
+
 export class ComponentDetailsComponent implements OnInit {
   public heroData?: HeroData;
   public componentBlocks: ComponentBlock[] = [];

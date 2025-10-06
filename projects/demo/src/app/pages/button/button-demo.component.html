@@ -42,29 +42,4 @@
       </div>
     </div>
   </ng-container>
-
-  <app-control-table
-    controls
-    [controlName]="'Button'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Button'"
-    [configType]="'helper'"
-    [controlConfig]="_helperControlConfig"
-    [(model)]="helperModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Button group'"
-    [configType]="'input'"
-    [controlConfig]="_groupInputControlConfig"
-    [(model)]="groupModel"
-    (resetted)="reset()"
-  />
 </app-tryout>

@@ -2,7 +2,19 @@ import { IDS_SIDE_NAV_PARENT } from './tokens/ids-side-nav-parent';
 import { IDS_SIDE_NAV_ROUTER } from './tokens/ids-side-nav-router';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, contentChild, contentChildren, inject, input, linkedSignal, TemplateRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  contentChild,
+  contentChildren,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  linkedSignal,
+  TemplateRef,
+  untracked,
+} from '@angular/core';
 import { coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -27,7 +39,9 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
   template: `
     <a
       idsTooltipPosition="east"
-      [idsTooltip]="_parent?.hasLabel() ? '' : label()"
+      [idsTooltip]="label()"
+      [idsTooltipDisabled]="!_parent?.hasTooltip() || !label() || disabled()"
+      [idsTooltipIgnoreClipped]="true"
       [class.ids-side-nav-item-single]="!_expandable()"
       [class.ids-side-nav-item-expandable-summary]="_expandable()"
       [attr.tabindex]="!disabled() ? 0 : null"
@@ -92,6 +106,19 @@ export class IdsSideNavItemComponent {
   protected readonly _contentTemplate = contentChild('idsSideNavItemChildren', { read: TemplateRef });
   private readonly _contentChildren = contentChildren(IdsSideNavItemComponent);
   private readonly _router = inject(IDS_SIDE_NAV_ROUTER, { skipSelf: true });
+  private _elementRef = inject(ElementRef);
+
+  constructor() {
+    effect(() => {
+      const contentLength = this._contentChildren().length;
+
+      untracked(() => {
+        if (this._expandable()) {
+          this._elementRef.nativeElement.style.setProperty('--submenu-items-count', contentLength.toString());
+        }
+      });
+    });
+  }
 
   protected _onClick(event: MouseEvent): void {
     if (this.disabled()) {

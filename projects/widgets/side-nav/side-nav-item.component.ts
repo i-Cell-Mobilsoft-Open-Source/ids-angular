@@ -41,6 +41,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
       idsTooltipPosition="east"
       [idsTooltip]="label()"
       [idsTooltipDisabled]="!_parent?.hasTooltip() || !label() || disabled()"
+      [idsTooltipIgnoreClipped]="true"
       [class.ids-side-nav-item-single]="!_expandable()"
       [class.ids-side-nav-item-expandable-summary]="_expandable()"
       [attr.tabindex]="!disabled() ? 0 : null"

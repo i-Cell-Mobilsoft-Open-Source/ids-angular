@@ -38,7 +38,7 @@ const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
     '(close)': '_onNativeClose()',
   },
 })
-export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefaultConfig> implements OnDestroy {
+export class  IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefaultConfig> implements OnDestroy {
   protected override get _hostName(): string {
     return 'dialog';
   }

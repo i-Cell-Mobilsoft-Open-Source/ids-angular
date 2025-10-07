@@ -4,10 +4,10 @@ import { IDS_SIDE_NAV_ROUTER } from './tokens/ids-side-nav-router';
 import { IdsSideNavAppearanceType } from './types/side-nav-appearance.type';
 import { IdsSideNavVariantType } from './types/side-nav-variant.type';
 
-import { Component, computed, inject, input } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
-import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import {
   IDS_ICON_BUTTON_PARENT,
   IdsIconButtonAppearanceType,
@@ -55,14 +55,10 @@ export class IdsSideNavComponent extends ComponentBaseWithDefaults<IdsSideNavDef
   public appearance = input<IdsSideNavAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsSideNavVariantType>(this._defaultConfig.variant);
-  public hasActiveIndicator = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasActiveIndicator));
-  public hasLabel = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasLabel));
-  public hasTooltip = input<boolean>(coerceBooleanAttribute(this._defaultConfig.hasTooltip));
-  public navigationChange = toSignal(
-    this._router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
-    ),
-  );
+  public hasActiveIndicator = input<unknown, boolean>(this._defaultConfig.hasActiveIndicator, { transform: booleanAttribute });
+  public hasLabel = input<unknown, boolean>(this._defaultConfig.hasLabel, { transform: booleanAttribute });
+  public hasTooltip = input<unknown, boolean>(this._defaultConfig.hasTooltip, { transform: booleanAttribute });
+  public navigationChange = toSignal(this._router.events.pipe(filter((event) => event instanceof NavigationEnd)));
 
   public embeddedIconButtonAppearance = computed<IdsIconButtonAppearanceType>(() => this.appearance());
   public embeddedIconButtonVariant = computed<IdsIconButtonVariantType>(() => this.variant());

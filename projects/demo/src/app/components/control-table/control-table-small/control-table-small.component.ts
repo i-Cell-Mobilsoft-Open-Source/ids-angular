@@ -36,16 +36,6 @@ export class ControlTableSmallComponent<T extends Record<string, T[keyof T]>> {
   public controlName = input<string | undefined>();
   public controlConfig = input<DemoControlConfig<T>>();
   public model = model.required<T>();
-
-  public colDefs = [
-    {
-      id: 'name',
-      label: 'Alma',
-    },
-    { id: 'asd',
-      label: 'Alma' },
-  ];
-
   public resetted = output<void>();
 
   protected _demoControl = DemoControl;
@@ -72,6 +62,15 @@ export class ControlTableSmallComponent<T extends Record<string, T[keyof T]>> {
       });
     });
   });
+
+  protected _updateModelValue(controlName: keyof T, newValue: T[keyof T]): void {
+    // A .update() metódus meghívásával frissítjük a signalt,
+    // ami automatikusan kiváltja a modelChange eseményt a szülő felé.
+    this.model.update((currentModel) => ({
+      ...currentModel,
+      [controlName]: newValue,
+    }));
+  }
 
   protected _convertModelValueStringToNumberArray(controlName: keyof T): void {
     const value = this.model()[controlName];

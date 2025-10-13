@@ -4,8 +4,11 @@
     [inputControlConfig]="_inputControlConfig"
     [helperControlConfig]="_helperControlConfig"
     [groupInputControlConfig]="_groupInputControlConfig"
-    [(model)]="model"
-    [(helperModel)]="helperModel"
-    [(groupModel)]="groupModel"
+    [model]="model"
+    [helperModel]="helperModel"
+    [groupModel]="groupModel"
+    (modelChange)="onModelChange($event)"
+    (helperModelChange)="onHelperModelChange($event)"
+    (groupModelChange)="onGroupModelChange($event)"
   />
 </app-control-tryout>

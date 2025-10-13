@@ -104,4 +104,17 @@ export class ButtonDemoControlComponent {
   public model: ButtonInputControls = { ...this.defaults };
   public helperModel: ButtonHelperControls = { ...this.helperDefaults };
   public groupModel: ButtonGroupInputControls = { ...this.groupDefaults };
+
+  public onModelChange(newModel: ButtonInputControls): void {
+    this.model = newModel;
+  }
+
+  public onHelperModelChange(newModel: ButtonHelperControls): void {
+    this.helperModel = newModel;
+  }
+
+  public onGroupModelChange(newModel: ButtonGroupInputControls): void {
+    this.groupModel = newModel;
+  }
+
 }

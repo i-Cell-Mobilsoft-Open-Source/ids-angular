@@ -20,6 +20,7 @@
             [variant]="model.variant"
             [disabled]="model.disabled"
             (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
+
           >
             @if (helperModel.hasLeadingIcon) {
               <ids-icon icon-leading fontIcon="search" />
@@ -42,4 +43,5 @@
       </div>
     </div>
   </ng-container>
+
 </app-tryout>

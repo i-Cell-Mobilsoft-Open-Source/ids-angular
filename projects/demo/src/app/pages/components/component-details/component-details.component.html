@@ -57,7 +57,7 @@
                 <ids-icon icon-leading [fontIcon]="isOpen() ? 'visibility-off-filled' : 'visibility-filled'" />
                 <ids-icon icon-trailing size="compact" class="ml-1" [fontIcon]="isOpen() ? 'chevron-up' : 'chevron-down'" />
               </button>
-              <button type="button" idsButton appearance="text" size="comfortable" variant="primary">Reset controls</button>
+              <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="buttonDemo.reset()">Reset controls</button>
             </div>
           </div>
           <div
@@ -67,12 +67,12 @@
             [class.bg-ids-container-bg-surface-darker-10]="!isDark()"
           >
             <div class="w-full h-full lg:w-2/3 flex justify-center items-center">
-              <app-button-demo></app-button-demo>
+              <app-button-demo #buttonDemo [model]="buttonDemoControl.model" [helperModel]="buttonDemoControl.helperModel" [groupModel]="buttonDemoControl.groupModel"/>
             </div>
             <div
               class="w-full lg:w-1/3 p-ids-container-padding-24 text-ids-container-bg-surface-darker-95 bg-ids-container-bg-surface-lighter-10"
             >
-               <app-button-demo-control></app-button-demo-control>
+               <app-button-demo-control #buttonDemoControl/>
             </div>
           </div>
           @if (isOpen()) {

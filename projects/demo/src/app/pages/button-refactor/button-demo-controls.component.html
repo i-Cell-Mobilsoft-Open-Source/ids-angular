@@ -4,7 +4,7 @@
   [controlName]="'Button'"
   [configType]="'input'"
   [controlConfig]="inputControlConfig"
-  [model]="model"
+  [(model)]="model"
   (modelChange)="onModelChange($event)"
   (resetted)="resetted.emit()"
   />
@@ -13,7 +13,7 @@
   [controlName]="'Button'"
   [configType]="'helper'"
   [controlConfig]="helperControlConfig"
-  [model]="helperModel"
+  [(model)]="helperModel"
   (modelChange)="onHelperModelChange($event)"
   (resetted)="resetted.emit()"
   />
@@ -22,7 +22,7 @@
   [controlName]="'Button group'"
   [configType]="'input'"
   [controlConfig]="groupInputControlConfig"
-  [model]="groupModel"
+  [(model)]="groupModel"
   (modelChange)="onGroupModelChange($event)"
   (resetted)="resetted.emit()"
   />

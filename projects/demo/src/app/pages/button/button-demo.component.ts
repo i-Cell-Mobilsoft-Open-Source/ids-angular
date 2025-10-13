@@ -1,6 +1,6 @@
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -121,9 +121,9 @@ export class ButtonDemoComponent {
   public helperDefaults = getDefaultFromDemoConfig<ButtonHelperControls>(this._helperControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<ButtonGroupInputControls>(this._groupInputControlConfig);
 
-  public model: ButtonInputControls = { ...this.defaults };
-  public helperModel: ButtonHelperControls = { ...this.helperDefaults };
-  public groupModel: ButtonGroupInputControls = { ...this.groupDefaults };
+  @Input() public model: ButtonInputControls = { ...this.defaults };
+  @Input() public helperModel: ButtonHelperControls = { ...this.helperDefaults };
+  @Input() public groupModel: ButtonGroupInputControls = { ...this.groupDefaults };
 
   public onClick(buttonName: string): void {
     console.info(`${buttonName} button clicked`);
@@ -134,4 +134,5 @@ export class ButtonDemoComponent {
     this.helperModel = { ...this.helperDefaults };
     this.groupModel = { ...this.groupDefaults };
   }
+
 }

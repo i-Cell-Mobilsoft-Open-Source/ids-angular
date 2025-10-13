@@ -75,13 +75,13 @@ export class ButtonDemoComponent {
       description: 'Whether the button is disabled or not.',
       type: 'boolean',
       default: false,
-      control: DemoControl.CHECKBOX,
+      control: DemoControl.SWITCH,
     },
     asLink: {
       description: 'Whether the idsButton is a link (or button).',
       type: 'boolean',
       default: false,
-      control: DemoControl.CHECKBOX,
+      control: DemoControl.SWITCH,
     },
   };
 
@@ -97,13 +97,13 @@ export class ButtonDemoComponent {
       description: 'Whether the button has leading icon or not.',
       type: 'boolean',
       default: true,
-      control: DemoControl.CHECKBOX,
+      control: DemoControl.SWITCH,
     },
     hasTrailingIcon: {
       description: 'Whether the button has trailing icon or not.',
       type: 'boolean',
       default: true,
-      control: DemoControl.CHECKBOX,
+      control: DemoControl.SWITCH,
     },
   };
 

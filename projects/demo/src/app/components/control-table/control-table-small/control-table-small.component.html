@@ -12,19 +12,18 @@
           @let disabled = control.disabled ?? false;
 
           @switch (control.control) {
-            @case (_demoControl.CHECKBOX) {
-              <ids-checkbox
+            @case (_demoControl.SWITCH) {
+              <ids-switch
                 [name]="control.name"
                 [id]="control.name"
                 [disabled]="disabled"
-                [ngModel]="model()[control.name]"
-                (ngModelChange)="_updateModelValue(control.name, $event); control.onModelChange?.($event)"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)"
               />
             }
             @case (_demoControl.SELECT) {
               <ids-form-field style="width: 100%; z-index: 10; position: relative;">
-                <ids-select style="width: 100%;" [disabled]="disabled"
-                [ngModel]="model()[control.name]" (ngModelChange)="_updateModelValue(control.name, $event); control.onModelChange?.($event)">
+                <ids-select style="width: 100%;" [disabled]="disabled" [(ngModel)]="model()[control.name]" (ngModelChange)="control.onModelChange?.($event)">
                   <ids-option-group>
                   @for (item of control.list; track $index) {
                     <ids-option [value]="item">{{ item }}</ids-option>
@@ -44,8 +43,8 @@
                   [disabled]="disabled"
                   [attr.min]="control.min"
                   [attr.step]="control.step"
-                [ngModel]="model()[control.name]"
-                  (ngModelChange)="_updateModelValue(control.name, $event); control.onModelChange?.($event)"
+                  [(ngModel)]="model()[control.name]"
+                  (ngModelChange)="control.onModelChange?.($event)"
                 />
               </ids-form-field>
             }
@@ -57,8 +56,8 @@
                 [name]="control.name"
                 [id]="control.name"
                 [disabled]="disabled"
-                [ngModel]="model()[control.name]"
-                (ngModelChange)="_updateModelValue(control.name, $event); control.onModelChange?.($event)"               />
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)"               />
             }
             @case (_demoControl.NUMBERARRAY) {
               <input
@@ -67,8 +66,8 @@
                 [name]="control.name"
                 [id]="control.name"
                 [disabled]="disabled"
-                [ngModel]="model()[control.name]"
-                (ngModelChange)="_updateModelValue(control.name, $event); control.onModelChange?.($event)"               />
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.($event)"               />
             }
             @default {
               <ids-form-field>
@@ -77,8 +76,8 @@
                 [name]="control.name"
                 [id]="control.name"
                 [disabled]="disabled"
-                [ngModel]="model()[control.name]"
-                (ngModelChange)="_updateModelValue(control.name, $event); control.onModelChange?.($event)" 
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)" 
                 />
               </ids-form-field>
             }

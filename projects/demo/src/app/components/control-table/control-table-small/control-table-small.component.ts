@@ -3,10 +3,10 @@ import { DemoControl, DemoControlConfig, DemoControlItem } from '../../../../typ
 import { Component, computed, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsCardBodyDirective, IdsCardComponent, IdsCardHeaderComponent, IdsCardTitleDirective } from '@i-cell/ids-angular/card';
-import { IdsCheckboxComponent } from '@i-cell/ids-angular/checkbox';
 import { IdsSentenceCasePipe } from '@i-cell/ids-angular/core';
 import { IdsFormFieldComponent, IdsInputDirective, IdsOptionComponent, IdsOptionGroupComponent } from '@i-cell/ids-angular/forms';
 import { IdsSelectComponent } from '@i-cell/ids-angular/select';
+import { IdsSwitchComponent } from '@i-cell/ids-angular/switch';
 
 const DEFAULT_CONTROL_TABLE_PADDING = 8;
 
@@ -15,7 +15,7 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
   imports: [
     IdsSentenceCasePipe,
     FormsModule,
-    IdsCheckboxComponent,
+    IdsSwitchComponent,
     IdsSelectComponent,
     // IdsDatepickerTriggerComponent,
     IdsFormFieldComponent,
@@ -62,15 +62,6 @@ export class ControlTableSmallComponent<T extends Record<string, T[keyof T]>> {
       });
     });
   });
-
-  protected _updateModelValue(controlName: keyof T, newValue: T[keyof T]): void {
-    // A .update() metódus meghívásával frissítjük a signalt,
-    // ami automatikusan kiváltja a modelChange eseményt a szülő felé.
-    this.model.update((currentModel) => ({
-      ...currentModel,
-      [controlName]: newValue,
-    }));
-  }
 
   protected _convertModelValueStringToNumberArray(controlName: keyof T): void {
     const value = this.model()[controlName];

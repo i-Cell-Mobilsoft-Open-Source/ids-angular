@@ -6,10 +6,22 @@ import { FormsModule } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsMenuItemComponent, IdsMenuItemAppearance, IdsMenuItemAppearanceType, IdsMenuItemVariant, IdsMenuItemVariantType, IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/menu';
-import { IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/overlay-panel';
+import {
+  IdsMenuItemComponent,
+  IdsMenuItemAppearance,
+  IdsMenuItemAppearanceType,
+  IdsMenuItemVariant,
+  IdsMenuItemVariantType,
+  IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY,
+  IdsActionMenuTriggerDirective,
+} from '@i-cell/ids-angular/menu';
+import {
+  IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY,
+  IdsOverlayPanelTriggerDirective,
+} from '@i-cell/ids-angular/overlay-panel';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel/overlay-panel.component';
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
 import { IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-variant.type';
@@ -38,6 +50,7 @@ type MenuItemHelperControls = {
   hasLeadingIcon: boolean,
   hasTrailingIcon: boolean,
   hasDisabledItem: boolean,
+  showFirstItemLabel: boolean;
 };
 
 @Component({
@@ -50,6 +63,9 @@ type MenuItemHelperControls = {
     IdsIconComponent,
     TranslateModule,
     FormsModule,
+    IdsActionMenuTriggerDirective,
+    IdsOverlayPanelTriggerDirective,
+    IdsButtonComponent,
   ],
   templateUrl: './overlay-panel-demo.component.html',
   styleUrls: [
@@ -136,6 +152,13 @@ export class OverlayPanelDemoComponent {
       description: 'Whether one menu item is disabled or not. For testing purposes this is the first menu item.',
       type: 'boolean',
       default: false,
+      control: DemoControl.CHECKBOX,
+    },
+    showFirstItemLabel: {
+      // eslint-disable-next-line @stylistic/js/max-len
+      description: 'Whether to show the label of the first menu item or not. This is useful for testing purposes when the first item is disabled and has no leading icon.',
+      type: 'boolean',
+      default: true,
       control: DemoControl.CHECKBOX,
     },
   };

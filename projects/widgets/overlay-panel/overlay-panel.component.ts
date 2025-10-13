@@ -5,7 +5,6 @@ import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsMenuItemComponent } from '@i-cell/ids-angular/menu';
 
 const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
 
@@ -31,7 +30,7 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsOverlayPanelVariantType>(this._defaultConfig.variant);
 
-  public actionItems = contentChildren(IdsMenuItemComponent);
+  public actionItems = contentChildren<unknown>('*');
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),

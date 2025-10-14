@@ -1,13 +1,18 @@
 import { ButtonGroupInputControls, ButtonHelperControls, ButtonInputControls } from './button-demo.component';
+import { ButtonDemoControlsComponent } from './button-refactor/button-demo-controls.component';
 
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
-import { ButtonDemoControlsComponent } from '../button-refactor/button-demo-controls.component';
 
 import { Component } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsButtonAppearance, IdsButtonVariant, IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/button';
+import {
+  IdsButtonAppearance,
+  IdsButtonVariant,
+  IDS_BUTTON_DEFAULT_CONFIG_FACTORY,
+  IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY,
+} from '@i-cell/ids-angular/button';
 import { IdsSize } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -18,7 +23,6 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
   selector: 'app-button-demo-control',
   standalone: true,
   imports: [
-
     TryoutControlComponent,
     TranslateModule,
     ButtonDemoControlsComponent,
@@ -26,9 +30,7 @@ const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
   templateUrl: './button-demo-control.component.html',
   //styleUrls: ['./button-demo-content.component.scss'], // Létre kell hozni
 })
-
 export class ButtonDemoControlComponent {
-
   protected _inputControlConfig: DemoControlConfig<ButtonInputControls> = {
     appearance: {
       description: 'Button appearance.',
@@ -116,5 +118,4 @@ export class ButtonDemoControlComponent {
   public onGroupModelChange(newModel: ButtonGroupInputControls): void {
     this.groupModel = newModel;
   }
-
 }

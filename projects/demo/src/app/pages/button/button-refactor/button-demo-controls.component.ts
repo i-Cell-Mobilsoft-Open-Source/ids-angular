@@ -1,5 +1,5 @@
-import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
-import { ButtonGroupInputControls, ButtonHelperControls, ButtonInputControls } from '../button/button-demo.component'; // Importáljuk a típusokat
+import { ControlTableSmallComponent } from '../../../components/control-table/control-table-small/control-table-small.component';
+import { ButtonGroupInputControls, ButtonHelperControls, ButtonInputControls } from '../button-demo.component'; // Importáljuk a típusokat
 
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
@@ -12,10 +12,10 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [
     CommonModule,
+    CommonModule,
     FormsModule,
     TranslateModule,
     ControlTableSmallComponent,
-
   ],
   templateUrl: './button-demo-controls.component.html',
   styleUrl: './button-demo-controls.component.scss', // Létre kell hozni

@@ -3,6 +3,7 @@ import { IDS_SIDE_NAV_ROUTER } from './tokens/ids-side-nav-router';
 
 import { NgTemplateOutlet } from '@angular/common';
 import {
+  booleanAttribute,
   Component,
   computed,
   contentChild,
@@ -40,7 +41,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
     <a
       idsTooltipPosition="east"
       [idsTooltip]="label()"
-      [idsTooltipDisabled]="!_parent?.hasTooltip() || !label() || disabled()"
+      [idsTooltipDisabled]="!hasTooltip() || !label() || disabled()"
       [idsTooltipIgnoreClipped]="true"
       [class.ids-side-nav-item-single]="!_expandable()"
       [class.ids-side-nav-item-expandable-summary]="_expandable()"
@@ -87,6 +88,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 export class IdsSideNavItemComponent {
   public disabled = input(false, { transform: (value: boolean | string) => coerceBooleanAttribute(value) });
   public label = input.required<string>();
+  public hasTooltip = input<unknown, boolean>(false, { transform: booleanAttribute });
   public target = input<string>('');
   public templateChildren = input<TemplateRef<HTMLElement>>();
   public active = computed(() => {

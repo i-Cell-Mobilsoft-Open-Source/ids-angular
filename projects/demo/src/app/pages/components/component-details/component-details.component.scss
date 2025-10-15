@@ -11,3 +11,13 @@ ids-chip,
 #header {
   @apply border-b border-solid border-ids-page-fg-surface-lighter-40;
 }
+
+.demohost-container {
+  display: flex;
+  padding: var(--smc-reference-Padding-md, 24px) var(--smc-reference-Padding-lg, 32px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--smc-reference-Padding-xs, 16px);
+  flex: 1 0 0;
+  align-self: stretch;
+}

@@ -41,7 +41,8 @@ export class ButtonDemoControlsComponent {
 
   // Segítő funkció a model változás kezelésére (a kétirányú kötéshez)
   public onModelChange(newModel: ButtonInputControls): void {
-    this.modelChange.emit(newModel);
+    this.model = newModel;
+    this.modelChange.emit(this.model);
   }
 
   public onHelperModelChange(newModel: ButtonHelperControls): void {

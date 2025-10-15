@@ -57,9 +57,7 @@
                 <ids-icon icon-leading [fontIcon]="isOpen() ? 'visibility-off-filled' : 'visibility-filled'" />
                 <ids-icon icon-trailing size="compact" class="ml-1" [fontIcon]="isOpen() ? 'chevron-up' : 'chevron-down'" />
               </button>
-              <button type="button" idsButton appearance="text" size="comfortable" variant="primary" 
-              
-              >Reset controls</button>
+              <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="resetDemoControls()">Reset controls</button>
             </div>
           </div>
           <div
@@ -68,15 +66,14 @@
             [class.text-white]="isDark()"
             [class.bg-ids-container-bg-surface-darker-10]="!isDark()"
           >
-            <div class="w-full h-full lg:w-2/3 flex justify-center items-center">
+            <div class="w-full h-full lg:w-2/3 flex justify-center items-center demohost-container">
             <ng-template #demoHost/>
               <!-- <app-button-demo #buttonDemo [model]="buttonDemoControl.model" [helperModel]="buttonDemoControl.helperModel" [groupModel]="buttonDemoControl.groupModel"/> -->
             </div>
             <div
-              class="w-full lg:w-1/3 p-ids-container-padding-24 text-ids-container-bg-surface-darker-95 bg-ids-container-bg-surface-lighter-10"
+              class="w-full lg:w-1/3 text-ids-container-bg-surface-darker-95 bg-ids-container-bg-surface-lighter-10"
             >
             <ng-template #controlHost/>
-               <!-- <app-button-demo-control #buttonDemoControl/> -->
             </div>
           </div>
           @if (isOpen()) {

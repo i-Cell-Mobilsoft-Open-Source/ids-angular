@@ -3,17 +3,17 @@
     <h2 idsCardTitle>{{ _caption() | sentenceCase }} controls</h2>
   </header>
 
-    <ids-card-body style="overflow: visible;">
+  <ids-card-body style="overflow: visible">
     @for (control of _flatControls(); track $index) {
       <div class="control-row">
-                <div class="control-name">{{ control.name }}</div>
+        <div class="control-name">{{ control.name }}</div>
 
-                <div class="control-input">
+        <div class="control-input">
           @let disabled = control.disabled ?? false;
 
           @switch (control.control) {
             @case (_demoControl.SWITCH) {
-              <ids-switch
+              <ids-switch [hasIcon]="true"
                 [name]="control.name"
                 [id]="control.name"
                 [disabled]="disabled"
@@ -22,22 +22,27 @@
               />
             }
             @case (_demoControl.SELECT) {
-              <ids-form-field style="width: 100%; z-index: 10; position: relative;">
-                <ids-select style="width: 100%;" [disabled]="disabled" [(ngModel)]="model()[control.name]" (ngModelChange)="control.onModelChange?.($event)">
+              <ids-form-field style="width: 100%; z-index: 10; position: relative">
+                <ids-select
+                  style="width: 100%"
+                  [disabled]="disabled"
+                  [(ngModel)]="model()[control.name]"
+                  (ngModelChange)="control.onModelChange?.($event)"
+                >
                   <ids-option-group>
-                  @for (item of control.list; track $index) {
-                    <ids-option [value]="item">{{ item }}</ids-option>
-                  }
+                    @for (item of control.list; track $index) {
+                      <ids-option [value]="item">{{ item }}</ids-option>
+                    }
                   </ids-option-group>
                 </ids-select>
               </ids-form-field>
             }
             @case (_demoControl.NUMBER) {
-              <ids-form-field style="width: 100%; z-index: 10; position: relative;">
+              <ids-form-field style="width: 100%; z-index: 10; position: relative">
                 <input
                   idsInput
                   type="number"
-                  style="width: 100%;"
+                  style="width: 100%"
                   [name]="control.name"
                   [id]="control.name"
                   [disabled]="disabled"
@@ -52,32 +57,35 @@
             @case (_demoControl.DATE) {
               <input
                 type="date"
-                style="width: 100%;"
+                style="width: 100%"
                 [name]="control.name"
                 [id]="control.name"
                 [disabled]="disabled"
                 [(ngModel)]="model()[control.name]"
-                (ngModelChange)="control.onModelChange?.($event)"               />
+                (ngModelChange)="control.onModelChange?.($event)"
+              />
             }
             @case (_demoControl.NUMBERARRAY) {
               <input
                 type="text"
-                style="width: 100%;"
+                style="width: 100%"
                 [name]="control.name"
                 [id]="control.name"
                 [disabled]="disabled"
                 [(ngModel)]="model()[control.name]"
-                (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.($event)"               />
+                (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.($event)"
+              />
             }
             @default {
               <ids-form-field>
-                <input idsInput
-                style="width: 100%;"
-                [name]="control.name"
-                [id]="control.name"
-                [disabled]="disabled"
-                [(ngModel)]="model()[control.name]"
-                (ngModelChange)="control.onModelChange?.($event)" 
+                <input
+                  idsInput
+                  style="width: 100%"
+                  [name]="control.name"
+                  [id]="control.name"
+                  [disabled]="disabled"
+                  [(ngModel)]="model()[control.name]"
+                  (ngModelChange)="control.onModelChange?.($event)"
                 />
               </ids-form-field>
             }

@@ -8,16 +8,20 @@ import { ComponentEntry } from '../../../model/componentEntry';
 import { ContentCardData } from '../../../model/contentCardData';
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
+import { AccordionDemoControlComponent } from '../../accordion/accordion-demo-control.component';
+import { AccordionDemoComponent } from '../../accordion/accordion-demo.component';
 import { ButtonDemoControlComponent } from '../../button/button-demo-control.component';
 import { ButtonDemoComponent } from '../../button/button-demo.component';
 
 // Static mapping for demo and control components
 const DEMO_COMPONENT_MAP: Record<string, Type<any>> = {
   button: ButtonDemoComponent,
+  accordion: AccordionDemoComponent,
   // Add more mappings: 'slug': DemoComponent
 };
 const CONTROL_COMPONENT_MAP: Record<string, Type<any>> = {
   button: ButtonDemoControlComponent,
+  accordion: AccordionDemoControlComponent,
   // Add more mappings: 'slug': ControlComponent
 };
 
@@ -242,4 +246,5 @@ export class ComponentDetailsComponent implements OnInit {
       this._currentControlInstance.groupModel = { ...this._currentControlInstance.groupDefaults };
     }
   }
+
 }

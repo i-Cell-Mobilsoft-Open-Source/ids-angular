@@ -1,4 +1,6 @@
 export interface ComponentEntry {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  componentBlocks: any;
   id: string;
   title: string;
   slug: string;

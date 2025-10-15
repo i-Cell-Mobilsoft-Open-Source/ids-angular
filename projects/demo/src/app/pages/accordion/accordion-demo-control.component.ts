@@ -1,11 +1,12 @@
-import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
+import { IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionComponent } from '@i-cell/ids-angular/accordion';
 import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -28,21 +29,20 @@ type AccordionInputControls = {
 };
 
 @Component({
-  selector: 'app-accordion-demo',
+  selector: 'app-accordion-demo-control',
   imports: [
-    TryoutComponent,
-    IdsAccordionComponent,
-    IdsAccordionItemComponent,
+    TryoutControlComponent,
+    ControlTableSmallComponent,
     TranslateModule,
     FormsModule,
   ],
-  templateUrl: './accordion-demo.component.html',
+  templateUrl: './accordion-demo-control.component.html',
   styleUrls: [
     '../demo-page.scss',
     './accordion-demo.component.scss',
   ],
 })
-export class AccordionDemoComponent {
+export class AccordionDemoControlComponent {
   private _accordion = viewChild<IdsAccordionComponent>('accordion');
   protected _inputControlConfig: DemoControlConfig<AccordionInputControls> = {
     size: {
@@ -125,9 +125,4 @@ export class AccordionDemoComponent {
   public defaults = getDefaultFromDemoConfig<AccordionInputControls>(this._inputControlConfig);
 
   public model: AccordionInputControls = { ...this.defaults };
-
-  public reset(): void {
-    this._accordion()?.closeAll();
-    this.model = { ...this.defaults };
-  }
 }

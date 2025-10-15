@@ -7,7 +7,6 @@
       [variant]="model.variant"
       [hasActiveIndicator]="helperModel.hasActiveIndicator"
       [hasLabel]="helperModel.hasLabel"
-      [hasTooltip]="helperModel.hasTooltip"
     >
       <!-- initiate sections, title and items using side-nav related component selectors... -->
       <ids-side-nav-section>
@@ -19,7 +18,12 @@
             <ids-icon icon-trailing fontIcon="cart" />
           }
         </ids-side-nav-title>
-        <ids-side-nav-item label="Design Tokens" target="design-tokens" [disabled]="helperModel.disabled">
+        <ids-side-nav-item
+          label="Design Tokens"
+          target="design-tokens"
+          [disabled]="helperModel.disabled"
+          [hasTooltip]="helperModel.hasTooltip"
+        >
           @if (helperModel.hasLeadingIcon) {
             <ids-icon icon-leading fontIcon="filter" />
           }
@@ -27,7 +31,7 @@
             <ids-icon icon-trailing fontIcon="filter" />
           }
         </ids-side-nav-item>
-        <ids-side-nav-item label="Home" target="/" [disabled]="helperModel.disabled">
+        <ids-side-nav-item label="Home" target="/" [disabled]="helperModel.disabled" [hasTooltip]="helperModel.hasTooltip">
           @if (helperModel.hasLeadingIcon) {
             <ids-icon icon-leading fontIcon="home" />
           }
@@ -35,14 +39,19 @@
             <ids-icon icon-trailing fontIcon="home" />
           }
         </ids-side-nav-item>
-        <ids-side-nav-item label="Components" target="components" [disabled]="helperModel.disabled">
+        <ids-side-nav-item label="Components" target="components" [disabled]="helperModel.disabled" [hasTooltip]="helperModel.hasTooltip">
           @if (helperModel.hasLeadingIcon) {
             <ids-icon icon-leading fontIcon="more-horiz" />
           }
           @if (helperModel.hasTrailingIcon) {
             <ids-icon icon-trailing fontIcon="more-horiz" />
           }
-          <ids-side-nav-item [label]="helperModel.text" [target]="helperModel.target" [disabled]="helperModel.disabled">
+          <ids-side-nav-item
+            [label]="helperModel.text"
+            [target]="helperModel.target"
+            [disabled]="helperModel.disabled"
+            [hasTooltip]="helperModel.hasTooltip"
+          >
             @if (helperModel.hasLeadingIcon) {
               <ids-icon icon-leading fontIcon="help-circle" />
             }
@@ -50,7 +59,12 @@
               <ids-icon icon-trailing fontIcon="help-circle" />
             }
           </ids-side-nav-item>
-          <ids-side-nav-item label="Avatar" target="components/avatar" [disabled]="helperModel.disabled">
+          <ids-side-nav-item
+            label="Avatar"
+            target="components/avatar"
+            [disabled]="helperModel.disabled"
+            [hasTooltip]="helperModel.hasTooltip"
+          >
             @if (helperModel.hasLeadingIcon) {
               <ids-icon icon-leading fontIcon="account" />
             }
@@ -58,7 +72,12 @@
               <ids-icon icon-trailing fontIcon="account" />
             }
           </ids-side-nav-item>
-          <ids-side-nav-item label="Side Navigation" target="components/side-nav" [disabled]="helperModel.disabled">
+          <ids-side-nav-item
+            label="Side Navigation"
+            target="components/side-nav"
+            [disabled]="helperModel.disabled"
+            [hasTooltip]="helperModel.hasTooltip"
+          >
             @if (helperModel.hasLeadingIcon) {
               <ids-icon icon-leading fontIcon="menu" />
             }
@@ -81,7 +100,13 @@
             <ids-icon icon-trailing fontIcon="cctv" />
           }
         </li>
-        <li idsSideNavItem label="Design Tokens" target="design-tokens" [disabled]="helperModel.disabled">
+        <li
+          idsSideNavItem
+          label="Design Tokens"
+          target="design-tokens"
+          [disabled]="helperModel.disabled"
+          [hasTooltip]="helperModel.hasTooltip"
+        >
           @if (helperModel.hasLeadingIcon) {
             <ids-icon icon-leading fontIcon="filter" />
           }
@@ -89,7 +114,7 @@
             <ids-icon icon-trailing fontIcon="filter" />
           }
         </li>
-        <li idsSideNavItem label="Home" target="/" [disabled]="helperModel.disabled">
+        <li idsSideNavItem label="Home" target="/" [disabled]="helperModel.disabled" [hasTooltip]="helperModel.hasTooltip">
           @if (helperModel.hasLeadingIcon) {
             <ids-icon icon-leading fontIcon="home" />
           }
@@ -97,7 +122,7 @@
             <ids-icon icon-trailing fontIcon="home" />
           }
         </li>
-        <li idsSideNavItem label="Components" target="components" [disabled]="helperModel.disabled">
+        <li idsSideNavItem label="Components" target="components" [disabled]="helperModel.disabled" [hasTooltip]="helperModel.hasTooltip">
           @if (helperModel.hasLeadingIcon) {
             <ids-icon icon-leading fontIcon="more-horiz" />
           }
@@ -106,28 +131,46 @@
           }
           <!-- in this case children should be listed in a template, marked with '#idsSideNavItemChildren' variable name-->
           <ng-template #idsSideNavItemChildren>
-            <li idsSideNavItem [label]="helperModel.text" [target]="helperModel.target" [disabled]="helperModel.disabled">
+            <li
+              idsSideNavItem
+              [label]="helperModel.text"
+              [target]="helperModel.target"
+              [disabled]="helperModel.disabled"
+              [hasTooltip]="helperModel.hasTooltip"
+            >
               @if (helperModel.hasLeadingIcon) {
-                <ids-icon icon-leading fontIcon="question-mark-circle-filled" />
+                <ids-icon icon-leading fontIcon="help-circle" />
               }
               @if (helperModel.hasTrailingIcon) {
-                <ids-icon icon-trailing fontIcon="question-mark-circle-filled" />
+                <ids-icon icon-trailing fontIcon="help-circle" />
               }
             </li>
-            <li idsSideNavItem label="Avatar" target="components/avatar" [disabled]="helperModel.disabled">
+            <li
+              idsSideNavItem
+              label="Avatar"
+              target="components/avatar"
+              [disabled]="helperModel.disabled"
+              [hasTooltip]="helperModel.hasTooltip"
+            >
               @if (helperModel.hasLeadingIcon) {
-                <ids-icon icon-leading fontIcon="user" />
+                <ids-icon icon-leading fontIcon="account" />
               }
               @if (helperModel.hasTrailingIcon) {
-                <ids-icon icon-trailing fontIcon="user" />
+                <ids-icon icon-trailing fontIcon="account" />
               }
             </li>
-            <li idsSideNavItem label="Side Navigation" target="components/side-nav" [disabled]="helperModel.disabled">
+            <li
+              idsSideNavItem
+              label="Side Navigation"
+              target="components/side-nav"
+              [disabled]="helperModel.disabled"
+              [hasTooltip]="helperModel.hasTooltip"
+            >
               @if (helperModel.hasLeadingIcon) {
-                <ids-icon icon-leading fontIcon="bars-3" />
+                <ids-icon icon-leading fontIcon="menu" />
               }
               @if (helperModel.hasTrailingIcon) {
-                <ids-icon icon-trailing fontIcon="bars-3" />
+                <ids-icon icon-trailing fontIcon="menu" />
               }
             </li>
           </ng-template>

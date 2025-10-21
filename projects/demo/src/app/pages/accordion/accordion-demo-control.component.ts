@@ -1,7 +1,7 @@
 import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
-import { Component, viewChild } from '@angular/core';
+import { Component, viewChild, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -125,4 +125,17 @@ export class AccordionDemoControlComponent {
   public defaults = getDefaultFromDemoConfig<AccordionInputControls>(this._inputControlConfig);
 
   public model: AccordionInputControls = { ...this.defaults };
+
+  @Output() public modelChange = new EventEmitter<AccordionInputControls>();
+
+  public setModel(newModel: AccordionInputControls): void {
+    this.model = newModel;
+    this.modelChange.emit(this.model);
+  }
+
+  public reset(): void {
+    this._accordion()?.closeAll();
+    this.model = { ...this.defaults };
+  }
+
 }

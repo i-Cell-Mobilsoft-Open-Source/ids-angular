@@ -3,7 +3,7 @@ import { ButtonDemoControlsComponent } from './button-refactor/button-demo-contr
 
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -107,15 +107,28 @@ export class ButtonDemoControlComponent {
   public helperModel: ButtonHelperControls = { ...this.helperDefaults };
   public groupModel: ButtonGroupInputControls = { ...this.groupDefaults };
 
-  public onModelChange(newModel: ButtonInputControls): void {
+  @Output() public modelChange = new EventEmitter<ButtonInputControls>();
+  @Output() public helperModelChange = new EventEmitter<ButtonHelperControls>();
+  @Output() public groupModelChange = new EventEmitter<ButtonGroupInputControls>();
+
+  public setModel(newModel: ButtonInputControls): void {
     this.model = newModel;
+    this.modelChange.emit(this.model);
   }
 
-  public onHelperModelChange(newModel: ButtonHelperControls): void {
+  public setHelperModel(newModel: ButtonHelperControls): void {
     this.helperModel = newModel;
+    this.helperModelChange.emit(this.helperModel);
   }
 
-  public onGroupModelChange(newModel: ButtonGroupInputControls): void {
+  public setGroupModel(newModel: ButtonGroupInputControls): void {
     this.groupModel = newModel;
+    this.groupModelChange.emit(this.groupModel);
+  }
+
+  public reset(): void {
+    this.model = { ...this.defaults };
+    this.helperModel = { ...this.helperDefaults };
+    this.groupModel = { ...this.groupDefaults };
   }
 }

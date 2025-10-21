@@ -8,6 +8,7 @@ import { StatamicComponentListItem } from '../../model/statamicComponentListItem
 import { GraphqlService } from '../../services/graphql.service';
 
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
 
 @Component({
@@ -17,6 +18,7 @@ import { ApolloQueryResult } from '@apollo/client/core';
   imports: [
     HeroComponent,
     ArticleCardComponent,
+    RouterOutlet,
   ],
 })
 export class ComponentsComponent implements OnInit {
@@ -34,8 +36,9 @@ export class ComponentsComponent implements OnInit {
   private readonly _graphqlService = inject(GraphqlService);
 
   public ngOnInit(): void {
-    this._graphqlService.getComponentsList().subscribe(
-      (result: ApolloQueryResult<{ entries: { data: StatamicComponentListItem[] }; entry?: EntryData }>) => {
+    this._graphqlService
+      .getComponentsList()
+      .subscribe((result: ApolloQueryResult<{ entries: { data: StatamicComponentListItem[] }; entry?: EntryData }>) => {
         const baseUrl = environment.cmsBaseUrl.replace(/\/$/, '');
         const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
 
@@ -62,12 +65,10 @@ export class ComponentsComponent implements OnInit {
                     id: Number(page.id) || 0,
                     title: page.title ?? '',
                     comp_description: page.comp_description ?? '', // Statamic field
-                    description: page.comp_description ?? '',      // For display
+                    description: page.comp_description ?? '', // For display
                     slug: page.slug ?? '',
                     imageUrl:
-                      buildCmsUrl(page.comp_img_light_mode?.[0]?.url) ||
-                      buildCmsUrl(page.comp_img_dark_mode?.[0]?.url) ||
-                      fallbackImage,
+                      buildCmsUrl(page.comp_img_light_mode?.[0]?.url) || buildCmsUrl(page.comp_img_dark_mode?.[0]?.url) || fallbackImage,
                     imageLink: page.slug ? `/components/${page.slug}` : '',
                     comp_img_light_mode: page.comp_img_light_mode,
                     comp_img_dark_mode: page.comp_img_dark_mode,
@@ -85,7 +86,7 @@ export class ComponentsComponent implements OnInit {
             id: Number(componentItem.id) || 0,
             title: componentItem.title ?? '',
             comp_description: componentItem.comp_description ?? '', // Statamic field
-            description: componentItem.comp_description ?? '',      // For display
+            description: componentItem.comp_description ?? '', // For display
             slug: componentItem.slug ?? '',
             imageUrl:
               buildCmsUrl(componentItem.comp_img_light_mode?.[0]?.url) ||
@@ -101,12 +102,8 @@ export class ComponentsComponent implements OnInit {
 
         // Set heroData signal based on entry or fallback.
         if (entry) {
-          const lightUrl = entry.hero_image_light?.url
-            ? buildCmsUrl(entry.hero_image_light.url)
-            : '';
-          const darkUrl = entry.hero_image_dark?.url
-            ? buildCmsUrl(entry.hero_image_dark.url)
-            : '';
+          const lightUrl = entry.hero_image_light?.url ? buildCmsUrl(entry.hero_image_light.url) : '';
+          const darkUrl = entry.hero_image_dark?.url ? buildCmsUrl(entry.hero_image_dark.url) : '';
 
           this.heroData.set({
             title: entry.title ?? 'Components',
@@ -138,7 +135,6 @@ export class ComponentsComponent implements OnInit {
             isBackButton: true,
           });
         }
-      },
-    );
+      });
   }
 }

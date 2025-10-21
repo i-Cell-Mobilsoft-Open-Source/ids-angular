@@ -6,7 +6,7 @@ import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, effect, ElementRef, forwardRef, inject, input, isDevMode, OnDestroy, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, effect, ElementRef, forwardRef, inject, input, isDevMode, OnDestroy, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValueChangeEvent } from '@angular/forms';
 import { coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
@@ -58,7 +58,7 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 })
 export class IdsSelectComponent
   extends IdsFormFieldControl<IdsSelectDefaultConfig>
-  implements ControlValueAccessor, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+  implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
   protected override get _hostName(): string {
     return 'select';
   }
@@ -142,6 +142,18 @@ export class IdsSelectComponent
     effect(() => {
       this._keyManager?.withTypeAhead(this.typeaheadDebounceInterval());
     });
+
+    effect(
+      () => {
+        const options = this.options();
+
+        if (options.length > 0) {
+          this._initKeyManager();
+          this._selectionModel?.select(...this.options().filter((item) => item.selected()));
+          this._subscribeOptionChanges();
+        }
+      },
+    );
   }
 
   public ngOnInit(): void {
@@ -163,12 +175,6 @@ export class IdsSelectComponent
       }
     });
     this._initErrorStateTracker();
-  }
-
-  public ngAfterContentInit(): void {
-    this._initKeyManager();
-    this._selectionModel?.select(...this.options().filter((item) => item.selected()));
-    this._subscribeOptionChanges();
   }
 
   public ngAfterViewInit(): void {

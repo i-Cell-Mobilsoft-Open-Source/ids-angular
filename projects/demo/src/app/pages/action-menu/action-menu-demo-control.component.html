@@ -1,0 +1,34 @@
+<app-control-tryout>
+  <app-control-table-small
+    controls
+    [controlName]="'Overlay panel'"
+    [configType]="'input'"
+    [controlConfig]="demoService.overlayPanelInputControlConfig"
+    [(model)]="demoService.overlayPanelModel"
+    (resetted)="demoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Overlay panel'"
+    [configType]="'helper'"
+    [controlConfig]="demoService.overlayPanelHelperControlConfig"
+    [(model)]="demoService.overlayPanelHelperModel"
+    (resetted)="demoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Menu item'"
+    [configType]="'input'"
+    [controlConfig]="demoService.menuItemInputControlConfig"
+    [(model)]="demoService.menuItemModel"
+    (resetted)="demoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Menu item'"
+    [configType]="'helper'"
+    [controlConfig]="demoService.menuItemHelperControlConfig"
+    [(model)]="demoService.menuItemHelperModel"
+    (resetted)="demoService.reset()"
+  />
+</app-control-tryout>

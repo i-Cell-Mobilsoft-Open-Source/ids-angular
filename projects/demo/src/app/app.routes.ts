@@ -20,7 +20,13 @@ export const routes: Routes = [
             path: '',
             loadComponent: () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
           },
-
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/accordion/accordion-demo-control.component')
+                .then((module) => module.AccordionDemoControlComponent),
+          },
         ],
       },
       {
@@ -70,6 +76,12 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () => import('./pages/button/button-demo.component').then((module) => module.ButtonDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/button/button-demo-control.component').then((module) => module.ButtonDemoControlComponent),
           },
         ],
       },

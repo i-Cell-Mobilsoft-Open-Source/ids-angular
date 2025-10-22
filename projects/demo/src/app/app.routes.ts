@@ -1,3 +1,4 @@
+import { ActionMenuDemoService } from './pages/action-menu/action-menu-demo.service';
 import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
 
 import { Routes } from '@angular/router';
@@ -32,10 +33,18 @@ export const routes: Routes = [
       {
         path: 'action-menu',
         component: ComponentDetailsComponent,
+        providers: [ActionMenuDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/action-menu/action-menu-demo.component').then((module) => module.ActionMenuDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/action-menu/action-menu-demo-control.component')
+                .then((module) => module.ActionMenuDemoControlComponent),
           },
         ],
       },

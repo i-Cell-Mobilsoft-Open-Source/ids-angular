@@ -32,9 +32,10 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "REF=${{ github.event.inputs.ref }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "REF=${{ github.head_ref }}" >> $GITHUB_OUTPUT
           else
             echo "REF=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-          fi
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -66,14 +67,18 @@ jobs:
         run: |
           SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
           REF='${{ steps.ref.outputs.REF }}'
+          IMAGE='${{ steps.imagename.outputs.IMAGE_NAME }}'
           sanitize () { echo "$1" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//'; }
           if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF" = "main" ]; then
-            FINAL_TAG="${IMAGE_NAME}:${SHORT_SHA}"
+            FINAL_TAG="${IMAGE}:${SHORT_SHA}"
           elif [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-            FINAL_TAG="${IMAGE_NAME}:${REF}"
+            FINAL_TAG="${IMAGE}:${REF}"
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            PR_NUM='${{ github.event.pull_request.number }}'
+            FINAL_TAG="${IMAGE}:pr-${PR_NUM}-${SHORT_SHA}"
           else
             SAFE=$(sanitize "$REF")
-            FINAL_TAG="${IMAGE_NAME}:${SAFE}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE}:${SAFE}-${SHORT_SHA}"
           fi
           echo "FINAL_TAG=$FINAL_TAG" >> $GITHUB_OUTPUT
           echo "Tag => $FINAL_TAG"

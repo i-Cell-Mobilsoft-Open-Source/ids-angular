@@ -1,32 +1,32 @@
 <app-tryout
   [title]="'COMPONENTS.BUTTON' | translate"
-  [hasDarkBackground]="model.variant === 'light' || model.variant === 'light-fixed'"
-  (resetted)="reset()"
+  [hasDarkBackground]="buttonDemoService.model.variant === 'light' || buttonDemoService.model.variant === 'light-fixed'"
+  (resetted)="buttonDemoService.reset()"
 >
   <ng-container component>
     <div component class="button-grid">
       <div class="button-item">
         <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
-        @if (model.asLink) {
-          <a href="" idsButton [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [disabled]="model.disabled">
-            {{ helperModel.text }}
+        @if (buttonDemoService.model.asLink) {
+          <a href="" idsButton [appearance]="buttonDemoService.model.appearance" [size]="buttonDemoService.model.size" [variant]="buttonDemoService.model.variant" [disabled]="buttonDemoService.model.disabled">
+            {{ buttonDemoService.helperModel.text }}
           </a>
         } @else {
           <button
             type="button"
             idsButton
-            [appearance]="model.appearance"
-            [size]="model.size"
-            [variant]="model.variant"
-            [disabled]="model.disabled"
-            (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
+            [appearance]="buttonDemoService.model.appearance"
+            [size]="buttonDemoService.model.size"
+            [variant]="buttonDemoService.model.variant"
+            [disabled]="buttonDemoService.model.disabled"
+            (click)="buttonDemoService.onClick(buttonDemoService.model.appearance + '-' + buttonDemoService.model.variant + '-' + buttonDemoService.model.size)"
 
           >
-            @if (helperModel.hasLeadingIcon) {
+            @if (buttonDemoService.helperModel.hasLeadingIcon) {
               <ids-icon icon-leading fontIcon="search" />
             }
-            {{ helperModel.text }}
-            @if (helperModel.hasTrailingIcon) {
+            {{ buttonDemoService.helperModel.text }}
+            @if (buttonDemoService.helperModel.hasTrailingIcon) {
               <ids-icon icon-trailing fontIcon="check" />
             }
           </button>
@@ -35,10 +35,10 @@
 
       <div class="button-item">
         <h2>{{ "COMMON.GROUPED" | translate }}</h2>
-        <ids-button-group [size]="groupModel.size">
-          <button type="button" idsButton [appearance]="'filled'" [variant]="'primary'">One</button>
-          <button type="button" idsButton [appearance]="'outlined'" [variant]="'success'">Two</button>
-          <button type="button" idsButton [appearance]="'text'" [variant]="'warning'">Three</button>
+        <ids-button-group [size]="buttonDemoService.groupModel.size">
+          <button type="button" idsButton appearance]="'filled'" [variant]="'primary'">One</button>
+          <button type="button" idsButton appearance]="'outlined'" [variant]="'success'">Two</button>
+          <button type="button" idsButton appearance]="'text'" [variant]="'warning'">Three</button>
         </ids-button-group>
       </div>
     </div>

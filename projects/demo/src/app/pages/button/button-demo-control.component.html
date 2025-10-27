@@ -1,14 +1,27 @@
 <app-control-tryout>  
-  <app-button-demo-controls
-    controls
-    [inputControlConfig]="_inputControlConfig"
-    [helperControlConfig]="_helperControlConfig"
-    [groupInputControlConfig]="_groupInputControlConfig"
-    [model]="model"
-    [helperModel]="helperModel"
-    [groupModel]="groupModel"
-    (modelChange)="setModel($event)"
-    (helperModelChange)="setHelperModel($event)"
-    (groupModelChange)="setGroupModel($event)"
+
+  <app-control-table-small
+  controls
+  [controlName]="'Button'"
+  [configType]="'input'"
+  [controlConfig]="buttonDemoService.inputControlConfig"
+  [(model)]="buttonDemoService.model"
+  (resetted)="buttonDemoService.reset()"
+  />
+  <app-control-table-small
+  controls
+  [controlName]="'Button'"
+  [configType]="'helper'"
+  [controlConfig]="buttonDemoService.helperControlConfig"
+  [(model)]="buttonDemoService.helperModel"
+  (resetted)="buttonDemoService.reset()"
+  />
+  <app-control-table-small
+  controls
+  [controlName]="'Button group'"
+  [configType]="'input'"
+  [controlConfig]="buttonDemoService.groupInputControlConfig"
+  [(model)]="buttonDemoService.groupModel"
+  (resetted)="buttonDemoService.reset()"
   />
 </app-control-tryout>

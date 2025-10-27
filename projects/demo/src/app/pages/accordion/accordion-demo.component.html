@@ -2,27 +2,27 @@
   <ng-container component>
     <ids-accordion
       #accordion
-      [multi]="model.multi"
-      [appearance]="model.appearance"
-      [size]="model.size"
-      [disabled]="model.disabled"
-      [expandBtnLabel]="model.expandBtnLabel"
-      [collapseBtnLabel]="model.collapseBtnLabel"
-      [btnSize]="model.btnSize"
-      [btnAppearance]="model.btnAppearance"
-      [btnVariant]="model.btnVariant"
-      [hasLeadingIcon]="model.hasLeadingIcon"
-      [hasTrailingIcon]="model.hasTrailingIcon"
+      [multi]="accordionDemoService.model.multi"
+      [appearance]="accordionDemoService.model.appearance"
+      [size]="accordionDemoService.model.size"
+      [disabled]="accordionDemoService.model.disabled"
+      [expandBtnLabel]="accordionDemoService.model.expandBtnLabel"
+      [collapseBtnLabel]="accordionDemoService.model.collapseBtnLabel"
+      [btnSize]="accordionDemoService.model.btnSize"
+      [btnAppearance]="accordionDemoService.model.btnAppearance"
+      [btnVariant]="accordionDemoService.model.btnVariant"
+      [hasLeadingIcon]="accordionDemoService.model.hasLeadingIcon"
+      [hasTrailingIcon]="accordionDemoService.model.hasTrailingIcon"
     >
-      <ids-accordion-item [summary]="model.summary">
+      <ids-accordion-item [summary]="accordionDemoService.model.summary">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
       </ids-accordion-item>
-      <ids-accordion-item [summary]="model.summary">
+      <ids-accordion-item [summary]="accordionDemoService.model.summary">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
       </ids-accordion-item>
-      <ids-accordion-item [summary]="model.summary">
+      <ids-accordion-item [summary]="accordionDemoService.model.summary">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
       </ids-accordion-item>

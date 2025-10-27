@@ -69,8 +69,9 @@ jobs:
           SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
           REF='${{ steps.ref.outputs.REF }}'
           sanitize () { echo "$1" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//'; }
-          if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF" = "main" ]; then
-            FINAL_TAG="${IMAGE_NAME}:${SHORT_SHA}"
+          if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ]; then
+            BRANCH=$(sanitize "$REF")
+            FINAL_TAG="${IMAGE_NAME}:${BRANCH}-${SHORT_SHA}"
           elif [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
             FINAL_TAG="${IMAGE_NAME}:${REF}"
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
@@ -84,9 +85,9 @@ jobs:
           echo "Tag => $FINAL_TAG"
 
       - name: Login Docker.io
-        if: |
-          github.event_name == 'push' ||
-          (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
+        # if: |
+        #   github.event_name == 'push' ||
+        #   (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -96,9 +97,9 @@ jobs:
         run: docker build -t "${{ steps.tag.outputs.FINAL_TAG }}" .
 
       - name: Push image
-        if: |
-          github.event_name == 'push' ||
-          (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
+        # if: |
+        #   github.event_name == 'push' ||
+        #   (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
         run: docker push "${{ steps.tag.outputs.FINAL_TAG }}"
 
       - name: Summary

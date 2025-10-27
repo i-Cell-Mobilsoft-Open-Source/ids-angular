@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableSmallComponent,
   ],
   templateUrl: './button-demo-control.component.html',
-  //styleUrls: ['./button-demo-content.component.scss'], // Létre kell hozni
+  styleUrl: './button-demo.component.scss',
 })
 export class ButtonDemoControlComponent {
   public buttonDemoService = inject(ButtonDemoService);

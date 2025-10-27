@@ -39,7 +39,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ steps.ref.outputs.REF }}
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || steps.ref.outputs.REF }}
 
       - name: Enable Corepack
         run: corepack enable

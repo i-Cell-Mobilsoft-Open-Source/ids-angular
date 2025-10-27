@@ -20,14 +20,13 @@ permissions:
   contents: read
   packages: write
 
+env:
+  IMAGE_NAME: icellmobilsoft/ids-angular
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Lowercase image name
-        id: image
-        run: echo "IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
-
       - name: Resolve ref
         id: ref
         run: |
@@ -85,15 +84,14 @@ jobs:
           echo "FINAL_TAG=$FINAL_TAG" >> $GITHUB_OUTPUT
           echo "Tag => $FINAL_TAG"
 
-      - name: Login GHCR
+      - name: Login Docker.io
         if: |
           github.event_name == 'push' ||
           (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build image
         run: docker build -t "${{ steps.tag.outputs.FINAL_TAG }}" .

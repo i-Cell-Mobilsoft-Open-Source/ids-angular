@@ -1,18 +1,18 @@
-<app-tryout [title]="'COMPONENTS.AVATAR' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.AVATAR' | translate" [hasDarkBackground]="avatarDemoService.model.variant === 'light'" (resetted)="avatarDemoService.reset()">
   <div component class="avatar-types">
     <div class="avatar-type">
       <h2>Initials</h2>
-      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant" [initials]="model.initials" />
+      <ids-avatar [size]="avatarDemoService.model.size" [sizeCollection]="avatarDemoService.model.sizeCollection" [variant]="avatarDemoService.model.variant" [initials]="avatarDemoService.model.initials" />
     </div>
     <div class="avatar-type">
       <h2>Icon</h2>
-      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant">
+      <ids-avatar [size]="avatarDemoService.model.size" [sizeCollection]="avatarDemoService.model.sizeCollection" [variant]="avatarDemoService.model.variant">
         <ids-icon fontIcon="avatar" />
       </ids-avatar>
     </div>
     <div class="avatar-type">
       <h2>With image</h2>
-      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant">
+      <ids-avatar [size]="avatarDemoService.model.size" [sizeCollection]="avatarDemoService.model.sizeCollection" [variant]="avatarDemoService.model.variant">
         <img
           idsAvatarImage
           src="https://hips.hearstapps.com/harpersbazaaruk.cdnds.net/16/38/1600x1600/square-1474624165-scarlett-johansson.jpg"
@@ -22,5 +22,4 @@
     </div>
   </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
 </app-tryout>

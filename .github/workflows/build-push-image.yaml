@@ -68,7 +68,7 @@ jobs:
         run: |
           SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
           REF='${{ steps.ref.outputs.REF }}'
-          IMAGE='${{ steps.imagename.outputs.IMAGE_NAME }}'
+          IMAGE='${{ steps.image.outputs.IMAGE_NAME }}'
           sanitize () { echo "$1" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//'; }
           if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF" = "main" ]; then
             FINAL_TAG="${IMAGE}:${SHORT_SHA}"
@@ -85,7 +85,9 @@ jobs:
           echo "Tag => $FINAL_TAG"
 
       - name: Login GHCR
-        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true' }}
+        if: |
+          github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -96,9 +98,14 @@ jobs:
         run: docker build -t "${{ steps.tag.outputs.FINAL_TAG }}" .
 
       - name: Push image
-        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.push_image == 'true' }}
+        if: |
+          github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
         run: docker push "${{ steps.tag.outputs.FINAL_TAG }}"
 
       - name: Summary
         run: |
-          echo "Pushed: ${{ steps.tag.outputs.FINAL_TAG }}"
+          echo "Built: ${{ steps.tag.outputs.FINAL_TAG }}"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "PR build (image not pushed)."
+          fi

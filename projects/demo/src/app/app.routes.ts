@@ -1,4 +1,9 @@
+import { AccordionDemoService } from './pages/accordion/accordion-demo.service';
 import { ActionMenuDemoService } from './pages/action-menu/action-menu-demo.service';
+import { AvatarDemoService } from './pages/avatar/avatar-demo.service';
+import { BadgeDemoService } from './pages/badge/badge-demo.service';
+import { BreadcrumbDemoService } from './pages/breadcrumb/breadcrumb-demo.service';
+import { ButtonDemoService } from './pages/button/button-demo.service';
 import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
 
 import { Routes } from '@angular/router';
@@ -16,6 +21,7 @@ export const routes: Routes = [
       {
         path: 'accordion',
         component: ComponentDetailsComponent,
+        providers: [AccordionDemoService],
         children: [
           {
             path: '',
@@ -51,36 +57,58 @@ export const routes: Routes = [
       {
         path: 'avatar',
         component: ComponentDetailsComponent,
+        providers: [AvatarDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/avatar/avatar-demo-control.component').then((module) => module.AvatarDemoControlComponent),
           },
         ],
       },
       {
         path: 'badge',
         component: ComponentDetailsComponent,
+        providers: [BadgeDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/badge/badge-demo-control.component').then((module) => module.BadgeDemoControlComponent),
           },
         ],
       },
       {
         path: 'breadcrumb',
         component: ComponentDetailsComponent,
+        providers: [BreadcrumbDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/breadcrumb/breadcrumb-demo.component').then((module) => module.BreadcrumbDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/breadcrumb/breadcrumb-demo-control.component').then((module) => module.BreadcrumbDemoControlComponent),
           },
         ],
       },
       {
         path: 'button',
         component: ComponentDetailsComponent,
+        providers: [ButtonDemoService],
         children: [
           {
             path: '',

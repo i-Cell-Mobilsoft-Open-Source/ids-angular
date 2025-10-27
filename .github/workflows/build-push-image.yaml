@@ -65,6 +65,7 @@ jobs:
       - name: Compute tag
         id: tag
         run: |
+          echo "IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
           SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
           REF='${{ steps.ref.outputs.REF }}'
           IMAGE='${{ steps.imagename.outputs.IMAGE_NAME }}'

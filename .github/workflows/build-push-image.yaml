@@ -68,18 +68,17 @@ jobs:
         run: |
           SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
           REF='${{ steps.ref.outputs.REF }}'
-          IMAGE='${{ steps.image.outputs.IMAGE_NAME }}'
           sanitize () { echo "$1" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//'; }
           if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF" = "main" ]; then
-            FINAL_TAG="${IMAGE}:${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:${SHORT_SHA}"
           elif [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-            FINAL_TAG="${IMAGE}:${REF}"
+            FINAL_TAG="${IMAGE_NAME}:${REF}"
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             PR_NUM='${{ github.event.pull_request.number }}'
-            FINAL_TAG="${IMAGE}:pr-${PR_NUM}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:pr-${PR_NUM}-${SHORT_SHA}"
           else
             SAFE=$(sanitize "$REF")
-            FINAL_TAG="${IMAGE}:${SAFE}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:${SAFE}-${SHORT_SHA}"
           fi
           echo "FINAL_TAG=$FINAL_TAG" >> $GITHUB_OUTPUT
           echo "Tag => $FINAL_TAG"

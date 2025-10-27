@@ -2,12 +2,12 @@ name: Build & Push Docker Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     tags: [ '*' ]
   workflow_dispatch:
     inputs:
       ref:
-        description: "Branch (non-master) to build manually"
+        description: "Branch (non-main) to build manually"
         required: true
       push_image:
         description: "Push image? (true/false)"
@@ -65,7 +65,7 @@ jobs:
           SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
           REF='${{ steps.ref.outputs.REF }}'
           sanitize () { echo "$1" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//'; }
-          if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF" = "master" ]; then
+          if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ] && [ "$REF" = "main" ]; then
             FINAL_TAG="${IMAGE_NAME}:${SHORT_SHA}"
           elif [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
             FINAL_TAG="${IMAGE_NAME}:${REF}"

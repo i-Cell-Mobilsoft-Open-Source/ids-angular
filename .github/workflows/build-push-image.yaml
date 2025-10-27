@@ -37,6 +37,7 @@ jobs:
             echo "REF=${{ github.head_ref }}" >> $GITHUB_OUTPUT
           else
             echo "REF=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Checkout
         uses: actions/checkout@v4

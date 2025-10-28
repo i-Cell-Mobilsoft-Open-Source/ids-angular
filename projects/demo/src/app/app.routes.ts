@@ -4,6 +4,8 @@ import { AvatarDemoService } from './pages/avatar/avatar-demo.service';
 import { BadgeDemoService } from './pages/badge/badge-demo.service';
 import { BreadcrumbDemoService } from './pages/breadcrumb/breadcrumb-demo.service';
 import { ButtonDemoService } from './pages/button/button-demo.service';
+import { CardDemoService } from './pages/card/card-demo.service';
+import { CheckboxDemoService } from './pages/checkbox/checkbox-demo.service';
 import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
 
 import { Routes } from '@angular/router';
@@ -125,20 +127,34 @@ export const routes: Routes = [
       {
         path: 'card',
         component: ComponentDetailsComponent,
+        providers: [CardDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/card/card-demo.component').then((module) => module.CardDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/card/card-demo-control.component').then((module) => module.CardDemoControlComponent),
           },
         ],
       },
       {
         path: 'checkbox',
         component: ComponentDetailsComponent,
+        providers: [CheckboxDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/checkbox/checkbox-demo.component').then((module) => module.CheckboxDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/checkbox/checkbox-demo-control.component').then((module) => module.CheckboxDemoControlComponent),
           },
         ],
       },

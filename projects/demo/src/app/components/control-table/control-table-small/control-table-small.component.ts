@@ -4,7 +4,8 @@ import { Component, computed, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsCardBodyDirective, IdsCardComponent, IdsCardHeaderComponent, IdsCardTitleDirective } from '@i-cell/ids-angular/card';
 import { IdsSentenceCasePipe } from '@i-cell/ids-angular/core';
-import { IdsFormFieldComponent, IdsInputDirective, IdsOptionComponent, IdsOptionGroupComponent } from '@i-cell/ids-angular/forms';
+import { IdsDatepickerTriggerComponent, IdsDatepickerDirective } from '@i-cell/ids-angular/datepicker';
+import { IdsFormFieldComponent, IdsInputDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsSelectComponent } from '@i-cell/ids-angular/select';
 import { IdsSwitchComponent } from '@i-cell/ids-angular/switch';
 
@@ -17,7 +18,6 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
     FormsModule,
     IdsSwitchComponent,
     IdsSelectComponent,
-    // IdsDatepickerTriggerComponent,
     IdsFormFieldComponent,
     IdsOptionComponent,
     IdsOptionGroupComponent,
@@ -26,6 +26,9 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
     IdsCardBodyDirective,
     IdsCardHeaderComponent,
     IdsInputDirective,
+    IdsDatepickerDirective,
+    IdsSuffixDirective,
+    IdsDatepickerTriggerComponent,
   ],
   templateUrl: './control-table-small.component.html',
   styleUrl: './control-table-small.component.scss',

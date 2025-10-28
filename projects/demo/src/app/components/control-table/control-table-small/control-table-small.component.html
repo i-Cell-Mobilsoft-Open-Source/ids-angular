@@ -13,7 +13,8 @@
 
           @switch (control.control) {
             @case (_demoControl.SWITCH) {
-              <ids-switch [hasIcon]="true"
+              <ids-switch
+                [hasIcon]="true"
                 [name]="control.name"
                 [id]="control.name"
                 [disabled]="disabled"
@@ -55,15 +56,22 @@
             }
 
             @case (_demoControl.DATE) {
-              <input
-                type="date"
-                style="width: 100%"
-                [name]="control.name"
-                [id]="control.name"
-                [disabled]="disabled"
-                [(ngModel)]="model()[control.name]"
-                (ngModelChange)="control.onModelChange?.($event)"
-              />
+              <ids-form-field style="width: 100%" [variant]="'surface'">
+                <input
+                  #inputFieldModel="ngModel"
+                  #datepicker="idsDatepicker"
+                  idsInput
+                  idsDatepicker
+                  style="width: 100%"
+                  [name]="control.name"
+                  [id]="control.name"
+                  [disabled]="disabled"
+                  [(ngModel)]="model()[control.name]"
+                  (ngModelChange)="control.onModelChange?.($event)"
+                />
+
+                <ids-datepicker-trigger idsSuffix [for]="datepicker" />
+              </ids-form-field>
             }
             @case (_demoControl.NUMBERARRAY) {
               <input
@@ -77,17 +85,15 @@
               />
             }
             @default {
-              <ids-form-field>
-                <input
-                  idsInput
-                  style="width: 100%"
-                  [name]="control.name"
-                  [id]="control.name"
-                  [disabled]="disabled"
-                  [(ngModel)]="model()[control.name]"
-                  (ngModelChange)="control.onModelChange?.($event)"
-                />
-              </ids-form-field>
+              <input
+                idsInput
+                style="width: 100%"
+                [name]="control.name"
+                [id]="control.name"
+                [disabled]="disabled"
+                [(ngModel)]="model()[control.name]"
+                (ngModelChange)="control.onModelChange?.($event)"
+              />
             }
           }
         </div>

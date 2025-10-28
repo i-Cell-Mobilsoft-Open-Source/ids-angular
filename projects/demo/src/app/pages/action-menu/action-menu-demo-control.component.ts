@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-action-menu-demo',
+  selector: 'app-action-menu-demo-control',
   imports: [
     TryoutControlComponent,
     ControlTableSmallComponent,

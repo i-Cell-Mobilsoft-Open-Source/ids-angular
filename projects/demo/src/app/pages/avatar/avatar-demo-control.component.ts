@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-avatar-demo',
+  selector: 'app-avatar-demo-control',
   imports: [
     TryoutControlComponent,
     ControlTableSmallComponent,

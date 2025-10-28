@@ -6,7 +6,7 @@ import { TryoutControlComponent } from '../../components/tryout/tryout-controls.
 import { Component, inject } from '@angular/core';
 
 @Component({
-  selector: 'app-breadcrumb-demo',
+  selector: 'app-breadcrumb-demo-control',
   standalone: true,
   imports: [
     TryoutControlComponent,

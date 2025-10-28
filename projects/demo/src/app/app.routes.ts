@@ -6,6 +6,7 @@ import { BreadcrumbDemoService } from './pages/breadcrumb/breadcrumb-demo.servic
 import { ButtonDemoService } from './pages/button/button-demo.service';
 import { CardDemoService } from './pages/card/card-demo.service';
 import { CheckboxDemoService } from './pages/checkbox/checkbox-demo.service';
+import { ChipDemoService } from './pages/chip/chip-demo.service';
 import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
 
 import { Routes } from '@angular/router';
@@ -161,10 +162,17 @@ export const routes: Routes = [
       {
         path: 'chip',
         component: ComponentDetailsComponent,
+        providers: [ChipDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/chip/chip-demo.component').then((module) => module.ChipDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/chip/chip-demo-control.component').then((module) => module.ChipDemoControlComponent),
           },
         ],
       },

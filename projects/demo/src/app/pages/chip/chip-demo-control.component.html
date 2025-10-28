@@ -1,0 +1,35 @@
+<app-control-tryout>
+  
+  <app-control-table-small
+    controls
+    [controlName]="'Chip'"
+    [configType]="'input'"
+    [controlConfig]="chipDemoService.inputControlConfig"
+    [(model)]="chipDemoService.model"
+    (resetted)="chipDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Chip'"
+    [configType]="'helper'"
+    [controlConfig]="chipDemoService.helperControlConfig"
+    [(model)]="chipDemoService.helperModel"
+    (resetted)="chipDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Chip group'"
+    [configType]="'input'"
+    [controlConfig]="chipDemoService.groupInputControlConfig"
+    [(model)]="chipDemoService.groupModel"
+    (resetted)="chipDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Chip group'"
+    [configType]="'helper'"
+    [controlConfig]="chipDemoService.groupHelperControlConfig"
+    [(model)]="chipDemoService.groupHelperModel"
+    (resetted)="chipDemoService.reset()"
+  />
+</app-control-tryout>

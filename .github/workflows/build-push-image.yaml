@@ -107,7 +107,8 @@ jobs:
         run: docker push "${{ steps.tag.outputs.FINAL_TAG }}"
 
       - name: Update dev manifest
-        if: github.ref == 'refs/heads/main'
+        # if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         uses: peter-evans/repository-dispatch@v4
         with:
           repository: i-Cell-Mobilsoft-Open-Source/ids-deploy

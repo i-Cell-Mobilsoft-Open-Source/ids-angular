@@ -71,15 +71,19 @@ jobs:
           sanitize () { echo "$1" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//'; }
           if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ]; then
             BRANCH=$(sanitize "$REF")
-            FINAL_TAG="${IMAGE_NAME}:${BRANCH}-${SHORT_SHA}"
+            IMAGE_TAG="${BRANCH}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:${IMAGE_TAG}"
           elif [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-            FINAL_TAG="${IMAGE_NAME}:${REF}"
+            IMAGE_TAG=$(sanitize "$REF")
+            FINAL_TAG="${IMAGE_NAME}:${IMAGE_TAG}"
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             PR_NUM='${{ github.event.pull_request.number }}'
-            FINAL_TAG="${IMAGE_NAME}:pr-${PR_NUM}-${SHORT_SHA}"
+            IMAGE_TAG="pr-${PR_NUM}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:${IMAGE_TAG}"
           else
             SAFE=$(sanitize "$REF")
-            FINAL_TAG="${IMAGE_NAME}:${SAFE}-${SHORT_SHA}"
+            IMAGE_TAG="${SAFE}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:${IMAGE_TAG}"
           fi
           echo "FINAL_TAG=$FINAL_TAG" >> $GITHUB_OUTPUT
           echo "Tag => $FINAL_TAG"
@@ -110,7 +114,7 @@ jobs:
           event-type: update-dev-image
           client-payload: |
             {
-              "image": "${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.FINAL_TAG##*: }}"
+              "image": "${{ env.IMAGE_TAG }}"
             }
 
       - name: Update prod manifest PR
@@ -121,7 +125,7 @@ jobs:
           event-type: update-prod-image
           client-payload: |
             {
-              "image": "${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.FINAL_TAG##*: }}"
+              "image": "${{ env.IMAGE_TAG }}"
             }
 
       - name: Summary

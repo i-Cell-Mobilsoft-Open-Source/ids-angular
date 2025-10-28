@@ -8,6 +8,7 @@ import { CardDemoService } from './pages/card/card-demo.service';
 import { CheckboxDemoService } from './pages/checkbox/checkbox-demo.service';
 import { ChipDemoService } from './pages/chip/chip-demo.service';
 import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
+import { DatepickerDemoService } from './pages/datepicker/datepicker-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -179,10 +180,18 @@ export const routes: Routes = [
       {
         path: 'date-picker',
         component: ComponentDetailsComponent,
+        providers: [DatepickerDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/datepicker/datepicker-demo.component').then((module) => module.DatepickerDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/datepicker/datepicker-demo-control.component')
+                .then((module) => module.DatepickerDemoControlComponent),
           },
         ],
       },

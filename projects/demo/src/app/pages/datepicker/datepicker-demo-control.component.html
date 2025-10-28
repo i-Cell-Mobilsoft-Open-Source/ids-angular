@@ -1,0 +1,18 @@
+<app-control-tryout>
+<app-control-table-small
+    controls
+    [controlName]="'Form field'"
+    [configType]="'input'"
+    [controlConfig]="datepickerDemoService.formFieldInputControlConfig"
+    [(model)]="datepickerDemoService.formFieldModel"
+    (resetted)="datepickerDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Datepicker'"
+    [configType]="'input'"
+    [controlConfig]="datepickerDemoService.datepickerInputControlConfig"
+    [(model)]="datepickerDemoService.datepickerModel"
+    (resetted)="datepickerDemoService.reset()"
+  />
+</app-control-tryout>

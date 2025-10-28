@@ -1,20 +1,20 @@
 @let templateDrivenFieldName = 'FORM_FIELD.LABEL.DATE_TEMPLATE' | translate;
 @let modelDrivenFieldName = 'FORM_FIELD.LABEL.DATE_MODEL' | translate;
 
-<app-tryout [title]="'COMPONENTS.DATEPICKER' | translate" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.DATEPICKER' | translate" (resetted)="datepickerDemoService.reset()">
   <div component class="datepicker-grid">
     <div>
-      <ids-form-field [size]="formFieldModel.size" [variant]="'surface'">
+      <ids-form-field [size]="datepickerDemoService.formFieldModel.size" [variant]="'surface'">
         <ids-label>{{ templateDrivenFieldName }}</ids-label>
         <input
           #inputFieldModel="ngModel"
           #datepicker1="idsDatepicker"
           idsInput
           idsDatepicker
-          [minDate]="datepickerModel.minDate"
-          [maxDate]="datepickerModel.maxDate"
-          [view]="datepickerModel.view"
-          [(ngModel)]="input"
+          [minDate]="datepickerDemoService.datepickerModel.minDate"
+          [maxDate]="datepickerDemoService.datepickerModel.maxDate"
+          [view]="datepickerDemoService.datepickerModel.view"
+          [(ngModel)]="datepickerDemoService.input"
         />
         <ids-datepicker-trigger idsSuffix [for]="datepicker1" />
         <ids-error-message>
@@ -26,16 +26,16 @@
     </div>
 
     <div>
-      <ids-form-field [size]="formFieldModel.size" [variant]="'surface'">
+      <ids-form-field [size]="datepickerDemoService.formFieldModel.size" [variant]="'surface'">
         <ids-label>{{ modelDrivenFieldName }}</ids-label>
         <input
           #datepicker2="idsDatepicker"
           idsInput
           idsDatepicker
-          [minDate]="datepickerModel.minDate"
-          [maxDate]="datepickerModel.maxDate"
-          [view]="datepickerModel.view"
-          [formControl]="control"
+          [minDate]="datepickerDemoService.datepickerModel.minDate"
+          [maxDate]="datepickerDemoService.datepickerModel.maxDate"
+          [view]="datepickerDemoService.datepickerModel.view"
+          [formControl]="datepickerDemoService.control"
         />
         <ids-datepicker-trigger idsSuffix [for]="datepicker2" />
         <ids-error-message>
@@ -47,20 +47,5 @@
     </div>
   </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Form field'"
-    [configType]="'input'"
-    [controlConfig]="_formFieldInputControlConfig"
-    [(model)]="formFieldModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Datepicker'"
-    [configType]="'input'"
-    [controlConfig]="_datepickerInputControlConfig"
-    [(model)]="datepickerModel"
-    (resetted)="reset()"
-  />
+  
 </app-tryout>

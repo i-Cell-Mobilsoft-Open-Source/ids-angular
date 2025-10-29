@@ -10,6 +10,7 @@ import { ChipDemoService } from './pages/chip/chip-demo.service';
 import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
 import { DatepickerDemoService } from './pages/datepicker/datepicker-demo.service';
 import { DialogDemoService } from './pages/dialog/dialog-demo.service';
+import { DividerDemoService } from './pages/divider/divider-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -216,10 +217,17 @@ export const routes: Routes = [
       {
         path: 'divider',
         component: ComponentDetailsComponent,
+        providers: [DividerDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/divider/divider-demo.component').then((module) => module.DividerDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/divider/divider-demo-control.component').then((module) => module.DividerDemoControlComponent),
           },
         ],
       },

@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -12,6 +13,8 @@ type AvatarInputControls = {
   sizeCollection: IdsSizeCollectionType,
   variant: IdsAvatarVariantType,
 };
+
+@Injectable()
 export class AvatarDemoService {
 
   public readonly inputControlConfig: DemoControlConfig<AvatarInputControls> = {

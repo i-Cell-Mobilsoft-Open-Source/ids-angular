@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -31,6 +32,7 @@ type CheckboxGroupInputControls = {
   orientation: IdsOrientationType,
 };
 
+@Injectable()
 export class CheckboxDemoService {
   public readonly inputControlConfig: DemoControlConfig<CheckboxInputControls> = {
     size: {

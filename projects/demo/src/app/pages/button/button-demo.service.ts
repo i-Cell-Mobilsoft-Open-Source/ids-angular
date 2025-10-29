@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -25,6 +26,7 @@ export type ButtonGroupInputControls = {
   size: IdsSizeType,
 };
 
+@Injectable()
 export class ButtonDemoService {
   public readonly inputControlConfig: DemoControlConfig<ButtonInputControls> = {
     appearance: {

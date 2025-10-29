@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -19,6 +20,7 @@ type DatepickerInputControls = {
   view: IdsDatepickerViewType,
 };
 
+@Injectable()
 export class DatepickerDemoService {
   public readonly formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
     size: {

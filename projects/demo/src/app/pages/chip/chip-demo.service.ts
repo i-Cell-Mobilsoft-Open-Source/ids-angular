@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -38,6 +39,7 @@ const chipList: { label: string, variant: IdsChipVariantType }[] = [
   { label: 'mushroom', variant: IdsChipVariant.SURFACE },
 ];
 
+@Injectable()
 export class ChipDemoService {
   public readonly inputControlConfig: DemoControlConfig<ChipInputControls> = {
     appearance: {

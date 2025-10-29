@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -20,6 +21,7 @@ type OverlayPanelInputControls = {
 
 const breadcrumbDefaultConfig = IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY();
 
+@Injectable()
 export class BreadcrumbDemoService {
   public readonly breadcrumbInputControlConfig: DemoControlConfig<BreadcrumbInputControls> = {
     size: {

@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
@@ -22,6 +23,7 @@ type CardHelperControls = {
   clickable: boolean,
 };
 
+@Injectable()
 export class CardDemoService {
   public readonly inputControlConfig: DemoControlConfig<CardInputControls> = {
     appearance: {

@@ -9,6 +9,7 @@ import { CheckboxDemoService } from './pages/checkbox/checkbox-demo.service';
 import { ChipDemoService } from './pages/chip/chip-demo.service';
 import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
 import { DatepickerDemoService } from './pages/datepicker/datepicker-demo.service';
+import { DialogDemoService } from './pages/dialog/dialog-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -198,10 +199,17 @@ export const routes: Routes = [
       {
         path: 'dialog',
         component: ComponentDetailsComponent,
+        providers: [DialogDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/dialog/dialog-demo-control.component').then((module) => module.DialogDemoControlComponent),
           },
         ],
       },

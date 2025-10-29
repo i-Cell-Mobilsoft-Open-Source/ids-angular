@@ -1,32 +1,14 @@
-import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { DialogDemoService } from './dialog-demo.service';
+
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, InjectionToken, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
-import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
-import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_DIALOG_DEFAULT_CONFIG_FACTORY, IdsCustomDialogBase, IdsDialogComponent, IdsDialogHeaderDirective, IdsDialogService } from '@i-cell/ids-angular/dialog';
+import { IdsCustomDialogBase, IdsDialogComponent, IdsDialogHeaderDirective, IdsDialogService } from '@i-cell/ids-angular/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 
 export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog-token');
-
-const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
-
-type DialogInputControls = {
-  size: IdsSizeType,
-  mainTitle: string,
-  subTitle: string,
-  showCloseButton: boolean,
-  showBackdrop: boolean,
-};
-
-type DialogHelperControls = {
-  useCustomHeader: boolean,
-  useLongContent: boolean,
-};
 
 @Component({
   selector: 'app-custom-dialog',
@@ -36,8 +18,8 @@ type DialogHelperControls = {
     IdsDialogHeaderDirective,
   ],
   template: `
-    @let controls = model();
-    @let helperControls = helperModel();
+    @let controls = dialogDemoService.model;
+    @let helperControls = dialogDemoService.helperModel;
     <dialog
       #dialogDynamic="idsDialog"
       idsDialog
@@ -188,15 +170,15 @@ type DialogHelperControls = {
 export class CustomDialogComponent extends IdsCustomDialogBase {
   public providedData = inject(CUSTOM_DIALOG_TOKEN);
   public inputData = input('');
-  public model = input<DialogInputControls>();
-  public helperModel = input<DialogHelperControls>();
+  public dialogDemoService = inject(DialogDemoService);
+  // public model = input<DialogInputControls>();
+  // public helperModel = input<DialogHelperControls>();
 }
 
 @Component({
   selector: 'app-dialog-demo',
   imports: [
     TryoutComponent,
-    ControlTableComponent,
     IdsButtonComponent,
     IdsDialogComponent,
     IdsDialogHeaderDirective,
@@ -210,60 +192,7 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
   ],
 })
 export class DialogDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<DialogInputControls> = {
-    size: {
-      description: 'Dialog size.',
-      type: 'IdsSizeType',
-      default: defaultConfig.size,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsSize),
-    },
-    mainTitle: {
-      description: 'Dialog main title.',
-      type: 'string',
-      default: '-',
-      demoDefault: 'Dialog main title',
-    },
-    subTitle: {
-      description: 'Dialog sub title.',
-      type: 'string',
-      default: '-',
-      demoDefault: 'Dialog sub title',
-    },
-    showCloseButton: {
-      description: 'Whether to show close button or not.',
-      type: 'boolean',
-      default: defaultConfig.showCloseButton,
-      control: DemoControl.CHECKBOX,
-    },
-    showBackdrop: {
-      description: 'Whether to show dialog backdrop or not.',
-      type: 'boolean',
-      default: defaultConfig.showBackdrop,
-      control: DemoControl.CHECKBOX,
-    },
-  };
-
-  protected _helperControlConfig: DemoControlConfig<DialogHelperControls> = {
-    useCustomHeader: {
-      description: 'Whether to use custom header or not.',
-      type: 'boolean',
-      default: false,
-      control: DemoControl.CHECKBOX,
-    },
-    useLongContent: {
-      description: 'Whether to use long content or not. This is for testing scrollable content.',
-      type: 'boolean',
-      default: false,
-      control: DemoControl.CHECKBOX,
-    },
-  };
-
-  public defaults = getDefaultFromDemoConfig<DialogInputControls>(this._inputControlConfig);
-  public helperDefaults = getDefaultFromDemoConfig<DialogHelperControls>(this._helperControlConfig);
-
-  public model: DialogInputControls = { ...this.defaults };
-  public helperModel: DialogHelperControls = { ...this.helperDefaults };
+  public dialogDemoService = inject(DialogDemoService);
 
   private _dialogService = inject(IdsDialogService);
 
@@ -279,17 +208,15 @@ export class DialogDemoComponent {
 
   public openCustomDialog(): void {
     this._dialogService.open(CustomDialogComponent, {
-      providers: [{ provide: CUSTOM_DIALOG_TOKEN, useValue: 'This text is provided with an InjectionToken' }],
+      providers: [
+        { provide: CUSTOM_DIALOG_TOKEN, useValue: 'This text is provided with an InjectionToken' },
+        { provide: DialogDemoService, useValue: this.dialogDemoService },
+      ],
       inputs: {
         inputData: 'This text is provided using input binding',
-        model: this.model,
-        helperModel: this.helperModel,
+        // model: this.model,
+        // helperModel: this.helperModel,
       },
     }).subscribe((result) => console.info('Dialog result:', result));
-  }
-
-  public reset(): void {
-    this.model = { ...this.defaults };
-    this.helperModel = { ...this.helperDefaults };
   }
 }

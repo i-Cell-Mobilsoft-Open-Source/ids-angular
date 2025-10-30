@@ -1,0 +1,16 @@
+<app-control-tryout>
+  <app-control-table-small
+    controls
+    [configType]="'input'"
+    [controlConfig]="fieldsetDemoService.inputControlConfig"
+    [(model)]="fieldsetDemoService.model"
+    (resetted)="fieldsetDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [configType]="'helper'"
+    [controlConfig]="fieldsetDemoService.helperControlConfig"
+    [(model)]="fieldsetDemoService.helperModel"
+    (resetted)="fieldsetDemoService.reset()"
+  />
+</app-control-tryout>

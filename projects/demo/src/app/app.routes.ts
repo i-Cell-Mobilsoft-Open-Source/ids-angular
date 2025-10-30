@@ -11,6 +11,8 @@ import { ComponentDetailsComponent } from './pages/components/component-details/
 import { DatepickerDemoService } from './pages/datepicker/datepicker-demo.service';
 import { DialogDemoService } from './pages/dialog/dialog-demo.service';
 import { DividerDemoService } from './pages/divider/divider-demo.service';
+import { FieldsetDemoService } from './pages/fieldset/fieldset-demo.service';
+import { FormFieldDemoService } from './pages/form-field/form-field-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -37,8 +39,7 @@ export const routes: Routes = [
             path: '',
             outlet: 'demoControls',
             loadComponent: () =>
-              import('./pages/accordion/accordion-demo-control.component')
-                .then((module) => module.AccordionDemoControlComponent),
+              import('./pages/accordion/accordion-demo-control.component').then((module) => module.AccordionDemoControlComponent),
           },
         ],
       },
@@ -55,8 +56,7 @@ export const routes: Routes = [
             path: '',
             outlet: 'demoControls',
             loadComponent: () =>
-              import('./pages/action-menu/action-menu-demo-control.component')
-                .then((module) => module.ActionMenuDemoControlComponent),
+              import('./pages/action-menu/action-menu-demo-control.component').then((module) => module.ActionMenuDemoControlComponent),
           },
         ],
       },
@@ -72,8 +72,7 @@ export const routes: Routes = [
           {
             path: '',
             outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/avatar/avatar-demo-control.component').then((module) => module.AvatarDemoControlComponent),
+            loadComponent: () => import('./pages/avatar/avatar-demo-control.component').then((module) => module.AvatarDemoControlComponent),
           },
         ],
       },
@@ -89,8 +88,7 @@ export const routes: Routes = [
           {
             path: '',
             outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/badge/badge-demo-control.component').then((module) => module.BadgeDemoControlComponent),
+            loadComponent: () => import('./pages/badge/badge-demo-control.component').then((module) => module.BadgeDemoControlComponent),
           },
         ],
       },
@@ -123,8 +121,7 @@ export const routes: Routes = [
           {
             path: '',
             outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/button/button-demo-control.component').then((module) => module.ButtonDemoControlComponent),
+            loadComponent: () => import('./pages/button/button-demo-control.component').then((module) => module.ButtonDemoControlComponent),
           },
         ],
       },
@@ -140,8 +137,7 @@ export const routes: Routes = [
           {
             path: '',
             outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/card/card-demo-control.component').then((module) => module.CardDemoControlComponent),
+            loadComponent: () => import('./pages/card/card-demo-control.component').then((module) => module.CardDemoControlComponent),
           },
         ],
       },
@@ -174,8 +170,7 @@ export const routes: Routes = [
           {
             path: '',
             outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/chip/chip-demo-control.component').then((module) => module.ChipDemoControlComponent),
+            loadComponent: () => import('./pages/chip/chip-demo-control.component').then((module) => module.ChipDemoControlComponent),
           },
         ],
       },
@@ -192,8 +187,7 @@ export const routes: Routes = [
             path: '',
             outlet: 'demoControls',
             loadComponent: () =>
-              import('./pages/datepicker/datepicker-demo-control.component')
-                .then((module) => module.DatepickerDemoControlComponent),
+              import('./pages/datepicker/datepicker-demo-control.component').then((module) => module.DatepickerDemoControlComponent),
           },
         ],
       },
@@ -209,8 +203,7 @@ export const routes: Routes = [
           {
             path: '',
             outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/dialog/dialog-demo-control.component').then((module) => module.DialogDemoControlComponent),
+            loadComponent: () => import('./pages/dialog/dialog-demo-control.component').then((module) => module.DialogDemoControlComponent),
           },
         ],
       },
@@ -234,20 +227,34 @@ export const routes: Routes = [
       {
         path: 'fieldset',
         component: ComponentDetailsComponent,
+        providers: [FieldsetDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/fieldset/fieldset-demo.component').then((module) => module.FieldsetDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/fieldset/fieldset-demo-control.component').then((modu) => modu.FieldsetDemoControlComponent),
           },
         ],
       },
       {
         path: 'form-field',
         component: ComponentDetailsComponent,
+        providers: [FormFieldDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/form-field/form-field-demo.component').then((module) => module.FormFieldDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/form-field/form-field-demo-control.component').then((mod) => mod.FormFieldDemoControlComponent),
           },
         ],
       },

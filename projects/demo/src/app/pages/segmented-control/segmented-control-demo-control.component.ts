@@ -1,30 +1,27 @@
 import { SegmentedControlDemoService } from './segmented-control-demo.service';
 
-import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsSegmentedControlDirective, IdsSegmentedControlItemComponent } from '@i-cell/ids-angular/segmented-control';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-segmented-control-demo',
+  selector: 'app-segmented-control-demo-control',
   imports: [
-    TryoutComponent,
-    IdsSegmentedControlDirective,
-    IdsSegmentedControlItemComponent,
-    IdsIconComponent,
+    TryoutControlComponent,
+    ControlTableSmallComponent,
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
   ],
-  templateUrl: './segmented-control-demo.component.html',
+  templateUrl: './segmented-control-demo-control.component.html',
   styleUrls: [
     '../demo-page.scss',
     './segmented-control-demo.component.scss',
   ],
 })
-export class SegmentedControlDemoComponent {
+export class SegmentedControlDemoControlComponent {
   public segmentedControlDemoService = inject(SegmentedControlDemoService);
 }

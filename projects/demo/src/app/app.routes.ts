@@ -21,6 +21,7 @@ import { OverlayPanelDemoService } from './pages/overlay-panel/overlay-panel-dem
 import { PaginatorDemoService } from './pages/paginator/paginator-demo.service';
 import { RadioDemoService } from './pages/radio/radio-demo.service';
 import { ScrollbarDemoService } from './pages/scrollbar/scrollbar-demo.service';
+import { SegmentedControlDemoService } from './pages/segmented-control/segmented-control-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -413,11 +414,20 @@ export const routes: Routes = [
       {
         path: 'segmented-control',
         component: ComponentDetailsComponent,
+        providers: [SegmentedControlDemoService],
         children: [
           {
             path: '',
             loadComponent: () =>
               import('./pages/segmented-control/segmented-control-demo.component').then((module) => module.SegmentedControlDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/segmented-control/segmented-control-demo-control.component').then(
+                (module) => module.SegmentedControlDemoControlComponent,
+              ),
           },
         ],
       },

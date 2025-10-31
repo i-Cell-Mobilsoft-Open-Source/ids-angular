@@ -1,23 +1,22 @@
-<app-tryout [title]="'COMPONENTS.ICON_BUTTON' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.ICON_BUTTON' | translate" [hasDarkBackground]="iconButtonDemoService.model.variant === 'light'" (resetted)="iconButtonDemoService.reset()">
   <ng-container component>
-    @if (model.asLink) {
-      <a href="" idsIconButton [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [disabled]="model.disabled">
+    @if (iconButtonDemoService.model.asLink) {
+      <a href="" idsIconButton [appearance]="iconButtonDemoService.model.appearance" [size]="iconButtonDemoService.model.size" [variant]="iconButtonDemoService.model.variant" [disabled]="iconButtonDemoService.model.disabled">
         <ids-icon aria-hidden="true" alt="" fontIcon="search" />
       </a>
     } @else {
       <button
         type="button"
         idsIconButton
-        [size]="model.size"
-        [variant]="model.variant"
-        [appearance]="model.appearance"
-        [disabled]="model.disabled"
-        (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
+        [size]="iconButtonDemoService.model.size"
+        [variant]="iconButtonDemoService.model.variant"
+        [appearance]="iconButtonDemoService.model.appearance"
+        [disabled]="iconButtonDemoService.model.disabled"
+        (click)="iconButtonDemoService.onClick(iconButtonDemoService.model.appearance + '-' + iconButtonDemoService.model.variant + '-' + iconButtonDemoService.model.size)"
       >
         <ids-icon aria-hidden="true" alt="" fontIcon="search" />
       </button>
     }
   </ng-container>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
 </app-tryout>

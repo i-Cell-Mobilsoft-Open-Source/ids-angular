@@ -1,28 +1,26 @@
 import { IconButtonDemoService } from './icon-button-demo.service';
 
-import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-icon-button-demo',
+  selector: 'app-icon-button-demo-control',
   imports: [
-    TryoutComponent,
-    IdsIconButtonComponent,
-    IdsIconComponent,
+    TryoutControlComponent,
+    ControlTableSmallComponent,
     TranslateModule,
     FormsModule,
   ],
-  templateUrl: './icon-button-demo.component.html',
+  templateUrl: './icon-button-demo-control.component.html',
   styleUrls: [
     '../demo-page.scss',
     './icon-button-demo.component.scss',
   ],
 })
-export class IconButtonDemoComponent {
+export class IconButtonDemoControlComponent {
   public iconButtonDemoService = inject(IconButtonDemoService);
 }

@@ -22,6 +22,7 @@ import { PaginatorDemoService } from './pages/paginator/paginator-demo.service';
 import { RadioDemoService } from './pages/radio/radio-demo.service';
 import { ScrollbarDemoService } from './pages/scrollbar/scrollbar-demo.service';
 import { SegmentedControlDemoService } from './pages/segmented-control/segmented-control-demo.service';
+import { SegmentedControlToggleDemoService } from './pages/segmented-control-toggle/segmented-control-toggle-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -434,12 +435,21 @@ export const routes: Routes = [
       {
         path: 'segmented-control-toggle',
         component: ComponentDetailsComponent,
+        providers: [SegmentedControlToggleDemoService],
         children: [
           {
             path: '',
             loadComponent: () =>
               import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component').then(
                 (module) => module.SegmentedControlToggleDemoComponent,
+              ),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/segmented-control-toggle/segmented-control-toggle-demo-control.component').then(
+                (module) => module.SegmentedControlToggleDemoControlComponent,
               ),
           },
         ],

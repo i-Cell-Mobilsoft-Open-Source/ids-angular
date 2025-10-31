@@ -20,6 +20,7 @@ import { NotificationDemoService } from './pages/notification/notification-demo.
 import { OverlayPanelDemoService } from './pages/overlay-panel/overlay-panel-demo.service';
 import { PaginatorDemoService } from './pages/paginator/paginator-demo.service';
 import { RadioDemoService } from './pages/radio/radio-demo.service';
+import { ScrollbarDemoService } from './pages/scrollbar/scrollbar-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -395,10 +396,17 @@ export const routes: Routes = [
       {
         path: 'scrollbar',
         component: ComponentDetailsComponent,
+        providers: [ScrollbarDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/scrollbar/scrollbar-demo.component').then((module) => module.ScrollbarDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/scrollbar/scrollbar-demo-control.component').then((module) => module.ScrollbarDemoControlComponent),
           },
         ],
       },

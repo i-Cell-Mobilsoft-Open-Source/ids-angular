@@ -1,12 +1,12 @@
-<app-tryout [title]="'COMPONENTS.SCROLLBAR' | translate" (resetted)="reset()">
-  <div component class="scrollable" [style.scrollbarGutter]="model['scrollbar-gutter']" [style.scrollbarWidth]="model['scrollbar-width']">
+<app-tryout [title]="'COMPONENTS.SCROLLBAR' | translate" (resetted)="scrollbarDemoService.reset()">
+  <div component class="scrollable" [style.scrollbarGutter]="scrollbarDemoService.model['scrollbar-gutter']" [style.scrollbarWidth]="scrollbarDemoService.model['scrollbar-width']">
     <div class="child">
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia possimus facere fuga voluptate alias ipsa quibusdam doloremque
         minus laborum repellat, modi magnam. Dignissimos natus iusto nisi earum voluptatem laborum, molestiae odit amet accusamus magnam
         incidunt voluptate obcaecati alias eveniet aliquam numquam aperiam asperiores consectetur commodi optio deserunt perspiciatis.
       </p>
-      @if (!helperModel.childFitsInParent) {
+      @if (!scrollbarDemoService.helperModel.childFitsInParent) {
         <p>
           Illum numquam quasi minima mollitia libero, nesciunt ipsam repellat sed facilis est aperiam dolor quos minus consequuntur, labore
           sapiente, odit praesentium ad aliquid nam error porro excepturi accusantium? Enim dignissimos incidunt non autem earum culpa
@@ -22,20 +22,5 @@
     </div>
   </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Scrollbar'"
-    [configType]="'input'"
-    [controlConfig]="_controlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Scrollbar'"
-    [configType]="'helper'"
-    [controlConfig]="_helperControlConfig"
-    [(model)]="helperModel"
-    (resetted)="reset()"
-  />
+
 </app-tryout>

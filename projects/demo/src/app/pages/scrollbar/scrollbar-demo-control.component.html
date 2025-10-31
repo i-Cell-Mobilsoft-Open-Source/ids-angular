@@ -1,0 +1,18 @@
+<app-control-tryout>
+    <app-control-table-small
+    controls
+    [controlName]="'Scrollbar'"
+    [configType]="'input'"
+    [controlConfig]="scrollbarDemoService.controlConfig"
+    [(model)]="scrollbarDemoService.model"
+    (resetted)="scrollbarDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Scrollbar'"
+    [configType]="'helper'"
+    [controlConfig]="scrollbarDemoService.helperControlConfig"
+    [(model)]="scrollbarDemoService.helperModel"
+    (resetted)="scrollbarDemoService.reset()"
+  />
+</app-control-tryout>

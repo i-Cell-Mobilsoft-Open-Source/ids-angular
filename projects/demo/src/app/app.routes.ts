@@ -13,6 +13,13 @@ import { DialogDemoService } from './pages/dialog/dialog-demo.service';
 import { DividerDemoService } from './pages/divider/divider-demo.service';
 import { FieldsetDemoService } from './pages/fieldset/fieldset-demo.service';
 import { FormFieldDemoService } from './pages/form-field/form-field-demo.service';
+import { IconDemoService } from './pages/icon/icon-demo.service';
+import { IconButtonDemoService } from './pages/icon-button/icon-button-demo.service';
+import { MenuItemDemoService } from './pages/menu-item/menu-item-demo.service';
+import { NotificationDemoService } from './pages/notification/notification-demo.service';
+import { OverlayPanelDemoService } from './pages/overlay-panel/overlay-panel-demo.service';
+import { PaginatorDemoService } from './pages/paginator/paginator-demo.service';
+import { RadioDemoService } from './pages/radio/radio-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -261,72 +268,127 @@ export const routes: Routes = [
       {
         path: 'icon',
         component: ComponentDetailsComponent,
+        providers: [IconDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/icon/icon-demo-control.component').then((module) => module.IconDemoControlComponent),
           },
         ],
       },
       {
         path: 'icon-button',
         component: ComponentDetailsComponent,
+        providers: [IconButtonDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/icon-button/icon-button-demo-control.component').then((module) => module.IconButtonDemoControlComponent),
           },
         ],
       },
       {
         path: 'menu-item',
         component: ComponentDetailsComponent,
+        providers: [MenuItemDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/menu-item/menu-item-demo.component').then((module) => module.MenuItemDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/menu-item/menu-item-demo-control.component').then((module) => module.MenuItemDemoControlComponent),
           },
         ],
       },
       {
         path: 'notification',
         component: ComponentDetailsComponent,
+        providers: [NotificationDemoService],
         children: [
           {
             path: '',
             loadComponent: () =>
               import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
           },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/notification/notification-demo-control.component').then(
+                (module) => module.NotificationDemoControlComponent,
+              ),
+          },
         ],
       },
       {
         path: 'overlay-panel',
         component: ComponentDetailsComponent,
+        providers: [OverlayPanelDemoService],
         children: [
           {
             path: '',
             loadComponent: () =>
               import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
           },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/overlay-panel/overlay-panel-demo-control.component').then(
+                (module) => module.OverlayPanelDemoControlComponent,
+              ),
+          },
         ],
       },
       {
         path: 'paginator',
         component: ComponentDetailsComponent,
+        providers: [PaginatorDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/paginator/paginator-demo-control.component').then(
+                (module) => module.PaginatorDemoControlComponent,
+              ),
           },
         ],
       },
       {
         path: 'radio',
         component: ComponentDetailsComponent,
+        providers: [RadioDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/radio/radio-demo-control.component').then((module) => module.RadioDemoControlComponent),
           },
         ],
       },

@@ -1,30 +1,27 @@
 import { RadioDemoService } from './radio-demo.service';
 
-import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
-import { IdsRadioGroupDirective, IdsRadioComponent } from '@i-cell/ids-angular/radio';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-radio-demo',
+  selector: 'app-radio-demo-control',
   imports: [
-    TryoutComponent,
-    IdsCardComponent,
-    IdsRadioGroupDirective,
-    IdsRadioComponent,
+    ControlTableSmallComponent,
     FormsModule,
     TranslateModule,
+    TryoutControlComponent,
   ],
-  templateUrl: './radio-demo.component.html',
+  templateUrl: './radio-demo-control.component.html',
   styleUrls: [
     '../demo-page.scss',
     './radio-demo.component.scss',
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class RadioDemoComponent {
+export class RadioDemoControlComponent {
   public radioDemoService = inject(RadioDemoService);
 }

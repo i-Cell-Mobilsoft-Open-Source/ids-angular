@@ -1,30 +1,22 @@
-<app-tryout [title]="'COMPONENTS.PAGINATOR' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.PAGINATOR' | translate" [hasDarkBackground]="paginatorDemoService.model.variant === 'light'" (resetted)="paginatorDemoService.reset()">
   <ng-container component>
     <ids-paginator
-      [length]="model.length"
-      [pageSize]="model.pageSize"
-      [pageSizeOptions]="model.pageSizeOptions"
-      [showFirstLastButton]="model.showFirstLastButton"
-      [showPrevNextLabel]="model.showPrevNextLabel"
-      [showPageInfo]="model.showPageInfo"
-      [showPageButtons]="model.showPageButtons"
-      [showAllPages]="model.showAllPages"
-      [maxDisplayedItemCount]="model.maxDisplayedItemCount"
-      [size]="model.size"
-      [variant]="model.variant"
-      [pageButtonAppearance]="model.pageButtonAppearance"
-      [disabled]="model.disabled"
-      [compactLayout]="model.compactLayout"
-      (pageChanged)="onPageChange($event)"
+      [length]="paginatorDemoService.model.length"
+      [pageSize]="paginatorDemoService.model.pageSize"
+      [pageSizeOptions]="paginatorDemoService.model.pageSizeOptions"
+      [showFirstLastButton]="paginatorDemoService.model.showFirstLastButton"
+      [showPrevNextLabel]="paginatorDemoService.model.showPrevNextLabel"
+      [showPageInfo]="paginatorDemoService.model.showPageInfo"
+      [showPageButtons]="paginatorDemoService.model.showPageButtons"
+      [showAllPages]="paginatorDemoService.model.showAllPages"
+      [maxDisplayedItemCount]="paginatorDemoService.model.maxDisplayedItemCount"
+      [size]="paginatorDemoService.model.size"
+      [variant]="paginatorDemoService.model.variant"
+      [pageButtonAppearance]="paginatorDemoService.model.pageButtonAppearance"
+      [disabled]="paginatorDemoService.model.disabled"
+      [compactLayout]="paginatorDemoService.model.compactLayout"
+      (pageChanged)="paginatorDemoService.onPageChange($event)"
     />
   </ng-container>
 
-  <app-control-table
-    controls
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (modelChange)="_updatePageSize()"
-    (resetted)="reset()"
-  />
 </app-tryout>

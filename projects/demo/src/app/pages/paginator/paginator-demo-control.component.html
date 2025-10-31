@@ -1,0 +1,11 @@
+<app-control-tryout>
+  
+  <app-control-table-small
+    controls
+    [configType]="'input'"
+    [controlConfig]="paginatorDemoService.inputControlConfig"
+    [(model)]="paginatorDemoService.model"
+    (modelChange)="paginatorDemoService.updatePageSize()"
+    (resetted)="paginatorDemoService.reset()"
+  />
+</app-control-tryout>

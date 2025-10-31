@@ -1,26 +1,26 @@
 import { PaginatorDemoService } from './paginator-demo.service';
 
-import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-paginator-demo',
+  selector: 'app-paginator-demo-control',
   imports: [
-    TryoutComponent,
-    IdsPaginatorComponent,
     TranslateModule,
     FormsModule,
+    ControlTableSmallComponent,
+    TryoutControlComponent,
   ],
-  templateUrl: './paginator-demo.component.html',
+  templateUrl: './paginator-demo-control.component.html',
   styleUrls: [
     '../demo-page.scss',
     './paginator-demo.component.scss',
   ],
 })
-export class PaginatorDemoComponent {
+export class PaginatorDemoControlComponent {
   public paginatorDemoService = inject(PaginatorDemoService);
 }

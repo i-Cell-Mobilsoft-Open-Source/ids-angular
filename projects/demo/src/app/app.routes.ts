@@ -26,6 +26,7 @@ import { SegmentedControlToggleDemoService } from './pages/segmented-control-tog
 import { SelectDemoService } from './pages/select/select-demo.service';
 import { SideSheetDemoService } from './pages/side-sheet/side-sheet-demo.service';
 import { SnackbarDemoService } from './pages/snackbar/snackbar-demo.service';
+import { SpinnerDemoService } from './pages/spinner/spinner-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -515,10 +516,17 @@ export const routes: Routes = [
       {
         path: 'spinner',
         component: ComponentDetailsComponent,
+        providers: [SpinnerDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/spinner/spinner-demo.component').then((module) => module.SpinnerDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/spinner/spinner-demo-control.component').then((module) => module.SpinnerDemoControlComponent),
           },
         ],
       },

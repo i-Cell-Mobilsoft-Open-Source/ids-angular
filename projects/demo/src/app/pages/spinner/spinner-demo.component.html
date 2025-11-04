@@ -1,20 +1,13 @@
-<app-tryout [title]="'COMPONENTS.SPINNER' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.SPINNER' | translate" [hasDarkBackground]="spinnerDemoService.model.variant === 'light'" (resetted)="spinnerDemoService.reset()">
   <div component >
     <ids-spinner
-      [sizeCollection]="model.sizeCollection"
-      [size]="model.size"
-      [variant]="model.variant"
-      [isTrack]="model.isTrack"
+      [sizeCollection]="spinnerDemoService.model.sizeCollection"
+      [size]="spinnerDemoService.model.size"
+      [variant]="spinnerDemoService.model.variant"
+      [isTrack]="spinnerDemoService.model.isTrack"
       [aria-label]="'loading'"
     />
   </div>
-  <app-control-table
-    controls
-    [controlName]="'Spinner'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
+
 
 </app-tryout>

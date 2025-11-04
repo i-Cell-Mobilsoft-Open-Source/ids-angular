@@ -1,22 +1,22 @@
-<app-tryout [title]="'COMPONENTS.SELECT' | translate" [hasDarkBackground]="formFieldModel.variant === 'light'" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.SELECT' | translate" [hasDarkBackground]="selectDemoService.formFieldModel.variant === 'light'" (resetted)="selectDemoService.reset()">
   <ng-container component>
     <div class="select-grid">
       <div class="select-item">
         <h2>Single selection</h2>
-        <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
+        <ids-form-field [size]="selectDemoService.formFieldModel.size" [variant]="selectDemoService.formFieldModel.variant">
           <ids-label>Animal</ids-label>
           <ids-select
-            [placeholder]="selectModel.placeholder"
-            [required]="selectModel.required"
-            [disabled]="selectModel.disabled"
-            [readonly]="selectModel.readonly"
-            [aria-label]="selectModel['aria-label']"
-            [aria-labelledby]="selectModel['aria-labelledby']"
-            [typeaheadDebounceInterval]="selectModel.typeaheadDebounceInterval"
-            [canHandleSuccessState]="selectModel.canHandleSuccessState"
-            [(ngModel)]="singleSelectionValue"
+            [placeholder]="selectDemoService.selectModel.placeholder"
+            [required]="selectDemoService.selectModel.required"
+            [disabled]="selectDemoService.selectModel.disabled"
+            [readonly]="selectDemoService.selectModel.readonly"
+            [aria-label]="selectDemoService.selectModel['aria-label']"
+            [aria-labelledby]="selectDemoService.selectModel['aria-labelledby']"
+            [typeaheadDebounceInterval]="selectDemoService.selectModel.typeaheadDebounceInterval"
+            [canHandleSuccessState]="selectDemoService.selectModel.canHandleSuccessState"
+            [(ngModel)]="selectDemoService.singleSelectionValue"
           >
-            @for (group of animals | keyvalue; track $index) {
+            @for (group of selectDemoService.animals | keyvalue; track $index) {
               <ids-option-group [label]="group.key | titlecase">
                 @for (option of group.value; track $index) {
                   <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
@@ -34,37 +34,37 @@
 
       <div class="select-item">
         <h2>Multi selection</h2>
-        <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
+        <ids-form-field [size]="selectDemoService.formFieldModel.size" [variant]="selectDemoService.formFieldModel.variant">
           <ids-label>Animal</ids-label>
           <ids-select
             [multiSelect]="true"
-            [placeholder]="selectModel.placeholder"
-            [required]="selectModel.required"
-            [disabled]="selectModel.disabled"
-            [readonly]="selectModel.readonly"
-            [aria-label]="selectModel['aria-label']"
-            [aria-labelledby]="selectModel['aria-labelledby']"
-            [typeaheadDebounceInterval]="selectModel.typeaheadDebounceInterval"
-            [canHandleSuccessState]="selectModel.canHandleSuccessState"
-            [(ngModel)]="multiSelectionValue"
+            [placeholder]="selectDemoService.selectModel.placeholder"
+            [required]="selectDemoService.selectModel.required"
+            [disabled]="selectDemoService.selectModel.disabled"
+            [readonly]="selectDemoService.selectModel.readonly"
+            [aria-label]="selectDemoService.selectModel['aria-label']"
+            [aria-labelledby]="selectDemoService.selectModel['aria-labelledby']"
+            [typeaheadDebounceInterval]="selectDemoService.selectModel.typeaheadDebounceInterval"
+            [canHandleSuccessState]="selectDemoService.selectModel.canHandleSuccessState"
+            [(ngModel)]="selectDemoService.multiSelectionValue"
           >
-            @if (selectHelperModel.useCustomTrigger) {
+            @if (selectDemoService.selectHelperModel.useCustomTrigger) {
               <ids-select-trigger>
-                {{ multiSelectionValue![0] }}
-                @if ((multiSelectionValue.length || 0) > 1) {
+                {{ selectDemoService.multiSelectionValue![0] }}
+                @if ((selectDemoService.multiSelectionValue.length || 0) > 1) {
                   <span class="example-additional-selection">
-                    (+{{ (multiSelectionValue.length || 0) - 1 }} {{ multiSelectionValue.length === 2 ? "other" : "others" }})
+                    (+{{ (selectDemoService.multiSelectionValue.length || 0) - 1 }} {{ selectDemoService.multiSelectionValue.length === 2 ? "other" : "others" }})
                   </span>
                 }
               </ids-select-trigger>
             }
             <ids-option-group label="Land">
-              @for (option of animals.land; track $index) {
+              @for (option of selectDemoService.animals.land; track $index) {
                 <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
               }
             </ids-option-group>
             <ids-option-group label="Aquatic">
-              @for (option of animals.aquatic; track $index) {
+              @for (option of selectDemoService.animals.aquatic; track $index) {
                 <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
               }
             </ids-option-group>
@@ -79,28 +79,5 @@
     </div>
   </ng-container>
 
-  <app-control-table
-    controls
-    [controlName]="'Form field'"
-    [configType]="'input'"
-    [controlConfig]="_formFieldInputControlConfig"
-    [(model)]="formFieldModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Select'"
-    [configType]="'input'"
-    [controlConfig]="_selectInputControlConfig"
-    [(model)]="selectModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Select'"
-    [configType]="'helper'"
-    [controlConfig]="_selectHelperControlConfig"
-    [(model)]="selectHelperModel"
-    (resetted)="reset()"
-  />
+
 </app-tryout>

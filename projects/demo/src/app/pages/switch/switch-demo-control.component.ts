@@ -1,27 +1,26 @@
 import { SwitchDemoService } from './switch-demo.service';
 
-import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsSwitchComponent, IdsSwitchGroupComponent } from '@i-cell/ids-angular/switch';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-switch-demo',
+  selector: 'app-switch-demo-control',
   imports: [
-    TryoutComponent,
-    IdsSwitchComponent,
-    IdsSwitchGroupComponent,
+    TryoutControlComponent,
     TranslateModule,
     FormsModule,
+    ControlTableSmallComponent,
   ],
-  templateUrl: './switch-demo.component.html',
+  templateUrl: './switch-demo-control.component.html',
   styleUrls: [
     '../demo-page.scss',
     './switch-demo.component.scss',
   ],
 })
-export class SwitchDemoComponent {
+export class SwitchDemoControlComponent {
   public switchDemoService = inject(SwitchDemoService);
 }

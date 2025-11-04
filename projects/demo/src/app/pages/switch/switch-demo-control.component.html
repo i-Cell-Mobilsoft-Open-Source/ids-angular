@@ -1,0 +1,18 @@
+<app-control-tryout>
+    <app-control-table-small
+    controls
+    [controlName]="'Switch'"
+    [configType]="'input'"
+    [controlConfig]="switchDemoService.inputControlConfig"
+    [(model)]="switchDemoService.model"
+    (resetted)="switchDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Switch group'"
+    [configType]="'input'"
+    [controlConfig]="switchDemoService.groupInputControlConfig"
+    [(model)]="switchDemoService.groupModel"
+    (resetted)="switchDemoService.reset()"
+  />
+</app-control-tryout>

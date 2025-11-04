@@ -27,6 +27,7 @@ import { SelectDemoService } from './pages/select/select-demo.service';
 import { SideSheetDemoService } from './pages/side-sheet/side-sheet-demo.service';
 import { SnackbarDemoService } from './pages/snackbar/snackbar-demo.service';
 import { SpinnerDemoService } from './pages/spinner/spinner-demo.service';
+import { SwitchDemoService } from './pages/switch/switch-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -533,10 +534,17 @@ export const routes: Routes = [
       {
         path: 'switch',
         component: ComponentDetailsComponent,
+        providers: [SwitchDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/switch/switch-demo-control.component').then((module) => module.SwitchDemoControlComponent),
           },
         ],
       },

@@ -1,28 +1,28 @@
 <ng-template #sideSheet>
   <ids-side-sheet
-    [open]="_show"
-    [type]="model.type"
-    [title]="model.title"
-    [header]="model.header"
-    [isBackdrop]="model.isBackdrop"
-    [isScrollable]="model.isScrollable"
-    [isClosable]="model.isClosable"
-    [isShowHeader]="model.isShowHeader"
-    [position]="model.position"
-    [backButton]="model.backButton"
-    [closeTooltipText]="model.closeTooltipText"
-    [size]="model.size"
-    [backdropType]="model.backdropType"
-    [backdropOpacity]="model.backdropOpacity"
-    (closed)="_show = false"
-    (backClicked)="onBackButtonClick()"
+    [open]="sideSheetService.show"
+    [type]="sideSheetService.model.type"
+    [title]="sideSheetService.model.title"
+    [header]="sideSheetService.model.header"
+    [isBackdrop]="sideSheetService.model.isBackdrop"
+    [isScrollable]="sideSheetService.model.isScrollable"
+    [isClosable]="sideSheetService.model.isClosable"
+    [isShowHeader]="sideSheetService.model.isShowHeader"
+    [position]="sideSheetService.model.position"
+    [backButton]="sideSheetService.model.backButton"
+    [closeTooltipText]="sideSheetService.model.closeTooltipText"
+    [size]="sideSheetService.model.size"
+    [backdropType]="sideSheetService.model.backdropType"
+    [backdropOpacity]="sideSheetService.model.backdropOpacity"
+    (closed)="sideSheetService.show = false"
+    (backClicked)="sideSheetService.onBackButtonClick()"
   >
     <div slot="customHeader">
       <header>
         <h2 id="side-sheet-title">Customer</h2>
       </header>
     </div>
-    @if (model.isShowFooter) {
+    @if (sideSheetService.model.isShowFooter) {
       <div slot="footer">
         <button
           type="button"
@@ -38,60 +38,53 @@
     <div>
       <ids-form-field>
         <ids-label>First name</ids-label>
-        <input idsInput placeholder="E.g. Steve" required [(ngModel)]="_firstName" />
+        <input idsInput placeholder="E.g. Steve" required [(ngModel)]="sideSheetService.firstName" />
       </ids-form-field>
 
       <ids-form-field>
         <ids-label>Last name</ids-label>
-        <input idsInput placeholder="E.g. Johnson" required [(ngModel)]="_lastName" />
+        <input idsInput placeholder="E.g. Johnson" required [(ngModel)]="sideSheetService.lastName" />
       </ids-form-field>
 
       <ids-form-field>
         <ids-label>Email address</ids-label>
-        <input idsInput type="email" placeholder="E.g. steve@example.com" required [(ngModel)]="_email" />
+        <input idsInput type="email" placeholder="E.g. steve@example.com" required [(ngModel)]="sideSheetService.email" />
       </ids-form-field>
 
       <ids-form-field>
         <ids-label>Phone number</ids-label>
-        <input idsInput type="tel" placeholder="E.g. +1 234 567 8901" [(ngModel)]="_phoneNumber" />
+        <input idsInput type="tel" placeholder="E.g. +1 234 567 8901" [(ngModel)]="sideSheetService.phoneNumber" />
       </ids-form-field>
 
       <ids-form-field>
         <ids-label>Shipping address</ids-label>
-        <input idsInput placeholder="E.g. 123 Main St" required [(ngModel)]="_shippingAddress" />
+        <input idsInput placeholder="E.g. 123 Main St" required [(ngModel)]="sideSheetService.shippingAddress" />
       </ids-form-field>
 
       <ids-form-field>
         <ids-label>City</ids-label>
-        <input idsInput placeholder="E.g. New York" required [(ngModel)]="_city" />
+        <input idsInput placeholder="E.g. New York" required [(ngModel)]="sideSheetService.city" />
       </ids-form-field>
 
       <ids-form-field>
         <ids-label>Postal code</ids-label>
-        <input idsInput placeholder="E.g. 10001" required [(ngModel)]="_postalCode" />
+        <input idsInput placeholder="E.g. 10001" required [(ngModel)]="sideSheetService.postalCode" />
       </ids-form-field>
     </div>
   </ids-side-sheet>
 </ng-template>
 
-@if (model.position !== 'right') {
+@if (sideSheetService.model.position !== 'right') {
   <ng-container *ngTemplateOutlet="sideSheet"/>
 }
 
-<app-tryout [title]="'COMPONENTS.SIDE-SHEET' | translate" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.SIDE-SHEET' | translate" (resetted)="sideSheetService.reset()">
   <div component>
-    <button type="button" idsButton (click)="_show = true">open side sheet</button>
+    <button type="button" idsButton (click)="sideSheetService.show = true">open side sheet</button>
   </div>
-  <app-control-table
-    controls
-    [controlName]="'Side Sheet'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
+
 </app-tryout>
 
-@if (model.position === 'right') {
+@if (sideSheetService.model.position === 'right') {
   <ng-container *ngTemplateOutlet="sideSheet"/>
 }

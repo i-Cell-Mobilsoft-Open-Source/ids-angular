@@ -23,6 +23,8 @@ import { RadioDemoService } from './pages/radio/radio-demo.service';
 import { ScrollbarDemoService } from './pages/scrollbar/scrollbar-demo.service';
 import { SegmentedControlDemoService } from './pages/segmented-control/segmented-control-demo.service';
 import { SegmentedControlToggleDemoService } from './pages/segmented-control-toggle/segmented-control-toggle-demo.service';
+import { SelectDemoService } from './pages/select/select-demo.service';
+import { SideSheetDemoService } from './pages/side-sheet/side-sheet-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -457,20 +459,36 @@ export const routes: Routes = [
       {
         path: 'select',
         component: ComponentDetailsComponent,
+        providers: [SelectDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/select/select-demo-control.component').then((module) => module.SelectDemoControlComponent),
           },
         ],
       },
       {
         path: 'side-sheet',
         component: ComponentDetailsComponent,
+        providers: [SideSheetDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/side-sheet/side-sheet-demo.component').then((module) => module.SideSheetDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/side-sheet/side-sheet-demo-control.component').then(
+                (module) => module.SideSheetDemoControlControlComponent,
+              ),
           },
         ],
       },

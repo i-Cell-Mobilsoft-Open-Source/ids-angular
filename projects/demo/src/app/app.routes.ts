@@ -25,6 +25,7 @@ import { SegmentedControlDemoService } from './pages/segmented-control/segmented
 import { SegmentedControlToggleDemoService } from './pages/segmented-control-toggle/segmented-control-toggle-demo.service';
 import { SelectDemoService } from './pages/select/select-demo.service';
 import { SideSheetDemoService } from './pages/side-sheet/side-sheet-demo.service';
+import { SnackbarDemoService } from './pages/snackbar/snackbar-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -495,10 +496,19 @@ export const routes: Routes = [
       {
         path: 'snackbar',
         component: ComponentDetailsComponent,
+        providers: [SnackbarDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/snackbar/snackbar-demo-control.component').then(
+                (module) => module.SnackbarDemoControlComponent,
+              ),
           },
         ],
       },

@@ -31,6 +31,7 @@ import { SwitchDemoService } from './pages/switch/switch-demo.service';
 import { TabDemoService } from './pages/tab/tab-demo.service';
 import { TableDemoService } from './pages/table/table-demo.service';
 import { TagDemoService } from './pages/tag/tag-demo.service';
+import { TooltipDemoService } from './pages/tooltip/tooltip-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -41,7 +42,6 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
-        // pathMatch: 'full',
       },
 
       {
@@ -605,24 +605,22 @@ export const routes: Routes = [
       {
         path: 'tooltip',
         component: ComponentDetailsComponent,
+        providers: [TooltipDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
           },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/tooltip/tooltip-demo-control.component').then((module) => module.TooltipDemoControlComponent),
+          },
         ],
       },
     ],
   },
-  // {
-  //   path: 'components/:slug',
-  //   component: ComponentDetailsComponent,
-  // },
-  // {
-  //   path: 'components/component-details',
-  //   component: ComponentDetailsComponent,
-  // },
-
   {
     path: 'index',
     loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),

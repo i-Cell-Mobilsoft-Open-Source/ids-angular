@@ -1,5 +1,6 @@
 import { DemoControl, DemoControlConfig, DemoControlItem } from '../../../../types/demo-control.type';
 
+import { CommonModule } from '@angular/common';
 import { Component, computed, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsCardBodyDirective, IdsCardComponent, IdsCardHeaderComponent, IdsCardTitleDirective } from '@i-cell/ids-angular/card';
@@ -14,6 +15,7 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
 @Component({
   selector: 'app-control-table-small',
   imports: [
+    CommonModule,
     IdsSentenceCasePipe,
     FormsModule,
     IdsSwitchComponent,
@@ -39,6 +41,7 @@ export class ControlTableSmallComponent<T extends Record<string, T[keyof T]>> {
   public controlName = input<string | undefined>();
   public controlConfig = input<DemoControlConfig<T>>();
   public model = model.required<T>();
+  public modelChange = output<T>();
   public resetted = output<void>();
 
   protected _demoControl = DemoControl;

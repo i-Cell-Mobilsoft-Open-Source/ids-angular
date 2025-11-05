@@ -30,6 +30,7 @@ import { SpinnerDemoService } from './pages/spinner/spinner-demo.service';
 import { SwitchDemoService } from './pages/switch/switch-demo.service';
 import { TabDemoService } from './pages/tab/tab-demo.service';
 import { TableDemoService } from './pages/table/table-demo.service';
+import { TagDemoService } from './pages/tag/tag-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -587,10 +588,17 @@ export const routes: Routes = [
       {
         path: 'tag',
         component: ComponentDetailsComponent,
+        providers: [TagDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/tag/tag-demo-control.component').then((module) => module.TagDemoControlComponent),
           },
         ],
       },

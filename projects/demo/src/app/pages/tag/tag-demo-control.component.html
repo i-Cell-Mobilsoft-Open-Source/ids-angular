@@ -1,0 +1,26 @@
+<app-control-tryout>
+  <app-control-table-small
+    controls
+    [controlName]="'Tag'"
+    [configType]="'input'"
+    [controlConfig]="tagDemoService.inputControlConfig"
+    [(model)]="tagDemoService.model"
+    (resetted)="tagDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Tag'"
+    [configType]="'helper'"
+    [controlConfig]="tagDemoService.helperControlConfig"
+    [(model)]="tagDemoService.helperModel"
+    (resetted)="tagDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Tag group'"
+    [configType]="'input'"
+    [controlConfig]="tagDemoService.groupInputControlConfig"
+    [(model)]="tagDemoService.groupModel"
+    (resetted)="tagDemoService.reset()"
+  />
+</app-control-tryout>

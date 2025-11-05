@@ -1,18 +1,18 @@
-<app-tryout [title]="'COMPONENTS.TAG' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.TAG' | translate" [hasDarkBackground]="tagDemoService.model.variant === 'light'" (resetted)="tagDemoService.reset()">
   <div component class="tag-grid">
     <div class="tag-item">
       <h2>{{ "COMMON.NON-INTERACTIVE" | translate }}</h2>
       <ids-tag
-        [appearance]="model.appearance"
-        [size]="model.size"
-        [variant]="model.variant"
-        (click)="onClick(model.appearance + '-' + model.size + '-' + model.variant)"
+        [appearance]="tagDemoService.model.appearance"
+        [size]="tagDemoService.model.size"
+        [variant]="tagDemoService.model.variant"
+        (click)="tagDemoService.onClick(tagDemoService.model.appearance + '-' + tagDemoService.model.size + '-' + tagDemoService.model.variant)"
       >
-        @if (helperModel.hasLeadingIcon) {
+        @if (tagDemoService.helperModel.hasLeadingIcon) {
           <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
         }
         Non-interactive tag
-        @if (helperModel.hasTrailingIcon) {
+        @if (tagDemoService.helperModel.hasTrailingIcon) {
           <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="check" />
         }
       </ids-tag>
@@ -20,12 +20,12 @@
 
     <div class="tag-item">
       <h2>{{ "COMMON.INTERACTIVE" | translate }} (link)</h2>
-      <a idsTag href="https://angular.dev/" target="_blank" [appearance]="model.appearance" [size]="model.size" [variant]="model.variant">
-        @if (helperModel.hasLeadingIcon) {
+      <a idsTag href="https://angular.dev/" target="_blank" [appearance]="tagDemoService.model.appearance" [size]="tagDemoService.model.size" [variant]="tagDemoService.model.variant">
+        @if (tagDemoService.helperModel.hasLeadingIcon) {
           <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
         }
         Interactive tag
-        @if (helperModel.hasTrailingIcon) {
+        @if (tagDemoService.helperModel.hasTrailingIcon) {
           <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="check" />
         }
       </a>
@@ -33,7 +33,7 @@
 
     <div class="tag-item">
       <h2>{{ "COMMON.GROUPED" | translate }}</h2>
-      <ids-tag-group [appearance]="groupModel.appearance" [size]="groupModel.size">
+      <ids-tag-group [appearance]="tagDemoService.groupModel.appearance" [size]="tagDemoService.groupModel.size">
         <ids-tag [variant]="'primary'">Primary</ids-tag>
         <ids-tag [variant]="'secondary'">Secondary</ids-tag>
         <ids-tag [variant]="'success'">Success</ids-tag>
@@ -41,28 +41,5 @@
     </div>
   </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Tag'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Tag'"
-    [configType]="'helper'"
-    [controlConfig]="_helperControlConfig"
-    [(model)]="helperModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Tag group'"
-    [configType]="'input'"
-    [controlConfig]="_groupInputControlConfig"
-    [(model)]="groupModel"
-    (resetted)="reset()"
-  />
+
 </app-tryout>

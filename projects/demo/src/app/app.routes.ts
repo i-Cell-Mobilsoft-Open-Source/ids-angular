@@ -28,6 +28,8 @@ import { SideSheetDemoService } from './pages/side-sheet/side-sheet-demo.service
 import { SnackbarDemoService } from './pages/snackbar/snackbar-demo.service';
 import { SpinnerDemoService } from './pages/spinner/spinner-demo.service';
 import { SwitchDemoService } from './pages/switch/switch-demo.service';
+import { TabDemoService } from './pages/tab/tab-demo.service';
+import { TableDemoService } from './pages/table/table-demo.service';
 
 import { Routes } from '@angular/router';
 
@@ -551,20 +553,34 @@ export const routes: Routes = [
       {
         path: 'tab',
         component: ComponentDetailsComponent,
+        providers: [TabDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/tab/tab-demo.component').then((module) => module.TabsDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/tab/tab-demo-control.component').then((module) => module.TabsDemoControlComponent),
           },
         ],
       },
       {
         path: 'table',
         component: ComponentDetailsComponent,
+        providers: [TableDemoService],
         children: [
           {
             path: '',
             loadComponent: () => import('./pages/table/table-demo.component').then((module) => module.TableDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/table/table-demo-control.component').then((module) => module.TableDemoControlComponent),
           },
         ],
       },

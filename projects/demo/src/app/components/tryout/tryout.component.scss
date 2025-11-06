@@ -28,7 +28,7 @@ section {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 4rem;
 
   &.component {

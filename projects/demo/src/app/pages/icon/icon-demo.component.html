@@ -1,26 +1,25 @@
-<app-tryout [title]="'COMPONENTS.ICON' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+<app-tryout [title]="'COMPONENTS.ICON' | translate" [hasDarkBackground]="iconDemoService.model.variant === 'light'" (resetted)="iconDemoService.reset()">
   <div component class="icon-types">
     <div class="icon-tpye">
       <h2>Font icon</h2>
       <ids-icon
-        [size]="model.size"
-        [sizeCollection]="model.sizeCollection"
-        [variant]="model.variant"
-        [fontIcon]="model.fontIcon"
-        [aria-hidden]="model['aria-hidden']"
+        [size]="iconDemoService.model.size"
+        [sizeCollection]="iconDemoService.model.sizeCollection"
+        [variant]="iconDemoService.model.variant"
+        [fontIcon]="iconDemoService.model.fontIcon"
+        [aria-hidden]="iconDemoService.model['aria-hidden']"
       />
     </div>
     <div class="icon-tpye">
       <h2>SVG icon</h2>
       <ids-icon
-        [size]="model.size"
-        [sizeCollection]="model.sizeCollection"
-        [variant]="model.variant"
-        [svgIcon]="model.svgIcon"
-        [aria-hidden]="model['aria-hidden']"
+        [size]="iconDemoService.model.size"
+        [sizeCollection]="iconDemoService.model.sizeCollection"
+        [variant]="iconDemoService.model.variant"
+        [svgIcon]="iconDemoService.model.svgIcon"
+        [aria-hidden]="iconDemoService.model['aria-hidden']"
       />
     </div>
   </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
 </app-tryout>

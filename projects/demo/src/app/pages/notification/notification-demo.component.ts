@@ -2,7 +2,7 @@ import { NotificationDemoService } from './notification-demo.service';
 
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -26,7 +26,12 @@ import { TranslateModule } from '@ngx-translate/core';
     './notification-demo.component.scss',
   ],
 })
-export class NotificationDemoComponent {
+export class NotificationDemoComponent implements OnInit {
 
   public notificationDemoService = inject(NotificationDemoService);
+
+  public ngOnInit(): void {
+    this.notificationDemoService.loadIcons();
+  }
+
 }

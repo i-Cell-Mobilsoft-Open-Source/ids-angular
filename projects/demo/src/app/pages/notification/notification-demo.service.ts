@@ -46,8 +46,9 @@ export class NotificationDemoService {
   private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
   public displayComponent = signal<boolean>(true);
+  public isLoaded = signal(false);
 
-  public inputControlConfig: DemoControlConfig<NotificationInputControls> = {
+  public inputControlConfig = signal<DemoControlConfig<NotificationInputControls>>({
     appearance: {
       description: 'Notification appearance.',
       type: 'IdsNotificationAppearanceType',
@@ -115,7 +116,7 @@ export class NotificationDemoService {
       default: defaultConfig.displayActionsAtBottom,
       control: DemoControl.SWITCH,
     },
-  };
+  });
 
   public readonly helperControlConfig: DemoControlConfig<NotificationHelperControls> = {
     showAction1Button: {
@@ -208,22 +209,27 @@ export class NotificationDemoService {
     },
   };
 
-  constructor() {
-    this._loadIcons();
-  }
-
-  private _loadIcons(): void {
+  public loadIcons(): void {
     this._iconService.loadIcons().pipe(
       takeUntilDestroyed(this._destroyRef),
     ).subscribe((list: string[]) => {
-      this.inputControlConfig = {
-        ...this.inputControlConfig,
-        icon: { ...this.inputControlConfig.icon, list },
-      };
+
+      // ⭐️ 6. Frissítsd a signalt .update()-tel
+      this.inputControlConfig.update((currentConfig) => ({
+        ...currentConfig,
+        icon: { ...currentConfig.icon, list: list },
+      }));
+
+      // ⭐️ 7. Frissítsd a defaultokat és a modellt a betöltés után
+      this.defaults = getDefaultFromDemoConfig<NotificationInputControls>(this.inputControlConfig());
+      this.model = { ...this.defaults };
+
+      // ⭐️ 8. Jelezd, hogy betöltődtek az adatok
+      this.isLoaded.set(true);
     });
   }
 
-  public defaults = getDefaultFromDemoConfig<NotificationInputControls>(this.inputControlConfig);
+  public defaults = getDefaultFromDemoConfig<NotificationInputControls>(this.inputControlConfig());
   public helperDefaults = getDefaultFromDemoConfig<NotificationHelperControls>(this.helperControlConfig);
 
   public model: NotificationInputControls = { ...this.defaults };
@@ -235,6 +241,7 @@ export class NotificationDemoService {
 
   public reset(): void {
     this.displayComponent.set(true);
+    this.defaults = getDefaultFromDemoConfig<NotificationInputControls>(this.inputControlConfig());
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
   }

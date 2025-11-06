@@ -94,6 +94,7 @@ export class IdsCheckboxComponent
 
   public controlDir: NgControl | null = null;
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   public readonly change = output<IdsCheckBoxChangeEvent>();
   public readonly indeterminateChange = output<boolean>();
 
@@ -242,10 +243,14 @@ export class IdsCheckboxComponent
 
   protected get _hasRequiredValidator(): boolean {
     const control = this.controlDir?.control;
+    const attrRequired = this.required();
+
     if (!control) {
-      return this.required();
+      return attrRequired;
     }
-    return control.hasValidator(Validators.required)
+
+    return attrRequired
+      || control.hasValidator(Validators.required)
       || control.hasValidator(Validators.requiredTrue)
       || control.hasValidator(IdsValidators.required)
       || control.hasValidator(IdsValidators.requiredTrue)

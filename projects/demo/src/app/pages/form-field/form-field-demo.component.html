@@ -7,7 +7,7 @@
       <ids-form-field [size]="formFieldDemoService.formFieldModel.size" [variant]="formFieldDemoService.formFieldModel.variant">
         <ids-label>{{ formFieldDemoService.formFieldHelperModel.label }}</ids-label>
         @if (formFieldDemoService.formFieldHelperModel.hasLeadingIcon) {
-          <ids-icon idsLeadingIcon fontIcon="sun" />
+          <ids-icon idsLeadingIcon fontIcon="key" />
         }
         @if (formFieldDemoService.formFieldHelperModel.hasPrefix) {
           <span idsPrefix>{{ formFieldDemoService.formFieldHelperModel.prefix }}</span>
@@ -28,7 +28,7 @@
           <span idsSuffix>{{ formFieldDemoService.formFieldHelperModel.suffix }}</span>
         }
         @if (formFieldDemoService.formFieldHelperModel.hasTrailingIcon) {
-          <ids-icon idsTrailingIcon fontIcon="moon" />
+          <ids-icon idsTrailingIcon fontIcon="cart" />
         }
         @if (formFieldDemoService.formFieldHelperModel.hasAction) {
           <div idsFormFieldAction>

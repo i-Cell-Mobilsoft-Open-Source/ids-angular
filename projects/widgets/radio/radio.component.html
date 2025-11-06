@@ -4,7 +4,7 @@
     #input
     class="ids-radio__native-control"
     type="radio"
-    [id]="inputId()"
+    [id]="_inputId()"
     [checked]="selected()"
     [disabled]="_isDisabled()"
     [attr.name]="_name()"
@@ -18,6 +18,6 @@
   />
   <div class="ids-radio__inner-circle" (click)="_innerCircleClick()"></div>
 </div>
-<label class="ids-radio__label" [for]="inputId()">
+<label class="ids-radio__label" [for]="_inputId()">
   <ng-content />
 </label>

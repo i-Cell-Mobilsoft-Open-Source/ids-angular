@@ -31,7 +31,7 @@ import { IdsIconButtonComponent, IdsIconButtonVariantType } from '@i-cell/ids-an
       [variant]="variant()"
       (click)="_toggle()"
     >
-      <ids-icon aria-hidden="true" alt="" fontIcon="more-horizontal" />
+      <ids-icon aria-hidden="true" alt="" fontIcon="more-horiz" />
     </button>
     <ng-template
       cdkConnectedOverlay

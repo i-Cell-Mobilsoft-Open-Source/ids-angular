@@ -100,17 +100,23 @@ export const routes: Routes = [
   },
   {
     path: 'components/segmented-control',
-    loadComponent: () => import('./pages/segmented-control/segmented-control-demo.component').then(
-      (module) => module.SegmentedControlDemoComponent),
+    loadComponent: () =>
+      import('./pages/segmented-control/segmented-control-demo.component').then((module) => module.SegmentedControlDemoComponent),
   },
   {
     path: 'components/segmented-control-toggle',
-    loadComponent: () => import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component').then(
-      (module) => module.SegmentedControlToggleDemoComponent),
+    loadComponent: () =>
+      import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component').then(
+        (module) => module.SegmentedControlToggleDemoComponent,
+      ),
   },
   {
     path: 'components/select',
     loadComponent: () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
+  },
+  {
+    path: 'components/side-nav',
+    loadComponent: () => import('./pages/side-nav/side-nav-demo.component').then((module) => module.SideNavDemoComponent),
   },
   {
     path: 'components/side-sheet',

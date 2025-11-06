@@ -45,11 +45,11 @@ importers:
         specifier: ^3.13.9
         version: 3.13.9(@types/react@18.3.4)(graphql@16.11.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@i-cell/ids-styles':
-        specifier: ^0.0.45
-        version: 0.0.45
+        specifier: ^0.0.52
+        version: 0.0.52
       '@i-cell/ids-tokens':
-        specifier: 0.0.35
-        version: 0.0.35
+        specifier: 0.0.36
+        version: 0.0.36
       '@ngx-translate/core':
         specifier: 17.0.0
         version: 17.0.0(@angular/common@20.1.7(@angular/core@20.1.7(@angular/compiler@20.1.7)(rxjs@7.8.1)(zone.js@0.15.1))(rxjs@7.8.1))(@angular/core@20.1.7(@angular/compiler@20.1.7)(rxjs@7.8.1)(zone.js@0.15.1))
@@ -1645,11 +1645,11 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@i-cell/ids-styles@0.0.45':
-    resolution: {integrity: sha512-BgUw/l+42eQNa0IZdZ+QW2mG9wsCrB/8mE/Twc5H5GnDL1yJ74/Gmd4/E2fINk3tyrulA5N7HiRchOuOo0jevw==}
+  '@i-cell/ids-styles@0.0.52':
+    resolution: {integrity: sha512-3EItL3WQDZ8m6mTEup3g7zZRP9pjyxLzhehDdYK4bPyyoyJgg4FBSnDDlnoptIDr0mQ7wTnnOEYEEuWOB+bR5w==}
 
-  '@i-cell/ids-tokens@0.0.35':
-    resolution: {integrity: sha512-iBLovTzkCYSjcCQJSgj6MAFi3dQMz3DVXK/KVP7cy7v9f4W3RlWQLDUPKQjI9Keg9zNQYbWvswupiasrkdhvYw==}
+  '@i-cell/ids-tokens@0.0.36':
+    resolution: {integrity: sha512-o2yyCsjThMKa9fiZWZr2Xtc1jAE/jkC3Io3s8M3lAZL6HPCHV1BwtUGm7i/fXNq/TB2HNdustDnvGzyE7DtFjA==}
 
   '@inquirer/checkbox@4.2.1':
     resolution: {integrity: sha512-bevKGO6kX1eM/N+pdh9leS5L7TBF4ICrzi9a+cbWkrxeAeIcwlo/7OfWGCDERdRCI2/Q6tjltX4bt07ALHDwFw==}
@@ -10252,9 +10252,9 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@i-cell/ids-styles@0.0.45': {}
+  '@i-cell/ids-styles@0.0.52': {}
 
-  '@i-cell/ids-tokens@0.0.35': {}
+  '@i-cell/ids-tokens@0.0.36': {}
 
   '@inquirer/checkbox@4.2.1(@types/node@24.3.0)':
     dependencies:

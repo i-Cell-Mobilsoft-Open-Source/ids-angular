@@ -1,0 +1,198 @@
+<app-tryout [title]="'COMPONENTS.SIDE_NAV' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
+  <ng-container component>
+    <nav
+      idsSideNav
+      [appearance]="model.appearance"
+      [size]="model.size"
+      [variant]="model.variant"
+      [hasActiveIndicator]="helperModel.hasActiveIndicator"
+      [hasLabel]="helperModel.hasLabel"
+    >
+      <!-- initiate sections, title and items using side-nav related component selectors... -->
+      <ids-side-nav-section>
+        <ids-side-nav-title label="Built with component selectors">
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="cart" />
+          }
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="cart" />
+          }
+        </ids-side-nav-title>
+        <ids-side-nav-item
+          label="Design Tokens"
+          target="design-tokens"
+          [disabled]="helperModel.disabled"
+          [hasTooltip]="helperModel.hasTooltip"
+        >
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="filter" />
+          }
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="filter" />
+          }
+        </ids-side-nav-item>
+        <ids-side-nav-item label="Home" target="/" [disabled]="helperModel.disabled" [hasTooltip]="helperModel.hasTooltip">
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="home" />
+          }
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="home" />
+          }
+        </ids-side-nav-item>
+        <ids-side-nav-item label="Components" target="components" [disabled]="helperModel.disabled" [hasTooltip]="helperModel.hasTooltip">
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="more-horiz" />
+          }
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="more-horiz" />
+          }
+          <ids-side-nav-item
+            [label]="helperModel.text"
+            [target]="helperModel.target"
+            [disabled]="helperModel.disabled"
+            [hasTooltip]="helperModel.hasTooltip"
+          >
+            @if (helperModel.hasLeadingIcon) {
+              <ids-icon icon-leading fontIcon="help-circle" />
+            }
+            @if (helperModel.hasTrailingIcon) {
+              <ids-icon icon-trailing fontIcon="help-circle" />
+            }
+          </ids-side-nav-item>
+          <ids-side-nav-item
+            label="Avatar"
+            target="components/avatar"
+            [disabled]="helperModel.disabled"
+            [hasTooltip]="helperModel.hasTooltip"
+          >
+            @if (helperModel.hasLeadingIcon) {
+              <ids-icon icon-leading fontIcon="account" />
+            }
+            @if (helperModel.hasTrailingIcon) {
+              <ids-icon icon-trailing fontIcon="account" />
+            }
+          </ids-side-nav-item>
+          <ids-side-nav-item
+            label="Side Navigation"
+            target="components/side-nav"
+            [disabled]="helperModel.disabled"
+            [hasTooltip]="helperModel.hasTooltip"
+          >
+            @if (helperModel.hasLeadingIcon) {
+              <ids-icon icon-leading fontIcon="menu" />
+            }
+            @if (helperModel.hasTrailingIcon) {
+              <ids-icon icon-trailing fontIcon="menu" />
+            }
+          </ids-side-nav-item>
+        </ids-side-nav-item>
+      </ids-side-nav-section>
+
+      <!-- ...OR... -->
+
+      <!-- ...use with semantic elements (as list) -->
+      <ul idsSideNavSection>
+        <li idsSideNavTitle label="Built with semantic elements">
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="cctv" />
+          }
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="cctv" />
+          }
+        </li>
+        <li
+          idsSideNavItem
+          label="Design Tokens"
+          target="design-tokens"
+          [disabled]="helperModel.disabled"
+          [hasTooltip]="helperModel.hasTooltip"
+        >
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="filter" />
+          }
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="filter" />
+          }
+        </li>
+        <li idsSideNavItem label="Home" target="/" [disabled]="helperModel.disabled" [hasTooltip]="helperModel.hasTooltip">
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="home" />
+          }
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="home" />
+          }
+        </li>
+        <li idsSideNavItem label="Components" target="components" [disabled]="helperModel.disabled" [hasTooltip]="helperModel.hasTooltip">
+          @if (helperModel.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="more-horiz" />
+          }
+          @if (helperModel.hasTrailingIcon) {
+            <ids-icon icon-trailing fontIcon="more-horiz" />
+          }
+          <!-- in this case children should be listed in a template, marked with '#idsSideNavItemChildren' variable name-->
+          <ng-template #idsSideNavItemChildren>
+            <li
+              idsSideNavItem
+              [label]="helperModel.text"
+              [target]="helperModel.target"
+              [disabled]="helperModel.disabled"
+              [hasTooltip]="helperModel.hasTooltip"
+            >
+              @if (helperModel.hasLeadingIcon) {
+                <ids-icon icon-leading fontIcon="help-circle" />
+              }
+              @if (helperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing fontIcon="help-circle" />
+              }
+            </li>
+            <li
+              idsSideNavItem
+              label="Avatar"
+              target="components/avatar"
+              [disabled]="helperModel.disabled"
+              [hasTooltip]="helperModel.hasTooltip"
+            >
+              @if (helperModel.hasLeadingIcon) {
+                <ids-icon icon-leading fontIcon="account" />
+              }
+              @if (helperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing fontIcon="account" />
+              }
+            </li>
+            <li
+              idsSideNavItem
+              label="Side Navigation"
+              target="components/side-nav"
+              [disabled]="helperModel.disabled"
+              [hasTooltip]="helperModel.hasTooltip"
+            >
+              @if (helperModel.hasLeadingIcon) {
+                <ids-icon icon-leading fontIcon="menu" />
+              }
+              @if (helperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing fontIcon="menu" />
+              }
+            </li>
+          </ng-template>
+        </li>
+      </ul>
+    </nav>
+  </ng-container>
+
+  <app-control-table
+    controls
+    [controlName]="'SideNav'"
+    [configType]="'input'"
+    [controlConfig]="_sideNavInputControlConfig"
+    [(model)]="model"
+    (resetted)="reset()"
+  />
+  <app-control-table
+    controls
+    [controlName]="'SideNav'"
+    [configType]="'helper'"
+    [controlConfig]="_helperControlConfig"
+    [(model)]="helperModel"
+    (resetted)="reset()"
+  />
+</app-tryout>

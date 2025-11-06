@@ -18,7 +18,7 @@
         [disabled]="helperModel.onlyOneItemIsDisabled"
       >
         @if (helperModel.itemHasIcon) {
-          <ids-icon fontIcon="envelope" />
+          <ids-icon fontIcon="mail" />
         }
         @if (helperModel.itemHasSuffix) {
           <span suffixContent>$</span>
@@ -26,7 +26,7 @@
       </ids-segmented-control-toggle-item>
       <ids-segmented-control-toggle-item value="second" [label]="helperModel.itemHasLabel ? 'Label 2' : undefined">
         @if (helperModel.itemHasIcon) {
-          <ids-icon fontIcon="user" />
+          <ids-icon fontIcon="account" />
         }
         @if (helperModel.itemHasSuffix) {
           <span suffixContent>$</span>
@@ -34,7 +34,7 @@
       </ids-segmented-control-toggle-item>
       <ids-segmented-control-toggle-item value="third" [label]="helperModel.itemHasLabel ? 'Label 3' : undefined">
         @if (helperModel.itemHasIcon) {
-          <ids-icon fontIcon="clock" />
+          <ids-icon fontIcon="access-time" />
         }
         @if (helperModel.itemHasSuffix) {
           <span suffixContent>$</span>

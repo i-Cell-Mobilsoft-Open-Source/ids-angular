@@ -60,11 +60,11 @@ export class ComponentDetailsComponent implements OnInit {
     const slug$ = this._router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
-        const urlSegments = event.urlAfterRedirects.split('/'); // urlSegments = ["", "components", "accordion", "demo"]
+        const urlSegments = event.urlAfterRedirects.split('/');
         return urlSegments[2];
       }),
       startWith(this._router.url.split('/')[2]),
-      distinctUntilChanged(), //it doesn't emit if the slug didn't change
+      distinctUntilChanged(),
     );
 
     slug$
@@ -171,23 +171,40 @@ export class ComponentDetailsComponent implements OnInit {
     this.isDark.update((dark) => !dark);
   }
 
-  public resetDemoControls(): void {
-    if (this._currentDemoInstance && this._currentDemoInstance.reset) {
-      this._currentDemoInstance.reset();
-    }
+  public onDemoActivate(instance: any): void {
+    this._currentDemoInstance = instance;
+  }
 
-    if (this._currentControlInstance) {
-      if (typeof this._currentControlInstance.setModel === 'function') {
-        this._currentControlInstance.setModel({ ...this._currentControlInstance.defaults });
+  public onControlActivate(instance: any): void {
+    this._currentControlInstance = instance;
+  }
+
+  public resetDemoControls(): void {
+    let demoService: any;
+
+    if (this._currentDemoInstance) {
+      const serviceKey = Object.keys(this._currentDemoInstance).find((key) =>
+        key.endsWith('DemoService'),
+      );
+      if (serviceKey) {
+        demoService = (this._currentDemoInstance as any)[serviceKey];
       }
     }
 
-    if (typeof this._currentControlInstance.setHelperModel === 'function') {
-      this._currentControlInstance.setHelperModel({ ...this._currentControlInstance.helperDefaults });
+    if (!demoService && this._currentControlInstance) {
+      const serviceKey = Object.keys(this._currentControlInstance).find((key) =>
+        key.endsWith('DemoService'),
+      );
+      if (serviceKey) {
+        demoService = (this._currentControlInstance as any)[serviceKey];
+      }
     }
 
-    if (typeof this._currentControlInstance.setGroupModel === 'function') {
-      this._currentControlInstance.setGroupModel({ ...this._currentControlInstance.groupDefaults });
+    if (demoService && typeof demoService.reset === 'function') {
+      demoService.reset();
+    } else {
+      console.warn('Nem található a DemoService, vagy nincs reset() metódusa.');
     }
   }
+
 }

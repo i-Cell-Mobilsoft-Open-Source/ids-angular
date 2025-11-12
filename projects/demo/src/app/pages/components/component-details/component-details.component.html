@@ -42,7 +42,7 @@
                 [attr.aria-pressed]="isDark()"
                 (click)="toggleDark()"
               >
-                <ids-icon icon-leading [fontIcon]="isDark() ? 'sun' : 'moon'" />
+                <ids-icon icon-leading [fontIcon]="isDark() ? 'light-mode' : 'dark-mode'" />
               </button>
               <button
                 type="button"
@@ -54,11 +54,11 @@
                 (click)="toggleFooter()"
               >
                 {{ isOpen() ? "Hide code" : "Show code" }}
-                <ids-icon icon-leading [fontIcon]="isOpen() ? 'visibility-off-filled' : 'visibility-filled'" />
+                <ids-icon icon-leading [fontIcon]="isOpen() ? 'visibility-off' : 'visibility'" />
                 <ids-icon icon-trailing size="compact" class="ml-1" [fontIcon]="isOpen() ? 'chevron-up' : 'chevron-down'" />
               </button>
               <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="resetDemoControls()">
-                <ids-icon icon-leading alt="" fontIcon="reset" />
+                <ids-icon icon-leading alt="" fontIcon="reload" />
               </button>
             </div>
           </div>
@@ -69,10 +69,10 @@
             [class.bg-ids-container-bg-surface-darker-10]="!isDark()"
           >
             <div class="w-full h-full lg:w-2/3  demohost-container">
-              <router-outlet/>
+              <router-outlet (activate)="onDemoActivate($event)"/>
             </div>
             <div class="w-full lg:w-1/3 text-ids-container-bg-surface-darker-95 bg-ids-container-bg-surface-lighter-10">
-              <router-outlet name="demoControls" />
+              <router-outlet name="demoControls" (activate)="onControlActivate($event)"/>
             </div>
           </div>
           @if (isOpen()) {
@@ -80,7 +80,7 @@
               <div class="absolute top-4 right-4">
                 <button type="button" idsButton appearance="outlined" size="comfortable" variant="primary" id="copy">
                   Copy code
-                  <ids-icon icon-leading fontIcon="copy-filled" />
+                  <ids-icon icon-leading fontIcon="file-copy" />
                 </button>
               </div>
               <p>Code</p>

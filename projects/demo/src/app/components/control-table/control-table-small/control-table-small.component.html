@@ -24,7 +24,6 @@
             }
             @case (_demoControl.SELECT) {
               <ids-form-field style="width: 100%; z-index: 10; position: relative">
-
                 <ids-select
                   style="width: 100%"
                   [disabled]="disabled"
@@ -76,30 +75,31 @@
             }
             @case (_demoControl.NUMBERARRAY) {
               <ids-form-field style="width: 100%" [variant]="'surface'">
-              <input
-                type="text"
-                style="width: 100%"
-                [name]="control.name"
-                [id]="control.name"
-                [disabled]="disabled"
-                [(ngModel)]="model()[control.name]"
-                (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.($event)"
-              />
+                <input
+                  idsInput
+                  type="text"
+                  style="width: 100%"
+                  [name]="control.name"
+                  [id]="control.name"
+                  [disabled]="disabled"
+                  [(ngModel)]="model()[control.name]"
+                  (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.($event)"
+                />
               </ids-form-field>
             }
             @default {
               <ids-form-field style="width: 100%" [variant]="'surface'">
-              <input
-                #inputFieldModel="ngModel"
-                idsInput
-                type="text"
-                style="width: 100%"
-                [name]="control.name"
-                [id]="control.name"
-                [disabled]="disabled"
-                [(ngModel)]="model()[control.name]"
-                (ngModelChange)="control.onModelChange?.($event)"
-              />
+                <input
+                  #inputFieldModel="ngModel"
+                  idsInput
+                  type="text"
+                  style="width: 100%"
+                  [name]="control.name"
+                  [id]="control.name"
+                  [disabled]="disabled"
+                  [(ngModel)]="model()[control.name]"
+                  (ngModelChange)="control.onModelChange?.($event)"
+                />
               </ids-form-field>
             }
           }

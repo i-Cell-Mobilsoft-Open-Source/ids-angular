@@ -204,14 +204,11 @@ export class TabDemoService {
   public model: TabInputControls = { ...this.defaults };
   public helperModel: TabHelperControls = { ...this.helperDefaults };
 
-  // private _cdr = inject(ChangeDetectorRef);
-
   public loadIcons(): void {
     this._iconService
       .loadIcons()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((list: string[]) => {
-        // 1. Frissítsd a helper configot a listákkal
         this.helperControlConfig.update((cfg) => ({
           ...cfg,
           tabItem1LeadingIcon: { ...cfg.tabItem1LeadingIcon, list: list },
@@ -222,35 +219,12 @@ export class TabDemoService {
           tabItem3TrailingIcon: { ...cfg.tabItem3TrailingIcon, list: list },
         }));
 
-        // 2. ⭐️ Frissítsd a helper defaultokat és a modellt a betöltés UTÁN
         this.helperDefaults = getDefaultFromDemoConfig<TabHelperControls>(this.helperControlConfig());
         this.helperModel = { ...this.helperDefaults };
 
-        // 3. ⭐️ Jelezd, hogy végeztünk
         this.isLoaded.set(true);
       });
   }
-  // private _loadIcons(): void {
-  //   this._iconService.loadIcons().pipe(
-  //     takeUntilDestroyed(this._destroyRef),
-  //   ).subscribe((list: string[]) => {
-  //     this.helperControlConfig = {
-  //       ...this.helperControlConfig,
-  //       tabItem1LeadingIcon: { ...this.helperControlConfig.tabItem1LeadingIcon, list },
-  //       tabItem1TrailingIcon: { ...this.helperControlConfig.tabItem1TrailingIcon, list },
-  //       tabItem2LeadingIcon: { ...this.helperControlConfig.tabItem2LeadingIcon, list },
-  //       tabItem2TrailingIcon: { ...this.helperControlConfig.tabItem2TrailingIcon, list },
-  //       tabItem3LeadingIcon: { ...this.helperControlConfig.tabItem3LeadingIcon, list },
-  //       tabItem3TrailingIcon: { ...this.helperControlConfig.tabItem3TrailingIcon, list },
-  //     };
-  //     // this._cdr.markForCheck();
-  //   });
-  // }
-
-  // public reset(): void {
-  //   this.model = { ...this.defaults };
-  //   this.helperModel = { ...this.helperDefaults };
-  // }
 
   public reset(): void {
     this.defaults = getDefaultFromDemoConfig<TabInputControls>(this.inputControlConfig);

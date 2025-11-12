@@ -36,7 +36,6 @@ export class AccordionDemoComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    // 5. Ne felejts el leiratkozni
     this._resetSubscription?.unsubscribe();
   }
 }

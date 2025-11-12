@@ -214,17 +214,14 @@ export class NotificationDemoService {
       takeUntilDestroyed(this._destroyRef),
     ).subscribe((list: string[]) => {
 
-      // ⭐️ 6. Frissítsd a signalt .update()-tel
       this.inputControlConfig.update((currentConfig) => ({
         ...currentConfig,
         icon: { ...currentConfig.icon, list: list },
       }));
 
-      // ⭐️ 7. Frissítsd a defaultokat és a modellt a betöltés után
       this.defaults = getDefaultFromDemoConfig<NotificationInputControls>(this.inputControlConfig());
       this.model = { ...this.defaults };
 
-      // ⭐️ 8. Jelezd, hogy betöltődtek az adatok
       this.isLoaded.set(true);
     });
   }

@@ -24,6 +24,7 @@ import { ScrollbarDemoService } from './pages/scrollbar/scrollbar-demo.service';
 import { SegmentedControlDemoService } from './pages/segmented-control/segmented-control-demo.service';
 import { SegmentedControlToggleDemoService } from './pages/segmented-control-toggle/segmented-control-toggle-demo.service';
 import { SelectDemoService } from './pages/select/select-demo.service';
+import { SideNavDemoService } from './pages/side-nav/side-nav-demo.service';
 import { SideSheetDemoService } from './pages/side-sheet/side-sheet-demo.service';
 import { SnackbarDemoService } from './pages/snackbar/snackbar-demo.service';
 import { SpinnerDemoService } from './pages/spinner/spinner-demo.service';
@@ -476,6 +477,25 @@ export const routes: Routes = [
             outlet: 'demoControls',
             loadComponent: () =>
               import('./pages/select/select-demo-control.component').then((module) => module.SelectDemoControlComponent),
+          },
+        ],
+      },
+      {
+        path: 'side-nav',
+        component: ComponentDetailsComponent,
+        providers: [SideNavDemoService],
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./pages/side-nav/side-nav-demo.component').then((module) => module.SideNavDemoComponent),
+          },
+          {
+            path: '',
+            outlet: 'demoControls',
+            loadComponent: () =>
+              import('./pages/side-nav/side-nav-demo-control.component').then(
+                (module) => module.SideNavDemoControlComponent,
+              ),
           },
         ],
       },

@@ -31,10 +31,28 @@
   </div>
   <div class="spacer"></div>
   <div class="language-chooser">
-    <button idsButton type="button" variant="primary" [disabled]="currentLang() === 'en'" (click)="changeLanguage('en')">EN</button>
-    <button idsButton type="button" variant="secondary" [disabled]="currentLang() === 'hu'" (click)="changeLanguage('hu')">HU</button>
+    <ids-segmented-control-toggle ngModel="en" size="dense" [appearance]="'filled'" [variant]="'surface'" [buttonVariant]="'primary'">
+      <ids-segmented-control-toggle-item value="hu" [label]="'HU'" (click)="changeLanguage('hu')" />
+      <ids-segmented-control-toggle-item value="en" [label]="'EN'" (click)="changeLanguage('en')" />
+    </ids-segmented-control-toggle>
   </div>
-  <ids-switch [formControl]="darkMode" [size]="'dense'" />
+
+  <ids-segmented-control-toggle
+    size="dense"
+    [formControl]="darkMode"
+    [appearance]="'filled'"
+    [variant]="'surface'"
+    [buttonVariant]="'primary'"
+  >
+    <ids-segmented-control-toggle-item value="light-mode">
+      <ids-icon fontIcon="light-mode" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="dark-mode">
+      <ids-icon fontIcon="dark-mode" />
+    </ids-segmented-control-toggle-item>
+  </ids-segmented-control-toggle>
+
+  <!-- <ids-switch [formControl]="darkMode" [size]="'dense'" /> -->
 </header>
 <!-- <ids-nav [menu]="menuConfigs" /> -->
 <ids-nav [menu]="dynamicMenu" />

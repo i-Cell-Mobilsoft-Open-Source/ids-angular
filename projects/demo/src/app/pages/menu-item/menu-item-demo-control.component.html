@@ -1,0 +1,19 @@
+<app-control-tryout>
+  
+  <app-control-table-small
+    controls
+    [controlName]="'Menu item'"
+    [configType]="'input'"
+    [controlConfig]="menuItemDemoService.menuItemInputControlConfig"
+    [(model)]="menuItemDemoService.menuItemModel"
+    (resetted)="menuItemDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Menu item'"
+    [configType]="'helper'"
+    [controlConfig]="menuItemDemoService.menuItemHelperControlConfig"
+    [(model)]="menuItemDemoService.menuItemHelperModel"
+    (resetted)="menuItemDemoService.reset()"
+  />
+</app-control-tryout>

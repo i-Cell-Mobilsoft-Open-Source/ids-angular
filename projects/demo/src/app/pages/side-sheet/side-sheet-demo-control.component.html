@@ -1,0 +1,10 @@
+<app-control-tryout>
+    <app-control-table-small
+    controls
+    [controlName]="'Side Sheet'"
+    [configType]="'input'"
+    [controlConfig]="sideSheetService.inputControlConfig"
+    [(model)]="sideSheetService.model"
+    (resetted)="sideSheetService.reset()"
+  />
+</app-control-tryout>

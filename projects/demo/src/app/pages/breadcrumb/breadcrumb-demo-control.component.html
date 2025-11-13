@@ -1,0 +1,20 @@
+<app-control-tryout>
+
+  <app-control-table-small
+  controls
+    [controlName]="'Breadcrumb'"
+    [configType]="'input'"
+    [controlConfig]="breadcrumbDemoService.breadcrumbInputControlConfig"
+    [(model)]="breadcrumbDemoService.breadcrumbModel"
+    (resetted)="breadcrumbDemoService.reset()"
+    />  
+    
+  <app-control-table-small
+  controls
+  [controlName]="'Overlay panel'"
+  [configType]="'input'"
+  [controlConfig]="breadcrumbDemoService.overlayPanelInputControlConfig"
+  [(model)]="breadcrumbDemoService.overlayPanelModel"
+  (resetted)="breadcrumbDemoService.reset()"
+  />
+</app-control-tryout>

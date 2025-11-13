@@ -1,7 +1,7 @@
 <app-tryout
   [title]="'COMPONENTS.CHECKBOX' | translate"
-  [hasDarkBackground]="model.variant === 'light' || groupModel.variant === 'light'"
-  (resetted)="reset()"
+  [hasDarkBackground]="checkboxDemoService.model.variant === 'light' || checkboxDemoService.groupModel.variant === 'light'"
+  (resetted)="checkboxDemoService.reset()"
 >
   <ng-container component>
     <div component class="checkbox-grid">
@@ -10,47 +10,47 @@
         <ul class="checkbox-group">
           <li>
             <ids-checkbox
-              [size]="model.size"
-              [variant]="model.variant"
-              [readonly]="model.readonly"
-              [required]="model.required"
-              [disabled]="model.disabled"
-              [(ngModel)]="standalone.unselected"
+              [size]="checkboxDemoService.model.size"
+              [variant]="checkboxDemoService.model.variant"
+              [readonly]="checkboxDemoService.model.readonly"
+              [required]="checkboxDemoService.model.required"
+              [disabled]="checkboxDemoService.model.disabled"
+              [(ngModel)]="checkboxDemoService.standalone.unselected"
             >
-              {{ helperModel.label }}
-              @if (helperModel.allowHint) {
-                <ids-hint-message>{{ helperModel.hintMessage }}</ids-hint-message>
+              {{ checkboxDemoService.helperModel.label }}
+              @if (checkboxDemoService.helperModel.allowHint) {
+                <ids-hint-message>{{ checkboxDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-checkbox>
           </li>
           <li>
             <ids-checkbox
-              [size]="model.size"
-              [variant]="model.variant"
-              [readonly]="model.readonly"
-              [required]="model.required"
-              [disabled]="model.disabled"
+              [size]="checkboxDemoService.model.size"
+              [variant]="checkboxDemoService.model.variant"
+              [readonly]="checkboxDemoService.model.readonly"
+              [required]="checkboxDemoService.model.required"
+              [disabled]="checkboxDemoService.model.disabled"
               [indeterminate]="true"
-              [(ngModel)]="standalone.indeterminate"
+              [(ngModel)]="checkboxDemoService.standalone.indeterminate"
             >
-              {{ helperModel.label }}
-              @if (helperModel.allowHint) {
-                <ids-hint-message>{{ helperModel.hintMessage }}</ids-hint-message>
+              {{ checkboxDemoService.helperModel.label }}
+              @if (checkboxDemoService.helperModel.allowHint) {
+                <ids-hint-message>{{ checkboxDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-checkbox>
           </li>
           <li>
             <ids-checkbox
-              [size]="model.size"
-              [variant]="model.variant"
-              [readonly]="model.readonly"
-              [required]="model.required"
-              [disabled]="model.disabled"
-              [(ngModel)]="standalone.selected"
+              [size]="checkboxDemoService.model.size"
+              [variant]="checkboxDemoService.model.variant"
+              [readonly]="checkboxDemoService.model.readonly"
+              [required]="checkboxDemoService.model.required"
+              [disabled]="checkboxDemoService.model.disabled"
+              [(ngModel)]="checkboxDemoService.standalone.selected"
             >
-              {{ helperModel.label }}
-              @if (helperModel.allowHint) {
-                <ids-hint-message>{{ helperModel.hintMessage }}</ids-hint-message>
+              {{ checkboxDemoService.helperModel.label }}
+              @if (checkboxDemoService.helperModel.allowHint) {
+                <ids-hint-message>{{ checkboxDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-checkbox>
           </li>
@@ -60,44 +60,20 @@
       <div class="checkbox-item">
         <h2>{{ "COMMON.GROUPED" | translate }}</h2>
         <ids-checkbox-group
-          [label]="groupModel.groupLabel"
-          [allowParent]="groupModel.allowParent"
-          [parentLabel]="groupModel.parentLabel"
-          [name]="groupModel.name"
-          [size]="groupModel.size"
-          [variant]="groupModel.variant"
-          [orientation]="groupModel.orientation"
+          [label]="checkboxDemoService.groupModel.groupLabel"
+          [allowParent]="checkboxDemoService.groupModel.allowParent"
+          [parentLabel]="checkboxDemoService.groupModel.parentLabel"
+          [name]="checkboxDemoService.groupModel.name"
+          [size]="checkboxDemoService.groupModel.size"
+          [variant]="checkboxDemoService.groupModel.variant"
+          [orientation]="checkboxDemoService.groupModel.orientation"
         >
-          <ids-checkbox [(ngModel)]="group.toothBrushing">Tooth brushing</ids-checkbox>
-          <ids-checkbox [(ngModel)]="group.bath">Bath</ids-checkbox>
-          <ids-checkbox [(ngModel)]="group.sleep">Sleep</ids-checkbox>
+          <ids-checkbox [(ngModel)]="checkboxDemoService.group.toothBrushing">Tooth brushing</ids-checkbox>
+          <ids-checkbox [(ngModel)]="checkboxDemoService.group.bath">Bath</ids-checkbox>
+          <ids-checkbox [(ngModel)]="checkboxDemoService.group.sleep">Sleep</ids-checkbox>
         </ids-checkbox-group>
       </div>
     </div>
   </ng-container>
 
-  <app-control-table
-    controls
-    [controlName]="'Checkbox'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Checkbox'"
-    [configType]="'helper'"
-    [controlConfig]="_helperControlConfig"
-    [(model)]="helperModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Checkbox group'"
-    [configType]="'input'"
-    [controlConfig]="_groupInputControlConfig"
-    [(model)]="groupModel"
-    (resetted)="reset()"
-  />
 </app-tryout>

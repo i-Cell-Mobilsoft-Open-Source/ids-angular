@@ -1,15 +1,15 @@
 <app-tryout
-[title]="'COMPONENTS.BADGE' | translate" (resetted)="reset()">
+[title]="'COMPONENTS.BADGE' | translate" (resetted)="badgeDemoService.reset()">
   <div component>
     <div
       idsBadge
-      [badgeVariant]="model.variant"
-      [badgeSize]="model.size"
-      [badgeLabel]="model.label"
-      [badgeShowLeadingElement]="model.hasLeadingIcon"
-      [badgeLimit]="model.limit"
+      [badgeVariant]="badgeDemoService.model.variant"
+      [badgeSize]="badgeDemoService.model.size"
+      [badgeLabel]="badgeDemoService.model.label"
+      [badgeShowLeadingElement]="badgeDemoService.model.hasLeadingIcon"
+      [badgeLimit]="badgeDemoService.model.limit"
     >
-      @if (model.hasLeadingIcon) {
+      @if (badgeDemoService.model.hasLeadingIcon) {
         <ids-icon
           icon-leading
           fontIcon="search"
@@ -19,12 +19,4 @@
     </div>
   </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Badge'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
 </app-tryout>

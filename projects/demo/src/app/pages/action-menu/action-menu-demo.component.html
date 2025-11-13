@@ -1,7 +1,7 @@
 <app-tryout
   [title]="'COMPONENTS.ACTION_MENU' | translate"
-  [hasDarkBackground]="overlayPanelHelperModel.testBackgroundColor === 'dark'"
-  (resetted)="reset()"
+  [hasDarkBackground]="demoService.overlayPanelHelperModel.testBackgroundColor === 'dark'"
+  (resetted)="demoService.reset()"
 >
   <ng-container component>
     <button
@@ -18,18 +18,18 @@
     </button>
 
     <ng-template #actionMenu>
-      <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
-        @for (_ of items; track $index) {
+      <ids-overlay-panel [appearance]="demoService.overlayPanelModel.appearance" [size]="demoService.overlayPanelModel.size" [variant]="demoService.overlayPanelModel.variant">
+        @for (_ of demoService.items; track $index) {
           <button
             type="button"
             idsMenuItem
-            [appearance]="menuItemModel.appearance"
-            [size]="menuItemModel.size"
-            [variant]="menuItemModel.variant"
-            [label]="$index !== 0 || menuItemHelperModel.showFirstItemLabel ? 'Menu item label ' + $index : ''"
-            [disabled]="$index === 0 && menuItemHelperModel.hasDisabledItem"
+            [appearance]="demoService.menuItemModel.appearance"
+            [size]="demoService.menuItemModel.size"
+            [variant]="demoService.menuItemModel.variant"
+            [label]="$index !== 0 || demoService.menuItemHelperModel.showFirstItemLabel ? 'Menu item label ' + $index : ''"
+            [disabled]="$index === 0 && demoService.menuItemHelperModel.hasDisabledItem"
           >
-            @if (menuItemHelperModel.hasLeadingIcon) {
+            @if (demoService.menuItemHelperModel.hasLeadingIcon) {
               <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
             }
           </button>
@@ -37,16 +37,16 @@
         <button
           type="button"
           idsMenuItem
-          [appearance]="menuItemModel.appearance"
-          [size]="menuItemModel.size"
-          [variant]="menuItemModel.variant"
-          [label]="'Menu item label ' + items.length"
+          [appearance]="demoService.menuItemModel.appearance"
+          [size]="demoService.menuItemModel.size"
+          [variant]="demoService.menuItemModel.variant"
+          [label]="'Menu item label ' + demoService.items.length"
           [idsActionMenuTriggerFor]="subMenu"
         >
-          @if (menuItemHelperModel.hasLeadingIcon) {
+          @if (demoService.menuItemHelperModel.hasLeadingIcon) {
             <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
           }
-          @if (menuItemHelperModel.hasTrailingIcon) {
+          @if (demoService.menuItemHelperModel.hasTrailingIcon) {
             <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
           }
         </button>
@@ -54,18 +54,18 @@
     </ng-template>
 
     <ng-template #subMenu>
-      <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
-        @for (_ of items; track $index) {
+      <ids-overlay-panel [appearance]="demoService.overlayPanelModel.appearance" [size]="demoService.overlayPanelModel.size" [variant]="demoService.overlayPanelModel.variant">
+        @for (_ of demoService.items; track $index) {
           <button
             type="button"
             idsMenuItem
-            [appearance]="menuItemModel.appearance"
-            [size]="menuItemModel.size"
-            [variant]="menuItemModel.variant"
+            [appearance]="demoService.menuItemModel.appearance"
+            [size]="demoService.menuItemModel.size"
+            [variant]="demoService.menuItemModel.variant"
             [label]="'Menu item label ' + $index"
-            [disabled]="$index === 0 && menuItemHelperModel.hasDisabledItem"
+            [disabled]="$index === 0 && demoService.menuItemHelperModel.hasDisabledItem"
           >
-            @if (menuItemHelperModel.hasLeadingIcon) {
+            @if (demoService.menuItemHelperModel.hasLeadingIcon) {
               <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
             }
           </button>
@@ -73,37 +73,4 @@
       </ids-overlay-panel>
     </ng-template>
   </ng-container>
-
-  <app-control-table
-    controls
-    [controlName]="'Overlay panel'"
-    [configType]="'input'"
-    [controlConfig]="_overlayPanelInputControlConfig"
-    [(model)]="overlayPanelModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Overlay panel'"
-    [configType]="'helper'"
-    [controlConfig]="_overlayPanelHelperControlConfig"
-    [(model)]="overlayPanelHelperModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Menu item'"
-    [configType]="'input'"
-    [controlConfig]="_menuItemInputControlConfig"
-    [(model)]="menuItemModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Menu item'"
-    [configType]="'helper'"
-    [controlConfig]="_menuItemHelperControlConfig"
-    [(model)]="menuItemHelperModel"
-    (resetted)="reset()"
-  />
 </app-tryout>

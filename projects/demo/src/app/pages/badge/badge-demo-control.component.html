@@ -1,0 +1,10 @@
+<app-control-tryout>
+    <app-control-table-small
+    controls
+    [controlName]="'Badge'"
+    [configType]="'input'"
+    [controlConfig]="badgeDemoService.inputControlConfig"
+    [(model)]="badgeDemoService.model"
+    (resetted)="badgeDemoService.reset()"
+  />
+</app-control-tryout>

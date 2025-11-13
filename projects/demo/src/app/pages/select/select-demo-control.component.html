@@ -1,0 +1,26 @@
+<app-control-tryout>
+    <app-control-table-small
+    controls
+    [controlName]="'Form field'"
+    [configType]="'input'"
+    [controlConfig]="selectDemoService.formFieldInputControlConfig"
+    [(model)]="selectDemoService.formFieldModel"
+    (resetted)="selectDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Select'"
+    [configType]="'input'"
+    [controlConfig]="selectDemoService.selectInputControlConfig"
+    [(model)]="selectDemoService.selectModel"
+    (resetted)="selectDemoService.reset()"
+  />
+  <app-control-table-small
+    controls
+    [controlName]="'Select'"
+    [configType]="'helper'"
+    [controlConfig]="selectDemoService.selectHelperControlConfig"
+    [(model)]="selectDemoService.selectHelperModel"
+    (resetted)="selectDemoService.reset()"
+  />
+</app-control-tryout>

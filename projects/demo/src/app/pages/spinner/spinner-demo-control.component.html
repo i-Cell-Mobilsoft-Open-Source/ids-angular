@@ -1,0 +1,10 @@
+<app-control-tryout>
+    <app-control-table-small
+    controls
+    [controlName]="'Spinner'"
+    [configType]="'input'"
+    [controlConfig]="spinnerDemoService.inputControlConfig"
+    [(model)]="spinnerDemoService.model"
+    (resetted)="spinnerDemoService.reset()"
+  />
+</app-control-tryout>

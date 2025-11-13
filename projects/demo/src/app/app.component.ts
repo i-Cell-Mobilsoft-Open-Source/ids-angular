@@ -5,11 +5,11 @@ import { GraphqlService, NavigationQueryResult } from './services/graphql.servic
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { DestroyRef, inject as angularInject, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { toSignal, takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsSwitchComponent } from '@i-cell/ids-angular/switch';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent } from '@i-cell/ids-angular/segmented-control-toggle';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { map, startWith, Subscription } from 'rxjs';
 
@@ -20,10 +20,12 @@ import { map, startWith, Subscription } from 'rxjs';
     RouterOutlet,
     TranslateModule,
     NavComponent,
-    IdsButtonComponent,
-    IdsSwitchComponent,
     CdkScrollable,
     ReactiveFormsModule,
+    IdsSegmentedControlToggleDirective,
+    IdsSegmentedControlToggleItemComponent,
+    FormsModule,
+    IdsIconComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -36,7 +38,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public menuConfigs: Menu[] = [
     {
-      name: 'GET_STARTED', children: [
+      name: 'GET_STARTED',
+      children: [
         { name: 'Home', path: '/index' },
         { name: 'Issue report', path: '/issue-report' },
       ],
@@ -95,9 +98,15 @@ export class AppComponent implements OnInit, OnDestroy {
     { name: 'RESOURCES', children: [] },
   ];
 
-  public darkMode = new FormControl<boolean>(false);
+  // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
+  public darkMode = new FormControl<string>('light-mode');
 
-  public currentLang = toSignal(this._translate.onLangChange.pipe(map(({ lang }) => lang), startWith(this._translate.currentLang)));
+  public currentLang = toSignal(
+    this._translate.onLangChange.pipe(
+      map(({ lang }) => lang),
+      startWith(this._translate.currentLang),
+    ),
+  );
 
   public dynamicMenu: Menu[] = [];
   private _destroyRef = angularInject(DestroyRef);
@@ -115,13 +124,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
 
     const graphqlService = angularInject(GraphqlService);
-    graphqlService.getNavigation().pipe(
-      takeUntilDestroyed(this._destroyRef),
-    ).subscribe((result: ApolloQueryResult<NavigationQueryResult>) => {
-      const navTree = result.data.navs?.[0]?.tree || [];
-      this._componentLevelDepth = this._findDeepestLevel(navTree);
-      this.dynamicMenu = this._mapStatamicNavToMenu(navTree);
-    });
+    graphqlService
+      .getNavigation()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((result: ApolloQueryResult<NavigationQueryResult>) => {
+        const navTree = result.data.navs?.[0]?.tree || [];
+        this._componentLevelDepth = this._findDeepestLevel(navTree);
+        this.dynamicMenu = this._mapStatamicNavToMenu(navTree);
+      });
   }
 
   // Find the deepest level in the Statamic navigation tree
@@ -129,11 +139,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (!tree || tree.length === 0) {
       return currentDepth;
     }
-    return Math.max(
-      ...tree.map((node: StatamicNavNode) =>
-        this._findDeepestLevel(node.children ?? [], node.depth),
-      ),
-    );
+    return Math.max(...tree.map((node: StatamicNavNode) => this._findDeepestLevel(node.children ?? [], node.depth)));
   }
 
   private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
@@ -156,8 +162,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this._subscription = this.darkMode.valueChanges.subscribe((checked) => {
-      this._changeTheme(checked ? 'dark' : 'light');
+    this._subscription = this.darkMode.valueChanges.subscribe((value) => {
+      const isDark = value === 'dark-mode';
+      this._changeTheme(isDark ? 'dark' : 'light');
     });
   }
 

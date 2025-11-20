@@ -23,10 +23,32 @@
       [open]="_newOverlayOpen"
       (closed)="_newOverlayOpen = false"
     >
-      <ul class="example-list">
-        <li tabindex="0">Item 1 (parentből)</li>
-        <li tabindex="0">Item 2 (parentből)</li>
-      </ul>
+      <div style="margin=10px; padding: 10px; gap: 10px; display: flex; flex-direction: column; border: 1px solid black">
+        <div>
+          <button
+            type="button"
+            idsButton
+            appearance="filled"
+            size="compact"
+            variant="primary"
+          >button 1</button>
+          <button
+            type="button"
+            idsButton
+            appearance="filled"
+            size="compact"
+            variant="primary"
+          >button 2</button>
+        </div>
+        <div>
+          <ids-chip>
+            <ids-icon fontIcon="chevron-up" idsLeadingIcon />
+            something
+          </ids-chip>
+        </div>
+      </div>
+
+
     </ids-new-overlay-panel>
 
     <button

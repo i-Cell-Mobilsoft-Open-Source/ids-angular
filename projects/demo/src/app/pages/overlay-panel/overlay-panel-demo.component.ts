@@ -8,7 +8,9 @@ import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsPrefixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import {
   IdsMenuItemComponent,
@@ -70,6 +72,8 @@ type MenuItemHelperControls = {
     IdsButtonComponent,
     OverlayModule,
     NewOverlayPanelComponent,
+    IdsChipComponent,
+    IdsPrefixDirective,
   ],
   templateUrl: './overlay-panel-demo.component.html',
   styleUrls: [

@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
@@ -8,7 +9,10 @@ import {
 
 @Component({
   selector: 'ids-new-overlay-panel',
-  imports: [OverlayModule],
+  imports: [
+    OverlayModule,
+    A11yModule,
+  ],
   templateUrl: './new-overlay-panel.component.html',
   styleUrl: './new-overlay-panel.component.scss',
   encapsulation: ViewEncapsulation.None,

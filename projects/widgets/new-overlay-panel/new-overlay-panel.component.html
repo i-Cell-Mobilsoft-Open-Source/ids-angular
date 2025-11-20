@@ -5,5 +5,7 @@
   [cdkConnectedOverlayOpen]="open()"
   (detach)="_handleDetach()"
 >
-  <ng-content />
+  <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+    <ng-content/>
+  </div>
 </ng-template>

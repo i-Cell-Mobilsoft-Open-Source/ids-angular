@@ -1,6 +1,7 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
+import { OverlayModule } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -18,6 +19,7 @@ import {
   IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY,
   IdsActionMenuTriggerDirective,
 } from '@i-cell/ids-angular/menu';
+import { NewOverlayPanelComponent } from '@i-cell/ids-angular/new-overlay-panel/new-overlay-panel.component';
 import {
   IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY,
   IdsOverlayPanelTriggerDirective,
@@ -66,6 +68,8 @@ type MenuItemHelperControls = {
     IdsActionMenuTriggerDirective,
     IdsOverlayPanelTriggerDirective,
     IdsButtonComponent,
+    OverlayModule,
+    NewOverlayPanelComponent,
   ],
   templateUrl: './overlay-panel-demo.component.html',
   styleUrls: [
@@ -175,6 +179,12 @@ export class OverlayPanelDemoComponent {
 
   // eslint-disable-next-line no-magic-numbers
   public items = Array(3);
+
+  protected _newOverlayOpen = false;
+
+  public toggleNewOverlay(): void {
+    this._newOverlayOpen = !this._newOverlayOpen;
+  }
 
   public reset(): void {
     this.overlayPanelModel = { ...this.overlayPanelDefaults };

@@ -4,6 +4,31 @@
   (resetted)="reset()"
 >
   <ng-container component>
+    <!-- External trigger for NewOverlayPanelComponent -->
+    <button
+      #newOrigin="cdkOverlayOrigin"
+      type="button"
+      cdkOverlayOrigin
+      idsButton
+      appearance="outlined"
+      size="compact"
+      variant="primary"
+      (click)="toggleNewOverlay()"
+    >
+      {{ _newOverlayOpen ? 'Close new overlay' : 'Open new overlay' }}
+    </button>
+
+    <ids-new-overlay-panel
+      [origin]="newOrigin"
+      [open]="_newOverlayOpen"
+      (closed)="_newOverlayOpen = false"
+    >
+      <ul class="example-list">
+        <li tabindex="0">Item 1 (parentből)</li>
+        <li tabindex="0">Item 2 (parentből)</li>
+      </ul>
+    </ids-new-overlay-panel>
+
     <button
       #trigger1="idsOverlayPanelTrigger"
       type="button"

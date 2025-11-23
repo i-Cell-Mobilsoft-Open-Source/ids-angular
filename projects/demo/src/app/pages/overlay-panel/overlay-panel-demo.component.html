@@ -18,7 +18,7 @@
       {{ _newOverlayOpen ? 'Close new overlay' : 'Open new overlay' }}
     </button>
 
-    <ids-new-overlay-panel
+    <ids-overlay-panel
       [origin]="newOrigin"
       [open]="_newOverlayOpen"
       (closed)="_newOverlayOpen = false"
@@ -49,76 +49,7 @@
       </div>
 
 
-    </ids-new-overlay-panel>
-
-    <button
-      #trigger1="idsOverlayPanelTrigger"
-      type="button"
-      idsButton
-      appearance="filled"
-      size="comfortable"
-      variant="primary"
-      [idsOverlayPanelTriggerFor]="actionMenu"
-    >
-      Action menu
-      <ids-icon icon-trailing aria-hidden="true" alt="" [fontIcon]="trigger1.isOpen ? 'chevron-up' : 'chevron-down'" />
-    </button>
-
-    <ng-template #actionMenu>
-      <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
-        @for (_ of items; track $index) {
-          <button
-            type="button"
-            idsMenuItem
-            [appearance]="menuItemModel.appearance"
-            [size]="menuItemModel.size"
-            [variant]="menuItemModel.variant"
-            [label]="$index !== 0 || menuItemHelperModel.showFirstItemLabel ? 'Menu item label ' + $index : ''"
-            [disabled]="$index === 0 && menuItemHelperModel.hasDisabledItem"
-          >
-            @if (menuItemHelperModel.hasLeadingIcon) {
-              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-            }
-          </button>
-        }
-        <button
-          type="button"
-            idsMenuItem
-            [appearance]="menuItemModel.appearance"
-            [size]="menuItemModel.size"
-            [variant]="menuItemModel.variant"
-            [label]="'Menu item label ' + items.length"
-            [idsActionMenuTriggerFor]="subMenu"
-        >
-          @if (menuItemHelperModel.hasLeadingIcon) {
-            <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-          }
-          @if (menuItemHelperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
-          }
-        </button>
-      </ids-overlay-panel>
-    </ng-template>
-
-    <ng-template #subMenu>
-      <ids-overlay-panel [appearance]="overlayPanelModel.appearance" [size]="overlayPanelModel.size" [variant]="overlayPanelModel.variant">
-        @for (_ of items; track $index) {
-          <button
-            type="button"
-            idsMenuItem
-            [appearance]="menuItemModel.appearance"
-            [size]="menuItemModel.size"
-            [variant]="menuItemModel.variant"
-            [label]="'Menu item label ' + $index"
-            [disabled]="$index === 0 && menuItemHelperModel.hasDisabledItem"
-          >
-            @if (menuItemHelperModel.hasLeadingIcon) {
-              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-            }
-          </button>
-        }
-      </ids-overlay-panel>
-    </ng-template>
+    </ids-overlay-panel>
   </ng-container>
 
   <app-control-table

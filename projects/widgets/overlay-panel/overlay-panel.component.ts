@@ -1,36 +1,53 @@
-import { IDS_OVERLAY_PANEL_DEFAULT_CONFIG, IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY, IdsOverlayPanelDefaultConfig } from './overlay-panel-defaults';
+import {
+  IDS_OVERLAY_PANEL_DEFAULT_CONFIG,
+  IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY,
+  IdsOverlayPanelDefaultConfig,
+} from './overlay-panel-defaults';
 import { IdsOverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
 import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
-import { CdkMenu, CdkTargetMenuAim } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, input } from '@angular/core';
-import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { A11yModule } from '@angular/cdk/a11y';
+import { OverlayModule, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  input, output, computed,
+} from '@angular/core';
+import { IdsSizeType, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'ids-overlay-panel,div[idsOverlayPanel]',
-  imports: [],
-  hostDirectives: [
-    CdkMenu,
-    CdkTargetMenuAim,
+  selector: 'ids-overlay-panel',
+  imports: [
+    OverlayModule,
+    A11yModule,
   ],
-  template: '<ng-content />',
+  templateUrl: './overlay-panel.component.html',
+  styleUrl: './overlay-panel.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
-export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverlayPanelDefaultConfig> {
+export class OverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverlayPanelDefaultConfig> {
   protected override get _hostName(): string {
     return 'overlay-panel';
   }
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
+  public open = input<boolean>(false);
+  public origin = input<CdkOverlayOrigin>();
+  public closed = output<void>();
+
   public appearance = input<IdsOverlayPanelAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsOverlayPanelVariantType>(this._defaultConfig.variant);
 
-  public actionItems = contentChildren<unknown>('*');
+  protected _handleDetach(): void {
+    this.closed.emit();
+  }
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),

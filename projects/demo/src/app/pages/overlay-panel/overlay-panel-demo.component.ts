@@ -13,20 +13,15 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsPrefixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import {
-  IdsMenuItemComponent,
   IdsMenuItemAppearance,
   IdsMenuItemAppearanceType,
   IdsMenuItemVariant,
   IdsMenuItemVariantType,
   IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY,
-  IdsActionMenuTriggerDirective,
 } from '@i-cell/ids-angular/menu';
-import { NewOverlayPanelComponent } from '@i-cell/ids-angular/new-overlay-panel/new-overlay-panel.component';
 import {
-  IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY,
-  IdsOverlayPanelTriggerDirective,
+  IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY, OverlayPanelComponent,
 } from '@i-cell/ids-angular/overlay-panel';
-import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel/overlay-panel.component';
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
 import { IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-variant.type';
 import { TranslateModule } from '@ngx-translate/core';
@@ -62,18 +57,14 @@ type MenuItemHelperControls = {
   imports: [
     TryoutComponent,
     ControlTableComponent,
-    IdsOverlayPanelComponent,
-    IdsMenuItemComponent,
     IdsIconComponent,
     TranslateModule,
     FormsModule,
-    IdsActionMenuTriggerDirective,
-    IdsOverlayPanelTriggerDirective,
     IdsButtonComponent,
     OverlayModule,
-    NewOverlayPanelComponent,
     IdsChipComponent,
     IdsPrefixDirective,
+    OverlayPanelComponent,
   ],
   templateUrl: './overlay-panel-demo.component.html',
   styleUrls: [

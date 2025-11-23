@@ -38,7 +38,7 @@ export class OverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverlayP
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
   public open = input<boolean>(false);
-  public origin = input<CdkOverlayOrigin>();
+  public origin = input.required<CdkOverlayOrigin>();
   public closed = output<void>();
 
   public appearance = input<IdsOverlayPanelAppearanceType>(this._defaultConfig.appearance);

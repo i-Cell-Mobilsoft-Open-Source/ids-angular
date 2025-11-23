@@ -1,7 +1,6 @@
-<div #fallback></div>
 <ng-template
   cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="origin() || fallback"
+  [cdkConnectedOverlayOrigin]="origin()"
   [cdkConnectedOverlayOpen]="open()"
   (detach)="_handleDetach()"
 >

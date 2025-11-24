@@ -2,9 +2,14 @@
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="origin()"
   [cdkConnectedOverlayOpen]="open()"
+  [cdkConnectedOverlayPanelClass]="_hostClasses()"
   (detach)="_handleDetach()"
 >
-  <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+  <div
+    cdkTrapFocus
+    [cdkTrapFocusAutoCapture]="true"
+    [ngClass]="_panelClasses()"
+  >
     <ng-content/>
   </div>
 </ng-template>

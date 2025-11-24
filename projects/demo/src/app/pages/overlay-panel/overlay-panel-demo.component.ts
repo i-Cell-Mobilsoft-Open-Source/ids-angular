@@ -187,4 +187,8 @@ export class OverlayPanelDemoComponent {
     this.menuItemModel = { ...this.menuItemDefaults };
     this.menuItemHelperModel = { ...this.menuItemHelperDefaults };
   }
+
+  protected _contentBtnTest(nr: string):void {
+    alert(`Button in overlay panel clicked! ${nr}`);
+  }
 }

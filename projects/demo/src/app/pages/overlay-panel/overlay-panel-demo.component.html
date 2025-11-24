@@ -4,9 +4,8 @@
   (resetted)="reset()"
 >
   <ng-container component>
-    <!-- External trigger for NewOverlayPanelComponent -->
     <button
-      #newOrigin="cdkOverlayOrigin"
+      #origin="cdkOverlayOrigin"
       type="button"
       cdkOverlayOrigin
       idsButton
@@ -19,11 +18,14 @@
     </button>
 
     <ids-overlay-panel
-      [origin]="newOrigin"
+      [origin]="origin"
       [open]="_newOverlayOpen"
       (closed)="_newOverlayOpen = false"
+      [appearance]="overlayPanelModel.appearance"
+      [size]="overlayPanelModel.size"
+      [variant]="overlayPanelModel.variant"
     >
-      <div style="margin=10px; padding: 10px; gap: 10px; display: flex; flex-direction: column; border: 1px solid black">
+      <div class="overlay-content">
         <div>
           <button
             type="button"
@@ -31,6 +33,7 @@
             appearance="filled"
             size="compact"
             variant="primary"
+            (click)="_contentBtnTest('1')"
           >button 1</button>
           <button
             type="button"
@@ -38,6 +41,7 @@
             appearance="filled"
             size="compact"
             variant="primary"
+            (click)="_contentBtnTest('2')"
           >button 2</button>
         </div>
         <div>
@@ -46,9 +50,13 @@
             something
           </ids-chip>
         </div>
+        <div>
+          <ids-chip>
+            <ids-icon fontIcon="chevron-up" idsLeadingIcon />
+            something 2
+          </ids-chip>
+        </div>
       </div>
-
-
     </ids-overlay-panel>
   </ng-container>
 

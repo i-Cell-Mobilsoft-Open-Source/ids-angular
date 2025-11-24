@@ -8,6 +8,7 @@ import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
 import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -23,6 +24,7 @@ const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
   imports: [
     OverlayModule,
     A11yModule,
+    NgClass,
   ],
   templateUrl: './overlay-panel.component.html',
   styleUrl: './overlay-panel.component.scss',
@@ -49,10 +51,12 @@ export class OverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverlayP
     this.closed.emit();
   }
 
-  protected _hostClasses = computed(() => this._getHostClasses([
+  protected _panelClasses = computed(() => this._getHostClasses([
     this.appearance(),
     this.size(),
     this.variant(),
   ]),
   );
+
+  protected _hostClasses = computed(() => '');
 }

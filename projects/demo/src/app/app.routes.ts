@@ -12,10 +12,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
   },
   {
-    path: 'components/action-menu',
-    loadComponent: () => import('./pages/action-menu/action-menu-demo.component').then((module) => module.ActionMenuDemoComponent),
-  },
-  {
     path: 'components/avatar',
     loadComponent: () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
   },

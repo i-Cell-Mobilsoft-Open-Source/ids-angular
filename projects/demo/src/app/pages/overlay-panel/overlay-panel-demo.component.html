@@ -25,38 +25,64 @@
       [size]="overlayPanelModel.size"
       [variant]="overlayPanelModel.variant"
     >
-      <div class="overlay-content">
-        <div>
-          <button
-            type="button"
-            idsButton
-            appearance="filled"
-            size="compact"
-            variant="primary"
-            (click)="_contentBtnTest('1')"
-          >button 1</button>
-          <button
-            type="button"
-            idsButton
-            appearance="filled"
-            size="compact"
-            variant="primary"
-            (click)="_contentBtnTest('2')"
-          >button 2</button>
-        </div>
-        <div>
-          <ids-chip>
-            <ids-icon fontIcon="chevron-up" idsLeadingIcon />
-            something
-          </ids-chip>
-        </div>
-        <div>
-          <ids-chip>
-            <ids-icon fontIcon="chevron-up" idsLeadingIcon />
-            something 2
-          </ids-chip>
-        </div>
-      </div>
+
+        @if(overlayPanelHelperModel.contentType === 'menuItems') {
+          <div cdkMenuBar>
+            @for (_ of items; track $index) {
+              <div idsActiveIndicator [active]="false" >
+                <button
+                  type="button"
+                  idsMenuItem
+                  [appearance]="menuItemModel.appearance"
+                  [size]="menuItemModel.size"
+                  [variant]="menuItemModel.variant"
+                  [label]="'Menu item label ' + $index"
+                  [disabled]="$index === 0 && menuItemHelperModel.hasDisabledItem"
+                >
+                  @if (menuItemHelperModel.hasLeadingIcon) {
+                    <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+                  }
+                  @if (menuItemHelperModel.hasTrailingIcon) {
+                    <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
+                  }
+                </button>
+              </div>
+            }
+          </div>
+        } @else if (overlayPanelHelperModel.contentType === 'customContent') {
+          <div class="overlay-content">
+            <div>
+              <button
+                type="button"
+                idsButton
+                appearance="filled"
+                size="compact"
+                variant="primary"
+                (click)="_contentBtnTest('1')"
+              >button 1</button>
+              <button
+                type="button"
+                idsButton
+                appearance="filled"
+                size="compact"
+                variant="primary"
+                (click)="_contentBtnTest('2')"
+              >button 2</button>
+            </div>
+            <div>
+              <ids-chip>
+                <ids-icon fontIcon="chevron-up" idsLeadingIcon />
+                something
+              </ids-chip>
+            </div>
+            <div>
+              <ids-chip>
+                <ids-icon fontIcon="chevron-up" idsLeadingIcon />
+                something 2
+              </ids-chip>
+            </div>
+          </div>
+        }
     </ids-overlay-panel>
   </ng-container>
 

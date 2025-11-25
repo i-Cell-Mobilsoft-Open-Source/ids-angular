@@ -1,6 +1,7 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
+import { CdkMenuBar } from '@angular/cdk/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +18,7 @@ import {
   IdsMenuItemAppearanceType,
   IdsMenuItemVariant,
   IdsMenuItemVariantType,
-  IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY,
+  IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY, IdsMenuItemComponent, IdsActiveIndicatorDirective,
 } from '@i-cell/ids-angular/menu';
 import {
   IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY, OverlayPanelComponent,
@@ -37,6 +38,7 @@ type OverlayPanelInputControls = {
 
 type OverlayPanelHelperControls = {
   testBackgroundColor: 'none' | 'dark',
+  contentType: 'menuItems' | 'customContent',
 };
 
 type MenuItemInputControls = {
@@ -65,6 +67,10 @@ type MenuItemHelperControls = {
     IdsChipComponent,
     IdsPrefixDirective,
     OverlayPanelComponent,
+    IdsMenuItemComponent,
+    CdkMenuBar,
+    IdsActiveIndicatorDirective,
+
   ],
   templateUrl: './overlay-panel-demo.component.html',
   styleUrls: [
@@ -106,6 +112,16 @@ export class OverlayPanelDemoComponent {
       list: [
         'none',
         'dark',
+      ],
+    },
+    contentType: {
+      description: 'Type of content inside the overlay panel.',
+      type: 'string',
+      default: 'menuItems',
+      control: DemoControl.SELECT,
+      list: [
+        'menuItems',
+        'customContent',
       ],
     },
   };

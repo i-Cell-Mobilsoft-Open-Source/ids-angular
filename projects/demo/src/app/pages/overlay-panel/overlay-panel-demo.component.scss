@@ -1,9 +1,5 @@
-.overlay-panel {
+.overlay-content {
   display: flex;
   flex-direction: column;
-
-  button:focus {
-    outline-width: 3px !important;
-    outline-color: black;
-  }
+  gap: 1rem;
 }

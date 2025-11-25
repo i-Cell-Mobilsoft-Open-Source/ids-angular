@@ -12,22 +12,24 @@
       appearance="outlined"
       size="compact"
       variant="primary"
-      (click)="toggleNewOverlay()"
+      (click)="toggleOverlay()"
     >
-      {{ _newOverlayOpen ? 'Close new overlay' : 'Open new overlay' }}
+      {{ _overlayOpen ? 'Close overlay' : 'Open overlay' }}
     </button>
 
     <ids-overlay-panel
       [origin]="origin"
-      [open]="_newOverlayOpen"
-      (closed)="_newOverlayOpen = false"
+      [open]="_overlayOpen"
+      (closed)="_overlayOpen = false"
       [appearance]="overlayPanelModel.appearance"
       [size]="overlayPanelModel.size"
       [variant]="overlayPanelModel.variant"
     >
 
         @if(overlayPanelHelperModel.contentType === 'menuItems') {
-          <div cdkMenuBar>
+          <div
+            cdkMenu
+          >
             @for (_ of items; track $index) {
               <div idsActiveIndicator [active]="false" >
                 <button

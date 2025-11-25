@@ -3,6 +3,7 @@
   [cdkConnectedOverlayOrigin]="origin()"
   [cdkConnectedOverlayOpen]="open()"
   [cdkConnectedOverlayPanelClass]="_hostClasses()"
+  (overlayOutsideClick)="_handleOverlayOutsideClick()"
   (detach)="_handleDetach()"
 >
   <div

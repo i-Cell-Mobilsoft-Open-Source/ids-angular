@@ -7,13 +7,14 @@ import { IdsOverlayPanelAppearanceType } from './types/overlay-panel-appearance.
 import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
 import { A11yModule } from '@angular/cdk/a11y';
+import { CdkMenu } from '@angular/cdk/menu';
 import { OverlayModule, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  input, output, computed,
+  input, output, computed, contentChild,
 } from '@angular/core';
 import { IdsSizeType, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
@@ -27,7 +28,6 @@ const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
     NgClass,
   ],
   templateUrl: './overlay-panel.component.html',
-  styleUrl: './overlay-panel.component.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
@@ -47,6 +47,16 @@ export class OverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverlayP
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsOverlayPanelVariantType>(this._defaultConfig.variant);
 
+  private _cdkMenu = contentChild(CdkMenu, { descendants: true });
+
+  protected _hasCdkMenu = computed(() => !!this._cdkMenu());
+
+  protected _handleOverlayOutsideClick(): void {
+    if (this.open()) {
+      this.closed.emit();
+    }
+  }
+
   protected _handleDetach(): void {
     this.closed.emit();
   }
@@ -55,6 +65,7 @@ export class OverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverlayP
     this.appearance(),
     this.size(),
     this.variant(),
+    this._hasCdkMenu() ? 'has-menu' : null,
   ]),
   );
 

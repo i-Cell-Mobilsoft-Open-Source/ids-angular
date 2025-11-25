@@ -1,7 +1,7 @@
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { CdkMenuBar } from '@angular/cdk/menu';
+import { CdkMenu } from '@angular/cdk/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -68,8 +68,8 @@ type MenuItemHelperControls = {
     IdsPrefixDirective,
     OverlayPanelComponent,
     IdsMenuItemComponent,
-    CdkMenuBar,
     IdsActiveIndicatorDirective,
+    CdkMenu,
 
   ],
   templateUrl: './overlay-panel-demo.component.html',
@@ -191,10 +191,10 @@ export class OverlayPanelDemoComponent {
   // eslint-disable-next-line no-magic-numbers
   public items = Array(3);
 
-  protected _newOverlayOpen = false;
+  protected _overlayOpen = false;
 
-  public toggleNewOverlay(): void {
-    this._newOverlayOpen = !this._newOverlayOpen;
+  public toggleOverlay(): void {
+    this._overlayOpen = !this._overlayOpen;
   }
 
   public reset(): void {

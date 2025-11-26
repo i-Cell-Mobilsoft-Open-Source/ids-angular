@@ -1,11 +1,20 @@
 <app-control-tryout>
-  @if(notificationDemoService.isLoaded()){
-    <app-control-table-small controls [configType]="'input'" [controlConfig]="notificationDemoService.inputControlConfig()" [(model)]="notificationDemoService.model" (resetted)="notificationDemoService.reset()" />
+  @if (notificationDemoService.isLoaded()) {
+    <app-control-table
+      controls
+      [configType]="'input'"
+      [controlConfig]="notificationDemoService.inputControlConfig()"
+      [(model)]="notificationDemoService.model"
+      (resetted)="notificationDemoService.reset()"
+    />
+  } @else {
+    <div>Loading...</div>
   }
-  @else {
-    <div>
-      Loading...
-    </div>
-  }
-  <app-control-table-small controls [configType]="'helper'" [controlConfig]="notificationDemoService.helperControlConfig" [(model)]="notificationDemoService.helperModel" (resetted)="notificationDemoService.reset()" />
+  <app-control-table
+    controls
+    [configType]="'helper'"
+    [controlConfig]="notificationDemoService.helperControlConfig"
+    [(model)]="notificationDemoService.helperModel"
+    (resetted)="notificationDemoService.reset()"
+  />
 </app-control-tryout>

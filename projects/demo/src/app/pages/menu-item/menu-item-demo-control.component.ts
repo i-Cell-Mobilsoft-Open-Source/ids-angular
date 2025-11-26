@@ -1,6 +1,6 @@
 import { MenuItemDemoService } from './menu-item-demo.service';
 
-import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject, ViewEncapsulation } from '@angular/core';
@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TryoutControlComponent,
     TranslateModule,
     FormsModule,
-    ControlTableSmallComponent,
+    ControlTableComponent,
   ],
   templateUrl: './menu-item-demo-control.component.html',
   styleUrls: [

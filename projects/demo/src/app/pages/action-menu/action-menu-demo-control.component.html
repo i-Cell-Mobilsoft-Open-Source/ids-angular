@@ -1,5 +1,5 @@
 <app-control-tryout>
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Overlay panel'"
     [configType]="'input'"
@@ -7,7 +7,7 @@
     [(model)]="demoService.overlayPanelModel"
     (resetted)="demoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Overlay panel'"
     [configType]="'helper'"
@@ -15,7 +15,7 @@
     [(model)]="demoService.overlayPanelHelperModel"
     (resetted)="demoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Menu item'"
     [configType]="'input'"
@@ -23,7 +23,7 @@
     [(model)]="demoService.menuItemModel"
     (resetted)="demoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Menu item'"
     [configType]="'helper'"

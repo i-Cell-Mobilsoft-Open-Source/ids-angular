@@ -1,6 +1,6 @@
 import { BreadcrumbDemoService } from './breadcrumb-demo.service';
 
-import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject } from '@angular/core';
@@ -10,7 +10,7 @@ import { Component, inject } from '@angular/core';
   standalone: true,
   imports: [
     TryoutControlComponent,
-    ControlTableSmallComponent,
+    ControlTableComponent,
   ],
   templateUrl: './breadcrumb-demo-control.component.html',
   styleUrl: './breadcrumb-demo.component.scss',

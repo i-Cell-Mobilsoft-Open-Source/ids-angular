@@ -1,23 +1,20 @@
 <app-control-tryout>
-  <app-control-table-small
+  <app-control-table
     controls
     [configType]="'input'"
     [controlConfig]="tabDemoService.inputControlConfig"
     [(model)]="tabDemoService.model"
     (resetted)="tabDemoService.reset()"
   />
-  @if(tabDemoService.isLoaded()){
-    <app-control-table-small
-    controls
-    [configType]="'helper'"
-    [controlConfig]="tabDemoService.helperControlConfig()"
-    [(model)]="tabDemoService.helperModel"
-    (resetted)="tabDemoService.reset()"
+  @if (tabDemoService.isLoaded()) {
+    <app-control-table
+      controls
+      [configType]="'helper'"
+      [controlConfig]="tabDemoService.helperControlConfig()"
+      [(model)]="tabDemoService.helperModel"
+      (resetted)="tabDemoService.reset()"
     />
-  }
-  @else {
-    <div>
-      Loading...
-    </div>
+  } @else {
+    <div>Loading...</div>
   }
 </app-control-tryout>

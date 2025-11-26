@@ -1,6 +1,6 @@
 import { SpinnerDemoService } from './spinner-demo.service';
 
-import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject } from '@angular/core';
@@ -9,7 +9,7 @@ import { Component, inject } from '@angular/core';
   selector: 'app-spinner-demo-control',
   imports: [
     TryoutControlComponent,
-    ControlTableSmallComponent,
+    ControlTableComponent,
   ],
   templateUrl: './spinner-demo-control.component.html',
   styleUrl: './spinner-demo.component.scss',

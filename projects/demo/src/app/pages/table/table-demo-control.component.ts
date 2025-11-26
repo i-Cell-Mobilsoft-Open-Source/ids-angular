@@ -1,7 +1,7 @@
 import { TableDemoTableIntl } from './table-demo.component';
 import { TableDemoService } from './table-demo.service';
 
-import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject, ViewEncapsulation } from '@angular/core';
@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     TranslateModule,
     TryoutControlComponent,
-    ControlTableSmallComponent,
+    ControlTableComponent,
   ],
   templateUrl: './table-demo-control.component.html',
   styleUrl: './table-demo.component.scss',

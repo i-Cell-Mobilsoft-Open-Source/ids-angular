@@ -1,17 +1,13 @@
 <app-control-tryout>
-  @if(iconDemoService.isLoaded()){
-    <app-control-table-small
-    controls
-    [configType]="'input'"
-    [controlConfig]="iconDemoService.inputControlConfig()"
-    [(model)]="iconDemoService.model"
-    (resetted)="iconDemoService.reset()"
+  @if (iconDemoService.isLoaded()) {
+    <app-control-table
+      controls
+      [configType]="'input'"
+      [controlConfig]="iconDemoService.inputControlConfig()"
+      [(model)]="iconDemoService.model"
+      (resetted)="iconDemoService.reset()"
     />
+  } @else {
+    <div>Loading...</div>
   }
-  @else {
-    <div>
-      Loading...
-    </div>
-  }
-
 </app-control-tryout>

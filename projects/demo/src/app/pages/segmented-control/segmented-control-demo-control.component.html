@@ -1,4 +1,16 @@
 <app-control-tryout>
-    <app-control-table-small controls [configType]="'input'" [controlConfig]="segmentedControlDemoService.inputControlConfig" [(model)]="segmentedControlDemoService.model" (resetted)="segmentedControlDemoService.reset()" />
-  <app-control-table-small controls [configType]="'helper'" [controlConfig]="segmentedControlDemoService.helperControlConfig" [(model)]="segmentedControlDemoService.helperModel" (resetted)="segmentedControlDemoService.reset()" />
+  <app-control-table
+    controls
+    [configType]="'input'"
+    [controlConfig]="segmentedControlDemoService.inputControlConfig"
+    [(model)]="segmentedControlDemoService.model"
+    (resetted)="segmentedControlDemoService.reset()"
+  />
+  <app-control-table
+    controls
+    [configType]="'helper'"
+    [controlConfig]="segmentedControlDemoService.helperControlConfig"
+    [(model)]="segmentedControlDemoService.helperModel"
+    (resetted)="segmentedControlDemoService.reset()"
+  />
 </app-control-tryout>

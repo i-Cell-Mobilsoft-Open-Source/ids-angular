@@ -1,6 +1,6 @@
 import { SideSheetDemoService } from './side-sheet-demo.service';
 
-import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject } from '@angular/core';
@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-segmented-control-demo-control',
   imports: [
     FormsModule,
-    ControlTableSmallComponent,
+    ControlTableComponent,
     TryoutControlComponent,
   ],
   templateUrl: './side-sheet-demo-control.component.html',

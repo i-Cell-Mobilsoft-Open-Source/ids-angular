@@ -1,4 +1,16 @@
 <app-control-tryout>
-  <app-control-table-small controls [configType]="'input'" [controlConfig]="radioDemoService.inputControlConfig" [(model)]="radioDemoService.model" (resetted)="radioDemoService.reset()" />
-  <app-control-table-small controls [configType]="'helper'" [controlConfig]="radioDemoService.helperControlConfig" [(model)]="radioDemoService.helperModel" (resetted)="radioDemoService.reset()" />
+  <app-control-table
+    controls
+    [configType]="'input'"
+    [controlConfig]="radioDemoService.inputControlConfig"
+    [(model)]="radioDemoService.model"
+    (resetted)="radioDemoService.reset()"
+  />
+  <app-control-table
+    controls
+    [configType]="'helper'"
+    [controlConfig]="radioDemoService.helperControlConfig"
+    [(model)]="radioDemoService.helperModel"
+    (resetted)="radioDemoService.reset()"
+  />
 </app-control-tryout>

@@ -1,6 +1,5 @@
 <app-control-tryout>
-  
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Chip'"
     [configType]="'input'"
@@ -8,7 +7,7 @@
     [(model)]="chipDemoService.model"
     (resetted)="chipDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Chip'"
     [configType]="'helper'"
@@ -16,7 +15,7 @@
     [(model)]="chipDemoService.helperModel"
     (resetted)="chipDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Chip group'"
     [configType]="'input'"
@@ -24,7 +23,7 @@
     [(model)]="chipDemoService.groupModel"
     (resetted)="chipDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Chip group'"
     [configType]="'helper'"

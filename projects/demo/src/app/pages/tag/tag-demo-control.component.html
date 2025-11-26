@@ -1,5 +1,5 @@
 <app-control-tryout>
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Tag'"
     [configType]="'input'"
@@ -7,7 +7,7 @@
     [(model)]="tagDemoService.model"
     (resetted)="tagDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Tag'"
     [configType]="'helper'"
@@ -15,7 +15,7 @@
     [(model)]="tagDemoService.helperModel"
     (resetted)="tagDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Tag group'"
     [configType]="'input'"

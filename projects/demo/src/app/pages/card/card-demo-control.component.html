@@ -1,5 +1,5 @@
 <app-control-tryout>
-    <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Card'"
     [configType]="'input'"
@@ -7,7 +7,7 @@
     [(model)]="cardDemoService.model"
     (resetted)="cardDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Card media'"
     [configType]="'input'"
@@ -15,7 +15,7 @@
     [(model)]="cardDemoService.mediaModel"
     (resetted)="cardDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Card'"
     [configType]="'helper'"

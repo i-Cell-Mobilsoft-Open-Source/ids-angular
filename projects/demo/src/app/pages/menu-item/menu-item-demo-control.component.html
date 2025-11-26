@@ -1,6 +1,5 @@
 <app-control-tryout>
-  
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Menu item'"
     [configType]="'input'"
@@ -8,7 +7,7 @@
     [(model)]="menuItemDemoService.menuItemModel"
     (resetted)="menuItemDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Menu item'"
     [configType]="'helper'"

@@ -1,4 +1,16 @@
 <app-control-tryout>
-  <app-control-table-small controls [configType]="'input'" [controlConfig]="snackbarDemoService.inputControlConfig" [(model)]="snackbarDemoService.model" (resetted)="snackbarDemoService.reset()" />
-  <app-control-table-small controls [configType]="'helper'" [controlConfig]="snackbarDemoService.helperControlConfig" [(model)]="snackbarDemoService.helperModel" (resetted)="snackbarDemoService.reset()" />
+  <app-control-table
+    controls
+    [configType]="'input'"
+    [controlConfig]="snackbarDemoService.inputControlConfig"
+    [(model)]="snackbarDemoService.model"
+    (resetted)="snackbarDemoService.reset()"
+  />
+  <app-control-table
+    controls
+    [configType]="'helper'"
+    [controlConfig]="snackbarDemoService.helperControlConfig"
+    [(model)]="snackbarDemoService.helperModel"
+    (resetted)="snackbarDemoService.reset()"
+  />
 </app-control-tryout>

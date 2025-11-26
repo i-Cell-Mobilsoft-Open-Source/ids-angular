@@ -1,6 +1,5 @@
 <app-control-tryout>
-  
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Checkbox'"
     [configType]="'input'"
@@ -8,7 +7,7 @@
     [(model)]="checkboxDemoService.model"
     (resetted)="checkboxDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Checkbox'"
     [configType]="'helper'"
@@ -16,7 +15,7 @@
     [(model)]="checkboxDemoService.helperModel"
     (resetted)="checkboxDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Checkbox group'"
     [configType]="'input'"

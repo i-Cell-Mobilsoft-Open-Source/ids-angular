@@ -1,5 +1,5 @@
 <app-control-tryout>
-    <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Form field'"
     [configType]="'input'"
@@ -7,7 +7,7 @@
     [(model)]="selectDemoService.formFieldModel"
     (resetted)="selectDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Select'"
     [configType]="'input'"
@@ -15,7 +15,7 @@
     [(model)]="selectDemoService.selectModel"
     (resetted)="selectDemoService.reset()"
   />
-  <app-control-table-small
+  <app-control-table
     controls
     [controlName]="'Select'"
     [configType]="'helper'"

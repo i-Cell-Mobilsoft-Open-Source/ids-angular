@@ -1,6 +1,6 @@
 import { SegmentedControlDemoService } from './segmented-control-demo.service';
 
-import { ControlTableSmallComponent } from '../../components/control-table/control-table-small/control-table-small.component';
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 
 import { Component, inject } from '@angular/core';
@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-segmented-control-demo-control',
   imports: [
     TryoutControlComponent,
-    ControlTableSmallComponent,
+    ControlTableComponent,
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,

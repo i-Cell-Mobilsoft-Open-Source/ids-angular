@@ -1,4 +1,3 @@
-import { NgComponentOutlet } from '@angular/common';
 import { Component, inject, OnInit, signal, Type } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
@@ -20,7 +19,6 @@ interface ResettableService {
     IdsIconComponent,
     IdsIconButtonComponent,
     IdsButtonComponent,
-    NgComponentOutlet,
 
   ],
   templateUrl: './demo-and-code.component.html',

@@ -34,7 +34,37 @@ import { TableDemoService } from './pages/table/table-demo.service';
 import { TagDemoService } from './pages/tag/tag-demo.service';
 import { TooltipDemoService } from './pages/tooltip/tooltip-demo.service';
 
-import { Routes } from '@angular/router';
+import { EnvironmentProviders, Provider } from '@angular/core';
+import { Routes, Route } from '@angular/router';
+
+function buildComponentRoute(
+  slug: string,
+  demoService: Provider | EnvironmentProviders,
+): Route {
+  return {
+    path: slug,
+    component: ComponentDetailsComponent,
+    providers: [demoService],
+    children: [
+      {
+        path: '', redirectTo: 'guidelines', pathMatch: 'full',
+      },
+      {
+        path: 'guidelines',
+        loadComponent: () => import('./components/tabs/guidelines/guidelines.component').then((module) => module.GuidelinesComponent),
+      },
+      {
+        path: 'demo',
+        loadComponent: () => import('./components/tabs/demo-and-code/demo-and-code.component')
+          .then((module) => module.DemoAndCodeComponent),
+      },
+      {
+        path: 'api',
+        loadComponent: () => import('./components/tabs/api/api.component').then((module) => module.ApiComponent),
+      },
+    ],
+  };
+}
 
 export const routes: Routes = [
   {
@@ -45,600 +75,40 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
       },
 
-      {
-        path: 'accordion',
-        component: ComponentDetailsComponent,
-        providers: [AccordionDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/accordion/accordion-demo-control.component').then((module) => module.AccordionDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'action-menu',
-        component: ComponentDetailsComponent,
-        providers: [ActionMenuDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/action-menu/action-menu-demo.component').then((module) => module.ActionMenuDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/action-menu/action-menu-demo-control.component').then((module) => module.ActionMenuDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'avatar',
-        component: ComponentDetailsComponent,
-        providers: [AvatarDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () => import('./pages/avatar/avatar-demo-control.component').then((module) => module.AvatarDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'badge',
-        component: ComponentDetailsComponent,
-        providers: [BadgeDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () => import('./pages/badge/badge-demo-control.component').then((module) => module.BadgeDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'breadcrumb',
-        component: ComponentDetailsComponent,
-        providers: [BreadcrumbDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/breadcrumb/breadcrumb-demo.component').then((module) => module.BreadcrumbDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/breadcrumb/breadcrumb-demo-control.component').then((module) => module.BreadcrumbDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'button',
-        component: ComponentDetailsComponent,
-        providers: [ButtonDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/button/button-demo.component').then((module) => module.ButtonDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () => import('./pages/button/button-demo-control.component').then((module) => module.ButtonDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'card',
-        component: ComponentDetailsComponent,
-        providers: [CardDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/card/card-demo.component').then((module) => module.CardDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () => import('./pages/card/card-demo-control.component').then((module) => module.CardDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'checkbox',
-        component: ComponentDetailsComponent,
-        providers: [CheckboxDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/checkbox/checkbox-demo.component').then((module) => module.CheckboxDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/checkbox/checkbox-demo-control.component').then((module) => module.CheckboxDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'chip',
-        component: ComponentDetailsComponent,
-        providers: [ChipDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/chip/chip-demo.component').then((module) => module.ChipDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () => import('./pages/chip/chip-demo-control.component').then((module) => module.ChipDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'date-picker',
-        component: ComponentDetailsComponent,
-        providers: [DatepickerDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/datepicker/datepicker-demo.component').then((module) => module.DatepickerDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/datepicker/datepicker-demo-control.component').then((module) => module.DatepickerDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'dialog',
-        component: ComponentDetailsComponent,
-        providers: [DialogDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () => import('./pages/dialog/dialog-demo-control.component').then((module) => module.DialogDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'divider',
-        component: ComponentDetailsComponent,
-        providers: [DividerDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/divider/divider-demo.component').then((module) => module.DividerDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/divider/divider-demo-control.component').then((module) => module.DividerDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'fieldset',
-        component: ComponentDetailsComponent,
-        providers: [FieldsetDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/fieldset/fieldset-demo.component').then((module) => module.FieldsetDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/fieldset/fieldset-demo-control.component').then((modu) => modu.FieldsetDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'form-field',
-        component: ComponentDetailsComponent,
-        providers: [FormFieldDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/form-field/form-field-demo.component').then((module) => module.FormFieldDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/form-field/form-field-demo-control.component').then((mod) => mod.FormFieldDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'icon',
-        component: ComponentDetailsComponent,
-        providers: [IconDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/icon/icon-demo-control.component').then((module) => module.IconDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'icon-button',
-        component: ComponentDetailsComponent,
-        providers: [IconButtonDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/icon-button/icon-button-demo-control.component').then((module) => module.IconButtonDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'menu-item',
-        component: ComponentDetailsComponent,
-        providers: [MenuItemDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/menu-item/menu-item-demo.component').then((module) => module.MenuItemDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/menu-item/menu-item-demo-control.component').then((module) => module.MenuItemDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'notification',
-        component: ComponentDetailsComponent,
-        providers: [NotificationDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () =>
-              import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/notification/notification-demo-control.component').then(
-                (module) => module.NotificationDemoControlComponent,
-              ),
-          },
-        ],
-      },
-      {
-        path: 'overlay-panel',
-        component: ComponentDetailsComponent,
-        providers: [OverlayPanelDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () =>
-              import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/overlay-panel/overlay-panel-demo-control.component').then(
-                (module) => module.OverlayPanelDemoControlComponent,
-              ),
-          },
-        ],
-      },
-      {
-        path: 'paginator',
-        component: ComponentDetailsComponent,
-        providers: [PaginatorDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/paginator/paginator-demo-control.component').then(
-                (module) => module.PaginatorDemoControlComponent,
-              ),
-          },
-        ],
-      },
-      {
-        path: 'radio',
-        component: ComponentDetailsComponent,
-        providers: [RadioDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/radio/radio-demo-control.component').then((module) => module.RadioDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'scrollbar',
-        component: ComponentDetailsComponent,
-        providers: [ScrollbarDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/scrollbar/scrollbar-demo.component').then((module) => module.ScrollbarDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/scrollbar/scrollbar-demo-control.component').then((module) => module.ScrollbarDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'segmented-control',
-        component: ComponentDetailsComponent,
-        providers: [SegmentedControlDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () =>
-              import('./pages/segmented-control/segmented-control-demo.component').then((module) => module.SegmentedControlDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/segmented-control/segmented-control-demo-control.component').then(
-                (module) => module.SegmentedControlDemoControlComponent,
-              ),
-          },
-        ],
-      },
-      {
-        path: 'segmented-control-toggle',
-        component: ComponentDetailsComponent,
-        providers: [SegmentedControlToggleDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () =>
-              import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component').then(
-                (module) => module.SegmentedControlToggleDemoComponent,
-              ),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/segmented-control-toggle/segmented-control-toggle-demo-control.component').then(
-                (module) => module.SegmentedControlToggleDemoControlComponent,
-              ),
-          },
-        ],
-      },
-      {
-        path: 'select',
-        component: ComponentDetailsComponent,
-        providers: [SelectDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/select/select-demo-control.component').then((module) => module.SelectDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'side-nav',
-        component: ComponentDetailsComponent,
-        providers: [SideNavDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/side-nav/side-nav-demo.component').then((module) => module.SideNavDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/side-nav/side-nav-demo-control.component').then(
-                (module) => module.SideNavDemoControlComponent,
-              ),
-          },
-        ],
-      },
-      {
-        path: 'side-sheet',
-        component: ComponentDetailsComponent,
-        providers: [SideSheetDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/side-sheet/side-sheet-demo.component').then((module) => module.SideSheetDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/side-sheet/side-sheet-demo-control.component').then(
-                (module) => module.SideSheetDemoControlControlComponent,
-              ),
-          },
-        ],
-      },
-      {
-        path: 'snackbar',
-        component: ComponentDetailsComponent,
-        providers: [SnackbarDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/snackbar/snackbar-demo-control.component').then(
-                (module) => module.SnackbarDemoControlComponent,
-              ),
-          },
-        ],
-      },
-      {
-        path: 'spinner',
-        component: ComponentDetailsComponent,
-        providers: [SpinnerDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/spinner/spinner-demo.component').then((module) => module.SpinnerDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/spinner/spinner-demo-control.component').then((module) => module.SpinnerDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'switch',
-        component: ComponentDetailsComponent,
-        providers: [SwitchDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/switch/switch-demo-control.component').then((module) => module.SwitchDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'tab',
-        component: ComponentDetailsComponent,
-        providers: [TabDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/tab/tab-demo.component').then((module) => module.TabsDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/tab/tab-demo-control.component').then((module) => module.TabsDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'table',
-        component: ComponentDetailsComponent,
-        providers: [TableDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/table/table-demo.component').then((module) => module.TableDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/table/table-demo-control.component').then((module) => module.TableDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'tag',
-        component: ComponentDetailsComponent,
-        providers: [TagDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/tag/tag-demo-control.component').then((module) => module.TagDemoControlComponent),
-          },
-        ],
-      },
-      {
-        path: 'tooltip',
-        component: ComponentDetailsComponent,
-        providers: [TooltipDemoService],
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
-          },
-          {
-            path: '',
-            outlet: 'demoControls',
-            loadComponent: () =>
-              import('./pages/tooltip/tooltip-demo-control.component').then((module) => module.TooltipDemoControlComponent),
-          },
-        ],
-      },
+      buildComponentRoute('accordion', AccordionDemoService),
+      buildComponentRoute('action-menu', ActionMenuDemoService),
+      buildComponentRoute('avatar', AvatarDemoService),
+      buildComponentRoute('badge', BadgeDemoService),
+      buildComponentRoute('breadcrumb', BreadcrumbDemoService),
+      buildComponentRoute('button', ButtonDemoService),
+      buildComponentRoute('card', CardDemoService),
+      buildComponentRoute('checkbox', CheckboxDemoService),
+      buildComponentRoute('chip', ChipDemoService),
+      buildComponentRoute('date-picker', DatepickerDemoService),
+      buildComponentRoute('dialog', DialogDemoService),
+      buildComponentRoute('divider', DividerDemoService),
+      buildComponentRoute('fieldset', FieldsetDemoService),
+      buildComponentRoute('form-field', FormFieldDemoService),
+      buildComponentRoute('icon', IconDemoService),
+      buildComponentRoute('icon-button', IconButtonDemoService),
+      buildComponentRoute('menu-item', MenuItemDemoService),
+      buildComponentRoute('notification', NotificationDemoService),
+      buildComponentRoute('overlay-panel', OverlayPanelDemoService),
+      buildComponentRoute('paginator', PaginatorDemoService),
+      buildComponentRoute('radio', RadioDemoService),
+      buildComponentRoute('scrollbar', ScrollbarDemoService),
+      buildComponentRoute('segmented-control', SegmentedControlDemoService),
+      buildComponentRoute('segmented-control-toggle', SegmentedControlToggleDemoService),
+      buildComponentRoute('select', SelectDemoService),
+      buildComponentRoute('side-nav', SideNavDemoService),
+      buildComponentRoute('side-sheet', SideSheetDemoService),
+      buildComponentRoute('snackbar', SnackbarDemoService),
+      buildComponentRoute('spinner', SpinnerDemoService),
+      buildComponentRoute('switch', SwitchDemoService),
+      buildComponentRoute('tab', TabDemoService),
+      buildComponentRoute('table', TableDemoService),
+      buildComponentRoute('tag', TagDemoService),
+      buildComponentRoute('tooltip', TooltipDemoService),
     ],
   },
   {

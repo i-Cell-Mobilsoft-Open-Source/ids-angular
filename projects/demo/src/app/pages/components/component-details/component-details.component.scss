@@ -12,26 +12,30 @@ ids-chip,
   @apply border-b border-solid border-ids-page-fg-surface-lighter-40;
 }
 
-
 :host {
+  display: block;
+  height: 100%; // A szülőnek legyen magassága
   width: 100%;
-  display: block; 
 }
 
-.demohost-container {
-  display: flex; 
-  padding: var(--smc-reference-Padding-md, 24px) var(--smc-reference-Padding-lg, 32px);
-  gap: var(--smc-reference-Padding-xs, 16px);
-  flex: 1 0 0;
-  align-self: stretch;
+.component-details-host {
+  height: 100%; // A flex container töltse ki a hostot
+}
 
-  &::ng-deep {
-    > :not(router-outlet) {
-      width: 100%;
-      height: 100%;
+.router-container {
+  // Ez a container foglalja el a helyet a tabok alatt
+  display: flex;
+  flex-direction: column;
 
-      display: flex;
-
-    }
+  // A varázslat: A router-outlet által beszúrt komponenst célozzuk meg
+  // Ez a Guidelines, a Demo VAGY az API komponens
+  &::ng-deep > :not(router-outlet) {
+    display: block;
+    width: 100%;
+    height: 100%; // Most már működni fog, mert a szülő (.router-container) is 100%-os
+    
+    // Ha a betöltött komponens (pl. demo) maga is flexbox, akkor inkább:
+    // display: flex;
+    // flex-direction: column;
   }
 }

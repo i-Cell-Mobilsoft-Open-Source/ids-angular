@@ -1,0 +1,35 @@
+ids-chip,
+#copy {
+  border-style: solid;
+}
+#demo {
+  gap: 0px !important;
+}
+#footer {
+  @apply border-t border-solid border-ids-page-fg-surface-lighter-40;
+}
+#header {
+  @apply border-b border-solid border-ids-page-fg-surface-lighter-40;
+}
+
+:host {
+  width: 100%;
+  display: block; 
+}
+
+.demohost-container {
+  display: flex; 
+  padding: var(--smc-reference-Padding-md, 24px) var(--smc-reference-Padding-lg, 32px);
+  gap: var(--smc-reference-Padding-xs, 16px);
+  flex: 1 0 0;
+  align-self: stretch;
+
+  &::ng-deep {
+    > :not(router-outlet) {
+      width: 100%;
+      height: 100%;
+      display: flex;
+
+    }
+  }
+}

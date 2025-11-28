@@ -4,34 +4,34 @@
   </header>
 
   <ids-card-body style="overflow: visible">
-    @for (control of _flatControls(); track $index) {
+    @for (flatControl of _flatControls(); track $index) {
       <div class="control-row">
-        <div class="control-name">{{ control.name }}</div>
+        <div class="control-name">{{ flatControl.name }}</div>
 
         <div class="control-input">
-          @let disabled = control.disabled ?? false;
+          @let disabled = flatControl.disabled ?? false;
 
-          @switch (control.control) {
+          @switch (flatControl.control) {
             @case (_demoControl.SWITCH) {
               <ids-switch
                 [hasIcon]="true"
-                [name]="control.name"
-                [id]="control.name"
+                [name]="flatControl.name"
+                [id]="flatControl.name"
                 [disabled]="disabled"
-                [(ngModel)]="model()[control.name]"
-                (ngModelChange)="control.onModelChange?.($event)"
+                [(ngModel)]="model()[flatControl.name]"
+                (ngModelChange)="flatControl.onModelChange?.($event)"
               />
             }
             @case (_demoControl.SELECT) {
-              <ids-form-field style="width: 100%; z-index: 10; position: relative">
+              <ids-form-field class="component-width" style="z-index: 10; position: relative">
                 <ids-select
-                  style="width: 100%"
+                  class="component-width"
                   [disabled]="disabled"
-                  [(ngModel)]="model()[control.name]"
-                  (ngModelChange)="control.onModelChange?.($event)"
+                  [(ngModel)]="model()[flatControl.name]"
+                  (ngModelChange)="flatControl.onModelChange?.($event)"
                 >
                   <ids-option-group>
-                    @for (item of control.list; track $index) {
+                    @for (item of flatControl.list; track $index) {
                       <ids-option [value]="item">{{ item }}</ids-option>
                     }
                   </ids-option-group>
@@ -39,66 +39,66 @@
               </ids-form-field>
             }
             @case (_demoControl.NUMBER) {
-              <ids-form-field style="width: 100%; z-index: 10; position: relative">
+              <ids-form-field class="component-width" style="z-index: 10; position: relative">
                 <input
                   idsInput
                   type="number"
-                  style="width: 100%"
-                  [name]="control.name"
-                  [id]="control.name"
+                  class="component-width"
+                  [name]="flatControl.name"
+                  [id]="flatControl.name"
                   [disabled]="disabled"
-                  [attr.min]="control.min"
-                  [attr.step]="control.step"
-                  [(ngModel)]="model()[control.name]"
-                  (ngModelChange)="control.onModelChange?.($event)"
+                  [attr.min]="flatControl.min"
+                  [attr.step]="flatControl.step"
+                  [(ngModel)]="model()[flatControl.name]"
+                  (ngModelChange)="flatControl.onModelChange?.($event)"
                 />
               </ids-form-field>
             }
 
             @case (_demoControl.DATE) {
-              <ids-form-field style="width: 100%" [variant]="'surface'">
+              <ids-form-field class="component-width" [variant]="'surface'">
                 <input
                   #inputFieldModel="ngModel"
                   #datepicker="idsDatepicker"
                   idsInput
                   idsDatepicker
-                  style="width: 100%"
-                  [name]="control.name"
-                  [id]="control.name"
+                  class="component-width"
+                  [name]="flatControl.name"
+                  [id]="flatControl.name"
                   [disabled]="disabled"
-                  [(ngModel)]="model()[control.name]"
-                  (ngModelChange)="control.onModelChange?.($event)"
+                  [(ngModel)]="model()[flatControl.name]"
+                  (ngModelChange)="flatControl.onModelChange?.($event)"
                 />
 
                 <ids-datepicker-trigger idsSuffix [for]="datepicker" />
               </ids-form-field>
             }
             @case (_demoControl.NUMBERARRAY) {
-              <ids-form-field style="width: 100%" [variant]="'surface'">
+              <ids-form-field class="component-width" [variant]="'surface'">
                 <input
                   idsInput
                   type="text"
-                  style="width: 100%"
-                  [name]="control.name"
-                  [id]="control.name"
+                  class="component-width"
+                  [name]="flatControl.name"
+                  [id]="flatControl.name"
                   [disabled]="disabled"
-                  [(ngModel)]="model()[control.name]"
-                  (ngModelChange)="_convertModelValueStringToNumberArray(control.name); control.onModelChange?.($event)"
+                  [(ngModel)]="model()[flatControl.name]"
+                  (ngModelChange)="_convertModelValueStringToNumberArray(flatControl.name); flatControl.onModelChange?.($event)"
                 />
               </ids-form-field>
             }
             @default {
-              <ids-form-field style="width: 100%" [variant]="'surface'">
+              <ids-form-field class="component-width"  [variant]="'surface'">
                 <input
                   #inputFieldModel="ngModel"
                   idsInput
                   type="text"
-                  style="width: 100%"
-                  [name]="control.name"
-                  [id]="control.name"
+                  class="component-width"
+                  [name]="flatControl.name"
+                  [id]="flatControl.name"
                   [disabled]="disabled"
-                  [(ngModel)]="model()[control.name]"
-                  (ngModelChange)="control.onModelChange?.($event)"
+                  [(ngModel)]="model()[flatControl.name]"
+                  (ngModelChange)="flatControl.onModelChange?.($event)"
                 />
               </ids-form-field>
             }

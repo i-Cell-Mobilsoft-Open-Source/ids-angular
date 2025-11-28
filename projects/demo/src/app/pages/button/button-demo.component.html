@@ -1,47 +1,89 @@
-<app-tryout
-  [title]="'COMPONENTS.BUTTON' | translate"
-  [hasDarkBackground]="buttonDemoService.model.variant === 'light' || buttonDemoService.model.variant === 'light-fixed'"
-  (resetted)="buttonDemoService.reset()"
->
-  <ng-container component>
-    <div component class="button-grid">
-      <div class="button-item">
-        <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
-        @if (buttonDemoService.model.asLink) {
-          <a href="" idsButton [appearance]="buttonDemoService.model.appearance" [size]="buttonDemoService.model.size" [variant]="buttonDemoService.model.variant" [disabled]="buttonDemoService.model.disabled">
-            {{ buttonDemoService.helperModel.text }}
-          </a>
-        } @else {
-          <button
-            type="button"
-            idsButton
-            [appearance]="buttonDemoService.model.appearance"
-            [size]="buttonDemoService.model.size"
-            [variant]="buttonDemoService.model.variant"
-            [disabled]="buttonDemoService.model.disabled"
-            (click)="buttonDemoService.onClick(buttonDemoService.model.appearance + '-' + buttonDemoService.model.variant + '-' + buttonDemoService.model.size)"
-
-          >
-            @if (buttonDemoService.helperModel.hasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="search" />
+<app-demo-and-code (resetDemo)="buttonDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.BUTTON' | translate"
+      [hasDarkBackground]="buttonDemoService.model.variant === 'light' || buttonDemoService.model.variant === 'light-fixed'"
+      (resetted)="buttonDemoService.reset()"
+    >
+      <ng-container component>
+        <div component class="button-grid">
+          <div class="button-item">
+            <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
+            @if (buttonDemoService.model.asLink) {
+              <a
+                href=""
+                idsButton
+                [appearance]="buttonDemoService.model.appearance"
+                [size]="buttonDemoService.model.size"
+                [variant]="buttonDemoService.model.variant"
+                [disabled]="buttonDemoService.model.disabled"
+              >
+                {{ buttonDemoService.helperModel.text }}
+              </a>
+            } @else {
+              <button
+                type="button"
+                idsButton
+                [appearance]="buttonDemoService.model.appearance"
+                [size]="buttonDemoService.model.size"
+                [variant]="buttonDemoService.model.variant"
+                [disabled]="buttonDemoService.model.disabled"
+                (click)="
+                  buttonDemoService.onClick(
+                    buttonDemoService.model.appearance + '-' + buttonDemoService.model.variant + '-' + buttonDemoService.model.size
+                  )
+                "
+              >
+                @if (buttonDemoService.helperModel.hasLeadingIcon) {
+                  <ids-icon icon-leading fontIcon="search" />
+                }
+                {{ buttonDemoService.helperModel.text }}
+                @if (buttonDemoService.helperModel.hasTrailingIcon) {
+                  <ids-icon icon-trailing fontIcon="done" />
+                }
+              </button>
             }
-            {{ buttonDemoService.helperModel.text }}
-            @if (buttonDemoService.helperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="done" />
-            }
-          </button>
-        }
-      </div>
+          </div>
 
-      <div class="button-item">
-        <h2>{{ "COMMON.GROUPED" | translate }}</h2>
-        <ids-button-group [size]="buttonDemoService.groupModel.size">
-          <button type="button" idsButton [appearance]="'filled'" [variant]="'primary'">One</button>
-          <button type="button" idsButton [appearance]="'outlined'" [variant]="'success'">Two</button>
-          <button type="button" idsButton [appearance]="'text'" [variant]="'warning'">Three</button>
-        </ids-button-group>
-      </div>
-    </div>
-  </ng-container>
+          <div class="button-item">
+            <h2>{{ "COMMON.GROUPED" | translate }}</h2>
+            <ids-button-group [size]="buttonDemoService.groupModel.size">
+              <button type="button" idsButton [appearance]="'filled'" [variant]="'primary'">One</button>
+              <button type="button" idsButton [appearance]="'outlined'" [variant]="'success'">Two</button>
+              <button type="button" idsButton [appearance]="'text'" [variant]="'warning'">Three</button>
+            </ids-button-group>
+          </div>
+        </div>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'Button'"
+        [configType]="'input'"
+        [controlConfig]="buttonDemoService.inputControlConfig"
+        [(model)]="buttonDemoService.model"
+        (resetted)="buttonDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Button'"
+        [configType]="'helper'"
+        [controlConfig]="buttonDemoService.helperControlConfig"
+        [(model)]="buttonDemoService.helperModel"
+        (resetted)="buttonDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Button group'"
+        [configType]="'input'"
+        [controlConfig]="buttonDemoService.groupInputControlConfig"
+        [(model)]="buttonDemoService.groupModel"
+        (resetted)="buttonDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

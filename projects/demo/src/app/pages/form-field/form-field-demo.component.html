@@ -1,82 +1,118 @@
-@let fieldName = 'FORM_FIELD.LABEL.NAME' | translate;
+@let fieldName = "FORM_FIELD.LABEL.NAME" | translate;
 
-<app-tryout [title]="'COMPONENTS.FORM_FIELD' | translate" [hasDarkBackground]="formFieldDemoService.formFieldModel.variant === 'light'" (resetted)="formFieldDemoService.reset()">
-  <div component class="form-field-grid">
-    <div>
-      <h2>Input (template driven)</h2>
-      <ids-form-field [size]="formFieldDemoService.formFieldModel.size" [variant]="formFieldDemoService.formFieldModel.variant">
-        <ids-label>{{ formFieldDemoService.formFieldHelperModel.label }}</ids-label>
-        @if (formFieldDemoService.formFieldHelperModel.hasLeadingIcon) {
-          <ids-icon idsLeadingIcon fontIcon="key" />
-        }
-        @if (formFieldDemoService.formFieldHelperModel.hasPrefix) {
-          <span idsPrefix>{{ formFieldDemoService.formFieldHelperModel.prefix }}</span>
-        }
-        <input
-          #inputFieldModel="ngModel"
-          idsInput
-          pattern="[a-zA-Z]+(?:\s[a-zA-Z]+)?"
-          [minlength]="3"
-          [placeholder]="formFieldDemoService.inputModel.placeholder"
-          [readonly]="formFieldDemoService.inputModel.readonly"
-          [disabled]="formFieldDemoService.inputModel.disabled"
-          [required]="formFieldDemoService.inputModel.required"
-          [canHandleSuccessState]="formFieldDemoService.inputModel.canHandleSuccessState"
-          [(ngModel)]="formFieldDemoService.input"
-        />
-        @if (formFieldDemoService.formFieldHelperModel.hasSuffix) {
-          <span idsSuffix>{{ formFieldDemoService.formFieldHelperModel.suffix }}</span>
-        }
-        @if (formFieldDemoService.formFieldHelperModel.hasTrailingIcon) {
-          <ids-icon idsTrailingIcon fontIcon="cart" />
-        }
-        @if (formFieldDemoService.formFieldHelperModel.hasAction) {
-          <div idsFormFieldAction>
-            <button type="button" idsIconButton appearance="standard" [variant]="formFieldDemoService.formFieldModel.variant">
-              <ids-icon aria-hidden="true" alt="" fontIcon="search" />
-            </button>
-          </div>
-        }
-        <ids-hint-message>{{ formFieldDemoService.formFieldHelperModel.hintMessage }}</ids-hint-message>
-        <ids-error-message>
-          <ids-error-def code="required">{{ 'FORM_FIELD.ERROR.REQUIRED' | translate: { fieldName } }}</ids-error-def>
-          <ids-error-def code="minlength">
-            @let inputRequiredLength = inputFieldModel.control.errors?.['minlength']?.requiredLength;
-            {{ 'FORM_FIELD.ERROR.MINLENGTH' | translate: { fieldName, requiredLength: inputRequiredLength } }}
-          </ids-error-def>
-          <ids-error-def code="pattern">{{ 'FORM_FIELD.ERROR.PATTERN' | translate: { fieldName } }}</ids-error-def>
-        </ids-error-message>
-        <ids-success-message>{{ 'FORM_FIELD.SUCCESS' | translate: { fieldName } }}</ids-success-message>
-      </ids-form-field>
-    </div>
+<app-demo-and-code (resetDemo)="formFieldDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.FORM_FIELD' | translate"
+      [hasDarkBackground]="formFieldDemoService.formFieldModel.variant === 'light'"
+      (resetted)="formFieldDemoService.reset()"
+    >
+      <div component class="form-field-grid">
+        <div>
+          <h2>Input (template driven)</h2>
+          <ids-form-field [size]="formFieldDemoService.formFieldModel.size" [variant]="formFieldDemoService.formFieldModel.variant">
+            <ids-label>{{ formFieldDemoService.formFieldHelperModel.label }}</ids-label>
+            @if (formFieldDemoService.formFieldHelperModel.hasLeadingIcon) {
+              <ids-icon idsLeadingIcon fontIcon="key" />
+            }
+            @if (formFieldDemoService.formFieldHelperModel.hasPrefix) {
+              <span idsPrefix>{{ formFieldDemoService.formFieldHelperModel.prefix }}</span>
+            }
+            <input
+              #inputFieldModel="ngModel"
+              idsInput
+              pattern="[a-zA-Z]+(?:\s[a-zA-Z]+)?"
+              [minlength]="3"
+              [placeholder]="formFieldDemoService.inputModel.placeholder"
+              [readonly]="formFieldDemoService.inputModel.readonly"
+              [disabled]="formFieldDemoService.inputModel.disabled"
+              [required]="formFieldDemoService.inputModel.required"
+              [canHandleSuccessState]="formFieldDemoService.inputModel.canHandleSuccessState"
+              [(ngModel)]="formFieldDemoService.input"
+            />
+            @if (formFieldDemoService.formFieldHelperModel.hasSuffix) {
+              <span idsSuffix>{{ formFieldDemoService.formFieldHelperModel.suffix }}</span>
+            }
+            @if (formFieldDemoService.formFieldHelperModel.hasTrailingIcon) {
+              <ids-icon idsTrailingIcon fontIcon="cart" />
+            }
+            @if (formFieldDemoService.formFieldHelperModel.hasAction) {
+              <div idsFormFieldAction>
+                <button type="button" idsIconButton appearance="standard" [variant]="formFieldDemoService.formFieldModel.variant">
+                  <ids-icon aria-hidden="true" alt="" fontIcon="search" />
+                </button>
+              </div>
+            }
+            <ids-hint-message>{{ formFieldDemoService.formFieldHelperModel.hintMessage }}</ids-hint-message>
+            <ids-error-message>
+              <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
+              <ids-error-def code="minlength">
+                @let inputRequiredLength = inputFieldModel.control.errors?.["minlength"]?.requiredLength;
+                {{ "FORM_FIELD.ERROR.MINLENGTH" | translate: { fieldName, requiredLength: inputRequiredLength } }}
+              </ids-error-def>
+              <ids-error-def code="pattern">{{ "FORM_FIELD.ERROR.PATTERN" | translate: { fieldName } }}</ids-error-def>
+            </ids-error-message>
+            <ids-success-message>{{ "FORM_FIELD.SUCCESS" | translate: { fieldName } }}</ids-success-message>
+          </ids-form-field>
+        </div>
 
-    <div>
-      <h2>Textarea (model driven)</h2>
-      <ids-form-field [size]="formFieldDemoService.formFieldModel.size" [variant]="formFieldDemoService.formFieldModel.variant">
-        <ids-label>{{ formFieldDemoService.formFieldHelperModel.label }}</ids-label>
-        <textarea
-          idsInput
-          rows="3"
-          pattern="[a-zA-Z]+(?:\s[a-zA-Z]+)?"
-          [minlength]="3"
-          [placeholder]="formFieldDemoService.inputModel.placeholder"
-          [readonly]="formFieldDemoService.inputModel.readonly"
-          [required]="formFieldDemoService.inputModel.required"
-          [canHandleSuccessState]="formFieldDemoService.inputModel.canHandleSuccessState"
-          [formControl]="formFieldDemoService.textarea"
-        ></textarea>
-        <ids-hint-message>{{ formFieldDemoService.formFieldHelperModel.hintMessage }}</ids-hint-message>
-        <ids-error-message>
-          <ids-error-def code="required">{{ 'FORM_FIELD.ERROR.REQUIRED' | translate: { fieldName } }}</ids-error-def>
-          <ids-error-def code="minlength">
-            @let textareaRequiredLength = formFieldDemoService.textarea.errors?.['minlength']?.requiredLength;
-            {{ 'FORM_FIELD.ERROR.MINLENGTH' | translate: { fieldName, requiredLength: textareaRequiredLength } }}
-          </ids-error-def>
-          <ids-error-def code="pattern">{{ 'FORM_FIELD.ERROR.PATTERN' | translate: { fieldName } }}</ids-error-def>
-        </ids-error-message>
-        <ids-success-message>{{ 'FORM_FIELD.SUCCESS' | translate: { fieldName } }}</ids-success-message>
-      </ids-form-field>
-    </div>
+        <div>
+          <h2>Textarea (model driven)</h2>
+          <ids-form-field [size]="formFieldDemoService.formFieldModel.size" [variant]="formFieldDemoService.formFieldModel.variant">
+            <ids-label>{{ formFieldDemoService.formFieldHelperModel.label }}</ids-label>
+            <textarea
+              idsInput
+              rows="3"
+              pattern="[a-zA-Z]+(?:\s[a-zA-Z]+)?"
+              [minlength]="3"
+              [placeholder]="formFieldDemoService.inputModel.placeholder"
+              [readonly]="formFieldDemoService.inputModel.readonly"
+              [required]="formFieldDemoService.inputModel.required"
+              [canHandleSuccessState]="formFieldDemoService.inputModel.canHandleSuccessState"
+              [formControl]="formFieldDemoService.textarea"
+            ></textarea>
+            <ids-hint-message>{{ formFieldDemoService.formFieldHelperModel.hintMessage }}</ids-hint-message>
+            <ids-error-message>
+              <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
+              <ids-error-def code="minlength">
+                @let textareaRequiredLength = formFieldDemoService.textarea.errors?.["minlength"]?.requiredLength;
+                {{ "FORM_FIELD.ERROR.MINLENGTH" | translate: { fieldName, requiredLength: textareaRequiredLength } }}
+              </ids-error-def>
+              <ids-error-def code="pattern">{{ "FORM_FIELD.ERROR.PATTERN" | translate: { fieldName } }}</ids-error-def>
+            </ids-error-message>
+            <ids-success-message>{{ "FORM_FIELD.SUCCESS" | translate: { fieldName } }}</ids-success-message>
+          </ids-form-field>
+        </div>
+      </div>
+    </app-tryout>
   </div>
 
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'Form field'"
+        [configType]="'input'"
+        [controlConfig]="formFieldDemoService.formFieldInputControlConfig"
+        [(model)]="formFieldDemoService.formFieldModel"
+        (resetted)="formFieldDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Form field'"
+        [configType]="'helper'"
+        [controlConfig]="formFieldDemoService.formFieldHelperControlConfig"
+        [(model)]="formFieldDemoService.formFieldHelperModel"
+        (resetted)="formFieldDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Form field'"
+        [configType]="'input'"
+        [controlConfig]="formFieldDemoService.inputInputControlConfig"
+        [(model)]="formFieldDemoService.inputModel"
+        (resetted)="formFieldDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

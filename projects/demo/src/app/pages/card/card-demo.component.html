@@ -1,50 +1,92 @@
-<app-tryout [title]="'COMPONENTS.CARD' | translate" [hasDarkBackground]="cardDemoService.model.variant === 'light'" (resetted)="cardDemoService.reset()">
-  <ng-container component>
-    @if (cardDemoService.helperModel.clickable) {
-      <ids-card
-        appearance="filled"
-        [size]="cardDemoService.model.size"
-        [variant]="cardDemoService.model.variant"
-        [orientation]="cardDemoService.model.orientation"
-        [disabled]="cardDemoService.model.disabled"
-        (click)="cardDemoService.onClick()"
-      >
-        @if (cardDemoService.model.orientation === "vertical") {
-          <header idsCardHeader>
-            <h2 idsCardTitle>This is the title</h2>
-            <h3 idsCardSubtitle>This is the subtitle</h3>
-          </header>
+<app-demo-and-code (resetDemo)="cardDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.CARD' | translate"
+      [hasDarkBackground]="cardDemoService.model.variant === 'light'"
+      (resetted)="cardDemoService.reset()"
+    >
+      <ng-container component>
+        @if (cardDemoService.helperModel.clickable) {
+          <ids-card
+            appearance="filled"
+            [size]="cardDemoService.model.size"
+            [variant]="cardDemoService.model.variant"
+            [orientation]="cardDemoService.model.orientation"
+            [disabled]="cardDemoService.model.disabled"
+            (click)="cardDemoService.onClick()"
+          >
+            @if (cardDemoService.model.orientation === "vertical") {
+              <header idsCardHeader>
+                <h2 idsCardTitle>This is the title</h2>
+                <h3 idsCardSubtitle>This is the subtitle</h3>
+              </header>
+            }
+            <img
+              idsCardMedia
+              src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
+              alt=""
+              [stretch]="cardDemoService.mediaModel.stretch"
+            />
+            <ids-card-body>This is the body</ids-card-body>
+            @if (cardDemoService.model.orientation === "vertical") {
+              <footer idsCardFooter>This is the footer</footer>
+            }
+          </ids-card>
+        } @else {
+          <ids-card
+            [appearance]="cardDemoService.model.appearance"
+            [size]="cardDemoService.model.size"
+            [variant]="cardDemoService.model.variant"
+            [orientation]="cardDemoService.model.orientation"
+          >
+            @if (cardDemoService.model.orientation === "vertical") {
+              <header idsCardHeader>
+                <h2 idsCardTitle>This is the title</h2>
+                <h3 idsCardSubtitle>This is the subtitle</h3>
+              </header>
+            }
+            <img
+              idsCardMedia
+              src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
+              alt=""
+              [stretch]="cardDemoService.mediaModel.stretch"
+            />
+            <ids-card-body>This is the body</ids-card-body>
+            @if (cardDemoService.model.orientation === "vertical") {
+              <footer idsCardFooter>This is the footer</footer>
+            }
+          </ids-card>
         }
-        <img
-          idsCardMedia
-          src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
-          alt=""
-          [stretch]="cardDemoService.mediaModel.stretch"
-        />
-        <ids-card-body>This is the body</ids-card-body>
-        @if (cardDemoService.model.orientation === "vertical") {
-          <footer idsCardFooter>This is the footer</footer>
-        }
-      </ids-card>
-    } @else {
-      <ids-card [appearance]="cardDemoService.model.appearance" [size]="cardDemoService.model.size" [variant]="cardDemoService.model.variant" [orientation]="cardDemoService.model.orientation">
-        @if (cardDemoService.model.orientation === "vertical") {
-          <header idsCardHeader>
-            <h2 idsCardTitle>This is the title</h2>
-            <h3 idsCardSubtitle>This is the subtitle</h3>
-          </header>
-        }
-        <img
-          idsCardMedia
-          src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
-          alt=""
-          [stretch]="cardDemoService.mediaModel.stretch"
-        />
-        <ids-card-body>This is the body</ids-card-body>
-        @if (cardDemoService.model.orientation === "vertical") {
-          <footer idsCardFooter>This is the footer</footer>
-        }
-      </ids-card>
-    }
-  </ng-container>
-</app-tryout>
+      </ng-container>
+    </app-tryout>
+  </div>
+
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'Card'"
+        [configType]="'input'"
+        [controlConfig]="cardDemoService.inputControlConfig"
+        [(model)]="cardDemoService.model"
+        (resetted)="cardDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Card media'"
+        [configType]="'input'"
+        [controlConfig]="cardDemoService.mediaInputControlConfig"
+        [(model)]="cardDemoService.mediaModel"
+        (resetted)="cardDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Card'"
+        [configType]="'helper'"
+        [controlConfig]="cardDemoService.helperControlConfig"
+        [(model)]="cardDemoService.helperModel"
+        (resetted)="cardDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

@@ -1,51 +1,86 @@
-@let templateDrivenFieldName = 'FORM_FIELD.LABEL.DATE_TEMPLATE' | translate;
-@let modelDrivenFieldName = 'FORM_FIELD.LABEL.DATE_MODEL' | translate;
+@let templateDrivenFieldName = "FORM_FIELD.LABEL.DATE_TEMPLATE" | translate;
+@let modelDrivenFieldName = "FORM_FIELD.LABEL.DATE_MODEL" | translate;
 
-<app-tryout [title]="'COMPONENTS.DATEPICKER' | translate" (resetted)="datepickerDemoService.reset()">
-  <div component class="datepicker-grid">
-    <div>
-      <ids-form-field [size]="datepickerDemoService.formFieldModel.size" [variant]="'surface'">
-        <ids-label>{{ templateDrivenFieldName }}</ids-label>
-        <input
-          #inputFieldModel="ngModel"
-          #datepicker1="idsDatepicker"
-          idsInput
-          idsDatepicker
-          [minDate]="datepickerDemoService.datepickerModel.minDate"
-          [maxDate]="datepickerDemoService.datepickerModel.maxDate"
-          [view]="datepickerDemoService.datepickerModel.view"
-          [(ngModel)]="datepickerDemoService.input"
-        />
-        <ids-datepicker-trigger idsSuffix [for]="datepicker1" />
-        <ids-error-message>
-          <ids-error-def code="idsDateFormat">{{ 'FORM_FIELD.ERROR.DATE_FORMAT' | translate: { fieldName: templateDrivenFieldName } }}</ids-error-def>
-          <ids-error-def code="idsDateMin">{{ 'FORM_FIELD.ERROR.DATE_MIN' | translate: { fieldName: templateDrivenFieldName } }}</ids-error-def>
-          <ids-error-def code="idsDateMax">{{ 'FORM_FIELD.ERROR.DATE_MAX' | translate: { fieldName: templateDrivenFieldName } }}</ids-error-def>
-        </ids-error-message>
-      </ids-form-field>
-    </div>
+<app-demo-and-code (resetDemo)="datepickerDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout [title]="'COMPONENTS.DATEPICKER' | translate" (resetted)="datepickerDemoService.reset()">
+      <div component class="datepicker-grid">
+        <div>
+          <ids-form-field [size]="datepickerDemoService.formFieldModel.size" [variant]="'surface'">
+            <ids-label>{{ templateDrivenFieldName }}</ids-label>
+            <input
+              #inputFieldModel="ngModel"
+              #datepicker1="idsDatepicker"
+              idsInput
+              idsDatepicker
+              [minDate]="datepickerDemoService.datepickerModel.minDate"
+              [maxDate]="datepickerDemoService.datepickerModel.maxDate"
+              [view]="datepickerDemoService.datepickerModel.view"
+              [(ngModel)]="datepickerDemoService.input"
+            />
+            <ids-datepicker-trigger idsSuffix [for]="datepicker1" />
+            <ids-error-message>
+              <ids-error-def code="idsDateFormat">{{
+                "FORM_FIELD.ERROR.DATE_FORMAT" | translate: { fieldName: templateDrivenFieldName }
+              }}</ids-error-def>
+              <ids-error-def code="idsDateMin">{{
+                "FORM_FIELD.ERROR.DATE_MIN" | translate: { fieldName: templateDrivenFieldName }
+              }}</ids-error-def>
+              <ids-error-def code="idsDateMax">{{
+                "FORM_FIELD.ERROR.DATE_MAX" | translate: { fieldName: templateDrivenFieldName }
+              }}</ids-error-def>
+            </ids-error-message>
+          </ids-form-field>
+        </div>
 
-    <div>
-      <ids-form-field [size]="datepickerDemoService.formFieldModel.size" [variant]="'surface'">
-        <ids-label>{{ modelDrivenFieldName }}</ids-label>
-        <input
-          #datepicker2="idsDatepicker"
-          idsInput
-          idsDatepicker
-          [minDate]="datepickerDemoService.datepickerModel.minDate"
-          [maxDate]="datepickerDemoService.datepickerModel.maxDate"
-          [view]="datepickerDemoService.datepickerModel.view"
-          [formControl]="datepickerDemoService.control"
-        />
-        <ids-datepicker-trigger idsSuffix [for]="datepicker2" />
-        <ids-error-message>
-          <ids-error-def code="idsDateFormat">{{ 'FORM_FIELD.ERROR.DATE_FORMAT' | translate: { fieldName: modelDrivenFieldName } }}</ids-error-def>
-          <ids-error-def code="idsDateMin">{{ 'FORM_FIELD.ERROR.DATE_MIN' | translate: { fieldName: modelDrivenFieldName } }}</ids-error-def>
-          <ids-error-def code="idsDateMax">{{ 'FORM_FIELD.ERROR.DATE_MAX' | translate: { fieldName: modelDrivenFieldName } }}</ids-error-def>
-        </ids-error-message>
-      </ids-form-field>
-    </div>
+        <div>
+          <ids-form-field [size]="datepickerDemoService.formFieldModel.size" [variant]="'surface'">
+            <ids-label>{{ modelDrivenFieldName }}</ids-label>
+            <input
+              #datepicker2="idsDatepicker"
+              idsInput
+              idsDatepicker
+              [minDate]="datepickerDemoService.datepickerModel.minDate"
+              [maxDate]="datepickerDemoService.datepickerModel.maxDate"
+              [view]="datepickerDemoService.datepickerModel.view"
+              [formControl]="datepickerDemoService.control"
+            />
+            <ids-datepicker-trigger idsSuffix [for]="datepicker2" />
+            <ids-error-message>
+              <ids-error-def code="idsDateFormat">{{
+                "FORM_FIELD.ERROR.DATE_FORMAT" | translate: { fieldName: modelDrivenFieldName }
+              }}</ids-error-def>
+              <ids-error-def code="idsDateMin">{{
+                "FORM_FIELD.ERROR.DATE_MIN" | translate: { fieldName: modelDrivenFieldName }
+              }}</ids-error-def>
+              <ids-error-def code="idsDateMax">{{
+                "FORM_FIELD.ERROR.DATE_MAX" | translate: { fieldName: modelDrivenFieldName }
+              }}</ids-error-def>
+            </ids-error-message>
+          </ids-form-field>
+        </div>
+      </div>
+    </app-tryout>
   </div>
 
-  
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'Form field'"
+        [configType]="'input'"
+        [controlConfig]="datepickerDemoService.formFieldInputControlConfig"
+        [(model)]="datepickerDemoService.formFieldModel"
+        (resetted)="datepickerDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Datepicker'"
+        [configType]="'input'"
+        [controlConfig]="datepickerDemoService.datepickerInputControlConfig"
+        [(model)]="datepickerDemoService.datepickerModel"
+        (resetted)="datepickerDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

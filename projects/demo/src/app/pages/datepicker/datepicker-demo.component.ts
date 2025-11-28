@@ -1,5 +1,8 @@
 import { DatepickerDemoService } from './datepicker-demo.service';
 
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, inject } from '@angular/core';
@@ -23,6 +26,9 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     IdsDatepickerDirective,
     IdsDatepickerTriggerComponent,
+    DemoAndCodeComponent,
+    TryoutControlComponent,
+    ControlTableComponent,
   ],
   templateUrl: './datepicker-demo.component.html',
   styleUrls: [

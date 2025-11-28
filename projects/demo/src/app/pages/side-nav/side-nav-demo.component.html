@@ -1,181 +1,232 @@
-<app-tryout [title]="'COMPONENTS.SIDE_NAV' | translate" [hasDarkBackground]="_sideNavDemoService.model.variant === 'light'" (resetted)="_sideNavDemoService.reset()">
-  <ng-container component>
-    <nav
-      idsSideNav
-      [appearance]="_sideNavDemoService.model.appearance"
-      [size]="_sideNavDemoService.model.size"
-      [variant]="_sideNavDemoService.model.variant"
-      [hasActiveIndicator]="_sideNavDemoService.helperModel.hasActiveIndicator"
-      [hasLabel]="_sideNavDemoService.helperModel.hasLabel"
+<app-demo-and-code (resetDemo)="_sideNavDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.SIDE_NAV' | translate"
+      [hasDarkBackground]="_sideNavDemoService.model.variant === 'light'"
+      (resetted)="_sideNavDemoService.reset()"
     >
-      <!-- initiate sections, title and items using side-nav related component selectors... -->
-      <ids-side-nav-section>
-        <ids-side-nav-title label="Built with component selectors">
-          @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="cart" />
-          }
-          @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="cart" />
-          }
-        </ids-side-nav-title>
-        <ids-side-nav-item
-          label="Design Tokens"
-          target="design-tokens"
-          [disabled]="_sideNavDemoService.helperModel.disabled"
-          [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+      <ng-container component>
+        <nav
+          idsSideNav
+          [appearance]="_sideNavDemoService.model.appearance"
+          [size]="_sideNavDemoService.model.size"
+          [variant]="_sideNavDemoService.model.variant"
+          [hasActiveIndicator]="_sideNavDemoService.helperModel.hasActiveIndicator"
+          [hasLabel]="_sideNavDemoService.helperModel.hasLabel"
         >
-          @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="filter" />
-          }
-          @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="filter" />
-          }
-        </ids-side-nav-item>
-        <ids-side-nav-item label="Home" target="/" [disabled]="_sideNavDemoService.helperModel.disabled" [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip">
-          @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="home" />
-          }
-          @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="home" />
-          }
-        </ids-side-nav-item>
-        <ids-side-nav-item label="Components" target="components" [disabled]="_sideNavDemoService.helperModel.disabled" [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip">
-          @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="more-horiz" />
-          }
-          @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="more-horiz" />
-          }
-          <ids-side-nav-item
-            [label]="_sideNavDemoService.helperModel.text"
-            [target]="_sideNavDemoService.helperModel.target"
-            [disabled]="_sideNavDemoService.helperModel.disabled"
-            [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
-          >
-            @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="help-circle" />
-            }
-            @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="help-circle" />
-            }
-          </ids-side-nav-item>
-          <ids-side-nav-item
-            label="Avatar"
-            target="components/avatar"
-            [disabled]="_sideNavDemoService.helperModel.disabled"
-            [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
-          >
-            @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="account" />
-            }
-            @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="account" />
-            }
-          </ids-side-nav-item>
-          <ids-side-nav-item
-            label="Side Navigation"
-            target="components/side-nav"
-            [disabled]="_sideNavDemoService.helperModel.disabled"
-            [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
-          >
-            @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="menu" />
-            }
-            @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="menu" />
-            }
-          </ids-side-nav-item>
-        </ids-side-nav-item>
-      </ids-side-nav-section>
+          <!-- initiate sections, title and items using side-nav related component selectors... -->
+          <ids-side-nav-section>
+            <ids-side-nav-title label="Built with component selectors">
+              @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                <ids-icon icon-leading fontIcon="cart" />
+              }
+              @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing fontIcon="cart" />
+              }
+            </ids-side-nav-title>
+            <ids-side-nav-item
+              label="Design Tokens"
+              target="design-tokens"
+              [disabled]="_sideNavDemoService.helperModel.disabled"
+              [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+            >
+              @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                <ids-icon icon-leading fontIcon="filter" />
+              }
+              @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing fontIcon="filter" />
+              }
+            </ids-side-nav-item>
+            <ids-side-nav-item
+              label="Home"
+              target="/"
+              [disabled]="_sideNavDemoService.helperModel.disabled"
+              [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+            >
+              @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                <ids-icon icon-leading fontIcon="home" />
+              }
+              @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing fontIcon="home" />
+              }
+            </ids-side-nav-item>
+            <ids-side-nav-item
+              label="Components"
+              target="components"
+              [disabled]="_sideNavDemoService.helperModel.disabled"
+              [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+            >
+              @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                <ids-icon icon-leading fontIcon="more-horiz" />
+              }
+              @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing fontIcon="more-horiz" />
+              }
+              <ids-side-nav-item
+                [label]="_sideNavDemoService.helperModel.text"
+                [target]="_sideNavDemoService.helperModel.target"
+                [disabled]="_sideNavDemoService.helperModel.disabled"
+                [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+              >
+                @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                  <ids-icon icon-leading fontIcon="help-circle" />
+                }
+                @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                  <ids-icon icon-trailing fontIcon="help-circle" />
+                }
+              </ids-side-nav-item>
+              <ids-side-nav-item
+                label="Avatar"
+                target="components/avatar"
+                [disabled]="_sideNavDemoService.helperModel.disabled"
+                [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+              >
+                @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                  <ids-icon icon-leading fontIcon="account" />
+                }
+                @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                  <ids-icon icon-trailing fontIcon="account" />
+                }
+              </ids-side-nav-item>
+              <ids-side-nav-item
+                label="Side Navigation"
+                target="components/side-nav"
+                [disabled]="_sideNavDemoService.helperModel.disabled"
+                [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+              >
+                @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                  <ids-icon icon-leading fontIcon="menu" />
+                }
+                @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                  <ids-icon icon-trailing fontIcon="menu" />
+                }
+              </ids-side-nav-item>
+            </ids-side-nav-item>
+          </ids-side-nav-section>
 
-      <!-- ...OR... -->
+          <!-- ...OR... -->
 
-      <!-- ...use with semantic elements (as list) -->
-      <ul idsSideNavSection>
-        <li idsSideNavTitle label="Built with semantic elements">
-          @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="cctv" />
-          }
-          @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="cctv" />
-          }
-        </li>
-        <li
-          idsSideNavItem
-          label="Design Tokens"
-          target="design-tokens"
-          [disabled]="_sideNavDemoService.helperModel.disabled"
-          [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
-        >
-          @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="filter" />
-          }
-          @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="filter" />
-          }
-        </li>
-        <li idsSideNavItem label="Home" target="/" [disabled]="_sideNavDemoService.helperModel.disabled" [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip">
-          @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="home" />
-          }
-          @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="home" />
-          }
-        </li>
-        <li idsSideNavItem label="Components" target="components" [disabled]="_sideNavDemoService.helperModel.disabled" [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip">
-          @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-            <ids-icon icon-leading fontIcon="more-horiz" />
-          }
-          @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing fontIcon="more-horiz" />
-          }
-          <!-- in this case children should be listed in a template, marked with '#idsSideNavItemChildren' variable name-->
-          <ng-template #idsSideNavItemChildren>
-            <li
-              idsSideNavItem
-              [label]="_sideNavDemoService.helperModel.text"
-              [target]="_sideNavDemoService.helperModel.target"
-              [disabled]="_sideNavDemoService.helperModel.disabled"
-              [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
-            >
+          <!-- ...use with semantic elements (as list) -->
+          <ul idsSideNavSection>
+            <li idsSideNavTitle label="Built with semantic elements">
               @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-                <ids-icon icon-leading fontIcon="help-circle" />
+                <ids-icon icon-leading fontIcon="cctv" />
               }
               @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-                <ids-icon icon-trailing fontIcon="help-circle" />
+                <ids-icon icon-trailing fontIcon="cctv" />
               }
             </li>
             <li
               idsSideNavItem
-              label="Avatar"
-              target="components/avatar"
+              label="Design Tokens"
+              target="design-tokens"
               [disabled]="_sideNavDemoService.helperModel.disabled"
               [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
             >
               @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-                <ids-icon icon-leading fontIcon="account" />
+                <ids-icon icon-leading fontIcon="filter" />
               }
               @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-                <ids-icon icon-trailing fontIcon="account" />
+                <ids-icon icon-trailing fontIcon="filter" />
               }
             </li>
             <li
               idsSideNavItem
-              label="Side Navigation"
-              target="components/side-nav"
+              label="Home"
+              target="/"
               [disabled]="_sideNavDemoService.helperModel.disabled"
               [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
             >
               @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
-                <ids-icon icon-leading fontIcon="menu" />
+                <ids-icon icon-leading fontIcon="home" />
               }
               @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
-                <ids-icon icon-trailing fontIcon="menu" />
+                <ids-icon icon-trailing fontIcon="home" />
               }
             </li>
-          </ng-template>
-        </li>
-      </ul>
-    </nav>
-  </ng-container>
-</app-tryout>
+            <li
+              idsSideNavItem
+              label="Components"
+              target="components"
+              [disabled]="_sideNavDemoService.helperModel.disabled"
+              [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+            >
+              @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                <ids-icon icon-leading fontIcon="more-horiz" />
+              }
+              @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing fontIcon="more-horiz" />
+              }
+              <!-- in this case children should be listed in a template, marked with '#idsSideNavItemChildren' variable name-->
+              <ng-template #idsSideNavItemChildren>
+                <li
+                  idsSideNavItem
+                  [label]="_sideNavDemoService.helperModel.text"
+                  [target]="_sideNavDemoService.helperModel.target"
+                  [disabled]="_sideNavDemoService.helperModel.disabled"
+                  [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+                >
+                  @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                    <ids-icon icon-leading fontIcon="help-circle" />
+                  }
+                  @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                    <ids-icon icon-trailing fontIcon="help-circle" />
+                  }
+                </li>
+                <li
+                  idsSideNavItem
+                  label="Avatar"
+                  target="components/avatar"
+                  [disabled]="_sideNavDemoService.helperModel.disabled"
+                  [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+                >
+                  @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                    <ids-icon icon-leading fontIcon="account" />
+                  }
+                  @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                    <ids-icon icon-trailing fontIcon="account" />
+                  }
+                </li>
+                <li
+                  idsSideNavItem
+                  label="Side Navigation"
+                  target="components/side-nav"
+                  [disabled]="_sideNavDemoService.helperModel.disabled"
+                  [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
+                >
+                  @if (_sideNavDemoService.helperModel.hasLeadingIcon) {
+                    <ids-icon icon-leading fontIcon="menu" />
+                  }
+                  @if (_sideNavDemoService.helperModel.hasTrailingIcon) {
+                    <ids-icon icon-trailing fontIcon="menu" />
+                  }
+                </li>
+              </ng-template>
+            </li>
+          </ul>
+        </nav>
+      </ng-container>
+    </app-tryout>
+  </div>
+
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'SideNav'"
+        [configType]="'input'"
+        [controlConfig]="_sideNavDemoService.sideNavInputControlConfig"
+        [(model)]="_sideNavDemoService.model"
+        (resetted)="_sideNavDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'SideNav'"
+        [configType]="'helper'"
+        [controlConfig]="_sideNavDemoService.helperControlConfig"
+        [(model)]="_sideNavDemoService.helperModel"
+        (resetted)="_sideNavDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

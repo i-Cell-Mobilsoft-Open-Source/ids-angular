@@ -1,21 +1,46 @@
-<app-tryout 
-  [title]="'COMPONENTS.BREADCRUMB' | translate" 
-  [hasDarkBackground]="breadcrumbDemoService.breadcrumbModel.variant === 'light'" 
-  (resetted)="breadcrumbDemoService.reset()"
->
-  <div component class="text-center">
-    <ids-breadcrumb
-      [hierarchy]="breadcrumbDemoService.hierarchy"
-      [size]="breadcrumbDemoService.breadcrumbModel.size"
-      [variant]="breadcrumbDemoService.breadcrumbModel.variant"
-      [dividerType]="breadcrumbDemoService.breadcrumbModel.dividerType"
-      [overlayAppearance]="breadcrumbDemoService.overlayPanelModel.appearance"
-      [overlaySize]="breadcrumbDemoService.overlayPanelModel.size"
-      [overlayVariant]="breadcrumbDemoService.overlayPanelModel.variant"
-    />
-    <ids-notification title="Note" variant="warning" size="compact" class="block w-1/2 text-left place-self-center mt-10">
-      Breadcrumb size changes won't be applied on truncation panel due to overlay limitations (initial values are passed to the panel).
-    </ids-notification>
+<app-demo-and-code (resetDemo)="breadcrumbDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.BREADCRUMB' | translate"
+      [hasDarkBackground]="breadcrumbDemoService.breadcrumbModel.variant === 'light'"
+      (resetted)="breadcrumbDemoService.reset()"
+    >
+      <div component class="text-center">
+        <ids-breadcrumb
+          [hierarchy]="breadcrumbDemoService.hierarchy"
+          [size]="breadcrumbDemoService.breadcrumbModel.size"
+          [variant]="breadcrumbDemoService.breadcrumbModel.variant"
+          [dividerType]="breadcrumbDemoService.breadcrumbModel.dividerType"
+          [overlayAppearance]="breadcrumbDemoService.overlayPanelModel.appearance"
+          [overlaySize]="breadcrumbDemoService.overlayPanelModel.size"
+          [overlayVariant]="breadcrumbDemoService.overlayPanelModel.variant"
+        />
+        <ids-notification title="Note" variant="warning" size="compact" class="block w-1/2 text-left place-self-center mt-10">
+          Breadcrumb size changes won't be applied on truncation panel due to overlay limitations (initial values are passed to the panel).
+        </ids-notification>
+      </div>
+    </app-tryout>
   </div>
 
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'Breadcrumb'"
+        [configType]="'input'"
+        [controlConfig]="breadcrumbDemoService.breadcrumbInputControlConfig"
+        [(model)]="breadcrumbDemoService.breadcrumbModel"
+        (resetted)="breadcrumbDemoService.reset()"
+      />
+
+      <app-control-table
+        controls
+        [controlName]="'Overlay panel'"
+        [configType]="'input'"
+        [controlConfig]="breadcrumbDemoService.overlayPanelInputControlConfig"
+        [(model)]="breadcrumbDemoService.overlayPanelModel"
+        (resetted)="breadcrumbDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

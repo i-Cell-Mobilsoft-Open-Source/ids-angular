@@ -1,25 +1,56 @@
-<app-tryout [title]="'COMPONENTS.AVATAR' | translate" [hasDarkBackground]="avatarDemoService.model.variant === 'light'" (resetted)="avatarDemoService.reset()">
-  <div component class="avatar-types">
-    <div class="avatar-type">
-      <h2>Initials</h2>
-      <ids-avatar [size]="avatarDemoService.model.size" [sizeCollection]="avatarDemoService.model.sizeCollection" [variant]="avatarDemoService.model.variant" [initials]="avatarDemoService.model.initials" />
-    </div>
-    <div class="avatar-type">
-      <h2>Icon</h2>
-      <ids-avatar [size]="avatarDemoService.model.size" [sizeCollection]="avatarDemoService.model.sizeCollection" [variant]="avatarDemoService.model.variant">
-        <ids-icon fontIcon="account-circle" />
-      </ids-avatar>
-    </div>
-    <div class="avatar-type">
-      <h2>With image</h2>
-      <ids-avatar [size]="avatarDemoService.model.size" [sizeCollection]="avatarDemoService.model.sizeCollection" [variant]="avatarDemoService.model.variant">
-        <img
-          idsAvatarImage
-          src="https://hips.hearstapps.com/harpersbazaaruk.cdnds.net/16/38/1600x1600/square-1474624165-scarlett-johansson.jpg"
-          alt="Scarlett Johansson"
-        />
-      </ids-avatar>
-    </div>
+<app-demo-and-code (resetDemo)="avatarDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.AVATAR' | translate"
+      [hasDarkBackground]="avatarDemoService.model.variant === 'light'"
+      (resetted)="avatarDemoService.reset()"
+    >
+      <div component class="avatar-types">
+        <div class="avatar-type">
+          <h2>Initials</h2>
+          <ids-avatar
+            [size]="avatarDemoService.model.size"
+            [sizeCollection]="avatarDemoService.model.sizeCollection"
+            [variant]="avatarDemoService.model.variant"
+            [initials]="avatarDemoService.model.initials"
+          />
+        </div>
+        <div class="avatar-type">
+          <h2>Icon</h2>
+          <ids-avatar
+            [size]="avatarDemoService.model.size"
+            [sizeCollection]="avatarDemoService.model.sizeCollection"
+            [variant]="avatarDemoService.model.variant"
+          >
+            <ids-icon fontIcon="account-circle" />
+          </ids-avatar>
+        </div>
+        <div class="avatar-type">
+          <h2>With image</h2>
+          <ids-avatar
+            [size]="avatarDemoService.model.size"
+            [sizeCollection]="avatarDemoService.model.sizeCollection"
+            [variant]="avatarDemoService.model.variant"
+          >
+            <img
+              idsAvatarImage
+              src="https://hips.hearstapps.com/harpersbazaaruk.cdnds.net/16/38/1600x1600/square-1474624165-scarlett-johansson.jpg"
+              alt="Scarlett Johansson"
+            />
+          </ids-avatar>
+        </div>
+      </div>
+    </app-tryout>
   </div>
-
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [configType]="'input'"
+        [controlConfig]="avatarDemoService.inputControlConfig"
+        [(model)]="avatarDemoService.model"
+        (resetted)="avatarDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

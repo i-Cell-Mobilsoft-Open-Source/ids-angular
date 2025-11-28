@@ -34,13 +34,56 @@ import { TableDemoService } from './pages/table/table-demo.service';
 import { TagDemoService } from './pages/tag/tag-demo.service';
 import { TooltipDemoService } from './pages/tooltip/tooltip-demo.service';
 
-import { EnvironmentProviders, Provider } from '@angular/core';
+import { EnvironmentProviders, Provider, Type } from '@angular/core';
 import { Routes, Route } from '@angular/router';
+
+const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
+  'accordion': () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
+  'action-menu': () => import('./pages/action-menu/action-menu-demo.component').then((module) => module.ActionMenuDemoComponent),
+  'avatar': () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
+  'badge': () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
+  'breadcrumb': () => import('./pages/breadcrumb/breadcrumb-demo.component').then((module) => module.BreadcrumbDemoComponent),
+  'button': () => import('./pages/button/button-demo.component').then((module) => module.ButtonDemoComponent),
+  'card': () => import('./pages/card/card-demo.component').then((module) => module.CardDemoComponent),
+  'checkbox': () => import('./pages/checkbox/checkbox-demo.component').then((module) => module.CheckboxDemoComponent),
+  'chip': () => import('./pages/chip/chip-demo.component').then((module) => module.ChipDemoComponent),
+  'date-picker': () => import('./pages/datepicker/datepicker-demo.component').then((module) => module.DatepickerDemoComponent),
+  'dialog': () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
+  'divider': () => import('./pages/divider/divider-demo.component').then((module) => module.DividerDemoComponent),
+  'fieldset': () => import('./pages/fieldset/fieldset-demo.component').then((module) => module.FieldsetDemoComponent),
+  'form-field': () => import('./pages/form-field/form-field-demo.component').then((module) => module.FormFieldDemoComponent),
+  'icon': () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
+  'icon-button': () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
+  'menu-item': () => import('./pages/menu-item/menu-item-demo.component').then((module) => module.MenuItemDemoComponent),
+  'notification': () => import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
+  'overlay-panel': () => import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
+  'paginator': () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
+  'radio': () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
+  'scrollbar': () => import('./pages/scrollbar/scrollbar-demo.component').then((module) => module.ScrollbarDemoComponent),
+  'segmented-control': () => import('./pages/segmented-control/segmented-control-demo.component')
+    .then((module) => module.SegmentedControlDemoComponent),
+  'segmented-control-toggle': () => import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component')
+    .then((module) => module.SegmentedControlToggleDemoComponent),
+  'select': () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
+  'side-nav': () => import('./pages/side-nav/side-nav-demo.component').then((module) => module.SideNavDemoComponent),
+  'side-sheet': () => import('./pages/side-sheet/side-sheet-demo.component').then((module) => module.SideSheetDemoComponent),
+  'snackbar': () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
+  'spinner': () => import('./pages/spinner/spinner-demo.component').then((module) => module.SpinnerDemoComponent),
+  'switch': () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
+  'tab': () => import('./pages/tab/tab-demo.component').then((module) => module.TabsDemoComponent),
+  'table': () => import('./pages/table/table-demo.component').then((module) => module.TableDemoComponent),
+  'tag': () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
+  'tooltip': () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
+};
 
 function buildComponentRoute(
   slug: string,
   demoService: Provider | EnvironmentProviders,
 ): Route {
+  const componentImport = DEMO_IMPORTS[slug];
+  if (!componentImport) {
+    throw new Error(`No component import found for slug: ${slug}`);
+  }
   return {
     path: slug,
     component: ComponentDetailsComponent,
@@ -55,8 +98,7 @@ function buildComponentRoute(
       },
       {
         path: 'demo',
-        loadComponent: () => import('./components/tabs/demo-and-code/demo-and-code.component')
-          .then((module) => module.DemoAndCodeComponent),
+        loadComponent: componentImport,
       },
       {
         path: 'api',

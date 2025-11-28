@@ -1,22 +1,52 @@
-<app-tryout [title]="'COMPONENTS.ICON_BUTTON' | translate" [hasDarkBackground]="iconButtonDemoService.model.variant === 'light'" (resetted)="iconButtonDemoService.reset()">
-  <ng-container component>
-    @if (iconButtonDemoService.model.asLink) {
-      <a href="" idsIconButton [appearance]="iconButtonDemoService.model.appearance" [size]="iconButtonDemoService.model.size" [variant]="iconButtonDemoService.model.variant" [disabled]="iconButtonDemoService.model.disabled">
-        <ids-icon aria-hidden="true" alt="" fontIcon="search" />
-      </a>
-    } @else {
-      <button
-        type="button"
-        idsIconButton
-        [size]="iconButtonDemoService.model.size"
-        [variant]="iconButtonDemoService.model.variant"
-        [appearance]="iconButtonDemoService.model.appearance"
-        [disabled]="iconButtonDemoService.model.disabled"
-        (click)="iconButtonDemoService.onClick(iconButtonDemoService.model.appearance + '-' + iconButtonDemoService.model.variant + '-' + iconButtonDemoService.model.size)"
-      >
-        <ids-icon aria-hidden="true" alt="" fontIcon="search" />
-      </button>
-    }
-  </ng-container>
+<app-demo-and-code (resetDemo)="iconButtonDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.ICON_BUTTON' | translate"
+      [hasDarkBackground]="iconButtonDemoService.model.variant === 'light'"
+      (resetted)="iconButtonDemoService.reset()"
+    >
+      <ng-container component>
+        @if (iconButtonDemoService.model.asLink) {
+          <a
+            href=""
+            idsIconButton
+            [appearance]="iconButtonDemoService.model.appearance"
+            [size]="iconButtonDemoService.model.size"
+            [variant]="iconButtonDemoService.model.variant"
+            [disabled]="iconButtonDemoService.model.disabled"
+          >
+            <ids-icon aria-hidden="true" alt="" fontIcon="search" />
+          </a>
+        } @else {
+          <button
+            type="button"
+            idsIconButton
+            [size]="iconButtonDemoService.model.size"
+            [variant]="iconButtonDemoService.model.variant"
+            [appearance]="iconButtonDemoService.model.appearance"
+            [disabled]="iconButtonDemoService.model.disabled"
+            (click)="
+              iconButtonDemoService.onClick(
+                iconButtonDemoService.model.appearance + '-' + iconButtonDemoService.model.variant + '-' + iconButtonDemoService.model.size
+              )
+            "
+          >
+            <ids-icon aria-hidden="true" alt="" fontIcon="search" />
+          </button>
+        }
+      </ng-container>
+    </app-tryout>
+  </div>
 
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [configType]="'input'"
+        [controlConfig]="iconButtonDemoService.inputControlConfig"
+        [(model)]="iconButtonDemoService.model"
+        (resetted)="iconButtonDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

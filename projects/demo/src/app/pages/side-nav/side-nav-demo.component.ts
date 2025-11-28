@@ -1,5 +1,8 @@
 import { SideNavDemoService } from './side-nav-demo.service';
 
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, inject } from '@angular/core';
@@ -17,6 +20,9 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsSideNavTitleComponent,
     TranslateModule,
     TryoutComponent,
+    DemoAndCodeComponent,
+    TryoutControlComponent,
+    ControlTableComponent,
   ],
   templateUrl: './side-nav-demo.component.html',
   styleUrl: './side-nav-demo.component.scss',

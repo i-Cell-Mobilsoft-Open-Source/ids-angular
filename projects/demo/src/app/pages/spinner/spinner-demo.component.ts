@@ -1,5 +1,8 @@
 import { SpinnerDemoService } from './spinner-demo.service';
 
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, inject } from '@angular/core';
@@ -12,6 +15,9 @@ import { TranslatePipe } from '@ngx-translate/core';
     IdsSpinnerComponent,
     TranslatePipe,
     TryoutComponent,
+    DemoAndCodeComponent,
+    ControlTableComponent,
+    TryoutControlComponent,
   ],
   templateUrl: './spinner-demo.component.html',
   styleUrl: './spinner-demo.component.scss',

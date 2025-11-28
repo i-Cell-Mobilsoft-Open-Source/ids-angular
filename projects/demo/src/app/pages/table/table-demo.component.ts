@@ -1,6 +1,9 @@
 import { PeriodicTableElement } from './periodic-table-element';
 import { TableDemoService } from './table-demo.service';
 
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, DestroyRef, inject, Injectable, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
@@ -49,6 +52,9 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
     IdsTableComponent,
     TranslateModule,
     TryoutComponent,
+    DemoAndCodeComponent,
+    TryoutControlComponent,
+    ControlTableComponent,
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',

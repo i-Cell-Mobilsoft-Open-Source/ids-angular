@@ -1,13 +1,31 @@
-<app-tryout [title]="'COMPONENTS.DIVIDER' | translate" [hasDarkBackground]="dividerDemoService.model.variant === 'light'" (resetted)="dividerDemoService.reset()">
-  <div component class="divider-container">
-    <ids-divider
-      [orientation]="dividerDemoService.model.orientation"
-      [size]="dividerDemoService.model.size"
-      [variant]="dividerDemoService.model.variant"
-      [width]="dividerDemoService.model.width"
-      [height]="dividerDemoService.model.height"
-    />
+<app-demo-and-code (resetDemo)="dividerDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.DIVIDER' | translate"
+      [hasDarkBackground]="dividerDemoService.model.variant === 'light'"
+      (resetted)="dividerDemoService.reset()"
+    >
+      <div component class="divider-container">
+        <ids-divider
+          [orientation]="dividerDemoService.model.orientation"
+          [size]="dividerDemoService.model.size"
+          [variant]="dividerDemoService.model.variant"
+          [width]="dividerDemoService.model.width"
+          [height]="dividerDemoService.model.height"
+        />
+      </div>
+    </app-tryout>
   </div>
 
-
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [configType]="'input'"
+        [controlConfig]="dividerDemoService.inputControlConfig"
+        [(model)]="dividerDemoService.model"
+        (resetted)="dividerDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

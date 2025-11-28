@@ -1,6 +1,28 @@
-<app-tryout [title]="'COMPONENTS.SNACKBAR' | translate" (resetted)="snackbarDemoService.reset()">
-  <ng-container component>
-    <button type="button" idsButton (click)="snackbarDemoService.openSnackbar()">Open snackbar</button>
-  </ng-container>
+<app-demo-and-code (resetDemo)="snackbarDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout [title]="'COMPONENTS.SNACKBAR' | translate" (resetted)="snackbarDemoService.reset()">
+      <ng-container component>
+        <button type="button" idsButton (click)="snackbarDemoService.openSnackbar()">Open snackbar</button>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [configType]="'input'"
+        [controlConfig]="snackbarDemoService.inputControlConfig"
+        [(model)]="snackbarDemoService.model"
+        (resetted)="snackbarDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [configType]="'helper'"
+        [controlConfig]="snackbarDemoService.helperControlConfig"
+        [(model)]="snackbarDemoService.helperModel"
+        (resetted)="snackbarDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

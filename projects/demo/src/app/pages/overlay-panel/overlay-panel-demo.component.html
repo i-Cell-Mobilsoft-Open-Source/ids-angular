@@ -1,29 +1,73 @@
-<app-tryout
-  [title]="'COMPONENTS.OVERLAY_PANEL' | translate"
-  [hasDarkBackground]="overlayPanelDemoService.overlayPanelHelperModel.testBackgroundColor === 'dark'"
-  (resetted)="overlayPanelDemoService.reset()"
->
-  <ng-container component>
-    <ids-overlay-panel [appearance]="overlayPanelDemoService.overlayPanelModel.appearance" [size]="overlayPanelDemoService.overlayPanelModel.size" [variant]="overlayPanelDemoService.overlayPanelModel.variant">
-      @for (_ of overlayPanelDemoService.items; track $index) {
-        <button
-          type="button"
-          idsMenuItem
-          [appearance]="overlayPanelDemoService.menuItemModel.appearance"
-          [size]="overlayPanelDemoService.menuItemModel.size"
-          [variant]="overlayPanelDemoService.menuItemModel.variant"
-          [label]="'Menu item label ' + $index"
-          [disabled]="$index === 0 && overlayPanelDemoService.menuItemHelperModel.hasDisabledItem"
+<app-demo-and-code (resetDemo)="overlayPanelDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.OVERLAY_PANEL' | translate"
+      [hasDarkBackground]="overlayPanelDemoService.overlayPanelHelperModel.testBackgroundColor === 'dark'"
+      (resetted)="overlayPanelDemoService.reset()"
+    >
+      <ng-container component>
+        <ids-overlay-panel
+          [appearance]="overlayPanelDemoService.overlayPanelModel.appearance"
+          [size]="overlayPanelDemoService.overlayPanelModel.size"
+          [variant]="overlayPanelDemoService.overlayPanelModel.variant"
         >
-          @if (overlayPanelDemoService.menuItemHelperModel.hasLeadingIcon) {
-            <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+          @for (_ of overlayPanelDemoService.items; track $index) {
+            <button
+              type="button"
+              idsMenuItem
+              [appearance]="overlayPanelDemoService.menuItemModel.appearance"
+              [size]="overlayPanelDemoService.menuItemModel.size"
+              [variant]="overlayPanelDemoService.menuItemModel.variant"
+              [label]="'Menu item label ' + $index"
+              [disabled]="$index === 0 && overlayPanelDemoService.menuItemHelperModel.hasDisabledItem"
+            >
+              @if (overlayPanelDemoService.menuItemHelperModel.hasLeadingIcon) {
+                <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+              }
+              @if (overlayPanelDemoService.menuItemHelperModel.hasTrailingIcon) {
+                <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
+              }
+            </button>
           }
-          @if (overlayPanelDemoService.menuItemHelperModel.hasTrailingIcon) {
-            <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
-          }
-        </button>
-      }
-    </ids-overlay-panel>
-  </ng-container>
+        </ids-overlay-panel>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'Overlay panel'"
+        [configType]="'input'"
+        [controlConfig]="overlayPanelDemoService.overlayPanelInputControlConfig"
+        [(model)]="overlayPanelDemoService.overlayPanelModel"
+        (resetted)="overlayPanelDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Overlay panel'"
+        [configType]="'helper'"
+        [controlConfig]="overlayPanelDemoService.overlayPanelHelperControlConfig"
+        [(model)]="overlayPanelDemoService.overlayPanelHelperModel"
+        (resetted)="overlayPanelDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Menu item'"
+        [configType]="'input'"
+        [controlConfig]="overlayPanelDemoService.menuItemInputControlConfig"
+        [(model)]="overlayPanelDemoService.menuItemModel"
+        (resetted)="overlayPanelDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Menu item'"
+        [configType]="'helper'"
+        [controlConfig]="overlayPanelDemoService.menuItemHelperControlConfig"
+        [(model)]="overlayPanelDemoService.menuItemHelperModel"
+        (resetted)="overlayPanelDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

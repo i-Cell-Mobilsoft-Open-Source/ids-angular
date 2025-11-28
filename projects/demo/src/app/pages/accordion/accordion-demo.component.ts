@@ -1,5 +1,8 @@
 import { AccordionDemoService } from './accordion-demo.service';
 
+import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
@@ -16,6 +19,9 @@ import { Subscription } from 'rxjs';
     IdsAccordionItemComponent,
     TranslateModule,
     FormsModule,
+    DemoAndCodeComponent,
+    ControlTableComponent,
+    TryoutControlComponent,
   ],
   templateUrl: './accordion-demo.component.html',
   styleUrls: [

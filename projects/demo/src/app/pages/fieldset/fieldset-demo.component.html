@@ -1,56 +1,64 @@
-<app-tryout
-  [title]="'COMPONENTS.FIELDSET' | translate"
-  [hasDarkBackground]="fieldsetDemoService.model.variant === 'light'"
-  (resetted)="reset()"
->
-  <ng-container component>
-    <fieldset
-      idsFieldset
-      [legend]="fieldsetDemoService.model.legend"
-      [size]="fieldsetDemoService.model.size"
-      [variant]="fieldsetDemoService.model.variant"
+<app-demo-and-code (resetDemo)="fieldsetDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.FIELDSET' | translate"
+      [hasDarkBackground]="fieldsetDemoService.model.variant === 'light'"
+      (resetted)="reset()"
     >
-      @if (fieldsetDemoService.helperModel.showMessage) {
-        <span idsFieldsetMessage>This is a fieldset message</span>
-      }
-      <ids-fieldset-row>
-        <ids-form-field>
-          <ids-label>First name</ids-label>
-          <input idsInput placeholder="E.g Steve" required [(ngModel)]="first" />
-          <ids-hint-message>Type your first name</ids-hint-message>
-          <ids-error-message>Name is mandatory</ids-error-message>
-        </ids-form-field>
-      </ids-fieldset-row>
+      <ng-container component>
+        <fieldset
+          idsFieldset
+          [legend]="fieldsetDemoService.model.legend"
+          [size]="fieldsetDemoService.model.size"
+          [variant]="fieldsetDemoService.model.variant"
+        >
+          @if (fieldsetDemoService.helperModel.showMessage) {
+            <span idsFieldsetMessage>This is a fieldset message</span>
+          }
+          <ids-fieldset-row>
+            <ids-form-field>
+              <ids-label>First name</ids-label>
+              <input idsInput placeholder="E.g Steve" required [(ngModel)]="first" />
+              <ids-hint-message>Type your first name</ids-hint-message>
+              <ids-error-message>Name is mandatory</ids-error-message>
+            </ids-form-field>
+          </ids-fieldset-row>
 
-      <ids-fieldset-row>
-        <ids-form-field>
-          <ids-label>Last name</ids-label>
-          <input idsInput placeholder="E.g Smith" required [(ngModel)]="last" />
-          <ids-hint-message>Type your last name</ids-hint-message>
-          <ids-error-message>Name is mandatory</ids-error-message>
-        </ids-form-field>
-        <ids-form-field>
-          <ids-label>Middle name</ids-label>
-          <input idsInput placeholder="E.g Adam" required [(ngModel)]="middle" />
-          <ids-hint-message>Type your middle name</ids-hint-message>
-          <ids-error-message>Name is mandatory</ids-error-message>
-        </ids-form-field>
-      </ids-fieldset-row>
-    </fieldset>
-  </ng-container>
+          <ids-fieldset-row>
+            <ids-form-field>
+              <ids-label>Last name</ids-label>
+              <input idsInput placeholder="E.g Smith" required [(ngModel)]="last" />
+              <ids-hint-message>Type your last name</ids-hint-message>
+              <ids-error-message>Name is mandatory</ids-error-message>
+            </ids-form-field>
+            <ids-form-field>
+              <ids-label>Middle name</ids-label>
+              <input idsInput placeholder="E.g Adam" required [(ngModel)]="middle" />
+              <ids-hint-message>Type your middle name</ids-hint-message>
+              <ids-error-message>Name is mandatory</ids-error-message>
+            </ids-form-field>
+          </ids-fieldset-row>
+        </fieldset>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table
-    controls
-    [configType]="'input'"
-    [controlConfig]="fieldsetDemoService.inputControlConfig"
-    [(model)]="fieldsetDemoService.model"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [configType]="'helper'"
-    [controlConfig]="fieldsetDemoService.helperControlConfig"
-    [(model)]="fieldsetDemoService.helperModel"
-    (resetted)="reset()"
-  />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [configType]="'input'"
+        [controlConfig]="fieldsetDemoService.inputControlConfig"
+        [(model)]="fieldsetDemoService.model"
+        (resetted)="fieldsetDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [configType]="'helper'"
+        [controlConfig]="fieldsetDemoService.helperControlConfig"
+        [(model)]="fieldsetDemoService.helperModel"
+        (resetted)="fieldsetDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

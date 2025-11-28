@@ -1,45 +1,89 @@
-<app-tryout [title]="'COMPONENTS.TAG' | translate" [hasDarkBackground]="tagDemoService.model.variant === 'light'" (resetted)="tagDemoService.reset()">
-  <div component class="tag-grid">
-    <div class="tag-item">
-      <h2>{{ "COMMON.NON-INTERACTIVE" | translate }}</h2>
-      <ids-tag
-        [appearance]="tagDemoService.model.appearance"
-        [size]="tagDemoService.model.size"
-        [variant]="tagDemoService.model.variant"
-        (click)="tagDemoService.onClick(tagDemoService.model.appearance + '-' + tagDemoService.model.size + '-' + tagDemoService.model.variant)"
-      >
-        @if (tagDemoService.helperModel.hasLeadingIcon) {
-          <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-        }
-        Non-interactive tag
-        @if (tagDemoService.helperModel.hasTrailingIcon) {
-          <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="done" />
-        }
-      </ids-tag>
-    </div>
+<app-demo-and-code (resetDemo)="tagDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.TAG' | translate"
+      [hasDarkBackground]="tagDemoService.model.variant === 'light'"
+      (resetted)="tagDemoService.reset()"
+    >
+      <div component class="tag-grid">
+        <div class="tag-item">
+          <h2>{{ "COMMON.NON-INTERACTIVE" | translate }}</h2>
+          <ids-tag
+            [appearance]="tagDemoService.model.appearance"
+            [size]="tagDemoService.model.size"
+            [variant]="tagDemoService.model.variant"
+            (click)="
+              tagDemoService.onClick(tagDemoService.model.appearance + '-' + tagDemoService.model.size + '-' + tagDemoService.model.variant)
+            "
+          >
+            @if (tagDemoService.helperModel.hasLeadingIcon) {
+              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+            }
+            Non-interactive tag
+            @if (tagDemoService.helperModel.hasTrailingIcon) {
+              <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="done" />
+            }
+          </ids-tag>
+        </div>
 
-    <div class="tag-item">
-      <h2>{{ "COMMON.INTERACTIVE" | translate }} (link)</h2>
-      <a idsTag href="https://angular.dev/" target="_blank" [appearance]="tagDemoService.model.appearance" [size]="tagDemoService.model.size" [variant]="tagDemoService.model.variant">
-        @if (tagDemoService.helperModel.hasLeadingIcon) {
-          <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-        }
-        Interactive tag
-        @if (tagDemoService.helperModel.hasTrailingIcon) {
-          <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="done" />
-        }
-      </a>
-    </div>
+        <div class="tag-item">
+          <h2>{{ "COMMON.INTERACTIVE" | translate }} (link)</h2>
+          <a
+            idsTag
+            href="https://angular.dev/"
+            target="_blank"
+            [appearance]="tagDemoService.model.appearance"
+            [size]="tagDemoService.model.size"
+            [variant]="tagDemoService.model.variant"
+          >
+            @if (tagDemoService.helperModel.hasLeadingIcon) {
+              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+            }
+            Interactive tag
+            @if (tagDemoService.helperModel.hasTrailingIcon) {
+              <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="done" />
+            }
+          </a>
+        </div>
 
-    <div class="tag-item">
-      <h2>{{ "COMMON.GROUPED" | translate }}</h2>
-      <ids-tag-group [appearance]="tagDemoService.groupModel.appearance" [size]="tagDemoService.groupModel.size">
-        <ids-tag [variant]="'primary'">Primary</ids-tag>
-        <ids-tag [variant]="'secondary'">Secondary</ids-tag>
-        <ids-tag [variant]="'success'">Success</ids-tag>
-      </ids-tag-group>
-    </div>
+        <div class="tag-item">
+          <h2>{{ "COMMON.GROUPED" | translate }}</h2>
+          <ids-tag-group [appearance]="tagDemoService.groupModel.appearance" [size]="tagDemoService.groupModel.size">
+            <ids-tag [variant]="'primary'">Primary</ids-tag>
+            <ids-tag [variant]="'secondary'">Secondary</ids-tag>
+            <ids-tag [variant]="'success'">Success</ids-tag>
+          </ids-tag-group>
+        </div>
+      </div>
+    </app-tryout>
   </div>
 
-
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'Tag'"
+        [configType]="'input'"
+        [controlConfig]="tagDemoService.inputControlConfig"
+        [(model)]="tagDemoService.model"
+        (resetted)="tagDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Tag'"
+        [configType]="'helper'"
+        [controlConfig]="tagDemoService.helperControlConfig"
+        [(model)]="tagDemoService.helperModel"
+        (resetted)="tagDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [controlName]="'Tag group'"
+        [configType]="'input'"
+        [controlConfig]="tagDemoService.groupInputControlConfig"
+        [(model)]="tagDemoService.groupModel"
+        (resetted)="tagDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

@@ -1,46 +1,71 @@
-<app-tryout [title]="'COMPONENTS.RADIO' | translate" [hasDarkBackground]="radioDemoService.model.variant === 'light'" (resetted)="radioDemoService.reset()">
-  <div component class="flex gap-12">
-    <div  class="flex flex-col gap-4">
-      <h2>Simple group</h2>
-      <ids-radio-group
-        [name]="radioDemoService.model.name + '-simple'"
-        [required]="radioDemoService.model.required"
-        [disabled]="radioDemoService.model.disabled"
-        [size]="radioDemoService.model.size"
-        [variant]="radioDemoService.model.variant"
-        [orientation]="radioDemoService.model.orientation"
-        [labelPosition]="radioDemoService.model.labelPosition"
-        [(ngModel)]="radioDemoService.simpleValue"
-      >
-        <ids-radio value="chicken" [disabled]="radioDemoService.helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
-        <ids-radio value="beef">Beef</ids-radio>
-        <ids-radio value="pork">Pork</ids-radio>
-      </ids-radio-group>
-    </div>
-    <div  class="flex flex-col gap-4">
-      <h2>Wrapped in cards</h2>
-      <ids-radio-group
-        [name]="radioDemoService.model.name + '-cards'"
-        [required]="radioDemoService.model.required"
-        [disabled]="radioDemoService.model.disabled"
-        [size]="radioDemoService.model.size"
-        [variant]="radioDemoService.model.variant"
-        [orientation]="radioDemoService.model.orientation"
-        [labelPosition]="radioDemoService.model.labelPosition"
-        [(ngModel)]="radioDemoService.wrappedValue"
-      >
-        <ids-card appearance="outlined" size="comfortable">
-          <ids-radio value="chicken" [disabled]="radioDemoService.helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
-        </ids-card>
-        <ids-card appearance="outlined" size="comfortable">
-          <ids-radio value="beef">Beef</ids-radio>
-        </ids-card>
-        <ids-card appearance="outlined" size="comfortable">
-          <ids-radio value="pork">Pork</ids-radio>
-        </ids-card>
-      </ids-radio-group>
-    </div>
+<app-demo-and-code (resetDemo)="radioDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.RADIO' | translate"
+      [hasDarkBackground]="radioDemoService.model.variant === 'light'"
+      (resetted)="radioDemoService.reset()"
+    >
+      <div component class="flex gap-12">
+        <div class="flex flex-col gap-4">
+          <h2>Simple group</h2>
+          <ids-radio-group
+            [name]="radioDemoService.model.name + '-simple'"
+            [required]="radioDemoService.model.required"
+            [disabled]="radioDemoService.model.disabled"
+            [size]="radioDemoService.model.size"
+            [variant]="radioDemoService.model.variant"
+            [orientation]="radioDemoService.model.orientation"
+            [labelPosition]="radioDemoService.model.labelPosition"
+            [(ngModel)]="radioDemoService.simpleValue"
+          >
+            <ids-radio value="chicken" [disabled]="radioDemoService.helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
+            <ids-radio value="beef">Beef</ids-radio>
+            <ids-radio value="pork">Pork</ids-radio>
+          </ids-radio-group>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h2>Wrapped in cards</h2>
+          <ids-radio-group
+            [name]="radioDemoService.model.name + '-cards'"
+            [required]="radioDemoService.model.required"
+            [disabled]="radioDemoService.model.disabled"
+            [size]="radioDemoService.model.size"
+            [variant]="radioDemoService.model.variant"
+            [orientation]="radioDemoService.model.orientation"
+            [labelPosition]="radioDemoService.model.labelPosition"
+            [(ngModel)]="radioDemoService.wrappedValue"
+          >
+            <ids-card appearance="outlined" size="comfortable">
+              <ids-radio value="chicken" [disabled]="radioDemoService.helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
+            </ids-card>
+            <ids-card appearance="outlined" size="comfortable">
+              <ids-radio value="beef">Beef</ids-radio>
+            </ids-card>
+            <ids-card appearance="outlined" size="comfortable">
+              <ids-radio value="pork">Pork</ids-radio>
+            </ids-card>
+          </ids-radio-group>
+        </div>
+      </div>
+    </app-tryout>
   </div>
 
-  
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [configType]="'input'"
+        [controlConfig]="radioDemoService.inputControlConfig"
+        [(model)]="radioDemoService.model"
+        (resetted)="radioDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        [configType]="'helper'"
+        [controlConfig]="radioDemoService.helperControlConfig"
+        [(model)]="radioDemoService.helperModel"
+        (resetted)="radioDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

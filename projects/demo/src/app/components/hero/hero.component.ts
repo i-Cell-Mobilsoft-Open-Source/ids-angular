@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { HeroData } from '../../model/heroData';
 import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
@@ -6,6 +5,8 @@ import { Location } from '@angular/common';
 import { Component, input, OnDestroy, OnInit, inject as angularInject } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+
+const SIGNAL_UPDATE_DELAY_MS = 50;
 
 @Component({
   selector: 'app-hero',
@@ -19,7 +20,6 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent implements OnDestroy, OnInit {
-  public static readonly SignalUpdateDelayMs = 50;
   public heroData = input.required<HeroData>();
   public currentImageUrl = '';
   private _observer: MutationObserver | undefined;
@@ -49,7 +49,7 @@ export class HeroComponent implements OnDestroy, OnInit {
     // If heroData is empty, wait for signal update before setting image
     if (!data.imageUrlLight && !data.imageUrlDark && !data.imageUrl) {
       // Try again after a short delay (wait for signal update)
-      setTimeout(() => this._updateImageBasedOnTheme(), HeroComponent.SignalUpdateDelayMs);
+      setTimeout(() => this._updateImageBasedOnTheme(), SIGNAL_UPDATE_DELAY_MS);
       return;
     }
 

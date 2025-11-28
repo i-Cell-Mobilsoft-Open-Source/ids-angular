@@ -29,5 +29,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class SwitchDemoComponent {
-  public switchDemoService = inject(SwitchDemoService);
+  protected _switchDemoService = inject(SwitchDemoService);
 }

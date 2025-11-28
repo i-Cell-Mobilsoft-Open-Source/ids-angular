@@ -29,9 +29,9 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class IconDemoComponent implements OnInit {
 
-  public iconDemoService = inject(IconDemoService);
+  protected _iconDemoService = inject(IconDemoService);
 
   public ngOnInit(): void {
-    this.iconDemoService.loadIcons();
+    this._iconDemoService.loadIcons();
   }
 }

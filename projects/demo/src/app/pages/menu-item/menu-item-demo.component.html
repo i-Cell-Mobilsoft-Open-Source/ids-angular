@@ -1,9 +1,9 @@
-<app-demo-and-code (resetDemo)="menuItemDemoService.reset()">
+<app-demo-and-code (resetDemo)="_menuItemDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.MENU_ITEM' | translate"
-      [hasDarkBackground]="menuItemDemoService.menuItemHelperModel.testBackgroundColor === 'dark'"
-      (resetted)="menuItemDemoService.reset()"
+      [hasDarkBackground]="_menuItemDemoService.menuItemHelperModel.testBackgroundColor === 'dark'"
+      (resetted)="_menuItemDemoService.reset()"
     >
       <ng-container component>
         <div cdkMenuBar class="menu-bar">
@@ -11,22 +11,22 @@
             <h2>Button</h2>
             <div
               idsActiveIndicator
-              [active]="menuItemDemoService.menuItemHelperModel.active"
-              [class.extra-height]="menuItemDemoService.menuItemHelperModel.active && menuItemDemoService.menuItemHelperModel.extraHeight"
+              [active]="_menuItemDemoService.menuItemHelperModel.active"
+              [class.extra-height]="_menuItemDemoService.menuItemHelperModel.active && _menuItemDemoService.menuItemHelperModel.extraHeight"
             >
               <button
                 type="button"
                 idsMenuItem
-                [appearance]="menuItemDemoService.menuItemModel.appearance"
-                [size]="menuItemDemoService.menuItemModel.size"
-                [variant]="menuItemDemoService.menuItemModel.variant"
-                [label]="menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
-                [disabled]="menuItemDemoService.menuItemModel.disabled"
+                [appearance]="_menuItemDemoService.menuItemModel.appearance"
+                [size]="_menuItemDemoService.menuItemModel.size"
+                [variant]="_menuItemDemoService.menuItemModel.variant"
+                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+                [disabled]="_menuItemDemoService.menuItemModel.disabled"
               >
-                @if (menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
+                @if (_menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
                   <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
                 }
-                @if (menuItemDemoService.menuItemHelperModel.hasTrailingIcon) {
+                @if (_menuItemDemoService.menuItemHelperModel.hasTrailingIcon) {
                   <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
                 }
               </button>
@@ -36,22 +36,22 @@
             <h2>Link</h2>
             <div
               idsActiveIndicator
-              [active]="menuItemDemoService.menuItemHelperModel.active"
-              [class.extra-height]="menuItemDemoService.menuItemHelperModel.active && menuItemDemoService.menuItemHelperModel.extraHeight"
+              [active]="_menuItemDemoService.menuItemHelperModel.active"
+              [class.extra-height]="_menuItemDemoService.menuItemHelperModel.active && _menuItemDemoService.menuItemHelperModel.extraHeight"
             >
               <a
                 idsMenuItem
                 routerLink="/components/menu-item"
-                [appearance]="menuItemDemoService.menuItemModel.appearance"
-                [size]="menuItemDemoService.menuItemModel.size"
-                [variant]="menuItemDemoService.menuItemModel.variant"
-                [label]="menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
-                [disabled]="menuItemDemoService.menuItemModel.disabled"
+                [appearance]="_menuItemDemoService.menuItemModel.appearance"
+                [size]="_menuItemDemoService.menuItemModel.size"
+                [variant]="_menuItemDemoService.menuItemModel.variant"
+                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+                [disabled]="_menuItemDemoService.menuItemModel.disabled"
               >
-                @if (menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
+                @if (_menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
                   <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
                 }
-                @if (menuItemDemoService.menuItemHelperModel.hasTrailingIcon) {
+                @if (_menuItemDemoService.menuItemHelperModel.hasTrailingIcon) {
                   <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
                 }
               </a>
@@ -68,17 +68,17 @@
         controls
         [controlName]="'Menu item'"
         [configType]="'input'"
-        [controlConfig]="menuItemDemoService.menuItemInputControlConfig"
-        [(model)]="menuItemDemoService.menuItemModel"
-        (resetted)="menuItemDemoService.reset()"
+        [controlConfig]="_menuItemDemoService.menuItemInputControlConfig"
+        [(model)]="_menuItemDemoService.menuItemModel"
+        (resetted)="_menuItemDemoService.reset()"
       />
       <app-control-table
         controls
         [controlName]="'Menu item'"
         [configType]="'helper'"
-        [controlConfig]="menuItemDemoService.menuItemHelperControlConfig"
-        [(model)]="menuItemDemoService.menuItemHelperModel"
-        (resetted)="menuItemDemoService.reset()"
+        [controlConfig]="_menuItemDemoService.menuItemHelperControlConfig"
+        [(model)]="_menuItemDemoService.menuItemHelperModel"
+        (resetted)="_menuItemDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

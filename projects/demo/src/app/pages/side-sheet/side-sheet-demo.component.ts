@@ -36,5 +36,5 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrls: ['./side-sheet-demo.component.scss'],
 })
 export class SideSheetDemoComponent {
-  public sideSheetService = inject(SideSheetDemoService);
+  protected _sideSheetService = inject(SideSheetDemoService);
 }

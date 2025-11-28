@@ -1,16 +1,16 @@
-<app-demo-and-code (resetDemo)="spinnerDemoService.reset()">
+<app-demo-and-code (resetDemo)="_spinnerDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.SPINNER' | translate"
-      [hasDarkBackground]="spinnerDemoService.model.variant === 'light'"
-      (resetted)="spinnerDemoService.reset()"
+      [hasDarkBackground]="_spinnerDemoService.model.variant === 'light'"
+      (resetted)="_spinnerDemoService.reset()"
     >
       <div component>
         <ids-spinner
-          [sizeCollection]="spinnerDemoService.model.sizeCollection"
-          [size]="spinnerDemoService.model.size"
-          [variant]="spinnerDemoService.model.variant"
-          [isTrack]="spinnerDemoService.model.isTrack"
+          [sizeCollection]="_spinnerDemoService.model.sizeCollection"
+          [size]="_spinnerDemoService.model.size"
+          [variant]="_spinnerDemoService.model.variant"
+          [isTrack]="_spinnerDemoService.model.isTrack"
           [aria-label]="'loading'"
         />
       </div>
@@ -23,9 +23,9 @@
         controls
         [controlName]="'Spinner'"
         [configType]="'input'"
-        [controlConfig]="spinnerDemoService.inputControlConfig"
-        [(model)]="spinnerDemoService.model"
-        (resetted)="spinnerDemoService.reset()"
+        [controlConfig]="_spinnerDemoService.inputControlConfig"
+        [(model)]="_spinnerDemoService.model"
+        (resetted)="_spinnerDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

@@ -1,16 +1,16 @@
-<app-demo-and-code (resetDemo)="badgeDemoService.reset()">
+<app-demo-and-code (resetDemo)="_badgeDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
-    <app-tryout [title]="'COMPONENTS.BADGE' | translate" (resetted)="badgeDemoService.reset()">
+    <app-tryout [title]="'COMPONENTS.BADGE' | translate" (resetted)="_badgeDemoService.reset()">
       <div component>
         <div
           idsBadge
-          [badgeVariant]="badgeDemoService.model.variant"
-          [badgeSize]="badgeDemoService.model.size"
-          [badgeLabel]="badgeDemoService.model.label"
-          [badgeShowLeadingElement]="badgeDemoService.model.hasLeadingIcon"
-          [badgeLimit]="badgeDemoService.model.limit"
+          [badgeVariant]="_badgeDemoService.model.variant"
+          [badgeSize]="_badgeDemoService.model.size"
+          [badgeLabel]="_badgeDemoService.model.label"
+          [badgeShowLeadingElement]="_badgeDemoService.model.hasLeadingIcon"
+          [badgeLimit]="_badgeDemoService.model.limit"
         >
-          @if (badgeDemoService.model.hasLeadingIcon) {
+          @if (_badgeDemoService.model.hasLeadingIcon) {
             <ids-icon icon-leading fontIcon="search" />
           }
           Text
@@ -24,9 +24,9 @@
         controls
         [controlName]="'Badge'"
         [configType]="'input'"
-        [controlConfig]="badgeDemoService.inputControlConfig"
-        [(model)]="badgeDemoService.model"
-        (resetted)="badgeDemoService.reset()"
+        [controlConfig]="_badgeDemoService.inputControlConfig"
+        [(model)]="_badgeDemoService.model"
+        (resetted)="_badgeDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

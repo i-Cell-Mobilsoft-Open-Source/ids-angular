@@ -1,6 +1,6 @@
-<app-demo-and-code (resetDemo)="dialogDemoService.reset()">
+<app-demo-and-code (resetDemo)="_dialogDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
-    <app-tryout [title]="'COMPONENTS.DIALOG' | translate" (resetted)="dialogDemoService.reset()">
+    <app-tryout [title]="'COMPONENTS.DIALOG' | translate" (resetted)="_dialogDemoService.reset()">
       <div component class="dialog-types">
         <div class="dialog-type">
           <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="dialogStatic.open()">
@@ -10,20 +10,20 @@
           <dialog
             #dialogStatic="idsDialog"
             idsDialog
-            [size]="dialogDemoService.model.size"
-            [mainTitle]="dialogDemoService.model.mainTitle"
-            [subTitle]="dialogDemoService.model.subTitle"
-            [showCloseButton]="dialogDemoService.model.showCloseButton"
-            [showBackdrop]="dialogDemoService.model.showBackdrop"
+            [size]="_dialogDemoService.model.size"
+            [mainTitle]="_dialogDemoService.model.mainTitle"
+            [subTitle]="_dialogDemoService.model.subTitle"
+            [showCloseButton]="_dialogDemoService.model.showCloseButton"
+            [showBackdrop]="_dialogDemoService.model.showBackdrop"
           >
-            @if (dialogDemoService.helperModel.useCustomHeader) {
+            @if (_dialogDemoService.helperModel.useCustomHeader) {
               <div *idsDialogHeader>
                 <h2>This is a custom header!</h2>
               </div>
             }
             <!-- content -->
             <div idsDialogContent>
-              @if (dialogDemoService.helperModel.useLongContent) {
+              @if (_dialogDemoService.helperModel.useLongContent) {
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio molestias illo tempore quo quod unde ipsa fugit nihil
                   placeat dicta eius sit nemo obcaecati soluta nam ea nobis, minima asperiores! Nostrum culpa necessitatibus ratione minima
@@ -188,16 +188,16 @@
       <app-control-table
         controls
         [configType]="'input'"
-        [controlConfig]="dialogDemoService.inputControlConfig"
-        [(model)]="dialogDemoService.model"
-        (resetted)="dialogDemoService.reset()"
+        [controlConfig]="_dialogDemoService.inputControlConfig"
+        [(model)]="_dialogDemoService.model"
+        (resetted)="_dialogDemoService.reset()"
       />
       <app-control-table
         controls
         [configType]="'helper'"
-        [controlConfig]="dialogDemoService.helperControlConfig"
-        [(model)]="dialogDemoService.helperModel"
-        (resetted)="dialogDemoService.reset()"
+        [controlConfig]="_dialogDemoService.helperControlConfig"
+        [(model)]="_dialogDemoService.helperModel"
+        (resetted)="_dialogDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

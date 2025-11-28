@@ -42,5 +42,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class FormFieldDemoComponent {
-  public formFieldDemoService = inject(FormFieldDemoService);
+  protected _formFieldDemoService = inject(FormFieldDemoService);
 }

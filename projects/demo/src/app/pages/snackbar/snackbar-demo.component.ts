@@ -28,11 +28,11 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class SnackbarDemoComponent implements OnInit {
-  public snackbarDemoService = inject(SnackbarDemoService);
+  protected _snackbarDemoService = inject(SnackbarDemoService);
   private readonly _viewContainerRef = inject(ViewContainerRef);
 
   public ngOnInit(): void {
 
-    this.snackbarDemoService.registerViewContainerRef(this._viewContainerRef);
+    this._snackbarDemoService.registerViewContainerRef(this._viewContainerRef);
   }
 }

@@ -40,5 +40,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class CardDemoComponent {
-  public cardDemoService = inject(CardDemoService);
+  protected _cardDemoService = inject(CardDemoService);
 }

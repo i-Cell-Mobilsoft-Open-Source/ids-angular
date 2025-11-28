@@ -1,26 +1,26 @@
-<app-demo-and-code (resetDemo)="avatarDemoService.reset()">
+<app-demo-and-code (resetDemo)="_avatarDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.AVATAR' | translate"
-      [hasDarkBackground]="avatarDemoService.model.variant === 'light'"
-      (resetted)="avatarDemoService.reset()"
+      [hasDarkBackground]="_avatarDemoService.model.variant === 'light'"
+      (resetted)="_avatarDemoService.reset()"
     >
       <div component class="avatar-types">
         <div class="avatar-type">
           <h2>Initials</h2>
           <ids-avatar
-            [size]="avatarDemoService.model.size"
-            [sizeCollection]="avatarDemoService.model.sizeCollection"
-            [variant]="avatarDemoService.model.variant"
-            [initials]="avatarDemoService.model.initials"
+            [size]="_avatarDemoService.model.size"
+            [sizeCollection]="_avatarDemoService.model.sizeCollection"
+            [variant]="_avatarDemoService.model.variant"
+            [initials]="_avatarDemoService.model.initials"
           />
         </div>
         <div class="avatar-type">
           <h2>Icon</h2>
           <ids-avatar
-            [size]="avatarDemoService.model.size"
-            [sizeCollection]="avatarDemoService.model.sizeCollection"
-            [variant]="avatarDemoService.model.variant"
+            [size]="_avatarDemoService.model.size"
+            [sizeCollection]="_avatarDemoService.model.sizeCollection"
+            [variant]="_avatarDemoService.model.variant"
           >
             <ids-icon fontIcon="account-circle" />
           </ids-avatar>
@@ -28,9 +28,9 @@
         <div class="avatar-type">
           <h2>With image</h2>
           <ids-avatar
-            [size]="avatarDemoService.model.size"
-            [sizeCollection]="avatarDemoService.model.sizeCollection"
-            [variant]="avatarDemoService.model.variant"
+            [size]="_avatarDemoService.model.size"
+            [sizeCollection]="_avatarDemoService.model.sizeCollection"
+            [variant]="_avatarDemoService.model.variant"
           >
             <img
               idsAvatarImage
@@ -47,9 +47,9 @@
       <app-control-table
         controls
         [configType]="'input'"
-        [controlConfig]="avatarDemoService.inputControlConfig"
-        [(model)]="avatarDemoService.model"
-        (resetted)="avatarDemoService.reset()"
+        [controlConfig]="_avatarDemoService.inputControlConfig"
+        [(model)]="_avatarDemoService.model"
+        (resetted)="_avatarDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

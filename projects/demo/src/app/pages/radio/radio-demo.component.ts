@@ -32,5 +32,5 @@ import { TranslateModule } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioDemoComponent {
-  public radioDemoService = inject(RadioDemoService);
+  protected _radioDemoService = inject(RadioDemoService);
 }

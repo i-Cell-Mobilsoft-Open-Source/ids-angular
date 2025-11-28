@@ -41,5 +41,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class SelectDemoComponent {
-  public selectDemoService = inject(SelectDemoService);
+  protected _selectDemoService = inject(SelectDemoService);
 }

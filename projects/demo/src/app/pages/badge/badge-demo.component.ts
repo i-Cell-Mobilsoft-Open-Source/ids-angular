@@ -26,5 +26,5 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './badge-demo.component.scss',
 })
 export class BadgeDemoComponent {
-  public badgeDemoService = inject(BadgeDemoService);
+  protected _badgeDemoService = inject(BadgeDemoService);
 }

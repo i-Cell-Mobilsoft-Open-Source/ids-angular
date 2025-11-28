@@ -28,5 +28,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class PaginatorDemoComponent {
-  public paginatorDemoService = inject(PaginatorDemoService);
+  protected _paginatorDemoService = inject(PaginatorDemoService);
 }

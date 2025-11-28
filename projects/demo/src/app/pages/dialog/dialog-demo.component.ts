@@ -174,8 +174,6 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
   public providedData = inject(CUSTOM_DIALOG_TOKEN);
   public inputData = input('');
   public dialogDemoService = inject(DialogDemoService);
-  // public model = input<DialogInputControls>();
-  // public helperModel = input<DialogHelperControls>();
 }
 
 @Component({
@@ -198,7 +196,7 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
   ],
 })
 export class DialogDemoComponent {
-  public dialogDemoService = inject(DialogDemoService);
+  protected _dialogDemoService = inject(DialogDemoService);
 
   private _dialogService = inject(IdsDialogService);
 
@@ -216,12 +214,11 @@ export class DialogDemoComponent {
     this._dialogService.open(CustomDialogComponent, {
       providers: [
         { provide: CUSTOM_DIALOG_TOKEN, useValue: 'This text is provided with an InjectionToken' },
-        { provide: DialogDemoService, useValue: this.dialogDemoService },
+        { provide: DialogDemoService, useValue: this._dialogDemoService },
       ],
       inputs: {
         inputData: 'This text is provided using input binding',
-        // model: this.model,
-        // helperModel: this.helperModel,
+
       },
     }).subscribe((result) => console.info('Dialog result:', result));
   }

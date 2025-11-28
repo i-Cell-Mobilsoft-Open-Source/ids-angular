@@ -37,5 +37,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class DatepickerDemoComponent {
-  public datepickerDemoService = inject(DatepickerDemoService);
+  protected _datepickerDemoService = inject(DatepickerDemoService);
 }

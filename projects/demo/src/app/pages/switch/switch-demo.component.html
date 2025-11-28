@@ -1,65 +1,65 @@
-<app-demo-and-code (resetDemo)="switchDemoService.reset()">
+<app-demo-and-code (resetDemo)="_switchDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.SWITCH' | translate"
-      [hasDarkBackground]="switchDemoService.model.variant === 'light'"
-      (resetted)="switchDemoService.reset()"
+      [hasDarkBackground]="_switchDemoService.model.variant === 'light'"
+      (resetted)="_switchDemoService.reset()"
     >
       <div component class="switch-grid">
         <div class="switch-item">
           <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
           <ids-switch
-            [label]="switchDemoService.model.label"
-            [readonly]="switchDemoService.model.readonly"
-            [size]="switchDemoService.model.size"
-            [variant]="switchDemoService.model.variant"
-            [hasIcon]="switchDemoService.model.hasIcon"
-            [iconPosition]="switchDemoService.model.iconPosition"
-            [labelPosition]="switchDemoService.model.labelPosition"
-            [disabled]="switchDemoService.model.disabled"
-            [aria-label]="switchDemoService.model['aria-label']"
-            [aria-labelledby]="switchDemoService.model['aria-labelledby']"
-            [aria-describedby]="switchDemoService.model['aria-describedby']"
-            [(ngModel)]="switchDemoService.value"
+            [label]="_switchDemoService.model.label"
+            [readonly]="_switchDemoService.model.readonly"
+            [size]="_switchDemoService.model.size"
+            [variant]="_switchDemoService.model.variant"
+            [hasIcon]="_switchDemoService.model.hasIcon"
+            [iconPosition]="_switchDemoService.model.iconPosition"
+            [labelPosition]="_switchDemoService.model.labelPosition"
+            [disabled]="_switchDemoService.model.disabled"
+            [aria-label]="_switchDemoService.model['aria-label']"
+            [aria-labelledby]="_switchDemoService.model['aria-labelledby']"
+            [aria-describedby]="_switchDemoService.model['aria-describedby']"
+            [(ngModel)]="_switchDemoService.value"
           />
         </div>
         <div class="switch-item">
           <h2>{{ "COMMON.GROUPED" | translate }}</h2>
           <ids-switch-group
-            [size]="switchDemoService.groupModel.size"
-            [hasIcon]="switchDemoService.groupModel.hasIcon"
-            [iconPosition]="switchDemoService.groupModel.iconPosition"
-            [labelPosition]="switchDemoService.groupModel.labelPosition"
+            [size]="_switchDemoService.groupModel.size"
+            [hasIcon]="_switchDemoService.groupModel.hasIcon"
+            [iconPosition]="_switchDemoService.groupModel.iconPosition"
+            [labelPosition]="_switchDemoService.groupModel.labelPosition"
           >
             <ids-switch
-              [label]="switchDemoService.model.label"
-              [readonly]="switchDemoService.model.readonly"
-              [variant]="switchDemoService.model.variant"
-              [disabled]="switchDemoService.model.disabled"
-              [aria-label]="switchDemoService.model['aria-label']"
-              [aria-labelledby]="switchDemoService.model['aria-labelledby']"
-              [aria-describedby]="switchDemoService.model['aria-describedby']"
-              [(ngModel)]="switchDemoService.groupValue[0]"
+              [label]="_switchDemoService.model.label"
+              [readonly]="_switchDemoService.model.readonly"
+              [variant]="_switchDemoService.model.variant"
+              [disabled]="_switchDemoService.model.disabled"
+              [aria-label]="_switchDemoService.model['aria-label']"
+              [aria-labelledby]="_switchDemoService.model['aria-labelledby']"
+              [aria-describedby]="_switchDemoService.model['aria-describedby']"
+              [(ngModel)]="_switchDemoService.groupValue[0]"
             />
             <ids-switch
-              [label]="switchDemoService.model.label"
-              [readonly]="switchDemoService.model.readonly"
-              [variant]="switchDemoService.model.variant"
-              [disabled]="switchDemoService.model.disabled"
-              [aria-label]="switchDemoService.model['aria-label']"
-              [aria-labelledby]="switchDemoService.model['aria-labelledby']"
-              [aria-describedby]="switchDemoService.model['aria-describedby']"
-              [(ngModel)]="switchDemoService.groupValue[1]"
+              [label]="_switchDemoService.model.label"
+              [readonly]="_switchDemoService.model.readonly"
+              [variant]="_switchDemoService.model.variant"
+              [disabled]="_switchDemoService.model.disabled"
+              [aria-label]="_switchDemoService.model['aria-label']"
+              [aria-labelledby]="_switchDemoService.model['aria-labelledby']"
+              [aria-describedby]="_switchDemoService.model['aria-describedby']"
+              [(ngModel)]="_switchDemoService.groupValue[1]"
             />
             <ids-switch
-              [label]="switchDemoService.model.label"
-              [readonly]="switchDemoService.model.readonly"
-              [variant]="switchDemoService.model.variant"
-              [disabled]="switchDemoService.model.disabled"
-              [aria-label]="switchDemoService.model['aria-label']"
-              [aria-labelledby]="switchDemoService.model['aria-labelledby']"
-              [aria-describedby]="switchDemoService.model['aria-describedby']"
-              [(ngModel)]="switchDemoService.groupValue[2]"
+              [label]="_switchDemoService.model.label"
+              [readonly]="_switchDemoService.model.readonly"
+              [variant]="_switchDemoService.model.variant"
+              [disabled]="_switchDemoService.model.disabled"
+              [aria-label]="_switchDemoService.model['aria-label']"
+              [aria-labelledby]="_switchDemoService.model['aria-labelledby']"
+              [aria-describedby]="_switchDemoService.model['aria-describedby']"
+              [(ngModel)]="_switchDemoService.groupValue[2]"
             />
           </ids-switch-group>
         </div>
@@ -73,17 +73,17 @@
         controls
         [controlName]="'Switch'"
         [configType]="'input'"
-        [controlConfig]="switchDemoService.inputControlConfig"
-        [(model)]="switchDemoService.model"
-        (resetted)="switchDemoService.reset()"
+        [controlConfig]="_switchDemoService.inputControlConfig"
+        [(model)]="_switchDemoService.model"
+        (resetted)="_switchDemoService.reset()"
       />
       <app-control-table
         controls
         [controlName]="'Switch group'"
         [configType]="'input'"
-        [controlConfig]="switchDemoService.groupInputControlConfig"
-        [(model)]="switchDemoService.groupModel"
-        (resetted)="switchDemoService.reset()"
+        [controlConfig]="_switchDemoService.groupInputControlConfig"
+        [(model)]="_switchDemoService.groupModel"
+        (resetted)="_switchDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

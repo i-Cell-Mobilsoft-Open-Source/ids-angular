@@ -31,5 +31,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class TagDemoComponent {
-  public tagDemoService = inject(TagDemoService);
+  protected _tagDemoService = inject(TagDemoService);
 }

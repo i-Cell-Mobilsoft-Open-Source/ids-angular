@@ -34,10 +34,10 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class NotificationDemoComponent implements OnInit {
 
-  public notificationDemoService = inject(NotificationDemoService);
+  protected _notificationDemoService = inject(NotificationDemoService);
 
   public ngOnInit(): void {
-    this.notificationDemoService.loadIcons();
+    this._notificationDemoService.loadIcons();
   }
 
 }

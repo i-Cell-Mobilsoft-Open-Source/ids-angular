@@ -31,5 +31,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class AvatarDemoComponent {
-  public avatarDemoService = inject(AvatarDemoService);
+  protected _avatarDemoService = inject(AvatarDemoService);
 }

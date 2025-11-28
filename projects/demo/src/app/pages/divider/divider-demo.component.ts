@@ -28,5 +28,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class DividerDemoComponent {
-  public dividerDemoService = inject(DividerDemoService);
+  protected _dividerDemoService = inject(DividerDemoService);
 }

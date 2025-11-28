@@ -32,5 +32,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class SegmentedControlDemoComponent {
-  public segmentedControlDemoService = inject(SegmentedControlDemoService);
+  protected _segmentedControlDemoService = inject(SegmentedControlDemoService);
 }

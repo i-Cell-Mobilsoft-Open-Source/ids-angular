@@ -23,5 +23,5 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './spinner-demo.component.scss',
 })
 export class SpinnerDemoComponent {
-  public spinnerDemoService = inject(SpinnerDemoService);
+  protected _spinnerDemoService = inject(SpinnerDemoService);
 }

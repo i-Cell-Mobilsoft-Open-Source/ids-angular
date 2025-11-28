@@ -1,52 +1,52 @@
-<app-demo-and-code (resetDemo)="segmentedControlDemoService.reset()">
+<app-demo-and-code (resetDemo)="_segmentedControlDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.SEGMENTED_CONTROL' | translate"
-      [hasDarkBackground]="segmentedControlDemoService.model.variant === 'light'"
-      (resetted)="segmentedControlDemoService.reset()"
+      [hasDarkBackground]="_segmentedControlDemoService.model.variant === 'light'"
+      (resetted)="_segmentedControlDemoService.reset()"
     >
       <ng-container component>
         <div component class="segmented-control-grid">
           <div class="segmented-control-item">
             <h2>Single selection</h2>
             <ids-segmented-control
-              [appearance]="segmentedControlDemoService.model.appearance"
-              [variant]="segmentedControlDemoService.model.variant"
-              [size]="segmentedControlDemoService.model.size"
-              [disabled]="segmentedControlDemoService.model.disabled"
-              [(ngModel)]="segmentedControlDemoService.singleSelectionValue"
+              [appearance]="_segmentedControlDemoService.model.appearance"
+              [variant]="_segmentedControlDemoService.model.variant"
+              [size]="_segmentedControlDemoService.model.size"
+              [disabled]="_segmentedControlDemoService.model.disabled"
+              [(ngModel)]="_segmentedControlDemoService.singleSelectionValue"
             >
               <ids-segmented-control-item
                 value="first"
-                [label]="segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 1' : undefined"
-                [disabled]="segmentedControlDemoService.helperModel.onlyOneItemIsDisabled"
+                [label]="_segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 1' : undefined"
+                [disabled]="_segmentedControlDemoService.helperModel.onlyOneItemIsDisabled"
               >
-                @if (segmentedControlDemoService.helperModel.itemHasIcon) {
+                @if (_segmentedControlDemoService.helperModel.itemHasIcon) {
                   <ids-icon fontIcon="mail" />
                 }
-                @if (segmentedControlDemoService.helperModel.itemHasSuffix) {
+                @if (_segmentedControlDemoService.helperModel.itemHasSuffix) {
                   <span suffixContent>$</span>
                 }
               </ids-segmented-control-item>
               <ids-segmented-control-item
                 value="second"
-                [label]="segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 2' : undefined"
+                [label]="_segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 2' : undefined"
               >
-                @if (segmentedControlDemoService.helperModel.itemHasIcon) {
+                @if (_segmentedControlDemoService.helperModel.itemHasIcon) {
                   <ids-icon fontIcon="account" />
                 }
-                @if (segmentedControlDemoService.helperModel.itemHasSuffix) {
+                @if (_segmentedControlDemoService.helperModel.itemHasSuffix) {
                   <span suffixContent>$</span>
                 }
               </ids-segmented-control-item>
               <ids-segmented-control-item
                 value="third"
-                [label]="segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 3' : undefined"
+                [label]="_segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 3' : undefined"
               >
-                @if (segmentedControlDemoService.helperModel.itemHasIcon) {
+                @if (_segmentedControlDemoService.helperModel.itemHasIcon) {
                   <ids-icon fontIcon="access-time" />
                 }
-                @if (segmentedControlDemoService.helperModel.itemHasSuffix) {
+                @if (_segmentedControlDemoService.helperModel.itemHasSuffix) {
                   <span suffixContent>$</span>
                 }
               </ids-segmented-control-item>
@@ -55,44 +55,44 @@
           <div class="segmented-control-item">
             <h2>Multi selection</h2>
             <ids-segmented-control
-              [appearance]="segmentedControlDemoService.model.appearance"
-              [variant]="segmentedControlDemoService.model.variant"
-              [size]="segmentedControlDemoService.model.size"
+              [appearance]="_segmentedControlDemoService.model.appearance"
+              [variant]="_segmentedControlDemoService.model.variant"
+              [size]="_segmentedControlDemoService.model.size"
               [multiSelect]="true"
-              [disabled]="segmentedControlDemoService.model.disabled"
-              [ngModel]="segmentedControlDemoService.multiSelectionValue"
+              [disabled]="_segmentedControlDemoService.model.disabled"
+              [ngModel]="_segmentedControlDemoService.multiSelectionValue"
             >
               <ids-segmented-control-item
                 value="first"
-                [label]="segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 1' : undefined"
-                [disabled]="segmentedControlDemoService.helperModel.onlyOneItemIsDisabled"
+                [label]="_segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 1' : undefined"
+                [disabled]="_segmentedControlDemoService.helperModel.onlyOneItemIsDisabled"
               >
-                @if (segmentedControlDemoService.helperModel.itemHasIcon) {
+                @if (_segmentedControlDemoService.helperModel.itemHasIcon) {
                   <ids-icon fontIcon="mail" />
                 }
-                @if (segmentedControlDemoService.helperModel.itemHasSuffix) {
+                @if (_segmentedControlDemoService.helperModel.itemHasSuffix) {
                   <span suffixContent>$</span>
                 }
               </ids-segmented-control-item>
               <ids-segmented-control-item
                 value="second"
-                [label]="segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 2' : undefined"
+                [label]="_segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 2' : undefined"
               >
-                @if (segmentedControlDemoService.helperModel.itemHasIcon) {
+                @if (_segmentedControlDemoService.helperModel.itemHasIcon) {
                   <ids-icon fontIcon="account" />
                 }
-                @if (segmentedControlDemoService.helperModel.itemHasSuffix) {
+                @if (_segmentedControlDemoService.helperModel.itemHasSuffix) {
                   <span suffixContent>$</span>
                 }
               </ids-segmented-control-item>
               <ids-segmented-control-item
                 value="third"
-                [label]="segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 3' : undefined"
+                [label]="_segmentedControlDemoService.helperModel.itemHasLabel ? 'Label 3' : undefined"
               >
-                @if (segmentedControlDemoService.helperModel.itemHasIcon) {
+                @if (_segmentedControlDemoService.helperModel.itemHasIcon) {
                   <ids-icon fontIcon="access-time" />
                 }
-                @if (segmentedControlDemoService.helperModel.itemHasSuffix) {
+                @if (_segmentedControlDemoService.helperModel.itemHasSuffix) {
                   <span suffixContent>$</span>
                 }
               </ids-segmented-control-item>
@@ -108,16 +108,16 @@
       <app-control-table
         controls
         [configType]="'input'"
-        [controlConfig]="segmentedControlDemoService.inputControlConfig"
-        [(model)]="segmentedControlDemoService.model"
-        (resetted)="segmentedControlDemoService.reset()"
+        [controlConfig]="_segmentedControlDemoService.inputControlConfig"
+        [(model)]="_segmentedControlDemoService.model"
+        (resetted)="_segmentedControlDemoService.reset()"
       />
       <app-control-table
         controls
         [configType]="'helper'"
-        [controlConfig]="segmentedControlDemoService.helperControlConfig"
-        [(model)]="segmentedControlDemoService.helperModel"
-        (resetted)="segmentedControlDemoService.reset()"
+        [controlConfig]="_segmentedControlDemoService.helperControlConfig"
+        [(model)]="_segmentedControlDemoService.helperModel"
+        (resetted)="_segmentedControlDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

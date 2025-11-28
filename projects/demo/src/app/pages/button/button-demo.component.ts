@@ -31,5 +31,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 
 export class ButtonDemoComponent {
-  public buttonDemoService = inject(ButtonDemoService);
+  protected _buttonDemoService = inject(ButtonDemoService);
 }

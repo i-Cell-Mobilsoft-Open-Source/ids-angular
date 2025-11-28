@@ -21,5 +21,5 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './scrollbar-demo.component.scss',
 })
 export class ScrollbarDemoComponent {
-  public scrollbarDemoService = inject(ScrollbarDemoService);
+  protected _scrollbarDemoService = inject(ScrollbarDemoService);
 }

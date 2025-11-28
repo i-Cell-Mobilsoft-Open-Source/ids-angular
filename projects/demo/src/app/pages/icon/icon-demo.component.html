@@ -1,29 +1,29 @@
-<app-demo-and-code (resetDemo)="iconDemoService.reset()">
+<app-demo-and-code (resetDemo)="_iconDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.ICON' | translate"
-      [hasDarkBackground]="iconDemoService.model.variant === 'light'"
-      (resetted)="iconDemoService.reset()"
+      [hasDarkBackground]="_iconDemoService.model.variant === 'light'"
+      (resetted)="_iconDemoService.reset()"
     >
       <div component class="icon-types">
         <div class="icon-tpye">
           <h2>Font icon</h2>
           <ids-icon
-            [size]="iconDemoService.model.size"
-            [sizeCollection]="iconDemoService.model.sizeCollection"
-            [variant]="iconDemoService.model.variant"
-            [fontIcon]="iconDemoService.model.fontIcon"
-            [aria-hidden]="iconDemoService.model['aria-hidden']"
+            [size]="_iconDemoService.model.size"
+            [sizeCollection]="_iconDemoService.model.sizeCollection"
+            [variant]="_iconDemoService.model.variant"
+            [fontIcon]="_iconDemoService.model.fontIcon"
+            [aria-hidden]="_iconDemoService.model['aria-hidden']"
           />
         </div>
         <div class="icon-tpye">
           <h2>SVG icon</h2>
           <ids-icon
-            [size]="iconDemoService.model.size"
-            [sizeCollection]="iconDemoService.model.sizeCollection"
-            [variant]="iconDemoService.model.variant"
-            [svgIcon]="iconDemoService.model.svgIcon"
-            [aria-hidden]="iconDemoService.model['aria-hidden']"
+            [size]="_iconDemoService.model.size"
+            [sizeCollection]="_iconDemoService.model.sizeCollection"
+            [variant]="_iconDemoService.model.variant"
+            [svgIcon]="_iconDemoService.model.svgIcon"
+            [aria-hidden]="_iconDemoService.model['aria-hidden']"
           />
         </div>
       </div>
@@ -32,13 +32,13 @@
 
   <div controls class="h-full">
     <app-tryout-controls>
-      @if (iconDemoService.isLoaded()) {
+      @if (_iconDemoService.isLoaded()) {
         <app-control-table
           controls
           [configType]="'input'"
-          [controlConfig]="iconDemoService.inputControlConfig()"
-          [(model)]="iconDemoService.model"
-          (resetted)="iconDemoService.reset()"
+          [controlConfig]="_iconDemoService.inputControlConfig()"
+          [(model)]="_iconDemoService.model"
+          (resetted)="_iconDemoService.reset()"
         />
       } @else {
         <div>Loading...</div>

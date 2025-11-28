@@ -44,14 +44,14 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class FieldsetDemoComponent {
-  public fieldsetDemoService = inject(FieldsetDemoService);
+  protected _fieldsetDemoService = inject(FieldsetDemoService);
 
   public first = 'John';
   public last = 'Wick';
   public middle = 'Sam';
 
   public reset(): void {
-    this.fieldsetDemoService.reset();
+    this._fieldsetDemoService.reset();
     this.first = 'John';
     this.last = 'Wick';
     this.middle = 'Sam';

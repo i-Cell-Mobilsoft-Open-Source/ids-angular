@@ -1,18 +1,18 @@
-<app-demo-and-code (resetDemo)="fieldsetDemoService.reset()">
+<app-demo-and-code (resetDemo)="_fieldsetDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.FIELDSET' | translate"
-      [hasDarkBackground]="fieldsetDemoService.model.variant === 'light'"
+      [hasDarkBackground]="_fieldsetDemoService.model.variant === 'light'"
       (resetted)="reset()"
     >
       <ng-container component>
         <fieldset
           idsFieldset
-          [legend]="fieldsetDemoService.model.legend"
-          [size]="fieldsetDemoService.model.size"
-          [variant]="fieldsetDemoService.model.variant"
+          [legend]="_fieldsetDemoService.model.legend"
+          [size]="_fieldsetDemoService.model.size"
+          [variant]="_fieldsetDemoService.model.variant"
         >
-          @if (fieldsetDemoService.helperModel.showMessage) {
+          @if (_fieldsetDemoService.helperModel.showMessage) {
             <span idsFieldsetMessage>This is a fieldset message</span>
           }
           <ids-fieldset-row>
@@ -48,16 +48,16 @@
       <app-control-table
         controls
         [configType]="'input'"
-        [controlConfig]="fieldsetDemoService.inputControlConfig"
-        [(model)]="fieldsetDemoService.model"
-        (resetted)="fieldsetDemoService.reset()"
+        [controlConfig]="_fieldsetDemoService.inputControlConfig"
+        [(model)]="_fieldsetDemoService.model"
+        (resetted)="_fieldsetDemoService.reset()"
       />
       <app-control-table
         controls
         [configType]="'helper'"
-        [controlConfig]="fieldsetDemoService.helperControlConfig"
-        [(model)]="fieldsetDemoService.helperModel"
-        (resetted)="fieldsetDemoService.reset()"
+        [controlConfig]="_fieldsetDemoService.helperControlConfig"
+        [(model)]="_fieldsetDemoService.helperModel"
+        (resetted)="_fieldsetDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

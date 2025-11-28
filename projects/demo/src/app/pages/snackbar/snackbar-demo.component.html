@@ -1,8 +1,8 @@
-<app-demo-and-code (resetDemo)="snackbarDemoService.reset()">
+<app-demo-and-code (resetDemo)="_snackbarDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
-    <app-tryout [title]="'COMPONENTS.SNACKBAR' | translate" (resetted)="snackbarDemoService.reset()">
+    <app-tryout [title]="'COMPONENTS.SNACKBAR' | translate" (resetted)="_snackbarDemoService.reset()">
       <ng-container component>
-        <button type="button" idsButton (click)="snackbarDemoService.openSnackbar()">Open snackbar</button>
+        <button type="button" idsButton (click)="_snackbarDemoService.openSnackbar()">Open snackbar</button>
       </ng-container>
     </app-tryout>
   </div>
@@ -12,16 +12,16 @@
       <app-control-table
         controls
         [configType]="'input'"
-        [controlConfig]="snackbarDemoService.inputControlConfig"
-        [(model)]="snackbarDemoService.model"
-        (resetted)="snackbarDemoService.reset()"
+        [controlConfig]="_snackbarDemoService.inputControlConfig"
+        [(model)]="_snackbarDemoService.model"
+        (resetted)="_snackbarDemoService.reset()"
       />
       <app-control-table
         controls
         [configType]="'helper'"
-        [controlConfig]="snackbarDemoService.helperControlConfig"
-        [(model)]="snackbarDemoService.helperModel"
-        (resetted)="snackbarDemoService.reset()"
+        [controlConfig]="_snackbarDemoService.helperControlConfig"
+        [(model)]="_snackbarDemoService.helperModel"
+        (resetted)="_snackbarDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

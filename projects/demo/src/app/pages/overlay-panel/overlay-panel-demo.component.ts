@@ -32,5 +32,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class OverlayPanelDemoComponent {
-  public overlayPanelDemoService = inject(OverlayPanelDemoService);
+  protected _overlayPanelDemoService = inject(OverlayPanelDemoService);
 }

@@ -1,30 +1,30 @@
-<app-demo-and-code (resetDemo)="sideSheetService.reset()">
+<app-demo-and-code (resetDemo)="_sideSheetService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <ng-template #sideSheet>
       <ids-side-sheet
-        [open]="sideSheetService.show"
-        [type]="sideSheetService.model.type"
-        [title]="sideSheetService.model.title"
-        [header]="sideSheetService.model.header"
-        [isBackdrop]="sideSheetService.model.isBackdrop"
-        [isScrollable]="sideSheetService.model.isScrollable"
-        [isClosable]="sideSheetService.model.isClosable"
-        [isShowHeader]="sideSheetService.model.isShowHeader"
-        [position]="sideSheetService.model.position"
-        [backButton]="sideSheetService.model.backButton"
-        [closeTooltipText]="sideSheetService.model.closeTooltipText"
-        [size]="sideSheetService.model.size"
-        [backdropType]="sideSheetService.model.backdropType"
-        [backdropOpacity]="sideSheetService.model.backdropOpacity"
-        (closed)="sideSheetService.show = false"
-        (backClicked)="sideSheetService.onBackButtonClick()"
+        [open]="_sideSheetService.show"
+        [type]="_sideSheetService.model.type"
+        [title]="_sideSheetService.model.title"
+        [header]="_sideSheetService.model.header"
+        [isBackdrop]="_sideSheetService.model.isBackdrop"
+        [isScrollable]="_sideSheetService.model.isScrollable"
+        [isClosable]="_sideSheetService.model.isClosable"
+        [isShowHeader]="_sideSheetService.model.isShowHeader"
+        [position]="_sideSheetService.model.position"
+        [backButton]="_sideSheetService.model.backButton"
+        [closeTooltipText]="_sideSheetService.model.closeTooltipText"
+        [size]="_sideSheetService.model.size"
+        [backdropType]="_sideSheetService.model.backdropType"
+        [backdropOpacity]="_sideSheetService.model.backdropOpacity"
+        (closed)="_sideSheetService.show = false"
+        (backClicked)="_sideSheetService.onBackButtonClick()"
       >
         <div slot="customHeader">
           <header>
             <h2 id="side-sheet-title">Customer</h2>
           </header>
         </div>
-        @if (sideSheetService.model.isShowFooter) {
+        @if (_sideSheetService.model.isShowFooter) {
           <div slot="footer">
             <button type="button" class="demo-save-btn" idsButton [size]="'comfortable'" [variant]="'success'">
               <span>Save</span>
@@ -34,53 +34,53 @@
         <div>
           <ids-form-field>
             <ids-label>First name</ids-label>
-            <input idsInput placeholder="E.g. Steve" required [(ngModel)]="sideSheetService.firstName" />
+            <input idsInput placeholder="E.g. Steve" required [(ngModel)]="_sideSheetService.firstName" />
           </ids-form-field>
 
           <ids-form-field>
             <ids-label>Last name</ids-label>
-            <input idsInput placeholder="E.g. Johnson" required [(ngModel)]="sideSheetService.lastName" />
+            <input idsInput placeholder="E.g. Johnson" required [(ngModel)]="_sideSheetService.lastName" />
           </ids-form-field>
 
           <ids-form-field>
             <ids-label>Email address</ids-label>
-            <input idsInput type="email" placeholder="E.g. steve@example.com" required [(ngModel)]="sideSheetService.email" />
+            <input idsInput type="email" placeholder="E.g. steve@example.com" required [(ngModel)]="_sideSheetService.email" />
           </ids-form-field>
 
           <ids-form-field>
             <ids-label>Phone number</ids-label>
-            <input idsInput type="tel" placeholder="E.g. +1 234 567 8901" [(ngModel)]="sideSheetService.phoneNumber" />
+            <input idsInput type="tel" placeholder="E.g. +1 234 567 8901" [(ngModel)]="_sideSheetService.phoneNumber" />
           </ids-form-field>
 
           <ids-form-field>
             <ids-label>Shipping address</ids-label>
-            <input idsInput placeholder="E.g. 123 Main St" required [(ngModel)]="sideSheetService.shippingAddress" />
+            <input idsInput placeholder="E.g. 123 Main St" required [(ngModel)]="_sideSheetService.shippingAddress" />
           </ids-form-field>
 
           <ids-form-field>
             <ids-label>City</ids-label>
-            <input idsInput placeholder="E.g. New York" required [(ngModel)]="sideSheetService.city" />
+            <input idsInput placeholder="E.g. New York" required [(ngModel)]="_sideSheetService.city" />
           </ids-form-field>
 
           <ids-form-field>
             <ids-label>Postal code</ids-label>
-            <input idsInput placeholder="E.g. 10001" required [(ngModel)]="sideSheetService.postalCode" />
+            <input idsInput placeholder="E.g. 10001" required [(ngModel)]="_sideSheetService.postalCode" />
           </ids-form-field>
         </div>
       </ids-side-sheet>
     </ng-template>
 
-    @if (sideSheetService.model.position !== "right") {
+    @if (_sideSheetService.model.position !== "right") {
       <ng-container *ngTemplateOutlet="sideSheet" />
     }
 
-    <app-tryout [title]="'COMPONENTS.SIDE-SHEET' | translate" (resetted)="sideSheetService.reset()">
+    <app-tryout [title]="'COMPONENTS.SIDE-SHEET' | translate" (resetted)="_sideSheetService.reset()">
       <div component>
-        <button type="button" idsButton (click)="sideSheetService.show = true">open side sheet</button>
+        <button type="button" idsButton (click)="_sideSheetService.show = true">open side sheet</button>
       </div>
     </app-tryout>
 
-    @if (sideSheetService.model.position === "right") {
+    @if (_sideSheetService.model.position === "right") {
       <ng-container *ngTemplateOutlet="sideSheet" />
     }
   </div>
@@ -91,9 +91,9 @@
         controls
         [controlName]="'Side Sheet'"
         [configType]="'input'"
-        [controlConfig]="sideSheetService.inputControlConfig"
-        [(model)]="sideSheetService.model"
-        (resetted)="sideSheetService.reset()"
+        [controlConfig]="_sideSheetService.inputControlConfig"
+        [(model)]="_sideSheetService.model"
+        (resetted)="_sideSheetService.reset()"
       />
     </app-tryout-controls>
   </div>

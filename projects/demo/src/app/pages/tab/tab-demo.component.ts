@@ -30,9 +30,9 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class TabsDemoComponent implements OnInit {
-  public tabDemoService = inject(TabDemoService);
+  protected _tabDemoService = inject(TabDemoService);
 
   public ngOnInit(): void {
-    this.tabDemoService.loadIcons();
+    this._tabDemoService.loadIcons();
   }
 }

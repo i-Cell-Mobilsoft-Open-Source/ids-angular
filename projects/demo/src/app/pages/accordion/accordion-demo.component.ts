@@ -30,13 +30,13 @@ import { Subscription } from 'rxjs';
   ],
 })
 export class AccordionDemoComponent implements OnInit, OnDestroy {
-  public accordionDemoService = inject(AccordionDemoService);
+  protected _accordionDemoService = inject(AccordionDemoService);
 
   private _accordion = viewChild<IdsAccordionComponent>('accordion');
   private _resetSubscription: Subscription | undefined;
 
   public ngOnInit(): void {
-    this._resetSubscription = this.accordionDemoService.reset$.subscribe(() => {
+    this._resetSubscription = this._accordionDemoService.reset$.subscribe(() => {
       this._accordion()?.closeAll();
     });
   }

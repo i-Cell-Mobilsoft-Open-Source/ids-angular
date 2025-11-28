@@ -28,5 +28,5 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './breadcrumb-demo.component.scss',
 })
 export class BreadcrumbDemoComponent {
-  public breadcrumbDemoService = inject(BreadcrumbDemoService);
+  protected _breadcrumbDemoService = inject(BreadcrumbDemoService);
 }

@@ -37,5 +37,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class ChipDemoComponent {
-  public chipDemoService = inject(ChipDemoService);
+  protected _chipDemoService = inject(ChipDemoService);
 }

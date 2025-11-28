@@ -1,11 +1,11 @@
-<app-demo-and-code (resetDemo)="scrollbarDemoService.reset()">
+<app-demo-and-code (resetDemo)="_scrollbarDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
-    <app-tryout [title]="'COMPONENTS.SCROLLBAR' | translate" (resetted)="scrollbarDemoService.reset()">
+    <app-tryout [title]="'COMPONENTS.SCROLLBAR' | translate" (resetted)="_scrollbarDemoService.reset()">
       <div
         component
         class="scrollable"
-        [style.scrollbarGutter]="scrollbarDemoService.model['scrollbar-gutter']"
-        [style.scrollbarWidth]="scrollbarDemoService.model['scrollbar-width']"
+        [style.scrollbarGutter]="_scrollbarDemoService.model['scrollbar-gutter']"
+        [style.scrollbarWidth]="_scrollbarDemoService.model['scrollbar-width']"
       >
         <div class="child">
           <p>
@@ -14,7 +14,7 @@
             accusamus magnam incidunt voluptate obcaecati alias eveniet aliquam numquam aperiam asperiores consectetur commodi optio
             deserunt perspiciatis.
           </p>
-          @if (!scrollbarDemoService.helperModel.childFitsInParent) {
+          @if (!_scrollbarDemoService.helperModel.childFitsInParent) {
             <p>
               Illum numquam quasi minima mollitia libero, nesciunt ipsam repellat sed facilis est aperiam dolor quos minus consequuntur,
               labore sapiente, odit praesentium ad aliquid nam error porro excepturi accusantium? Enim dignissimos incidunt non autem earum
@@ -38,17 +38,17 @@
         controls
         [controlName]="'Scrollbar'"
         [configType]="'input'"
-        [controlConfig]="scrollbarDemoService.controlConfig"
-        [(model)]="scrollbarDemoService.model"
-        (resetted)="scrollbarDemoService.reset()"
+        [controlConfig]="_scrollbarDemoService.controlConfig"
+        [(model)]="_scrollbarDemoService.model"
+        (resetted)="_scrollbarDemoService.reset()"
       />
       <app-control-table
         controls
         [controlName]="'Scrollbar'"
         [configType]="'helper'"
-        [controlConfig]="scrollbarDemoService.helperControlConfig"
-        [(model)]="scrollbarDemoService.helperModel"
-        (resetted)="scrollbarDemoService.reset()"
+        [controlConfig]="_scrollbarDemoService.helperControlConfig"
+        [(model)]="_scrollbarDemoService.helperModel"
+        (resetted)="_scrollbarDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

@@ -36,5 +36,5 @@ import { TranslateModule } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class MenuItemDemoComponent {
-  public menuItemDemoService = inject(MenuItemDemoService);
+  protected _menuItemDemoService = inject(MenuItemDemoService);
 }

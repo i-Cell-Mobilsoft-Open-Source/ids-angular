@@ -1,44 +1,44 @@
-<app-demo-and-code (resetDemo)="tabDemoService.reset()">
+<app-demo-and-code (resetDemo)="_tabDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.TAB' | translate"
-      [hasDarkBackground]="tabDemoService.model.variant === 'light'"
-      (resetted)="tabDemoService.reset()"
+      [hasDarkBackground]="_tabDemoService.model.variant === 'light'"
+      (resetted)="_tabDemoService.reset()"
     >
       <ng-container component>
         <ids-tab-group
-          [size]="tabDemoService.model.size"
-          [variant]="tabDemoService.model.variant"
-          [orientation]="tabDemoService.model.orientation"
-          [stretchTabs]="tabDemoService.model.stretchTabs"
-          [tabPosition]="tabDemoService.model.tabPosition"
-          [indicatorPosition]="tabDemoService.model.indicatorPosition"
-          [disabled]="tabDemoService.model.disabled"
+          [size]="_tabDemoService.model.size"
+          [variant]="_tabDemoService.model.variant"
+          [orientation]="_tabDemoService.model.orientation"
+          [stretchTabs]="_tabDemoService.model.stretchTabs"
+          [tabPosition]="_tabDemoService.model.tabPosition"
+          [indicatorPosition]="_tabDemoService.model.indicatorPosition"
+          [disabled]="_tabDemoService.model.disabled"
         >
           <ids-tab
-            [id]="tabDemoService.helperModel.tabItem1Id"
-            [label]="tabDemoService.helperModel.tabItem1Label"
-            [leadingIcon]="tabDemoService.helperModel.tabItem1LeadingIcon"
-            [trailingIcon]="tabDemoService.helperModel.tabItem1TrailingIcon"
-            [disabled]="tabDemoService.helperModel.tabItem1Disabled"
+            [id]="_tabDemoService.helperModel.tabItem1Id"
+            [label]="_tabDemoService.helperModel.tabItem1Label"
+            [leadingIcon]="_tabDemoService.helperModel.tabItem1LeadingIcon"
+            [trailingIcon]="_tabDemoService.helperModel.tabItem1TrailingIcon"
+            [disabled]="_tabDemoService.helperModel.tabItem1Disabled"
           >
             Tab Content 1
           </ids-tab>
           <ids-tab
-            [id]="tabDemoService.helperModel.tabItem2Id"
-            [label]="tabDemoService.helperModel.tabItem2Label"
-            [leadingIcon]="tabDemoService.helperModel.tabItem2LeadingIcon"
-            [trailingIcon]="tabDemoService.helperModel.tabItem2TrailingIcon"
-            [disabled]="tabDemoService.helperModel.tabItem2Disabled"
+            [id]="_tabDemoService.helperModel.tabItem2Id"
+            [label]="_tabDemoService.helperModel.tabItem2Label"
+            [leadingIcon]="_tabDemoService.helperModel.tabItem2LeadingIcon"
+            [trailingIcon]="_tabDemoService.helperModel.tabItem2TrailingIcon"
+            [disabled]="_tabDemoService.helperModel.tabItem2Disabled"
           >
             Tab Content 2
           </ids-tab>
           <ids-tab
-            [id]="tabDemoService.helperModel.tabItem3Id"
-            [label]="tabDemoService.helperModel.tabItem3Label"
-            [leadingIcon]="tabDemoService.helperModel.tabItem3LeadingIcon"
-            [trailingIcon]="tabDemoService.helperModel.tabItem3TrailingIcon"
-            [disabled]="tabDemoService.helperModel.tabItem3Disabled"
+            [id]="_tabDemoService.helperModel.tabItem3Id"
+            [label]="_tabDemoService.helperModel.tabItem3Label"
+            [leadingIcon]="_tabDemoService.helperModel.tabItem3LeadingIcon"
+            [trailingIcon]="_tabDemoService.helperModel.tabItem3TrailingIcon"
+            [disabled]="_tabDemoService.helperModel.tabItem3Disabled"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis
             sequi aut fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.
@@ -53,17 +53,17 @@
       <app-control-table
         controls
         [configType]="'input'"
-        [controlConfig]="tabDemoService.inputControlConfig"
-        [(model)]="tabDemoService.model"
-        (resetted)="tabDemoService.reset()"
+        [controlConfig]="_tabDemoService.inputControlConfig"
+        [(model)]="_tabDemoService.model"
+        (resetted)="_tabDemoService.reset()"
       />
-      @if (tabDemoService.isLoaded()) {
+      @if (_tabDemoService.isLoaded()) {
         <app-control-table
           controls
           [configType]="'helper'"
-          [controlConfig]="tabDemoService.helperControlConfig()"
-          [(model)]="tabDemoService.helperModel"
-          (resetted)="tabDemoService.reset()"
+          [controlConfig]="_tabDemoService.helperControlConfig()"
+          [(model)]="_tabDemoService.helperModel"
+          (resetted)="_tabDemoService.reset()"
         />
       } @else {
         <div>Loading...</div>

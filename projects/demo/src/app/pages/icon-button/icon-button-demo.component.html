@@ -1,19 +1,19 @@
-<app-demo-and-code (resetDemo)="iconButtonDemoService.reset()">
+<app-demo-and-code (resetDemo)="_iconButtonDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.ICON_BUTTON' | translate"
-      [hasDarkBackground]="iconButtonDemoService.model.variant === 'light'"
-      (resetted)="iconButtonDemoService.reset()"
+      [hasDarkBackground]="_iconButtonDemoService.model.variant === 'light'"
+      (resetted)="_iconButtonDemoService.reset()"
     >
       <ng-container component>
-        @if (iconButtonDemoService.model.asLink) {
+        @if (_iconButtonDemoService.model.asLink) {
           <a
             href=""
             idsIconButton
-            [appearance]="iconButtonDemoService.model.appearance"
-            [size]="iconButtonDemoService.model.size"
-            [variant]="iconButtonDemoService.model.variant"
-            [disabled]="iconButtonDemoService.model.disabled"
+            [appearance]="_iconButtonDemoService.model.appearance"
+            [size]="_iconButtonDemoService.model.size"
+            [variant]="_iconButtonDemoService.model.variant"
+            [disabled]="_iconButtonDemoService.model.disabled"
           >
             <ids-icon aria-hidden="true" alt="" fontIcon="search" />
           </a>
@@ -21,13 +21,13 @@
           <button
             type="button"
             idsIconButton
-            [size]="iconButtonDemoService.model.size"
-            [variant]="iconButtonDemoService.model.variant"
-            [appearance]="iconButtonDemoService.model.appearance"
-            [disabled]="iconButtonDemoService.model.disabled"
+            [size]="_iconButtonDemoService.model.size"
+            [variant]="_iconButtonDemoService.model.variant"
+            [appearance]="_iconButtonDemoService.model.appearance"
+            [disabled]="_iconButtonDemoService.model.disabled"
             (click)="
-              iconButtonDemoService.onClick(
-                iconButtonDemoService.model.appearance + '-' + iconButtonDemoService.model.variant + '-' + iconButtonDemoService.model.size
+              _iconButtonDemoService.onClick(
+                _iconButtonDemoService.model.appearance + '-' + _iconButtonDemoService.model.variant + '-' + _iconButtonDemoService.model.size
               )
             "
           >
@@ -43,9 +43,9 @@
       <app-control-table
         controls
         [configType]="'input'"
-        [controlConfig]="iconButtonDemoService.inputControlConfig"
-        [(model)]="iconButtonDemoService.model"
-        (resetted)="iconButtonDemoService.reset()"
+        [controlConfig]="_iconButtonDemoService.inputControlConfig"
+        [(model)]="_iconButtonDemoService.model"
+        (resetted)="_iconButtonDemoService.reset()"
       />
     </app-tryout-controls>
   </div>

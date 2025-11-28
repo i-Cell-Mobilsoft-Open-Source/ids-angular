@@ -1,30 +1,30 @@
-<app-demo-and-code (resetDemo)="accordionDemoService.reset()">
+<app-demo-and-code (resetDemo)="_accordionDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout [title]="'COMPONENTS.ACCORDION' | translate">
       <ng-container component>
         <ids-accordion
           #accordion
-          [multi]="accordionDemoService.model.multi"
-          [appearance]="accordionDemoService.model.appearance"
-          [size]="accordionDemoService.model.size"
-          [disabled]="accordionDemoService.model.disabled"
-          [expandBtnLabel]="accordionDemoService.model.expandBtnLabel"
-          [collapseBtnLabel]="accordionDemoService.model.collapseBtnLabel"
-          [btnSize]="accordionDemoService.model.btnSize"
-          [btnAppearance]="accordionDemoService.model.btnAppearance"
-          [btnVariant]="accordionDemoService.model.btnVariant"
-          [hasLeadingIcon]="accordionDemoService.model.hasLeadingIcon"
-          [hasTrailingIcon]="accordionDemoService.model.hasTrailingIcon"
+          [multi]="_accordionDemoService.model.multi"
+          [appearance]="_accordionDemoService.model.appearance"
+          [size]="_accordionDemoService.model.size"
+          [disabled]="_accordionDemoService.model.disabled"
+          [expandBtnLabel]="_accordionDemoService.model.expandBtnLabel"
+          [collapseBtnLabel]="_accordionDemoService.model.collapseBtnLabel"
+          [btnSize]="_accordionDemoService.model.btnSize"
+          [btnAppearance]="_accordionDemoService.model.btnAppearance"
+          [btnVariant]="_accordionDemoService.model.btnVariant"
+          [hasLeadingIcon]="_accordionDemoService.model.hasLeadingIcon"
+          [hasTrailingIcon]="_accordionDemoService.model.hasTrailingIcon"
         >
-          <ids-accordion-item [summary]="accordionDemoService.model.summary">
+          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
             text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
           </ids-accordion-item>
-          <ids-accordion-item [summary]="accordionDemoService.model.summary">
+          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
             text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
           </ids-accordion-item>
-          <ids-accordion-item [summary]="accordionDemoService.model.summary">
+          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
             text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
           </ids-accordion-item>
@@ -38,8 +38,8 @@
       <app-control-table
         controls
         [configType]="'input'"
-        [controlConfig]="accordionDemoService.inputControlConfig"
-        [(model)]="accordionDemoService.model"
+        [controlConfig]="_accordionDemoService.inputControlConfig"
+        [(model)]="_accordionDemoService.model"
       />
     </app-tryout-controls>
   </div>

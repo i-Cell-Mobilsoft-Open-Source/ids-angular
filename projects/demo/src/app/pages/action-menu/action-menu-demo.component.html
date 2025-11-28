@@ -1,10 +1,10 @@
-<app-demo-and-code (resetDemo)="demoService.reset()">
+<app-demo-and-code (resetDemo)="_actionMenuDemoService.reset()">
 <div demo class="w-full h-full flex justify-center items-center">
 
   <app-tryout
   [title]="'COMPONENTS.ACTION_MENU' | translate"
-  [hasDarkBackground]="demoService.overlayPanelHelperModel.testBackgroundColor === 'dark'"
-  (resetted)="demoService.reset()"
+  [hasDarkBackground]="_actionMenuDemoService.overlayPanelHelperModel.testBackgroundColor === 'dark'"
+  (resetted)="_actionMenuDemoService.reset()"
   >
   <ng-container component>
     <button
@@ -21,18 +21,18 @@
   </button>
   
   <ng-template #actionMenu>
-    <ids-overlay-panel [appearance]="demoService.overlayPanelModel.appearance" [size]="demoService.overlayPanelModel.size" [variant]="demoService.overlayPanelModel.variant">
-      @for (_ of demoService.items; track $index) {
+    <ids-overlay-panel [appearance]="_actionMenuDemoService.overlayPanelModel.appearance" [size]="_actionMenuDemoService.overlayPanelModel.size" [variant]="_actionMenuDemoService.overlayPanelModel.variant">
+      @for (_ of _actionMenuDemoService.items; track $index) {
         <button
         type="button"
         idsMenuItem
-        [appearance]="demoService.menuItemModel.appearance"
-        [size]="demoService.menuItemModel.size"
-        [variant]="demoService.menuItemModel.variant"
-        [label]="$index !== 0 || demoService.menuItemHelperModel.showFirstItemLabel ? 'Menu item label ' + $index : ''"
-        [disabled]="$index === 0 && demoService.menuItemHelperModel.hasDisabledItem"
+        [appearance]="_actionMenuDemoService.menuItemModel.appearance"
+        [size]="_actionMenuDemoService.menuItemModel.size"
+        [variant]="_actionMenuDemoService.menuItemModel.variant"
+        [label]="$index !== 0 || _actionMenuDemoService.menuItemHelperModel.showFirstItemLabel ? 'Menu item label ' + $index : ''"
+        [disabled]="$index === 0 && _actionMenuDemoService.menuItemHelperModel.hasDisabledItem"
         >
-        @if (demoService.menuItemHelperModel.hasLeadingIcon) {
+        @if (_actionMenuDemoService.menuItemHelperModel.hasLeadingIcon) {
           <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
         }
       </button>
@@ -40,16 +40,16 @@
     <button
     type="button"
     idsMenuItem
-    [appearance]="demoService.menuItemModel.appearance"
-    [size]="demoService.menuItemModel.size"
-    [variant]="demoService.menuItemModel.variant"
-    [label]="'Menu item label ' + demoService.items.length"
+    [appearance]="_actionMenuDemoService.menuItemModel.appearance"
+    [size]="_actionMenuDemoService.menuItemModel.size"
+    [variant]="_actionMenuDemoService.menuItemModel.variant"
+    [label]="'Menu item label ' + _actionMenuDemoService.items.length"
     [idsActionMenuTriggerFor]="subMenu"
     >
-    @if (demoService.menuItemHelperModel.hasLeadingIcon) {
+    @if (_actionMenuDemoService.menuItemHelperModel.hasLeadingIcon) {
       <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
     }
-    @if (demoService.menuItemHelperModel.hasTrailingIcon) {
+    @if (_actionMenuDemoService.menuItemHelperModel.hasTrailingIcon) {
       <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
     }
   </button>
@@ -57,18 +57,18 @@
 </ng-template>
 
 <ng-template #subMenu>
-  <ids-overlay-panel [appearance]="demoService.overlayPanelModel.appearance" [size]="demoService.overlayPanelModel.size" [variant]="demoService.overlayPanelModel.variant">
-    @for (_ of demoService.items; track $index) {
+  <ids-overlay-panel [appearance]="_actionMenuDemoService.overlayPanelModel.appearance" [size]="_actionMenuDemoService.overlayPanelModel.size" [variant]="_actionMenuDemoService.overlayPanelModel.variant">
+    @for (_ of _actionMenuDemoService.items; track $index) {
       <button
       type="button"
       idsMenuItem
-      [appearance]="demoService.menuItemModel.appearance"
-      [size]="demoService.menuItemModel.size"
-      [variant]="demoService.menuItemModel.variant"
+      [appearance]="_actionMenuDemoService.menuItemModel.appearance"
+      [size]="_actionMenuDemoService.menuItemModel.size"
+      [variant]="_actionMenuDemoService.menuItemModel.variant"
       [label]="'Menu item label ' + $index"
-      [disabled]="$index === 0 && demoService.menuItemHelperModel.hasDisabledItem"
+      [disabled]="$index === 0 && _actionMenuDemoService.menuItemHelperModel.hasDisabledItem"
       >
-      @if (demoService.menuItemHelperModel.hasLeadingIcon) {
+      @if (_actionMenuDemoService.menuItemHelperModel.hasLeadingIcon) {
         <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
       }
     </button>
@@ -85,33 +85,33 @@
     controls
     [controlName]="'Overlay panel'"
     [configType]="'input'"
-    [controlConfig]="demoService.overlayPanelInputControlConfig"
-    [(model)]="demoService.overlayPanelModel"
-    (resetted)="demoService.reset()"
+    [controlConfig]="_actionMenuDemoService.overlayPanelInputControlConfig"
+    [(model)]="_actionMenuDemoService.overlayPanelModel"
+    (resetted)="_actionMenuDemoService.reset()"
     />
     <app-control-table
     controls
     [controlName]="'Overlay panel'"
     [configType]="'helper'"
-    [controlConfig]="demoService.overlayPanelHelperControlConfig"
-    [(model)]="demoService.overlayPanelHelperModel"
-    (resetted)="demoService.reset()"
+    [controlConfig]="_actionMenuDemoService.overlayPanelHelperControlConfig"
+    [(model)]="_actionMenuDemoService.overlayPanelHelperModel"
+    (resetted)="_actionMenuDemoService.reset()"
     />
     <app-control-table
     controls
     [controlName]="'Menu item'"
     [configType]="'input'"
-    [controlConfig]="demoService.menuItemInputControlConfig"
-    [(model)]="demoService.menuItemModel"
-    (resetted)="demoService.reset()"
+    [controlConfig]="_actionMenuDemoService.menuItemInputControlConfig"
+    [(model)]="_actionMenuDemoService.menuItemModel"
+    (resetted)="_actionMenuDemoService.reset()"
     />
     <app-control-table
     controls
     [controlName]="'Menu item'"
     [configType]="'helper'"
-    [controlConfig]="demoService.menuItemHelperControlConfig"
-    [(model)]="demoService.menuItemHelperModel"
-    (resetted)="demoService.reset()"
+    [controlConfig]="_actionMenuDemoService.menuItemHelperControlConfig"
+    [(model)]="_actionMenuDemoService.menuItemHelperModel"
+    (resetted)="_actionMenuDemoService.reset()"
     />
   </app-tryout-controls>
 </div>

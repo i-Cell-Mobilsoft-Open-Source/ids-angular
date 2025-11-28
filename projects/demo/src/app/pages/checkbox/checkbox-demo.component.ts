@@ -32,5 +32,5 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class CheckboxDemoComponent {
-  public checkboxDemoService = inject(CheckboxDemoService);
+  protected _checkboxDemoService = inject(CheckboxDemoService);
 }

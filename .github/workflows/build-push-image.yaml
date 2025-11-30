@@ -1,0 +1,139 @@
+name: Build & Push Docker Image
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch (non-main) to build manually"
+        required: true
+      push_image:
+        description: "Push image? (true/false)"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_NAME: icellmobilsoft/ids-angular
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve ref
+        id: ref
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "REF=${{ github.event.inputs.ref }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "REF=${{ github.head_ref }}" >> $GITHUB_OUTPUT
+          else
+            echo "REF=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || steps.ref.outputs.REF }}
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Angular
+        run: pnpm run build:github
+
+      - name: Verify dist
+        run: |
+          if [ -z "$(find dist -type f -maxdepth 4 -print -quit 2>/dev/null)" ]; then
+            echo "dist empty"; exit 1; fi
+
+      - name: Compute tag
+        id: tag
+        run: |
+          SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
+          REF='${{ steps.ref.outputs.REF }}'
+          sanitize () { echo "$1" | tr '/_' '-' | tr -cd '[:alnum:]-' | sed 's/^-*//;s/-*$//'; }
+          if [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "branch" ]; then
+            BRANCH=$(sanitize "$REF")
+            IMAGE_TAG="${BRANCH}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:${IMAGE_TAG}"
+          elif [ "${{ github.event_name }}" = "push" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            IMAGE_TAG=$(sanitize "$REF")
+            FINAL_TAG="${IMAGE_NAME}:${IMAGE_TAG}"
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            PR_NUM='${{ github.event.pull_request.number }}'
+            IMAGE_TAG="pr-${PR_NUM}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:${IMAGE_TAG}"
+          else
+            SAFE=$(sanitize "$REF")
+            IMAGE_TAG="${SAFE}-${SHORT_SHA}"
+            FINAL_TAG="${IMAGE_NAME}:${IMAGE_TAG}"
+          fi
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "FINAL_TAG=$FINAL_TAG" >> $GITHUB_OUTPUT
+          echo "Tag => $FINAL_TAG"
+
+      - name: Login Docker.io
+        if: |
+          github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build image
+        run: docker build -t "${{ steps.tag.outputs.FINAL_TAG }}" .
+
+      - name: Push image
+        if: |
+          github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && github.event.inputs.push_image == 'true')
+        run: docker push "${{ steps.tag.outputs.FINAL_TAG }}"
+
+      - name: Update dev manifest
+        if: github.ref == 'refs/heads/main'
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          token: ${{ secrets.DEPLOY_REPO_PAT }}
+          repository: i-Cell-Mobilsoft-Open-Source/ids-deploy
+          event-type: update-dev-image
+          client-payload: |
+            {
+              "image": "${{ steps.tag.outputs.IMAGE_TAG }}"
+            }
+
+      - name: Update prod manifest PR
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          token: ${{ secrets.DEPLOY_REPO_PAT }}
+          repository: i-Cell-Mobilsoft-Open-Source/ids-deploy
+          event-type: update-prod-image
+          client-payload: |
+            {
+              "image": "${{ steps.tag.outputs.IMAGE_TAG }}"
+            }
+
+      - name: Summary
+        run: |
+          echo "Built: ${{ steps.tag.outputs.FINAL_TAG }}"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "PR build (image not pushed)."
+          fi

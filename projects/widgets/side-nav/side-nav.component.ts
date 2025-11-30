@@ -57,7 +57,6 @@ export class IdsSideNavComponent extends ComponentBaseWithDefaults<IdsSideNavDef
   public variant = input<IdsSideNavVariantType>(this._defaultConfig.variant);
   public hasActiveIndicator = input<unknown, boolean>(this._defaultConfig.hasActiveIndicator, { transform: booleanAttribute });
   public hasLabel = input<unknown, boolean>(this._defaultConfig.hasLabel, { transform: booleanAttribute });
-  public hasTooltip = input<unknown, boolean>(this._defaultConfig.hasTooltip, { transform: booleanAttribute });
   public navigationChange = toSignal(this._router.events.pipe(filter((event) => event instanceof NavigationEnd)));
 
   public embeddedIconButtonAppearance = computed<IdsIconButtonAppearanceType>(() => this.appearance());

@@ -21,7 +21,7 @@ import {
   IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY, IdsMenuItemComponent, IdsActiveIndicatorDirective,
 } from '@i-cell/ids-angular/menu';
 import {
-  IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY, OverlayPanelComponent,
+  IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY, IdsOverlayPanelComponent,
 } from '@i-cell/ids-angular/overlay-panel';
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-appearance.type';
 import { IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel/types/overlay-panel-variant.type';
@@ -66,7 +66,7 @@ type MenuItemHelperControls = {
     OverlayModule,
     IdsChipComponent,
     IdsPrefixDirective,
-    OverlayPanelComponent,
+    IdsOverlayPanelComponent,
     IdsMenuItemComponent,
     IdsActiveIndicatorDirective,
     CdkMenu,

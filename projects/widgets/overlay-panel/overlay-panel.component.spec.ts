@@ -1,18 +1,18 @@
-import { OverlayPanelComponent } from './overlay-panel.component';
+import { IdsOverlayPanelComponent } from './overlay-panel.component';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('NewOverlayPanelComponent', () => {
-  let component: OverlayPanelComponent;
-  let fixture: ComponentFixture<OverlayPanelComponent>;
+  let component: IdsOverlayPanelComponent;
+  let fixture: ComponentFixture<IdsOverlayPanelComponent>;
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      imports: [OverlayPanelComponent],
+      imports: [IdsOverlayPanelComponent],
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(OverlayPanelComponent);
+    fixture = TestBed.createComponent(IdsOverlayPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

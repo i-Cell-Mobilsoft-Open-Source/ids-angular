@@ -6,12 +6,6 @@ export const COMPONENT_DATA = [
     imageLink: '#/components/accordion',
   },
   {
-    id: 2,
-    title: 'Action menu',
-    imageUrl: 'assets/images/tn/ids-action-menu-tn@2x.png',
-    imageLink: '#/components/action-menu',
-  },
-  {
     id: 3,
     title: 'Avatar',
     imageUrl: 'assets/images/tn/ids-avatar-tn@2x.png',

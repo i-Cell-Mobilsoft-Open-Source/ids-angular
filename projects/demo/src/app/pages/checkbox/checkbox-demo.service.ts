@@ -2,34 +2,39 @@ import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxVariant, IdsCheckboxVariantType } from '@i-cell/ids-angular/checkbox';
+import {
+  IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY,
+  IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY,
+  IdsCheckboxVariant,
+  IdsCheckboxVariantType,
+} from '@i-cell/ids-angular/checkbox';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
 
 type CheckboxInputControls = {
-  size: IdsSizeType,
-  variant: IdsCheckboxVariantType,
-  readonly: boolean,
-  required: boolean,
-  disabled: boolean,
+  size: IdsSizeType;
+  variant: IdsCheckboxVariantType;
+  readonly: boolean;
+  required: boolean;
+  disabled: boolean;
 };
 
 type CheckboxHelperControls = {
-  label: string,
-  allowHint: boolean,
-  hintMessage: string,
+  label: string;
+  allowHint: boolean;
+  hintMessage: string;
 };
 
 type CheckboxGroupInputControls = {
-  groupLabel: string,
-  allowParent: boolean,
-  parentLabel: string,
-  name: string,
-  size: IdsSizeType,
-  variant: IdsCheckboxVariantType,
-  orientation: IdsOrientationType,
+  groupLabel: string;
+  allowParent: boolean;
+  parentLabel: string;
+  name: string;
+  size: IdsSizeType;
+  variant: IdsCheckboxVariantType;
+  orientation: IdsOrientationType;
 };
 
 @Injectable()
@@ -174,5 +179,4 @@ export class CheckboxDemoService {
     bath: true,
     sleep: false,
   };
-
 }

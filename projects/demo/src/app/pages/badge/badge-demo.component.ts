@@ -12,7 +12,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-badge-demo',
-  standalone: true,
   imports: [
     IdsBadgeDirective,
     IdsIconComponent,

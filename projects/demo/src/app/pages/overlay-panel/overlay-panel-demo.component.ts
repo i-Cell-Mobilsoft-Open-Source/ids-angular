@@ -26,10 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TryoutControlComponent,
   ],
   templateUrl: './overlay-panel-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './overlay-panel-demo.component.scss',
-  ],
+  styleUrls: ['../demo-page.scss'],
 })
 export class OverlayPanelDemoComponent {
   protected _overlayPanelDemoService = inject(OverlayPanelDemoService);

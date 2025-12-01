@@ -2,39 +2,47 @@ import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IDS_CHIP_DEFAULT_CONFIG_FACTORY, IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY, IdsChipAppearance, IdsChipAppearanceType, IdsChipRemoveEvent, IdsChipVariant, IdsChipVariantType } from '@i-cell/ids-angular/chip';
+import {
+  IDS_CHIP_DEFAULT_CONFIG_FACTORY,
+  IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY,
+  IdsChipAppearance,
+  IdsChipAppearanceType,
+  IdsChipRemoveEvent,
+  IdsChipVariant,
+  IdsChipVariantType,
+} from '@i-cell/ids-angular/chip';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY();
 
 type ChipInputControls = {
-  appearance: IdsChipAppearanceType,
-  size: IdsSizeType,
-  variant: IdsChipVariantType,
-  removable: boolean,
-  disabled: boolean,
+  appearance: IdsChipAppearanceType;
+  size: IdsSizeType;
+  variant: IdsChipVariantType;
+  removable: boolean;
+  disabled: boolean;
 };
 
 type ChipHelperControls = {
-  hasAvatar: boolean,
-  hasLeadingIcon: boolean,
-  label: string,
-  hasTrailingIconButton: boolean,
+  hasAvatar: boolean;
+  hasLeadingIcon: boolean;
+  label: string;
+  hasTrailingIconButton: boolean;
 };
 
 type ChipGroupInputControls = {
-  appearance: IdsChipAppearanceType,
-  size: IdsSizeType,
-  disabled: boolean,
+  appearance: IdsChipAppearanceType;
+  size: IdsSizeType;
+  disabled: boolean;
 };
 
 type ChipGroupHelperControls = {
-  chipsAreInteractive: boolean,
+  chipsAreInteractive: boolean;
 };
 
-const chipList: { label: string, variant: IdsChipVariantType }[] = [
-  { label: 'carrot',  variant: IdsChipVariant.PRIMARY },
+const chipList: { label: string; variant: IdsChipVariantType }[] = [
+  { label: 'carrot', variant: IdsChipVariant.PRIMARY },
   { label: 'onion', variant: IdsChipVariant.SECONDARY },
   { label: 'mushroom', variant: IdsChipVariant.SURFACE },
 ];

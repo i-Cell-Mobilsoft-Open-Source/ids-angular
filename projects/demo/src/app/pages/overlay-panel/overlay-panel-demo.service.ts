@@ -8,6 +8,7 @@ import { IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY, IdsOverlayPanelAppearance, Id
 
 const overlayPanelDefaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
 const menuItemDefaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
+const numberOfItems = 3;
 
 type OverlayPanelInputControls = {
   appearance: IdsOverlayPanelAppearanceType,
@@ -124,8 +125,7 @@ export class OverlayPanelDemoService {
   public menuItemModel: MenuItemInputControls = { ...this.menuItemDefaults };
   public menuItemHelperModel: MenuItemHelperControls = { ...this.menuItemHelperDefaults };
 
-  // eslint-disable-next-line no-magic-numbers
-  public items = Array(3);
+  public items = Array(numberOfItems);
 
   public reset(): void {
     this.overlayPanelModel = { ...this.overlayPanelDefaults };

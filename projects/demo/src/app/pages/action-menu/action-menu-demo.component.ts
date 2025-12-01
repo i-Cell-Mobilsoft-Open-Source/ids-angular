@@ -29,10 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
   ],
   templateUrl: './action-menu-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './action-menu-demo.component.scss',
-  ],
+  styleUrls: ['../demo-page.scss'],
 })
 export class ActionMenuDemoComponent {
   protected _actionMenuDemoService = inject(ActionMenuDemoService);

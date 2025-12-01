@@ -14,7 +14,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-breadcrumb-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     TranslatePipe,
@@ -25,7 +24,6 @@ import { TranslatePipe } from '@ngx-translate/core';
     TryoutControlComponent,
   ],
   templateUrl: './breadcrumb-demo.component.html',
-  styleUrl: './breadcrumb-demo.component.scss',
 })
 export class BreadcrumbDemoComponent {
   protected _breadcrumbDemoService = inject(BreadcrumbDemoService);

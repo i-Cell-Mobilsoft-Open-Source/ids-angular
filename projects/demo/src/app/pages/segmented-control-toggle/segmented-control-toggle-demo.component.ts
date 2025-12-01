@@ -25,10 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableComponent,
   ],
   templateUrl: './segmented-control-toggle-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './segmented-control-toggle-demo.component.scss',
-  ],
+  styleUrls: ['../demo-page.scss'],
 })
 export class SegmentedControlToggleDemoComponent {
   protected _segmentedControlToggleDemoService = inject(SegmentedControlToggleDemoService);

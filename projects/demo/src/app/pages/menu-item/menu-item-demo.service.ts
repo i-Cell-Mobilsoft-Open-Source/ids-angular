@@ -6,6 +6,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY, IdsMenuItemAppearance, IdsMenuItemAppearanceType, IdsMenuItemVariant, IdsMenuItemVariantType } from '@i-cell/ids-angular/menu';
 
 const menuItemDefaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
+const numberOfItems = 3;
 
 type MenuItemInputControls = {
   appearance: IdsMenuItemAppearanceType,
@@ -103,8 +104,7 @@ export class MenuItemDemoService {
   public menuItemModel: MenuItemInputControls = { ...this.menuItemDefaults };
   public menuItemHelperModel: MenuItemHelperControls = { ...this.menuItemHelperDefaults };
 
-  // eslint-disable-next-line no-magic-numbers
-  public items = Array(3);
+  public items = Array(numberOfItems);
 
   public reset(): void {
     this.menuItemModel = { ...this.menuItemDefaults };

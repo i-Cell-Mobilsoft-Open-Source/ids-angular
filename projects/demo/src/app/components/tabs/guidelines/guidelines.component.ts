@@ -8,7 +8,6 @@ type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & 
 
 @Component({
   selector: 'app-guidelines',
-  standalone: true,
   imports: [
     IdsChipComponent,
     ContentCardComponent,

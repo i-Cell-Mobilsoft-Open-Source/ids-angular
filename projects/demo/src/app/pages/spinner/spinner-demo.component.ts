@@ -20,7 +20,6 @@ import { TranslatePipe } from '@ngx-translate/core';
     TryoutControlComponent,
   ],
   templateUrl: './spinner-demo.component.html',
-  styleUrl: './spinner-demo.component.scss',
 })
 export class SpinnerDemoComponent {
   protected _spinnerDemoService = inject(SpinnerDemoService);

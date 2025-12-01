@@ -30,6 +30,8 @@ export type TableInputControls = {
 
 const defaultConfig = IDS_TABLE_DEFAULT_CONFIG_FACTORY();
 const zeroCelsiusInKelvin = 273.15;
+const pageDefaultRows = 10;
+const pageDefaultPage = 1;
 
 export const translateLabelsToIntlPropNames = {
   'TABLE.ARIA.HEADER_SELECTOR': 'headerSelectorAriaLabel',
@@ -46,9 +48,8 @@ export class TableDemoService {
 
   public getPeriodicTable(paginationData: IdsTableRequestPaginationData | null, sortInfo: IdsTableSortInfo | null):
   Observable<IdsTableResponseData<PeriodicTableElement>> {
-    // eslint-disable-next-line no-magic-numbers
-    const rows = paginationData?.rows || 10;
-    const page = paginationData?.page || 1;
+    const rows = paginationData?.rows || pageDefaultRows;
+    const page = paginationData?.page || pageDefaultPage;
 
     return this._http.get<{ elements: PeriodicTableElement[] }>(`${environment.baseUrl}/assets/json/periodic-table.json`).pipe(
       map((result) => ({

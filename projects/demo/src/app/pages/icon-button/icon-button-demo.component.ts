@@ -24,10 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableComponent,
   ],
   templateUrl: './icon-button-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './icon-button-demo.component.scss',
-  ],
+  styleUrls: ['../demo-page.scss'],
 })
 export class IconButtonDemoComponent {
   protected _iconButtonDemoService = inject(IconButtonDemoService);

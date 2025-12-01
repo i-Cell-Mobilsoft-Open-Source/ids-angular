@@ -60,8 +60,8 @@ export class SnackbarDemoService {
       control: DemoControl.SWITCH,
     },
     closeButtonLabel: {
-      // eslint-disable-next-line @stylistic/js/max-len
-      description: 'Custom close button. If any text is provided, the close button will be a button with this text against the default "x" button',
+      description: 'Custom close button. If any text is provided,' +
+      ' the close button will be a button with this text against the default "x" button',
       type: 'string',
       default: '-',
       demoDefault: '',
@@ -104,8 +104,8 @@ export class SnackbarDemoService {
       disabled: true,
     },
     newestAtStartPosition: {
-      // eslint-disable-next-line @stylistic/js/max-len
-      description: 'Whether the newest snackbar opens in start position, or not. newestAtStartPosition is an application-wide default value. Can not overwrite at runtime.',
+      description: 'Whether the newest snackbar opens in start position, or not.'+
+      ' newestAtStartPosition is an application-wide default value. Can not overwrite at runtime.',
       type: 'boolean',
       default: defaultConfig.newestAtStartPosition,
       control: DemoControl.SWITCH,
@@ -121,8 +121,9 @@ export class SnackbarDemoService {
       step: 1,
     },
     useActualViewContainer: {
-      // eslint-disable-next-line @stylistic/js/max-len
-      description: 'Snackbars open in snackbar group. This group can connect to the viewport by default, or we can connect to a viewContainerRef. With this boolean, we can switch between actual viewContainerRef or viewPort.',
+      description: 'Snackbars open in snackbar group.'+
+      ' This group can connect to the viewport by default, or we can connect to a viewContainerRef.'+
+      ' With this boolean, we can switch between actual viewContainerRef or viewPort.',
       type: 'boolean',
       default: true,
       control: DemoControl.SWITCH,

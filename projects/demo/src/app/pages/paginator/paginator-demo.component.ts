@@ -22,10 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableComponent,
   ],
   templateUrl: './paginator-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './paginator-demo.component.scss',
-  ],
+  styleUrls: ['../demo-page.scss'],
 })
 export class PaginatorDemoComponent {
   protected _paginatorDemoService = inject(PaginatorDemoService);

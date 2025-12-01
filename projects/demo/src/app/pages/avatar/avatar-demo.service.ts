@@ -8,15 +8,14 @@ import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '
 const defaultConfig = IDS_AVATAR_DEFAULT_CONFIG_FACTORY();
 
 type AvatarInputControls = {
-  initials: string,
-  size: IdsSizeType,
-  sizeCollection: IdsSizeCollectionType,
-  variant: IdsAvatarVariantType,
+  initials: string;
+  size: IdsSizeType;
+  sizeCollection: IdsSizeCollectionType;
+  variant: IdsAvatarVariantType;
 };
 
 @Injectable()
 export class AvatarDemoService {
-
   public readonly inputControlConfig: DemoControlConfig<AvatarInputControls> = {
     initials: {
       description: 'Avatar initials.',

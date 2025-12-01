@@ -12,7 +12,6 @@ import { RouterOutlet } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
 
 @Component({
-  standalone: true,
   selector: 'app-components',
   templateUrl: './components.component.html',
   imports: [
@@ -53,19 +52,17 @@ export class ComponentsComponent implements OnInit {
         const entry = result.data.entry;
         let components: ComponentData[] = [];
 
-        // Extract from nested navs_field tree if available
         if (entry?.navs_field) {
           entry.navs_field[0]?.tree?.forEach((treeNode) => {
             treeNode.children?.forEach((childNode) => {
               childNode.children?.forEach((grandchild) => {
                 const page = grandchild.page;
                 if (page?.id) {
-                  // Map Statamic fields to ComponentData
                   components.push({
                     id: Number(page.id) || 0,
                     title: page.title ?? '',
-                    comp_description: page.comp_description ?? '', // Statamic field
-                    description: page.comp_description ?? '', // For display
+                    comp_description: page.comp_description ?? '',
+                    description: page.comp_description ?? '',
                     slug: page.slug ?? '',
                     imageUrl:
                       buildCmsUrl(page.comp_img_light_mode?.[0]?.url) || buildCmsUrl(page.comp_img_dark_mode?.[0]?.url) || fallbackImage,
@@ -79,14 +76,13 @@ export class ComponentsComponent implements OnInit {
           });
         }
 
-        // Fallback to flat list if nested not available
         if (components.length === 0) {
           const componentsList = result.data.entries.data ?? [];
           components = componentsList.map((componentItem: StatamicComponentListItem) => ({
             id: Number(componentItem.id) || 0,
             title: componentItem.title ?? '',
-            comp_description: componentItem.comp_description ?? '', // Statamic field
-            description: componentItem.comp_description ?? '', // For display
+            comp_description: componentItem.comp_description ?? '',
+            description: componentItem.comp_description ?? '',
             slug: componentItem.slug ?? '',
             imageUrl:
               buildCmsUrl(componentItem.comp_img_light_mode?.[0]?.url) ||
@@ -100,7 +96,6 @@ export class ComponentsComponent implements OnInit {
 
         this.componentDatas.set(components.sort((a, b) => a.title.localeCompare(b.title)));
 
-        // Set heroData signal based on entry or fallback.
         if (entry) {
           const lightUrl = entry.hero_image_light?.url ? buildCmsUrl(entry.hero_image_light.url) : '';
           const darkUrl = entry.hero_image_dark?.url ? buildCmsUrl(entry.hero_image_dark.url) : '';

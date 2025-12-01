@@ -5,11 +5,11 @@ import { IDS_BADGE_DEFAULT_CONFIG_FACTORY, IdsBadgeVariant, IdsBadgeVariantType 
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 type BadgeInputControls = {
-  size: IdsSizeType,
-  variant: IdsBadgeVariantType,
-  hasLeadingIcon: boolean,
-  label: string,
-  limit: number | null,
+  size: IdsSizeType;
+  variant: IdsBadgeVariantType;
+  hasLeadingIcon: boolean;
+  label: string;
+  limit: number | null;
 };
 
 const defaultConfig = IDS_BADGE_DEFAULT_CONFIG_FACTORY();

@@ -16,7 +16,6 @@ type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & 
 
 @Component({
   selector: 'app-component-details',
-  standalone: true,
   imports: [
     RouterOutlet,
     RouterModule,
@@ -31,9 +30,6 @@ export class ComponentDetailsComponent implements OnInit {
   public heroData?: HeroData;
   public componentBlocks: ComponentBlock[] = [];
 
-  // @ViewChild('demoHost', { read: ViewContainerRef, static: true }) public demoHost!: ViewContainerRef;
-  // @ViewChild('controlHost', { read: ViewContainerRef, static: true }) public controlHost!: ViewContainerRef;
-
   public tabGroup = viewChild(IdsTabGroupComponent);
   public activeTab = signal<string>('guidelines');
 
@@ -43,9 +39,7 @@ export class ComponentDetailsComponent implements OnInit {
     'api',
   ];
 
-  public targetTabIndex = computed(() =>
-    this._tabs.indexOf(this.activeTab()),
-  );
+  public targetTabIndex = computed(() => this._tabs.indexOf(this.activeTab()));
 
   private _graphqlService = inject(GraphqlService);
   private _route = inject(ActivatedRoute);
@@ -71,7 +65,6 @@ export class ComponentDetailsComponent implements OnInit {
       const group = this.tabGroup();
 
       if (group) {
-
         const clickedIndex = group.selectedTabIndex();
 
         const targetPath = this._tabs[clickedIndex] || 'guidelines';
@@ -86,36 +79,37 @@ export class ComponentDetailsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
     const navigationEnd$ = this._router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       startWith(null),
     );
 
-    navigationEnd$.pipe(
-      map(() => {
-        const urlSegments = this._router.url.split('/');
-        return urlSegments[2];
-      }),
-      distinctUntilChanged(),
-      filter((slug) => !!slug),
-      switchMap((slug) =>
-        this._graphqlService.getComponents().pipe(
-          map((result) => {
-            const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
-            const components = typedResult.data.entries.data;
-            return components.find((entry) => entry.slug === slug);
-          }),
+    navigationEnd$
+      .pipe(
+        map(() => {
+          const urlSegments = this._router.url.split('/');
+          return urlSegments[2];
+        }),
+        distinctUntilChanged(),
+        filter((slug) => !!slug),
+        switchMap((slug) =>
+          this._graphqlService.getComponents().pipe(
+            map((result) => {
+              const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
+              const components = typedResult.data.entries.data;
+              return components.find((entry) => entry.slug === slug);
+            }),
+          ),
         ),
-      ),
-    ).subscribe((component) => {
-      if (component) {
-        this._updateHeroAndBlocks(component);
-      } else {
-        this.heroData = undefined;
-        this.componentBlocks = [];
-      }
-    });
+      )
+      .subscribe((component) => {
+        if (component) {
+          this._updateHeroAndBlocks(component);
+        } else {
+          this.heroData = undefined;
+          this.componentBlocks = [];
+        }
+      });
 
     navigationEnd$.subscribe(() => {
       const childRoute = this._route.firstChild?.snapshot.url[0]?.path ?? 'guidelines';
@@ -131,9 +125,7 @@ export class ComponentDetailsComponent implements OnInit {
       isBackButton: true,
       description: component.comp_description,
       imageUrl: component.comp_img_light_mode?.[0]?.url ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}` : '',
-      imageUrlLight: component.comp_img_light_mode?.[0]?.url
-        ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}`
-        : '',
+      imageUrlLight: component.comp_img_light_mode?.[0]?.url ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}` : '',
       imageUrlDark: component.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${component.comp_img_dark_mode[0].url}` : '',
     };
 
@@ -193,5 +185,4 @@ export class ComponentDetailsComponent implements OnInit {
   public trackByCardOrHeading(index: number, item: ComponentBlock): string | number {
     return item.type === 'card' ? (item.id ?? `card-${index}`) : `heading-${index}`;
   }
-
 }

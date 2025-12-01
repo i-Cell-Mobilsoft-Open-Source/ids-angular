@@ -24,10 +24,7 @@ import { Subscription } from 'rxjs';
     TryoutControlComponent,
   ],
   templateUrl: './accordion-demo.component.html',
-  styleUrls: [
-    '../demo-page.scss',
-    './accordion-demo.component.scss',
-  ],
+  styleUrls: ['../demo-page.scss'],
 })
 export class AccordionDemoComponent implements OnInit, OnDestroy {
   protected _accordionDemoService = inject(AccordionDemoService);

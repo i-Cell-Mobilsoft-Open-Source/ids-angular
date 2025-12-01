@@ -25,7 +25,6 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableComponent,
   ],
   templateUrl: './side-nav-demo.component.html',
-  styleUrl: './side-nav-demo.component.scss',
 })
 export class SideNavDemoComponent {
   protected _sideNavDemoService = inject(SideNavDemoService);

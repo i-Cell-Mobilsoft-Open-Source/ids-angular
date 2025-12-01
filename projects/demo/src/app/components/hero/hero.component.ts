@@ -10,7 +10,6 @@ const SIGNAL_UPDATE_DELAY_MS = 50;
 
 @Component({
   selector: 'app-hero',
-  standalone: true,
   imports: [
     IdsIconComponent,
     IdsIconButtonComponent,

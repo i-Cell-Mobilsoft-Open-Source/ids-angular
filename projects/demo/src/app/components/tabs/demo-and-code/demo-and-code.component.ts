@@ -8,7 +8,6 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
 @Component({
   selector: 'app-demo-and-code',
-  standalone: true,
   imports: [
     IdsChipComponent,
     IdsCardComponent,

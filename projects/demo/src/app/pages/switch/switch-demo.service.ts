@@ -139,14 +139,21 @@ export class SwitchDemoService {
   public groupModel: SwitchGroupInputControls = { ...this.groupDefaults };
 
   public value = true;
-  // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
-  public groupValue = [true, true, true];
+
+  public groupValue = [
+    true,
+    true,
+    true,
+  ];
 
   public reset(): void {
     this.value = true;
     this.model = { ...this.defaults };
-    // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
-    this.groupValue = [true, true, true];
+    this.groupValue = [
+      true,
+      true,
+      true,
+    ];
     this.groupModel = { ...this.groupDefaults };
   }
 }

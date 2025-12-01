@@ -2,25 +2,31 @@ import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IDS_CARD_DEFAULT_CONFIG_FACTORY, IdsCardAppearance, IdsCardAppearanceType, IdsCardVariant, IdsCardVariantType } from '@i-cell/ids-angular/card';
+import {
+  IDS_CARD_DEFAULT_CONFIG_FACTORY,
+  IdsCardAppearance,
+  IdsCardAppearanceType,
+  IdsCardVariant,
+  IdsCardVariantType,
+} from '@i-cell/ids-angular/card';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
 
 type CardInputControls = {
-  appearance: IdsCardAppearanceType,
-  size: IdsSizeType,
-  variant: IdsCardVariantType,
-  orientation: IdsOrientationType,
-  disabled: boolean,
+  appearance: IdsCardAppearanceType;
+  size: IdsSizeType;
+  variant: IdsCardVariantType;
+  orientation: IdsOrientationType;
+  disabled: boolean;
 };
 
 type CardMediaInputControls = {
-  stretch: boolean
+  stretch: boolean;
 };
 
 type CardHelperControls = {
-  clickable: boolean,
+  clickable: boolean;
 };
 
 @Injectable()
@@ -97,5 +103,4 @@ export class CardDemoService {
     this.mediaModel = { ...this.mediaDefaults };
     this.helperModel = { ...this.helperDefaults };
   }
-
 }

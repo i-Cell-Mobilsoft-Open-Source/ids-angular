@@ -12,7 +12,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-button-demo',
-  standalone: true,
   imports: [
     TryoutComponent,
     IdsButtonComponent,
@@ -29,7 +28,6 @@ import { TranslateModule } from '@ngx-translate/core';
     './button-demo.component.scss',
   ],
 })
-
 export class ButtonDemoComponent {
   protected _buttonDemoService = inject(ButtonDemoService);
 }

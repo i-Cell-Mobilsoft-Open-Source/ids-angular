@@ -2,28 +2,35 @@ import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IDS_BUTTON_DEFAULT_CONFIG_FACTORY, IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY, IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
+import {
+  IDS_BUTTON_DEFAULT_CONFIG_FACTORY,
+  IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY,
+  IdsButtonAppearance,
+  IdsButtonAppearanceType,
+  IdsButtonVariant,
+  IdsButtonVariantType,
+} from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY();
 
 export type ButtonInputControls = {
-  appearance: IdsButtonAppearanceType,
-  size: IdsSizeType,
-  variant: IdsButtonVariantType,
-  disabled: boolean,
-  asLink: boolean,
+  appearance: IdsButtonAppearanceType;
+  size: IdsSizeType;
+  variant: IdsButtonVariantType;
+  disabled: boolean;
+  asLink: boolean;
 };
 
 export type ButtonHelperControls = {
-  text: string,
-  hasLeadingIcon: boolean,
-  hasTrailingIcon: boolean,
+  text: string;
+  hasLeadingIcon: boolean;
+  hasTrailingIcon: boolean;
 };
 
 export type ButtonGroupInputControls = {
-  size: IdsSizeType,
+  size: IdsSizeType;
 };
 
 @Injectable()

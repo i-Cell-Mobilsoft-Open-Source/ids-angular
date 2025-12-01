@@ -10,18 +10,18 @@ import { Subject } from 'rxjs';
 const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 
 type AccordionInputControls = {
-  size: IdsSizeType,
-  appearance: IdsAccordionAppearanceType,
-  summary: string,
-  disabled: boolean,
-  multi: boolean,
-  btnSize: IdsSizeType,
-  btnAppearance: IdsButtonAppearanceType,
-  btnVariant: IdsButtonVariantType,
-  expandBtnLabel: string,
-  collapseBtnLabel: string,
-  hasLeadingIcon: boolean,
-  hasTrailingIcon: boolean,
+  size: IdsSizeType;
+  appearance: IdsAccordionAppearanceType;
+  summary: string;
+  disabled: boolean;
+  multi: boolean;
+  btnSize: IdsSizeType;
+  btnAppearance: IdsButtonAppearanceType;
+  btnVariant: IdsButtonVariantType;
+  expandBtnLabel: string;
+  collapseBtnLabel: string;
+  hasLeadingIcon: boolean;
+  hasTrailingIcon: boolean;
 };
 @Injectable()
 export class AccordionDemoService {

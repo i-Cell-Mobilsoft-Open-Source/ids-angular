@@ -2,9 +2,21 @@ import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY, IdsBreadcrumbDivider, IdsBreadcrumbDividerType, IdsBreadcrumbHierarchyType, IdsBreadcrumbVariant, IdsBreadcrumbVariantType } from '@i-cell/ids-angular/breadcrumb';
+import {
+  IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY,
+  IdsBreadcrumbDivider,
+  IdsBreadcrumbDividerType,
+  IdsBreadcrumbHierarchyType,
+  IdsBreadcrumbVariant,
+  IdsBreadcrumbVariantType,
+} from '@i-cell/ids-angular/breadcrumb';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType, IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel';
+import {
+  IdsOverlayPanelAppearance,
+  IdsOverlayPanelAppearanceType,
+  IdsOverlayPanelVariant,
+  IdsOverlayPanelVariantType,
+} from '@i-cell/ids-angular/overlay-panel';
 
 type BreadcrumbInputControls = {
   size: IdsSizeType;

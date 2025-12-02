@@ -2,7 +2,7 @@ import { IdsOverlayPanelComponent } from './overlay-panel.component';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('IdsOverlayPanelComponent', () => {
+describe('NewOverlayPanelComponent', () => {
   let component: IdsOverlayPanelComponent;
   let fixture: ComponentFixture<IdsOverlayPanelComponent>;
 

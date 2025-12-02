@@ -49,7 +49,6 @@ export class AppComponent implements OnInit, OnDestroy {
           path: '/components',
           children: [
             { name: 'COMPONENTS.ACCORDION', path: '/components/accordion' },
-            { name: 'COMPONENTS.ACTION_MENU', path: '/components/action-menu' },
             { name: 'COMPONENTS.AVATAR', path: '/components/avatar' },
             { name: 'COMPONENTS.BADGE', path: '/components/badge' },
             { name: 'COMPONENTS.BREADCRUMB', path: '/components/breadcrumb' },

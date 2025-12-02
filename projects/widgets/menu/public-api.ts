@@ -1,4 +1,3 @@
-export * from './action-menu/action-menu-trigger.directive';
 export * from './active-indicator/active-indicator.directive';
 export * from './menu-item/types/menu-item-appearance.type';
 export * from './menu-item/types/menu-item-variant.type';

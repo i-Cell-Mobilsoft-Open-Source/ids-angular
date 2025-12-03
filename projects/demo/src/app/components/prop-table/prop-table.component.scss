@@ -1,0 +1,12 @@
+.props-table-wrapper {
+  .prop-value-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 2px;
+      color: var(--ids-color-text-secondary, #6b7280); // Vagy a design rendszernek megfelelő szín
+    }
+  }
+} 

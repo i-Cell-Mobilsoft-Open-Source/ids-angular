@@ -1,0 +1,25 @@
+<div class="props-table-wrapper w-full">
+  <ids-table
+    [columnDefs]="colDefs"
+    [dataSource]="_dataSource"
+    [size]="'compact'"
+    [variant]="'surface'"
+    [withBorder]="true"
+    [enableSorting]="false"
+    [enableRowSelection]="false"
+  >
+    <ng-template let-row idsCellTemplate="valueListTemplate">
+      @if (row.values && row.values.length > 0) {
+        <ul class="list-disc list-inside pl-4">
+          @for (value of row.values; track value) {
+            <li>
+              {{ value }}
+            </li>
+          }
+        </ul>
+      } @else {
+        <span class="text-sm text-secondary">-</span>
+      }
+    </ng-template>
+  </ids-table>
+</div>

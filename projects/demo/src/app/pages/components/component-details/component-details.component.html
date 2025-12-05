@@ -3,7 +3,7 @@
     <app-hero [heroData]="hero" />
   }
 
-  <ids-tab-group>
+  <ids-tab-group [selectedTabIndex]="_selectedTabIndex" (selectedTabChange)="_onSelectedTabChange($event)">
     <ids-tab label="Guidelines">
       <ng-template />
     </ids-tab>

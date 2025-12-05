@@ -36,16 +36,16 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Scrollbar'"
-        [configType]="'input'"
+        controlName="Scrollbar"
+        configType="input"
         [controlConfig]="_scrollbarDemoService.controlConfig"
         [(model)]="_scrollbarDemoService.model"
         (resetted)="_scrollbarDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Scrollbar'"
-        [configType]="'helper'"
+        controlName="Scrollbar"
+        configType="helper"
         [controlConfig]="_scrollbarDemoService.helperControlConfig"
         [(model)]="_scrollbarDemoService.helperModel"
         (resetted)="_scrollbarDemoService.reset()"

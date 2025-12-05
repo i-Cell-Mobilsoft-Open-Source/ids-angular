@@ -26,8 +26,8 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Breadcrumb'"
-        [configType]="'input'"
+        controlName="Breadcrumb"
+        configType="input"
         [controlConfig]="_breadcrumbDemoService.breadcrumbInputControlConfig"
         [(model)]="_breadcrumbDemoService.breadcrumbModel"
         (resetted)="_breadcrumbDemoService.reset()"
@@ -35,8 +35,8 @@
 
       <app-control-table
         controls
-        [controlName]="'Overlay panel'"
-        [configType]="'input'"
+        controlName="Overlay panel"
+        configType="input"
         [controlConfig]="_breadcrumbDemoService.overlayPanelInputControlConfig"
         [(model)]="_breadcrumbDemoService.overlayPanelModel"
         (resetted)="_breadcrumbDemoService.reset()"

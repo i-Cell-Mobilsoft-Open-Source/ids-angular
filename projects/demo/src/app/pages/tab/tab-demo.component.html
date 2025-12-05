@@ -52,7 +52,7 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [configType]="'input'"
+        configType="input"
         [controlConfig]="_tabDemoService.inputControlConfig"
         [(model)]="_tabDemoService.model"
         (resetted)="_tabDemoService.reset()"
@@ -60,7 +60,7 @@
       @if (_tabDemoService.isLoaded()) {
         <app-control-table
           controls
-          [configType]="'helper'"
+          configType="helper"
           [controlConfig]="_tabDemoService.helperControlConfig()"
           [(model)]="_tabDemoService.helperModel"
           (resetted)="_tabDemoService.reset()"

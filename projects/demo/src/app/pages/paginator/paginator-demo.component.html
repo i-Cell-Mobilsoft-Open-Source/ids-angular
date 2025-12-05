@@ -31,7 +31,7 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [configType]="'input'"
+        configType="input"
         [controlConfig]="_paginatorDemoService.inputControlConfig"
         [(model)]="_paginatorDemoService.model"
         (modelChange)="_paginatorDemoService.updatePageSize()"

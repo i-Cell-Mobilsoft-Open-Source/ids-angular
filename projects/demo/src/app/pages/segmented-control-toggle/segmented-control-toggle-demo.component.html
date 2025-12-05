@@ -57,14 +57,14 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [configType]="'input'"
+        configType="input"
         [controlConfig]="_segmentedControlToggleDemoService.inputControlConfig"
         [(model)]="_segmentedControlToggleDemoService.model"
         (resetted)="_segmentedControlToggleDemoService.reset()"
       />
       <app-control-table
         controls
-        [configType]="'helper'"
+        configType="helper"
         [controlConfig]="_segmentedControlToggleDemoService.helperControlConfig"
         [(model)]="_segmentedControlToggleDemoService.helperModel"
         (resetted)="_segmentedControlToggleDemoService.reset()"

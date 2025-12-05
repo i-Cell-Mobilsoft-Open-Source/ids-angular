@@ -91,24 +91,24 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Form field'"
-        [configType]="'input'"
+        controlName="Form field"
+        configType="input"
         [controlConfig]="_formFieldDemoService.formFieldInputControlConfig"
         [(model)]="_formFieldDemoService.formFieldModel"
         (resetted)="_formFieldDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Form field'"
-        [configType]="'helper'"
+        controlName="Form field"
+        configType="helper"
         [controlConfig]="_formFieldDemoService.formFieldHelperControlConfig"
         [(model)]="_formFieldDemoService.formFieldHelperModel"
         (resetted)="_formFieldDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Form field'"
-        [configType]="'input'"
+        controlName="Form field"
+        configType="input"
         [controlConfig]="_formFieldDemoService.inputInputControlConfig"
         [(model)]="_formFieldDemoService.inputModel"
         (resetted)="_formFieldDemoService.reset()"

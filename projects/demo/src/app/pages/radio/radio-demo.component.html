@@ -54,14 +54,14 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [configType]="'input'"
+        configType="input"
         [controlConfig]="_radioDemoService.inputControlConfig"
         [(model)]="_radioDemoService.model"
         (resetted)="_radioDemoService.reset()"
       />
       <app-control-table
         controls
-        [configType]="'helper'"
+        configType="helper"
         [controlConfig]="_radioDemoService.helperControlConfig"
         [(model)]="_radioDemoService.helperModel"
         (resetted)="_radioDemoService.reset()"

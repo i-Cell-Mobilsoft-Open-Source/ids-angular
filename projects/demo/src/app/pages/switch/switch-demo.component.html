@@ -71,16 +71,16 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Switch'"
-        [configType]="'input'"
+        controlName="Switch"
+        configType="input"
         [controlConfig]="_switchDemoService.inputControlConfig"
         [(model)]="_switchDemoService.model"
         (resetted)="_switchDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Switch group'"
-        [configType]="'input'"
+        controlName="Switch group"
+        configType="input"
         [controlConfig]="_switchDemoService.groupInputControlConfig"
         [(model)]="_switchDemoService.groupModel"
         (resetted)="_switchDemoService.reset()"

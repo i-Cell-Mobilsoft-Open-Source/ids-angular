@@ -34,7 +34,7 @@
     <button idsButton type="button" variant="primary" [disabled]="currentLang() === 'en'" (click)="changeLanguage('en')">EN</button>
     <button idsButton type="button" variant="secondary" [disabled]="currentLang() === 'hu'" (click)="changeLanguage('hu')">HU</button>
   </div>
-  <ids-switch [formControl]="darkMode" [size]="'dense'" />
+  <ids-switch size="dense" [formControl]="darkMode" />
 </header>
 <ids-nav [menu]="dynamicMenu" />
 <main cdkScrollable>

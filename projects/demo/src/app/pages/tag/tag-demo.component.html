@@ -49,9 +49,9 @@
         <div class="tag-item">
           <h2>{{ "COMMON.GROUPED" | translate }}</h2>
           <ids-tag-group [appearance]="_tagDemoService.groupModel.appearance" [size]="_tagDemoService.groupModel.size">
-            <ids-tag [variant]="'primary'">Primary</ids-tag>
-            <ids-tag [variant]="'secondary'">Secondary</ids-tag>
-            <ids-tag [variant]="'success'">Success</ids-tag>
+            <ids-tag variant="primary">Primary</ids-tag>
+            <ids-tag variant="secondary">Secondary</ids-tag>
+            <ids-tag variant="success">Success</ids-tag>
           </ids-tag-group>
         </div>
       </div>
@@ -62,24 +62,24 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Tag'"
-        [configType]="'input'"
+        controlName="Tag"
+        configType="input"
         [controlConfig]="_tagDemoService.inputControlConfig"
         [(model)]="_tagDemoService.model"
         (resetted)="_tagDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Tag'"
-        [configType]="'helper'"
+        controlName="Tag"
+        configType="helper"
         [controlConfig]="_tagDemoService.helperControlConfig"
         [(model)]="_tagDemoService.helperModel"
         (resetted)="_tagDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Tag group'"
-        [configType]="'input'"
+        controlName="Tag group"
+        configType="input"
         [controlConfig]="_tagDemoService.groupInputControlConfig"
         [(model)]="_tagDemoService.groupModel"
         (resetted)="_tagDemoService.reset()"

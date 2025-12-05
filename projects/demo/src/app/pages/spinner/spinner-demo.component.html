@@ -7,11 +7,11 @@
     >
       <div component>
         <ids-spinner
+          aria-label="loading"
           [sizeCollection]="_spinnerDemoService.model.sizeCollection"
           [size]="_spinnerDemoService.model.size"
           [variant]="_spinnerDemoService.model.variant"
           [isTrack]="_spinnerDemoService.model.isTrack"
-          [aria-label]="'loading'"
         />
       </div>
     </app-tryout>
@@ -21,8 +21,8 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Spinner'"
-        [configType]="'input'"
+        controlName="Spinner"
+        configType="input"
         [controlConfig]="_spinnerDemoService.inputControlConfig"
         [(model)]="_spinnerDemoService.model"
         (resetted)="_spinnerDemoService.reset()"

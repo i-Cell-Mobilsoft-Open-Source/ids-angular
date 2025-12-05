@@ -47,14 +47,14 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [configType]="'input'"
+        configType="input"
         [controlConfig]="_fieldsetDemoService.inputControlConfig"
         [(model)]="_fieldsetDemoService.model"
         (resetted)="_fieldsetDemoService.reset()"
       />
       <app-control-table
         controls
-        [configType]="'helper'"
+        configType="helper"
         [controlConfig]="_fieldsetDemoService.helperControlConfig"
         [(model)]="_fieldsetDemoService.helperModel"
         (resetted)="_fieldsetDemoService.reset()"

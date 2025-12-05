@@ -84,24 +84,24 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Checkbox'"
-        [configType]="'input'"
+        controlName="Checkbox"
+        configType="input"
         [controlConfig]="_checkboxDemoService.inputControlConfig"
         [(model)]="_checkboxDemoService.model"
         (resetted)="_checkboxDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Checkbox'"
-        [configType]="'helper'"
+        controlName="Checkbox"
+        configType="helper"
         [controlConfig]="_checkboxDemoService.helperControlConfig"
         [(model)]="_checkboxDemoService.helperModel"
         (resetted)="_checkboxDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Checkbox group'"
-        [configType]="'input'"
+        controlName="Checkbox group"
+        configType="input"
         [controlConfig]="_checkboxDemoService.groupInputControlConfig"
         [(model)]="_checkboxDemoService.groupModel"
         (resetted)="_checkboxDemoService.reset()"

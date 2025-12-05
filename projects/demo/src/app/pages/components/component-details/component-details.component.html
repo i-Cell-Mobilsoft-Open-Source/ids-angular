@@ -1,9 +1,9 @@
-<div class="flex flex-col gap-16">
+<div class="flex flex-col">
   @if (heroData; as hero) {
     <app-hero [heroData]="hero" />
   }
 
-  <ids-tab-group>
+  <ids-tab-group [selectedTabIndex]="_selectedTabIndex" (selectedTabChange)="_onSelectedTabChange($event)">
     <ids-tab label="Guidelines">
       <ng-template />
     </ids-tab>

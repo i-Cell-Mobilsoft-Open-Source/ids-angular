@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { IdsTabGroupExtensionDirective } from './ids-tab-group-extension.directive';
+
 import { IdsTabGroupComponent } from '../../../../../../widgets/tab/tab-group.component';
 import { environment } from '../../../../environments/environment.development';
 import { HeroComponent } from '../../../components/hero/hero.component';
@@ -7,7 +9,7 @@ import { ContentCardData } from '../../../model/contentCardData';
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
-import { Component, OnInit, computed, effect, inject, signal, untracked, viewChild } from '@angular/core';
+import { Component, OnInit, computed, inject, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
 import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
@@ -22,6 +24,7 @@ type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & 
     HeroComponent,
     IdsTabComponent,
     IdsTabGroupComponent,
+    IdsTabGroupExtensionDirective,
   ],
   templateUrl: './component-details.component.html',
   styleUrl: './component-details.component.scss',
@@ -31,7 +34,9 @@ export class ComponentDetailsComponent implements OnInit {
   public componentBlocks: ComponentBlock[] = [];
 
   public tabGroup = viewChild(IdsTabGroupComponent);
-  public activeTab = signal<string>('guidelines');
+  public activeTab = signal<string>('demo');
+  protected _selectedTabIndex = 1;
+  protected _initTabIndex = undefined;
 
   private _tabs = [
     'guidelines',
@@ -47,35 +52,22 @@ export class ComponentDetailsComponent implements OnInit {
   public selectedSection = 'demo';
 
   constructor() {
-    effect(() => {
-      const group = this.tabGroup();
-      const targetIndex = this.targetTabIndex();
+    const tabIndex = this._tabs.findIndex((tab) => tab === location.pathname.split('/').pop());
+    if (tabIndex > 0) {
+      this._selectedTabIndex = tabIndex;
+    }
+  }
 
-      if (group) {
-        untracked(() => {
-          if (group.selectedTabIndex() !== targetIndex) {
-            setTimeout(() => {
-              group.selectTab(targetIndex);
-            }, 0);
-          }
-        });
-      }
-    });
-    effect(() => {
-      const group = this.tabGroup();
+  protected _onSelectedTabChange(index: number): void {
+    const componentRouteName = this._route.snapshot.url[0]?.path;
 
-      if (group) {
-        const clickedIndex = group.selectedTabIndex();
+    this._selectedTabIndex = index;
 
-        const targetPath = this._tabs[clickedIndex] || 'guidelines';
-
-        const currentPath = untracked(() => this.activeTab());
-
-        if (currentPath !== targetPath) {
-          this._router.navigate([targetPath], { relativeTo: this._route });
-        }
-      }
-    });
+    this._router.navigate([
+      'components',
+      componentRouteName,
+      this._tabs[this._selectedTabIndex],
+    ]);
   }
 
   public ngOnInit(): void {
@@ -112,7 +104,7 @@ export class ComponentDetailsComponent implements OnInit {
       });
 
     navigationEnd$.subscribe(() => {
-      const childRoute = this._route.firstChild?.snapshot.url[0]?.path ?? 'guidelines';
+      const childRoute = this._route.firstChild?.snapshot.url[1]?.path ?? 'demo';
 
       this.activeTab.set(childRoute);
     });

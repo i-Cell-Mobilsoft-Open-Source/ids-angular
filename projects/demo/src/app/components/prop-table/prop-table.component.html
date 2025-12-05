@@ -3,7 +3,8 @@
     [columnDefs]="colDefs"
     [dataSource]="_dataSource"
     [size]="'compact'"
-    [variant]="'surface'"
+    [variant]="'secondary'"
+    [appearance]="'line-division'"
     [withBorder]="true"
     [enableSorting]="false"
     [enableRowSelection]="false"
@@ -17,9 +18,7 @@
             </li>
           }
         </ul>
-      } @else {
-        <span class="text-sm text-secondary">-</span>
-      }
+      } 
     </ng-template>
   </ids-table>
 </div>

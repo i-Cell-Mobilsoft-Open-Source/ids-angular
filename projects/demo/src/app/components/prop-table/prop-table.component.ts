@@ -1,7 +1,7 @@
 import { PropTableElement } from './prop-table-element';
 
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { IdsTableCellTemplateDirective, IdsTableColumnDef, IdsTableComponent, IdsTableRequestFactory, ServerSideDataSource } from '@i-cell/ids-angular/table';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,8 +19,8 @@ import { of } from 'rxjs';
   styleUrls: ['./prop-table.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PropTableComponent implements OnChanges {
-  @Input({ required: true }) public config!: DemoControlConfig<unknown>;
+export class PropTableComponent implements OnInit {
+  public config = input.required<DemoControlConfig<unknown>[]>();
 
   protected _dataSource: ServerSideDataSource<PropTableElement>;
 
@@ -29,7 +29,6 @@ export class PropTableComponent implements OnChanges {
       id: 'name',
       label: 'Prop name',
       field: 'name',
-      // sticky: true,
     },
     {
       id: 'description',
@@ -61,14 +60,20 @@ export class PropTableComponent implements OnChanges {
     }));
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['config'] && this.config) {
-      this._updateDataSource();
-    }
+  public ngOnInit(): void {
+    this._updateDataSource();
   }
 
   private _updateDataSource(): void {
-    const data: PropTableElement[] = this._transformConfigToRows(this.config);
+    let data: PropTableElement[] = [];
+
+    const cfg = this.config();
+
+    if (Array.isArray(cfg)) {
+      data = cfg.flatMap((config) => this._transformConfigToRows(config));
+    } else {
+      data = this._transformConfigToRows(cfg);
+    }
 
     const requestFactory: IdsTableRequestFactory<PropTableElement> = () => of({
       resultList: data,
@@ -104,6 +109,8 @@ export class PropTableComponent implements OnChanges {
           'true',
           'false',
         ];
+      } else if (!item.list) {
+        values = ['-'];
       }
 
       return {

@@ -6,7 +6,7 @@
     <app-tryout [title]="'COMPONENTS.DATEPICKER' | translate" (resetted)="_datepickerDemoService.reset()">
       <div component class="datepicker-grid">
         <div>
-          <ids-form-field [size]="_datepickerDemoService.formFieldModel.size" [variant]="'surface'">
+          <ids-form-field variant="surface" [size]="_datepickerDemoService.formFieldModel.size">
             <ids-label>{{ templateDrivenFieldName }}</ids-label>
             <input
               #inputFieldModel="ngModel"
@@ -34,7 +34,7 @@
         </div>
 
         <div>
-          <ids-form-field [size]="_datepickerDemoService.formFieldModel.size" [variant]="'surface'">
+          <ids-form-field variant="surface" [size]="_datepickerDemoService.formFieldModel.size">
             <ids-label>{{ modelDrivenFieldName }}</ids-label>
             <input
               #datepicker2="idsDatepicker"
@@ -67,16 +67,16 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Form field'"
-        [configType]="'input'"
+        controlName="Form field"
+        configType="input"
         [controlConfig]="_datepickerDemoService.formFieldInputControlConfig"
         [(model)]="_datepickerDemoService.formFieldModel"
         (resetted)="_datepickerDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Datepicker'"
-        [configType]="'input'"
+        controlName="Datepicker"
+        configType="input"
         [controlConfig]="_datepickerDemoService.datepickerInputControlConfig"
         [(model)]="_datepickerDemoService.datepickerModel"
         (resetted)="_datepickerDemoService.reset()"

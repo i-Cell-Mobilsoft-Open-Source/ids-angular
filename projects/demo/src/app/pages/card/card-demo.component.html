@@ -65,24 +65,24 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Card'"
-        [configType]="'input'"
+        controlName="Card"
+        configType="input"
         [controlConfig]="_cardDemoService.inputControlConfig"
         [(model)]="_cardDemoService.model"
         (resetted)="_cardDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Card media'"
-        [configType]="'input'"
+        controlName="Card media"
+        configType="input"
         [controlConfig]="_cardDemoService.mediaInputControlConfig"
         [(model)]="_cardDemoService.mediaModel"
         (resetted)="_cardDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Card'"
-        [configType]="'helper'"
+        controlName="Card"
+        configType="helper"
         [controlConfig]="_cardDemoService.helperControlConfig"
         [(model)]="_cardDemoService.helperModel"
         (resetted)="_cardDemoService.reset()"

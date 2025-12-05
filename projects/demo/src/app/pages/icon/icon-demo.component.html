@@ -35,7 +35,7 @@
       @if (_iconDemoService.isLoaded()) {
         <app-control-table
           controls
-          [configType]="'input'"
+          configType="input"
           [controlConfig]="_iconDemoService.inputControlConfig()"
           [(model)]="_iconDemoService.model"
           (resetted)="_iconDemoService.reset()"

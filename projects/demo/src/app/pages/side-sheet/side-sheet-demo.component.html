@@ -26,7 +26,7 @@
         </div>
         @if (_sideSheetService.model.isShowFooter) {
           <div slot="footer">
-            <button type="button" class="demo-save-btn" idsButton [size]="'comfortable'" [variant]="'success'">
+            <button type="button" class="demo-save-btn" idsButton size="comfortable" variant="success">
               <span>Save</span>
             </button>
           </div>
@@ -89,8 +89,8 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Side Sheet'"
-        [configType]="'input'"
+        controlName="Side Sheet"
+        configType="input"
         [controlConfig]="_sideSheetService.inputControlConfig"
         [(model)]="_sideSheetService.model"
         (resetted)="_sideSheetService.reset()"

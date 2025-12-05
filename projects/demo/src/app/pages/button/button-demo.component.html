@@ -48,9 +48,9 @@
           <div class="button-item">
             <h2>{{ "COMMON.GROUPED" | translate }}</h2>
             <ids-button-group [size]="_buttonDemoService.groupModel.size">
-              <button type="button" idsButton [appearance]="'filled'" [variant]="'primary'">One</button>
-              <button type="button" idsButton [appearance]="'outlined'" [variant]="'success'">Two</button>
-              <button type="button" idsButton [appearance]="'text'" [variant]="'warning'">Three</button>
+              <button type="button" idsButton appearance="filled" variant="primary">One</button>
+              <button type="button" idsButton appearance="outlined" variant="success">Two</button>
+              <button type="button" idsButton appearance="text" variant="warning">Three</button>
             </ids-button-group>
           </div>
         </div>
@@ -62,24 +62,24 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Button'"
-        [configType]="'input'"
+        controlName="Button"
+        configType="input"
         [controlConfig]="_buttonDemoService.inputControlConfig"
         [(model)]="_buttonDemoService.model"
         (resetted)="_buttonDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Button'"
-        [configType]="'helper'"
+        controlName="Button"
+        configType="helper"
         [controlConfig]="_buttonDemoService.helperControlConfig"
         [(model)]="_buttonDemoService.helperModel"
         (resetted)="_buttonDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Button group'"
-        [configType]="'input'"
+        controlName="Button group"
+        configType="input"
         [controlConfig]="_buttonDemoService.groupInputControlConfig"
         [(model)]="_buttonDemoService.groupModel"
         (resetted)="_buttonDemoService.reset()"

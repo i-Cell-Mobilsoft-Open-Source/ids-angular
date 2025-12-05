@@ -187,14 +187,14 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [configType]="'input'"
+        configType="input"
         [controlConfig]="_dialogDemoService.inputControlConfig"
         [(model)]="_dialogDemoService.model"
         (resetted)="_dialogDemoService.reset()"
       />
       <app-control-table
         controls
-        [configType]="'helper'"
+        configType="helper"
         [controlConfig]="_dialogDemoService.helperControlConfig"
         [(model)]="_dialogDemoService.helperModel"
         (resetted)="_dialogDemoService.reset()"

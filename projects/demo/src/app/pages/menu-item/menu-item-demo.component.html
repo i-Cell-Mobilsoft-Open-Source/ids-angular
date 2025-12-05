@@ -66,16 +66,16 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [controlName]="'Menu item'"
-        [configType]="'input'"
+        controlName="Menu item"
+        configType="input"
         [controlConfig]="_menuItemDemoService.menuItemInputControlConfig"
         [(model)]="_menuItemDemoService.menuItemModel"
         (resetted)="_menuItemDemoService.reset()"
       />
       <app-control-table
         controls
-        [controlName]="'Menu item'"
-        [configType]="'helper'"
+        controlName="Menu item"
+        configType="helper"
         [controlConfig]="_menuItemDemoService.menuItemHelperControlConfig"
         [(model)]="_menuItemDemoService.menuItemHelperModel"
         (resetted)="_menuItemDemoService.reset()"

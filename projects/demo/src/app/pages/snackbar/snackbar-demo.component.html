@@ -11,14 +11,14 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [configType]="'input'"
+        configType="input"
         [controlConfig]="_snackbarDemoService.inputControlConfig"
         [(model)]="_snackbarDemoService.model"
         (resetted)="_snackbarDemoService.reset()"
       />
       <app-control-table
         controls
-        [configType]="'helper'"
+        configType="helper"
         [controlConfig]="_snackbarDemoService.helperControlConfig"
         [(model)]="_snackbarDemoService.helperModel"
         (resetted)="_snackbarDemoService.reset()"

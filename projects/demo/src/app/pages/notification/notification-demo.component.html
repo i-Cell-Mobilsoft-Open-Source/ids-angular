@@ -81,7 +81,7 @@
       @if (_notificationDemoService.isLoaded()) {
         <app-control-table
           controls
-          [configType]="'input'"
+          configType="input"
           [controlConfig]="_notificationDemoService.inputControlConfig()"
           [(model)]="_notificationDemoService.model"
           (resetted)="_notificationDemoService.reset()"
@@ -91,7 +91,7 @@
       }
       <app-control-table
         controls
-        [configType]="'helper'"
+        configType="helper"
         [controlConfig]="_notificationDemoService.helperControlConfig"
         [(model)]="_notificationDemoService.helperModel"
         (resetted)="_notificationDemoService.reset()"

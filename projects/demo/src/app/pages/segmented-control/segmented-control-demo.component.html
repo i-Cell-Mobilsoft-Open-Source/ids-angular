@@ -107,14 +107,14 @@
     <app-tryout-controls>
       <app-control-table
         controls
-        [configType]="'input'"
+        configType="input"
         [controlConfig]="_segmentedControlDemoService.inputControlConfig"
         [(model)]="_segmentedControlDemoService.model"
         (resetted)="_segmentedControlDemoService.reset()"
       />
       <app-control-table
         controls
-        [configType]="'helper'"
+        configType="helper"
         [controlConfig]="_segmentedControlDemoService.helperControlConfig"
         [(model)]="_segmentedControlDemoService.helperModel"
         (resetted)="_segmentedControlDemoService.reset()"

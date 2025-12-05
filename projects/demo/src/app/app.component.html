@@ -39,15 +39,15 @@
 
   <ids-segmented-control-toggle
     size="dense"
-    [formControl]="darkMode"
+    [formControl]="theme"
     [appearance]="'filled'"
     [variant]="'surface'"
     [buttonVariant]="'primary'"
   >
-    <ids-segmented-control-toggle-item value="light-mode">
+    <ids-segmented-control-toggle-item value="light">
       <ids-icon fontIcon="light-mode" />
     </ids-segmented-control-toggle-item>
-    <ids-segmented-control-toggle-item value="dark-mode">
+    <ids-segmented-control-toggle-item value="dark">
       <ids-icon fontIcon="dark-mode" />
     </ids-segmented-control-toggle-item>
   </ids-segmented-control-toggle>

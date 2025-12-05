@@ -3,7 +3,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { GraphqlService, NavigationQueryResult } from './services/graphql.service';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { DestroyRef, inject as angularInject, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { DestroyRef, Component, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
@@ -11,7 +11,9 @@ import { ApolloQueryResult } from '@apollo/client/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent } from '@i-cell/ids-angular/segmented-control-toggle';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { map, startWith, Subscription } from 'rxjs';
+import { map, startWith } from 'rxjs';
+
+export type theme = 'light' | 'dark';
 
 @Component({
   selector: 'app-root',
@@ -31,10 +33,8 @@ import { map, startWith, Subscription } from 'rxjs';
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent implements OnInit, OnDestroy {
-  private _translate: TranslateService = angularInject(TranslateService);
-
-  private _subscription = new Subscription();
+export class AppComponent {
+  private _translate: TranslateService = inject(TranslateService);
 
   public menuConfigs: Menu[] = [
     {
@@ -99,7 +99,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
   // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
-  public darkMode = new FormControl<string>('light-mode');
+  public theme = new FormControl<theme>('light', { nonNullable: true });
 
   public currentLang = toSignal(
     this._translate.onLangChange.pipe(
@@ -109,12 +109,19 @@ export class AppComponent implements OnInit, OnDestroy {
   );
 
   public dynamicMenu: Menu[] = [];
-  private _destroyRef = angularInject(DestroyRef);
+  private _destroyRef = inject(DestroyRef);
 
   private _componentLevelDepth: number | undefined;
 
   constructor() {
     this._changeTheme('light');
+
+    this.theme.valueChanges
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((value) => {
+        this._changeTheme(value);
+      });
+
     this._translate.addLangs([
       'hu',
       'en',
@@ -123,7 +130,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const browserLang = this._translate.getBrowserLang();
     this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
 
-    const graphqlService = angularInject(GraphqlService);
+    const graphqlService = inject(GraphqlService);
     graphqlService
       .getNavigation()
       .pipe(takeUntilDestroyed(this._destroyRef))
@@ -161,14 +168,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  public ngOnInit(): void {
-    this._subscription = this.darkMode.valueChanges.subscribe((value) => {
-      const isDark = value === 'dark-mode';
-      this._changeTheme(isDark ? 'dark' : 'light');
-    });
-  }
-
-  private _changeTheme(theme: string): void {
+  private _changeTheme(theme: theme): void {
     if (theme === 'dark') {
       document.documentElement.classList.remove('ids-theme-light');
       document.documentElement.classList.add('ids-theme-dark');
@@ -176,10 +176,6 @@ export class AppComponent implements OnInit, OnDestroy {
       document.documentElement.classList.remove('ids-theme-dark');
       document.documentElement.classList.add('ids-theme-light');
     }
-  }
-
-  public ngOnDestroy(): void {
-    this._subscription.unsubscribe();
   }
 
   public changeLanguage(lang: 'en' | 'hu'): void {

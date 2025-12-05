@@ -1,25 +1,36 @@
-table {
-  width: 100%;
+.ids-card-title {
+  color: var(--smc-reference-container-color-fg-secondary-fixed-darker-30, #1e293b);
 
-  caption {
-    text-align-last: left;
-    font-weight: 600;
-    color: var(--ids-smc-colors-surface-darker-60);
-  }
-
-  & > thead > tr > th {
-    font-size: 0.7rem;
-    color: var(--ids-smc-colors-surface-darker-50);
-    font-weight: 500;
-  }
-
-  & > tbody > tr > td {
-    max-width: 400px;
-  }
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
 }
 
-code {
-  background-color: var(--ids-smc-colors-surface-darker-20);
-  border-radius: 4px;
-  padding: 2px 6px;
+.control-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 0; 
+}
+
+.control-name {
+  flex: 0 0 150px;
+  color: var(--smc-reference-container-color-fg-secondary-fixed-default, #64748b);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+.control-input {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.component-width {
+  width: 100%;
 }

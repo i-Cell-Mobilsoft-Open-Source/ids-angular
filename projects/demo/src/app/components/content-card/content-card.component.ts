@@ -1,7 +1,5 @@
-// import { Badge } from '../../model/badge';
 import { ContentCardData } from '../../model/contentCardData';
 import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
-// import { Image } from '../../model/image';
 import { BadgeComponent } from '../badge/badge.component';
 import { ImageComponent } from '../image/image.component';
 
@@ -12,7 +10,6 @@ import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directi
 
 @Component({
   selector: 'app-content-card',
-  standalone: true,
   imports: [
     ImageComponent,
     IdsCardComponent,

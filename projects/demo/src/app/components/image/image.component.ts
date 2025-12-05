@@ -3,7 +3,6 @@ import { Component, input, OnInit, OnDestroy, computed } from '@angular/core';
 
 @Component({
   selector: 'app-image',
-  standalone: true,
   imports: [NgClass],
   templateUrl: './image.component.html',
   styleUrl: './image.component.scss',

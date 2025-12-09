@@ -90,15 +90,15 @@ function buildComponentRoute(
     providers: [demoService],
     children: [
       {
-        path: '', redirectTo: 'guidelines', pathMatch: 'full',
-      },
-      {
-        path: 'guidelines',
-        loadComponent: () => import('./components/tabs/guidelines/guidelines.component').then((module) => module.GuidelinesComponent),
+        path: '', redirectTo: 'demo', pathMatch: 'full',
       },
       {
         path: 'demo',
         loadComponent: componentImport,
+      },
+      {
+        path: 'guidelines',
+        loadComponent: () => import('./components/tabs/guidelines/guidelines.component').then((module) => module.GuidelinesComponent),
       },
       {
         path: 'api',

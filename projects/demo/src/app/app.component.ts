@@ -13,7 +13,7 @@ import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemCompon
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { map, startWith } from 'rxjs';
 
-export type theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark';
 
 @Component({
   selector: 'app-root',
@@ -99,7 +99,7 @@ export class AppComponent {
   ];
 
   // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
-  public theme = new FormControl<theme>('light', { nonNullable: true });
+  public theme = new FormControl<Theme>('light', { nonNullable: true });
 
   public currentLang = toSignal(
     this._translate.onLangChange.pipe(
@@ -168,7 +168,7 @@ export class AppComponent {
     });
   }
 
-  private _changeTheme(theme: theme): void {
+  private _changeTheme(theme: Theme): void {
     if (theme === 'dark') {
       document.documentElement.classList.remove('ids-theme-light');
       document.documentElement.classList.add('ids-theme-dark');

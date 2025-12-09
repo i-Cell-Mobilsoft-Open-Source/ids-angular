@@ -1,6 +1,7 @@
 import { FormFieldDemoService } from './form-field-demo.service';
 
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { PropTableComponent } from '../../components/prop-table/prop-table.component';
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
@@ -34,6 +35,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    PropTableComponent,
   ],
   templateUrl: './form-field-demo.component.html',
   styleUrls: [

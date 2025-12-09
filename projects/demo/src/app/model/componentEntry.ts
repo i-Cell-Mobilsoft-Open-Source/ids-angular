@@ -1,6 +1,8 @@
+import { ContentCardData } from './contentCardData';
+export type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & { type: 'card' });
+
 export interface ComponentEntry {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  componentBlocks: any;
+  componentBlocks: ComponentContent[];
   id: string;
   title: string;
   slug: string;

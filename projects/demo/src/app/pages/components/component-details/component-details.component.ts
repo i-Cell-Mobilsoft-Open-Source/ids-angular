@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IdsTabGroupExtensionDirective } from './ids-tab-group-extension.directive';
 
 import { IdsTabGroupComponent } from '../../../../../../widgets/tab/tab-group.component';
 import { environment } from '../../../../environments/environment.development';
 import { HeroComponent } from '../../../components/hero/hero.component';
-import { ComponentEntry } from '../../../model/componentEntry';
-import { ContentCardData } from '../../../model/contentCardData';
+import { ComponentBlock, ComponentContent, ComponentEntry } from '../../../model/componentEntry';
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
@@ -13,8 +11,6 @@ import { Component, OnInit, computed, inject, signal, viewChild } from '@angular
 import { ActivatedRoute, Router, RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
 import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
-
-type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & { type: 'card' });
 
 @Component({
   selector: 'app-component-details',
@@ -110,7 +106,7 @@ export class ComponentDetailsComponent implements OnInit {
     });
   }
 
-  private _updateHeroAndBlocks(component: any): void {
+  private _updateHeroAndBlocks(component: ComponentEntry): void {
     this.heroData = {
       id: Number(component.id),
       title: component.title,
@@ -122,7 +118,7 @@ export class ComponentDetailsComponent implements OnInit {
     };
 
     const blocks: ComponentBlock[] = [];
-    component.componentBlocks?.forEach((block: any) => {
+    component.componentBlocks?.forEach((block: ComponentContent) => {
       if (block.__typename === 'Set_Content_Heading') {
         blocks.push({
           type: 'heading',
@@ -136,7 +132,7 @@ export class ComponentDetailsComponent implements OnInit {
           orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
           variant: block.card_properties?.card_variant?.value ?? 'surface',
           appearance: block.card_properties?.appearance?.value ?? 'filled',
-          transparent: block.card_bg_transparent ?? false,
+          transparent: block.card_properties?.card_bg_transparent ?? false,
           filledInContainer: block.group_image?.filled_in_container ?? false,
           state: block.group_image?.state?.value,
           imageURL: block.group_image?.img_light_mode?.[0]?.url

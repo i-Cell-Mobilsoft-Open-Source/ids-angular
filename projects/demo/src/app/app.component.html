@@ -31,10 +31,27 @@
   </div>
   <div class="spacer"></div>
   <div class="language-chooser">
-    <button idsButton type="button" variant="primary" [disabled]="currentLang() === 'en'" (click)="changeLanguage('en')">EN</button>
-    <button idsButton type="button" variant="secondary" [disabled]="currentLang() === 'hu'" (click)="changeLanguage('hu')">HU</button>
+    <ids-segmented-control-toggle ngModel="en" size="dense" appearance="filled" variant="surface" buttonVariant="primary">
+      <ids-segmented-control-toggle-item value="hu" label="HU" (click)="changeLanguage('hu')" />
+      <ids-segmented-control-toggle-item value="en" label="EN" (click)="changeLanguage('en')" />
+    </ids-segmented-control-toggle>
   </div>
-  <ids-switch size="dense" [formControl]="darkMode" />
+
+  <ids-segmented-control-toggle
+    size="dense"
+    appearance="filled"
+    variant="surface"
+    buttonVariant="primary"
+    [formControl]="theme"
+  >
+    <ids-segmented-control-toggle-item value="light">
+      <ids-icon fontIcon="light-mode" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="dark">
+      <ids-icon fontIcon="dark-mode" />
+    </ids-segmented-control-toggle-item>
+  </ids-segmented-control-toggle>
+
 </header>
 <ids-nav [menu]="dynamicMenu" />
 <main cdkScrollable>

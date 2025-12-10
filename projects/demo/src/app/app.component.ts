@@ -3,15 +3,17 @@ import { NavComponent } from './components/nav/nav.component';
 import { GraphqlService, NavigationQueryResult } from './services/graphql.service';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { DestroyRef, inject as angularInject, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { DestroyRef, Component, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal, takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ApolloQueryResult } from '@apollo/client/core';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsSwitchComponent } from '@i-cell/ids-angular/switch';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent } from '@i-cell/ids-angular/segmented-control-toggle';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { map, startWith, Subscription } from 'rxjs';
+import { map, startWith } from 'rxjs';
+
+export type Theme = 'light' | 'dark';
 
 @Component({
   selector: 'app-root',
@@ -20,31 +22,44 @@ import { map, startWith, Subscription } from 'rxjs';
     RouterOutlet,
     TranslateModule,
     NavComponent,
-    IdsButtonComponent,
-    IdsSwitchComponent,
     CdkScrollable,
     ReactiveFormsModule,
+    IdsSegmentedControlToggleDirective,
+    IdsSegmentedControlToggleItemComponent,
+    FormsModule,
+    IdsIconComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent implements OnInit, OnDestroy {
-  private _translate: TranslateService = angularInject(TranslateService);
+export class AppComponent {
+  private _translate: TranslateService = inject(TranslateService);
 
-  private _subscription = new Subscription();
+  // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
+  public theme = new FormControl<Theme>('light', { nonNullable: true });
 
-  public darkMode = new FormControl<boolean>(false);
-
-  public currentLang = toSignal(this._translate.onLangChange.pipe(map(({ lang }) => lang), startWith(this._translate.currentLang)));
+  public currentLang = toSignal(
+    this._translate.onLangChange.pipe(
+      map(({ lang }) => lang),
+      startWith(this._translate.currentLang),
+    ),
+  );
 
   public dynamicMenu: Menu[] = [];
-  private _destroyRef = angularInject(DestroyRef);
+  private _destroyRef = inject(DestroyRef);
 
   private _componentLevelDepth: number | undefined;
 
   constructor() {
     this._changeTheme('light');
+
+    this.theme.valueChanges
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((value) => {
+        this._changeTheme(value);
+      });
+
     this._translate.addLangs([
       'hu',
       'en',
@@ -53,25 +68,22 @@ export class AppComponent implements OnInit, OnDestroy {
     const browserLang = this._translate.getBrowserLang();
     this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
 
-    const graphqlService = angularInject(GraphqlService);
-    graphqlService.getNavigation().pipe(
-      takeUntilDestroyed(this._destroyRef),
-    ).subscribe((result: ApolloQueryResult<NavigationQueryResult>) => {
-      const navTree = result.data.navs?.[0]?.tree || [];
-      this._componentLevelDepth = this._findDeepestLevel(navTree);
-      this.dynamicMenu = this._mapStatamicNavToMenu(navTree);
-    });
+    const graphqlService = inject(GraphqlService);
+    graphqlService
+      .getNavigation()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((result: ApolloQueryResult<NavigationQueryResult>) => {
+        const navTree = result.data.navs?.[0]?.tree || [];
+        this._componentLevelDepth = this._findDeepestLevel(navTree);
+        this.dynamicMenu = this._mapStatamicNavToMenu(navTree);
+      });
   }
 
   private _findDeepestLevel(tree: readonly StatamicNavNode[], currentDepth = 0): number {
     if (!tree || tree.length === 0) {
       return currentDepth;
     }
-    return Math.max(
-      ...tree.map((node: StatamicNavNode) =>
-        this._findDeepestLevel(node.children ?? [], node.depth),
-      ),
-    );
+    return Math.max(...tree.map((node: StatamicNavNode) => this._findDeepestLevel(node.children ?? [], node.depth)));
   }
 
   private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
@@ -92,13 +104,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  public ngOnInit(): void {
-    this._subscription = this.darkMode.valueChanges.subscribe((checked) => {
-      this._changeTheme(checked ? 'dark' : 'light');
-    });
-  }
-
-  private _changeTheme(theme: string): void {
+  private _changeTheme(theme: Theme): void {
     if (theme === 'dark') {
       document.documentElement.classList.remove('ids-theme-light');
       document.documentElement.classList.add('ids-theme-dark');
@@ -106,10 +112,6 @@ export class AppComponent implements OnInit, OnDestroy {
       document.documentElement.classList.remove('ids-theme-dark');
       document.documentElement.classList.add('ids-theme-light');
     }
-  }
-
-  public ngOnDestroy(): void {
-    this._subscription.unsubscribe();
   }
 
   public changeLanguage(lang: 'en' | 'hu'): void {

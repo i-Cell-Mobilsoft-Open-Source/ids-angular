@@ -1,38 +1,51 @@
-<app-tryout 
-  [title]="'COMPONENTS.BREADCRUMB' | translate" 
-  [hasDarkBackground]="breadcrumbModel.variant === 'light'" 
-  (resetted)="reset()"
->
-  <div component class="text-center">
-    <ids-breadcrumb
-      [hierarchy]="hierarchy"
-      [size]="breadcrumbModel.size"
-      [variant]="breadcrumbModel.variant"
-      [dividerType]="breadcrumbModel.dividerType"
-      [overlayAppearance]="overlayPanelModel.appearance"
-      [overlaySize]="overlayPanelModel.size"
-      [overlayVariant]="overlayPanelModel.variant"
-    />
-    <ids-notification title="Note" variant="warning" size="compact" class="block w-1/2 text-left place-self-center mt-10">
-      Breadcrumb size changes won't be applied on truncation panel due to overlay limitations (initial values are passed to the panel).
-    </ids-notification>
+<app-demo-and-code (resetDemo)="_breadcrumbDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.BREADCRUMB' | translate"
+      [hasDarkBackground]="_breadcrumbDemoService.breadcrumbModel.variant === 'light'"
+      (resetted)="_breadcrumbDemoService.reset()"
+    >
+      <div component class="text-center">
+        <ids-breadcrumb
+          [hierarchy]="_breadcrumbDemoService.hierarchy"
+          [size]="_breadcrumbDemoService.breadcrumbModel.size"
+          [variant]="_breadcrumbDemoService.breadcrumbModel.variant"
+          [dividerType]="_breadcrumbDemoService.breadcrumbModel.dividerType"
+          [overlayAppearance]="_breadcrumbDemoService.overlayPanelModel.appearance"
+          [overlaySize]="_breadcrumbDemoService.overlayPanelModel.size"
+          [overlayVariant]="_breadcrumbDemoService.overlayPanelModel.variant"
+        />
+        <ids-notification title="Note" variant="warning" size="compact" class="block w-1/2 text-left place-self-center mt-10">
+          Breadcrumb size changes won't be applied on truncation panel due to overlay limitations (initial values are passed to the panel).
+        </ids-notification>
+      </div>
+    </app-tryout>
   </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Breadcrumb'"
-    [configType]="'input'"
-    [controlConfig]="_breadcrumbInputControlConfig"
-    [(model)]="breadcrumbModel"
-    (resetted)="reset()"
-  />  
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Breadcrumb"
+        configType="input"
+        [controlConfig]="_breadcrumbDemoService.breadcrumbInputControlConfig"
+        [(model)]="_breadcrumbDemoService.breadcrumbModel"
+        (resetted)="_breadcrumbDemoService.reset()"
+      />
 
-  <app-control-table
-    controls
-    [controlName]="'Overlay panel'"
-    [configType]="'input'"
-    [controlConfig]="_overlayPanelInputControlConfig"
-    [(model)]="overlayPanelModel"
-    (resetted)="reset()"
-  />
-</app-tryout>
+      <app-control-table
+        controls
+        controlName="Overlay panel"
+        configType="input"
+        [controlConfig]="_breadcrumbDemoService.overlayPanelInputControlConfig"
+        [(model)]="_breadcrumbDemoService.overlayPanelModel"
+        (resetted)="_breadcrumbDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_breadcrumbDemoService.breadcrumbInputControlConfig, _breadcrumbDemoService.overlayPanelInputControlConfig]" />
+</div>

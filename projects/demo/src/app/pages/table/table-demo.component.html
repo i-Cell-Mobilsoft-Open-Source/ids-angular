@@ -1,55 +1,64 @@
-<app-tryout [title]="'COMPONENTS.TABLE' | translate" (resetted)="_reset()">
-  <div component class="table-wrapper">
-    <div class="table-master-detail-actions">
-      <button idsButton type="button" (click)="table.expandAll()">{{ 'TABLE.BUTTON.EXPAND_DETAILS' | translate }}</button>
-      <button idsButton type="button" [variant]="'error'" (click)="table.collapseAll()">{{ 'TABLE.BUTTON.COLLAPSE_DETAILS' | translate }}</button>
-    </div>
-    <ids-paginator
-      [length]="_totalRows()"
-      [(pageIndex)]="_currentPageIndex"
-      (pageChanged)="_dataSource.page($event)"
-    />
-    <ids-table
-      #table="idsTable"
-      [columnDefs]="_colDefs"
-      [dataSource]="_dataSource"
-      [appearance]="_model.appearance"
-      [size]="_model.size"
-      [variant]="_model.variant"
-      [enableRowSelection]="_model.enableRowSelection"
-      [enableSorting]="_model.enableSorting"
-      [masterDetail]="_model.masterDetail"
-      [showDetailHeader]="_model.showDetailHeader"
-      [detailTemplateName]="'customDetailTemplate'"
-      [detailStickyColumns]="_model.detailStickyColumns"
-      [hasDetailRow]="_hasDetailRow"
-      [withBorder]="_model.withBorder"
-      (sortChange)="_dataSource.sort($event)"
-      (cellClick)="onCellClick()"
-      (rowClick)="onRowClick()"
-      (rowKeydown)="onRowKeydown($event)"
-      (contentChanged)="onContentChanged()"
-    >
-      <span *idsCellTemplate="'symbol'; let row" class="ids-table-cell-template-translate2">{{ row.symbol }}</span>
-      <ng-template let-value="cellValue" idsCellTemplate="translate1">
-        <span class="ids-table-cell-template-translate1">{{ value | translate }}</span>
-      </ng-template>
-      <span *idsCellTemplate="'translate2'; let value=cellValue" class="ids-table-cell-template-translate2">{{ value | translate }}</span>
-      <span *idsCellTemplate="'customDetailTemplate'; let row" class="ids-table-cell-template-detail">{{ row?.summary }}</span>
-    </ids-table>
-    <ids-paginator
-      [length]="_totalRows()"
-      [(pageIndex)]="_currentPageIndex"
-      (pageChanged)="_dataSource.page($event)"
-    />
+<app-demo-and-code (resetDemo)="_tableDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout [title]="'COMPONENTS.TABLE' | translate" (resetted)="_tableDemoService.reset()">
+      <div component class="table-wrapper">
+        <div class="table-master-detail-actions">
+          <button idsButton type="button" (click)="table.expandAll()">{{ "TABLE.BUTTON.EXPAND_DETAILS" | translate }}</button>
+          <button idsButton type="button" variant="error" (click)="table.collapseAll()">
+            {{ "TABLE.BUTTON.COLLAPSE_DETAILS" | translate }}
+          </button>
+        </div>
+        <ids-paginator [length]="_totalRows()" [(pageIndex)]="_currentPageIndex" (pageChanged)="_dataSource.page($event)" />
+        <ids-table
+          #table="idsTable"
+          detailTemplateName="customDetailTemplate"
+          [columnDefs]="_tableDemoService.colDefs"
+          [dataSource]="_dataSource"
+          [appearance]="_tableDemoService.model.appearance"
+          [size]="_tableDemoService.model.size"
+          [variant]="_tableDemoService.model.variant"
+          [enableRowSelection]="_tableDemoService.model.enableRowSelection"
+          [enableSorting]="_tableDemoService.model.enableSorting"
+          [masterDetail]="_tableDemoService.model.masterDetail"
+          [showDetailHeader]="_tableDemoService.model.showDetailHeader"
+          [detailStickyColumns]="_tableDemoService.model.detailStickyColumns"
+          [hasDetailRow]="_hasDetailRow"
+          [withBorder]="_tableDemoService.model.withBorder"
+          (sortChange)="_dataSource.sort($event)"
+          (cellClick)="onCellClick()"
+          (rowClick)="onRowClick()"
+          (rowKeydown)="onRowKeydown($event)"
+          (contentChanged)="onContentChanged()"
+        >
+          <span *idsCellTemplate="'symbol'; let row" class="ids-table-cell-template-translate2">{{ row.symbol }}</span>
+          <ng-template let-value="cellValue" idsCellTemplate="translate1">
+            <span class="ids-table-cell-template-translate1">{{ value | translate }}</span>
+          </ng-template>
+          <span *idsCellTemplate="'translate2'; let value = cellValue" class="ids-table-cell-template-translate2">{{
+            value | translate
+          }}</span>
+          <span *idsCellTemplate="'customDetailTemplate'; let row" class="ids-table-cell-template-detail">{{ row?.summary }}</span>
+        </ids-table>
+        <ids-paginator [length]="_totalRows()" [(pageIndex)]="_currentPageIndex" (pageChanged)="_dataSource.page($event)" />
+      </div>
+    </app-tryout>
   </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Table'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="_model"
-    (resetted)="_reset()"
-  />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Table"
+        configType="input"
+        [controlConfig]="_tableDemoService.inputControlConfig"
+        [(model)]="_tableDemoService.model"
+        (resetted)="_tableDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_tableDemoService.inputControlConfig]"/>
+</div>

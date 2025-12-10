@@ -1,41 +1,60 @@
-<app-tryout [title]="'COMPONENTS.SCROLLBAR' | translate" (resetted)="reset()">
-  <div component class="scrollable" [style.scrollbarGutter]="model['scrollbar-gutter']" [style.scrollbarWidth]="model['scrollbar-width']">
-    <div class="child">
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia possimus facere fuga voluptate alias ipsa quibusdam doloremque
-        minus laborum repellat, modi magnam. Dignissimos natus iusto nisi earum voluptatem laborum, molestiae odit amet accusamus magnam
-        incidunt voluptate obcaecati alias eveniet aliquam numquam aperiam asperiores consectetur commodi optio deserunt perspiciatis.
-      </p>
-      @if (!helperModel.childFitsInParent) {
-        <p>
-          Illum numquam quasi minima mollitia libero, nesciunt ipsam repellat sed facilis est aperiam dolor quos minus consequuntur, labore
-          sapiente, odit praesentium ad aliquid nam error porro excepturi accusantium? Enim dignissimos incidunt non autem earum culpa
-          ducimus velit eius ullam deleniti? Minus error aliquid corporis ullam! Perspiciatis et in repellat, ullam similique provident.
-          Praesentium nihil nam ea quod beatae quasi fugit ipsam itaque sapiente natus! Incidunt possimus omnis unde consequuntur illo
-          dolores saepe reprehenderit quo pariatur quae quas veniam id optio nobis accusantium, quis in dicta eum! Tempora omnis earum
-          veritatis, ea vero quasi? Voluptatem architecto nobis similique provident earum, eos blanditiis quas consectetur dolore, rem
-          magnam non nisi adipisci, quasi quam dolorum nam a nihil nostrum alias reprehenderit. A quia labore beatae. Numquam distinctio
-          nihil tempora ipsa sunt possimus commodi facilis, expedita laborum quo, accusamus labore modi reiciendis incidunt illum? Libero
-          rem sed exercitationem itaque perferendis explicabo alias. Neque reprehenderit velit totam!
-        </p>
-      }
-    </div>
+<app-demo-and-code (resetDemo)="_scrollbarDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout [title]="'COMPONENTS.SCROLLBAR' | translate" (resetted)="_scrollbarDemoService.reset()">
+      <div
+        component
+        class="scrollable"
+        [style.scrollbarGutter]="_scrollbarDemoService.model['scrollbar-gutter']"
+        [style.scrollbarWidth]="_scrollbarDemoService.model['scrollbar-width']"
+      >
+        <div class="child">
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia possimus facere fuga voluptate alias ipsa quibusdam
+            doloremque minus laborum repellat, modi magnam. Dignissimos natus iusto nisi earum voluptatem laborum, molestiae odit amet
+            accusamus magnam incidunt voluptate obcaecati alias eveniet aliquam numquam aperiam asperiores consectetur commodi optio
+            deserunt perspiciatis.
+          </p>
+          @if (!_scrollbarDemoService.helperModel.childFitsInParent) {
+            <p>
+              Illum numquam quasi minima mollitia libero, nesciunt ipsam repellat sed facilis est aperiam dolor quos minus consequuntur,
+              labore sapiente, odit praesentium ad aliquid nam error porro excepturi accusantium? Enim dignissimos incidunt non autem earum
+              culpa ducimus velit eius ullam deleniti? Minus error aliquid corporis ullam! Perspiciatis et in repellat, ullam similique
+              provident. Praesentium nihil nam ea quod beatae quasi fugit ipsam itaque sapiente natus! Incidunt possimus omnis unde
+              consequuntur illo dolores saepe reprehenderit quo pariatur quae quas veniam id optio nobis accusantium, quis in dicta eum!
+              Tempora omnis earum veritatis, ea vero quasi? Voluptatem architecto nobis similique provident earum, eos blanditiis quas
+              consectetur dolore, rem magnam non nisi adipisci, quasi quam dolorum nam a nihil nostrum alias reprehenderit. A quia labore
+              beatae. Numquam distinctio nihil tempora ipsa sunt possimus commodi facilis, expedita laborum quo, accusamus labore modi
+              reiciendis incidunt illum? Libero rem sed exercitationem itaque perferendis explicabo alias. Neque reprehenderit velit totam!
+            </p>
+          }
+        </div>
+      </div>
+    </app-tryout>
   </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Scrollbar'"
-    [configType]="'input'"
-    [controlConfig]="_controlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Scrollbar'"
-    [configType]="'helper'"
-    [controlConfig]="_helperControlConfig"
-    [(model)]="helperModel"
-    (resetted)="reset()"
-  />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Scrollbar"
+        configType="input"
+        [controlConfig]="_scrollbarDemoService.controlConfig"
+        [(model)]="_scrollbarDemoService.model"
+        (resetted)="_scrollbarDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Scrollbar"
+        configType="helper"
+        [controlConfig]="_scrollbarDemoService.helperControlConfig"
+        [(model)]="_scrollbarDemoService.helperModel"
+        (resetted)="_scrollbarDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_scrollbarDemoService.controlConfig, _scrollbarDemoService.helperControlConfig]" />
+</div>

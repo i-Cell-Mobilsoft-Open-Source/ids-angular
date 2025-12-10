@@ -1,106 +1,124 @@
-<app-tryout [title]="'COMPONENTS.SELECT' | translate" [hasDarkBackground]="formFieldModel.variant === 'light'" (resetted)="reset()">
-  <ng-container component>
-    <div class="select-grid">
-      <div class="select-item">
-        <h2>Single selection</h2>
-        <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
-          <ids-label>Animal</ids-label>
-          <ids-select
-            [placeholder]="selectModel.placeholder"
-            [required]="selectModel.required"
-            [disabled]="selectModel.disabled"
-            [readonly]="selectModel.readonly"
-            [aria-label]="selectModel['aria-label']"
-            [aria-labelledby]="selectModel['aria-labelledby']"
-            [typeaheadDebounceInterval]="selectModel.typeaheadDebounceInterval"
-            [canHandleSuccessState]="selectModel.canHandleSuccessState"
-            [(ngModel)]="singleSelectionValue"
-          >
-            @for (group of animals | keyvalue; track $index) {
-              <ids-option-group [label]="group.key | titlecase">
-                @for (option of group.value; track $index) {
-                  <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+<app-demo-and-code (resetDemo)="_selectDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.SELECT' | translate"
+      [hasDarkBackground]="_selectDemoService.formFieldModel.variant === 'light'"
+      (resetted)="_selectDemoService.reset()"
+    >
+      <ng-container component>
+        <div class="select-grid">
+          <div class="select-item">
+            <h2>Single selection</h2>
+            <ids-form-field [size]="_selectDemoService.formFieldModel.size" [variant]="_selectDemoService.formFieldModel.variant">
+              <ids-label>Animal</ids-label>
+              <ids-select
+                [placeholder]="_selectDemoService.selectModel.placeholder"
+                [required]="_selectDemoService.selectModel.required"
+                [disabled]="_selectDemoService.selectModel.disabled"
+                [readonly]="_selectDemoService.selectModel.readonly"
+                [aria-label]="_selectDemoService.selectModel['aria-label']"
+                [aria-labelledby]="_selectDemoService.selectModel['aria-labelledby']"
+                [typeaheadDebounceInterval]="_selectDemoService.selectModel.typeaheadDebounceInterval"
+                [canHandleSuccessState]="_selectDemoService.selectModel.canHandleSuccessState"
+                [(ngModel)]="_selectDemoService.singleSelectionValue"
+              >
+                @for (group of _selectDemoService.animals | keyvalue; track $index) {
+                  <ids-option-group [label]="group.key | titlecase">
+                    @for (option of group.value; track $index) {
+                      <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                    }
+                  </ids-option-group>
                 }
-              </ids-option-group>
-            }
-          </ids-select>
-          <ids-hint-message>Choose an animal</ids-hint-message>
-          <ids-error-message>
-            <ids-error-def code="required">Animal is mandatory</ids-error-def>
-          </ids-error-message>
-          <ids-success-message>Animal field is valid</ids-success-message>
-        </ids-form-field>
-      </div>
+              </ids-select>
+              <ids-hint-message>Choose an animal</ids-hint-message>
+              <ids-error-message>
+                <ids-error-def code="required">Animal is mandatory</ids-error-def>
+              </ids-error-message>
+              <ids-success-message>Animal field is valid</ids-success-message>
+            </ids-form-field>
+          </div>
 
-      <div class="select-item">
-        <h2>Multi selection</h2>
-        <ids-form-field [size]="formFieldModel.size" [variant]="formFieldModel.variant">
-          <ids-label>Animal</ids-label>
-          <ids-select
-            [multiSelect]="true"
-            [placeholder]="selectModel.placeholder"
-            [required]="selectModel.required"
-            [disabled]="selectModel.disabled"
-            [readonly]="selectModel.readonly"
-            [aria-label]="selectModel['aria-label']"
-            [aria-labelledby]="selectModel['aria-labelledby']"
-            [typeaheadDebounceInterval]="selectModel.typeaheadDebounceInterval"
-            [canHandleSuccessState]="selectModel.canHandleSuccessState"
-            [(ngModel)]="multiSelectionValue"
-          >
-            @if (selectHelperModel.useCustomTrigger) {
-              <ids-select-trigger>
-                {{ multiSelectionValue![0] }}
-                @if ((multiSelectionValue.length || 0) > 1) {
-                  <span class="example-additional-selection">
-                    (+{{ (multiSelectionValue.length || 0) - 1 }} {{ multiSelectionValue.length === 2 ? "other" : "others" }})
-                  </span>
+          <div class="select-item">
+            <h2>Multi selection</h2>
+            <ids-form-field [size]="_selectDemoService.formFieldModel.size" [variant]="_selectDemoService.formFieldModel.variant">
+              <ids-label>Animal</ids-label>
+              <ids-select
+                [multiSelect]="true"
+                [placeholder]="_selectDemoService.selectModel.placeholder"
+                [required]="_selectDemoService.selectModel.required"
+                [disabled]="_selectDemoService.selectModel.disabled"
+                [readonly]="_selectDemoService.selectModel.readonly"
+                [aria-label]="_selectDemoService.selectModel['aria-label']"
+                [aria-labelledby]="_selectDemoService.selectModel['aria-labelledby']"
+                [typeaheadDebounceInterval]="_selectDemoService.selectModel.typeaheadDebounceInterval"
+                [canHandleSuccessState]="_selectDemoService.selectModel.canHandleSuccessState"
+                [(ngModel)]="_selectDemoService.multiSelectionValue"
+              >
+                @if (_selectDemoService.selectHelperModel.useCustomTrigger) {
+                  <ids-select-trigger>
+                    {{ _selectDemoService.multiSelectionValue![0] }}
+                    @if ((_selectDemoService.multiSelectionValue.length || 0) > 1) {
+                      <span class="example-additional-selection">
+                        (+{{ (_selectDemoService.multiSelectionValue.length || 0) - 1 }}
+                        {{ _selectDemoService.multiSelectionValue.length === 2 ? "other" : "others" }})
+                      </span>
+                    }
+                  </ids-select-trigger>
                 }
-              </ids-select-trigger>
-            }
-            <ids-option-group label="Land">
-              @for (option of animals.land; track $index) {
-                <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
-              }
-            </ids-option-group>
-            <ids-option-group label="Aquatic">
-              @for (option of animals.aquatic; track $index) {
-                <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
-              }
-            </ids-option-group>
-          </ids-select>
-          <ids-hint-message>Choose animals</ids-hint-message>
-          <ids-error-message>
-            <ids-error-def code="required">Animal is mandatory</ids-error-def>
-          </ids-error-message>
-          <ids-success-message>Animal field is valid</ids-success-message>
-        </ids-form-field>
-      </div>
-    </div>
-  </ng-container>
+                <ids-option-group label="Land">
+                  @for (option of _selectDemoService.animals.land; track $index) {
+                    <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                  }
+                </ids-option-group>
+                <ids-option-group label="Aquatic">
+                  @for (option of _selectDemoService.animals.aquatic; track $index) {
+                    <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                  }
+                </ids-option-group>
+              </ids-select>
+              <ids-hint-message>Choose animals</ids-hint-message>
+              <ids-error-message>
+                <ids-error-def code="required">Animal is mandatory</ids-error-def>
+              </ids-error-message>
+              <ids-success-message>Animal field is valid</ids-success-message>
+            </ids-form-field>
+          </div>
+        </div>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Form field'"
-    [configType]="'input'"
-    [controlConfig]="_formFieldInputControlConfig"
-    [(model)]="formFieldModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Select'"
-    [configType]="'input'"
-    [controlConfig]="_selectInputControlConfig"
-    [(model)]="selectModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Select'"
-    [configType]="'helper'"
-    [controlConfig]="_selectHelperControlConfig"
-    [(model)]="selectHelperModel"
-    (resetted)="reset()"
-  />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Form field"
+        configType="input"
+        [controlConfig]="_selectDemoService.formFieldInputControlConfig"
+        [(model)]="_selectDemoService.formFieldModel"
+        (resetted)="_selectDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Select"
+        configType="input"
+        [controlConfig]="_selectDemoService.selectInputControlConfig"
+        [(model)]="_selectDemoService.selectModel"
+        (resetted)="_selectDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Select"
+        configType="helper"
+        [controlConfig]="_selectDemoService.selectHelperControlConfig"
+        [(model)]="_selectDemoService.selectHelperModel"
+        (resetted)="_selectDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_selectDemoService.formFieldInputControlConfig, _selectDemoService.selectInputControlConfig, _selectDemoService.selectHelperControlConfig]" />
+</div>

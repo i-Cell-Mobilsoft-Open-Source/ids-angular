@@ -1,5 +1,6 @@
 export const DemoControl = {
   CHECKBOX: 'checkbox',
+  SWITCH: 'switch',
   TEXT: 'text',
   TEXTARRAY: 'textarray',
   NUMBER: 'number',

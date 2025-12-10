@@ -1,69 +1,90 @@
-<app-tryout
-  [title]="'COMPONENTS.MENU_ITEM' | translate"
-  [hasDarkBackground]="menuItemHelperModel.testBackgroundColor === 'dark'"
-  (resetted)="reset()"
->
-  <ng-container component>
-    <div cdkMenuBar class="menu-bar">
-      <div>
-        <h2>Button</h2>
-        <div idsActiveIndicator [active]="menuItemHelperModel.active" [class.extra-height]="menuItemHelperModel.active && menuItemHelperModel.extraHeight">
-          <button
-            type="button"
-            idsMenuItem
-            [appearance]="menuItemModel.appearance"
-            [size]="menuItemModel.size"
-            [variant]="menuItemModel.variant"
-            [label]="menuItemHelperModel.showLabel ? 'Menu item label' : ''"
-            [disabled]="menuItemModel.disabled"
-          >
-            @if (menuItemHelperModel.hasLeadingIcon) {
-              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-            }
-            @if (menuItemHelperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
-            }
-          </button>
+<app-demo-and-code (resetDemo)="_menuItemDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.MENU_ITEM' | translate"
+      [hasDarkBackground]="_menuItemDemoService.menuItemHelperModel.testBackgroundColor === 'dark'"
+      (resetted)="_menuItemDemoService.reset()"
+    >
+      <ng-container component>
+        <div cdkMenuBar class="menu-bar">
+          <div>
+            <h2>Button</h2>
+            <div
+              idsActiveIndicator
+              [active]="_menuItemDemoService.menuItemHelperModel.active"
+              [class.extra-height]="_menuItemDemoService.menuItemHelperModel.active && _menuItemDemoService.menuItemHelperModel.extraHeight"
+            >
+              <button
+                type="button"
+                idsMenuItem
+                [appearance]="_menuItemDemoService.menuItemModel.appearance"
+                [size]="_menuItemDemoService.menuItemModel.size"
+                [variant]="_menuItemDemoService.menuItemModel.variant"
+                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+                [disabled]="_menuItemDemoService.menuItemModel.disabled"
+              >
+                @if (_menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
+                  <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+                }
+                @if (_menuItemDemoService.menuItemHelperModel.hasTrailingIcon) {
+                  <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
+                }
+              </button>
+            </div>
+          </div>
+          <div>
+            <h2>Link</h2>
+            <div
+              idsActiveIndicator
+              [active]="_menuItemDemoService.menuItemHelperModel.active"
+              [class.extra-height]="_menuItemDemoService.menuItemHelperModel.active && _menuItemDemoService.menuItemHelperModel.extraHeight"
+            >
+              <a
+                idsMenuItem
+                routerLink="/components/menu-item"
+                [appearance]="_menuItemDemoService.menuItemModel.appearance"
+                [size]="_menuItemDemoService.menuItemModel.size"
+                [variant]="_menuItemDemoService.menuItemModel.variant"
+                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+                [disabled]="_menuItemDemoService.menuItemModel.disabled"
+              >
+                @if (_menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
+                  <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+                }
+                @if (_menuItemDemoService.menuItemHelperModel.hasTrailingIcon) {
+                  <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
+                }
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <h2>Link</h2>
-        <div idsActiveIndicator [active]="menuItemHelperModel.active" [class.extra-height]="menuItemHelperModel.active && menuItemHelperModel.extraHeight">
-          <a
-            idsMenuItem
-            routerLink="/components/menu-item"
-            [appearance]="menuItemModel.appearance"
-            [size]="menuItemModel.size"
-            [variant]="menuItemModel.variant"
-            [label]="menuItemHelperModel.showLabel ? 'Menu item label' : ''"
-            [disabled]="menuItemModel.disabled"
-          >
-            @if (menuItemHelperModel.hasLeadingIcon) {
-              <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-            }
-            @if (menuItemHelperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
-            }
-          </a>
-        </div>
-      </div>
-    </div>
-  </ng-container>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Menu item'"
-    [configType]="'input'"
-    [controlConfig]="_menuItemInputControlConfig"
-    [(model)]="menuItemModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Menu item'"
-    [configType]="'helper'"
-    [controlConfig]="_menuItemHelperControlConfig"
-    [(model)]="menuItemHelperModel"
-    (resetted)="reset()"
-  />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Menu item"
+        configType="input"
+        [controlConfig]="_menuItemDemoService.menuItemInputControlConfig"
+        [(model)]="_menuItemDemoService.menuItemModel"
+        (resetted)="_menuItemDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Menu item"
+        configType="helper"
+        [controlConfig]="_menuItemDemoService.menuItemHelperControlConfig"
+        [(model)]="_menuItemDemoService.menuItemHelperModel"
+        (resetted)="_menuItemDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_menuItemDemoService.menuItemInputControlConfig, _menuItemDemoService.menuItemHelperControlConfig]" />
+</div>

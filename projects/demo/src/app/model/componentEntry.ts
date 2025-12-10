@@ -1,4 +1,8 @@
+import { ContentCardData } from './contentCardData';
+export type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & { type: 'card' });
+
 export interface ComponentEntry {
+  componentBlocks: ComponentContent[];
   id: string;
   title: string;
   slug: string;

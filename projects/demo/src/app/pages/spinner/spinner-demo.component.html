@@ -1,20 +1,37 @@
-<app-tryout [title]="'COMPONENTS.SPINNER' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <div component >
-    <ids-spinner
-      [sizeCollection]="model.sizeCollection"
-      [size]="model.size"
-      [variant]="model.variant"
-      [isTrack]="model.isTrack"
-      [aria-label]="'loading'"
-    />
+<app-demo-and-code (resetDemo)="_spinnerDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.SPINNER' | translate"
+      [hasDarkBackground]="_spinnerDemoService.model.variant === 'light'"
+      (resetted)="_spinnerDemoService.reset()"
+    >
+      <div component>
+        <ids-spinner
+          aria-label="loading"
+          [sizeCollection]="_spinnerDemoService.model.sizeCollection"
+          [size]="_spinnerDemoService.model.size"
+          [variant]="_spinnerDemoService.model.variant"
+          [isTrack]="_spinnerDemoService.model.isTrack"
+        />
+      </div>
+    </app-tryout>
   </div>
-  <app-control-table
-    controls
-    [controlName]="'Spinner'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
 
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Spinner"
+        configType="input"
+        [controlConfig]="_spinnerDemoService.inputControlConfig"
+        [(model)]="_spinnerDemoService.model"
+        (resetted)="_spinnerDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_spinnerDemoService.inputControlConfig]"/>
+</div>

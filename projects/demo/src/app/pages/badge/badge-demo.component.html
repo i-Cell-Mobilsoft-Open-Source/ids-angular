@@ -1,30 +1,38 @@
-<app-tryout
-[title]="'COMPONENTS.BADGE' | translate" (resetted)="reset()">
-  <div component>
-    <div
-      idsBadge
-      [badgeVariant]="model.variant"
-      [badgeSize]="model.size"
-      [badgeLabel]="model.label"
-      [badgeShowLeadingElement]="model.hasLeadingIcon"
-      [badgeLimit]="model.limit"
-    >
-      @if (model.hasLeadingIcon) {
-        <ids-icon
-          icon-leading
-          fontIcon="search"
-        />
-      }
-      Text
-    </div>
+<app-demo-and-code (resetDemo)="_badgeDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout [title]="'COMPONENTS.BADGE' | translate" (resetted)="_badgeDemoService.reset()">
+      <div component>
+        <div
+          idsBadge
+          [badgeVariant]="_badgeDemoService.model.variant"
+          [badgeSize]="_badgeDemoService.model.size"
+          [badgeLabel]="_badgeDemoService.model.label"
+          [badgeShowLeadingElement]="_badgeDemoService.model.hasLeadingIcon"
+          [badgeLimit]="_badgeDemoService.model.limit"
+        >
+          @if (_badgeDemoService.model.hasLeadingIcon) {
+            <ids-icon icon-leading fontIcon="search" />
+          }
+          Text
+        </div>
+      </div>
+    </app-tryout>
   </div>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Badge"
+        configType="input"
+        [controlConfig]="_badgeDemoService.inputControlConfig"
+        [(model)]="_badgeDemoService.model"
+        (resetted)="_badgeDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
 
-  <app-control-table
-    controls
-    [controlName]="'Badge'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
-  />
-</app-tryout>
+  <app-prop-table [config]="[_badgeDemoService.inputControlConfig]" />
+</div>

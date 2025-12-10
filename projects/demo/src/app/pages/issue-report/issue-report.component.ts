@@ -19,7 +19,6 @@ type ComponentBlock =
     ContentCardComponent,
   ],
   templateUrl: './issue-report.component.html',
-  styleUrl: './issue-report.component.scss',
 })
 export class IssueReportComponent implements OnInit, OnDestroy {
   public indexDatas = ISSUE_DATA;

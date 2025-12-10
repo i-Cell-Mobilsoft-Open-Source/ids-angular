@@ -11,3 +11,24 @@ ids-chip,
 #header {
   @apply border-b border-solid border-ids-page-fg-surface-lighter-40;
 }
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.component-details-host {
+  height: 100%;
+}
+
+.router-container {
+  display: flex;
+  flex-direction: column;
+
+  &::ng-deep > :not(router-outlet) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}

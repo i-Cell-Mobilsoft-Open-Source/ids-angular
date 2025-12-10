@@ -1,48 +1,79 @@
-<app-tryout
-  [title]="'COMPONENTS.SEGMENTED_CONTROL_TOGGLE' | translate"
-  [hasDarkBackground]="model.variant === 'light'"
-  (resetted)="reset()"
->
-  <ng-container component>
-    <ids-segmented-control-toggle
-      ngModel="second"
-      [appearance]="model.appearance"
-      [variant]="model.variant"
-      [buttonVariant]="model.buttonVariant"
-      [size]="model.size"
-      [disabled]="model.disabled"
+<app-demo-and-code (resetDemo)="_segmentedControlToggleDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.SEGMENTED_CONTROL_TOGGLE' | translate"
+      [hasDarkBackground]="_segmentedControlToggleDemoService.model.variant === 'light'"
+      (resetted)="_segmentedControlToggleDemoService.reset()"
     >
-      <ids-segmented-control-toggle-item
-        value="first"
-        [label]="helperModel.itemHasLabel ? 'Label 1' : undefined"
-        [disabled]="helperModel.onlyOneItemIsDisabled"
-      >
-        @if (helperModel.itemHasIcon) {
-          <ids-icon fontIcon="mail" />
-        }
-        @if (helperModel.itemHasSuffix) {
-          <span suffixContent>$</span>
-        }
-      </ids-segmented-control-toggle-item>
-      <ids-segmented-control-toggle-item value="second" [label]="helperModel.itemHasLabel ? 'Label 2' : undefined">
-        @if (helperModel.itemHasIcon) {
-          <ids-icon fontIcon="account" />
-        }
-        @if (helperModel.itemHasSuffix) {
-          <span suffixContent>$</span>
-        }
-      </ids-segmented-control-toggle-item>
-      <ids-segmented-control-toggle-item value="third" [label]="helperModel.itemHasLabel ? 'Label 3' : undefined">
-        @if (helperModel.itemHasIcon) {
-          <ids-icon fontIcon="access-time" />
-        }
-        @if (helperModel.itemHasSuffix) {
-          <span suffixContent>$</span>
-        }
-      </ids-segmented-control-toggle-item>
-    </ids-segmented-control-toggle>
-  </ng-container>
+      <ng-container component>
+        <ids-segmented-control-toggle
+          ngModel="second"
+          [appearance]="_segmentedControlToggleDemoService.model.appearance"
+          [variant]="_segmentedControlToggleDemoService.model.variant"
+          [buttonVariant]="_segmentedControlToggleDemoService.model.buttonVariant"
+          [size]="_segmentedControlToggleDemoService.model.size"
+          [disabled]="_segmentedControlToggleDemoService.model.disabled"
+        >
+          <ids-segmented-control-toggle-item
+            value="first"
+            [label]="_segmentedControlToggleDemoService.helperModel.itemHasLabel ? 'Label 1' : undefined"
+            [disabled]="_segmentedControlToggleDemoService.helperModel.onlyOneItemIsDisabled"
+          >
+            @if (_segmentedControlToggleDemoService.helperModel.itemHasIcon) {
+              <ids-icon fontIcon="mail" />
+            }
+            @if (_segmentedControlToggleDemoService.helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
+            }
+          </ids-segmented-control-toggle-item>
+          <ids-segmented-control-toggle-item
+            value="second"
+            [label]="_segmentedControlToggleDemoService.helperModel.itemHasLabel ? 'Label 2' : undefined"
+          >
+            @if (_segmentedControlToggleDemoService.helperModel.itemHasIcon) {
+              <ids-icon fontIcon="account" />
+            }
+            @if (_segmentedControlToggleDemoService.helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
+            }
+          </ids-segmented-control-toggle-item>
+          <ids-segmented-control-toggle-item
+            value="third"
+            [label]="_segmentedControlToggleDemoService.helperModel.itemHasLabel ? 'Label 3' : undefined"
+          >
+            @if (_segmentedControlToggleDemoService.helperModel.itemHasIcon) {
+              <ids-icon fontIcon="access-time" />
+            }
+            @if (_segmentedControlToggleDemoService.helperModel.itemHasSuffix) {
+              <span suffixContent>$</span>
+            }
+          </ids-segmented-control-toggle-item>
+        </ids-segmented-control-toggle>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_segmentedControlToggleDemoService.inputControlConfig"
+        [(model)]="_segmentedControlToggleDemoService.model"
+        (resetted)="_segmentedControlToggleDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        configType="helper"
+        [controlConfig]="_segmentedControlToggleDemoService.helperControlConfig"
+        [(model)]="_segmentedControlToggleDemoService.helperModel"
+        (resetted)="_segmentedControlToggleDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_segmentedControlToggleDemoService.inputControlConfig, _segmentedControlToggleDemoService.helperControlConfig]" />
+</div>

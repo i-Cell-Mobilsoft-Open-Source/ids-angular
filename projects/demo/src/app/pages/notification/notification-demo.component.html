@@ -1,64 +1,106 @@
-<app-tryout [title]="'COMPONENTS.NOTIFICATION' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <ng-container component>
-    @if (this.displayComponent()) {
-      <ids-notification
-        [appearance]="model.appearance"
-        [variant]="model.variant"
-        [size]="model.size"
-        [icon]="model.icon"
-        [title]="model.title"
-        [closeButtonSize]="model.closeButtonSize"
-        [closeButtonLabel]="model.closeButtonLabel"
-        [closeLabelButtonAppearance]="model.closeLabelButtonAppearance"
-        [urgent]="model.urgent"
-        [displayActionsAtBottom]="model.displayActionsAtBottom"
-        (closed)="delete()"
-      >
-        This is a notification with a long content and an action. Notice how the text wraps to multiple lines when the max-width is reached.
-        @if (helperModel.showAction1Button) {
-          <button
-            type="button"
-            idsButton
-            idsNotificationActionButton
-            [appearance]="helperModel.action1Appearance"
-            [size]="helperModel.action1Size"
-            [disabled]="helperModel.action1Disabled"
-            (click)="onClick(helperModel.action1Appearance + '-' + helperModel.action1Size)"
+<app-demo-and-code (resetDemo)="_notificationDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.NOTIFICATION' | translate"
+      [hasDarkBackground]="_notificationDemoService.model.variant === 'light'"
+      (resetted)="_notificationDemoService.reset()"
+    >
+      <ng-container component>
+        @if (_notificationDemoService.displayComponent()) {
+          <ids-notification
+            [appearance]="_notificationDemoService.model.appearance"
+            [variant]="_notificationDemoService.model.variant"
+            [size]="_notificationDemoService.model.size"
+            [icon]="_notificationDemoService.model.icon"
+            [title]="_notificationDemoService.model.title"
+            [closeButtonSize]="_notificationDemoService.model.closeButtonSize"
+            [closeButtonLabel]="_notificationDemoService.model.closeButtonLabel"
+            [closeLabelButtonAppearance]="_notificationDemoService.model.closeLabelButtonAppearance"
+            [urgent]="_notificationDemoService.model.urgent"
+            [displayActionsAtBottom]="_notificationDemoService.model.displayActionsAtBottom"
+            (closed)="_notificationDemoService.delete()"
           >
-            @if (helperModel.action1HasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="search" />
+            This is a notification with a long content and an action. Notice how the text wraps to multiple lines when the max-width is
+            reached.
+            @if (_notificationDemoService.helperModel.showAction1Button) {
+              <button
+                type="button"
+                idsButton
+                idsNotificationActionButton
+                [appearance]="_notificationDemoService.helperModel.action1Appearance"
+                [size]="_notificationDemoService.helperModel.action1Size"
+                [disabled]="_notificationDemoService.helperModel.action1Disabled"
+                (click)="
+                  _notificationDemoService.onClick(
+                    _notificationDemoService.helperModel.action1Appearance + '-' + _notificationDemoService.helperModel.action1Size
+                  )
+                "
+              >
+                @if (_notificationDemoService.helperModel.action1HasLeadingIcon) {
+                  <ids-icon icon-leading fontIcon="search" />
+                }
+                {{ _notificationDemoService.helperModel.action1Text }}
+                @if (_notificationDemoService.helperModel.action1HasTrailingIcon) {
+                  <ids-icon icon-trailing fontIcon="done" />
+                }
+              </button>
             }
-            {{ helperModel.action1Text }}
-            @if (helperModel.action1HasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="done" />
+            @if (_notificationDemoService.helperModel.showAction2Button) {
+              <button
+                type="button"
+                idsButton
+                idsNotificationActionButton
+                [appearance]="_notificationDemoService.helperModel.action2Appearance"
+                [size]="_notificationDemoService.helperModel.action2Size"
+                [disabled]="_notificationDemoService.helperModel.action2Disabled"
+                (click)="
+                  _notificationDemoService.onClick(
+                    _notificationDemoService.helperModel.action2Appearance + '-' + _notificationDemoService.helperModel.action2Size
+                  )
+                "
+              >
+                @if (_notificationDemoService.helperModel.action2HasLeadingIcon) {
+                  <ids-icon icon-leading fontIcon="search" />
+                }
+                {{ _notificationDemoService.helperModel.action2Text }}
+                @if (_notificationDemoService.helperModel.action2HasTrailingIcon) {
+                  <ids-icon icon-trailing fontIcon="done" />
+                }
+              </button>
             }
-          </button>
+          </ids-notification>
+        } @else {
+          <button type="button" idsButton (click)="_notificationDemoService.onRestoreButtonClick()">Restore notification</button>
         }
-        @if (helperModel.showAction2Button) {
-          <button
-            type="button"
-            idsButton
-            idsNotificationActionButton
-            [appearance]="helperModel.action2Appearance"
-            [size]="helperModel.action2Size"
-            [disabled]="helperModel.action2Disabled"
-            (click)="onClick(helperModel.action2Appearance + '-' + helperModel.action2Size)"
-          >
-            @if (helperModel.action2HasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="search" />
-            }
-            {{ helperModel.action2Text }}
-            @if (helperModel.action2HasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="done" />
-            }
-          </button>
-        }
-      </ids-notification>
-    } @else {
-      <button type="button" idsButton (click)="onRestoreButtonClick()">Restore notification</button>
-    }
-  </ng-container>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      @if (_notificationDemoService.isLoaded()) {
+        <app-control-table
+          controls
+          configType="input"
+          [controlConfig]="_notificationDemoService.inputControlConfig()"
+          [(model)]="_notificationDemoService.model"
+          (resetted)="_notificationDemoService.reset()"
+        />
+      } @else {
+        <div>Loading...</div>
+      }
+      <app-control-table
+        controls
+        configType="helper"
+        [controlConfig]="_notificationDemoService.helperControlConfig"
+        [(model)]="_notificationDemoService.helperModel"
+        (resetted)="_notificationDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_notificationDemoService.inputControlConfig(), _notificationDemoService.helperControlConfig]" />
+</div>

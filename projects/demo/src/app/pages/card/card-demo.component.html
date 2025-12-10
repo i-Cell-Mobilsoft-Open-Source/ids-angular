@@ -1,75 +1,99 @@
-<app-tryout [title]="'COMPONENTS.CARD' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <ng-container component>
-    @if (helperModel.clickable) {
-      <ids-card
-        appearance="filled"
-        [size]="model.size"
-        [variant]="model.variant"
-        [orientation]="model.orientation"
-        [disabled]="model.disabled"
-        (click)="onClick()"
-      >
-        @if (model.orientation === "vertical") {
-          <header idsCardHeader>
-            <h2 idsCardTitle>This is the title</h2>
-            <h3 idsCardSubtitle>This is the subtitle</h3>
-          </header>
+<app-demo-and-code (resetDemo)="_cardDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.CARD' | translate"
+      [hasDarkBackground]="_cardDemoService.model.variant === 'light'"
+      (resetted)="_cardDemoService.reset()"
+    >
+      <ng-container component>
+        @if (_cardDemoService.helperModel.clickable) {
+          <ids-card
+            appearance="filled"
+            [size]="_cardDemoService.model.size"
+            [variant]="_cardDemoService.model.variant"
+            [orientation]="_cardDemoService.model.orientation"
+            [disabled]="_cardDemoService.model.disabled"
+            (click)="_cardDemoService.onClick()"
+          >
+            @if (_cardDemoService.model.orientation === "vertical") {
+              <header idsCardHeader>
+                <h2 idsCardTitle>This is the title</h2>
+                <h3 idsCardSubtitle>This is the subtitle</h3>
+              </header>
+            }
+            <img
+              idsCardMedia
+              src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
+              alt=""
+              [stretch]="_cardDemoService.mediaModel.stretch"
+            />
+            <ids-card-body>This is the body</ids-card-body>
+            @if (_cardDemoService.model.orientation === "vertical") {
+              <footer idsCardFooter>This is the footer</footer>
+            }
+          </ids-card>
+        } @else {
+          <ids-card
+            [appearance]="_cardDemoService.model.appearance"
+            [size]="_cardDemoService.model.size"
+            [variant]="_cardDemoService.model.variant"
+            [orientation]="_cardDemoService.model.orientation"
+          >
+            @if (_cardDemoService.model.orientation === "vertical") {
+              <header idsCardHeader>
+                <h2 idsCardTitle>This is the title</h2>
+                <h3 idsCardSubtitle>This is the subtitle</h3>
+              </header>
+            }
+            <img
+              idsCardMedia
+              src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
+              alt=""
+              [stretch]="_cardDemoService.mediaModel.stretch"
+            />
+            <ids-card-body>This is the body</ids-card-body>
+            @if (_cardDemoService.model.orientation === "vertical") {
+              <footer idsCardFooter>This is the footer</footer>
+            }
+          </ids-card>
         }
-        <img
-          idsCardMedia
-          src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
-          alt=""
-          [stretch]="mediaModel.stretch"
-        />
-        <ids-card-body>This is the body</ids-card-body>
-        @if (model.orientation === "vertical") {
-          <footer idsCardFooter>This is the footer</footer>
-        }
-      </ids-card>
-    } @else {
-      <ids-card [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [orientation]="model.orientation">
-        @if (model.orientation === "vertical") {
-          <header idsCardHeader>
-            <h2 idsCardTitle>This is the title</h2>
-            <h3 idsCardSubtitle>This is the subtitle</h3>
-          </header>
-        }
-        <img
-          idsCardMedia
-          src="https://images.photowall.com/products/50608/dandelion-meadow.jpg?h=699&q=85"
-          alt=""
-          [stretch]="mediaModel.stretch"
-        />
-        <ids-card-body>This is the body</ids-card-body>
-        @if (model.orientation === "vertical") {
-          <footer idsCardFooter>This is the footer</footer>
-        }
-      </ids-card>
-    }
-  </ng-container>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Card'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Card"
+        configType="input"
+        [controlConfig]="_cardDemoService.inputControlConfig"
+        [(model)]="_cardDemoService.model"
+        (resetted)="_cardDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Card media"
+        configType="input"
+        [controlConfig]="_cardDemoService.mediaInputControlConfig"
+        [(model)]="_cardDemoService.mediaModel"
+        (resetted)="_cardDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Card"
+        configType="helper"
+        [controlConfig]="_cardDemoService.helperControlConfig"
+        [(model)]="_cardDemoService.helperModel"
+        (resetted)="_cardDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+  <app-prop-table
+    [config]="[_cardDemoService.inputControlConfig, _cardDemoService.mediaInputControlConfig, _cardDemoService.helperControlConfig]"
   />
-  <app-control-table
-    controls
-    [controlName]="'Card media'"
-    [configType]="'input'"
-    [controlConfig]="_mediaInputControlConfig"
-    [(model)]="mediaModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Card'"
-    [configType]="'helper'"
-    [controlConfig]="_helperControlConfig"
-    [(model)]="helperModel"
-    (resetted)="reset()"
-  />
-</app-tryout>
+</div>

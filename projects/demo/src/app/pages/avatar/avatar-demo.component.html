@@ -1,26 +1,61 @@
-<app-tryout [title]="'COMPONENTS.AVATAR' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <div component class="avatar-types">
-    <div class="avatar-type">
-      <h2>Initials</h2>
-      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant" [initials]="model.initials" />
-    </div>
-    <div class="avatar-type">
-      <h2>Icon</h2>
-      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant">
-        <ids-icon fontIcon="account-circle" />
-      </ids-avatar>
-    </div>
-    <div class="avatar-type">
-      <h2>With image</h2>
-      <ids-avatar [size]="model.size" [sizeCollection]="model.sizeCollection" [variant]="model.variant">
-        <img
-          idsAvatarImage
-          src="https://hips.hearstapps.com/harpersbazaaruk.cdnds.net/16/38/1600x1600/square-1474624165-scarlett-johansson.jpg"
-          alt="Scarlett Johansson"
-        />
-      </ids-avatar>
-    </div>
+<app-demo-and-code (resetDemo)="_avatarDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.AVATAR' | translate"
+      [hasDarkBackground]="_avatarDemoService.model.variant === 'light'"
+      (resetted)="_avatarDemoService.reset()"
+    >
+      <div component class="avatar-types">
+        <div class="avatar-type">
+          <h2>Initials</h2>
+          <ids-avatar
+            [size]="_avatarDemoService.model.size"
+            [sizeCollection]="_avatarDemoService.model.sizeCollection"
+            [variant]="_avatarDemoService.model.variant"
+            [initials]="_avatarDemoService.model.initials"
+          />
+        </div>
+        <div class="avatar-type">
+          <h2>Icon</h2>
+          <ids-avatar
+            [size]="_avatarDemoService.model.size"
+            [sizeCollection]="_avatarDemoService.model.sizeCollection"
+            [variant]="_avatarDemoService.model.variant"
+          >
+            <ids-icon fontIcon="account-circle" />
+          </ids-avatar>
+        </div>
+        <div class="avatar-type">
+          <h2>With image</h2>
+          <ids-avatar
+            [size]="_avatarDemoService.model.size"
+            [sizeCollection]="_avatarDemoService.model.sizeCollection"
+            [variant]="_avatarDemoService.model.variant"
+          >
+            <img
+              idsAvatarImage
+              src="https://hips.hearstapps.com/harpersbazaaruk.cdnds.net/16/38/1600x1600/square-1474624165-scarlett-johansson.jpg"
+              alt="Scarlett Johansson"
+            />
+          </ids-avatar>
+        </div>
+      </div>
+    </app-tryout>
   </div>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_avatarDemoService.inputControlConfig"
+        [(model)]="_avatarDemoService.model"
+        (resetted)="_avatarDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-</app-tryout>
+  <app-prop-table [config]="[_avatarDemoService.inputControlConfig]" />
+</div>

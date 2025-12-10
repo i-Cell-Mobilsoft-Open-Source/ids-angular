@@ -1,70 +1,96 @@
-<app-tryout
-  [title]="'COMPONENTS.BUTTON' | translate"
-  [hasDarkBackground]="model.variant === 'light' || model.variant === 'light-fixed'"
-  (resetted)="reset()"
->
-  <ng-container component>
-    <div component class="button-grid">
-      <div class="button-item">
-        <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
-        @if (model.asLink) {
-          <a href="" idsButton [appearance]="model.appearance" [size]="model.size" [variant]="model.variant" [disabled]="model.disabled">
-            {{ helperModel.text }}
-          </a>
-        } @else {
-          <button
-            type="button"
-            idsButton
-            [appearance]="model.appearance"
-            [size]="model.size"
-            [variant]="model.variant"
-            [disabled]="model.disabled"
-            (click)="onClick(model.appearance + '-' + model.variant + '-' + model.size)"
-          >
-            @if (helperModel.hasLeadingIcon) {
-              <ids-icon icon-leading fontIcon="search" />
+<app-demo-and-code (resetDemo)="_buttonDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.BUTTON' | translate"
+      [hasDarkBackground]="_buttonDemoService.model.variant === 'light' || _buttonDemoService.model.variant === 'light-fixed'"
+      (resetted)="_buttonDemoService.reset()"
+    >
+      <ng-container component>
+        <div component class="button-grid">
+          <div class="button-item">
+            <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
+            @if (_buttonDemoService.model.asLink) {
+              <a
+                href=""
+                idsButton
+                [appearance]="_buttonDemoService.model.appearance"
+                [size]="_buttonDemoService.model.size"
+                [variant]="_buttonDemoService.model.variant"
+                [disabled]="_buttonDemoService.model.disabled"
+              >
+                {{ _buttonDemoService.helperModel.text }}
+              </a>
+            } @else {
+              <button
+                type="button"
+                idsButton
+                [appearance]="_buttonDemoService.model.appearance"
+                [size]="_buttonDemoService.model.size"
+                [variant]="_buttonDemoService.model.variant"
+                [disabled]="_buttonDemoService.model.disabled"
+                (click)="
+                  _buttonDemoService.onClick(
+                    _buttonDemoService.model.appearance + '-' + _buttonDemoService.model.variant + '-' + _buttonDemoService.model.size
+                  )
+                "
+              >
+                @if (_buttonDemoService.helperModel.hasLeadingIcon) {
+                  <ids-icon icon-leading fontIcon="search" />
+                }
+                {{ _buttonDemoService.helperModel.text }}
+                @if (_buttonDemoService.helperModel.hasTrailingIcon) {
+                  <ids-icon icon-trailing fontIcon="done" />
+                }
+              </button>
             }
-            {{ helperModel.text }}
-            @if (helperModel.hasTrailingIcon) {
-              <ids-icon icon-trailing fontIcon="done" />
-            }
-          </button>
-        }
-      </div>
+          </div>
 
-      <div class="button-item">
-        <h2>{{ "COMMON.GROUPED" | translate }}</h2>
-        <ids-button-group [size]="groupModel.size">
-          <button type="button" idsButton [appearance]="'filled'" [variant]="'primary'">One</button>
-          <button type="button" idsButton [appearance]="'outlined'" [variant]="'success'">Two</button>
-          <button type="button" idsButton [appearance]="'text'" [variant]="'warning'">Three</button>
-        </ids-button-group>
-      </div>
-    </div>
-  </ng-container>
+          <div class="button-item">
+            <h2>{{ "COMMON.GROUPED" | translate }}</h2>
+            <ids-button-group [size]="_buttonDemoService.groupModel.size">
+              <button type="button" idsButton appearance="filled" variant="primary">One</button>
+              <button type="button" idsButton appearance="outlined" variant="success">Two</button>
+              <button type="button" idsButton appearance="text" variant="warning">Three</button>
+            </ids-button-group>
+          </div>
+        </div>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Button'"
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (resetted)="reset()"
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Button"
+        configType="input"
+        [controlConfig]="_buttonDemoService.inputControlConfig"
+        [(model)]="_buttonDemoService.model"
+        (resetted)="_buttonDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Button"
+        configType="helper"
+        [controlConfig]="_buttonDemoService.helperControlConfig"
+        [(model)]="_buttonDemoService.helperModel"
+        (resetted)="_buttonDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Button group"
+        configType="input"
+        [controlConfig]="_buttonDemoService.groupInputControlConfig"
+        [(model)]="_buttonDemoService.groupModel"
+        (resetted)="_buttonDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table
+    [config]="[_buttonDemoService.inputControlConfig, _buttonDemoService.helperControlConfig, _buttonDemoService.groupInputControlConfig]"
   />
-  <app-control-table
-    controls
-    [controlName]="'Button'"
-    [configType]="'helper'"
-    [controlConfig]="_helperControlConfig"
-    [(model)]="helperModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Button group'"
-    [configType]="'input'"
-    [controlConfig]="_groupInputControlConfig"
-    [(model)]="groupModel"
-    (resetted)="reset()"
-  />
-</app-tryout>
+</div>

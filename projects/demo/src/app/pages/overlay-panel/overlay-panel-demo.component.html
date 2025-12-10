@@ -6,28 +6,81 @@
       (resetted)="_overlayPanelDemoService.reset()"
     >
       <ng-container component>
+        <button
+          #origin="cdkOverlayOrigin"
+          type="button"
+          cdkOverlayOrigin
+          idsButton
+          appearance="outlined"
+          size="compact"
+          variant="primary"
+          (click)="toggleOverlay()"
+        >
+          {{ _overlayOpen ? 'Close overlay' : 'Open overlay' }}
+        </button>
+
         <ids-overlay-panel
+          [origin]="origin"
+          [open]="_overlayOpen"
+          (closed)="_overlayOpen = false"
           [appearance]="_overlayPanelDemoService.overlayPanelModel.appearance"
           [size]="_overlayPanelDemoService.overlayPanelModel.size"
           [variant]="_overlayPanelDemoService.overlayPanelModel.variant"
         >
-          @for (_ of _overlayPanelDemoService.items; track $index) {
-            <button
-              type="button"
-              idsMenuItem
-              [appearance]="_overlayPanelDemoService.menuItemModel.appearance"
-              [size]="_overlayPanelDemoService.menuItemModel.size"
-              [variant]="_overlayPanelDemoService.menuItemModel.variant"
-              [label]="'Menu item label ' + $index"
-              [disabled]="$index === 0 && _overlayPanelDemoService.menuItemHelperModel.hasDisabledItem"
+
+          @if(_overlayPanelDemoService.overlayPanelHelperModel.contentType === 'menuItems') {
+            <div
+              cdkMenu
             >
-              @if (_overlayPanelDemoService.menuItemHelperModel.hasLeadingIcon) {
-                <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+              @for (_ of items; track $index) {
+                <div idsActiveIndicator [active]="false" >
+                  <button
+                    type="button"
+                    idsMenuItem
+                    [appearance]="_overlayPanelDemoService.menuItemModel.appearance"
+                    [size]="_overlayPanelDemoService.menuItemModel.size"
+                    [variant]="_overlayPanelDemoService.menuItemModel.variant"
+                    [label]="'Menu item label ' + $index"
+                  >
+                      <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+                      <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
+                  </button>
+                </div>
               }
-              @if (_overlayPanelDemoService.menuItemHelperModel.hasTrailingIcon) {
-                <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
-              }
-            </button>
+            </div>
+          } @else if (_overlayPanelDemoService.overlayPanelHelperModel.contentType === 'customContent') {
+            <div class="overlay-content">
+              <div>
+                <button
+                  type="button"
+                  idsButton
+                  appearance="filled"
+                  size="compact"
+                  variant="primary"
+                  (click)="_contentBtnTest('1')"
+                >button 1</button>
+                <button
+                  type="button"
+                  idsButton
+                  appearance="filled"
+                  size="compact"
+                  variant="primary"
+                  (click)="_contentBtnTest('2')"
+                >button 2</button>
+              </div>
+              <div>
+                <ids-chip>
+                  <ids-icon fontIcon="chevron-up" idsLeadingIcon />
+                  something
+                </ids-chip>
+              </div>
+              <div>
+                <ids-chip>
+                  <ids-icon fontIcon="chevron-up" idsLeadingIcon />
+                  something 2
+                </ids-chip>
+              </div>
+            </div>
           }
         </ids-overlay-panel>
       </ng-container>
@@ -58,14 +111,6 @@
         configType="input"
         [controlConfig]="_overlayPanelDemoService.menuItemInputControlConfig"
         [(model)]="_overlayPanelDemoService.menuItemModel"
-        (resetted)="_overlayPanelDemoService.reset()"
-      />
-      <app-control-table
-        controls
-        controlName="Menu item"
-        configType="helper"
-        [controlConfig]="_overlayPanelDemoService.menuItemHelperControlConfig"
-        [(model)]="_overlayPanelDemoService.menuItemHelperModel"
         (resetted)="_overlayPanelDemoService.reset()"
       />
     </app-tryout-controls>

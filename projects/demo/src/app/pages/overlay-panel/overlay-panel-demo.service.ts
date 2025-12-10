@@ -18,6 +18,7 @@ type OverlayPanelInputControls = {
 
 type OverlayPanelHelperControls = {
   testBackgroundColor: 'none' | 'dark',
+  contentType: 'menuItems' | 'customContent',
 };
 
 type MenuItemInputControls = {
@@ -66,6 +67,16 @@ export class OverlayPanelDemoService {
       list: [
         'none',
         'dark',
+      ],
+    },
+    contentType: {
+      description: 'Type of content inside the overlay panel.',
+      type: 'string',
+      default: 'menuItems',
+      control: DemoControl.SELECT,
+      list: [
+        'menuItems',
+        'customContent',
       ],
     },
   };

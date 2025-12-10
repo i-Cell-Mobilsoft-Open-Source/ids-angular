@@ -50,7 +50,7 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
     const valueFn = this.colDef().value ?? ((): string => '');
 
     const rawResult = field && Object.hasOwn(rowData, field) ? (rowData as Record<string, unknown>)[field] : valueFn(rowData);
-    return isString(rawResult) ? this._preSanitize(rawResult) : rawResult;
+    return rawResult;
   });
 
   protected _stringCellValue = computed(() => String(this._cellValue() ?? ''));

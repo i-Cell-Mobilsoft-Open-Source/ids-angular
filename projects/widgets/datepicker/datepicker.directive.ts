@@ -31,7 +31,6 @@ const defaultConfig = IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY();
     },
   ],
   host: {
-    '[disabled]': 'disabled',
     '(input)': '_handleInput($event.target.value)',
     '(blur)': '_handleBlur()',
     '(keydown)': '_handleKeydown($event)',
@@ -183,6 +182,8 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     this._componentRef.instance.selected.subscribe((selectedDate: Date) => {
       this._onChange(selectedDate);
       this._setInputValue(this.value);
+      this._isValid.set(this._isValidValue(this.value));
+      this._parent.controlDir()?.control?.updateValueAndValidity();
       this.close();
     });
     this._componentRef.instance.monthSelected.subscribe((selectedMonth: Date) => this.monthSelected.emit(selectedMonth));
@@ -206,9 +207,8 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     afterNextRender(() => this._elementRef.nativeElement.focus(), { injector: this._injector });
   }
 
-  private _handleInput(value: string): void {
+  protected _handleInput(value: string): void {
     const parsed = this.parser()(value);
-
     this._isValid.set(this._isValidValue(parsed));
 
     const date = getValidDateOrNull(parsed);
@@ -219,11 +219,11 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     }
   }
 
-  private _handleBlur(): void {
+  protected _handleBlur(): void {
     this._onTouched();
   }
 
-  private _handleKeydown(event: KeyboardEvent): void {
+  protected _handleKeydown(event: KeyboardEvent): void {
     if (event.code === 'ArrowDown' && event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
       this.open();
     }

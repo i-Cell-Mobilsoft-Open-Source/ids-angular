@@ -1,37 +1,27 @@
+import { DividerDemoService } from './divider-demo.service';
+
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { PropTableComponent } from '../../components/prop-table/prop-table.component';
+import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
-import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
-import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import {
-  IdsSize,
-  IdsSizeType,
-  IdsOrientationType,
-  IdsOrientation } from '@i-cell/ids-angular/core';
-import { IDS_DIVIDER_DEFAULT_CONFIG_FACTORY, IdsDividerComponent, IdsDividerVariant, IdsDividerVariantType } from '@i-cell/ids-angular/divider';
+import { IdsDividerComponent } from '@i-cell/ids-angular/divider';
 import { TranslateModule } from '@ngx-translate/core';
-
-const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
-
-type DividerInputControls = {
-  size: IdsSizeType,
-  variant: IdsDividerVariantType,
-  orientation: IdsOrientationType,
-  width: string,
-  height: string,
-};
 
 @Component({
   selector: 'app-divider-demo',
   imports: [
     TryoutComponent,
-    ControlTableComponent,
     IdsDividerComponent,
     TranslateModule,
     FormsModule,
+    DemoAndCodeComponent,
+    TryoutControlComponent,
+    ControlTableComponent,
+    PropTableComponent,
   ],
   templateUrl: './divider-demo.component.html',
   styleUrls: [
@@ -40,47 +30,5 @@ type DividerInputControls = {
   ],
 })
 export class DividerDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<DividerInputControls> = {
-    orientation: {
-      description: 'Divider orientation.',
-      type: 'IdsOrientationType',
-      default: defaultConfig.orientation,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsOrientation),
-    },
-    size: {
-      description: 'Divider size.',
-      type: 'IdsSizeType',
-      default: defaultConfig.size,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsSize),
-    },
-    variant: {
-      description: 'Divider variant.',
-      type: 'IdsDividerVariantType',
-      default: defaultConfig.variant,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsDividerVariant),
-    },
-    width: {
-      description: 'Divider width as css property.',
-      type: 'string',
-      default: defaultConfig.width,
-      demoDefault: '100%',
-    },
-    height: {
-      description: 'Divider height as css property.',
-      type: 'string',
-      default: defaultConfig.height,
-      demoDefault: '100%',
-    },
-  };
-
-  public defaults = getDefaultFromDemoConfig<DividerInputControls>(this._inputControlConfig);
-
-  public model: DividerInputControls = { ...this.defaults  };
-
-  public reset(): void {
-    this.model = { ...this.defaults };
-  }
+  protected _dividerDemoService = inject(DividerDemoService);
 }

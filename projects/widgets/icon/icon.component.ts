@@ -3,8 +3,9 @@ import { IDS_ICON_PARENT } from './tokens/icon-parent';
 import { IdsIconSource } from './types/icon-source.type';
 import { IdsIconVariantType } from './types/icon-variant.type';
 
+import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation, DOCUMENT } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, SecurityContext, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -32,7 +33,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_ICON_DEFAULT_CONFIG);
 
   private readonly _elementRef = inject(ElementRef<HTMLElement>);
-  private readonly _document = inject(DOCUMENT);
+  private readonly _document = inject(DOCUMENT) as Document;
   private readonly _httpClient = inject(HttpClient);
   private readonly _sanitizer = inject(DomSanitizer);
 

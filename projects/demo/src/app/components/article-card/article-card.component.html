@@ -1,8 +1,9 @@
 <a [routerLink]="componentData().imageLink">
-  <ids-card variant="light" appearance="elevated">
+  <ids-card variant="light" appearance="elevated" class="h-full">
     <article class="flex flex-col p-4 gap-4 relative">
       <img class="bg-gray-100 aspect-video rounded-lg" [alt]="componentData().title" [src]="componentData().imageUrl" />
-      <h3 class="text-center">{{ componentData().title }}</h3>
+      <h3 class="text-left storng text-title-sm-large">{{ componentData().title }}</h3>
+      <p class="text-left text-body-medium ids-page-sur line-clamp-3">{{ componentData().description }}</p>
     </article>
   </ids-card>
 </a>

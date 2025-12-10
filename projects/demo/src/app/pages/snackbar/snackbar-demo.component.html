@@ -1,8 +1,33 @@
-<app-tryout [title]="'COMPONENTS.SNACKBAR' | translate" (resetted)="reset()">
-  <ng-container component>
-    <button type="button" idsButton (click)="openSnackbar()">Open snackbar</button>
-  </ng-container>
+<app-demo-and-code (resetDemo)="_snackbarDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout [title]="'COMPONENTS.SNACKBAR' | translate" (resetted)="_snackbarDemoService.reset()">
+      <ng-container component>
+        <button type="button" idsButton (click)="_snackbarDemoService.openSnackbar()">Open snackbar</button>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_snackbarDemoService.inputControlConfig"
+        [(model)]="_snackbarDemoService.model"
+        (resetted)="_snackbarDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        configType="helper"
+        [controlConfig]="_snackbarDemoService.helperControlConfig"
+        [(model)]="_snackbarDemoService.helperModel"
+        (resetted)="_snackbarDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_snackbarDemoService.inputControlConfig, _snackbarDemoService.helperControlConfig]" />
+</div>

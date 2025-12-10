@@ -1,123 +1,130 @@
-<app-tryout
-  [title]="'COMPONENTS.OVERLAY_PANEL' | translate"
-  [hasDarkBackground]="overlayPanelHelperModel.testBackgroundColor === 'dark'"
-  (resetted)="reset()"
->
-  <ng-container component>
-    <button
-      #origin="cdkOverlayOrigin"
-      type="button"
-      cdkOverlayOrigin
-      idsButton
-      appearance="outlined"
-      size="compact"
-      variant="primary"
-      (click)="toggleOverlay()"
+<app-demo-and-code (resetDemo)="_overlayPanelDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.OVERLAY_PANEL' | translate"
+      [hasDarkBackground]="_overlayPanelDemoService.overlayPanelHelperModel.testBackgroundColor === 'dark'"
+      (resetted)="_overlayPanelDemoService.reset()"
     >
-      {{ _overlayOpen ? 'Close overlay' : 'Open overlay' }}
-    </button>
+      <ng-container component>
+        <button
+          #origin="cdkOverlayOrigin"
+          type="button"
+          cdkOverlayOrigin
+          idsButton
+          appearance="outlined"
+          size="compact"
+          variant="primary"
+          (click)="toggleOverlay()"
+        >
+          {{ _overlayOpen ? 'Close overlay' : 'Open overlay' }}
+        </button>
 
-    <ids-overlay-panel
-      [origin]="origin"
-      [open]="_overlayOpen"
-      (closed)="_overlayOpen = false"
-      [appearance]="overlayPanelModel.appearance"
-      [size]="overlayPanelModel.size"
-      [variant]="overlayPanelModel.variant"
-    >
+        <ids-overlay-panel
+          [origin]="origin"
+          [open]="_overlayOpen"
+          (closed)="_overlayOpen = false"
+          [appearance]="_overlayPanelDemoService.overlayPanelModel.appearance"
+          [size]="_overlayPanelDemoService.overlayPanelModel.size"
+          [variant]="_overlayPanelDemoService.overlayPanelModel.variant"
+        >
 
-        @if(overlayPanelHelperModel.contentType === 'menuItems') {
-          <div
-            cdkMenu
-          >
-            @for (_ of items; track $index) {
-              <div idsActiveIndicator [active]="false" >
+          @if(_overlayPanelDemoService.overlayPanelHelperModel.contentType === 'menuItems') {
+            <div
+              cdkMenu
+            >
+              @for (_ of items; track $index) {
+                <div idsActiveIndicator [active]="false" >
+                  <button
+                    type="button"
+                    idsMenuItem
+                    [appearance]="_overlayPanelDemoService.menuItemModel.appearance"
+                    [size]="_overlayPanelDemoService.menuItemModel.size"
+                    [variant]="_overlayPanelDemoService.menuItemModel.variant"
+                    [label]="'Menu item label ' + $index"
+                  >
+                      <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+                      <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
+                  </button>
+                </div>
+              }
+            </div>
+          } @else if (_overlayPanelDemoService.overlayPanelHelperModel.contentType === 'customContent') {
+            <div class="overlay-content">
+              <div>
                 <button
                   type="button"
-                  idsMenuItem
-                  [appearance]="menuItemModel.appearance"
-                  [size]="menuItemModel.size"
-                  [variant]="menuItemModel.variant"
-                  [label]="'Menu item label ' + $index"
-                  [disabled]="$index === 0 && menuItemHelperModel.hasDisabledItem"
-                >
-                  @if (menuItemHelperModel.hasLeadingIcon) {
-                    <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
-                  }
-                  @if (menuItemHelperModel.hasTrailingIcon) {
-                    <ids-icon icon-trailing aria-hidden="true" alt="" fontIcon="chevron-right" />
-                  }
-                </button>
+                  idsButton
+                  appearance="filled"
+                  size="compact"
+                  variant="primary"
+                  (click)="_contentBtnTest('1')"
+                >button 1</button>
+                <button
+                  type="button"
+                  idsButton
+                  appearance="filled"
+                  size="compact"
+                  variant="primary"
+                  (click)="_contentBtnTest('2')"
+                >button 2</button>
               </div>
-            }
-          </div>
-        } @else if (overlayPanelHelperModel.contentType === 'customContent') {
-          <div class="overlay-content">
-            <div>
-              <button
-                type="button"
-                idsButton
-                appearance="filled"
-                size="compact"
-                variant="primary"
-                (click)="_contentBtnTest('1')"
-              >button 1</button>
-              <button
-                type="button"
-                idsButton
-                appearance="filled"
-                size="compact"
-                variant="primary"
-                (click)="_contentBtnTest('2')"
-              >button 2</button>
+              <div>
+                <ids-chip>
+                  <ids-icon fontIcon="chevron-up" idsLeadingIcon />
+                  something
+                </ids-chip>
+              </div>
+              <div>
+                <ids-chip>
+                  <ids-icon fontIcon="chevron-up" idsLeadingIcon />
+                  something 2
+                </ids-chip>
+              </div>
             </div>
-            <div>
-              <ids-chip>
-                <ids-icon fontIcon="chevron-up" idsLeadingIcon />
-                something
-              </ids-chip>
-            </div>
-            <div>
-              <ids-chip>
-                <ids-icon fontIcon="chevron-up" idsLeadingIcon />
-                something 2
-              </ids-chip>
-            </div>
-          </div>
-        }
-    </ids-overlay-panel>
-  </ng-container>
+          }
+        </ids-overlay-panel>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table
-    controls
-    [controlName]="'Overlay panel'"
-    [configType]="'input'"
-    [controlConfig]="_overlayPanelInputControlConfig"
-    [(model)]="overlayPanelModel"
-    (resetted)="reset()"
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Overlay panel"
+        configType="input"
+        [controlConfig]="_overlayPanelDemoService.overlayPanelInputControlConfig"
+        [(model)]="_overlayPanelDemoService.overlayPanelModel"
+        (resetted)="_overlayPanelDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Overlay panel"
+        configType="helper"
+        [controlConfig]="_overlayPanelDemoService.overlayPanelHelperControlConfig"
+        [(model)]="_overlayPanelDemoService.overlayPanelHelperModel"
+        (resetted)="_overlayPanelDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Menu item"
+        configType="input"
+        [controlConfig]="_overlayPanelDemoService.menuItemInputControlConfig"
+        [(model)]="_overlayPanelDemoService.menuItemModel"
+        (resetted)="_overlayPanelDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table
+    [config]="[
+      _overlayPanelDemoService.overlayPanelInputControlConfig,
+      _overlayPanelDemoService.overlayPanelHelperControlConfig,
+      _overlayPanelDemoService.menuItemInputControlConfig,
+      _overlayPanelDemoService.menuItemHelperControlConfig,
+    ]"
   />
-  <app-control-table
-    controls
-    [controlName]="'Overlay panel'"
-    [configType]="'helper'"
-    [controlConfig]="_overlayPanelHelperControlConfig"
-    [(model)]="overlayPanelHelperModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Menu item'"
-    [configType]="'input'"
-    [controlConfig]="_menuItemInputControlConfig"
-    [(model)]="menuItemModel"
-    (resetted)="reset()"
-  />
-  <app-control-table
-    controls
-    [controlName]="'Menu item'"
-    [configType]="'helper'"
-    [controlConfig]="_menuItemHelperControlConfig"
-    [(model)]="menuItemHelperModel"
-    (resetted)="reset()"
-  />
-</app-tryout>
+</div>

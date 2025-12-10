@@ -1,45 +1,78 @@
-<app-tryout [title]="'COMPONENTS.TAB' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <ng-container component>
-    <ids-tab-group
-      [size]="model.size"
-      [variant]="model.variant"
-      [orientation]="model.orientation"
-      [stretchTabs]="model.stretchTabs"
-      [tabPosition]="model.tabPosition"
-      [indicatorPosition]="model.indicatorPosition"
-      [disabled]="model.disabled"
+<app-demo-and-code (resetDemo)="_tabDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.TAB' | translate"
+      [hasDarkBackground]="_tabDemoService.model.variant === 'light'"
+      (resetted)="_tabDemoService.reset()"
     >
-      <ids-tab
-        [id]="helperModel.tabItem1Id"
-        [label]="helperModel.tabItem1Label"
-        [leadingIcon]="helperModel.tabItem1LeadingIcon"
-        [trailingIcon]="helperModel.tabItem1TrailingIcon"
-        [disabled]="helperModel.tabItem1Disabled"
-      >
-        Tab Content 1
-      </ids-tab>
-      <ids-tab
-        [id]="helperModel.tabItem2Id"
-        [label]="helperModel.tabItem2Label"
-        [leadingIcon]="helperModel.tabItem2LeadingIcon"
-        [trailingIcon]="helperModel.tabItem2TrailingIcon"
-        [disabled]="helperModel.tabItem2Disabled"
-      >
-        Tab Content 2
-      </ids-tab>
-      <ids-tab
-        [id]="helperModel.tabItem3Id"
-        [label]="helperModel.tabItem3Label"
-        [leadingIcon]="helperModel.tabItem3LeadingIcon"
-        [trailingIcon]="helperModel.tabItem3TrailingIcon"
-        [disabled]="helperModel.tabItem3Disabled"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis sequi
-        aut fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.
-      </ids-tab>
-    </ids-tab-group>
-  </ng-container>
+      <ng-container component>
+        <ids-tab-group
+          [size]="_tabDemoService.model.size"
+          [variant]="_tabDemoService.model.variant"
+          [orientation]="_tabDemoService.model.orientation"
+          [stretchTabs]="_tabDemoService.model.stretchTabs"
+          [tabPosition]="_tabDemoService.model.tabPosition"
+          [indicatorPosition]="_tabDemoService.model.indicatorPosition"
+          [disabled]="_tabDemoService.model.disabled"
+        >
+          <ids-tab
+            [id]="_tabDemoService.helperModel.tabItem1Id"
+            [label]="_tabDemoService.helperModel.tabItem1Label"
+            [leadingIcon]="_tabDemoService.helperModel.tabItem1LeadingIcon"
+            [trailingIcon]="_tabDemoService.helperModel.tabItem1TrailingIcon"
+            [disabled]="_tabDemoService.helperModel.tabItem1Disabled"
+          >
+            Tab Content 1
+          </ids-tab>
+          <ids-tab
+            [id]="_tabDemoService.helperModel.tabItem2Id"
+            [label]="_tabDemoService.helperModel.tabItem2Label"
+            [leadingIcon]="_tabDemoService.helperModel.tabItem2LeadingIcon"
+            [trailingIcon]="_tabDemoService.helperModel.tabItem2TrailingIcon"
+            [disabled]="_tabDemoService.helperModel.tabItem2Disabled"
+          >
+            Tab Content 2
+          </ids-tab>
+          <ids-tab
+            [id]="_tabDemoService.helperModel.tabItem3Id"
+            [label]="_tabDemoService.helperModel.tabItem3Label"
+            [leadingIcon]="_tabDemoService.helperModel.tabItem3LeadingIcon"
+            [trailingIcon]="_tabDemoService.helperModel.tabItem3TrailingIcon"
+            [disabled]="_tabDemoService.helperModel.tabItem3Disabled"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis
+            sequi aut fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.
+          </ids-tab>
+        </ids-tab-group>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-  <app-control-table controls [configType]="'helper'" [controlConfig]="_helperControlConfig" [(model)]="helperModel" (resetted)="reset()" />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_tabDemoService.inputControlConfig"
+        [(model)]="_tabDemoService.model"
+        (resetted)="_tabDemoService.reset()"
+      />
+      @if (_tabDemoService.isLoaded()) {
+        <app-control-table
+          controls
+          configType="helper"
+          [controlConfig]="_tabDemoService.helperControlConfig()"
+          [(model)]="_tabDemoService.helperModel"
+          (resetted)="_tabDemoService.reset()"
+        />
+      } @else {
+        <div>Loading...</div>
+      }
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_tabDemoService.inputControlConfig, _tabDemoService.helperControlConfig()]"/>
+</div>

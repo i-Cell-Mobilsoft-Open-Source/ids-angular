@@ -1,37 +1,26 @@
+import { IdsTabGroupExtensionDirective } from './ids-tab-group-extension.directive';
+
 import { IdsTabGroupComponent } from '../../../../../../widgets/tab/tab-group.component';
 import { environment } from '../../../../environments/environment.development';
-import { ContentCardComponent } from '../../../components/content-card/content-card.component';
 import { HeroComponent } from '../../../components/hero/hero.component';
-import { ComponentEntry } from '../../../model/componentEntry';
-import { ContentCardData } from '../../../model/contentCardData';
+import { ComponentBlock, ComponentContent, ComponentEntry } from '../../../model/componentEntry';
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
-import { IdsChipComponent } from '@i-cell/ids-angular/chip';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { Component, OnInit, computed, inject, signal, viewChild } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
-
-type ComponentBlock =
-  | { type: 'heading'; heading: string }
-  | (ContentCardData & { type: 'card' });
+import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-component-details',
-  standalone: true,
   imports: [
+    RouterOutlet,
+    RouterModule,
     HeroComponent,
-    ContentCardComponent,
     IdsTabComponent,
     IdsTabGroupComponent,
-    IdsChipComponent,
-    IdsButtonComponent,
-    IdsCardComponent,
-    IdsIconComponent,
-    IdsIconButtonComponent,
+    IdsTabGroupExtensionDirective,
   ],
   templateUrl: './component-details.component.html',
   styleUrl: './component-details.component.scss',
@@ -40,79 +29,134 @@ export class ComponentDetailsComponent implements OnInit {
   public heroData?: HeroData;
   public componentBlocks: ComponentBlock[] = [];
 
+  public tabGroup = viewChild(IdsTabGroupComponent);
+  public activeTab = signal<string>('demo');
+  protected _selectedTabIndex = 1;
+  protected _initTabIndex = undefined;
+
+  private _tabs = [
+    'guidelines',
+    'demo',
+    'api',
+  ];
+
+  public targetTabIndex = computed(() => this._tabs.indexOf(this.activeTab()));
+
   private _graphqlService = inject(GraphqlService);
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  public selectedSection = 'demo';
+
+  constructor() {
+    const tabIndex = this._tabs.findIndex((tab) => tab === location.pathname.split('/').pop());
+    if (tabIndex > 0) {
+      this._selectedTabIndex = tabIndex;
+    }
+  }
+
+  protected _onSelectedTabChange(index: number): void {
+    const componentRouteName = this._route.snapshot.url[0]?.path;
+
+    this._selectedTabIndex = index;
+
+    this._router.navigate([
+      'components',
+      componentRouteName,
+      this._tabs[this._selectedTabIndex],
+    ]);
+  }
 
   public ngOnInit(): void {
-    this._graphqlService.getComponents().subscribe((result) => {
-      const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
-      const components = typedResult.data.entries.data;
+    const navigationEnd$ = this._router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      startWith(null),
+    );
 
-      if (components.length === 0) {
-        return;
-      }
-
-      const component = components[0];
-
-      this.heroData = {
-        id: Number(component.id),
-        title: component.title,
-        isBackButton: true,
-        description: component.comp_description,
-        imageUrl: component.comp_img_light_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}`
-          : '',
-        imageUrlLight: component.comp_img_light_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}`
-          : '',
-        imageUrlDark: component.comp_img_dark_mode?.[0]?.url
-          ? `${environment.cmsBaseUrl}${component.comp_img_dark_mode[0].url}`
-          : '',
-      };
-
-      const blocks: ComponentBlock[] = [];
-
-      for (const block of component.content) {
-        if (block.__typename === 'Set_Content_Heading') {
-          blocks.push({
-            type: 'heading',
-            heading: block.heading,
-          });
+    navigationEnd$
+      .pipe(
+        map(() => {
+          const urlSegments = this._router.url.split('/');
+          return urlSegments[2];
+        }),
+        distinctUntilChanged(),
+        filter((slug) => !!slug),
+        switchMap((slug) =>
+          this._graphqlService.getComponents().pipe(
+            map((result) => {
+              const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
+              const components = typedResult.data.entries.data;
+              return components.find((entry) => entry.slug === slug);
+            }),
+          ),
+        ),
+      )
+      .subscribe((component) => {
+        if (component) {
+          this._updateHeroAndBlocks(component);
+        } else {
+          this.heroData = undefined;
+          this.componentBlocks = [];
         }
+      });
 
-        if (block.__typename === 'Set_Content_Card') {
-          blocks.push({
-            type: 'card',
-            id: Number(block.id),
-            orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
-            variant: block.card_properties?.card_variant?.value ?? 'surface',
-            appearance: block.card_properties?.appearance?.value ?? 'filled',
-            transparent: block.card_properties?.card_bg_transparent ?? false,
-            filledInContainer: block.group_image?.filled_in_container ?? false,
-            state: block.group_image?.state?.value,
-            imageURL: block.group_image?.img_light_mode?.[0]?.url
-              ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-              : '',
-            imageUrlLight: block.group_image?.img_light_mode?.[0]?.url
-              ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-              : '',
-            imageUrlDark: block.group_image?.img_dark_mode?.[0]?.url
-              ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
-              : '',
-            imageCaption: block.group_image?.img_caption,
-            imageBgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
-            imageBGTransparent: block.group_image?.bg_transparent ?? false,
-            overTitle: block.content?.content_over_title,
-            title: block.content?.content_title,
-            description: block.content?.content_description,
-            buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : undefined,
-            buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
-            buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,
-            buttonTwoUrl: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_url : block.button?.button?.button_url,
-          });
-        }
+    navigationEnd$.subscribe(() => {
+      const childRoute = this._route.firstChild?.snapshot.url[1]?.path ?? 'demo';
+
+      this.activeTab.set(childRoute);
+    });
+  }
+
+  private _updateHeroAndBlocks(component: ComponentEntry): void {
+    this.heroData = {
+      id: Number(component.id),
+      title: component.title,
+      isBackButton: true,
+      description: component.comp_description,
+      imageUrl: component.comp_img_light_mode?.[0]?.url ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}` : '',
+      imageUrlLight: component.comp_img_light_mode?.[0]?.url ? `${environment.cmsBaseUrl}${component.comp_img_light_mode[0].url}` : '',
+      imageUrlDark: component.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${component.comp_img_dark_mode[0].url}` : '',
+    };
+
+    const blocks: ComponentBlock[] = [];
+    component.componentBlocks?.forEach((block: ComponentContent) => {
+      if (block.__typename === 'Set_Content_Heading') {
+        blocks.push({
+          type: 'heading',
+          heading: block.heading,
+        });
       }
-
-      this.componentBlocks = blocks;
+      if (block.__typename === 'Set_Content_Card') {
+        blocks.push({
+          type: 'card',
+          id: Number(block.id),
+          orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
+          variant: block.card_properties?.card_variant?.value ?? 'surface',
+          appearance: block.card_properties?.appearance?.value ?? 'filled',
+          transparent: block.card_properties?.card_bg_transparent ?? false,
+          filledInContainer: block.group_image?.filled_in_container ?? false,
+          state: block.group_image?.state?.value,
+          imageURL: block.group_image?.img_light_mode?.[0]?.url
+            ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+            : '',
+          imageUrlLight: block.group_image?.img_light_mode?.[0]?.url
+            ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+            : '',
+          imageUrlDark: block.group_image?.img_dark_mode?.[0]?.url
+            ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
+            : '',
+          imageCaption: block.group_image?.img_caption,
+          imageBgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
+          imageBGTransparent: block.group_image?.bg_transparent ?? false,
+          overTitle: block.content?.content_over_title,
+          title: block.content?.content_title,
+          description: block.content?.content_description,
+          buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : undefined,
+          buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
+          buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,
+          buttonTwoUrl: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_url : block.button?.button?.button_url,
+        });
+        this.componentBlocks = blocks;
+      }
     });
   }
 
@@ -127,17 +171,6 @@ export class ComponentDetailsComponent implements OnInit {
   }
 
   public trackByCardOrHeading(index: number, item: ComponentBlock): string | number {
-    return item.type === 'card' ? item.id ?? `card-${index}` : `heading-${index}`;
-  }
-
-  public isOpen = signal(false);
-  public isDark = signal(false);
-
-  public toggleFooter(): void {
-    this.isOpen.update((open) => !open);
-  }
-
-  public toggleDark(): void {
-    this.isDark.update((dark) => !dark);
+    return item.type === 'card' ? (item.id ?? `card-${index}`) : `heading-${index}`;
   }
 }

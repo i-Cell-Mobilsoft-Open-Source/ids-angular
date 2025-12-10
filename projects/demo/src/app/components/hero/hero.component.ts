@@ -2,13 +2,14 @@ import { HeroData } from '../../model/heroData';
 import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
 import { Location } from '@angular/common';
-import { Component, input, OnDestroy, OnInit } from '@angular/core';
+import { Component, input, OnDestroy, OnInit, inject as angularInject } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
+const SIGNAL_UPDATE_DELAY_MS = 50;
+
 @Component({
   selector: 'app-hero',
-  standalone: true,
   imports: [
     IdsIconComponent,
     IdsIconButtonComponent,
@@ -41,20 +42,41 @@ export class HeroComponent implements OnDestroy, OnInit {
 
   private _updateImageBasedOnTheme(): void {
     const htmlClassList = document.documentElement.classList;
-    const data = this.heroData(); // if you're using signal
+    // If using signals, call as a function
+    const data = typeof this.heroData === 'function' ? this.heroData() : this.heroData;
 
-    if (data.localImageUrl) {
-      this.currentImageUrl = data.localImageUrl;
-    } else {
-      const light = data.imageUrlLight || '';
-      const dark = data.imageUrlDark || '';
-      this.currentImageUrl = htmlClassList.contains('ids-theme-dark') ? dark : light;
+    // If heroData is empty, wait for signal update before setting image
+    if (!data.imageUrlLight && !data.imageUrlDark && !data.imageUrl) {
+      // Try again after a short delay (wait for signal update)
+      setTimeout(() => this._updateImageBasedOnTheme(), SIGNAL_UPDATE_DELAY_MS);
+      return;
     }
+
+    // Always use imageUrlLight and imageUrlDark for theme switching, fallback to imageUrl
+    let imgSrc = '';
+    if (data.imageUrlLight && data.imageUrlDark) {
+      imgSrc = htmlClassList.contains('ids-theme-dark') ? data.imageUrlDark : data.imageUrlLight;
+    } else if (data.imageUrlLight) {
+      imgSrc = data.imageUrlLight;
+    } else if (data.imageUrlDark) {
+      imgSrc = data.imageUrlDark;
+    } else if (data.imageUrl) {
+      imgSrc = data.imageUrl;
+    } else {
+      imgSrc = 'https://via.placeholder.com/600x400?text=No+Image';
+    }
+
+    this.currentImageUrl = imgSrc;
   }
 
-  constructor(private _location: Location) { }
+  private readonly _location: Location;
+
+  constructor() {
+    this._location = angularInject(Location);
+  }
 
   public goBack(): void {
     this._location.back();
   }
 }
+

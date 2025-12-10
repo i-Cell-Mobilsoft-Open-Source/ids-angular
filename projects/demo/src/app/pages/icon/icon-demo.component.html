@@ -1,26 +1,53 @@
-<app-tryout [title]="'COMPONENTS.ICON' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <div component class="icon-types">
-    <div class="icon-tpye">
-      <h2>Font icon</h2>
-      <ids-icon
-        [size]="model.size"
-        [sizeCollection]="model.sizeCollection"
-        [variant]="model.variant"
-        [fontIcon]="model.fontIcon"
-        [aria-hidden]="model['aria-hidden']"
-      />
-    </div>
-    <div class="icon-tpye">
-      <h2>SVG icon</h2>
-      <ids-icon
-        [size]="model.size"
-        [sizeCollection]="model.sizeCollection"
-        [variant]="model.variant"
-        [svgIcon]="model.svgIcon"
-        [aria-hidden]="model['aria-hidden']"
-      />
-    </div>
+<app-demo-and-code (resetDemo)="_iconDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.ICON' | translate"
+      [hasDarkBackground]="_iconDemoService.model.variant === 'light'"
+      (resetted)="_iconDemoService.reset()"
+    >
+      <div component class="icon-types">
+        <div class="icon-tpye">
+          <h2>Font icon</h2>
+          <ids-icon
+            [size]="_iconDemoService.model.size"
+            [sizeCollection]="_iconDemoService.model.sizeCollection"
+            [variant]="_iconDemoService.model.variant"
+            [fontIcon]="_iconDemoService.model.fontIcon"
+            [aria-hidden]="_iconDemoService.model['aria-hidden']"
+          />
+        </div>
+        <div class="icon-tpye">
+          <h2>SVG icon</h2>
+          <ids-icon
+            [size]="_iconDemoService.model.size"
+            [sizeCollection]="_iconDemoService.model.sizeCollection"
+            [variant]="_iconDemoService.model.variant"
+            [svgIcon]="_iconDemoService.model.svgIcon"
+            [aria-hidden]="_iconDemoService.model['aria-hidden']"
+          />
+        </div>
+      </div>
+    </app-tryout>
   </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      @if (_iconDemoService.isLoaded()) {
+        <app-control-table
+          controls
+          configType="input"
+          [controlConfig]="_iconDemoService.inputControlConfig()"
+          [(model)]="_iconDemoService.model"
+          (resetted)="_iconDemoService.reset()"
+        />
+      } @else {
+        <div>Loading...</div>
+      }
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_iconDemoService.inputControlConfig()]"/>
+</div>

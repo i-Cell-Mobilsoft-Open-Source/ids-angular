@@ -1,12 +1,13 @@
 import { IdsCustomDialogBase } from './custom-dialog-base';
 
-import { ApplicationRef, EnvironmentInjector, Injectable, Injector, Provider, Signal, StaticProvider, Type, createComponent, inject, DOCUMENT } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ApplicationRef, EnvironmentInjector, Injectable, Injector, Provider, Signal, StaticProvider, Type, createComponent, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class IdsDialogService {
   private _appRef = inject(ApplicationRef);
-  private _document = inject(DOCUMENT);
+  private _document = inject(DOCUMENT) as Document;
   private _injector = inject(EnvironmentInjector);
 
   public open<C extends IdsCustomDialogBase<R>, R = unknown>(

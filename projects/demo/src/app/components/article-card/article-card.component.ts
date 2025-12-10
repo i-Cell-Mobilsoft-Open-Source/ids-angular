@@ -6,7 +6,6 @@ import { IdsCardComponent } from '@i-cell/ids-angular/card';
 
 @Component({
   selector: 'app-article-card',
-  standalone: true,
   templateUrl: './article-card.component.html',
   styleUrl: './article-card.component.scss',
   imports: [

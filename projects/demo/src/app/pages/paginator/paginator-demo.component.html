@@ -1,30 +1,47 @@
-<app-tryout [title]="'COMPONENTS.PAGINATOR' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <ng-container component>
-    <ids-paginator
-      [length]="model.length"
-      [pageSize]="model.pageSize"
-      [pageSizeOptions]="model.pageSizeOptions"
-      [showFirstLastButton]="model.showFirstLastButton"
-      [showPrevNextLabel]="model.showPrevNextLabel"
-      [showPageInfo]="model.showPageInfo"
-      [showPageButtons]="model.showPageButtons"
-      [showAllPages]="model.showAllPages"
-      [maxDisplayedItemCount]="model.maxDisplayedItemCount"
-      [size]="model.size"
-      [variant]="model.variant"
-      [pageButtonAppearance]="model.pageButtonAppearance"
-      [disabled]="model.disabled"
-      [compactLayout]="model.compactLayout"
-      (pageChanged)="onPageChange($event)"
-    />
-  </ng-container>
+<app-demo-and-code (resetDemo)="_paginatorDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.PAGINATOR' | translate"
+      [hasDarkBackground]="_paginatorDemoService.model.variant === 'light'"
+      (resetted)="_paginatorDemoService.reset()"
+    >
+      <ng-container component>
+        <ids-paginator
+          [length]="_paginatorDemoService.model.length"
+          [pageSize]="_paginatorDemoService.model.pageSize"
+          [pageSizeOptions]="_paginatorDemoService.model.pageSizeOptions"
+          [showFirstLastButton]="_paginatorDemoService.model.showFirstLastButton"
+          [showPrevNextLabel]="_paginatorDemoService.model.showPrevNextLabel"
+          [showPageInfo]="_paginatorDemoService.model.showPageInfo"
+          [showPageButtons]="_paginatorDemoService.model.showPageButtons"
+          [showAllPages]="_paginatorDemoService.model.showAllPages"
+          [maxDisplayedItemCount]="_paginatorDemoService.model.maxDisplayedItemCount"
+          [size]="_paginatorDemoService.model.size"
+          [variant]="_paginatorDemoService.model.variant"
+          [pageButtonAppearance]="_paginatorDemoService.model.pageButtonAppearance"
+          [disabled]="_paginatorDemoService.model.disabled"
+          [compactLayout]="_paginatorDemoService.model.compactLayout"
+          (pageChanged)="_paginatorDemoService.onPageChange($event)"
+        />
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table
-    controls
-    [configType]="'input'"
-    [controlConfig]="_inputControlConfig"
-    [(model)]="model"
-    (modelChange)="_updatePageSize()"
-    (resetted)="reset()"
-  />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_paginatorDemoService.inputControlConfig"
+        [(model)]="_paginatorDemoService.model"
+        (modelChange)="_paginatorDemoService.updatePageSize()"
+        (resetted)="_paginatorDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_paginatorDemoService.inputControlConfig]"/>
+</div>

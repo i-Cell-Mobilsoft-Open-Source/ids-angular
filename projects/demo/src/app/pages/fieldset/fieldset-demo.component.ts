@@ -1,26 +1,24 @@
+import { FieldsetDemoService } from './fieldset-demo.service';
+
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
+import { PropTableComponent } from '../../components/prop-table/prop-table.component';
+import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
+import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
-import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
-import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY, IdsErrorMessageComponent, IdsFieldsetComponent, IdsFieldsetMessageDirective, IdsFieldsetRowComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective } from '@i-cell/ids-angular/forms';
+import {
+  IdsErrorMessageComponent,
+  IdsFieldsetComponent,
+  IdsFieldsetMessageDirective,
+  IdsFieldsetRowComponent,
+  IdsFormFieldComponent,
+  IdsHintMessageComponent,
+  IdsInputDirective,
+  IdsLabelDirective,
+} from '@i-cell/ids-angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-
-type FieldsetInputControls = {
-  size: IdsSizeType,
-  variant: IdsFormFieldVariantType,
-  legend: string,
-};
-
-type FieldsetHelperControls = {
-  showMessage: boolean,
-};
-
-const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'app-fieldset-demo',
@@ -37,6 +35,9 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
     IdsErrorMessageComponent,
     FormsModule,
     TranslateModule,
+    DemoAndCodeComponent,
+    TryoutControlComponent,
+    PropTableComponent,
   ],
   templateUrl: './fieldset-demo.component.html',
   styleUrls: [
@@ -45,50 +46,14 @@ const defaultConfig = IDS_FIELDSET_DEFAULT_CONFIG_FACTORY();
   ],
 })
 export class FieldsetDemoComponent {
-  protected _inputControlConfig: DemoControlConfig<FieldsetInputControls> = {
-    size: {
-      description: 'Fieldset size.',
-      type: 'IdsSizeType',
-      default: defaultConfig.size,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsSize),
-    },
-    variant: {
-      description: 'Fieldset variant.',
-      type: 'IdsFormFieldVariantType',
-      default: defaultConfig.variant,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsFormFieldVariant),
-    },
-    legend: {
-      description: 'Fieldset legend.',
-      type: 'string',
-      default: '-',
-      demoDefault: 'Personal data',
-    },
-  };
-
-  protected _helperControlConfig: DemoControlConfig<FieldsetHelperControls> = {
-    showMessage: {
-      description: 'Whether to show fieldset message or not.',
-      type: 'boolean',
-      default: true,
-      control: DemoControl.CHECKBOX,
-    },
-  };
-
-  public defaults = getDefaultFromDemoConfig<FieldsetInputControls>(this._inputControlConfig);
-  public helperDefaults = getDefaultFromDemoConfig<FieldsetHelperControls>(this._helperControlConfig);
-
-  public model: FieldsetInputControls = { ...this.defaults };
-  public helperModel: FieldsetHelperControls = { ...this.helperDefaults };
+  protected _fieldsetDemoService = inject(FieldsetDemoService);
 
   public first = 'John';
   public last = 'Wick';
   public middle = 'Sam';
 
   public reset(): void {
-    this.model = { ...this.defaults };
+    this._fieldsetDemoService.reset();
     this.first = 'John';
     this.last = 'Wick';
     this.middle = 'Sam';

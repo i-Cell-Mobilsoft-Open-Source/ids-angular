@@ -1,13 +1,36 @@
-<app-tryout [title]="'COMPONENTS.DIVIDER' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <div component class="divider-container">
-    <ids-divider
-      [orientation]="model.orientation"
-      [size]="model.size"
-      [variant]="model.variant"
-      [width]="model.width"
-      [height]="model.height"
-    />
+<app-demo-and-code (resetDemo)="_dividerDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.DIVIDER' | translate"
+      [hasDarkBackground]="_dividerDemoService.model.variant === 'light'"
+      (resetted)="_dividerDemoService.reset()"
+    >
+      <div component class="divider-container">
+        <ids-divider
+          [orientation]="_dividerDemoService.model.orientation"
+          [size]="_dividerDemoService.model.size"
+          [variant]="_dividerDemoService.model.variant"
+          [width]="_dividerDemoService.model.width"
+          [height]="_dividerDemoService.model.height"
+        />
+      </div>
+    </app-tryout>
   </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_dividerDemoService.inputControlConfig"
+        [(model)]="_dividerDemoService.model"
+        (resetted)="_dividerDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_dividerDemoService.inputControlConfig]" />
+</div>

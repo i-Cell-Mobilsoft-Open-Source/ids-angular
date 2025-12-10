@@ -1,33 +1,51 @@
-<app-tryout [title]="'COMPONENTS.ACCORDION' | translate" (resetted)="reset()">
-  <ng-container component>
-    <ids-accordion
-      #accordion
-      [multi]="model.multi"
-      [appearance]="model.appearance"
-      [size]="model.size"
-      [disabled]="model.disabled"
-      [expandBtnLabel]="model.expandBtnLabel"
-      [collapseBtnLabel]="model.collapseBtnLabel"
-      [btnSize]="model.btnSize"
-      [btnAppearance]="model.btnAppearance"
-      [btnVariant]="model.btnVariant"
-      [hasLeadingIcon]="model.hasLeadingIcon"
-      [hasTrailingIcon]="model.hasTrailingIcon"
-    >
-      <ids-accordion-item [summary]="model.summary">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-        ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-      </ids-accordion-item>
-      <ids-accordion-item [summary]="model.summary">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-        ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-      </ids-accordion-item>
-      <ids-accordion-item [summary]="model.summary">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-        ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-      </ids-accordion-item>
-    </ids-accordion>
-  </ng-container>
+<app-demo-and-code (resetDemo)="_accordionDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout [title]="'COMPONENTS.ACCORDION' | translate">
+      <ng-container component>
+        <ids-accordion
+          #accordion
+          [multi]="_accordionDemoService.model.multi"
+          [appearance]="_accordionDemoService.model.appearance"
+          [size]="_accordionDemoService.model.size"
+          [disabled]="_accordionDemoService.model.disabled"
+          [expandBtnLabel]="_accordionDemoService.model.expandBtnLabel"
+          [collapseBtnLabel]="_accordionDemoService.model.collapseBtnLabel"
+          [btnSize]="_accordionDemoService.model.btnSize"
+          [btnAppearance]="_accordionDemoService.model.btnAppearance"
+          [btnVariant]="_accordionDemoService.model.btnVariant"
+          [hasLeadingIcon]="_accordionDemoService.model.hasLeadingIcon"
+          [hasTrailingIcon]="_accordionDemoService.model.hasTrailingIcon"
+        >
+          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+            text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          </ids-accordion-item>
+          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+            text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          </ids-accordion-item>
+          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+            text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          </ids-accordion-item>
+        </ids-accordion>
+      </ng-container>
+    </app-tryout>
+  </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_accordionDemoService.inputControlConfig"
+        [(model)]="_accordionDemoService.model"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_accordionDemoService.inputControlConfig]" />
+</div>

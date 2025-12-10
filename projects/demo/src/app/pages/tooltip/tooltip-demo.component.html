@@ -1,25 +1,48 @@
-<app-tryout [title]="'COMPONENTS.TOOLTIP' | translate" [hasDarkBackground]="model.variant === 'light'" (resetted)="reset()">
-  <div class="component" component>
-    <button
-      type="button"
-      idsButton
-      [variant]="model.variant !== 'light' ? 'primary' : 'light'"
-      [idsTooltip]="model.tooltipText"
-      [idsTooltipPosition]="model.position"
-      [idsTooltipSize]="model.size"
-      [idsTooltipVariant]="model.variant"
-      [idsTooltipShowDelay]="model.showDelay"
-      [idsTooltipHideDelay]="model.hideDelay"
-      [idsTooltipDisabled]="model.disabled"
-      [idsTooltipTouchGestures]="model.touchGestures"
-      [idsTooltipTextAlign]="model.textAlign"
-      [idsTooltipShowPointer]="model.showPointer"
+<app-demo-and-code (resetDemo)="_tooltipDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.TOOLTIP' | translate"
+      [hasDarkBackground]="_tooltipDemoService.model.variant === 'light'"
+      (resetted)="_tooltipDemoService.reset()"
     >
-      Hover me
-    </button>
-    <p>Hover over the button to show the tooltip on {{ model.position }}.</p>
-    <p>Hover out from the button to hide the tooltip with hideDelay, or click outside tooltip to hide immediately.</p>
+      <div class="component" component>
+        <button
+          type="button"
+          idsButton
+          [variant]="_tooltipDemoService.model.variant !== 'light' ? 'primary' : 'light'"
+          [idsTooltip]="_tooltipDemoService.model.tooltipText"
+          [idsTooltipPosition]="_tooltipDemoService.model.position"
+          [idsTooltipSize]="_tooltipDemoService.model.size"
+          [idsTooltipVariant]="_tooltipDemoService.model.variant"
+          [idsTooltipShowDelay]="_tooltipDemoService.model.showDelay"
+          [idsTooltipHideDelay]="_tooltipDemoService.model.hideDelay"
+          [idsTooltipDisabled]="_tooltipDemoService.model.disabled"
+          [idsTooltipTouchGestures]="_tooltipDemoService.model.touchGestures"
+          [idsTooltipTextAlign]="_tooltipDemoService.model.textAlign"
+          [idsTooltipShowPointer]="_tooltipDemoService.model.showPointer"
+        >
+          Hover me
+        </button>
+        <p>Hover over the button to show the tooltip on {{ _tooltipDemoService.model.position }}.</p>
+        <p>Hover out from the button to hide the tooltip with hideDelay, or click outside tooltip to hide immediately.</p>
+      </div>
+    </app-tryout>
   </div>
 
-  <app-control-table controls [configType]="'input'" [controlConfig]="_inputControlConfig" [(model)]="model" (resetted)="reset()" />
-</app-tryout>
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_tooltipDemoService.inputControlConfig"
+        [(model)]="_tooltipDemoService.model"
+        (resetted)="_tooltipDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+
+  <app-prop-table [config]="[_tooltipDemoService.inputControlConfig]"/>
+</div>

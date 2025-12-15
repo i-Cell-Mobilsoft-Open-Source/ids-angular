@@ -8,7 +8,7 @@ import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
 import { A11yModule } from '@angular/cdk/a11y';
 import { CdkMenu } from '@angular/cdk/menu';
-import { OverlayModule, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { OverlayModule, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -42,6 +42,7 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   public open = input<boolean>(false);
   public origin = input.required<CdkOverlayOrigin>();
   public closed = output<void>();
+  public positions = input<ConnectedPosition[]>(this._defaultConfig.positions);
 
   public appearance = input<IdsOverlayPanelAppearanceType>(this._defaultConfig.appearance);
   public size = input<IdsSizeType>(this._defaultConfig.size);

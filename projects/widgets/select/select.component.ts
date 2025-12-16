@@ -1,6 +1,7 @@
 import { IDS_SELECT_DEFAULT_CONFIG, IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectDefaultConfig } from './select-defaults';
-import { selectConnectedPositions } from './select-positions';
 import { IdsSelectTriggerDirective } from './select-trigger.directive';
+
+import { overlayConnectedPositions } from '../shared/overlay-positions';
 
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -69,7 +70,7 @@ export class IdsSelectComponent
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
   private readonly _parentFormField = inject(IdsFormFieldComponent);
 
-  protected readonly _connectedPositions = selectConnectedPositions;
+  protected readonly _connectedPositions = overlayConnectedPositions;
 
   protected _preferredOverlayOrigin: CdkOverlayOrigin | ElementRef | undefined;
   protected _overlayWidth: string | number = 0;

@@ -6,7 +6,7 @@ import {
 import { IdsOverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
 import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
-import { A11yModule } from '@angular/cdk/a11y';
+import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkMenu } from '@angular/cdk/menu';
 import { OverlayModule, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { NgClass } from '@angular/common';
@@ -15,6 +15,8 @@ import {
   Component,
   ViewEncapsulation,
   input, output, computed, contentChild,
+  viewChild,
+  effect,
 } from '@angular/core';
 import { IdsSizeType, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
@@ -49,7 +51,19 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
 
   private _cdkMenu = contentChild(CdkMenu, { descendants: true });
 
+  private _focusTrap = viewChild(CdkTrapFocus);
+
   protected _hasCdkMenu = computed(() => !!this._cdkMenu());
+
+  constructor() {
+    super();
+
+    effect(() => {
+      if (this._focusTrap()) {
+        this._focusTrap()?.focusTrap.focusInitialElementWhenReady({ preventScroll: true });
+      }
+    });
+  }
 
   protected _handleOverlayOutsideClick(): void {
     if (this.open()) {

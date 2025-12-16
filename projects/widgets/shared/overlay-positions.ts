@@ -1,6 +1,6 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 
-export const selectConnectedPositions: ConnectedPosition[] = [
+export const overlayConnectedPositions: ConnectedPosition[] = [
   {
     originX: 'start',
     originY: 'bottom',

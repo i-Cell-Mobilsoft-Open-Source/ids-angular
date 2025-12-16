@@ -1,6 +1,7 @@
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
-import { IdsOverlayPanelConnectedPositions } from './types/overlay-panel-connected-positions.type';
 import { IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
+
+import { overlayConnectedPositions } from '../shared/overlay-positions';
 
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { InjectionToken } from '@angular/core';
@@ -26,7 +27,7 @@ export function IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY(): Required<IdsOverlayP
     appearance: IdsOverlayPanelAppearance.FILLED,
     size: IdsSize.COMPACT,
     variant: IdsOverlayPanelVariant.LIGHT,
-    positions: [IdsOverlayPanelConnectedPositions],
+    positions: overlayConnectedPositions,
   };
 }
 

@@ -22,10 +22,10 @@
         <ids-overlay-panel
           [origin]="origin"
           [open]="_overlayOpen"
-          (closed)="_overlayOpen = false"
           [appearance]="_overlayPanelDemoService.overlayPanelModel.appearance"
           [size]="_overlayPanelDemoService.overlayPanelModel.size"
           [variant]="_overlayPanelDemoService.overlayPanelModel.variant"
+          (closed)="_overlayOpen = false"
         >
 
           @if(_overlayPanelDemoService.overlayPanelHelperModel.contentType === 'menuItems') {

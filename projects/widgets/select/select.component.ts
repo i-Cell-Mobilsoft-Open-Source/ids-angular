@@ -1,7 +1,6 @@
 import { IDS_SELECT_DEFAULT_CONFIG, IDS_SELECT_DEFAULT_CONFIG_FACTORY, IdsSelectDefaultConfig } from './select-defaults';
+import { selectConnectedPositions } from './select-positions';
 import { IdsSelectTriggerDirective } from './select-trigger.directive';
-
-import { overlayConnectedPositions } from '../shared/overlay-positions';
 
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -70,7 +69,7 @@ export class IdsSelectComponent
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
   private readonly _parentFormField = inject(IdsFormFieldComponent);
 
-  protected readonly _connectedPositions = overlayConnectedPositions;
+  protected readonly _connectedPositions = selectConnectedPositions;
 
   protected _preferredOverlayOrigin: CdkOverlayOrigin | ElementRef | undefined;
   protected _overlayWidth: string | number = 0;
@@ -558,7 +557,7 @@ export class IdsSelectComponent
     }
   }
 
-  private _onBlur(): void {
+  protected _onBlur(): void {
     this._focused.set(false);
     this._keyManager?.cancelTypeahead();
 
@@ -568,7 +567,7 @@ export class IdsSelectComponent
     }
   }
 
-  private _getAriaActiveDescendant(): string | null {
+  protected _getAriaActiveDescendant(): string | null {
     if (this.isPanelOpen() && this._keyManager?.activeItem) {
       return this._keyManager.activeItem.id();
     }

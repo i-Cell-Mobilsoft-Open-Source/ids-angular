@@ -1,7 +1,6 @@
+import { overlayConnectedPositions } from './overlay-positions';
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
 import { IdsOverlayPanelVariant, IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
-
-import { overlayConnectedPositions } from '../shared/overlay-positions';
 
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { InjectionToken } from '@angular/core';

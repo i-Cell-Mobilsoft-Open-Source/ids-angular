@@ -1,0 +1,69 @@
+<app-demo-and-code (resetDemo)="_messageDemoService.reset();">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.MESSAGE' | translate"
+      [hasDarkBackground]="_messageDemoService.model.variant === 'light'"
+      (resetted)="_messageDemoService.reset();"
+    >
+      <div component class="message-grid">
+
+        @if (_messageDemoService.helperModel.isError) {
+          <ids-error-message>
+
+            <ids-error-def code="custom">{{ _messageDemoService.helperModel.message }}</ids-error-def>
+            @if (_messageDemoService.helperModel.hasSuffix) {
+              <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
+            }
+          </ids-error-message>
+        }
+
+        @if (_messageDemoService.helperModel.isSuccess) {
+          <ids-success-message>
+            {{ _messageDemoService.helperModel.message }}
+            @if (_messageDemoService.helperModel.hasSuffix) {
+              <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
+            }
+          </ids-success-message>
+        } 
+        
+        @if (!_messageDemoService.helperModel.isError && !_messageDemoService.helperModel.isSuccess) {
+          <ids-hint-message [size]="_messageDemoService.model.size" [variant]="_messageDemoService.model.variant">
+            {{ _messageDemoService.helperModel.message }}
+            @if (_messageDemoService.helperModel.hasSuffix) {
+              <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
+            }
+          </ids-hint-message>
+        }
+      </div>
+    </app-tryout>
+  </div>
+
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Message Appearance"
+        configType="input"
+        [controlConfig]="_messageDemoService.messageInputControlConfig"
+        [(model)]="_messageDemoService.model"
+        (resetted)="_messageDemoService.reset();"
+      />
+      <app-control-table
+        controls
+        controlName="Message Content"
+        configType="helper"
+        [controlConfig]="_messageDemoService.messageHelperControlConfig"
+        [(model)]="_messageDemoService.helperModel"
+        (resetted)="_messageDemoService.reset();"
+      />
+      <app-control-table
+        controls
+        controlName="Message State"
+        configType="input"
+        [controlConfig]="_messageDemoService.messageInputControlConfigInput"
+        [(model)]="_messageDemoService.inputModel"
+        (resetted)="_messageDemoService.reset();"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

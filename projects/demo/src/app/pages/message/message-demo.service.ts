@@ -3,13 +3,13 @@ import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_MESSAGE_DEFAULT_CONFIG_FACTORY, IdsMessageVariant, IdsMessageVariantType } from '@i-cell/ids-angular/forms';
+import { IDS_MESSAGE_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariantType, IdsMessageVariant } from '@i-cell/ids-angular/forms';
 
 const defaultConfig = IDS_MESSAGE_DEFAULT_CONFIG_FACTORY();
 
 type MessageInputControls = {
   size: IdsSizeType;
-  variant: IdsMessageVariantType;
+  variant: IdsFormFieldVariantType;
 };
 
 type MessageHelperControls = {
@@ -36,8 +36,8 @@ export class MessageDemoService {
     },
     variant: {
       description: 'Variant of the message component.',
-      type: 'IdsMessageVariantType',
-      default: defaultConfig.variant,
+      type: 'IdsFormFieldVariantType',
+      default: defaultConfig.variant as IdsFormFieldVariantType,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsMessageVariant),
     },

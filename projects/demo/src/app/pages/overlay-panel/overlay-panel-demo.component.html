@@ -14,18 +14,17 @@
           appearance="outlined"
           size="compact"
           variant="primary"
-          (click)="toggleOverlay()"
+          (click)="overlayPanel.toggle()"
         >
-          {{ _overlayOpen ? 'Close overlay' : 'Open overlay' }}
+          {{ overlayPanel.open() ? 'Close overlay' : 'Open overlay' }}
         </button>
 
         <ids-overlay-panel
+          #overlayPanel
           [origin]="origin"
-          [open]="_overlayOpen"
           [appearance]="_overlayPanelDemoService.overlayPanelModel.appearance"
           [size]="_overlayPanelDemoService.overlayPanelModel.size"
           [variant]="_overlayPanelDemoService.overlayPanelModel.variant"
-          (closed)="_overlayOpen = false"
         >
 
           @if(_overlayPanelDemoService.overlayPanelHelperModel.contentType === 'menuItems') {

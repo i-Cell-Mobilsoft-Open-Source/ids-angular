@@ -17,6 +17,7 @@ import {
   input, output, computed, contentChild,
   viewChild,
   effect,
+  signal,
 } from '@angular/core';
 import { IdsSizeType, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
@@ -41,7 +42,7 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
-  public open = input<boolean>(false);
+  public open = signal<boolean>(false);
   public origin = input.required<CdkOverlayOrigin>();
   public closed = output<void>();
   public positions = input<ConnectedPosition[]>(this._defaultConfig.positions);
@@ -66,8 +67,13 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
     });
   }
 
+  public toggle(): void {
+    this.open.set(!this.open());
+  }
+
   protected _handleOverlayOutsideClick(): void {
     if (this.open()) {
+      this.open.set(false);
       this.closed.emit();
     }
   }

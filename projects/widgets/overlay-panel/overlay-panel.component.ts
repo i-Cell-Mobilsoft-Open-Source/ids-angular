@@ -17,7 +17,7 @@ import {
   input, output, computed, contentChild,
   viewChild,
   effect,
-  signal,
+  linkedSignal,
 } from '@angular/core';
 import { IdsSizeType, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
@@ -42,7 +42,7 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
-  public open = signal<boolean>(false);
+  public open = input<boolean>(false);
   public origin = input.required<CdkOverlayOrigin>();
   public closed = output<void>();
   public positions = input<ConnectedPosition[]>(this._defaultConfig.positions);
@@ -51,11 +51,16 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsOverlayPanelVariantType>(this._defaultConfig.variant);
 
+  protected _open = linkedSignal(() => this.open());
+  protected _hasCdkMenu = computed(() => !!this._cdkMenu());
+
   private _cdkMenu = contentChild(CdkMenu, { descendants: true });
 
   private _focusTrap = viewChild(CdkTrapFocus);
 
-  protected _hasCdkMenu = computed(() => !!this._cdkMenu());
+  public get isOpen(): boolean {
+    return this._open();
+  }
 
   constructor() {
     super();
@@ -68,12 +73,12 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   }
 
   public toggle(): void {
-    this.open.set(!this.open());
+    this._open.set(!this._open());
   }
 
   protected _handleOverlayOutsideClick(): void {
-    if (this.open()) {
-      this.open.set(false);
+    if (this._open()) {
+      this._open.set(false);
       this.closed.emit();
     }
   }

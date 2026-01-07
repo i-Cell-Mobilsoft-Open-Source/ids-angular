@@ -53,12 +53,6 @@ export class OverlayPanelDemoComponent {
   // eslint-disable-next-line no-magic-numbers
   public items = Array(3);
 
-  protected _overlayOpen = false;
-
-  public toggleOverlay(): void {
-    this._overlayOpen = !this._overlayOpen;
-  }
-
   protected _contentBtnTest(nr: string):void {
     alert(`Button in overlay panel clicked! ${nr}`);
   }

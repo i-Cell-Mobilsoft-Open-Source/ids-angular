@@ -30,6 +30,10 @@
     <div class="blur"></div>
   </div>
   <div class="spacer"></div>
+  <ids-segmented-control-toggle ngModel="default" size="dense" appearance="filled" variant="surface" buttonVariant="primary">
+    <ids-segmented-control-toggle-item value="default" label="default" (click)="_changeStyle('default')" />
+    <ids-segmented-control-toggle-item value="alt" label="dáp" (click)="_changeStyle('alt')" />
+  </ids-segmented-control-toggle>
   <div class="language-chooser">
     <ids-segmented-control-toggle ngModel="en" size="dense" appearance="filled" variant="surface" buttonVariant="primary">
       <ids-segmented-control-toggle-item value="hu" label="HU" (click)="changeLanguage('hu')" />

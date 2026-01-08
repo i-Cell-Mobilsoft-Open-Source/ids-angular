@@ -75,7 +75,7 @@
 
   @if (showHintLoading || showHintMinChars || showHintMaxLength || showHintNoResults) {
     <div class="ids-overlay-panel__autocomplete-message">
-      <ids-option [disabled]="true">
+      <ids-option disabled>
         @if (showHintLoading) {
           {{ hintLoading() }}
         } @else if (showHintMinChars) {

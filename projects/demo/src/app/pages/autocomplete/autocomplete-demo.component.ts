@@ -82,10 +82,8 @@ import { delay, Observable, of } from 'rxjs';
             }
 
             const newOptions = options.filter((item) => item.toLowerCase().includes(search.toLowerCase()));
-            console.info(newOptions);
-
-            // eslint-disable-next-line no-magic-numbers
-            return of(newOptions).pipe(delay(500));
+            const delayTimeMs = 500;
+            return of(newOptions).pipe(delay(delayTimeMs));
           },
     },
   ],

@@ -55,6 +55,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 import { filter } from 'rxjs';
 
 const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
+const LIVE_ANNOUNCE_DURATION_MS = 10000;
 
 @Component({
   selector: `ids-autocomplete[ngModel]:not([formControl]):not([formControlName]),
@@ -133,7 +134,7 @@ export class IdsAutocompleteComponent
   public ariaLabelClearButton = input<string>('Clear');
   public ariaLabelToggleButton = input<string>('Toggle');
   public valueCompareFn = input<(o1: unknown, o2: unknown) => boolean>((o1: unknown, o2: unknown) => o1 === o2);
-  public sortCompareFn = input<(a: IdsOptionComponent, b: IdsOptionComponent, options: Readonly<IdsOptionComponent[]>) => number>();
+  public sortCompareFn = input<(a: string, b: string, options: Readonly<string[]>) => number>();
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public typeaheadDebounceInterval = input<number, unknown>(this._defaultConfig.typeaheadDebounceInterval, {
     transform: coerceNumberAttribute,
@@ -173,6 +174,7 @@ export class IdsAutocompleteComponent
   private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && !this.readonly() && this.options().length > 0);
   private _panel = viewChild('overlayPanel', { read: ElementRef<HTMLElement> });
   private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
+  private _inputElemment = viewChild('fallbackOverlayOrigin', { read: ElementRef<HTMLInputElement> });
 
   protected _resource = rxResource({
     defaultValue: [],
@@ -181,7 +183,7 @@ export class IdsAutocompleteComponent
   });
 
   private _rawValue: unknown | unknown[];
-  private _selectionModel?: SelectionModel<IdsOptionComponent>;
+  private _selectionModel?: SelectionModel<string>;
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => {};
 
@@ -189,7 +191,7 @@ export class IdsAutocompleteComponent
     return Boolean(this._selectionModel?.isEmpty());
   }
 
-  public get selected(): IdsOptionComponent | IdsOptionComponent[] | undefined {
+  public get selected(): string | string[] | undefined {
     return this.multiSelect() ? this._selectionModel?.selected : this._selectionModel?.selected?.[0];
   }
 
@@ -201,11 +203,11 @@ export class IdsAutocompleteComponent
     }
 
     if (this.multiSelect()) {
-      const selectedOptions = this._selectionModel?.selected?.map((option) => option.viewValue());
+      const selectedOptions = this._selectionModel?.selected;
       return selectedOptions?.join(', ') || '';
     }
 
-    return this._selectionModel?.selected?.[0].viewValue() || '';
+    return this._selectionModel?.selected?.[0] || '';
   }
 
   constructor() {
@@ -221,7 +223,11 @@ export class IdsAutocompleteComponent
       untracked(() => {
         if (options.length > 0) {
           this._initKeyManager();
-          this._selectionModel?.select(...this.options().filter((item) => item.selected()));
+          this.options().forEach((option) => {
+            if (this._selectionModel?.selected.includes(option.viewValue())) {
+              option.selected.set(true);
+            }
+          });
           this._subscribeOptionChanges();
         }
       });
@@ -232,7 +238,7 @@ export class IdsAutocompleteComponent
     if (!this._parentFormField) {
       throw this._createHostError('Select must be in a form field');
     }
-    this._selectionModel = new SelectionModel<IdsOptionComponent>(this.multiSelect(), undefined, false, this.valueCompareFn());
+    this._selectionModel = new SelectionModel<string>(this.multiSelect(), undefined, false, this.valueCompareFn());
     queueMicrotask(() => {
       const control = this.ngControl()?.control;
       if (control) {
@@ -275,18 +281,6 @@ export class IdsAutocompleteComponent
       .withAllowedModifierKeys(['shiftKey'])
       .skipPredicate(this._skipPredicate);
 
-    // ez nem biztos, hogy kell...
-    // this._keyManager.tabOut.subscribe(() => {
-    //   console.info('tabout');
-    //   if (this.isPanelOpen()) {
-    //     if (!this.multiSelect() && this._keyManager?.activeItem) {
-    //       this._keyManager.activeItem.selectViaInteraction();
-    //     }
-    //     this.focus();
-    //     this.close();
-    //   }
-    // });
-
     this._keyManager.change.subscribe(() => {
       if (this.isPanelOpen() && this._panel()) {
         this._scrollOptionIntoView(this._keyManager?.activeItemIndex || 0);
@@ -315,37 +309,50 @@ export class IdsAutocompleteComponent
 
     if (isUserInput && !this.multiSelect() && this.isPanelOpen()) {
       this.close();
-      // this.focus();
     }
 
     if (this.multiSelect()) {
       this._sortValues();
-
-      // if (isUserInput) {
-      //   this.focus();
-      // }
     }
 
     if (selected) {
-      this._selectionModel?.select(source);
+      this._selectionModel?.select(source.viewValue());
       this._searchText.set(source.viewValue());
     } else {
-      this._selectionModel?.deselect(source);
+      this._selectionModel?.deselect(source.viewValue());
     }
     this._handleChange();
     this._onTouched();
+    this._inputElemment()?.nativeElement.blur();
     this.isPanelOpen.set(false);
   }
 
   protected _handleKeydown(event: KeyboardEvent): void {
     if (!this.disabled() && !this.readonly()) {
       this.isPanelOpen() ? this._handleOpenedPanelKeydown(event) : this._handleClosedPanelKeydown(event);
+      // announce number of options when a key is pressed
+      this._liveAnnouncer.announce(
+        this.options()
+          .filter((option) => option.value() !== undefined)
+          .length.toString(),
+        LIVE_ANNOUNCE_DURATION_MS,
+      );
     }
   }
 
   private _handleClosedPanelKeydown(event: KeyboardEvent): void {
-    const manager = this._keyManager;
     const key = event.key;
+    const targetElement = event.target as HTMLElement;
+    const isButtonTarget = targetElement.localName === 'button';
+
+    if (isButtonTarget && (key === 'Enter' || key === ' ')) {
+      event.preventDefault();
+      targetElement.click();
+      targetElement.blur();
+      return;
+    }
+
+    const manager = this._keyManager;
     const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp' || key === 'ArrowLeft' || key === 'ArrowRight';
     const isOpenKey = key === 'Enter' || key === ' ';
 
@@ -360,18 +367,27 @@ export class IdsAutocompleteComponent
     } else if (!this.multiSelect()) {
       const previouslySelectedOption = this.selected;
       manager?.onKeydown(event);
-      const selectedOption = this.selected as IdsOptionComponent;
+      const selectedOption = this.selected as string;
 
-      if (selectedOption?.viewValue() && previouslySelectedOption !== selectedOption) {
-        // eslint-disable-next-line no-magic-numbers
-        this._liveAnnouncer.announce(selectedOption.viewValue(), 10000);
+      if (selectedOption && previouslySelectedOption !== selectedOption) {
+        this._liveAnnouncer.announce(selectedOption, LIVE_ANNOUNCE_DURATION_MS);
       }
     }
   }
 
   private _handleOpenedPanelKeydown(event: KeyboardEvent): void {
-    const manager = this._keyManager;
     const key = event.key;
+    const targetElement = event.target as HTMLElement;
+    const isButtonTarget = targetElement.localName === 'button';
+
+    if (isButtonTarget && (key === 'Enter' || key === ' ')) {
+      event.preventDefault();
+      targetElement.click();
+      targetElement.blur();
+      return;
+    }
+
+    const manager = this._keyManager;
     const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp';
     const isTyping = manager?.isTyping();
 
@@ -424,7 +440,7 @@ export class IdsAutocompleteComponent
 
   private _sortValues(): void {
     if (this.multiSelect()) {
-      const options = this.options();
+      const options = this.options().map((option) => option.viewValue());
 
       const sortComparator = this.sortCompareFn();
       this._selectionModel?.sort((a, b) => (sortComparator ? sortComparator(a, b, options) : options.indexOf(a) - options.indexOf(b)));
@@ -520,7 +536,7 @@ export class IdsAutocompleteComponent
   private _selectValue(value: unknown): IdsOptionComponent | undefined {
     const valueCompareFn = this.valueCompareFn();
     const correspondingOption = this.options().find((option) => {
-      if (this._selectionModel?.isSelected(option)) {
+      if (this._selectionModel?.isSelected(option.viewValue())) {
         return false;
       }
 
@@ -536,7 +552,7 @@ export class IdsAutocompleteComponent
 
     if (correspondingOption) {
       correspondingOption.selected.set(true);
-      this._selectionModel?.select(correspondingOption);
+      this._selectionModel?.select(correspondingOption.viewValue());
     }
 
     return correspondingOption;
@@ -550,7 +566,7 @@ export class IdsAutocompleteComponent
   }
 
   private _handleChange(): void {
-    const selectionModelValues = this._selectionModel?.selected?.map((item) => item.value());
+    const selectionModelValues = this._selectionModel?.selected;
     if (this.multiSelect()) {
       this._onChange(selectionModelValues);
     } else {
@@ -582,7 +598,10 @@ export class IdsAutocompleteComponent
         this._keyManager.setActiveItem(firstEnabledOptionIndex);
       } else {
         if (this._selectionModel) {
-          this._keyManager.setActiveItem(this._selectionModel.selected[0]);
+          const activeItem = this.options().find((option) => this._selectionModel?.isSelected(option.viewValue()));
+          if (activeItem) {
+            this._keyManager.setActiveItem(activeItem);
+          }
         }
       }
     }

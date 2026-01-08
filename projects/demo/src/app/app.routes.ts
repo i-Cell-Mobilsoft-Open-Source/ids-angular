@@ -1,4 +1,5 @@
 import { AccordionDemoService } from './pages/accordion/accordion-demo.service';
+import { AutocompleteDemoService } from './pages/autocomplete/autocomplete-demo.service';
 import { AvatarDemoService } from './pages/avatar/avatar-demo.service';
 import { BadgeDemoService } from './pages/badge/badge-demo.service';
 import { BreadcrumbDemoService } from './pages/breadcrumb/breadcrumb-demo.service';
@@ -39,6 +40,7 @@ import { Routes, Route } from '@angular/router';
 
 const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
   'accordion': () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
+  'autocomplete': () => import('./pages/autocomplete/autocomplete-demo.component').then((module) => module.AutocompleteDemoComponent),
   'avatar': () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
   'badge': () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
   'breadcrumb': () => import('./pages/breadcrumb/breadcrumb-demo.component').then((module) => module.BreadcrumbDemoComponent),
@@ -118,6 +120,7 @@ export const routes: Routes = [
       },
 
       buildComponentRoute('accordion', AccordionDemoService),
+      buildComponentRoute('autocomplete', AutocompleteDemoService),
       buildComponentRoute('avatar', AvatarDemoService),
       buildComponentRoute('badge', BadgeDemoService),
       buildComponentRoute('breadcrumb', BreadcrumbDemoService),

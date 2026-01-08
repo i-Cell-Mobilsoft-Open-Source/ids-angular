@@ -1,0 +1,63 @@
+<app-demo-and-code (resetDemo)="_autocompleteDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.AUTOCOMPLETE' | translate"
+      [hasDarkBackground]="_autocompleteDemoService.model.variant === 'light'"
+      (resetted)="_autocompleteDemoService.reset()"
+    >
+      <div component>
+        <ids-form-field [size]="_autocompleteDemoService.model.size" [variant]="_autocompleteDemoService.model.variant">
+          @let name = _autocompleteDemoService.helperModel.name;
+
+          <ids-label>{{ name }}</ids-label>
+          <ids-autocomplete
+            class="w-64"
+            [id]="name"
+            [name]="name"
+            [placeholder]="_autocompleteDemoService.helperModel.placeholder"
+            [minChars]="_autocompleteDemoService.helperModel.minChars"
+            [maxLength]="_autocompleteDemoService.helperModel.maxLength"
+            [required]="_autocompleteDemoService.model.required"
+            [disabled]="_autocompleteDemoService.model.disabled"
+            [(ngModel)]="input"
+          />
+          <ids-error-message>
+            <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" }}</ids-error-def>
+          </ids-error-message>
+        </ids-form-field>
+      </div>
+
+      <app-control-table
+        controls
+        [configType]="'input'"
+        [controlConfig]="_autocompleteDemoService.inputControlConfig"
+        [(model)]="_autocompleteDemoService.model"
+      />
+    </app-tryout>
+  </div>
+
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        controlName="Autocomplete"
+        [controlConfig]="_autocompleteDemoService.inputControlConfig"
+        [(model)]="_autocompleteDemoService.model"
+        (resetted)="_autocompleteDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Autocomplete"
+        configType="helper"
+        [controlConfig]="_autocompleteDemoService.helperControlConfig"
+        [(model)]="_autocompleteDemoService.helperModel"
+        (resetted)="_autocompleteDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+  <app-prop-table [config]="[_autocompleteDemoService.inputControlConfig, _autocompleteDemoService.helperControlConfig]" />
+</div>

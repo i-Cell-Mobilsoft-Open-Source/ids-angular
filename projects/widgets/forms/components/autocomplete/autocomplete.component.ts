@@ -333,7 +333,7 @@ export class IdsAutocompleteComponent
       // announce number of options when a key is pressed
       this._liveAnnouncer.announce(
         this.options()
-          .filter((option) => option.value() !== undefined)
+          .filter((option) => !option.disabled)
           .length.toString(),
         LIVE_ANNOUNCE_DURATION_MS,
       );
@@ -355,11 +355,12 @@ export class IdsAutocompleteComponent
     const manager = this._keyManager;
     const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp' || key === 'ArrowLeft' || key === 'ArrowRight';
     const isOpenKey = key === 'Enter' || key === ' ';
+    const validOptions = this.options().filter((option) => !option.disabled);
 
     if (
       (!manager?.isTyping() && isOpenKey && !hasModifierKey(event)) ||
       isArrowKey ||
-      this.options().length > 0 ||
+      validOptions.length > 0 ||
       this._resource.value().length > 0
     ) {
       event.preventDefault();

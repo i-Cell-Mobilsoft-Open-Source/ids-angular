@@ -232,6 +232,18 @@ export class IdsAutocompleteComponent
         }
       });
     });
+
+    effect(() => {
+      const searchText = this._searchText();
+
+      untracked(() => {
+        const control = this.ngControl();
+        if (control?.value && searchText !== control?.value) {
+          control?.reset();
+          this._clearSelection();
+        }
+      });
+    });
   }
 
   public ngOnInit(): void {
@@ -355,15 +367,16 @@ export class IdsAutocompleteComponent
     const manager = this._keyManager;
     const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp' || key === 'ArrowLeft' || key === 'ArrowRight';
     const isOpenKey = key === 'Enter' || key === ' ';
-    const validOptions = this.options().filter((option) => !option.disabled);
 
     if (
       (!manager?.isTyping() && isOpenKey && !hasModifierKey(event)) ||
       isArrowKey ||
-      validOptions.length > 0 ||
+      this.options().length > 0 ||
       this._resource.value().length > 0
     ) {
-      event.preventDefault();
+      if (isArrowKey || isOpenKey) {
+        event.preventDefault();
+      }
       this.open();
     } else if (!this.multiSelect()) {
       const previouslySelectedOption = this.selected;

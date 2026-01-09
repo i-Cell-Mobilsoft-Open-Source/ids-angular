@@ -1,6 +1,5 @@
 @let isLoading = _resource.isLoading();
 @let optionsLength = _resource.value().length;
-@let control = ngControl()?.control;
 @let maxOptionsLength = maxLength();
 
 <input
@@ -14,7 +13,7 @@
   [(ngModel)]="_searchText"
   (click)="_onInputClick()"
 />
-@if (control?.value || (_searchText().length && optionsLength === 0)) {
+@if (_searchText().length > 0) {
   <div idsFormFieldAction>
     <button
       type="button"
@@ -76,7 +75,7 @@
   @if (showHintLoading || showHintMinChars || showHintMaxLength || showHintNoResults) {
     <div class="ids-overlay-panel__autocomplete-message">
       <ids-option disabled>
-        @if (showHintLoading) {
+        @if (showHintLoading && !showHintMinChars) {
           {{ hintLoading() }}
         } @else if (showHintMinChars) {
           {{ hintMinChars() }}

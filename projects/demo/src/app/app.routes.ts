@@ -17,6 +17,7 @@ import { IconButtonDemoService } from './pages/icon-button/icon-button-demo.serv
 import { MenuItemDemoService } from './pages/menu-item/menu-item-demo.service';
 import { MessageDemoService } from './pages/message/message-demo.service';
 import { NotificationDemoService } from './pages/notification/notification-demo.service';
+import { OptionDemoService } from './pages/option/option-demo.service';
 import { OverlayPanelDemoService } from './pages/overlay-panel/overlay-panel-demo.service';
 import { PaginatorDemoService } from './pages/paginator/paginator-demo.service';
 import { RadioDemoService } from './pages/radio/radio-demo.service';
@@ -56,6 +57,7 @@ const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
   'menu-item': () => import('./pages/menu-item/menu-item-demo.component').then((module) => module.MenuItemDemoComponent),
   'message': () => import('./pages/message/message-demo.component').then((module) => module.MessageDemoComponent),
   'notification': () => import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
+  'option': () => import('./pages/option/option-demo.component').then((module) => module.OptionDemoComponent),
   'overlay-panel': () => import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
   'paginator': () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
   'radio': () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
@@ -135,6 +137,7 @@ export const routes: Routes = [
       buildComponentRoute('menu-item', MenuItemDemoService),
       buildComponentRoute('message', MessageDemoService),
       buildComponentRoute('notification', NotificationDemoService),
+      buildComponentRoute('option', OptionDemoService),
       buildComponentRoute('overlay-panel', OverlayPanelDemoService),
       buildComponentRoute('paginator', PaginatorDemoService),
       buildComponentRoute('radio', RadioDemoService),

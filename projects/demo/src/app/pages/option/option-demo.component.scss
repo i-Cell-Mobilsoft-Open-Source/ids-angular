@@ -1,0 +1,14 @@
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 3rem;
+  max-width: 100%;
+
+.option-item {
+  line-height: 1.5;
+  }
+
+  .ids-form-field {
+    width: 100%;
+  }
+}

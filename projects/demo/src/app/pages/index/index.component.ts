@@ -1,29 +1,144 @@
-import { INDEX_DATA } from '../../../utils/indexListData';
+import { environment } from '../../../environments/environment.development';
+import { ContentCardComponent } from '../../components/content-card/content-card.component';
 import { HeroComponent } from '../../components/hero/hero.component';
+import { ComponentBlock } from '../../model/componentEntry';
 import { HeroData } from '../../model/heroData';
+import { PageEntry } from '../../model/pageEntry';
+import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, signal } from '@angular/core';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+
 @Component({
   selector: 'app-index',
   imports: [
     HeroComponent,
-    IdsCardComponent,
+    ContentCardComponent,
   ],
   templateUrl: './index.component.html',
 })
-export class IndexComponent {
-  public indexDatas = INDEX_DATA;
-  public heroData = signal<HeroData>({
-    title: 'Welcome to I-DS Design System ',
-    description: 'Our design system enables us to create consistent web interfaces.' +
-    ' We offer comprehensive design principles, technical documentation, and live examples of components to streamline our workflow.' +
-    ' While browsing through the components, you can conveniently copy code snippets to enhance efficiency in your work.' +
-    ' Additionally, you can easily access the Figma design file for comparative analysis.' +
-    ' Our design system not only assists developers and designers ' +
-    'but also provides support for testers and analysts actively involved in the design process.',
-    localImageUrl: 'assets/images/illustration/ids-illu-comp-general@2x.png',
-    id: 0,
-    imageUrl: '',
-  });
+export class IndexComponent implements OnInit, OnDestroy {
+
+  public heroData?: HeroData;
+  public componentBlocks: ComponentBlock[] = [];
+
+  private _observer: MutationObserver | undefined;
+  private _isDarkTheme = signal<boolean>(false);
+  private _graphqlService = inject(GraphqlService);
+
+  public ngOnInit(): void {
+    this._updateTheme();
+
+    this._observer = new MutationObserver(() => {
+      this._updateTheme();
+    });
+
+    this._observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    this._graphqlService.getPages().subscribe((result) => {
+      const typedResult = result as { data: { entries: { data: PageEntry[] } } };
+      const components = typedResult.data.entries.data;
+
+      if (components.length === 0) {
+        return;
+      }
+
+      const component = components.find((page) => page.slug === 'home');
+
+      if (!component) {
+        return;
+      }
+
+      this.heroData = {
+        id: Number(component.id),
+        title: component.title,
+        isBackButton: true,
+        description: component.hero_description,
+        imageUrl: component.hero_image_light?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
+          : '',
+        imageUrlLight: component.hero_image_light?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
+          : '',
+        imageUrlDark: component.hero_image_dark?.url
+          ? `${environment.cmsBaseUrl}${component.hero_image_dark.url}`
+          : '',
+      };
+
+      const blocks: ComponentBlock[] = [];
+
+      for (const block of component.content) {
+        if (block.__typename === 'Set_Content_Heading') {
+          blocks.push({
+            type: 'heading',
+            heading: block.heading,
+          });
+        }
+
+        if (block.__typename === 'Set_Content_Card') {
+          blocks.push({
+            type: 'card',
+            id: Number(block.id),
+            orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
+            variant: block.card_properties?.card_variant?.value ?? 'surface',
+            appearance: block.card_properties?.appearance?.value ?? 'filled',
+            transparent: block.card_properties?.card_bg_transparent ?? false,
+            filledInContainer: block.group_image?.filled_in_container ?? false,
+            state: block.group_image?.state?.value,
+            imageURL: block.group_image?.img_light_mode?.[0]?.url
+              ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+              : '',
+            imageUrlLight: block.group_image?.img_light_mode?.[0]?.url
+              ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+              : '',
+            imageUrlDark: block.group_image?.img_dark_mode?.[0]?.url
+              ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
+              : '',
+            imageCaption: block.group_image?.img_caption,
+            imageBgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
+            imageBGTransparent: block.group_image?.bg_transparent ?? false,
+            aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
+            overTitle: block.content?.content_over_title,
+            title: block.content?.content_title,
+            description: block.content?.content_description,
+            buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : undefined,
+            buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
+            buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,
+            buttonTwoUrl: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_url : block.button?.button?.button_url,
+          });
+        }
+      }
+
+      this.componentBlocks = blocks;
+    });
+  }
+
+  public trackByBlock(index: number, item: ComponentBlock): string | number {
+    if (item.type === 'card') {
+      return item.id ?? index;
+    }
+    if (item.type === 'heading') {
+      return item.heading ?? index;
+    }
+    return index;
+  }
+
+  public trackByCardOrHeading(index: number, item: ComponentBlock): string | number {
+    return item.type === 'card' ? item.id ?? `card-${index}` : `heading-${index}`;
+  }
+
+  public ngOnDestroy(): void {
+    this._observer?.disconnect();
+  }
+
+  public getImageUrl(indexData: unknown): string {
+    const data = indexData as { imageUrlDark: string; imageUrlLight: string };
+    return this._isDarkTheme() ? data.imageUrlDark : data.imageUrlLight;
+  }
+
+  private _updateTheme(): void {
+    const htmlClassList = document.documentElement.classList;
+    this._isDarkTheme.set(htmlClassList.contains('ids-theme-dark'));
+  }
 }

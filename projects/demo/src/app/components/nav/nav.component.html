@@ -2,7 +2,14 @@
   @for (menuConfig of menu(); track $index) {
     <section>
       @if (menuConfig.name) {
-        <h2 class="nav-label">{{ menuConfig.name | translate }}</h2>
+        @if(menuConfig.name==='Home'){
+          <a [routerLink]="menuConfig.path">
+            <h2 class="nav-label">{{ menuConfig.name | translate }}</h2>
+          </a>
+        }
+        @else {
+          <h2 class="nav-label">{{ menuConfig.name | translate }}</h2>
+        }
       }
       <ul>
         @for (menuItem of menuConfig.children; track $index) {

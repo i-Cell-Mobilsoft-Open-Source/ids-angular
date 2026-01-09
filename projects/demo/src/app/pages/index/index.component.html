@@ -1,16 +1,27 @@
-<div class="flex flex-col gap-16">
-  <app-hero [heroData]="heroData()" />
-  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-    @for (indexData of indexDatas; track indexData.id) {
-      <a class="h-full flex" [href]="indexData.imageLink">
-        <ids-card variant="light" appearance="elevated">
-          <article class="flex flex-col p-4 gap-4 relative">
-            <img class="bg-gray-100 rounded-lg" [src]="indexData.imageUrl" [alt]="indexData.title" />
-            <h3 class="text-title-medium-prominent">{{ indexData.title }}</h3>
-            <p>{{ indexData.description }}</p>
-          </article>
-        </ids-card>
-      </a>
+<div class="flex flex-col gap-12">
+@if (heroData; as hero) {
+    <app-hero [heroData]="hero"/>
+  }  
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+    
+    @if (componentBlocks.length) {
+      @for (item of componentBlocks; track $index) {
+          @if (item.type === "heading") {
+            <div>
+              <h2 class="text-headline-small-prominent text-ids-page-fg-surface-default">
+                {{ item.heading }}
+              </h2>
+            </div>
+          }
+          
+          <div>  
+            @if (item.type === "card") {
+              <app-content-card [contentCardData]="item"  />
+            }
+          </div>
+
+        }
     }
   </div>
 </div>

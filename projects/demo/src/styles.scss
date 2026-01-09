@@ -64,6 +64,10 @@ h6 {
   margin: 0;
   padding: 0;
 }
+h1 {
+  @apply text-display-medium-prominent text-ids-page-fg-surface-default;
+  margin-bottom: 16px;
+}
 
 h2 {
   @apply text-headline-small-prominent text-ids-page-fg-surface-default;

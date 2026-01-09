@@ -65,6 +65,7 @@ export class IdsOptionComponent<T = unknown>
 
   protected readonly _multiSelect = Boolean(this._parent?.multiSelect());
 
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   public onSelectionChange = output<IdsOptionSelectionChange<T>>();
 
   public viewValue = computed(() => this._textElement().nativeElement.textContent || this.explicitViewValue() || '');
@@ -96,7 +97,7 @@ export class IdsOptionComponent<T = unknown>
     }
   }
 
-  private _handleKeydown(event: KeyboardEvent): void {
+  protected _handleKeydown(event: KeyboardEvent): void {
     if ((event.key === 'ENTER' || event.key === ' ') && !hasModifierKey(event)) {
       this.selectViaInteraction();
       event.preventDefault();

@@ -9,7 +9,7 @@
 >
   <div
     cdkTrapFocus
-    [ngClass]="_panelClasses()"
+    [ngClass]="[panelClasses(), _panelClasses()]"
   >
     <ng-content/>
   </div>

@@ -48,7 +48,11 @@ export class IssueReportComponent implements OnInit, OnDestroy {
         return;
       }
 
-      const component = components[0];
+      const component = components.find((page) => page.slug === 'issue-report');
+
+      if (!component) {
+        return;
+      }
 
       this.heroData = {
         id: Number(component.id),

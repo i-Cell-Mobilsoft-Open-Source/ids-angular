@@ -151,7 +151,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'index',
+    path: 'home',
     loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
   },
   {
@@ -160,7 +160,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'index',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
 ];

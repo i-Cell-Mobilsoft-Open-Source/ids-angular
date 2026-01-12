@@ -1,0 +1,94 @@
+@let isLoading = _resource.isLoading();
+@let optionsLength = _resource.value().length;
+@let maxOptionsLength = maxLength();
+
+<input
+  #fallbackOverlayOrigin="cdkOverlayOrigin"
+  cdkOverlayOrigin
+  idsInput
+  [placeholder]="placeholder()"
+  [disabled]="disabled()"
+  [readonly]="readonly()"
+  [required]="false"
+  [(ngModel)]="_searchText"
+  (click)="_onInputClick()"
+/>
+@if (_searchText().length > 0) {
+  <div idsFormFieldAction>
+    <button
+      type="button"
+      idsIconButton
+      appearance="standard"
+      variant="surface"
+      size="dense"
+      [attr.aria-label]="ariaLabelClearButton()"
+      [idsTooltip]="ariaLabelClearButton()"
+      [idsTooltipDisabled]="!ariaLabelClearButton() || disabled()"
+      [idsTooltipIgnoreClipped]="true"
+      [disabled]="disabled()"
+      (click)="clear()"
+    >
+      <ids-icon alt="" aria-hidden="true" fontIcon="close" />
+    </button>
+  </div>
+}
+@if (!isLoading && optionsLength > 0) {
+  <div idsFormFieldAction>
+    <button
+      type="button"
+      idsIconButton
+      appearance="standard"
+      variant="surface"
+      size="dense"
+      [attr.aria-label]="ariaLabelToggleButton()"
+      [idsTooltip]="ariaLabelToggleButton()"
+      [idsTooltipDisabled]="!ariaLabelToggleButton() || disabled()"
+      [idsTooltipIgnoreClipped]="true"
+      [disabled]="disabled()"
+      (click)="toggle()"
+    >
+      <ids-icon alt="" aria-hidden="true" [fontIcon]="isPanelOpen() ? 'chevron-up' : 'chevron-down'" />
+    </button>
+  </div>
+}
+@if (isLoading) {
+  <div idsFormFieldAction>
+    <ids-spinner sizeCollection="small" size="compact" variant="surface" [isTrack]="true" [aria-label]="hintLoading()" />
+  </div>
+}
+<ids-overlay-panel
+  #overlayPanel
+  variant="light"
+  [id]="id() + '-panel'"
+  [origin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
+  [open]="isPanelOpen()"
+  [size]="parentSize()"
+  [width]="_overlayWidth"
+  [panelClasses]="_panelClasses()"
+  (closed)="isPanelOpen.set(false)"
+>
+  @let showHintLoading = isLoading;
+  @let showHintMinChars = _searchText().length < minChars();
+  @let showHintMaxLength = maxOptionsLength && optionsLength > maxOptionsLength;
+  @let showHintNoResults = optionsLength === 0;
+
+  @if (showHintLoading || showHintMinChars || showHintMaxLength || showHintNoResults) {
+    <div class="ids-overlay-panel__autocomplete-message">
+      <ids-option disabled>
+        @if (showHintLoading && !showHintMinChars) {
+          {{ hintLoading() }}
+        } @else if (showHintMinChars) {
+          {{ hintMinChars() }}
+        } @else if (showHintMaxLength) {
+          {{ hintMaxLength() }}
+        } @else if (showHintNoResults) {
+          {{ hintNoResults() }}
+        }
+      </ids-option>
+    </div>
+  } @else {
+    @for (option of _resource.value(); track $index) {
+      <ids-option [value]="option">{{ option }}</ids-option>
+    }
+  }
+</ids-overlay-panel>

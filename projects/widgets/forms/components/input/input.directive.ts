@@ -90,7 +90,7 @@ export class IdsInputDirective extends IdsFormFieldControl<IdsInputDefaultConfig
     this._elementRef.nativeElement.focus(options);
   }
 
-  private _focusChanged(isFocused: boolean): void {
+  protected _focusChanged(isFocused: boolean): void {
     if (isFocused !== this._focused) {
       this._focused = isFocused;
     }

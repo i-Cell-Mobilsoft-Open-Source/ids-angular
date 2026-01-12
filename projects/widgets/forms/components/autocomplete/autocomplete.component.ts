@@ -32,7 +32,7 @@ import {
 } from '@angular/core';
 import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ValueChangeEvent } from '@angular/forms';
-import { coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
+import { coerceNumberAttribute } from '@i-cell/ids-angular/core';
 import {
   IdsInputDirective,
   formFieldControlClass,
@@ -144,6 +144,7 @@ export class IdsAutocompleteComponent
   public hintNoResults = input<string>(this._defaultConfig.hintNoResults);
   public hintMinChars = input<string>(this._defaultConfig.hintMinChars);
   public hintMaxLength = input<string>(this._defaultConfig.hintMaxLength);
+  public panelClasses = input<string>('');
 
   public isPanelOpen = signal<boolean>(false);
   public parentSize = computed(() => this._parentFormField.parentOrSelfSize());
@@ -165,10 +166,10 @@ export class IdsAutocompleteComponent
     ),
   );
 
-  protected _panelClasses = computed(() => createClassList(`${this._hostClassName}-panel`, [
-    this.parentSize(),
-    this.parentVariant(),
-  ]));
+  protected _panelClasses = computed(() => [
+    'ids-overlay-panel__autocomplete-panel',
+    this.panelClasses(),
+  ].join(' '));
 
   private _focused = signal<boolean>(false);
   private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && !this.readonly() && this.options().length > 0);

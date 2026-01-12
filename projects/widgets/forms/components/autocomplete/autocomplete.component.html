@@ -58,13 +58,13 @@
 }
 <ids-overlay-panel
   #overlayPanel
-  panelClasses="ids-overlay-panel__autocomplete-panel"
   variant="light"
   [id]="id() + '-panel'"
   [origin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
   [open]="isPanelOpen()"
   [size]="parentSize()"
   [width]="_overlayWidth"
+  [panelClasses]="_panelClasses()"
   (closed)="isPanelOpen.set(false)"
 >
   @let showHintLoading = isLoading;

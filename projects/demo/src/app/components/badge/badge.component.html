@@ -3,6 +3,12 @@
     class="absolute flex justify-center left-8 top-8 items-center rounded-ids-container-full w-ids-container-size-width-24 h-ids-container-size-height-24"
     [class]="bgClass()"
   >
-    <ids-icon size="compact" sizeCollection="small" variant="light" aria-hidden="true" [fontIcon]="state() === 'do' ? 'check' : 'close'" />
+    <ids-icon
+      size="compact"
+      sizeCollection="small"
+      variant="light"
+      aria-hidden="true"
+      [fontIcon]="state() === 'do' ? 'check' : state() === 'dont' ? 'close' : ''"
+    />
   </div>
 }

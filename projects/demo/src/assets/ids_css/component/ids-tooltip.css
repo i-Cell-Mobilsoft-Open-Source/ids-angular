@@ -5,10 +5,10 @@
     --ids-comp-tooltip-color-fg-dark-disabled: light-dark(#94a3b8, #475569);
     --ids-comp-tooltip-color-fg-light-default: light-dark(#1e293b, #1e293b);
     --ids-comp-tooltip-color-fg-light-disabled: light-dark(#94a3b8, #475569);
-    --ids-comp-tooltip-label-typography-font-family-comfortable: Montserrat;
-    --ids-comp-tooltip-label-typography-font-family-compact: Montserrat;
-    --ids-comp-tooltip-label-typography-font-family-dense: Montserrat;
-    --ids-comp-tooltip-label-typography-font-family-spacious: Montserrat;
+    --ids-comp-tooltip-label-typography-font-family-comfortable: Inter;
+    --ids-comp-tooltip-label-typography-font-family-compact: Inter;
+    --ids-comp-tooltip-label-typography-font-family-dense: Inter;
+    --ids-comp-tooltip-label-typography-font-family-spacious: Inter;
     --ids-comp-tooltip-label-typography-font-size-comfortable: 12px;
     --ids-comp-tooltip-label-typography-font-size-compact: 12px;
     --ids-comp-tooltip-label-typography-font-size-dense: 12px;

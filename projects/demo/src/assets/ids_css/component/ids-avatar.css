@@ -1,7 +1,7 @@
 :root {
     --ids-comp-avatar-color-bg-dark-default: light-dark(#020617, #020617);
     --ids-comp-avatar-color-bg-light-default: light-dark(#ffffff, #000000);
-    --ids-comp-avatar-color-bg-primary-default: light-dark(#003cff, #4775ff);
+    --ids-comp-avatar-color-bg-primary-default: light-dark(#4258ed, #4964fb);
     --ids-comp-avatar-color-bg-secondary-default: light-dark(#64748b, #94a3b8);
     --ids-comp-avatar-color-bg-surface-default: light-dark(#f1f5f9, #0f172a);
     --ids-comp-avatar-color-border-dark-default: #ffffff00;
@@ -47,10 +47,10 @@
     --ids-comp-avatar-icon-typography-smallcollection-line-height-compact: 16px;
     --ids-comp-avatar-icon-typography-smallcollection-line-height-dense: 12px;
     --ids-comp-avatar-icon-typography-smallcollection-line-height-spacious: 24px;
-    --ids-comp-avatar-initials-typography-bigcollection-font-family-comfortable: Montserrat;
-    --ids-comp-avatar-initials-typography-bigcollection-font-family-compact: Montserrat;
-    --ids-comp-avatar-initials-typography-bigcollection-font-family-dense: Montserrat;
-    --ids-comp-avatar-initials-typography-bigcollection-font-family-spacious: Montserrat;
+    --ids-comp-avatar-initials-typography-bigcollection-font-family-comfortable: Inter;
+    --ids-comp-avatar-initials-typography-bigcollection-font-family-compact: Inter;
+    --ids-comp-avatar-initials-typography-bigcollection-font-family-dense: Inter;
+    --ids-comp-avatar-initials-typography-bigcollection-font-family-spacious: Inter;
     --ids-comp-avatar-initials-typography-bigcollection-font-size-comfortable: 18px;
     --ids-comp-avatar-initials-typography-bigcollection-font-size-compact: 16px;
     --ids-comp-avatar-initials-typography-bigcollection-font-size-dense: 14px;
@@ -67,10 +67,10 @@
     --ids-comp-avatar-initials-typography-bigcollection-line-height-compact: 16px;
     --ids-comp-avatar-initials-typography-bigcollection-line-height-dense: 14px;
     --ids-comp-avatar-initials-typography-bigcollection-line-height-spacious: 28px;
-    --ids-comp-avatar-initials-typography-smallcollection-font-family-comfortable: Montserrat;
-    --ids-comp-avatar-initials-typography-smallcollection-font-family-compact: Montserrat;
-    --ids-comp-avatar-initials-typography-smallcollection-font-family-dense: Montserrat;
-    --ids-comp-avatar-initials-typography-smallcollection-font-family-spacious: Montserrat;
+    --ids-comp-avatar-initials-typography-smallcollection-font-family-comfortable: Inter;
+    --ids-comp-avatar-initials-typography-smallcollection-font-family-compact: Inter;
+    --ids-comp-avatar-initials-typography-smallcollection-font-family-dense: Inter;
+    --ids-comp-avatar-initials-typography-smallcollection-font-family-spacious: Inter;
     --ids-comp-avatar-initials-typography-smallcollection-font-size-comfortable: 10px;
     --ids-comp-avatar-initials-typography-smallcollection-font-size-compact: 8px;
     --ids-comp-avatar-initials-typography-smallcollection-font-size-dense: 8px;

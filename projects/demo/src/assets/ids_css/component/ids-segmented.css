@@ -21,7 +21,7 @@
     --ids-comp-segmented-control-button-outlined-color-bg-light-focused: #ffffff00;
     --ids-comp-segmented-control-button-outlined-color-bg-light-hovered: light-dark(#648cb41a, #ffffff1a);
     --ids-comp-segmented-control-button-outlined-color-bg-light-pressed: light-dark(#648cb433, #ffffff33);
-    --ids-comp-segmented-control-button-outlined-color-bg-primary-active: light-dark(#003cff, #4775ff);
+    --ids-comp-segmented-control-button-outlined-color-bg-primary-active: light-dark(#4258ed, #4964fb);
     --ids-comp-segmented-control-button-outlined-color-bg-primary-default: light-dark(#648cb41a, #ffffff1a);
     --ids-comp-segmented-control-button-outlined-color-bg-primary-disabled: #ffffff00;
     --ids-comp-segmented-control-button-outlined-color-bg-primary-focused: #ffffff00;
@@ -115,10 +115,10 @@
     --ids-comp-segmented-control-button-size-padding-y-compact: 8px;
     --ids-comp-segmented-control-button-size-padding-y-dense: 4px;
     --ids-comp-segmented-control-button-size-padding-y-spacious: 8px;
-    --ids-comp-segmented-control-button-typography-font-family-comfortable: Montserrat;
-    --ids-comp-segmented-control-button-typography-font-family-compact: Montserrat;
-    --ids-comp-segmented-control-button-typography-font-family-dense: Montserrat;
-    --ids-comp-segmented-control-button-typography-font-family-spacious: Montserrat;
+    --ids-comp-segmented-control-button-typography-font-family-comfortable: Inter;
+    --ids-comp-segmented-control-button-typography-font-family-compact: Inter;
+    --ids-comp-segmented-control-button-typography-font-family-dense: Inter;
+    --ids-comp-segmented-control-button-typography-font-family-spacious: Inter;
     --ids-comp-segmented-control-button-typography-font-size-comfortable: 16px;
     --ids-comp-segmented-control-button-typography-font-size-compact: 14px;
     --ids-comp-segmented-control-button-typography-font-size-dense: 12px;
@@ -159,7 +159,7 @@
     --ids-comp-segmented-control-container-size-padding-y-compact: 0px;
     --ids-comp-segmented-control-container-size-padding-y-dense: 0px;
     --ids-comp-segmented-control-container-size-padding-y-spacious: 0px;
-    --ids-comp-segmented-control-focused-outline-color-dark-focused: light-dark(#003cff, #4775ff);
+    --ids-comp-segmented-control-focused-outline-color-dark-focused: light-dark(#4258ed, #4964fb);
     --ids-comp-segmented-control-focused-outline-color-light-focused: light-dark(#ffffff, #000000);
     --ids-comp-segmented-control-focused-outline-size-border-radius-left-comfortable: 1000px;
     --ids-comp-segmented-control-focused-outline-size-border-radius-left-compact: 1000px;
@@ -179,7 +179,7 @@
     --ids-comp-segmented-control-toggle-button-filled-color-bg-light-focused: light-dark(#64748b, #94a3b8);
     --ids-comp-segmented-control-toggle-button-filled-color-bg-light-hovered: light-dark(#334155, #e2e8f0);
     --ids-comp-segmented-control-toggle-button-filled-color-bg-light-pressed: light-dark(#1e293b, #f1f5f9);
-    --ids-comp-segmented-control-toggle-button-filled-color-bg-primary-active: light-dark(#003cff, #4775ff);
+    --ids-comp-segmented-control-toggle-button-filled-color-bg-primary-active: light-dark(#4258ed, #4964fb);
     --ids-comp-segmented-control-toggle-button-filled-color-bg-primary-default: #ffffff00;
     --ids-comp-segmented-control-toggle-button-filled-color-bg-primary-disabled: #ffffff00;
     --ids-comp-segmented-control-toggle-button-filled-color-bg-primary-focused: light-dark(#ffffff, #000000);
@@ -267,7 +267,7 @@
     --ids-comp-segmented-control-toggle-button-outlined-color-bg-light-focused: #ffffff00;
     --ids-comp-segmented-control-toggle-button-outlined-color-bg-light-hovered: light-dark(#648cb41a, #ffffff1a);
     --ids-comp-segmented-control-toggle-button-outlined-color-bg-light-pressed: light-dark(#648cb433, #ffffff33);
-    --ids-comp-segmented-control-toggle-button-outlined-color-bg-primary-active: light-dark(#d1ddff, #001861);
+    --ids-comp-segmented-control-toggle-button-outlined-color-bg-primary-active: light-dark(#a2b1ff, #23197b);
     --ids-comp-segmented-control-toggle-button-outlined-color-bg-primary-default: #ffffff00;
     --ids-comp-segmented-control-toggle-button-outlined-color-bg-primary-disabled: #ffffff00;
     --ids-comp-segmented-control-toggle-button-outlined-color-bg-primary-focused: #ffffff00;
@@ -303,7 +303,7 @@
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-icon-light-focused: light-dark(#475569, #cbd5e1);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-icon-light-hovered: light-dark(#475569, #cbd5e1);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-icon-light-pressed: light-dark(#334155, #e2e8f0);
-    --ids-comp-segmented-control-toggle-button-outlined-color-fg-icon-primary-active: light-dark(#003cff, #4775ff);
+    --ids-comp-segmented-control-toggle-button-outlined-color-fg-icon-primary-active: light-dark(#4258ed, #4964fb);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-icon-primary-default: light-dark(#64748b, #94a3b8);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-icon-primary-disabled: light-dark(#94a3b8, #475569);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-icon-primary-focused: light-dark(#020617, #f8fafc);
@@ -321,7 +321,7 @@
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-label-light-focused: light-dark(#475569, #cbd5e1);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-label-light-hovered: light-dark(#475569, #cbd5e1);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-label-light-pressed: light-dark(#334155, #e2e8f0);
-    --ids-comp-segmented-control-toggle-button-outlined-color-fg-label-primary-active: light-dark(#003cff, #4775ff);
+    --ids-comp-segmented-control-toggle-button-outlined-color-fg-label-primary-active: light-dark(#4258ed, #4964fb);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-label-primary-default: light-dark(#64748b, #94a3b8);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-label-primary-disabled: light-dark(#94a3b8, #475569);
     --ids-comp-segmented-control-toggle-button-outlined-color-fg-label-primary-focused: light-dark(#020617, #f8fafc);
@@ -361,10 +361,10 @@
     --ids-comp-segmented-control-toggle-button-size-padding-y-compact: 8px;
     --ids-comp-segmented-control-toggle-button-size-padding-y-dense: 4px;
     --ids-comp-segmented-control-toggle-button-size-padding-y-spacious: 8px;
-    --ids-comp-segmented-control-toggle-button-typography-font-family-comfortable: Montserrat;
-    --ids-comp-segmented-control-toggle-button-typography-font-family-compact: Montserrat;
-    --ids-comp-segmented-control-toggle-button-typography-font-family-dense: Montserrat;
-    --ids-comp-segmented-control-toggle-button-typography-font-family-spacious: Montserrat;
+    --ids-comp-segmented-control-toggle-button-typography-font-family-comfortable: Inter;
+    --ids-comp-segmented-control-toggle-button-typography-font-family-compact: Inter;
+    --ids-comp-segmented-control-toggle-button-typography-font-family-dense: Inter;
+    --ids-comp-segmented-control-toggle-button-typography-font-family-spacious: Inter;
     --ids-comp-segmented-control-toggle-button-typography-font-size-comfortable: 16px;
     --ids-comp-segmented-control-toggle-button-typography-font-size-compact: 14px;
     --ids-comp-segmented-control-toggle-button-typography-font-size-dense: 12px;
@@ -409,7 +409,7 @@
     --ids-comp-segmented-control-toggle-container-size-padding-y-compact: 4px;
     --ids-comp-segmented-control-toggle-container-size-padding-y-dense: 4px;
     --ids-comp-segmented-control-toggle-container-size-padding-y-spacious: 4px;
-    --ids-comp-segmented-control-toggle-focused-outline-color-dark-focused: light-dark(#003cff, #4775ff);
+    --ids-comp-segmented-control-toggle-focused-outline-color-dark-focused: light-dark(#4258ed, #4964fb);
     --ids-comp-segmented-control-toggle-focused-outline-color-light-focused: light-dark(#ffffff, #000000);
     --ids-comp-segmented-control-toggle-focused-outline-size-border-radius-left-comfortable: 1000px;
     --ids-comp-segmented-control-toggle-focused-outline-size-border-radius-left-compact: 1000px;

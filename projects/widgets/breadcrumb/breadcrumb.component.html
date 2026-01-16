@@ -31,6 +31,7 @@
     [link]="!breadcrumbItem.disabled ? breadcrumbItem.path : null"
     [idsTooltip]="breadcrumbItem.label"
     [idsTooltipDisabled]="!breadcrumbItem.hasTooltip"
+    [idsTooltipIgnoreClipped]="true"
     [disabled]="!!breadcrumbItem.disabled"
     (hasTooltip)="breadcrumbItem.hasTooltip = $event"
   >

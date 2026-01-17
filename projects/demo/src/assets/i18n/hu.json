@@ -11,6 +11,7 @@
   "RESOURCES": "Forrásanyagok",
   "COMPONENTS": {
     "ACCORDION": "Accordion",
+    "AUTOCOMPLETE": "Auto complete",
     "AVATAR": "Avatar",
     "BADGE": "Badge",
     "BREADCRUMB": "Breadcrumb",

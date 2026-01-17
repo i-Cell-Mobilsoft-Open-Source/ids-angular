@@ -1,4 +1,5 @@
 import { AccordionDemoService } from './pages/accordion/accordion-demo.service';
+import { AutocompleteDemoService } from './pages/autocomplete/autocomplete-demo.service';
 import { AvatarDemoService } from './pages/avatar/avatar-demo.service';
 import { BadgeDemoService } from './pages/badge/badge-demo.service';
 import { BreadcrumbDemoService } from './pages/breadcrumb/breadcrumb-demo.service';
@@ -15,7 +16,9 @@ import { FormFieldDemoService } from './pages/form-field/form-field-demo.service
 import { IconDemoService } from './pages/icon/icon-demo.service';
 import { IconButtonDemoService } from './pages/icon-button/icon-button-demo.service';
 import { MenuItemDemoService } from './pages/menu-item/menu-item-demo.service';
+import { MessageDemoService } from './pages/message/message-demo.service';
 import { NotificationDemoService } from './pages/notification/notification-demo.service';
+import { OptionDemoService } from './pages/option/option-demo.service';
 import { OverlayPanelDemoService } from './pages/overlay-panel/overlay-panel-demo.service';
 import { PaginatorDemoService } from './pages/paginator/paginator-demo.service';
 import { RadioDemoService } from './pages/radio/radio-demo.service';
@@ -38,6 +41,7 @@ import { Routes, Route } from '@angular/router';
 
 const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
   'accordion': () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
+  'autocomplete': () => import('./pages/autocomplete/autocomplete-demo.component').then((module) => module.AutocompleteDemoComponent),
   'avatar': () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
   'badge': () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
   'breadcrumb': () => import('./pages/breadcrumb/breadcrumb-demo.component').then((module) => module.BreadcrumbDemoComponent),
@@ -53,7 +57,9 @@ const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
   'icon': () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
   'icon-button': () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   'menu-item': () => import('./pages/menu-item/menu-item-demo.component').then((module) => module.MenuItemDemoComponent),
+  'message': () => import('./pages/message/message-demo.component').then((module) => module.MessageDemoComponent),
   'notification': () => import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
+  'option': () => import('./pages/option/option-demo.component').then((module) => module.OptionDemoComponent),
   'overlay-panel': () => import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
   'paginator': () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
   'radio': () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
@@ -116,6 +122,7 @@ export const routes: Routes = [
       },
 
       buildComponentRoute('accordion', AccordionDemoService),
+      buildComponentRoute('autocomplete', AutocompleteDemoService),
       buildComponentRoute('avatar', AvatarDemoService),
       buildComponentRoute('badge', BadgeDemoService),
       buildComponentRoute('breadcrumb', BreadcrumbDemoService),
@@ -131,7 +138,9 @@ export const routes: Routes = [
       buildComponentRoute('icon', IconDemoService),
       buildComponentRoute('icon-button', IconButtonDemoService),
       buildComponentRoute('menu-item', MenuItemDemoService),
+      buildComponentRoute('message', MessageDemoService),
       buildComponentRoute('notification', NotificationDemoService),
+      buildComponentRoute('option', OptionDemoService),
       buildComponentRoute('overlay-panel', OverlayPanelDemoService),
       buildComponentRoute('paginator', PaginatorDemoService),
       buildComponentRoute('radio', RadioDemoService),

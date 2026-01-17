@@ -1,0 +1,99 @@
+<app-demo-and-code (resetDemo)="_optionDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center flex-col gap-4">
+    <app-tryout [title]="'COMPONENTS.OPTION' | translate" [hasDarkBackground]="_optionDemoService.selectModel.variant==='light'" (resetted)="_optionDemoService.reset()">
+      <ng-container component>
+        <div class="option-grid">
+          <div class="option-item">
+            <h2>Single selection</h2>
+
+            <ids-form-field [size]="_optionDemoService.selectModel.size" [variant]="_optionDemoService.selectModel.variant">
+              <ids-label>Option Demo Select</ids-label>
+
+              <ids-select
+                placeholder="Open to see options"
+                [(ngModel)]="_optionDemoService.selectedValue"
+              >
+                <ids-option-group label="Land">
+                  @for (option of _optionDemoService.animals.land; track $index) {
+                    <ids-option [value]="option.value" [disabled]="_optionDemoService.sampleOptionModel.hasDisabledElement">{{ option.viewValue }}</ids-option>
+                  }
+                </ids-option-group>
+                <ids-option-group label="Aquatic">
+                  @for (option of _optionDemoService.animals.aquatic; track $index) {
+                    <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                  }
+                </ids-option-group>
+              </ids-select>
+            </ids-form-field>
+          </div>
+
+          <div class="option-item">
+            <h2>Multi selection</h2>
+
+            <ids-form-field [size]="_optionDemoService.selectModel.size" [variant]="_optionDemoService.selectModel.variant">
+              <ids-label>Option Demo Select</ids-label>
+
+              <ids-select
+                placeholder="Open to see options"
+                [multiSelect]="true"
+                [(ngModel)]="_optionDemoService.multiSelectionValue"
+              >
+                <ids-option-group label="Land">
+                  @for (option of _optionDemoService.animals.land; track $index) {
+                    <ids-option [value]="option.value" [disabled]="_optionDemoService.multipleSelectionModel.hasDisabledElement">{{ option.viewValue }}</ids-option>
+                  }
+                </ids-option-group>
+                <ids-option-group label="Aquatic">
+                  @for (option of _optionDemoService.animals.aquatic; track $index) {
+                    <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                  }
+                </ids-option-group>
+              </ids-select>
+            </ids-form-field>
+          </div>
+        </div>
+      </ng-container>
+    </app-tryout>
+  </div>
+
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        [controlName]="'Parent (Select)'"
+        [configType]="'input'"
+        [controlConfig]="_optionDemoService.selectControlConfig"
+        [(model)]="_optionDemoService.selectModel"
+        (resetted)="_optionDemoService.reset()"
+      />
+
+      <app-control-table
+        controls
+        [controlName]="'Option Props'"
+        [configType]="'input'"
+        [controlConfig]="_optionDemoService.sampleInputControlConfig"
+        [(model)]="_optionDemoService.sampleOptionModel"
+        (resetted)="_optionDemoService.reset()"
+      />
+
+      <app-control-table
+        controls
+        [controlName]="'Group Props'"
+        [configType]="'input'"
+        [controlConfig]="_optionDemoService.multipleInputControlConfig"
+        [(model)]="_optionDemoService.multipleSelectionModel"
+        (resetted)="_optionDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>
+
+<div documentation class="w-full mt-8">
+  <h3 class="text-lg font-bold mb-4">Props</h3>
+  <app-prop-table 
+    [config]="[
+      _optionDemoService.selectControlConfig,
+      _optionDemoService.sampleInputControlConfig,
+      _optionDemoService.multipleInputControlConfig
+    ]"/>
+</div>

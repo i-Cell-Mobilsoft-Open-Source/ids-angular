@@ -1,13 +1,13 @@
 :root {
-    --ids-comp-divider-color-bg-brand-default: light-dark(#003cff, #4775ff);
-    --ids-comp-divider-color-bg-dark-default: light-dark(#020617, #f8fafc);
-    --ids-comp-divider-color-bg-error-default: light-dark(#dc2626, #fca5a5);
+    --ids-comp-divider-color-bg-brand-default: light-dark(#4258ed, #929eff);
+    --ids-comp-divider-color-bg-dark-default: undefined;
+    --ids-comp-divider-color-bg-error-default: light-dark(#d40d00, #ff8169);
     --ids-comp-divider-color-bg-light-default: light-dark(#ffffff, #000000);
-    --ids-comp-divider-color-bg-primary-default: light-dark(#003cff, #4775ff);
-    --ids-comp-divider-color-bg-secondary-default: light-dark(#9c4fe5, #c084fc);
-    --ids-comp-divider-color-bg-success-default: light-dark(#178740, #1da850);
-    --ids-comp-divider-color-bg-surface-default: light-dark(#cbd5e1, #334155);
-    --ids-comp-divider-color-bg-warning-default: light-dark(#f97316, #fb923c);
+    --ids-comp-divider-color-bg-primary-default: light-dark(#4258ed, #929eff);
+    --ids-comp-divider-color-bg-secondary-default: light-dark(#64748b, #94a3b8);
+    --ids-comp-divider-color-bg-success-default: light-dark(#007b24, #00bf53);
+    --ids-comp-divider-color-bg-surface-default: light-dark(#d1d7df, #1c1f26);
+    --ids-comp-divider-color-bg-warning-default: light-dark(#a65200, #f98900);
     --ids-comp-divider-size-border-radius-comfortable: 0px;
     --ids-comp-divider-size-border-radius-compact: 0px;
     --ids-comp-divider-size-border-radius-dense: 0px;

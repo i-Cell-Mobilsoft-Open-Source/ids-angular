@@ -3,18 +3,12 @@ import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
 import { Location } from '@angular/common';
 import { Component, input, OnDestroy, OnInit, inject as angularInject } from '@angular/core';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
 const SIGNAL_UPDATE_DELAY_MS = 50;
 
 @Component({
   selector: 'app-hero',
-  imports: [
-    IdsIconComponent,
-    IdsIconButtonComponent,
-    SafeHtmlPipe,
-  ],
+  imports: [SafeHtmlPipe],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })

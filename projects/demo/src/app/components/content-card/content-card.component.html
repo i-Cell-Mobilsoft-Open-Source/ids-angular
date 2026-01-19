@@ -4,11 +4,11 @@
   [appearance]="data.appearance || 'filled'"
   [variant]="data.variant || 'surface'"
   [orientation]="data.orientation"
-  [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row  ' : ''"
+  [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row' : ''"
   [class.transparent-bg]="data.transparent === true"
 >
   @if (data.imageURL) {
-    <div class="relative" [class]="data.orientation === 'horizontal' ? ' md:w-full ' : ''">
+    <div class="ids-container-gap-24" [class]="data.orientation === 'horizontal' ? ' md:w-full ' : ''">
       @if (data.state) {
         <app-badge [state]="data.state" />
       }

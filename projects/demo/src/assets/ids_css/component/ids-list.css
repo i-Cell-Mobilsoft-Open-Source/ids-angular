@@ -63,10 +63,10 @@
     --ids-comp-list-item-focused-outline-size-outline-compact: 2px;
     --ids-comp-list-item-focused-outline-size-outline-dense: 2px;
     --ids-comp-list-item-focused-outline-size-outline-spacious: 2px;
-    --ids-comp-list-item-icon-typography-font-family-comfortable: I-DS-font-icon-material;
-    --ids-comp-list-item-icon-typography-font-family-compact: I-DS-font-icon-material;
-    --ids-comp-list-item-icon-typography-font-family-dense: I-DS-font-icon-material;
-    --ids-comp-list-item-icon-typography-font-family-spacious: I-DS-font-icon-material;
+    --ids-comp-list-item-icon-typography-font-family-comfortable: I-DS-font-icon-remix;
+    --ids-comp-list-item-icon-typography-font-family-compact: I-DS-font-icon-remix;
+    --ids-comp-list-item-icon-typography-font-family-dense: I-DS-font-icon-remix;
+    --ids-comp-list-item-icon-typography-font-family-spacious: I-DS-font-icon-remix;
     --ids-comp-list-item-icon-typography-font-size-comfortable: 24px;
     --ids-comp-list-item-icon-typography-font-size-compact: 20px;
     --ids-comp-list-item-icon-typography-font-size-dense: 16px;

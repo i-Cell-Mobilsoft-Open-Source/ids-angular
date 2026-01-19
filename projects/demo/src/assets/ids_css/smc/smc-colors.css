@@ -300,9 +300,9 @@
     --ids-smc-colors-surface-darker-60: light-dark(#a3abba, #282c35);
     --ids-smc-colors-surface-darker-70: light-dark(#7e8797, #2b3039);
     --ids-smc-colors-surface-darker-80: light-dark(#707a8a, #353b46);
-    --ids-smc-colors-surface-darker-90: light-dark(#606b7a, #404753);
+    --ids-smc-colors-surface-darker-90: light-dark(#606b7a, #d1d7df);
     --ids-smc-colors-surface-darker-95: light-dark(#020617, #f8fafc);
-    --ids-smc-colors-surface-darker-100: light-dark(#404753, #606b7a);
+    --ids-smc-colors-surface-darker-100: light-dark(#404753, #bfc6d1);
     --ids-smc-colors-surface-darker-200: light-dark(#353b46, #707a8a);
     --ids-smc-colors-surface-darker-300: light-dark(#2b3039, #7e8797);
     --ids-smc-colors-surface-darker-400: light-dark(#282c35, #a3abba);

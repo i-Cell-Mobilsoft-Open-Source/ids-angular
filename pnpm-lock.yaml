@@ -45,8 +45,8 @@ importers:
         specifier: ^3.13.9
         version: 3.13.9(@types/react@18.3.4)(graphql@16.11.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@i-cell/ids-styles':
-        specifier: ^0.0.55
-        version: 0.0.55
+        specifier: ^0.0.56
+        version: 0.0.56
       '@i-cell/ids-tokens':
         specifier: 0.0.36
         version: 0.0.36
@@ -1645,8 +1645,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@i-cell/ids-styles@0.0.55':
-    resolution: {integrity: sha512-nmSG8qZ09/RMBjmgqDbOENbQbBVB+04OxTVdAX9Nz35wlo9ROlYvC9JlKPghAnKCXrBbDBwVlk6vqSt+2wwggQ==}
+  '@i-cell/ids-styles@0.0.56':
+    resolution: {integrity: sha512-cV47xcdzQC8yANJ9TOiKNWdHL2VBK5sXhPWslz6FuNjcBRV3SIfxcU2uWz/0Y7sANhjnCYRM4biTY++sJRea3Q==}
 
   '@i-cell/ids-tokens@0.0.36':
     resolution: {integrity: sha512-o2yyCsjThMKa9fiZWZr2Xtc1jAE/jkC3Io3s8M3lAZL6HPCHV1BwtUGm7i/fXNq/TB2HNdustDnvGzyE7DtFjA==}
@@ -10273,7 +10273,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@i-cell/ids-styles@0.0.55': {}
+  '@i-cell/ids-styles@0.0.56': {}
 
   '@i-cell/ids-tokens@0.0.36': {}
 
@@ -13777,9 +13777,9 @@ snapshots:
 
   flatted@3.3.3: {}
 
-  follow-redirects@1.15.11(debug@4.4.1):
+  follow-redirects@1.15.11(debug@4.4.3):
     optionalDependencies:
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3
 
   for-each@0.3.5:
     dependencies:
@@ -14144,7 +14144,7 @@ snapshots:
   http-proxy-middleware@2.0.9(@types/express@4.17.23):
     dependencies:
       '@types/http-proxy': 1.17.16
-      http-proxy: 1.18.1(debug@4.4.1)
+      http-proxy: 1.18.1(debug@4.4.3)
       is-glob: 4.0.3
       is-plain-obj: 3.0.0
       micromatch: 4.0.8
@@ -14156,18 +14156,18 @@ snapshots:
   http-proxy-middleware@3.0.5:
     dependencies:
       '@types/http-proxy': 1.17.16
-      debug: 4.4.1(supports-color@8.1.1)
-      http-proxy: 1.18.1(debug@4.4.1)
+      debug: 4.4.3
+      http-proxy: 1.18.1(debug@4.4.3)
       is-glob: 4.0.3
       is-plain-object: 5.0.0
       micromatch: 4.0.8
     transitivePeerDependencies:
       - supports-color
 
-  http-proxy@1.18.1(debug@4.4.1):
+  http-proxy@1.18.1(debug@4.4.3):
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.11(debug@4.4.1)
+      follow-redirects: 1.15.11(debug@4.4.3)
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -16634,7 +16634,7 @@ snapshots:
 
   spdy-transport@3.0.0:
     dependencies:
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3
       detect-node: 2.1.0
       hpack.js: 2.1.6
       obuf: 1.1.2
@@ -16645,7 +16645,7 @@ snapshots:
 
   spdy@4.0.2:
     dependencies:
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3
       handle-thing: 2.0.1
       http-deceiver: 1.2.7
       select-hose: 2.0.0

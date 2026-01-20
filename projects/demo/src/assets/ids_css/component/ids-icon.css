@@ -480,6 +480,10 @@
     --ids-comp-icon-typography-bigcollection-line-height-compact: 40px;
     --ids-comp-icon-typography-bigcollection-line-height-dense: 32px;
     --ids-comp-icon-typography-bigcollection-line-height-spacious: 72px;
+    --ids-comp-icon-typography-font-family-font-family-default-comfortable: I-DS-font-icon-remix;
+    --ids-comp-icon-typography-font-family-font-family-default-compact: I-DS-font-icon-remix;
+    --ids-comp-icon-typography-font-family-font-family-default-dense: I-DS-font-icon-remix;
+    --ids-comp-icon-typography-font-family-font-family-default-spacious: I-DS-font-icon-remix;
     --ids-comp-icon-typography-smallcollection-font-size-comfortable: 20px;
     --ids-comp-icon-typography-smallcollection-font-size-compact: 16px;
     --ids-comp-icon-typography-smallcollection-font-size-dense: 12px;

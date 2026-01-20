@@ -45,7 +45,7 @@ body {
 }
 
 @font-face {
-  font-family: "IDS Icons";
+  font-family: "I-DS-font-icon-material";
   src: url("./assets/fonts/I-DS-font-icon-material.eot");
   src:
     local("IDS Icons"),
@@ -53,6 +53,15 @@ body {
     url(./assets/fonts/I-DS-font-icon-material.woff2) format("woff2"),
     url(./assets/fonts/I-DS-font-icon-material.woff) format("woff"),
     url(./assets/fonts/I-DS-font-icon-material.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "I-DS-font-icon-remix";
+  src:
+    url(./assets/fonts/I-DS-font-icon-remix.woff2) format("woff2"),
+    url(./assets/fonts/I-DS-font-icon-remix.woff) format("woff"),
+    url(./assets/fonts/I-DS-font-icon-remix.ttf) format("truetype");
+  font-display: swap;
 }
 
 @mixin designScrollbar {

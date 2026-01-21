@@ -1,9 +1,20 @@
 import {
-  IDS_AUTOCOMPLETE_DEFAULT_CONFIG,
   IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY,
   IdsAutocompleteDefaultConfig,
+  IDS_AUTOCOMPLETE_DEFAULT_CONFIG,
 } from './autocomplete-defaults';
 import { IDS_AUTOCOMPLETE_LOADER } from './tokens/autocomplete-loader.token';
+
+import { ErrorStateMatcher } from '../../common/error/error-state';
+import { SuccessStateMatcher } from '../../common/success/success-state';
+import { IdsOptionComponent, _getOptionScrollPosition } from '../../components/option/option.component';
+import { IDS_OPTION_PARENT_COMPONENT } from '../../components/option/tokens/option-parent';
+import { IdsOptionSelectionChange } from '../../components/option/types/option-events.class';
+import { IdsFormFieldActionDirective } from '../../directives/form-field-action.directive';
+import { formFieldControlClass, IdsFormFieldControl } from '../form-field/form-field-control';
+import { IdsFormFieldComponent } from '../form-field/form-field.component';
+import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-control';
+import { IdsInputDirective } from '../input/input.directive';
 
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -33,20 +44,6 @@ import {
 import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ValueChangeEvent } from '@angular/forms';
 import { coerceNumberAttribute } from '@i-cell/ids-angular/core';
-import {
-  IdsInputDirective,
-  formFieldControlClass,
-  IDS_FORM_FIELD_CONTROL,
-  IdsFormFieldComponent,
-  IdsFormFieldControl,
-  IdsOptionComponent,
-  IdsOptionSelectionChange,
-  IDS_OPTION_PARENT_COMPONENT,
-  IdsFormFieldActionDirective,
-  ErrorStateMatcher,
-  SuccessStateMatcher,
-  _getOptionScrollPosition,
-} from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';

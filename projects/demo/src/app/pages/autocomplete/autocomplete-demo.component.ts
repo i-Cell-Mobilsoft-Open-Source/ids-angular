@@ -8,9 +8,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, inject, ResourceLoaderParams } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IdsErrorDefinitionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsLabelDirective } from '@i-cell/ids-angular/forms';
-import { IdsAutocompleteComponent } from '@i-cell/ids-angular/forms/components/autocomplete/autocomplete.component';
-import { IDS_AUTOCOMPLETE_LOADER } from '@i-cell/ids-angular/forms/components/autocomplete/tokens/autocomplete-loader.token';
+import { IDS_AUTOCOMPLETE_LOADER, IdsAutocompleteComponent, IdsErrorDefinitionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsLabelDirective } from '@i-cell/ids-angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { delay, Observable, of } from 'rxjs';
 

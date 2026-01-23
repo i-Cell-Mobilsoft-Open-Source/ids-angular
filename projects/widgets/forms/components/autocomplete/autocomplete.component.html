@@ -47,7 +47,7 @@
       [disabled]="disabled()"
       (click)="toggle()"
     >
-      <ids-icon alt="" aria-hidden="true" [fontIcon]="isPanelOpen() ? 'chevron-up' : 'chevron-down'" />
+      <ids-icon alt="" aria-hidden="true" [fontIcon]="overlay.open() ? 'chevron-up' : 'chevron-down'" />
     </button>
   </div>
 }
@@ -57,15 +57,13 @@
   </div>
 }
 <ids-overlay-panel
-  #overlayPanel
+  #overlay
   variant="light"
   [id]="id() + '-panel'"
   [origin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
-  [open]="isPanelOpen()"
   [size]="parentSize()"
   [width]="_overlayWidth"
   [panelClasses]="_panelClasses()"
-  (closed)="isPanelOpen.set(false)"
 >
   @let showHintLoading = isLoading;
   @let showHintMinChars = _searchText().length < minChars();

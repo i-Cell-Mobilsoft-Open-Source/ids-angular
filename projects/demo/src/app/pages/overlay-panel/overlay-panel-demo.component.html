@@ -16,7 +16,7 @@
           variant="primary"
           (click)="overlayPanel.toggle()"
         >
-          {{ overlayPanel.isOpen ? 'Close overlay' : 'Open overlay' }}
+          {{ overlayPanel.open() ? 'Close overlay' : 'Open overlay' }}
         </button>
 
         <ids-overlay-panel

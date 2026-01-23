@@ -2,10 +2,10 @@
   cdkConnectedOverlay
   [cdkConnectedOverlayPositions]="positions()"
   [cdkConnectedOverlayOrigin]="origin()"
-  [cdkConnectedOverlayOpen]="_open()"
+  [cdkConnectedOverlayOpen]="open()"
   [cdkConnectedOverlayPanelClass]="_hostClasses()"
-  (overlayOutsideClick)="_handleOverlayOutsideClick()"
-  (detach)="_handleDetach()"
+  (overlayOutsideClick)="_close()"
+  (detach)="_close()"
 >
   <div
     cdkTrapFocus

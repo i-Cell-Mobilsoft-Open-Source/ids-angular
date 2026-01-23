@@ -87,9 +87,9 @@ const LIVE_ANNOUNCE_DURATION_MS = 10000;
     'aria-autocomplete': 'list',
     'aria-haspopup': 'listbox',
     '[attr.tabindex]': 'disabled() ? -1 : tabIndex()',
-    '[attr.aria-controls]': 'isPanelOpen() ? id() + "-panel" : null',
-    '[attr.aria-owns]': 'isPanelOpen() ? id() + "-panel" : null',
-    '[attr.aria-expanded]': 'isPanelOpen()',
+    '[attr.aria-controls]': 'overlayPanel().open() ? id() + "-panel" : null',
+    '[attr.aria-owns]': 'overlayPanel().open() ? id() + "-panel" : null',
+    '[attr.aria-expanded]': 'overlayPanel().open()',
     '[attr.aria-label]': 'ariaLabel() || null',
     '[attr.aria-labelledby]': 'ariaLabelledby() || null',
     '[attr.aria-required]': 'required().toString()',
@@ -143,12 +143,12 @@ export class IdsAutocompleteComponent
   public hintMaxLength = input<string>(this._defaultConfig.hintMaxLength);
   public panelClasses = input<string>('');
 
-  public isPanelOpen = signal<boolean>(false);
   public parentSize = computed(() => this._parentFormField.parentOrSelfSize());
   public parentVariant = computed(() => this._parentFormField.parentOrSelfVariant());
   public readonly errorStateMatcher = signal(inject(ErrorStateMatcher));
   public readonly successStateMatcher = signal(inject(SuccessStateMatcher));
   public options = viewChildren<IdsOptionComponent>(IdsOptionComponent);
+  public overlayPanel = viewChild.required(IdsOverlayPanelComponent);
   public onContainerClick = (): void => {};
 
   protected _hostClasses = computed(() =>
@@ -169,8 +169,8 @@ export class IdsAutocompleteComponent
   ].join(' '));
 
   private _focused = signal<boolean>(false);
-  private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && !this.readonly() && this.options().length > 0);
-  private _panel = viewChild('overlayPanel', { read: ElementRef<HTMLElement> });
+  private _canOpen = computed(() => !this.overlayPanel().open() && !this.disabled() && !this.readonly() && this.options().length > 0);
+  private _panel = viewChild('overlay', { read: ElementRef<HTMLElement> });
   private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
   private _inputElemment = viewChild('fallbackOverlayOrigin', { read: ElementRef<HTMLInputElement> });
 
@@ -292,7 +292,7 @@ export class IdsAutocompleteComponent
       .skipPredicate(this._skipPredicate);
 
     this._keyManager.change.subscribe(() => {
-      if (this.isPanelOpen() && this._panel()) {
+      if (this.overlayPanel().open() && this._panel()) {
         this._scrollOptionIntoView(this._keyManager?.activeItemIndex || 0);
       }
     });
@@ -317,7 +317,7 @@ export class IdsAutocompleteComponent
       this._keyManager?.setActiveItem(source);
     }
 
-    if (isUserInput && !this.multiSelect() && this.isPanelOpen()) {
+    if (isUserInput && !this.multiSelect() && this.overlayPanel().open()) {
       this.close();
     }
 
@@ -334,12 +334,12 @@ export class IdsAutocompleteComponent
     this._handleChange();
     this._onTouched();
     this._inputElemment()?.nativeElement.blur();
-    this.isPanelOpen.set(false);
+    this.overlayPanel().open.set(false);
   }
 
   protected _handleKeydown(event: KeyboardEvent): void {
     if (!this.disabled() && !this.readonly()) {
-      this.isPanelOpen() ? this._handleOpenedPanelKeydown(event) : this._handleClosedPanelKeydown(event);
+      this.overlayPanel().open() ? this._handleOpenedPanelKeydown(event) : this._handleClosedPanelKeydown(event);
       // announce number of options when a key is pressed
       this._liveAnnouncer.announce(
         this.options()
@@ -465,7 +465,7 @@ export class IdsAutocompleteComponent
   }
 
   public toggle(): void {
-    this.isPanelOpen() ? this.close() : this.open();
+    this.overlayPanel().open() ? this.close() : this.open();
   }
 
   public open(): void {
@@ -477,15 +477,15 @@ export class IdsAutocompleteComponent
     }
 
     this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
-    this.isPanelOpen.set(true);
+    this.overlayPanel().open.set(true);
     this._keyManager?.withHorizontalOrientation(null);
     this._highlightCorrectOption();
     this._changeDetectorRef.markForCheck();
   }
 
   public close(): void {
-    if (this.isPanelOpen()) {
-      this.isPanelOpen.set(false);
+    if (this.overlayPanel().open()) {
+      this.overlayPanel().open.set(false);
       this._changeDetectorRef.markForCheck();
       this._onTouched();
     }
@@ -539,7 +539,7 @@ export class IdsAutocompleteComponent
       const correspondingOption = this._selectValue(value);
       if (correspondingOption) {
         this._keyManager?.updateActiveItem(correspondingOption);
-      } else if (!this.isPanelOpen()) {
+      } else if (!this.overlayPanel().open()) {
         this._keyManager?.updateActiveItem(-1);
       }
     }
@@ -588,7 +588,7 @@ export class IdsAutocompleteComponent
   }
 
   private _skipPredicate = (option: IdsOptionComponent): boolean => {
-    if (this.isPanelOpen()) {
+    if (this.overlayPanel().open()) {
       return false;
     }
 
@@ -640,14 +640,14 @@ export class IdsAutocompleteComponent
     this._focused.set(false);
     this._keyManager?.cancelTypeahead();
 
-    if (!this.disabled() && !this.isPanelOpen()) {
+    if (!this.disabled() && !this.overlayPanel().open()) {
       this._onTouched();
       this._changeDetectorRef.markForCheck();
     }
   }
 
   protected _getAriaActiveDescendant(): string | null {
-    if (this.isPanelOpen() && this._keyManager?.activeItem) {
+    if (this.overlayPanel().open() && this._keyManager?.activeItem) {
       return this._keyManager.activeItem.id();
     }
 

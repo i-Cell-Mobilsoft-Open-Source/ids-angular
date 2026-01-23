@@ -170,7 +170,7 @@ export class IdsAutocompleteComponent
 
   private _focused = signal<boolean>(false);
   private _canOpen = computed(() => !this.overlayPanel().open() && !this.disabled() && !this.readonly() && this.options().length > 0);
-  private _panel = viewChild('overlayPanel', { read: ElementRef<HTMLElement> });
+  private _panel = viewChild('overlay', { read: ElementRef<HTMLElement> });
   private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
   private _inputElemment = viewChild('fallbackOverlayOrigin', { read: ElementRef<HTMLInputElement> });
 

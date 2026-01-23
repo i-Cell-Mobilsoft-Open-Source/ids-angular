@@ -14,12 +14,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  input, output, computed, contentChild,
+  input, computed, contentChild,
   ElementRef,
   viewChild,
   untracked,
   effect,
-  linkedSignal,
+  model,
 } from '@angular/core';
 import { IdsSizeType, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
@@ -44,9 +44,8 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
-  public open = input<boolean>(false);
+  public open = model<boolean>(false);
   public origin = input.required<CdkOverlayOrigin | ElementRef>();
-  public closed = output<void>();
   public positions = input<ConnectedPosition[]>(this._defaultConfig.positions);
 
   public appearance = input<IdsOverlayPanelAppearanceType>(this._defaultConfig.appearance);
@@ -55,17 +54,12 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   public panelClasses = input<string>('');
   public width = input<string | number>();
 
-  protected _open = linkedSignal(() => this.open());
   protected _hasCdkMenu = computed(() => !!this._cdkMenu());
 
   private _cdkMenu = contentChild(CdkMenu, { descendants: true });
   private _overlayRef = viewChild(CdkConnectedOverlay);
 
   private _focusTrap = viewChild(CdkTrapFocus);
-
-  public get isOpen(): boolean {
-    return this._open();
-  }
 
   constructor() {
     super();
@@ -90,18 +84,13 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   }
 
   public toggle(): void {
-    this._open.set(!this._open());
+    this.open.update((open) => !open);
   }
 
-  protected _handleOverlayOutsideClick(): void {
-    if (this._open()) {
-      this._open.set(false);
-      this.closed.emit();
+  protected _close(): void {
+    if (this.open()) {
+      this.open.set(false);
     }
-  }
-
-  protected _handleDetach(): void {
-    this.closed.emit();
   }
 
   protected _panelClasses = computed(() => this._getHostClasses([

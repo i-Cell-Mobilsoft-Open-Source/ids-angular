@@ -24,6 +24,24 @@ export interface PageEntry {
   content: ComponentContent[];
 }
 
+export interface GlobalEntry {
+  id: string;
+  title: string;
+  handle: string;
+  footer_copyright: string;
+  footer_logo?: { url: string }[];
+  footer_certs?: { url: string }[];
+  footer_contact_group?: {
+    company_name: string;
+    company_email: string;
+    company_phone_number: string;
+    company_address: string;
+    address_icon?: string;
+    email_icon?: string;
+    phone_icon?: string;
+  };
+}
+
 export type ComponentContent = SetContentCard | SetContentHeading;
 
 export interface SetContentCard {

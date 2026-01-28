@@ -41,13 +41,7 @@
     </ids-segmented-control-toggle>
   </div>
 
-  <ids-segmented-control-toggle
-    size="dense"
-    appearance="filled"
-    variant="surface"
-    buttonVariant="primary"
-    [formControl]="theme"
-  >
+  <ids-segmented-control-toggle size="dense" appearance="filled" variant="surface" buttonVariant="primary" [formControl]="theme">
     <ids-segmented-control-toggle-item value="light">
       <ids-icon fontIcon="light-mode" />
     </ids-segmented-control-toggle-item>
@@ -55,9 +49,17 @@
       <ids-icon fontIcon="dark-mode" />
     </ids-segmented-control-toggle-item>
   </ids-segmented-control-toggle>
-
 </header>
-<ids-nav [menu]="dynamicMenu" />
+
 <main cdkScrollable>
-  <div class="container p-8 mx-auto"> <router-outlet/></div>
-</main>
+  <div class="flex flex-row">
+    <ids-nav [menu]="dynamicMenu" />
+
+    <div class="container p-8 mx-auto"><router-outlet /></div>
+  </div>
+
+  
+    <app-footer />
+  </main>
+
+

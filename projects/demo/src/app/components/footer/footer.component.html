@@ -1,0 +1,131 @@
+<footer class="relative">
+  <div class="absolute z-10">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="123" viewBox="0 0 100 123" fill="none">
+      <circle cx="-2.20501" cy="20.7953" r="102" transform="rotate(-154.44 -2.20501 20.7953)" fill="url(#paint0_linear_4040_697)" />
+      <defs>
+        <linearGradient id="paint0_linear_4040_697" x1="-138.129" y1="-29.348" x2="75.1231" y2="-9.7019" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#013DFF" />
+          <stop offset="1" stop-color="#013DFF" stop-opacity="0.1" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div class="footer relative">
+
+    <div class="ellipse">
+      <div class="large-circle"></div>
+    </div>
+    
+    
+    <div class="rectangle"></div>
+    
+    <div class="flex flex-col items-start gap-8">
+      <img alt="Company Logo" class="flex w-[120px] h-[85px] justify-center items-center" [src]="footerData?.footer_logo?.[0]?.url" />
+      
+      <div class="flex flex-col items-start gap-[118px] z-10 relative">
+        <div class="flex items-start gap-[146px] relative">
+          <div class="flex flex-col items-start gap-[10px]">
+            <h3 class="company-name">{{ footerData?.footer_contact_group?.company_name }}</h3>
+            
+            <div class="flex flex-col items-start">
+              <div class="address">
+                <ids-icon [fontIcon]="'location'" />
+                <span class="address-text">{{ footerData?.footer_contact_group?.company_address }}</span>
+              </div>
+              
+              <div class="email">
+                <ids-icon [fontIcon]="'mail'" />
+                <span class="email-text">{{ footerData?.footer_contact_group?.company_email }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-row gap-[126px] z-10 px-20">
+            <div class="link-col">
+              <div class="flex flex-col items-start gap-2">
+                <h3 class="link-title">Documentation</h3>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="4" viewBox="0 0 60 4" fill="none">
+                  <line x1="2" y1="2" x2="58" y2="2" stroke="url(#paint0_linear_4004_559)" stroke-width="4" stroke-linecap="round" />
+                  <defs>
+                    <linearGradient id="paint0_linear_4004_559" x1="0" y1="4" x2="76.9163" y2="4.00023" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#003CFF" />
+                      <stop offset="1" stop-color="#013DFF" stop-opacity="0.1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="flex flex-col items-start gap-2">
+                <a class="link-item" href="">Get Started</a>
+                <a class="link-item" href="">Design</a>
+                <a class="link-item" href="">Develop</a>
+                <a class="link-item" href="">Components</a>
+                <a class="link-item" href="">Design tokens</a>
+              </div>
+            </div>
+            
+            <div class="link-col">
+              <div class="flex flex-col items-start gap-2">
+                <h3 class="link-title">Resources</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="4" viewBox="0 0 60 4" fill="none">
+                  <line x1="2" y1="2" x2="58" y2="2" stroke="url(#paint0_linear_4004_559)" stroke-width="4" stroke-linecap="round" />
+                  <defs>
+                    <linearGradient id="paint0_linear_4004_559" x1="0" y1="4" x2="76.9163" y2="4.00023" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#003CFF" />
+                      <stop offset="1" stop-color="#013DFF" stop-opacity="0.1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="flex flex-col items-start gap-2">
+                <a class="link-item" href="">Releases</a>
+                <a class="link-item" href="">Figma kit</a>
+                <a class="link-item" href="">Icon library</a>
+              </div>
+            </div>
+            <div class="link-col">
+              <div class="flex flex-col items-start gap-2">
+                <h3 class="link-title">Community</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="4" viewBox="0 0 60 4" fill="none">
+                  <line x1="2" y1="2" x2="58" y2="2" stroke="url(#paint0_linear_4004_559)" stroke-width="4" stroke-linecap="round" />
+                  <defs>
+                    <linearGradient id="paint0_linear_4004_559" x1="0" y1="4" x2="76.9163" y2="4.00023" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#003CFF" />
+                      <stop offset="1" stop-color="#013DFF" stop-opacity="0.1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="flex flex-col items-start gap-2">
+                <a class="link-item" href="">Github</a>
+                <a class="link-item" href="">Issue report</a>
+                <a class="link-item" href="">Bug report</a>
+              </div>
+            </div>
+          </div>
+          <img alt="" class="cert1" [src]="footerData?.footer_certs?.[0]?.url" />
+          <img alt="" class="cert2" [src]="footerData?.footer_certs?.[1]?.url" />
+        </div>
+        <img alt="" class="cert3" [src]="footerData?.footer_certs?.[2]?.url" />
+        <img alt="" class="cert4" [src]="footerData?.footer_certs?.[3]?.url" />
+        
+        <div class="flex flex-col items-end gap-4">
+          <div class="line"></div>
+          
+          <div class="flex justify-between items-start w-[1214px]">
+            <p class="copyright-text flex flex-col justify-center shrink-0 w-[388px] h-[21px]">
+              {{ footerData?.footer_copyright }}
+            </p>
+            
+            <div class="flex items-end justify-center gap-5">
+              <a href="/privacy" class="copyright-text">Privacy Policy</a>
+              <a href="/cookie" class="copyright-text">Cookie Policy</a>
+              <a href="/legal" class="copyright-text">Legal Notice</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

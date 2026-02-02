@@ -19,6 +19,7 @@
         appearance="standard"
         size="compact"
         variant="surface"
+        [disabled]="isCloseButtonDisabled()"
         (click)="close()"
       >
         <ids-icon aria-hidden="true" alt="" fontIcon="close" />

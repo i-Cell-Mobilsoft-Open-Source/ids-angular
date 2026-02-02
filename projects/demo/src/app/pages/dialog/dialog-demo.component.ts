@@ -31,6 +31,7 @@ export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog
       [mainTitle]="controls!.mainTitle"
       [subTitle]="controls!.subTitle"
       [showCloseButton]="controls!.showCloseButton"
+      [isCloseButtonDisabled]="controls!.isCloseButtonDisabled"
       [showBackdrop]="controls!.showBackdrop"
     >
       @if (helperControls!.useCustomHeader) {

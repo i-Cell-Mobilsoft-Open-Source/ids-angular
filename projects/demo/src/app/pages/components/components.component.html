@@ -2,8 +2,8 @@
   <app-hero [heroData]="heroData()" />
   <!-- Debug output for componentDatas -->
   <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-    @for (componentData of componentDatas(); track componentData.id) {
-      <app-article-card [componentData]="componentData" />
+    @for (componentData of componentDatas(); track $index) {
+      <app-content-card  [contentCardData]="transformToCardData(componentData)" />
     }
   </div>
     <!-- Router outlet for the details pane (renders ComponentDetailsComponent as a child route) -->

@@ -1,10 +1,10 @@
 @let data = contentCardData();
 <ids-card
   size="compact"
-  [appearance]="data.appearance || 'filled'"
+  [appearance]="data.appearance || 'elevated'"
   [variant]="data.variant || 'surface'"
   [orientation]="data.orientation"
-  [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row' : ''"
+  [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row' : 'h-full'"
   [class.transparent-bg]="data.transparent === true"
 >
   @if (data.imageURL) {
@@ -44,10 +44,30 @@
             <h3 class="text-title-large-prominent text-ids-page-fg-surface-default">{{ data.title }}</h3>
           }
           @if (data.description) {
-            <div [innerHTML]="data.description | safeHtml"></div>
+            <div
+              class="text-left text-body-medium ids-page-surface"
+              [class]="data.orientation === 'horizontal' ? 'md:line-clamp-5' : 'line-clamp-3'"
+              [innerHTML]="data.description | safeHtml"
+            ></div>
           }
         </div>
       </div>
+
+      @if (data.orientation === "vertical") {
+        <div class="flex gap-ids-container-gap-8 justify-end w-full">
+          <button
+            type="button"
+            idsButton
+            appearance="outlined"
+            size="compact"
+            variant="primary"
+            (click)="handleButtonClick(data.buttonOneUrl)"
+          >
+            Tovább
+          </button>
+        </div>
+      }
+
       @if (data.buttonOne || data.buttonTwo) {
         <div class="flex gap-ids-container-gap-8 justify-end w-full">
           @if (data.buttonOne) {

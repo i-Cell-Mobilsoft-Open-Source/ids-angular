@@ -4,6 +4,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 export interface IdsDialogDefaultConfig {
   size?: IdsSizeType,
   showCloseButton?: boolean,
+  isCloseButtonDisabled?: boolean,
   showBackdrop?: boolean,
 }
 
@@ -19,6 +20,7 @@ export function IDS_DIALOG_DEFAULT_CONFIG_FACTORY(): Required<IdsDialogDefaultCo
   return {
     size: IdsSize.COMPACT,
     showCloseButton: false,
+    isCloseButtonDisabled: false,
     showBackdrop: true,
   };
 }

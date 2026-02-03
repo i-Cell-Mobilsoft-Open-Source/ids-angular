@@ -56,6 +56,7 @@ export class  IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefa
   public mainTitle = input.required<string>();
   public subTitle = input<string>();
   public showCloseButton = input<boolean>(this._defaultConfig.showCloseButton);
+  public isCloseButtonDisabled = input<boolean>(this._defaultConfig.isCloseButtonDisabled);
   public showBackdrop = input<boolean>(this._defaultConfig.showBackdrop);
 
   protected _customHeader = contentChild(IdsDialogHeaderDirective);

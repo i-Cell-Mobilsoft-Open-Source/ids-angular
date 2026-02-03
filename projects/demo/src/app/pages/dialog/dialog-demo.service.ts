@@ -12,6 +12,7 @@ type DialogInputControls = {
   mainTitle: string,
   subTitle: string,
   showCloseButton: boolean,
+  isCloseButtonDisabled: boolean,
   showBackdrop: boolean,
 };
 
@@ -46,6 +47,12 @@ export class DialogDemoService {
       description: 'Whether to show close button or not.',
       type: 'boolean',
       default: defaultConfig.showCloseButton,
+      control: DemoControl.SWITCH,
+    },
+    isCloseButtonDisabled: {
+      description: 'Whether the close button is disabled or not.',
+      type: 'boolean',
+      default: defaultConfig.isCloseButtonDisabled,
       control: DemoControl.SWITCH,
     },
     showBackdrop: {

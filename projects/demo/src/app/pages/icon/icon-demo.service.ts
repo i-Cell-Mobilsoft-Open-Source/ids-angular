@@ -6,7 +6,12 @@ import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconVariant, IdsIconVariantType } from '@i-cell/ids-angular/icon';
+import {
+  IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconFontSet,
+  IdsIconFontSetType,
+  IdsIconVariant,
+  IdsIconVariantType,
+} from '@i-cell/ids-angular/icon';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
@@ -14,6 +19,7 @@ type IconInputControls = {
   size: IdsSizeType,
   sizeCollection: IdsSizeCollectionType,
   variant: IdsIconVariantType,
+  fontSet: IdsIconFontSetType,
   fontIcon: string
   svgIcon: string,
   'aria-hidden': boolean,
@@ -47,12 +53,19 @@ export class IconDemoService {
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsIconVariant),
     },
+    fontSet: {
+      description: 'Icon font set.',
+      type: 'IdsIconFontSetType',
+      default: defaultConfig.fontSet,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsIconFontSet),
+    },
     fontIcon: {
       description: 'Name of font icon.',
       type: 'string',
       default: '-',
-      demoDefault: 'key',
-      control: DemoControl.SELECT,
+      demoDefault: 'chevron_right',
+      control: DemoControl.TEXT,
       list: [],
     },
     svgIcon: {

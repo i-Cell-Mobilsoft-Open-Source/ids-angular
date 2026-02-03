@@ -44,15 +44,35 @@ body {
   margin: 0;
 }
 
+// Material Icons, I-DS-font-icon-material, I-DS-font-icon-material-unique
+// ./assets/fonts/material/idsBase/I-DS-font-icon-material.ttf
+// ./assets/fonts/material/unique/I-DS-font-icon-material-unique.ttf
+
+// IDS core base
 @font-face {
   font-family: "I-DS-font-icon-material";
   src: url("./assets/fonts/I-DS-font-icon-material.eot");
   src:
     local("IDS Icons"),
     local("I-DS-font-icon-material"),
-    url(./assets/fonts/I-DS-font-icon-material.woff2) format("woff2"),
-    url(./assets/fonts/I-DS-font-icon-material.woff) format("woff"),
-    url(./assets/fonts/I-DS-font-icon-material.ttf) format("truetype");
+    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.ttf) format("woff2"),
+    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.woff) format("woff"),
+    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.ttf) format("truetype");
+}
+
+// IDS core default
+@font-face {
+  font-family: "Material Icons";
+  src: url(./assets/fonts/material/default/MaterialIcons-Regular.ttf) format("truetype");
+}
+
+// IDS core unique
+@font-face {
+  font-family: "I-DS-font-icon-material-unique";
+  src:
+    url(./assets/fonts/material/unique/I-DS-font-icon-material-unique.ttf) format("woff2"),
+    url(./assets/fonts/material/unique/I-DS-font-icon-material-unique.woff2) format("woff"),
+    url(./assets/fonts/material/unique/I-DS-font-icon-material-unique.woff) format("truetype");
 }
 
 @font-face {

@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@i-cell/ids-styles': link:../ids-styles
+
 importers:
 
   .:
@@ -45,11 +48,11 @@ importers:
         specifier: ^3.13.9
         version: 3.13.9(@types/react@18.3.4)(graphql@16.11.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@i-cell/ids-styles':
-        specifier: ^0.0.58
-        version: 0.0.58
+        specifier: link:../ids-styles
+        version: link:../ids-styles
       '@i-cell/ids-tokens':
-        specifier: 0.0.37
-        version: 0.0.37
+        specifier: 0.0.38
+        version: 0.0.38
       '@ngx-translate/core':
         specifier: 17.0.0
         version: 17.0.0(@angular/common@20.1.7(@angular/core@20.1.7(@angular/compiler@20.1.7)(rxjs@7.8.1)(zone.js@0.15.1))(rxjs@7.8.1))(@angular/core@20.1.7(@angular/compiler@20.1.7)(rxjs@7.8.1)(zone.js@0.15.1))
@@ -1645,11 +1648,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@i-cell/ids-styles@0.0.58':
-    resolution: {integrity: sha512-hNpBws3Q1361IpHjlpfKRHLkr0UbmBYYbsTDKoWLdsA1RDmKbnvlkLmZR0O6D4oZRsY/UMW/3RXDK3hAPw5o+Q==}
-
-  '@i-cell/ids-tokens@0.0.37':
-    resolution: {integrity: sha512-nKvOJx6HSgikQSQec/d+CXun/5zrL5T2CVCu2y10cAsKFIfeMRabL0V3z32K+UG6KChybe9dadzeD3FKrmbCVw==}
+  '@i-cell/ids-tokens@0.0.38':
+    resolution: {integrity: sha512-/9EDQVPUhAIaxtdZiuSp4r3yk3mhmsM4b1UOtvoR+opzXmnwUG97cBpNnJQDR4VIQImn4qHwS9JsQr7NHhJQdw==}
 
   '@inquirer/checkbox@4.2.1':
     resolution: {integrity: sha512-bevKGO6kX1eM/N+pdh9leS5L7TBF4ICrzi9a+cbWkrxeAeIcwlo/7OfWGCDERdRCI2/Q6tjltX4bt07ALHDwFw==}
@@ -3974,6 +3974,10 @@ packages:
 
   cors@2.8.5:
     resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
+    engines: {node: '>= 0.10'}
+
+  cors@2.8.6:
+    resolution: {integrity: sha512-tJtZBBHA6vjIAaF6EnIaq6laBBP9aq/Y3ouVJjEfoHbRBcHBAHYcMh/w8LDrk2PvIMMq8gmopa5D4V8RmbrxGw==}
     engines: {node: '>= 0.10'}
 
   cosmiconfig@7.1.0:
@@ -9958,7 +9962,7 @@ snapshots:
       chokidar: 3.6.0
       colors: 1.4.0
       connect: 3.7.0
-      cors: 2.8.5
+      cors: 2.8.6
       event-stream: 4.0.1
       faye-websocket: 0.11.4
       http-auth: 4.1.9
@@ -10273,9 +10277,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@i-cell/ids-styles@0.0.58': {}
-
-  '@i-cell/ids-tokens@0.0.37': {}
+  '@i-cell/ids-tokens@0.0.38': {}
 
   '@inquirer/checkbox@4.2.1(@types/node@24.3.0)':
     dependencies:
@@ -12787,6 +12789,11 @@ snapshots:
   core-util-is@1.0.3: {}
 
   cors@2.8.5:
+    dependencies:
+      object-assign: 4.1.1
+      vary: 1.1.2
+
+  cors@2.8.6:
     dependencies:
       object-assign: 4.1.1
       vary: 1.1.2

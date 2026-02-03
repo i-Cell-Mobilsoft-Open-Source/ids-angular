@@ -13,7 +13,7 @@ export class IconService {
   private readonly _http = inject(HttpClient);
 
   public loadIcons(): Observable<string[]> {
-    return this._http.get<IconData[]>('assets/fonts/I-DS-font-icon-material.json').pipe(
+    return this._http.get<IconData[]>('assets/fonts/material/idsBase/I-DS-font-icon-material.json').pipe(
       map((data) => data.map((item) => item.name)),
       catchError(() => of([])),
     );

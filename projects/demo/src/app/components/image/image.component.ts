@@ -68,7 +68,7 @@ export class ImageComponent implements OnInit, OnDestroy {
   public imgFilledClass = computed<string>(() =>
     (this.filledInContainer()
       ? 'object-cover lg:w-full lg:h-full'
-      : 'object-contain lg:w-1/2 lg:h-auto'
+      : 'object-contain lg:h-auto'
     ),
   );
 
@@ -105,4 +105,5 @@ export class ImageComponent implements OnInit, OnDestroy {
       this.currentImageUrl = this.imageUrlLight() || this.imageUrlDark() || '';
     }
   }
+
 }

@@ -51,13 +51,10 @@ body {
 // IDS core base
 @font-face {
   font-family: "I-DS-font-icon-material";
-  src: url("./assets/fonts/I-DS-font-icon-material.eot");
   src:
-    local("IDS Icons"),
-    local("I-DS-font-icon-material"),
-    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.ttf) format("woff2"),
+    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.ttf) format("truetype"),
     url(./assets/fonts/material/idsBase/I-DS-font-icon-material.woff) format("woff"),
-    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.ttf) format("truetype");
+    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.woff2) format("woff2");
 }
 
 // IDS core default

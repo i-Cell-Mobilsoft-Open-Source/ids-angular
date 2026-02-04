@@ -1,5 +1,5 @@
 export const IdsIconFontSet = {
-  IDS_BASE: 'idsBase',
+  IDS_BASE: 'idsbase',
   DEFAULT: 'default',
   UNIQUE: 'unique',
 } as const;

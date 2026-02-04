@@ -65,7 +65,7 @@ export class IconDemoService {
       type: 'string',
       default: '-',
       demoDefault: 'chevron_right',
-      control: DemoControl.TEXT,
+      control: DemoControl.SELECT,
       list: [],
     },
     svgIcon: {

@@ -14,7 +14,7 @@
           [attr.aria-pressed]="isDark()"
           (click)="toggleDark()"
         >
-          <ids-icon icon-leading [fontIcon]="isDark() ? 'light-mode' : 'dark-mode'" />
+          <ids-icon icon-leading [fontSet]="'idsbase'" [fontIcon]="isDark() ? 'light-mode' : 'dark-mode'" />
         </button>
         <button
           type="button"
@@ -26,11 +26,11 @@
           (click)="toggleFooter()"
         >
           {{ isOpen() ? "Hide code" : "Show code" }}
-          <ids-icon icon-leading [fontIcon]="isOpen() ? 'visibility-off' : 'visibility'" />
-          <ids-icon icon-trailing size="compact" class="ml-1" [fontIcon]="isOpen() ? 'chevron-up' : 'chevron-down'" />
+          <ids-icon  fontSet="idsbase" icon-leading [fontIcon]="isOpen() ? 'visibility-off' : 'visibility'" />
+          <ids-icon fontSet="idsbase" icon-trailing size="compact" class="ml-1" [fontIcon]="isOpen() ? 'chevron-up' : 'chevron-down'" />
         </button>
         <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="onResetClick()">
-          <ids-icon icon-leading alt="" fontIcon="reload" />
+          <ids-icon fontSet="idsbase" icon-leading alt="" fontIcon="reload" />
         </button>
       </div>
     </div>
@@ -52,7 +52,7 @@
         <div class="absolute top-4 right-4">
           <button type="button" idsButton appearance="outlined" size="comfortable" variant="primary" id="copy">
             Copy code
-            <ids-icon icon-leading fontIcon="file-copy" />
+            <ids-icon fontSet="idsbase" icon-leading fontIcon="file-copy" />
           </button>
         </div>
         <p>Code</p>

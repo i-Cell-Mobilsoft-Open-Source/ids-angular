@@ -8,7 +8,7 @@
       [attr.aria-label]="_intl.firstPageAriaLabel"
       (click)="stepFirstPage()"
     >
-      <ids-icon fontIcon="chevron-double-left" [size]="size()" />
+      <ids-icon fontSet="idsbase" fontIcon="chevron-double-left" [size]="size()" />
     </button>
   }
 
@@ -20,7 +20,7 @@
     [attr.aria-label]="_intl.previousPageAriaLabel"
     (click)="stepPreviousPage()"
   >
-    <ids-icon fontIcon="chevron-left" [size]="size()" />
+    <ids-icon fontSet="idsbase" fontIcon="chevron-left" [size]="size()" />
     @if (showPrevNextLabel() && compactLayout()) {
       <span class="ids-paginator__page-button-arrow__label">{{ _intl.previousPageLabel }}</span>
     }
@@ -32,7 +32,7 @@
         <li>
           @if (pageButtonLabel === "tl" || pageButtonLabel === "tr") {
             <button type="button" disabled class="ids-paginator__page-button-truncation" [class]="_pageButtonClasses()">
-              <ids-icon fontIcon="more-horiz" [size]="size()" />
+              <ids-icon fontSet="idsbase" fontIcon="more-horiz" [size]="size()" />
             </button>
           } @else {
             <button
@@ -66,7 +66,7 @@
     @if (showPrevNextLabel() && compactLayout()) {
       <span class="ids-paginator__page-button-arrow__label">{{ _intl.nextPageLabel }}</span>
     }
-    <ids-icon fontIcon="chevron-right" [size]="size()" />
+    <ids-icon fontSet="idsbase" fontIcon="chevron-right" [size]="size()" />
   </button>
 
   @if (showFirstLastButton()) {
@@ -78,7 +78,7 @@
       [attr.aria-label]="_intl.lastPageAriaLabel"
       (click)="stepLastPage()"
     >
-      <ids-icon fontIcon="chevron-double-right" [size]="size()" />
+      <ids-icon fontSet="idsbase" fontIcon="chevron-double-right" [size]="size()" />
     </button>
   }
 

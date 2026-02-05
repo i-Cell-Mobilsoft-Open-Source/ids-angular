@@ -9,11 +9,11 @@
         <div class="icon-tpye">
           <h2>Font icon</h2>
           <ids-icon
+            [fontSet]="_iconDemoService.model.fontSet"
             [size]="_iconDemoService.model.size"
             [sizeCollection]="_iconDemoService.model.sizeCollection"
             [variant]="_iconDemoService.model.variant"
             [fontIcon]="_iconDemoService.model.fontIcon"
-            [fontSet]="_iconDemoService.model.fontSet"
             [aria-hidden]="_iconDemoService.model['aria-hidden']"
           />
         </div>
@@ -37,7 +37,7 @@
         <app-control-table
           controls
           configType="input"
-          [controlConfig]="_iconDemoService.inputControlConfig()"
+          [controlConfig]="_inputControlConfigWithoutFontSet()"
           [(model)]="_iconDemoService.model"
           (resetted)="_iconDemoService.reset()"
         />

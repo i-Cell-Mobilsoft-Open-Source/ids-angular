@@ -68,7 +68,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
       }
       @if (_expandable()) {
         <button idsIconButton type="button" [disabled]="disabled()">
-          <ids-icon aria-hidden="true" alt="" [fontIcon]="_expanded() ? 'chevron-up' : 'chevron-down'" />
+          <ids-icon fontSet="idsbase" aria-hidden="true" alt="" [fontIcon]="_expanded() ? 'chevron-up' : 'chevron-down'" />
         </button>
       }
     </a>

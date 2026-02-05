@@ -235,9 +235,11 @@ export class IdsAutocompleteComponent
       const searchText = this._searchText();
 
       untracked(() => {
-        const control = this.ngControl();
-        if (control?.value && searchText !== control?.value) {
-          control?.reset();
+        const control = this.ngControl()?.control;
+        const controlValue = control?.value;
+
+        if (controlValue && searchText !== controlValue) {
+          control.setValue(null);
           this._clearSelection();
         }
       });
@@ -492,9 +494,7 @@ export class IdsAutocompleteComponent
   }
 
   public clear(): void {
-    this.ngControl()?.control?.reset();
     this._searchText.set('');
-    this._clearSelection();
   }
 
   // #region ControlValueAccessor implementation

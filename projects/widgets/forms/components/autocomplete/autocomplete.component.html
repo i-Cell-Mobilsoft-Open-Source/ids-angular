@@ -12,6 +12,7 @@
   [required]="false"
   [(ngModel)]="_searchText"
   (click)="_onInputClick()"
+  (blur)="_onBlur()"
 />
 @if (_searchText().length > 0) {
   <div idsFormFieldAction>

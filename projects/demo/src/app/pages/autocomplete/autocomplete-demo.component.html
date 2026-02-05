@@ -27,7 +27,7 @@
             [(ngModel)]="input"
           />
           <ids-error-message>
-            <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" }}</ids-error-def>
+            <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate:{ fieldName: name } }}</ids-error-def>
           </ids-error-message>
         </ids-form-field>
       </div>

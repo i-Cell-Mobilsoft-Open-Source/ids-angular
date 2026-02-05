@@ -3,16 +3,22 @@ import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonVariant, IdsIconButtonVariantType } from '@i-cell/ids-angular/icon-button';
+import {
+  IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY,
+  IdsIconButtonAppearance,
+  IdsIconButtonAppearanceType,
+  IdsIconButtonVariant,
+  IdsIconButtonVariantType,
+} from '@i-cell/ids-angular/icon-button';
 
 const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
 
 type IconButtonInputControls = {
-  size: IdsSizeType,
-  variant: IdsIconButtonVariantType,
-  appearance: IdsIconButtonAppearanceType,
-  disabled: boolean,
-  asLink: boolean,
+  size: IdsSizeType;
+  variant: IdsIconButtonVariantType;
+  appearance: IdsIconButtonAppearanceType;
+  disabled: boolean;
+  asLink: boolean;
 };
 
 @Injectable()
@@ -59,9 +65,13 @@ export class IconButtonDemoService {
 
   public defaults = getDefaultFromDemoConfig<IconButtonInputControls>(this.inputControlConfig);
 
-  public model: IconButtonInputControls = { ...this.defaults  };
+  public model: IconButtonInputControls = { ...this.defaults };
 
   public reset(): void {
     this.model = { ...this.defaults };
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
   }
 }

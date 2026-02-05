@@ -233,4 +233,11 @@ export class TabDemoService {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig(),
+    ];
+  }
 }

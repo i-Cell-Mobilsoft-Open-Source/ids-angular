@@ -179,4 +179,12 @@ export class CheckboxDemoService {
     bath: true,
     sleep: false,
   };
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+      this.groupInputControlConfig,
+    ];
+  }
 }

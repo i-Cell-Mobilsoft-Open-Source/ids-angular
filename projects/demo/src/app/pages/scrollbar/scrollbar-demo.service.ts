@@ -68,4 +68,11 @@ export class ScrollbarDemoService {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.controlConfig,
+      this.helperControlConfig,
+    ];
+  }
 }

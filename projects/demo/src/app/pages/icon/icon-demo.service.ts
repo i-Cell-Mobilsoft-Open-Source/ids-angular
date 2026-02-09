@@ -60,7 +60,7 @@ export class IconDemoService {
       demoDefault: IdsIconFontSet.IDS_BASE,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsIconFontSet),
-      hiddenInControls: false,
+      hiddenInControls: true,
     },
     fontIcon: {
       description: 'Name of font icon.',

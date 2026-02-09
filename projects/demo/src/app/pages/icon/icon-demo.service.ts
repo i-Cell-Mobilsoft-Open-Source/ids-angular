@@ -56,9 +56,11 @@ export class IconDemoService {
     fontSet: {
       description: 'Icon font set.',
       type: 'IdsIconFontSetType',
-      default: IdsIconFontSet.IDS_BASE,
+      default: IdsIconFontSet.DEFAULT,
+      demoDefault: IdsIconFontSet.IDS_BASE,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsIconFontSet),
+      hiddenInControls: true,
     },
     fontIcon: {
       description: 'Name of font icon.',

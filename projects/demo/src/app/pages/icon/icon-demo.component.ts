@@ -11,9 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 import { TranslateModule } from '@ngx-translate/core';
 
-import type { IconInputControls } from './icon-demo.service';
-import type { DemoControlConfig } from '../../../types/demo-control.type';
-
 @Component({
   selector: 'app-icon-demo',
   imports: [
@@ -38,12 +35,5 @@ export class IconDemoComponent implements OnInit {
 
   public ngOnInit(): void {
     this._iconDemoService.loadIcons();
-  }
-
-  protected _inputControlConfigWithoutFontSet(): DemoControlConfig<IconInputControls> {
-    const cfg = this._iconDemoService.inputControlConfig();
-    const next: DemoControlConfig<IconInputControls> = { ...cfg };
-    delete (next as Partial<DemoControlConfig<IconInputControls>>).fontSet;
-    return next;
   }
 }

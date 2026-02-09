@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@i-cell/ids-styles': link:../ids-styles
-
 importers:
 
   .:
@@ -48,8 +45,8 @@ importers:
         specifier: ^3.13.9
         version: 3.13.9(@types/react@18.3.4)(graphql@16.11.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@i-cell/ids-styles':
-        specifier: link:../ids-styles
-        version: link:../ids-styles
+        specifier: ^0.0.58
+        version: 0.0.58
       '@i-cell/ids-tokens':
         specifier: 0.0.38
         version: 0.0.38
@@ -1647,6 +1644,9 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
+
+  '@i-cell/ids-styles@0.0.58':
+    resolution: {integrity: sha512-hNpBws3Q1361IpHjlpfKRHLkr0UbmBYYbsTDKoWLdsA1RDmKbnvlkLmZR0O6D4oZRsY/UMW/3RXDK3hAPw5o+Q==}
 
   '@i-cell/ids-tokens@0.0.38':
     resolution: {integrity: sha512-/9EDQVPUhAIaxtdZiuSp4r3yk3mhmsM4b1UOtvoR+opzXmnwUG97cBpNnJQDR4VIQImn4qHwS9JsQr7NHhJQdw==}
@@ -10276,6 +10276,8 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
+
+  '@i-cell/ids-styles@0.0.58': {}
 
   '@i-cell/ids-tokens@0.0.38': {}
 

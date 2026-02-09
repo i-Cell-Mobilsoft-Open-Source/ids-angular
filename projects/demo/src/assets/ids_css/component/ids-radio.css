@@ -57,10 +57,10 @@
     --ids-comp-radio-button-label-size-padding-y-compact: 2px;
     --ids-comp-radio-button-label-size-padding-y-dense: 2px;
     --ids-comp-radio-button-label-size-padding-y-spacious: 2px;
-    --ids-comp-radio-button-label-typography-font-family-comfortable: Inter;
-    --ids-comp-radio-button-label-typography-font-family-compact: Inter;
-    --ids-comp-radio-button-label-typography-font-family-dense: Inter;
-    --ids-comp-radio-button-label-typography-font-family-spacious: Inter;
+    --ids-comp-radio-button-label-typography-font-family-comfortable: inter;
+    --ids-comp-radio-button-label-typography-font-family-compact: inter;
+    --ids-comp-radio-button-label-typography-font-family-dense: inter;
+    --ids-comp-radio-button-label-typography-font-family-spacious: inter;
     --ids-comp-radio-button-label-typography-font-size-comfortable: 18px;
     --ids-comp-radio-button-label-typography-font-size-compact: 16px;
     --ids-comp-radio-button-label-typography-font-size-dense: 14px;

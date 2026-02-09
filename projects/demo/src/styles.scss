@@ -21,7 +21,7 @@ html:has(input[color-scheme]:checked) {
 body {
   font-family:
     Montserrat,
-    Inter,
+    inter,
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -43,10 +43,6 @@ body {
   font-variant-numeric: tabular-nums slashed-zero !important;
   margin: 0;
 }
-
-// Material Icons, I-DS-font-icon-material, I-DS-font-icon-material-unique
-// ./assets/fonts/material/idsBase/I-DS-font-icon-material.ttf
-// ./assets/fonts/material/unique/I-DS-font-icon-material-unique.ttf
 
 // IDS core base
 @font-face {
@@ -72,12 +68,30 @@ body {
     url(./assets/fonts/material/unique/I-DS-font-icon-material-unique.woff) format("truetype");
 }
 
+// DAP base
 @font-face {
   font-family: "I-DS-font-icon-remix";
   src:
-    url(./assets/fonts/I-DS-font-icon-remix.woff2) format("woff2"),
-    url(./assets/fonts/I-DS-font-icon-remix.woff) format("woff"),
-    url(./assets/fonts/I-DS-font-icon-remix.ttf) format("truetype");
+    url(./assets/fonts/remix/idsBase/I-DS-font-icon-remix.woff2) format("woff2"),
+    url(./assets/fonts/remix/idsBase/I-DS-font-icon-remix.woff) format("woff"),
+    url(./assets/fonts/remix/idsBase/I-DS-font-icon-remix.ttf) format("truetype");
+  font-display: swap;
+}
+
+// DAP default
+@font-face {
+  font-family: "remixicon";
+  //src: url(./assets/fonts/material/default/MaterialIcons-Regular.ttf) format("truetype");
+  src: url(./assets/fonts/remix/default/remixicon.ttf) format("truetype");
+}
+
+// DAP unique
+@font-face {
+  font-family: "I-DS-font-icon-remix-unique";
+  src:
+    url(./assets/fonts/remix/unique/I-DS-font-icon-remix-unique.woff2) format("woff2"),
+    url(./assets/fonts/remix/unique/I-DS-font-icon-remix-unique.woff) format("woff"),
+    url(./assets/fonts/remix/unique/I-DS-font-icon-remix-unique.ttf) format("truetype");
   font-display: swap;
 }
 

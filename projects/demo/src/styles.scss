@@ -81,9 +81,10 @@ body {
 // DAP default
 @font-face {
   font-family: "remixicon";
-  //src: url(./assets/fonts/material/default/MaterialIcons-Regular.ttf) format("truetype");
   src: url(./assets/fonts/remix/default/remixicon.ttf) format("truetype");
+  font-display: swap;
 }
+
 
 // DAP unique
 @font-face {

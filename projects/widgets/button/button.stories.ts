@@ -39,9 +39,9 @@ export default {
           ${isDisabled ? 'disabled' : ''}
           ${argsToTemplate(props)}
         >
-          ${hasPrefixIcon ? '<ids-icon icon-leading fontIcon="search" />' : ''}
+          ${hasPrefixIcon ? '<ids-icon fontSet="idsbase" icon-leading fontIcon="search" />' : ''}
           ${label}
-          ${hasSuffixIcon ? '<ids-icon icon-trailing fontIcon="done" />' : ''}
+          ${hasSuffixIcon ? '<ids-icon fontSet="idsbase" icon-trailing fontIcon="done" />' : ''}
         </button>
       `,
     };

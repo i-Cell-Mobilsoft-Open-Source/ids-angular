@@ -15,7 +15,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   },
   template: `
     @if (dividerType() === _dividerType.ICON) {
-      <ids-icon aria-hidden="true" fontIcon="chevron-right" [size]="size()" />
+      <ids-icon aria-hidden="true" fontIcon="chevron-right" [fontSet]="'idsbase'" [size]="size()" />
     } @else {
       <span class="ids-breadcrumb-divider-foreslash">/</span>
     }

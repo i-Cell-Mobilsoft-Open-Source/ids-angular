@@ -1471,7 +1471,7 @@
     --ids-smc-reference-page-color-fg-warning-darker-20: light-dark(#5e2a00, #f98900);
     --ids-smc-reference-page-color-fg-warning-default: light-dark(#a65200, #f98900);
     --ids-smc-reference-page-color-fg-warning-lighter-100: light-dark(#ffffff, #000000);
-    --ids-smc-reference-typography-font-family-default: Inter;
+    --ids-smc-reference-typography-font-family-default: inter;
     --ids-smc-reference-typography-font-size-8: 8px;
     --ids-smc-reference-typography-font-size-10: 10px;
     --ids-smc-reference-typography-font-size-12: 12px;
@@ -1496,8 +1496,9 @@
     --ids-smc-reference-typography-font-weight-regular: 400;
     --ids-smc-reference-typography-font-weight-semibold: 600;
     --ids-smc-reference-typography-font-weight-thin: 100;
-    --ids-smc-reference-typography-iconset-custom: I-DS-font-icon-material;
-    --ids-smc-reference-typography-iconset-default: I-DS-font-icon-remix;
+    --ids-smc-reference-typography-iconset-default: remixicon;
+    --ids-smc-reference-typography-iconset-idsbase: I-DS-font-icon-remix;
+    --ids-smc-reference-typography-iconset-unique: I-DS-font-icon-remix-unique;
     --ids-smc-reference-typography-letter-spacing-default: 0em;
     --ids-smc-reference-typography-letter-spacing-loose: 0.0015em;
     --ids-smc-reference-typography-letter-spacing-looser: 0.0025em;

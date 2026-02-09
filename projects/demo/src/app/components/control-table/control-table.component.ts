@@ -62,17 +62,22 @@ export class ControlTableComponent<T extends Record<string, T[keyof T]>> {
     if (!controls) {
       return [];
     }
-    return Object.entries<DemoControlItem<T[keyof T]>>(controls).map(([
-      key,
-      ctrl,
-    ]) => {
-      const listToDisplay = ctrl.control === 'select' ? ctrl.list : undefined;
-      return {
-        name: key,
-        ...ctrl,
-        list: listToDisplay,
-      };
-    });
+
+    return Object.entries<DemoControlItem<T[keyof T]>>(controls)
+      .filter(([
+        , ctrl,
+      ]) => ctrl.hiddenInControls !== true)
+      .map(([
+        key,
+        ctrl,
+      ]) => {
+        const listToDisplay = ctrl.control === 'select' ? ctrl.list : undefined;
+        return {
+          name: key,
+          ...ctrl,
+          list: listToDisplay,
+        };
+      });
   });
 
   protected _convertModelValueStringToNumberArray(controlName: keyof T): void {

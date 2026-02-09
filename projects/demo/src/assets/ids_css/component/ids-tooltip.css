@@ -5,10 +5,10 @@
     --ids-comp-tooltip-color-fg-dark-disabled: light-dark(#f5f7fa, #0f1115);
     --ids-comp-tooltip-color-fg-light-default: light-dark(#1e293b, #1e293b);
     --ids-comp-tooltip-color-fg-light-disabled: light-dark(#f5f7fa, #0f1115);
-    --ids-comp-tooltip-label-typography-font-family-comfortable: Inter;
-    --ids-comp-tooltip-label-typography-font-family-compact: Inter;
-    --ids-comp-tooltip-label-typography-font-family-dense: Inter;
-    --ids-comp-tooltip-label-typography-font-family-spacious: Inter;
+    --ids-comp-tooltip-label-typography-font-family-comfortable: inter;
+    --ids-comp-tooltip-label-typography-font-family-compact: inter;
+    --ids-comp-tooltip-label-typography-font-family-dense: inter;
+    --ids-comp-tooltip-label-typography-font-family-spacious: inter;
     --ids-comp-tooltip-label-typography-font-size-comfortable: 12px;
     --ids-comp-tooltip-label-typography-font-size-compact: 12px;
     --ids-comp-tooltip-label-typography-font-size-dense: 12px;

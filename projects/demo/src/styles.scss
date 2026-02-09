@@ -21,7 +21,7 @@ html:has(input[color-scheme]:checked) {
 body {
   font-family:
     Montserrat,
-    Inter,
+    inter,
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -44,23 +44,55 @@ body {
   margin: 0;
 }
 
+// IDS core base
 @font-face {
   font-family: "I-DS-font-icon-material";
-  src: url("./assets/fonts/I-DS-font-icon-material.eot");
   src:
-    local("IDS Icons"),
-    local("I-DS-font-icon-material"),
-    url(./assets/fonts/I-DS-font-icon-material.woff2) format("woff2"),
-    url(./assets/fonts/I-DS-font-icon-material.woff) format("woff"),
-    url(./assets/fonts/I-DS-font-icon-material.ttf) format("truetype");
+    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.ttf) format("truetype"),
+    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.woff) format("woff"),
+    url(./assets/fonts/material/idsBase/I-DS-font-icon-material.woff2) format("woff2");
 }
 
+// IDS core default
+@font-face {
+  font-family: "Material Icons";
+  src: url(./assets/fonts/material/default/MaterialIcons-Regular.ttf) format("truetype");
+}
+
+// IDS core unique
+@font-face {
+  font-family: "I-DS-font-icon-material-unique";
+  src:
+    url(./assets/fonts/material/unique/I-DS-font-icon-material-unique.ttf) format("woff2"),
+    url(./assets/fonts/material/unique/I-DS-font-icon-material-unique.woff2) format("woff"),
+    url(./assets/fonts/material/unique/I-DS-font-icon-material-unique.woff) format("truetype");
+}
+
+// DAP base
 @font-face {
   font-family: "I-DS-font-icon-remix";
   src:
-    url(./assets/fonts/I-DS-font-icon-remix.woff2) format("woff2"),
-    url(./assets/fonts/I-DS-font-icon-remix.woff) format("woff"),
-    url(./assets/fonts/I-DS-font-icon-remix.ttf) format("truetype");
+    url(./assets/fonts/remix/idsBase/I-DS-font-icon-remix.woff2) format("woff2"),
+    url(./assets/fonts/remix/idsBase/I-DS-font-icon-remix.woff) format("woff"),
+    url(./assets/fonts/remix/idsBase/I-DS-font-icon-remix.ttf) format("truetype");
+  font-display: swap;
+}
+
+// DAP default
+@font-face {
+  font-family: "remixicon";
+  src: url(./assets/fonts/remix/default/remixicon.ttf) format("truetype");
+  font-display: swap;
+}
+
+
+// DAP unique
+@font-face {
+  font-family: "I-DS-font-icon-remix-unique";
+  src:
+    url(./assets/fonts/remix/unique/I-DS-font-icon-remix-unique.woff2) format("woff2"),
+    url(./assets/fonts/remix/unique/I-DS-font-icon-remix-unique.woff) format("woff"),
+    url(./assets/fonts/remix/unique/I-DS-font-icon-remix-unique.ttf) format("truetype");
   font-display: swap;
 }
 

@@ -20,7 +20,7 @@ export default {
   render: ({ ...props }) => ({
     props,
     template: `
-        <ids-icon ${argsToTemplate(props)} />
+        <ids-icon fontSet="idsbase" ${argsToTemplate(props)} />
       `,
   }),
   argTypes: {

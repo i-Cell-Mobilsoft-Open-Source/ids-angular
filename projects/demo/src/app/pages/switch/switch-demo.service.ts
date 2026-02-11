@@ -156,4 +156,11 @@ export class SwitchDemoService {
     ];
     this.groupModel = { ...this.groupDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.groupInputControlConfig,
+    ];
+  }
 }

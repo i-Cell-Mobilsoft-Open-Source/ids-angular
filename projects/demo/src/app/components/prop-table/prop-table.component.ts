@@ -3,7 +3,13 @@ import { PropTableElement } from './prop-table-element';
 import { CommonModule } from '@angular/common';
 import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
-import { IdsTableCellTemplateDirective, IdsTableColumnDef, IdsTableComponent, IdsTableRequestFactory, ServerSideDataSource } from '@i-cell/ids-angular/table';
+import {
+  IdsTableCellTemplateDirective,
+  IdsTableColumnDef,
+  IdsTableComponent,
+  IdsTableRequestFactory,
+  ServerSideDataSource,
+} from '@i-cell/ids-angular/table';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
@@ -54,10 +60,12 @@ export class PropTableComponent implements OnInit {
   ];
 
   constructor() {
-    this._dataSource = new ServerSideDataSource(() => of({
-      resultList: [] as PropTableElement[],
-      paginationParams: { totalRows: 0, rows: 100, page: 1 },
-    }));
+    this._dataSource = new ServerSideDataSource(() =>
+      of({
+        resultList: [] as PropTableElement[],
+        paginationParams: { totalRows: 0, rows: 100, page: 1 },
+      }),
+    );
   }
 
   public ngOnInit(): void {
@@ -75,14 +83,15 @@ export class PropTableComponent implements OnInit {
       data = this._transformConfigToRows(cfg);
     }
 
-    const requestFactory: IdsTableRequestFactory<PropTableElement> = () => of({
-      resultList: data,
-      paginationParams: {
-        totalRows: data.length,
-        rows: data.length,
-        page: 1,
-      },
-    });
+    const requestFactory: IdsTableRequestFactory<PropTableElement> = () =>
+      of({
+        resultList: data,
+        paginationParams: {
+          totalRows: data.length,
+          rows: data.length,
+          page: 1,
+        },
+      });
 
     this._dataSource = new ServerSideDataSource(requestFactory);
     this._dataSource.refreshData();
@@ -95,6 +104,14 @@ export class PropTableComponent implements OnInit {
       description?: string;
       default?: unknown;
     };
+
+    if (Array.isArray(config)) {
+      return config.flatMap((conf) => this._transformConfigToRows(conf));
+    }
+
+    if (!config || typeof config !== 'object') {
+      return [];
+    }
 
     return Object.entries(config as Record<string, ControlItem>).map(([
       key,

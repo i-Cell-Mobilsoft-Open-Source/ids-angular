@@ -144,4 +144,8 @@ export class SideSheetDemoService {
   public shippingAddress = '';
   public city = '';
   public postalCode = '';
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
+  }
 }

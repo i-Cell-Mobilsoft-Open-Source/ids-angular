@@ -127,4 +127,11 @@ export class AutocompleteDemoService {
     this.helperModel = { ...this.helperDefaults };
     this._resetSubject.next();
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+    ];
+  }
 }

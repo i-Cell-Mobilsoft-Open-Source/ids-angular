@@ -114,4 +114,9 @@ export class AccordionDemoService {
     this.model = { ...this.defaults };
     this._resetSubject.next();
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
+  }
 }
+

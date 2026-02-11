@@ -1,1 +1,5 @@
-<ng-content />
+@if (allowCustomContent()) {
+  <ng-content />
+} @else if (_icons().length) {
+  <ng-content select="ids-icon" />
+}

@@ -1,6 +1,7 @@
 import { IdsCellContentComponent } from './components/cell-content/cell-content.component';
 import { IdsTableCellTemplateDirective } from './directives/cell-template';
 import { RowInfoHolderDirective } from './directives/row-info-holder';
+import { IdsTableSortAscIconDirective, IdsTableSortDescIconDirective, IdsTableSortNoneIconDirective } from './directives/sort-icon-template';
 import { DEFAULT_MASTER_DETAIL_TEMPLATE_NAME, IDS_TABLE_DEFAULT_CONFIG, IDS_TABLE_DEFAULT_CONFIG_FACTORY, IdsTableDefaultConfig } from './table-defaults';
 import { IdsTableIntl } from './table-intl';
 import { IdsTableAppearance, IdsTableAppearanceType } from './types/table-appearance.type';
@@ -16,7 +17,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { SelectionModel } from '@angular/cdk/collections';
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, CdkHeaderRow, CdkHeaderRowDef, CdkNoDataRow, CdkRow, CdkRowDef, CdkTable, CdkTableDataSourceInput } from '@angular/cdk/table';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChildren, inject, input, OnInit, output, signal, TemplateRef, viewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, inject, input, OnInit, output, signal, TemplateRef, viewChildren, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { IdsCheckboxComponent } from '@i-cell/ids-angular/checkbox';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -82,6 +83,10 @@ export class IdsTableComponent<D>
   private _selectorCheckboxes = viewChildren(IdsCheckboxComponent);
   private _cellContentRenderers = viewChildren(IdsCellContentComponent<D>);
   private _contentCellTemplates = contentChildren(IdsTableCellTemplateDirective);
+
+  protected _sortAscIconTemplate = contentChild(IdsTableSortAscIconDirective);
+  protected _sortDescIconTemplate = contentChild(IdsTableSortDescIconDirective);
+  protected _sortNoneIconTemplate = contentChild(IdsTableSortNoneIconDirective);
 
   public columnDefs = input.required<IdsTableColumnDef<D>[]>();
   public dataSource = input.required<CdkTableDataSourceInput<D>>();

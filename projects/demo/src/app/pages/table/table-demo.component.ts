@@ -10,8 +10,19 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { Component, DestroyRef, inject, Injectable, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
-import { IdsTableCellRenderer, IdsTableCellTemplateDirective, IdsTableColumnDef, IdsTableComponent, IdsTableIntl, IdsTableRequestFactory, IdsTableRowKeydownEvent, ServerSideDataSource } from '@i-cell/ids-angular/table';
+import {
+  IdsTableCellRenderer,
+  IdsTableCellTemplateDirective,
+  IdsTableColumnDef,
+  IdsTableComponent,
+  IdsTableIntl,
+  IdsTableRequestFactory,
+  IdsTableRowKeydownEvent,
+  IdsTableSortAscIconDirective, IdsTableSortDescIconDirective, IdsTableSortNoneIconDirective,
+  ServerSideDataSource,
+} from '@i-cell/ids-angular/table';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { map, tap } from 'rxjs';
 
@@ -48,8 +59,12 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
   selector: 'app-table-demo',
   imports: [
     IdsButtonComponent,
+    IdsIconComponent,
     IdsPaginatorComponent,
     IdsTableCellTemplateDirective,
+    IdsTableSortAscIconDirective,
+    IdsTableSortDescIconDirective,
+    IdsTableSortNoneIconDirective,
     IdsTableComponent,
     TranslateModule,
     TryoutComponent,

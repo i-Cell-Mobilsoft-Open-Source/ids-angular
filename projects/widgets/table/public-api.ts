@@ -1,6 +1,7 @@
 export * from './datasource/server-side-datasource';
 export * from './directives/cell-renderer';
 export * from './directives/cell-template';
+export * from './directives/sort-icon-template';
 export * from './types/pagination-params';
 export * from './types/request-factory';
 export * from './types/request-pagination-data';

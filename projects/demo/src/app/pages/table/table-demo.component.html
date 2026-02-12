@@ -30,6 +30,15 @@
           (rowKeydown)="onRowKeydown($event)"
           (contentChanged)="onContentChanged()"
         >
+          <ng-template idsTableSortAscIcon>
+            <ids-icon fontIcon="arrow-upward" />
+          </ng-template>
+          <ng-template idsTableSortDescIcon>
+            <ids-icon fontIcon="arrow-downward" />
+          </ng-template>
+          <ng-template idsTableSortNoneIcon>
+            <ids-icon fontIcon="unfold-more" />
+          </ng-template>
           <span *idsCellTemplate="'symbol'; let row" class="ids-table-cell-template-translate2">{{ row.symbol }}</span>
           <ng-template let-value="cellValue" idsCellTemplate="translate1">
             <span class="ids-table-cell-template-translate1">{{ value | translate }}</span>

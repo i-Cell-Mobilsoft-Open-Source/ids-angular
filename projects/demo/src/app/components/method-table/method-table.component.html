@@ -1,0 +1,27 @@
+<div class="props-table-wrapper w-full">
+  <ids-table
+    class="cdk-table-sticky-border-elem-left"
+    size="compact"
+    variant="secondary"
+    appearance="line-division"
+    [columnDefs]="colDefs"
+    [dataSource]="_dataSource"
+    [withBorder]="true"
+    [enableSorting]="false"
+  >
+    <ng-template let-row let-value="value" idsCellTemplate="default">
+      @if (_isArray(value) && value.length > 0) {
+        <ul class="list-disc list-inside pl-4">
+          @for (item of value; track item) {
+            <li>
+              {{ item }}
+            </li>
+          }
+        </ul>
+      }
+      @else {
+        {{ value }}
+      }
+    </ng-template>
+  </ids-table>
+</div>

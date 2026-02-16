@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -16,6 +17,12 @@ type TooltipInputControls = {
   touchGestures: IdsTooltipTouchGestures,
   textAlign: IdsTooltipTextAlign,
   showPointer: boolean,
+};
+
+type TooltipMethodControls = {
+  show: void;
+  hide: void;
+  toggle: void;
 };
 
 const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
@@ -100,11 +107,33 @@ export class TooltipDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig<TooltipMethodControls> = {
+    show: {
+      name: 'show()',
+      description: 'Shows the tooltip.',
+      returnType: 'void',
+    },
+    hide: {
+      name: 'hide()',
+      description: 'Hides the tooltip.',
+      returnType: 'void',
+    },
+    toggle: {
+      name: 'toggle()',
+      description: 'Toggles the visibility of the tooltip.',
+      returnType: 'void',
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<TooltipInputControls>(this.inputControlConfig);
 
   public model: TooltipInputControls = { ...this.defaults  };
 
   public reset(): void {
     this.model = { ...this.defaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig<TooltipMethodControls>[] {
+    return [this.methodControlConfig];
   }
 }

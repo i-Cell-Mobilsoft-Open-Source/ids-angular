@@ -1,5 +1,6 @@
 import { computed, inject, Injectable, ViewContainerRef } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -22,6 +23,15 @@ type SnackbarHelperControls = {
   newestAtStartPosition: boolean
   viewportMargin: number
   useActualViewContainer: boolean
+};
+
+type SnackbarMethodControls = {
+  close: void;
+  callAction: void;
+};
+
+type SnackbarGroupMethodControls = {
+  closeSnackbar: void;
 };
 
 const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
@@ -130,6 +140,33 @@ export class SnackbarDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig<SnackbarMethodControls> = {
+    close: {
+      name: 'close()',
+      description: 'Closes the currently opened snackbar.',
+      returnType: 'void',
+    },
+    callAction: {
+      name: 'callAction(action: ()=>void)',
+      description: 'Calls the provided action.',
+      returnType: 'void',
+      parameters: ['action'],
+      parameterTypes: ['() => void'],
+      parameterDescriptions: ['The action to call.'],
+    },
+  };
+
+  public readonly groupMethodControlConfig: DemoMethodConfig<SnackbarGroupMethodControls> = {
+    closeSnackbar: {
+      name: 'closeSnackbar(id: number)',
+      description: 'Snackbar-group: Closes the snackbar at the given index.',
+      returnType: 'void',
+      parameters: ['id'],
+      parameterTypes: ['number'],
+      parameterDescriptions: ['The index of the snackbar to close.'],
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<SnackbarInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<SnackbarHelperControls>(this.helperControlConfig);
 
@@ -177,5 +214,12 @@ export class SnackbarDemoService {
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+    return [
+      this.methodControlConfig,
+      this.groupMethodControlConfig,
+    ];
   }
 }

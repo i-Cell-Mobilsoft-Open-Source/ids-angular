@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { compare, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -41,6 +42,12 @@ export const translateLabelsToIntlPropNames = {
 
 export type TranslateLabelsToIntlPropNamesType = typeof translateLabelsToIntlPropNames;
 export type TranslateLabelsType = keyof TranslateLabelsToIntlPropNamesType;
+
+type TableMethodControls = {
+  expandAll: void;
+  collapseAll: void;
+  updateCellContents: void;
+};
 
 @Injectable({ providedIn: 'root' })
 export class TableDemoService {
@@ -222,6 +229,25 @@ export class TableDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig<TableMethodControls> = {
+    expandAll: {
+      name: 'expandAll()',
+      description: 'Open up all row details.',
+      returnType: 'void',
+    },
+    collapseAll: {
+      name: 'collapseAll()',
+      description: 'Closes all opened row details.',
+      returnType: 'void',
+    },
+    updateCellContents: {
+      name: 'updateCellContents()',
+      description: 'Refresh rendered cell values.'+
+      ' Useful if for eg. the `value` getter function is not pure and the values need to be refreshed manually.',
+      returnType: 'void',
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<TableInputControls>(this.inputControlConfig);
 
   public model: TableInputControls = { ...this.defaults };
@@ -230,4 +256,7 @@ export class TableDemoService {
     this.model = { ...this.defaults };
   }
 
+  public getMethodConfig(): DemoMethodConfig<TableMethodControls>[] {
+    return [this.methodControlConfig];
+  }
 }

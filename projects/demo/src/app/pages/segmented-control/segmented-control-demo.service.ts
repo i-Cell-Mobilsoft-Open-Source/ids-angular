@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -19,6 +20,15 @@ type SegmentedControlHelperControls = {
   itemHasIcon: boolean,
   itemHasSuffix: boolean,
   onlyOneItemIsDisabled: boolean,
+};
+
+type SegmentedControlMethodControls = {
+  isItemPreSelectedByValue: boolean
+};
+
+type SegmentedControlItemMethodControls = {
+  onclick: void,
+  focus: void,
 };
 
 @Injectable()
@@ -80,6 +90,34 @@ export class SegmentedControlDemoService {
     },
   };
 
+  public methodControlConfig: DemoMethodConfig<SegmentedControlMethodControls> = {
+    isItemPreSelectedByValue: {
+      name: 'isItemPreSelectedByValue(itemValue: unknown): boolean',
+      description: 'Checks if the item with the given value is pre-selected.',
+      returnType: 'boolean',
+      parameters: ['itemValue'],
+      parameterTypes: ['unknown'],
+      parameterDescriptions: ['The value of the item to check.'],
+    },
+  };
+
+  public itemMethodControlConfig: DemoMethodConfig<SegmentedControlItemMethodControls> = {
+    onclick: {
+      name: 'onclick()',
+      description: 'Segmented-control-item: Simulates a click on the segmented control item.',
+      returnType: 'void',
+    },
+    focus: {
+      name: 'focus(option?: FocusOption)',
+      description: 'Segmented-control-item: Focuses the segmented control item.'+
+      'Optionally, a focus option can be provided to specify the focus behavior.',
+      returnType: 'void',
+      parameters: ['option'],
+      parameterTypes: ['FocusOption'],
+      parameterDescriptions: ['The focus option to specify the focus behavior.'],
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<SegmentedControlInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<SegmentedControlHelperControls>(this.helperControlConfig);
 
@@ -94,5 +132,12 @@ export class SegmentedControlDemoService {
     this.multiSelectionValue = [];
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+    return [
+      this.methodControlConfig,
+      this.itemMethodControlConfig,
+    ];
   }
 }

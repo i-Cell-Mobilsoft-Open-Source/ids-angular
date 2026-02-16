@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import {
@@ -39,6 +40,10 @@ type ChipGroupInputControls = {
 
 type ChipGroupHelperControls = {
   chipsAreInteractive: boolean;
+};
+
+type ChipMethodControls = {
+  remove: void;
 };
 
 const chipList: { label: string; variant: IdsChipVariantType }[] = [
@@ -144,6 +149,14 @@ export class ChipDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig<ChipMethodControls> = {
+    remove: {
+      name: 'remove()',
+      description: 'Remove the chip.',
+      returnType: 'void',
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<ChipInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<ChipHelperControls>(this.helperControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<ChipGroupInputControls>(this.groupInputControlConfig);
@@ -176,5 +189,9 @@ export class ChipDemoService {
   public onChipRemoveFromGroup(event: IdsChipRemoveEvent, index: number, label: string): void {
     console.info('chip removed:', event.chip.id(), label);
     this.chipList = this.chipList.toSpliced(index, 1);
+  }
+
+  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+    return [this.methodControlConfig];
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -31,6 +32,10 @@ type MenuItemHelperControls = {
   hasLeadingIcon: boolean,
   hasTrailingIcon: boolean,
   hasDisabledItem: boolean,
+};
+
+type OverlayPanelMethodControls = {
+  toggle: void;
 };
 @Injectable()
 export class OverlayPanelDemoService {
@@ -126,6 +131,14 @@ export class OverlayPanelDemoService {
     },
   };
 
+  public readonly overlayPanelControlConfig: DemoMethodConfig<OverlayPanelMethodControls> = {
+    toggle: {
+      name: 'toggle()',
+      description: 'Toggles the visibility of the overlay panel.',
+      returnType: 'void',
+    },
+  };
+
   public overlayPanelDefaults = getDefaultFromDemoConfig<OverlayPanelInputControls>(this.overlayPanelInputControlConfig);
   public overlayPanelHelperDefaults = getDefaultFromDemoConfig<OverlayPanelHelperControls>(this.overlayPanelHelperControlConfig);
   public menuItemDefaults = getDefaultFromDemoConfig<MenuItemInputControls>(this.menuItemInputControlConfig);
@@ -143,5 +156,10 @@ export class OverlayPanelDemoService {
     this.overlayPanelHelperModel = { ...this.overlayPanelHelperDefaults };
     this.menuItemModel = { ...this.menuItemDefaults };
     this.menuItemHelperModel = { ...this.menuItemHelperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig<OverlayPanelMethodControls>[] {
+    return [this.overlayPanelControlConfig];
+
   }
 }

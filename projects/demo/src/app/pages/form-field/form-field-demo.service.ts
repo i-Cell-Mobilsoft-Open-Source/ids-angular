@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -31,6 +32,11 @@ type InputInputControls = {
   disabled: boolean,
   required: boolean,
   canHandleSuccessState: boolean,
+};
+
+type FormFieldMethodControls = {
+  getConnectedOverlayOrigin: ElementRef,
+  containerClick: void,
 };
 
 @Injectable()
@@ -156,6 +162,23 @@ export class FormFieldDemoService {
     },
   };
 
+  public readonly formFieldMethodControlConfig: DemoMethodConfig<FormFieldMethodControls> = {
+    getConnectedOverlayOrigin: {
+      name: 'getConnectedOverlayOrigin()',
+      description: 'Gets the connected overlay origin element. This is the element to which the overlay will be connected.',
+      returnType: 'ElementRef',
+    },
+    containerClick: {
+      name: 'containerClick(event: MouseEvent)',
+      description: 'Simulates a click on the form field container. ' +
+                  ' This is used to test if the form field can handle clicks on the container.',
+      returnType: 'void',
+      parameters: ['event'],
+      parameterTypes: ['MouseEvent'],
+      parameterDescriptions: ['The click event.'],
+    },
+  };
+
   public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this.formFieldInputControlConfig);
   public formFieldHelperDefaults = getDefaultFromDemoConfig<FormFieldHelperControls>(this.formFieldHelperControlConfig);
   public inputDefaults = getDefaultFromDemoConfig<InputInputControls>(this.inputInputControlConfig);
@@ -175,4 +198,8 @@ export class FormFieldDemoService {
     this.input = '';
     this.textarea.setValue('');
   }
+
+  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+    return [this.formFieldMethodControlConfig];
+  };
 }

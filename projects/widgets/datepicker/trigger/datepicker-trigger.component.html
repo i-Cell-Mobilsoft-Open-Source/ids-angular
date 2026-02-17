@@ -1,6 +1,7 @@
 <button
   type="button"
   idsIconButton
+  allowCustomContent
   aria-haspopup="true"
   [size]="'dense'"
   [variant]="'surface'"
@@ -9,5 +10,7 @@
   [attr.aria-expanded]="datepicker() ? datepicker().opened() : null"
   (click)="datepicker().open()"
 >
-  <ids-icon aria-hidden="true" fontIcon="calendar-month-outline" [attr.alt]="ariaLabel() || _intl.triggerButtonLabel" />
+  <ng-content select="[slot='icon']">
+    <ids-icon aria-hidden="true" fontIcon="calendar-month-outline" [attr.alt]="ariaLabel() || _intl.triggerButtonLabel" />
+  </ng-content>
 </button>

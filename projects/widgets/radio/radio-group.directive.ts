@@ -82,9 +82,11 @@ export class IdsRadioGroupDirective
     }
 
     const items = this._items();
-    const target = event.target as HTMLButtonElement;
-    const inputId = target.id;
-    const index = items.findIndex((item) => item.inputId() === inputId);
+    const index = this._getCurrentItemIndex(event, items);
+
+    if (index < 0) {
+      return;
+    }
 
     switch (event.key) {
       case 'ArrowUp': {
@@ -139,6 +141,25 @@ export class IdsRadioGroupDirective
       default:
         return;
     }
+  }
+
+  private _getCurrentItemIndex(event: KeyboardEvent, items: readonly IdsRadioComponent[]): number {
+    const target = event.target as HTMLElement | null;
+    const activeElement = document.activeElement as HTMLElement | null;
+    const currentInputId = target?.id || activeElement?.id;
+
+    if (currentInputId) {
+      const focusedItemIndex = items.findIndex((item) => {
+        const itemInputId = item.inputId();
+        return itemInputId === currentInputId || `${itemInputId}-native` === currentInputId;
+      });
+
+      if (focusedItemIndex >= 0) {
+        return focusedItemIndex;
+      }
+    }
+
+    return items.findIndex((item) => item.selected());
   }
 
   public ngOnInit(): void {

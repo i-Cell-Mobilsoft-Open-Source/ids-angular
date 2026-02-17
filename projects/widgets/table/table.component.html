@@ -12,6 +12,18 @@
   <ids-table appearance="zebra" [dataSource]="[row]" [columnDefs]="cols"></ids-table>
 </ng-template>
 
+<ng-template #defaultSortAscIcon>
+  <ids-icon [fontIcon]="'chevron-up'"></ids-icon>
+</ng-template>
+
+<ng-template #defaultSortDescIcon>
+  <ids-icon [fontIcon]="'chevron-down'"></ids-icon>
+</ng-template>
+
+<ng-template #defaultSortNoneIcon>
+  <ids-icon [fontIcon]="'adjustments-horizontal'"></ids-icon>
+</ng-template>
+
 <!-- TODO: Loading spinner -->
 
 <div class="ids-table__horizontal-scroll">
@@ -147,6 +159,7 @@
             <button
               type="button"
               idsIconButton
+              allowCustomContent
               colEnd
               class="ids-table__header-cell--sort-button"
               [attr.aria-label]="_intl.getSortButtonAriaLabel(col, nextSortDirection)"
@@ -154,14 +167,11 @@
             >
               @switch (sortDirection) {
                 @case ('asc') {
-                  <ids-icon [fontIcon]="'chevron-up'"></ids-icon>
-                }
+                  <ng-container *ngTemplateOutlet="_sortAscIconTemplate()?.templateRef ?? defaultSortAscIcon"></ng-container>                }
                 @case ('desc') {
-                  <ids-icon [fontIcon]="'chevron-down'"></ids-icon>
-                }
+                  <ng-container *ngTemplateOutlet="_sortDescIconTemplate()?.templateRef ?? defaultSortDescIcon"></ng-container>                }
                 @default {
-                  <ids-icon [fontIcon]="'adjustments-horizontal'"></ids-icon>
-                }
+                  <ng-container *ngTemplateOutlet="_sortNoneIconTemplate()?.templateRef ?? defaultSortNoneIcon"></ng-container>                }
               }
             </button>
           }

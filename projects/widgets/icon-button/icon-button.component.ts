@@ -50,6 +50,7 @@ export class IdsIconButtonComponent extends ComponentBaseWithDefaults<IdsIconBut
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsIconButtonVariantType>(this._defaultConfig.variant);
   public disabled = input(false, { transform: coerceBooleanAttribute });
+  public allowCustomContent = input(false, { transform: coerceBooleanAttribute });
 
   protected _icons = contentChildren(IdsIconComponent);
 

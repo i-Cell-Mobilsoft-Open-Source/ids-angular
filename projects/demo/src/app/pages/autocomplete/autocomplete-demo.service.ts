@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -116,6 +117,82 @@ export class AutocompleteDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'updateErrorAndSuccess()',
+      description: 'Updates the error and success state of the autocomplete.',
+      returnType: 'void',
+    },
+    {
+      name: 'toggle()',
+      description: 'Toggles the visibility of the autocomplete options.',
+      returnType: 'void',
+    },
+    {
+      name: 'clear()',
+      description: 'Clears the input value and selected option.',
+      returnType: 'void',
+    },
+    {
+      name: 'focus(options?: FocusOptions)',
+      description: 'Focuses the autocomplete input.',
+      returnType: 'void',
+      parameters: ['options?'],
+      parameterTypes: ['FocusOptions'],
+      parameterDescriptions: ['Optional focus options.'],
+    },
+    {
+      name: 'open()',
+      description: 'Opens the autocomplete options.',
+      returnType: 'void',
+    },
+    {
+      name: 'close()',
+      description: 'Closes the autocomplete options.',
+      returnType: 'void',
+    },
+    {
+      name: 'writeValue(value: boolean)',
+      description: 'Writes a new value to the element.',
+      parameters: ['value'],
+      parameterTypes: ['boolean'],
+      parameterDescriptions: ['The value to be written.'],
+      returnType: 'void',
+    },
+    {
+      name: 'registerOnChange(fn: ()=>void)',
+      description: 'Registers a callback function that should be called when the control\'s value changes in the UI.',
+      parameters: ['fn'],
+      parameterTypes: ['()=>void'],
+      parameterDescriptions: ['The callback function.'],
+      returnType: 'void',
+    },
+    {
+      name: 'registerOnTouched(fn: ()=>unknown)',
+      description: 'Registers a callback function that should be called when the control is touched.',
+      parameters: ['fn'],
+      parameterTypes: ['()=>unknown'],
+      parameterDescriptions: ['The callback function.'],
+      returnType: 'void',
+    },
+    {
+      name: 'setDisabledState(isDisabled: boolean)',
+      description: 'Sets the disabled state of the element.',
+      parameters: ['isDisabled'],
+      parameterTypes: ['boolean'],
+      parameterDescriptions: ['Whether the element should be disabled or not.'],
+      returnType: 'void',
+    },
+    {
+      name: 'isOptionPreSelectedByValue(optionValue: unknown): boolean',
+      description: 'Checks if the option with the given value is pre-selected.',
+      parameters: ['optionValue'],
+      parameterTypes: ['unknown'],
+      parameterDescriptions: ['The value to check.'],
+      returnType: 'boolean',
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<AutocompleteInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<AutocompleteHelperControls>(this.helperControlConfig);
 
@@ -127,4 +204,8 @@ export class AutocompleteDemoService {
     this.helperModel = { ...this.helperDefaults };
     this._resetSubject.next();
   }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodControlConfig];
+  };
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -27,6 +28,7 @@ type SwitchGroupInputControls = {
   iconPosition: IdsSwitchIconPositionType,
   labelPosition: IdsSwitchLabelPositionType,
 };
+
 @Injectable()
 export class SwitchDemoService {
   public readonly inputControlConfig: DemoControlConfig<SwitchInputControls> = {
@@ -132,6 +134,51 @@ export class SwitchDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'toggle()',
+      description: 'Toggles the checked state of the switch.',
+      returnType: 'void',
+    },
+    {
+      name: 'focus()',
+      description: 'Focuses the switch.',
+      returnType: 'void',
+    },
+    {
+      name: 'writeValue(value: boolean)',
+      description: 'Writes a new value to the element.',
+      parameters: ['value'],
+      parameterTypes: ['boolean'],
+      parameterDescriptions: ['The value to be written.'],
+      returnType: 'void',
+    },
+    {
+      name: 'registerOnChange(fn: ()=>void)',
+      description: 'Registers a callback function that should be called when the control\'s value changes in the UI.',
+      parameters: ['fn'],
+      parameterTypes: ['()=>void'],
+      parameterDescriptions: ['The callback function.'],
+      returnType: 'void',
+    },
+    {
+      name: 'registerOnTouched(fn: ()=>unknown)',
+      description: 'Registers a callback function that should be called when the control is touched.',
+      parameters: ['fn'],
+      parameterTypes: ['()=>unknown'],
+      parameterDescriptions: ['The callback function.'],
+      returnType: 'void',
+    },
+    {
+      name: 'setDisabledState(isDisabled: boolean)',
+      description: 'Sets the disabled state of the element.',
+      parameters: ['isDisabled'],
+      parameterTypes: ['boolean'],
+      parameterDescriptions: ['Whether the element should be disabled or not.'],
+      returnType: 'void',
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<SwitchInputControls>(this.inputControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<SwitchGroupInputControls>(this.groupInputControlConfig);
 
@@ -155,5 +202,9 @@ export class SwitchDemoService {
       true,
     ];
     this.groupModel = { ...this.groupDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodControlConfig];
   }
 }

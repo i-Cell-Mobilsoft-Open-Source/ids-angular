@@ -26,14 +26,6 @@ type PaginatorInputControls = {
   compactLayout: boolean,
 };
 
-type PaginatorMethodControls = {
-  stepNextPage: void;
-  stepPreviousPage: void;
-  stepFirstPage: void;
-  stepLastPage: void;
-  stepPage: void;
-};
-
 @Injectable()
 export class PaginatorDemoService {
   public inputControlConfig: DemoControlConfig<PaginatorInputControls> ={
@@ -139,28 +131,28 @@ export class PaginatorDemoService {
     },
   };
 
-  public readonly methodControlConfig: DemoMethodConfig<PaginatorMethodControls> = {
-    stepNextPage: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'stepNextPage()',
       description: 'Navigates to the next page.',
       returnType: 'void',
     },
-    stepPreviousPage: {
+    {
       name: 'stepPreviousPage()',
       description: 'Navigates to the previous page.',
       returnType: 'void',
     },
-    stepFirstPage: {
+    {
       name: 'stepFirstPage()',
       description: 'Navigates to the first page.',
       returnType: 'void',
     },
-    stepLastPage: {
+    {
       name: 'stepLastPage()',
       description: 'Navigates to the last page.',
       returnType: 'void',
     },
-    stepPage: {
+    {
       name: 'stepPage(pageIndex: number)',
       description: 'Navigates to the specified page index.',
       parameters: ['pageIndex'],
@@ -168,7 +160,7 @@ export class PaginatorDemoService {
       parameterDescriptions: ['The index of the page to navigate to.'],
       returnType: 'void',
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<PaginatorInputControls>(this.inputControlConfig);
 
@@ -197,7 +189,7 @@ export class PaginatorDemoService {
     };
   }
 
-  public getMethodConfig(): DemoMethodConfig<PaginatorMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
 }

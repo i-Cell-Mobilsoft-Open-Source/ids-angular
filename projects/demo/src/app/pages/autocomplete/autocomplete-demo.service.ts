@@ -30,20 +30,6 @@ type AutocompleteHelperControls = {
   hintMaxLength: string;
 };
 
-type AutocompleteMethodControls = {
-  updateErrorAndSuccessState: void;
-  toggle: void;
-  clear: void;
-  focus: void;
-  open: void;
-  close: void;
-  writeValue: void;
-  registerOnChange: void;
-  registerOnTouched: void;
-  setDisabledState: void;
-  isOptionPreSelectedByValue: boolean;
-};
-
 @Injectable()
 export class AutocompleteDemoService {
   private _resetSubject = new Subject<void>();
@@ -131,23 +117,23 @@ export class AutocompleteDemoService {
     },
   };
 
-  public readonly methodControlConfig: DemoMethodConfig<AutocompleteMethodControls> = {
-    updateErrorAndSuccessState: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'updateErrorAndSuccess()',
       description: 'Updates the error and success state of the autocomplete.',
       returnType: 'void',
     },
-    toggle: {
+    {
       name: 'toggle()',
       description: 'Toggles the visibility of the autocomplete options.',
       returnType: 'void',
     },
-    clear: {
+    {
       name: 'clear()',
       description: 'Clears the input value and selected option.',
       returnType: 'void',
     },
-    focus: {
+    {
       name: 'focus(options?: FocusOptions)',
       description: 'Focuses the autocomplete input.',
       returnType: 'void',
@@ -155,17 +141,17 @@ export class AutocompleteDemoService {
       parameterTypes: ['FocusOptions'],
       parameterDescriptions: ['Optional focus options.'],
     },
-    open: {
+    {
       name: 'open()',
       description: 'Opens the autocomplete options.',
       returnType: 'void',
     },
-    close: {
+    {
       name: 'close()',
       description: 'Closes the autocomplete options.',
       returnType: 'void',
     },
-    writeValue: {
+    {
       name: 'writeValue(value: boolean)',
       description: 'Writes a new value to the element.',
       parameters: ['value'],
@@ -173,7 +159,7 @@ export class AutocompleteDemoService {
       parameterDescriptions: ['The value to be written.'],
       returnType: 'void',
     },
-    registerOnChange: {
+    {
       name: 'registerOnChange(fn: ()=>void)',
       description: 'Registers a callback function that should be called when the control\'s value changes in the UI.',
       parameters: ['fn'],
@@ -181,7 +167,7 @@ export class AutocompleteDemoService {
       parameterDescriptions: ['The callback function.'],
       returnType: 'void',
     },
-    registerOnTouched: {
+    {
       name: 'registerOnTouched(fn: ()=>unknown)',
       description: 'Registers a callback function that should be called when the control is touched.',
       parameters: ['fn'],
@@ -189,7 +175,7 @@ export class AutocompleteDemoService {
       parameterDescriptions: ['The callback function.'],
       returnType: 'void',
     },
-    setDisabledState: {
+    {
       name: 'setDisabledState(isDisabled: boolean)',
       description: 'Sets the disabled state of the element.',
       parameters: ['isDisabled'],
@@ -197,7 +183,7 @@ export class AutocompleteDemoService {
       parameterDescriptions: ['Whether the element should be disabled or not.'],
       returnType: 'void',
     },
-    isOptionPreSelectedByValue: {
+    {
       name: 'isOptionPreSelectedByValue(optionValue: unknown): boolean',
       description: 'Checks if the option with the given value is pre-selected.',
       parameters: ['optionValue'],
@@ -205,7 +191,7 @@ export class AutocompleteDemoService {
       parameterDescriptions: ['The value to check.'],
       returnType: 'boolean',
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<AutocompleteInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<AutocompleteHelperControls>(this.helperControlConfig);
@@ -219,7 +205,7 @@ export class AutocompleteDemoService {
     this._resetSubject.next();
   }
 
-  public getMethodConfig(): DemoMethodConfig<AutocompleteMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   };
 }

@@ -41,19 +41,6 @@ type AnimalOptions = {
   aquatic: SampleOption[]
 };
 
-type RadioMethodControls = {
-  toggle: void;
-  open: void;
-  close: void;
-  focus: void;
-  writeValue: void;
-  registerOnChange: void;
-  registerOnTouched: void;
-  setDisabledState: void;
-  isOptionPreSelectedByValue: boolean;
-  updateErrorAndSuccessState: void;
-};
-
 @Injectable()
 export class SelectDemoService {
   public readonly formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
@@ -135,23 +122,23 @@ export class SelectDemoService {
     },
   };
 
-  public readonly selectMethodControlConfig: DemoMethodConfig<RadioMethodControls> = {
-    toggle: {
+  public readonly selectMethodControlConfig: DemoMethodConfig = [
+    {
       name: 'toggle()',
       description: 'Toggles the select open or closed.',
       returnType: 'void',
     },
-    open: {
+    {
       name: 'open()',
       description: 'Opens the select.',
       returnType: 'void',
     },
-    close: {
+    {
       name: 'close()',
       description: 'Closes the select.',
       returnType: 'void',
     },
-    focus: {
+    {
       name: 'focus(options?: FocusOptions)',
       description: 'Focuses the select.',
       returnType: 'void',
@@ -159,7 +146,7 @@ export class SelectDemoService {
       parameterTypes: ['FocusOptions'],
       parameterDescriptions: ['Optional focus options.'],
     },
-    writeValue: {
+    {
       name: 'writeValue(value: boolean)',
       description: 'Writes a new value to the element.',
       parameters: ['value'],
@@ -167,7 +154,7 @@ export class SelectDemoService {
       parameterDescriptions: ['The value to be written.'],
       returnType: 'void',
     },
-    registerOnChange: {
+    {
       name: 'registerOnChange(fn: ()=>void)',
       description: 'Registers a callback function that should be called when the control\'s value changes in the UI.',
       parameters: ['fn'],
@@ -175,7 +162,7 @@ export class SelectDemoService {
       parameterDescriptions: ['The callback function.'],
       returnType: 'void',
     },
-    registerOnTouched: {
+    {
       name: 'registerOnTouched(fn: ()=>unknown)',
       description: 'Registers a callback function that should be called when the control is touched.',
       parameters: ['fn'],
@@ -183,7 +170,7 @@ export class SelectDemoService {
       parameterDescriptions: ['The callback function.'],
       returnType: 'void',
     },
-    setDisabledState: {
+    {
       name: 'setDisabledState(isDisabled: boolean)',
       description: 'Sets the disabled state of the element.',
       parameters: ['isDisabled'],
@@ -191,7 +178,7 @@ export class SelectDemoService {
       parameterDescriptions: ['Whether the element should be disabled or not.'],
       returnType: 'void',
     },
-    isOptionPreSelectedByValue: {
+    {
       name: 'isOptionPreSelectedByValue(optionValue: unknown)',
       description: 'Checks if an option with the given value is pre-selected.',
       parameters: ['optionValue'],
@@ -199,12 +186,12 @@ export class SelectDemoService {
       parameterDescriptions: ['The value to check.'],
       returnType: 'boolean',
     },
-    updateErrorAndSuccessState: {
+    {
       name: 'updateErrorAndSuccessState()',
       description: 'Updates the error and success state of the select based on the current value.',
       returnType: 'void',
     },
-  };
+  ];
 
   public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this.formFieldInputControlConfig);
   public selectDefaults = getDefaultFromDemoConfig<SelectInputControls>(this.selectInputControlConfig);
@@ -251,7 +238,7 @@ export class SelectDemoService {
     ];
   }
 
-  public getMethodConfig(): DemoMethodConfig<RadioMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.selectMethodControlConfig];
   }
 }

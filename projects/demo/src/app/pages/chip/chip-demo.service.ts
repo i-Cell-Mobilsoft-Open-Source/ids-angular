@@ -42,10 +42,6 @@ type ChipGroupHelperControls = {
   chipsAreInteractive: boolean;
 };
 
-type ChipMethodControls = {
-  remove: void;
-};
-
 const chipList: { label: string; variant: IdsChipVariantType }[] = [
   { label: 'carrot', variant: IdsChipVariant.PRIMARY },
   { label: 'onion', variant: IdsChipVariant.SECONDARY },
@@ -149,13 +145,13 @@ export class ChipDemoService {
     },
   };
 
-  public readonly methodControlConfig: DemoMethodConfig<ChipMethodControls> = {
-    remove: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'remove()',
       description: 'Remove the chip.',
       returnType: 'void',
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<ChipInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<ChipHelperControls>(this.helperControlConfig);
@@ -191,7 +187,7 @@ export class ChipDemoService {
     this.chipList = this.chipList.toSpliced(index, 1);
   }
 
-  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
 }

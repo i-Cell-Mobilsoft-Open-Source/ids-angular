@@ -22,9 +22,6 @@ type RadioHelperControls = {
   onlyOneItemIsDisabled: boolean,
 };
 
-type RadioMethodControls = {
-  focus: void,
-};
 @Injectable()
 export class RadioDemoService {
   public inputControlConfig: DemoControlConfig<RadioInputControls> = {
@@ -85,8 +82,8 @@ export class RadioDemoService {
     },
   };
 
-  public methodControlConfig: DemoMethodConfig<RadioMethodControls> = {
-    focus: {
+  public methodControlConfig: DemoMethodConfig = [
+    {
       name: 'focus(option?: FocusOption)',
       description: 'Focuses the radio item.',
       returnType: 'void',
@@ -94,7 +91,7 @@ export class RadioDemoService {
       parameterTypes: ['FocusOption'],
       parameterDescriptions: ['The option to focus. If not provided, focuses the first enabled option.'],
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<RadioInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<RadioHelperControls>(this.helperControlConfig);
@@ -114,7 +111,7 @@ export class RadioDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<RadioMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
 }

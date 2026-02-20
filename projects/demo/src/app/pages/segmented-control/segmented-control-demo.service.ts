@@ -22,15 +22,6 @@ type SegmentedControlHelperControls = {
   onlyOneItemIsDisabled: boolean,
 };
 
-type SegmentedControlMethodControls = {
-  isItemPreSelectedByValue: boolean
-};
-
-type SegmentedControlItemMethodControls = {
-  onclick: void,
-  focus: void,
-};
-
 @Injectable()
 export class SegmentedControlDemoService {
   public inputControlConfig: DemoControlConfig<SegmentedControlInputControls> = {
@@ -90,8 +81,8 @@ export class SegmentedControlDemoService {
     },
   };
 
-  public methodControlConfig: DemoMethodConfig<SegmentedControlMethodControls> = {
-    isItemPreSelectedByValue: {
+  public methodControlConfig: DemoMethodConfig= [
+    {
       name: 'isItemPreSelectedByValue(itemValue: unknown): boolean',
       description: 'Checks if the item with the given value is pre-selected.',
       returnType: 'boolean',
@@ -99,15 +90,15 @@ export class SegmentedControlDemoService {
       parameterTypes: ['unknown'],
       parameterDescriptions: ['The value of the item to check.'],
     },
-  };
+  ];
 
-  public itemMethodControlConfig: DemoMethodConfig<SegmentedControlItemMethodControls> = {
-    onclick: {
+  public itemMethodControlConfig: DemoMethodConfig = [
+    {
       name: 'onclick()',
       description: 'Segmented-control-item: Simulates a click on the segmented control item.',
       returnType: 'void',
     },
-    focus: {
+    {
       name: 'focus(option?: FocusOption)',
       description: 'Segmented-control-item: Focuses the segmented control item.'+
       'Optionally, a focus option can be provided to specify the focus behavior.',
@@ -116,7 +107,7 @@ export class SegmentedControlDemoService {
       parameterTypes: ['FocusOption'],
       parameterDescriptions: ['The focus option to specify the focus behavior.'],
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<SegmentedControlInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<SegmentedControlHelperControls>(this.helperControlConfig);
@@ -134,7 +125,7 @@ export class SegmentedControlDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [
       this.methodControlConfig,
       this.itemMethodControlConfig,

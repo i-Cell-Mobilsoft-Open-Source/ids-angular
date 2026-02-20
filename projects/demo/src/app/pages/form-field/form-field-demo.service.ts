@@ -1,4 +1,4 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
@@ -32,11 +32,6 @@ type InputInputControls = {
   disabled: boolean,
   required: boolean,
   canHandleSuccessState: boolean,
-};
-
-type FormFieldMethodControls = {
-  getConnectedOverlayOrigin: ElementRef,
-  containerClick: void,
 };
 
 @Injectable()
@@ -162,13 +157,13 @@ export class FormFieldDemoService {
     },
   };
 
-  public readonly formFieldMethodControlConfig: DemoMethodConfig<FormFieldMethodControls> = {
-    getConnectedOverlayOrigin: {
+  public readonly formFieldMethodControlConfig: DemoMethodConfig = [
+    {
       name: 'getConnectedOverlayOrigin()',
       description: 'Gets the connected overlay origin element. This is the element to which the overlay will be connected.',
       returnType: 'ElementRef',
     },
-    containerClick: {
+    {
       name: 'containerClick(event: MouseEvent)',
       description: 'Simulates a click on the form field container. ' +
                   ' This is used to test if the form field can handle clicks on the container.',
@@ -177,7 +172,7 @@ export class FormFieldDemoService {
       parameterTypes: ['MouseEvent'],
       parameterDescriptions: ['The click event.'],
     },
-  };
+  ];
 
   public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this.formFieldInputControlConfig);
   public formFieldHelperDefaults = getDefaultFromDemoConfig<FormFieldHelperControls>(this.formFieldHelperControlConfig);
@@ -199,7 +194,7 @@ export class FormFieldDemoService {
     this.textarea.setValue('');
   }
 
-  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.formFieldMethodControlConfig];
   };
 }

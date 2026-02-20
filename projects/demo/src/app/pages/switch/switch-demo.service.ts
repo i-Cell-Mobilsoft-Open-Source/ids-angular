@@ -29,14 +29,6 @@ type SwitchGroupInputControls = {
   labelPosition: IdsSwitchLabelPositionType,
 };
 
-type SwitchMethodControls = {
-  toggle: void;
-  focus: void;
-  writeValue: void;
-  registerOnChange: void;
-  registerOnTouched: void;
-  setDisabledState: void;
-};
 @Injectable()
 export class SwitchDemoService {
   public readonly inputControlConfig: DemoControlConfig<SwitchInputControls> = {
@@ -142,18 +134,18 @@ export class SwitchDemoService {
     },
   };
 
-  public readonly methodControlConfig: DemoMethodConfig<SwitchMethodControls> = {
-    toggle: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'toggle()',
       description: 'Toggles the checked state of the switch.',
       returnType: 'void',
     },
-    focus: {
+    {
       name: 'focus()',
       description: 'Focuses the switch.',
       returnType: 'void',
     },
-    writeValue: {
+    {
       name: 'writeValue(value: boolean)',
       description: 'Writes a new value to the element.',
       parameters: ['value'],
@@ -161,7 +153,7 @@ export class SwitchDemoService {
       parameterDescriptions: ['The value to be written.'],
       returnType: 'void',
     },
-    registerOnChange: {
+    {
       name: 'registerOnChange(fn: ()=>void)',
       description: 'Registers a callback function that should be called when the control\'s value changes in the UI.',
       parameters: ['fn'],
@@ -169,7 +161,7 @@ export class SwitchDemoService {
       parameterDescriptions: ['The callback function.'],
       returnType: 'void',
     },
-    registerOnTouched: {
+    {
       name: 'registerOnTouched(fn: ()=>unknown)',
       description: 'Registers a callback function that should be called when the control is touched.',
       parameters: ['fn'],
@@ -177,7 +169,7 @@ export class SwitchDemoService {
       parameterDescriptions: ['The callback function.'],
       returnType: 'void',
     },
-    setDisabledState: {
+    {
       name: 'setDisabledState(isDisabled: boolean)',
       description: 'Sets the disabled state of the element.',
       parameters: ['isDisabled'],
@@ -185,7 +177,7 @@ export class SwitchDemoService {
       parameterDescriptions: ['Whether the element should be disabled or not.'],
       returnType: 'void',
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<SwitchInputControls>(this.inputControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<SwitchGroupInputControls>(this.groupInputControlConfig);
@@ -212,7 +204,7 @@ export class SwitchDemoService {
     this.groupModel = { ...this.groupDefaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<SwitchMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
 }

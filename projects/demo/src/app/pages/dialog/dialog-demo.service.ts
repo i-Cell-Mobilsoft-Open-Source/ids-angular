@@ -22,11 +22,6 @@ type DialogHelperControls = {
   useLongContent: boolean,
 };
 
-type DialogMethodControls = {
-  open: void,
-  close: void,
-};
-
 @Injectable()
 export class DialogDemoService {
   public readonly inputControlConfig: DemoControlConfig<DialogInputControls> = {
@@ -84,19 +79,19 @@ export class DialogDemoService {
     },
   };
 
-  public readonly methodControlConfig: DemoMethodConfig<DialogMethodControls> = {
-    open: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'open()',
       returnType: 'void',
       description: 'Opens the dialog.',
     },
-    close: {
+    {
       name: 'close()',
       returnType: 'void',
       description: 'Close the dialog',
     },
 
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<DialogInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<DialogHelperControls>(this.helperControlConfig);
@@ -109,7 +104,7 @@ export class DialogDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<DialogMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
 }

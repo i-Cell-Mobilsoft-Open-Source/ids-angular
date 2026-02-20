@@ -23,15 +23,6 @@ type SegmentedControlToggleHelperControls = {
   onlyOneItemIsDisabled: boolean,
 };
 
-type SegmentedControlToggleMethodControls = {
-  isItemPreSelectedByValue: boolean
-};
-
-type SegmentedControlToggleItemMethodControls = {
-  onclick: void,
-  focus: void,
-};
-
 @Injectable()
 export class SegmentedControlToggleDemoService {
   public readonly inputControlConfig: DemoControlConfig<SegmentedControlToggleInputControls> = {
@@ -98,8 +89,8 @@ export class SegmentedControlToggleDemoService {
     },
   };
 
-  public readonly methodControlConfig: DemoMethodConfig<SegmentedControlToggleMethodControls> = {
-    isItemPreSelectedByValue: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'isItemPreSelectedByValue(itemValue: unknown): boolean',
       description: 'Checks if the item with the given value is pre-selected.',
       returnType: 'boolean',
@@ -107,15 +98,15 @@ export class SegmentedControlToggleDemoService {
       parameterTypes: ['unknown'],
       parameterDescriptions: ['The value of the item to check.'],
     },
-  };
+  ];
 
-  public readonly itemMethodControlConfig: DemoMethodConfig<SegmentedControlToggleItemMethodControls> = {
-    onclick: {
+  public readonly itemMethodControlConfig: DemoMethodConfig = [
+    {
       name: 'onclick()',
       description: 'Segmented-control-toggle-item: Simulates a click on the segmented control toggle item.',
       returnType: 'void',
     },
-    focus: {
+    {
       name: 'focus(option?: FocusOption)',
       description: 'Segmented-control-toggle-item: Focuses the segmented control toggle item.'+
       'Optionally, a focus option can be provided to specify the focus behavior.',
@@ -124,7 +115,7 @@ export class SegmentedControlToggleDemoService {
       parameterTypes: ['FocusOption'],
       parameterDescriptions: ['The focus option to specify the focus behavior.'],
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<SegmentedControlToggleInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<SegmentedControlToggleHelperControls>(this.helperControlConfig);
@@ -140,7 +131,7 @@ export class SegmentedControlToggleDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [
       this.methodControlConfig,
       this.itemMethodControlConfig,

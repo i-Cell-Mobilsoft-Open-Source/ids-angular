@@ -30,18 +30,6 @@ type AnimalOptions = {
   aquatic: SampleOption[]
 };
 
-type OptionMethodControls = {
-  focus: void;
-  selectViaInteraction: void;
-  getHostElement: HTMLElement;
-  select: void;
-  deselect: void;
-  setActiveStyles: void;
-  setInactiveStyles: void;
-  getLabel: string;
-
-};
-
 @Injectable({ providedIn: 'root' })
 export class OptionDemoService {
 
@@ -81,8 +69,8 @@ export class OptionDemoService {
     },
   };
 
-  public readonly optionMethodControls: DemoMethodConfig<OptionMethodControls> = {
-    focus: {
+  public readonly optionMethodControls: DemoMethodConfig = [
+    {
       name: 'focus(_origin?: FocusOrigin, options?: FocusOptions)',
       description: 'Focuses the option.',
       returnType: 'void',
@@ -99,17 +87,17 @@ export class OptionDemoService {
         'Additional focus options.',
       ],
     },
-    selectViaInteraction: {
+    {
       name: 'selectViaInteraction()',
       description: 'Selects the option as if it were selected by the user.',
       returnType: 'void',
     },
-    getHostElement: {
+    {
       name: 'getHostElement()',
       description: 'Returns the host element of the option.',
       returnType: 'HTMLElement',
     },
-    select: {
+    {
       name: 'select(emitEvent=true)',
       description: 'Selects the option.',
       returnType: 'void',
@@ -117,7 +105,7 @@ export class OptionDemoService {
       parameterTypes: ['boolean'],
       parameterDescriptions: ['Whether to emit the selection change event or not.'],
     },
-    deselect: {
+    {
       name: 'deselect(emitEvent=true)',
       description: 'Deselects the option.',
       returnType: 'void',
@@ -125,24 +113,24 @@ export class OptionDemoService {
       parameterTypes: ['boolean'],
       parameterDescriptions: ['Whether to emit the selection change event or not.'],
     },
-    setActiveStyles: {
+    {
       name: 'setActiveStyles()',
       description: 'Sets the active styles on the option.',
       returnType: 'void',
     },
-    setInactiveStyles: {
+    {
       name: 'setInactiveStyles()',
       description: 'Sets the inactive styles on the option.',
       returnType: 'void',
     },
-    getLabel: {
+    {
       name: 'getLabel()',
       description: 'Returns the label of the option.',
       returnType: 'string',
 
     },
 
-  };
+  ];
 
   public selectDefaults = getDefaultFromDemoConfig<OptionSelectControls>(this.selectControlConfig);
   public defaults = getDefaultFromDemoConfig<SampleOptionControls>(this.sampleInputControlConfig);
@@ -183,7 +171,7 @@ export class OptionDemoService {
     this.animals.aquatic[1].value,
   ];
 
-  public getMethodConfig(): DemoMethodConfig<unknown>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.optionMethodControls];
   }
 }

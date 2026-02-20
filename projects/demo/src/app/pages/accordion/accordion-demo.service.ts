@@ -25,11 +25,6 @@ type AccordionInputControls = {
   hasTrailingIcon: boolean;
 };
 
-type AccordionMethodControls = {
-  closeAll: void;
-  openAll: void;
-};
-
 @Injectable()
 export class AccordionDemoService {
   private _resetSubject = new Subject<void>();
@@ -113,18 +108,18 @@ export class AccordionDemoService {
     },
   };
 
-  public readonly methodConfig: DemoMethodConfig<AccordionMethodControls> = {
-    openAll: {
+  public readonly methodConfig: DemoMethodConfig = [
+    {
       name: 'openAll()',
       description: 'Opens all accordion items.',
       returnType: 'void',
     },
-    closeAll: {
+    {
       name: 'closeAll()',
       description: 'Closes all accordion items.',
       returnType: 'void',
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<AccordionInputControls>(this.inputControlConfig);
 
@@ -135,7 +130,7 @@ export class AccordionDemoService {
     this._resetSubject.next();
   }
 
-  public getMethodConfig(): unknown[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodConfig];
   }
 }

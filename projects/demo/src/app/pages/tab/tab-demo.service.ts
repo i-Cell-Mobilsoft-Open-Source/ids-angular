@@ -39,9 +39,6 @@ type TabHelperControls = {
   tabItem3Id: string,
 };
 
-type TabMethodControls = {
-  selectTab: number;
-};
 @Injectable({ providedIn: 'root' })
 export class TabDemoService {
   private readonly _iconService = inject(IconService);
@@ -203,8 +200,8 @@ export class TabDemoService {
     },
   });
 
-  public readonly methodControlConfig: DemoMethodConfig<TabMethodControls> = {
-    selectTab: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'selectTab(index: number)',
       description: 'Tab-group: Selects a tab by its index.',
       returnType: 'number',
@@ -212,7 +209,7 @@ export class TabDemoService {
       parameterTypes: ['number'],
       parameterDescriptions: ['The index of the tab to select.'],
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<TabInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<TabHelperControls>(this.helperControlConfig());
@@ -250,7 +247,7 @@ export class TabDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<TabMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
 }

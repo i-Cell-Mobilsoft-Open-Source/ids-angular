@@ -19,12 +19,6 @@ type TooltipInputControls = {
   showPointer: boolean,
 };
 
-type TooltipMethodControls = {
-  show: void;
-  hide: void;
-  toggle: void;
-};
-
 const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class TooltipDemoService {
@@ -107,23 +101,23 @@ export class TooltipDemoService {
     },
   };
 
-  public readonly methodControlConfig: DemoMethodConfig<TooltipMethodControls> = {
-    show: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'show()',
       description: 'Shows the tooltip.',
       returnType: 'void',
     },
-    hide: {
+    {
       name: 'hide()',
       description: 'Hides the tooltip.',
       returnType: 'void',
     },
-    toggle: {
+    {
       name: 'toggle()',
       description: 'Toggles the visibility of the tooltip.',
       returnType: 'void',
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<TooltipInputControls>(this.inputControlConfig);
 
@@ -133,7 +127,7 @@ export class TooltipDemoService {
     this.model = { ...this.defaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<TooltipMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
 }

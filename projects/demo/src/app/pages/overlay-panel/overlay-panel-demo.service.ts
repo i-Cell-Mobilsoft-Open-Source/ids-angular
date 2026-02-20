@@ -33,10 +33,6 @@ type MenuItemHelperControls = {
   hasTrailingIcon: boolean,
   hasDisabledItem: boolean,
 };
-
-type OverlayPanelMethodControls = {
-  toggle: void;
-};
 @Injectable()
 export class OverlayPanelDemoService {
   public readonly overlayPanelInputControlConfig: DemoControlConfig<OverlayPanelInputControls> = {
@@ -131,13 +127,13 @@ export class OverlayPanelDemoService {
     },
   };
 
-  public readonly overlayPanelControlConfig: DemoMethodConfig<OverlayPanelMethodControls> = {
-    toggle: {
+  public readonly overlayPanelControlConfig: DemoMethodConfig = [
+    {
       name: 'toggle()',
       description: 'Toggles the visibility of the overlay panel.',
       returnType: 'void',
     },
-  };
+  ];
 
   public overlayPanelDefaults = getDefaultFromDemoConfig<OverlayPanelInputControls>(this.overlayPanelInputControlConfig);
   public overlayPanelHelperDefaults = getDefaultFromDemoConfig<OverlayPanelHelperControls>(this.overlayPanelHelperControlConfig);
@@ -158,7 +154,7 @@ export class OverlayPanelDemoService {
     this.menuItemHelperModel = { ...this.menuItemHelperDefaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<OverlayPanelMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.overlayPanelControlConfig];
 
   }

@@ -15,7 +15,7 @@ import { of } from 'rxjs';
   styleUrl: './method-table.component.scss',
 })
 export class MethodTableComponent implements OnInit {
-  public config = input.required<DemoMethodConfig<unknown>[]>();
+  public config = input.required<DemoMethodConfig>();
 
   protected _dataSource: ServerSideDataSource<MethodTableElement>;
 
@@ -69,16 +69,7 @@ export class MethodTableComponent implements OnInit {
   }
 
   private _updateDataSource(): void {
-    let data: MethodTableElement[] = [];
-
-    const cfg = this.config();
-
-    if (Array.isArray(cfg)) {
-      data = cfg.flatMap((config) => this._transformConfigToRows(config));
-    } else {
-      data = this._transformConfigToRows(cfg);
-    }
-
+    const data: MethodTableElement[] = Array.isArray(this.config()) ? this.config() : [];
     const requestFactory: IdsTableRequestFactory<MethodTableElement> = () =>
       of({
         resultList: data,
@@ -93,41 +84,7 @@ export class MethodTableComponent implements OnInit {
     this._dataSource.refreshData();
   }
 
-  private _transformConfigToRows(config: DemoMethodConfig<unknown>): MethodTableElement[] {
-    type ControlItem = {
-      name: string;
-      // list?: string[];
-      returnType?: string;
-      description?: string;
-      default?: unknown;
-      parameters?: string[];
-      parameterTypes?: string[];
-      parameterDescriptions?: string[];
-    };
-
-    if (Array.isArray(config)) {
-      return config.flatMap((conf) => this._transformConfigToRows(conf));
-    }
-
-    if (!config || typeof config !== 'object') {
-      return [];
-    }
-
-    return Object.entries(config as Record<string, ControlItem>).map(([
-      ,
-      item,
-    ]) => ({
-      name: item.name,
-      description: item.description || '',
-      returnType: item.returnType || '',
-      parameters: item.parameters || [],
-      parameterTypes: item.parameterTypes || [],
-      parameterDescriptions: item.parameterDescriptions || [],
-    }));
-  }
-
   protected _isArray(value: unknown): value is string[] {
     return Array.isArray(value);
   }
-
 }

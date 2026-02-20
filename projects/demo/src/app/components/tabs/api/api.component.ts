@@ -7,7 +7,7 @@ import { DemoMethodConfig } from '@demo-types/demo-method.type';
 
 export interface IComponentDemoService {
   getApiConfig(): DemoControlConfig<unknown>[];
-  getMethodConfig(): DemoMethodConfig<unknown>[];
+  getMethodConfig?(): DemoMethodConfig[];
 }
 
 @Component({
@@ -18,12 +18,12 @@ export interface IComponentDemoService {
 })
 export class ApiComponent implements OnInit {
   protected _propConfig: unknown[] = [];
-  protected _methodConfig: unknown[] = [];
+  protected _methodConfig: DemoMethodConfig[] = [];
 
   private _service = inject(CURRENT_DEMO_SERVICE);
 
   public ngOnInit(): void {
-    this._methodConfig = this._service.getMethodConfig();
+    this._methodConfig = this._service.getMethodConfig?.() ?? [];
   }
 
 }

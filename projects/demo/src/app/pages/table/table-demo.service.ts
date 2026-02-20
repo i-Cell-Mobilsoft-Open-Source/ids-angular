@@ -43,12 +43,6 @@ export const translateLabelsToIntlPropNames = {
 export type TranslateLabelsToIntlPropNamesType = typeof translateLabelsToIntlPropNames;
 export type TranslateLabelsType = keyof TranslateLabelsToIntlPropNamesType;
 
-type TableMethodControls = {
-  expandAll: void;
-  collapseAll: void;
-  updateCellContents: void;
-};
-
 @Injectable({ providedIn: 'root' })
 export class TableDemoService {
   private _http = inject(HttpClient);
@@ -229,24 +223,24 @@ export class TableDemoService {
     },
   };
 
-  public readonly methodControlConfig: DemoMethodConfig<TableMethodControls> = {
-    expandAll: {
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
       name: 'expandAll()',
       description: 'Open up all row details.',
       returnType: 'void',
     },
-    collapseAll: {
+    {
       name: 'collapseAll()',
       description: 'Closes all opened row details.',
       returnType: 'void',
     },
-    updateCellContents: {
+    {
       name: 'updateCellContents()',
       description: 'Refresh rendered cell values.'+
       ' Useful if for eg. the `value` getter function is not pure and the values need to be refreshed manually.',
       returnType: 'void',
     },
-  };
+  ];
 
   public defaults = getDefaultFromDemoConfig<TableInputControls>(this.inputControlConfig);
 
@@ -256,7 +250,7 @@ export class TableDemoService {
     this.model = { ...this.defaults };
   }
 
-  public getMethodConfig(): DemoMethodConfig<TableMethodControls>[] {
+  public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
 }

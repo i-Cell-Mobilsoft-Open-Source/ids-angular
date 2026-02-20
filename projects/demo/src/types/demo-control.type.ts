@@ -22,6 +22,7 @@ export type DemoControlItem<T> = {
   min?: number,
   step?: number,
   onModelChange?: (() => void) | ((value?: T) => void),
+  hiddenInControls?: boolean,
 };
 
 export type DemoControlConfig<T> = {

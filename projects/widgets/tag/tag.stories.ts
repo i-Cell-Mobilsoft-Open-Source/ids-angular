@@ -34,9 +34,9 @@ export default {
           [size]="size"
           [variant]="variant"
         >
-          ${hasPrefixIcon ? '<ids-icon icon-leading fontIcon="search" aria-hidden="true" alt="" />' : ''}
+          ${hasPrefixIcon ? '<ids-icon fontSet="idsbase" icon-leading fontIcon="search" aria-hidden="true" alt="" />' : ''}
           ${label}
-          ${hasSuffixIcon ? '<ids-icon icon-trailing fontIcon="search" aria-hidden="true" alt="" />' : ''}
+          ${hasSuffixIcon ? '<ids-icon fontSet="idsbase" icon-trailing fontIcon="search" aria-hidden="true" alt="" />' : ''}
         </ids-tag>
       `,
     };

@@ -1,8 +1,8 @@
 :root {
-    --ids-comp-segmented-control-button-icon-typography-font-family-comfortable: I-DS-font-icon-remix;
-    --ids-comp-segmented-control-button-icon-typography-font-family-compact: I-DS-font-icon-remix;
-    --ids-comp-segmented-control-button-icon-typography-font-family-dense: I-DS-font-icon-remix;
-    --ids-comp-segmented-control-button-icon-typography-font-family-spacious: I-DS-font-icon-remix;
+    --ids-comp-segmented-control-button-icon-typography-font-family-comfortable: remixicon;
+    --ids-comp-segmented-control-button-icon-typography-font-family-compact: remixicon;
+    --ids-comp-segmented-control-button-icon-typography-font-family-dense: remixicon;
+    --ids-comp-segmented-control-button-icon-typography-font-family-spacious: remixicon;
     --ids-comp-segmented-control-button-icon-typography-font-size-comfortable: 16px;
     --ids-comp-segmented-control-button-icon-typography-font-size-compact: 16px;
     --ids-comp-segmented-control-button-icon-typography-font-size-dense: 16px;
@@ -115,10 +115,10 @@
     --ids-comp-segmented-control-button-size-padding-y-compact: 8px;
     --ids-comp-segmented-control-button-size-padding-y-dense: 4px;
     --ids-comp-segmented-control-button-size-padding-y-spacious: 8px;
-    --ids-comp-segmented-control-button-typography-font-family-comfortable: Inter;
-    --ids-comp-segmented-control-button-typography-font-family-compact: Inter;
-    --ids-comp-segmented-control-button-typography-font-family-dense: Inter;
-    --ids-comp-segmented-control-button-typography-font-family-spacious: Inter;
+    --ids-comp-segmented-control-button-typography-font-family-comfortable: inter;
+    --ids-comp-segmented-control-button-typography-font-family-compact: inter;
+    --ids-comp-segmented-control-button-typography-font-family-dense: inter;
+    --ids-comp-segmented-control-button-typography-font-family-spacious: inter;
     --ids-comp-segmented-control-button-typography-font-size-comfortable: 16px;
     --ids-comp-segmented-control-button-typography-font-size-compact: 14px;
     --ids-comp-segmented-control-button-typography-font-size-dense: 12px;
@@ -245,10 +245,10 @@
     --ids-comp-segmented-control-toggle-button-filled-color-fg-label-surface-focused: light-dark(#7e8797, #2b3039);
     --ids-comp-segmented-control-toggle-button-filled-color-fg-label-surface-hovered: light-dark(#7e8797, #2b3039);
     --ids-comp-segmented-control-toggle-button-filled-color-fg-label-surface-pressed: light-dark(#7e8797, #2b3039);
-    --ids-comp-segmented-control-toggle-button-icon-typography-font-family-comfortable: I-DS-font-icon-remix;
-    --ids-comp-segmented-control-toggle-button-icon-typography-font-family-compact: I-DS-font-icon-remix;
-    --ids-comp-segmented-control-toggle-button-icon-typography-font-family-dense: I-DS-font-icon-remix;
-    --ids-comp-segmented-control-toggle-button-icon-typography-font-family-spacious: I-DS-font-icon-remix;
+    --ids-comp-segmented-control-toggle-button-icon-typography-font-family-comfortable: remixicon;
+    --ids-comp-segmented-control-toggle-button-icon-typography-font-family-compact: remixicon;
+    --ids-comp-segmented-control-toggle-button-icon-typography-font-family-dense: remixicon;
+    --ids-comp-segmented-control-toggle-button-icon-typography-font-family-spacious: remixicon;
     --ids-comp-segmented-control-toggle-button-icon-typography-font-size-comfortable: 16px;
     --ids-comp-segmented-control-toggle-button-icon-typography-font-size-compact: 16px;
     --ids-comp-segmented-control-toggle-button-icon-typography-font-size-dense: 16px;
@@ -361,10 +361,10 @@
     --ids-comp-segmented-control-toggle-button-size-padding-y-compact: 8px;
     --ids-comp-segmented-control-toggle-button-size-padding-y-dense: 4px;
     --ids-comp-segmented-control-toggle-button-size-padding-y-spacious: 8px;
-    --ids-comp-segmented-control-toggle-button-typography-font-family-comfortable: Inter;
-    --ids-comp-segmented-control-toggle-button-typography-font-family-compact: Inter;
-    --ids-comp-segmented-control-toggle-button-typography-font-family-dense: Inter;
-    --ids-comp-segmented-control-toggle-button-typography-font-family-spacious: Inter;
+    --ids-comp-segmented-control-toggle-button-typography-font-family-comfortable: inter;
+    --ids-comp-segmented-control-toggle-button-typography-font-family-compact: inter;
+    --ids-comp-segmented-control-toggle-button-typography-font-family-dense: inter;
+    --ids-comp-segmented-control-toggle-button-typography-font-family-spacious: inter;
     --ids-comp-segmented-control-toggle-button-typography-font-size-comfortable: 16px;
     --ids-comp-segmented-control-toggle-button-typography-font-size-compact: 14px;
     --ids-comp-segmented-control-toggle-button-typography-font-size-dense: 12px;

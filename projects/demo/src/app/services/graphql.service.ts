@@ -1,5 +1,6 @@
 import { GET_COMPONENTS_LIST } from '../queries/get-components-list.query';
 import { GET_COMPONENTS } from '../queries/get-components.query';
+import { GET_GLOBALS } from '../queries/get-globals.query';
 import { GET_NAVIGATION } from '../queries/get-navigation.query';
 import { GET_PAGES } from '../queries/get-pages.query';
 
@@ -56,6 +57,21 @@ export interface StatamicComponentListItem {
   hero_image_dark?: { url: string };
 }
 
+export interface StatamicFooterGlobal {
+  footer_copyright?: string;
+  footer_certs?: Array<{ url: string }>;
+  footer_logo?: { url: string };
+  footer_contact_group?: {
+    company_name?: string;
+    company_address?: string;
+    company_email?: string;
+    company_phone_number?: string;
+    address_icon?: string;
+    email_icon?: string;
+    phone_icon?: string;
+  };
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -66,6 +82,7 @@ export class GraphqlService {
     return this._apollo.watchQuery({
       query: GET_COMPONENTS,
     }).valueChanges;
+
   }
 
   public getPages(): Observable<unknown> {
@@ -74,10 +91,18 @@ export class GraphqlService {
     }).valueChanges;
   }
 
+  public getGlobals(): Observable<unknown> {
+    return this._apollo.watchQuery({
+      query: GET_GLOBALS,
+    }).valueChanges;
+  }
+
   public getNavigation(): Observable<ApolloQueryResult<NavigationQueryResult>> {
+    ;
     return this._apollo.watchQuery<NavigationQueryResult>({
       query: GET_NAVIGATION,
     }).valueChanges;
+
   }
 
   public getComponentsList(): Observable<ApolloQueryResult<{ entries: { data: StatamicComponentListItem[] } }>> {
@@ -85,4 +110,11 @@ export class GraphqlService {
       query: GET_COMPONENTS_LIST,
     }).valueChanges;
   }
+
+  public getFooterGlobals(): Observable<ApolloQueryResult<{ globalSet: StatamicFooterGlobal }>> {
+    return this._apollo.watchQuery<{ globalSet: StatamicFooterGlobal }>({
+      query: GET_GLOBALS,
+    }).valueChanges;
+  }
+
 }

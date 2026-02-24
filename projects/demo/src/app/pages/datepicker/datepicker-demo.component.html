@@ -45,7 +45,9 @@
               [view]="_datepickerDemoService.datepickerModel.view"
               [formControl]="_datepickerDemoService.control"
             />
-            <ids-datepicker-trigger idsSuffix [for]="datepicker2" />
+            <ids-datepicker-trigger idsSuffix [for]="datepicker2">
+              <ids-icon slot="icon" aria-hidden="true" alt="" fontIcon="event" />
+            </ids-datepicker-trigger>
             <ids-error-message>
               <ids-error-def code="idsDateFormat">{{
                 "FORM_FIELD.ERROR.DATE_FORMAT" | translate: { fieldName: modelDrivenFieldName }

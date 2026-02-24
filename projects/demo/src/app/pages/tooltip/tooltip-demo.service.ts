@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -100,11 +101,33 @@ export class TooltipDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'show()',
+      description: 'Shows the tooltip.',
+      returnType: 'void',
+    },
+    {
+      name: 'hide()',
+      description: 'Hides the tooltip.',
+      returnType: 'void',
+    },
+    {
+      name: 'toggle()',
+      description: 'Toggles the visibility of the tooltip.',
+      returnType: 'void',
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<TooltipInputControls>(this.inputControlConfig);
 
   public model: TooltipInputControls = { ...this.defaults  };
 
   public reset(): void {
     this.model = { ...this.defaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodControlConfig];
   }
 }

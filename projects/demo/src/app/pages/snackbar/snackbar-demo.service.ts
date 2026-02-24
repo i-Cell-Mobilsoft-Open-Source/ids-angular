@@ -1,5 +1,6 @@
 import { computed, inject, Injectable, ViewContainerRef } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -61,7 +62,7 @@ export class SnackbarDemoService {
     },
     closeButtonLabel: {
       description: 'Custom close button. If any text is provided,' +
-      ' the close button will be a button with this text against the default "x" button',
+        ' the close button will be a button with this text against the default "x" button',
       type: 'string',
       default: '-',
       demoDefault: '',
@@ -104,8 +105,8 @@ export class SnackbarDemoService {
       disabled: true,
     },
     newestAtStartPosition: {
-      description: 'Whether the newest snackbar opens in start position, or not.'+
-      ' newestAtStartPosition is an application-wide default value. Can not overwrite at runtime.',
+      description: 'Whether the newest snackbar opens in start position, or not.' +
+        ' newestAtStartPosition is an application-wide default value. Can not overwrite at runtime.',
       type: 'boolean',
       default: defaultConfig.newestAtStartPosition,
       control: DemoControl.SWITCH,
@@ -121,14 +122,41 @@ export class SnackbarDemoService {
       step: 1,
     },
     useActualViewContainer: {
-      description: 'Snackbars open in snackbar group.'+
-      ' This group can connect to the viewport by default, or we can connect to a viewContainerRef.'+
-      ' With this boolean, we can switch between actual viewContainerRef or viewPort.',
+      description: 'Snackbars open in snackbar group.' +
+        ' This group can connect to the viewport by default, or we can connect to a viewContainerRef.' +
+        ' With this boolean, we can switch between actual viewContainerRef or viewPort.',
       type: 'boolean',
       default: true,
       control: DemoControl.SWITCH,
     },
   };
+
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'close()',
+      description: 'Closes the currently opened snackbar.',
+      returnType: 'void',
+    },
+    {
+      name: 'callAction(action: ()=>void)',
+      description: 'Calls the provided action.',
+      returnType: 'void',
+      parameters: ['action'],
+      parameterTypes: ['() => void'],
+      parameterDescriptions: ['The action to call.'],
+    },
+  ];
+
+  public readonly groupMethodControlConfig: DemoMethodConfig = [
+    {
+      name: 'closeSnackbar(id: number)',
+      description: 'Snackbar-group: Closes the snackbar at the given index.',
+      returnType: 'void',
+      parameters: ['id'],
+      parameterTypes: ['number'],
+      parameterDescriptions: ['The index of the snackbar to close.'],
+    },
+  ];
 
   public defaults = getDefaultFromDemoConfig<SnackbarInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<SnackbarHelperControls>(this.helperControlConfig);
@@ -177,5 +205,12 @@ export class SnackbarDemoService {
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [
+      this.methodControlConfig,
+      this.groupMethodControlConfig,
+    ];
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -130,6 +131,37 @@ export class PaginatorDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'stepNextPage()',
+      description: 'Navigates to the next page.',
+      returnType: 'void',
+    },
+    {
+      name: 'stepPreviousPage()',
+      description: 'Navigates to the previous page.',
+      returnType: 'void',
+    },
+    {
+      name: 'stepFirstPage()',
+      description: 'Navigates to the first page.',
+      returnType: 'void',
+    },
+    {
+      name: 'stepLastPage()',
+      description: 'Navigates to the last page.',
+      returnType: 'void',
+    },
+    {
+      name: 'stepPage(pageIndex: number)',
+      description: 'Navigates to the specified page index.',
+      parameters: ['pageIndex'],
+      parameterTypes: ['number'],
+      parameterDescriptions: ['The index of the page to navigate to.'],
+      returnType: 'void',
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<PaginatorInputControls>(this.inputControlConfig);
 
   public model: PaginatorInputControls = { ...this.defaults  };
@@ -155,5 +187,9 @@ export class PaginatorDemoService {
         list: pageSizeOptions,
       },
     };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodControlConfig];
   }
 }

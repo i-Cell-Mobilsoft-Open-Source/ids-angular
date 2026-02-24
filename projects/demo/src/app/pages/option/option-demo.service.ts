@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSizeType, IdsSize } from '@i-cell/ids-angular/core';
@@ -68,6 +69,69 @@ export class OptionDemoService {
     },
   };
 
+  public readonly optionMethodControls: DemoMethodConfig = [
+    {
+      name: 'focus(_origin?: FocusOrigin, options?: FocusOptions)',
+      description: 'Focuses the option.',
+      returnType: 'void',
+      parameters: [
+        '_origin?',
+        'options?',
+      ],
+      parameterTypes: [
+        'FocusOrigin',
+        'FocusOptions',
+      ],
+      parameterDescriptions: [
+        'The origin of the focus event.',
+        'Additional focus options.',
+      ],
+    },
+    {
+      name: 'selectViaInteraction()',
+      description: 'Selects the option as if it were selected by the user.',
+      returnType: 'void',
+    },
+    {
+      name: 'getHostElement()',
+      description: 'Returns the host element of the option.',
+      returnType: 'HTMLElement',
+    },
+    {
+      name: 'select(emitEvent=true)',
+      description: 'Selects the option.',
+      returnType: 'void',
+      parameters: ['emitEvent'],
+      parameterTypes: ['boolean'],
+      parameterDescriptions: ['Whether to emit the selection change event or not.'],
+    },
+    {
+      name: 'deselect(emitEvent=true)',
+      description: 'Deselects the option.',
+      returnType: 'void',
+      parameters: ['emitEvent'],
+      parameterTypes: ['boolean'],
+      parameterDescriptions: ['Whether to emit the selection change event or not.'],
+    },
+    {
+      name: 'setActiveStyles()',
+      description: 'Sets the active styles on the option.',
+      returnType: 'void',
+    },
+    {
+      name: 'setInactiveStyles()',
+      description: 'Sets the inactive styles on the option.',
+      returnType: 'void',
+    },
+    {
+      name: 'getLabel()',
+      description: 'Returns the label of the option.',
+      returnType: 'string',
+
+    },
+
+  ];
+
   public selectDefaults = getDefaultFromDemoConfig<OptionSelectControls>(this.selectControlConfig);
   public defaults = getDefaultFromDemoConfig<SampleOptionControls>(this.sampleInputControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<MultipleOptionControls>(this.multipleInputControlConfig);
@@ -75,6 +139,7 @@ export class OptionDemoService {
   public selectModel: OptionSelectControls = { ...this.selectDefaults };
   public sampleOptionModel: SampleOptionControls = { ...this.defaults };
   public multipleSelectionModel: MultipleOptionControls = { ...this.groupDefaults };
+
   public reset(): void {
     this.selectModel = { ...this.selectDefaults };
     this.sampleOptionModel = { ...this.defaults };
@@ -105,4 +170,8 @@ export class OptionDemoService {
     this.animals.land[2].value,
     this.animals.aquatic[1].value,
   ];
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.optionMethodControls];
+  }
 }

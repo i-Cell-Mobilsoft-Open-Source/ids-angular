@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import {
@@ -143,6 +144,94 @@ export class CheckboxDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'toggle()',
+      description: 'Toggles the checked state of the checkbox.',
+      returnType: 'void',
+    },
+    {
+      name: 'focus()',
+      description: 'Focuses the checkbox.',
+      returnType: 'void',
+    },
+    {
+      name: 'writeValue(value: boolean)',
+      description: 'Writes a new value to the element.',
+      parameters: ['value'],
+      parameterTypes: ['boolean'],
+      parameterDescriptions: ['The value to be written.'],
+      returnType: 'void',
+    },
+    {
+      name: 'registerOnChange(fn: ()=>void)',
+      description: 'Registers a callback function that should be called when the control\'s value changes in the UI.',
+      parameters: ['fn'],
+      parameterTypes: ['()=>void'],
+      parameterDescriptions: ['The callback function.'],
+      returnType: 'void',
+    },
+    {
+      name: 'registerOnTouched(fn: ()=>unknown)',
+      description: 'Registers a callback function that should be called when the control is touched.',
+      parameters: ['fn'],
+      parameterTypes: ['()=>unknown'],
+      parameterDescriptions: ['The callback function.'],
+      returnType: 'void',
+    },
+    {
+      name: 'setDisabledState(isDisabled: boolean)',
+      description: 'Sets the disabled state of the element.',
+      parameters: ['isDisabled'],
+      parameterTypes: ['boolean'],
+      parameterDescriptions: ['Whether the element should be disabled or not.'],
+      returnType: 'void',
+    },
+    {
+      name: 'select()',
+      description: 'Selects the checkbox.',
+      returnType: 'void',
+    },
+    {
+      name: 'deselect()',
+      description: 'Deselects the checkbox.',
+      returnType: 'void',
+    },
+    {
+      name: 'onBlur()',
+      description: 'Should be called when the checkbox loses focus.',
+      returnType: 'void',
+    },
+    {
+      name: 'onInputClick()',
+      description: 'Should be called when the checkbox input is clicked.',
+      returnType: 'void',
+    },
+    {
+      name: 'onTouchTargetClick()',
+      description: 'Should be called when the checkbox touch target is clicked.',
+      returnType: 'void',
+    },
+    {
+      name: 'displayedMessages()',
+      description: 'Returns the type of messages currently displayed by the checkbox.',
+      returnType: '"error" | "hint" | undefined',
+    },
+  ];
+
+  public readonly groupMethodControlConfig: DemoMethodConfig = [
+    {
+      name: 'selectAllChild()',
+      description: 'Checkbox-group: Selects all child checkboxes in the checkbox-group.',
+      returnType: 'void',
+    },
+    {
+      name: 'deselectAllChild()',
+      description: 'Checkbox-group: Deselects all child checkboxes in the checkbox-group.',
+      returnType: 'void',
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<CheckboxInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<CheckboxHelperControls>(this.helperControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<CheckboxGroupInputControls>(this.groupInputControlConfig);
@@ -179,4 +268,11 @@ export class CheckboxDemoService {
     bath: true,
     sleep: false,
   };
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [
+      this.methodControlConfig,
+      this.groupMethodControlConfig,
+    ];
+  }
 }

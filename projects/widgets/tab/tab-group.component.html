@@ -14,11 +14,11 @@
         @let tabLeadingIcon = item.leadingIcon();
         @let tabTrailingIcon = item.trailingIcon();
         @if (tabLeadingIcon) {
-          <ids-icon [fontIcon]="tabLeadingIcon" />
+          <ids-icon fontSet="idsbase" [fontIcon]="tabLeadingIcon" />
         }
         <span class="ids-tab__label">{{ item.label() }}</span>
         @if (tabTrailingIcon) {
-          <ids-icon [fontIcon]="tabTrailingIcon" />
+          <ids-icon fontSet="idsbase" [fontIcon]="tabTrailingIcon" />
         }
         <span class="ids-tab__indicator">
           <span class="ids-tab__line"></span>

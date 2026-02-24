@@ -8,7 +8,7 @@
 
 @if (_safeRemovable()) {
   <button type="button" idsIconButton (click)="remove()">
-    <ids-icon fontIcon="close" />
+    <ids-icon fontSet="idsbase" fontIcon="close" />
   </button>
 } @else {
   <ng-content select="button[idsIconButton]" />

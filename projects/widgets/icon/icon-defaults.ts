@@ -1,3 +1,4 @@
+import { IdsIconFontSet, IdsIconFontSetType } from './types/icon-font-set.type';
 import { IdsIconVariant, IdsIconVariantType } from './types/icon-variant.type';
 
 import { InjectionToken } from '@angular/core';
@@ -6,7 +7,8 @@ import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '
 export interface IdsIconDefaultConfig {
   size?: IdsSizeType
   sizeCollection?: IdsSizeCollectionType
-  variant?: IdsIconVariantType
+  variant?: IdsIconVariantType,
+  fontSet?: IdsIconFontSetType,
   iconAssetsPath: string
   fontNameMappings?: Record<string, string>
 }
@@ -24,6 +26,7 @@ export function IDS_ICON_DEFAULT_CONFIG_FACTORY(): Required<IdsIconDefaultConfig
     size: IdsSize.COMPACT,
     sizeCollection: IdsSizeCollection.SMALL,
     variant: IdsIconVariant.SURFACE,
+    fontSet: IdsIconFontSet.DEFAULT,
     iconAssetsPath: '',
     fontNameMappings: {},
   };

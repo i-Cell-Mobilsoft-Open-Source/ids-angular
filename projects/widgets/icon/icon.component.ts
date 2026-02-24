@@ -1,5 +1,6 @@
 import { IDS_ICON_DEFAULT_CONFIG, IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconDefaultConfig } from './icon-defaults';
 import { IDS_ICON_PARENT } from './tokens/icon-parent';
+import { IdsIconFontSetType } from './types/icon-font-set.type';
 import { IdsIconSource } from './types/icon-source.type';
 import { IdsIconVariantType } from './types/icon-variant.type';
 
@@ -40,6 +41,7 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public sizeCollection = input<IdsSizeCollectionType>(this._defaultConfig.sizeCollection);
   public variant = input<IdsIconVariantType>(this._defaultConfig.variant);
+  public fontSet = input<IdsIconFontSetType>(this._defaultConfig.fontSet);
   public fontIcon = input<string | null, string>(null, { transform: coerceStringAttribute });
   public svgIconName = input<string | null, string>(null, { alias: 'svgIcon', transform: coerceStringAttribute });
   public ariaHidden = input<boolean, unknown>(true, { alias: 'aria-hidden', transform: coerceBooleanAttribute });
@@ -62,6 +64,10 @@ export class IdsIconComponent extends ComponentBaseWithDefaults<IdsIconDefaultCo
   protected _hostClasses = computed(() => this._getHostClasses([
     [
       `${this.sizeCollection()}collection`,
+      this.size(),
+    ],
+    [
+      this.fontSet(),
       this.size(),
     ],
     this._parentOrSelfVariant(),

@@ -10,7 +10,7 @@
     [enableSorting]="false"
   >
     <ng-template let-row let-value="value" idsCellTemplate="default">
-      @if ((value) && value.length > 0) {
+      @if (value && value.length > 0) {
         <ul class="list-disc list-inside pl-4">
           @for (item of value; track item) {
             <li>

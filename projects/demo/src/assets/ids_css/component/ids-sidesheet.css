@@ -18,7 +18,7 @@
     --ids-comp-sidesheet-backdrop-orientation-right-size-padding-left-dense: 24px;
     --ids-comp-sidesheet-backdrop-orientation-right-size-padding-left-spacious: 24px;
     --ids-comp-sidesheet-container-color-bg-default: light-dark(#ffffff, #000000);
-    --ids-comp-sidesheet-container-color-border-surface-default: light-dark(#e2e8f0, #e2e8f0);
+    --ids-comp-sidesheet-container-color-border-surface-default: light-dark(#a3abba, #a3abba);
     --ids-comp-sidesheet-container-orientation-left-size-border-radius-left-comfortable: 0px;
     --ids-comp-sidesheet-container-orientation-left-size-border-radius-left-compact: 0px;
     --ids-comp-sidesheet-container-orientation-left-size-border-radius-left-dense: 0px;
@@ -68,7 +68,7 @@
     --ids-comp-sidesheet-container-orientation-size-width-dense: 320px;
     --ids-comp-sidesheet-container-orientation-size-width-spacious: 400px;
     --ids-comp-sidesheet-content-color-bg-default: #ffffff00;
-    --ids-comp-sidesheet-content-color-border-surface-default: light-dark(#e9edf2, #181b22);
+    --ids-comp-sidesheet-content-color-border-surface-default: light-dark(#a3abba, #2b3039);
     --ids-comp-sidesheet-content-fixed-size-padding-x-comfortable: 0px;
     --ids-comp-sidesheet-content-fixed-size-padding-x-compact: 0px;
     --ids-comp-sidesheet-content-fixed-size-padding-x-dense: 0px;
@@ -98,7 +98,7 @@
     --ids-comp-sidesheet-footer-border-width-dense: 1px;
     --ids-comp-sidesheet-footer-border-width-spacious: 1px;
     --ids-comp-sidesheet-footer-color-bg-default: #ffffff00;
-    --ids-comp-sidesheet-footer-color-border-surface-default: light-dark(#e9edf2, #181b22);
+    --ids-comp-sidesheet-footer-color-border-surface-default: light-dark(#a3abba, #2b3039);
     --ids-comp-sidesheet-footer-gap-comfortable: 8px;
     --ids-comp-sidesheet-footer-gap-compact: 8px;
     --ids-comp-sidesheet-footer-gap-dense: 8px;
@@ -152,7 +152,7 @@
     --ids-comp-sidesheet-header-subtitle-typography-line-height-compact: 24px;
     --ids-comp-sidesheet-header-subtitle-typography-line-height-dense: 24px;
     --ids-comp-sidesheet-header-subtitle-typography-line-height-spacious: 24px;
-    --ids-comp-sidesheet-header-title-color-fg-default: undefined;
+    --ids-comp-sidesheet-header-title-color-fg-default: light-dark(#15181f, #f5f7fa);
     --ids-comp-sidesheet-header-title-typography-font-family-comfortable: inter;
     --ids-comp-sidesheet-header-title-typography-font-family-compact: inter;
     --ids-comp-sidesheet-header-title-typography-font-family-dense: inter;

@@ -18,7 +18,7 @@
     --ids-comp-navigationrail-backdrop-orientation-right-size-padding-left-dense: 24px;
     --ids-comp-navigationrail-backdrop-orientation-right-size-padding-left-spacious: 24px;
     --ids-comp-navigationrail-container-color-bg-default: light-dark(#ffffff, #000000);
-    --ids-comp-navigationrail-container-color-border-surface-default: light-dark(#e2e8f0, #e2e8f0);
+    --ids-comp-navigationrail-container-color-border-surface-default: light-dark(#a3abba, #a3abba);
     --ids-comp-navigationrail-container-orientation-size-border-radius-comfortable: 0px;
     --ids-comp-navigationrail-container-orientation-size-border-radius-compact: 0px;
     --ids-comp-navigationrail-container-orientation-size-border-radius-dense: 0px;
@@ -68,7 +68,7 @@
     --ids-comp-navigationrail-container-orientation-size-width-dense: 256px;
     --ids-comp-navigationrail-container-orientation-size-width-spacious: 400px;
     --ids-comp-navigationrail-content-color-bg-default: #ffffff00;
-    --ids-comp-navigationrail-content-color-border-surface-default: light-dark(#e9edf2, #181b22);
+    --ids-comp-navigationrail-content-color-border-surface-default: light-dark(#a3abba, #2b3039);
     --ids-comp-navigationrail-content-fixed-size-padding-x-comfortable: 0px;
     --ids-comp-navigationrail-content-fixed-size-padding-x-compact: 0px;
     --ids-comp-navigationrail-content-fixed-size-padding-x-dense: 0px;
@@ -94,7 +94,7 @@
     --ids-comp-navigationrail-content-scrollable-size-padding-y-top-dense: 24px;
     --ids-comp-navigationrail-content-scrollable-size-padding-y-top-spacious: 24px;
     --ids-comp-navigationrail-footer-color-bg-default: #ffffff00;
-    --ids-comp-navigationrail-footer-color-border-surface-default: light-dark(#e9edf2, #181b22);
+    --ids-comp-navigationrail-footer-color-border-surface-default: light-dark(#a3abba, #2b3039);
     --ids-comp-navigationrail-footer-gap-comfortable: 8px;
     --ids-comp-navigationrail-footer-gap-compact: 8px;
     --ids-comp-navigationrail-footer-gap-dense: 8px;

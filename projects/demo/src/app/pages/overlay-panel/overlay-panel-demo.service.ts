@@ -144,4 +144,13 @@ export class OverlayPanelDemoService {
     this.menuItemModel = { ...this.menuItemDefaults };
     this.menuItemHelperModel = { ...this.menuItemHelperDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.overlayPanelInputControlConfig,
+      this.overlayPanelHelperControlConfig,
+      this.menuItemInputControlConfig,
+      this.menuItemHelperControlConfig,
+    ];
+  }
 }

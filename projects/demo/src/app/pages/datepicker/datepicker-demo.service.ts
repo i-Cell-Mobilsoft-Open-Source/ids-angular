@@ -72,4 +72,11 @@ export class DatepickerDemoService {
     this.input = '';
     this.control.setValue('');
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.formFieldInputControlConfig,
+      this.datepickerInputControlConfig,
+    ];
+  }
 }

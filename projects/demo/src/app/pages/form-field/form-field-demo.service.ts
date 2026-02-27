@@ -175,4 +175,12 @@ export class FormFieldDemoService {
     this.input = '';
     this.textarea.setValue('');
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.formFieldInputControlConfig,
+      this.formFieldHelperControlConfig,
+      this.inputInputControlConfig,
+    ];
+  }
 }

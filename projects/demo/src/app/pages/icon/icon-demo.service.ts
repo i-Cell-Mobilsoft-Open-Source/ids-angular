@@ -11,12 +11,12 @@ import { IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconVariant, IdsIconVariantType } f
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
 type IconInputControls = {
-  size: IdsSizeType,
-  sizeCollection: IdsSizeCollectionType,
-  variant: IdsIconVariantType,
-  fontIcon: string
-  svgIcon: string,
-  'aria-hidden': boolean,
+  size: IdsSizeType;
+  sizeCollection: IdsSizeCollectionType;
+  variant: IdsIconVariantType;
+  fontIcon: string;
+  svgIcon: string;
+  'aria-hidden': boolean;
 };
 @Injectable()
 export class IconDemoService {
@@ -72,29 +72,33 @@ export class IconDemoService {
   });
 
   public loadIcons(): void {
-    this._iconService.loadIcons().pipe(
-      takeUntilDestroyed(this._destroyRef),
-    ).subscribe((list: string[]) => {
+    this._iconService
+      .loadIcons()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((list: string[]) => {
+        this.inputControlConfig.update((currentConfig) => ({
+          ...currentConfig,
+          fontIcon: { ...currentConfig.fontIcon, list: list },
+          svgIcon: { ...currentConfig.svgIcon, list: list },
+        }));
 
-      this.inputControlConfig.update((currentConfig) => ({
-        ...currentConfig,
-        fontIcon: { ...currentConfig.fontIcon, list: list },
-        svgIcon: { ...currentConfig.svgIcon, list: list },
-      }));
+        const currentDefaults = getDefaultFromDemoConfig<IconInputControls>(this.inputControlConfig());
+        this.model = { ...currentDefaults };
 
-      const currentDefaults = getDefaultFromDemoConfig<IconInputControls>(this.inputControlConfig());
-      this.model = { ...currentDefaults };
-
-      this.isLoaded.set(true);
-    });
+        this.isLoaded.set(true);
+      });
   }
 
   public defaults = getDefaultFromDemoConfig<IconInputControls>(this.inputControlConfig());
 
-  public model: IconInputControls = { ...this.defaults  };
+  public model: IconInputControls = { ...this.defaults };
 
   public reset(): void {
     this.defaults = getDefaultFromDemoConfig<IconInputControls>(this.inputControlConfig());
     this.model = { ...this.defaults };
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig()];
   }
 }

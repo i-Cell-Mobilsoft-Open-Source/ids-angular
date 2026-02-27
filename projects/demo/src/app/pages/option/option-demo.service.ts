@@ -105,4 +105,12 @@ export class OptionDemoService {
     this.animals.land[2].value,
     this.animals.aquatic[1].value,
   ];
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.selectControlConfig,
+      this.sampleInputControlConfig,
+      this.multipleInputControlConfig,
+    ];
+  }
 }

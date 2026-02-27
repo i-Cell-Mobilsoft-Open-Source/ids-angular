@@ -164,4 +164,12 @@ export class SelectDemoService {
       this.animals.aquatic[1].value,
     ];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.formFieldInputControlConfig,
+      this.selectInputControlConfig,
+      this.selectHelperControlConfig,
+    ];
+  }
 }

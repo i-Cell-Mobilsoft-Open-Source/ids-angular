@@ -108,4 +108,11 @@ export class BreadcrumbDemoService {
     this.breadcrumbModel = { ...this.breadcrumbDefaults };
     this.overlayPanelModel = { ...this.overlayPanelDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.breadcrumbInputControlConfig,
+      this.overlayPanelInputControlConfig,
+    ];
+  }
 }

@@ -103,4 +103,12 @@ export class CardDemoService {
     this.mediaModel = { ...this.mediaDefaults };
     this.helperModel = { ...this.helperDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.mediaInputControlConfig,
+      this.helperControlConfig,
+    ];
+  }
 }

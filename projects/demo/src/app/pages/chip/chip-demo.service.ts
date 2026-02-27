@@ -177,4 +177,13 @@ export class ChipDemoService {
     console.info('chip removed:', event.chip.id(), label);
     this.chipList = this.chipList.toSpliced(index, 1);
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+      this.groupInputControlConfig,
+      this.groupHelperControlConfig,
+    ];
+  }
 }

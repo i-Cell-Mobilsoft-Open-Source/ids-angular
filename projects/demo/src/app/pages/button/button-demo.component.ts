@@ -11,7 +11,6 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-button-demo',
   imports: [
     TryoutComponent,
     IdsButtonComponent,

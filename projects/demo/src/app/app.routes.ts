@@ -1,3 +1,4 @@
+import { IComponentDemoService } from './components/tabs/api/api.component';
 import { AccordionDemoService } from './pages/accordion/accordion-demo.service';
 import { AutocompleteDemoService } from './pages/autocomplete/autocomplete-demo.service';
 import { AvatarDemoService } from './pages/avatar/avatar-demo.service';
@@ -36,7 +37,7 @@ import { TableDemoService } from './pages/table/table-demo.service';
 import { TagDemoService } from './pages/tag/tag-demo.service';
 import { TooltipDemoService } from './pages/tooltip/tooltip-demo.service';
 
-import { EnvironmentProviders, Provider, Type } from '@angular/core';
+import { EnvironmentProviders, InjectionToken, Provider, Type } from '@angular/core';
 import { Routes, Route } from '@angular/router';
 
 const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
@@ -80,6 +81,8 @@ const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
   'tooltip': () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
 };
 
+export const CURRENT_DEMO_SERVICE = new InjectionToken<IComponentDemoService>('CurrentDemoService');
+
 function buildComponentRoute(
   slug: string,
   demoService: Provider | EnvironmentProviders,
@@ -91,7 +94,10 @@ function buildComponentRoute(
   return {
     path: slug,
     component: ComponentDetailsComponent,
-    providers: [demoService],
+    providers: [
+      demoService,
+      { provide: CURRENT_DEMO_SERVICE, useExisting: demoService },
+    ],
     children: [
       {
         path: '', redirectTo: 'demo', pathMatch: 'full',

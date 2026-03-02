@@ -250,4 +250,11 @@ export class NotificationDemoService {
   public onRestoreButtonClick(): void {
     this.displayComponent.set(true);
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig(),
+      this.helperControlConfig,
+    ];
+  }
 }

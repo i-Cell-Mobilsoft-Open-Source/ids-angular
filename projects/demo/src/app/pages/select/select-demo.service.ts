@@ -12,33 +12,33 @@ const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 const selectDefaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
 type FormFieldInputControls = {
-  size: IdsSizeType,
-  variant: IdsFormFieldVariantType,
+  size: IdsSizeType;
+  variant: IdsFormFieldVariantType;
 };
 
 type SelectInputControls = {
-  placeholder: string,
-  required: boolean,
-  disabled: boolean,
-  readonly: boolean,
-  'aria-label': string,
-  'aria-labelledby': string,
-  typeaheadDebounceInterval: number,
-  canHandleSuccessState: boolean,
+  placeholder: string;
+  required: boolean;
+  disabled: boolean;
+  readonly: boolean;
+  'aria-label': string;
+  'aria-labelledby': string;
+  typeaheadDebounceInterval: number;
+  canHandleSuccessState: boolean;
 };
 
 type SelectHelperControls = {
-  useCustomTrigger: boolean,
+  useCustomTrigger: boolean;
 };
 
 type SampleOption = {
-  value: string
-  viewValue: string
+  value: string;
+  viewValue: string;
 };
 
 type AnimalOptions = {
-  land: SampleOption[]
-  aquatic: SampleOption[]
+  land: SampleOption[];
+  aquatic: SampleOption[];
 };
 
 @Injectable()

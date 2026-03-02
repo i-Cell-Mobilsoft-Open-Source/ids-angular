@@ -53,12 +53,10 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   public variant = input<IdsOverlayPanelVariantType>(this._defaultConfig.variant);
   public panelClasses = input<string>('');
   public width = input<string | number>();
+  public readonly overlayDir = viewChild(CdkConnectedOverlay);
 
   protected _hasCdkMenu = computed(() => !!this._cdkMenu());
-
   private _cdkMenu = contentChild(CdkMenu, { descendants: true });
-  private _overlayRef = viewChild(CdkConnectedOverlay);
-
   private _focusTrap = viewChild(CdkTrapFocus);
 
   constructor() {
@@ -71,13 +69,13 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
     });
 
     effect(() => {
-      const overlayRef = this._overlayRef();
+      const overlayDir = this.overlayDir();
       const overlayWidth = this.width();
 
       // apply width after the overlay has been rendered
       untracked(() => {
-        if (overlayRef && overlayWidth) {
-          overlayRef.width = overlayWidth;
+        if (overlayDir && overlayWidth) {
+          overlayDir.width = overlayWidth;
         }
       });
     });

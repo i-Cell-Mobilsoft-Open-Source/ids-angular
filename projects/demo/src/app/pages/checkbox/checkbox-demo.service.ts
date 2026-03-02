@@ -275,4 +275,12 @@ export class CheckboxDemoService {
       this.groupMethodControlConfig,
     ];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+      this.groupInputControlConfig,
+    ];
+  }
 }

@@ -131,4 +131,11 @@ export class SegmentedControlDemoService {
       this.itemMethodControlConfig,
     ];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+    ];
+  }
 }

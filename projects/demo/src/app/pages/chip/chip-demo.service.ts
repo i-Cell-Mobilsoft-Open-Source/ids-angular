@@ -190,4 +190,13 @@ export class ChipDemoService {
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+      this.groupInputControlConfig,
+      this.groupHelperControlConfig,
+    ];
+  }
 }

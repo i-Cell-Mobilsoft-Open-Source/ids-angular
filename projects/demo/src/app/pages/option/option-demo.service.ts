@@ -174,4 +174,12 @@ export class OptionDemoService {
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.optionMethodControls];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.selectControlConfig,
+      this.sampleInputControlConfig,
+      this.multipleInputControlConfig,
+    ];
+  }
 }

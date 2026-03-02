@@ -4,31 +4,38 @@ import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY, IdsPaginatorPageButtonAppearance, IdsPaginatorPageButtonAppearanceType, IdsPaginatorPageChangeEvent, IdsPaginatorVariant, IdsPaginatorVariantType } from '@i-cell/ids-angular/paginator';
+import {
+  IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY,
+  IdsPaginatorPageButtonAppearance,
+  IdsPaginatorPageButtonAppearanceType,
+  IdsPaginatorPageChangeEvent,
+  IdsPaginatorVariant,
+  IdsPaginatorVariantType,
+} from '@i-cell/ids-angular/paginator';
 
 const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
 
 type PaginatorInputControls = {
-  length: number,
-  pageSize: number
-  pageSizeOptions: number[]
-  showFirstLastButton: boolean
-  showPrevNextLabel: boolean
-  showPageInfo: boolean
-  showPageButtons: boolean
-  showAllPages: boolean
-  maxDisplayedItemCount: number
-  size: IdsSizeType
-  variant: IdsPaginatorVariantType
-  pageButtonAppearance: IdsPaginatorPageButtonAppearanceType
-  debounceTime: number,
-  disabled: boolean,
-  compactLayout: boolean,
+  length: number;
+  pageSize: number;
+  pageSizeOptions: number[];
+  showFirstLastButton: boolean;
+  showPrevNextLabel: boolean;
+  showPageInfo: boolean;
+  showPageButtons: boolean;
+  showAllPages: boolean;
+  maxDisplayedItemCount: number;
+  size: IdsSizeType;
+  variant: IdsPaginatorVariantType;
+  pageButtonAppearance: IdsPaginatorPageButtonAppearanceType;
+  debounceTime: number;
+  disabled: boolean;
+  compactLayout: boolean;
 };
 
 @Injectable()
 export class PaginatorDemoService {
-  public inputControlConfig: DemoControlConfig<PaginatorInputControls> ={
+  public inputControlConfig: DemoControlConfig<PaginatorInputControls> = {
     length: {
       description: 'The total number of items to paginate.',
       type: 'number',
@@ -164,7 +171,7 @@ export class PaginatorDemoService {
 
   public defaults = getDefaultFromDemoConfig<PaginatorInputControls>(this.inputControlConfig);
 
-  public model: PaginatorInputControls = { ...this.defaults  };
+  public model: PaginatorInputControls = { ...this.defaults };
 
   public reset(): void {
     this.model = { ...this.defaults };
@@ -191,5 +198,9 @@ export class PaginatorDemoService {
 
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
   }
 }

@@ -156,6 +156,14 @@ export class OverlayPanelDemoService {
 
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.overlayPanelControlConfig];
+  }
 
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.overlayPanelInputControlConfig,
+      this.overlayPanelHelperControlConfig,
+      this.menuItemInputControlConfig,
+      this.menuItemHelperControlConfig,
+    ];
   }
 }

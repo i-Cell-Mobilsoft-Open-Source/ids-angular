@@ -133,4 +133,9 @@ export class AccordionDemoService {
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodConfig];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
+  }
 }
+

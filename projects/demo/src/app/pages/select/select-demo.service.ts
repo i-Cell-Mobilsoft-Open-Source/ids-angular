@@ -241,4 +241,12 @@ export class SelectDemoService {
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.selectMethodControlConfig];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.formFieldInputControlConfig,
+      this.selectInputControlConfig,
+      this.selectHelperControlConfig,
+    ];
+  }
 }

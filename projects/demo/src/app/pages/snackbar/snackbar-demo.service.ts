@@ -213,4 +213,11 @@ export class SnackbarDemoService {
       this.groupMethodControlConfig,
     ];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+    ];
+  }
 }

@@ -197,4 +197,12 @@ export class FormFieldDemoService {
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.formFieldMethodControlConfig];
   };
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.formFieldInputControlConfig,
+      this.formFieldHelperControlConfig,
+      this.inputInputControlConfig,
+    ];
+  }
 }

@@ -107,4 +107,11 @@ export class DialogDemoService {
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+    ];
+  }
 }

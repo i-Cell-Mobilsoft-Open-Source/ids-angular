@@ -1,5 +1,6 @@
 import { CURRENT_DEMO_SERVICE } from '../../../app.routes';
 import { MethodTableComponent } from '../../method-table/method-table.component';
+import { PropTableComponent } from '../../prop-table/prop-table.component';
 
 import { Component, inject, OnInit } from '@angular/core';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
@@ -13,7 +14,10 @@ export interface IComponentDemoService {
 @Component({
   selector: 'app-api',
   standalone: true,
-  imports: [MethodTableComponent],
+  imports: [
+    MethodTableComponent,
+    PropTableComponent,
+  ],
   templateUrl: './api.component.html',
 })
 export class ApiComponent implements OnInit {
@@ -24,6 +28,7 @@ export class ApiComponent implements OnInit {
 
   public ngOnInit(): void {
     this._methodConfig = this._service.getMethodConfig?.() ?? [];
+    this._propConfig = this._service.getApiConfig();
   }
 
 }

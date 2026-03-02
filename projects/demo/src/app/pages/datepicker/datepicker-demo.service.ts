@@ -157,4 +157,11 @@ export class DatepickerDemoService {
       this.pageSelectorMethodConfig,
     ];
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.formFieldInputControlConfig,
+      this.datepickerInputControlConfig,
+    ];
+  }
 }

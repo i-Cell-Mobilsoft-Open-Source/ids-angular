@@ -23,5 +23,5 @@ export class IdsDatepickerTriggerComponent {
 
   public datepicker = input.required<IdsDatepickerDirective>({ alias: 'for' });
   public ariaLabel = input<string | null>(null, { alias: 'aria-label' });
-  public buttonSize = input<IdsSizeType>('dense');
+  public size = input<IdsSizeType>('dense');
 }

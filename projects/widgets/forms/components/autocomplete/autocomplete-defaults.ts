@@ -1,12 +1,11 @@
+import { AbstractErrorStateMatcher, ErrorStateMatcher } from '../../common/error/error-state';
+import { AbstractSuccessStateMatcher, SuccessStateMatcher } from '../../common/success/success-state';
+
 import { InjectionToken } from '@angular/core';
 
 export interface IdsAutocompleteDefaultConfig {
-  minChars?: number;
-  hintLoading: string;
-  hintNoResults: string;
-  hintMinChars: string;
-  hintMaxLength: string;
-  typeaheadDebounceInterval?: number;
+  errorStateMatcher?: typeof AbstractErrorStateMatcher
+  successStateMatcher?: typeof AbstractSuccessStateMatcher
 }
 
 export const IDS_AUTOCOMPLETE_DEFAULT_CONFIG = new InjectionToken<IdsAutocompleteDefaultConfig>(
@@ -19,11 +18,7 @@ export const IDS_AUTOCOMPLETE_DEFAULT_CONFIG = new InjectionToken<IdsAutocomplet
 
 export function IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY(): Required<IdsAutocompleteDefaultConfig> {
   return {
-    minChars: 1,
-    hintLoading: 'Loading...',
-    hintNoResults: 'No results found',
-    hintMinChars: 'Please provide at least 1 characters',
-    hintMaxLength: 'Too many results, please refine your search',
-    typeaheadDebounceInterval: 300,
+    errorStateMatcher: ErrorStateMatcher,
+    successStateMatcher: SuccessStateMatcher,
   };
 }

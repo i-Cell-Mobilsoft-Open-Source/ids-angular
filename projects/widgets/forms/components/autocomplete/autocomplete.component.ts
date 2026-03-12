@@ -1,78 +1,72 @@
 import {
+  IDS_AUTOCOMPLETE_DEFAULT_CONFIG,
   IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY,
   IdsAutocompleteDefaultConfig,
-  IDS_AUTOCOMPLETE_DEFAULT_CONFIG,
 } from './autocomplete-defaults';
-import { IDS_AUTOCOMPLETE_LOADER } from './tokens/autocomplete-loader.token';
+import { IdsAutocompleteTriggerDirective } from './autocomplete-trigger.directive';
+import { IdsOptionValue } from './types/option-value.type';
 
-import { ErrorStateMatcher } from '../../common/error/error-state';
-import { SuccessStateMatcher } from '../../common/success/success-state';
-import { IdsOptionComponent, _getOptionScrollPosition } from '../../components/option/option.component';
-import { IDS_OPTION_PARENT_COMPONENT } from '../../components/option/tokens/option-parent';
-import { IdsOptionSelectionChange } from '../../components/option/types/option-events.class';
-import { IdsFormFieldActionDirective } from '../../directives/form-field-action.directive';
+import { AbstractErrorStateMatcher } from '../../common/error/error-state';
+import { AbstractSuccessStateMatcher } from '../../common/success/success-state';
 import { formFieldControlClass, IdsFormFieldControl } from '../form-field/form-field-control';
 import { IdsFormFieldComponent } from '../form-field/form-field.component';
 import { IDS_FORM_FIELD_CONTROL } from '../form-field/tokens/form-field-control';
-import { IdsInputDirective } from '../input/input.directive';
+import { IdsOptionGroupComponent } from '../option/option-group.component';
+import { IdsOptionComponent } from '../option/option.component';
+import { IDS_OPTION_GROUP } from '../option/tokens/option-group';
+import { IDS_OPTION_PARENT_COMPONENT } from '../option/tokens/option-parent';
 
-import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { SelectionModel } from '@angular/cdk/collections';
-import { hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  computed,
-  effect,
+  contentChildren,
   ElementRef,
-  forwardRef,
   inject,
-  input,
-  isDevMode,
-  model,
-  OnInit,
-  signal,
-  untracked,
   viewChild,
-  viewChildren,
-  ViewEncapsulation,
-  OnDestroy,
+  model,
+  computed,
+  input,
+  effect,
+  untracked,
+  booleanAttribute,
+  forwardRef,
+  AfterViewInit,
+  OnInit,
 } from '@angular/core';
-import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ValueChangeEvent } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceNumberAttribute } from '@i-cell/ids-angular/core';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';
-import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner';
-import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
-import { filter } from 'rxjs';
 
 const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
-const LIVE_ANNOUNCE_DURATION_MS = 10000;
 
 @Component({
-  selector: `ids-autocomplete[ngModel]:not([formControl]):not([formControlName]),
-              ids-autocomplete[formControl]:not([ngModel]):not([formControlName]),
-              ids-autocomplete[formControlName]:not([ngModel]):not([formControl])`,
-  imports: [
-    CdkOverlayOrigin,
-    FormsModule,
-    IdsFormFieldActionDirective,
-    IdsInputDirective,
-    IdsIconComponent,
-    IdsIconButtonComponent,
-    IdsOverlayPanelComponent,
-    IdsOptionComponent,
-    IdsSpinnerComponent,
-    IdsTooltipDirective,
-  ],
-  templateUrl: './autocomplete.component.html',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'ids-autocomplete',
+  imports: [IdsOverlayPanelComponent],
+  template: `
+    @if (panelOpen()) {
+      <ids-overlay-panel
+        #overlayPanel
+        appearance="elevated"
+        [origin]="_overlayOrigin"
+        [open]="panelOpen()"
+        [size]="parentSize()"
+        [panelClasses]="_panelClasses()"
+      >
+        <div
+          #panel
+          class="ids-autocomplete-panel"
+          role="listbox"
+          [id]="id() + '-panel'"
+          [attr.aria-multiselectable]="multiSelect()"
+          [attr.aria-label]="ariaLabel() || null"
+          [attr.aria-labelledby]="ariaLabelledby() || null"
+        >
+          <ng-content />
+        </div>
+      </ids-overlay-panel>
+    }
+  `,
+  exportAs: 'idsAutocomplete',
   providers: [
     { provide: IDS_FORM_FIELD_CONTROL, useExisting: IdsAutocompleteComponent },
     { provide: IDS_OPTION_PARENT_COMPONENT, useExisting: IdsAutocompleteComponent },
@@ -82,165 +76,65 @@ const LIVE_ANNOUNCE_DURATION_MS = 10000;
       multi: true,
     },
   ],
-  host: {
-    role: 'combobox',
-    'aria-autocomplete': 'list',
-    'aria-haspopup': 'listbox',
-    '[attr.tabindex]': 'disabled() ? -1 : tabIndex()',
-    '[attr.aria-controls]': 'overlayPanel().open() ? id() + "-panel" : null',
-    '[attr.aria-owns]': 'overlayPanel().open() ? id() + "-panel" : null',
-    '[attr.aria-expanded]': 'overlayPanel().open()',
-    '[attr.aria-label]': 'ariaLabel() || null',
-    '[attr.aria-labelledby]': 'ariaLabelledby() || null',
-    '[attr.aria-required]': 'required().toString()',
-    '[attr.aria-disabled]': 'disabled().toString()',
-    '[attr.aria-invalid]': 'hasErrorState()',
-    '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
-    '(keydown)': '_handleKeydown($event)',
-    '(focus)': 'focus()',
-    '(blur)': '_onBlur()',
-  },
 })
 export class IdsAutocompleteComponent
   extends IdsFormFieldControl<IdsAutocompleteDefaultConfig>
-  implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+  implements ControlValueAccessor, OnInit, AfterViewInit {
   protected override get _hostName(): string {
     return 'autocomplete';
   }
 
-  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_AUTOCOMPLETE_DEFAULT_CONFIG);
-  protected readonly _elementRef = inject(ElementRef);
-  private readonly _changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly _liveAnnouncer = inject(LiveAnnouncer);
-  private readonly _parentFormField = inject(IdsFormFieldComponent);
-
-  protected _preferredOverlayOrigin: CdkOverlayOrigin | ElementRef | undefined;
-  protected _overlayWidth: string | number = 0;
-
-  /**
-   * Minimum number of characters to initiate actual search.
-   * Warning is shown when input length is not met.
-   * (Resource loader/stream function needs to be adjusted accordingly!)
-   */
-  public minChars = input<number, unknown>(1, { transform: coerceNumberAttribute });
-  /** Max length of options allowed to show. Warning is shown when available options is higher than this number  */
-  public maxLength = input<number | null, number>(null, { transform: coerceNumberAttribute });
-  public multiSelect = input<boolean>(false);
   public ariaLabel = input<string>('', { alias: 'aria-label' });
   public ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
-  public ariaLabelClearButton = input<string>('Clear');
-  public ariaLabelToggleButton = input<string>('Toggle');
-  public valueCompareFn = input<(o1: unknown, o2: unknown) => boolean>((o1: unknown, o2: unknown) => o1 === o2);
-  public sortCompareFn = input<(a: string, b: string, options: Readonly<string[]>) => number>();
+  public multiSelect = input<boolean, boolean>(false, { transform: booleanAttribute });
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
-  public typeaheadDebounceInterval = input<number, unknown>(this._defaultConfig.typeaheadDebounceInterval, {
-    transform: coerceNumberAttribute,
-  });
-
-  public hintLoading = input<string>(this._defaultConfig.hintLoading);
-  public hintNoResults = input<string>(this._defaultConfig.hintNoResults);
-  public hintMinChars = input<string>(this._defaultConfig.hintMinChars);
-  public hintMaxLength = input<string>(this._defaultConfig.hintMaxLength);
-  public panelClasses = input<string>('');
-
-  public parentSize = computed(() => this._parentFormField.parentOrSelfSize());
-  public parentVariant = computed(() => this._parentFormField.parentOrSelfVariant());
-  public readonly errorStateMatcher = signal(inject(ErrorStateMatcher));
-  public readonly successStateMatcher = signal(inject(SuccessStateMatcher));
-  public options = viewChildren<IdsOptionComponent>(IdsOptionComponent);
-  public overlayPanel = viewChild.required(IdsOverlayPanelComponent);
-  public onContainerClick = (): void => {};
-
-  protected _hostClasses = computed(() =>
-    this._getHostClasses(
-      [
-        this.parentSize(),
-        this.parentVariant(),
-        this.disabled() ? 'disabled' : null,
-        this.readonly() ? 'readonly' : null,
-      ],
-      [formFieldControlClass],
-    ),
+  public sortCompareFn = input<(a: IdsOptionValue, b: IdsOptionValue) => number>((a: IdsOptionValue, b: IdsOptionValue) =>
+    a.viewValue.localeCompare(b.viewValue),
   );
 
+  public valueCompareFn = input<(o1: unknown, o2: unknown) => boolean>(
+    (o1: unknown, o2: unknown) => JSON.stringify(o1) === JSON.stringify(o2),
+  );
+
+  public trigger = input.required<IdsAutocompleteTriggerDirective>();
+  public panelClasses = input<string>('');
+
+  public panelOpen = model(false);
+  public options = contentChildren(IdsOptionComponent, { descendants: true });
+  public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
+  public overlayPanel = viewChild<IdsOverlayPanelComponent>('overlayPanel');
+  public panel = viewChild('panel', { read: ElementRef<HTMLElement> });
+  public parentSize = computed(() => this._parentFormField.parentOrSelfSize());
+  public parentVariant = computed(() => this._parentFormField.parentOrSelfVariant());
+
+  public onChange: (value: unknown) => void = () => {};
+  public onTouched: () => unknown = () => {};
+
+  protected _overlayOrigin!: ElementRef;
+  private readonly _parentFormField = inject(IdsFormFieldComponent);
+
+  // holds actual value internally
+  private _value: unknown | unknown[];
+
+  // declarations of IdsFormFieldControl variables
+  protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_AUTOCOMPLETE_DEFAULT_CONFIG);
+  public readonly errorStateMatcher = input<AbstractErrorStateMatcher>(inject(this._defaultConfig.errorStateMatcher));
+  public readonly successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultConfig.successStateMatcher));
+  protected readonly _elementRef = inject(ElementRef);
+  protected _hostClasses = computed(() => this._getHostClasses([this.disabled() ? 'disabled' : null], [formFieldControlClass]));
   protected _panelClasses = computed(() => [
-    'ids-overlay-panel__autocomplete-panel',
+    'ids-autocomplete-overlay-panel',
     this.panelClasses(),
   ].join(' '));
 
-  private _focused = signal<boolean>(false);
-  private _canOpen = computed(() => !this.overlayPanel().open() && !this.disabled() && !this.readonly() && this.options().length > 0);
-  private _panel = viewChild('overlay', { read: ElementRef<HTMLElement> });
-  private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
-  private _inputElemment = viewChild('fallbackOverlayOrigin', { read: ElementRef<HTMLInputElement> });
-
-  protected _resource = rxResource({
-    defaultValue: [],
-    params: () => ({ search: this._searchText() }),
-    stream: inject(IDS_AUTOCOMPLETE_LOADER),
-  });
-
-  private _rawValue: unknown | unknown[];
-  private _selectionModel?: SelectionModel<string>;
-  private _onChange: (value: unknown) => void = () => {};
-  private _onTouched: () => unknown = () => {};
-
-  protected get _empty(): boolean {
-    return Boolean(this._selectionModel?.isEmpty());
-  }
-
-  public get selected(): string | string[] | undefined {
-    return this.multiSelect() ? this._selectionModel?.selected : this._selectionModel?.selected?.[0];
-  }
-
-  protected _searchText = model<string>('');
-
-  protected get _triggerValue(): string {
-    if (this._empty) {
-      return '';
-    }
-
-    if (this.multiSelect()) {
-      const selectedOptions = this._selectionModel?.selected;
-      return selectedOptions?.join(', ') || '';
-    }
-
-    return this._selectionModel?.selected?.[0] || '';
-  }
-
   constructor() {
     super();
-
     effect(() => {
-      this._keyManager?.withTypeAhead(this.typeaheadDebounceInterval());
-    });
-
-    effect(() => {
-      const options = this.options();
+      const overlayPanelOpen = this.overlayPanel()?.open() ?? false;
 
       untracked(() => {
-        if (options.length > 0) {
-          this._initKeyManager();
-          this.options().forEach((option) => {
-            if (this._selectionModel?.selected.includes(option.viewValue())) {
-              option.selected.set(true);
-            }
-          });
-          this._subscribeOptionChanges();
-        }
-      });
-    });
-
-    effect(() => {
-      const searchText = this._searchText();
-
-      untracked(() => {
-        const control = this.ngControl()?.control;
-        const controlValue = control?.value;
-
-        if (controlValue && searchText !== controlValue) {
-          control.setValue(null);
-          this._clearSelection();
+        if (!overlayPanelOpen && this.panelOpen()) {
+          this.panelOpen.set(false);
         }
       });
     });
@@ -248,24 +142,12 @@ export class IdsAutocompleteComponent
 
   public ngOnInit(): void {
     if (!this._parentFormField) {
-      throw this._createHostError('Select must be in a form field');
+      throw this.createHostError('Select must be in a form field');
     }
-    this._selectionModel = new SelectionModel<string>(this.multiSelect(), undefined, false, this.valueCompareFn());
-    queueMicrotask(() => {
-      const control = this.ngControl()?.control;
-      if (control) {
-        control.events
-          .pipe(
-            filter((event) => event instanceof ValueChangeEvent),
-            takeUntilDestroyed(this._destroyRef),
-          )
-          .subscribe(() => this._changeDetectorRef.markForCheck());
-      }
-    });
-    this._initErrorStateTracker();
   }
 
   public ngAfterViewInit(): void {
+    this._initErrorStateTracker();
     queueMicrotask(() => {
       const controlDir = this.ngControl();
       if (controlDir?.control) {
@@ -279,388 +161,93 @@ export class IdsAutocompleteComponent
     this._successStateTracker?.updateSuccessState();
   }
 
-  public ngOnDestroy(): void {
-    this._keyManager?.destroy();
-  }
-
-  private _initKeyManager(): void {
-    this._keyManager = new ActiveDescendantKeyManager<IdsOptionComponent>(this.options())
-      .withTypeAhead(this.typeaheadDebounceInterval())
-      .withVerticalOrientation()
-      .withHorizontalOrientation('ltr')
-      .withHomeAndEnd()
-      .withPageUpDown()
-      .withAllowedModifierKeys(['shiftKey'])
-      .skipPredicate(this._skipPredicate);
-
-    this._keyManager.change.subscribe(() => {
-      if (this.overlayPanel().open() && this._panel()) {
-        this._scrollOptionIntoView(this._keyManager?.activeItemIndex || 0);
-      }
-    });
-  }
-
-  private _subscribeOptionChanges(): void {
-    this.options().forEach((option) => {
-      option.onSelectionChange.subscribe((change) => {
-        this._handleOptionChange(change);
-      });
-    });
-  }
-
-  private _handleOptionChange(change: IdsOptionSelectionChange): void {
-    const { source, selected, isUserInput } = change;
-    if (!this.multiSelect()) {
-      this._clearSelection();
-    }
-    source.selected.set(selected);
-
-    if (isUserInput) {
-      this._keyManager?.setActiveItem(source);
-    }
-
-    if (isUserInput && !this.multiSelect() && this.overlayPanel().open()) {
-      this.close();
-    }
-
-    if (this.multiSelect()) {
-      this._sortValues();
-    }
-
-    if (selected) {
-      this._selectionModel?.select(source.viewValue());
-      this._searchText.set(source.viewValue());
-    } else {
-      this._selectionModel?.deselect(source.viewValue());
-    }
-    this._handleChange();
-    this._onTouched();
-    this._inputElemment()?.nativeElement.blur();
-    this.overlayPanel().open.set(false);
-  }
-
-  protected _handleKeydown(event: KeyboardEvent): void {
-    if (!this.disabled() && !this.readonly()) {
-      this.overlayPanel().open() ? this._handleOpenedPanelKeydown(event) : this._handleClosedPanelKeydown(event);
-      // announce number of options when a key is pressed
-      this._liveAnnouncer.announce(
-        this.options()
-          .filter((option) => !option.disabled)
-          .length.toString(),
-        LIVE_ANNOUNCE_DURATION_MS,
-      );
-    }
-  }
-
-  private _handleClosedPanelKeydown(event: KeyboardEvent): void {
-    const key = event.key;
-    const targetElement = event.target as HTMLElement;
-    const isButtonTarget = targetElement.localName === 'button';
-
-    if (isButtonTarget && (key === 'Enter' || key === ' ')) {
-      event.preventDefault();
-      targetElement.click();
-      targetElement.blur();
-      return;
-    }
-
-    const manager = this._keyManager;
-    const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp' || key === 'ArrowLeft' || key === 'ArrowRight';
-    const isOpenKey = key === 'Enter' || key === ' ';
-
-    if (
-      (!manager?.isTyping() && isOpenKey && !hasModifierKey(event)) ||
-      isArrowKey ||
-      this.options().length > 0 ||
-      this._resource.value().length > 0
-    ) {
-      if (isArrowKey || isOpenKey) {
-        event.preventDefault();
-      }
-      this.open();
-    } else if (!this.multiSelect()) {
-      const previouslySelectedOption = this.selected;
-      manager?.onKeydown(event);
-      const selectedOption = this.selected as string;
-
-      if (selectedOption && previouslySelectedOption !== selectedOption) {
-        this._liveAnnouncer.announce(selectedOption, LIVE_ANNOUNCE_DURATION_MS);
-      }
-    }
-  }
-
-  private _handleOpenedPanelKeydown(event: KeyboardEvent): void {
-    const key = event.key;
-    const targetElement = event.target as HTMLElement;
-    const isButtonTarget = targetElement.localName === 'button';
-
-    if (isButtonTarget && (key === 'Enter' || key === ' ')) {
-      event.preventDefault();
-      targetElement.click();
-      targetElement.blur();
-      return;
-    }
-
-    const manager = this._keyManager;
-    const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp';
-    const isTyping = manager?.isTyping();
-
-    if (isArrowKey && event.altKey) {
-      event.preventDefault();
-      this.close();
-    } else if (!isTyping && (key === 'Enter' || key === ' ') && manager?.activeItem && !hasModifierKey(event)) {
-      event.preventDefault();
-      manager.activeItem.selectViaInteraction();
-    } else if (!isTyping && this.multiSelect() && key === 'a' && event.ctrlKey) {
-      event.preventDefault();
-      const hasDeselectedOptions = this.options().some((opt) => !opt.disabled && !opt.selected());
-
-      this.options().forEach((option) => {
-        if (!option.disabled) {
-          hasDeselectedOptions ? option.select() : option.deselect();
-        }
-      });
-    } else {
-      const previouslyFocusedIndex = manager?.activeItemIndex;
-
-      manager?.onKeydown(event);
-
-      if (
-        this.multiSelect() &&
-        isArrowKey &&
-        event.shiftKey &&
-        manager?.activeItem &&
-        manager?.activeItemIndex !== previouslyFocusedIndex
-      ) {
-        manager?.activeItem.selectViaInteraction();
-      }
-    }
-  }
-
-  private _scrollOptionIntoView(index: number): void {
-    const option = this.options()[index];
-
-    if (option) {
-      const panel: HTMLElement = this._panel()!.nativeElement;
-      const element = option.getHostElement();
-
-      if (index === 0) {
-        panel.scrollTop = 0;
-      } else {
-        panel.scrollTop = _getOptionScrollPosition(element.offsetTop, element.offsetHeight, panel.scrollTop, panel.offsetHeight);
-      }
-    }
-  }
-
-  private _sortValues(): void {
-    if (this.multiSelect()) {
-      const options = this.options().map((option) => option.viewValue());
-
-      const sortComparator = this.sortCompareFn();
-      this._selectionModel?.sort((a, b) => (sortComparator ? sortComparator(a, b, options) : options.indexOf(a) - options.indexOf(b)));
-    }
-  }
-
-  private _getOverlayWidth(preferredOrigin: ElementRef<ElementRef> | CdkOverlayOrigin | undefined): string | number {
-    const refToMeasure = preferredOrigin instanceof CdkOverlayOrigin ? preferredOrigin.elementRef : preferredOrigin || this._elementRef;
-    return refToMeasure.nativeElement.getBoundingClientRect().width;
-  }
-
-  public toggle(): void {
-    this.overlayPanel().open() ? this.close() : this.open();
-  }
-
-  public open(): void {
-    if (!this._canOpen()) {
-      return;
-    }
-    if (this._parentFormField) {
-      this._preferredOverlayOrigin = this._parentFormField?.getConnectedOverlayOrigin();
-    }
-
-    this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
-    this.overlayPanel().open.set(true);
-    this._keyManager?.withHorizontalOrientation(null);
-    this._highlightCorrectOption();
-    this._changeDetectorRef.markForCheck();
-  }
-
-  public close(): void {
-    if (this.overlayPanel().open()) {
-      this.overlayPanel().open.set(false);
-      this._changeDetectorRef.markForCheck();
-      this._onTouched();
-    }
-  }
-
-  public clear(): void {
-    this._searchText.set('');
-  }
-
   // #region ControlValueAccessor implementation
   public writeValue(value: unknown | unknown[]): void {
-    this._setSelectionByValue(value);
+    if (value !== null) {
+      this._patchValue(value);
+    } else {
+      this.trigger()?.clear();
+    }
+    this._value = value;
   }
 
-  public registerOnChange(fn: () => void): void {
-    this._onChange = fn;
+  public registerOnChange(fn: (value: unknown) => void): void {
+    this.onChange = fn;
   }
 
   public registerOnTouched(fn: () => unknown): void {
-    this._onTouched = fn;
+    this.onTouched = fn;
   }
 
-  public setDisabledState(isDisabled: boolean): void {
+  public setDisabledState?(isDisabled: boolean): void {
     this._disabled.set(isDisabled);
-    this._changeDetectorRef.markForCheck();
   }
   // #endregion
 
-  private _setSelectionByValue(value: unknown | unknown[]): void {
-    this.options().forEach((option) => {
-      option.setInactiveStyles();
-      option.selected.set(false);
-    });
-    this._selectionModel?.clear();
-    this._rawValue = value;
-
-    if (this.options().length === 0) {
-      return;
-    }
-
-    if (this.multiSelect() && value) {
-      if (!Array.isArray(value)) {
-        throw this._createHostError('value must be an array in multiple-selection mode');
-      }
-
-      value.forEach((currentValue: unknown) => this._selectValue(currentValue));
-      this._sortValues();
-    } else {
-      const correspondingOption = this._selectValue(value);
-      if (correspondingOption) {
-        this._keyManager?.updateActiveItem(correspondingOption);
-      } else if (!this.overlayPanel().open()) {
-        this._keyManager?.updateActiveItem(-1);
-      }
-    }
+  public handleChange(value: unknown | unknown[]): void {
+    this._value = value;
+    this.onChange(value);
   }
 
-  private _selectValue(value: unknown): IdsOptionComponent | undefined {
-    const valueCompareFn = this.valueCompareFn();
-    const correspondingOption = this.options().find((option) => {
-      if (this._selectionModel?.isSelected(option.viewValue())) {
-        return false;
-      }
-
-      try {
-        return valueCompareFn?.(option.value(), value);
-      } catch(error) {
-        if (isDevMode()) {
-          console.warn(error);
-        }
-        return false;
-      }
-    });
-
-    if (correspondingOption) {
-      correspondingOption.selected.set(true);
-      this._selectionModel?.select(correspondingOption.viewValue());
+  // #region IdsFormFieldControl implementation
+  public onContainerClick = (): void => {
+    if (!this.readonly() && !this.disabled() && this.panelOpen()) {
+      this.trigger().focus();
     }
-
-    return correspondingOption;
-  }
-
-  private _clearSelection(): void {
-    this._selectionModel?.clear();
-    this.options().forEach((option) => {
-      option.selected.set(false);
-    });
-  }
-
-  private _handleChange(): void {
-    const selectionModelValues = this._selectionModel?.selected;
-    if (this.multiSelect()) {
-      this._onChange(selectionModelValues);
-    } else {
-      this._onChange(selectionModelValues?.[0]);
-    }
-    this._changeDetectorRef.markForCheck();
-  }
-
-  private _skipPredicate = (option: IdsOptionComponent): boolean => {
-    if (this.overlayPanel().open()) {
-      return false;
-    }
-
-    return option.disabledInput();
   };
+  // #endregion
 
-  private _highlightCorrectOption(): void {
-    if (this._keyManager) {
-      if (this._empty) {
-        let firstEnabledOptionIndex = -1;
-        for (let index = 0; index < this.options().length; index++) {
-          const option = this.options()[index]!;
-          if (!option.disabled) {
-            firstEnabledOptionIndex = index;
-            break;
+  // #region required as `IDS_OPTION_PARENT`, but not used here as it cannot handle option content changes.
+  // Selection is handled by `_updateCurrentSelection` method of `AutocompleteTriggerDirective`
+  public isOptionPreSelectedByValue(): boolean {
+    return false;
+  }
+  // #endregion
+
+  public setScrollTop(scrollTop: number): void {
+    if (this.panel()) {
+      this.panel()!.nativeElement.scrollTop = scrollTop;
+    }
+  }
+
+  public getScrollTop(): number {
+    return this.panel() ? this.panel()?.nativeElement.scrollTop : 0;
+  }
+
+  public setPanelOpen(): void {
+    this._overlayOrigin = this._parentFormField?.getConnectedOverlayOrigin();
+    this.overlayPanel()?.overlayDir()?.overlayRef?.updateSize({ width: this._overlayOrigin.nativeElement.getBoundingClientRect().width });
+    this._observeOverlayOrigin();
+    this.panelOpen.set(true);
+  }
+
+  public createHostError(message: string): Error {
+    throw this._createHostError(message);
+  }
+
+  private _observeOverlayOrigin(): void {
+    const observer = new ResizeObserver(() => {
+      this.overlayPanel()?.overlayDir()?.overlayRef?.updatePosition();
+      this.overlayPanel()?.overlayDir()?.overlayRef?.updateSize({ width: this._overlayOrigin.nativeElement.getBoundingClientRect().width });
+    });
+
+    observer.observe(this._overlayOrigin.nativeElement);
+  }
+
+  // "async" way to patch value to ensure options are loaded before setting selection
+  private _patchValue(value: unknown | unknown[]): void {
+    const patchEffect = effect(
+      () => {
+        const options = this.options();
+
+        untracked(() => {
+          if (options.length > 0) {
+            this.trigger().setSelectionByValue(value);
+            patchEffect.destroy();
           }
-        }
-
-        this._keyManager.setActiveItem(firstEnabledOptionIndex);
-      } else {
-        if (this._selectionModel) {
-          const activeItem = this.options().find((option) => this._selectionModel?.isSelected(option.viewValue()));
-          if (activeItem) {
-            this._keyManager.setActiveItem(activeItem);
-          }
-        }
-      }
-    }
-  }
-
-  public isOptionPreSelectedByValue(optionValue: unknown): boolean {
-    if (this._rawValue === undefined) {
-      return false;
-    }
-
-    if (this.multiSelect() && Array.isArray(this._rawValue)) {
-      return this._rawValue.some((value) => optionValue != null && value === optionValue);
-    }
-    return optionValue === this._rawValue;
-  }
-
-  protected _onFocus(): void {
-    if (!this.disabled()) {
-      this._focused.set(true);
-    }
-  }
-
-  protected _onBlur(): void {
-    this._focused.set(false);
-    this._keyManager?.cancelTypeahead();
-
-    if (!this.disabled() && !this.overlayPanel().open()) {
-      this._onTouched();
-      this._changeDetectorRef.markForCheck();
-    }
-  }
-
-  protected _getAriaActiveDescendant(): string | null {
-    if (this.overlayPanel().open() && this._keyManager?.activeItem) {
-      return this._keyManager.activeItem.id();
-    }
-
-    return null;
-  }
-
-  public focus(options?: FocusOptions): void {
-    this._elementRef.nativeElement.focus(options);
-  }
-
-  protected _onInputClick(): void {
-    if (!this._focused() && !this.readonly() && !this.disabled() && this._searchText().length) {
-      this.open();
-    }
+        });
+      },
+      { injector: this._injector, manualCleanup: true },
+    );
   }
 }

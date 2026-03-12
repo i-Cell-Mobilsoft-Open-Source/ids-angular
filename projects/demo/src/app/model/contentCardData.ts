@@ -23,4 +23,10 @@ export interface ContentCardData {
   imageBGTransparent?: boolean
   appearance?: 'filled' | 'elevated';
   filledInContainer?: boolean;
+  last_modified?: string;
+  date?: string;
+  tags?: Array<{
+    id?: number;
+    title?: string;
+  }>;
 }

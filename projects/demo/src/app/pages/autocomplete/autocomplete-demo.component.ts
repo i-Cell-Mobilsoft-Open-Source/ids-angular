@@ -9,7 +9,18 @@ import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject, model, TemplateRef, untracked, viewChild, ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsDividerComponent } from '@i-cell/ids-angular/divider/public-api';
-import { IdsAutocompleteChipListComponent, IdsAutocompleteComponent, IdsAutocompleteControlsComponent, IdsAutocompleteHintComponent, IdsAutocompleteTriggerDirective, IdsErrorDefinitionDirective, IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent } from '@i-cell/ids-angular/forms';
+import {
+  IdsAutocompleteChipListComponent,
+  IdsAutocompleteComponent,
+  IdsAutocompleteHintComponent,
+  IdsAutocompleteTriggerDirective,
+  IdsErrorDefinitionDirective,
+  IdsErrorMessageComponent,
+  IdsFormFieldComponent,
+  IdsHintMessageComponent,
+  IdsLabelDirective,
+  IdsOptionComponent,
+} from '@i-cell/ids-angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -21,7 +32,6 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IdsAutocompleteChipListComponent,
     IdsAutocompleteComponent,
-    IdsAutocompleteControlsComponent,
     IdsAutocompleteHintComponent,
     IdsAutocompleteTriggerDirective,
     IdsDividerComponent,

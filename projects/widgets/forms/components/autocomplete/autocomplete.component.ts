@@ -35,13 +35,23 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceNumberAttribute } from '@i-cell/ids-angular/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';
+import { IdsSpinnerComponent, IdsSpinnerVariant, IdsSpinnerVariantType } from '@i-cell/ids-angular/spinner';
+import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-autocomplete',
-  imports: [IdsOverlayPanelComponent],
+  imports: [
+    IdsIconComponent,
+    IdsIconButtonComponent,
+    IdsOverlayPanelComponent,
+    IdsSpinnerComponent,
+    IdsTooltipDirective,
+  ],
   template: `
     @if (panelOpen()) {
       <ids-overlay-panel
@@ -65,6 +75,41 @@ const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
         </div>
       </ids-overlay-panel>
     }
+    <span class="ids-autocomplete-suffix">
+      @if (trigger().selected.length > 0) {
+        <button
+          type="button"
+          idsIconButton
+          [appearance]="appearance()"
+          [variant]="parentVariant()"
+          [size]="parentSize()"
+          [disabled]="disabled()"
+          [ariaLabel]="ariaLabelClear()"
+          [idsTooltip]="ariaLabelClear()"
+          [idsTooltipDisabled]="!ariaLabelClear()"
+          [idsTooltipIgnoreClipped]="true"
+          (click)="trigger().clear()"
+        >
+          <ids-icon alt="" aria-hidden="true" fontIcon="close" />
+        </button>
+      }
+      @if (isLoading()) {
+        <ids-spinner
+          sizeCollection="small"
+          [size]="parentSize()"
+          [variant]="spinnerVariant()"
+          [isTrack]="true"
+          [aria-label]="ariaLabelLoading()"
+        />
+      } @else {
+        <ids-icon
+          alt=""
+          aria-hidden="true"
+          [size]="parentSize()"
+          [fontIcon]="trigger().autocomplete().panelOpen() ? 'chevron-up' : 'chevron-down'"
+        />
+      }
+    </span>
   `,
   exportAs: 'idsAutocomplete',
   providers: [
@@ -86,6 +131,8 @@ export class IdsAutocompleteComponent
 
   public ariaLabel = input<string>('', { alias: 'aria-label' });
   public ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
+  public ariaLabelClear = input<string>('');
+  public ariaLabelLoading = input<string>('');
   public multiSelect = input<boolean, boolean>(false, { transform: booleanAttribute });
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public sortCompareFn = input<(a: IdsOptionValue, b: IdsOptionValue) => number>((a: IdsOptionValue, b: IdsOptionValue) =>
@@ -104,9 +151,13 @@ export class IdsAutocompleteComponent
   public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
   public overlayPanel = viewChild<IdsOverlayPanelComponent>('overlayPanel');
   public panel = viewChild('panel', { read: ElementRef<HTMLElement> });
+
+  public appearance = input<IdsIconButtonAppearanceType>(IdsIconButtonAppearance.STANDARD);
   public parentSize = computed(() => this._parentFormField.parentOrSelfSize());
   public parentVariant = computed(() => this._parentFormField.parentOrSelfVariant());
+  public spinnerVariant = input<IdsSpinnerVariantType>(IdsSpinnerVariant.SURFACE);
 
+  public isLoading = input<boolean, boolean>(false, { transform: booleanAttribute });
   public onChange: (value: unknown) => void = () => {};
   public onTouched: () => unknown = () => {};
 
@@ -121,7 +172,13 @@ export class IdsAutocompleteComponent
   public readonly errorStateMatcher = input<AbstractErrorStateMatcher>(inject(this._defaultConfig.errorStateMatcher));
   public readonly successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultConfig.successStateMatcher));
   protected readonly _elementRef = inject(ElementRef);
-  protected _hostClasses = computed(() => this._getHostClasses([this.disabled() ? 'disabled' : null], [formFieldControlClass]));
+  protected _hostClasses = computed(() =>
+    this._getHostClasses([
+      this.parentSize(),
+      this.disabled() ? 'disabled' : null,
+    ], [formFieldControlClass]),
+  );
+
   protected _panelClasses = computed(() => [
     'ids-autocomplete-overlay-panel',
     this.panelClasses(),
@@ -190,8 +247,13 @@ export class IdsAutocompleteComponent
   }
 
   // #region IdsFormFieldControl implementation
-  public onContainerClick = (): void => {
-    if (!this.readonly() && !this.disabled() && this.panelOpen()) {
+  public onContainerClick = (event: Event): void => {
+    if (!this.readonly() && !this.disabled()) {
+      const target = event.target as HTMLElement;
+      // 'clear' button should not trigger focus on the input
+      if (target.parentElement?.tagName === 'BUTTON' || (target.tagName === 'IDS-ICON' && target.parentElement?.tagName === 'BUTTON')) {
+        return;
+      }
       this.trigger().focus();
     }
   };

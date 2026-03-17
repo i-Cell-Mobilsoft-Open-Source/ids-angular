@@ -5,9 +5,11 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
-import { debounceTime, distinctUntilChanged, EMPTY, map, Observable, Subject } from 'rxjs';
+import { IdsSpinnerVariantType, IdsSpinnerVariant } from '@i-cell/ids-angular/spinner';
+import { debounceTime, delay, distinctUntilChanged, EMPTY, map, Observable, Subject, tap } from 'rxjs';
 
 const USER_INPUT_DEBOUNCE_TIME = 300;
+const SIMULATED_LOADING_TIME = 300;
 
 const OPTIONS = [
   'Accordion',
@@ -62,7 +64,7 @@ type AutocompleteHelperControls = {
   hint: string;
   limit: number;
   ariaLabelClearButton: string;
-  ariaLabelToggleButton: string;
+  spinnerVariant: IdsSpinnerVariantType;
   hintLoading: string;
   hintNoResults: string;
   hintMinChars: string;
@@ -145,10 +147,12 @@ export class AutocompleteDemoService {
       type: 'string',
       default: 'Clear',
     },
-    ariaLabelToggleButton: {
-      description: 'Aria label for the toggle button',
-      type: 'string',
-      default: 'Toggle',
+    spinnerVariant: {
+      description: 'Variant of the spinner displayed in the autocomplete field.',
+      type: 'IdsSpinnerVariantType',
+      default: IdsSpinnerVariant.SURFACE,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsSpinnerVariant),
     },
     hintLoading: {
       description: 'Hint text displayed while loading options.',
@@ -188,7 +192,10 @@ export class AutocompleteDemoService {
     this.options$ = this.input$.pipe(
       distinctUntilChanged(),
       debounceTime(USER_INPUT_DEBOUNCE_TIME),
+      tap(() => this.isLoading.set(true)),
+      delay(SIMULATED_LOADING_TIME),
       map((value) => this._fixedOptionsListFilterFn(OPTIONS, value)),
+      tap(() => this.isLoading.set(false)),
     );
   }
 

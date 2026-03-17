@@ -1,7 +1,7 @@
 import { IdsAutocompleteTriggerDirective } from './autocomplete-trigger.directive';
 import { IdsOptionValue } from './types/option-value.type';
 
-import { booleanAttribute, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { IdsChipAppearance, IdsChipAppearanceType, IdsChipComponent, IdsChipVariant, IdsChipVariantType } from '@i-cell/ids-angular/chip';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
@@ -19,6 +19,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
         [appearance]="appearance()"
         [size]="size()"
         [variant]="variant()"
+        [disabled]="autocompleteTrigger().autocomplete().disabled()"
         [removable]="true"
         (removed)="autocompleteTrigger().removeOption(option)"
       >
@@ -30,7 +31,6 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 export class IdsAutocompleteChipListComponent {
   public autocompleteTrigger = input.required<IdsAutocompleteTriggerDirective>({ alias: 'for' });
   public options = input<IdsOptionValue[]>([]);
-  public disabled = input<boolean, boolean>(false, { transform: booleanAttribute });
   public appearance = input<IdsChipAppearanceType>(IdsChipAppearance.OUTLINED);
   public size = input<IdsSizeType>(IdsSize.COMPACT);
   public variant = input<IdsChipVariantType>(IdsChipVariant.SURFACE);

@@ -7,13 +7,14 @@ import { IdsOptionSelectionChange } from '../option/types/option-events.class';
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { computed, Directive, effect, ElementRef, inject, input, isDevMode, OnDestroy, OnInit, Renderer2, untracked } from '@angular/core';
+import { afterNextRender, computed, Directive, effect, ElementRef, inject, Injector, input, isDevMode, OnDestroy, OnInit, Renderer2, untracked } from '@angular/core';
 
 const LIVE_ANNOUNCER_DURATION = 10000;
 
 @Directive({
   selector: 'input[idsAutocompleteTriggerFor]',
   host: {
+    class: 'ids-form-field-control',
     '[attr.role]': '_disabled() ? null : "combobox"',
     '[attr.autocomplete]': '_disabled() ? "off" : "auto"',
     '[attr.aria-autocomplete]': '_disabled() ? null : "list"',
@@ -31,7 +32,6 @@ const LIVE_ANNOUNCER_DURATION = 10000;
     '(keydown)': '_handleKeydown($event)',
     '(focus)': 'focus()',
     '(blur)': '_onBlur()',
-    '(click)': '_handleClick()',
   },
   exportAs: 'idsAutocompleteTrigger',
 })
@@ -44,6 +44,7 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
   private _selectionModel?: SelectionModel<IdsOptionValue>;
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
   private readonly _renderer = inject(Renderer2);
+  private readonly _injector = inject(Injector);
 
   public get selected(): IdsOptionValue[] {
     return this._selectionModel?.selected ?? [];
@@ -106,10 +107,10 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
     this._keyManager?.withHorizontalOrientation(null);
 
     // wait for opening panel...
-    setTimeout(() => {
+    afterNextRender(() => {
       this._scrollOptionIntoView(this._keyManager?.activeItemIndex ?? 0);
       this._highlightCorrectOption();
-    });
+    }, { injector: this._injector });
   }
 
   public close(): void {
@@ -172,12 +173,6 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
   protected _onBlur(): void {
     if (!this._disabled()) {
       this.autocomplete().onTouched();
-    }
-  }
-
-  protected _handleClick(): void {
-    if (!this.autocomplete().panelOpen()) {
-      this.open();
     }
   }
 

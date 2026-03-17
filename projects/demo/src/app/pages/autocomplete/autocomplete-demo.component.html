@@ -11,62 +11,54 @@
           @let label = "Input with autocomplete";
           <ids-form-field [size]="_autocompleteDemoService.model.size" [variant]="_autocompleteDemoService.model.variant">
             <ids-label>{{ label }}</ids-label>
-            <span>
-              @if (_autocompleteDemoService.model.multiSelect) {
-                <ids-autocomplete-chip-list [for]="autocompleteTrigger" />
-              }
-              <input
-                #autocompleteTrigger="idsAutocompleteTrigger"
-                type="text"
-                id="autocomplete_widget__input"
-                [placeholder]="_autocompleteDemoService.helperModel.placeholder"
-                [idsAutocompleteTriggerFor]="autoComplete"
-                (input)="_autocompleteDemoService.inputChange($event)"
-              />
-              <ids-autocomplete
-                #autoComplete="idsAutocomplete"
-                [trigger]="autocompleteTrigger"
-                [multiSelect]="_autocompleteDemoService.model.multiSelect"
-                [disabled]="_autocompleteDemoService.model.disabled"
-                [required]="_autocompleteDemoService.model.required"
-                [panelClasses]="'max-h-[50vh]'"
-                [(ngModel)]="_value"
-              >
-                @let options = (_autocompleteDemoService.options$ | async) ?? [];
-                @if (_autocompleteDemoService.isLoading()) {
-                  <ids-autocomplete-hint>
-                    {{ _autocompleteDemoService.helperModel.hintLoading }}
-                  </ids-autocomplete-hint>
-                } @else if (_autocompleteDemoService.input().length < _autocompleteDemoService.helperModel.minChars) {
-                  <ids-autocomplete-hint>
-                    {{ _autocompleteDemoService.helperModel.hintMinChars }}
-                  </ids-autocomplete-hint>
-                } @else if (!options.length) {
-                  <ids-autocomplete-hint>
-                    {{ _autocompleteDemoService.helperModel.hintNoResults }}
-                  </ids-autocomplete-hint>
-                } @else {
-                  @if (options.length >= _autocompleteDemoService.helperModel.limit) {
-                    <ids-autocomplete-hint>
-                      {{ _autocompleteDemoService.helperModel.hintTooManyResults }}
-                    </ids-autocomplete-hint>
-                    <ids-divider variant="surface" />
-                  }
-                  @for (option of options; track $index) {
-                    <ids-option [value]="option.value" [viewValue]="option.key">{{ option.key }}</ids-option>
-                  }
-                }
-              </ids-autocomplete>
-            </span>
-            <ids-autocomplete-controls
-              [for]="autocompleteTrigger"
-              [isLoading]="_autocompleteDemoService.isLoading()"
-              [disabled]="autoComplete.disabled()"
-              [size]="_autocompleteDemoService.model.size"
-              [variant]="_autocompleteDemoService.model.variant"
-              [ariaLabelClear]="_autocompleteDemoService.helperModel.ariaLabelClearButton"
-              [ariaLabelToggle]="_autocompleteDemoService.helperModel.ariaLabelToggleButton"
+            @if (_autocompleteDemoService.model.multiSelect) {
+              <ids-autocomplete-chip-list [for]="autocompleteTrigger" />
+            }
+            <input
+              #autocompleteTrigger="idsAutocompleteTrigger"
+              type="text"
+              id="autocomplete_widget__input"
+              [placeholder]="_autocompleteDemoService.helperModel.placeholder"
+              [idsAutocompleteTriggerFor]="autoComplete"
+              (input)="_autocompleteDemoService.inputChange($event)"
             />
+            <ids-autocomplete
+              #autoComplete="idsAutocomplete"
+              [trigger]="autocompleteTrigger"
+              [multiSelect]="_autocompleteDemoService.model.multiSelect"
+              [disabled]="_autocompleteDemoService.model.disabled"
+              [required]="_autocompleteDemoService.model.required"
+              [panelClasses]="'max-h-[50vh]'"
+              [ariaLabelClear]="_autocompleteDemoService.helperModel.ariaLabelClearButton"
+              [spinnerVariant]="_autocompleteDemoService.helperModel.spinnerVariant"
+              [isLoading]="_autocompleteDemoService.isLoading()"
+              [(ngModel)]="_value"
+            >
+              @let options = (_autocompleteDemoService.options$ | async) ?? [];
+              @if (_autocompleteDemoService.isLoading()) {
+                <ids-autocomplete-hint>
+                  {{ _autocompleteDemoService.helperModel.hintLoading }}
+                </ids-autocomplete-hint>
+              } @else if (_autocompleteDemoService.input().length < _autocompleteDemoService.helperModel.minChars) {
+                <ids-autocomplete-hint>
+                  {{ _autocompleteDemoService.helperModel.hintMinChars }}
+                </ids-autocomplete-hint>
+              } @else if (!options.length) {
+                <ids-autocomplete-hint>
+                  {{ _autocompleteDemoService.helperModel.hintNoResults }}
+                </ids-autocomplete-hint>
+              } @else {
+                @if (options.length >= _autocompleteDemoService.helperModel.limit) {
+                  <ids-autocomplete-hint>
+                    {{ _autocompleteDemoService.helperModel.hintTooManyResults }}
+                  </ids-autocomplete-hint>
+                  <ids-divider variant="surface" />
+                }
+                @for (option of options; track $index) {
+                  <ids-option [value]="option.value" [viewValue]="option.key">{{ option.key }}</ids-option>
+                }
+              }
+            </ids-autocomplete>
             @if (_autocompleteDemoService.helperModel.hint) {
               <ids-hint-message>
                 {{ _autocompleteDemoService.helperModel.hint }}

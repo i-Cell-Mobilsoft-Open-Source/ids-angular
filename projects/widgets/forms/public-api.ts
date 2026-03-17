@@ -3,7 +3,6 @@ export * from './common/success/success-state';
 export * from './components/autocomplete/autocomplete.component';
 export * from './components/autocomplete/autocomplete-trigger.directive';
 export * from './components/autocomplete/autocomplete-chip-list.component';
-export * from './components/autocomplete/autocomplete-controls.component';
 export * from './components/autocomplete/autocomplete-hint.component';
 export * from './components/autocomplete/autocomplete-defaults';
 export * from './components/fieldset/fieldset-row/fieldset-row.component';

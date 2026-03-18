@@ -1,33 +1,79 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
-import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
-import { IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/forms/components/autocomplete/autocomplete-defaults';
-import { Subject } from 'rxjs';
+import { IdsSpinnerVariantType, IdsSpinnerVariant } from '@i-cell/ids-angular/spinner';
+import { debounceTime, delay, distinctUntilChanged, EMPTY, map, Observable, Subject, tap } from 'rxjs';
 
-const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
+const USER_INPUT_DEBOUNCE_TIME = 300;
+const SIMULATED_LOADING_TIME = 300;
+
+const OPTIONS = [
+  'Accordion',
+  'Autocomplete',
+  'Avatar',
+  'Badge',
+  'Breadcrumb',
+  'Button',
+  'Card',
+  'Chip',
+  'Checkbox',
+  'Date Picker',
+  'Dialog',
+  'Divider',
+  'Fieldset',
+  'Form Field',
+  'Icon',
+  'Icon button',
+  'Menu Item',
+  'Message',
+  'Notification',
+  'Option',
+  'Overlay panel',
+  'Paginator',
+  'Radio',
+  'Scrollbar',
+  'Segmented Control',
+  'Segmented Control Toggle',
+  'Select',
+  'Side nav',
+  'Side Sheet',
+  'Snackbar',
+  'Spinner',
+  'Switch',
+  'Tab',
+  'Table',
+  'Tag',
+  'Tooltip',
+].map((option) => ({ key: option, value: option }));
 
 type AutocompleteInputControls = {
   size: IdsSizeType;
   variant: IdsFormFieldVariantType;
   disabled: boolean;
   required: boolean;
+  multiSelect: boolean;
 };
 
 type AutocompleteHelperControls = {
-  name: string;
   placeholder: string;
   minChars: number;
-  maxLength: number;
+  hint: string;
+  limit: number;
   ariaLabelClearButton: string;
-  ariaLabelToggleButton: string;
+  spinnerVariant: IdsSpinnerVariantType;
   hintLoading: string;
   hintNoResults: string;
   hintMinChars: string;
-  hintMaxLength: string;
+  hintTooManyResults: string;
+};
+
+type InputOption = {
+  key: string;
+  value: unknown;
 };
 
 @Injectable()
@@ -62,14 +108,20 @@ export class AutocompleteDemoService {
       default: false,
       control: DemoControl.SWITCH,
     },
+    multiSelect: {
+      description: 'Whether the field allows multiple selections.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+      onModelChange: (value) => {
+        if (value !== undefined) {
+          this.multiSelectSignal.set(value);
+        }
+      },
+    },
   };
 
   public readonly helperControlConfig: DemoControlConfig<AutocompleteHelperControls> = {
-    name: {
-      description: 'Name of the field',
-      type: 'string',
-      default: 'Autocomplete field',
-    },
     placeholder: {
       description: 'Placeholder text for the autocomplete input',
       type: 'string',
@@ -78,10 +130,15 @@ export class AutocompleteDemoService {
     minChars: {
       description: 'Minimum number of characters before autocomplete activates',
       type: 'number',
-      default: defaultConfig.minChars,
+      default: 0,
     },
-    maxLength: {
-      description: 'Maximum length of the options is shown',
+    hint: {
+      description: 'Hint text for the autocomplete input',
+      type: 'string',
+      default: 'You can narrow suggestions by typing.',
+    },
+    limit: {
+      description: 'Hint shown if the number of suggestions exceeds this limit',
       type: 'number',
       default: 10,
     },
@@ -90,114 +147,61 @@ export class AutocompleteDemoService {
       type: 'string',
       default: 'Clear',
     },
-    ariaLabelToggleButton: {
-      description: 'Aria label for the toggle button',
-      type: 'string',
-      default: 'Toggle',
+    spinnerVariant: {
+      description: 'Variant of the spinner displayed in the autocomplete field.',
+      type: 'IdsSpinnerVariantType',
+      default: IdsSpinnerVariant.SURFACE,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsSpinnerVariant),
     },
     hintLoading: {
       description: 'Hint text displayed while loading options.',
       type: 'string',
-      default: defaultConfig.hintLoading,
+      default: 'Loading...',
     },
     hintNoResults: {
       description: 'Hint text displayed when no results are found.',
       type: 'string',
-      default: defaultConfig.hintNoResults,
+      default: 'No results found',
     },
     hintMinChars: {
       description: 'Hint text displayed when minimum number of characters before autocomplete activates is not met.',
       type: 'string',
-      default: defaultConfig.hintMinChars,
+      default: 'Please provide at least 1 characters',
     },
-    hintMaxLength: {
+    hintTooManyResults: {
       description: 'Hint text displayed when maximum length of the options is exceeded.',
       type: 'string',
-      default: defaultConfig.hintMaxLength,
+      default: 'Too many results, please refine your search',
     },
   };
-
-  public readonly methodControlConfig: DemoMethodConfig = [
-    {
-      name: 'updateErrorAndSuccess()',
-      description: 'Updates the error and success state of the autocomplete.',
-      returnType: 'void',
-    },
-    {
-      name: 'toggle()',
-      description: 'Toggles the visibility of the autocomplete options.',
-      returnType: 'void',
-    },
-    {
-      name: 'clear()',
-      description: 'Clears the input value and selected option.',
-      returnType: 'void',
-    },
-    {
-      name: 'focus(options?: FocusOptions)',
-      description: 'Focuses the autocomplete input.',
-      returnType: 'void',
-      parameters: ['options?'],
-      parameterTypes: ['FocusOptions'],
-      parameterDescriptions: ['Optional focus options.'],
-    },
-    {
-      name: 'open()',
-      description: 'Opens the autocomplete options.',
-      returnType: 'void',
-    },
-    {
-      name: 'close()',
-      description: 'Closes the autocomplete options.',
-      returnType: 'void',
-    },
-    {
-      name: 'writeValue(value: boolean)',
-      description: 'Writes a new value to the element.',
-      parameters: ['value'],
-      parameterTypes: ['boolean'],
-      parameterDescriptions: ['The value to be written.'],
-      returnType: 'void',
-    },
-    {
-      name: 'registerOnChange(fn: ()=>void)',
-      description: 'Registers a callback function that should be called when the control\'s value changes in the UI.',
-      parameters: ['fn'],
-      parameterTypes: ['()=>void'],
-      parameterDescriptions: ['The callback function.'],
-      returnType: 'void',
-    },
-    {
-      name: 'registerOnTouched(fn: ()=>unknown)',
-      description: 'Registers a callback function that should be called when the control is touched.',
-      parameters: ['fn'],
-      parameterTypes: ['()=>unknown'],
-      parameterDescriptions: ['The callback function.'],
-      returnType: 'void',
-    },
-    {
-      name: 'setDisabledState(isDisabled: boolean)',
-      description: 'Sets the disabled state of the element.',
-      parameters: ['isDisabled'],
-      parameterTypes: ['boolean'],
-      parameterDescriptions: ['Whether the element should be disabled or not.'],
-      returnType: 'void',
-    },
-    {
-      name: 'isOptionPreSelectedByValue(optionValue: unknown): boolean',
-      description: 'Checks if the option with the given value is pre-selected.',
-      parameters: ['optionValue'],
-      parameterTypes: ['unknown'],
-      parameterDescriptions: ['The value to check.'],
-      returnType: 'boolean',
-    },
-  ];
 
   public defaults = getDefaultFromDemoConfig<AutocompleteInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<AutocompleteHelperControls>(this.helperControlConfig);
 
   public model: AutocompleteInputControls = { ...this.defaults };
   public helperModel: AutocompleteHelperControls = { ...this.helperDefaults };
+  public multiSelectSignal = signal(this.model.multiSelect);
+
+  public isLoading = signal(false);
+  public options$: Observable<InputOption[]> = EMPTY;
+  public input = signal<string>('');
+  public input$ = toObservable(this.input);
+
+  constructor() {
+    this.options$ = this.input$.pipe(
+      distinctUntilChanged(),
+      debounceTime(USER_INPUT_DEBOUNCE_TIME),
+      tap(() => this.isLoading.set(true)),
+      delay(SIMULATED_LOADING_TIME),
+      map((value) => this._fixedOptionsListFilterFn(OPTIONS, value)),
+      tap(() => this.isLoading.set(false)),
+    );
+  }
+
+  public inputChange(event: Event): void {
+    this.input.set((event.target as HTMLInputElement).value);
+  }
 
   public reset(): void {
     this.model = { ...this.defaults };
@@ -205,14 +209,17 @@ export class AutocompleteDemoService {
     this._resetSubject.next();
   }
 
-  public getMethodConfig(): DemoMethodConfig[] {
-    return [this.methodControlConfig];
-  };
-
   public getApiConfig(): DemoControlConfig<unknown>[] {
     return [
       this.inputControlConfig,
       this.helperControlConfig,
     ];
+  }
+
+  private _fixedOptionsListFilterFn(options: InputOption[], value: string | null | undefined): InputOption[] {
+    const filterValue = value?.toLowerCase() ?? '';
+    return (options ?? [])
+      .filter((option) => (option?.key as unknown as string).toLowerCase().includes(filterValue))
+      .map((option) => ({ key: option.key, value: option.value }) as InputOption);
   }
 }

@@ -48,8 +48,8 @@ importers:
         specifier: ^0.0.60
         version: 0.0.60
       '@i-cell/ids-tokens':
-        specifier: 0.0.37
-        version: 0.0.37
+        specifier: 0.0.39
+        version: 0.0.39
       '@ngx-translate/core':
         specifier: 17.0.0
         version: 17.0.0(@angular/common@20.1.7(@angular/core@20.1.7(@angular/compiler@20.1.7)(rxjs@7.8.1)(zone.js@0.15.1))(rxjs@7.8.1))(@angular/core@20.1.7(@angular/compiler@20.1.7)(rxjs@7.8.1)(zone.js@0.15.1))
@@ -1648,8 +1648,8 @@ packages:
   '@i-cell/ids-styles@0.0.60':
     resolution: {integrity: sha512-R2DzkcTFWBCttnYqDSEmlCYSfD8R6tjnQB6c3UNPS8Ox8PPZdTQpR4HFbdq5VjWBPqoVuVmtbbJZMBvcDvj+Eg==}
 
-  '@i-cell/ids-tokens@0.0.37':
-    resolution: {integrity: sha512-nKvOJx6HSgikQSQec/d+CXun/5zrL5T2CVCu2y10cAsKFIfeMRabL0V3z32K+UG6KChybe9dadzeD3FKrmbCVw==}
+  '@i-cell/ids-tokens@0.0.39':
+    resolution: {integrity: sha512-dca0WUjkaW4BEqQjT1NwcNkCC01/czqjCYaGWNt/gdbE51RVGJnssQcGXOwQ9hrT5TW4dzYe2k66mWiwyYeu1w==}
 
   '@inquirer/checkbox@4.2.1':
     resolution: {integrity: sha512-bevKGO6kX1eM/N+pdh9leS5L7TBF4ICrzi9a+cbWkrxeAeIcwlo/7OfWGCDERdRCI2/Q6tjltX4bt07ALHDwFw==}
@@ -10279,7 +10279,7 @@ snapshots:
 
   '@i-cell/ids-styles@0.0.60': {}
 
-  '@i-cell/ids-tokens@0.0.37': {}
+  '@i-cell/ids-tokens@0.0.39': {}
 
   '@inquirer/checkbox@4.2.1(@types/node@24.3.0)':
     dependencies:

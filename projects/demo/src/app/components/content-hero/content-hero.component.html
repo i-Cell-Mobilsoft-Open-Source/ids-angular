@@ -1,0 +1,46 @@
+<div class="hero overflow-hidden">
+  <div class="gradient-outline-blue hidden sm:block size-[446px] absolute left-0 translate-y-64 z-0 -translate-x-24;">
+    <div class="size-60 absolute -translate-y-28 translate-x-36 z-10 rounded-full glassy-bg-on-light-lighter"></div>
+  </div>
+
+  <div class="gradient-outline-blue sm:block rotate-90 size-[446px] absolute right-0 -translate-y-72 z-0 translate-x-16">
+    <div class="size-60 absolute glassy-bg-on-light-lighter translate-y-36 translate-x-[366px] z-10 rounded-full"></div>
+  </div>
+
+  <button idsButton type="button" appearance="text" variant="secondary" showLeadingElement="true" class="back" [routerLink]="['..']">
+    <ids-icon icon-leading fontIcon="arrow-back" sizeCollection="big" />
+    Back
+  </button>
+
+  <div class="flex flex-col items-center w-[1106px] gap-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <ids-chip-group appearance="outlined" size="dense">
+      <ids-chip variant="primary">
+        {{ heroData().date }}
+      </ids-chip>
+      @for (tag of heroData().tags; track $index) {
+        <ids-chip variant="secondary">
+          {{ typeof tag === "string" ? tag : tag.title }}
+        </ids-chip>
+      }
+    </ids-chip-group>
+
+    <h1 class="content-title">{{ heroData().title }}</h1>
+
+    <ids-divider size="spacious" variant="surface" width="50%" />
+    
+    <div class="flex items-start gap-4">
+      <div class="flex justify-center gap-2 items-start">
+        <div class="flex w-[191px] items-center gap-3">
+          <ids-avatar size="dense" sizeCollection="big">
+            <ids-icon fontIcon="account-circle" />
+          </ids-avatar>
+
+          <div class="flex flex-col items-start">
+            <span class="text-sm font-medium text-on-surface">{{ heroData().writtenBy }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

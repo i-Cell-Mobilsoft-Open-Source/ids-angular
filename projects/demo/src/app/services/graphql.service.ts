@@ -1,6 +1,9 @@
+import { PageEntry } from '../model/pageEntry';
 import { GET_COMPONENTS_LIST } from '../queries/get-components-list.query';
 import { GET_COMPONENTS } from '../queries/get-components.query';
+import { GET_CONTENT } from '../queries/get-content.query';
 import { GET_NAVIGATION } from '../queries/get-navigation.query';
+import { GET_PAGES_LIST } from '../queries/get-pages-list.query';
 import { GET_PAGES } from '../queries/get-pages.query';
 
 import { inject, Injectable } from '@angular/core';
@@ -85,4 +88,24 @@ export class GraphqlService {
       query: GET_COMPONENTS_LIST,
     }).valueChanges;
   }
+
+  public getPagesList(collection: string, slug: string): Observable<ApolloQueryResult<{ entry: PageEntry }>> {
+    return this._apollo.watchQuery<{ entry: PageEntry }>({
+      query: GET_PAGES_LIST,
+      variables: {
+        collection,
+        slug,
+      },
+    }).valueChanges;
+  }
+
+  public getContent(slug: string): Observable<ApolloQueryResult<{ entry: unknown }>> {
+    return this._apollo.watchQuery<{ entry: unknown }>({
+      query: GET_CONTENT,
+      variables: {
+        slug,
+      },
+    }).valueChanges;
+  }
+
 }

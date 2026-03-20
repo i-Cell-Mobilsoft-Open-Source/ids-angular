@@ -109,7 +109,7 @@ export class IdsInputDirective extends IdsFormFieldControl<IdsInputDefaultConfig
    * Should be an arrow function in order to handle `this` outside of this class
    */
   public onContainerClick = (): void => {
-    if (!this._focused && !this.readonly() && !this.disabled) {
+    if (!this._focused && !this.readonly() && !this.disabled()) {
       this.focus();
     }
   };

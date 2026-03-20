@@ -167,19 +167,19 @@ export const routes: Routes = [
     path: 'issue-report',
     loadComponent: () => import('./pages/issue-report/issue-report.component').then((module) => module.IssueReportComponent),
   },
-  {
-    path: 'news-releases',
-    loadComponent: () => import('./pages/list-page/list-page.component').then((module) => module.ListPageComponent),
-    data: {
-      collection: 'pages',
-      slug: 'news-releases',
-    },
+  // {
+  //   path: 'news-releases',
+  //   loadComponent: () => import('./pages/list-page/list-page.component').then((module) => module.ListPageComponent),
+  //   data: {
+  //     collection: 'pages',
+  //     slug: 'news-releases',
+  //   },
 
-  },
-  {
-    path: 'news-releases/:slug',
-    loadComponent: () => import('./pages/list-page/content-page/content-page.component').then((module) => module.ContentPageComponent),
-  },
+  // },
+  // {
+  //   path: 'news-releases/:slug',
+  //   loadComponent: () => import('./pages/list-page/content-page/content-page.component').then((module) => module.ContentPageComponent),
+  // },
   {
     path: '',
     redirectTo: 'home',

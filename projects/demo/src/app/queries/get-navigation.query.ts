@@ -15,6 +15,7 @@ export const GET_NAVIGATION = gql`
         }
         ... on NavEntryPage_SideNav_Pages_Page {
           slug
+          generated
         }
         ... on NavEntryPage_SideNav_Components_Component {
           slug

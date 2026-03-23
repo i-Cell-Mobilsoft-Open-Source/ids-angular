@@ -137,8 +137,7 @@ export class IdsSegmentedControlToggleDirective
   private _subscribeItemChanges(): void {
     this._items().forEach((item) => {
       item.changes.subscribe(
-        //eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (change: any) => {
+        (change) => {
           this._handleItemChanges(change);
         },
       );

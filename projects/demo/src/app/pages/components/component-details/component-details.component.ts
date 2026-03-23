@@ -84,7 +84,7 @@ export class ComponentDetailsComponent implements OnInit {
           this._graphqlService.getComponents().pipe(
             map((result) => {
               const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
-              const components = typedResult?.data?.entries?.data || [];
+              const components = typedResult?.data?.entries?.data ?? [];
               return components.find((entry) => entry.slug === slug);
             }),
           ),

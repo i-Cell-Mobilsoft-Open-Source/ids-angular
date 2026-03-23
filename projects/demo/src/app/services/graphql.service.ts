@@ -80,8 +80,8 @@ export class GraphqlService {
     }).valueChanges;
   }
 
-  public getComponentsList(): Observable<ApolloQueryResult<{ entries: { data: StatamicComponentListItem[] } }>> {
-    return this._apollo.watchQuery<{ entries: { data: StatamicComponentListItem[] } }>({
+  public getComponentsList(): Observable<ApolloQueryResult<{ entries: { data: Partial<StatamicComponentListItem>[] } }>> {
+    return this._apollo.watchQuery<{ entries: { data: Partial<StatamicComponentListItem>[] } }>({
       query: GET_COMPONENTS_LIST,
     }).valueChanges;
   }

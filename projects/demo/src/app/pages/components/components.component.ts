@@ -40,7 +40,7 @@ export class ComponentsComponent implements OnInit {
   public ngOnInit(): void {
     this._graphqlService
       .getComponentsList()
-      .subscribe((result: ApolloQueryResult<{ entries: { data: StatamicComponentListItem[] }; entry?: EntryData }>) => {
+      .subscribe((result: ApolloQueryResult<{ entries: { data: Partial<StatamicComponentListItem>[] }; entry?: EntryData }>) => {
         const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
         let components: ComponentData[] = [];
 
@@ -74,7 +74,7 @@ export class ComponentsComponent implements OnInit {
 
         if (components.length === 0) {
           const componentsList = result.data?.entries?.data ?? [];
-          components = componentsList.map((componentItem: StatamicComponentListItem) => ({
+          components = componentsList.map((componentItem: Partial<StatamicComponentListItem>) => ({
             id: Number(componentItem.id) || 0,
             title: componentItem.title ?? '',
             comp_description: componentItem.comp_description ?? '',

@@ -16,7 +16,7 @@ const LIVE_ANNOUNCER_DURATION = 10000;
   host: {
     class: 'ids-form-field-control',
     '[attr.role]': '_disabled() ? null : "combobox"',
-    '[attr.autocomplete]': '_disabled() ? "off" : "auto"',
+    '[attr.autocomplete]': '"off"',
     '[attr.aria-autocomplete]': '_disabled() ? null : "list"',
     '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
     '[attr.aria-owns]': 'autocomplete().panelOpen() ? autocomplete().id() + "-panel" : null',

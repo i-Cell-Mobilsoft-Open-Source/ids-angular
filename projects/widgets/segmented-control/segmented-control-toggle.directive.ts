@@ -1,13 +1,8 @@
-import { IdsSegmentedControlToggleItemComponent } from './segmented-control-item/segmented-control-toggle-item.component';
-import { IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleDefaultConfig } from './segmented-control-toggle-defaults';
-import { IdsSegmentedControlToggleItemChange } from './types/segmented-control-item-change.class';
-import { IdsSegmentedControlToggleAppearanceType } from './types/segmented-control-toggle-appearance.type';
-import { IdsSegmentedControlToggleButtonVariantType, IdsSegmentedControlToggleVariantType } from './types/segmented-control-toggle-variant.type';
-
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG, IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleAppearanceType, IdsSegmentedControlToggleButtonVariantType, IdsSegmentedControlToggleDefaultConfig, IdsSegmentedControlToggleItemChange, IdsSegmentedControlToggleItemComponent, IdsSegmentedControlToggleVariantType } from '@i-cell/ids-angular/segmented-control-toggle';
 
 const defaultConfig = IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY();
 
@@ -24,7 +19,7 @@ const defaultConfig = IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY();
     },
   ],
   host: {
-    '[attr.role]': 'radiogroup',
+    '[attr.role]': '"radiogroup"',
     '(keydown)': '_handleKeyDown($event)',
   },
 })
@@ -65,7 +60,7 @@ export class IdsSegmentedControlToggleDirective
 
   public readonly itemChanges = output<IdsSegmentedControlToggleItemChange>();
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', ' '];
 
@@ -142,7 +137,8 @@ export class IdsSegmentedControlToggleDirective
   private _subscribeItemChanges(): void {
     this._items().forEach((item) => {
       item.changes.subscribe(
-        (change) => {
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (change: any) => {
           this._handleItemChanges(change);
         },
       );

@@ -18,7 +18,7 @@ const iconDefaultConfig: IdsIconDefaultConfig = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([])),
-    provideApollo((): ApolloClientOptions<unknown> => {
+    provideApollo((): ApolloClientOptions => {
       const httpLink = inject(HttpLink);
       return {
         cache: new InMemoryCache(),

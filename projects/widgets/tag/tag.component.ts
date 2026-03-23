@@ -16,7 +16,7 @@ const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[type]': '_hostType',
+    '[attr.type]': '_hostType',
   },
 })
 export class IdsTagComponent extends ComponentBaseWithDefaults<IdsTagDefaultConfig> {
@@ -46,7 +46,7 @@ export class IdsTagComponent extends ComponentBaseWithDefaults<IdsTagDefaultConf
     this.variant(),
   ]));
 
-  private get _hostType(): string | null {
+  protected get _hostType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
   }
 }

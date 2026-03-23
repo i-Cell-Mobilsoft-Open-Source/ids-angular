@@ -2,6 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { DirectiveBase } from '@i-cell/ids-angular/core';
 
 @Directive({
+  //eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
 })
 export abstract class IdsCardSectionBase extends DirectiveBase {

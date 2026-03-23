@@ -76,7 +76,7 @@ export class AppComponent {
       .getNavigation()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((result: ApolloQueryResult<NavigationQueryResult>) => {
-        const navTree = result.data.navs?.[0]?.tree || [];
+        const navTree = result.data?.navs?.[0]?.tree || [];
         this._componentLevelDepth = this._findDeepestLevel(navTree);
         this.dynamicMenu = this._mapStatamicNavToMenu(navTree);
       });
@@ -122,13 +122,13 @@ export class AppComponent {
     if (!tree || tree.length === 0) {
       return currentDepth;
     }
-    return Math.max(...tree.map((node: StatamicNavNode) => this._findDeepestLevel(node.children ?? [], node.depth)));
+    return Math.max(...tree.map((node: StatamicNavNode) => this._findDeepestLevel(node.children ?? [], node.depth ?? 0)));
   }
 
   private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
     return tree.map((node) => {
       let path: string | undefined = undefined;
-      if (node.page?.slug) {
+      if (node.page?.slug && node.depth) {
         if (this._componentLevelDepth !== undefined && node.depth >= this._componentLevelDepth) {
           path = `/components/${node.page.slug}`;
         } else {
@@ -159,7 +159,7 @@ export class AppComponent {
 }
 
 interface StatamicNavNode {
-  depth: number;
+  depth?: number;
   page?: { title?: string; id?: string; slug?: string };
   children?: StatamicNavNode[];
 }

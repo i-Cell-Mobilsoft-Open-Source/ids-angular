@@ -102,7 +102,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
 
     const overlayRef = this._createOverlay();
     this._portal =
-        this._portal || new ComponentPortal(IdsTooltipComponent, this._viewContainerRef);
+      this._portal || new ComponentPortal(IdsTooltipComponent, this._viewContainerRef);
     this._componentRef = overlayRef.attach(this._portal);
     this._tooltipInstance = this._componentRef.instance;
     const instance = this._tooltipInstance;

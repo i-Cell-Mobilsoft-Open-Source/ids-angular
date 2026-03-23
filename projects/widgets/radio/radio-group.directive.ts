@@ -64,7 +64,7 @@ export class IdsRadioGroupDirective
 
   public readonly itemChanges = output<IdsRadioChangeEvent>();
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys: Record<IdsOrientationType, Set<string>> = {
       // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
       horizontal: new Set(['ArrowLeft', 'ArrowRight', 'Enter', ' ']),

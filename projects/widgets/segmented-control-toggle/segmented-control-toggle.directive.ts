@@ -24,7 +24,7 @@ const defaultConfig = IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY();
     },
   ],
   host: {
-    '[attr.role]': 'radiogroup',
+    '[attr.role]': '"radiogroup"',
     '(keydown)': '_handleKeyDown($event)',
   },
 })
@@ -65,7 +65,7 @@ export class IdsSegmentedControlToggleDirective
 
   public readonly itemChanges = output<IdsSegmentedControlToggleItemChange>();
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', 'Spacebar', ' '];
 

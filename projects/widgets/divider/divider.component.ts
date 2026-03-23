@@ -29,8 +29,8 @@ export class IdsDividerComponent extends ComponentBaseWithDefaults<IdsDividerDef
   public variant = input<IdsDividerVariantType>(this._defaultConfig.variant);
   public width = input<string>(this._defaultConfig.width);
   public height = input<string>(this._defaultConfig.height);
-  private _safeWidth = computed(() => (this.orientation() === IdsOrientation.HORIZONTAL ? this.width() : null));
-  private _safeHeight = computed(() => (this.orientation() === IdsOrientation.VERTICAL ? this.height() : null));
+  protected _safeWidth = computed(() => (this.orientation() === IdsOrientation.HORIZONTAL ? this.width() : null));
+  protected _safeHeight = computed(() => (this.orientation() === IdsOrientation.VERTICAL ? this.height() : null));
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.orientation(),

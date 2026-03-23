@@ -72,13 +72,13 @@ export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
     this._hideTimeout = undefined;
   }
 
-  private _handleMouseEnter(): void {
+  protected _handleMouseEnter(): void {
     if (this._hideTimeout) {
       this.abortHide();
     }
   }
 
-  private _handleMouseLeave({ relatedTarget }: MouseEvent): void {
+  protected _handleMouseLeave({ relatedTarget }: MouseEvent): void {
     if (!relatedTarget || !this.triggerElement?.contains(relatedTarget as Node)) {
       this.hide(this.mouseLeaveHideDelay());
     }

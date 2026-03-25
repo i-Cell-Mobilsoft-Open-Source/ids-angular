@@ -70,8 +70,6 @@ export function initializeDynamicRoutes(
           currentConfig.push(fallbackRoute);
         }
         router.resetConfig(currentConfig);
-
-        console.info('Beregisztrált dinamikus útvonalak:', generatedSlugs);
       }),
     );
 }

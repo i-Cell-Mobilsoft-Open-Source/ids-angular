@@ -8,6 +8,7 @@ import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-arr
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupPosition, IdsTabGroupPositionType, IdsTabGroupVariant, IdsTabGroupVariantType, IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from '@i-cell/ids-angular/tab';
+import { IdsTabActivationMode, IdsTabActivationModeType } from '@i-cell/ids-angular/tab/types/tab-activation-mode.type';
 
 const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -19,6 +20,7 @@ type TabInputControls = {
   tabPosition: IdsTabGroupPositionType,
   indicatorPosition: IdsTabIndicatorPositionType,
   disabled: boolean,
+  activationMode: IdsTabActivationModeType,
 };
 
 type TabHelperControls = {
@@ -92,6 +94,13 @@ export class TabDemoService {
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+    },
+    activationMode: {
+      description: 'Tab activation mode.',
+      type: 'IdsTabActivationModeType',
+      default: defaultConfig.activationMode,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsTabActivationMode),
     },
   };
 

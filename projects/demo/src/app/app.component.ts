@@ -1,3 +1,4 @@
+import { FooterComponent } from './components/footer/footer.component';
 import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
 import { GraphqlService, NavigationQueryResult } from './services/graphql.service';
@@ -29,6 +30,7 @@ export type Theme = 'light' | 'dark';
     IdsSegmentedControlToggleItemComponent,
     FormsModule,
     IdsIconComponent,
+    FooterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

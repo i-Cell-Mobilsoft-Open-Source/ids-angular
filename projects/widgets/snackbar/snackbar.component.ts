@@ -48,7 +48,7 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
 
   public closed = output<void>();
 
-  private _canAutoClose = computed(() => !this.allowDismiss() && this.autoClose());
+  private _canAutoClose = computed(() => this.autoClose());
   private _duration = computed(() => {
     const actionReadDuration = (this.actions()?.length ?? 0) * READ_SPEED_PER_ACTION;
     return Math.max(this.message().length * READ_SPEED_PER_CHAR + actionReadDuration, MIN_DURATION);

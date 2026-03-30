@@ -59,6 +59,9 @@ export function initializeDynamicRoutes(
             path: `${slug}/:slug`,
             loadComponent: () =>
               import('./pages/list-page/content-page/content-page.component').then((module) => module.ContentPageComponent),
+            data: {
+              collection: slug,
+            },
           },
         ]);
 

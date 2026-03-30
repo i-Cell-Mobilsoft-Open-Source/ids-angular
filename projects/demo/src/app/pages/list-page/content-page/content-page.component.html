@@ -1,3 +1,45 @@
-<div>
-  <app-content-hero [heroData]="heroData()"/>
+<app-content-hero [heroData]="heroData()" />
+
+@let contents = articleContent();
+
+<div class="flex flex-col items-start gap-12 py-10 px-8 contents-container">
+  <div class="flex flex-col w-full max-w-1170px items-start ids-container-gap-16">
+    <div class="self-stretch text-justify" [innerHTML]="contents?.hero_description"></div>
+  </div>
+
+  <div class="flex flex-col w-full gap-8">
+    @for (block of contentBlocks(); track $index) {
+      @switch (block.type) {
+        @case ("heading") {
+          <h2 class="text-2xl font-bold">{{ block.heading }}</h2>
+        }
+
+        @case ("card") {
+          <ids-card class="w-full" appearance="filled" stretch="true">
+            <div class="p-4 flex flex-col gap-2">
+              <header idsCardHeader>
+                <h2 idsCardTitle>{{ block.title }}</h2>
+                @if (block.overTitle) {
+                  <h3 idsCardSubtitle>{{ block.overTitle }}</h3>
+                }
+              </header>
+
+              @if(block.imageURL) {
+                <img
+                  idsCardMedia
+                  alt=""
+                  [stretch]=true
+                  [src]="block.imageURL"
+                />
+              }
+
+              @if (block.description) {
+                <ids-card-body [innerHTML]="block.description" />
+              }
+            </div>
+          </ids-card>
+        }
+      }
+    }
+  </div>
 </div>

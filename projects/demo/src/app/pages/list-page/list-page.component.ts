@@ -91,19 +91,20 @@ export class ListPageComponent implements OnInit {
 
   private readonly _graphqlService = inject(GraphqlService);
   private readonly _route = inject(ActivatedRoute);
-  private readonly _baseUrl = environment.cmsBaseUrl.replace(/\/$/, '');
 
   public ngOnInit(): void {
     this._route.data.subscribe((routeData) => {
       const collection = routeData['collection'];
       const slug = routeData['slug'];
+      const typeName = this._generateTypeName(slug);
 
-      this._loadData(collection, slug);
+      this._loadData(collection, typeName, slug);
     });
+
   }
 
-  private _loadData(collection: string, slug: string): void {
-    this._graphqlService.getPagesList(collection, slug).subscribe({
+  private _loadData(collection: string, typeName: string, slug: string): void {
+    this._graphqlService.getPagesList(collection, typeName, slug).subscribe({
       next: (result) => {
         const typedResult = result as unknown as { data: { entry?: EntryListData } };
         const entry = typedResult.data?.entry;
@@ -127,7 +128,7 @@ export class ListPageComponent implements OnInit {
                     title: entryItem.title ?? '',
                     slug: entryItem.slug ?? '',
                     description: heroDesc,
-                    imageUrl: fallbackImage,
+                    imageUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
                     imageLink: entryItem.slug ? `/${slug}/${entryItem.slug}` : '',
                     last_modified: entryItem.last_modified,
                     date: entryItem.date,
@@ -141,8 +142,8 @@ export class ListPageComponent implements OnInit {
 
         this.contentDatas.set(contents.sort((a, b) => a.title.localeCompare(b.title)));
 
-        const lightUrl = entry?.hero_image_light?.url ? `${this._baseUrl}${entry.hero_image_light.url}` : '';
-        const darkUrl = entry?.hero_image_dark?.url ? `${this._baseUrl}${entry.hero_image_dark.url}` : '';
+        const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';
+        const darkUrl = entry?.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : '';
 
         this.heroData.set({
           id: Number(entry?.id) || 0,
@@ -158,6 +159,23 @@ export class ListPageComponent implements OnInit {
         console.warn('Hiba történt a GraphQL lekérdezés során:', err);
       },
     });
+  }
+
+  private _generateTypeName(collection: string): string {
+
+    const pascalCaseCollection = collection
+      .split('-')
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join('');
+
+    let blueprintName = pascalCaseCollection;
+    if (blueprintName.endsWith('s')) {
+      blueprintName = blueprintName.slice(0, -1);
+    }
+
+    const result = `Entry_${pascalCaseCollection}_${blueprintName}`;
+
+    return result;
   }
 
   public transformToCardData(item: ContentData): ContentCardData {

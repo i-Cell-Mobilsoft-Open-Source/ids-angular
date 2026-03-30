@@ -1,7 +1,7 @@
 import { PageEntry } from '../model/pageEntry';
 import { GET_COMPONENTS_LIST } from '../queries/get-components-list.query';
 import { GET_COMPONENTS } from '../queries/get-components.query';
-import { GET_CONTENT } from '../queries/get-content.query';
+import { GET_DYNAMIC_CONTENT } from '../queries/get-dynamic-content.query';
 import { GET_NAVIGATION } from '../queries/get-navigation.query';
 import { GET_PAGES_LIST } from '../queries/get-pages-list.query';
 import { GET_PAGES } from '../queries/get-pages.query';
@@ -89,9 +89,9 @@ export class GraphqlService {
     }).valueChanges;
   }
 
-  public getPagesList(collection: string, slug: string): Observable<ApolloQueryResult<{ entry: PageEntry }>> {
+  public getPagesList(collection: string, typeName: string, slug: string): Observable<ApolloQueryResult<{ entry: PageEntry }>> {
     return this._apollo.watchQuery<{ entry: PageEntry }>({
-      query: GET_PAGES_LIST,
+      query: GET_PAGES_LIST(typeName),
       variables: {
         collection,
         slug,
@@ -99,13 +99,13 @@ export class GraphqlService {
     }).valueChanges;
   }
 
-  public getContent(slug: string): Observable<ApolloQueryResult<{ entry: unknown }>> {
-    return this._apollo.watchQuery<{ entry: unknown }>({
-      query: GET_CONTENT,
+  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<ApolloQueryResult<unknown>> {
+    const dynamicQuery = GET_DYNAMIC_CONTENT(collection, typeName);
+    return this._apollo.watchQuery({
+      query: dynamicQuery,
       variables: {
         slug,
       },
     }).valueChanges;
   }
-
 }

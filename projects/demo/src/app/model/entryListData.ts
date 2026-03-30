@@ -16,6 +16,8 @@ export interface EntryListData {
           title?: string;
           id?: number;
           hero_description?: ContentData;
+          hero_image_light?: { url?: string };
+          hero_image_dark?: { url?: string };
           last_modified?: string;
           date?: string;
           tags?: Array<{

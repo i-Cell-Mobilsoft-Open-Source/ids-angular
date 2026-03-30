@@ -4,11 +4,11 @@ import { GraphqlService, NavigationQueryResult } from './services/graphql.servic
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
-import { DestroyRef, Component, ViewEncapsulation, inject } from '@angular/core';
-import { toSignal, takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, DestroyRef, ViewEncapsulation, inject } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { ApolloQueryResult } from '@apollo/client/core';
+import { ObservableQuery } from '@apollo/client/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent } from '@i-cell/ids-angular/segmented-control-toggle';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -75,7 +75,7 @@ export class AppComponent {
     graphqlService
       .getNavigation()
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((result: ApolloQueryResult<NavigationQueryResult>) => {
+      .subscribe((result: ObservableQuery.Result<NavigationQueryResult>) => {
         const navTree = result.data?.navs?.[0]?.tree || [];
         this._componentLevelDepth = this._findDeepestLevel(navTree);
         this.dynamicMenu = this._mapStatamicNavToMenu(navTree);

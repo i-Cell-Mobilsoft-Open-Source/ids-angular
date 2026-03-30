@@ -10,7 +10,7 @@ import { GraphqlService } from '../../services/graphql.service';
 
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { ApolloQueryResult } from '@apollo/client/core';
+import { ObservableQuery } from '@apollo/client/core';
 
 @Component({
   selector: 'app-components',
@@ -40,7 +40,7 @@ export class ComponentsComponent implements OnInit {
   public ngOnInit(): void {
     this._graphqlService
       .getComponentsList()
-      .subscribe((result: ApolloQueryResult<{ entries: { data: Partial<StatamicComponentListItem>[] }; entry?: EntryData }>) => {
+      .subscribe((result: ObservableQuery.Result<{ entries: { data: Partial<StatamicComponentListItem>[] }; entry?: EntryData }>) => {
         const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
         let components: ComponentData[] = [];
 

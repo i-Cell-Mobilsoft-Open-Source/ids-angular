@@ -6,7 +6,6 @@
 
 .hero {
   background: var(--smc-colors-surface-darker-10, #f1f5f9);
-  @apply md:h-[360px] py-6 md:py-0 flex flex-col justify-center items-center relative;
 }
 
 .back {

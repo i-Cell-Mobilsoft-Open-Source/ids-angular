@@ -1,4 +1,4 @@
-<div class="hero overflow-hidden">
+<div class="hero overflow-hidden md:h-[360px] py-6 md:py-0 flex flex-col justify-center items-center relative">
   <div class="gradient-outline-blue hidden sm:block size-[446px] absolute left-0 translate-y-64 z-0 -translate-x-24;">
     <div class="size-60 absolute -translate-y-28 translate-x-36 z-10 rounded-full glassy-bg-on-light-lighter"></div>
   </div>
@@ -12,7 +12,7 @@
     Back
   </button>
 
-  <div class="flex flex-col items-center w-[1106px] gap-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+  <div class="flex flex-col items-center w-full max-w-[1106px] px-4 sm:px-8 gap-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
     <ids-chip-group appearance="outlined" size="dense">
       <ids-chip variant="primary">
         {{ heroData().date }}
@@ -24,7 +24,7 @@
       }
     </ids-chip-group>
 
-    <h1 class="content-title">{{ heroData().title }}</h1>
+    <h1 class="content-title text-center">{{ heroData().title }}</h1>
 
     <ids-divider size="spacious" variant="surface" width="50%" />
     

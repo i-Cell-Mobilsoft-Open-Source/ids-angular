@@ -6,7 +6,14 @@ import { GraphqlService } from '../../../services/graphql.service';
 import { formatDate } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { IdsCardComponent, IdsCardTitleDirective, IdsCardSubtitleDirective, IdsCardBodyDirective, IdsCardHeaderComponent, IdsCardMediaDirective } from '@i-cell/ids-angular/card';
+import {
+  IdsCardComponent,
+  IdsCardTitleDirective,
+  IdsCardSubtitleDirective,
+  IdsCardBodyDirective,
+  IdsCardHeaderComponent,
+  IdsCardMediaDirective,
+} from '@i-cell/ids-angular/card';
 import { environment } from 'projects/demo/src/environments/environment.development';
 import { combineLatest } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
@@ -104,17 +111,10 @@ export class ContentPageComponent implements OnInit {
             this.contentBlocks.set(this._mapContentBlocks(entry.content ?? []));
           }
         },
-        error: (err) => console.warn('Hiba a cikk lekérdezésekor:', err),
       });
   }
 
   private _generateTypeName(collection: string): string {
-
-    if (!collection) {
-      console.warn('Hiba: a collection üres a generátorban!');
-      return '';
-    }
-
     const pascalCaseCollection = collection
       .split('_')
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
@@ -155,16 +155,22 @@ export class ContentPageComponent implements OnInit {
           orientation: block.card_properties?.card_orientation?.value,
           variant: block.card_properties?.card_variant?.value,
           appearance: block.card_properties?.appearance?.value,
-          image: block.group_image ? {
-            caption: block.group_image.img_caption,
-            lightUrl: block.group_image.img_light_mode?.[0]?.url ? `${this._baseUrl}${block.group_image.img_light_mode[0].url}` : undefined,
-            darkUrl: block.group_image.img_dark_mode?.[0]?.url ? `${this._baseUrl}${block.group_image.img_dark_mode[0].url}` : undefined,
-            aspectRatio: block.group_image.img_aspect_ratio?.value,
-            bgColor: block.group_image.img_bg_color?.value,
-            bgTransparent: block.group_image.bg_transparent,
-            filledInContainer: block.group_image.filled_in_container,
-            state: block.group_image.state?.value,
-          } : undefined,
+          image: block.group_image
+            ? {
+              caption: block.group_image.img_caption,
+              lightUrl: block.group_image.img_light_mode?.[0]?.url
+                ? `${this._baseUrl}${block.group_image.img_light_mode[0].url}`
+                : undefined,
+              darkUrl: block.group_image.img_dark_mode?.[0]?.url
+                ? `${this._baseUrl}${block.group_image.img_dark_mode[0].url}`
+                : undefined,
+              aspectRatio: block.group_image.img_aspect_ratio?.value,
+              bgColor: block.group_image.img_bg_color?.value,
+              bgTransparent: block.group_image.bg_transparent,
+              filledInContainer: block.group_image.filled_in_container,
+              state: block.group_image.state?.value,
+            }
+            : undefined,
           buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : block.button?.button?.button_label,
           buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
           buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,

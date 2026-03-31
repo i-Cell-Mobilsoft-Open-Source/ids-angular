@@ -132,7 +132,9 @@ export class ListPageComponent implements OnInit {
                     imageLink: entryItem.slug ? `/${slug}/${entryItem.slug}` : '',
                     last_modified: entryItem.last_modified,
                     date: entryItem.date,
-                    tags: entryItem.tags,
+                    tags: entryItem.tags?.filter((tag): tag is { id: number; title: string } =>
+                      tag.id !== undefined && tag.title !== undefined,
+                    ),
                   });
                 }
               });
@@ -140,7 +142,7 @@ export class ListPageComponent implements OnInit {
           });
         }
 
-        this.contentDatas.set(contents.sort((a, b) => a.title.localeCompare(b.title)));
+        this.contentDatas.set(contents.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '')));
 
         const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';
         const darkUrl = entry?.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : '';
@@ -154,9 +156,6 @@ export class ListPageComponent implements OnInit {
           imageUrlDark: darkUrl || fallbackImage,
           isBackButton: true,
         });
-      },
-      error: (err) => {
-        console.warn('Hiba történt a GraphQL lekérdezés során:', err);
       },
     });
   }

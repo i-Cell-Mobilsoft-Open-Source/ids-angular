@@ -1,10 +1,7 @@
 import { computed, Directive, input } from '@angular/core';
 import { DirectiveBase } from '@i-cell/ids-angular/core';
 
-@Directive({
-  //eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false,
-})
+@Directive()
 export abstract class IdsCardSectionBase extends DirectiveBase {
   protected override get _hostName(): string {
     return 'card-section';

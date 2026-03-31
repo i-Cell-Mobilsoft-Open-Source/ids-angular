@@ -1,56 +1,42 @@
 <div class="flex flex-col gap-16">
   <app-hero [heroData]="heroData()" />
   <div class="flex justify-center items-center self-stretch gap-3">
-
     <ids-chip-group appearance="outlined" size="compact">
-      <button 
-      idsChip 
-      type="button"
-      appearance='outlined'
-      size='compact'
-      variant='secondary'
-      (click)="onFilterChange('All')">
-      @if (selectedTag() === 'All') {
-        <ids-icon fontIcon="done" />
+      <button idsChip type="button" appearance="outlined" size="compact" variant="secondary" (click)="onFilterChange('All')">
+        @if (selectedTag() === "All") {
+          <ids-icon fontIcon="done" />
+        }
+        All
+      </button>
+      @for (tag of availableTags(); track tag) {
+        <button idsChip type="button" appearance="outlined" size="compact" variant="secondary" (click)="onFilterChange(tag)">
+          @if (selectedTag() === tag) {
+            <ids-icon fontIcon="done" />
+          }
+          {{ tag }}
+        </button>
       }
-      All
-    </button>
-    @for(tag of availableTags(); track tag) {
-      <button 
-      idsChip 
-      type="button"
-      appearance='outlined'
-      size='compact'
-      variant='secondary'
-      (click)="onFilterChange(tag)">
-      @if (selectedTag() === tag) {
-        <ids-icon fontIcon="done" />
-      }
-      {{ tag }}
-    </button>
-  }
-</ids-chip-group>
-</div>
+    </ids-chip-group>
+  </div>
   <!-- Debug output for componentDatas -->
   <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
     @for (contentData of paginatedContentDatas(); track $index) {
-      <app-content-card  [contentCardData]="transformToCardData(contentData)" />
+      <app-content-card [contentCardData]="transformToCardData(contentData)" />
     }
-  </div> 
+  </div>
   <div class="flex justify-center items center">
-    <ids-paginator 
-    variant='surface' 
-    [length]="contentDatas().length"
-    [pageSize]="pageSize()"
-    [pageSizeOptions]="[6, 12, 18]"
-    [showFirstLastButton]="true"
-    [showPageInfo]="false"
-    (pageChanged)="onPageChange($event)"
-
+    <ids-paginator
+      variant="surface"
+      [length]="contentDatas().length"
+      [pageSize]="pageSize()"
+      [pageSizeOptions]="[6, 12, 18]"
+      [showFirstLastButton]="true"
+      [showPageInfo]="false"
+      (pageChanged)="onPageChange($event)"
     />
   </div>
-    <!-- Router outlet for the details pane (renders ComponentDetailsComponent as a child route) -->
-    <div class="mt-8">
-      <router-outlet />
-    </div>
+  <!-- Router outlet for the details pane (renders ComponentDetailsComponent as a child route) -->
+  <div class="mt-8">
+    <router-outlet />
   </div>
+</div>

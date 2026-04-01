@@ -37,6 +37,7 @@ query GetDynamicDetail($slug: String!) {
                 content_title
                 content_description
               }
+              is_button
               button {
                 button {
                   button_url
@@ -55,6 +56,7 @@ query GetDynamicDetail($slug: String!) {
                   value
                 }
               }
+              is_image
               group_image {
                 filled_in_container
                 img_caption

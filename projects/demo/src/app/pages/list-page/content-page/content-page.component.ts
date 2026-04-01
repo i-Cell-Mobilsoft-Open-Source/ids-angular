@@ -5,7 +5,8 @@ import { GraphqlService } from '../../../services/graphql.service';
 
 import { formatDate } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { IdsButtonGroupComponent, IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
   IdsCardComponent,
   IdsCardTitleDirective,
@@ -29,6 +30,8 @@ import { filter, map, switchMap } from 'rxjs/operators';
     IdsCardBodyDirective,
     IdsCardHeaderComponent,
     IdsCardMediaDirective,
+    IdsButtonGroupComponent,
+    IdsButtonComponent,
   ],
   templateUrl: './content-page.component.html',
   styleUrl: './content-page.component.scss',
@@ -49,9 +52,8 @@ export class ContentPageComponent implements OnInit {
 
   private readonly _graphqlService = inject(GraphqlService);
   private readonly _route = inject(ActivatedRoute);
-  private readonly _baseUrl = environment.cmsBaseUrl.replace(/\/$/, '');
+  private _router = inject(Router);
 
-  public articleContent = signal<ContentEntry | null>(null);
   public contentBlocks = signal<ContentBlock[]>([]);
 
   public ngOnInit(): void {
@@ -88,8 +90,8 @@ export class ContentPageComponent implements OnInit {
             const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
             const heroDesc = typeof entry.hero_description === 'string' ? entry.hero_description : '';
 
-            const lightUrl = entry.hero_image_light?.url ? `${this._baseUrl}${entry.hero_image_light.url}` : fallbackImage;
-            const darkUrl = entry.hero_image_dark?.url ? `${this._baseUrl}${entry.hero_image_dark.url}` : fallbackImage;
+            const lightUrl = entry.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : fallbackImage;
+            const darkUrl = entry.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : fallbackImage;
 
             const formattedDate = entry.date ? formatDate(entry.date, 'yyyy-MM-dd', 'en-US') : '';
 
@@ -106,12 +108,23 @@ export class ContentPageComponent implements OnInit {
               date: formattedDate,
             });
 
-            this.articleContent.set(entry);
-
             this.contentBlocks.set(this._mapContentBlocks(entry.content ?? []));
           }
         },
       });
+  }
+
+  public handleButtonClick(url?: string): void {
+    if (!url) {
+      return;
+    }
+    // Navigate internally for relative URLs, open in new tab for absolute URLs
+    if (url.startsWith('/')) {
+      this._router.navigateByUrl(url);
+      return;
+    }
+    window.open(url, '_blank', 'noopener');
+
   }
 
   private _generateTypeName(collection: string): string {
@@ -155,14 +168,15 @@ export class ContentPageComponent implements OnInit {
           orientation: block.card_properties?.card_orientation?.value,
           variant: block.card_properties?.card_variant?.value,
           appearance: block.card_properties?.appearance?.value,
+          isImage: block.is_image,
           image: block.group_image
             ? {
               caption: block.group_image.img_caption,
               lightUrl: block.group_image.img_light_mode?.[0]?.url
-                ? `${this._baseUrl}${block.group_image.img_light_mode[0].url}`
+                ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
                 : undefined,
               darkUrl: block.group_image.img_dark_mode?.[0]?.url
-                ? `${this._baseUrl}${block.group_image.img_dark_mode[0].url}`
+                ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
                 : undefined,
               aspectRatio: block.group_image.img_aspect_ratio?.value,
               bgColor: block.group_image.img_bg_color?.value,
@@ -171,6 +185,7 @@ export class ContentPageComponent implements OnInit {
               state: block.group_image.state?.value,
             }
             : undefined,
+          isButton: block.is_button,
           buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : block.button?.button?.button_label,
           buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
           buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,

@@ -33,6 +33,7 @@ export interface SetContentCard {
     content_title: string;
     content_description: string;
   };
+  is_button?: boolean;
   button?: {
     button?: {
       button_url?: string;
@@ -45,6 +46,7 @@ export interface SetContentCard {
     card_variant?: { value: 'surface' | 'light' | 'dark' };
     appearance?: { value: 'filled' | 'elevated' };
   };
+  is_image?: boolean;
   group_image?: {
     img_caption?: string;
     img_light_mode?: { url: string }[];

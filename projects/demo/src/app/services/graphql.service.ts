@@ -89,7 +89,7 @@ export class GraphqlService {
     }).valueChanges;
   }
 
-  public getPagesList(collection: string, typeName: string, slug: string): Observable<ApolloQueryResult<{ entry: PageEntry }>> {
+  public getPagesList(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<{ entry: PageEntry }>> {
     return this._apollo.watchQuery<{ entry: PageEntry }>({
       query: GET_PAGES_LIST(typeName),
       variables: {
@@ -99,7 +99,7 @@ export class GraphqlService {
     }).valueChanges;
   }
 
-  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<ApolloQueryResult<unknown>> {
+  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<unknown>> {
     const dynamicQuery = GET_DYNAMIC_CONTENT(collection, typeName);
     return this._apollo.watchQuery({
       query: dynamicQuery,

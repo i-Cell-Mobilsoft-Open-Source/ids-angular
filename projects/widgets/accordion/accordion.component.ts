@@ -65,7 +65,7 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
     }
   }
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys = [
       'Enter',
       ' ',

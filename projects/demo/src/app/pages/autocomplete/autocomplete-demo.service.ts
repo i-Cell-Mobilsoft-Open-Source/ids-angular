@@ -1,32 +1,79 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
-import { IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/forms/components/autocomplete/autocomplete-defaults';
-import { Subject } from 'rxjs';
+import { IdsSpinnerVariantType, IdsSpinnerVariant } from '@i-cell/ids-angular/spinner';
+import { debounceTime, delay, distinctUntilChanged, EMPTY, map, Observable, Subject, tap } from 'rxjs';
 
-const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
+const USER_INPUT_DEBOUNCE_TIME = 300;
+const SIMULATED_LOADING_TIME = 300;
+
+const OPTIONS = [
+  'Accordion',
+  'Autocomplete',
+  'Avatar',
+  'Badge',
+  'Breadcrumb',
+  'Button',
+  'Card',
+  'Chip',
+  'Checkbox',
+  'Date Picker',
+  'Dialog',
+  'Divider',
+  'Fieldset',
+  'Form Field',
+  'Icon',
+  'Icon button',
+  'Menu Item',
+  'Message',
+  'Notification',
+  'Option',
+  'Overlay panel',
+  'Paginator',
+  'Radio',
+  'Scrollbar',
+  'Segmented Control',
+  'Segmented Control Toggle',
+  'Select',
+  'Side nav',
+  'Side Sheet',
+  'Snackbar',
+  'Spinner',
+  'Switch',
+  'Tab',
+  'Table',
+  'Tag',
+  'Tooltip',
+].map((option) => ({ key: option, value: option }));
 
 type AutocompleteInputControls = {
   size: IdsSizeType;
   variant: IdsFormFieldVariantType;
   disabled: boolean;
   required: boolean;
+  multiSelect: boolean;
 };
 
 type AutocompleteHelperControls = {
-  name: string;
   placeholder: string;
   minChars: number;
-  maxLength: number;
+  hint: string;
+  limit: number;
   ariaLabelClearButton: string;
-  ariaLabelToggleButton: string;
+  spinnerVariant: IdsSpinnerVariantType;
   hintLoading: string;
   hintNoResults: string;
   hintMinChars: string;
-  hintMaxLength: string;
+  hintTooManyResults: string;
+};
+
+type InputOption = {
+  key: string;
+  value: unknown;
 };
 
 @Injectable()
@@ -61,14 +108,20 @@ export class AutocompleteDemoService {
       default: false,
       control: DemoControl.SWITCH,
     },
+    multiSelect: {
+      description: 'Whether the field allows multiple selections.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+      onModelChange: (value) => {
+        if (value !== undefined) {
+          this.multiSelectSignal.set(value);
+        }
+      },
+    },
   };
 
   public readonly helperControlConfig: DemoControlConfig<AutocompleteHelperControls> = {
-    name: {
-      description: 'Name of the field',
-      type: 'string',
-      default: 'Autocomplete field',
-    },
     placeholder: {
       description: 'Placeholder text for the autocomplete input',
       type: 'string',
@@ -77,10 +130,15 @@ export class AutocompleteDemoService {
     minChars: {
       description: 'Minimum number of characters before autocomplete activates',
       type: 'number',
-      default: defaultConfig.minChars,
+      default: 0,
     },
-    maxLength: {
-      description: 'Maximum length of the options is shown',
+    hint: {
+      description: 'Hint text for the autocomplete input',
+      type: 'string',
+      default: 'You can narrow suggestions by typing.',
+    },
+    limit: {
+      description: 'Hint shown if the number of suggestions exceeds this limit',
       type: 'number',
       default: 10,
     },
@@ -89,30 +147,32 @@ export class AutocompleteDemoService {
       type: 'string',
       default: 'Clear',
     },
-    ariaLabelToggleButton: {
-      description: 'Aria label for the toggle button',
-      type: 'string',
-      default: 'Toggle',
+    spinnerVariant: {
+      description: 'Variant of the spinner displayed in the autocomplete field.',
+      type: 'IdsSpinnerVariantType',
+      default: IdsSpinnerVariant.SURFACE,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsSpinnerVariant),
     },
     hintLoading: {
       description: 'Hint text displayed while loading options.',
       type: 'string',
-      default: defaultConfig.hintLoading,
+      default: 'Loading...',
     },
     hintNoResults: {
       description: 'Hint text displayed when no results are found.',
       type: 'string',
-      default: defaultConfig.hintNoResults,
+      default: 'No results found',
     },
     hintMinChars: {
       description: 'Hint text displayed when minimum number of characters before autocomplete activates is not met.',
       type: 'string',
-      default: defaultConfig.hintMinChars,
+      default: 'Please provide at least 1 characters',
     },
-    hintMaxLength: {
+    hintTooManyResults: {
       description: 'Hint text displayed when maximum length of the options is exceeded.',
       type: 'string',
-      default: defaultConfig.hintMaxLength,
+      default: 'Too many results, please refine your search',
     },
   };
 
@@ -121,10 +181,45 @@ export class AutocompleteDemoService {
 
   public model: AutocompleteInputControls = { ...this.defaults };
   public helperModel: AutocompleteHelperControls = { ...this.helperDefaults };
+  public multiSelectSignal = signal(this.model.multiSelect);
+
+  public isLoading = signal(false);
+  public options$: Observable<InputOption[]> = EMPTY;
+  public input = signal<string>('');
+  public input$ = toObservable(this.input);
+
+  constructor() {
+    this.options$ = this.input$.pipe(
+      distinctUntilChanged(),
+      debounceTime(USER_INPUT_DEBOUNCE_TIME),
+      tap(() => this.isLoading.set(true)),
+      delay(SIMULATED_LOADING_TIME),
+      map((value) => this._fixedOptionsListFilterFn(OPTIONS, value)),
+      tap(() => this.isLoading.set(false)),
+    );
+  }
+
+  public inputChange(event: Event): void {
+    this.input.set((event.target as HTMLInputElement).value);
+  }
 
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
     this._resetSubject.next();
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig,
+    ];
+  }
+
+  private _fixedOptionsListFilterFn(options: InputOption[], value: string | null | undefined): InputOption[] {
+    const filterValue = value?.toLowerCase() ?? '';
+    return (options ?? [])
+      .filter((option) => (option?.key as unknown as string).toLowerCase().includes(filterValue))
+      .map((option) => ({ key: option.key, value: option.value }) as InputOption);
   }
 }

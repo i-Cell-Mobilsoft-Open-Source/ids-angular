@@ -1,5 +1,5 @@
-import { APP_INITIALIZER, Injector } from "@angular/core";
-import { AngularRenderer } from "@storybook/angular";
+import { APP_INITIALIZER, Injector } from '@angular/core';
+import { AngularRenderer } from '@storybook/angular';
 import { DecoratorFunction } from '@storybook/csf';
 
 export function selectControlOptions(constObj: { [key: string]: string }, description?: string): object {
@@ -31,4 +31,4 @@ export function injectInjectorToProps<TArgs = unknown>(): DecoratorFunction<Angu
 
     return story;
   };
-}
+};

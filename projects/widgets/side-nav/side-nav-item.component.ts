@@ -83,7 +83,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
   host: {
     class: 'ids-side-nav-item',
     '[class.ids-side-nav-item-expandable]': '_expandable()',
-    '[role]': '_expandable() ? "group" : "treeitem"',
+    '[attr.role]': '_expandable() ? "group" : "treeitem"',
   },
 })
 export class IdsSideNavItemComponent {

@@ -1,3 +1,4 @@
+import { IdsTabActivationMode, IdsTabActivationModeType } from './types/tab-activation-mode.type';
 import { IdsTabGroupPosition, IdsTabGroupPositionType } from './types/tab-group-position.type';
 import { IdsTabGroupVariant, IdsTabGroupVariantType } from './types/tab-group-variant.type';
 import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
@@ -12,6 +13,7 @@ export interface IdsTabGroupDefaultConfig {
   stretchTabs?: boolean,
   tabPosition?: IdsTabGroupPositionType,
   indicatorPosition?: IdsTabIndicatorPositionType,
+  activationMode?: IdsTabActivationModeType,
 }
 
 export const IDS_TAB_GROUP_DEFAULT_CONFIG = new InjectionToken<IdsTabGroupDefaultConfig>(
@@ -30,5 +32,6 @@ export function IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY(): Required<IdsTabGroupDefa
     stretchTabs: true,
     tabPosition: IdsTabGroupPosition.START,
     indicatorPosition: IdsTabIndicatorPosition.BOTTOM,
+    activationMode: IdsTabActivationMode.MANUAL,
   };
 }

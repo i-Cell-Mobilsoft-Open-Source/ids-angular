@@ -38,7 +38,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     });
     this._graphqlService.getPages().subscribe((result) => {
       const typedResult = result as { data: { entries: { data: PageEntry[] } } };
-      const components = typedResult.data.entries.data;
+      const components = typedResult?.data?.entries?.data ?? [];
 
       if (components.length === 0) {
         return;

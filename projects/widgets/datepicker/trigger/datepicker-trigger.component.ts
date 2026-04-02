@@ -2,6 +2,7 @@ import { IdsDatepickerIntl } from '../datepicker-intl';
 import { IdsDatepickerDirective } from '../datepicker.directive';
 
 import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsFormFieldComponent } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -22,4 +23,5 @@ export class IdsDatepickerTriggerComponent {
 
   public datepicker = input.required<IdsDatepickerDirective>({ alias: 'for' });
   public ariaLabel = input<string | null>(null, { alias: 'aria-label' });
+  public size = input<IdsSizeType>('dense');
 }

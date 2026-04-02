@@ -47,7 +47,7 @@ export class HeroComponent implements OnDestroy, OnInit {
     }
 
     // Always use imageUrlLight and imageUrlDark for theme switching, fallback to imageUrl
-    let imgSrc = '';
+    let imgSrc: string;
     if (data.imageUrlLight && data.imageUrlDark) {
       imgSrc = htmlClassList.contains('ids-theme-dark') ? data.imageUrlDark : data.imageUrlLight;
     } else if (data.imageUrlLight) {

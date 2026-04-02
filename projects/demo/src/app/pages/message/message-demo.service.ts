@@ -99,4 +99,12 @@ export class MessageDemoService {
     this.helperModel = { ...this.helperDefaults };
     this.inputModel = { ...this.inputDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.messageInputControlConfig,
+      this.messageHelperControlConfig,
+      this.messageInputControlConfigInput,
+    ];
+  }
 }

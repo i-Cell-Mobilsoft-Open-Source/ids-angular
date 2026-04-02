@@ -68,7 +68,7 @@ export class IdsOptionComponent<T = unknown>
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   public onSelectionChange = output<IdsOptionSelectionChange<T>>();
 
-  public viewValue = computed(() => this._textElement().nativeElement.textContent || this.explicitViewValue() || '');
+  public viewValue = computed(() => this.explicitViewValue() || this._textElement().nativeElement.textContent || '');
   protected readonly _hostClasses = computed(() => this._getHostClasses([
     this.selected() ? 'selected' : null,
     this._active() ? 'active' : null,

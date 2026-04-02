@@ -3,10 +3,12 @@ import { IconService } from '../../core/services/icon.service';
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupPosition, IdsTabGroupPositionType, IdsTabGroupVariant, IdsTabGroupVariantType, IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from '@i-cell/ids-angular/tab';
+import { IdsTabActivationMode, IdsTabActivationModeType } from '@i-cell/ids-angular/tab/types/tab-activation-mode.type';
 
 const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -18,6 +20,7 @@ type TabInputControls = {
   tabPosition: IdsTabGroupPositionType,
   indicatorPosition: IdsTabIndicatorPositionType,
   disabled: boolean,
+  activationMode: IdsTabActivationModeType,
 };
 
 type TabHelperControls = {
@@ -37,6 +40,7 @@ type TabHelperControls = {
   tabItem3TrailingIcon: string,
   tabItem3Id: string,
 };
+
 @Injectable({ providedIn: 'root' })
 export class TabDemoService {
   private readonly _iconService = inject(IconService);
@@ -90,6 +94,13 @@ export class TabDemoService {
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+    },
+    activationMode: {
+      description: 'Tab activation mode.',
+      type: 'IdsTabActivationModeType',
+      default: defaultConfig.activationMode,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsTabActivationMode),
     },
   };
 
@@ -198,6 +209,17 @@ export class TabDemoService {
     },
   });
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'selectTab(index: number)',
+      description: 'Tab-group: Selects a tab by its index.',
+      returnType: 'number',
+      parameters: ['index'],
+      parameterTypes: ['number'],
+      parameterDescriptions: ['The index of the tab to select.'],
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<TabInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<TabHelperControls>(this.helperControlConfig());
 
@@ -232,5 +254,16 @@ export class TabDemoService {
 
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodControlConfig];
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.helperControlConfig(),
+    ];
   }
 }

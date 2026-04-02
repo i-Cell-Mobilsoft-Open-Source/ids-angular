@@ -90,7 +90,7 @@ export class IdsDaySelectorComponent extends IdsCalendarPage {
     return equalDates(date, this._today);
   }
 
-  private _handleKeydown(event: KeyboardEvent): void {
+  protected _handleKeydown(event: KeyboardEvent): void {
     let focusedDate = this.focusedDate();
 
     switch (event.code) {

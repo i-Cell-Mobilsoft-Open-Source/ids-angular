@@ -4,7 +4,7 @@ import { GET_NAVIGATION } from '../queries/get-navigation.query';
 import { GET_PAGES } from '../queries/get-pages.query';
 
 import { inject, Injectable } from '@angular/core';
-import { ApolloQueryResult } from '@apollo/client/core';
+import { ObservableQuery } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
@@ -74,14 +74,14 @@ export class GraphqlService {
     }).valueChanges;
   }
 
-  public getNavigation(): Observable<ApolloQueryResult<NavigationQueryResult>> {
+  public getNavigation(): Observable<ObservableQuery.Result<NavigationQueryResult>> {
     return this._apollo.watchQuery<NavigationQueryResult>({
       query: GET_NAVIGATION,
     }).valueChanges;
   }
 
-  public getComponentsList(): Observable<ApolloQueryResult<{ entries: { data: StatamicComponentListItem[] } }>> {
-    return this._apollo.watchQuery<{ entries: { data: StatamicComponentListItem[] } }>({
+  public getComponentsList(): Observable<ObservableQuery.Result<{ entries: { data: Partial<StatamicComponentListItem>[] } }>> {
+    return this._apollo.watchQuery<{ entries: { data: Partial<StatamicComponentListItem>[] } }>({
       query: GET_COMPONENTS_LIST,
     }).valueChanges;
   }

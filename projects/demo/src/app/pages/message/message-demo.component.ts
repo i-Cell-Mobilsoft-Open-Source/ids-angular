@@ -5,12 +5,23 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { CommonModule } from '@angular/common';
 import { Component, inject, Injectable, signal, DoCheck } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsHintMessageComponent, IdsErrorMessageComponent, IdsSuccessMessageComponent, IdsErrorDefinitionDirective, IdsFormFieldVariantType, IdsFormFieldComponent, IdsMessageSuffixDirective, IdsMessageDirective } from '@i-cell/ids-angular/forms';
-import { IDS_MESSAGE_PARENT_FORM_FIELD, IdsMessageParentFormField } from '@i-cell/ids-angular/forms/components/message/types/message-parent-form-field';
+import {
+  IdsHintMessageComponent,
+  IdsErrorMessageComponent,
+  IdsSuccessMessageComponent,
+  IdsErrorDefinitionDirective,
+  IdsFormFieldVariantType,
+  IdsFormFieldComponent,
+  IdsMessageSuffixDirective,
+  IdsMessageDirective,
+} from '@i-cell/ids-angular/forms';
+import {
+  IDS_MESSAGE_PARENT_FORM_FIELD,
+  IdsMessageParentFormField,
+} from '@i-cell/ids-angular/forms/components/message/types/message-parent-form-field';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
@@ -35,7 +46,6 @@ class DemoMessageState implements IdsMessageParentFormField {
     TryoutControlComponent,
     ControlTableComponent,
     IdsErrorDefinitionDirective,
-    CommonModule,
     IdsMessageSuffixDirective,
     IdsMessageDirective,
   ],
@@ -71,5 +81,4 @@ export class MessageDemoComponent implements DoCheck {
     this._demoMessageState.variant.set(this._messageDemoService.model.variant);
     this._demoMessageState.disabled.set(this._messageDemoService.inputModel.disabled);
   }
-
 }

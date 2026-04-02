@@ -97,7 +97,7 @@ export class IdsYearSelectorComponent extends IdsCalendarPage {
     return (isValidDate(min) && year < min.getFullYear()) || (isValidDate(max) && year > max.getFullYear());
   }
 
-  private _handleKeydown(event: KeyboardEvent): void {
+  protected _handleKeydown(event: KeyboardEvent): void {
     let focusedDate = this.focusedDate();
 
     switch (event.code) {

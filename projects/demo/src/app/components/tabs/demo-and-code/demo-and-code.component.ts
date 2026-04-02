@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
@@ -14,8 +13,6 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
     IdsIconComponent,
     IdsIconButtonComponent,
     IdsButtonComponent,
-    CommonModule,
-
   ],
   templateUrl: './demo-and-code.component.html',
 })
@@ -36,5 +33,4 @@ export class DemoAndCodeComponent {
   public onResetClick(): void {
     this.resetDemo.emit();
   }
-
 }

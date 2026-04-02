@@ -10,7 +10,7 @@ import { GraphqlService } from '../../services/graphql.service';
 
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { ApolloQueryResult } from '@apollo/client/core';
+import { ObservableQuery } from '@apollo/client/core';
 
 @Component({
   selector: 'app-components',
@@ -40,11 +40,11 @@ export class ComponentsComponent implements OnInit {
   public ngOnInit(): void {
     this._graphqlService
       .getComponentsList()
-      .subscribe((result: ApolloQueryResult<{ entries: { data: StatamicComponentListItem[] }; entry?: EntryData }>) => {
+      .subscribe((result: ObservableQuery.Result<{ entries: { data: Partial<StatamicComponentListItem>[] }; entry?: EntryData }>) => {
         const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
         let components: ComponentData[] = [];
 
-        const entry = result.data.entry;
+        const entry = result.data?.entry;
 
         if (entry?.navs_field) {
           entry.navs_field[0]?.tree?.forEach((treeNode) => {
@@ -63,8 +63,8 @@ export class ComponentsComponent implements OnInit {
                       (page.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${page.comp_img_dark_mode[0].url}` : '') ||
                       fallbackImage,
                     imageLink: page.slug ? `/components/${page.slug}` : '',
-                    comp_img_light_mode: page.comp_img_light_mode,
-                    comp_img_dark_mode: page.comp_img_dark_mode,
+                    comp_img_light_mode: page.comp_img_light_mode as { url: string }[] | undefined,
+                    comp_img_dark_mode: page.comp_img_dark_mode as { url: string }[] | undefined,
                   });
                 }
               });
@@ -73,8 +73,8 @@ export class ComponentsComponent implements OnInit {
         }
 
         if (components.length === 0) {
-          const componentsList = result.data.entries.data ?? [];
-          components = componentsList.map((componentItem: StatamicComponentListItem) => ({
+          const componentsList = result.data?.entries?.data ?? [];
+          components = componentsList.map((componentItem: Partial<StatamicComponentListItem>) => ({
             id: Number(componentItem.id) || 0,
             title: componentItem.title ?? '',
             comp_description: componentItem.comp_description ?? '',
@@ -85,8 +85,8 @@ export class ComponentsComponent implements OnInit {
               (componentItem.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${componentItem.comp_img_dark_mode[0].url}` : '') ||
               fallbackImage,
             imageLink: componentItem.slug ? `/components/${componentItem.slug}` : '',
-            comp_img_light_mode: componentItem.comp_img_light_mode,
-            comp_img_dark_mode: componentItem.comp_img_dark_mode,
+            comp_img_light_mode: componentItem.comp_img_light_mode as { url: string }[] | undefined,
+            comp_img_dark_mode: componentItem.comp_img_dark_mode as { url: string }[] | undefined,
           }));
         }
 

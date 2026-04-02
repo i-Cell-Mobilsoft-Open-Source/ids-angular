@@ -39,7 +39,7 @@ export class IdsCardComponent extends ComponentBaseWithDefaults<IdsCardDefaultCo
   // eslint-disable-next-line @angular-eslint/no-output-native
   public click = new EventEmitter();
 
-  private _hasClickHandler = signal(false);
+  protected _hasClickHandler = signal(false);
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.appearance(),

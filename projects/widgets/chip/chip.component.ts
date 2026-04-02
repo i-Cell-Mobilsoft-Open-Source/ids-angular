@@ -50,7 +50,7 @@ export class IdsChipComponent
 
   private _hostElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  private _isInteractive = this._hostElement.tagName === 'BUTTON';
+  protected _isInteractive = this._hostElement.tagName === 'BUTTON';
 
   public removable = input<boolean>(this._defaultConfig.removable);
   public appearance = input<IdsChipAppearanceType>(this._defaultConfig.appearance);
@@ -61,12 +61,12 @@ export class IdsChipComponent
 
   public removed = output<IdsChipRemoveEvent>();
 
+  protected _parentOrSelfDisabled = computed(() => this._group?.disabled() ?? this.disabled());
+  protected _safeRemovable = computed(() => this._isInteractive && this.removable());
+  protected _safeTabIndex = computed(() => (!this._isInteractive || this.removable() || this.disabled() ? -1 : this.tabIndex()));
+  protected _safeRole = computed(() => (this._safeRemovable() ? 'presentation' : null));
   private _parentOrSelfAppearance = computed(() => this._group?.appearance() ?? this.appearance());
   private _parentOrSelfSize = computed(() => this._group?.size() ?? this.size());
-  private _parentOrSelfDisabled = computed(() => this._group?.disabled() ?? this.disabled());
-  protected _safeRemovable = computed(() => this._isInteractive && this.removable());
-  private _safeTabIndex = computed(() => (!this._isInteractive || this.removable() || this.disabled() ? -1 : this.tabIndex()));
-  private _safeRole = computed(() => (this._safeRemovable() ? 'presentation' : null));
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfAppearance(),

@@ -36,14 +36,10 @@
                     <div class="text-justify" [innerHTML]="block.description"></div>
                     @if(block.isButton){
                       <ids-button-group>
-                        <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(block.buttonOneUrl)"> 
-                          {{ block.buttonOne }}
+                        @for(button of block.button; track $index){
+                        <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(button.url)"> 
+                          {{ button.text }}
                         </button>
-                          @if(block.buttonTwo){
-                            <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(block.buttonTwoUrl)">
-                            {{ block.buttonTwo }}
-
-                          </button>
                         }
                       </ids-button-group>
                     }

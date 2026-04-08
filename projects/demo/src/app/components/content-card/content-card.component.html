@@ -8,9 +8,9 @@
   [class.transparent-bg]="data.transparent === true"
 >
   @if (data.imageURL) {
-    <div class="ids-container-gap-24" [class]="data.orientation === 'horizontal' ? ' md:w-full ' : ''">
+    <div class="ids-container-gap-24 relative" [class]="data.orientation === 'horizontal' ? ' md:w-full ' : ''">
       @if (data.state) {
-        <app-badge [state]="data.state" />
+        <app-badge class="absolute" [state]="data.state" />
       }
       <app-image
         [aspectRatio]="data.aspectRatio"
@@ -22,6 +22,7 @@
         [imageUrlDark]="contentCardData().imageUrlDark ?? ''"
         [data]="imageData()"
         [filledInContainer]="data.filledInContainer ?? false"
+        [showCaption]="showCaption()"
       />
     </div>
   }
@@ -45,8 +46,8 @@
           }
           @if (data.description) {
             <div
-              class="text-left text-body-medium ids-page-surface"
-              [class]="data.orientation === 'horizontal' ? 'md:line-clamp-5' : 'line-clamp-3'"
+              class="text-left text-body-medium ids-page-surface [&_ol]:list-decimal [&_ul]:list-disc [&_ol]:pl-5 [&_ul]:pl-5"
+              [class]="(data.orientation === 'horizontal' || fullDescription()) ? '' : 'line-clamp-3'"
               [innerHTML]="data.description | safeHtml"
             ></div>
           }

@@ -27,7 +27,7 @@ import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
 })
 export class ComponentDetailsComponent implements OnInit {
   public heroData?: HeroData;
-  public componentBlocks: ComponentBlock[] = [];
+  public componentBlocks = signal<ComponentBlock[]>([]);
 
   public tabGroup = viewChild(IdsTabGroupComponent);
   public activeTab = signal<string>('demo');
@@ -95,7 +95,7 @@ export class ComponentDetailsComponent implements OnInit {
           this._updateHeroAndBlocks(component);
         } else {
           this.heroData = undefined;
-          this.componentBlocks = [];
+          this.componentBlocks.set([]);
         }
       });
 
@@ -118,7 +118,7 @@ export class ComponentDetailsComponent implements OnInit {
     };
 
     const blocks: ComponentBlock[] = [];
-    component.componentBlocks?.forEach((block: ComponentContent) => {
+    component.content?.forEach((block: ComponentContent) => {
       if (block.__typename === 'Set_Content_Heading') {
         blocks.push({
           type: 'heading',
@@ -155,9 +155,9 @@ export class ComponentDetailsComponent implements OnInit {
           buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,
           buttonTwoUrl: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_url : block.button?.button?.button_url,
         });
-        this.componentBlocks = blocks;
       }
     });
+    this.componentBlocks.set(blocks);
   }
 
   public trackByBlock(index: number, item: ComponentBlock): string | number {

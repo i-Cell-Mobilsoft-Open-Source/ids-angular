@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
+import { IdsChipGroupComponent, IdsChipComponent } from '@i-cell/ids-angular/chip';
 
 @Component({
   selector: 'app-content-card',
@@ -18,6 +19,8 @@ import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directi
     BadgeComponent,
     IdsButtonComponent,
     SafeHtmlPipe,
+    IdsChipGroupComponent,
+    IdsChipComponent,
   ],
   templateUrl: './content-card.component.html',
   styleUrl: './content-card.component.scss',
@@ -43,4 +46,5 @@ export class ContentCardComponent  {
   public imageData = computed(() => ({
     transparent: this.contentCardData().imageBGTransparent === true,
   }));
+
 }

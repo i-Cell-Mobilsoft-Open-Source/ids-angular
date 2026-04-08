@@ -136,6 +136,7 @@ export class AppComponent {
         }
       }
       return {
+        slug: node.page?.slug,
         name: node.page?.title,
         path,
         children: node.children ? this._mapStatamicNavToMenu(node.children) : [],

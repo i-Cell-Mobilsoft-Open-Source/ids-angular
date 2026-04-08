@@ -3,6 +3,17 @@ export interface ContentCardData {
   id?: number;
   orientation: 'horizontal' | 'vertical';
   aspectRatio?: '1/1' | '16/9' | '16/10';
+  image?: {
+    lightUrl?: string;
+    darkUrl?: string;
+    caption?: string;
+    bgColorVariant?: 'surface' | 'primary' | 'light';
+    bgTransparent?: boolean;
+    filledInContainer?: boolean;
+    state?: 'no_state' | 'do' | 'dont';
+  };
+  isImage?: boolean;
+  isButton?: boolean;
   imageURL?: string;
   imageUrlLight?: string;
   imageUrlDark?: string;
@@ -23,4 +34,10 @@ export interface ContentCardData {
   imageBGTransparent?: boolean
   appearance?: 'filled' | 'elevated';
   filledInContainer?: boolean;
+  last_modified?: string;
+  date?: string;
+  tags?: Array<{
+    id?: number;
+    title?: string;
+  }>;
 }

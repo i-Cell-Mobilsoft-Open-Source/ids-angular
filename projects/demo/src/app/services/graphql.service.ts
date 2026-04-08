@@ -1,6 +1,9 @@
+import { PageEntry } from '../model/pageEntry';
 import { GET_COMPONENTS_LIST } from '../queries/get-components-list.query';
 import { GET_COMPONENTS } from '../queries/get-components.query';
+import { GET_DYNAMIC_CONTENT } from '../queries/get-dynamic-content.query';
 import { GET_NAVIGATION } from '../queries/get-navigation.query';
+import { GET_PAGES_LIST } from '../queries/get-pages-list.query';
 import { GET_PAGES } from '../queries/get-pages.query';
 
 import { inject, Injectable } from '@angular/core';
@@ -83,6 +86,26 @@ export class GraphqlService {
   public getComponentsList(): Observable<ObservableQuery.Result<{ entries: { data: Partial<StatamicComponentListItem>[] } }>> {
     return this._apollo.watchQuery<{ entries: { data: Partial<StatamicComponentListItem>[] } }>({
       query: GET_COMPONENTS_LIST,
+    }).valueChanges;
+  }
+
+  public getPagesList(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<{ entry: PageEntry }>> {
+    return this._apollo.watchQuery<{ entry: PageEntry }>({
+      query: GET_PAGES_LIST(typeName),
+      variables: {
+        collection,
+        slug,
+      },
+    }).valueChanges;
+  }
+
+  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<unknown>> {
+    const dynamicQuery = GET_DYNAMIC_CONTENT(collection, typeName);
+    return this._apollo.watchQuery({
+      query: dynamicQuery,
+      variables: {
+        slug,
+      },
     }).valueChanges;
   }
 }

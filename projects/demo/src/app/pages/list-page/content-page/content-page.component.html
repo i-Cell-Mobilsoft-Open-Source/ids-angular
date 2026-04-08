@@ -1,0 +1,60 @@
+<app-content-hero [heroData]="heroData()" />
+
+<div class="flex flex-col items-start gap-12 py-10 px-8 contents-container">
+  <div class="flex flex-col w-full max-w-[1170px] items-start gap-ids-container-gap-16">
+    <div class="self-stretch text-justify" [innerHTML]="heroData().description"></div>
+  </div>
+  <ids-card class="self-center flex justify-center items-center hero-img" orientation="horizontal">
+    <img alt="" [src]="heroData().imageUrlLight">
+  </ids-card>
+
+  <div class="flex flex-col w-full gap-8">
+    @for (block of contentBlocks(); track $index) {
+      @switch (block.type) {
+        @case ("heading") {
+          <h2 class="text-2xl font-bold">{{ block.heading }}</h2>
+        }
+
+        @case ("card") {
+          <ids-card class="w-full" stretch="true">
+            <div class="p-4 flex flex-col gap-2">
+              <header idsCardHeader>
+                <h2 idsCardTitle>{{ block.title }}</h2>
+                @if (block.overTitle) {
+                  <h3 idsCardSubtitle>{{ block.overTitle }}</h3>
+                }
+              </header>
+
+              <ids-card-body>
+                <div>
+                  @if (block.isImage) {
+                    <div class="float-left mr-4 mb-2 w-ids-container-size-width-256">
+                      <img idsCardMedia alt="" [src]="block.image?.lightUrl" />
+                    </div>
+                  }
+                  <div>
+                    <div class="text-justify" [innerHTML]="block.description"></div>
+                    @if(block.isButton){
+                      <ids-button-group>
+                        <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(block.buttonOneUrl)"> 
+                          {{ block.buttonOne }}
+                        </button>
+                          @if(block.buttonTwo){
+                            <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(block.buttonTwoUrl)">
+                            {{ block.buttonTwo }}
+
+                          </button>
+                        }
+                      </ids-button-group>
+                    }
+                    <div></div>
+                  </div>
+                </div>
+              </ids-card-body>
+            </div>
+          </ids-card>
+        }
+      }
+    }
+  </div>
+</div>

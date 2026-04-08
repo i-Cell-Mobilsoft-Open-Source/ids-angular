@@ -5,7 +5,3 @@ export interface NavigationNode {
   max_depth?: number | null;
   title?: string;
 }
-
-export interface NavigationQueryResult {
-  navs: NavigationNode[];
-}

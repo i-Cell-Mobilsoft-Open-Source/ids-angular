@@ -27,9 +27,9 @@
   <div class="flex justify-center items center">
     <ids-paginator
       variant="surface"
-      [length]="contentDatas().length"
+      [length]="filteredContentDatas().length"
       [pageSize]="pageSize()"
-      [pageSizeOptions]="[6, 12, 18]"
+      [pageSizeOptions]="[8, 16, 32]"
       [showFirstLastButton]="true"
       [showPageInfo]="false"
       (pageChanged)="onPageChange($event)"

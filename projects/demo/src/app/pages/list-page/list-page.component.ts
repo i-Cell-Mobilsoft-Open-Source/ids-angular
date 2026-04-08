@@ -13,7 +13,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
 import { environment } from 'projects/demo/src/environments/environment.development';
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 8;
 
 @Component({
   selector: 'app-list-page',
@@ -65,7 +65,7 @@ export class ListPageComponent implements OnInit {
 
   public filteredContentDatas = computed(() => {
     const filter = this.activeFilter();
-    const allData = this.contentDatas();
+    const allData = this.contentDatas().sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 
     if (filter === 'All') {
       return allData;

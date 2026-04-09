@@ -139,9 +139,6 @@ export class SegmentedControlToggleDemoService {
   }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [
-      this.inputControlConfig,
-      this.helperControlConfig,
-    ];
+    return [this.inputControlConfig];
   }
 }

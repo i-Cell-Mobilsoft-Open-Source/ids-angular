@@ -112,9 +112,6 @@ export class MenuItemDemoService {
   }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [
-      this.menuItemInputControlConfig,
-      this.menuItemHelperControlConfig,
-    ];
+    return [this.menuItemInputControlConfig];
   }
 }

@@ -112,9 +112,6 @@ export class SideNavDemoService {
   }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [
-      this.sideNavInputControlConfig,
-      this.helperControlConfig,
-    ];
+    return [this.sideNavInputControlConfig];
   }
 }

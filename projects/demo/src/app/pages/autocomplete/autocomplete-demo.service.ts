@@ -210,10 +210,7 @@ export class AutocompleteDemoService {
   }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [
-      this.inputControlConfig,
-      this.helperControlConfig,
-    ];
+    return [this.inputControlConfig];
   }
 
   private _fixedOptionsListFilterFn(options: InputOption[], value: string | null | undefined): InputOption[] {

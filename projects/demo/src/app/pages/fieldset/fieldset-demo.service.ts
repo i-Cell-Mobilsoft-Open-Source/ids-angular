@@ -63,9 +63,6 @@ export class FieldsetDemoService {
   }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [
-      this.inputControlConfig,
-      this.helperControlConfig,
-    ];
+    return [this.inputControlConfig];
   }
 }

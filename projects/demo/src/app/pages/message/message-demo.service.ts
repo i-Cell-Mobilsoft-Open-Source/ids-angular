@@ -103,7 +103,6 @@ export class MessageDemoService {
   public getApiConfig(): DemoControlConfig<unknown>[] {
     return [
       this.messageInputControlConfig,
-      this.messageHelperControlConfig,
       this.messageInputControlConfigInput,
     ];
   }

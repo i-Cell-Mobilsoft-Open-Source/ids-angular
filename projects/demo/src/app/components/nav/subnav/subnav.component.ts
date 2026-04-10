@@ -10,6 +10,7 @@ import {
   Input,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { IdsSideNavItemComponent } from '@i-cell/ids-angular/side-nav';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -17,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     RouterModule,
     TranslateModule,
+    IdsSideNavItemComponent,
   ],
   templateUrl: './subnav.component.html',
   styleUrls: ['./subnav.component.scss'],

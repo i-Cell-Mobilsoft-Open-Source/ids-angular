@@ -1,40 +1,39 @@
-<nav>
+<nav idsSideNav>
   @for (menuConfig of menu(); track $index) {
-    <section>
+    <ids-side-nav-section>
       @if (menuConfig.slug) {
-          <a [routerLink]="menuConfig.path">
-            <h2 class="nav-label">{{ menuConfig.name | translate }}</h2>
-          </a>
-        }
-        @else {
-          <h2 class="nav-label">{{ menuConfig.name | translate }}</h2>
-        }
+        <a [routerLink]="menuConfig.path">
+          <ids-side-nav-title class="nav-label" [label]="menuConfig.name!" />
+        </a>
+      } @else {
+        <ids-side-nav-title class="nav-label" [label]="menuConfig.name!" />
+      }
       <ul>
         @for (menuItem of menuConfig.children; track $index) {
           @if (menuItem.children?.length! > 0) {
             <li>
-              <span class="subnav-parent">
+              <div class="subnav-parent">
                 <a #rla="routerLinkActive" [routerLink]="menuItem.path" [routerLinkActive]="['active']">
                   <span class="icon">
                     @if (menuItem.icon) {
                       <ids-icon [fontIcon]="menuItem.icon" />
                     }
                   </span>
-                  <span class="name">{{ menuItem.name! | translate }}</span>
+                  <ids-side-nav-item class="name" [label]="menuItem.name!" />
                 </a>
-                <span #trigger class="more"><ids-icon [fontIcon]="menuItem.$open ? 'chevron-up' : 'chevron-down'" /></span>
-              </span>
+                <span #trigger class="more"><ids-icon icon-trailing [fontIcon]="menuItem.$open ? 'chevron-up' : 'chevron-down'" /></span>
+              </div>
               <ids-subnav [menuItem]="menuItem" [trigger]="trigger" [open]="rla.isActive" (opened)="menuItem.$open = $event" />
             </li>
           } @else {
             <li>
               <a [routerLink]="menuItem.path">
-                <span class="icon"></span><span class="name">{{ menuItem!.name! | translate }}</span>
+                <ids-side-nav-item class="icon" [label]="menuItem.name!" />
               </a>
             </li>
           }
         }
       </ul>
-    </section>
+    </ids-side-nav-section>
   }
 </nav>

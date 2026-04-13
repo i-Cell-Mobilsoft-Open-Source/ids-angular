@@ -2,9 +2,7 @@ import { HeroData } from '../../model/heroData';
 import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
 import { Location } from '@angular/common';
-import { Component, input, OnDestroy, OnInit, inject as angularInject } from '@angular/core';
-
-const SIGNAL_UPDATE_DELAY_MS = 50;
+import { Component, effect, input, OnDestroy, OnInit, inject as angularInject } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
@@ -16,6 +14,18 @@ export class HeroComponent implements OnDestroy, OnInit {
   public heroData = input.required<HeroData>();
   public currentImageUrl = '';
   private _observer: MutationObserver | undefined;
+  private readonly _location: Location;
+
+  constructor() {
+    this._location = angularInject(Location);
+
+    effect(() => {
+      const data = this.heroData();
+      if (data.imageUrl || data.imageUrlLight || data.imageUrlDark) {
+        this._updateImageBasedOnTheme();
+      }
+    });
+  }
 
   public ngOnInit(): void {
     this._updateImageBasedOnTheme();
@@ -39,10 +49,8 @@ export class HeroComponent implements OnDestroy, OnInit {
     // If using signals, call as a function
     const data = typeof this.heroData === 'function' ? this.heroData() : this.heroData;
 
-    // If heroData is empty, wait for signal update before setting image
+    // If heroData is empty, skip update
     if (!data.imageUrlLight && !data.imageUrlDark && !data.imageUrl) {
-      // Try again after a short delay (wait for signal update)
-      setTimeout(() => this._updateImageBasedOnTheme(), SIGNAL_UPDATE_DELAY_MS);
       return;
     }
 
@@ -63,14 +71,7 @@ export class HeroComponent implements OnDestroy, OnInit {
     this.currentImageUrl = imgSrc;
   }
 
-  private readonly _location: Location;
-
-  constructor() {
-    this._location = angularInject(Location);
-  }
-
   public goBack(): void {
     this._location.back();
   }
 }
-

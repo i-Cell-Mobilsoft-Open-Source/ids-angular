@@ -47,7 +47,7 @@ export class ContentCardComponent  {
   }
 
   public imageData = computed(() => ({
-    transparent: this.contentCardData().imageBGTransparent === true,
+    transparent: this.contentCardData().image?.bgTransparent === true,
   }));
 
 }

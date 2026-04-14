@@ -70,9 +70,6 @@ export class ScrollbarDemoService {
   }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [
-      this.controlConfig,
-      this.helperControlConfig,
-    ];
+    return [this.controlConfig];
   }
 }

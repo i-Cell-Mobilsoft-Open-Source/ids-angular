@@ -23,6 +23,7 @@ export class ImageComponent implements OnInit, OnDestroy {
   public filledInContainer = input<boolean>(false);
 
   public imageCaption = input<string>();
+  public showCaption = input<boolean>(false);
 
   public data = input.required<{
     transparent?: boolean;
@@ -68,7 +69,7 @@ export class ImageComponent implements OnInit, OnDestroy {
   public imgFilledClass = computed<string>(() =>
     (this.filledInContainer()
       ? 'object-cover lg:w-full lg:h-full'
-      : 'object-contain lg:h-auto'
+      : 'object-contain'
     ),
   );
 

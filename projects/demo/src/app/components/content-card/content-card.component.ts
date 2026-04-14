@@ -30,6 +30,9 @@ export class ContentCardComponent  {
   public contentCardData = input.required<ContentCardData>();
   private _router = inject(Router);
 
+  public showCaption = input<boolean>(false);
+  public fullDescription = input<boolean>(false);
+
   public handleButtonClick(url?: string): void {
     if (!url) {
       return;

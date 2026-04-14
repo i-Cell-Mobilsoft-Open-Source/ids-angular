@@ -246,7 +246,6 @@ export class SelectDemoService {
     return [
       this.formFieldInputControlConfig,
       this.selectInputControlConfig,
-      this.selectHelperControlConfig,
     ];
   }
 }

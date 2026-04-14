@@ -194,9 +194,7 @@ export class ChipDemoService {
   public getApiConfig(): DemoControlConfig<unknown>[] {
     return [
       this.inputControlConfig,
-      this.helperControlConfig,
       this.groupInputControlConfig,
-      this.groupHelperControlConfig,
     ];
   }
 }

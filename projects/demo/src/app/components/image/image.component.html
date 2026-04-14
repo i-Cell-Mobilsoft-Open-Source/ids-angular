@@ -13,7 +13,7 @@
   >
     <img class="w-full h-48 bg-gray-100 rounded-lg" [alt]="imageCaption() || ''" [src]="currentImageUrl" [ngClass]="[aspectRatioClass(), imgFilledClass()]" />
   </div>
-  <!-- @if (imageCaption()) {
+  @if (showCaption() && imageCaption()) {
     <figcaption class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ imageCaption() }}</figcaption>
-  } -->
+  }
 </figure>

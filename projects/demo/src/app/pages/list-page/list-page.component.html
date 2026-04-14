@@ -1,3 +1,9 @@
+@if (isLoading()) {
+<div class="flex flex-col items-center gap-4 py-10 px-8">
+  <ids-spinner size="comfortable" sizeCollection="big" variant="primary"/>
+</div>
+}
+@else {
 <div class="flex flex-col gap-16">
   <app-hero [heroData]="heroData()" />
   <div class="flex justify-center items-center self-stretch gap-3">
@@ -40,3 +46,4 @@
     <router-outlet />
   </div>
 </div>
+}

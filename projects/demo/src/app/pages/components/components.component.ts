@@ -11,6 +11,8 @@ import { GraphqlService } from '../../services/graphql.service';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ObservableQuery } from '@apollo/client/core';
+import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner';
+import { filter, tap } from 'rxjs';
 
 @Component({
   selector: 'app-components',
@@ -20,6 +22,7 @@ import { ObservableQuery } from '@apollo/client/core';
     RouterOutlet,
     ContentCardComponent,
     RouterModule,
+    IdsSpinnerComponent,
   ],
 })
 export class ComponentsComponent implements OnInit {
@@ -34,12 +37,18 @@ export class ComponentsComponent implements OnInit {
     isBackButton: true,
   });
 
+  public isLoading = signal<boolean>(true);
+
   private readonly _graphqlService = inject(GraphqlService);
   private readonly _baseUrl = environment.cmsBaseUrl.replace(/\/$/, '');
 
   public ngOnInit(): void {
+    this.isLoading.set(true);
+
     this._graphqlService
       .getComponentsList()
+      .pipe(tap(() => this.isLoading.set(true)),
+        filter((result) => !result.loading))
       .subscribe((result: ObservableQuery.Result<{ entries: { data: Partial<StatamicComponentListItem>[] }; entry?: EntryData }>) => {
         const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
         let components: ComponentData[] = [];
@@ -126,6 +135,8 @@ export class ComponentsComponent implements OnInit {
             isBackButton: true,
           });
         }
+        this.isLoading.set(false);
+
       });
   }
 

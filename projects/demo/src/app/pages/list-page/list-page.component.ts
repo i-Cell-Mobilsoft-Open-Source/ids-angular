@@ -11,7 +11,9 @@ import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { IdsChipGroupComponent, IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
+import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner';
 import { environment } from 'projects/demo/src/environments/environment.development';
+import { filter } from 'rxjs';
 
 const PAGE_SIZE = 8;
 
@@ -26,6 +28,7 @@ const PAGE_SIZE = 8;
     IdsIconComponent,
     IdsPaginatorComponent,
     RouterOutlet,
+    IdsSpinnerComponent,
   ],
   templateUrl: './list-page.component.html',
   styleUrl: './list-page.component.scss',
@@ -46,6 +49,8 @@ export class ListPageComponent implements OnInit {
   public pageIndex = signal<number>(0);
 
   public activeFilter = signal<string>('All');
+
+  public isLoading = signal<boolean>(true);
 
   // Compute the list of available tags from the content data
   public availableTags = computed(() => {
@@ -93,6 +98,8 @@ export class ListPageComponent implements OnInit {
   private readonly _route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
+    this.isLoading.set(true);
+
     this._route.data.subscribe((routeData) => {
       const collection = routeData['collection'];
       const slug = routeData['slug'];
@@ -104,60 +111,65 @@ export class ListPageComponent implements OnInit {
   }
 
   private _loadData(collection: string, typeName: string, slug: string): void {
-    this._graphqlService.getPagesList(collection, typeName, slug).subscribe({
-      next: (result) => {
-        const typedResult = result as unknown as { data: { entry?: EntryListData } };
-        const entry = typedResult.data?.entry;
+    this._graphqlService.getPagesList(collection, typeName, slug)
+      .pipe(
+        filter((result) => !result.loading),
+      )
+      .subscribe({
+        next: (result) => {
+          const typedResult = result as unknown as { data: { entry?: EntryListData } };
+          const entry = typedResult.data?.entry;
 
-        const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
-        const contents: ContentData[] = [];
+          const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
+          const contents: ContentData[] = [];
 
-        if (entry?.collections_contents) {
-          entry.collections_contents.forEach((collection) => {
-            const treeArray = collection.structure?.tree || [];
+          if (entry?.collections_contents) {
+            entry.collections_contents.forEach((collection) => {
+              const treeArray = collection.structure?.tree || [];
 
-            if (Array.isArray(treeArray)) {
-              treeArray.forEach((treeNode) => {
-                const entryItem = treeNode.entry;
+              if (Array.isArray(treeArray)) {
+                treeArray.forEach((treeNode) => {
+                  const entryItem = treeNode.entry;
 
-                if (entryItem && entryItem.id) {
-                  const heroDesc = typeof entryItem.hero_description === 'string' ? entryItem.hero_description : '';
+                  if (entryItem && entryItem.id) {
+                    const heroDesc = typeof entryItem.hero_description === 'string' ? entryItem.hero_description : '';
 
-                  contents.push({
-                    id: Number(entryItem.id) || 0,
-                    title: entryItem.title ?? '',
-                    slug: entryItem.slug ?? '',
-                    description: heroDesc,
-                    imageUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
-                    imageLink: entryItem.slug ? `/${slug}/${entryItem.slug}` : '',
-                    last_modified: entryItem.last_modified,
-                    date: entryItem.date,
-                    tags: entryItem.tags?.filter((tag): tag is { id: number; title: string } =>
-                      tag.id !== undefined && tag.title !== undefined,
-                    ),
-                  });
-                }
-              });
-            }
+                    contents.push({
+                      id: Number(entryItem.id) || 0,
+                      title: entryItem.title ?? '',
+                      slug: entryItem.slug ?? '',
+                      description: heroDesc,
+                      imageUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
+                      imageLink: entryItem.slug ? `/${slug}/${entryItem.slug}` : '',
+                      last_modified: entryItem.last_modified,
+                      date: entryItem.date,
+                      tags: entryItem.tags?.filter((tag): tag is { id: number; title: string } =>
+                        tag.id !== undefined && tag.title !== undefined,
+                      ),
+                    });
+                  }
+                });
+              }
+            });
+          }
+
+          this.contentDatas.set(contents.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '')));
+
+          const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';
+          const darkUrl = entry?.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : '';
+
+          this.heroData.set({
+            id: Number(entry?.id) || 0,
+            title: entry?.title ?? 'List Page',
+            description: entry?.hero_description ?? '',
+            imageUrl: lightUrl || darkUrl || fallbackImage,
+            imageUrlLight: lightUrl || fallbackImage,
+            imageUrlDark: darkUrl || fallbackImage,
+            isBackButton: true,
           });
-        }
-
-        this.contentDatas.set(contents.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '')));
-
-        const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';
-        const darkUrl = entry?.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : '';
-
-        this.heroData.set({
-          id: Number(entry?.id) || 0,
-          title: entry?.title ?? 'List Page',
-          description: entry?.hero_description ?? '',
-          imageUrl: lightUrl || darkUrl || fallbackImage,
-          imageUrlLight: lightUrl || fallbackImage,
-          imageUrlDark: darkUrl || fallbackImage,
-          isBackButton: true,
-        });
-      },
-    });
+          this.isLoading.set(false);
+        },
+      });
   }
 
   private _generateTypeName(collection: string): string {

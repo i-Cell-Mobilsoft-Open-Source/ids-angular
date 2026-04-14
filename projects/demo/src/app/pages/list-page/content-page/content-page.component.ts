@@ -15,9 +15,10 @@ import {
   IdsCardHeaderComponent,
   IdsCardMediaDirective,
 } from '@i-cell/ids-angular/card';
+import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner';
 import { environment } from 'projects/demo/src/environments/environment.development';
 import { combineLatest } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-content-page',
@@ -32,6 +33,7 @@ import { filter, map, switchMap } from 'rxjs/operators';
     IdsCardMediaDirective,
     IdsButtonGroupComponent,
     IdsButtonComponent,
+    IdsSpinnerComponent,
   ],
   templateUrl: './content-page.component.html',
   styleUrl: './content-page.component.scss',
@@ -50,6 +52,8 @@ export class ContentPageComponent implements OnInit {
     date: '',
   });
 
+  public isLoading = signal<boolean>(true);
+
   private readonly _graphqlService = inject(GraphqlService);
   private readonly _route = inject(ActivatedRoute);
   private _router = inject(Router);
@@ -57,11 +61,14 @@ export class ContentPageComponent implements OnInit {
   public contentBlocks = signal<ContentBlock[]>([]);
 
   public ngOnInit(): void {
+    this.isLoading.set(true);
+
     combineLatest([
       this._route.paramMap,
       this._route.data,
     ])
       .pipe(
+        tap(() => this.isLoading.set(true)),
         map(([
           params,
           routeData,
@@ -80,6 +87,7 @@ export class ContentPageComponent implements OnInit {
         filter((info): info is { slug: string; collection: string; typeName: string } => !!info.slug),
 
         switchMap((info) => this._graphqlService.getDynamicContent(info.collection, info.typeName, info.slug)),
+        filter((result) => !result.loading),
       )
       .subscribe({
         next: (result) => {
@@ -109,7 +117,9 @@ export class ContentPageComponent implements OnInit {
             });
 
             this.contentBlocks.set(this._mapContentBlocks(entry.content ?? []));
+
           }
+          this.isLoading.set(false);
         },
       });
   }

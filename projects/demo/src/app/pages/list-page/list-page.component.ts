@@ -107,7 +107,6 @@ export class ListPageComponent implements OnInit {
 
       this._loadData(collection, typeName, slug);
     });
-
   }
 
   private _loadData(collection: string, typeName: string, slug: string): void {
@@ -173,7 +172,6 @@ export class ListPageComponent implements OnInit {
   }
 
   private _generateTypeName(collection: string): string {
-
     const pascalCaseCollection = collection
       .split('-')
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
@@ -192,17 +190,31 @@ export class ListPageComponent implements OnInit {
   public transformToCardData(item: ContentData): ContentCardData {
     return {
       id: item.id,
+      card: {
+        orientation: 'vertical',
+        appearance: 'elevated',
+        variant: 'light',
+        transparent: false,
+      },
+      image: {
+        imageUrl: item.imageUrl ?? '',
+        aspectRatio: '16/9',
+        lightUrl: item.imageUrl ?? '',
+        darkUrl: item.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${item.comp_img_dark_mode[0].url}` : item.imageUrl ?? '',
+        caption: item.title ?? '',
+        bgColorVariant: 'surface',
+        bgTransparent: false,
+        filledInContainer: false,
+        state: 'no_state',
+      },
+      button: [
+        {
+          text: 'Tovább',
+          url: item.imageLink ?? '',
+        },
+      ],
       title: item.title,
       description: item.description,
-      orientation: 'vertical',
-      aspectRatio: '16/9',
-      appearance: 'elevated',
-      variant: 'light',
-      imageCaption: item.title,
-      imageURL: item.imageUrl,
-      imageUrlLight: item.imageUrl,
-      imageUrlDark: item.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${item.comp_img_dark_mode[0].url}` : item.imageUrl,
-      buttonOneUrl: item.imageLink,
       last_modified: item.last_modified,
       date: item.date,
       tags: item.tags,

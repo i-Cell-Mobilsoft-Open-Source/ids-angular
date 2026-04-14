@@ -35,28 +35,17 @@
                 
                 <ids-card-body>
                   <div>
-                    @if (block.isImage) {
-                      <div class="float-left mr-4 mb-2 w-ids-container-size-width-256">
-                        <img idsCardMedia alt="" [src]="block.image?.lightUrl" />
-                      </div>
+                    <div class="text-justify" [innerHTML]="block.description"></div>
+                    @if(block.isButton){
+                      <ids-button-group>
+                        @for(button of block.button; track $index){
+                        <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(button.url)"> 
+                          {{ button.text }}
+                        </button>
+                        }
+                      </ids-button-group>
                     }
-                    <div>
-                      <div class="text-justify" [innerHTML]="block.description"></div>
-                      @if(block.isButton){
-                        <ids-button-group>
-                          <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(block.buttonOneUrl)"> 
-                            {{ block.buttonOne }}
-                          </button>
-                          @if(block.buttonTwo){
-                            <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(block.buttonTwoUrl)">
-                              {{ block.buttonTwo }}
-                              
-                            </button>
-                          }
-                        </ids-button-group>
-                      }
-                      <div></div>
-                    </div>
+                    <div></div>
                   </div>
                 </ids-card-body>
               </div>

@@ -145,15 +145,29 @@ export class ComponentsComponent implements OnInit {
       id: item.id,
       title: item.title,
       description: item.description,
-      orientation: 'vertical',
-      aspectRatio: '16/9',
-      appearance: 'elevated',
-      variant: 'light',
-      imageCaption: item.title,
-      imageURL: item.imageUrl,
-      imageUrlLight: item.imageUrl,
-      imageUrlDark: item.comp_img_dark_mode?.[0]?.url ? environment.cmsBaseUrl + item.comp_img_dark_mode[0].url : item.imageUrl,
-      buttonOneUrl: item.imageLink, //contains the link to the component page
+      card: {
+        orientation: 'vertical',
+        appearance: 'elevated',
+        variant: 'light',
+        transparent: false,
+      },
+      image: {
+        aspectRatio: '16/9',
+        imageUrl: item.imageUrl,
+        lightUrl: item.imageUrl,
+        darkUrl: item.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${item.comp_img_dark_mode[0].url}` : item.imageUrl,
+        caption: item.title,
+        bgColorVariant: 'surface',
+        bgTransparent: false,
+        filledInContainer: false,
+        state: 'no_state',
+      },
+      button: [
+        {
+          text: 'Learn More',
+          url: item.imageLink ?? '',
+        },
+      ],
     };
   }
 }

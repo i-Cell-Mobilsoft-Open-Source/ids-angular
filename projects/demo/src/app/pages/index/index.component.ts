@@ -93,32 +93,36 @@ export class IndexComponent implements OnInit, OnDestroy {
               blocks.push({
                 type: 'card',
                 id: Number(block.id),
-                orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
-                variant: block.card_properties?.card_variant?.value ?? 'surface',
-                appearance: block.card_properties?.appearance?.value ?? 'filled',
-                transparent: block.card_properties?.card_bg_transparent ?? false,
-                filledInContainer: block.group_image?.filled_in_container ?? false,
-                state: block.group_image?.state?.value,
-                imageURL: block.group_image?.img_light_mode?.[0]?.url
-                  ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-                  : '',
-                imageUrlLight: block.group_image?.img_light_mode?.[0]?.url
-                  ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-                  : '',
-                imageUrlDark: block.group_image?.img_dark_mode?.[0]?.url
-                  ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
-                  : '',
-                imageCaption: block.group_image?.img_caption,
-                imageBgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
-                imageBGTransparent: block.group_image?.bg_transparent ?? false,
-                aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
+                card: {
+                  orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
+                  variant: block.card_properties?.card_variant?.value ?? 'surface',
+                  appearance: block.card_properties?.appearance?.value ?? 'filled',
+                  transparent: block.card_properties?.card_bg_transparent ?? false,
+                },
+                image: {
+                  aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
+                  imageUrl: block.group_image?.img_light_mode?.[0]?.url ?
+                    `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}` : '',
+                  lightUrl: block.group_image?.img_light_mode?.[0]?.url
+                    ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+                    : '',
+                  darkUrl: block.group_image?.img_dark_mode?.[0]?.url
+                    ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
+                    : '',
+                  caption: block.group_image?.img_caption ?? '',
+                  bgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
+                  bgTransparent: block.group_image?.bg_transparent ?? false,
+                  filledInContainer: block.group_image?.filled_in_container ?? false,
+                  state: block.group_image?.state?.value ?? 'no_state',
+                },
                 overTitle: block.content?.content_over_title,
                 title: block.content?.content_title,
                 description: block.content?.content_description,
-                buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : undefined,
-                buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
-                buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,
-                buttonTwoUrl: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_url : block.button?.button?.button_url,
+                button: Array.isArray(block.button?.button) ? block.button?.button.map((btn) => ({
+                  text: btn.button_label,
+                  url: btn.button_url,
+                })) : [],
+
               });
             }
           }
@@ -127,7 +131,6 @@ export class IndexComponent implements OnInit, OnDestroy {
           this.isLoading.set(false);
         },
       });
-
   }
 
   public trackByBlock(index: number, item: ComponentBlock): string | number {

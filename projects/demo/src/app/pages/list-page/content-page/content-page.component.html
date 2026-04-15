@@ -1,59 +1,49 @@
-@if (isLoading()) {
-<div class="flex flex-col items-center gap-4 py-10 px-8">
-  <ids-spinner size="comfortable" sizeCollection="big" variant="primary"/>
-</div>
-}
-@else {
+<app-content-hero [heroData]="heroData()" />
 
-  
-  <app-content-hero [heroData]="heroData()" />
-  
-  <div class="flex flex-col items-start gap-12 py-10 px-8 contents-container">
-    <div class="flex flex-col w-full max-w-[1170px] items-start gap-ids-container-gap-16">
-      <div class="self-stretch text-justify" [innerHTML]="heroData().description"></div>
-    </div>
-    <ids-card class="self-center flex justify-center items-center hero-img" orientation="horizontal">
-      <img alt="" [src]="heroData().imageUrlLight">
-    </ids-card>
-    
-    <div class="flex flex-col w-full gap-8">
-      @for (block of contentBlocks(); track $index) {
-        @switch (block.type) {
-          @case ("heading") {
-            <h2 class="text-2xl font-bold">{{ block.heading }}</h2>
-          }
-          
-          @case ("card") {
-            <ids-card class="w-full" stretch="true">
-              <div class="p-4 flex flex-col gap-2">
-                <header idsCardHeader>
-                  <h2 idsCardTitle>{{ block.title }}</h2>
-                  @if (block.overTitle) {
-                    <h3 idsCardSubtitle>{{ block.overTitle }}</h3>
-                  }
-                </header>
-                
-                <ids-card-body>
-                  <div>
-                    <div class="text-justify" [innerHTML]="block.description"></div>
-                    @if(block.isButton){
-                      <ids-button-group>
-                        @for(button of block.button; track $index){
-                        <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(button.url)"> 
+<div class="flex flex-col items-start gap-12 py-10 px-8 contents-container">
+  <div class="flex flex-col w-full max-w-[1170px] items-start gap-ids-container-gap-16">
+    <div class="self-stretch text-justify" [innerHTML]="heroData().description"></div>
+  </div>
+  <ids-card class="self-center flex justify-center items-center hero-img" orientation="horizontal">
+    <img alt="" [src]="heroData().imageUrlLight" />
+  </ids-card>
+
+  <div class="flex flex-col w-full gap-8">
+    @for (block of contentBlocks(); track $index) {
+      @switch (block.type) {
+        @case ("heading") {
+          <h2 class="text-2xl font-bold">{{ block.heading }}</h2>
+        }
+
+        @case ("card") {
+          <ids-card class="w-full" stretch="true">
+            <div class="p-4 flex flex-col gap-2">
+              <header idsCardHeader>
+                <h2 idsCardTitle>{{ block.title }}</h2>
+                @if (block.overTitle) {
+                  <h3 idsCardSubtitle>{{ block.overTitle }}</h3>
+                }
+              </header>
+
+              <ids-card-body>
+                <div>
+                  <div class="text-justify" [innerHTML]="block.description"></div>
+                  @if (block.isButton) {
+                    <ids-button-group>
+                      @for (button of block.button; track $index) {
+                        <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(button.url)">
                           {{ button.text }}
                         </button>
-                        }
-                      </ids-button-group>
-                    }
-                    <div></div>
-                  </div>
-                </ids-card-body>
-              </div>
-            </ids-card>
-          }
+                      }
+                    </ids-button-group>
+                  }
+                  <div></div>
+                </div>
+              </ids-card-body>
+            </div>
+          </ids-card>
         }
       }
-    </div>
+    }
   </div>
-  
-}
+</div>

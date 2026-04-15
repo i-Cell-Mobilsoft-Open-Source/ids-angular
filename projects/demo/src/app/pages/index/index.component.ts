@@ -7,20 +7,16 @@ import { PageEntry } from '../../model/pageEntry';
 import { GraphqlService } from '../../services/graphql.service';
 
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner';
-import { filter, tap } from 'rxjs';
 
 @Component({
   selector: 'app-index',
   imports: [
     HeroComponent,
     ContentCardComponent,
-    IdsSpinnerComponent,
   ],
   templateUrl: './index.component.html',
 })
 export class IndexComponent implements OnInit, OnDestroy {
-
   public heroData?: HeroData;
   public componentBlocks: ComponentBlock[] = [];
 
@@ -28,11 +24,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   private _isDarkTheme = signal<boolean>(false);
   private _graphqlService = inject(GraphqlService);
 
-  public isLoading = signal<boolean>(true);
-
   public ngOnInit(): void {
-    this.isLoading.set(true);
-
     this._updateTheme();
 
     this._observer = new MutationObserver(() => {
@@ -43,94 +35,84 @@ export class IndexComponent implements OnInit, OnDestroy {
       attributes: true,
       attributeFilter: ['class'],
     });
-    this._graphqlService.getPages()
-      .pipe(
-        tap(() => this.isLoading.set(true)),
-        filter((result) => !(result as { loading?: boolean }).loading),
-      )
-      .subscribe({
-        next: (result) => {
-          const typedResult = result as { data?: { entries?: { data: PageEntry[] } } };
-          const components = typedResult.data?.entries?.data ?? [];
+    this._graphqlService.getPages().subscribe({
+      next: (result) => {
+        const typedResult = result as { data?: { entries?: { data: PageEntry[] } } };
+        const components = typedResult.data?.entries?.data ?? [];
 
-          if (components.length === 0) {
-            return;
+        if (components.length === 0) {
+          return;
+        }
+
+        const component = components.find((page) => page.slug === 'home');
+
+        if (!component) {
+          return;
+        }
+
+        this.heroData = {
+          id: Number(component.id),
+          title: component.title,
+          isBackButton: true,
+          description: component.hero_description,
+          imageUrl: component.hero_image_light?.url ? `${environment.cmsBaseUrl}${component.hero_image_light.url}` : '',
+          imageUrlLight: component.hero_image_light?.url ? `${environment.cmsBaseUrl}${component.hero_image_light.url}` : '',
+          imageUrlDark: component.hero_image_dark?.url ? `${environment.cmsBaseUrl}${component.hero_image_dark.url}` : '',
+        };
+
+        const blocks: ComponentBlock[] = [];
+
+        for (const block of component.content) {
+          if (block.__typename === 'Set_Content_Heading') {
+            blocks.push({
+              type: 'heading',
+              heading: block.heading,
+            });
           }
 
-          const component = components.find((page) => page.slug === 'home');
-
-          if (!component) {
-            return;
-          }
-
-          this.heroData = {
-            id: Number(component.id),
-            title: component.title,
-            isBackButton: true,
-            description: component.hero_description,
-            imageUrl: component.hero_image_light?.url
-              ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
-              : '',
-            imageUrlLight: component.hero_image_light?.url
-              ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
-              : '',
-            imageUrlDark: component.hero_image_dark?.url
-              ? `${environment.cmsBaseUrl}${component.hero_image_dark.url}`
-              : '',
-          };
-
-          const blocks: ComponentBlock[] = [];
-
-          for (const block of component.content) {
-            if (block.__typename === 'Set_Content_Heading') {
-              blocks.push({
-                type: 'heading',
-                heading: block.heading,
-              });
-            }
-
-            if (block.__typename === 'Set_Content_Card') {
-              blocks.push({
-                type: 'card',
-                id: Number(block.id),
-                card: {
-                  orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
-                  variant: block.card_properties?.card_variant?.value ?? 'surface',
-                  appearance: block.card_properties?.appearance?.value ?? 'filled',
-                  transparent: block.card_properties?.card_bg_transparent ?? false,
-                },
-                image: {
-                  aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
-                  imageUrl: block.group_image?.img_light_mode?.[0]?.url ?
-                    `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}` : '',
-                  lightUrl: block.group_image?.img_light_mode?.[0]?.url
-                    ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-                    : '',
-                  darkUrl: block.group_image?.img_dark_mode?.[0]?.url
-                    ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
-                    : '',
-                  caption: block.group_image?.img_caption ?? '',
-                  bgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
-                  bgTransparent: block.group_image?.bg_transparent ?? false,
-                  filledInContainer: block.group_image?.filled_in_container ?? false,
-                  state: block.group_image?.state?.value ?? 'no_state',
-                },
-                overTitle: block.content?.content_over_title,
-                title: block.content?.content_title,
-                description: block.content?.content_description,
-                button: Array.isArray(block.button?.button) ? block.button?.button.map((btn) => ({
+          if (block.__typename === 'Set_Content_Card') {
+            blocks.push({
+              type: 'card',
+              id: Number(block.id),
+              card: {
+                orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
+                variant: block.card_properties?.card_variant?.value ?? 'surface',
+                appearance: block.card_properties?.appearance?.value ?? 'filled',
+                transparent: block.card_properties?.card_bg_transparent ?? false,
+              },
+              image: {
+                aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
+                imageUrl: block.group_image?.img_light_mode?.[0]?.url
+                  ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+                  : '',
+                lightUrl: block.group_image?.img_light_mode?.[0]?.url
+                  ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+                  : '',
+                darkUrl: block.group_image?.img_dark_mode?.[0]?.url
+                  ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
+                  : '',
+                caption: block.group_image?.img_caption ?? '',
+                bgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
+                bgTransparent: block.group_image?.bg_transparent ?? false,
+                filledInContainer: block.group_image?.filled_in_container ?? false,
+                state: block.group_image?.state?.value ?? 'no_state',
+              },
+              overTitle: block.content?.content_over_title,
+              title: block.content?.content_title,
+              description: block.content?.content_description,
+              button: Array.isArray(block.button?.button)
+                ? block.button?.button.map((btn) => ({
                   text: btn.button_label,
                   url: btn.button_url,
-                })) : [],
-
-              });
-            }
+                }))
+                : [],
+            });
           }
+        }
 
-          this.componentBlocks = blocks;
-          this.isLoading.set(false);
-        },
-      });
+        this.componentBlocks = blocks;
+      },
+    });
   }
 
   public trackByBlock(index: number, item: ComponentBlock): string | number {
@@ -144,7 +126,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   public trackByCardOrHeading(index: number, item: ComponentBlock): string | number {
-    return item.type === 'card' ? item.id ?? `card-${index}` : `heading-${index}`;
+    return item.type === 'card' ? (item.id ?? `card-${index}`) : `heading-${index}`;
   }
 
   public ngOnDestroy(): void {

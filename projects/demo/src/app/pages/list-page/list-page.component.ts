@@ -11,9 +11,7 @@ import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { IdsChipGroupComponent, IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
-import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner';
 import { environment } from 'projects/demo/src/environments/environment.development';
-import { filter } from 'rxjs';
 
 const PAGE_SIZE = 8;
 
@@ -28,7 +26,6 @@ const PAGE_SIZE = 8;
     IdsIconComponent,
     IdsPaginatorComponent,
     RouterOutlet,
-    IdsSpinnerComponent,
   ],
   templateUrl: './list-page.component.html',
   styleUrl: './list-page.component.scss',
@@ -49,8 +46,6 @@ export class ListPageComponent implements OnInit {
   public pageIndex = signal<number>(0);
 
   public activeFilter = signal<string>('All');
-
-  public isLoading = signal<boolean>(true);
 
   // Compute the list of available tags from the content data
   public availableTags = computed(() => {
@@ -98,7 +93,6 @@ export class ListPageComponent implements OnInit {
   private readonly _route = inject(ActivatedRoute);
 
   public ngOnInit(): void {
-    this.isLoading.set(true);
 
     this._route.data.subscribe((routeData) => {
       const collection = routeData['collection'];
@@ -111,9 +105,6 @@ export class ListPageComponent implements OnInit {
 
   private _loadData(collection: string, typeName: string, slug: string): void {
     this._graphqlService.getPagesList(collection, typeName, slug)
-      .pipe(
-        filter((result) => !result.loading),
-      )
       .subscribe({
         next: (result) => {
           const typedResult = result as unknown as { data: { entry?: EntryListData } };
@@ -166,7 +157,6 @@ export class ListPageComponent implements OnInit {
             imageUrlDark: darkUrl || fallbackImage,
             isBackButton: true,
           });
-          this.isLoading.set(false);
         },
       });
   }

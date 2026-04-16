@@ -14,6 +14,7 @@ type SegmentedControlToggleInputControls = {
   buttonVariant: IdsSegmentedControlToggleButtonVariantType,
   appearance: IdsSegmentedControlToggleAppearanceType,
   disabled: boolean,
+  showActiveIcon: boolean,
 };
 
 type SegmentedControlToggleHelperControls = {
@@ -58,6 +59,12 @@ export class SegmentedControlToggleDemoService {
       description: 'Whether the segmented control toggle is disabled or not.',
       type: 'boolean',
       default: false,
+      control: DemoControl.SWITCH,
+    },
+    showActiveIcon: {
+      description: 'Whether the active icon should be shown or not.',
+      type: 'boolean',
+      default: true,
       control: DemoControl.SWITCH,
     },
   };

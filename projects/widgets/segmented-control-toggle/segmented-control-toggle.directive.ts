@@ -50,6 +50,7 @@ export class IdsSegmentedControlToggleDirective
   public buttonVariant = input<IdsSegmentedControlToggleButtonVariantType>(this._defaultConfig.buttonVariant);
   public appearance = input<IdsSegmentedControlToggleAppearanceType>(this._defaultConfig.appearance);
   public disabled = signal<boolean>(false);
+  public showActiveIcon = input<boolean>(true);
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),

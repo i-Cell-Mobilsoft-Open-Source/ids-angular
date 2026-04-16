@@ -13,6 +13,7 @@ type SegmentedControlInputControls = {
   variant: IdsSegmentedControlVariantType,
   appearance: IdsSegmentedControlAppearanceType,
   disabled: boolean,
+  showActiveIcon: boolean,
 };
 
 type SegmentedControlHelperControls = {
@@ -50,6 +51,12 @@ export class SegmentedControlDemoService {
       description: 'Whether the segmented control is disabled or not.',
       type: 'boolean',
       default: false,
+      control: DemoControl.SWITCH,
+    },
+    showActiveIcon: {
+      description: 'Whether the active icon should be shown or not.',
+      type: 'boolean',
+      default: true,
       control: DemoControl.SWITCH,
     },
   };

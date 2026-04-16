@@ -50,6 +50,11 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
     return this._selectionModel?.selected ?? [];
   }
 
+  public get hasInputValue(): boolean {
+    const inputValue = this._inputElement.nativeElement.value;
+    return inputValue !== null && inputValue !== undefined && inputValue.length > 0;
+  }
+
   public get selectedOptions(): IdsOptionComponent[] {
     const selectedValues = this.selected.map((option) => option.value) ?? [];
     return this.autocomplete()

@@ -32,6 +32,6 @@ export class IdsAutocompleteChipListComponent {
   public autocompleteTrigger = input.required<IdsAutocompleteTriggerDirective>({ alias: 'for' });
   public options = input<IdsOptionValue[]>([]);
   public appearance = input<IdsChipAppearanceType>(IdsChipAppearance.OUTLINED);
-  public size = input<IdsSizeType>(IdsSize.COMPACT);
+  public size = input<IdsSizeType>(IdsSize.DENSE);
   public variant = input<IdsChipVariantType>(IdsChipVariant.SURFACE);
 }

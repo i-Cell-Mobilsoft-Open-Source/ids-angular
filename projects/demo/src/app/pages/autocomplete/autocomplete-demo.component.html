@@ -9,7 +9,7 @@
         <ng-container #container />
         <ng-template #template>
           @let label = "Input with autocomplete";
-          <ids-form-field [size]="_autocompleteDemoService.model.size" [variant]="_autocompleteDemoService.model.variant">
+          <ids-form-field class="max-w-80" [size]="_autocompleteDemoService.model.size" [variant]="_autocompleteDemoService.model.variant">
             <ids-label>{{ label }}</ids-label>
             @if (_autocompleteDemoService.model.multiSelect) {
               <ids-autocomplete-chip-list [for]="autocompleteTrigger" />

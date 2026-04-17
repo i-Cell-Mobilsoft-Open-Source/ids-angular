@@ -76,13 +76,12 @@ const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
       </ids-overlay-panel>
     }
     <span class="ids-autocomplete-suffix">
-      @if (trigger().selected.length > 0) {
+      @if (trigger().selected.length > 0 || trigger().hasInputValue) {
         <button
           type="button"
           idsIconButton
           [appearance]="appearance()"
           [variant]="parentVariant()"
-          [size]="parentSize()"
           [disabled]="disabled()"
           [ariaLabel]="ariaLabelClear()"
           [idsTooltip]="ariaLabelClear()"
@@ -96,7 +95,6 @@ const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
       @if (isLoading()) {
         <ids-spinner
           sizeCollection="small"
-          [size]="parentSize()"
           [variant]="spinnerVariant()"
           [isTrack]="true"
           [aria-label]="ariaLabelLoading()"
@@ -105,7 +103,6 @@ const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
         <ids-icon
           alt=""
           aria-hidden="true"
-          [size]="parentSize()"
           [fontIcon]="trigger().autocomplete().panelOpen() ? 'chevron-up' : 'chevron-down'"
         />
       }

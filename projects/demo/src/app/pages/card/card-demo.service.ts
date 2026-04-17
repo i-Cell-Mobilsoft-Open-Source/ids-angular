@@ -108,7 +108,6 @@ export class CardDemoService {
     return [
       this.inputControlConfig,
       this.mediaInputControlConfig,
-      this.helperControlConfig,
     ];
   }
 }

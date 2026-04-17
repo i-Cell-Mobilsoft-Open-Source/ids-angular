@@ -18,7 +18,7 @@ const defaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[type]': 'buttonType',
+    '[type]': '_buttonType',
     '[attr.disabled]': 'disabled() ? "" : null',
     '[attr.aria-disabled]': 'disabled() || null',
   },
@@ -50,7 +50,7 @@ export class IdsMenuItemComponent extends ComponentBaseWithDefaults<IdsMenuItemD
     !this.label() ? 'no-label' : null,
   ]));
 
-  private get _buttonType(): string | null {
+  protected get _buttonType(): string | null {
     return this._hostElement.tagName === 'BUTTON' ? 'button' : null;
   }
 

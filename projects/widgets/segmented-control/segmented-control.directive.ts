@@ -65,7 +65,7 @@ export class IdsSegmentedControlDirective
 
   public readonly itemChanges = output<IdsSegmentedControlItemChange>();
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', 'Spacebar', ' '];
 

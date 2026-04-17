@@ -21,7 +21,7 @@ import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-ang
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[role]': '_role()',
+    '[attr.role]': '_role()',
     '(mouseenter)': '_onMouseEnter()',
     '(mouseleave)': '_onMouseLeave()',
   },
@@ -48,7 +48,7 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
 
   public closed = output<void>();
 
-  private _canAutoClose = computed(() => !this.allowDismiss() && this.autoClose());
+  private _canAutoClose = computed(() => this.autoClose());
   private _duration = computed(() => {
     const actionReadDuration = (this.actions()?.length ?? 0) * READ_SPEED_PER_ACTION;
     return Math.max(this.message().length * READ_SPEED_PER_CHAR + actionReadDuration, MIN_DURATION);
@@ -59,7 +59,7 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
     this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
   ]));
 
-  private _role = computed(() => (this.urgent() ? 'alert' : 'status'));
+  protected _role = computed(() => (this.urgent() ? 'alert' : 'status'));
   protected _buttonVariant = computed(() =>
     (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE));
 
@@ -83,11 +83,11 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
 
   protected _safeIcon = computed(() => this.icon() ?? this._defaultIcon());
 
-  private _onMouseEnter(): void {
+  protected _onMouseEnter(): void {
     this._stopTimer();
   }
 
-  private _onMouseLeave(): void {
+  protected _onMouseLeave(): void {
     this._startTimer();
   }
 

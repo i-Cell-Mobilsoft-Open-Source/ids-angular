@@ -55,3 +55,9 @@ app-root {
     overflow: auto;
   }
 }
+
+.router-outlet-wrapper {
+  &:not(:has(app-content-page)) {
+    @apply p-8 mx-auto container;
+  }
+}

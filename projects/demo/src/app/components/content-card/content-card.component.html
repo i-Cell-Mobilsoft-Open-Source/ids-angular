@@ -1,40 +1,56 @@
 @let data = contentCardData();
 <ids-card
   size="compact"
-  [appearance]="data.appearance || 'elevated'"
-  [variant]="data.variant || 'surface'"
-  [orientation]="data.orientation"
-  [class]="data.orientation === 'horizontal' ? 'flex flex-col md:flex-row' : 'h-full'"
-  [class.transparent-bg]="data.transparent === true"
+  [appearance]="data.card?.appearance || 'elevated'"
+  [variant]="data.card?.variant || 'surface'"
+  [orientation]="data.card?.orientation ?? 'vertical'"
+  [class]="data.card?.orientation === 'horizontal' ? 'flex flex-col md:flex-row' : 'h-full'"
+  [class.transparent-bg]="data.card?.transparent === true"
 >
-  @if (data.imageURL) {
-    <div class="ids-container-gap-24" [class]="data.orientation === 'horizontal' ? ' md:w-full ' : ''">
-      @if (data.state) {
-        <app-badge [state]="data.state" />
+  @if (data.image?.imageUrl) {
+    <div class="ids-container-gap-24 relative" [class]="data.card?.orientation === 'horizontal' ? ' md:w-full ' : ''">
+      @if (data.image?.state) {
+        <app-badge class="absolute" [state]="data.image?.state"/>
       }
       <app-image
-        [aspectRatio]="data.aspectRatio"
-        [imageBgColorVariant]="data.imageBgColorVariant"
-        [orientation]="data.orientation"
-        [state]="data.state"
-        [imageCaption]="data.imageCaption"
-        [imageUrlLight]="contentCardData().imageUrlLight ?? ''"
-        [imageUrlDark]="contentCardData().imageUrlDark ?? ''"
+        [aspectRatio]="data.image?.aspectRatio"
+        [imageBgColorVariant]="data.image?.bgColorVariant"
+        [orientation]="data.card?.orientation"
+        [state]="data.image?.state"
+        [imageCaption]="data.image?.caption"
+        [imageUrlLight]="contentCardData().image?.lightUrl ?? ''"
+        [imageUrlDark]="contentCardData().image?.darkUrl ?? ''"
         [data]="imageData()"
-        [filledInContainer]="data.filledInContainer ?? false"
+        [filledInContainer]="data.image?.filledInContainer ?? false"
+        [showCaption]="showCaption()"
       />
     </div>
   }
   <ids-card-body
     [class]="
-      data.orientation === 'horizontal'
-        ? data.filledInContainer === true
+      data.card?.orientation === 'horizontal'
+        ? data.image?.filledInContainer === true
           ? 'flex flex-col md:flex-row md:w-full special-horizontal-filled'
           : 'flex flex-col md:flex-row md:w-full special-horizontal-filled-2 '
         : ''
     "
   >
-    <div class="flex flex-col gap-ids-container-gap-16 w-full">
+    @if (data.date || data.tags) {
+      <div class="flex items-center gap-ids-container-gap-8">
+        <ids-chip-group appearance="outlined" size="dense">
+          <ids-chip variant="primary">
+            {{ data.date }}
+          </ids-chip>
+          @for (tag of data.tags; track $index) {
+            <ids-chip variant="secondary">
+              {{ tag.title }}
+            </ids-chip>
+          }
+        </ids-chip-group>
+      </div>
+    }
+
+    <div class="flex flex-col gap-ids-container-gap-16 w-full pt-2">
       <div class="flex flex-col gap-0 relative">
         @if (data.overTitle) {
           <span class="text-body-small-prominent text-ids-page-fg-surface-lighter-20">{{ data.overTitle }}</span>
@@ -45,56 +61,18 @@
           }
           @if (data.description) {
             <div
-              class="text-left text-body-medium ids-page-surface"
-              [class]="data.orientation === 'horizontal' ? 'md:line-clamp-5' : 'line-clamp-3'"
+              class="text-left text-body-medium ids-page-surface [&_ol]:list-decimal [&_ul]:list-disc [&_ol]:pl-5 [&_ul]:pl-5"
+              [class]="(data.card?.orientation === 'horizontal' || fullDescription()) ? '' : 'line-clamp-3'"
               [innerHTML]="data.description | safeHtml"
             ></div>
           }
         </div>
       </div>
-
-      @if (data.orientation === "vertical") {
+      @for (button of data.button; track $index) {
         <div class="flex gap-ids-container-gap-8 justify-end w-full">
-          <button
-            type="button"
-            idsButton
-            appearance="outlined"
-            size="compact"
-            variant="primary"
-            (click)="handleButtonClick(data.buttonOneUrl)"
-          >
-            Tovább
+          <button type="button" idsButton size="compact" variant="primary" appearance="outlined" (click)="handleButtonClick(button.url)">
+            {{ button.text }}
           </button>
-        </div>
-      }
-
-      @if (data.buttonOne || data.buttonTwo) {
-        <div class="flex gap-ids-container-gap-8 justify-end w-full">
-          @if (data.buttonOne) {
-            <button
-              type="button"
-              idsButton
-              appearance="outlined"
-              size="compact"
-              variant="primary"
-              (click)="handleButtonClick(data.buttonOneUrl)"
-            >
-              {{ data.buttonOne }}
-            </button>
-          }
-
-          @if (data.buttonTwo) {
-            <button
-              type="button"
-              idsButton
-              appearance="filled"
-              size="compact"
-              variant="primary"
-              (click)="handleButtonClick(data.buttonTwoUrl)"
-            >
-              {{ data.buttonTwo }}
-            </button>
-          }
         </div>
       }
     </div>

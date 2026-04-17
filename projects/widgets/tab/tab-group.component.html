@@ -1,15 +1,22 @@
 <div class="ids-tab-group__container">
-  <ul class="ids-tab-group__header" role="tablist">
+  <ul
+    class="ids-tab-group__header"
+    role="tablist"
+    [attr.aria-orientation]="orientation()"
+    (keydown)="_onTabListKeydown($event)"
+  >
     @for (item of _items(); track $index; let i = $index) {
       <li
         role="tab"
         [id]="item.id()"
         [class]="item.hostTabClasses()"
         [class.ids-tab--active]="_selectedTabIndex() === i"
-        [attr.tabindex]="item.parentOrSelfDisabled() ? -1 : 0"
+        [attr.tabindex]="_focusedTabIndex() === i ? 0 : -1"
         [attr.aria-selected]="_selectedTabIndex() === i ? 'true' : 'false'"
+        [attr.aria-disabled]="item.parentOrSelfDisabled() ? 'true' : 'false'"
         [attr.aria-controls]="item.panelId()"
         (click)="selectTab(i)"
+        (focus)="focusTab(i)"
       >
         @let tabLeadingIcon = item.leadingIcon();
         @let tabTrailingIcon = item.trailingIcon();

@@ -4,4 +4,5 @@ export interface Menu {
   path?: string;
   children?: Menu[];
   $open?: boolean;
+  slug?: string;
 }

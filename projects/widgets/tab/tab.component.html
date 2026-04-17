@@ -1,5 +1,11 @@
 <ng-template>
-  <div class="ids-tab-body-content" [attr.role]="'tabpanel'" [id]="panelId()">
+  <div
+    class="ids-tab-body-content"
+    [attr.role]="'tabpanel'"
+    [id]="panelId()"
+    [attr.aria-labelledby]="label()"
+    [attr.tabindex]="0"
+  >
     <ng-content />
   </div>
 </ng-template>

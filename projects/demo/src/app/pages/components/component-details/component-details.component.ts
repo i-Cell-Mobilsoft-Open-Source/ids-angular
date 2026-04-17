@@ -27,7 +27,7 @@ import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
 })
 export class ComponentDetailsComponent implements OnInit {
   public heroData?: HeroData;
-  public componentBlocks: ComponentBlock[] = [];
+  public componentBlocks = signal<ComponentBlock[]>([]);
 
   public tabGroup = viewChild(IdsTabGroupComponent);
   public activeTab = signal<string>('demo');
@@ -84,7 +84,7 @@ export class ComponentDetailsComponent implements OnInit {
           this._graphqlService.getComponents().pipe(
             map((result) => {
               const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
-              const components = typedResult.data.entries.data;
+              const components = typedResult?.data?.entries?.data ?? [];
               return components.find((entry) => entry.slug === slug);
             }),
           ),
@@ -95,7 +95,7 @@ export class ComponentDetailsComponent implements OnInit {
           this._updateHeroAndBlocks(component);
         } else {
           this.heroData = undefined;
-          this.componentBlocks = [];
+          this.componentBlocks.set([]);
         }
       });
 
@@ -118,7 +118,7 @@ export class ComponentDetailsComponent implements OnInit {
     };
 
     const blocks: ComponentBlock[] = [];
-    component.componentBlocks?.forEach((block: ComponentContent) => {
+    component.content?.forEach((block: ComponentContent) => {
       if (block.__typename === 'Set_Content_Heading') {
         blocks.push({
           type: 'heading',
@@ -129,35 +129,36 @@ export class ComponentDetailsComponent implements OnInit {
         blocks.push({
           type: 'card',
           id: Number(block.id),
-          orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
-          variant: block.card_properties?.card_variant?.value ?? 'surface',
-          appearance: block.card_properties?.appearance?.value ?? 'filled',
-          transparent: block.card_properties?.card_bg_transparent ?? false,
-          filledInContainer: block.group_image?.filled_in_container ?? false,
-          state: block.group_image?.state?.value,
-          imageURL: block.group_image?.img_light_mode?.[0]?.url
-            ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-            : '',
-          imageUrlLight: block.group_image?.img_light_mode?.[0]?.url
-            ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-            : '',
-          imageUrlDark: block.group_image?.img_dark_mode?.[0]?.url
-            ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
-            : '',
-          imageCaption: block.group_image?.img_caption,
-          imageBgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
-          imageBGTransparent: block.group_image?.bg_transparent ?? false,
+          card: {
+            orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
+            variant: block.card_properties?.card_variant?.value ?? 'surface',
+            appearance: block.card_properties?.appearance?.value ?? 'filled',
+            transparent: block.card_properties?.card_bg_transparent ?? false,
+          },
+          image: {
+            state: block.group_image?.state?.value ?? 'no_state',
+            aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
+            imageUrl: block.group_image?.img_light_mode?.[0]?.url ?
+              `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}` : '',
+            lightUrl: block.group_image?.img_light_mode?.[0]?.url ?
+              `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}` : '',
+            darkUrl: block.group_image?.img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}` : '',
+            caption: block.group_image?.img_caption ?? '',
+            bgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
+            bgTransparent: block.group_image?.bg_transparent ?? false,
+            filledInContainer: block.group_image?.filled_in_container ?? false,
+          },
           overTitle: block.content?.content_over_title,
           title: block.content?.content_title,
           description: block.content?.content_description,
-          buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : undefined,
-          buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
-          buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,
-          buttonTwoUrl: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_url : block.button?.button?.button_url,
+          button: Array.isArray(block.button?.button) ? block.button?.button.map((btn) => ({
+            text: btn.button_label,
+            url: btn.button_url,
+          })) : [],
         });
-        this.componentBlocks = blocks;
       }
     });
+    this.componentBlocks.set(blocks);
   }
 
   public trackByBlock(index: number, item: ComponentBlock): string | number {

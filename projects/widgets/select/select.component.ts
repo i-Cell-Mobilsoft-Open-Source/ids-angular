@@ -381,9 +381,9 @@ export class IdsSelectComponent
     preferredOrigin: ElementRef<ElementRef> | CdkOverlayOrigin | undefined,
   ): string | number {
     const refToMeasure
-        = preferredOrigin instanceof CdkOverlayOrigin
-          ? preferredOrigin.elementRef
-          : preferredOrigin || this._elementRef;
+      = preferredOrigin instanceof CdkOverlayOrigin
+        ? preferredOrigin.elementRef
+        : preferredOrigin || this._elementRef;
     return refToMeasure.nativeElement.getBoundingClientRect().width;
   }
 

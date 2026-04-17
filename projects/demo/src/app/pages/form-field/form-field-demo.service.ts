@@ -201,7 +201,6 @@ export class FormFieldDemoService {
   public getApiConfig(): DemoControlConfig<unknown>[] {
     return [
       this.formFieldInputControlConfig,
-      this.formFieldHelperControlConfig,
       this.inputInputControlConfig,
     ];
   }

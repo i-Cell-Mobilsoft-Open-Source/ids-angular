@@ -3,15 +3,15 @@
     <ids-chip appearance="outlined" variant="surface" size="dense"> Updated 25 Feb 2025 </ids-chip>
     <button type="button" idsButton appearance="outlined" variant="primary" size="comfortable">Figma file</button>
   </div>
-
-  @for (item of componentBlocks; track $index) {
+  
+  @for (item of componentBlocks(); track $index) {
     @if (item.type === "heading") {
       <h2>
         {{ item.heading }}
       </h2>
     }
     @if (item.type === "card") {
-      <app-content-card [contentCardData]="item" />
+      <app-content-card [contentCardData]="item" [showCaption]="true" [fullDescription]="true"/>
     }
   }
 </div>

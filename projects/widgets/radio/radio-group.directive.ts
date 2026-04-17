@@ -64,82 +64,41 @@ export class IdsRadioGroupDirective
 
   public readonly itemChanges = output<IdsRadioChangeEvent>();
 
-  private _handleKeyDown(event: KeyboardEvent): void {
-    const navigationKeys: Record<IdsOrientationType, Set<string>> = {
-      // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
-      horizontal: new Set(['ArrowLeft', 'ArrowRight', 'Enter', ' ']),
-      // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
-      vertical: new Set(['ArrowUp', 'ArrowDown', 'Enter', ' ']),
-    };
-
-    const orientation = this.orientation();
-
-    if (navigationKeys.horizontal.has(event.key) || navigationKeys.vertical.has(event.key)) {
-      event.preventDefault();
-    }
-    if (!navigationKeys[orientation].has(event.key)) {
+  protected _handleKeyDown(event: KeyboardEvent): void {
+    const items = this._items();
+    if (items.length === 0) {
       return;
     }
 
-    const items = this._items();
+    if (this.isDisabled()) {
+      return;
+    }
+
     const index = this._getCurrentItemIndex(event, items);
 
     if (index < 0) {
       return;
     }
 
-    switch (event.key) {
-      case 'ArrowUp': {
-        if (orientation === IdsOrientation.HORIZONTAL) {
-          return;
-        }
-        if (index === 0) {
-          return;
-        }
-        const prevItem = items[index - 1];
-        prevItem.focus();
-        break;
-      }
-      case 'ArrowLeft': {
-        if (orientation === IdsOrientation.VERTICAL) {
-          return;
-        }
-        if (index === 0) {
-          return;
-        }
-        const prevItem = items[index - 1];
-        prevItem.focus();
-        break;
-      }
-      case 'ArrowDown': {
-        if (orientation === IdsOrientation.HORIZONTAL) {
-          return;
-        }
-        if (index === (items.length - 1)) {
-          return;
-        }
-        const nextItem = items[index + 1];
-        nextItem.focus();
-        break;
-      }
-      case 'ArrowRight': {
-        if (orientation === IdsOrientation.VERTICAL) {
-          return;
-        }
-        if (index === (items.length - 1)) {
-          return;
-        }
-        const nextItem = items[index + 1];
-        nextItem.focus();
-        break;
-      }
-      case 'Enter':
-      case ' ': {
-        items[index].onChange();
-        break;
-      }
-      default:
+    let step = 0;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      step = -1;
+    }
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      step = 1;
+    }
+
+    if (step === 0) {
+      return;
+    }
+
+    for (let i = 1; i <= items.length; i += 1) {
+      const nextIndex = (index + (step * i) + items.length) % items.length;
+      const nextItem = items[nextIndex];
+      if (!nextItem.disabled()) {
+        this._selectionModel?.select(nextItem);
         return;
+      }
     }
   }
 

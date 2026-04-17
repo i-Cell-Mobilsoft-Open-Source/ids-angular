@@ -10,7 +10,6 @@ let nextUniqueId = 0;
   host: {
     '[id]': 'id()',
   },
-  standalone: false,
 })
 export abstract class ComponentBase extends DirectiveBase {
   protected readonly _uniqueId = `${this._hostClassName}-${++nextUniqueId}`;

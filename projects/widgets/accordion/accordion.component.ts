@@ -47,6 +47,9 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   public expandBtnLabel = input<string, string>(this._defaultConfig.expandBtnLabel, { transform: coerceStringAttribute });
   public collapseBtnLabel = input<string, string>(this._defaultConfig.collapseBtnLabel, { transform: coerceStringAttribute });
 
+  protected _expandBtnId = computed(() => `${this.id()}-expand-btn`);
+  protected _collapseBtnId = computed(() => `${this.id()}-collapse-btn`);
+
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
     this.appearance(),
@@ -65,7 +68,7 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
     }
   }
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     const navigationKeys = [
       'Enter',
       ' ',

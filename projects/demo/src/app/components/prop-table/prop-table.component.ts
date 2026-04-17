@@ -1,6 +1,5 @@
 import { PropTableElement } from './prop-table-element';
 
-import { CommonModule } from '@angular/common';
 import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import {
@@ -17,7 +16,6 @@ import { of } from 'rxjs';
   selector: 'app-prop-table',
   templateUrl: './prop-table.component.html',
   imports: [
-    CommonModule,
     IdsTableComponent,
     IdsTableCellTemplateDirective,
     TranslateModule,

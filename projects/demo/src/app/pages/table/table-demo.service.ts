@@ -10,14 +10,25 @@ import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { compare, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_TABLE_DEFAULT_CONFIG_FACTORY, IdsTableAppearance, IdsTableAppearanceType, IdsTableColumnDef, IdsTableRequestPaginationData, IdsTableResponseData, IdsTableSortDirection, IdsTableSortInfo, IdsTableVariant, IdsTableVariantType } from '@i-cell/ids-angular/table';
+import {
+  IDS_TABLE_DEFAULT_CONFIG_FACTORY,
+  IdsTableAppearance,
+  IdsTableAppearanceType,
+  IdsTableColumnDef,
+  IdsTableRequestPaginationData,
+  IdsTableResponseData,
+  IdsTableSortDirection,
+  IdsTableSortInfo,
+  IdsTableVariant,
+  IdsTableVariantType,
+} from '@i-cell/ids-angular/table';
 import { TranslateService } from '@ngx-translate/core';
 import { map, Observable } from 'rxjs';
 
 export type TableInputControls = {
-  appearance: IdsTableAppearanceType,
-  size: IdsSizeType,
-  variant: IdsTableVariantType,
+  appearance: IdsTableAppearanceType;
+  size: IdsSizeType;
+  variant: IdsTableVariantType;
   fixedHeader: boolean;
   enableRowSelection: boolean;
   clearSelectionOnChange: boolean;
@@ -134,7 +145,8 @@ export class TableDemoService {
       id: 'melt',
       label: 'TABLE.COL.MELT',
       headerCellRenderer: TranslateCellRendererComponent,
-      value: (rowData): string => (Number.isFinite(rowData.melt) ? this.meltNumberFormat.format(rowData.melt! - zeroCelsiusInKelvin) : ''),
+      valueGetter: (rowData): string =>
+        (Number.isFinite(rowData.melt) ? this.meltNumberFormat.format(rowData.melt! - zeroCelsiusInKelvin) : ''),
       cellClasses: 'table-demo_cell__numeric',
     },
     {
@@ -257,5 +269,4 @@ export class TableDemoService {
   public getApiConfig(): DemoControlConfig<unknown>[] {
     return [this.inputControlConfig];
   }
-
 }

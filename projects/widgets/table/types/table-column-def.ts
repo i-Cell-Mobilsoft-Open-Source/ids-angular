@@ -24,7 +24,12 @@ export type IdsTableColumnDef<D> = {
   /**
    * Value getter function called by a cell renderer, provides the value to be displayed in the cell.
    */
-  value?: ((rowData: D) => unknown);
+  valueGetter?: ((rowData: D) => unknown);
+
+  /**
+   * Value formatter function called by a cell renderer, provides the opportunity to transform the cell value before it is displayed.
+   */
+  valueFormatter?: (value: unknown) => string;
 
   /**
    * The header cell's renderer either built-in or external template or component.

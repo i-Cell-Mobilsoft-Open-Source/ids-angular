@@ -16,7 +16,7 @@ import {
   TemplateRef,
   untracked,
 } from '@angular/core';
-import { IsActiveMatchOptions } from '@angular/router';
+import { isActive, IsActiveMatchOptions } from '@angular/router';
 import { coerceBooleanAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -87,6 +87,9 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
   },
 })
 export class IdsSideNavItemComponent {
+  protected readonly _parent = inject(IDS_SIDE_NAV_PARENT, { optional: true });
+  private readonly _router = inject(IDS_SIDE_NAV_ROUTER, { skipSelf: true });
+
   public disabled = input(false, { transform: (value: boolean | string) => coerceBooleanAttribute(value) });
   public label = input.required<string>();
   public hasTooltip = input<unknown, boolean>(false, { transform: booleanAttribute });
@@ -99,23 +102,14 @@ export class IdsSideNavItemComponent {
     matrixParams: 'ignored',
   });
 
-  public active = computed(() => {
-    this._parent?.navigationChange();
-    return this._router.isActive(this.target(), this.isActiveMatchOptions());
-  });
+  public active = computed(() => (this.target() ? isActive(this.target(), this._router, this.isActiveMatchOptions())() : false));
 
   protected _expandable = computed(() => this._contentChildren().length > 0 || this._contentTemplate());
-  protected _expanded = linkedSignal(() => {
-    this._parent?.navigationChange();
-    return this._contentChildren().some((child) => child.active());
-  });
-
+  protected _expanded = linkedSignal(() => this._contentChildren().some((child) => child.active()));
   protected _iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
   protected _iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
-  protected readonly _parent = inject(IDS_SIDE_NAV_PARENT, { optional: true });
   protected readonly _contentTemplate = contentChild('idsSideNavItemChildren', { read: TemplateRef });
   private readonly _contentChildren = contentChildren(IdsSideNavItemComponent);
-  private readonly _router = inject(IDS_SIDE_NAV_ROUTER, { skipSelf: true });
   private _elementRef = inject(ElementRef);
 
   constructor() {

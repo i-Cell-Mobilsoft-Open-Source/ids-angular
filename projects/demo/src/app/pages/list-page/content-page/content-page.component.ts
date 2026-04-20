@@ -1,3 +1,4 @@
+import { ContentCardComponent } from '../../../components/content-card/content-card.component';
 import { ContentHeroComponent } from '../../../components/content-hero/content-hero.component';
 import { ContentBlock, ContentContent, ContentEntry } from '../../../model/contentEntry';
 import { HeroData } from '../../../model/heroData';
@@ -6,14 +7,8 @@ import { GraphqlService } from '../../../services/graphql.service';
 import { formatDate } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { IdsButtonGroupComponent, IdsButtonComponent } from '@i-cell/ids-angular/button';
 import {
   IdsCardComponent,
-  IdsCardTitleDirective,
-  IdsCardSubtitleDirective,
-  IdsCardBodyDirective,
-  IdsCardHeaderComponent,
-  IdsCardMediaDirective,
 } from '@i-cell/ids-angular/card';
 import { environment } from 'projects/demo/src/environments/environment.development';
 import { combineLatest } from 'rxjs';
@@ -25,13 +20,7 @@ import { filter, map, switchMap } from 'rxjs/operators';
     RouterModule,
     ContentHeroComponent,
     IdsCardComponent,
-    IdsCardTitleDirective,
-    IdsCardSubtitleDirective,
-    IdsCardBodyDirective,
-    IdsCardHeaderComponent,
-    IdsCardMediaDirective,
-    IdsButtonGroupComponent,
-    IdsButtonComponent,
+    ContentCardComponent,
   ],
   templateUrl: './content-page.component.html',
   styleUrl: './content-page.component.scss',
@@ -159,37 +148,51 @@ export class ContentPageComponent implements OnInit {
       }
 
       if (block.__typename === 'Set_Content_Card') {
+        const lightUrl = block.group_image?.img_light_mode?.[0]?.url
+          ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+          : '';
+        const darkUrl = block.group_image?.img_dark_mode?.[0]?.url
+          ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
+          : lightUrl;
+
+        const buttonArray: { text: string; url: string }[] = [];
+        if (block.button?.button) {
+          const btnData = block.button.button;
+          if (Array.isArray(btnData)) {
+            btnData.forEach((b) => {
+              buttonArray.push({ text: b.button_label ?? '', url: b.button_url ?? '' });
+            });
+          } else {
+            buttonArray.push({ text: btnData.button_label ?? '', url: btnData.button_url ?? '' });
+          }
+        }
+
         blocks.push({
           type: 'card',
-          id: Number(block.id),
+          id: block.id,
           overTitle: block.content?.content_over_title,
           title: block.content?.content_title,
           description: block.content?.content_description,
-          orientation: block.card_properties?.card_orientation?.value,
-          variant: block.card_properties?.card_variant?.value,
-          appearance: block.card_properties?.appearance?.value,
+          card: {
+            orientation: block.card_properties?.card_orientation?.value || 'vertical',
+            variant: block.card_properties?.card_variant?.value ?? 'surface',
+            appearance: block.card_properties?.appearance?.value ?? 'elevated',
+            transparent: block.card_properties?.card_bg_transparent ?? false,
+          },
           isImage: block.is_image,
-          image: block.group_image
-            ? {
-              caption: block.group_image.img_caption,
-              lightUrl: block.group_image.img_light_mode?.[0]?.url
-                ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-                : undefined,
-              darkUrl: block.group_image.img_dark_mode?.[0]?.url
-                ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
-                : undefined,
-              aspectRatio: block.group_image.img_aspect_ratio?.value,
-              bgColor: block.group_image.img_bg_color?.value,
-              bgTransparent: block.group_image.bg_transparent,
-              filledInContainer: block.group_image.filled_in_container,
-              state: block.group_image.state?.value,
-            }
-            : undefined,
-          isButton: block.is_button,
-          buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : block.button?.button?.button_label,
-          buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
-          buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,
-          buttonTwoUrl: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_url : undefined,
+          image: {
+            imageUrl: lightUrl,
+            lightUrl: lightUrl,
+            darkUrl: darkUrl,
+            caption: block.group_image?.img_caption ?? '',
+            aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
+            bgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
+            bgTransparent: block.group_image?.bg_transparent ?? false,
+            filledInContainer: block.group_image?.filled_in_container ?? false,
+            state: block.group_image?.state?.value ?? 'no_state',
+          },
+          isButton: block.is_button ?? false,
+          button: buttonArray,
         } as ContentBlock);
       }
     });

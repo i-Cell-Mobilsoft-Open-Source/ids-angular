@@ -1,7 +1,6 @@
 import { ContentCardComponent } from '../../components/content-card/content-card.component';
 import { HeroComponent } from '../../components/hero/hero.component';
 import { ContentCardData } from '../../model/contentCardData';
-import { ContentData } from '../../model/contentData';
 import { EntryListData } from '../../model/entryListData';
 import { HeroData } from '../../model/heroData';
 import { GraphqlService } from '../../services/graphql.service';
@@ -31,7 +30,7 @@ const PAGE_SIZE = 8;
   styleUrl: './list-page.component.scss',
 })
 export class ListPageComponent implements OnInit {
-  public contentDatas = signal<ContentData[]>([]);
+  public contentDatas = signal<ContentCardData[]>([]);
   public heroData = signal<HeroData>({
     title: '',
     description: '',
@@ -103,60 +102,82 @@ export class ListPageComponent implements OnInit {
   }
 
   private _loadData(collection: string, typeName: string, slug: string): void {
-    this._graphqlService.getPagesList(collection, typeName, slug).subscribe({
-      next: (result) => {
-        const typedResult = result as unknown as { data: { entry?: EntryListData } };
-        const entry = typedResult.data?.entry;
+    this._graphqlService.getPagesList(collection, typeName, slug)
+      .subscribe({
+        next: (result) => {
+          const typedResult = result as unknown as { data: { entry?: EntryListData } };
+          const entry = typedResult.data?.entry;
 
-        const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
-        const contents: ContentData[] = [];
+          const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
+          const contents: ContentCardData[] = [];
 
-        if (entry?.collections_contents) {
-          entry.collections_contents.forEach((collection) => {
-            const treeArray = collection.structure?.tree || [];
+          if (entry?.collections_contents) {
+            entry.collections_contents.forEach((collection) => {
+              const treeArray = collection.structure?.tree || [];
 
-            if (Array.isArray(treeArray)) {
-              treeArray.forEach((treeNode) => {
-                const entryItem = treeNode.entry;
+              if (Array.isArray(treeArray)) {
+                treeArray.forEach((treeNode) => {
+                  const entryItem = treeNode.entry;
 
-                if (entryItem && entryItem.id) {
-                  const heroDesc = typeof entryItem.hero_description === 'string' ? entryItem.hero_description : '';
+                  if (entryItem && entryItem.id) {
+                    const heroDesc = typeof entryItem.hero_description === 'string' ? entryItem.hero_description : '';
 
-                  contents.push({
-                    id: Number(entryItem.id) || 0,
-                    title: entryItem.title ?? '',
-                    slug: entryItem.slug ?? '',
-                    description: heroDesc,
-                    imageUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
-                    imageLink: entryItem.slug ? `/${slug}/${entryItem.slug}` : '',
-                    last_modified: entryItem.last_modified,
-                    date: entryItem.date,
-                    tags: entryItem.tags?.filter(
-                      (tag): tag is { id: number; title: string } => tag.id !== undefined && tag.title !== undefined,
-                    ),
-                  });
-                }
-              });
-            }
+                    contents.push({
+                      id: Number(entryItem.id) || 0,
+                      title: entryItem.title ?? '',
+                      slug: entryItem.slug ?? '',
+                      description: heroDesc,
+                      card: {
+                        orientation: 'vertical',
+                        appearance: 'elevated',
+                        variant: 'light',
+                        transparent: false,
+                      },
+                      image: {
+                        imageUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
+                        lightUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
+                        darkUrl: entryItem.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_dark.url}` : '',
+                        aspectRatio: '16/9',
+                        caption: entryItem.title ?? '',
+                        bgColorVariant: 'light',
+                        bgTransparent: true,
+                        filledInContainer: false,
+                        state: 'no_state',
+                      },
+                      button: [
+                        {
+                          text: 'Tovább',
+                          url: entryItem.slug ? `/${slug}/${entryItem.slug}` : '',
+                        },
+                      ],
+                      last_modified: entryItem.last_modified,
+                      date: entryItem.date,
+                      tags: entryItem.tags?.filter((tag): tag is { id: number; title: string } =>
+                        tag.id !== undefined && tag.title !== undefined,
+                      ),
+                    });
+                  }
+                });
+              }
+            });
+          }
+
+          this.contentDatas.set(contents.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '')));
+
+          const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';
+          const darkUrl = entry?.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : '';
+
+          this.heroData.set({
+            id: Number(entry?.id) || 0,
+            title: entry?.title ?? 'List Page',
+            description: entry?.hero_description ?? '',
+            imageUrl: lightUrl || darkUrl || fallbackImage,
+            imageUrlLight: lightUrl || fallbackImage,
+            imageUrlDark: darkUrl || fallbackImage,
+            isBackButton: true,
           });
-        }
-
-        this.contentDatas.set(contents.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '')));
-
-        const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';
-        const darkUrl = entry?.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : '';
-
-        this.heroData.set({
-          id: Number(entry?.id) || 0,
-          title: entry?.title ?? 'List Page',
-          description: entry?.hero_description ?? '',
-          imageUrl: lightUrl || darkUrl || fallbackImage,
-          imageUrlLight: lightUrl || fallbackImage,
-          imageUrlDark: darkUrl || fallbackImage,
-          isBackButton: true,
-        });
-      },
-    });
+        },
+      });
   }
 
   private _generateTypeName(collection: string): string {
@@ -173,40 +194,6 @@ export class ListPageComponent implements OnInit {
     const result = `Entry_${pascalCaseCollection}_${blueprintName}`;
 
     return result;
-  }
-
-  public transformToCardData(item: ContentData): ContentCardData {
-    return {
-      id: item.id,
-      card: {
-        orientation: 'vertical',
-        appearance: 'elevated',
-        variant: 'light',
-        transparent: false,
-      },
-      image: {
-        imageUrl: item.imageUrl ?? '',
-        aspectRatio: '16/9',
-        lightUrl: item.imageUrl ?? '',
-        darkUrl: item.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${item.comp_img_dark_mode[0].url}` : item.imageUrl ?? '',
-        caption: item.title ?? '',
-        bgColorVariant: 'surface',
-        bgTransparent: false,
-        filledInContainer: false,
-        state: 'no_state',
-      },
-      button: [
-        {
-          text: 'Tovább',
-          url: item.imageLink ?? '',
-        },
-      ],
-      title: item.title,
-      description: item.description,
-      last_modified: item.last_modified,
-      date: item.date,
-      tags: item.tags,
-    };
   }
 
   public onPageChange(event: { pageIndex: number; pageSize: number }): void {

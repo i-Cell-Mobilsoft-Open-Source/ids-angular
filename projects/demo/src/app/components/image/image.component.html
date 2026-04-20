@@ -11,7 +11,7 @@
     [ngClass]="[borderClass(), colorVariantClass(), containerPaddingClass()]"
     [class.transparent-bg]="data().transparent === true"
   >
-    <img class="w-full h-48 bg-gray-100 rounded-lg" [alt]="imageCaption() || ''" [src]="currentImageUrl" [ngClass]="[aspectRatioClass(), imgFilledClass()]" />
+    <img class="w-full rounded-lg" [alt]="imageCaption() || ''" [src]="currentImageUrl" [ngClass]="[aspectRatioClass(), imgFilledClass()]" />
   </div>
   @if (showCaption() && imageCaption()) {
     <figcaption class="text-body-medium text-ids-page-fg-surface-lighter-10">{{ imageCaption() }}</figcaption>

@@ -16,39 +16,7 @@
         }
 
         @case ("card") {
-          <ids-card class="w-full" stretch="true">
-            <div class="p-4 flex flex-col gap-2">
-              <header idsCardHeader>
-                <h2 idsCardTitle>{{ block.title }}</h2>
-                @if (block.overTitle) {
-                  <h3 idsCardSubtitle>{{ block.overTitle }}</h3>
-                }
-              </header>
-
-              <ids-card-body>
-                <div>
-                  @if (block.isImage) {
-                    <div class="float-left mr-4 mb-2 w-ids-container-size-width-256">
-                      <img idsCardMedia alt="" [src]="block.image?.lightUrl" />
-                    </div>
-                  }
-                  <div>
-                    <div class="text-justify" [innerHTML]="block.description"></div>
-                    @if(block.isButton){
-                      <ids-button-group>
-                        @for(button of block.button; track $index){
-                        <button type="button" idsButton appearance="filled" variant="primary" (click)="handleButtonClick(button.url)"> 
-                          {{ button.text }}
-                        </button>
-                        }
-                      </ids-button-group>
-                    }
-                    <div></div>
-                  </div>
-                </div>
-              </ids-card-body>
-            </div>
-          </ids-card>
+          <app-content-card [contentCardData]="block" [showCaption]="true"/>
         }
       }
     }

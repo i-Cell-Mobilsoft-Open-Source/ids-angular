@@ -30,8 +30,8 @@ export class ComponentDetailsComponent implements OnInit {
   public componentBlocks = signal<ComponentBlock[]>([]);
 
   public tabGroup = viewChild(IdsTabGroupComponent);
-  public activeTab = signal<string>('demo');
-  protected _selectedTabIndex = 1;
+  public activeTab = signal<string>('guidelines');
+  protected _selectedTabIndex = 0;
   protected _initTabIndex = undefined;
 
   private _tabs = [
@@ -100,9 +100,15 @@ export class ComponentDetailsComponent implements OnInit {
       });
 
     navigationEnd$.subscribe(() => {
-      const childRoute = this._route.firstChild?.snapshot.url[1]?.path ?? 'demo';
+      const childRoute = this._route.firstChild?.snapshot.url[0]?.path ?? 'guidelines';
 
       this.activeTab.set(childRoute);
+
+      const tabIndex = this._tabs.indexOf(childRoute ?? 'guidelines');
+      if (tabIndex >= 0) {
+        this._selectedTabIndex = tabIndex;
+        this.tabGroup()?.selectTab(tabIndex);
+      }
     });
   }
 
@@ -138,10 +144,12 @@ export class ComponentDetailsComponent implements OnInit {
           image: {
             state: block.group_image?.state?.value ?? 'no_state',
             aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
-            imageUrl: block.group_image?.img_light_mode?.[0]?.url ?
-              `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}` : '',
-            lightUrl: block.group_image?.img_light_mode?.[0]?.url ?
-              `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}` : '',
+            imageUrl: block.group_image?.img_light_mode?.[0]?.url
+              ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+              : '',
+            lightUrl: block.group_image?.img_light_mode?.[0]?.url
+              ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+              : '',
             darkUrl: block.group_image?.img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}` : '',
             caption: block.group_image?.img_caption ?? '',
             bgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
@@ -151,10 +159,12 @@ export class ComponentDetailsComponent implements OnInit {
           overTitle: block.content?.content_over_title,
           title: block.content?.content_title,
           description: block.content?.content_description,
-          button: Array.isArray(block.button?.button) ? block.button?.button.map((btn) => ({
-            text: btn.button_label,
-            url: btn.button_url,
-          })) : [],
+          button: Array.isArray(block.button?.button)
+            ? block.button?.button.map((btn) => ({
+              text: btn.button_label,
+              url: btn.button_url,
+            }))
+            : [],
         });
       }
     });

@@ -2,38 +2,34 @@
   @for (menuConfig of menu(); track $index) {
     <ids-side-nav-section>
       @if (menuConfig.slug) {
-        <a [routerLink]="menuConfig.path">
-          <ids-side-nav-title class="nav-label" [label]="menuConfig.name!" />
-        </a>
+        <ids-side-nav-item class="nav-label" [label]="menuConfig.name!" [target]="menuConfig.path ?? ''" />
       } @else {
         <ids-side-nav-title class="nav-label" [label]="menuConfig.name!" />
       }
-      <ul>
-        @for (menuItem of menuConfig.children; track $index) {
-          @if (menuItem.children?.length! > 0) {
-            <li>
-              <div class="subnav-parent">
-                <a #rla="routerLinkActive" [routerLink]="menuItem.path" [routerLinkActive]="['active']">
-                  <span class="icon">
-                    @if (menuItem.icon) {
-                      <ids-icon [fontIcon]="menuItem.icon" />
-                    }
-                  </span>
-                  <ids-side-nav-item class="name" [label]="menuItem.name!" />
-                </a>
-                <span #trigger class="more"><ids-icon icon-trailing [fontIcon]="menuItem.$open ? 'chevron-up' : 'chevron-down'" /></span>
-              </div>
-              <ids-subnav [menuItem]="menuItem" [trigger]="trigger" [open]="rla.isActive" (opened)="menuItem.$open = $event" />
-            </li>
-          } @else {
-            <li>
-              <a [routerLink]="menuItem.path">
-                <ids-side-nav-item class="icon" [label]="menuItem.name!" />
-              </a>
-            </li>
-          }
+
+      @for (menuItem of menuConfig.children; track $index) {
+        @if (menuItem.children?.length! > 0) {
+          <ids-side-nav-item class="name" [label]="menuItem.name!" [target]="menuItem.path ?? ''">
+            @if (menuItem.icon) {
+              <ids-icon icon-leading [fontIcon]="menuItem.icon" />
+            }
+
+            @for (subItem of menuItem.children; track $index) {
+              <ids-side-nav-item [label]="subItem.name!" [target]="subItem.path ?? ''" [isActiveMatchOptions]="subsetMatchOptions">
+                @if (subItem.icon) {
+                  <ids-icon icon-leading [fontIcon]="subItem.icon" />
+                }
+              </ids-side-nav-item>
+            }
+          </ids-side-nav-item>
+        } @else {
+          <ids-side-nav-item class="icon" [label]="menuItem.name!" [target]="menuItem.path ?? ''">
+            @if (menuItem.icon) {
+              <ids-icon icon-leading [fontIcon]="menuItem.icon" />
+            }
+          </ids-side-nav-item>
         }
-      </ul>
+      }
     </ids-side-nav-section>
   }
 </nav>

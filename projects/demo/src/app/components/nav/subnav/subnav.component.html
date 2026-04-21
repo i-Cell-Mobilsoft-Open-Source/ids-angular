@@ -1,9 +1,0 @@
-<details #details>
-  <summary></summary>
-    @for (child of menuItem().children!; track $index) {
-        <a [routerLink]="child.path" [routerLinkActive]="['active']">
-          <span class="icon"></span>
-          <ids-side-nav-item class="name" [label]="child.name!"/>
-        </a>
-    }
-</details>

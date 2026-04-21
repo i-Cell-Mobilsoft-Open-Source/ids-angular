@@ -1,7 +1,7 @@
 import { routes } from './app.routes';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { NavigationNode } from './model/navigation';
 import { GraphqlService } from './services/graphql.service';
-import { loadingInterceptor } from './services/loading.service';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';

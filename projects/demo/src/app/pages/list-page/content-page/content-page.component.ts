@@ -55,7 +55,6 @@ export class ContentPageComponent implements OnInit {
   public contentBlocks = signal<ContentBlock[]>([]);
 
   public ngOnInit(): void {
-
     combineLatest([
       this._route.paramMap,
       this._route.data,
@@ -108,7 +107,6 @@ export class ContentPageComponent implements OnInit {
             });
 
             this.contentBlocks.set(this._mapContentBlocks(entry.content ?? []));
-
           }
         },
       });

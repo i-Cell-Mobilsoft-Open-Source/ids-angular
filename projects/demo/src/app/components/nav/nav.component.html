@@ -2,14 +2,14 @@
   @for (menuConfig of menu(); track $index) {
     <ids-side-nav-section>
       @if (menuConfig.slug) {
-        <ids-side-nav-item class="nav-label" [label]="menuConfig.name!" [target]="menuConfig.path ?? ''" />
+        <ids-side-nav-item [label]="menuConfig.name!" [target]="menuConfig.path ?? ''" />
       } @else {
-        <ids-side-nav-title class="nav-label" [label]="menuConfig.name!" />
+        <ids-side-nav-title [label]="menuConfig.name!" />
       }
 
       @for (menuItem of menuConfig.children; track $index) {
         @if (menuItem.children?.length! > 0) {
-          <ids-side-nav-item class="name" [label]="menuItem.name!" [target]="menuItem.path ?? ''">
+          <ids-side-nav-item [label]="menuItem.name!" [target]="menuItem.path ?? ''">
             @if (menuItem.icon) {
               <ids-icon icon-leading [fontIcon]="menuItem.icon" />
             }
@@ -23,7 +23,7 @@
             }
           </ids-side-nav-item>
         } @else {
-          <ids-side-nav-item class="icon" [label]="menuItem.name!" [target]="menuItem.path ?? ''">
+          <ids-side-nav-item [label]="menuItem.name!" [target]="menuItem.path ?? ''">
             @if (menuItem.icon) {
               <ids-icon icon-leading [fontIcon]="menuItem.icon" />
             }

@@ -1,23 +1,10 @@
 :host {
-  display: flex;
-  width: auto;
-  flex-direction: column;
-  flex-shrink: 0;
   background-color: var(--ids-smc-colors-surface-lighter-10);
-  padding: 0.625rem;
-  box-sizing: border-box;
-  color: var(--ids-smc-colors-surface-darker-80);
+  box-sizing: content-box;
+  overflow-x: hidden;
   overflow-y: auto;
+  // sidenav section min width + padding (x-axis)
+  width: calc(var(--ids-comp-sidenav-section-size-min-width-compact) + 1rem);
+  padding: 0.5rem;
   scrollbar-gutter: stable;
-
-  * {
-    box-sizing: border-box;
-  }
-}
-
-.nav-label {
-  padding: 0.625rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.00625rem;
 }

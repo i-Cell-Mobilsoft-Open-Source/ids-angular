@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_COMPONENTS = gql`
-{
-  entries(collection: "components") {
+query GetComponents($site: String!) {
+  entries(collection: "components", site: $site) {
     data {
       title
       ... on Entry_Components_Component {

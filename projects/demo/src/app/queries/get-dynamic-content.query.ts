@@ -3,8 +3,8 @@ import { DocumentNode } from 'graphql';
 
 export const GET_DYNAMIC_CONTENT = (collection: string, typeName: string): DocumentNode => gql`
 
-query GetDynamicDetail($slug: String!) {
-    entry(collection: "${collection}", slug: $slug) {
+query GetDynamicDetail($slug: String!, $site: String!) {
+    entry(collection: "${collection}", slug: $slug, site: $site) {
       id
       title
       slug

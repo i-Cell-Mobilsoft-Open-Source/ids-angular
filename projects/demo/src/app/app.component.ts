@@ -5,17 +5,15 @@ import { GraphqlService, NavigationQueryResult } from './services/graphql.servic
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import { Component, DestroyRef, ViewEncapsulation, inject } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ObservableQuery } from '@apollo/client/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent } from '@i-cell/ids-angular/segmented-control-toggle';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { map, startWith } from 'rxjs';
 
 export type Theme = 'light' | 'dark';
-
 @Component({
   selector: 'app-root',
   imports: [
@@ -40,13 +38,6 @@ export class AppComponent {
   // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
   public theme = new FormControl<Theme>('light', { nonNullable: true });
 
-  public currentLang = toSignal(
-    this._translate.onLangChange.pipe(
-      map(({ lang }) => lang),
-      startWith(this._translate.currentLang),
-    ),
-  );
-
   public dynamicMenu: Menu[] = [];
   private _destroyRef = inject(DestroyRef);
 
@@ -67,9 +58,9 @@ export class AppComponent {
       'hu',
       'en',
     ]);
-    this._translate.setDefaultLang('en');
+    this._translate.setDefaultLang('hu');
     const browserLang = this._translate.getBrowserLang();
-    this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
+    this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'hu');
 
     const graphqlService = inject(GraphqlService);
     graphqlService

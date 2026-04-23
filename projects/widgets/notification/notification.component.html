@@ -8,9 +8,12 @@
 
   <div class="ids-notification__container">
     <div class="ids-notification__title-msg-container">
-      <div class="ids-notification__title">
-        {{ title() }}
-      </div>
+      @let titleText = title();
+      @if (titleText) {
+        <div class="ids-notification__title">
+          {{ titleText }}
+        </div>
+      }
       <div class="ids-notification__message">
         <ng-content />
       </div>

@@ -103,7 +103,7 @@ function buildComponentRoute(
     children: [
       {
         path: '',
-        redirectTo: 'demo',
+        redirectTo: 'guidelines',
         pathMatch: 'full',
       },
       {

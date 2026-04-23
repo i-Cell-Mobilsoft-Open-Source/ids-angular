@@ -78,6 +78,13 @@ export type IdsTableColumnDef<D> = {
   cellRenderer?: string | Type<IdsTableCellRenderer<D>>;
 
   /**
+   * Additional custom inputs passed to component-based cell renderers.
+   *
+   * These are merged with the built-in renderer inputs (`rowData`, `colDef`, `cellValue`).
+   */
+  cellRendererInput?: Record<string, unknown>;
+
+  /**
    * Defines if the column is hideable (column visibility feature coming soon...).
    */
   hideable?: boolean;

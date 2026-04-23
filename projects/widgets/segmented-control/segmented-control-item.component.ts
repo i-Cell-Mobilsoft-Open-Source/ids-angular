@@ -34,6 +34,7 @@ export class IdsSegmentedControlItemComponent extends ComponentBase implements O
   protected _buttonId = computed(() => `${this.id()}-button`);
   protected _parentOrSelfDisabled = computed(() => this.disabled() || this._group?.disabled());
   protected _multiSelect = computed(() => this._group?.multiSelect());
+  protected _showActiveIcon = computed(() => this._group?.showActiveIcon() ?? true);
   protected _ariaPressed = computed(() => (this._multiSelect() ? this.selected() : null));
   protected _ariaChecked = computed(() => (!this._multiSelect() ? this.selected() : null));
   protected _role = computed(() => (this._multiSelect() ? 'button' : 'radio'));

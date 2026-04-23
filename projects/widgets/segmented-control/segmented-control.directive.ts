@@ -49,6 +49,7 @@ export class IdsSegmentedControlDirective
   public variant = input<IdsSegmentedControlVariantType>(this._defaultConfig.variant);
   public appearance = input<IdsSegmentedControlAppearanceType>(this._defaultConfig.appearance);
   public multiSelect = input<boolean>(false);
+  public showActiveIcon = input<boolean>(true);
   public disabled = signal<boolean>(false);
 
   protected _hostClasses = computed(() => this._getHostClasses([

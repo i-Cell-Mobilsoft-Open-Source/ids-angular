@@ -3,7 +3,7 @@ import { IdsSegmentedControlToggleItemChange } from './types/segmented-control-t
 import { IdsSegmentedControlToggleDirective } from '../segmented-control-toggle/segmented-control-toggle.directive';
 
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { addClassPrefix, coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
+import { addClassPrefix, ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
@@ -29,11 +29,11 @@ export class IdsSegmentedControlToggleItemComponent extends ComponentBase implem
   public label = input<string>();
   public ariaLabel = input<string>('', { alias: 'aria-label' });
   public ariaLabelledBy = input<string>('', { alias: 'aria-labeledby' });
-  public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
 
   protected _buttonId = computed(() => `${this.id()}-button`);
   protected _parentOrSelfDisabled = computed(() => this.disabled() || this._group?.disabled());
+  protected _showActiveIcon = computed(() => this._group?.showActiveIcon() ?? true);
   protected _ariaPressed = signal(null); // it is signal because of the common template
   protected _ariaChecked = computed(() => this.selected());
   protected _role = signal('radio'); // it is signal because of the common template

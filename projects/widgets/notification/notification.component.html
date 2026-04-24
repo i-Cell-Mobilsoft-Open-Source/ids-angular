@@ -22,23 +22,25 @@
     }
   </div>
 
-  <div class="ids-notification__close-button-container" [class]="_closeLabelButtonClass()">
-    @let buttonLabel = closeButtonLabel();
-    @if (buttonLabel) {
-      <button
-        type="button"
-        aria-label="Close notification"
-        idsButton
-        [size]="closeButtonSize()"
-        [appearance]="closeLabelButtonAppearance()"
-        (click)="_close()"
-      >
-        {{ buttonLabel }}
-      </button>
-    } @else {
-      <button type="button" aria-label="Close notification" idsIconButton [size]="closeButtonSize()" (click)="_close()">
-        <ids-icon alt="close icon" fontIcon="close" />
-      </button>
-    }
-  </div>
+  @if (closable()) {
+    <div class="ids-notification__close-button-container" [class]="_closeLabelButtonClass()">
+      @let buttonLabel = closeButtonLabel();
+      @if (buttonLabel) {
+        <button
+          type="button"
+          aria-label="Close notification"
+          idsButton
+          [size]="closeButtonSize()"
+          [appearance]="closeLabelButtonAppearance()"
+          (click)="_close()"
+        >
+          {{ buttonLabel }}
+        </button>
+      } @else {
+        <button type="button" aria-label="Close notification" idsIconButton [size]="closeButtonSize()" (click)="_close()">
+          <ids-icon alt="close icon" fontIcon="close" />
+        </button>
+      }
+    </div>
+  }
 </div>

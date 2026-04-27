@@ -6,7 +6,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  effect,
   ElementRef,
   HostListener,
   inject,
@@ -56,16 +55,6 @@ export class NavComponent implements AfterViewInit {
     fragment: 'ignored',
     matrixParams: 'ignored',
   };
-
-  constructor() {
-    effect(() => {
-      const currentMenu = this.menu();
-
-      if (currentMenu && currentMenu.length > 0) {
-        this.checkMenuItemOverflows();
-      }
-    });
-  }
 
   public ngAfterViewInit(): void {
     this.checkMenuItemOverflows();

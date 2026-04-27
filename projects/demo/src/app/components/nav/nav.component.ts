@@ -23,6 +23,8 @@ import {
 } from '@i-cell/ids-angular/side-nav';
 import { TranslateModule } from '@ngx-translate/core';
 
+const EXPAND_ANIMATION_DELAY = 300;
+
 @Component({
   selector: 'ids-nav',
   imports: [
@@ -74,7 +76,12 @@ export class NavComponent implements AfterViewInit {
     this.checkMenuItemOverflows();
   }
 
-  public checkMenuItemOverflows(): void {
+  @HostListener('click')
+  protected _onClick(): void {
+    this.checkMenuItemOverflows(EXPAND_ANIMATION_DELAY);
+  }
+
+  public checkMenuItemOverflows(delay = 0): void {
     setTimeout(() => {
       const menuItems = this._elementRef.nativeElement.querySelectorAll('ids-side-nav-item') as NodeListOf<HTMLElement>;
 
@@ -87,6 +94,6 @@ export class NavComponent implements AfterViewInit {
         return { ...items, [menuItem.id]: hasOverflow };
       }, {});
       this._cdr.markForCheck();
-    });
+    }, delay);
   }
 }

@@ -188,7 +188,7 @@ export class ListPageComponent implements OnInit {
         imageUrl: item.imageUrl ?? '',
         aspectRatio: '16/9',
         lightUrl: item.imageUrl ?? '',
-        darkUrl: item.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${item.comp_img_dark_mode[0].url}` : item.imageUrl ?? '',
+        darkUrl: item.comp_img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${item.comp_img_dark_mode[0].url}` : (item.imageUrl ?? ''),
         caption: item.title ?? '',
         bgColorVariant: 'surface',
         bgTransparent: false,

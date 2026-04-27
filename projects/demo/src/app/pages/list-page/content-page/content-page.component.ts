@@ -13,7 +13,6 @@ import {
   IdsCardSubtitleDirective,
   IdsCardBodyDirective,
   IdsCardHeaderComponent,
-  IdsCardMediaDirective,
 } from '@i-cell/ids-angular/card';
 import { environment } from 'projects/demo/src/environments/environment.development';
 import { combineLatest } from 'rxjs';
@@ -29,7 +28,6 @@ import { filter, map, switchMap } from 'rxjs/operators';
     IdsCardSubtitleDirective,
     IdsCardBodyDirective,
     IdsCardHeaderComponent,
-    IdsCardMediaDirective,
     IdsButtonGroupComponent,
     IdsButtonComponent,
   ],

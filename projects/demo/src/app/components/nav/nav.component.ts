@@ -1,7 +1,18 @@
 import { Menu } from './menu.interface';
 
 import { CdkMenuModule } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  effect,
+  ElementRef,
+  HostListener,
+  inject,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 import { IsActiveMatchOptions, RouterModule } from '@angular/router';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import {
@@ -27,8 +38,13 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class NavComponent {
+export class NavComponent implements AfterViewInit {
+  private readonly _elementRef = inject(ElementRef);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
+  protected _menuItemsOverflow: Record<string, boolean> = {};
   public menu = input<Menu[]>([]);
   public open = false;
 
@@ -38,4 +54,39 @@ export class NavComponent {
     fragment: 'ignored',
     matrixParams: 'ignored',
   };
+
+  constructor() {
+    effect(() => {
+      const currentMenu = this.menu();
+
+      if (currentMenu && currentMenu.length > 0) {
+        this.checkMenuItemOverflows();
+      }
+    });
+  }
+
+  public ngAfterViewInit(): void {
+    this.checkMenuItemOverflows();
+  }
+
+  @HostListener('window:resize')
+  protected _onResize(): void {
+    this.checkMenuItemOverflows();
+  }
+
+  public checkMenuItemOverflows(): void {
+    setTimeout(() => {
+      const menuItems = this._elementRef.nativeElement.querySelectorAll('ids-side-nav-item') as NodeListOf<HTMLElement>;
+
+      this._menuItemsOverflow = Array.from(menuItems).reduce((items: Record<string, boolean>, menuItem: HTMLElement) => {
+        const menuLabel = menuItem.querySelector(':scope > a > .ids-side-nav-item-label') as HTMLElement;
+        if (!menuLabel || menuLabel.offsetWidth === 0) {
+          return items;
+        }
+        const hasOverflow = menuLabel.scrollWidth > menuLabel.offsetWidth;
+        return { ...items, [menuItem.id]: hasOverflow };
+      }, {});
+      this._cdr.markForCheck();
+    });
+  }
 }

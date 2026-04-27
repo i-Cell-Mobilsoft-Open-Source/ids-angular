@@ -1,10 +1,16 @@
-:host {
+ids-nav {
   background-color: var(--ids-smc-colors-surface-lighter-10);
   box-sizing: content-box;
   overflow-x: hidden;
   overflow-y: auto;
-  // sidenav section min width + padding (x-axis)
-  width: calc(var(--ids-comp-sidenav-section-size-min-width-compact) + 1rem);
+  // sidenav section min width
+  width: calc(var(--ids-comp-sidenav-section-size-min-width-compact));
   padding: 0.5rem;
   scrollbar-gutter: stable;
+
+  .ids-side-nav-item .ids-side-nav-item-label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }

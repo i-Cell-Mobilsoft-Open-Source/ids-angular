@@ -72,7 +72,7 @@ export class GraphqlService {
     startWith(this._translate.getCurrentLang() || 'hu'),
   );
 
-  public getComponents(): Observable<unknown> {
+  public getComponents(slug: string): Observable<unknown> {
     return this._currentLang.pipe(
       switchMap(
         (lang) =>
@@ -80,6 +80,7 @@ export class GraphqlService {
             query: GET_COMPONENTS,
             variables: {
               site: lang,
+              slug,
             },
             fetchPolicy: 'network-only',
           }).valueChanges,

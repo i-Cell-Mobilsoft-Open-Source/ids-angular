@@ -1,6 +1,7 @@
 import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
 import { GraphqlService, NavigationQueryResult } from './services/graphql.service';
+import { LoadingService } from './services/loading.service';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
@@ -11,6 +12,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { ObservableQuery } from '@apollo/client/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent } from '@i-cell/ids-angular/segmented-control-toggle';
+import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 export type Theme = 'light' | 'dark';
@@ -27,12 +29,15 @@ export type Theme = 'light' | 'dark';
     IdsSegmentedControlToggleItemComponent,
     FormsModule,
     IdsIconComponent,
+    IdsSpinnerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
+  public loadingService = inject(LoadingService);
+
   private _translate: TranslateService = inject(TranslateService);
 
   // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')

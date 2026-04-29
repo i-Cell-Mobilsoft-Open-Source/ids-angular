@@ -1,6 +1,7 @@
 import { IDS_ACCORDION_DEFAULT_CONFIG, IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionDefaultConfig } from './accordion-defaults';
 import { IdsAccordionItemComponent } from './accordion-item/accordion-item.component';
 import { IdsAccordionAppearanceType } from './types/accordion-appearance.type';
+import { IdsAccordionHeadingLevelType } from './types/accordion-heading-level.type';
 
 import { CdkAccordion } from '@angular/cdk/accordion';
 import { ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, ViewEncapsulation } from '@angular/core';
@@ -10,7 +11,7 @@ import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefault
 const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'ids-accordion',
+  selector: 'ids-accordion, ul[idsAccordion]',
   imports: [IdsButtonComponent],
   templateUrl: './accordion.component.html',
   encapsulation: ViewEncapsulation.None,
@@ -41,6 +42,7 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   public hasLeadingIcon = input(this._defaultConfig.hasLeadingIcon, { transform: coerceBooleanAttribute });
   public hasTrailingIcon = input(this._defaultConfig.hasTrailingIcon, { transform: coerceBooleanAttribute });
   public multi = input<boolean>(this._defaultConfig.multi);
+  public headingLevel = input<IdsAccordionHeadingLevelType>(this._defaultConfig.headingLevel);
   public btnSize = input<IdsSizeType>(this._defaultConfig.btnSize);
   public btnAppearance = input<IdsButtonAppearanceType>(this._defaultConfig.btnAppearance);
   public btnVariant = input<IdsButtonVariantType>(this._defaultConfig.btnVariant);
@@ -51,8 +53,10 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
   protected _collapseBtnId = computed(() => `${this.id()}-collapse-btn`);
 
   protected _hostClasses = computed(() => this._getHostClasses([
+    'ids-accordion',
     this.size(),
     this.appearance(),
+    this.headingLevel(),
     this.disabled() ? 'disabled' : null,
   ]));
 
@@ -86,7 +90,7 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
 
     const items = this._items();
     const target = event.target as HTMLButtonElement;
-    const accordionId = target.parentElement!.id;
+    const accordionId = target.parentElement?.parentElement?.id;
     const index = items.findIndex((item) => item.id() === accordionId);
 
     switch (event.key) {

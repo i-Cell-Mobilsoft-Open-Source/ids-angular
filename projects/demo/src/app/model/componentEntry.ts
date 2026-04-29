@@ -6,6 +6,7 @@ export interface ComponentEntry {
   id: string;
   title: string;
   slug: string;
+  last_modified: string;
   comp_description: string;
   comp_img_light_mode?: { url: string }[];
   comp_img_dark_mode?: { url: string }[];

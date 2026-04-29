@@ -4,6 +4,7 @@ export const GET_COMPONENTS = gql`
 {
   entries(collection: "components") {
     data {
+      last_modified(format: "Y.m.d.")
       title
       ... on Entry_Components_Component {
         id

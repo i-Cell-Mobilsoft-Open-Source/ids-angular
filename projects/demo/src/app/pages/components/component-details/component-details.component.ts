@@ -28,6 +28,7 @@ import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
 export class ComponentDetailsComponent implements OnInit {
   public heroData?: HeroData;
   public componentBlocks = signal<ComponentBlock[]>([]);
+  public lastModified = signal<string>('');
 
   public tabGroup = viewChild(IdsTabGroupComponent);
   public activeTab = signal<string>('guidelines');
@@ -113,6 +114,7 @@ export class ComponentDetailsComponent implements OnInit {
   }
 
   private _updateHeroAndBlocks(component: ComponentEntry): void {
+    this.lastModified.set(component.last_modified ?? '');
     this.heroData = {
       id: Number(component.id),
       title: component.title,

@@ -1,7 +1,7 @@
 <ng-content select="[colStart]" />
 
 @if (_cellRendererComp()) {
-  <ng-container *ngComponentOutlet="_cellRendererComp(); inputs: { rowData: rowData(), colDef: colDef(), cellValue: _cellValue() }" />
+  <ng-container *ngComponentOutlet="_cellRendererComp(); inputs: _cellRendererInputs()" />
 } @else {
   @switch (_cellTemplateName()) {
     @case ('strong') {

@@ -1,11 +1,10 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_COMPONENTS = gql`
-{
-  entries(collection: "components") {
-    data {
-      last_modified(format: "Y.m.d.")
-      title
+query GetComponents($slug: String!){
+  entry(collection: "components", slug: $slug) {
+    title
+    last_modified(format: "Y.m.d.")
       ... on Entry_Components_Component {
         id
         title
@@ -34,7 +33,7 @@ export const GET_COMPONENTS = gql`
             card_properties {
               appearance {
                 value
-              }              
+              }
               card_bg_transparent
               card_orientation {
                 value
@@ -71,5 +70,4 @@ export const GET_COMPONENTS = gql`
       }
     }
   }
-}
 `;

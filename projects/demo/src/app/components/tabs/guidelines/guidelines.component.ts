@@ -18,5 +18,5 @@ export class GuidelinesComponent {
   private _componentDetails = inject(ComponentDetailsComponent);
 
   public componentBlocks = this._componentDetails.componentBlocks;
-
+  protected _lastModified = this._componentDetails.lastModified;
 }

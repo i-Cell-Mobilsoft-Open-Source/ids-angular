@@ -1,9 +1,12 @@
+import { IdsCardAppearanceType, IdsCardVariantType } from '@i-cell/ids-angular/card';
+
 export type ContentCardData = Partial<{
-  id: number;
+  slug: string;
+  id: string | number;
   card: {
-    variant: 'surface' | 'light' | 'dark';
+    variant: IdsCardVariantType;
     orientation: 'horizontal' | 'vertical';
-    appearance: 'filled' | 'elevated';
+    appearance: IdsCardAppearanceType;
     transparent: boolean;
   }
   isImage: boolean;

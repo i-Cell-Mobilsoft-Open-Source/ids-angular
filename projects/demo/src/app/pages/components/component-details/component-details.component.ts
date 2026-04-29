@@ -7,7 +7,8 @@ import { ComponentBlock, ComponentContent, ComponentEntry } from '../../../model
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
-import { Component, OnInit, computed, inject, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, OnInit, computed, inject, signal, viewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
 import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
@@ -46,6 +47,7 @@ export class ComponentDetailsComponent implements OnInit {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   public selectedSection = 'demo';
+  private _destroyRef = inject(DestroyRef);
 
   constructor() {
     const tabIndex = this._tabs.findIndex((tab) => tab === location.pathname.split('/').pop());
@@ -74,6 +76,7 @@ export class ComponentDetailsComponent implements OnInit {
 
     navigationEnd$
       .pipe(
+        takeUntilDestroyed(this._destroyRef),
         map(() => {
           const urlSegments = this._router.url.split('/');
           return urlSegments[2];
@@ -81,11 +84,10 @@ export class ComponentDetailsComponent implements OnInit {
         distinctUntilChanged(),
         filter((slug) => !!slug),
         switchMap((slug) =>
-          this._graphqlService.getComponents().pipe(
+          this._graphqlService.getComponents(slug).pipe(
             map((result) => {
-              const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
-              const components = typedResult?.data?.entries?.data ?? [];
-              return components.find((entry) => entry.slug === slug);
+              const typedResult = result as { data: { entry: ComponentEntry  } };
+              return typedResult?.data?.entry;
             }),
           ),
         ),
@@ -99,17 +101,19 @@ export class ComponentDetailsComponent implements OnInit {
         }
       });
 
-    navigationEnd$.subscribe(() => {
-      const childRoute = this._route.firstChild?.snapshot.url[0]?.path ?? 'guidelines';
+    navigationEnd$
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => {
+        const childRoute = this._route.firstChild?.snapshot.url[0]?.path ?? 'guidelines';
 
-      this.activeTab.set(childRoute);
+        this.activeTab.set(childRoute);
 
-      const tabIndex = this._tabs.indexOf(childRoute ?? 'guidelines');
-      if (tabIndex >= 0) {
-        this._selectedTabIndex = tabIndex;
-        this.tabGroup()?.selectTab(tabIndex);
-      }
-    });
+        const tabIndex = this._tabs.indexOf(childRoute ?? 'guidelines');
+        if (tabIndex >= 0) {
+          this._selectedTabIndex = tabIndex;
+          this.tabGroup()?.selectTab(tabIndex);
+        }
+      });
   }
 
   private _updateHeroAndBlocks(component: ComponentEntry): void {

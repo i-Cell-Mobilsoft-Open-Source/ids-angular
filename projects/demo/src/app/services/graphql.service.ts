@@ -65,9 +65,12 @@ export interface StatamicComponentListItem {
 export class GraphqlService {
   private _apollo = inject(Apollo);
 
-  public getComponents(): Observable<unknown> {
+  public getComponents(slug: string): Observable<unknown> {
     return this._apollo.watchQuery({
       query: GET_COMPONENTS,
+      variables: {
+        slug,
+      },
     }).valueChanges;
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@i-cell/ids-angular",
-  "version": "0.2.25",
+  "version": "0.2.26",
   "private": false,
   "description": "i-Cell Design System UI Kit components for Angular",
   "publishConfig": {
@@ -33,7 +33,7 @@
     "@angular/forms": "^21.2.5",
     "@angular/platform-browser": "^21.2.5",
     "@angular/router": "^21.2.5",
-    "@i-cell/ids-styles": "^0.0.63"
+    "@i-cell/ids-styles": "^0.0.66"
   },
   "dependencies": {
     "tslib": "^2.8.1"

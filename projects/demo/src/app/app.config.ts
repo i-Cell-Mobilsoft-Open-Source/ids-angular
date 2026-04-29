@@ -1,4 +1,5 @@
 import { routes } from './app.routes';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { NavigationNode } from './model/navigation';
 import { GraphqlService } from './services/graphql.service';
 
@@ -27,16 +28,9 @@ function extractGeneratedSlugs(nodes: NavigationNode[]): string[] {
   return slugs;
 }
 
-export function initializeDynamicRoutes(
-  graphqlService: GraphqlService,
-  router: Router,
-): () => Promise<void> {
+export function initializeDynamicRoutes(graphqlService: GraphqlService, router: Router): () => Promise<void> {
   return async() => {
-    const result = await firstValueFrom(
-      graphqlService.getNavigation().pipe(
-        filter((res) => !res.loading),
-      ),
-    );
+    const result = await firstValueFrom(graphqlService.getNavigation().pipe(filter((res) => !res.loading)));
 
     const navs = result.data?.navs || [];
     const generatedSlugs: string[] = [];
@@ -59,8 +53,7 @@ export function initializeDynamicRoutes(
       },
       {
         path: `${slug}/:slug`,
-        loadComponent: () =>
-          import('./pages/list-page/content-page/content-page.component').then((module) => module.ContentPageComponent),
+        loadComponent: () => import('./pages/list-page/content-page/content-page.component').then((module) => module.ContentPageComponent),
         data: {
           collection: slug,
         },
@@ -84,7 +77,7 @@ const iconDefaultConfig: IdsIconDefaultConfig = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([])),
+    provideHttpClient(withInterceptors([loadingInterceptor])),
     provideApollo((): ApolloClientOptions => {
       const httpLink = inject(HttpLink);
       return {

@@ -1,13 +1,31 @@
 import { IdsNotificationActionButtonDirective } from './notification-action-button.directive';
-import { IDS_NOTIFICATION_DEFAULT_CONFIG, IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY, IdsNotificationDefaultConfig } from './notification-defaults';
+import {
+  IDS_NOTIFICATION_DEFAULT_CONFIG,
+  IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY,
+  IdsNotificationDefaultConfig,
+} from './notification-defaults';
 import { IdsNotificationAppearance, IdsNotificationAppearanceType } from './types/notification-appearance.type';
 import { IdsNotificationVariant, IdsNotificationVariantType } from './types/notification-variant.type';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, input, output, signal, ViewEncapsulation } from '@angular/core';
-import { IDS_BUTTON_PARENT, IdsButtonAppearanceType, IdsButtonComponent, IdsButtonParent, IdsButtonVariant } from '@i-cell/ids-angular/button';
+import {
+  IDS_BUTTON_PARENT,
+  IdsButtonAppearanceType,
+  IdsButtonComponent,
+  IdsButtonParent,
+  IdsButtonVariant,
+} from '@i-cell/ids-angular/button';
 import { coerceBooleanAttribute, coerceStringAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonComponent, IdsIconButtonParent, IdsIconButtonVariant, IdsIconButtonVariantType } from '@i-cell/ids-angular/icon-button';
+import {
+  IDS_ICON_BUTTON_PARENT,
+  IdsIconButtonAppearance,
+  IdsIconButtonAppearanceType,
+  IdsIconButtonComponent,
+  IdsIconButtonParent,
+  IdsIconButtonVariant,
+  IdsIconButtonVariantType,
+} from '@i-cell/ids-angular/icon-button';
 
 const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
 
@@ -35,7 +53,8 @@ const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
     },
   ],
 })
-export class IdsNotificationComponent extends ComponentBaseWithDefaults<IdsNotificationDefaultConfig>
+export class IdsNotificationComponent
+  extends ComponentBaseWithDefaults<IdsNotificationDefaultConfig>
   implements IdsButtonParent, IdsIconButtonParent {
   protected override get _hostName(): string {
     return 'notification';
@@ -50,6 +69,7 @@ export class IdsNotificationComponent extends ComponentBaseWithDefaults<IdsNotif
   public title = input<string>('');
   public urgent = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
   public displayActionsAtBottom = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
+  public closable = input<boolean, boolean | undefined>(this._defaultConfig.closable, { transform: coerceBooleanAttribute });
   public closeButtonSize = input<IdsSizeType>(this._defaultConfig.closeButtonSize);
   public closeLabelButtonAppearance = input<IdsButtonAppearanceType>(this._defaultConfig.closeLabelButtonAppearance);
   public closeButtonLabel = input<string, string>('', { transform: coerceStringAttribute });
@@ -63,12 +83,14 @@ export class IdsNotificationComponent extends ComponentBaseWithDefaults<IdsNotif
 
   protected _role = computed(() => (this.urgent() ? 'alert' : 'status'));
 
-  protected _hostClasses = computed(() => this._getHostClasses([
-    this.size(),
-    this.appearance(),
-    this.variant(),
-    this.displayActionsAtBottom() ? 'actions-bottom-mode' : null,
-  ]));
+  protected _hostClasses = computed(() =>
+    this._getHostClasses([
+      this.size(),
+      this.appearance(),
+      this.variant(),
+      this.displayActionsAtBottom() ? 'actions-bottom-mode' : null,
+    ]),
+  );
 
   protected _closeLabelButtonClass = computed(() => (this.closeButtonLabel() ? 'ids-notification__label-button' : ''));
 

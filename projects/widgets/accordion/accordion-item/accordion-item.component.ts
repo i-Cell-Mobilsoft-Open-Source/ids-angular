@@ -2,13 +2,17 @@ import { accordionAnimations } from '../accordion-animations';
 import { IdsAccordionComponent } from '../accordion.component';
 
 import { CdkAccordionItem } from '@angular/cdk/accordion';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 @Component({
-  selector: 'ids-accordion-item',
-  imports: [IdsIconComponent],
+  selector: 'ids-accordion-item, li[idsAccordionItem]',
+  imports: [
+    IdsIconComponent,
+    NgTemplateOutlet,
+  ],
   templateUrl: './accordion-item.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,6 +51,7 @@ export class IdsAccordionItemComponent extends ComponentBase {
   protected _parentOrSelfHasLeadingIcon = computed(() => this._accordion.hasLeadingIcon() ?? this.hasLeadingIcon());
   protected _parentOrSelfHasTrailingIcon = computed(() => this._accordion.hasTrailingIcon() ?? this.hasTrailingIcon());
   protected _parentOrSelfDisabled = computed(() => this._accordion.disabled() || this.disabled());
+  protected _parentHeadingLevel = computed(() => this._accordion.headingLevel());
 
   protected _hostClasses = computed(() => this._getHostClasses(
     [this._parentOrSelfDisabled() ? 'disabled' : null],

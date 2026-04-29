@@ -15,6 +15,7 @@ type NotificationInputControls = {
   variant: IdsNotificationVariantType,
   icon: string,
   title: string,
+  closable: boolean,
   closeButtonSize: IdsSizeType,
   closeLabelButtonAppearance: IdsButtonAppearanceType,
   closeButtonLabel: string,
@@ -83,6 +84,12 @@ export class NotificationDemoService {
       type: 'string',
       default: '-',
       demoDefault: 'Sample Title',
+    },
+    closable: {
+      description: 'Whether the notification is closable or not.',
+      type: 'boolean',
+      default: defaultConfig.closable,
+      control: DemoControl.SWITCH,
     },
     closeButtonSize: {
       description: 'Close Button size.',

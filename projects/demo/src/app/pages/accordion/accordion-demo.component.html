@@ -2,10 +2,12 @@
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout [title]="'COMPONENTS.ACCORDION' | translate">
       <ng-container component>
-        <ids-accordion
+        <ul
           #accordion
+          idsAccordion
           [multi]="_accordionDemoService.model.multi"
           [appearance]="_accordionDemoService.model.appearance"
+          [headingLevel]="_accordionDemoService.model.headingLevel"
           [size]="_accordionDemoService.model.size"
           [disabled]="_accordionDemoService.model.disabled"
           [expandBtnLabel]="_accordionDemoService.model.expandBtnLabel"
@@ -16,19 +18,19 @@
           [hasLeadingIcon]="_accordionDemoService.model.hasLeadingIcon"
           [hasTrailingIcon]="_accordionDemoService.model.hasTrailingIcon"
         >
-          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
+          <li idsAccordionItem [summary]="_accordionDemoService.model.summary">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
             text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-          </ids-accordion-item>
-          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
+          </li>
+          <li idsAccordionItem [summary]="_accordionDemoService.model.summary">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
             text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-          </ids-accordion-item>
-          <ids-accordion-item [summary]="_accordionDemoService.model.summary">
+          </li>
+          <li idsAccordionItem [summary]="_accordionDemoService.model.summary">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
             text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-          </ids-accordion-item>
-        </ids-accordion>
+          </li>
+        </ul>
       </ng-container>
     </app-tryout>
   </div>

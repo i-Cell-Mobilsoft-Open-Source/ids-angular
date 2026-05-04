@@ -124,18 +124,24 @@ export class IdsSelectComponent
     return this.multiSelect() ? this._selectionModel?.selected : this._selectionModel?.selected?.[0];
   }
 
-  protected get _triggerValue(): string {
+  protected _triggerValue = computed(() => {
     if (this._empty) {
       return '';
     }
 
-    if (this.multiSelect()) {
-      const selectedOptions = this._selectionModel?.selected?.map((option) => option.viewValue());
-      return selectedOptions?.join(', ') || '';
+    const options = this.options();
+    const selectedOptions = options.filter((option) => option.selected());
+
+    if (selectedOptions.length === 0) {
+      return '';
     }
 
-    return this._selectionModel?.selected?.[0].viewValue() || '';
-  }
+    if (this.multiSelect()) {
+      return selectedOptions.map((option) => option.viewValue()).join(', ');
+    }
+
+    return selectedOptions[0].viewValue();
+  });
 
   constructor() {
     super();

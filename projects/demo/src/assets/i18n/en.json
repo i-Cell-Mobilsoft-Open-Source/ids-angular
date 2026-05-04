@@ -67,6 +67,22 @@
     },
     "SUCCESS": "{{fieldName}} is valid."
   },
+  "SELECT": {
+    "LAND": {
+      "DOG": "Dog",
+      "CAT": "Cat",
+      "GIRAFFE": "Giraffe",
+      "ORANGUTAN": "Orangutan",
+      "MAMMOTH": "Mammoth",
+      "OPISTHOCOELICAUDIA SKARZYNSKI": "Opisthocoelicaudia Skarzynski"
+    },
+    "AQUATIC": {
+      "CROCODILE": "Crocodile",
+      "WHALE": "Whale",
+      "DOLPHIN": "Dolphin",
+      "SHARK": "Shark"
+    }
+  },
   "TABLE": {
     "COL": {
       "NAME": "Name",

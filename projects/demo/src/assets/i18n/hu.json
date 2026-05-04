@@ -67,6 +67,22 @@
     },
     "SUCCESS": "{{fieldName}} értéke helyes."
   },
+  "SELECT": {
+    "LAND": {
+      "DOG": "Kutya",
+      "CAT": "Macska",
+      "GIRAFFE": "Zsiráf",
+      "ORANGUTAN": "Orangután",
+      "MAMMOTH": "Mammut",
+      "OPISTHOCOELICAUDIA SKARZYNSKI": "Opisthocoelicaudia Skarzynskii"
+    },
+    "AQUATIC": {
+      "CROCODILE": "Krokodil",
+      "WHALE": "Bálna",
+      "DOLPHIN": "Delfin",
+      "SHARK": "Cápa"
+    }
+  },
   "TABLE": {
     "COL": {
       "NAME": "Megnevezés",

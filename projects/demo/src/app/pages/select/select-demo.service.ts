@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -6,6 +6,7 @@ import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-con
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
 import { IDS_SELECT_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/select';
+import { TranslateService } from '@ngx-translate/core';
 
 const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
@@ -201,20 +202,22 @@ export class SelectDemoService {
   public selectModel: SelectInputControls = { ...this.selectDefaults };
   public selectHelperModel: SelectHelperControls = { ...this.selectHelperDefaults };
 
+  public translate = inject(TranslateService);
+
   public animals: AnimalOptions = {
     land: [
-      { viewValue: 'Dog', value: 'dog' },
-      { viewValue: 'Cat', value: 'cat' },
-      { viewValue: 'Giraffe', value: 'giraffe' },
-      { viewValue: 'Orangutan', value: 'orangutan' },
-      { viewValue: 'Mammoth', value: 'mammoth' },
-      { viewValue: 'Opisthocoelicaudia Skarzynski', value: 'opisthocoelicaudia skarzynski' },
+      { viewValue: 'SELECT.LAND.DOG', value: 'dog' },
+      { viewValue: 'SELECT.LAND.CAT', value: 'cat' },
+      { viewValue: 'SELECT.LAND.GIRAFFE', value: 'giraffe' },
+      { viewValue: 'SELECT.LAND.ORANGUTAN', value: 'orangutan' },
+      { viewValue: 'SELECT.LAND.MAMMOTH', value: 'mammoth' },
+      { viewValue: 'SELECT.LAND.OPISTHOCOELICAUDIA SKARZYNSKI', value: 'opisthocoelicaudia skarzynski' },
     ],
     aquatic: [
-      { viewValue: 'Crocodile', value: 'crocodile' },
-      { viewValue: 'Whale', value: 'whale' },
-      { viewValue: 'Dolphin', value: 'doplhin' },
-      { viewValue: 'Shark', value: 'shark' },
+      { viewValue: 'SELECT.AQUATIC.CROCODILE', value: 'crocodile' },
+      { viewValue: 'SELECT.AQUATIC.WHALE', value: 'whale' },
+      { viewValue: 'SELECT.AQUATIC.DOLPHIN', value: 'doplhin' },
+      { viewValue: 'SELECT.AQUATIC.SHARK', value: 'shark' },
     ],
   };
 

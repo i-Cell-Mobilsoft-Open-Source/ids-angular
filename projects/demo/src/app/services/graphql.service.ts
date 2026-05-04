@@ -10,7 +10,7 @@ import { inject, Injectable } from '@angular/core';
 import { ObservableQuery } from '@apollo/client/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Apollo } from 'apollo-angular';
-import { map, Observable, startWith, switchMap } from 'rxjs';
+import { map, Observable, shareReplay, startWith, switchMap } from 'rxjs';
 
 export interface NavigationQueryResult {
   navs: Array<{
@@ -69,7 +69,8 @@ export class GraphqlService {
 
   private _currentLang = this._translate.onLangChange.pipe(
     map(({ lang }) => lang),
-    startWith(this._translate.getCurrentLang() || 'hu'),
+    startWith(this._translate.getCurrentLang() || this._translate.getFallbackLang() || 'hu'),
+    shareReplay({ bufferSize: 1, refCount: false }),
   );
 
   public getComponents(slug: string): Observable<unknown> {

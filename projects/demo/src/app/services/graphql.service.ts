@@ -8,8 +8,9 @@ import { GET_PAGES } from '../queries/get-pages.query';
 
 import { inject, Injectable } from '@angular/core';
 import { ObservableQuery } from '@apollo/client/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs';
+import { map, Observable, shareReplay, startWith, switchMap } from 'rxjs';
 
 export interface NavigationQueryResult {
   navs: Array<{
@@ -64,20 +65,43 @@ export interface StatamicComponentListItem {
 })
 export class GraphqlService {
   private _apollo = inject(Apollo);
+  private _translate = inject(TranslateService);
+
+  private _currentLang = this._translate.onLangChange.pipe(
+    map(({ lang }) => lang),
+    startWith(this._translate.getCurrentLang() || this._translate.getFallbackLang() || 'hu'),
+    shareReplay({ bufferSize: 1, refCount: false }),
+  );
 
   public getComponents(slug: string): Observable<unknown> {
-    return this._apollo.watchQuery({
-      query: GET_COMPONENTS,
-      variables: {
-        slug,
-      },
-    }).valueChanges;
+    return this._currentLang.pipe(
+      switchMap(
+        (lang) =>
+          this._apollo.watchQuery({
+            query: GET_COMPONENTS,
+            variables: {
+              site: lang,
+              slug,
+            },
+            fetchPolicy: 'network-only',
+          }).valueChanges,
+      ),
+    );
   }
 
   public getPages(): Observable<unknown> {
-    return this._apollo.watchQuery({
-      query: GET_PAGES,
-    }).valueChanges;
+    return this._currentLang.pipe(
+      switchMap(
+        (lang) =>
+          this._apollo.watchQuery({
+            query: GET_PAGES,
+            variables: {
+              site: lang,
+            },
+            fetchPolicy: 'network-only',
+          }).valueChanges,
+      ),
+    );
   }
 
   public getNavigation(): Observable<ObservableQuery.Result<NavigationQueryResult>> {
@@ -87,28 +111,51 @@ export class GraphqlService {
   }
 
   public getComponentsList(): Observable<ObservableQuery.Result<{ entries: { data: Partial<StatamicComponentListItem>[] } }>> {
-    return this._apollo.watchQuery<{ entries: { data: Partial<StatamicComponentListItem>[] } }>({
-      query: GET_COMPONENTS_LIST,
-    }).valueChanges;
+    return this._currentLang.pipe(
+      switchMap(
+        (lang) =>
+          this._apollo.watchQuery<{ entries: { data: Partial<StatamicComponentListItem>[] } }>({
+            query: GET_COMPONENTS_LIST,
+            variables: {
+              site: lang,
+            },
+            fetchPolicy: 'network-only',
+          }).valueChanges,
+      ),
+    );
   }
 
   public getPagesList(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<{ entry: PageEntry }>> {
-    return this._apollo.watchQuery<{ entry: PageEntry }>({
-      query: GET_PAGES_LIST(typeName),
-      variables: {
-        collection,
-        slug,
-      },
-    }).valueChanges;
+    return this._currentLang.pipe(
+      switchMap(
+        (lang) =>
+          this._apollo.watchQuery<{ entry: PageEntry }>({
+            query: GET_PAGES_LIST(typeName),
+            variables: {
+              collection,
+              slug,
+              site: lang,
+            },
+            fetchPolicy: 'network-only',
+          }).valueChanges,
+      ),
+    );
   }
 
   public getDynamicContent(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<unknown>> {
     const dynamicQuery = GET_DYNAMIC_CONTENT(collection, typeName);
-    return this._apollo.watchQuery({
-      query: dynamicQuery,
-      variables: {
-        slug,
-      },
-    }).valueChanges;
+    return this._currentLang.pipe(
+      switchMap(
+        (lang) =>
+          this._apollo.watchQuery({
+            query: dynamicQuery,
+            variables: {
+              slug,
+              site: lang,
+            },
+            fetchPolicy: 'network-only',
+          }).valueChanges,
+      ),
+    );
   }
 }

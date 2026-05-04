@@ -85,10 +85,7 @@ const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
 
 export const CURRENT_DEMO_SERVICE = new InjectionToken<IComponentDemoService>('CurrentDemoService');
 
-function buildComponentRoute(
-  slug: string,
-  demoService: Provider | EnvironmentProviders,
-): Route {
+function buildComponentRoute(slug: string, demoService: Provider | EnvironmentProviders): Route {
   const componentImport = DEMO_IMPORTS[slug];
   if (!componentImport) {
     throw new Error(`No component import found for slug: ${slug}`);
@@ -124,62 +121,72 @@ function buildComponentRoute(
 
 export const routes: Routes = [
   {
-    path: 'components',
+    path: ':lang',
     children: [
       {
-        path: '',
-        loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
-      },
+        path: 'components',
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
+          },
 
-      buildComponentRoute('accordion', AccordionDemoService),
-      buildComponentRoute('autocomplete', AutocompleteDemoService),
-      buildComponentRoute('avatar', AvatarDemoService),
-      buildComponentRoute('badge', BadgeDemoService),
-      buildComponentRoute('breadcrumb', BreadcrumbDemoService),
-      buildComponentRoute('button', ButtonDemoService),
-      buildComponentRoute('card', CardDemoService),
-      buildComponentRoute('checkbox', CheckboxDemoService),
-      buildComponentRoute('chip', ChipDemoService),
-      buildComponentRoute('date-picker', DatepickerDemoService),
-      buildComponentRoute('dialog', DialogDemoService),
-      buildComponentRoute('divider', DividerDemoService),
-      buildComponentRoute('fieldset', FieldsetDemoService),
-      buildComponentRoute('form-field', FormFieldDemoService),
-      buildComponentRoute('icon', IconDemoService),
-      buildComponentRoute('icon-button', IconButtonDemoService),
-      buildComponentRoute('menu-item', MenuItemDemoService),
-      buildComponentRoute('message', MessageDemoService),
-      buildComponentRoute('notification', NotificationDemoService),
-      buildComponentRoute('option', OptionDemoService),
-      buildComponentRoute('overlay-panel', OverlayPanelDemoService),
-      buildComponentRoute('paginator', PaginatorDemoService),
-      buildComponentRoute('radio', RadioDemoService),
-      buildComponentRoute('scrollbar', ScrollbarDemoService),
-      buildComponentRoute('segmented-control', SegmentedControlDemoService),
-      buildComponentRoute('segmented-control-toggle', SegmentedControlToggleDemoService),
-      buildComponentRoute('select', SelectDemoService),
-      buildComponentRoute('side-nav', SideNavDemoService),
-      buildComponentRoute('side-sheet', SideSheetDemoService),
-      buildComponentRoute('snackbar', SnackbarDemoService),
-      buildComponentRoute('spinner', SpinnerDemoService),
-      buildComponentRoute('switch', SwitchDemoService),
-      buildComponentRoute('tab', TabDemoService),
-      buildComponentRoute('table', TableDemoService),
-      buildComponentRoute('tag', TagDemoService),
-      buildComponentRoute('tooltip', TooltipDemoService),
+          buildComponentRoute('accordion', AccordionDemoService),
+          buildComponentRoute('autocomplete', AutocompleteDemoService),
+          buildComponentRoute('avatar', AvatarDemoService),
+          buildComponentRoute('badge', BadgeDemoService),
+          buildComponentRoute('breadcrumb', BreadcrumbDemoService),
+          buildComponentRoute('button', ButtonDemoService),
+          buildComponentRoute('card', CardDemoService),
+          buildComponentRoute('checkbox', CheckboxDemoService),
+          buildComponentRoute('chip', ChipDemoService),
+          buildComponentRoute('date-picker', DatepickerDemoService),
+          buildComponentRoute('dialog', DialogDemoService),
+          buildComponentRoute('divider', DividerDemoService),
+          buildComponentRoute('fieldset', FieldsetDemoService),
+          buildComponentRoute('form-field', FormFieldDemoService),
+          buildComponentRoute('icon', IconDemoService),
+          buildComponentRoute('icon-button', IconButtonDemoService),
+          buildComponentRoute('menu-item', MenuItemDemoService),
+          buildComponentRoute('message', MessageDemoService),
+          buildComponentRoute('notification', NotificationDemoService),
+          buildComponentRoute('option', OptionDemoService),
+          buildComponentRoute('overlay-panel', OverlayPanelDemoService),
+          buildComponentRoute('paginator', PaginatorDemoService),
+          buildComponentRoute('radio', RadioDemoService),
+          buildComponentRoute('scrollbar', ScrollbarDemoService),
+          buildComponentRoute('segmented-control', SegmentedControlDemoService),
+          buildComponentRoute('segmented-control-toggle', SegmentedControlToggleDemoService),
+          buildComponentRoute('select', SelectDemoService),
+          buildComponentRoute('side-nav', SideNavDemoService),
+          buildComponentRoute('side-sheet', SideSheetDemoService),
+          buildComponentRoute('snackbar', SnackbarDemoService),
+          buildComponentRoute('spinner', SpinnerDemoService),
+          buildComponentRoute('switch', SwitchDemoService),
+          buildComponentRoute('tab', TabDemoService),
+          buildComponentRoute('table', TableDemoService),
+          buildComponentRoute('tag', TagDemoService),
+          buildComponentRoute('tooltip', TooltipDemoService),
+        ],
+      },
+      {
+        path: 'home',
+        loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
+      },
+      {
+        path: 'issue-report',
+        loadComponent: () => import('./pages/issue-report/issue-report.component').then((module) => module.IssueReportComponent),
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
     ],
   },
   {
-    path: 'home',
-    loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
-  },
-  {
-    path: 'issue-report',
-    loadComponent: () => import('./pages/issue-report/issue-report.component').then((module) => module.IssueReportComponent),
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'hu/home',
     pathMatch: 'full',
   },
 ];

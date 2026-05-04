@@ -13,6 +13,8 @@ import { ActivatedRoute, Router, RouterOutlet, RouterModule, NavigationEnd } fro
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
 import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
 
+const SLUG_INDEX = 3;
+
 @Component({
   selector: 'app-component-details',
   imports: [
@@ -61,7 +63,9 @@ export class ComponentDetailsComponent implements OnInit {
 
     this._selectedTabIndex = index;
 
+    const lang = this._router.url.split('/')[1];
     this._router.navigate([
+      lang,
       'components',
       componentRouteName,
       this._tabs[this._selectedTabIndex],
@@ -79,14 +83,14 @@ export class ComponentDetailsComponent implements OnInit {
         takeUntilDestroyed(this._destroyRef),
         map(() => {
           const urlSegments = this._router.url.split('/');
-          return urlSegments[2];
+          return urlSegments[SLUG_INDEX];
         }),
         distinctUntilChanged(),
         filter((slug) => !!slug),
         switchMap((slug) =>
           this._graphqlService.getComponents(slug).pipe(
             map((result) => {
-              const typedResult = result as { data: { entry: ComponentEntry  } };
+              const typedResult = result as { data: { entry: ComponentEntry } };
               return typedResult?.data?.entry;
             }),
           ),
@@ -101,19 +105,17 @@ export class ComponentDetailsComponent implements OnInit {
         }
       });
 
-    navigationEnd$
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => {
-        const childRoute = this._route.firstChild?.snapshot.url[0]?.path ?? 'guidelines';
+    navigationEnd$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      const childRoute = this._route.firstChild?.snapshot.url[0]?.path ?? 'guidelines';
 
-        this.activeTab.set(childRoute);
+      this.activeTab.set(childRoute);
 
-        const tabIndex = this._tabs.indexOf(childRoute ?? 'guidelines');
-        if (tabIndex >= 0) {
-          this._selectedTabIndex = tabIndex;
-          this.tabGroup()?.selectTab(tabIndex);
-        }
-      });
+      const tabIndex = this._tabs.indexOf(childRoute ?? 'guidelines');
+      if (tabIndex >= 0) {
+        this._selectedTabIndex = tabIndex;
+        this.tabGroup()?.selectTab(tabIndex);
+      }
+    });
   }
 
   private _updateHeroAndBlocks(component: ComponentEntry): void {

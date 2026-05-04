@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_COMPONENTS_LIST = gql`
-{
-  entry(collection: "pages", slug: "components") {
+query GetComponentsList($site: String!) {
+  entry(collection: "pages", slug: "components", site: $site) {
     title
     url
     ... on Entry_Pages_Page {

@@ -16,7 +16,7 @@ query GetComponentsList($site: String!) {
       }
       navs_field {
         title
-        tree {
+        tree(site: $site) {
           children {
             children {
               page {

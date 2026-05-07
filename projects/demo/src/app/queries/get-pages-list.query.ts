@@ -20,7 +20,7 @@ export const GET_PAGES_LIST = (typeName: string): DocumentNode => gql`
           title
           structure {
             handle
-            tree {
+            tree(site: $site) {
               entry {
                 title
                 ... on ${typeName} {

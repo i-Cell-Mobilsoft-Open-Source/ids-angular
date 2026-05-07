@@ -130,7 +130,6 @@ export const routes: Routes = [
             path: '',
             loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
           },
-
           buildComponentRoute('accordion', AccordionDemoService),
           buildComponentRoute('autocomplete', AutocompleteDemoService),
           buildComponentRoute('avatar', AvatarDemoService),
@@ -186,7 +185,10 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'hu/home',
     pathMatch: 'full',
+    redirectTo: (): string => {
+      const savedLang = sessionStorage.getItem('ids_lang') || 'en';
+      return `/${savedLang}/home`;
+    },
   },
 ];

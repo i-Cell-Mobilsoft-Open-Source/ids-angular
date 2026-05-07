@@ -5,14 +5,14 @@ import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
 import { formatDate } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import {
-  IdsCardComponent,
-} from '@i-cell/ids-angular/card';
+import { IdsCardComponent } from '@i-cell/ids-angular/card';
+import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'projects/demo/src/environments/environment.development';
 import { combineLatest } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-content-page',
@@ -41,16 +41,25 @@ export class ContentPageComponent implements OnInit {
 
   private readonly _graphqlService = inject(GraphqlService);
   private readonly _route = inject(ActivatedRoute);
+  private readonly _translate = inject(TranslateService);
+  private readonly _destroyRef = inject(DestroyRef);
   private _router = inject(Router);
 
   public contentBlocks = signal<ContentBlock[]>([]);
 
   public ngOnInit(): void {
+    const lang$ = this._translate.onLangChange.pipe(
+      map(({ lang }) => lang),
+      startWith(this._translate.getCurrentLang() || 'en'),
+    );
+
     combineLatest([
       this._route.paramMap,
       this._route.data,
+      lang$,
     ])
       .pipe(
+        takeUntilDestroyed(this._destroyRef),
         map(([
           params,
           routeData,
@@ -72,7 +81,7 @@ export class ContentPageComponent implements OnInit {
       )
       .subscribe({
         next: (result) => {
-          const data = result.data as { entry?: ContentEntry };
+          const data = (result as { data?: { entry?: ContentEntry } }).data;
           const entry = data?.entry;
 
           if (entry) {
@@ -113,7 +122,6 @@ export class ContentPageComponent implements OnInit {
       return;
     }
     window.open(url, '_blank', 'noopener');
-
   }
 
   private _generateTypeName(collection: string): string {

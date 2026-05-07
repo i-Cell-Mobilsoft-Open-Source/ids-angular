@@ -8,10 +8,11 @@ import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
 import { Component, DestroyRef, OnInit, computed, inject, signal, viewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
-import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { map, filter, switchMap, startWith, distinctUntilChanged, combineLatest } from 'rxjs';
 
 const SLUG_INDEX = 3;
 
@@ -48,8 +49,13 @@ export class ComponentDetailsComponent implements OnInit {
   private _graphqlService = inject(GraphqlService);
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
+  private _translate = inject(TranslateService);
   public selectedSection = 'demo';
   private _destroyRef = inject(DestroyRef);
+
+  private readonly _lang = toSignal(this._translate.onLangChange.pipe(map((event) => event.lang)), {
+    initialValue: sessionStorage.getItem('ids_lang') || 'en',
+  });
 
   constructor() {
     const tabIndex = this._tabs.findIndex((tab) => tab === location.pathname.split('/').pop());
@@ -63,7 +69,7 @@ export class ComponentDetailsComponent implements OnInit {
 
     this._selectedTabIndex = index;
 
-    const lang = this._router.url.split('/')[1];
+    const lang = sessionStorage.getItem('ids_lang') || 'en';
     this._router.navigate([
       lang,
       'components',
@@ -78,16 +84,27 @@ export class ComponentDetailsComponent implements OnInit {
       startWith(null),
     );
 
-    navigationEnd$
+    const slug$ = navigationEnd$.pipe(
+      map(() => {
+        const urlSegments = this._router.url.split('/');
+        return urlSegments[SLUG_INDEX];
+      }),
+      distinctUntilChanged(),
+      filter((slug) => !!slug),
+    );
+
+    const lang$ = this._translate.onLangChange.pipe(
+      map(({ lang }) => lang),
+      startWith(this._translate.getCurrentLang() || 'en'),
+    );
+
+    combineLatest([
+      slug$,
+      lang$,
+    ])
       .pipe(
         takeUntilDestroyed(this._destroyRef),
-        map(() => {
-          const urlSegments = this._router.url.split('/');
-          return urlSegments[SLUG_INDEX];
-        }),
-        distinctUntilChanged(),
-        filter((slug) => !!slug),
-        switchMap((slug) =>
+        switchMap(([slug]) =>
           this._graphqlService.getComponents(slug).pipe(
             map((result) => {
               const typedResult = result as { data: { entry: ComponentEntry } };

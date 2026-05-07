@@ -7,10 +7,9 @@ import { GET_PAGES_LIST } from '../queries/get-pages-list.query';
 import { GET_PAGES } from '../queries/get-pages.query';
 
 import { inject, Injectable } from '@angular/core';
-import { ObservableQuery } from '@apollo/client/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Apollo } from 'apollo-angular';
-import { map, Observable, shareReplay, startWith, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface NavigationQueryResult {
   navs: Array<{
@@ -67,95 +66,67 @@ export class GraphqlService {
   private _apollo = inject(Apollo);
   private _translate = inject(TranslateService);
 
-  private _currentLang = this._translate.onLangChange.pipe(
-    map(({ lang }) => lang),
-    startWith(this._translate.getCurrentLang() || this._translate.getFallbackLang() || 'hu'),
-    shareReplay({ bufferSize: 1, refCount: false }),
-  );
+  private _currentLang(): string {
+    return sessionStorage.getItem('ids_lang') || this._translate.getCurrentLang() || 'en';
+  }
 
   public getComponents(slug: string): Observable<unknown> {
-    return this._currentLang.pipe(
-      switchMap(
-        (lang) =>
-          this._apollo.watchQuery({
-            query: GET_COMPONENTS,
-            variables: {
-              site: lang,
-              slug,
-            },
-            fetchPolicy: 'network-only',
-          }).valueChanges,
-      ),
-    );
+    return this._apollo.query({
+      query: GET_COMPONENTS,
+      variables: { site: this._currentLang(), slug },
+      fetchPolicy: 'network-only',
+    });
   }
 
   public getPages(): Observable<unknown> {
-    return this._currentLang.pipe(
-      switchMap(
-        (lang) =>
-          this._apollo.watchQuery({
-            query: GET_PAGES,
-            variables: {
-              site: lang,
-            },
-            fetchPolicy: 'network-only',
-          }).valueChanges,
-      ),
-    );
+    return this._apollo.query({
+      query: GET_PAGES,
+      variables: { site: this._currentLang() },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getNavigation(): Observable<ObservableQuery.Result<NavigationQueryResult>> {
-    return this._apollo.watchQuery<NavigationQueryResult>({
+  public getNavigation(): Observable<unknown> {
+    return this._apollo.query<NavigationQueryResult>({
       query: GET_NAVIGATION,
-    }).valueChanges;
+      variables: {
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getComponentsList(): Observable<ObservableQuery.Result<{ entries: { data: Partial<StatamicComponentListItem>[] } }>> {
-    return this._currentLang.pipe(
-      switchMap(
-        (lang) =>
-          this._apollo.watchQuery<{ entries: { data: Partial<StatamicComponentListItem>[] } }>({
-            query: GET_COMPONENTS_LIST,
-            variables: {
-              site: lang,
-            },
-            fetchPolicy: 'network-only',
-          }).valueChanges,
-      ),
-    );
+  public getComponentsList(): Observable<unknown> {
+    return this._apollo.query({
+      query: GET_COMPONENTS_LIST,
+      variables: {
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getPagesList(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<{ entry: PageEntry }>> {
-    return this._currentLang.pipe(
-      switchMap(
-        (lang) =>
-          this._apollo.watchQuery<{ entry: PageEntry }>({
-            query: GET_PAGES_LIST(typeName),
-            variables: {
-              collection,
-              slug,
-              site: lang,
-            },
-            fetchPolicy: 'network-only',
-          }).valueChanges,
-      ),
-    );
+  public getPagesList(collection: string, typeName: string, slug: string): Observable<unknown> {
+    return this._apollo.query<{ entry: PageEntry }>({
+      query: GET_PAGES_LIST(typeName),
+      variables: {
+        collection,
+        slug,
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<unknown>> {
+  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<unknown> {
     const dynamicQuery = GET_DYNAMIC_CONTENT(collection, typeName);
-    return this._currentLang.pipe(
-      switchMap(
-        (lang) =>
-          this._apollo.watchQuery({
-            query: dynamicQuery,
-            variables: {
-              slug,
-              site: lang,
-            },
-            fetchPolicy: 'network-only',
-          }).valueChanges,
-      ),
-    );
+    return this._apollo.query({
+      query: dynamicQuery,
+      variables: {
+        slug,
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
   }
 }

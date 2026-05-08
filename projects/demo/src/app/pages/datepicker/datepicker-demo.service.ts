@@ -113,23 +113,23 @@ export class DatepickerDemoService {
   public pageSelectorMethodConfig: DemoMethodConfig = [
     {
       name: 'hasPreviousPage(): boolean',
-      description: 'Date selectors (day, month, year) - Checks if there is a previous page.',
+      description: 'Checks if there is a previous page in the date selector (day, month, year).',
       returnType: 'boolean',
     },
     {
       name: 'gotoPreviousPage()',
-      description: 'Date selectors (day, month, year) - Goes to the previous page.',
+      description: 'Goes to the previous page in the date selector (day, month, year).',
       returnType: 'void',
     },
 
     {
       name: 'hasNextPage(): boolean',
-      description: 'Date selectors (day, month, year) - Checks if there is a next page.',
+      description: 'Checks if there is a next page in the date selector (day, month, year).',
       returnType: 'boolean',
     },
     {
       name: 'gotoNextPage()',
-      description: 'Date selectors (day, month, year) - Goes to the next page.',
+      description: 'Goes to the next page in the date selector (day, month, year).',
       returnType: 'void',
     },
   ];
@@ -155,6 +155,13 @@ export class DatepickerDemoService {
     return [
       this.datepickerMethodConfig,
       this.pageSelectorMethodConfig,
+    ];
+  }
+
+  public getMethodTitles(): string[] {
+    return [
+      'Datepicker Methods',
+      'Date Selector Methods (day, month, year)',
     ];
   }
 

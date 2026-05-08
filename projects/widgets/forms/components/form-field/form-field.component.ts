@@ -88,6 +88,7 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
         return control ? control.statusChanges.pipe(startWith(control.status)) : of(null);
       }),
     ),
+    { equal: () => false },
   );
 
   public hasRequiredValidator = computed(() => {

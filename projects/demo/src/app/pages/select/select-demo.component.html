@@ -25,7 +25,7 @@
                 @for (group of _selectDemoService.animals | keyvalue; track $index) {
                   <ids-option-group [label]="group.key | titlecase">
                     @for (option of group.value; track $index) {
-                      <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                      <ids-option [value]="option.value">{{ option.viewValue | translate }}</ids-option>
                     }
                   </ids-option-group>
                 }
@@ -67,12 +67,12 @@
                 }
                 <ids-option-group label="Land">
                   @for (option of _selectDemoService.animals.land; track $index) {
-                    <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                    <ids-option [value]="option.value">{{ option.viewValue | translate }}</ids-option>
                   }
                 </ids-option-group>
                 <ids-option-group label="Aquatic">
                   @for (option of _selectDemoService.animals.aquatic; track $index) {
-                    <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
+                    <ids-option [value]="option.value">{{ option.viewValue | translate }}</ids-option>
                   }
                 </ids-option-group>
               </ids-select>

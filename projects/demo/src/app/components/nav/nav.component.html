@@ -1,40 +1,57 @@
-<nav>
-  @for (menuConfig of menu(); track $index) {
-    <section>
+<nav idsSideNav>
+  @for (menuConfig of menu(); track $index; let i = $index) {
+    <ids-side-nav-section>
       @if (menuConfig.slug) {
-          <a [routerLink]="menuConfig.path">
-            <h2 class="nav-label">{{ menuConfig.name | translate }}</h2>
-          </a>
+        <ids-side-nav-item
+          [id]="'menu-item-' + i"
+          [label]="menuConfig.name!"
+          [target]="menuConfig.path ?? ''"
+          [hasTooltip]="_menuItemsOverflow['menu-item-' + i]"
+        />
+      } @else {
+        <ids-side-nav-title [label]="menuConfig.name!" />
+      }
+
+      @for (menuItem of menuConfig.children; track $index; let j = $index) {
+        @if (menuItem.children?.length! > 0) {
+          <ids-side-nav-item
+            [id]="'menu-item-' + i + '-child-' + j"
+            [label]="menuItem.name!"
+            [target]="menuItem.path ?? ''"
+            [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j]"
+          >
+            @if (menuItem.icon) {
+              <ids-icon icon-leading [fontIcon]="menuItem.icon" />
+            }
+
+            @for (subItem of menuItem.children; track $index; let k = $index) {
+              <ids-side-nav-item
+                [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k"
+                [label]="subItem.name!"
+                [target]="subItem.path ?? ''"
+                [isActiveMatchOptions]="subsetMatchOptions"
+                [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k]"
+              >
+                @if (subItem.icon) {
+                  <ids-icon icon-leading [fontIcon]="subItem.icon" />
+                }
+              </ids-side-nav-item>
+            }
+          </ids-side-nav-item>
+        } @else {
+          <ids-side-nav-item
+            [id]="'menu-item-' + i + '-child-' + j"
+            [label]="menuItem.name!"
+            [target]="menuItem.path ?? ''"
+            [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j]"
+            [isActiveMatchOptions]="subsetMatchOptions"
+          >
+            @if (menuItem.icon) {
+              <ids-icon icon-leading [fontIcon]="menuItem.icon" />
+            }
+          </ids-side-nav-item>
         }
-        @else {
-          <h2 class="nav-label">{{ menuConfig.name | translate }}</h2>
-        }
-      <ul>
-        @for (menuItem of menuConfig.children; track $index) {
-          @if (menuItem.children?.length! > 0) {
-            <li>
-              <span class="subnav-parent">
-                <a #rla="routerLinkActive" [routerLink]="menuItem.path" [routerLinkActive]="['active']">
-                  <span class="icon">
-                    @if (menuItem.icon) {
-                      <ids-icon [fontIcon]="menuItem.icon" />
-                    }
-                  </span>
-                  <span class="name">{{ menuItem.name! | translate }}</span>
-                </a>
-                <span #trigger class="more"><ids-icon [fontIcon]="menuItem.$open ? 'chevron-up' : 'chevron-down'" /></span>
-              </span>
-              <ids-subnav [menuItem]="menuItem" [trigger]="trigger" [open]="rla.isActive" (opened)="menuItem.$open = $event" />
-            </li>
-          } @else {
-            <li>
-              <a [routerLink]="menuItem.path">
-                <span class="icon"></span><span class="name">{{ menuItem!.name! | translate }}</span>
-              </a>
-            </li>
-          }
-        }
-      </ul>
-    </section>
+      }
+    </ids-side-nav-section>
   }
 </nav>

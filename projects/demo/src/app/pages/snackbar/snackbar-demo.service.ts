@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, ViewContainerRef } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -14,6 +14,7 @@ type SnackbarInputControls = {
   closeButtonLabel: string | undefined,
   autoClose: boolean,
   urgent: boolean,
+  clearOnNavigation: boolean,
 };
 
 type SnackbarHelperControls = {
@@ -22,7 +23,6 @@ type SnackbarHelperControls = {
   position: IdsSnackbarPositionType,
   newestAtStartPosition: boolean
   viewportMargin: number
-  useActualViewContainer: boolean
 };
 
 const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
@@ -30,7 +30,6 @@ const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class SnackbarDemoService {
   private readonly _snackbarService = inject(IdsSnackbarService);
-  private _viewContainerRef: ViewContainerRef | null = null;
   private readonly _customActions: IdsSnackbarAction[] = [{ label: 'Log to console', action: this.action }];
   protected _areSnackbarsOpen = computed(() => this._snackbarService.snackbars().length > 0);
 
@@ -79,6 +78,12 @@ export class SnackbarDemoService {
       default: false,
       control: DemoControl.SWITCH,
     },
+    clearOnNavigation: {
+      description: 'Whether the snackbar should be cleared automatically on navigation or not.',
+      type: 'boolean',
+      default: true,
+      control: DemoControl.SWITCH,
+    },
   };
 
   public helperControlConfig: DemoControlConfig<SnackbarHelperControls> = {
@@ -121,14 +126,6 @@ export class SnackbarDemoService {
       min: 0,
       step: 1,
     },
-    useActualViewContainer: {
-      description: 'Snackbars open in snackbar group.' +
-        ' This group can connect to the viewport by default, or we can connect to a viewContainerRef.' +
-        ' With this boolean, we can switch between actual viewContainerRef or viewPort.',
-      type: 'boolean',
-      default: true,
-      control: DemoControl.SWITCH,
-    },
   };
 
   public readonly methodControlConfig: DemoMethodConfig = [
@@ -164,27 +161,6 @@ export class SnackbarDemoService {
   public model: SnackbarInputControls = { ...this.defaults };
   public helperModel: SnackbarHelperControls = { ...this.helperDefaults };
 
-  constructor() {
-    this.helperControlConfig.useActualViewContainer.onModelChange = this.setActualViewContainer.bind(this);
-  }
-
-  public registerViewContainerRef(vcr: ViewContainerRef): void {
-    this._viewContainerRef = vcr;
-    this.setActualViewContainer();
-  }
-
-  public setActualViewContainer = (): void => {
-    if (!this.helperModel) {
-      return;
-    }
-
-    if (this.helperModel.useActualViewContainer && this._viewContainerRef) {
-      this._snackbarService.setViewContainerRef(this._viewContainerRef);
-    } else {
-      this._snackbarService.clearViewContainerRef();
-    }
-  };
-
   public openSnackbar(): void {
     this._snackbarService.add({
       message: this.model.message,
@@ -195,6 +171,7 @@ export class SnackbarDemoService {
       closeButtonLabel: this.model.closeButtonLabel,
       autoClose: this.model.autoClose,
       urgent: this.model.urgent,
+      clearOnNavigation: this.model.clearOnNavigation,
     });
   }
 

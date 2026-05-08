@@ -44,6 +44,7 @@ export class AppComponent {
 
   // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
   public theme = new FormControl<Theme>('light', { nonNullable: true });
+  public language = new FormControl<string>('en', { nonNullable: true });
 
   public currentLang = toSignal(
     this._translate.onLangChange.pipe(
@@ -75,6 +76,7 @@ export class AppComponent {
     this._translate.setDefaultLang('en');
     const browserLang = this._translate.getBrowserLang();
     this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
+    this.language.setValue(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
 
     const graphqlService = inject(GraphqlService);
     graphqlService

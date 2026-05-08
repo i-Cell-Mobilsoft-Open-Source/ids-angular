@@ -150,7 +150,7 @@ export class SnackbarDemoService {
   public readonly groupMethodControlConfig: DemoMethodConfig = [
     {
       name: 'closeSnackbar(id: number)',
-      description: 'Snackbar-group: Closes the snackbar at the given index.',
+      description: 'Closes the snackbar at the given index.',
       returnType: 'void',
       parameters: ['id'],
       parameterTypes: ['number'],
@@ -211,6 +211,13 @@ export class SnackbarDemoService {
     return [
       this.methodControlConfig,
       this.groupMethodControlConfig,
+    ];
+  }
+
+  public getMethodTitles(): string[] {
+    return [
+      'Snackbar Methods',
+      'Snackbar Group Methods',
     ];
   }
 

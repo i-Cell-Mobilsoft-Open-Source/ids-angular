@@ -13,7 +13,7 @@ export class ImageComponent implements OnInit, OnDestroy {
 
   public state = input<'do' | 'dont' | 'no_state' | undefined>();
 
-  public aspectRatio = input<'1/1' | '16/9' | '16/10' | undefined>('16/9');
+  public aspectRatio = input<'1/1' | '16/9' | '16/10' | 'none' | undefined>('none');
 
   public imageBgColorVariant = input<'surface' | 'primary' | 'light' | undefined>('surface');
 
@@ -48,6 +48,8 @@ export class ImageComponent implements OnInit, OnDestroy {
         return 'aspect-16/9';
       case '16/10':
         return 'aspect-16/10';
+      case 'none':
+        return 'aspect-none';
       default:
         return 'aspect-16/9'; // Default value
     }

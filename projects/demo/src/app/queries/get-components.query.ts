@@ -1,9 +1,10 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_COMPONENTS = gql`
-  query GetComponents($slug: String!){
-    entry(collection: "components", slug: $slug) {
-      title
+query GetComponents($slug: String!){
+  entry(collection: "components", slug: $slug) {
+    title
+    last_modified(format: "Y.m.d.")
       ... on Entry_Components_Component {
         id
         title

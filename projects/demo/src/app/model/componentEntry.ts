@@ -41,7 +41,7 @@ export interface SetContentCard {
     img_caption?: string;
     img_light_mode?: { url: string }[];
     img_dark_mode?: { url: string }[];
-    img_aspect_ratio?: { value: '1/1' | '16/9' | '16/10' };
+    img_aspect_ratio?: { value: '1/1' | '16/9' | '16/10' | 'none' };
     img_bg_color?: { value: 'surface' | 'primary' | 'light' };
     bg_transparent?: boolean;
     filled_in_container?: boolean;

@@ -12,7 +12,7 @@ export type ContentCardData = Partial<{
   isImage: boolean;
   image: {
     imageUrl: string;
-    aspectRatio: '1/1' | '16/9' | '16/10';
+    aspectRatio: '1/1' | '16/9' | '16/10' | 'none';
     lightUrl: string;
     darkUrl: string;
     caption: string;

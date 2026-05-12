@@ -47,7 +47,7 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
     }
 
     const field = this.colDef().field ?? '';
-    let rawResult = '';
+    let rawResult: string;
 
     // when 'field' property is provided and exists in the row data, use it to get the cell value...
     if (field && Object.hasOwn(rowData, field)) {
@@ -83,6 +83,13 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
 
     return null;
   });
+
+  protected _cellRendererInputs = computed(() => ({
+    rowData: this.rowData(),
+    colDef: this.colDef(),
+    cellValue: this._cellValue(),
+    ...(this.colDef().cellRendererInput ?? {}),
+  }));
 
   protected _cellTemplateName = computed(() => {
     if (isString(this._cellRendererDef())) {

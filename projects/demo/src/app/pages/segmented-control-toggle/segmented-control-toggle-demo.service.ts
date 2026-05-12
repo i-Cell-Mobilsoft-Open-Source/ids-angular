@@ -110,12 +110,12 @@ export class SegmentedControlToggleDemoService {
   public readonly itemMethodControlConfig: DemoMethodConfig = [
     {
       name: 'onclick()',
-      description: 'Segmented-control-toggle-item: Simulates a click on the segmented control toggle item.',
+      description: 'Simulates a click on the segmented control toggle item.',
       returnType: 'void',
     },
     {
       name: 'focus(option?: FocusOption)',
-      description: 'Segmented-control-toggle-item: Focuses the segmented control toggle item.'+
+      description: 'Focuses the segmented control toggle item.'+
       'Optionally, a focus option can be provided to specify the focus behavior.',
       returnType: 'void',
       parameters: ['option'],
@@ -142,6 +142,13 @@ export class SegmentedControlToggleDemoService {
     return [
       this.methodControlConfig,
       this.itemMethodControlConfig,
+    ];
+  }
+
+  public getMethodTitles(): string[] {
+    return [
+      'Segmented Control Toggle Methods',
+      'Segmented Control Toggle Item Methods',
     ];
   }
 

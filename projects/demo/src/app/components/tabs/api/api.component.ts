@@ -11,6 +11,7 @@ import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 export interface IComponentDemoService {
   getApiConfig(): DemoControlConfig<unknown>[];
   getMethodConfig?(): DemoMethodConfig[];
+  getMethodTitles?(): string[];
 }
 
 @Component({
@@ -26,6 +27,7 @@ export interface IComponentDemoService {
 export class ApiComponent implements OnInit {
   protected _propConfig: unknown[] = [];
   protected _methodConfig: DemoMethodConfig[] = [];
+  protected _methodTitles: string[] = [];
 
   private _service = inject(CURRENT_DEMO_SERVICE);
 
@@ -35,6 +37,6 @@ export class ApiComponent implements OnInit {
   public ngOnInit(): void {
     this._methodConfig = this._service.getMethodConfig?.() ?? [];
     this._propConfig = this._service.getApiConfig();
+    this._methodTitles = this._service.getMethodTitles?.() ?? [];
   }
-
 }

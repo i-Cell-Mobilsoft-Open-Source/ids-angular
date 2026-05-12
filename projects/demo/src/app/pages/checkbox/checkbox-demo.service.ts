@@ -222,12 +222,12 @@ export class CheckboxDemoService {
   public readonly groupMethodControlConfig: DemoMethodConfig = [
     {
       name: 'selectAllChild()',
-      description: 'Checkbox-group: Selects all child checkboxes in the checkbox-group.',
+      description: 'Selects all child checkboxes in the checkbox-group.',
       returnType: 'void',
     },
     {
       name: 'deselectAllChild()',
-      description: 'Checkbox-group: Deselects all child checkboxes in the checkbox-group.',
+      description: 'Deselects all child checkboxes in the checkbox-group.',
       returnType: 'void',
     },
   ];
@@ -273,6 +273,13 @@ export class CheckboxDemoService {
     return [
       this.methodControlConfig,
       this.groupMethodControlConfig,
+    ];
+  }
+
+  public getMethodTitles(): string[] {
+    return [
+      'Standalone Checkbox Methods',
+      'Checkbox Group Methods',
     ];
   }
 

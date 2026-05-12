@@ -1,23 +1,21 @@
 import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
-import { GraphqlService, NavigationQueryResult } from './services/graphql.service';
+import { GraphqlService } from './services/graphql.service';
 import { LoadingService } from './services/loading.service';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, ViewEncapsulation, inject } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { Component, DestroyRef, ViewEncapsulation, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { ObservableQuery } from '@apollo/client/core';
+import { RouterModule, RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsSegmentedControlToggleDirective, IdsSegmentedControlToggleItemComponent } from '@i-cell/ids-angular/segmented-control-toggle';
 import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { map, startWith } from 'rxjs';
+import { filter, switchMap } from 'rxjs';
 
 export type Theme = 'light' | 'dark';
-
 @Component({
   selector: 'app-root',
   imports: [
@@ -41,52 +39,57 @@ export class AppComponent {
   public loadingService = inject(LoadingService);
 
   private _translate: TranslateService = inject(TranslateService);
+  private _router = inject(Router);
 
   // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
   public theme = new FormControl<Theme>('light', { nonNullable: true });
   public language = new FormControl<string>('en', { nonNullable: true });
 
-  public currentLang = toSignal(
-    this._translate.onLangChange.pipe(
-      map(({ lang }) => lang),
-      startWith(this._translate.currentLang),
-    ),
-  );
+  public currentLang = signal<'hu' | 'en'>('en');
 
   public dynamicMenu: Menu[] = [];
   private _destroyRef = inject(DestroyRef);
 
   private _componentLevelDepth: number | undefined;
+  private _navTree: StatamicNavNode[] = [];
   private readonly _linkID = 'ids-tokens';
   private readonly _doc = inject(DOCUMENT);
 
   constructor() {
+    this._initLanguage();
     this._changeTheme('light');
 
-    this.theme.valueChanges
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((value) => {
-        this._changeTheme(value);
-      });
+    this.theme.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
+      this._changeTheme(value);
+    });
 
-    this._translate.addLangs([
-      'hu',
-      'en',
-    ]);
-    this._translate.setDefaultLang('en');
-    const browserLang = this._translate.getBrowserLang();
-    this._translate.use(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
-    this.language.setValue(browserLang?.toString().match(/hu|en/) ? browserLang : 'en');
+    this._router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((event) => {
+      const urlLang = event.urlAfterRedirects.split('/')[1];
+      if (urlLang && /^(hu|en)$/.test(urlLang) && urlLang !== this._translate.getCurrentLang()) {
+        this._setLanguage(urlLang as 'hu' | 'en');
+      }
+    });
 
     const graphqlService = inject(GraphqlService);
     graphqlService
       .getNavigation()
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((result: ObservableQuery.Result<NavigationQueryResult>) => {
-        const navTree = result.data?.navs?.[0]?.tree || [];
-        this._componentLevelDepth = this._findDeepestLevel(navTree);
-        this.dynamicMenu = this._mapStatamicNavToMenu(navTree);
+      .subscribe((result) => {
+        const navResult = result as { data?: { navs?: Array<{ tree: StatamicNavNode[] }> } };
+        this._navTree = navResult.data?.navs?.[0]?.tree || [];
+        this._componentLevelDepth = this._findDeepestLevel(this._navTree);
+        this.dynamicMenu = this._mapStatamicNavToMenu(this._navTree);
       });
+
+    this._translate.onLangChange.pipe(
+      takeUntilDestroyed(this._destroyRef),
+      switchMap(() => graphqlService.getNavigation()),
+    ).subscribe((result) => {
+      const navResult = result as { data?: { navs?: Array<{ tree: StatamicNavNode[] }> } };
+      this._navTree = navResult.data?.navs?.[0]?.tree || [];
+      this._componentLevelDepth = this._findDeepestLevel(this._navTree);
+      this.dynamicMenu = this._mapStatamicNavToMenu(this._navTree);
+    });
   }
 
   private async _setTokens(href: string): Promise<void> {
@@ -133,13 +136,14 @@ export class AppComponent {
   }
 
   private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
+    const lang = this._translate.getCurrentLang() || 'en';
     return tree.map((node) => {
       let path: string | undefined = undefined;
       if (node.page?.slug && node.depth) {
         if (this._componentLevelDepth !== undefined && node.depth >= this._componentLevelDepth) {
-          path = `/components/${node.page.slug}`;
+          path = `/${lang}/components/${node.page.slug}`;
         } else {
-          path = `/${node.page.slug}`;
+          path = `/${lang}/${node.page.slug}`;
         }
       }
       return {
@@ -161,8 +165,44 @@ export class AppComponent {
     }
   }
 
-  public changeLanguage(lang: 'en' | 'hu'): void {
+  private _initLanguage(): void {
+    this._translate.addLangs([
+      'hu',
+      'en',
+    ]);
+    this._translate.setFallbackLang('en');
+
+    const urlLang = location.pathname.split('/')[1];
+    let langToUse: 'hu' | 'en';
+
+    if (urlLang && /^(hu|en)$/.test(urlLang)) {
+      langToUse = urlLang as 'hu' | 'en';
+    } else {
+      const sessionLang = sessionStorage.getItem('ids_lang');
+      if (sessionLang && /^(hu|en)$/.test(sessionLang)) {
+        langToUse = sessionLang as 'hu' | 'en';
+      } else {
+        const browserLang = this._translate.getBrowserLang();
+        langToUse = browserLang && /hu|en/.test(browserLang) ? (browserLang as 'hu' | 'en') : 'en';
+      }
+    }
+
+    this._setLanguage(langToUse);
+  }
+
+  private _setLanguage(lang: 'hu' | 'en'): void {
+    this.currentLang.set(lang);
+    sessionStorage.setItem('ids_lang', lang);
     this._translate.use(lang);
+  }
+
+  public changeLanguage(lang: 'en' | 'hu'): void {
+    if (this.currentLang() !== lang) {
+      this._setLanguage(lang);
+      const currentUrl = this._router.url;
+      const newUrl = currentUrl.replace(/^\/(hu|en)/, `/${lang}`);
+      this._router.navigateByUrl(newUrl);
+    }
   }
 }
 

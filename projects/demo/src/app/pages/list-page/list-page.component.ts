@@ -5,11 +5,13 @@ import { EntryListData } from '../../model/entryListData';
 import { HeroData } from '../../model/heroData';
 import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { IdsChipGroupComponent, IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
+import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'projects/demo/src/environments/environment.development';
 
 const PAGE_SIZE = 8;
@@ -90,94 +92,109 @@ export class ListPageComponent implements OnInit {
 
   private readonly _graphqlService = inject(GraphqlService);
   private readonly _route = inject(ActivatedRoute);
+  private readonly _translate = inject(TranslateService);
+  private readonly _destroyRef = inject(DestroyRef);
+
+  private _currentCollection = '';
+  private _currentTypeName = '';
+  private _currentSlug = '';
 
   public ngOnInit(): void {
-    this._route.data.subscribe((routeData) => {
+    this._route.data.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((routeData) => {
       const collection = routeData['collection'];
       const slug = routeData['slug'];
       const typeName = this._generateTypeName(slug);
 
+      this._currentCollection = collection;
+      this._currentTypeName = typeName;
+      this._currentSlug = slug;
+
       this._loadData(collection, typeName, slug);
+    });
+
+    this._translate.onLangChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      if (this._currentCollection && this._currentTypeName && this._currentSlug) {
+        this._loadData(this._currentCollection, this._currentTypeName, this._currentSlug);
+      }
     });
   }
 
   private _loadData(collection: string, typeName: string, slug: string): void {
-    this._graphqlService.getPagesList(collection, typeName, slug)
-      .subscribe({
-        next: (result) => {
-          const typedResult = result as unknown as { data: { entry?: EntryListData } };
-          const entry = typedResult.data?.entry;
+    this._graphqlService.getPagesList(collection, typeName, slug).subscribe({
+      next: (result) => {
+        const typedResult = result as unknown as { data: { entry?: EntryListData } };
+        const entry = typedResult.data?.entry;
 
-          const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
-          const contents: ContentCardData[] = [];
+        const fallbackImage = 'https://via.placeholder.com/600x400?text=No+Image';
+        const contents: ContentCardData[] = [];
 
-          if (entry?.collections_contents) {
-            entry.collections_contents.forEach((collection) => {
-              const treeArray = collection.structure?.tree || [];
+        if (entry?.collections_contents) {
+          entry.collections_contents.forEach((collection) => {
+            const treeArray = collection.structure?.tree || [];
 
-              if (Array.isArray(treeArray)) {
-                treeArray.forEach((treeNode) => {
-                  const entryItem = treeNode.entry;
+            if (Array.isArray(treeArray)) {
+              treeArray.forEach((treeNode) => {
+                const entryItem = treeNode.entry;
 
-                  if (entryItem && entryItem.id) {
-                    const heroDesc = typeof entryItem.hero_description === 'string' ? entryItem.hero_description : '';
+                if (entryItem && entryItem.id) {
+                  const heroDesc = typeof entryItem.hero_description === 'string' ? entryItem.hero_description : '';
 
-                    contents.push({
-                      id: Number(entryItem.id) || 0,
-                      title: entryItem.title ?? '',
-                      slug: entryItem.slug ?? '',
-                      description: heroDesc,
-                      card: {
-                        orientation: 'vertical',
-                        appearance: 'elevated',
-                        variant: 'light',
-                        transparent: false,
+                  contents.push({
+                    id: Number(entryItem.id) || 0,
+                    title: entryItem.title ?? '',
+                    slug: entryItem.slug ?? '',
+                    description: heroDesc,
+                    card: {
+                      orientation: 'vertical',
+                      appearance: 'elevated',
+                      variant: 'light',
+                      transparent: false,
+                    },
+                    image: {
+                      imageUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
+                      lightUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
+                      darkUrl: entryItem.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_dark.url}` : '',
+                      aspectRatio: '16/9',
+                      caption: entryItem.title ?? '',
+                      bgColorVariant: 'light',
+                      bgTransparent: true,
+                      filledInContainer: false,
+                      state: 'no_state',
+                    },
+                    button: [
+                      {
+                        text: 'Tovább',
+                        url: entryItem.slug ? `/${sessionStorage.getItem('ids_lang') || 'en'}/${slug}/${entryItem.slug}` : '',
                       },
-                      image: {
-                        imageUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
-                        lightUrl: entryItem.hero_image_light?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_light.url}` : '',
-                        darkUrl: entryItem.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entryItem.hero_image_dark.url}` : '',
-                        aspectRatio: '16/9',
-                        caption: entryItem.title ?? '',
-                        bgColorVariant: 'light',
-                        bgTransparent: true,
-                        filledInContainer: false,
-                        state: 'no_state',
-                      },
-                      button: [
-                        {
-                          text: 'Tovább',
-                          url: entryItem.slug ? `/${slug}/${entryItem.slug}` : '',
-                        },
-                      ],
-                      last_modified: entryItem.last_modified,
-                      date: entryItem.date,
-                      tags: entryItem.tags?.filter((tag): tag is { id: number; title: string } =>
-                        tag.id !== undefined && tag.title !== undefined,
-                      ),
-                    });
-                  }
-                });
-              }
-            });
-          }
-
-          this.contentDatas.set(contents.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '')));
-
-          const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';
-          const darkUrl = entry?.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : '';
-
-          this.heroData.set({
-            id: Number(entry?.id) || 0,
-            title: entry?.title ?? 'List Page',
-            description: entry?.hero_description ?? '',
-            imageUrl: lightUrl || darkUrl || fallbackImage,
-            imageUrlLight: lightUrl || fallbackImage,
-            imageUrlDark: darkUrl || fallbackImage,
-            isBackButton: true,
+                    ],
+                    last_modified: entryItem.last_modified,
+                    date: entryItem.date,
+                    tags: entryItem.tags?.filter(
+                      (tag): tag is { id: number; title: string } => tag.id !== undefined && tag.title !== undefined,
+                    ),
+                  });
+                }
+              });
+            }
           });
-        },
-      });
+        }
+
+        this.contentDatas.set(contents.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '')));
+
+        const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';
+        const darkUrl = entry?.hero_image_dark?.url ? `${environment.cmsBaseUrl}${entry.hero_image_dark.url}` : '';
+
+        this.heroData.set({
+          id: Number(entry?.id) || 0,
+          title: entry?.title ?? 'List Page',
+          description: entry?.hero_description ?? '',
+          imageUrl: lightUrl || darkUrl || fallbackImage,
+          imageUrlLight: lightUrl || fallbackImage,
+          imageUrlDark: darkUrl || fallbackImage,
+          isBackButton: true,
+        });
+      },
+    });
   }
 
   private _generateTypeName(collection: string): string {

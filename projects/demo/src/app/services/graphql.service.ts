@@ -7,7 +7,7 @@ import { GET_PAGES_LIST } from '../queries/get-pages-list.query';
 import { GET_PAGES } from '../queries/get-pages.query';
 
 import { inject, Injectable } from '@angular/core';
-import { ObservableQuery } from '@apollo/client/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
@@ -64,51 +64,69 @@ export interface StatamicComponentListItem {
 })
 export class GraphqlService {
   private _apollo = inject(Apollo);
+  private _translate = inject(TranslateService);
+
+  private _currentLang(): string {
+    return sessionStorage.getItem('ids_lang') || this._translate.getCurrentLang() || 'en';
+  }
 
   public getComponents(slug: string): Observable<unknown> {
-    return this._apollo.watchQuery({
+    return this._apollo.query({
       query: GET_COMPONENTS,
-      variables: {
-        slug,
-      },
-    }).valueChanges;
+      variables: { site: this._currentLang(), slug },
+      fetchPolicy: 'network-only',
+    });
   }
 
   public getPages(): Observable<unknown> {
-    return this._apollo.watchQuery({
+    return this._apollo.query({
       query: GET_PAGES,
-    }).valueChanges;
+      variables: { site: this._currentLang() },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getNavigation(): Observable<ObservableQuery.Result<NavigationQueryResult>> {
-    return this._apollo.watchQuery<NavigationQueryResult>({
+  public getNavigation(): Observable<unknown> {
+    return this._apollo.query<NavigationQueryResult>({
       query: GET_NAVIGATION,
-    }).valueChanges;
+      variables: {
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getComponentsList(): Observable<ObservableQuery.Result<{ entries: { data: Partial<StatamicComponentListItem>[] } }>> {
-    return this._apollo.watchQuery<{ entries: { data: Partial<StatamicComponentListItem>[] } }>({
+  public getComponentsList(): Observable<unknown> {
+    return this._apollo.query({
       query: GET_COMPONENTS_LIST,
-    }).valueChanges;
+      variables: {
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getPagesList(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<{ entry: PageEntry }>> {
-    return this._apollo.watchQuery<{ entry: PageEntry }>({
+  public getPagesList(collection: string, typeName: string, slug: string): Observable<unknown> {
+    return this._apollo.query<{ entry: PageEntry }>({
       query: GET_PAGES_LIST(typeName),
       variables: {
         collection,
         slug,
+        site: this._currentLang(),
       },
-    }).valueChanges;
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<ObservableQuery.Result<unknown>> {
+  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<unknown> {
     const dynamicQuery = GET_DYNAMIC_CONTENT(collection, typeName);
-    return this._apollo.watchQuery({
+    return this._apollo.query({
       query: dynamicQuery,
       variables: {
         slug,
+        site: this._currentLang(),
       },
-    }).valueChanges;
+      fetchPolicy: 'network-only',
+    });
   }
 }

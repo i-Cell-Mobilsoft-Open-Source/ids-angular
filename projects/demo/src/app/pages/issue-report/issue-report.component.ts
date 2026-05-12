@@ -7,10 +7,10 @@ import { HeroData } from '../../model/heroData';
 import { PageEntry } from '../../model/pageEntry';
 import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, OnInit, inject, OnDestroy, signal } from '@angular/core';
-type ComponentBlock =
-  | { type: 'heading'; heading: string }
-  | (ContentCardData & { type: 'card' });
+import { Component, DestroyRef, OnInit, inject, OnDestroy, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateService } from '@ngx-translate/core';
+type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & { type: 'card' });
 
 @Component({
   selector: 'app-issue-report',
@@ -28,6 +28,8 @@ export class IssueReportComponent implements OnInit, OnDestroy {
   private _observer: MutationObserver | undefined;
   private _isDarkTheme = signal<boolean>(false);
   private _graphqlService = inject(GraphqlService);
+  private readonly _translate = inject(TranslateService);
+  private readonly _destroyRef = inject(DestroyRef);
 
   public ngOnInit(): void {
     this._updateTheme();
@@ -40,6 +42,13 @@ export class IssueReportComponent implements OnInit, OnDestroy {
       attributes: true,
       attributeFilter: ['class'],
     });
+
+    this._loadData();
+
+    this._translate.onLangChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this._loadData());
+  }
+
+  private _loadData(): void {
     this._graphqlService.getPages().subscribe((result) => {
       const typedResult = result as { data: { entries: { data: PageEntry[] } } };
       const components = typedResult?.data?.entries?.data ?? [];
@@ -59,15 +68,9 @@ export class IssueReportComponent implements OnInit, OnDestroy {
         title: component.title,
         isBackButton: true,
         description: component.hero_description,
-        imageUrl: component.hero_image_light?.url
-          ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
-          : '',
-        imageUrlLight: component.hero_image_light?.url
-          ? `${environment.cmsBaseUrl}${component.hero_image_light.url}`
-          : '',
-        imageUrlDark: component.hero_image_dark?.url
-          ? `${environment.cmsBaseUrl}${component.hero_image_dark.url}`
-          : '',
+        imageUrl: component.hero_image_light?.url ? `${environment.cmsBaseUrl}${component.hero_image_light.url}` : '',
+        imageUrlLight: component.hero_image_light?.url ? `${environment.cmsBaseUrl}${component.hero_image_light.url}` : '',
+        imageUrlDark: component.hero_image_dark?.url ? `${environment.cmsBaseUrl}${component.hero_image_dark.url}` : '',
       };
 
       const blocks: ComponentBlock[] = [];
@@ -110,10 +113,12 @@ export class IssueReportComponent implements OnInit, OnDestroy {
             overTitle: block.content?.content_over_title,
             title: block.content?.content_title,
             description: block.content?.content_description,
-            button: Array.isArray(block.button?.button) ? block.button?.button.map((btn) => ({
-              text: btn.button_label,
-              url: btn.button_url,
-            })) : [],
+            button: Array.isArray(block.button?.button)
+              ? block.button?.button.map((btn) => ({
+                text: btn.button_label,
+                url: btn.button_url,
+              }))
+              : [],
           });
         }
       }
@@ -133,7 +138,7 @@ export class IssueReportComponent implements OnInit, OnDestroy {
   }
 
   public trackByCardOrHeading(index: number, item: ComponentBlock): string | number {
-    return item.type === 'card' ? item.id ?? `card-${index}` : `heading-${index}`;
+    return item.type === 'card' ? (item.id ?? `card-${index}`) : `heading-${index}`;
   }
 
   public ngOnDestroy(): void {

@@ -30,7 +30,10 @@ function extractGeneratedSlugs(nodes: NavigationNode[]): string[] {
 
 export function initializeDynamicRoutes(graphqlService: GraphqlService, router: Router): () => Promise<void> {
   return async() => {
-    const result = await firstValueFrom(graphqlService.getNavigation().pipe(filter((res) => !res.loading)));
+    const result = await firstValueFrom(graphqlService
+      .getNavigation()
+      .pipe(filter((res): res is { loading?: boolean } =>
+        !(res as { loading?: boolean }).loading))) as { data?: { navs?: NavigationNode[] } };
 
     const navs = result.data?.navs || [];
     const generatedSlugs: string[] = [];
@@ -61,11 +64,15 @@ export function initializeDynamicRoutes(graphqlService: GraphqlService, router: 
     ]);
 
     const currentConfig = router.config;
-    const fallbackRoute = currentConfig.pop();
+    const langRoute = currentConfig.find((route) => route.path === ':lang');
+    if (langRoute?.children) {
+      const langChildren = langRoute.children;
+      const fallbackChild = langChildren.pop();
 
-    currentConfig.push(...dynamicRoutes);
-    if (fallbackRoute) {
-      currentConfig.push(fallbackRoute);
+      langChildren.push(...dynamicRoutes);
+      if (fallbackChild) {
+        langChildren.push(fallbackChild);
+      }
     }
     router.resetConfig(currentConfig);
   };

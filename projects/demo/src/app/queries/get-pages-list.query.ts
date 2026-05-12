@@ -1,8 +1,8 @@
 import { DocumentNode, gql } from '@apollo/client/core';
 
 export const GET_PAGES_LIST = (typeName: string): DocumentNode => gql`
-  query GetEntryBySlug($collection: String!, $slug: String!) {
-    entry(collection: $collection, slug: $slug) {
+  query GetEntryBySlug($collection: String!, $slug: String!, $site: String!) {
+    entry(collection: $collection, slug: $slug, site: $site) {
       title
       url
       ... on Entry_Pages_Page {
@@ -20,7 +20,7 @@ export const GET_PAGES_LIST = (typeName: string): DocumentNode => gql`
           title
           structure {
             handle
-            tree {
+            tree(site: $site) {
               entry {
                 title
                 ... on ${typeName} {

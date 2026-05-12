@@ -6,7 +6,9 @@ import { HeroData } from '../../model/heroData';
 import { PageEntry } from '../../model/pageEntry';
 import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-index',
@@ -23,6 +25,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   private _observer: MutationObserver | undefined;
   private _isDarkTheme = signal<boolean>(false);
   private _graphqlService = inject(GraphqlService);
+  private _translate = inject(TranslateService);
+  private _destroyRef = inject(DestroyRef);
 
   public ngOnInit(): void {
     this._updateTheme();
@@ -35,6 +39,15 @@ export class IndexComponent implements OnInit, OnDestroy {
       attributes: true,
       attributeFilter: ['class'],
     });
+
+    this._loadData();
+
+    this._translate.onLangChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      this._loadData();
+    });
+  }
+
+  private _loadData(): void {
     this._graphqlService.getPages().subscribe({
       next: (result) => {
         const typedResult = result as { data?: { entries?: { data: PageEntry[] } } };

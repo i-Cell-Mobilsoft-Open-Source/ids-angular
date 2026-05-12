@@ -10,7 +10,7 @@ import { IdsPseudoCheckboxState } from '../pseudo-checkbox/types/pseudo-checkbox
 
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnDestroy, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -39,7 +39,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 })
 export class IdsOptionComponent<T = unknown>
   extends ComponentBase
-  implements OnInit, IdsPseudoCheckboxParent<IdsFormFieldVariantType> {
+  implements OnInit, AfterViewInit, OnDestroy, IdsPseudoCheckboxParent<IdsFormFieldVariantType> {
   protected override get _hostName(): string {
     return 'option';
   }
@@ -49,9 +49,11 @@ export class IdsOptionComponent<T = unknown>
   public readonly group = inject(IDS_OPTION_GROUP, { optional: true });
 
   private _textElement = viewChild.required<ElementRef<HTMLElement>>('text');
+  private _viewValueObserver?: MutationObserver;
 
   public selected = signal<boolean>(false);
   private _active = signal<boolean>(false);
+  private _defaultViewValue = signal<string>('');
   public size = computed(() => this._parent.parentSize());
   public variant = computed(() =>  this._parent.parentVariant());
 
@@ -68,7 +70,7 @@ export class IdsOptionComponent<T = unknown>
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   public onSelectionChange = output<IdsOptionSelectionChange<T>>();
 
-  public viewValue = computed(() => this.explicitViewValue() || this._textElement().nativeElement.textContent || '');
+  public viewValue = computed(() => this.explicitViewValue() || this._defaultViewValue());
   protected readonly _hostClasses = computed(() => this._getHostClasses([
     this.selected() ? 'selected' : null,
     this._active() ? 'active' : null,
@@ -95,6 +97,27 @@ export class IdsOptionComponent<T = unknown>
     if (parent.isOptionPreSelectedByValue(this.value())) {
       this.selected.set(true);
     }
+  }
+
+  public ngAfterViewInit(): void {
+    const textElement = this._textElement().nativeElement;
+
+    const updateViewValue = (): void => {
+      this._defaultViewValue.set(textElement.textContent || '');
+    };
+
+    this._viewValueObserver = new MutationObserver(updateViewValue);
+    this._viewValueObserver.observe(textElement, {
+      childList: true,
+      characterData: true,
+      subtree: true,
+    });
+
+    updateViewValue();
+  }
+
+  public ngOnDestroy(): void {
+    this._viewValueObserver?.disconnect();
   }
 
   protected _handleKeydown(event: KeyboardEvent): void {

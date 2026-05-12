@@ -24,6 +24,7 @@ type FormFieldHelperControls = {
   hasAction: boolean,
   label: string,
   hintMessage: string,
+  dynamicRequired: boolean,
 };
 
 type InputInputControls = {
@@ -108,6 +109,20 @@ export class FormFieldDemoService {
       default: '-',
       demoDefault: 'Type a value',
     },
+    dynamicRequired: {
+      description: 'Whether the dynamic input field is required or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+      onModelChange: (isRequired?: boolean) => {
+        if (isRequired) {
+          this.dynamicInput.addValidators(Validators.required);
+        } else {
+          this.dynamicInput.removeValidators(Validators.required);
+        }
+        this.dynamicInput.updateValueAndValidity();
+      },
+    },
   };
 
   public readonly inputInputControlConfig: DemoControlConfig<InputInputControls> = {
@@ -184,6 +199,7 @@ export class FormFieldDemoService {
 
   public input = '';
   public textarea = new FormControl('');
+  public dynamicInput = new FormControl('');
 
   public reset(): void {
     this.formFieldModel = { ...this.formFieldDefaults };
@@ -192,6 +208,9 @@ export class FormFieldDemoService {
 
     this.input = '';
     this.textarea.setValue('');
+    this.dynamicInput.setValue('');
+    this.dynamicInput.removeValidators(Validators.required);
+    this.dynamicInput.updateValueAndValidity();
   }
 
   public getMethodConfig(): DemoMethodConfig[] {

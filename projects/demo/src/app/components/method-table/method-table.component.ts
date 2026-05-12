@@ -2,7 +2,13 @@ import { MethodTableElement } from './method-table-elements';
 
 import { Component, input, OnInit } from '@angular/core';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
-import { IdsTableCellTemplateDirective, IdsTableColumnDef, IdsTableComponent, IdsTableRequestFactory, ServerSideDataSource } from '@i-cell/ids-angular/table';
+import {
+  IdsTableCellTemplateDirective,
+  IdsTableColumnDef,
+  IdsTableComponent,
+  IdsTableRequestFactory,
+  ServerSideDataSource,
+} from '@i-cell/ids-angular/table';
 import { of } from 'rxjs';
 
 @Component({

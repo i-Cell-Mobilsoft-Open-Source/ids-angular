@@ -102,12 +102,12 @@ export class SegmentedControlDemoService {
   public itemMethodControlConfig: DemoMethodConfig = [
     {
       name: 'onclick()',
-      description: 'Segmented-control-item: Simulates a click on the segmented control item.',
+      description: 'Simulates a click on the segmented control item.',
       returnType: 'void',
     },
     {
       name: 'focus(option?: FocusOption)',
-      description: 'Segmented-control-item: Focuses the segmented control item.'+
+      description: 'Focuses the segmented control item.'+
       'Optionally, a focus option can be provided to specify the focus behavior.',
       returnType: 'void',
       parameters: ['option'],
@@ -136,6 +136,13 @@ export class SegmentedControlDemoService {
     return [
       this.methodControlConfig,
       this.itemMethodControlConfig,
+    ];
+  }
+
+  public getMethodTitles(): string[] {
+    return [
+      'Segmented Control Methods',
+      'Segmented Control Item Methods',
     ];
   }
 

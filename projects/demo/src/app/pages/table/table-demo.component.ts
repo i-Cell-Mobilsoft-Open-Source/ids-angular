@@ -6,7 +6,7 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, DestroyRef, inject, Injectable, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
+import { Component, DestroyRef, inject, Injectable, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -38,6 +38,15 @@ export type TranslateLabelsType = keyof TranslateLabelsToIntlPropNamesType;
   template: '{{ cellValue() | translate }}',
 })
 export class TranslateCellRendererComponent extends IdsTableCellRenderer<PeriodicTableElement> {}
+
+@Component({
+  selector: 'ids-table-suffixed-cell-renderer',
+  imports: [],
+  template: '{{ cellValue() }}{{ suffix() }}',
+})
+export class SuffixedCellRendererComponent extends IdsTableCellRenderer<PeriodicTableElement> {
+  public suffix = input('');
+}
 
 @Injectable()
 export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {

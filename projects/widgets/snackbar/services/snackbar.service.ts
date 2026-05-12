@@ -1,12 +1,12 @@
 import { IDS_SNACKBAR_DEFAULT_CONFIG, IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY } from '../snackbar-defaults';
 import { IdsSnackbarGroupComponent } from '../snackbar-group.component';
-import { getSnackbarFlexibleConnectedPositionStrategy, getSnackbarGlobalPositionStrategy } from '../snackbar-position-strategies';
+import { getSnackbarGlobalPositionStrategy } from '../snackbar-position-strategies';
 import { IdsSnackbarData } from '../types/snackbar-data.type';
 import { IdsSnackbarInnerData } from '../types/snackbar-inner-data.type';
 
 import { Overlay, OverlayConfig, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { inject, Injectable, signal, ViewContainerRef } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -25,16 +25,29 @@ export class IdsSnackbarService {
 
   private _overlayRef?: OverlayRef;
   private _snackbarGroupPortal = new ComponentPortal(IdsSnackbarGroupComponent, null);
-  private _viewContainerRef?: ViewContainerRef;
   private _snackbarNextUniqueId = 0;
   private _snackbars = signal<IdsSnackbarInnerData[]>([]);
 
   public snackbars = this._snackbars.asReadonly();
 
   constructor() {
-    this._router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+    this._router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => this._clearSnackbarsOnNavigationEnd());
+  }
+
+  private _clearSnackbarsOnNavigationEnd(): void {
+    const snackbars = this._snackbars();
+    const snackbarsToKeep = snackbars.filter((snackbar) => snackbar.clearOnNavigation === false);
+
+    if (snackbarsToKeep.length === 0) {
       this.clear();
-    });
+      return;
+    }
+
+    if (snackbarsToKeep.length !== snackbars.length) {
+      this._snackbars.set(snackbarsToKeep);
+    }
+
+    this.update();
   }
 
   private _attachGroup(): void {
@@ -56,14 +69,8 @@ export class IdsSnackbarService {
   private _getPositionStrategy(): PositionStrategy {
     const position = this._overlay.position();
     const margin = this._defaultConfig.viewportMargin;
-    if (this._viewContainerRef) {
-      const connectedTo = position
-        .flexibleConnectedTo(this._viewContainerRef.element);
-      return getSnackbarFlexibleConnectedPositionStrategy(connectedTo, this._defaultConfig.position, margin);
-    } else {
-      const globalPosition = position.global();
-      return getSnackbarGlobalPositionStrategy(globalPosition, this._defaultConfig.position, margin);
-    }
+    const globalPosition = position.global();
+    return getSnackbarGlobalPositionStrategy(globalPosition, this._defaultConfig.position, margin);
   }
 
   private _detachGroup(): void {
@@ -102,14 +109,6 @@ export class IdsSnackbarService {
   public clear(): void {
     this._snackbars.set([]);
     this._detachGroup();
-  }
-
-  public setViewContainerRef(viewContainerRef: ViewContainerRef): void {
-    this._viewContainerRef = viewContainerRef;
-  }
-
-  public clearViewContainerRef(): void {
-    this._viewContainerRef = undefined;
   }
 
   public update(): void {

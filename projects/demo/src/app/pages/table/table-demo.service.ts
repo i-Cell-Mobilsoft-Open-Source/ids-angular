@@ -1,5 +1,5 @@
 import { PeriodicTableElement } from './periodic-table-element';
-import { TranslateCellRendererComponent } from './table-demo.component';
+import { SuffixedCellRendererComponent, TranslateCellRendererComponent } from './table-demo.component';
 
 import { environment } from '../../../environments/environment';
 
@@ -137,7 +137,8 @@ export class TableDemoService {
       label: 'TABLE.COL.ATOMIC_MASS',
       headerCellRenderer: TranslateCellRendererComponent,
       field: 'atomicMass',
-      cellRenderer: 'numeric',
+      cellRenderer: SuffixedCellRendererComponent,
+      cellRendererInput: { suffix: ' (g/mol)' },
       sortable: true,
       orderName: 'atomicMass',
     },

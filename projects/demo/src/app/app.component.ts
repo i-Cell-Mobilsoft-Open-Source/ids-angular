@@ -43,6 +43,7 @@ export class AppComponent {
 
   // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
   public theme = new FormControl<Theme>('light', { nonNullable: true });
+  public language = new FormControl<string>('en', { nonNullable: true });
 
   public currentLang = signal<'hu' | 'en'>('en');
 

@@ -6,7 +6,7 @@ import { IdsTabGroupVariantType } from './types/tab-group-variant.type';
 import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
 
 import { CdkPortalOutlet, PortalModule, TemplatePortal } from '@angular/cdk/portal';
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, isDevMode, signal, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, effect, inject, input, isDevMode, output, signal, untracked, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -41,6 +41,14 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
   public indicatorPosition = input<IdsTabIndicatorPositionType>();
   public disabled = input(false, { transform: coerceBooleanAttribute });
   public activationMode = input<IdsTabActivationModeType>(this._defaultConfig.activationMode);
+  /**
+   * Optionally set the tabindex for the tab-group after initialization.
+   */
+  public setTabIndex = input<number>();
+  /**
+   * Emits the index of the selected tab whenever the selected tab changes.
+   */
+  public selectedTabChange = output<number>();
 
   protected _selectedTabIndex = signal<number>(0);
   public selectedTabIndex = this._selectedTabIndex.asReadonly();
@@ -61,6 +69,18 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     (this.orientation() === IdsOrientation.HORIZONTAL ? IdsTabIndicatorPosition.BOTTOM : IdsTabIndicatorPosition.LEFT),
   );
 
+  constructor() {
+    super();
+
+    effect(() => {
+      const selectedTabIndex = this._selectedTabIndex();
+
+      untracked(() => {
+        this.selectedTabChange.emit(selectedTabIndex);
+      });
+    });
+  }
+
   public ngAfterContentInit(): void {
     const items = this._items();
     const orientation = this.orientation();
@@ -79,6 +99,12 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     if (isDevMode() && (orientation === IdsOrientation.VERTICAL &&
       (indicatorPosition && (indicatorPosition === IdsTabIndicatorPosition.BOTTOM || indicatorPosition === IdsTabIndicatorPosition.TOP)))) {
       throw this._createHostError(`Can not use ${indicatorPosition} indicator position with Vertical mode`);
+    }
+
+    const setTabIndex = this.setTabIndex();
+    if (setTabIndex !== null && setTabIndex !== undefined) {
+      this.selectTab(setTabIndex);
+      return;
     }
 
     this.selectTab(0);
@@ -144,7 +170,7 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     }
 
     const current = this._focusedTabIndex();
-    let nextIndex = current;
+    let nextIndex: number;
 
     if (move === 'first') {
       const first = items.findIndex((tab) => !tab.parentOrSelfDisabled());

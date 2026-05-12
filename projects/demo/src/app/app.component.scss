@@ -59,5 +59,7 @@ app-root {
 .router-outlet-wrapper {
   &:not(:has(app-content-page)) {
     @apply p-8 mx-auto container;
+    max-width: 2080px;
   }
+  max-width: 2080px;
 }

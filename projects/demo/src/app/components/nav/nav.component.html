@@ -1,24 +1,16 @@
 <nav idsSideNav>
   @for (menuConfig of menu(); track $index; let i = $index) {
     <ids-side-nav-section>
-      @if (menuConfig.slug) {
-        <ids-side-nav-item
-          [id]="'menu-item-' + i"
-          [label]="menuConfig.name!"
-          [target]="menuConfig.path ?? ''"
-          [hasTooltip]="_menuItemsOverflow['menu-item-' + i]"
-        />
-      } @else {
+      @if (!menuConfig.slug && !menuConfig.path) {
         <ids-side-nav-title [label]="menuConfig.name!" />
-      }
 
-      @for (menuItem of menuConfig.children; track $index; let j = $index) {
-        @if (menuItem.children?.length! > 0) {
+        @for (menuItem of menuConfig.children; track $index; let j = $index) {
           <ids-side-nav-item
             [id]="'menu-item-' + i + '-child-' + j"
             [label]="menuItem.name!"
-            [target]="menuItem.path ?? ''"
+            [target]="menuConfig.path ?? ''"
             [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j]"
+            [isActiveMatchOptions]="subsetMatchOptions"
           >
             @if (menuItem.icon) {
               <ids-icon icon-leading [fontIcon]="menuItem.icon" />
@@ -29,8 +21,8 @@
                 [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k"
                 [label]="subItem.name!"
                 [target]="subItem.path ?? ''"
-                [isActiveMatchOptions]="subsetMatchOptions"
                 [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k]"
+                [isActiveMatchOptions]="subsetMatchOptions"
               >
                 @if (subItem.icon) {
                   <ids-icon icon-leading [fontIcon]="subItem.icon" />
@@ -38,19 +30,47 @@
               </ids-side-nav-item>
             }
           </ids-side-nav-item>
-        } @else {
-          <ids-side-nav-item
-            [id]="'menu-item-' + i + '-child-' + j"
-            [label]="menuItem.name!"
-            [target]="menuItem.path ?? ''"
-            [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j]"
-            [isActiveMatchOptions]="subsetMatchOptions"
-          >
-            @if (menuItem.icon) {
-              <ids-icon icon-leading [fontIcon]="menuItem.icon" />
-            }
-          </ids-side-nav-item>
         }
+      } @else {
+        <ids-side-nav-item
+          [id]="'menu-item-' + i"
+          [label]="menuConfig.name!"
+          [target]="menuConfig.path ?? ''"
+          [hasTooltip]="_menuItemsOverflow['menu-item-' + i]"
+          [isActiveMatchOptions]="subsetMatchOptions"
+        >
+          @if (menuConfig.icon) {
+            <ids-icon icon-leading [fontIcon]="menuConfig.icon" />
+          }
+
+          @for (childItem of menuConfig.children; track $index; let j = $index) {
+            <ids-side-nav-item
+              [id]="'menu-item-' + i + '-child-' + j"
+              [label]="childItem.name!"
+              [target]="childItem.path ?? ''"
+              [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j]"
+              [isActiveMatchOptions]="subsetMatchOptions"
+            >
+              @if (childItem.icon) {
+                <ids-icon icon-leading [fontIcon]="childItem.icon" />
+              }
+
+              @for (subItem of childItem.children; track $index; let k = $index) {
+                <ids-side-nav-item
+                  [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k"
+                  [label]="subItem.name!"
+                  [target]="subItem.path ?? ''"
+                  [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k]"
+                  [isActiveMatchOptions]="subsetMatchOptions"
+                >
+                  @if (subItem.icon) {
+                    <ids-icon icon-leading [fontIcon]="subItem.icon" />
+                  }
+                </ids-side-nav-item>
+              }
+            </ids-side-nav-item>
+          }
+        </ids-side-nav-item>
       }
     </ids-side-nav-section>
   }

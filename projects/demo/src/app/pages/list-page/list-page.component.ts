@@ -158,7 +158,7 @@ export class ListPageComponent implements OnInit {
                     button: [
                       {
                         text: 'Tovább',
-                        url: entryItem.slug ? `/${slug}/${entryItem.slug}` : '',
+                        url: entryItem.slug ? `/${sessionStorage.getItem('ids_lang') || 'en'}/${slug}/${entryItem.slug}` : '',
                       },
                     ],
                     last_modified: entryItem.last_modified,

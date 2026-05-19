@@ -173,7 +173,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
       },
       {
-        path: 'issue-report',
+        path: 'support',
         loadComponent: () => import('./pages/issue-report/issue-report.component').then((module) => module.IssueReportComponent),
       },
       {

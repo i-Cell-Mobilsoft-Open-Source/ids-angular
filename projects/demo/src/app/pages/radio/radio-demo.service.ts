@@ -20,6 +20,8 @@ type RadioInputControls = {
 
 type RadioHelperControls = {
   onlyOneItemIsDisabled: boolean,
+  allowHint: boolean,
+  hintMessage: string,
 };
 
 @Injectable()
@@ -79,6 +81,18 @@ export class RadioDemoService {
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+    },
+    allowHint: {
+      description: 'Allow hint message',
+      type: 'boolean',
+      default: true,
+      control: DemoControl.SWITCH,
+    },
+    hintMessage: {
+      description: 'Hint message',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Hint message',
     },
   };
 

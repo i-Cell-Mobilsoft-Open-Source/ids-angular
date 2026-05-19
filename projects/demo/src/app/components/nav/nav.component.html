@@ -8,7 +8,7 @@
           <ids-side-nav-item
             [id]="'menu-item-' + i + '-child-' + j"
             [label]="menuItem.name!"
-            [target]="menuConfig.path ?? ''"
+            [target]="menuItem.path ?? ''"
             [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j]"
             [isActiveMatchOptions]="subsetMatchOptions"
           >

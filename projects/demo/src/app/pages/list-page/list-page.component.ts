@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/rou
 import { IdsChipGroupComponent, IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
+import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'projects/demo/src/environments/environment.development';
 
 const PAGE_SIZE = 8;
@@ -94,6 +95,10 @@ export class ListPageComponent implements OnInit {
   private readonly _router = inject(Router);
   private readonly _destroyRef = inject(DestroyRef);
 
+  private readonly _translate = inject(TranslateService);
+
+  private _currentCollection = '';
+  private _currentTypeName = '';
   private _currentSlug = '';
 
   public ngOnInit(): void {
@@ -102,6 +107,8 @@ export class ListPageComponent implements OnInit {
       const slug = routeData['slug'];
       const typeName = this._generateTypeName(slug);
 
+      this._currentCollection = collection;
+      this._currentTypeName = typeName;
       this._currentSlug = slug;
       this._loadData(collection, typeName, slug);
     });
@@ -110,6 +117,12 @@ export class ListPageComponent implements OnInit {
       const storageKey = `list_filter_${this._currentSlug}`;
       const filter = params.get('filter') ?? sessionStorage.getItem(storageKey) ?? 'All';
       this.activeFilter.set(filter);
+    });
+
+    this._translate.onLangChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      if (this._currentCollection && this._currentTypeName && this._currentSlug) {
+        this._loadData(this._currentCollection, this._currentTypeName, this._currentSlug);
+      }
     });
   }
 

@@ -92,7 +92,7 @@ export class GraphqlService {
       variables: {
         site: this._currentLang(),
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
     });
   }
 

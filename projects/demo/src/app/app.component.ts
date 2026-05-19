@@ -135,13 +135,17 @@ export class AppComponent {
     return Math.max(...tree.map((node: StatamicNavNode) => this._findDeepestLevel(node.children ?? [], node.depth ?? 0)));
   }
 
-  private _mapStatamicNavToMenu(tree: StatamicNavNode[]): Menu[] {
+  private _mapStatamicNavToMenu(tree: StatamicNavNode[], parentGeneratedSlug?: string): Menu[] {
     const lang = this._translate.getCurrentLang() || 'en';
     return tree.map((node) => {
       let path: string | undefined = undefined;
+      const currentGeneratedSlug = node.page?.generated ? node.page.slug : parentGeneratedSlug;
+
       if (node.page?.slug && node.depth) {
         if (this._componentLevelDepth !== undefined && node.depth >= this._componentLevelDepth) {
           path = `/${lang}/components/${node.page.slug}`;
+        } else if (parentGeneratedSlug && !node.page.generated) {
+          path = `/${lang}/${parentGeneratedSlug}/${node.page.slug}`;
         } else {
           path = `/${lang}/${node.page.slug}`;
         }
@@ -150,7 +154,7 @@ export class AppComponent {
         slug: node.page?.slug,
         name: node.page?.title,
         path,
-        children: node.children ? this._mapStatamicNavToMenu(node.children) : [],
+        children: node.children ? this._mapStatamicNavToMenu(node.children, currentGeneratedSlug) : [],
       };
     });
   }
@@ -208,6 +212,6 @@ export class AppComponent {
 
 interface StatamicNavNode {
   depth?: number;
-  page?: { title?: string; id?: string; slug?: string };
+  page?: { title?: string; id?: string; slug?: string; generated?: boolean };
   children?: StatamicNavNode[];
 }

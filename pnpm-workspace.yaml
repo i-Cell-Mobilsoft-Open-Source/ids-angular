@@ -1,0 +1,8 @@
+allowBuilds:
+  '@compodoc/compodoc': false
+  '@parcel/watcher': false
+  cypress: false
+  esbuild: false
+  lmdb: false
+  msgpackr-extract: false
+  unrs-resolver: false

@@ -1,7 +1,6 @@
 {
   "name": "@i-cell/ids-angular",
   "version": "0.0.0",
-  "packageManager": "pnpm@10.33.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -92,5 +91,16 @@
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.57.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@compodoc/compodoc",
+      "@parcel/watcher",
+      "cypress",
+      "esbuild",
+      "lmdb",
+      "msgpackr-extract",
+      "unrs-resolver"
+    ]
   }
 }

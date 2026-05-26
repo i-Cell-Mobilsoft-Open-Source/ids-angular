@@ -8,7 +8,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsCheckboxComponent, IdsCheckboxGroupComponent } from '@i-cell/ids-angular/checkbox';
-import { IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
+import { IdsErrorDefinitionDirective, IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -20,6 +20,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     FormsModule,
     IdsHintMessageComponent,
+    IdsErrorMessageComponent,
+    IdsErrorDefinitionDirective,
     TranslateModule,
     DemoAndCodeComponent,
     TryoutControlComponent,

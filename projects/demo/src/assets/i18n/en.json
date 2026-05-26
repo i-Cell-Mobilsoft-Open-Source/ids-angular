@@ -51,6 +51,13 @@
     "STANDALONE": "Standalone",
     "GROUPED": "Grouped"
   },
+  "CHECKBOX": {
+    "FORMGROUP": "Using in <form> tag",
+    "GROUPED_WITH_VALIDATOR": "Grouped (validator)",
+    "ERROR": {
+      "MINIMUM_COUNT_SELECTED": "At least {{minimumCount}} checkboxes must be selected."
+    }
+  },
   "FORM_FIELD": {
     "LABEL": {
       "NAME": "Name",

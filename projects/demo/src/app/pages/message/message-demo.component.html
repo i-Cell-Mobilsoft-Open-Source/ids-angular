@@ -8,9 +8,8 @@
       <div component class="message-grid">
 
         @if (_messageDemoService.helperModel.isError) {
-          <ids-error-message >
-
-            <ids-error-def code="custom">{{ _messageDemoService.helperModel.message }}</ids-error-def>
+          <ids-error-message>
+            {{ _messageDemoService.helperModel.message }}
             @if (_messageDemoService.helperModel.hasSuffix) {
               <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
             }
@@ -24,10 +23,10 @@
               <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
             }
           </ids-success-message>
-        } 
-        
+        }
+
         @if (!_messageDemoService.helperModel.isError && !_messageDemoService.helperModel.isSuccess) {
-          <ids-hint-message [size]="_messageDemoService.model.size" [variant]="_messageDemoService.model.variant">
+          <ids-hint-message>
             {{ _messageDemoService.helperModel.message }}
             @if (_messageDemoService.helperModel.hasSuffix) {
               <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>

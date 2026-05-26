@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -23,23 +24,55 @@ type CheckboxInputControls = {
 };
 
 type CheckboxHelperControls = {
-  label: string;
   allowHint: boolean;
-  hintMessage: string;
 };
 
 type CheckboxGroupInputControls = {
   groupLabel: string;
   allowParent: boolean;
   parentLabel: string;
-  name: string;
   size: IdsSizeType;
   variant: IdsCheckboxVariantType;
   orientation: IdsOrientationType;
+  showAsterisk: boolean;
 };
 
 @Injectable()
 export class CheckboxDemoService {
+  public form = new FormGroup({
+    terms_and_conditions: new FormControl(false, [Validators.requiredTrue]),
+    privacy_policy: new FormControl(false, [Validators.requiredTrue]),
+    marketing_materials: new FormControl(false, [Validators.requiredTrue]),
+  });
+
+  public formGroup = new FormGroup({
+    toppings: new FormGroup({
+      cheese: new FormControl(false, []),
+      ham: new FormControl(false, []),
+      corn: new FormControl(false, []),
+      mushrooms: new FormControl(false, []),
+    }, { validators: this._minimumCountSelectedValidator(2) }),
+    cheeses: new FormGroup({
+      cheddar: new FormControl(false, []),
+      mozzarella: new FormControl(false, []),
+      parmesan: new FormControl(false, []),
+    }, { validators: this._minimumCountSelectedValidator(1) }),
+  });
+
+  private _minimumCountSelectedValidator(minimumCount: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const group = control as FormGroup;
+
+      const checkedCount = Object.values(group.controls)
+        .filter((control) => control.value === true)
+        .length;
+
+      return checkedCount >= minimumCount
+        ? null
+        : { minimumCountSelected: true };
+    };
+  }
+
   public readonly inputControlConfig: DemoControlConfig<CheckboxInputControls> = {
     size: {
       description: 'Checkbox size.',
@@ -76,23 +109,11 @@ export class CheckboxDemoService {
   };
 
   public readonly helperControlConfig: DemoControlConfig<CheckboxHelperControls> = {
-    label: {
-      description: 'Label of checkbox',
-      type: 'string',
-      default: '-',
-      demoDefault: 'I accept the terms and conditions',
-    },
     allowHint: {
       description: 'Allow hint message',
       type: 'boolean',
       default: true,
       control: DemoControl.SWITCH,
-    },
-    hintMessage: {
-      description: 'Hint message',
-      type: 'string',
-      default: '-',
-      demoDefault: 'Hint message',
     },
   };
 
@@ -101,7 +122,7 @@ export class CheckboxDemoService {
       description: 'Checkbox group\'s label.',
       type: 'string',
       default: '-',
-      demoDefault: 'Everyday todos',
+      demoDefault: 'Options',
     },
     allowParent: {
       description: 'Whether to allow parent checkbox or not.',
@@ -113,13 +134,7 @@ export class CheckboxDemoService {
       description: 'Parent checkbox label.',
       type: 'string',
       default: '-',
-      demoDefault: 'Parent todo',
-    },
-    name: {
-      description: 'Name for checkboxes.',
-      type: 'string',
-      default: '-',
-      demoDefault: 'todo',
+      demoDefault: 'Parent options',
     },
     size: {
       description: 'Checkbox group size.',
@@ -141,6 +156,21 @@ export class CheckboxDemoService {
       default: defaultGroupConfig.orientation,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
+    },
+    showAsterisk: {
+      description: 'Whether to show an asterisk before to the checkbox group label or not. IMPORTANT: This is only for display purposes.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+    },
+  };
+
+  public readonly groupInputHelperControlConfig: DemoControlConfig<CheckboxHelperControls> = {
+    allowHint: {
+      description: 'Allow hint message',
+      type: 'boolean',
+      default: true,
+      control: DemoControl.SWITCH,
     },
   };
 
@@ -235,15 +265,18 @@ export class CheckboxDemoService {
   public defaults = getDefaultFromDemoConfig<CheckboxInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<CheckboxHelperControls>(this.helperControlConfig);
   public groupDefaults = getDefaultFromDemoConfig<CheckboxGroupInputControls>(this.groupInputControlConfig);
+  public groupInputHelperDefaults = getDefaultFromDemoConfig<CheckboxHelperControls>(this.groupInputHelperControlConfig);
 
   public model: CheckboxInputControls = { ...this.defaults };
   public helperModel: CheckboxHelperControls = { ...this.helperDefaults };
   public groupModel: CheckboxGroupInputControls = { ...this.groupDefaults };
+  public groupInputHelperModel: CheckboxHelperControls = { ...this.groupInputHelperDefaults };
 
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
     this.groupModel = { ...this.groupDefaults };
+    this.groupInputHelperModel = { ...this.groupInputHelperDefaults };
 
     this.standalone = {
       unselected: false,

@@ -4,7 +4,7 @@ ids-nav {
   overflow-x: hidden;
   overflow-y: auto;
   // sidenav section min width
-  width: calc(var(--ids-comp-sidenav-section-size-min-width-compact));
+  min-width: calc(var(--ids-comp-sidenav-section-size-min-width-compact));
   padding: 0.5rem;
   scrollbar-gutter: stable;
 

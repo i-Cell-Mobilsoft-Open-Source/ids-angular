@@ -75,8 +75,11 @@ export class AppComponent {
       .getNavigation()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((result) => {
-        const navResult = result as { data?: { navs?: Array<{ tree: StatamicNavNode[] }> } };
-        this._navTree = navResult.data?.navs?.[0]?.tree || [];
+        const navResult = result as { data?: { navs?: Array<{ handle: string; tree: StatamicNavNode[] }> } };
+
+        const sideNav = navResult.data?.navs?.find((nav) => nav.handle === 'side_nav');
+        this._navTree = sideNav?.tree || [];
+
         this._componentLevelDepth = this._findDeepestLevel(this._navTree);
         this.dynamicMenu = this._mapStatamicNavToMenu(this._navTree);
       });
@@ -85,8 +88,10 @@ export class AppComponent {
       takeUntilDestroyed(this._destroyRef),
       switchMap(() => graphqlService.getNavigation()),
     ).subscribe((result) => {
-      const navResult = result as { data?: { navs?: Array<{ tree: StatamicNavNode[] }> } };
-      this._navTree = navResult.data?.navs?.[0]?.tree || [];
+      const navResult = result as { data?: { navs?: Array<{ handle: string; tree: StatamicNavNode[] }> } };
+
+      const sideNav = navResult.data?.navs?.find((nav) => nav.handle === 'side_nav');
+      this._navTree = sideNav?.tree || [];
       this._componentLevelDepth = this._findDeepestLevel(this._navTree);
       this.dynamicMenu = this._mapStatamicNavToMenu(this._navTree);
     });

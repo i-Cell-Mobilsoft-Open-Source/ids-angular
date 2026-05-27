@@ -3,6 +3,7 @@ import { gql } from '@apollo/client/core';
 export const GET_NAVIGATION = gql`
   query GetNavigation($site: String!) {
     navs {
+      handle
       max_depth
       title
       tree(site: $site) {

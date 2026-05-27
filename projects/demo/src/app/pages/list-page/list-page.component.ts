@@ -13,6 +13,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'projects/demo/src/environments/environment.development';
+import { combineLatest, startWith } from 'rxjs';
 
 const PAGE_SIZE = 8;
 
@@ -97,33 +98,33 @@ export class ListPageComponent implements OnInit {
 
   private readonly _translate = inject(TranslateService);
 
-  private _currentCollection = '';
-  private _currentTypeName = '';
   private _currentSlug = '';
 
   public ngOnInit(): void {
-    this._route.data.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((routeData) => {
-      const collection = routeData['collection'];
-      const slug = routeData['slug'];
-      const typeName = this._generateTypeName(slug);
+    let lastLoadedKey = '';
 
-      this._currentCollection = collection;
-      this._currentTypeName = typeName;
-      this._currentSlug = slug;
-      this._loadData(collection, typeName, slug);
-    });
+    combineLatest({
+      routeData: this._route.data,
+      queryParams: this._route.queryParamMap,
+      langTrigger: this._translate.onLangChange.pipe(startWith(null)),
+    })
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(({ routeData, queryParams }) => {
+        const collection = routeData['collection'];
+        const slug = routeData['slug'];
+        const typeName = this._generateTypeName(slug);
 
-    this._route.queryParamMap.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((params) => {
-      const storageKey = `list_filter_${this._currentSlug}`;
-      const filter = params.get('filter') ?? sessionStorage.getItem(storageKey) ?? 'All';
-      this.activeFilter.set(filter);
-    });
+        const storageKey = `list_filter_${slug}`;
+        const filterValue = queryParams.get('filter') ?? sessionStorage.getItem(storageKey) ?? 'All';
+        this.activeFilter.set(filterValue);
 
-    this._translate.onLangChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-      if (this._currentCollection && this._currentTypeName && this._currentSlug) {
-        this._loadData(this._currentCollection, this._currentTypeName, this._currentSlug);
-      }
-    });
+        const currentLoadKey = `${collection}_${slug}_${this._translate.getCurrentLang()}`;
+
+        if (currentLoadKey !== lastLoadedKey) {
+          lastLoadedKey = currentLoadKey;
+          this._loadData(collection, typeName, slug);
+        }
+      });
   }
 
   private _loadData(collection: string, typeName: string, slug: string): void {

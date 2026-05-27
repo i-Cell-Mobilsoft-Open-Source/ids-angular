@@ -3,7 +3,7 @@
     --ids-comp-message-color-fg-icon-dark-disabled: light-dark(#707a8a, #404753);
     --ids-comp-message-color-fg-icon-dark-error-default: light-dark(#8e0000, #ff8169);
     --ids-comp-message-color-fg-icon-dark-success-default: light-dark(#00430d, #00dd72);
-    --ids-comp-message-color-fg-icon-light-default: light-dark(#f5f7fa, #0f1115);
+    --ids-comp-message-color-fg-icon-light-default: light-dark(#ffffff, #ffffff);
     --ids-comp-message-color-fg-icon-light-disabled: light-dark(#ffffff80, #ffffff80);
     --ids-comp-message-color-fg-icon-light-error-default: light-dark(#e32100, #8e0000);
     --ids-comp-message-color-fg-icon-light-success-default: light-dark(#007b24, #00bf53);

@@ -7,12 +7,13 @@ import { GraphqlService } from '../../services/graphql.service';
 
 import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { IdsChipGroupComponent, IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'projects/demo/src/environments/environment.development';
+import { combineLatest, startWith } from 'rxjs';
 
 const PAGE_SIZE = 8;
 
@@ -92,31 +93,38 @@ export class ListPageComponent implements OnInit {
 
   private readonly _graphqlService = inject(GraphqlService);
   private readonly _route = inject(ActivatedRoute);
-  private readonly _translate = inject(TranslateService);
+  private readonly _router = inject(Router);
   private readonly _destroyRef = inject(DestroyRef);
 
-  private _currentCollection = '';
-  private _currentTypeName = '';
+  private readonly _translate = inject(TranslateService);
+
   private _currentSlug = '';
 
   public ngOnInit(): void {
-    this._route.data.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((routeData) => {
-      const collection = routeData['collection'];
-      const slug = routeData['slug'];
-      const typeName = this._generateTypeName(slug);
+    let lastLoadedKey = '';
 
-      this._currentCollection = collection;
-      this._currentTypeName = typeName;
-      this._currentSlug = slug;
+    combineLatest({
+      routeData: this._route.data,
+      queryParams: this._route.queryParamMap,
+      langTrigger: this._translate.onLangChange.pipe(startWith(null)),
+    })
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(({ routeData, queryParams }) => {
+        const collection = routeData['collection'];
+        const slug = routeData['slug'];
+        const typeName = this._generateTypeName(slug);
 
-      this._loadData(collection, typeName, slug);
-    });
+        const storageKey = `list_filter_${slug}`;
+        const filterValue = queryParams.get('filter') ?? sessionStorage.getItem(storageKey) ?? 'All';
+        this.activeFilter.set(filterValue);
 
-    this._translate.onLangChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-      if (this._currentCollection && this._currentTypeName && this._currentSlug) {
-        this._loadData(this._currentCollection, this._currentTypeName, this._currentSlug);
-      }
-    });
+        const currentLoadKey = `${collection}_${slug}_${this._translate.getCurrentLang()}`;
+
+        if (currentLoadKey !== lastLoadedKey) {
+          lastLoadedKey = currentLoadKey;
+          this._loadData(collection, typeName, slug);
+        }
+      });
   }
 
   private _loadData(collection: string, typeName: string, slug: string): void {
@@ -221,6 +229,22 @@ export class ListPageComponent implements OnInit {
   public onFilterChange(tag: string): void {
     this.activeFilter.set(tag);
     this.pageIndex.set(0);
+
+    const filterValue = tag === 'All' ? null : tag;
+    const storageKey = `list_filter_${this._currentSlug}`;
+
+    if (filterValue) {
+      sessionStorage.setItem(storageKey, filterValue);
+    } else {
+      sessionStorage.removeItem(storageKey);
+    }
+
+    this._router.navigate([], {
+      relativeTo: this._route,
+      queryParams: { filter: filterValue },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 
   public selectedTag(): string {

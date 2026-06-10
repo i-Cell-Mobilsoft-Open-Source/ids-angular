@@ -12,9 +12,7 @@ import {
   IdsHintMessageComponent,
   IdsErrorMessageComponent,
   IdsSuccessMessageComponent,
-  IdsErrorDefinitionDirective,
   IdsFormFieldVariantType,
-  IdsFormFieldComponent,
   IdsMessageSuffixDirective,
   IdsMessageDirective,
 } from '@i-cell/ids-angular/forms';
@@ -23,7 +21,6 @@ import {
   IdsMessageParentFormField,
 } from '@i-cell/ids-angular/forms/components/message/types/message-parent-form-field';
 import { TranslateModule } from '@ngx-translate/core';
-import { of } from 'rxjs';
 
 @Injectable()
 class DemoMessageState implements IdsMessageParentFormField {
@@ -42,10 +39,8 @@ class DemoMessageState implements IdsMessageParentFormField {
     IdsHintMessageComponent,
     IdsErrorMessageComponent,
     IdsSuccessMessageComponent,
-    IdsErrorDefinitionDirective,
     TryoutControlComponent,
     ControlTableComponent,
-    IdsErrorDefinitionDirective,
     IdsMessageSuffixDirective,
     IdsMessageDirective,
   ],
@@ -55,18 +50,6 @@ class DemoMessageState implements IdsMessageParentFormField {
     {
       provide: IDS_MESSAGE_PARENT_FORM_FIELD,
       useExisting: DemoMessageState,
-    },
-    {
-      provide: IdsFormFieldComponent,
-      useValue: {
-        controlDir: signal({
-          control: {
-            status: 'INVALID',
-            statusChanges: of('INVALID'),
-            errors: { custom: true },
-          },
-        }),
-      },
     },
   ],
   templateUrl: './message-demo.component.html',

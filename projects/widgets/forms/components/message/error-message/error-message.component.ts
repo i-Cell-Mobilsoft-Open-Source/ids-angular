@@ -2,15 +2,15 @@ import { IdsErrorDefinitionDirective } from './error-definition.directive';
 
 import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.directive';
 import { IdsMessageDirective } from '../../../directives/message.directive';
-import { IdsFormFieldComponent } from '../../form-field/form-field.component';
 import { IdsErrorMessageMapping } from '../types/error-message-mapping';
 
 import { Component, ViewEncapsulation, computed, contentChildren, inject, signal } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
 import { ComponentBase } from '@i-cell/ids-angular/core';
+import { IDS_CONTROL_CONTAINER, IdsControlAccessor } from '@i-cell/ids-angular/core/tokens/control-container';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { asapScheduler, observeOn, of, startWith, switchMap, tap } from 'rxjs';
+import { of, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'ids-error-message',
@@ -24,40 +24,77 @@ export class IdsErrorMessageComponent extends ComponentBase {
     return 'error-message';
   }
 
-  private _parent = inject(IdsFormFieldComponent, { skipSelf: true });
+  private readonly _controlContainer = inject(IDS_CONTROL_CONTAINER, {
+    skipSelf: true,
+    optional: true,
+  });
 
-  private _control = signal<AbstractControl | null>(null);
-  private _errorDefDirs = contentChildren(IdsErrorDefinitionDirective);
-  private _errorDefs = computed(() => this._errorDefDirs().map((errorDefDir) => errorDefDir.toErrorMessageMapping()));
+  private readonly _fallbackControlDir = signal<IdsControlAccessor | null>(null);
 
-  protected _validationError = signal<IdsErrorMessageMapping | null>(null);
+  private readonly _controlDir =
+    this._controlContainer?.controlDir ?? this._fallbackControlDir;
 
-  protected _hostClasses = computed(() => this._getHostClasses([]));
+  private readonly _control = computed<AbstractControl | null>(() =>
+    this._controlDir()?.control ?? null,
+  );
 
-  public suffixes = contentChildren(IdsMessageSuffixDirective);
+  private readonly _controlStateChanges = toSignal(
+    toObservable(this._control).pipe(
+      switchMap((control) =>
+        control?.events.pipe(startWith(null)) ?? of(null),
+      ),
+    ),
+    {
+      initialValue: null,
+      equal: () => false,
+    },
+  );
 
-  constructor() {
-    super();
-    toObservable(this._parent.controlDir).pipe(
-      observeOn(asapScheduler),
-      tap((controlDir) => this._control.set(controlDir?.control ?? null)),
-      switchMap(() => this._control()?.statusChanges.pipe(startWith(this._control()?.status)) ?? of(null)),
-      takeUntilDestroyed(this._destroyRef),
-    ).subscribe((status) => {
-      if (status === 'INVALID') {
-        const nextError = this._selectMostImportantValidationError();
-        this._validationError.set(nextError);
-      } else {
-        this._validationError.set(null);
-      }
-    });
-  }
+  private readonly _errorDefDirs = contentChildren(IdsErrorDefinitionDirective);
 
-  private _selectMostImportantValidationError(): IdsErrorMessageMapping | null {
-    const errorDefs = this._errorDefs();
+  private readonly _errorDefs = computed(() => this._errorDefDirs().map((errorDefDir) =>
+    errorDefDir.toErrorMessageMapping(),
+  ));
+
+  protected readonly _useValidationMode = computed(() => this._control() !== null && this._errorDefs().length > 0);
+
+  protected readonly _validationError = computed<IdsErrorMessageMapping | null>(() => {
+    this._controlStateChanges();
+
+    if (!this._useValidationMode()) {
+      return null;
+    }
+
     const control = this._control();
+    if (!control?.errors || control.status !== 'INVALID') {
+      return null;
+    }
 
-    if (!errorDefs?.length || !control?.errors || Object.keys(control.errors).length === 0) {
+    if (!control.touched && !control.dirty) {
+      return null;
+    }
+
+    return this._selectMostImportantValidationError(control);
+  });
+
+  protected readonly _shouldRender = computed(() => {
+    if (!this._useValidationMode()) {
+      return true;
+    }
+
+    return this._validationError() !== null;
+  });
+
+  protected readonly _hostClasses = computed(() => this._getHostClasses([]));
+
+  public readonly suffixes = contentChildren(IdsMessageSuffixDirective);
+
+  private _selectMostImportantValidationError(
+    control: AbstractControl,
+  ): IdsErrorMessageMapping | null {
+    const errorDefs = this._errorDefs();
+
+    if (!errorDefs.length || !control.errors) {
       return null;
     }
 
@@ -66,7 +103,9 @@ export class IdsErrorMessageComponent extends ComponentBase {
     return errorDefs.find((errorDef) => errorCodes.has(errorDef.code)) ?? null;
   }
 
-  protected _getValidationErrorMessage(messageOrFn: IdsErrorMessageMapping['message']): string {
+  protected _getValidationErrorMessage(
+    messageOrFn: IdsErrorMessageMapping['message'],
+  ): string {
     return messageOrFn instanceof Function ? messageOrFn() : messageOrFn;
   }
 }

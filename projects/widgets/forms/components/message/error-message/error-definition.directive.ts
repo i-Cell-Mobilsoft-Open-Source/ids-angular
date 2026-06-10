@@ -8,7 +8,14 @@ import { Directive, ElementRef, inject, input } from '@angular/core';
  * The error code is provided as an attribute, while the error message will be this directive's text content.
  * The latter can be a plain string literal or even an interpolated string value.
  *
- * @example
+ * @example Standalone (no form control)
+ * ```html
+ * @if (showError) {
+ *   <ids-error-message>{{ 'ERROR.GENERIC' | translate }}</ids-error-message>
+ * }
+ * ```
+ *
+ * @example With form control validation
  * ```html
  * <ids-form-field>
  *   <ids-label>Input field</ids-label>
@@ -33,6 +40,9 @@ import { Directive, ElementRef, inject, input } from '@angular/core';
  */
 @Directive({
   selector: 'ids-error-def',
+  host: {
+    hidden: '',
+  },
 })
 export class IdsErrorDefinitionDirective {
   /**
@@ -40,13 +50,13 @@ export class IdsErrorDefinitionDirective {
    */
   public code = input.required<string>();
 
-  private _elementRef = inject(ElementRef);
+  private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   /**
    * The validation error's message that will be presented to the user
    */
-  get errorMessage(): string {
-    return (this._elementRef.nativeElement as HTMLElement).innerText;
+  public get errorMessage(): string {
+    return this._elementRef.nativeElement.textContent?.trim() ?? '';
   }
 
   /**

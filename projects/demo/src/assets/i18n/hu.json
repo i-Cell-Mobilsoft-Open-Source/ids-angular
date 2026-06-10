@@ -51,6 +51,13 @@
     "STANDALONE": "Különálló",
     "GROUPED": "Csoportban"
   },
+  "CHECKBOX": {
+    "FORMGROUP": "<form> taggal használva",
+    "GROUPED_WITH_VALIDATOR": "Csoportban (validátorral)",
+    "ERROR": {
+      "MINIMUM_COUNT_SELECTED": "Legalább {{minimumCount}} checkboxot kell kiválasztani."
+    }
+  },
   "FORM_FIELD": {
     "LABEL": {
       "NAME": "Név",

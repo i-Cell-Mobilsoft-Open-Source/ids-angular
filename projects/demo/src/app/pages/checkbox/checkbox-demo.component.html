@@ -8,6 +8,41 @@
       <ng-container component>
         <div component class="checkbox-grid">
           <div class="checkbox-item">
+            <h2>{{ "CHECKBOX.FORMGROUP" | translate }}</h2>
+            <form [formGroup]="_checkboxDemoService.form">
+              <ids-checkbox formControlName="terms_and_conditions">
+                I accept the terms and conditions
+                @if (_checkboxDemoService.helperModel.allowHint) {
+                  <ids-hint-message>Accept the terms and conditions</ids-hint-message>
+                }
+                <ids-error-message>
+                  <ids-error-def code="required"> {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: 'Terms and conditions' } }}</ids-error-def>
+                </ids-error-message>
+              </ids-checkbox>
+
+              <ids-checkbox
+              formControlName="privacy_policy">
+                I accept the privacy policy
+                @if (_checkboxDemoService.helperModel.allowHint) {
+                  <ids-hint-message>Accept the privacy policy</ids-hint-message>
+                }
+                <ids-error-message>
+                  <ids-error-def code="required"> {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: 'Privacy policy' } }}</ids-error-def>
+                </ids-error-message>
+              </ids-checkbox>
+
+              <ids-checkbox formControlName="marketing_materials">
+                I accept the marketing materials
+                @if (_checkboxDemoService.helperModel.allowHint) {
+                  <ids-hint-message>Accept the marketing materials</ids-hint-message>
+                }
+                <ids-error-message>
+                  <ids-error-def code="required"> {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: 'Marketing materials' } }}</ids-error-def>
+                </ids-error-message>
+              </ids-checkbox>
+            </form>
+            </div>
+            <div class="checkbox-item">
             <h2>{{ "COMMON.STANDALONE" | translate }}</h2>
             <ul class="checkbox-group">
               <li>
@@ -19,10 +54,13 @@
                   [disabled]="_checkboxDemoService.model.disabled"
                   [(ngModel)]="_checkboxDemoService.standalone.unselected"
                 >
-                  {{ _checkboxDemoService.helperModel.label }}
+                  I accept the terms and conditions
                   @if (_checkboxDemoService.helperModel.allowHint) {
-                    <ids-hint-message>{{ _checkboxDemoService.helperModel.hintMessage }}</ids-hint-message>
+                    <ids-hint-message>Accept the terms and conditions</ids-hint-message>
                   }
+                  <ids-error-message>
+                    <ids-error-def code="required"> {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: 'Terms and conditions' } }}</ids-error-def>
+                  </ids-error-message>
                 </ids-checkbox>
               </li>
               <li>
@@ -35,10 +73,13 @@
                   [indeterminate]="true"
                   [(ngModel)]="_checkboxDemoService.standalone.indeterminate"
                 >
-                  {{ _checkboxDemoService.helperModel.label }}
+                  I accept the privacy policy
                   @if (_checkboxDemoService.helperModel.allowHint) {
-                    <ids-hint-message>{{ _checkboxDemoService.helperModel.hintMessage }}</ids-hint-message>
+                    <ids-hint-message>Accept the privacy policy</ids-hint-message>
                   }
+                  <ids-error-message>
+                    <ids-error-def code="required"> {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: 'Privacy policy' } }}</ids-error-def>
+                  </ids-error-message>
                 </ids-checkbox>
               </li>
               <li>
@@ -50,10 +91,13 @@
                   [disabled]="_checkboxDemoService.model.disabled"
                   [(ngModel)]="_checkboxDemoService.standalone.selected"
                 >
-                  {{ _checkboxDemoService.helperModel.label }}
+                  I accept the marketing materials
                   @if (_checkboxDemoService.helperModel.allowHint) {
-                    <ids-hint-message>{{ _checkboxDemoService.helperModel.hintMessage }}</ids-hint-message>
+                    <ids-hint-message>Accept the marketing materials</ids-hint-message>
                   }
+                  <ids-error-message>
+                    <ids-error-def code="required"> {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: 'Marketing materials' } }}</ids-error-def>
+                  </ids-error-message>
                 </ids-checkbox>
               </li>
             </ul>
@@ -65,15 +109,78 @@
               [label]="_checkboxDemoService.groupModel.groupLabel"
               [allowParent]="_checkboxDemoService.groupModel.allowParent"
               [parentLabel]="_checkboxDemoService.groupModel.parentLabel"
-              [name]="_checkboxDemoService.groupModel.name"
               [size]="_checkboxDemoService.groupModel.size"
               [variant]="_checkboxDemoService.groupModel.variant"
               [orientation]="_checkboxDemoService.groupModel.orientation"
+              [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk"
             >
-              <ids-checkbox [(ngModel)]="_checkboxDemoService.group.toothBrushing">Tooth brushing</ids-checkbox>
-              <ids-checkbox [(ngModel)]="_checkboxDemoService.group.bath">Bath</ids-checkbox>
-              <ids-checkbox [(ngModel)]="_checkboxDemoService.group.sleep">Sleep</ids-checkbox>
+              @if (_checkboxDemoService.groupInputHelperModel.allowHint) {
+                <ids-hint-message>Select at least two todos</ids-hint-message>
+              }
+              <ids-checkbox
+                [required]="_checkboxDemoService.groupModel.showAsterisk"
+                [(ngModel)]="_checkboxDemoService.group.toothBrushing">Tooth brushing</ids-checkbox>
+              <ids-checkbox
+                [(ngModel)]="_checkboxDemoService.group.bath">Bath</ids-checkbox>
+              <ids-checkbox
+                [required]="_checkboxDemoService.groupModel.showAsterisk"
+                [(ngModel)]="_checkboxDemoService.group.sleep">Sleep</ids-checkbox>
+
+                @if (_checkboxDemoService.groupModel.showAsterisk) {
+                  <ids-error-message>
+                    {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: 'Options' } }}
+                  </ids-error-message>
+                }
             </ids-checkbox-group>
+          </div>
+          <div class="checkbox-item">
+            <h2>{{ "CHECKBOX.GROUPED_WITH_VALIDATOR" | translate }}</h2>
+            <form [formGroup]="_checkboxDemoService.formGroup">
+              <div formGroupName="toppings">
+              <ids-checkbox-group
+                [label]="_checkboxDemoService.groupModel.groupLabel"
+                [allowParent]="_checkboxDemoService.groupModel.allowParent"
+                [parentLabel]="_checkboxDemoService.groupModel.parentLabel"
+                [size]="_checkboxDemoService.groupModel.size"
+                [variant]="_checkboxDemoService.groupModel.variant"
+                [orientation]="_checkboxDemoService.groupModel.orientation"
+                [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk"
+              >
+                @if (_checkboxDemoService.groupInputHelperModel.allowHint) {
+                  <ids-hint-message>Select at least two toppings</ids-hint-message>
+                }
+                <ids-checkbox
+                formControlName="cheese">Cheese</ids-checkbox>
+                <ids-checkbox formControlName="ham">Ham</ids-checkbox>
+                <ids-checkbox formControlName="corn">Corn</ids-checkbox>
+                <ids-checkbox formControlName="mushrooms">Mushrooms</ids-checkbox>
+                <ids-error-message>
+                  <ids-error-def code="minimumCountSelected"> {{ "CHECKBOX.ERROR.MINIMUM_COUNT_SELECTED" | translate: { minimumCount: 2 } }}</ids-error-def>
+                </ids-error-message>
+              </ids-checkbox-group>
+              </div>
+              <div formGroupName="cheeses">
+                <ids-checkbox-group
+                  [label]="_checkboxDemoService.groupModel.groupLabel"
+                  [allowParent]="_checkboxDemoService.groupModel.allowParent"
+                  [parentLabel]="_checkboxDemoService.groupModel.parentLabel"
+                  [size]="_checkboxDemoService.groupModel.size"
+                  [variant]="_checkboxDemoService.groupModel.variant"
+                  [orientation]="_checkboxDemoService.groupModel.orientation"
+                  [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk"
+                >
+                @if (_checkboxDemoService.groupInputHelperModel.allowHint) {
+                  <ids-hint-message>Select at least one cheese</ids-hint-message>
+                }
+                  <ids-checkbox formControlName="cheddar">Cheddar</ids-checkbox>
+                  <ids-checkbox formControlName="mozzarella">Mozzarella</ids-checkbox>
+                  <ids-checkbox formControlName="parmesan">Parmesan</ids-checkbox>
+                  <ids-error-message>
+                    <ids-error-def code="minimumCountSelected"> {{ "CHECKBOX.ERROR.MINIMUM_COUNT_SELECTED" | translate: { minimumCount: 1 } }}</ids-error-def>
+                  </ids-error-message>
+                </ids-checkbox-group>
+              </div>
+            </form>
           </div>
         </div>
       </ng-container>
@@ -104,6 +211,15 @@
         configType="input"
         [controlConfig]="_checkboxDemoService.groupInputControlConfig"
         [(model)]="_checkboxDemoService.groupModel"
+        (resetted)="_checkboxDemoService.reset()"
+      />
+
+      <app-control-table
+        controls
+        controlName="Checkbox group"
+        configType="helper"
+        [controlConfig]="_checkboxDemoService.groupInputHelperControlConfig"
+        [(model)]="_checkboxDemoService.groupInputHelperModel"
         (resetted)="_checkboxDemoService.reset()"
       />
     </app-tryout-controls>

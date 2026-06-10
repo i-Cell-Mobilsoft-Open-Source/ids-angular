@@ -7,8 +7,7 @@ import { IdsErrorMessageMapping } from '../types/error-message-mapping';
 import { Component, ViewEncapsulation, computed, contentChildren, inject, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
-import { ComponentBase } from '@i-cell/ids-angular/core';
-import { IDS_CONTROL_CONTAINER, IdsControlAccessor } from '@i-cell/ids-angular/core/tokens/control-container';
+import { ComponentBase, IDS_CONTROL_CONTAINER, IdsControlAccessor } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { of, startWith, switchMap } from 'rxjs';
 

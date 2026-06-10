@@ -7,8 +7,14 @@ import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, model, output, signal, viewChild } from '@angular/core';
 import { ControlValueAccessor, FormControlName, NG_VALUE_ACCESSOR, NgControl, NgModel, Validators } from '@angular/forms';
-import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute, isString } from '@i-cell/ids-angular/core';
-import { IDS_CONTROL_CONTAINER } from '@i-cell/ids-angular/core/tokens/control-container';
+import {
+  ComponentBaseWithDefaults,
+  IdsSizeType,
+  coerceBooleanAttribute,
+  coerceNumberAttribute,
+  isString,
+  IDS_CONTROL_CONTAINER,
+} from '@i-cell/ids-angular/core';
 import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 

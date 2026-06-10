@@ -6,14 +6,18 @@ import { IDS_CHECKBOX_PARENT, IdsCheckboxParent } from './types/checkbox-parent'
 import { IdsCheckboxState } from './types/checkbox-state.type';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
-import { IDS_CONTROL_CONTAINER } from '../core/tokens/control-container';
-import { IdsErrorMessageComponent } from '../forms/components/message/error-message/error-message.component';
-import { IdsHintMessageComponent } from '../forms/components/message/hint-message/hint-message.component';
-
 import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, inject, input, signal, ViewEncapsulation } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlContainer } from '@angular/forms';
-import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
+import {
+  coerceBooleanAttribute,
+  ComponentBaseWithDefaults,
+  IdsOrientation,
+  IdsOrientationType,
+  IdsSizeType,
+  IDS_CONTROL_CONTAINER,
+} from '@i-cell/ids-angular/core';
+import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 import { of, startWith, switchMap } from 'rxjs';
 
 const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();

@@ -4,27 +4,53 @@ import { IdsRadioChangeEvent } from './types/radio-events.class';
 import { IdsRadioVariantType } from './types/radio-variant.type';
 
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterContentChecked, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChildren,
+  forwardRef,
+  Input,
+  input,
+  isDevMode,
+  OnInit,
+  output,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, IdsOrientation, IdsOrientationType, IdsPositionType, IdsSizeType, IdsVerticalPosition, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
+import {
+  coerceBooleanAttribute,
+  ComponentBaseWithDefaults,
+  IdsOrientation,
+  IdsOrientationType,
+  IdsPositionType,
+  IdsSizeType,
+  IdsVerticalPosition,
+} from '@i-cell/ids-angular/core';
+import { IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 
 const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 
-@Directive({
+@Component({
   selector: 'ids-radio-group',
-  standalone: true,
+  templateUrl: './radio-group.component.html',
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => IdsRadioGroupDirective),
+      useExisting: forwardRef(() => IdsRadioGroupComponent),
       multi: true,
     },
   ],
   host: {
     '(keydown)': '_handleKeyDown($event)',
+    'role': 'radiogroup',
   },
 })
-export class IdsRadioGroupDirective
+export class IdsRadioGroupComponent
   extends ComponentBaseWithDefaults<IdsRadioDefaultConfig>
   implements OnInit, AfterContentChecked, ControlValueAccessor {
   protected override get _hostName(): string {
@@ -35,34 +61,44 @@ export class IdsRadioGroupDirective
 
   private _selectionModel?: SelectionModel<IdsRadioComponent>;
   private _rawValue: unknown;
-  private _items = contentChildren<IdsRadioComponent>(IdsRadioComponent, { descendants: true });
+  private _items = contentChildren(IdsRadioComponent, { descendants: true });
 
   public name = input.required<string>();
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public groupLabel = input<string>('', { alias: 'label' });
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsRadioVariantType>(this._defaultConfig.variant);
   public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
   public labelPosition = input<IdsPositionType>(this._defaultConfig.labelPosition);
   public isDisabled = signal<boolean>(false);
 
+  protected _groupLabelId = computed(() =>  `${this.id()}-label`);
+  protected _hasHint = computed(() => Boolean(this.hintMessage().length));
+
+  public readonly hintMessage = contentChildren(IdsHintMessageComponent);
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
     this.orientation(),
     this.labelPosition(),
+    this.variant(),
+    this.isDisabled() ? 'disabled' : null,
   ]));
 
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => {};
 
   @Input() public valueCompareFn?: (o1: IdsRadioComponent, o2: IdsRadioComponent) => boolean;
+
   @Input({ transform: coerceBooleanAttribute })
   set disabled(value: boolean) {
-    if (value !== this.disabled) {
+    if (value !== this.isDisabled()) {
       this.isDisabled.set(value);
     }
   }
 
   public readonly itemChanges = output<IdsRadioChangeEvent>();
+
+  public hasErrorState = computed(() => this.required() && this._items().every((item) => !item.selected()));
 
   protected _handleKeyDown(event: KeyboardEvent): void {
     const items = this._items();

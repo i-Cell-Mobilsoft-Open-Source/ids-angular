@@ -5,7 +5,7 @@
       [hasDarkBackground]="_radioDemoService.model.variant === 'light'"
       (resetted)="_radioDemoService.reset()"
     >
-      <div component class="flex gap-12">
+      <div component class="flex gap-12" [ngStyle]="{ 'flex-direction': _radioDemoService.model.orientation === 'horizontal' ? 'column' : 'row' }">
         <div class="flex flex-col gap-4">
           <h2>Simple group</h2>
           <ids-radio-group
@@ -16,26 +16,31 @@
             [variant]="_radioDemoService.model.variant"
             [orientation]="_radioDemoService.model.orientation"
             [labelPosition]="_radioDemoService.model.labelPosition"
+            [label]="_radioDemoService.helperModel.showGroupLabel ? _radioDemoService.model.name + '-simple' : ''"
             [(ngModel)]="_radioDemoService.simpleValue"
           >
+            @if (_radioDemoService.helperModel.showGroupHintMessage) {
+              <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+            }
+
             <ids-radio value="chicken">Chicken
               @if (_radioDemoService.helperModel.allowHint) {
-                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-radio>
             <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled">Beef
               @if (_radioDemoService.helperModel.allowHint) {
-                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-radio>
             <ids-radio value="pork">Pork
               @if (_radioDemoService.helperModel.allowHint) {
-                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-radio>
             <ids-radio value="fish">Fish
               @if (_radioDemoService.helperModel.allowHint) {
-                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-radio>
           </ids-radio-group>
@@ -43,6 +48,7 @@
         <div class="flex flex-col gap-4">
           <h2>Wrapped in cards</h2>
           <ids-radio-group
+            #radioGroup
             [name]="_radioDemoService.model.name + '-cards'"
             [required]="_radioDemoService.model.required"
             [disabled]="_radioDemoService.model.disabled"
@@ -50,33 +56,49 @@
             [variant]="_radioDemoService.model.variant"
             [orientation]="_radioDemoService.model.orientation"
             [labelPosition]="_radioDemoService.model.labelPosition"
+            [label]="_radioDemoService.helperModel.showGroupLabel ? _radioDemoService.model.name + '-wrapped' : ''"
             [(ngModel)]="_radioDemoService.wrappedValue"
           >
+            @if (_radioDemoService.helperModel.showGroupHintMessage) {
+              <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+            }
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="chicken">Chicken
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                }
+                @if (_radioDemoService.model.required && !_radioDemoService.model.disabled) {
+                  <ids-error-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-error-message>
                 }
               </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
-              <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled">Beef
+              <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled || _radioDemoService.model.disabled">Beef
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message [disabled]="_radioDemoService.model.disabled || _radioDemoService.helperModel.onlyOneItemIsDisabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                }
+                @if (_radioDemoService.model.required && !_radioDemoService.model.disabled && !_radioDemoService.helperModel.onlyOneItemIsDisabled) {
+                  <ids-error-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-error-message>
                 }
               </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="pork">Pork
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                }
+                @if (_radioDemoService.model.required && !_radioDemoService.model.disabled) {
+                  <ids-error-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-error-message>
                 }
               </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="fish">Fish
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                }
+                @if (_radioDemoService.model.required && !_radioDemoService.model.disabled) {
+                  <ids-error-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-error-message>
                 }
               </ids-radio>
             </ids-card>

@@ -19,13 +19,15 @@
   <div class="ids-radio__inner-circle" (click)="_innerCircleClick()"></div>
 </div>
 
-<div class="ids-radio__label-wrapper">
+<div class="ids-radio__label-wrapper" (click)="_touchTargetClick()">
   <div class="ids-radio__label-container">
     <label class="ids-radio__label" [for]="_inputId()">
       <ng-content />
     </label>
   </div>
-  @if (hintMessage().length > 0) {
-    <ng-content select="ids-hint-message" />
+  @if (errorMessages().length > 0 && _hasErrorState()) {
+    <ng-content select="ids-error-message"  />
+  } @else if (hintMessage().length > 0) {
+    <ng-content select="ids-hint-message"/>
   }
 </div>

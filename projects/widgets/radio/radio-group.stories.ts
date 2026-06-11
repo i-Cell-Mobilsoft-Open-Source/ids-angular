@@ -1,4 +1,4 @@
-import { IdsRadioGroupDirective } from './radio-group.directive';
+import { IdsRadioGroupComponent } from './radio-group.component';
 import { IdsRadioComponent } from './radio.component';
 import { IdsRadioVariant } from './types/radio-variant.type';
 
@@ -9,10 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { Meta, StoryObj, argsToTemplate, moduleMetadata } from '@storybook/angular';
 
-type StoryType = IdsRadioGroupDirective;
+type StoryType = IdsRadioGroupComponent;
 
 export default {
-  component: IdsRadioGroupDirective,
+  component: IdsRadioGroupComponent,
   title: 'Components/Radio Group',
   tags: ['autodocs'],
   decorators: [

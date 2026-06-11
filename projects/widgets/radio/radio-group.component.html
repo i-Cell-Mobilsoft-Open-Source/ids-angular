@@ -1,0 +1,21 @@
+<div class="ids-radio-group__legend">
+
+  <div class="ids-radio-group__legend-container">
+    @if (required() && groupLabel().length > 0) {
+      <span class="ids-form-field__required-marker"></span>
+    }
+    <label class="ids-radio-group__legend-label"
+      [for]="id()"
+      [id]="_groupLabelId()">{{ groupLabel() }}
+    </label>
+  </div>
+  @if (_hasHint()) {
+    <ng-content select="ids-hint-message" />
+  }
+</div>
+<div class="ids-radio-group__list">
+  <ng-content />
+</div>
+<div class="ids-radio-group__error-container">
+  <ng-content select="ids-error-message" />
+</div>

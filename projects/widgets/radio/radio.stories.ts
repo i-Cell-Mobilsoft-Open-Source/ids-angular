@@ -1,4 +1,4 @@
-import { IdsRadioGroupDirective } from './radio-group.directive';
+import { IdsRadioGroupComponent } from './radio-group.component';
 import { IdsRadioComponent } from './radio.component';
 
 import { FormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [
-        IdsRadioGroupDirective,
+        IdsRadioGroupComponent,
         FormsModule,
       ],
     }),

@@ -22,6 +22,8 @@ type RadioHelperControls = {
   onlyOneItemIsDisabled: boolean,
   allowHint: boolean,
   hintMessage: string,
+  showGroupLabel: boolean,
+  showGroupHintMessage: boolean,
 };
 
 @Injectable()
@@ -93,6 +95,18 @@ export class RadioDemoService {
       type: 'string',
       default: '-',
       demoDefault: 'Hint message',
+    },
+    showGroupLabel: {
+      description: 'Whether to show the label of the radio group or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+    },
+    showGroupHintMessage: {
+      description: 'Whether to show the hint message of the radio group or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
     },
   };
 

@@ -4,27 +4,70 @@ import { IdsRadioChangeEvent } from './types/radio-events.class';
 import { IdsRadioVariantType } from './types/radio-variant.type';
 
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterContentChecked, computed, contentChildren, Directive, forwardRef, Input, input, isDevMode, OnInit, output, signal } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { coerceBooleanAttribute, IdsOrientation, IdsOrientationType, IdsPositionType, IdsSizeType, IdsVerticalPosition, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChildren,
+  forwardRef,
+  inject,
+  Injector,
+  Input,
+  input,
+  isDevMode,
+  OnInit,
+  output,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import {
+  ControlValueAccessor,
+  FormControlName,
+  FormGroupDirective,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  NgForm,
+  Validators,
+} from '@angular/forms';
+import {
+  coerceBooleanAttribute,
+  ComponentBaseWithDefaults,
+  IDS_CONTROL_CONTAINER,
+  IdsOrientation,
+  IdsOrientationType,
+  IdsPositionType,
+  IdsSizeType,
+  IdsVerticalPosition,
+} from '@i-cell/ids-angular/core';
+import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { of, startWith, switchMap } from 'rxjs';
 
 const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 
-@Directive({
+@Component({
   selector: 'ids-radio-group',
-  standalone: true,
+  templateUrl: './radio-group.component.html',
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
+      provide: IDS_CONTROL_CONTAINER,
+      useExisting: IdsRadioGroupComponent,
+    },
+    {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => IdsRadioGroupDirective),
+      useExisting: forwardRef(() => IdsRadioGroupComponent),
       multi: true,
     },
   ],
   host: {
     '(keydown)': '_handleKeyDown($event)',
+    'role': 'radiogroup',
   },
 })
-export class IdsRadioGroupDirective
+export class IdsRadioGroupComponent
   extends ComponentBaseWithDefaults<IdsRadioDefaultConfig>
   implements OnInit, AfterContentChecked, ControlValueAccessor {
   protected override get _hostName(): string {
@@ -33,36 +76,95 @@ export class IdsRadioGroupDirective
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_RADIO_DEFAULT_CONFIG);
 
+  private readonly _injector = inject(Injector);
+  private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
+  private readonly _parentForm = inject(NgForm, { optional: true });
+
   private _selectionModel?: SelectionModel<IdsRadioComponent>;
   private _rawValue: unknown;
-  private _items = contentChildren<IdsRadioComponent>(IdsRadioComponent, { descendants: true });
+  private _items = contentChildren(IdsRadioComponent, { descendants: true });
 
   public name = input.required<string>();
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
+  public groupLabel = input<string>('', { alias: 'label' });
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsRadioVariantType>(this._defaultConfig.variant);
   public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
   public labelPosition = input<IdsPositionType>(this._defaultConfig.labelPosition);
   public isDisabled = signal<boolean>(false);
+  public controlDir = signal<NgControl | null>(null);
 
+  protected _groupLabelId = computed(() =>  `${this.id()}-label`);
+  protected _hasHint = computed(() => Boolean(this.hintMessage().length));
+  private _hasSelection = computed(() => this._items().some((item) => item.selected()));
+  private _isInForm = (): boolean => !!(this._parentFormGroup || this._parentForm);
+
+  public readonly hintMessage = contentChildren(IdsHintMessageComponent);
+  public readonly errorMessages = contentChildren(IdsErrorMessageComponent);
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
     this.orientation(),
     this.labelPosition(),
+    this.variant(),
+    this.isDisabled() ? 'disabled' : null,
+    this.hasErrorState() ? 'invalid' : null,
   ]));
 
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => {};
 
   @Input() public valueCompareFn?: (o1: IdsRadioComponent, o2: IdsRadioComponent) => boolean;
+
   @Input({ transform: coerceBooleanAttribute })
   set disabled(value: boolean) {
-    if (value !== this.disabled) {
+    if (value !== this.isDisabled()) {
       this.isDisabled.set(value);
     }
   }
 
   public readonly itemChanges = output<IdsRadioChangeEvent>();
+
+  private readonly _controlState = toSignal(
+    toObservable(this.controlDir).pipe(
+      switchMap((controlDir) => (controlDir?.control ? controlDir.control.events.pipe(startWith(null)) : of(null))),
+    ),
+    { equal: () => false },
+  );
+
+  public hasErrorState = computed(() => {
+    this._controlState();
+
+    const control = this.controlDir()?.control;
+    const inForm = this._isInForm();
+
+    if (control?.invalid) {
+      if (!inForm) {
+        return true;
+      }
+      const form = this._parentFormGroup || this._parentForm;
+      return !!(control.touched || control.dirty || form?.submitted);
+    }
+
+    if (!inForm && this.required() && !this._hasSelection()) {
+      return true;
+    }
+
+    return false;
+  });
+
+  public hasRequiredValidator = computed(() => {
+    this._controlState();
+    const control = this.controlDir()?.control;
+    const attrRequired = this.required();
+
+    if (!control) {
+      return attrRequired;
+    }
+
+    return attrRequired
+      || control.hasValidator(Validators.required)
+      || control.hasValidator(IdsValidators.required);
+  });
 
   protected _handleKeyDown(event: KeyboardEvent): void {
     const items = this._items();
@@ -122,7 +224,12 @@ export class IdsRadioGroupDirective
   }
 
   public ngOnInit(): void {
+    this.controlDir.set(
+      this._injector.get(NgControl, null, { self: true, optional: true }),
+    );
     this._selectionModel = new SelectionModel<IdsRadioComponent>(false, undefined, false, this.valueCompareFn);
+    this._assertRequiredInputIsSupported();
+    this._subscribeToFormSubmit();
 
     if (this._hasInvalidLabelPosition()) {
       throw this._createHostError('invalid `orientation` + `labelPosition` combination.');
@@ -157,6 +264,18 @@ export class IdsRadioGroupDirective
     this.isDisabled.set(isDisabled);
   }
 
+  public markAsTouched(): void {
+    this._onTouched();
+    this.controlDir()?.control?.markAsTouched();
+  }
+
+  private _subscribeToFormSubmit(): void {
+    const parent = this._parentFormGroup || this._parentForm;
+    parent?.ngSubmit.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      this.controlDir()?.control?.markAsTouched();
+    });
+  }
+
   private _subscribeItemChanges(): void {
     this._items().forEach((item) => {
       item.changes.subscribe(
@@ -174,7 +293,7 @@ export class IdsRadioGroupDirective
     this._selectionModel?.select(source);
     this.itemChanges.emit(change);
     this._handleChange();
-    this._onTouched();
+    this.markAsTouched();
   }
 
   private _setSelectionByValue(value: unknown | unknown[]): void {
@@ -221,5 +340,14 @@ export class IdsRadioGroupDirective
     const labelPosition = this.labelPosition();
 
     return (orientation === IdsOrientation.VERTICAL && Object.values(IdsVerticalPosition).some((pos) => pos === labelPosition));
+  }
+
+  private _assertRequiredInputIsSupported(): void {
+    if (this.required() && this.controlDir() instanceof FormControlName) {
+      throw this._createHostError(
+        'The `[required]` input cannot be used on `ids-radio-group` with `formControlName`. '
+        + 'Configure `Validators.required` on the form control instead.',
+      );
+    }
   }
 }

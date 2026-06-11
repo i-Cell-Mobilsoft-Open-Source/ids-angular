@@ -1,9 +1,9 @@
-import { IdsRadioGroupDirective } from './radio-group.directive';
+import { IdsRadioGroupComponent } from './radio-group.component';
 import { IdsRadioChangeEvent } from './types/radio-events.class';
 
 import { ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
-import { IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
+import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 
 @Component({
   selector: 'ids-radio',
@@ -17,7 +17,7 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
     return 'radio';
   }
 
-  private _group = inject(IdsRadioGroupDirective, { optional: true, skipSelf: true });
+  private _group = inject(IdsRadioGroupComponent, { optional: true, skipSelf: true });
 
   public selected = signal<boolean>(false);
 
@@ -31,17 +31,20 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
 
   protected _isDisabled = computed(() => this.disabled() || this._group?.isDisabled());
   protected _name = computed(() => this._group?.name());
-  protected _required = computed(() => this._group?.required());
+  protected _required = computed(() => this._group?.hasRequiredValidator() ?? false);
+  protected _hasErrorState = computed(() => this._group?.hasErrorState() ?? false);
   protected _ariaChecked = computed(() => this.selected());
   protected _inputId = computed(() => (this.inputId() === this._uniqueId ? `${this._uniqueId}-native` : this.inputId()));
   protected _hostClasses = computed(() => this._getHostClasses([
     this._group?.variant() ?? null,
     this._group?.labelPosition() ?? null,
     this._isDisabled() ? 'disabled' : null,
+    this._hasErrorState() ? 'invalid' : null,
   ]));
 
   private _inputElement = viewChild.required<ElementRef<HTMLButtonElement>>('input');
   public hintMessage = contentChildren(IdsHintMessageComponent, { descendants: true });
+  public errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
 
   public readonly changes = output<IdsRadioChangeEvent>();
 
@@ -56,6 +59,10 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
 
   public onChange(): void {
     this.changes.emit(new IdsRadioChangeEvent(this, this.value()));
+  }
+
+  protected _onBlur(): void {
+    this._group?.markAsTouched();
   }
 
   protected _touchTargetClick(): void {

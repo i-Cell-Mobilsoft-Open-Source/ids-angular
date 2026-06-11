@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsOrientation, IdsOrientationType, IdsPosition, IdsPositionType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsValidators } from '@i-cell/ids-angular/forms';
 import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioVariant, IdsRadioVariantType } from '@i-cell/ids-angular/radio';
 
 const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
@@ -22,10 +24,16 @@ type RadioHelperControls = {
   onlyOneItemIsDisabled: boolean,
   allowHint: boolean,
   hintMessage: string,
+  showGroupLabel: boolean,
+  showGroupHintMessage: boolean,
 };
 
 @Injectable()
 export class RadioDemoService {
+  public form = new FormGroup({
+    selection: new FormControl(null, []),
+  });
+
   public inputControlConfig: DemoControlConfig<RadioInputControls> = {
     name: {
       description: 'Name for radio items. Name is provided for group, but items get it.',
@@ -38,12 +46,27 @@ export class RadioDemoService {
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+      onModelChange: (isRequired?: boolean) => {
+        if (isRequired) {
+          this.form.controls.selection.addValidators(IdsValidators.required);
+        } else {
+          this.form.controls.selection.removeValidators(IdsValidators.required);
+        }
+        this.form.controls.selection.updateValueAndValidity();
+      },
     },
     disabled: {
       description: 'Whether the radio is disabled or not.',
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+      onModelChange: (isDisabled?: boolean) => {
+        if (isDisabled) {
+          this.form.controls.selection.disable();
+        } else {
+          this.form.controls.selection.enable();
+        }
+      },
     },
     size: {
       description: 'Size of the radio.',
@@ -94,6 +117,18 @@ export class RadioDemoService {
       default: '-',
       demoDefault: 'Hint message',
     },
+    showGroupLabel: {
+      description: 'Whether to show the label of the radio group or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+    },
+    showGroupHintMessage: {
+      description: 'Whether to show the hint message of the radio group or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+    },
   };
 
   public methodControlConfig: DemoMethodConfig = [
@@ -123,6 +158,7 @@ export class RadioDemoService {
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+    this.form.reset();
   }
 
   public getMethodConfig(): DemoMethodConfig[] {

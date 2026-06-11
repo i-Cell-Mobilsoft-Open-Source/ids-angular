@@ -8,6 +8,8 @@ import { IdsButtonAppearance, IdsButtonComponent, IdsButtonVariant } from '@i-ce
 import { coerceBooleanAttribute, ComponentBase, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonAppearance, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { Subject, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'ids-snackbar',
@@ -31,7 +33,7 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
     return 'snackbar';
   }
 
-  private _timer?: ReturnType<typeof setTimeout>;
+  private readonly _autoCloseSubject = new Subject<void>();
 
   protected readonly _size = IdsSize;
   protected readonly _iconButtonAppearance = IdsIconButtonAppearance;
@@ -54,14 +56,17 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
     return Math.max(this.message().length * READ_SPEED_PER_CHAR + actionReadDuration, MIN_DURATION);
   });
 
-  protected _hostClasses = computed(() => this._getHostClasses([
-    this.variant(),
-    this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
-  ]));
+  protected _hostClasses = computed(() =>
+    this._getHostClasses([
+      this.variant(),
+      this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
+    ]),
+  );
 
   protected _role = computed(() => (this.urgent() ? 'alert' : 'status'));
   protected _buttonVariant = computed(() =>
-    (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE));
+    (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE),
+  );
 
   private _defaultIcon = computed<string | null>(() => {
     switch (this.variant()) {
@@ -93,15 +98,17 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
 
   private _startTimer(): void {
     if (this._canAutoClose()) {
-      this._timer = setTimeout(() => {
-        this.close();
-      }, this._duration());
+      timer(this._duration())
+        .pipe(takeUntil(this._autoCloseSubject))
+        .subscribe(() => {
+          this.close();
+        });
     }
   }
 
   private _stopTimer(): void {
     if (this._canAutoClose()) {
-      clearTimeout(this._timer);
+      this._autoCloseSubject.next();
     }
   }
 
@@ -120,6 +127,6 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
   }
 
   public ngOnDestroy(): void {
-    clearTimeout(this._timer);
+    this._autoCloseSubject.complete();
   }
 }

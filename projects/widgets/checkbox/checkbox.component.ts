@@ -80,11 +80,11 @@ export class IdsCheckboxComponent
 
   protected _isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
   protected _isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
-  protected _isFocusable = computed(() => !this.disabled() && !this.readonly());
+  protected _isFocusable = computed(() => !this.disabled());
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
-    this.disabled() ? 'disabled' : null,
+    this.disabled() || this.readonly() ? 'disabled' : null,
   ]),
   );
 
@@ -243,7 +243,7 @@ export class IdsCheckboxComponent
       this._handleInputClick();
     }
 
-    if (!this.disabled()) {
+    if (!this.disabled() && !this.readonly()) {
       this._inputElement().nativeElement.focus();
     }
   }
@@ -253,7 +253,9 @@ export class IdsCheckboxComponent
     if (
       this._errorMessages().length > 0 &&
       control?.errors &&
-      (control.touched || control.dirty)
+      (control.touched || control.dirty) &&
+      !this.disabled() &&
+      !this.readonly()
     ) {
       return 'error';
     }

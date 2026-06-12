@@ -20,7 +20,7 @@
     </div>
     @if (_actionButtons()) {
       <div class="ids-notification__action">
-        <ng-content select="button[idsNotificationActionButton]" />
+        <ng-content select="button[idsNotificationActionButton], a[idsNotificationActionButton]" />
       </div>
     }
   </div>

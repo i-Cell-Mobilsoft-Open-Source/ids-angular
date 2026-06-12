@@ -2,7 +2,6 @@ import { ComponentDetailsComponent } from '../../../pages/components/component-d
 import { ContentCardComponent } from '../../content-card/content-card.component';
 
 import { Component, inject } from '@angular/core';
-import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 
 @Component({
@@ -10,7 +9,6 @@ import { IdsChipComponent } from '@i-cell/ids-angular/chip';
   imports: [
     IdsChipComponent,
     ContentCardComponent,
-    IdsButtonComponent,
   ],
   templateUrl: './guidelines.component.html',
 })

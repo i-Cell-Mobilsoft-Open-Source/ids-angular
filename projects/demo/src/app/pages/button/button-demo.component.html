@@ -1,4 +1,9 @@
 <app-demo-and-code (resetDemo)="_buttonDemoService.reset()">
+  <div examples class="flex flex-col gap-6 w-full">
+    @for (example of buttonExamples; track example.id) {
+      <ids-example-viewer [example]="example" />
+    }
+  </div>
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
       [title]="'COMPONENTS.BUTTON' | translate"

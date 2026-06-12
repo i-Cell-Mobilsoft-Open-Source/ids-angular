@@ -40,9 +40,9 @@ type CheckboxGroupInputControls = {
 @Injectable()
 export class CheckboxDemoService {
   public form = new FormGroup({
-    terms_and_conditions: new FormControl(false, [Validators.requiredTrue]),
-    privacy_policy: new FormControl(false, [Validators.requiredTrue]),
-    marketing_materials: new FormControl(false, [Validators.requiredTrue]),
+    terms_and_conditions: new FormControl(false, []),
+    privacy_policy: new FormControl(false, []),
+    marketing_materials: new FormControl(false, []),
   });
 
   public formGroup = new FormGroup({
@@ -99,6 +99,20 @@ export class CheckboxDemoService {
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+      onModelChange: (isRequired?: boolean) => {
+        if (isRequired) {
+          this.form.controls.terms_and_conditions.addValidators(Validators.requiredTrue);
+          this.form.controls.privacy_policy.addValidators(Validators.requiredTrue);
+          this.form.controls.marketing_materials.addValidators(Validators.requiredTrue);
+        } else {
+          this.form.controls.terms_and_conditions.removeValidators(Validators.requiredTrue);
+          this.form.controls.privacy_policy.removeValidators(Validators.requiredTrue);
+          this.form.controls.marketing_materials.removeValidators(Validators.requiredTrue);
+        }
+        this.form.controls.terms_and_conditions.updateValueAndValidity();
+        this.form.controls.privacy_policy.updateValueAndValidity();
+        this.form.controls.marketing_materials.updateValueAndValidity();
+      },
     },
     disabled: {
       description: 'Whether the checkbox is disabled or not.',

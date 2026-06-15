@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common'; // <-- Import NgClass
-import { Component, input, OnInit, OnDestroy, computed } from '@angular/core';
+import { Component, input, OnInit, OnDestroy, computed, signal } from '@angular/core';
 
 @Component({
   selector: 'app-image',
@@ -8,7 +8,6 @@ import { Component, input, OnInit, OnDestroy, computed } from '@angular/core';
   styleUrl: './image.component.scss',
 })
 export class ImageComponent implements OnInit, OnDestroy {
-
   public orientation = input<'horizontal' | 'vertical' | undefined>('vertical');
 
   public state = input<'do' | 'dont' | 'no_state' | undefined>();
@@ -68,26 +67,30 @@ export class ImageComponent implements OnInit, OnDestroy {
     }
   });
 
-  public imgFilledClass = computed<string>(() =>
-    (this.filledInContainer()
-      ? 'object-cover lg:w-full lg:h-full'
-      : 'object-contain'
-    ),
-  );
+  public imgFilledClass = computed<string>(() => (this.filledInContainer() ? 'object-cover lg:w-full lg:h-full' : 'object-contain'));
 
-  public containerPaddingClass = computed<string>(() =>
-    (this.filledInContainer()
-      ? 'p-0' : 'p-4'),
-  );
+  public containerPaddingClass = computed<string>(() => (this.filledInContainer() ? 'p-0' : 'p-4'));
 
-  public currentImageUrl = '';
+  public isDarkMode = signal<boolean>(false);
+  public currentImageUrl = computed<string>(() => {
+    const darkTheme = this.isDarkMode();
+    const lightImg = this.imageUrlLight();
+    const darkImg = this.imageUrlDark();
+
+    if (darkTheme) {
+      return darkImg || lightImg || '';
+    } else {
+      return lightImg || darkImg || '';
+    }
+  });
+
   private _observer: MutationObserver | undefined;
 
   public ngOnInit(): void {
-    this._updateImageBasedOnTheme();
+    this.isDarkMode.set(document.documentElement.classList.contains('ids-theme-dark'));
 
     this._observer = new MutationObserver(() => {
-      this._updateImageBasedOnTheme();
+      this.isDarkMode.set(document.documentElement.classList.contains('ids-theme-dark'));
     });
 
     this._observer.observe(document.documentElement, {
@@ -99,14 +102,4 @@ export class ImageComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this._observer?.disconnect();
   }
-
-  private _updateImageBasedOnTheme(): void {
-    const htmlClassList = document.documentElement.classList;
-    if (htmlClassList.contains('ids-theme-dark')) {
-      this.currentImageUrl = this.imageUrlDark() || this.imageUrlLight() || '';
-    } else {
-      this.currentImageUrl = this.imageUrlLight() || this.imageUrlDark() || '';
-    }
-  }
-
 }

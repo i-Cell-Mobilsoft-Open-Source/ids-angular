@@ -77,7 +77,7 @@
               </ids-side-nav-item>
               <ids-side-nav-item
                 label="Avatar"
-                target="components/avatar"
+                target="components/avatar/demo"
                 [disabled]="_sideNavDemoService.helperModel.disabled"
                 [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
               >
@@ -90,7 +90,7 @@
               </ids-side-nav-item>
               <ids-side-nav-item
                 label="Side Navigation"
-                target="components/side-nav"
+                target="components/side-nav/demo"
                 [disabled]="_sideNavDemoService.helperModel.disabled"
                 [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
               >
@@ -176,7 +176,7 @@
                 <li
                   idsSideNavItem
                   label="Avatar"
-                  target="components/avatar"
+                  target="components/avatar/demo"
                   [disabled]="_sideNavDemoService.helperModel.disabled"
                   [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
                 >
@@ -190,7 +190,7 @@
                 <li
                   idsSideNavItem
                   label="Side Navigation"
-                  target="components/side-nav"
+                  target="components/side-nav/demo"
                   [disabled]="_sideNavDemoService.helperModel.disabled"
                   [hasTooltip]="_sideNavDemoService.helperModel.hasTooltip"
                 >
@@ -230,8 +230,3 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
-<div documentation class="w-full mt-8">
-  <h3 class="text-lg font-bold mb-4">Props</h3>
-
-  <app-prop-table [config]="[_sideNavDemoService.sideNavInputControlConfig, _sideNavDemoService.helperControlConfig]" />
-</div>

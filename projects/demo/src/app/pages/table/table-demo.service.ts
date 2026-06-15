@@ -1,22 +1,34 @@
 import { PeriodicTableElement } from './periodic-table-element';
-import { TranslateCellRendererComponent } from './table-demo.component';
+import { SuffixedCellRendererComponent, TranslateCellRendererComponent } from './table-demo.component';
 
 import { environment } from '../../../environments/environment';
 
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { compare, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_TABLE_DEFAULT_CONFIG_FACTORY, IdsTableAppearance, IdsTableAppearanceType, IdsTableColumnDef, IdsTableRequestPaginationData, IdsTableResponseData, IdsTableSortDirection, IdsTableSortInfo, IdsTableVariant, IdsTableVariantType } from '@i-cell/ids-angular/table';
+import {
+  IDS_TABLE_DEFAULT_CONFIG_FACTORY,
+  IdsTableAppearance,
+  IdsTableAppearanceType,
+  IdsTableColumnDef,
+  IdsTableRequestPaginationData,
+  IdsTableResponseData,
+  IdsTableSortDirection,
+  IdsTableSortInfo,
+  IdsTableVariant,
+  IdsTableVariantType,
+} from '@i-cell/ids-angular/table';
 import { TranslateService } from '@ngx-translate/core';
 import { map, Observable } from 'rxjs';
 
 export type TableInputControls = {
-  appearance: IdsTableAppearanceType,
-  size: IdsSizeType,
-  variant: IdsTableVariantType,
+  appearance: IdsTableAppearanceType;
+  size: IdsSizeType;
+  variant: IdsTableVariantType;
   fixedHeader: boolean;
   enableRowSelection: boolean;
   clearSelectionOnChange: boolean;
@@ -125,7 +137,8 @@ export class TableDemoService {
       label: 'TABLE.COL.ATOMIC_MASS',
       headerCellRenderer: TranslateCellRendererComponent,
       field: 'atomicMass',
-      cellRenderer: 'numeric',
+      cellRenderer: SuffixedCellRendererComponent,
+      cellRendererInput: { suffix: ' (g/mol)' },
       sortable: true,
       orderName: 'atomicMass',
     },
@@ -133,7 +146,8 @@ export class TableDemoService {
       id: 'melt',
       label: 'TABLE.COL.MELT',
       headerCellRenderer: TranslateCellRendererComponent,
-      value: (rowData): string => (Number.isFinite(rowData.melt) ? this.meltNumberFormat.format(rowData.melt! - zeroCelsiusInKelvin) : ''),
+      valueGetter: (rowData): string =>
+        (Number.isFinite(rowData.melt) ? this.meltNumberFormat.format(rowData.melt! - zeroCelsiusInKelvin) : ''),
       cellClasses: 'table-demo_cell__numeric',
     },
     {
@@ -222,6 +236,25 @@ export class TableDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'expandAll()',
+      description: 'Open up all row details.',
+      returnType: 'void',
+    },
+    {
+      name: 'collapseAll()',
+      description: 'Closes all opened row details.',
+      returnType: 'void',
+    },
+    {
+      name: 'updateCellContents()',
+      description: 'Refresh rendered cell values.'+
+      ' Useful if for eg. the `value` getter function is not pure and the values need to be refreshed manually.',
+      returnType: 'void',
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<TableInputControls>(this.inputControlConfig);
 
   public model: TableInputControls = { ...this.defaults };
@@ -230,4 +263,11 @@ export class TableDemoService {
     this.model = { ...this.defaults };
   }
 
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodControlConfig];
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
+  }
 }

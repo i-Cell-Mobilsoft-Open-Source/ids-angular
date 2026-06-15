@@ -1,22 +1,65 @@
-<div
-  #header
-  role="button"
-  class="ids-accordion-item-summary"
-  [id]="_headerId()"
-  [attr.aria-expanded]="isExpanded ? 'true' : 'false'"
-  [attr.aria-controls]="_contentId()"
-  [attr.tabindex]="_parentOrSelfDisabled() ? -1 : 0"
-  [attr.aria-disabled]="_parentOrSelfDisabled()"
-  (click)="toggle()"
->
-  @if (_parentOrSelfHasLeadingIcon()) {
-    <ids-icon icon-leading [fontIcon]="_icon" />
+@switch (_parentHeadingLevel()) {
+  @case ('h1') {
+    <h1>
+      <ng-container [ngTemplateOutlet]="summaryButtonTemplate" />
+    </h1>
   }
-  <span class="ids-accordion-item-title">{{ summary() }}</span>
-  @if (_parentOrSelfHasTrailingIcon()) {
-    <ids-icon icon-trailing [fontIcon]="_icon" />
+  @case ('h2') {
+    <h2>
+      <ng-container [ngTemplateOutlet]="summaryButtonTemplate" />
+    </h2>
   }
-</div>
+  @case ('h3') {
+    <h3>
+      <ng-container [ngTemplateOutlet]="summaryButtonTemplate" />
+    </h3>
+  }
+  @case ('h4') {
+    <h4>
+      <ng-container [ngTemplateOutlet]="summaryButtonTemplate" />
+    </h4>
+  }
+  @case ('h5') {
+    <h5>
+      <ng-container [ngTemplateOutlet]="summaryButtonTemplate" />
+    </h5>
+  }
+  @case ('h6') {
+    <h6>
+      <ng-container [ngTemplateOutlet]="summaryButtonTemplate" />
+    </h6>
+  }
+  @default {
+    <h3>
+      <ng-container [ngTemplateOutlet]="summaryButtonTemplate" />
+    </h3>
+  }
+}
+
+<ng-template #summaryButtonTemplate>
+  <button
+    #header
+    type="button"
+    role="button"
+    class="ids-accordion-item-summary"
+    [id]="_headerId()"
+    [attr.aria-expanded]="isExpanded ? 'true' : 'false'"
+    [attr.aria-controls]="_contentId()"
+    [attr.tabindex]="_parentOrSelfDisabled() ? -1 : 0"
+    [attr.aria-disabled]="_parentOrSelfDisabled()"
+    (click)="toggle()"
+  >
+    @if (_parentOrSelfHasLeadingIcon()) {
+      <ids-icon icon-leading [fontIcon]="_icon" />
+    }
+    <span class="ids-accordion-item-title">
+      {{ summary() }}
+    </span>
+    @if (_parentOrSelfHasTrailingIcon()) {
+      <ids-icon icon-trailing [fontIcon]="_icon" />
+    }
+  </button>
+</ng-template>
 <div
   role="region"
   class="ids-accordion-item-content"

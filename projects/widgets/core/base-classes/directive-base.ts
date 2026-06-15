@@ -6,7 +6,6 @@ import { DestroyRef, Directive, inject, InjectionToken, Signal } from '@angular/
   host: {
     '[class]': '_hostClasses()',
   },
-  standalone: false,
 })
 export abstract class DirectiveBase {
   protected get _hostName(): string {

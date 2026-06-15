@@ -3,3 +3,22 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
 }
+
+.form-field-dynamic-required {
+  margin-top: 3rem;
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 24rem;
+
+    .dynamic-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+  }
+}
+

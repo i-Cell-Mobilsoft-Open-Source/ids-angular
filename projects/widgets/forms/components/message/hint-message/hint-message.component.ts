@@ -8,18 +8,7 @@ import { Component, contentChildren, ViewEncapsulation } from '@angular/core';
   selector: 'ids-hint-message',
   imports: [],
   templateUrl: './hint-message.component.html',
-  host: {
-    class: 'ids-hint-message',
-  },
-  hostDirectives: [
-    {
-      directive: IdsMessageDirective,
-      inputs: [
-        'size: size',
-        'variant: variant',
-      ],
-    },
-  ],
+  hostDirectives: [IdsMessageDirective],
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsHintMessageComponent {

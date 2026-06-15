@@ -1,7 +1,7 @@
 import { GET_NAVIGATION } from '../queries/get-navigation.query';
 
 import { inject, Injectable } from '@angular/core';
-import { ApolloQueryResult } from '@apollo/client/core';
+import { ObservableQuery } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
@@ -27,7 +27,7 @@ export interface StatamicNavNode {
 export class NavigationService {
   private _apollo = inject(Apollo);
 
-  public getNavigation(): Observable<ApolloQueryResult<NavigationQueryResult>> {
+  public getNavigation(): Observable<ObservableQuery.Result<NavigationQueryResult>> {
     return this._apollo.watchQuery<NavigationQueryResult>({
       query: GET_NAVIGATION,
     }).valueChanges;

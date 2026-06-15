@@ -110,4 +110,8 @@ export class MenuItemDemoService {
     this.menuItemModel = { ...this.menuItemDefaults };
     this.menuItemHelperModel = { ...this.menuItemHelperDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.menuItemInputControlConfig];
+  }
 }

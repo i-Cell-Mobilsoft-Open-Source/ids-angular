@@ -1,7 +1,6 @@
 import { DialogDemoService } from './dialog-demo.service';
 
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
-import { PropTableComponent } from '../../components/prop-table/prop-table.component';
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
@@ -31,6 +30,7 @@ export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog
       [mainTitle]="controls!.mainTitle"
       [subTitle]="controls!.subTitle"
       [showCloseButton]="controls!.showCloseButton"
+      [isCloseButtonDisabled]="controls!.isCloseButtonDisabled"
       [showBackdrop]="controls!.showBackdrop"
     >
       @if (helperControls!.useCustomHeader) {
@@ -189,7 +189,6 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
-    PropTableComponent,
   ],
   templateUrl: './dialog-demo.component.html',
   styleUrls: [

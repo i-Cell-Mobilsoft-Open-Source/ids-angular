@@ -1,4 +1,6 @@
+import { IComponentDemoService } from './components/tabs/api/api.component';
 import { AccordionDemoService } from './pages/accordion/accordion-demo.service';
+import { AutocompleteDemoService } from './pages/autocomplete/autocomplete-demo.service';
 import { AvatarDemoService } from './pages/avatar/avatar-demo.service';
 import { BadgeDemoService } from './pages/badge/badge-demo.service';
 import { BreadcrumbDemoService } from './pages/breadcrumb/breadcrumb-demo.service';
@@ -35,53 +37,55 @@ import { TableDemoService } from './pages/table/table-demo.service';
 import { TagDemoService } from './pages/tag/tag-demo.service';
 import { TooltipDemoService } from './pages/tooltip/tooltip-demo.service';
 
-import { EnvironmentProviders, Provider, Type } from '@angular/core';
+import { EnvironmentProviders, InjectionToken, Provider, Type } from '@angular/core';
 import { Routes, Route } from '@angular/router';
 
 const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
-  'accordion': () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
-  'avatar': () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
-  'badge': () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
-  'breadcrumb': () => import('./pages/breadcrumb/breadcrumb-demo.component').then((module) => module.BreadcrumbDemoComponent),
-  'button': () => import('./pages/button/button-demo.component').then((module) => module.ButtonDemoComponent),
-  'card': () => import('./pages/card/card-demo.component').then((module) => module.CardDemoComponent),
-  'checkbox': () => import('./pages/checkbox/checkbox-demo.component').then((module) => module.CheckboxDemoComponent),
-  'chip': () => import('./pages/chip/chip-demo.component').then((module) => module.ChipDemoComponent),
+  accordion: () => import('./pages/accordion/accordion-demo.component').then((module) => module.AccordionDemoComponent),
+  autocomplete: () => import('./pages/autocomplete/autocomplete-demo.component').then((module) => module.AutocompleteDemoComponent),
+  avatar: () => import('./pages/avatar/avatar-demo.component').then((module) => module.AvatarDemoComponent),
+  badge: () => import('./pages/badge/badge-demo.component').then((module) => module.BadgeDemoComponent),
+  breadcrumb: () => import('./pages/breadcrumb/breadcrumb-demo.component').then((module) => module.BreadcrumbDemoComponent),
+  button: () => import('./pages/button/button-demo.component').then((module) => module.ButtonDemoComponent),
+  card: () => import('./pages/card/card-demo.component').then((module) => module.CardDemoComponent),
+  checkbox: () => import('./pages/checkbox/checkbox-demo.component').then((module) => module.CheckboxDemoComponent),
+  chip: () => import('./pages/chip/chip-demo.component').then((module) => module.ChipDemoComponent),
   'date-picker': () => import('./pages/datepicker/datepicker-demo.component').then((module) => module.DatepickerDemoComponent),
-  'dialog': () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
-  'divider': () => import('./pages/divider/divider-demo.component').then((module) => module.DividerDemoComponent),
-  'fieldset': () => import('./pages/fieldset/fieldset-demo.component').then((module) => module.FieldsetDemoComponent),
+  dialog: () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
+  divider: () => import('./pages/divider/divider-demo.component').then((module) => module.DividerDemoComponent),
+  fieldset: () => import('./pages/fieldset/fieldset-demo.component').then((module) => module.FieldsetDemoComponent),
   'form-field': () => import('./pages/form-field/form-field-demo.component').then((module) => module.FormFieldDemoComponent),
-  'icon': () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
+  icon: () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
   'icon-button': () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   'menu-item': () => import('./pages/menu-item/menu-item-demo.component').then((module) => module.MenuItemDemoComponent),
-  'message': () => import('./pages/message/message-demo.component').then((module) => module.MessageDemoComponent),
-  'notification': () => import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
-  'option': () => import('./pages/option/option-demo.component').then((module) => module.OptionDemoComponent),
+  message: () => import('./pages/message/message-demo.component').then((module) => module.MessageDemoComponent),
+  notification: () => import('./pages/notification/notification-demo.component').then((module) => module.NotificationDemoComponent),
+  option: () => import('./pages/option/option-demo.component').then((module) => module.OptionDemoComponent),
   'overlay-panel': () => import('./pages/overlay-panel/overlay-panel-demo.component').then((module) => module.OverlayPanelDemoComponent),
-  'paginator': () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
-  'radio': () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
-  'scrollbar': () => import('./pages/scrollbar/scrollbar-demo.component').then((module) => module.ScrollbarDemoComponent),
-  'segmented-control': () => import('./pages/segmented-control/segmented-control-demo.component')
-    .then((module) => module.SegmentedControlDemoComponent),
-  'segmented-control-toggle': () => import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component')
-    .then((module) => module.SegmentedControlToggleDemoComponent),
-  'select': () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
+  paginator: () => import('./pages/paginator/paginator-demo.component').then((module) => module.PaginatorDemoComponent),
+  radio: () => import('./pages/radio/radio-demo.component').then((module) => module.RadioDemoComponent),
+  scrollbar: () => import('./pages/scrollbar/scrollbar-demo.component').then((module) => module.ScrollbarDemoComponent),
+  'segmented-control': () =>
+    import('./pages/segmented-control/segmented-control-demo.component').then((module) => module.SegmentedControlDemoComponent),
+  'segmented-control-toggle': () =>
+    import('./pages/segmented-control-toggle/segmented-control-toggle-demo.component').then(
+      (module) => module.SegmentedControlToggleDemoComponent,
+    ),
+  select: () => import('./pages/select/select-demo.component').then((module) => module.SelectDemoComponent),
   'side-nav': () => import('./pages/side-nav/side-nav-demo.component').then((module) => module.SideNavDemoComponent),
   'side-sheet': () => import('./pages/side-sheet/side-sheet-demo.component').then((module) => module.SideSheetDemoComponent),
-  'snackbar': () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
-  'spinner': () => import('./pages/spinner/spinner-demo.component').then((module) => module.SpinnerDemoComponent),
-  'switch': () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
-  'tab': () => import('./pages/tab/tab-demo.component').then((module) => module.TabsDemoComponent),
-  'table': () => import('./pages/table/table-demo.component').then((module) => module.TableDemoComponent),
-  'tag': () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
-  'tooltip': () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
+  snackbar: () => import('./pages/snackbar/snackbar-demo.component').then((module) => module.SnackbarDemoComponent),
+  spinner: () => import('./pages/spinner/spinner-demo.component').then((module) => module.SpinnerDemoComponent),
+  switch: () => import('./pages/switch/switch-demo.component').then((module) => module.SwitchDemoComponent),
+  tab: () => import('./pages/tab/tab-demo.component').then((module) => module.TabsDemoComponent),
+  table: () => import('./pages/table/table-demo.component').then((module) => module.TableDemoComponent),
+  tag: () => import('./pages/tag/tag-demo.component').then((module) => module.TagDemoComponent),
+  tooltip: () => import('./pages/tooltip/tooltip-demo.component').then((module) => module.TooltipDemoComponent),
 };
 
-function buildComponentRoute(
-  slug: string,
-  demoService: Provider | EnvironmentProviders,
-): Route {
+export const CURRENT_DEMO_SERVICE = new InjectionToken<IComponentDemoService>('CurrentDemoService');
+
+function buildComponentRoute(slug: string, demoService: Provider | EnvironmentProviders): Route {
   const componentImport = DEMO_IMPORTS[slug];
   if (!componentImport) {
     throw new Error(`No component import found for slug: ${slug}`);
@@ -89,10 +93,15 @@ function buildComponentRoute(
   return {
     path: slug,
     component: ComponentDetailsComponent,
-    providers: [demoService],
+    providers: [
+      demoService,
+      { provide: CURRENT_DEMO_SERVICE, useExisting: demoService },
+    ],
     children: [
       {
-        path: '', redirectTo: 'demo', pathMatch: 'full',
+        path: '',
+        redirectTo: 'guidelines',
+        pathMatch: 'full',
       },
       {
         path: 'demo',
@@ -112,61 +121,74 @@ function buildComponentRoute(
 
 export const routes: Routes = [
   {
-    path: 'components',
+    path: ':lang',
     children: [
       {
-        path: '',
-        loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
+        path: 'components',
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./pages/components/components.component').then((module) => module.ComponentsComponent),
+          },
+          buildComponentRoute('accordion', AccordionDemoService),
+          buildComponentRoute('autocomplete', AutocompleteDemoService),
+          buildComponentRoute('avatar', AvatarDemoService),
+          buildComponentRoute('badge', BadgeDemoService),
+          buildComponentRoute('breadcrumb', BreadcrumbDemoService),
+          buildComponentRoute('button', ButtonDemoService),
+          buildComponentRoute('card', CardDemoService),
+          buildComponentRoute('checkbox', CheckboxDemoService),
+          buildComponentRoute('chip', ChipDemoService),
+          buildComponentRoute('date-picker', DatepickerDemoService),
+          buildComponentRoute('dialog', DialogDemoService),
+          buildComponentRoute('divider', DividerDemoService),
+          buildComponentRoute('fieldset', FieldsetDemoService),
+          buildComponentRoute('form-field', FormFieldDemoService),
+          buildComponentRoute('icon', IconDemoService),
+          buildComponentRoute('icon-button', IconButtonDemoService),
+          buildComponentRoute('menu-item', MenuItemDemoService),
+          buildComponentRoute('message', MessageDemoService),
+          buildComponentRoute('notification', NotificationDemoService),
+          buildComponentRoute('option', OptionDemoService),
+          buildComponentRoute('overlay-panel', OverlayPanelDemoService),
+          buildComponentRoute('paginator', PaginatorDemoService),
+          buildComponentRoute('radio', RadioDemoService),
+          buildComponentRoute('scrollbar', ScrollbarDemoService),
+          buildComponentRoute('segmented-control', SegmentedControlDemoService),
+          buildComponentRoute('segmented-control-toggle', SegmentedControlToggleDemoService),
+          buildComponentRoute('select', SelectDemoService),
+          buildComponentRoute('side-nav', SideNavDemoService),
+          buildComponentRoute('side-sheet', SideSheetDemoService),
+          buildComponentRoute('snackbar', SnackbarDemoService),
+          buildComponentRoute('spinner', SpinnerDemoService),
+          buildComponentRoute('switch', SwitchDemoService),
+          buildComponentRoute('tab', TabDemoService),
+          buildComponentRoute('table', TableDemoService),
+          buildComponentRoute('tag', TagDemoService),
+          buildComponentRoute('tooltip', TooltipDemoService),
+        ],
       },
-
-      buildComponentRoute('accordion', AccordionDemoService),
-      buildComponentRoute('avatar', AvatarDemoService),
-      buildComponentRoute('badge', BadgeDemoService),
-      buildComponentRoute('breadcrumb', BreadcrumbDemoService),
-      buildComponentRoute('button', ButtonDemoService),
-      buildComponentRoute('card', CardDemoService),
-      buildComponentRoute('checkbox', CheckboxDemoService),
-      buildComponentRoute('chip', ChipDemoService),
-      buildComponentRoute('date-picker', DatepickerDemoService),
-      buildComponentRoute('dialog', DialogDemoService),
-      buildComponentRoute('divider', DividerDemoService),
-      buildComponentRoute('fieldset', FieldsetDemoService),
-      buildComponentRoute('form-field', FormFieldDemoService),
-      buildComponentRoute('icon', IconDemoService),
-      buildComponentRoute('icon-button', IconButtonDemoService),
-      buildComponentRoute('menu-item', MenuItemDemoService),
-      buildComponentRoute('message', MessageDemoService),
-      buildComponentRoute('notification', NotificationDemoService),
-      buildComponentRoute('option', OptionDemoService),
-      buildComponentRoute('overlay-panel', OverlayPanelDemoService),
-      buildComponentRoute('paginator', PaginatorDemoService),
-      buildComponentRoute('radio', RadioDemoService),
-      buildComponentRoute('scrollbar', ScrollbarDemoService),
-      buildComponentRoute('segmented-control', SegmentedControlDemoService),
-      buildComponentRoute('segmented-control-toggle', SegmentedControlToggleDemoService),
-      buildComponentRoute('select', SelectDemoService),
-      buildComponentRoute('side-nav', SideNavDemoService),
-      buildComponentRoute('side-sheet', SideSheetDemoService),
-      buildComponentRoute('snackbar', SnackbarDemoService),
-      buildComponentRoute('spinner', SpinnerDemoService),
-      buildComponentRoute('switch', SwitchDemoService),
-      buildComponentRoute('tab', TabDemoService),
-      buildComponentRoute('table', TableDemoService),
-      buildComponentRoute('tag', TagDemoService),
-      buildComponentRoute('tooltip', TooltipDemoService),
+      {
+        path: 'home',
+        loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
+      },
+      {
+        path: 'support',
+        loadComponent: () => import('./pages/issue-report/issue-report.component').then((module) => module.IssueReportComponent),
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
     ],
   },
   {
-    path: 'index',
-    loadComponent: () => import('./pages/index/index.component').then((module) => module.IndexComponent),
-  },
-  {
-    path: 'issue-report',
-    loadComponent: () => import('./pages/issue-report/issue-report.component').then((module) => module.IssueReportComponent),
-  },
-  {
     path: '',
-    redirectTo: 'index',
     pathMatch: 'full',
+    redirectTo: (): string => {
+      const savedLang = sessionStorage.getItem('ids_lang') || 'en';
+      return `/${savedLang}/home`;
+    },
   },
 ];

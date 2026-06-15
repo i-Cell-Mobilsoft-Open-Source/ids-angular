@@ -24,7 +24,12 @@ export type IdsTableColumnDef<D> = {
   /**
    * Value getter function called by a cell renderer, provides the value to be displayed in the cell.
    */
-  value?: ((rowData: D) => unknown);
+  valueGetter?: ((rowData: D) => unknown);
+
+  /**
+   * Value formatter function called by a cell renderer, provides the opportunity to transform the cell value before it is displayed.
+   */
+  valueFormatter?: (value: unknown) => string;
 
   /**
    * The header cell's renderer either built-in or external template or component.
@@ -71,6 +76,13 @@ export type IdsTableColumnDef<D> = {
    * ```
    */
   cellRenderer?: string | Type<IdsTableCellRenderer<D>>;
+
+  /**
+   * Additional custom inputs passed to component-based cell renderers.
+   *
+   * These are merged with the built-in renderer inputs (`rowData`, `colDef`, `cellValue`).
+   */
+  cellRendererInput?: Record<string, unknown>;
 
   /**
    * Defines if the column is hideable (column visibility feature coming soon...).

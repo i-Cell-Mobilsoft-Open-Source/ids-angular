@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -13,6 +14,7 @@ type SegmentedControlToggleInputControls = {
   buttonVariant: IdsSegmentedControlToggleButtonVariantType,
   appearance: IdsSegmentedControlToggleAppearanceType,
   disabled: boolean,
+  showActiveIcon: boolean,
 };
 
 type SegmentedControlToggleHelperControls = {
@@ -59,6 +61,12 @@ export class SegmentedControlToggleDemoService {
       default: false,
       control: DemoControl.SWITCH,
     },
+    showActiveIcon: {
+      description: 'Whether the active icon should be shown or not.',
+      type: 'boolean',
+      default: true,
+      control: DemoControl.SWITCH,
+    },
   };
 
   public readonly helperControlConfig: DemoControlConfig<SegmentedControlToggleHelperControls> = {
@@ -88,6 +96,34 @@ export class SegmentedControlToggleDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'isItemPreSelectedByValue(itemValue: unknown): boolean',
+      description: 'Checks if the item with the given value is pre-selected.',
+      returnType: 'boolean',
+      parameters: ['itemValue'],
+      parameterTypes: ['unknown'],
+      parameterDescriptions: ['The value of the item to check.'],
+    },
+  ];
+
+  public readonly itemMethodControlConfig: DemoMethodConfig = [
+    {
+      name: 'onclick()',
+      description: 'Simulates a click on the segmented control toggle item.',
+      returnType: 'void',
+    },
+    {
+      name: 'focus(option?: FocusOption)',
+      description: 'Focuses the segmented control toggle item.'+
+      'Optionally, a focus option can be provided to specify the focus behavior.',
+      returnType: 'void',
+      parameters: ['option'],
+      parameterTypes: ['FocusOption'],
+      parameterDescriptions: ['The focus option to specify the focus behavior.'],
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<SegmentedControlToggleInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<SegmentedControlToggleHelperControls>(this.helperControlConfig);
 
@@ -100,5 +136,23 @@ export class SegmentedControlToggleDemoService {
     this.value = undefined;
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [
+      this.methodControlConfig,
+      this.itemMethodControlConfig,
+    ];
+  }
+
+  public getMethodTitles(): string[] {
+    return [
+      'Segmented Control Toggle Methods',
+      'Segmented Control Toggle Item Methods',
+    ];
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
   }
 }

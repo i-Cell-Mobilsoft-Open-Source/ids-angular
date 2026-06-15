@@ -24,7 +24,7 @@ const defaultConfig = IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY();
     },
   ],
   host: {
-    '[attr.role]': 'radiogroup',
+    '[attr.role]': '"radiogroup"',
     '(keydown)': '_handleKeyDown($event)',
   },
 })
@@ -50,6 +50,7 @@ export class IdsSegmentedControlToggleDirective
   public buttonVariant = input<IdsSegmentedControlToggleButtonVariantType>(this._defaultConfig.buttonVariant);
   public appearance = input<IdsSegmentedControlToggleAppearanceType>(this._defaultConfig.appearance);
   public disabled = signal<boolean>(false);
+  public showActiveIcon = input<boolean>(true);
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
@@ -65,9 +66,9 @@ export class IdsSegmentedControlToggleDirective
 
   public readonly itemChanges = output<IdsSegmentedControlToggleItemChange>();
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
-    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', ' '];
+    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', 'Spacebar', ' '];
 
     if (!navigationKeys.includes(event.key)) {
       return;
@@ -76,9 +77,13 @@ export class IdsSegmentedControlToggleDirective
     event.preventDefault();
 
     const items = this._items();
-    const target = event.target as HTMLButtonElement;
-    const buttonId = target.id;
-    const index = items.findIndex((item) => item.id() === buttonId);
+    const target = event.target as HTMLElement | null;
+    const buttonId = target?.closest('button')?.id;
+    const index = items.findIndex((item) => `${item.id()}-button` === buttonId);
+
+    if (index < 0) {
+      return;
+    }
 
     switch (event.key) {
       case 'ArrowLeft': {
@@ -98,7 +103,8 @@ export class IdsSegmentedControlToggleDirective
         break;
       }
       case 'Enter':
-      case ' ': {
+      case ' ':
+      case 'Spacebar': {
         items[index].onClick();
         break;
       }

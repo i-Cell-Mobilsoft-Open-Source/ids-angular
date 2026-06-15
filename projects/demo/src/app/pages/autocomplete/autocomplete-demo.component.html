@@ -1,0 +1,103 @@
+<app-demo-and-code (resetDemo)="_autocompleteDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.AUTOCOMPLETE' | translate"
+      [hasDarkBackground]="_autocompleteDemoService.model.variant === 'light'"
+      (resetted)="_autocompleteDemoService.reset()"
+    >
+      <div component>
+        <ng-container #container />
+        <ng-template #template>
+          @let label = "Input with autocomplete";
+          <ids-form-field class="max-w-80" [size]="_autocompleteDemoService.model.size" [variant]="_autocompleteDemoService.model.variant">
+            <ids-label>{{ label }}</ids-label>
+            @if (_autocompleteDemoService.model.multiSelect) {
+              <ids-autocomplete-chip-list [for]="autocompleteTrigger" />
+            }
+            <input
+              #autocompleteTrigger="idsAutocompleteTrigger"
+              type="text"
+              id="autocomplete_widget__input"
+              [placeholder]="_autocompleteDemoService.helperModel.placeholder"
+              [idsAutocompleteTriggerFor]="autoComplete"
+              (input)="_autocompleteDemoService.inputChange($event)"
+            />
+            <ids-autocomplete
+              #autoComplete="idsAutocomplete"
+              [trigger]="autocompleteTrigger"
+              [multiSelect]="_autocompleteDemoService.model.multiSelect"
+              [disabled]="_autocompleteDemoService.model.disabled"
+              [required]="_autocompleteDemoService.model.required"
+              [panelClasses]="'max-h-[50vh]'"
+              [ariaLabelClear]="_autocompleteDemoService.helperModel.ariaLabelClearButton"
+              [spinnerVariant]="_autocompleteDemoService.helperModel.spinnerVariant"
+              [isLoading]="_autocompleteDemoService.isLoading()"
+              [(ngModel)]="_value"
+            >
+              @let options = (_autocompleteDemoService.options$ | async) ?? [];
+              @if (_autocompleteDemoService.isLoading()) {
+                <ids-autocomplete-hint>
+                  {{ _autocompleteDemoService.helperModel.hintLoading }}
+                </ids-autocomplete-hint>
+              } @else if (_autocompleteDemoService.input().length < _autocompleteDemoService.helperModel.minChars) {
+                <ids-autocomplete-hint>
+                  {{ _autocompleteDemoService.helperModel.hintMinChars }}
+                </ids-autocomplete-hint>
+              } @else if (!options.length) {
+                <ids-autocomplete-hint>
+                  {{ _autocompleteDemoService.helperModel.hintNoResults }}
+                </ids-autocomplete-hint>
+              } @else {
+                @if (options.length >= _autocompleteDemoService.helperModel.limit) {
+                  <ids-autocomplete-hint>
+                    {{ _autocompleteDemoService.helperModel.hintTooManyResults }}
+                  </ids-autocomplete-hint>
+                  <ids-divider variant="surface" />
+                }
+                @for (option of options; track $index) {
+                  <ids-option [value]="option.value" [viewValue]="option.key">{{ option.key }}</ids-option>
+                }
+              }
+            </ids-autocomplete>
+            @if (_autocompleteDemoService.helperModel.hint) {
+              <ids-hint-message>
+                {{ _autocompleteDemoService.helperModel.hint }}
+              </ids-hint-message>
+            }
+            <ids-error-message>
+              <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: label } }}</ids-error-def>
+            </ids-error-message>
+          </ids-form-field>
+        </ng-template>
+      </div>
+
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_autocompleteDemoService.inputControlConfig"
+        [(model)]="_autocompleteDemoService.model"
+      />
+    </app-tryout>
+  </div>
+
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        configType="input"
+        controlName="Autocomplete"
+        [controlConfig]="_autocompleteDemoService.inputControlConfig"
+        [(model)]="_autocompleteDemoService.model"
+        (resetted)="_autocompleteDemoService.reset()"
+      />
+      <app-control-table
+        controls
+        controlName="Autocomplete"
+        configType="helper"
+        [controlConfig]="_autocompleteDemoService.helperControlConfig"
+        [(model)]="_autocompleteDemoService.helperModel"
+        (resetted)="_autocompleteDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

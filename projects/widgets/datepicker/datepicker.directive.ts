@@ -31,7 +31,7 @@ const defaultConfig = IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY();
     },
   ],
   host: {
-    '(input)': '_handleInput($event.target.value)',
+    '(input)': '_handleInput($event)',
     '(blur)': '_handleBlur()',
     '(keydown)': '_handleKeydown($event)',
   },
@@ -207,8 +207,8 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     afterNextRender(() => this._elementRef.nativeElement.focus(), { injector: this._injector });
   }
 
-  protected _handleInput(value: string): void {
-    const parsed = this.parser()(value);
+  protected _handleInput(event: Event): void {
+    const parsed = this.parser()((event.target as HTMLInputElement).value);
     this._isValid.set(this._isValidValue(parsed));
 
     const date = getValidDateOrNull(parsed);

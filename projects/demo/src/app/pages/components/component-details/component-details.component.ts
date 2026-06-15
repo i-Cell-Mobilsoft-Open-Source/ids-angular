@@ -7,10 +7,14 @@ import { ComponentBlock, ComponentContent, ComponentEntry } from '../../../model
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
-import { Component, OnInit, computed, inject, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, OnInit, computed, inject, signal, viewChild } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
-import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { map, filter, switchMap, startWith, distinctUntilChanged, combineLatest } from 'rxjs';
+
+const SLUG_INDEX = 3;
 
 @Component({
   selector: 'app-component-details',
@@ -27,11 +31,12 @@ import { map, filter, switchMap, startWith, distinctUntilChanged } from 'rxjs';
 })
 export class ComponentDetailsComponent implements OnInit {
   public heroData?: HeroData;
-  public componentBlocks: ComponentBlock[] = [];
+  public componentBlocks = signal<ComponentBlock[]>([]);
+  public lastModified = signal<string>('');
 
   public tabGroup = viewChild(IdsTabGroupComponent);
-  public activeTab = signal<string>('demo');
-  protected _selectedTabIndex = 1;
+  public activeTab = signal<string>('guidelines');
+  protected _selectedTabIndex = 0;
   protected _initTabIndex = undefined;
 
   private _tabs = [
@@ -45,7 +50,13 @@ export class ComponentDetailsComponent implements OnInit {
   private _graphqlService = inject(GraphqlService);
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
+  private _translate = inject(TranslateService);
   public selectedSection = 'demo';
+  private _destroyRef = inject(DestroyRef);
+
+  private readonly _lang = toSignal(this._translate.onLangChange.pipe(map((event) => event.lang)), {
+    initialValue: sessionStorage.getItem('ids_lang') || 'en',
+  });
 
   constructor() {
     const tabIndex = this._tabs.findIndex((tab) => tab === location.pathname.split('/').pop());
@@ -59,7 +70,9 @@ export class ComponentDetailsComponent implements OnInit {
 
     this._selectedTabIndex = index;
 
+    const lang = sessionStorage.getItem('ids_lang') || 'en';
     this._router.navigate([
+      lang,
       'components',
       componentRouteName,
       this._tabs[this._selectedTabIndex],
@@ -72,20 +85,31 @@ export class ComponentDetailsComponent implements OnInit {
       startWith(null),
     );
 
-    navigationEnd$
+    const slug$ = navigationEnd$.pipe(
+      map(() => {
+        const urlSegments = this._router.url.split('/');
+        return urlSegments[SLUG_INDEX];
+      }),
+      distinctUntilChanged(),
+      filter((slug) => !!slug),
+    );
+
+    const lang$ = this._translate.onLangChange.pipe(
+      map(({ lang }) => lang),
+      startWith(this._translate.getCurrentLang() || 'en'),
+    );
+
+    combineLatest([
+      slug$,
+      lang$,
+    ])
       .pipe(
-        map(() => {
-          const urlSegments = this._router.url.split('/');
-          return urlSegments[2];
-        }),
-        distinctUntilChanged(),
-        filter((slug) => !!slug),
-        switchMap((slug) =>
-          this._graphqlService.getComponents().pipe(
+        takeUntilDestroyed(this._destroyRef),
+        switchMap(([slug]) =>
+          this._graphqlService.getComponents(slug).pipe(
             map((result) => {
-              const typedResult = result as { data: { entries: { data: ComponentEntry[] } } };
-              const components = typedResult.data.entries.data;
-              return components.find((entry) => entry.slug === slug);
+              const typedResult = result as { data: { entry: ComponentEntry } };
+              return typedResult?.data?.entry;
             }),
           ),
         ),
@@ -95,18 +119,25 @@ export class ComponentDetailsComponent implements OnInit {
           this._updateHeroAndBlocks(component);
         } else {
           this.heroData = undefined;
-          this.componentBlocks = [];
+          this.componentBlocks.set([]);
         }
       });
 
-    navigationEnd$.subscribe(() => {
-      const childRoute = this._route.firstChild?.snapshot.url[1]?.path ?? 'demo';
+    navigationEnd$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      const childRoute = this._route.firstChild?.snapshot.url[0]?.path ?? 'guidelines';
 
       this.activeTab.set(childRoute);
+
+      const tabIndex = this._tabs.indexOf(childRoute ?? 'guidelines');
+      if (tabIndex >= 0) {
+        this._selectedTabIndex = tabIndex;
+        this.tabGroup()?.selectTab(tabIndex);
+      }
     });
   }
 
   private _updateHeroAndBlocks(component: ComponentEntry): void {
+    this.lastModified.set(component.last_modified ?? '');
     this.heroData = {
       id: Number(component.id),
       title: component.title,
@@ -118,7 +149,7 @@ export class ComponentDetailsComponent implements OnInit {
     };
 
     const blocks: ComponentBlock[] = [];
-    component.componentBlocks?.forEach((block: ComponentContent) => {
+    component.content?.forEach((block: ComponentContent) => {
       if (block.__typename === 'Set_Content_Heading') {
         blocks.push({
           type: 'heading',
@@ -129,35 +160,40 @@ export class ComponentDetailsComponent implements OnInit {
         blocks.push({
           type: 'card',
           id: Number(block.id),
-          orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
-          variant: block.card_properties?.card_variant?.value ?? 'surface',
-          appearance: block.card_properties?.appearance?.value ?? 'filled',
-          transparent: block.card_properties?.card_bg_transparent ?? false,
-          filledInContainer: block.group_image?.filled_in_container ?? false,
-          state: block.group_image?.state?.value,
-          imageURL: block.group_image?.img_light_mode?.[0]?.url
-            ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-            : '',
-          imageUrlLight: block.group_image?.img_light_mode?.[0]?.url
-            ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
-            : '',
-          imageUrlDark: block.group_image?.img_dark_mode?.[0]?.url
-            ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}`
-            : '',
-          imageCaption: block.group_image?.img_caption,
-          imageBgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
-          imageBGTransparent: block.group_image?.bg_transparent ?? false,
+          card: {
+            orientation: block.card_properties?.card_orientation?.value ?? 'vertical',
+            variant: block.card_properties?.card_variant?.value ?? 'surface',
+            appearance: block.card_properties?.appearance?.value ?? 'filled',
+            transparent: block.card_properties?.card_bg_transparent ?? false,
+          },
+          image: {
+            state: block.group_image?.state?.value ?? 'no_state',
+            aspectRatio: block.group_image?.img_aspect_ratio?.value ?? '16/9',
+            imageUrl: block.group_image?.img_light_mode?.[0]?.url
+              ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+              : '',
+            lightUrl: block.group_image?.img_light_mode?.[0]?.url
+              ? `${environment.cmsBaseUrl}${block.group_image.img_light_mode[0].url}`
+              : '',
+            darkUrl: block.group_image?.img_dark_mode?.[0]?.url ? `${environment.cmsBaseUrl}${block.group_image.img_dark_mode[0].url}` : '',
+            caption: block.group_image?.img_caption ?? '',
+            bgColorVariant: block.group_image?.img_bg_color?.value ?? 'surface',
+            bgTransparent: block.group_image?.bg_transparent ?? false,
+            filledInContainer: block.group_image?.filled_in_container ?? false,
+          },
           overTitle: block.content?.content_over_title,
           title: block.content?.content_title,
           description: block.content?.content_description,
-          buttonOne: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_label : undefined,
-          buttonOneUrl: Array.isArray(block.button?.button) ? block.button?.button[0]?.button_url : block.button?.button?.button_url,
-          buttonTwo: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_label : undefined,
-          buttonTwoUrl: Array.isArray(block.button?.button) ? block.button?.button[1]?.button_url : block.button?.button?.button_url,
+          button: Array.isArray(block.button?.button)
+            ? block.button?.button.map((btn) => ({
+              text: btn.button_label,
+              url: btn.button_url,
+            }))
+            : [],
         });
-        this.componentBlocks = blocks;
       }
     });
+    this.componentBlocks.set(blocks);
   }
 
   public trackByBlock(index: number, item: ComponentBlock): string | number {

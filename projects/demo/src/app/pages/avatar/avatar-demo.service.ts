@@ -53,4 +53,8 @@ export class AvatarDemoService {
   public reset(): void {
     this.model = { ...this.defaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
+  }
 }

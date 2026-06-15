@@ -2,16 +2,26 @@ import { PeriodicTableElement } from './periodic-table-element';
 import { TableDemoService } from './table-demo.service';
 
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
-import { PropTableComponent } from '../../components/prop-table/prop-table.component';
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, DestroyRef, inject, Injectable, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
+import { Component, DestroyRef, inject, Injectable, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
-import { IdsTableCellRenderer, IdsTableCellTemplateDirective, IdsTableColumnDef, IdsTableComponent, IdsTableIntl, IdsTableRequestFactory, IdsTableRowKeydownEvent, ServerSideDataSource } from '@i-cell/ids-angular/table';
+import {
+  IdsTableCellRenderer,
+  IdsTableCellTemplateDirective,
+  IdsTableColumnDef,
+  IdsTableComponent,
+  IdsTableIntl,
+  IdsTableRequestFactory,
+  IdsTableRowKeydownEvent,
+  IdsTableSortAscIconDirective, IdsTableSortDescIconDirective, IdsTableSortNoneIconDirective,
+  ServerSideDataSource,
+} from '@i-cell/ids-angular/table';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { map, tap } from 'rxjs';
 
@@ -28,6 +38,15 @@ export type TranslateLabelsType = keyof TranslateLabelsToIntlPropNamesType;
   template: '{{ cellValue() | translate }}',
 })
 export class TranslateCellRendererComponent extends IdsTableCellRenderer<PeriodicTableElement> {}
+
+@Component({
+  selector: 'ids-table-suffixed-cell-renderer',
+  imports: [],
+  template: '{{ cellValue() }}{{ suffix() }}',
+})
+export class SuffixedCellRendererComponent extends IdsTableCellRenderer<PeriodicTableElement> {
+  public suffix = input('');
+}
 
 @Injectable()
 export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
@@ -48,15 +67,18 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
   selector: 'app-table-demo',
   imports: [
     IdsButtonComponent,
+    IdsIconComponent,
     IdsPaginatorComponent,
     IdsTableCellTemplateDirective,
+    IdsTableSortAscIconDirective,
+    IdsTableSortDescIconDirective,
+    IdsTableSortNoneIconDirective,
     IdsTableComponent,
     TranslateModule,
     TryoutComponent,
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
-    PropTableComponent,
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',

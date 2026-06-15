@@ -13,7 +13,7 @@ export class ImageComponent implements OnInit, OnDestroy {
 
   public state = input<'do' | 'dont' | 'no_state' | undefined>();
 
-  public aspectRatio = input<'1/1' | '16/9' | '16/10' | undefined>('16/9');
+  public aspectRatio = input<'1/1' | '16/9' | '16/10' | 'none' | undefined>('none');
 
   public imageBgColorVariant = input<'surface' | 'primary' | 'light' | undefined>('surface');
 
@@ -23,6 +23,7 @@ export class ImageComponent implements OnInit, OnDestroy {
   public filledInContainer = input<boolean>(false);
 
   public imageCaption = input<string>();
+  public showCaption = input<boolean>(false);
 
   public data = input.required<{
     transparent?: boolean;
@@ -47,6 +48,8 @@ export class ImageComponent implements OnInit, OnDestroy {
         return 'aspect-16/9';
       case '16/10':
         return 'aspect-16/10';
+      case 'none':
+        return 'aspect-none';
       default:
         return 'aspect-16/9'; // Default value
     }
@@ -68,7 +71,7 @@ export class ImageComponent implements OnInit, OnDestroy {
   public imgFilledClass = computed<string>(() =>
     (this.filledInContainer()
       ? 'object-cover lg:w-full lg:h-full'
-      : 'object-contain lg:w-1/2 lg:h-auto'
+      : 'object-contain'
     ),
   );
 
@@ -105,4 +108,5 @@ export class ImageComponent implements OnInit, OnDestroy {
       this.currentImageUrl = this.imageUrlLight() || this.imageUrlDark() || '';
     }
   }
+
 }

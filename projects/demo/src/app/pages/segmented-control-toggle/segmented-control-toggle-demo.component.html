@@ -13,6 +13,7 @@
           [buttonVariant]="_segmentedControlToggleDemoService.model.buttonVariant"
           [size]="_segmentedControlToggleDemoService.model.size"
           [disabled]="_segmentedControlToggleDemoService.model.disabled"
+          [showActiveIcon]="_segmentedControlToggleDemoService.model.showActiveIcon"
         >
           <ids-segmented-control-toggle-item
             value="first"
@@ -72,8 +73,3 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
-<div documentation class="w-full mt-8">
-  <h3 class="text-lg font-bold mb-4">Props</h3>
-
-  <app-prop-table [config]="[_segmentedControlToggleDemoService.inputControlConfig, _segmentedControlToggleDemoService.helperControlConfig]" />
-</div>

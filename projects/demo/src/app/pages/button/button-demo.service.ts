@@ -120,4 +120,11 @@ export class ButtonDemoService {
     this.helperModel = { ...this.helperDefaults };
     this.groupModel = { ...this.groupDefaults };
   }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.inputControlConfig,
+      this.groupInputControlConfig,
+    ];
+  }
 }

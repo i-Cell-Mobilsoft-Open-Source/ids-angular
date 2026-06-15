@@ -6,7 +6,7 @@ import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, effect, ElementRef, forwardRef, inject, input, isDevMode, OnDestroy, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, effect, ElementRef, forwardRef, inject, input, isDevMode, OnDestroy, OnInit, signal, untracked, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValueChangeEvent } from '@angular/forms';
 import { coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
@@ -124,18 +124,24 @@ export class IdsSelectComponent
     return this.multiSelect() ? this._selectionModel?.selected : this._selectionModel?.selected?.[0];
   }
 
-  protected get _triggerValue(): string {
+  protected _triggerValue = computed(() => {
     if (this._empty) {
       return '';
     }
 
-    if (this.multiSelect()) {
-      const selectedOptions = this._selectionModel?.selected?.map((option) => option.viewValue());
-      return selectedOptions?.join(', ') || '';
+    const options = this.options();
+    const selectedOptions = options.filter((option) => option.selected());
+
+    if (selectedOptions.length === 0) {
+      return '';
     }
 
-    return this._selectionModel?.selected?.[0].viewValue() || '';
-  }
+    if (this.multiSelect()) {
+      return selectedOptions.map((option) => option.viewValue()).join(', ');
+    }
+
+    return selectedOptions[0].viewValue();
+  });
 
   constructor() {
     super();
@@ -147,11 +153,13 @@ export class IdsSelectComponent
       () => {
         const options = this.options();
 
-        if (options.length > 0) {
-          this._initKeyManager();
-          this._selectionModel?.select(...this.options().filter((item) => item.selected()));
-          this._subscribeOptionChanges();
-        }
+        untracked(() => {
+          if (options.length > 0) {
+            this._initKeyManager();
+            this._selectionModel?.select(...this.options().filter((item) => item.selected()));
+            this._subscribeOptionChanges();
+          }
+        });
       },
     );
   }
@@ -379,9 +387,9 @@ export class IdsSelectComponent
     preferredOrigin: ElementRef<ElementRef> | CdkOverlayOrigin | undefined,
   ): string | number {
     const refToMeasure
-        = preferredOrigin instanceof CdkOverlayOrigin
-          ? preferredOrigin.elementRef
-          : preferredOrigin || this._elementRef;
+      = preferredOrigin instanceof CdkOverlayOrigin
+        ? preferredOrigin.elementRef
+        : preferredOrigin || this._elementRef;
     return refToMeasure.nativeElement.getBoundingClientRect().width;
   }
 

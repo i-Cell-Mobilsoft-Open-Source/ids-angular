@@ -3,7 +3,7 @@ import { IdsDialogComponent } from './dialog.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 window.ResizeObserver
-    = jest.fn().mockImplementation(() => ({
+  = jest.fn().mockImplementation(() => ({
     disconnect: jest.fn(),
     observe: jest.fn(),
     unobserve: jest.fn(),

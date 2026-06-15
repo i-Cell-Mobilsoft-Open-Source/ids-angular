@@ -1,0 +1,25 @@
+:host {
+  .no-padding & {
+    padding: 0;
+  }
+}
+
+.hero {
+  background: var(--smc-colors-surface-darker-10);
+}
+
+.gradient-outline-blue {
+  border: 1rem solid transparent;
+  border-radius: 50em;
+  background:
+    linear-gradient(var(--ids-smc-colors-surface-darker-10), 
+      var(--ids-smc-colors-surface-darker-10)) padding-box,
+    linear-gradient(180deg, var(--ids-smc-colors-brand-lighter-20), transparent) border-box;
+}
+
+.glassy-bg-on-light-lighter {
+  background: linear-gradient(180deg, var(--ids-smc-colors-opacity-light-50), transparent);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+
+}

@@ -14,6 +14,7 @@
             [mainTitle]="_dialogDemoService.model.mainTitle"
             [subTitle]="_dialogDemoService.model.subTitle"
             [showCloseButton]="_dialogDemoService.model.showCloseButton"
+            [isCloseButtonDisabled]="_dialogDemoService.model.isCloseButtonDisabled"
             [showBackdrop]="_dialogDemoService.model.showBackdrop"
           >
             @if (_dialogDemoService.helperModel.useCustomHeader) {
@@ -202,8 +203,3 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
-<div documentation class="w-full mt-8">
-  <h3 class="text-lg font-bold mb-4">Props</h3>
-
-  <app-prop-table [config]="[_dialogDemoService.inputControlConfig, _dialogDemoService.helperControlConfig]" />
-</div>

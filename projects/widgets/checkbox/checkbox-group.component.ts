@@ -6,8 +6,19 @@ import { IDS_CHECKBOX_PARENT, IdsCheckboxParent } from './types/checkbox-parent'
 import { IdsCheckboxState } from './types/checkbox-state.type';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, ViewEncapsulation } from '@angular/core';
-import { ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { ControlContainer } from '@angular/forms';
+import {
+  coerceBooleanAttribute,
+  ComponentBaseWithDefaults,
+  IdsOrientation,
+  IdsOrientationType,
+  IdsSizeType,
+  IDS_CONTROL_CONTAINER,
+} from '@i-cell/ids-angular/core';
+import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
+import { of, startWith, switchMap } from 'rxjs';
 
 const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -23,6 +34,10 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
   },
   providers: [
     {
+      provide: IDS_CONTROL_CONTAINER,
+      useExisting: IdsCheckboxGroupComponent,
+    },
+    {
       provide: IDS_CHECKBOX_PARENT,
       useExisting: IdsCheckboxGroupComponent,
     },
@@ -35,22 +50,47 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG);
 
+  private readonly _controlContainer = inject(ControlContainer, { skipSelf: true, optional: true });
   private _childCheckboxes = contentChildren(IDS_CHECKBOX_GROUP_CHILD);
-
+  public showAsterisk = input(false, { transform: coerceBooleanAttribute });
   public groupLabel = input<string>('', { alias: 'label' });
   public allowParent = input<boolean>(this._defaultConfig.allowParent);
   public parentCheckboxLabel = input<string>('', { alias: 'parentLabel' });
-  public name = input<string>();
   public size = input<IdsSizeType | null>(this._defaultConfig.size);
   public variant = input<IdsCheckboxVariantType | null>(this._defaultConfig.variant);
   public orientation = input<IdsOrientationType | null>(this._defaultConfig.orientation);
+  public controlDir = signal<ControlContainer | null>(this._controlContainer);
+  public readonly errorMessages = contentChildren(IdsErrorMessageComponent);
+  public readonly hintMessage = contentChildren(IdsHintMessageComponent);
+
+  private readonly _controlState = toSignal(
+    toObservable(this.controlDir).pipe(
+      switchMap((controlDir) => (controlDir?.control ? controlDir.control.events.pipe(startWith(null)) : of(null))),
+    ),
+    { equal: () => false },
+  );
 
   protected _groupLabelId = computed(() =>  `${this.id()}-label`);
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
     this.variant(),
     this.orientation(),
+    this.allowParent() ? 'indeterminated' : null,
   ]));
+
+  protected _hasHint = computed(() => Boolean(this.hintMessage().length));
+
+  public hasError = computed(() => {
+    this._controlState();
+    if (this.errorMessages().length === 0) {
+      return undefined;
+    }
+    const control = this.controlDir()?.control;
+    if (!control) {
+      return undefined;
+    }
+    return control.errors && (control.touched || control.dirty) ? true : undefined;
+  });
 
   protected _parentCheckboxChecked = computed(() =>
     this._childCheckboxes().every((child) =>
@@ -60,6 +100,10 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
     !this._parentCheckboxChecked() && this._childCheckboxes().some((child) =>
       child.checkboxState() === IdsCheckboxState.CHECKED),
   );
+
+  protected get _shouldShowAsterisk(): boolean {
+    return this.showAsterisk();
+  };
 
   private _invalidParentOrientation = effect(() => {
     if (this.allowParent() && this.orientation() === IdsOrientation.HORIZONTAL) {

@@ -52,4 +52,8 @@ export class SpinnerDemoService {
     this.model = { ...this.defaults };
   }
 
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
+  }
+
 }

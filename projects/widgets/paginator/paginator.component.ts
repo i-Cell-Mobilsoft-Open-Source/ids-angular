@@ -112,7 +112,7 @@ export class IdsPaginatorComponent extends ComponentBaseWithDefaults<IdsPaginato
 
   public pageChanged = output<IdsPaginatorPageChangeEvent>();
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     event.stopPropagation();
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
     const navigationKeys = ['ArrowLeft', 'ArrowRight', 'PageDown', 'PageUp', 'Home', 'End'];

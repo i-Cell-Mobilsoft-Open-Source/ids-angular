@@ -108,7 +108,7 @@ export class IdsMonthSelectorComponent extends IdsCalendarPage {
     return createNormalizedDate(this._focusedYear(), month, 1);
   }
 
-  private _handleKeydown(event: KeyboardEvent): void {
+  protected _handleKeydown(event: KeyboardEvent): void {
     let focusedDate = this.focusedDate();
 
     switch (event.code) {

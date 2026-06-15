@@ -3,6 +3,7 @@ export * from './base-classes/directive-base';
 export * from './directives/detect-scrollable.directive';
 export * from './pipes/sentence-case.pipe';
 export * from './services/resize-observer.service';
+export * from './tokens/control-container';
 export * from './types/orientation.type';
 export * from './types/position.type';
 export * from './types/size-collection.type';

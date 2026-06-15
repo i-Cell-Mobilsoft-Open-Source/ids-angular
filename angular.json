@@ -60,11 +60,15 @@
             "assets": [
               "projects/demo/src/favicon.ico",
               "projects/demo/src/assets",
-              "projects/demo/src/robots.txt"
+              "projects/demo/src/robots.txt",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@i-cell/ids-tokens/css",
+                "output": "assets/ids-tokens"
+              }
             ],
             "styles": [
               "projects/demo/src/styles.scss",
-              "node_modules/@i-cell/ids-tokens/css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css",
               "node_modules/@i-cell/ids-styles/dist/accessibility.css"
             ],

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionAppearance, IdsAccordionAppearanceType } from '@i-cell/ids-angular/accordion';
+import { IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionHeadingLevel, IdsAccordionHeadingLevelType } from '@i-cell/ids-angular/accordion';
 import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { Subject } from 'rxjs';
@@ -12,6 +13,7 @@ const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 type AccordionInputControls = {
   size: IdsSizeType;
   appearance: IdsAccordionAppearanceType;
+  headingLevel: IdsAccordionHeadingLevelType;
   summary: string;
   disabled: boolean;
   multi: boolean;
@@ -23,6 +25,7 @@ type AccordionInputControls = {
   hasLeadingIcon: boolean;
   hasTrailingIcon: boolean;
 };
+
 @Injectable()
 export class AccordionDemoService {
   private _resetSubject = new Subject<void>();
@@ -42,6 +45,13 @@ export class AccordionDemoService {
       default: defaultConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsAccordionAppearance),
+    },
+    headingLevel: {
+      description: 'Heading level.',
+      type: 'IdsAccordionHeadingLevelType',
+      default: defaultConfig.headingLevel,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsAccordionHeadingLevel),
     },
     summary: {
       description: 'Summary of accordion',
@@ -106,6 +116,19 @@ export class AccordionDemoService {
     },
   };
 
+  public readonly methodConfig: DemoMethodConfig = [
+    {
+      name: 'openAll()',
+      description: 'Opens all accordion items.',
+      returnType: 'void',
+    },
+    {
+      name: 'closeAll()',
+      description: 'Closes all accordion items.',
+      returnType: 'void',
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<AccordionInputControls>(this.inputControlConfig);
 
   public model: AccordionInputControls = { ...this.defaults };
@@ -114,4 +137,13 @@ export class AccordionDemoService {
     this.model = { ...this.defaults };
     this._resetSubject.next();
   }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodConfig];
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
+  }
 }
+

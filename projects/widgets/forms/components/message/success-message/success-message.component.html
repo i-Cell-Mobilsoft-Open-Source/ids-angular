@@ -1,7 +1,10 @@
 <div class="ids-message__prefix">
   <ng-content select="[idsMessagePrefix]">
-    <ids-icon aria-hidden="true" fontIcon="done" variant="success" />
-  </ng-content>
+    @if (_isDisabled()) {
+      <ids-icon aria-hidden="true" fontIcon="done" />
+    } @else {
+      <ids-icon aria-hidden="true" fontIcon="done" variant="success" />
+    }  </ng-content>
 </div>
 <div class="ids-message__text">
   <ng-content />

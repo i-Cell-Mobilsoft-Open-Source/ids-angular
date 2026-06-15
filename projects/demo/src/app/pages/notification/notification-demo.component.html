@@ -13,6 +13,7 @@
             [size]="_notificationDemoService.model.size"
             [icon]="_notificationDemoService.model.icon"
             [title]="_notificationDemoService.model.title"
+            [closable]="_notificationDemoService.model.closable"
             [closeButtonSize]="_notificationDemoService.model.closeButtonSize"
             [closeButtonLabel]="_notificationDemoService.model.closeButtonLabel"
             [closeLabelButtonAppearance]="_notificationDemoService.model.closeLabelButtonAppearance"
@@ -99,8 +100,3 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
-<div documentation class="w-full mt-8">
-  <h3 class="text-lg font-bold mb-4">Props</h3>
-
-  <app-prop-table [config]="[_notificationDemoService.inputControlConfig(), _notificationDemoService.helperControlConfig]" />
-</div>

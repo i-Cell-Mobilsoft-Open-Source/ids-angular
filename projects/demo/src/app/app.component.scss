@@ -15,7 +15,7 @@ app-root {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto auto auto;
     gap: 1rem;
     align-items: center;
     grid-area: 1 / 1 / 1 / -1;
@@ -54,4 +54,12 @@ app-root {
     flex: 1 1 0;
     overflow: auto;
   }
+}
+
+.router-outlet-wrapper {
+  &:not(:has(app-content-page)) {
+    @apply p-8 mx-auto container;
+    max-width: 2080px;
+  }
+  max-width: 2080px;
 }

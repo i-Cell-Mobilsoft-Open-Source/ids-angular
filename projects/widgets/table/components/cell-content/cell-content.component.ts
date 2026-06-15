@@ -47,9 +47,24 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
     }
 
     const field = this.colDef().field ?? '';
-    const valueFn = this.colDef().value ?? ((): string => '');
+    let rawResult: string;
 
-    const rawResult = field && Object.hasOwn(rowData, field) ? (rowData as Record<string, unknown>)[field] : valueFn(rowData);
+    // when 'field' property is provided and exists in the row data, use it to get the cell value...
+    if (field && Object.hasOwn(rowData, field)) {
+      rawResult = (rowData as Record<string, unknown>)[field] as string;
+
+      const valueFormatter = this.colDef().valueFormatter;
+
+      if (valueFormatter && typeof valueFormatter === 'function') {
+        rawResult = valueFormatter(rawResult);
+      }
+
+    // otherwise, provide value by 'valueGetter' function
+    } else {
+      const valueFn = this.colDef().valueGetter ?? ((): string => '');
+      rawResult = valueFn(rowData) as string;
+    }
+
     return rawResult;
   });
 
@@ -68,6 +83,13 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
 
     return null;
   });
+
+  protected _cellRendererInputs = computed(() => ({
+    rowData: this.rowData(),
+    colDef: this.colDef(),
+    cellValue: this._cellValue(),
+    ...(this.colDef().cellRendererInput ?? {}),
+  }));
 
   protected _cellTemplateName = computed(() => {
     if (isString(this._cellRendererDef())) {

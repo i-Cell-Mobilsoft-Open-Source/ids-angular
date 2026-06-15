@@ -90,7 +90,7 @@ export class IdsInputDirective extends IdsFormFieldControl<IdsInputDefaultConfig
     this._elementRef.nativeElement.focus(options);
   }
 
-  private _focusChanged(isFocused: boolean): void {
+  protected _focusChanged(isFocused: boolean): void {
     if (isFocused !== this._focused) {
       this._focused = isFocused;
     }
@@ -109,7 +109,7 @@ export class IdsInputDirective extends IdsFormFieldControl<IdsInputDefaultConfig
    * Should be an arrow function in order to handle `this` outside of this class
    */
   public onContainerClick = (): void => {
-    if (!this._focused && !this.readonly() && !this.disabled) {
+    if (!this._focused && !this.readonly() && !this.disabled()) {
       this.focus();
     }
   };

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsOrientation, IdsOrientationType, IdsPosition, IdsPositionType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -19,7 +20,10 @@ type RadioInputControls = {
 
 type RadioHelperControls = {
   onlyOneItemIsDisabled: boolean,
+  allowHint: boolean,
+  hintMessage: string,
 };
+
 @Injectable()
 export class RadioDemoService {
   public inputControlConfig: DemoControlConfig<RadioInputControls> = {
@@ -78,7 +82,30 @@ export class RadioDemoService {
       default: false,
       control: DemoControl.SWITCH,
     },
+    allowHint: {
+      description: 'Allow hint message',
+      type: 'boolean',
+      default: true,
+      control: DemoControl.SWITCH,
+    },
+    hintMessage: {
+      description: 'Hint message',
+      type: 'string',
+      default: '-',
+      demoDefault: 'Hint message',
+    },
   };
+
+  public methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'focus(option?: FocusOption)',
+      description: 'Focuses the radio item.',
+      returnType: 'void',
+      parameters: ['option?'],
+      parameterTypes: ['FocusOption'],
+      parameterDescriptions: ['The option to focus. If not provided, focuses the first enabled option.'],
+    },
+  ];
 
   public defaults = getDefaultFromDemoConfig<RadioInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<RadioHelperControls>(this.helperControlConfig);
@@ -96,5 +123,13 @@ export class RadioDemoService {
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodControlConfig];
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
   }
 }

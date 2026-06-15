@@ -7,4 +7,7 @@ export interface HeroData {
   imageUrlLight?: string;
   imageUrlDark?: string;
   localImageUrl?: string;
+  date?: string;
+  tags?: string[] | { title: string }[];
+  writtenBy?: string;
 }

@@ -6,9 +6,16 @@ import { IdsCheckboxState, IdsCheckboxStateType } from './types/checkbox-state.t
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, model, output, signal, viewChild } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
-import { ComponentBaseWithDefaults, IdsSizeType, coerceBooleanAttribute, coerceNumberAttribute, isString } from '@i-cell/ids-angular/core';
-import { IDS_FORM_FIELD_CONTROL, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { ControlValueAccessor, FormControlName, NG_VALUE_ACCESSOR, NgControl, NgModel, Validators } from '@angular/forms';
+import {
+  ComponentBaseWithDefaults,
+  IdsSizeType,
+  coerceBooleanAttribute,
+  coerceNumberAttribute,
+  isString,
+  IDS_CONTROL_CONTAINER,
+} from '@i-cell/ids-angular/core';
+import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
@@ -24,7 +31,7 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
       multi: true,
     },
     {
-      provide: IDS_FORM_FIELD_CONTROL,
+      provide: IDS_CONTROL_CONTAINER,
       useExisting: IdsCheckboxComponent,
     },
     {
@@ -92,7 +99,7 @@ export class IdsCheckboxComponent
   private _onChange: (value: unknown) => void = () => { };
   private _onTouched: () => unknown = () => { };
 
-  public controlDir: NgControl | null = null;
+  public controlDir = signal<NgControl | null>(null);
 
   // eslint-disable-next-line @angular-eslint/no-output-native
   public readonly change = output<IdsCheckBoxChangeEvent>();
@@ -106,6 +113,7 @@ export class IdsCheckboxComponent
   public ngOnChanges(changes: SimpleChanges): void {
     const checkedChange = changes['checked'] as SimpleChange | undefined;
     const indeterminateChange = changes['indeterminate'] as SimpleChange | undefined;
+    const requiredChange = changes['required'] as SimpleChange | undefined;
     if (indeterminateChange || checkedChange) {
       const currentChecked = checkedChange?.currentValue;
       const currentIndeterminate = indeterminateChange?.currentValue;
@@ -117,10 +125,19 @@ export class IdsCheckboxComponent
         this._checkboxState.set(IdsCheckboxState.UNCHECKED);
       }
     }
+
+    if (requiredChange) {
+      this._assertRequiredInputIsSupported();
+      this._syncRequiredValidator();
+    }
   }
 
   public ngOnInit(): void {
-    this.controlDir = this._injector.get(NgControl, null, { self: true, optional: true });
+    this.controlDir.set(
+      this._injector.get(NgControl, null, { self: true, optional: true }),
+    );
+    this._assertRequiredInputIsSupported();
+    this._syncRequiredValidator();
   }
 
   public ngAfterViewInit(): void {
@@ -232,7 +249,12 @@ export class IdsCheckboxComponent
   }
 
   public get displayedMessages(): 'error' | 'hint' | undefined {
-    if (this._errorMessages().length > 0 && this.controlDir?.errors) {
+    const control = this.controlDir()?.control;
+    if (
+      this._errorMessages().length > 0 &&
+      control?.errors &&
+      (control.touched || control.dirty)
+    ) {
       return 'error';
     }
     if (this._hintMessages().length > 0) {
@@ -242,7 +264,7 @@ export class IdsCheckboxComponent
   }
 
   protected get _hasRequiredValidator(): boolean {
-    const control = this.controlDir?.control;
+    const control = this.controlDir()?.control;
     const attrRequired = this.required();
 
     if (!control) {
@@ -255,5 +277,31 @@ export class IdsCheckboxComponent
       || control.hasValidator(IdsValidators.required)
       || control.hasValidator(IdsValidators.requiredTrue)
       || control.hasValidator(IdsValidators.requiredFalse);
+  }
+
+  private _assertRequiredInputIsSupported(): void {
+    if (this.required() && this.controlDir() instanceof FormControlName) {
+      throw new Error(
+        'The `[required]` input cannot be used on `ids-checkbox` with `formControlName`. '
+        + 'Configure `Validators.requiredTrue` on the form control instead.',
+      );
+    }
+  }
+
+  private _syncRequiredValidator(): void {
+    const controlDir = this.controlDir();
+    const control = controlDir?.control;
+
+    if (!control || !(controlDir instanceof NgModel)) {
+      return;
+    }
+
+    if (this.required()) {
+      control.addValidators(Validators.requiredTrue);
+    } else {
+      control.removeValidators(Validators.requiredTrue);
+    }
+
+    control.updateValueAndValidity({ emitEvent: false });
   }
 }

@@ -49,6 +49,7 @@ export class IdsSegmentedControlDirective
   public variant = input<IdsSegmentedControlVariantType>(this._defaultConfig.variant);
   public appearance = input<IdsSegmentedControlAppearanceType>(this._defaultConfig.appearance);
   public multiSelect = input<boolean>(false);
+  public showActiveIcon = input<boolean>(true);
   public disabled = signal<boolean>(false);
 
   protected _hostClasses = computed(() => this._getHostClasses([
@@ -65,9 +66,9 @@ export class IdsSegmentedControlDirective
 
   public readonly itemChanges = output<IdsSegmentedControlItemChange>();
 
-  private _handleKeyDown(event: KeyboardEvent): void {
+  protected _handleKeyDown(event: KeyboardEvent): void {
     // eslint-disable-next-line @stylistic/js/array-bracket-newline, @stylistic/js/array-element-newline
-    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', ' '];
+    const navigationKeys = ['ArrowLeft', 'ArrowRight', 'Enter', 'Spacebar', ' '];
 
     if (!navigationKeys.includes(event.key)) {
       return;
@@ -76,9 +77,13 @@ export class IdsSegmentedControlDirective
     event.preventDefault();
 
     const items = this._items();
-    const target = event.target as HTMLButtonElement;
-    const buttonId = target.id;
-    const index = items.findIndex((item) => item.id() === buttonId);
+    const target = event.target as HTMLElement | null;
+    const buttonId = target?.closest('button')?.id;
+    const index = items.findIndex((item) => `${item.id()}-button` === buttonId);
+
+    if (index < 0) {
+      return;
+    }
 
     switch (event.key) {
       case 'ArrowLeft': {
@@ -98,7 +103,8 @@ export class IdsSegmentedControlDirective
         break;
       }
       case 'Enter':
-      case ' ': {
+      case ' ':
+      case 'Spacebar': {
         items[index].onClick();
         break;
       }

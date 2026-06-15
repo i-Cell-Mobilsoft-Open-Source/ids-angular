@@ -1,5 +1,6 @@
-import { computed, inject, Injectable, ViewContainerRef } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -13,6 +14,7 @@ type SnackbarInputControls = {
   closeButtonLabel: string | undefined,
   autoClose: boolean,
   urgent: boolean,
+  clearOnNavigation: boolean,
 };
 
 type SnackbarHelperControls = {
@@ -21,7 +23,6 @@ type SnackbarHelperControls = {
   position: IdsSnackbarPositionType,
   newestAtStartPosition: boolean
   viewportMargin: number
-  useActualViewContainer: boolean
 };
 
 const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
@@ -29,7 +30,6 @@ const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class SnackbarDemoService {
   private readonly _snackbarService = inject(IdsSnackbarService);
-  private _viewContainerRef: ViewContainerRef | null = null;
   private readonly _customActions: IdsSnackbarAction[] = [{ label: 'Log to console', action: this.action }];
   protected _areSnackbarsOpen = computed(() => this._snackbarService.snackbars().length > 0);
 
@@ -61,7 +61,7 @@ export class SnackbarDemoService {
     },
     closeButtonLabel: {
       description: 'Custom close button. If any text is provided,' +
-      ' the close button will be a button with this text against the default "x" button',
+        ' the close button will be a button with this text against the default "x" button',
       type: 'string',
       default: '-',
       demoDefault: '',
@@ -76,6 +76,12 @@ export class SnackbarDemoService {
       description: 'Whether the snackbar is urgent or not. It changes the role of the snackbar.',
       type: 'boolean',
       default: false,
+      control: DemoControl.SWITCH,
+    },
+    clearOnNavigation: {
+      description: 'Whether the snackbar should be cleared automatically on navigation or not.',
+      type: 'boolean',
+      default: true,
       control: DemoControl.SWITCH,
     },
   };
@@ -104,8 +110,8 @@ export class SnackbarDemoService {
       disabled: true,
     },
     newestAtStartPosition: {
-      description: 'Whether the newest snackbar opens in start position, or not.'+
-      ' newestAtStartPosition is an application-wide default value. Can not overwrite at runtime.',
+      description: 'Whether the newest snackbar opens in start position, or not.' +
+        ' newestAtStartPosition is an application-wide default value. Can not overwrite at runtime.',
       type: 'boolean',
       default: defaultConfig.newestAtStartPosition,
       control: DemoControl.SWITCH,
@@ -120,42 +126,40 @@ export class SnackbarDemoService {
       min: 0,
       step: 1,
     },
-    useActualViewContainer: {
-      description: 'Snackbars open in snackbar group.'+
-      ' This group can connect to the viewport by default, or we can connect to a viewContainerRef.'+
-      ' With this boolean, we can switch between actual viewContainerRef or viewPort.',
-      type: 'boolean',
-      default: true,
-      control: DemoControl.SWITCH,
-    },
   };
+
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'close()',
+      description: 'Closes the currently opened snackbar.',
+      returnType: 'void',
+    },
+    {
+      name: 'callAction(action: ()=>void)',
+      description: 'Calls the provided action.',
+      returnType: 'void',
+      parameters: ['action'],
+      parameterTypes: ['() => void'],
+      parameterDescriptions: ['The action to call.'],
+    },
+  ];
+
+  public readonly groupMethodControlConfig: DemoMethodConfig = [
+    {
+      name: 'closeSnackbar(id: number)',
+      description: 'Closes the snackbar at the given index.',
+      returnType: 'void',
+      parameters: ['id'],
+      parameterTypes: ['number'],
+      parameterDescriptions: ['The index of the snackbar to close.'],
+    },
+  ];
 
   public defaults = getDefaultFromDemoConfig<SnackbarInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<SnackbarHelperControls>(this.helperControlConfig);
 
   public model: SnackbarInputControls = { ...this.defaults };
   public helperModel: SnackbarHelperControls = { ...this.helperDefaults };
-
-  constructor() {
-    this.helperControlConfig.useActualViewContainer.onModelChange = this.setActualViewContainer.bind(this);
-  }
-
-  public registerViewContainerRef(vcr: ViewContainerRef): void {
-    this._viewContainerRef = vcr;
-    this.setActualViewContainer();
-  }
-
-  public setActualViewContainer = (): void => {
-    if (!this.helperModel) {
-      return;
-    }
-
-    if (this.helperModel.useActualViewContainer && this._viewContainerRef) {
-      this._snackbarService.setViewContainerRef(this._viewContainerRef);
-    } else {
-      this._snackbarService.clearViewContainerRef();
-    }
-  };
 
   public openSnackbar(): void {
     this._snackbarService.add({
@@ -167,6 +171,7 @@ export class SnackbarDemoService {
       closeButtonLabel: this.model.closeButtonLabel,
       autoClose: this.model.autoClose,
       urgent: this.model.urgent,
+      clearOnNavigation: this.model.clearOnNavigation,
     });
   }
 
@@ -177,5 +182,23 @@ export class SnackbarDemoService {
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [
+      this.methodControlConfig,
+      this.groupMethodControlConfig,
+    ];
+  }
+
+  public getMethodTitles(): string[] {
+    return [
+      'Snackbar Methods',
+      'Snackbar Group Methods',
+    ];
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
   }
 }

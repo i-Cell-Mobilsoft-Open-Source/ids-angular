@@ -1,8 +1,9 @@
 import { IdsRadioGroupDirective } from './radio-group.directive';
 import { IdsRadioChangeEvent } from './types/radio-events.class';
 
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
+import { IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 
 @Component({
   selector: 'ids-radio',
@@ -40,6 +41,7 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
   ]));
 
   private _inputElement = viewChild.required<ElementRef<HTMLButtonElement>>('input');
+  public hintMessage = contentChildren(IdsHintMessageComponent, { descendants: true });
 
   public readonly changes = output<IdsRadioChangeEvent>();
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -12,6 +13,7 @@ type DialogInputControls = {
   mainTitle: string,
   subTitle: string,
   showCloseButton: boolean,
+  isCloseButtonDisabled: boolean,
   showBackdrop: boolean,
 };
 
@@ -48,6 +50,12 @@ export class DialogDemoService {
       default: defaultConfig.showCloseButton,
       control: DemoControl.SWITCH,
     },
+    isCloseButtonDisabled: {
+      description: 'Whether the close button is disabled or not.',
+      type: 'boolean',
+      default: defaultConfig.isCloseButtonDisabled,
+      control: DemoControl.SWITCH,
+    },
     showBackdrop: {
       description: 'Whether to show dialog backdrop or not.',
       type: 'boolean',
@@ -71,6 +79,20 @@ export class DialogDemoService {
     },
   };
 
+  public readonly methodControlConfig: DemoMethodConfig = [
+    {
+      name: 'open()',
+      returnType: 'void',
+      description: 'Opens the dialog.',
+    },
+    {
+      name: 'close()',
+      returnType: 'void',
+      description: 'Close the dialog',
+    },
+
+  ];
+
   public defaults = getDefaultFromDemoConfig<DialogInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<DialogHelperControls>(this.helperControlConfig);
 
@@ -80,5 +102,13 @@ export class DialogDemoService {
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.methodControlConfig];
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.inputControlConfig];
   }
 }

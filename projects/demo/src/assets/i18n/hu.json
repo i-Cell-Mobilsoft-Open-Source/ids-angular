@@ -11,6 +11,7 @@
   "RESOURCES": "Forrásanyagok",
   "COMPONENTS": {
     "ACCORDION": "Accordion",
+    "AUTOCOMPLETE": "Auto complete",
     "AVATAR": "Avatar",
     "BADGE": "Badge",
     "BREADCRUMB": "Breadcrumb",
@@ -50,6 +51,13 @@
     "STANDALONE": "Különálló",
     "GROUPED": "Csoportban"
   },
+  "CHECKBOX": {
+    "FORMGROUP": "<form> taggal használva",
+    "GROUPED_WITH_VALIDATOR": "Csoportban (validátorral)",
+    "ERROR": {
+      "MINIMUM_COUNT_SELECTED": "Legalább {{minimumCount}} checkboxot kell kiválasztani."
+    }
+  },
   "FORM_FIELD": {
     "LABEL": {
       "NAME": "Név",
@@ -65,6 +73,22 @@
       "DATE_MAX": "{{fieldName}} túl késői."
     },
     "SUCCESS": "{{fieldName}} értéke helyes."
+  },
+  "SELECT": {
+    "LAND": {
+      "DOG": "Kutya",
+      "CAT": "Macska",
+      "GIRAFFE": "Zsiráf",
+      "ORANGUTAN": "Orangután",
+      "MAMMOTH": "Mammut",
+      "OPISTHOCOELICAUDIA SKARZYNSKI": "Opisthocoelicaudia Skarzynskii"
+    },
+    "AQUATIC": {
+      "CROCODILE": "Krokodil",
+      "WHALE": "Bálna",
+      "DOLPHIN": "Delfin",
+      "SHARK": "Cápa"
+    }
   },
   "TABLE": {
     "COL": {

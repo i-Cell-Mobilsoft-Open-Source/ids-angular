@@ -1,7 +1,6 @@
 import { DatepickerDemoService } from './datepicker-demo.service';
 
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
-import { PropTableComponent } from '../../components/prop-table/prop-table.component';
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
@@ -9,8 +8,15 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsDatepickerDirective, IdsDatepickerTriggerComponent } from '@i-cell/ids-angular/datepicker';
-import {  IdsErrorMessageComponent, IdsFormFieldComponent, IdsInputDirective, IdsLabelDirective, IdsSuffixDirective, IdsErrorDefinitionDirective } from '@i-cell/ids-angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+  IdsErrorMessageComponent,
+  IdsFormFieldComponent,
+  IdsInputDirective,
+  IdsLabelDirective,
+  IdsSuffixDirective,
+  IdsErrorDefinitionDirective,
+} from '@i-cell/ids-angular/forms';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon'; import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-datepicker-demo',
@@ -27,10 +33,10 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     IdsDatepickerDirective,
     IdsDatepickerTriggerComponent,
+    IdsIconComponent,
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
-    PropTableComponent,
   ],
   templateUrl: './datepicker-demo.component.html',
   styleUrls: [

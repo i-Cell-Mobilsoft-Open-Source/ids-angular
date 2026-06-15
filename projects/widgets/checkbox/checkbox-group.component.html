@@ -1,14 +1,30 @@
-<label class="ids-checkbox-group__label" [for]="id()" [id]="_groupLabelId()">{{ groupLabel() }}</label>
 
-@if (allowParent()) {
-  <ids-checkbox
-    [checked]="_parentCheckboxChecked()"
-    [indeterminate]="_parentCheckboxIndeterminate()"
-    (change)="_handleParentChange($event)"
-    >{{ parentCheckboxLabel() }}</ids-checkbox
-  >
-}
+<div class="ids-checkbox-group__legend">
+  @if (_shouldShowAsterisk) {
+    <span class="ids-form-field__required-marker"></span>
+  }
+  <label class="ids-checkbox-group__legend-label"
+    [for]="id()"
+    [id]="_groupLabelId()">{{ groupLabel() }}
+  </label>
 
+  @if (_hasHint()) {
+    <ng-content select="ids-hint-message" />
+  }
+</div>
+  @if (allowParent()) {
+    <div class="ids-checkbox-group__parent">
+      <ids-checkbox
+        [checked]="_parentCheckboxChecked()"
+        [indeterminate]="_parentCheckboxIndeterminate()"
+        (change)="_handleParentChange($event)"
+        >{{ parentCheckboxLabel() }}</ids-checkbox
+      >
+  </div>
+  }
 <div class="ids-checkbox-group__list">
   <ng-content select="ids-checkbox" />
+</div>
+<div class="ids-checkbox-group__error-container">
+  <ng-content select="ids-error-message" />
 </div>

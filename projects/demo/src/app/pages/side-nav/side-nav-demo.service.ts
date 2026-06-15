@@ -60,7 +60,7 @@ export class SideNavDemoService {
       description: 'Router link of side nav item',
       type: 'string',
       default: '-',
-      demoDefault: 'components/accordion',
+      demoDefault: 'components/accordion/demo',
     },
     hasLeadingIcon: {
       description: 'Whether the side nav item has leading icon or not.',
@@ -109,5 +109,9 @@ export class SideNavDemoService {
   public reset(): void {
     this.model = { ...this.sideNavDefaults };
     this.helperModel = { ...this.helperDefaults };
+  }
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [this.sideNavInputControlConfig];
   }
 }

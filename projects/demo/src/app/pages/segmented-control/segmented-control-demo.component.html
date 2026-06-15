@@ -14,6 +14,7 @@
               [variant]="_segmentedControlDemoService.model.variant"
               [size]="_segmentedControlDemoService.model.size"
               [disabled]="_segmentedControlDemoService.model.disabled"
+              [showActiveIcon]="_segmentedControlDemoService.model.showActiveIcon"
               [(ngModel)]="_segmentedControlDemoService.singleSelectionValue"
             >
               <ids-segmented-control-item
@@ -60,6 +61,7 @@
               [size]="_segmentedControlDemoService.model.size"
               [multiSelect]="true"
               [disabled]="_segmentedControlDemoService.model.disabled"
+              [showActiveIcon]="_segmentedControlDemoService.model.showActiveIcon"
               [ngModel]="_segmentedControlDemoService.multiSelectionValue"
             >
               <ids-segmented-control-item
@@ -122,8 +124,3 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
-<div documentation class="w-full mt-8">
-  <h3 class="text-lg font-bold mb-4">Props</h3>
-
-  <app-prop-table [config]="[_segmentedControlDemoService.inputControlConfig, _segmentedControlDemoService.helperControlConfig]" />
-</div>

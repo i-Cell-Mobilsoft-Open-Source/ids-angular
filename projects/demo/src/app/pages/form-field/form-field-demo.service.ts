@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -23,6 +24,7 @@ type FormFieldHelperControls = {
   hasAction: boolean,
   label: string,
   hintMessage: string,
+  dynamicRequired: boolean,
 };
 
 type InputInputControls = {
@@ -107,6 +109,20 @@ export class FormFieldDemoService {
       default: '-',
       demoDefault: 'Type a value',
     },
+    dynamicRequired: {
+      description: 'Whether the dynamic input field is required or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+      onModelChange: (isRequired?: boolean) => {
+        if (isRequired) {
+          this.dynamicInput.addValidators(Validators.required);
+        } else {
+          this.dynamicInput.removeValidators(Validators.required);
+        }
+        this.dynamicInput.updateValueAndValidity();
+      },
+    },
   };
 
   public readonly inputInputControlConfig: DemoControlConfig<InputInputControls> = {
@@ -156,6 +172,23 @@ export class FormFieldDemoService {
     },
   };
 
+  public readonly formFieldMethodControlConfig: DemoMethodConfig = [
+    {
+      name: 'getConnectedOverlayOrigin()',
+      description: 'Gets the connected overlay origin element. This is the element to which the overlay will be connected.',
+      returnType: 'ElementRef',
+    },
+    {
+      name: 'containerClick(event: MouseEvent)',
+      description: 'Simulates a click on the form field container. ' +
+                  ' This is used to test if the form field can handle clicks on the container.',
+      returnType: 'void',
+      parameters: ['event'],
+      parameterTypes: ['MouseEvent'],
+      parameterDescriptions: ['The click event.'],
+    },
+  ];
+
   public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this.formFieldInputControlConfig);
   public formFieldHelperDefaults = getDefaultFromDemoConfig<FormFieldHelperControls>(this.formFieldHelperControlConfig);
   public inputDefaults = getDefaultFromDemoConfig<InputInputControls>(this.inputInputControlConfig);
@@ -166,6 +199,7 @@ export class FormFieldDemoService {
 
   public input = '';
   public textarea = new FormControl('');
+  public dynamicInput = new FormControl('');
 
   public reset(): void {
     this.formFieldModel = { ...this.formFieldDefaults };
@@ -174,5 +208,19 @@ export class FormFieldDemoService {
 
     this.input = '';
     this.textarea.setValue('');
+    this.dynamicInput.setValue('');
+    this.dynamicInput.removeValidators(Validators.required);
+    this.dynamicInput.updateValueAndValidity();
+  }
+
+  public getMethodConfig(): DemoMethodConfig[] {
+    return [this.formFieldMethodControlConfig];
+  };
+
+  public getApiConfig(): DemoControlConfig<unknown>[] {
+    return [
+      this.formFieldInputControlConfig,
+      this.inputInputControlConfig,
+    ];
   }
 }

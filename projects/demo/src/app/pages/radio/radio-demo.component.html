@@ -18,9 +18,26 @@
             [labelPosition]="_radioDemoService.model.labelPosition"
             [(ngModel)]="_radioDemoService.simpleValue"
           >
-            <ids-radio value="chicken" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
-            <ids-radio value="beef">Beef</ids-radio>
-            <ids-radio value="pork">Pork</ids-radio>
+            <ids-radio value="chicken">Chicken
+              @if (_radioDemoService.helperModel.allowHint) {
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+              }
+            </ids-radio>
+            <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled">Beef
+              @if (_radioDemoService.helperModel.allowHint) {
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+              }
+            </ids-radio>
+            <ids-radio value="pork">Pork
+              @if (_radioDemoService.helperModel.allowHint) {
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+              }
+            </ids-radio>
+            <ids-radio value="fish">Fish
+              @if (_radioDemoService.helperModel.allowHint) {
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+              }
+            </ids-radio>
           </ids-radio-group>
         </div>
         <div class="flex flex-col gap-4">
@@ -36,13 +53,32 @@
             [(ngModel)]="_radioDemoService.wrappedValue"
           >
             <ids-card appearance="outlined" size="comfortable">
-              <ids-radio value="chicken" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled">Chicken</ids-radio>
+              <ids-radio value="chicken">Chicken
+                @if (_radioDemoService.helperModel.allowHint) {
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                }
+              </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
-              <ids-radio value="beef">Beef</ids-radio>
+              <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled">Beef
+                @if (_radioDemoService.helperModel.allowHint) {
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                }
+              </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
-              <ids-radio value="pork">Pork</ids-radio>
+              <ids-radio value="pork">Pork
+                @if (_radioDemoService.helperModel.allowHint) {
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                }
+              </ids-radio>
+            </ids-card>
+            <ids-card appearance="outlined" size="comfortable">
+              <ids-radio value="fish">Fish
+                @if (_radioDemoService.helperModel.allowHint) {
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                }
+              </ids-radio>
             </ids-card>
           </ids-radio-group>
         </div>
@@ -69,8 +105,3 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
-<div documentation class="w-full mt-8">
-  <h3 class="text-lg font-bold mb-4">Props</h3>
-
-  <app-prop-table [config]="[_radioDemoService.inputControlConfig, _radioDemoService.helperControlConfig]" />
-</div>

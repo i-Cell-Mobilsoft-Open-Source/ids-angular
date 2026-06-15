@@ -11,6 +11,7 @@
   "RESOURCES": "Resources",
   "COMPONENTS": {
     "ACCORDION": "Accordion",
+    "AUTOCOMPLETE": "Auto complete",
     "AVATAR": "Avatar",
     "BADGE": "Badge",
     "BREADCRUMB": "Breadcrumb",
@@ -50,6 +51,13 @@
     "STANDALONE": "Standalone",
     "GROUPED": "Grouped"
   },
+  "CHECKBOX": {
+    "FORMGROUP": "Using in <form> tag",
+    "GROUPED_WITH_VALIDATOR": "Grouped (validator)",
+    "ERROR": {
+      "MINIMUM_COUNT_SELECTED": "At least {{minimumCount}} checkboxes must be selected."
+    }
+  },
   "FORM_FIELD": {
     "LABEL": {
       "NAME": "Name",
@@ -65,6 +73,22 @@
       "DATE_MAX": "{{fieldName}} too late."
     },
     "SUCCESS": "{{fieldName}} is valid."
+  },
+  "SELECT": {
+    "LAND": {
+      "DOG": "Dog",
+      "CAT": "Cat",
+      "GIRAFFE": "Giraffe",
+      "ORANGUTAN": "Orangutan",
+      "MAMMOTH": "Mammoth",
+      "OPISTHOCOELICAUDIA SKARZYNSKI": "Opisthocoelicaudia Skarzynski"
+    },
+    "AQUATIC": {
+      "CROCODILE": "Crocodile",
+      "WHALE": "Whale",
+      "DOLPHIN": "Dolphin",
+      "SHARK": "Shark"
+    }
   },
   "TABLE": {
     "COL": {

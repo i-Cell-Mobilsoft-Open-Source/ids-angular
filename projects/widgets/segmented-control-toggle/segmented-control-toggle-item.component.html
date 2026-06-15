@@ -3,7 +3,7 @@
   type="button"
   [id]="_buttonId()"
   [attr.role]="_role()"
-  [attr.tabindex]="_parentOrSelfDisabled() ? -1 : tabIndex()"
+  [attr.tabindex]="selected() ? 0 : -1"
   [attr.aria-pressed]="_ariaPressed()"
   [attr.aria-checked]="_ariaChecked()"
   [disabled]="_parentOrSelfDisabled() || null"
@@ -13,10 +13,10 @@
   [class]="_buttonClasses()"
   (click)="onClick()"
 >
-  @if (selected()) {
+  @if (selected() && _showActiveIcon()) {
     <ids-icon aria-hidden="true" fontIcon="done" />
   }
-  @if (!selected() || !label()) {
+  @if (!selected() || !label() || !_showActiveIcon()) {
     <ng-content select="ids-icon" />
   }
 

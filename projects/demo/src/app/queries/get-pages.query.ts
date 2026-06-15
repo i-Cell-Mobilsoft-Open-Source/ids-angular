@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_PAGES = gql`
-{
-  entries(collection: "pages") {
+query GetPages($site: String!) {
+  entries(collection: "pages", site: $site) {
     data {
       title
       ... on Entry_Pages_Page {

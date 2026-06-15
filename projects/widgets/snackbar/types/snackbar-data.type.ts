@@ -9,6 +9,7 @@ export interface IdsSnackbarData {
   closeButtonLabel?: string
   autoClose?: boolean
   urgent?: boolean
+  clearOnNavigation?: boolean
 }
 
 export interface IdsSnackbarAction {

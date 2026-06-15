@@ -1,6 +1,5 @@
 import { DemoControl, DemoControlConfig, DemoControlItem } from '../../../types/demo-control.type';
 
-import { CommonModule } from '@angular/common';
 import { Component, computed, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsCardBodyDirective, IdsCardComponent, IdsCardHeaderComponent, IdsCardTitleDirective } from '@i-cell/ids-angular/card';
@@ -21,7 +20,6 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
 @Component({
   selector: 'app-control-table',
   imports: [
-    CommonModule,
     IdsSentenceCasePipe,
     FormsModule,
     IdsSwitchComponent,

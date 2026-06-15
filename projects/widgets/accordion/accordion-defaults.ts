@@ -1,12 +1,19 @@
 import { IdsAccordionAppearance, IdsAccordionAppearanceType } from './types/accordion-appearance.type';
+import { IdsAccordionHeadingLevel, IdsAccordionHeadingLevelType } from './types/accordion-heading-level.type';
 
 import { InjectionToken } from '@angular/core';
-import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
+import {
+  IdsButtonAppearance,
+  IdsButtonAppearanceType,
+  IdsButtonVariant,
+  IdsButtonVariantType,
+} from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsAccordionDefaultConfig {
   size?: IdsSizeType
   appearance?: IdsAccordionAppearanceType
+  headingLevel?: IdsAccordionHeadingLevelType,
   multi?: boolean,
   btnSize?: IdsSizeType,
   btnAppearance?: IdsButtonAppearanceType,
@@ -29,6 +36,7 @@ export function IDS_ACCORDION_DEFAULT_CONFIG_FACTORY(): Required<IdsAccordionDef
   return {
     size: IdsSize.COMPACT,
     appearance: IdsAccordionAppearance.FILLED,
+    headingLevel: IdsAccordionHeadingLevel.H3,
     multi: false,
     btnSize: IdsSize.COMPACT,
     btnAppearance: IdsButtonAppearance.FILLED,

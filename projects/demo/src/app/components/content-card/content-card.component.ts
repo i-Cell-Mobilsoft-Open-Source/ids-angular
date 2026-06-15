@@ -3,10 +3,12 @@ import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 import { BadgeComponent } from '../badge/badge.component';
 import { ImageComponent } from '../image/image.component';
 
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
+import { Router } from '@angular/router';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
+import { IdsChipGroupComponent, IdsChipComponent } from '@i-cell/ids-angular/chip';
 
 @Component({
   selector: 'app-content-card',
@@ -17,6 +19,8 @@ import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directi
     BadgeComponent,
     IdsButtonComponent,
     SafeHtmlPipe,
+    IdsChipGroupComponent,
+    IdsChipComponent,
   ],
   templateUrl: './content-card.component.html',
   styleUrl: './content-card.component.scss',
@@ -24,15 +28,26 @@ import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directi
 export class ContentCardComponent  {
 
   public contentCardData = input.required<ContentCardData>();
+  private _router = inject(Router);
+
+  public showCaption = input<boolean>(false);
+  public fullDescription = input<boolean>(false);
 
   public handleButtonClick(url?: string): void {
     if (!url) {
       return;
     }
+    // Navigate internally for relative URLs, open in new tab for absolute URLs
+    if (url.startsWith('/')) {
+      this._router.navigateByUrl(url);
+      return;
+    }
     window.open(url, '_blank', 'noopener');
+
   }
 
   public imageData = computed(() => ({
-    transparent: this.contentCardData().imageBGTransparent === true,
+    transparent: this.contentCardData().image?.bgTransparent === true,
   }));
+
 }

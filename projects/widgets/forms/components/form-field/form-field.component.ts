@@ -12,8 +12,10 @@ import { IdsHintMessageComponent } from '../message/hint-message/hint-message.co
 import { IdsSuccessMessageComponent } from '../message/success-message/success-message.component';
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Validators } from '@angular/forms';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { of, startWith, switchMap } from 'rxjs';
 
 const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
@@ -79,7 +81,18 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
     return undefined;
   });
 
+  private _controlStatus = toSignal(
+    toObservable(this.controlDir).pipe(
+      switchMap((dir) => {
+        const control = dir?.control;
+        return control ? control.statusChanges.pipe(startWith(control.status)) : of(null);
+      }),
+    ),
+    { equal: () => false },
+  );
+
   public hasRequiredValidator = computed(() => {
+    this._controlStatus();
     const control = this.controlDir()?.control;
     return this._child().required()
       || control?.hasValidator(Validators.required)

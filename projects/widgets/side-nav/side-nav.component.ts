@@ -5,8 +5,7 @@ import { IdsSideNavAppearanceType } from './types/side-nav-appearance.type';
 import { IdsSideNavVariantType } from './types/side-nav-variant.type';
 
 import { booleanAttribute, Component, computed, inject, input } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ComponentBaseWithDefaults, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import {
   IDS_ICON_BUTTON_PARENT,
@@ -14,7 +13,6 @@ import {
   IdsIconButtonVariantType,
   IdsIconButtonParent,
 } from '@i-cell/ids-angular/icon-button';
-import { filter } from 'rxjs';
 
 const defaultConfig = IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY();
 
@@ -57,8 +55,6 @@ export class IdsSideNavComponent extends ComponentBaseWithDefaults<IdsSideNavDef
   public variant = input<IdsSideNavVariantType>(this._defaultConfig.variant);
   public hasActiveIndicator = input<unknown, boolean>(this._defaultConfig.hasActiveIndicator, { transform: booleanAttribute });
   public hasLabel = input<unknown, boolean>(this._defaultConfig.hasLabel, { transform: booleanAttribute });
-  public navigationChange = toSignal(this._router.events.pipe(filter((event) => event instanceof NavigationEnd)));
-
   public embeddedIconButtonAppearance = computed<IdsIconButtonAppearanceType>(() => this.appearance());
   public embeddedIconButtonVariant = computed<IdsIconButtonVariantType>(() => this.variant());
   public embeddedIconButtonSize = computed<IdsSizeType>(() => {

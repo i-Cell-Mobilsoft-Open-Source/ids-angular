@@ -1,11 +1,14 @@
+import { PageEntry } from '../model/pageEntry';
 import { GET_COMPONENTS_LIST } from '../queries/get-components-list.query';
 import { GET_COMPONENTS } from '../queries/get-components.query';
+import { GET_DYNAMIC_CONTENT } from '../queries/get-dynamic-content.query';
 import { GET_GLOBALS } from '../queries/get-globals.query';
 import { GET_NAVIGATION } from '../queries/get-navigation.query';
+import { GET_PAGES_LIST } from '../queries/get-pages-list.query';
 import { GET_PAGES } from '../queries/get-pages.query';
 
 import { inject, Injectable } from '@angular/core';
-import { ApolloQueryResult } from '@apollo/client/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
@@ -77,41 +80,73 @@ export interface StatamicFooterGlobal {
 })
 export class GraphqlService {
   private _apollo = inject(Apollo);
+  private _translate = inject(TranslateService);
 
-  public getComponents(): Observable<unknown> {
-    return this._apollo.watchQuery({
+  private _currentLang(): string {
+    return sessionStorage.getItem('ids_lang') || this._translate.getCurrentLang() || 'en';
+  }
+
+  public getComponents(slug: string): Observable<unknown> {
+    return this._apollo.query({
       query: GET_COMPONENTS,
-    }).valueChanges;
-
+      variables: { site: this._currentLang(), slug },
+      fetchPolicy: 'network-only',
+    });
   }
 
   public getPages(): Observable<unknown> {
-    return this._apollo.watchQuery({
+    return this._apollo.query({
       query: GET_PAGES,
-    }).valueChanges;
+      variables: { site: this._currentLang() },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getGlobals(): Observable<unknown> {
-    return this._apollo.watchQuery({
-      query: GET_GLOBALS,
-    }).valueChanges;
-  }
-
-  public getNavigation(): Observable<ApolloQueryResult<NavigationQueryResult>> {
-    ;
-    return this._apollo.watchQuery<NavigationQueryResult>({
+  public getNavigation(): Observable<unknown> {
+    return this._apollo.query<NavigationQueryResult>({
       query: GET_NAVIGATION,
-    }).valueChanges;
-
+      variables: {
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'no-cache',
+    });
   }
 
-  public getComponentsList(): Observable<ApolloQueryResult<{ entries: { data: StatamicComponentListItem[] } }>> {
-    return this._apollo.watchQuery<{ entries: { data: StatamicComponentListItem[] } }>({
+  public getComponentsList(): Observable<unknown> {
+    return this._apollo.query({
       query: GET_COMPONENTS_LIST,
-    }).valueChanges;
+      variables: {
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
   }
 
-  public getFooterGlobals(): Observable<ApolloQueryResult<{ globalSet: StatamicFooterGlobal }>> {
+  public getPagesList(collection: string, typeName: string, slug: string): Observable<unknown> {
+    return this._apollo.query<{ entry: PageEntry }>({
+      query: GET_PAGES_LIST(typeName),
+      variables: {
+        collection,
+        slug,
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
+  }
+
+  public getDynamicContent(collection: string, typeName: string, slug: string): Observable<unknown> {
+    const dynamicQuery = GET_DYNAMIC_CONTENT(collection, typeName);
+    return this._apollo.query({
+      query: dynamicQuery,
+      variables: {
+        slug,
+        site: this._currentLang(),
+      },
+      fetchPolicy: 'network-only',
+    });
+  }
+
+  public getFooterGlobals(): Observable<unknown> {
     return this._apollo.watchQuery<{ globalSet: StatamicFooterGlobal }>({
       query: GET_GLOBALS,
     }).valueChanges;

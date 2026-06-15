@@ -24,22 +24,26 @@
   </div>
 
   @if (_isCodeVisible()) {
-    <div class="border-t border-ids-comp-border-default">
-      <div class="flex items-center p-3">
-        <button
-          type="button"
-          idsIconButton
-          appearance="standard"
-          size="comfortable"
-          variant="primary"
-          class="ml-auto"
-          idsTooltip="Copy code"
-          (click)="copyCode()"
-        >
-          <ids-icon fontIcon="file-copy" />
-        </button>
-      </div>
-      <pre class="ids-example-viewer__code-pre m-0 p-4 overflow-x-auto text-sm"><code [innerHTML]="_highlightedCode()"></code></pre>
+    <div class="px-4">
+      <ids-tab-group stretchTabs="false" [selectedTabIndex]="_selectedTabIndex()" (selectedTabChange)="onTabChange($event)">
+        @for (tab of tabs(); track tab.path) {
+          <ids-tab [label]="tab.language">
+            <pre class="p-4 overflow-x-auto text-sm w-full"><code [innerHTML]="_highlightedCode()"></code></pre>
+            <div class="flex justify-end">
+              <button
+                type="button"
+                idsIconButton
+                appearance="standard"
+                size="comfortable"
+                variant="primary"
+                idsTooltip="Copy code"
+                (click)="copyCode()">
+                <ids-icon fontIcon="file-copy" />
+              </button>
+            </div>
+          </ids-tab>
+        }
+      </ids-tab-group>
     </div>
   }
 </ids-card>

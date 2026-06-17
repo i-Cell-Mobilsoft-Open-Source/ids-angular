@@ -10,6 +10,7 @@ export const GET_GLOBALS = gql`
         url
         ... on Asset_Assets {
           url
+          alt
         }
       }
       footer_logo {

@@ -1,6 +1,5 @@
-<footer class="relative">
-  <div class="absolute z-10">
-    
+<footer class="bg-ids-container-bg-surface-darker-20 relative overflow-hidden" aria-labelledby="footer-heading">
+  <div class="absolute w-28 left-0 2xl:left-0 -top-[6px] 2xl:top-0 rotate-0 trasform overflow-hidden">
     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="123" viewBox="0 0 100 123" fill="none">
       <circle cx="-2.20501" cy="20.7953" r="102" transform="rotate(-154.44 -2.20501 20.7953)" fill="url(#paint0_linear_4040_697)" />
       <defs>
@@ -11,121 +10,90 @@
       </defs>
     </svg>
   </div>
-  <div class="footer relative">
-
-    <div class="ellipse">
-      <div class="large-circle"></div>
-    </div>
-    
-    
-    <div class="rectangle"></div>
-    
-    <div class="flex flex-col items-start gap-8">
-      <img alt="Company Logo" class="flex w-[120px] h-[85px] justify-center items-center" [src]="footerData?.footer_logo?.[0]?.url" />
-      
-      <div class="flex flex-col items-start gap-[118px] z-10 relative">
-        <div class="flex items-start gap-[146px] relative">
-          <div class="flex flex-col items-start gap-[10px]">
-            <h3 class="company-name">{{ footerData?.footer_contact_group?.company_name }}</h3>
-            
-            <div class="flex flex-col items-start">
-              <div class="address">
-                <ids-icon [fontIcon]="'location'" />
-                <span class="address-text">{{ footerData?.footer_contact_group?.company_address }}</span>
-              </div>
-              
-              <div class="email">
-                <ids-icon [fontIcon]="'mail'" />
-                <span class="email-text">{{ footerData?.footer_contact_group?.company_email }}</span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="flex flex-row gap-[126px] z-10 px-20">
-            <div class="link-col">
-              <div class="flex flex-col items-start gap-2">
-                <h3 class="link-title">Documentation</h3>
-                
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="4" viewBox="0 0 60 4" fill="none">
-                  <line x1="2" y1="2" x2="58" y2="2" stroke="url(#paint0_linear_4004_559)" stroke-width="4" stroke-linecap="round" />
-                  <defs>
-                    <linearGradient id="paint0_linear_4004_559" x1="0" y1="4" x2="76.9163" y2="4.00023" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#003CFF" />
-                      <stop offset="1" stop-color="#013DFF" stop-opacity="0.1" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div class="flex flex-col items-start gap-2">
-                <a class="link-item" href="">Get Started</a>
-                <a class="link-item" href="">Design</a>
-                <a class="link-item" href="">Develop</a>
-                <a class="link-item" href="">Components</a>
-                <a class="link-item" href="">Design tokens</a>
-              </div>
-            </div>
-            
-            <div class="link-col">
-              <div class="flex flex-col items-start gap-2">
-                <h3 class="link-title">Resources</h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="4" viewBox="0 0 60 4" fill="none">
-                  <line x1="2" y1="2" x2="58" y2="2" stroke="url(#paint0_linear_4004_559)" stroke-width="4" stroke-linecap="round" />
-                  <defs>
-                    <linearGradient id="paint0_linear_4004_559" x1="0" y1="4" x2="76.9163" y2="4.00023" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#003CFF" />
-                      <stop offset="1" stop-color="#013DFF" stop-opacity="0.1" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div class="flex flex-col items-start gap-2">
-                <a class="link-item" href="">Releases</a>
-                <a class="link-item" href="">Figma kit</a>
-                <a class="link-item" href="">Icon library</a>
-              </div>
-            </div>
-            <div class="link-col">
-              <div class="flex flex-col items-start gap-2">
-                <h3 class="link-title">Community</h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="4" viewBox="0 0 60 4" fill="none">
-                  <line x1="2" y1="2" x2="58" y2="2" stroke="url(#paint0_linear_4004_559)" stroke-width="4" stroke-linecap="round" />
-                  <defs>
-                    <linearGradient id="paint0_linear_4004_559" x1="0" y1="4" x2="76.9163" y2="4.00023" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#003CFF" />
-                      <stop offset="1" stop-color="#013DFF" stop-opacity="0.1" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div class="flex flex-col items-start gap-2">
-                <a class="link-item" href="">Github</a>
-                <a class="link-item" href="">Issue report</a>
-                <a class="link-item" href="">Bug report</a>
-              </div>
-            </div>
-          </div>
-          <img alt="" class="cert1" [src]="footerData?.footer_certs?.[0]?.url" />
-          <img alt="" class="cert2" [src]="footerData?.footer_certs?.[1]?.url" />
+  <h2 id="footer-heading" class="sr-only">Footer</h2>
+  <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-16 z-10 relative">
+    <div class="grid md:grid-cols-12 xl:grid xl:grid-cols-12 xl:gap-8">
+      <div class="space-y-8 sm:col-span-2 md:col-span-4 lg:col-span-3">
+        <div>
+          <img
+            alt="i-Cell mobilsoft logo"
+            class="flex w-[120px] h-[85px] justify-center items-center"
+            [src]="footerData?.footer_logo?.[0]?.url"
+          />
         </div>
-        <img alt="" class="cert3" [src]="footerData?.footer_certs?.[2]?.url" />
-        <img alt="" class="cert4" [src]="footerData?.footer_certs?.[3]?.url" />
-        
-        <div class="flex flex-col items-end gap-4">
-          <div class="line"></div>
-          
-          <div class="flex justify-between items-start w-[1214px]">
-            <p class="copyright-text flex flex-col justify-center shrink-0 w-[388px] h-[21px]">
-              {{ footerData?.footer_copyright }}
-            </p>
-            
-            <div class="flex items-end justify-center gap-5">
-              <a href="/privacy" class="copyright-text">Privacy Policy</a>
-              <a href="/cookie" class="copyright-text">Cookie Policy</a>
-              <a href="/legal" class="copyright-text">Legal Notice</a>
+        <div class="space-y-3">
+          <h3 class="text-ids-container-fg-surface-darker-70">{{ footerData?.footer_contact_group?.company_name }}</h3>
+          <ul class="list-none">
+            <li class="text-sm font-medium leading-6 flex items-center gap-2 text-gray-400">
+              <ids-icon [fontIcon]="'location'" />
+              <span class="text-ids-container-fg-surface-darker-70">{{ footerData?.footer_contact_group?.company_address }}</span>
+            </li>
+            <li class="text-sm font-medium leading-6 flex items-center gap-2 text-gray-400">
+              <ids-icon [fontIcon]="'mail'" />
+              <span class="text-ids-container-fg-surface-darker-70">{{ footerData?.footer_contact_group?.company_email }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-2 w-[190px]">
+          @for (cert of footerData?.footer_certs; track $index) {
+            <div class="flex items-center justify-center">
+              <img [alt]="cert?.alt" [src]="cert?.url" />
             </div>
+          }
+        </div>
+      </div>
+      <div class="mt-20 gap-8 sm:col-span-10 md:col-span-8 md:mt-[144px] lg:mt-[114px] xl:col-span-9 xl:mt-[114px] relative">
+        <div class="footer-glassy-bg card z-10 p-6 lg:p-14">
+          <div class="md:grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
+            @for (col of footerNavTree(); track col.page?.id || $index) {
+              <div class="link-col">
+                <div class="flex flex-col items-start gap-2 pb-4">
+                  <h3 class="text-ids-container-fg-surface-darker-70 text-label-xlarge-prominent">{{ col.page?.title }}</h3>
+
+                  <svg xmlns="http://www.w3.org/2000/svg" width="60" height="4" viewBox="0 0 60 4" fill="none">
+                    <line x1="2" y1="2" x2="58" y2="2" stroke="url(#paint0_linear_4004_559)" stroke-width="4" stroke-linecap="round" />
+                    <defs>
+                      <linearGradient id="paint0_linear_4004_559" x1="0" y1="4" x2="76.9163" y2="4.00023" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#003CFF" />
+                        <stop offset="1" stop-color="#013DFF" stop-opacity="0.1" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+
+                <div class="flex flex-col items-start gap-2">
+                  @for (link of col.children; track link.page?.id || $index) {
+                    <a class="link-item" [href]="getLinkUrl(link.page?.slug)">
+                      {{ link.page?.title }}
+                    </a>
+                  }
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>
     </div>
+    <div
+      class="mt-16 border-t border-ids-container-border-secondary-lighter-20 pt-6 sm:mt-20 lg:mt-24 flex flex-col items-start lg:flex-row justify-start lg:justify-between"
+    >
+      <div>
+        <p class="text-xs leading-5 text-ids-container-fg-surface-darker-70">
+          {{ footerData?.footer_copyright }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="absolute right-0 -bottom-[6px] rotate-0 trasform">
+    <svg width="312" height="221" viewBox="0 0 312 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="179" cy="179" r="179" fill="url(#paint0_linear_10300_56499)" />
+      <defs>
+        <linearGradient id="paint0_linear_10300_56499" x1="179" y1="0" x2="179" y2="358" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#013DFF" />
+          <stop offset="1" stop-color="#013DFF" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
   </div>
 </footer>

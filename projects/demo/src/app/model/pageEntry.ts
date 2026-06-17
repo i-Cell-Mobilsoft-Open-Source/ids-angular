@@ -30,7 +30,7 @@ export interface GlobalEntry {
   handle: string;
   footer_copyright: string;
   footer_logo?: { url: string }[];
-  footer_certs?: { url: string }[];
+  footer_certs?: { url: string, alt: string }[];
   footer_contact_group?: {
     company_name: string;
     company_email: string;

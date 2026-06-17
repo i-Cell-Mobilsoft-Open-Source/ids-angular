@@ -102,6 +102,12 @@ export class GraphqlService {
     });
   }
 
+  public getGlobals(): Observable<unknown> {
+    return this._apollo.watchQuery({
+      query: GET_GLOBALS,
+    }).valueChanges;
+  }
+
   public getNavigation(): Observable<unknown> {
     return this._apollo.query<NavigationQueryResult>({
       query: GET_NAVIGATION,

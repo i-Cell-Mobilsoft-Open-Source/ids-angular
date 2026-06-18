@@ -84,17 +84,19 @@ export class AppComponent {
         this.dynamicMenu = this._mapStatamicNavToMenu(this._navTree);
       });
 
-    this._translate.onLangChange.pipe(
-      takeUntilDestroyed(this._destroyRef),
-      switchMap(() => graphqlService.getNavigation()),
-    ).subscribe((result) => {
-      const navResult = result as { data?: { navs?: Array<{ handle: string; tree: StatamicNavNode[] }> } };
+    this._translate.onLangChange
+      .pipe(
+        takeUntilDestroyed(this._destroyRef),
+        switchMap(() => graphqlService.getNavigation()),
+      )
+      .subscribe((result) => {
+        const navResult = result as { data?: { navs?: Array<{ handle: string; tree: StatamicNavNode[] }> } };
 
-      const sideNav = navResult.data?.navs?.find((nav) => nav.handle === 'side_nav');
-      this._navTree = sideNav?.tree || [];
-      this._componentLevelDepth = this._findDeepestLevel(this._navTree);
-      this.dynamicMenu = this._mapStatamicNavToMenu(this._navTree);
-    });
+        const sideNav = navResult.data?.navs?.find((nav) => nav.handle === 'side_nav');
+        this._navTree = sideNav?.tree || [];
+        this._componentLevelDepth = this._findDeepestLevel(this._navTree);
+        this.dynamicMenu = this._mapStatamicNavToMenu(this._navTree);
+      });
   }
 
   private async _setTokens(href: string): Promise<void> {

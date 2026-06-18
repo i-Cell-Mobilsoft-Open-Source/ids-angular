@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { BUTTON_EXAMPLES } from '../../components-example/button/button-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { IdsButtonComponent, IdsButtonGroupComponent } from '@i-cell/ids-angular/button';
@@ -20,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     ControlTableComponent,
     TryoutControlComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './button-demo.component.html',
   styleUrls: [
@@ -29,4 +32,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class ButtonDemoComponent {
   protected _buttonDemoService = inject(ButtonDemoService);
+  public readonly buttonExamples = BUTTON_EXAMPLES;
 }

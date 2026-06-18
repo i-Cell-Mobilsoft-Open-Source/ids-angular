@@ -42,7 +42,7 @@ export class IdsYearSelectorComponent extends IdsCalendarPage {
   public override headerLabel = computed<string>(() => `${this._years()[0]} - ${this._years().at(-1)}`);
 
   public override hasPreviousPage(): boolean {
-    const min = Number.isFinite(this.min()?.getFullYear()) ? this.min()!.getFullYear() : Number.POSITIVE_INFINITY;
+    const min = Number.isFinite(this.min()?.getFullYear()) ? this.min()!.getFullYear() : Number.NEGATIVE_INFINITY;
     const firstYearOnPage = Number.isFinite(this._firstYearOnPage()) ? this._firstYearOnPage() : Number.NEGATIVE_INFINITY;
 
     return firstYearOnPage > min;
@@ -55,7 +55,7 @@ export class IdsYearSelectorComponent extends IdsCalendarPage {
   }
 
   public override hasNextPage(): boolean {
-    const max = Number.isFinite(this.max()?.getFullYear()) ? this.max()!.getFullYear() : Number.NEGATIVE_INFINITY;
+    const max = Number.isFinite(this.max()?.getFullYear()) ? this.max()!.getFullYear() : Number.POSITIVE_INFINITY;
     const lastYearOnPage = Number.isFinite(this._firstYearOnPage()) ? this._firstYearOnPage() + yearsPerPage - 1 : Number.POSITIVE_INFINITY;
 
     return lastYearOnPage < max;

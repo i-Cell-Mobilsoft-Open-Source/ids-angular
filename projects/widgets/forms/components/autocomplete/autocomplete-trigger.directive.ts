@@ -218,8 +218,11 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
     this.autocomplete()
       .options()
       .forEach((option) => {
-        option.onSelectionChange.subscribe((change) => {
+        option.selectionChange.subscribe((change) => {
           this._handleOptionChange(change);
+        });
+        option.selectionUnchanged.subscribe(() => {
+          this.close();
         });
       });
   }

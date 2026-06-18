@@ -64,7 +64,7 @@
 
                 <div class="flex flex-col items-start gap-2">
                   @for (link of col.children; track link.page?.id || $index) {
-                    <a class="link-item" [href]="getLinkUrl(link.page?.slug)">
+                    <a class="link-item" [href]="getLinkUrl(link.page?.slug)" (click)="handleLinkClick($event, link.page?.slug)">
                       {{ link.page?.title }}
                     </a>
                   }
@@ -82,6 +82,17 @@
         <p class="text-xs leading-5 text-ids-container-fg-surface-darker-70">
           {{ footerData?.footer_copyright }}
         </p>
+      </div>
+      <div class="mt-6 flex gap-4 lg:mt-0">
+        @for (link of footerLinksNavTree(); track link.page?.id || $index) {
+          <a
+            class="text-xs leading-5 text-ids-container-fg-surface-darker-70 cursor-pointer"
+            [href]="getLinkUrl(link.page?.url || link.page?.slug)"
+            (click)="handleLinkClick($event, link.page?.url || link.page?.slug)"
+          >
+            {{ link.page?.title }}
+          </a>
+        }
       </div>
     </div>
   </div>

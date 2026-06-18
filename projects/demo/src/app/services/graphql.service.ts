@@ -26,6 +26,7 @@ export interface StatamicNavNode {
     title?: string;
     id?: string;
     slug?: string;
+    url?: string;
   };
   children?: StatamicNavNode[];
 }
@@ -157,5 +158,4 @@ export class GraphqlService {
       query: GET_GLOBALS,
     }).valueChanges;
   }
-
 }

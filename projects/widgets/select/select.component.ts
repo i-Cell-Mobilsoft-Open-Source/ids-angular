@@ -274,8 +274,13 @@ export class IdsSelectComponent
 
   private _subscribeOptionChanges(): void {
     this.options().forEach((option) => {
-      option.onSelectionChange.subscribe((change) => {
-        this._handleOptionChange(change);
+      option.selectionChange.subscribe(
+        (change) => {
+          this._handleOptionChange(change);
+        },
+      );
+      option.selectionUnchanged.subscribe(() => {
+        this.close();
       });
     });
   }

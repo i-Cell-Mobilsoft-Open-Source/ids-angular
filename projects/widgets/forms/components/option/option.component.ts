@@ -67,8 +67,8 @@ export class IdsOptionComponent<T = unknown>
 
   protected readonly _multiSelect = Boolean(this._parent?.multiSelect());
 
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public onSelectionChange = output<IdsOptionSelectionChange<T>>();
+  public selectionChange = output<IdsOptionSelectionChange<T>>();
+  public selectionUnchanged = output<IdsOptionSelectionChange<T>>();
 
   public viewValue = computed(() => this.explicitViewValue() || this._defaultViewValue());
   protected readonly _hostClasses = computed(() => this._getHostClasses([
@@ -179,7 +179,9 @@ export class IdsOptionComponent<T = unknown>
 
   private _emitSelectionChangeEvent(selected: boolean, isUserInput = false): void {
     if (this._multiSelect || !this.selected()) {
-      this.onSelectionChange.emit(new IdsOptionSelectionChange<T>(this, selected, isUserInput));
+      this.selectionChange.emit(new IdsOptionSelectionChange<T>(this, selected, isUserInput));
+    } else {
+      this.selectionUnchanged.emit(new IdsOptionSelectionChange<T>(this, selected, isUserInput));
     }
   }
 }

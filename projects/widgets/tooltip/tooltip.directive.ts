@@ -13,9 +13,24 @@ import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ComponentRef, computed, Directive, effect, ElementRef, inject, input, NgZone, OnDestroy, signal, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  ComponentRef,
+  computed,
+  Directive,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  NgZone,
+  OnDestroy,
+  signal,
+  ViewContainerRef,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { coerceStringAttribute, DirectiveBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { Subject, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
 const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true });
@@ -45,8 +60,8 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
   private _portal?: ComponentPortal<IdsTooltipComponent>;
   private _componentRef?: ComponentRef<IdsTooltipComponent> | null;
   private _tooltipInstance: IdsTooltipComponent | null = null;
-  private _touchstartTimeout?: ReturnType<typeof setTimeout>;
-  private _showTimeout?: ReturnType<typeof setTimeout>;
+  private readonly _showSubject = new Subject<void>();
+  private readonly _touchstartSubject = new Subject<void>();
   private _pointerExitEventsInitialized = false;
   private _viewportMargin = this._defaultConfig.viewPortMargin;
   private _currentPosition = signal<IdsTooltipPositionType | null>(null);
@@ -101,8 +116,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     }
 
     const overlayRef = this._createOverlay();
-    this._portal =
-      this._portal || new ComponentPortal(IdsTooltipComponent, this._viewContainerRef);
+    this._portal = this._portal || new ComponentPortal(IdsTooltipComponent, this._viewContainerRef);
     this._componentRef = overlayRef.attach(this._portal);
     this._tooltipInstance = this._componentRef.instance;
     const instance = this._tooltipInstance;
@@ -126,11 +140,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
   }
 
   public hide(delay: number = this.hideDelay()): void {
-    if (this._showTimeout) {
-      clearTimeout(this._showTimeout);
-      this._showTimeout = undefined;
-      return;
-    }
+    this._showSubject.next();
 
     const instance = this._tooltipInstance;
     if (instance?.isHideTimerTicking) {
@@ -151,9 +161,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
       this._detach();
     }
 
-    const scrollableAncestors = this._scrollDispatcher.getAncestorScrollContainers(
-      this._elementRef,
-    );
+    const scrollableAncestors = this._scrollDispatcher.getAncestorScrollContainers(this._elementRef);
 
     const strategy = this._overlay
       .position()
@@ -165,10 +173,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     strategy.positionChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((change) => {
       this._updateCurrentPositionClass(change.connectionPair);
 
-      if (!this.ignoreClipped() &&
-        change.scrollableViewProperties.isOverlayClipped &&
-        this._tooltipInstance
-      ) {
+      if (!this.ignoreClipped() && change.scrollableViewProperties.isOverlayClipped && this._tooltipInstance) {
         this._ngZone.run(() => this.hide(0));
       }
     });
@@ -266,10 +271,11 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
         'mouseenter',
         (): void => {
           this._setupPointerExitEventsIfNeeded();
-          this._showTimeout = setTimeout(() => {
-            this._showTimeout = undefined;
-            this.show();
-          }, this.showDelay());
+          timer(this.showDelay())
+            .pipe(takeUntil(this._showSubject))
+            .subscribe(() => {
+              this.show();
+            });
         },
       ]);
     } else if (this.touchGestures() !== 'off') {
@@ -279,12 +285,11 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
         'touchstart',
         (): void => {
           this._setupPointerExitEventsIfNeeded();
-          clearTimeout(this._touchstartTimeout);
+          this._touchstartSubject.next();
 
-          this._touchstartTimeout = setTimeout(
-            () => this.show(),
-            this._defaultConfig.touchLongPressShowDelay,
-          );
+          timer(this._defaultConfig.touchLongPressShowDelay)
+            .pipe(takeUntil(this._touchstartSubject))
+            .subscribe(() => this.show());
         },
       ]);
     }
@@ -328,7 +333,7 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
     } else if (this.touchGestures() !== 'off') {
       this._disableNativeGesturesIfNecessary();
       const touchendListener = (): void => {
-        clearTimeout(this._touchstartTimeout);
+        this._touchstartSubject.next();
         this.hide(this._defaultConfig.touchendHideDelay);
       };
 
@@ -376,7 +381,8 @@ export class IdsTooltipDirective extends DirectiveBaseWithDefaults<IdsTooltipDef
   public ngOnDestroy(): void {
     const nativeElement = this._elementRef.nativeElement;
 
-    clearTimeout(this._touchstartTimeout);
+    this._showSubject.complete();
+    this._touchstartSubject.complete();
 
     if (this._componentRef) {
       this._tooltipInstance = null;

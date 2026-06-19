@@ -13,6 +13,7 @@ import {
 
 import { trigger, transition, style, animate } from '@angular/animations';
 import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
@@ -57,6 +58,7 @@ const defaultConfig = IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY();
     NgClass,
     A11yModule,
     CdkTrapFocus,
+    CdkScrollable,
   ],
 })
 export class IdsSideSheetComponent extends ComponentBaseWithDefaults<IdsSideSheetDefaultConfig> {

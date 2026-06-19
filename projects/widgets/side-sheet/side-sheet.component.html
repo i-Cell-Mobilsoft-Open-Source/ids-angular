@@ -105,7 +105,7 @@
         <ng-container *ngTemplateOutlet="customHeader"/>
       }
     </app-side-sheet-header>
-    <div class="ids-side-sheet__content" [ngClass]="{ 'ids-side-sheet__content--scrollable': isScrollable() }">
+    <div class="ids-side-sheet__content" cdkScrollable [ngClass]="{ 'ids-side-sheet__content--scrollable': isScrollable() }">
       <ng-container *ngTemplateOutlet="content"/>
     </div>
       <div class="ids-side-sheet__footer">

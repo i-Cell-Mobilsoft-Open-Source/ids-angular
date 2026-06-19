@@ -22,7 +22,7 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
   public selected = signal<boolean>(false);
 
   public inputId = input<string>(this._uniqueId);
-  public value = input.required<unknown>();
+  public value = input<unknown>();
   public ariaLabel = input<string>('', { alias: 'aria-label' });
   public ariaLabelledBy = input<string>('', { alias: 'aria-labelledby' });
   public ariaDescribedBy = input<string>('', { alias: 'aria-describedby' });

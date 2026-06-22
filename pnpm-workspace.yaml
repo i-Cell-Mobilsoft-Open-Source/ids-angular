@@ -6,3 +6,4 @@ allowBuilds:
   lmdb: false
   msgpackr-extract: false
   unrs-resolver: false
+minimumReleaseAge: 0

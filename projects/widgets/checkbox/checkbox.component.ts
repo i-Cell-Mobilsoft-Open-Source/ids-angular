@@ -6,6 +6,7 @@ import { IdsCheckboxState, IdsCheckboxStateType } from './types/checkbox-state.t
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Injector, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewEncapsulation, computed, contentChildren, inject, input, model, output, signal, viewChild } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormControlName, NG_VALUE_ACCESSOR, NgControl, NgModel, Validators } from '@angular/forms';
 import {
   ComponentBaseWithDefaults,
@@ -17,6 +18,7 @@ import {
 } from '@i-cell/ids-angular/core';
 import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { of, startWith, switchMap } from 'rxjs';
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 
@@ -80,11 +82,11 @@ export class IdsCheckboxComponent
 
   protected _isChecked = computed(() => this._checkboxState() === IdsCheckboxState.CHECKED);
   protected _isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
-  protected _isFocusable = computed(() => !this.disabled() && !this.readonly());
+  protected _isFocusable = computed(() => !this.disabled());
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
-    this.disabled() ? 'disabled' : null,
+    this.disabled() || this.readonly() ? 'disabled' : null,
   ]),
   );
 
@@ -100,6 +102,32 @@ export class IdsCheckboxComponent
   private _onTouched: () => unknown = () => { };
 
   public controlDir = signal<NgControl | null>(null);
+
+  private readonly _controlState = toSignal(
+    toObservable(this.controlDir).pipe(
+      switchMap((controlDir) => (controlDir?.control ? controlDir.control.events.pipe(startWith(null)) : of(null))),
+    ),
+    { equal: () => false },
+  );
+
+  protected _hasRequiredValidator = computed(() => {
+    this._controlState();
+    this.required();
+
+    const control = this.controlDir()?.control;
+    const attrRequired = this.required();
+
+    if (!control) {
+      return attrRequired;
+    }
+
+    return attrRequired
+      || control.hasValidator(Validators.required)
+      || control.hasValidator(Validators.requiredTrue)
+      || control.hasValidator(IdsValidators.required)
+      || control.hasValidator(IdsValidators.requiredTrue)
+      || control.hasValidator(IdsValidators.requiredFalse);
+  });
 
   // eslint-disable-next-line @angular-eslint/no-output-native
   public readonly change = output<IdsCheckBoxChangeEvent>();
@@ -235,6 +263,18 @@ export class IdsCheckboxComponent
   public onInputClick(): void {
     if (!this.readonly() && !this.disabled()) {
       this._handleInputClick();
+    } else {
+      switch (this._checkboxState()) {
+        case IdsCheckboxState.CHECKED:
+          this._inputElement().nativeElement.checked = true;
+          break;
+        case IdsCheckboxState.UNCHECKED:
+          this._inputElement().nativeElement.checked = false;
+          break;
+        case IdsCheckboxState.INDETERMINATE:
+          this._inputElement().nativeElement.indeterminate = true;
+          break;
+      }
     }
   }
 
@@ -243,7 +283,7 @@ export class IdsCheckboxComponent
       this._handleInputClick();
     }
 
-    if (!this.disabled()) {
+    if (!this.disabled() && !this.readonly()) {
       this._inputElement().nativeElement.focus();
     }
   }
@@ -253,7 +293,9 @@ export class IdsCheckboxComponent
     if (
       this._errorMessages().length > 0 &&
       control?.errors &&
-      (control.touched || control.dirty)
+      (control.touched || control.dirty) &&
+      !this.disabled() &&
+      !this.readonly()
     ) {
       return 'error';
     }
@@ -261,22 +303,6 @@ export class IdsCheckboxComponent
       return 'hint';
     }
     return undefined;
-  }
-
-  protected get _hasRequiredValidator(): boolean {
-    const control = this.controlDir()?.control;
-    const attrRequired = this.required();
-
-    if (!control) {
-      return attrRequired;
-    }
-
-    return attrRequired
-      || control.hasValidator(Validators.required)
-      || control.hasValidator(Validators.requiredTrue)
-      || control.hasValidator(IdsValidators.required)
-      || control.hasValidator(IdsValidators.requiredTrue)
-      || control.hasValidator(IdsValidators.requiredFalse);
   }
 
   private _assertRequiredInputIsSupported(): void {

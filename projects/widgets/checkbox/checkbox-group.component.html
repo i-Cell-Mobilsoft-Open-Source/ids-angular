@@ -1,13 +1,10 @@
-
-<div class="ids-checkbox-group__legend">
-  @if (_shouldShowAsterisk) {
-    <span class="ids-form-field__required-marker"></span>
-  }
-  <label class="ids-checkbox-group__legend-label"
-    [for]="id()"
-    [id]="_groupLabelId()">{{ groupLabel() }}
-  </label>
-
+<div class="ids-checkbox-group__legend-wrapper">
+  <div class="ids-checkbox-group__legend-container">
+    @if (_shouldShowAsterisk) {
+      <span class="ids-form-field__required-marker"></span>
+    }
+    <label class="ids-checkbox-group__legend-label" [for]="id()" [id]="_groupLabelId()">{{ groupLabel() }} </label>
+  </div>
   @if (_hasHint()) {
     <ng-content select="ids-hint-message" />
   }

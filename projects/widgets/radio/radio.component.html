@@ -27,9 +27,7 @@
       <ng-content />
     </label>
   </div>
-  @if (errorMessages().length > 0 && _hasErrorState()) {
-    <ng-content select="ids-error-message"  />
-  } @else if (hintMessage().length > 0) {
+  @if (hintMessage().length > 0) {
     <ng-content select="ids-hint-message"/>
   }
 </div>

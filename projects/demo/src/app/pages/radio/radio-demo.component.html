@@ -114,18 +114,12 @@
                 @if (_radioDemoService.helperModel.allowHint) {
                   <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
-                @if (_radioDemoService.model.required && !_radioDemoService.model.disabled) {
-                  <ids-error-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-error-message>
-                }
               </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled || _radioDemoService.model.disabled">Beef
                 @if (_radioDemoService.helperModel.allowHint) {
                   <ids-hint-message [disabled]="_radioDemoService.model.disabled || _radioDemoService.helperModel.onlyOneItemIsDisabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
-                }
-                @if (_radioDemoService.model.required && !_radioDemoService.model.disabled && !_radioDemoService.helperModel.onlyOneItemIsDisabled) {
-                  <ids-error-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-error-message>
                 }
               </ids-radio>
             </ids-card>
@@ -134,18 +128,12 @@
                 @if (_radioDemoService.helperModel.allowHint) {
                   <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
-                @if (_radioDemoService.model.required && !_radioDemoService.model.disabled) {
-                  <ids-error-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-error-message>
-                }
               </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="fish">Fish
                 @if (_radioDemoService.helperModel.allowHint) {
                   <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
-                }
-                @if (_radioDemoService.model.required && !_radioDemoService.model.disabled) {
-                  <ids-error-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-error-message>
                 }
               </ids-radio>
             </ids-card>

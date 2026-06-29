@@ -51,6 +51,10 @@
     "STANDALONE": "Standalone",
     "GROUPED": "Grouped"
   },
+  "BUTTONS": {
+    "MORE": "More",
+    "LEARN_MORE": "Learn more"
+  },
   "CHECKBOX": {
     "FORMGROUP": "Using in <form> tag",
     "GROUPED_WITH_VALIDATOR": "Grouped (validator)",

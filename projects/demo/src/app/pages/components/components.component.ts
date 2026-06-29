@@ -166,7 +166,7 @@ export class ComponentsComponent implements OnInit {
       },
       button: [
         {
-          text: 'Learn More',
+          text: this._translate.instant('BUTTONS.LEARN_MORE'),
           url: item.imageLink ?? '',
         },
       ],

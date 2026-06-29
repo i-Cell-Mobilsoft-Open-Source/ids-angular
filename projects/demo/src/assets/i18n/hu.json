@@ -51,6 +51,10 @@
     "STANDALONE": "Különálló",
     "GROUPED": "Csoportban"
   },
+  "BUTTONS": {
+    "MORE": "Több",
+    "LEARN_MORE": "Tudj meg többet"
+  },
   "CHECKBOX": {
     "FORMGROUP": "<form> taggal használva",
     "GROUPED_WITH_VALIDATOR": "Csoportban (validátorral)",

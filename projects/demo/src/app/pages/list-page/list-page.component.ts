@@ -171,7 +171,7 @@ export class ListPageComponent implements OnInit {
                     },
                     button: [
                       {
-                        text: sessionStorage.getItem('ids_lang') === 'hu' ? 'Tovább' : 'More',
+                        text: this._translate.instant('BUTTONS.MORE'),
                         url: entryItem.slug ? `/${sessionStorage.getItem('ids_lang') || 'en'}/${slug}/${entryItem.slug}` : '',
                       },
                     ],

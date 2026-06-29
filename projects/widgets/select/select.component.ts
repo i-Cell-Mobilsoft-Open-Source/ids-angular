@@ -489,17 +489,20 @@ export class IdsSelectComponent
     }
 
     const scrollableAncestors = this._scrollDispatcher.getAncestorScrollContainers(this._elementRef);
+    const directAncestor = scrollableAncestors.pop();
 
-    return scrollableAncestors.every((scrollable) => {
-      const containerRect = scrollable.getElementRef().nativeElement.getBoundingClientRect();
+    if (!directAncestor) {
+      return true;
+    }
 
-      return (
-        originRect.bottom > containerRect.top &&
-        originRect.top < containerRect.bottom &&
-        originRect.right > containerRect.left &&
-        originRect.left < containerRect.right
-      );
-    });
+    const containerRect = directAncestor.getElementRef().nativeElement.getBoundingClientRect();
+
+    return (
+      originRect.bottom > containerRect.top &&
+      originRect.top < containerRect.bottom &&
+      originRect.right > containerRect.left &&
+      originRect.left < containerRect.right
+    );
   }
 
   // #region ControlValueAccessor implementation

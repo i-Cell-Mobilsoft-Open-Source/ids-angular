@@ -45,7 +45,7 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
     ],
   },
   {
-    id: 'button-disabled',
+    id: 'button-link',
     title: 'Link button',
     description: 'A button styled as a link.',
     component: ButtonLinkExampleComponent,

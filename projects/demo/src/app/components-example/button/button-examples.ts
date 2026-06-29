@@ -1,6 +1,7 @@
 import { ButtonAppearanceExampleComponent } from './button-appearance-example/button-appearance-example.component';
-import { ButtonDisabledExampleComponent } from './button-disabled-example/button-disabled-example.component';
+import { ButtonGroupExampleComponent } from './button-group-example/button-group-example.component';
 import { ButtonIconExampleComponent } from './button-icon-example/button-icon-example.component';
+import { ButtonLinkExampleComponent } from './button-link-example/button-link-example.component';
 import { ButtonSizeExampleComponent } from './button-size-example/button-size-example.component';
 import { ButtonVariantsExampleComponent } from './button-variants-example/button-variants-example.component';
 
@@ -45,13 +46,13 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'button-disabled',
-    title: 'Disabled button',
-    description: 'A button in a disabled state.',
-    component: ButtonDisabledExampleComponent,
+    title: 'Link button',
+    description: 'A button styled as a link.',
+    component: ButtonLinkExampleComponent,
     files: [
       {
-        HTMLpath: 'assets/examples/button/button-disabled-example/button-disabled-example.component.html',
-        TSpath: 'assets/examples/button/button-disabled-example/button-disabled-example.component.ts',
+        HTMLpath: 'assets/examples/button/button-link-example/button-link-example.component.html',
+        TSpath: 'assets/examples/button/button-link-example/button-link-example.component.ts',
       },
     ],
   },
@@ -64,6 +65,18 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
       {
         HTMLpath: 'assets/examples/button/button-icon-example/button-icon-example.component.html',
         TSpath: 'assets/examples/button/button-icon-example/button-icon-example.component.ts',
+      },
+    ],
+  },
+  {
+    id: 'button-group',
+    title: 'Button group',
+    description: 'A group of buttons with different appearances and variants.',
+    component: ButtonGroupExampleComponent,
+    files: [
+      {
+        HTMLpath: 'assets/examples/button/button-group-example/button-group-example.component.html',
+        TSpath: 'assets/examples/button/button-group-example/button-group-example.component.ts',
       },
     ],
   },

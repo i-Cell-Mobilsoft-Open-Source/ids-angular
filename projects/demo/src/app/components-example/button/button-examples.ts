@@ -10,8 +10,8 @@ import { IdsExampleDef } from '../../shared/ids-example-viewer/ids-example.model
 export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   {
     id: 'button-basic',
-    title: 'Basic buttons',
-    description: 'The three button appearances: filled, outlined, and text.',
+    title: 'EXAMPLES.BUTTON.APPEARANCES.TITLE',
+    description: 'EXAMPLES.BUTTON.APPEARANCES.DESCRIPTION',
     component: ButtonAppearanceExampleComponent,
     files: [
       {
@@ -22,8 +22,8 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'button-variants',
-    title: 'Button variants',
-    description: 'Filled buttons with different color variants.',
+    title: 'EXAMPLES.BUTTON.VARIANTS.TITLE',
+    description: 'EXAMPLES.BUTTON.VARIANTS.DESCRIPTION',
     component: ButtonVariantsExampleComponent,
     files: [
       {
@@ -34,8 +34,8 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'button-sizes',
-    title: 'Button sizes',
-    description: 'Buttons with different size options.',
+    title: 'EXAMPLES.BUTTON.SIZES.TITLE',
+    description: 'EXAMPLES.BUTTON.SIZES.DESCRIPTION',
     component: ButtonSizeExampleComponent,
     files: [
       {
@@ -46,8 +46,8 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'button-link',
-    title: 'Link button',
-    description: 'A button styled as a link.',
+    title: 'EXAMPLES.BUTTON.LINKS.TITLE',
+    description: 'EXAMPLES.BUTTON.LINKS.DESCRIPTION',
     component: ButtonLinkExampleComponent,
     files: [
       {
@@ -58,8 +58,8 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'button-icon',
-    title: 'Button with icons',
-    description: 'Buttons with leading and trailing icons.',
+    title: 'EXAMPLES.BUTTON.ICONS.TITLE',
+    description: 'EXAMPLES.BUTTON.ICONS.DESCRIPTION',
     component: ButtonIconExampleComponent,
     files: [
       {
@@ -70,8 +70,8 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'button-group',
-    title: 'Button group',
-    description: 'A group of buttons with different appearances and variants.',
+    title: 'EXAMPLES.BUTTON.BUTTON_GROUP.TITLE',
+    description: 'EXAMPLES.BUTTON.BUTTON_GROUP.DESCRIPTION',
     component: ButtonGroupExampleComponent,
     files: [
       {

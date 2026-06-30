@@ -1,3 +1,4 @@
+import { FooterComponent } from './components/footer/footer.component';
 import { Menu } from './components/nav/menu.interface';
 import { NavComponent } from './components/nav/nav.component';
 import { GraphqlService } from './services/graphql.service';
@@ -5,7 +6,7 @@ import { LoadingService } from './services/loading.service';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, ViewEncapsulation, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, ElementRef, ViewEncapsulation, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet, Router, NavigationEnd } from '@angular/router';
@@ -29,17 +30,21 @@ export type Theme = 'light' | 'dark';
     IdsSegmentedControlToggleItemComponent,
     FormsModule,
     IdsIconComponent,
+    FooterComponent,
     IdsSpinnerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   public loadingService = inject(LoadingService);
 
   private _translate: TranslateService = inject(TranslateService);
   private _router = inject(Router);
+
+  private readonly _navRef = viewChild<ElementRef<HTMLElement>>('navRef');
+  private readonly _mainRef = viewChild<ElementRef<HTMLElement>>('mainRef');
 
   // Use a string FormControl to hold the segmented control value ('light-mode' | 'dark-mode')
   public theme = new FormControl<Theme>('light', { nonNullable: true });
@@ -97,6 +102,63 @@ export class AppComponent {
         this._componentLevelDepth = this._findDeepestLevel(this._navTree);
         this.dynamicMenu = this._mapStatamicNavToMenu(this._navTree);
       });
+  }
+
+  public ngAfterViewInit(): void {
+    this._setupScrollChaining();
+  }
+
+  private _setupScrollChaining(): void {
+    const nav = this._navRef()?.nativeElement;
+    const main = this._mainRef()?.nativeElement;
+
+    if (!nav || !main) {
+      return;
+    }
+
+    const onNavWheel = (event: WheelEvent): void => {
+      this._chainWheelScroll(event, nav, main);
+    };
+
+    const onMainWheel = (event: WheelEvent): void => {
+      if (event.deltaY < 0) {
+        this._chainWheelScroll(event, main, nav);
+      }
+    };
+
+    nav.addEventListener('wheel', onNavWheel, { passive: false });
+    main.addEventListener('wheel', onMainWheel, { passive: false });
+
+    this._destroyRef.onDestroy(() => {
+      nav.removeEventListener('wheel', onNavWheel);
+      main.removeEventListener('wheel', onMainWheel);
+    });
+  }
+
+  private _chainWheelScroll(event: WheelEvent, source: HTMLElement, target: HTMLElement): void {
+    const scrollingDown = event.deltaY > 0;
+    const atSourceEnd = scrollingDown ? this._isScrolledToBottom(source) : this._isScrolledToTop(source);
+
+    if (!atSourceEnd) {
+      return;
+    }
+
+    const targetCanScroll = scrollingDown ? !this._isScrolledToBottom(target) : !this._isScrolledToTop(target);
+
+    if (!targetCanScroll) {
+      return;
+    }
+
+    target.scrollTop += event.deltaY;
+    event.preventDefault();
+  }
+
+  private _isScrolledToBottom(element: HTMLElement, threshold = 1): boolean {
+    return element.scrollTop + element.clientHeight >= element.scrollHeight - threshold;
+  }
+
+  private _isScrolledToTop(element: HTMLElement, threshold = 1): boolean {
+    return element.scrollTop <= threshold;
   }
 
   private async _setTokens(href: string): Promise<void> {

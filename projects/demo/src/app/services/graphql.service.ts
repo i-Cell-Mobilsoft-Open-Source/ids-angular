@@ -2,6 +2,7 @@ import { PageEntry } from '../model/pageEntry';
 import { GET_COMPONENTS_LIST } from '../queries/get-components-list.query';
 import { GET_COMPONENTS } from '../queries/get-components.query';
 import { GET_DYNAMIC_CONTENT } from '../queries/get-dynamic-content.query';
+import { GET_GLOBALS } from '../queries/get-globals.query';
 import { GET_NAVIGATION } from '../queries/get-navigation.query';
 import { GET_PAGES_LIST } from '../queries/get-pages-list.query';
 import { GET_PAGES } from '../queries/get-pages.query';
@@ -25,6 +26,7 @@ export interface StatamicNavNode {
     title?: string;
     id?: string;
     slug?: string;
+    url?: string;
   };
   children?: StatamicNavNode[];
 }
@@ -59,6 +61,21 @@ export interface StatamicComponentListItem {
   hero_image_dark?: { url: string };
 }
 
+export interface StatamicFooterGlobal {
+  footer_copyright?: string;
+  footer_certs?: Array<{ url: string }>;
+  footer_logo?: { url: string };
+  footer_contact_group?: {
+    company_name?: string;
+    company_address?: string;
+    company_email?: string;
+    company_phone_number?: string;
+    address_icon?: string;
+    email_icon?: string;
+    phone_icon?: string;
+  };
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -84,6 +101,12 @@ export class GraphqlService {
       variables: { site: this._currentLang() },
       fetchPolicy: 'network-only',
     });
+  }
+
+  public getGlobals(): Observable<unknown> {
+    return this._apollo.watchQuery({
+      query: GET_GLOBALS,
+    }).valueChanges;
   }
 
   public getNavigation(): Observable<unknown> {
@@ -128,5 +151,11 @@ export class GraphqlService {
       },
       fetchPolicy: 'network-only',
     });
+  }
+
+  public getFooterGlobals(): Observable<unknown> {
+    return this._apollo.watchQuery<{ globalSet: StatamicFooterGlobal }>({
+      query: GET_GLOBALS,
+    }).valueChanges;
   }
 }

@@ -111,5 +111,33 @@
       "COLLAPSE_DETAILS": "Collapse details",
       "CHANGE_LANGUAGE": "Change language"
     }
+  },
+  "EXAMPLES": {
+    "BUTTON": {
+      "APPEARANCES": {
+        "TITLE": "Button appearances",
+        "DESCRIPTION": "The three button appearances: filled, outlined, and text. "
+      },
+      "VARIANTS": {
+        "TITLE": "Button variants",
+        "DESCRIPTION": "Filled buttons with different color variants: primary(default), secondary, brand, surface, error, warning, success, light,light-fixed, and dark."
+      },
+      "SIZES": {
+        "TITLE": "Button sizes",
+        "DESCRIPTION": "Buttons with different sizes: dense, compact, comfortable and spacious."
+      },
+      "ICONS": {
+        "TITLE": "Button with icons",
+        "DESCRIPTION": "Buttons can have icons on the left and/or right side of the button text."
+      },
+      "LINKS": {
+        "TITLE": "Button links",
+        "DESCRIPTION": "Buttons can be used as links by using the <a> tag."
+      },
+      "BUTTON_GROUP": {
+        "TITLE": "Button group",
+        "DESCRIPTION": "Buttons can be grouped together to organize them."
+      }
+    }
   }
 }

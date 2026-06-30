@@ -1,9 +1,9 @@
 <ids-card appearance="elevated" variant="light" size="compact" class="ids-example-viewer w-full">
   <div class="flex items-start justify-between p-4">
     <div>
-      <h3 class="text-label-xlarge-prominent">{{ example().title }}</h3>
+      <h3 class="text-label-xlarge-prominent">{{ example().title | translate }}</h3>
       @if (example().description) {
-        <p class="mt-1 text-l">{{ example().description }}</p>
+        <p class="mt-1 text-l">{{ example().description | translate }}</p>
       }
     </div>
     <button

@@ -276,6 +276,11 @@ export class IdsSelectComponent
     } else {
       this._selectionModel?.deselect(source);
     }
+    if (this.multiSelect()) {
+      this._rawValue = this._selectionModel?.selected?.map((item) => item.value());
+    } else {
+      this._rawValue = this._selectionModel?.selected?.[0]?.value();
+    }
     this._handleChange();
     this._onTouched();
   }

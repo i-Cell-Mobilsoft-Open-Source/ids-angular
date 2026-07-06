@@ -7,7 +7,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsErrorDefinitionDirective, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
 import { IdsSelectComponent, IdsSelectTriggerDirective } from '@i-cell/ids-angular/select';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsErrorMessageComponent,
     IdsErrorDefinitionDirective,
     FormsModule,
+    ReactiveFormsModule,
     TranslateModule,
     IdsOptionComponent,
     IdsOptionGroupComponent,

@@ -113,6 +113,7 @@ export class IdsSelectComponent
   private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
   private _rawValue: unknown | unknown[];
   private _selectionModel?: SelectionModel<IdsOptionComponent>;
+  private readonly _subscribedOptions = new WeakSet<IdsOptionComponent>();
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => { };
 
@@ -149,8 +150,10 @@ export class IdsSelectComponent
     });
 
     effect(() => {
+      const options = this.options();
+
       untracked(() => {
-        if (!this._selectionModel) {
+        if (!this._selectionModel || options.length === 0) {
           return;
         }
 
@@ -201,6 +204,7 @@ export class IdsSelectComponent
   }
 
   private _initKeyManager(): void {
+    this._keyManager?.destroy();
     this._keyManager = new ActiveDescendantKeyManager<IdsOptionComponent>(this.options())
       .withTypeAhead(this.typeaheadDebounceInterval())
       .withVerticalOrientation()
@@ -228,16 +232,19 @@ export class IdsSelectComponent
   }
 
   private _subscribeOptionChanges(): void {
-    this.options().forEach((option) => {
-      option.selectionChange.subscribe(
-        (change) => {
-          this._handleOptionChange(change);
-        },
-      );
+    for (const option of this.options()) {
+      if (this._subscribedOptions.has(option)) {
+        continue;
+      }
+
+      this._subscribedOptions.add(option);
+      option.selectionChange.subscribe((change) => {
+        this._handleOptionChange(change);
+      });
       option.selectionUnchanged.subscribe(() => {
         this.close();
       });
-    });
+    }
   }
 
   private _handleOptionChange(change: IdsOptionSelectionChange): void {
@@ -486,35 +493,6 @@ export class IdsSelectComponent
     this._changeDetectorRef.markForCheck();
   }
   // #endregion
-
-  private _setSelectionByValue(value: unknown | unknown[]): void {
-    this.options().forEach((option) => {
-      option.setInactiveStyles();
-      option.selected.set(false);
-    });
-    this._selectionModel?.clear();
-    this._rawValue = value;
-
-    if (this.options().length === 0) {
-      return;
-    }
-
-    if (this.multiSelect() && value) {
-      if (!Array.isArray(value)) {
-        throw this._createHostError('value must be an array in multiple-selection mode');
-      }
-
-      value.forEach((currentValue: unknown) => this._selectValue(currentValue));
-      this._sortValues();
-    } else {
-      const correspondingOption = this._selectValue(value);
-      if (correspondingOption) {
-        this._keyManager?.updateActiveItem(correspondingOption);
-      } else if (!this.isPanelOpen()) {
-        this._keyManager?.updateActiveItem(-1);
-      }
-    }
-  }
 
   private _selectValue(value: unknown): IdsOptionComponent | undefined {
     const valueCompareFn = this.valueCompareFn();

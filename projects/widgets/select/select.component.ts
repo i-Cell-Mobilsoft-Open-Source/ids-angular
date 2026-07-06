@@ -113,24 +113,24 @@ export class IdsSelectComponent
   private _keyManager?: ActiveDescendantKeyManager<IdsOptionComponent>;
   private _rawValue: unknown | unknown[];
   private _selectionModel?: SelectionModel<IdsOptionComponent>;
+  private readonly _subscribedOptions = new WeakSet<IdsOptionComponent>();
   private _onChange: (value: unknown) => void = () => {};
   private _onTouched: () => unknown = () => { };
 
-  protected get _empty(): boolean {
-    return Boolean(this._selectionModel?.isEmpty());
-  }
+  protected readonly _empty = computed(() => {
+    if (this.options().some((option) => option.selected())) {
+      return false;
+    }
+
+    return this._selectionModel?.isEmpty() ?? true;
+  });
 
   public get selected(): IdsOptionComponent | IdsOptionComponent[] | undefined {
     return this.multiSelect() ? this._selectionModel?.selected : this._selectionModel?.selected?.[0];
   }
 
   protected _triggerValue = computed(() => {
-    if (this._empty) {
-      return '';
-    }
-
-    const options = this.options();
-    const selectedOptions = options.filter((option) => option.selected());
+    const selectedOptions = this.options().filter((option) => option.selected());
 
     if (selectedOptions.length === 0) {
       return '';
@@ -149,19 +149,19 @@ export class IdsSelectComponent
       this._keyManager?.withTypeAhead(this.typeaheadDebounceInterval());
     });
 
-    effect(
-      () => {
-        const options = this.options();
+    effect(() => {
+      const options = this.options();
 
-        untracked(() => {
-          if (options.length > 0) {
-            this._initKeyManager();
-            this._selectionModel?.select(...this.options().filter((item) => item.selected()));
-            this._subscribeOptionChanges();
-          }
-        });
-      },
-    );
+      untracked(() => {
+        if (!this._selectionModel || options.length === 0) {
+          return;
+        }
+
+        this._initKeyManager();
+        this._syncSelectionWithValue();
+        this._subscribeOptionChanges();
+      });
+    });
   }
 
   public ngOnInit(): void {
@@ -204,6 +204,7 @@ export class IdsSelectComponent
   }
 
   private _initKeyManager(): void {
+    this._keyManager?.destroy();
     this._keyManager = new ActiveDescendantKeyManager<IdsOptionComponent>(this.options())
       .withTypeAhead(this.typeaheadDebounceInterval())
       .withVerticalOrientation()
@@ -231,16 +232,19 @@ export class IdsSelectComponent
   }
 
   private _subscribeOptionChanges(): void {
-    this.options().forEach((option) => {
-      option.selectionChange.subscribe(
-        (change) => {
-          this._handleOptionChange(change);
-        },
-      );
+    for (const option of this.options()) {
+      if (this._subscribedOptions.has(option)) {
+        continue;
+      }
+
+      this._subscribedOptions.add(option);
+      option.selectionChange.subscribe((change) => {
+        this._handleOptionChange(change);
+      });
       option.selectionUnchanged.subscribe(() => {
         this.close();
       });
-    });
+    }
   }
 
   private _handleOptionChange(change: IdsOptionSelectionChange): void {
@@ -271,6 +275,11 @@ export class IdsSelectComponent
       this._selectionModel?.select(source);
     } else {
       this._selectionModel?.deselect(source);
+    }
+    if (this.multiSelect()) {
+      this._rawValue = this._selectionModel?.selected?.map((item) => item.value());
+    } else {
+      this._rawValue = this._selectionModel?.selected?.[0]?.value();
     }
     this._handleChange();
     this._onTouched();
@@ -434,7 +443,46 @@ export class IdsSelectComponent
 
   // #region ControlValueAccessor implementation
   public writeValue(value: unknown | unknown[]): void {
-    this._setSelectionByValue(value);
+    this._rawValue = value;
+    this._syncSelectionWithValue();
+  }
+
+  private _syncSelectionWithValue(): void {
+    if (!this._selectionModel || this.options().length === 0) {
+      return;
+    }
+
+    this.options().forEach((option) => {
+      option.setInactiveStyles();
+      option.selected.set(false);
+    });
+
+    this._selectionModel.clear();
+
+    const value = this._rawValue;
+
+    if (this.multiSelect()) {
+      if (value == null) {
+        return;
+      }
+
+      if (!Array.isArray(value)) {
+        throw this._createHostError('value must be an array in multiple-selection mode');
+      }
+
+      value.forEach((currentValue) => this._selectValue(currentValue));
+      this._sortValues();
+    } else {
+      const selectedOption = this._selectValue(value);
+
+      if (selectedOption) {
+        this._keyManager?.updateActiveItem(selectedOption);
+      } else if (!this.isPanelOpen()) {
+        this._keyManager?.updateActiveItem(-1);
+      }
+    }
+
+    this._changeDetectorRef.markForCheck();
   }
 
   public registerOnChange(fn: () => void): void {
@@ -450,35 +498,6 @@ export class IdsSelectComponent
     this._changeDetectorRef.markForCheck();
   }
   // #endregion
-
-  private _setSelectionByValue(value: unknown | unknown[]): void {
-    this.options().forEach((option) => {
-      option.setInactiveStyles();
-      option.selected.set(false);
-    });
-    this._selectionModel?.clear();
-    this._rawValue = value;
-
-    if (this.options().length === 0) {
-      return;
-    }
-
-    if (this.multiSelect() && value) {
-      if (!Array.isArray(value)) {
-        throw this._createHostError('value must be an array in multiple-selection mode');
-      }
-
-      value.forEach((currentValue: unknown) => this._selectValue(currentValue));
-      this._sortValues();
-    } else {
-      const correspondingOption = this._selectValue(value);
-      if (correspondingOption) {
-        this._keyManager?.updateActiveItem(correspondingOption);
-      } else if (!this.isPanelOpen()) {
-        this._keyManager?.updateActiveItem(-1);
-      }
-    }
-  }
 
   private _selectValue(value: unknown): IdsOptionComponent | undefined {
     const valueCompareFn = this.valueCompareFn();
@@ -532,7 +551,7 @@ export class IdsSelectComponent
 
   private _highlightCorrectOption(): void {
     if (this._keyManager) {
-      if (this._empty) {
+      if (this._empty()) {
         let firstEnabledOptionIndex = -1;
         for (let index = 0; index < this.options().length; index++) {
           const option = this.options()[index]!;

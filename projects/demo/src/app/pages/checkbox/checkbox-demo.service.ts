@@ -119,6 +119,23 @@ export class CheckboxDemoService {
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+      onModelChange: (isDisabled?: boolean) => {
+        if (isDisabled) {
+          this.form.controls.terms_and_conditions.disable();
+          this.form.controls.privacy_policy.disable();
+          this.form.controls.marketing_materials.disable();
+          this.formGroup.controls.toppings.controls.cheese.disable();
+          this.formGroup.controls.toppings.controls.ham.disable();
+          this.formGroup.controls.cheeses.disable();
+        } else {
+          this.form.controls.terms_and_conditions.enable();
+          this.form.controls.privacy_policy.enable();
+          this.form.controls.marketing_materials.enable();
+          this.formGroup.controls.toppings.controls.cheese.enable();
+          this.formGroup.controls.toppings.controls.ham.enable();
+          this.formGroup.controls.cheeses.enable();
+        }
+      },
     },
   };
 

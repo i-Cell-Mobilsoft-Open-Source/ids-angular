@@ -14,6 +14,7 @@
       <ids-checkbox
         [checked]="_parentCheckboxChecked()"
         [indeterminate]="_parentCheckboxIndeterminate()"
+        [disabled]="_parentCheckboxDisabled()"
         (change)="_handleParentChange($event)"
         >{{ parentCheckboxLabel() }}</ids-checkbox
       >

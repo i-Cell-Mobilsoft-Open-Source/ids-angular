@@ -21,50 +21,149 @@
       >
         <div slot="customHeader">
           <header>
-            <h2 id="side-sheet-title">Customer</h2>
+            <h2 id="side-sheet-title">{{ 'SIDE_SHEET.CUSTOMER' | translate }}</h2>
           </header>
         </div>
         @if (_sideSheetService.model.isShowFooter) {
           <div slot="footer">
-            <button type="button" class="demo-save-btn" idsButton size="comfortable" variant="success">
-              <span>Save</span>
+            <button type="button" class="demo-save-btn" idsButton size="comfortable">
+              <span>{{ 'SIDE_SHEET.SAVE' | translate }}</span>
             </button>
           </div>
         }
-        <div>
+        <div class="p-2">
           <ids-form-field>
-            <ids-label>First name</ids-label>
-            <input idsInput placeholder="E.g. Steve" required [(ngModel)]="_sideSheetService.firstName" />
+            <ids-label>{{ 'SIDE_SHEET.LABEL.FIRST_NAME' | translate }}</ids-label>
+            <input
+              idsInput
+              required
+              [placeholder]="'SIDE_SHEET.PLACEHOLDER.FIRST_NAME' | translate"
+              [(ngModel)]="_sideSheetService.firstName"
+            />
           </ids-form-field>
 
           <ids-form-field>
-            <ids-label>Last name</ids-label>
-            <input idsInput placeholder="E.g. Johnson" required [(ngModel)]="_sideSheetService.lastName" />
+            <ids-label>{{ 'SIDE_SHEET.LABEL.LAST_NAME' | translate }}</ids-label>
+            <input
+              idsInput
+              required
+              [placeholder]="'SIDE_SHEET.PLACEHOLDER.LAST_NAME' | translate"
+              [(ngModel)]="_sideSheetService.lastName"
+            />
           </ids-form-field>
 
           <ids-form-field>
-            <ids-label>Email address</ids-label>
-            <input idsInput type="email" placeholder="E.g. steve@example.com" required [(ngModel)]="_sideSheetService.email" />
+            <ids-label>{{ 'SIDE_SHEET.LABEL.EMAIL' | translate }}</ids-label>
+            <input
+              idsInput
+              type="email"
+              required
+              [placeholder]="'SIDE_SHEET.PLACEHOLDER.EMAIL' | translate"
+              [(ngModel)]="_sideSheetService.email"
+            />
           </ids-form-field>
 
           <ids-form-field>
-            <ids-label>Phone number</ids-label>
-            <input idsInput type="tel" placeholder="E.g. +1 234 567 8901" [(ngModel)]="_sideSheetService.phoneNumber" />
+            <ids-label>{{ 'SIDE_SHEET.LABEL.PHONE' | translate }}</ids-label>
+            <input
+              idsInput
+              type="tel"
+              [placeholder]="'SIDE_SHEET.PLACEHOLDER.PHONE' | translate"
+              [(ngModel)]="_sideSheetService.phoneNumber"
+            />
           </ids-form-field>
 
           <ids-form-field>
-            <ids-label>Shipping address</ids-label>
-            <input idsInput placeholder="E.g. 123 Main St" required [(ngModel)]="_sideSheetService.shippingAddress" />
+            <ids-label>{{ 'SIDE_SHEET.LABEL.SHIPPING_ADDRESS' | translate }}</ids-label>
+            <input
+              idsInput
+              required
+              [placeholder]="'SIDE_SHEET.PLACEHOLDER.SHIPPING_ADDRESS' | translate"
+              [(ngModel)]="_sideSheetService.shippingAddress"
+            />
+            <button
+              #addressActionsOrigin="cdkOverlayOrigin"
+              type="button"
+              cdkOverlayOrigin
+              idsSuffix
+              idsButton
+              appearance="text"
+              size="compact"
+              variant="primary"
+              [attr.aria-label]="'SIDE_SHEET.ADDRESS_SUGGESTIONS' | translate"
+              (click)="addressOverlayPanel.toggle()"
+            >
+              <ids-icon aria-hidden="true" alt="" fontIcon="more-vert" />
+            </button>
+            <ids-overlay-panel #addressOverlayPanel [origin]="addressActionsOrigin">
+              <div cdkMenu>
+                <div idsActiveIndicator [active]="false">
+                  <button
+                    type="button"
+                    idsMenuItem
+                    [label]="'SIDE_SHEET.USE_OFFICE_ADDRESS' | translate"
+                    (click)="_applyAddressSuggestion('Bécsi út 271.', 'Budapest', '1037')"
+                  >
+                    <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="office" />
+                  </button>
+                </div>
+                <div idsActiveIndicator [active]="false">
+                  <button
+                    type="button"
+                    idsMenuItem
+                    [label]="'SIDE_SHEET.USE_HOME_ADDRESS' | translate"
+                    (click)="_applyAddressSuggestion('Szent István tér 1.', 'Esztergom', '2500')"
+                  >
+                    <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="home" />
+                  </button>
+                </div>
+              </div>
+            </ids-overlay-panel>
           </ids-form-field>
 
           <ids-form-field>
-            <ids-label>City</ids-label>
-            <input idsInput placeholder="E.g. New York" required [(ngModel)]="_sideSheetService.city" />
+            <ids-label>{{ 'SIDE_SHEET.LABEL.CITY' | translate }}</ids-label>
+            <input
+              idsInput
+              required
+              [placeholder]="'SIDE_SHEET.PLACEHOLDER.CITY' | translate"
+              [(ngModel)]="_sideSheetService.city"
+            />
           </ids-form-field>
 
           <ids-form-field>
-            <ids-label>Postal code</ids-label>
-            <input idsInput placeholder="E.g. 10001" required [(ngModel)]="_sideSheetService.postalCode" />
+            <ids-label>{{ 'SIDE_SHEET.LABEL.POSTAL_CODE' | translate }}</ids-label>
+            <input
+              idsInput
+              required
+              [placeholder]="'SIDE_SHEET.PLACEHOLDER.POSTAL_CODE' | translate"
+              [(ngModel)]="_sideSheetService.postalCode"
+            />
+          </ids-form-field>
+
+          <ids-form-field>
+            <ids-label>{{ 'SIDE_SHEET.LABEL.COUNTRY' | translate }}</ids-label>
+            <ids-select
+              required
+              [placeholder]="'SIDE_SHEET.SELECT_COUNTRY' | translate"
+              [(ngModel)]="_sideSheetService.country"
+            >
+              @for (country of _sideSheetService.countries; track country.value) {
+                <ids-option [value]="country.value">{{ country.viewValue | translate }}</ids-option>
+              }
+            </ids-select>
+          </ids-form-field>
+
+          <ids-form-field>
+            <ids-label>{{ 'SIDE_SHEET.LABEL.DELIVERY_DATE' | translate }}</ids-label>
+            <input
+              #deliveryDatepicker="idsDatepicker"
+              idsInput
+              idsDatepicker
+              [placeholder]="'SIDE_SHEET.PLACEHOLDER.DELIVERY_DATE' | translate"
+              [(ngModel)]="_sideSheetService.deliveryDate"
+            />
+            <ids-datepicker-trigger idsSuffix [for]="deliveryDatepicker" />
           </ids-form-field>
         </div>
       </ids-side-sheet>
@@ -74,9 +173,9 @@
       <ng-container *ngTemplateOutlet="sideSheet" />
     }
 
-    <app-tryout [title]="'COMPONENTS.SIDE-SHEET' | translate" (resetted)="_sideSheetService.reset()">
+    <app-tryout [title]="'COMPONENTS.SIDE_SHEET' | translate" (resetted)="_sideSheetService.reset()">
       <div component>
-        <button type="button" idsButton (click)="_sideSheetService.show = true">open side sheet</button>
+        <button type="button" idsButton (click)="_sideSheetService.show = true">{{ 'SIDE_SHEET.OPEN' | translate }}</button>
       </div>
     </app-tryout>
 

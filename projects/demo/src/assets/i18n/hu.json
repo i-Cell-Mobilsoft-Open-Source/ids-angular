@@ -111,5 +111,34 @@
       "COLLAPSE_DETAILS": "Részletek becsukása",
       "CHANGE_LANGUAGE": "Nyelvváltás"
     }
+  },
+  "EXAMPLES": {
+    "BUTTON": {
+      "APPEARANCES": {
+        "TITLE": "Button megjelenései",
+        "DESCRIPTION": "A button komponens megjelenései: filled, outlined, és text."
+      },
+      "VARIANTS": {
+        "TITLE": "Button változatai",
+        "DESCRIPTION": "A button komponens különböző változatai: primary(alapértelmezett), secondary, brand, surface, error, warning, success, light,light-fixed, és dark."
+      },
+      "SIZES": {
+        "TITLE": "Button méretei",
+        "DESCRIPTION": "A button komponens különböző méretei: dense, compact, comfortable és spacious."
+      },
+      "ICONS": {
+        "TITLE": "Button ikonokkal",
+        "DESCRIPTION": "A button komponens tartalmazhat ikont, amely a gomb bal és/vagy jobb oldalán helyezkedik el."
+      },
+      "LINKS": {
+        "TITLE": "Button linkek",
+        "DESCRIPTION": "A gombok linkként is használhatók az <a> tag segítségével."
+      },
+      "BUTTON_GROUP": {
+        "TITLE": "Button-group",
+        "DESCRIPTION": "A gombok csoportosíthatók, ezek rendszerezésre alkalmasak."
+      }
+    }
   }
+
 }

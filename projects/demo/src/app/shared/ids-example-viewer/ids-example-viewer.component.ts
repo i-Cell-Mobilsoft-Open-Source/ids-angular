@@ -13,6 +13,7 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsSnackbarService } from '@i-cell/ids-angular/snackbar';
 import { IdsTabGroupComponent, IdsTabComponent } from '@i-cell/ids-angular/tab';
 import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-typescript';
 import { of, switchMap } from 'rxjs';
@@ -35,6 +36,7 @@ interface NormalizedTab {
     IdsTabGroupComponent,
     IdsTabComponent,
     IdsTabGroupExtensionDirective,
+    TranslateModule,
   ],
 })
 export class IdsExampleViewerComponent implements OnInit {

@@ -25,7 +25,7 @@ export interface IComponentDemoService {
   templateUrl: './api.component.html',
 })
 export class ApiComponent implements OnInit {
-  protected _propConfig: unknown[] = [];
+  protected _propConfig: DemoControlConfig<unknown>[] = [];
   protected _methodConfig: DemoMethodConfig[] = [];
   protected _methodTitles: string[] = [];
 

@@ -21,7 +21,9 @@ export class IdsTabComponent extends ComponentBase {
   public disabled = input<boolean>(false);
   public leadingIcon = input('', { transform: coerceStringAttribute });
   public trailingIcon = input('', { transform: coerceStringAttribute });
-  public content = viewChild.required<TemplateRef<unknown>>(TemplateRef);
+  public content = viewChild.required<TemplateRef<unknown>>('content');
+  public prefixContent = viewChild.required<TemplateRef<unknown>>('prefixContent');
+  public suffixContent = viewChild.required<TemplateRef<unknown>>('suffixContent');
   public panelId = computed<string>(() => `${this.id()}-panel`);
 
   public parentOrSelfDisabled = computed(() => this._tabGroup.disabled() || this.disabled());

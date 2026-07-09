@@ -209,6 +209,61 @@ export class TabDemoService {
     },
   });
 
+  public readonly tabPropControlConfig: DemoControlConfig<unknown> = {
+    label: {
+      description: 'Whether the tab item is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+    },
+    disabled: {
+      description: 'Whether the tab item is disabled or not.',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+    },
+    content: {
+      description: 'Projected tab panel content.',
+      type: 'template',
+      default: '-',
+      demoDefault: '',
+      control: null,
+      list: [],
+    },
+    leadingIcon: {
+      description: 'Name of the leading icon.',
+      type: 'string',
+      default: '-',
+      demoDefault: '',
+      control: DemoControl.SELECT,
+      list: [],
+    },
+    trailingIcon: {
+      description: 'Name of the trailing icon.',
+      type: 'string',
+      default: '-',
+      demoDefault: '',
+      control: DemoControl.SELECT,
+      list: [],
+    },
+    prefixContent: {
+      description: 'Projected content before the leading icon (prefixContent attribute).',
+      type: 'template',
+      default: '-',
+      demoDefault: '',
+      control: null,
+      list: [],
+    },
+    suffixContent: {
+      description: 'Projected content after the trailing icon (suffixContent attribute).',
+      type: 'template',
+      default: '-',
+      demoDefault: '',
+      control: null,
+      list: [],
+    },
+  };
+
   public readonly methodControlConfig: DemoMethodConfig = [
     {
       name: 'selectTab(index: number)',
@@ -261,6 +316,9 @@ export class TabDemoService {
   }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+    return [
+      this.inputControlConfig,
+      this.tabPropControlConfig,
+    ];
   }
 }

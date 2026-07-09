@@ -23,6 +23,18 @@
             [trailingIcon]="_tabDemoService.helperModel.tabItem1TrailingIcon"
             [disabled]="_tabDemoService.helperModel.tabItem1Disabled"
           >
+            <button
+              idsButton
+              prefixContent
+              type="button"
+              class="ids-tab-demo__prefix"
+              [disabled]="_tabDemoService.helperModel.tabItem1Disabled"
+              (click)="$event.stopPropagation()">Button
+            </button>
+            <span suffixContent
+              idsTooltip="It's a tooltip"
+              class="ids-tab-demo__suffix">Hover me
+            </span>
             Tab Content 1
           </ids-tab>
           <ids-tab

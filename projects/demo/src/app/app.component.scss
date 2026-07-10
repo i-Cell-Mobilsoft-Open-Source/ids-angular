@@ -1,24 +1,25 @@
 app-root {
-  display: grid;
+  --app-header-height: 6rem;
+
+  display: flex;
+  flex-direction: column;
   min-height: 100dvh;
-  max-height: 100dvh;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: auto 1fr;
-  grid-row-gap: 0;
-  grid-column-gap: 0;
+
   color: var(--ids-smc-colors-surface-darker-80);
 
   & > header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     box-sizing: border-box;
-    height: 6rem;
-    min-height: 6rem;
+    height: var(--app-header-height);
+    min-height: var(--app-header-height);
     border-bottom-width: 1px;
     border-bottom-style: solid;
     display: grid;
     grid-template-columns: auto 1fr auto auto auto;
     gap: 1rem;
     align-items: center;
-    grid-area: 1 / 1 / 1 / -1;
     background-color: var(--ids-smc-colors-surface-lighter-10);
     border-color: var(--ids-smc-colors-surface-darker-20);
     padding: 0 var(--ids-smc-reference-container-padding-32) 0 var(--ids-smc-reference-container-padding-8);
@@ -47,12 +48,33 @@ app-root {
     }
   }
 
-  main {
-    grid-area: 2 / 2 / 3 / 3;
+  .app-body {
     display: flex;
     flex-direction: column;
-    flex: 1 1 0;
-    overflow: auto;
+    flex: 1;
+  }
+
+  .app-content {
+    display: flex;
+    flex: 1;
+    min-height: calc(100dvh - var(--app-header-height));
+  }
+
+  ids-nav {
+    position: sticky;
+    top: var(--app-header-height);
+    align-self: flex-start;
+    flex-shrink: 0;
+    max-height: calc(100dvh - var(--app-header-height));
+    height: 100vh;
+  }
+
+  main {
+    flex: 1;
+    min-width: 0;
+    min-height: calc(100dvh - var(--app-header-height));
+    overflow-y: auto;
+    overscroll-behavior-y: auto;
   }
 }
 

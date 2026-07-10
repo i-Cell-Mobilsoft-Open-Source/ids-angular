@@ -6,6 +6,7 @@ export interface IdsCheckboxGroupChild {
   checkboxState(): IdsCheckboxStateType;
   deselect(): void;
   select(): void;
+  disabled(): boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention

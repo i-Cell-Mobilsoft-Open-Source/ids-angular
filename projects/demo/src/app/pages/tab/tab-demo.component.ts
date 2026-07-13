@@ -8,15 +8,19 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
+import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tab-demo',
   imports: [
     TryoutComponent,
+    IdsButtonComponent,
     IdsTabGroupComponent,
     IdsTabComponent,
+    IdsTooltipDirective,
     TranslateModule,
     FormsModule,
     DemoAndCodeComponent,

@@ -6,6 +6,7 @@ import { IdsTabGroupVariantType } from './types/tab-group-variant.type';
 import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
 
 import { CdkPortalOutlet, PortalModule, TemplatePortal } from '@angular/cdk/portal';
+import { NgTemplateOutlet } from '@angular/common';
 import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, effect, inject, input, isDevMode, output, signal, untracked, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -15,6 +16,7 @@ const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
 @Component({
   selector: 'ids-tab-group',
   imports: [
+    NgTemplateOutlet,
     PortalModule,
     IdsIconComponent,
   ],

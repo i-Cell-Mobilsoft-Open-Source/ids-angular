@@ -1,37 +1,47 @@
-<section class="ids-dialog-container">
-  <header class="ids-dialog-header">
-    @if (_customHeader()) {
-      <ng-container [ngTemplateOutlet]="_customHeader()!.template" />
-    } @else {
-      <div class="ids-dialog-header-default-content">
-        <h2 class="ids-dialog-title" [id]="_titleId()">{{ mainTitle() }}</h2>
-        @if (subTitle()) {
-          <h3 class="ids-dialog-subtitle">{{ subTitle() }}</h3>
-        }
-      </div>
-    }
+@if (_isStaticDialog()) {
+  <ng-template #dialogTemplate>
+    <ng-container [ngTemplateOutlet]="template" />
+  </ng-template>
+} @else {
+  <ng-container [ngTemplateOutlet]="template" />
+}
 
-    @if (showCloseButton()) {
-      <button
-        type="button"
-        class="ids-dialog-close-button"
-        idsIconButton
-        appearance="standard"
-        size="compact"
-        variant="surface"
-        [disabled]="isCloseButtonDisabled()"
-        (click)="close()"
-      >
-        <ids-icon aria-hidden="true" alt="" fontIcon="close" />
-      </button>
-    }
-  </header>
-  <div class="ids-dialog-content" [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()">
-    <div #scrollDetector="idsDetectScrollable" idsDetectScrollable class="ids-dialog-content-overflow">
-      <ng-content select="[idsDialogContent]" />
+<ng-template #template>
+  <section class="ids-dialog-container">
+    <header class="ids-dialog-header">
+      @if (_customHeader()) {
+        <ng-container [ngTemplateOutlet]="_customHeader()!.template" />
+      } @else {
+        <div class="ids-dialog-header-default-content">
+          <h2 class="ids-dialog-title" [id]="_titleId()">{{ mainTitle() }}</h2>
+          @if (subTitle()) {
+            <h3 class="ids-dialog-subtitle">{{ subTitle() }}</h3>
+          }
+        </div>
+      }
+
+      @if (showCloseButton()) {
+        <button
+          type="button"
+          class="ids-dialog-close-button"
+          idsIconButton
+          appearance="standard"
+          size="compact"
+          variant="surface"
+          [disabled]="isCloseButtonDisabled()"
+          (click)="close()"
+        >
+          <ids-icon aria-hidden="true" alt="" fontIcon="close" />
+        </button>
+      }
+    </header>
+    <div class="ids-dialog-content" [class.ids-dialog-content-scrollable]="scrollDetector.isScrollable()">
+      <div #scrollDetector="idsDetectScrollable" idsDetectScrollable class="ids-dialog-content-overflow">
+        <ng-content select="[idsDialogContent]" />
+      </div>
     </div>
-  </div>
-  <footer class="ids-dialog-actions">
-    <ng-content select="[idsDialogActions]" />
-  </footer>
-</section>
+    <footer class="ids-dialog-actions">
+      <ng-content select="[idsDialogActions]" />
+    </footer>
+  </section>
+</ng-template>

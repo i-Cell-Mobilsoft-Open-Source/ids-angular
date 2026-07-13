@@ -1,18 +1,18 @@
 import { IDS_DIALOG_DEFAULT_CONFIG, IDS_DIALOG_DEFAULT_CONFIG_FACTORY, IdsDialogDefaultConfig } from './dialog-defaults';
 import { IdsDialogHeaderDirective } from './dialog-header.directive';
 
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
+  TemplateRef,
   ViewEncapsulation,
   computed,
   contentChild,
   inject,
   input,
-  OnDestroy,
+  viewChild,
 } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsDetectScrollableDirective, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -21,7 +21,7 @@ import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
 
 @Component({
-  selector: 'dialog[idsDialog]',
+  selector: 'ids-dialog, [idsDialog]',
   imports: [
     IdsDetectScrollableDirective,
     IdsIconComponent,
@@ -33,24 +33,22 @@ const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
   changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'idsDialog',
   host: {
+    '[class]': '_hostClasses()',
+    '[attr.role]': '"dialog"',
+    '[attr.aria-modal]': '"true"',
     '[attr.aria-labelledby]': '_titleId()',
-    '(cancel)': '_onCancel($event)',
-    '(close)': '_onNativeClose()',
   },
 })
-export class  IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefaultConfig> implements OnDestroy {
+export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefaultConfig> {
   protected override get _hostName(): string {
     return 'dialog';
   }
 
+  protected readonly _dialog = inject(Dialog);
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIALOG_DEFAULT_CONFIG);
+  protected _dialogRef = inject<DialogRef<unknown>>(DialogRef, { optional: true });
 
-  public dialog = inject<ElementRef<HTMLDialogElement>>(ElementRef).nativeElement;
-
-  private readonly _overlay = inject(OverlayContainer);
-  private _overlayRoot?: HTMLElement | null;
-  private _overlayPrevParent?: Node | null;
-
+  protected readonly _isStaticDialog = computed(() => this._dialogRef === null);
   protected _titleId = computed(() => `${this.id()}-title`);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public mainTitle = input.required<string>();
@@ -60,6 +58,7 @@ export class  IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefa
   public showBackdrop = input<boolean>(this._defaultConfig.showBackdrop);
 
   protected _customHeader = contentChild(IdsDialogHeaderDirective);
+  private readonly _template = viewChild.required<TemplateRef<unknown>>('template');
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
@@ -71,36 +70,39 @@ export class  IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefa
   }
 
   public open(): void {
-    this.dialog.showModal();
-
-    const root = this._overlay.getContainerElement();
-    if (root && root.parentNode !== this.dialog) {
-      this._overlayRoot = root;
-      this._overlayPrevParent = root.parentNode;
-      this.dialog.appendChild(root);
+    if (this._dialogRef) {
+      return;
     }
+    this._dialogRef = this._dialog.open(this._template(), {
+      hasBackdrop: this.showBackdrop(),
+      disableClose: true,
+      panelClass: [
+        'ids-dialog',
+        `ids-dialog-${this.size()}`,
+        this.showBackdrop() ? 'ids-dialog-with-backdrop' : '',
+      ],
+      backdropClass: this.showBackdrop()
+        ? 'ids-dialog-backdrop'
+        : 'ids-dialog-transparent-backdrop',
+      ariaLabelledBy: this._titleId(),
+      ariaModal: true,
+      restoreFocus: true,
+      autoFocus: 'first-tabbable',
+    });
+
+    this._dialogRef.closed.subscribe(() => {
+      this._dialogRef = null;
+    });
   }
 
-  public close(): void {
-    this.dialog.close();
-    this._restoreOverlay();
+  public close(result?: unknown): void {
+    if (this._dialogRef) {
+      this._dialogRef.close(result);
+    }
   }
 
   protected _onNativeClose(): void {
-    this._restoreOverlay();
   }
 
-  public ngOnDestroy(): void {
-    this._restoreOverlay();
-  }
-
-  private _restoreOverlay(): void {
-    if (this._overlayRoot && this._overlayPrevParent) {
-      try {
-        this._overlayPrevParent.appendChild(this._overlayRoot);
-      } catch { /* empty */ }
-    }
-    this._overlayRoot = null;
-    this._overlayPrevParent = null;
-  }
 }
+

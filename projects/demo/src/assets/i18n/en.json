@@ -94,6 +94,43 @@
       "SHARK": "Shark"
     }
   },
+  "SIDE_SHEET": {
+    "CUSTOMER": "Customer",
+    "SAVE": "Save",
+    "OPEN": "Open side sheet",
+    "ADDRESS_SUGGESTIONS": "Address suggestions",
+    "USE_OFFICE_ADDRESS": "Use office address",
+    "USE_HOME_ADDRESS": "Use home address",
+    "SELECT_COUNTRY": "Select country",
+    "LABEL": {
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "EMAIL": "Email address",
+      "PHONE": "Phone number",
+      "SHIPPING_ADDRESS": "Shipping address",
+      "CITY": "City",
+      "POSTAL_CODE": "Postal code",
+      "COUNTRY": "Country",
+      "DELIVERY_DATE": "Delivery date"
+    },
+    "PLACEHOLDER": {
+      "FIRST_NAME": "E.g. Steve",
+      "LAST_NAME": "E.g. Johnson",
+      "EMAIL": "E.g. steve@example.com",
+      "PHONE": "E.g. +1 234 567 8901",
+      "SHIPPING_ADDRESS": "E.g. 123 Main St",
+      "CITY": "E.g. New York",
+      "POSTAL_CODE": "E.g. 10001",
+      "DELIVERY_DATE": "E.g. 06/15/2026"
+    },
+    "COUNTRY": {
+      "HU": "Hungary",
+      "UK": "United Kingdom",
+      "DE": "Germany",
+      "FR": "France",
+      "US": "United States"
+    }
+  },
   "TABLE": {
     "COL": {
       "NAME": "Name",

@@ -54,7 +54,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
       [attr.aria-current]="active()"
       [attr.aria-expanded]="!_expandable() ? null : _expanded() ? 'true' : 'false'"
       [attr.aria-label]="label()"
-      [attr.href]="target() || null"
+      [attr.href]="disabled() ? null : (target() || null)"
       (keydown)="_onKeyDown($event)"
       (click)="_onClick($event)"
       (auxclick)="_onAuxClick($event)"
@@ -128,6 +128,7 @@ export class IdsSideNavItemComponent {
 
   protected _onClick(event: MouseEvent): void {
     if (this.disabled()) {
+      event.preventDefault();
       return;
     }
 
@@ -157,6 +158,7 @@ export class IdsSideNavItemComponent {
 
   protected _onAuxClick(event: MouseEvent): void {
     if (this.disabled()) {
+      event.preventDefault();
       return;
     }
 

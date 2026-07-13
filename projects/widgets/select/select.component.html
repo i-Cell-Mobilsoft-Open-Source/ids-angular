@@ -1,6 +1,6 @@
 <div #trigger #fallbackOverlayOrigin="cdkOverlayOrigin" cdk-overlay-origin class="ids-select__trigger" (click)="open()">
   <div class="ids-select__value">
-    @if (_empty) {
+    @if (_empty()) {
       <span class="ids-select__placeholder">{{ placeholder() }}</span>
     } @else {
       <span class="ids-select__value-text">

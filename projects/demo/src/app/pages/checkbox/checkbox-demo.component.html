@@ -120,19 +120,25 @@
               [size]="_checkboxDemoService.groupModel.size"
               [variant]="_checkboxDemoService.groupModel.variant"
               [orientation]="_checkboxDemoService.groupModel.orientation"
-              [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk"
-            >
+              [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk">
               @if (_checkboxDemoService.groupInputHelperModel.allowHint) {
                 <ids-hint-message>Select at least two todos</ids-hint-message>
               }
               <ids-checkbox
                 [required]="_checkboxDemoService.groupModel.showAsterisk"
-                [(ngModel)]="_checkboxDemoService.group.toothBrushing">Tooth brushing</ids-checkbox>
-              <ids-checkbox
-                [(ngModel)]="_checkboxDemoService.group.bath">Bath</ids-checkbox>
+                [(ngModel)]="_checkboxDemoService.group.toothBrushing">
+                Tooth brushing
+              </ids-checkbox>
               <ids-checkbox
                 [required]="_checkboxDemoService.groupModel.showAsterisk"
-                [(ngModel)]="_checkboxDemoService.group.sleep">Sleep</ids-checkbox>
+                [(ngModel)]="_checkboxDemoService.group.bath">
+                Bath
+              </ids-checkbox>
+              <ids-checkbox
+                [required]="_checkboxDemoService.groupModel.showAsterisk"
+                [(ngModel)]="_checkboxDemoService.group.sleep">
+                Sleep
+              </ids-checkbox>
 
                 @if (_checkboxDemoService.groupModel.showAsterisk) {
                   <ids-error-message>

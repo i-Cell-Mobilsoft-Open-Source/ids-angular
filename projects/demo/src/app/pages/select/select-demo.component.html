@@ -8,6 +8,34 @@
       <ng-container component>
         <div class="select-grid">
           <div class="select-item">
+            <h2>Reactive forms</h2>
+            <div [formGroup]="_selectDemoService.testForm">
+              <ids-form-field [size]="_selectDemoService.formFieldModel.size" [variant]="_selectDemoService.formFieldModel.variant">
+                <ids-label>Animal</ids-label>
+                <ids-select
+                  formControlName="animal"
+                  [placeholder]="_selectDemoService.selectModel.placeholder"
+                  [required]="_selectDemoService.selectModel.required"
+                  [readonly]="_selectDemoService.selectModel.readonly"
+                  [aria-label]="_selectDemoService.selectModel['aria-label']"
+                  [aria-labelledby]="_selectDemoService.selectModel['aria-labelledby']"
+                  [typeaheadDebounceInterval]="_selectDemoService.selectModel.typeaheadDebounceInterval"
+                  [canHandleSuccessState]="_selectDemoService.selectModel.canHandleSuccessState"
+                >
+                  @for (group of _selectDemoService.animals | keyvalue; track group.key) {
+                    <ids-option-group [label]="group.key | titlecase">
+                      @for (option of group.value; track option.value) {
+                        <ids-option [value]="option.value">{{ option.viewValue | translate }}</ids-option>
+                      }
+                    </ids-option-group>
+                  }
+                </ids-select>
+                <ids-hint-message>Choose an animal</ids-hint-message>
+              </ids-form-field>
+            </div>
+          </div>
+
+          <div class="select-item">
             <h2>Single selection</h2>
             <ids-form-field [size]="_selectDemoService.formFieldModel.size" [variant]="_selectDemoService.formFieldModel.variant">
               <ids-label>Animal</ids-label>

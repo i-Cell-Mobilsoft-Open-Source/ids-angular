@@ -23,9 +23,8 @@ export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog
   template: `
     @let controls = dialogDemoService.model;
     @let helperControls = dialogDemoService.helperModel;
-    <dialog
+    <ids-dialog
       #dialogDynamic="idsDialog"
-      idsDialog
       [size]="controls!.size"
       [mainTitle]="controls!.mainTitle"
       [subTitle]="controls!.subTitle"
@@ -158,7 +157,7 @@ export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog
           OK
         </button>
       </ng-container>
-    </dialog>
+    </ids-dialog>
   `,
   styles: `
     p {
@@ -174,7 +173,7 @@ export const CUSTOM_DIALOG_TOKEN = new InjectionToken<string>('ids-custom-dialog
 export class CustomDialogComponent extends IdsCustomDialogBase {
   public providedData = inject(CUSTOM_DIALOG_TOKEN);
   public inputData = input('');
-  public dialogDemoService = inject(DialogDemoService);
+  public dialogDemoService = inject<DialogDemoService>(DialogDemoService);
 }
 
 @Component({
@@ -219,8 +218,9 @@ export class DialogDemoComponent {
       ],
       inputs: {
         inputData: 'This text is provided using input binding',
-
       },
+      showBackdrop: this._dialogDemoService.model.showBackdrop,
+      size: this._dialogDemoService.model.size,
     }).subscribe((result) => console.info('Dialog result:', result));
   }
 }

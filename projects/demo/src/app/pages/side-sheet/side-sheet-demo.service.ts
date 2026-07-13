@@ -129,6 +129,15 @@ export class SideSheetDemoService {
 
   public reset(): void {
     this.model = { ...this.defaults };
+    this.firstName = '';
+    this.lastName = '';
+    this.email = '';
+    this.phoneNumber = '';
+    this.shippingAddress = '';
+    this.city = '';
+    this.postalCode = '';
+    this.country = null;
+    this.deliveryDate = null;
   }
 
   public onBackButtonClick(): void {
@@ -144,6 +153,16 @@ export class SideSheetDemoService {
   public shippingAddress = '';
   public city = '';
   public postalCode = '';
+  public country: string | null = null;
+  public deliveryDate: Date | null = null;
+
+  public readonly countries = [
+    { value: 'hu', viewValue: 'SIDE_SHEET.COUNTRY.HU' },
+    { value: 'uk', viewValue: 'SIDE_SHEET.COUNTRY.UK' },
+    { value: 'de', viewValue: 'SIDE_SHEET.COUNTRY.DE' },
+    { value: 'fr', viewValue: 'SIDE_SHEET.COUNTRY.FR' },
+    { value: 'us', viewValue: 'SIDE_SHEET.COUNTRY.US' },
+  ];
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
     return [this.inputControlConfig];

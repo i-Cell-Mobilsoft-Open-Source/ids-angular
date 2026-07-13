@@ -20,6 +20,7 @@
       >
         @let tabLeadingIcon = item.leadingIcon();
         @let tabTrailingIcon = item.trailingIcon();
+        <ng-container [ngTemplateOutlet]="item.prefixContent()" />
         @if (tabLeadingIcon) {
           <ids-icon [fontIcon]="tabLeadingIcon" />
         }
@@ -27,6 +28,7 @@
         @if (tabTrailingIcon) {
           <ids-icon [fontIcon]="tabTrailingIcon" />
         }
+        <ng-container [ngTemplateOutlet]="item.suffixContent()" />
         <span class="ids-tab__indicator">
           <span class="ids-tab__line"></span>
         </span>

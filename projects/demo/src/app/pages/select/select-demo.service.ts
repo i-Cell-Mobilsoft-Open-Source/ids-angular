@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
@@ -79,6 +80,13 @@ export class SelectDemoService {
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+      onModelChange: (isDisabled?: boolean) => {
+        if (isDisabled) {
+          this.testForm.controls.animal.disable();
+        } else {
+          this.testForm.controls.animal.enable();
+        }
+      },
     },
     readonly: {
       description: 'Whether the select is readonly or not.',
@@ -221,6 +229,10 @@ export class SelectDemoService {
     ],
   };
 
+  public testForm = new FormGroup({
+    animal: new FormControl<string>('dog', { nonNullable: true }),
+  });
+
   public singleSelectionValue: string | null = null;
   public multiSelectionValue: string[] = [
     this.animals.land[0].value,
@@ -232,6 +244,8 @@ export class SelectDemoService {
     this.formFieldModel = { ...this.formFieldDefaults };
     this.selectModel = { ...this.selectDefaults };
     this.selectHelperModel = { ...this.selectHelperDefaults };
+
+    this.testForm.reset({ animal: 'dog' });
 
     this.singleSelectionValue = null;
     this.multiSelectionValue = [

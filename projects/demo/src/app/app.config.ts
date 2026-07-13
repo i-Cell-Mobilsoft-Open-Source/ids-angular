@@ -6,7 +6,7 @@ import { GraphqlService } from './services/graphql.service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, Router, withHashLocation, Route } from '@angular/router';
+import { provideRouter, Router, Route } from '@angular/router';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { IDS_ICON_DEFAULT_CONFIG, IdsIconDefaultConfig } from '@i-cell/ids-angular/icon';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -94,7 +94,7 @@ export const appConfig: ApplicationConfig = {
         }),
       };
     }),
-    provideRouter(routes, withHashLocation()),
+    provideRouter(routes),
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: './assets/i18n/',

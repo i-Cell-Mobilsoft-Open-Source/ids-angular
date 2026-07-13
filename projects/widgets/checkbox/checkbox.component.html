@@ -33,11 +33,11 @@
 
 <div class="ids-checkbox__label-wrapper" (click)="onInputClick()" >
   <div class="ids-checkbox__label-container">
+    @if (_hasRequiredValidator()) {
+      <span class="ids-form-field__required-marker"></span>
+    }
     <label class="ids-checkbox__label" [for]="_inputId()" (click)="$event.stopPropagation()">
       <ng-content />
-      @if (_hasRequiredValidator()) {
-        <span class="ids-form-field__required-marker"></span>
-      }
     </label>
   </div>
   @let messages = displayedMessages;

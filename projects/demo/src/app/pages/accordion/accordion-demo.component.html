@@ -48,8 +48,8 @@
 </app-demo-and-code>
 
 
-<div examples class="flex gap-6 pt-6 w-full">
+<div examples class="flex flex-col gap-6 w-full pt-6">
   @for (example of accordionExamples; track example.id) {
-    <ids-example-viewer [example]="example"/>
+    <ids-example-viewer [example]="example" />
   }
 </div>

@@ -12,6 +12,7 @@ import { afterNextRender, booleanAttribute, ComponentRef, Directive, effect, Ele
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { compareDates, deserializeDate, DirectiveBaseWithDefaults, equalDates, getValidDateOrNull, isValidDate } from '@i-cell/ids-angular/core';
 import { IdsFormFieldComponent } from '@i-cell/ids-angular/forms';
+import { IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel';
 import { filter, merge, Observable, Subscription } from 'rxjs';
 
 const defaultConfig = IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY();
@@ -53,6 +54,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
   public parser = input(inject(IDS_DATE_PARSER));
 
   public view = input<IdsDatepickerViewType>(this._defaultConfig.view);
+  public appearance = input<IdsOverlayPanelAppearanceType>(this._defaultConfig.appearance);
   public minDate = input(null, { transform: (value: unknown) => getValidDateOrNull(deserializeDate(value)) });
   public maxDate = input(null, { transform: (value: unknown) => getValidDateOrNull(deserializeDate(value)) });
 
@@ -177,6 +179,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     this._componentRef.setInput('min', this.minDate());
     this._componentRef.setInput('max', this.maxDate());
     this._componentRef.setInput('view', this.view());
+    this._componentRef.setInput('appearance', this.appearance());
     this._componentRef.setInput('size', this._parent.size());
 
     this._componentRef.instance.selected.subscribe((selectedDate: Date) => {

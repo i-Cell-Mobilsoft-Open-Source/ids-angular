@@ -35,9 +35,11 @@ export type TranslateLabelsType = keyof TranslateLabelsToIntlPropNamesType;
 @Component({
   selector: 'ids-table-translate-cell-renderer',
   imports: [TranslateModule],
-  template: '{{ cellValue() | translate }}',
+  template: '{{ cellValue() | translate }} {{ headerSuffix() }}',
 })
-export class TranslateCellRendererComponent extends IdsTableCellRenderer<PeriodicTableElement> {}
+export class TranslateCellRendererComponent extends IdsTableCellRenderer<PeriodicTableElement> {
+  public headerSuffix = input('');
+}
 
 @Component({
   selector: 'ids-table-suffixed-cell-renderer',

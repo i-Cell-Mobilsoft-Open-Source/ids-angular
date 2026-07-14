@@ -136,6 +136,7 @@ export class TableDemoService {
       id: 'atomicMass',
       label: 'TABLE.COL.ATOMIC_MASS',
       headerCellRenderer: TranslateCellRendererComponent,
+      headerCellRendererInput: { headerSuffix: ' (g/mol)' },
       field: 'atomicMass',
       cellRenderer: SuffixedCellRendererComponent,
       cellRendererInput: { suffix: ' (g/mol)' },

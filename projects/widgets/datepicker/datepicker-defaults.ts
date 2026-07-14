@@ -1,9 +1,11 @@
 import { IdsDatepickerView, IdsDatepickerViewType } from './tokens/datepicker-view';
 
 import { InjectionToken } from '@angular/core';
+import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel';
 
 export interface IdsDatepickerDefaultConfig {
   view?: IdsDatepickerViewType,
+  appearance?: IdsOverlayPanelAppearanceType,
 }
 
 export const IDS_DATEPICKER_DEFAULT_CONFIG = new InjectionToken<IdsDatepickerDefaultConfig>(
@@ -17,6 +19,7 @@ export const IDS_DATEPICKER_DEFAULT_CONFIG = new InjectionToken<IdsDatepickerDef
 export function IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY(): Required<IdsDatepickerDefaultConfig> {
   return {
     view: IdsDatepickerView.DAY,
+    appearance: IdsOverlayPanelAppearance.ELEVATED,
   };
 }
 

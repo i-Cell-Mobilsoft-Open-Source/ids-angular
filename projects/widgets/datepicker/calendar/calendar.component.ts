@@ -13,6 +13,7 @@ import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { clampDate, ComponentBaseWithDefaults, IdsSize, IdsSizeType, isValidDate, startOfMonth, startOfYear } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel';
 
 @Component({
   selector: 'ids-calendar',
@@ -44,6 +45,7 @@ export class IdsCalendarComponent extends ComponentBaseWithDefaults<object> impl
   public value = input<Date | null>(null);
   public size = input.required<IdsSizeType>();
   public view = input.required<IdsDatepickerViewType>();
+  public appearance = input.required<IdsOverlayPanelAppearanceType>();
   public min = input<Date | null>(null);
   public max = input<Date | null>(null);
 
@@ -55,7 +57,10 @@ export class IdsCalendarComponent extends ComponentBaseWithDefaults<object> impl
 
   protected _view = linkedSignal(() => this.view());
 
-  protected _hostClasses = computed(() => this._getHostClasses([this.size()]));
+  protected _hostClasses = computed(() => this._getHostClasses([
+    this.size(),
+    this.appearance(),
+  ]));
 
   protected _headerButtonSize = computed(() => (this.size() === IdsSize.DENSE ? IdsSize.COMPACT : this.size()));
   protected _headerLabel = computed<string>(() => this._calendarPage()?.headerLabel() ?? '');

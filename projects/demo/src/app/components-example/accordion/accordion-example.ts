@@ -11,8 +11,8 @@ import { IdsExampleDef } from '../../shared/ids-example-viewer/ids-example.model
 export const ACCORDION_EXAMPLES: IdsExampleDef[] = [
   {
     id: 'accordion-appearance',
-    title: 'Accordion appearances',
-    description: 'Accordions with the two available appearances: filled and text.',
+    title: 'EXAMPLES.ACCORDION.APPEARANCES.TITLE',
+    description: 'EXAMPLES.ACCORDION.APPEARANCES.DESCRIPTION',
     component: AccordionAppearanceExampleComponent,
     files: [
       {
@@ -23,10 +23,8 @@ export const ACCORDION_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'accordion-size',
-    title: 'Accordion sizes',
-    description:
-      'Accordions with different size options (dense, compact, comfortable, spacious).' +
-      ' If you don\'t specify whether the trailing icon should appear, it will appear automatically.',
+    title: 'EXAMPLES.ACCORDION.SIZES.TITLE',
+    description: 'EXAMPLES.ACCORDION.SIZES.DESCRIPTION',
     component: AccordionSizeExampleComponent,
     files: [
       {
@@ -37,8 +35,8 @@ export const ACCORDION_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'accordion-disabled',
-    title: 'Disabled accordion / items',
-    description: 'An individual accordion item can be disabled, or the whole accordion can be disabled at once.',
+    title: 'EXAMPLES.ACCORDION.DISABLED.TITLE',
+    description: 'EXAMPLES.ACCORDION.DISABLED.DESCRIPTION',
     component: AccordionDisabledExampleComponent,
     files: [
       {
@@ -49,8 +47,8 @@ export const ACCORDION_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'accordion-icon',
-    title: 'Accordion icons',
-    description: 'Accordion items can show a leading icon, a trailing icon (chevron), both, or neither.',
+    title: 'EXAMPLES.ACCORDION.ICON.TITLE',
+    description: 'EXAMPLES.ACCORDION.ICON.DESCRIPTION',
     component: AccordionIconExampleComponent,
     files: [
       {
@@ -61,8 +59,8 @@ export const ACCORDION_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'accordion-heading-level',
-    title: 'Accordion heading level',
-    description: 'Set the semantic heading level rendered for each accordion item summary, useful for keeping a correct document outline.',
+    title: 'EXAMPLES.ACCORDION.HEADING_LEVEL.TITLE',
+    description: 'EXAMPLES.ACCORDION.HEADING_LEVEL.DESCRIPTION',
     component: AccordionHeadingLevelExampleComponent,
     files: [
       {
@@ -73,10 +71,8 @@ export const ACCORDION_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'accordion-multi',
-    title: 'Multiple expanded items',
-    description:
-      'By default only one accordion item can be open at a time.' +
-      ' Set the "multi" input to allow multiple items to be expanded simultaneously.',
+    title: 'EXAMPLES.ACCORDION.MULTI.TITLE',
+    description: 'EXAMPLES.ACCORDION.MULTI.DESCRIPTION',
     component: AccordionMultiExampleComponent,
     files: [
       {
@@ -87,8 +83,8 @@ export const ACCORDION_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'accordion-button-config',
-    title: 'Expand/collapse button configuration',
-    description: 'Customize the appearance, variant, size and labels of the built-in expand all / collapse all buttons.',
+    title: 'EXAMPLES.ACCORDION.BUTTON_CONFIG.TITLE',
+    description: 'EXAMPLES.ACCORDION.BUTTON_CONFIG.DESCRIPTION',
     component: AccordionButtonConfigExampleComponent,
     files: [
       {

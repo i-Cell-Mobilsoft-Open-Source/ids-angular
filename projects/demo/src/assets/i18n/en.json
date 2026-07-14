@@ -154,6 +154,40 @@
     }
   },
   "EXAMPLES": {
+    "ACCORDION": {
+      "APPEARANCES": {
+        "TITLE": "Accordion appearances",
+        "DESCRIPTION": "The three accordion appearances: filled, outlined, and text."
+      },
+      "SIZES": {
+        "TITLE": "Accordion sizes",
+        "DESCRIPTION": "Accordions with different size options:dense, compact, comfortable, spacious."
+      },
+      "ICON": {
+        "TITLE": "Accordion icons",
+        "DESCRIPTION": "Accordions can have a custom icon on the left side of the header. If you don't specify whether it's a trailing or leading icon, the default setting will be a trailing icon."
+      },
+      "HEADING_LEVEL": {
+        "TITLE": "Accordion heading level",
+        "DESCRIPTION":
+          "Accordions can have a custom heading level. The default heading level is 2."
+      },
+      "BUTTON_CONFIG": {
+        "TITLE": "Accordion button config",
+        "DESCRIPTION":
+          "Accordions can have a custom button config. You can specify the button type, color, and size. The default button config is a filled button with a primary color variant."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled accordion",
+        "DESCRIPTION":
+          "Accordions can be disabled. Disabled accordions cannot be opened or closed."
+      },
+      "MULTI": {
+        "TITLE": "Multiple expanded items",
+        "DESCRIPTION":
+          "By default only one accordion item can be open at a time. Set the \"multi\" input to allow multiple items to be expanded simultaneously."
+      }
+    },
     "BUTTON": {
       "APPEARANCES": {
         "TITLE": "Button appearances",

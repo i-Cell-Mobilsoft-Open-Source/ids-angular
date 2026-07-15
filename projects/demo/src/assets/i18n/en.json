@@ -179,6 +179,79 @@
         "TITLE": "Button group",
         "DESCRIPTION": "Buttons can be grouped together to organize them."
       }
+    },
+    "CARD": {
+      "APPEARANCES": {
+        "TITLE": "Card appearances",
+        "DESCRIPTION": "The three card appearances: filled (default), outlined, and elevated.",
+        "CONTENT": {
+          "FILLED": "Filled card",
+          "OUTLINED": "Outlined card",
+          "ELEVATED": "Elevated card"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Card variants",
+        "DESCRIPTION": "Cards with different color variants: primary, secondary, brand, surface(default), success, warning, error, info, light, and dark.",
+        "CONTENT": {
+          "PRIMARY": "Primary",
+          "SECONDARY": "Secondary",
+          "BRAND": "Brand",
+          "SURFACE": "Surface",
+          "SUCCESS": "Success",
+          "WARNING": "Warning",
+          "ERROR": "Error",
+          "INFO": "Info",
+          "LIGHT": "Light",
+          "DARK": "Dark"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Card sizes",
+        "DESCRIPTION": "Cards with different sizes: dense, compact (default), comfortable and spacious.",
+        "CONTENT": {
+          "DENSE": "Dense",
+          "COMPACT": "Compact",
+          "COMFORTABLE": "Comfortable",
+          "SPACIOUS": "Spacious"
+        }
+      },
+      "ORIENTATION": {
+        "TITLE": "Card orientation",
+        "DESCRIPTION": "Cards can be laid out vertically or horizontally.",
+        "CONTENT": {
+          "VERTICAL_TITLE": "Vertical card",
+          "VERTICAL_SUBTITLE": "Header on top",
+          "VERTICAL_BODY": "The header, media and body are stacked vertically.",
+          "HORIZONTAL_BODY": "Horizontal card with the media placed next to the body content."
+        }
+      },
+      "MEDIA": {
+        "TITLE": "Card media",
+        "DESCRIPTION": "The media of a card can be stretched to fill the full width of the card, or kept within the card's default padding.",
+        "CONTENT": {
+          "STRETCHED": "Stretched media fills the full width of the card.",
+          "NON_STRETCHED": "Non-stretched media keeps the card's default padding."
+        }
+      },
+      "CLICKABLE": {
+        "TITLE": "Clickable card",
+        "DESCRIPTION": "Cards become clickable when a click handler is attached, and can also be disabled.",
+        "CONTENT": {
+          "CLICKABLE": "Clickable card",
+          "DISABLED": "Disabled clickable card"
+        }
+      },
+      "FULL_COMPOSITION": {
+        "TITLE": "Full composition",
+        "DESCRIPTION": "A card composed of a header (title and subtitle), media, body and footer sections to present rich content.",
+        "CONTENT": {
+          "TITLE": "Dandelion Meadow",
+          "SUBTITLE": "Nature photography",
+          "BODY": "A card can be composed of a header (title and subtitle), media, body and footer sections to present rich content.",
+          "FOOTER_BUTTON": "Learn more"
+        }
+      }
     }
   }
 }

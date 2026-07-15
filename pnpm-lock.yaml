@@ -48,8 +48,8 @@ importers:
         specifier: ^0.0.72
         version: 0.0.72
       '@i-cell/ids-tokens':
-        specifier: 0.0.41
-        version: 0.0.41
+        specifier: 0.0.45
+        version: 0.0.45
       '@ngx-translate/core':
         specifier: 17.0.0
         version: 17.0.0(@angular/common@21.2.17(@angular/core@21.2.17(@angular/compiler@21.2.17)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2))(@angular/core@21.2.17(@angular/compiler@21.2.17)(rxjs@7.8.2)(zone.js@0.16.2))
@@ -1952,8 +1952,8 @@ packages:
   '@i-cell/ids-styles@0.0.72':
     resolution: {integrity: sha512-XirrwK3gmAOeW+L+YAzJfLFD/cMrbFkVXtkhcKrubLWYu32i9YmJHzh11z2bfwMMCqWVe/j5wGHXDooeAAlXTw==}
 
-  '@i-cell/ids-tokens@0.0.41':
-    resolution: {integrity: sha512-5jTvPDrD2ICCXYFBwDS6WwS6goAnZES2KR1pvj4ivhSRGCvSlM6zXYQIYa2yhrAUcI6nk9vE86K/+PEwiHxgjQ==}
+  '@i-cell/ids-tokens@0.0.45':
+    resolution: {integrity: sha512-wzCuuJMQVbUXvIP/fQBqfSQaH0aBxrcEgRqHenj9O/9Mc238Dessp1l3Exj/55PKZI1h7GTHrtm4qTiHNK1+hQ==}
 
   '@inquirer/ansi@1.0.2':
     resolution: {integrity: sha512-S8qNSZiYzFd0wAcyG5AXCvUHC5Sr7xpZ9wZ2py9XR88jUz8wooStVx5M6dRzczbBWjic9NP7+rY0Xi7qqK/aMQ==}
@@ -11325,7 +11325,7 @@ snapshots:
 
   '@i-cell/ids-styles@0.0.72': {}
 
-  '@i-cell/ids-tokens@0.0.41': {}
+  '@i-cell/ids-tokens@0.0.45': {}
 
   '@inquirer/ansi@1.0.2': {}
 

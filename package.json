@@ -35,7 +35,7 @@
     "@angular/router": "^21.2.5",
     "@apollo/client": "^4.1.6",
     "@i-cell/ids-styles": "^0.0.72",
-    "@i-cell/ids-tokens": "0.0.41",
+    "@i-cell/ids-tokens": "0.0.45",
     "@ngx-translate/core": "17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "apollo-angular": "^13.0.0",

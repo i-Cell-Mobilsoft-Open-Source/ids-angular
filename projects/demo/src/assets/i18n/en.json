@@ -9,6 +9,11 @@
     "PATTERNS": "Patterns"
   },
   "RESOURCES": "Resources",
+  "TITLES": {
+    "HOME": "Home",
+    "SUPPORT": "Support",
+    "COMPONENTS": "Components"
+  },
   "COMPONENTS": {
     "ACCORDION": "Accordion",
     "AUTOCOMPLETE": "Auto complete",
@@ -27,7 +32,9 @@
     "ICON": "Icon",
     "ICON_BUTTON": "Icon button",
     "MENU_ITEM": "Menu item",
+    "MESSAGE": "Message",
     "NOTIFICATION": "Notification",
+    "OPTION": "Option",
     "OVERLAY_PANEL": "Overlay panel",
     "PAGINATOR": "Paginator",
     "RADIO": "Radio",

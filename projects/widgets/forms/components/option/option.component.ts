@@ -65,7 +65,7 @@ export class IdsOptionComponent<T = unknown>
 
   protected _groupOrOptionIsDisabled = computed(() => this.group?.disabled() || this.disabledInput());
 
-  protected readonly _multiSelect = Boolean(this._parent?.multiSelect());
+  protected readonly _multiSelect = computed(() => Boolean(this._parent?.multiSelect()));
 
   public selectionChange = output<IdsOptionSelectionChange<T>>();
   public selectionUnchanged = output<IdsOptionSelectionChange<T>>();
@@ -75,7 +75,7 @@ export class IdsOptionComponent<T = unknown>
     this.selected() ? 'selected' : null,
     this._active() ? 'active' : null,
     this._groupOrOptionIsDisabled() ? 'disabled' : null,
-    this._multiSelect ? 'multiselect' : null,
+    this._multiSelect() ? 'multiselect' : null,
     this.size(),
     this.variant(),
   ]));
@@ -178,7 +178,7 @@ export class IdsOptionComponent<T = unknown>
   }
 
   private _emitSelectionChangeEvent(selected: boolean, isUserInput = false): void {
-    if (this._multiSelect || !this.selected()) {
+    if (this._multiSelect() || !this.selected()) {
       this.selectionChange.emit(new IdsOptionSelectionChange<T>(this, selected, isUserInput));
     } else {
       this.selectionUnchanged.emit(new IdsOptionSelectionChange<T>(this, selected, isUserInput));

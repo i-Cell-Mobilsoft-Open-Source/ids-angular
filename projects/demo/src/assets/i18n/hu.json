@@ -9,6 +9,11 @@
     "PATTERNS": "Minták"
   },
   "RESOURCES": "Forrásanyagok",
+  "TITLES": {
+    "HOME": "Kezdőlap",
+    "SUPPORT": "Támogatás",
+    "COMPONENTS": "Komponensek"
+  },
   "COMPONENTS": {
     "ACCORDION": "Accordion",
     "AUTOCOMPLETE": "Auto complete",
@@ -27,7 +32,9 @@
     "ICON": "Icon",
     "ICON_BUTTON": "Icon button",
     "MENU_ITEM": "Menu item",
+    "MESSAGE": "Message",
     "NOTIFICATION": "Notification",
+    "OPTION": "Option",
     "OVERLAY_PANEL": "Overlay panel",
     "PAGINATOR": "Paginator",
     "RADIO": "Radio",

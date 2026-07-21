@@ -10,7 +10,7 @@
   @if (data.image?.imageUrl) {
     <div class="ids-container-gap-24 relative" [class]="data.card?.orientation === 'horizontal' ? ' md:w-full ' : ''">
       @if (data.image?.state) {
-        <app-badge class="absolute" [state]="data.image?.state"/>
+        <app-badge class="absolute" [state]="data.image?.state" />
       }
       <app-image
         [aspectRatio]="data.image?.aspectRatio"
@@ -35,7 +35,7 @@
         : ''
     "
   >
-    @if (data.date || data.tags) {
+    @if (data.date || (data.tags?.length ?? 0) > 0) {
       <div class="flex items-center gap-ids-container-gap-8">
         <ids-chip-group appearance="outlined" size="dense">
           <ids-chip variant="primary">
@@ -62,7 +62,7 @@
           @if (data.description) {
             <div
               class="text-left text-body-medium ids-page-surface [&_ol]:list-decimal [&_ul]:list-disc [&_ol]:pl-5 [&_ul]:pl-5"
-              [class]="(data.card?.orientation === 'horizontal' || fullDescription()) ? '' : 'line-clamp-3'"
+              [class]="data.card?.orientation === 'horizontal' || fullDescription() ? '' : 'line-clamp-3'"
               [innerHTML]="data.description | safeHtml"
             ></div>
           }

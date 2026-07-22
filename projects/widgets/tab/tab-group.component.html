@@ -1,39 +1,99 @@
-<div class="ids-tab-group__container">
-  <ul
-    class="ids-tab-group__header"
-    role="tablist"
-    [attr.aria-orientation]="orientation()"
-    (keydown)="_onTabListKeydown($event)"
-  >
-    @for (item of _items(); track $index; let i = $index) {
-      <li
-        role="tab"
-        [id]="item.id()"
-        [class]="item.hostTabClasses()"
-        [class.ids-tab--active]="_selectedTabIndex() === i"
-        [attr.tabindex]="_focusedTabIndex() === i ? 0 : -1"
-        [attr.aria-selected]="_selectedTabIndex() === i ? 'true' : 'false'"
-        [attr.aria-disabled]="item.parentOrSelfDisabled() ? 'true' : 'false'"
-        [attr.aria-controls]="item.panelId()"
-        (click)="selectTab(i)"
-        (focus)="focusTab(i)"
+<div
+#tabScrollViewport
+ class="ids-tab-group__container"
+    >
+    @if (_hasOverflow()) {
+      <button
+        type="button"
+        class="ids-tab-group__scroll-button ids-tab-group__scroll-button--previous"
+        idsIconButton
+        [appearance]="'standard'"
+        [size]="size()"
+        [variant]="variant()"
+        [disabled]="disabled() || !_canScrollPrevious()"
+        [attr.aria-label]="
+          orientation() === 'horizontal'
+            ? 'Scroll tabs left'
+            : 'Scroll tabs up'
+        "
+        (click)="_scrollTabs(-1)"
       >
-        @let tabLeadingIcon = item.leadingIcon();
-        @let tabTrailingIcon = item.trailingIcon();
-        <ng-container [ngTemplateOutlet]="item.prefixContent()" />
-        @if (tabLeadingIcon) {
-          <ids-icon [fontIcon]="tabLeadingIcon" />
-        }
-        <span class="ids-tab__label">{{ item.label() }}</span>
-        @if (tabTrailingIcon) {
-          <ids-icon [fontIcon]="tabTrailingIcon" />
-        }
-        <ng-container [ngTemplateOutlet]="item.suffixContent()" />
-        <span class="ids-tab__indicator">
-          <span class="ids-tab__line"></span>
-        </span>
-      </li>
+        <ids-icon
+          [fontIcon]="
+            orientation() === 'horizontal'
+              ? 'chevron-left'
+              : 'chevron-up'
+          "
+        />
+      </button>
     }
-  </ul>
+    <div #tabList
+        class="ids-tab-group__header-wrapper"
+        (scroll)="_updateScrollState()">
+      <ul
+        class="ids-tab-group__header"
+        role="tablist"
+        [attr.aria-orientation]="orientation()"
+        [class.ids-tab-group__header--has-overflow]="!_hasOverflow()"
+        (keydown)="_onTabListKeydown($event)"
+      >
+        <span class="ids-tab-group__indicator"></span>
+        @for (item of _items(); track $index; let i = $index) {
+          <li
+            role="tab"
+            [id]="item.id()"
+            [class]="item.hostTabClasses()"
+            [class.ids-tab--active]="_selectedTabIndex() === i"
+            [attr.tabindex]="_focusedTabIndex() === i ? 0 : -1"
+            [attr.aria-selected]="_selectedTabIndex() === i ? 'true' : 'false'"
+            [attr.aria-disabled]="item.parentOrSelfDisabled() ? 'true' : 'false'"
+            [attr.aria-controls]="item.panelId()"
+            (click)="selectTab(i)"
+            (focus)="focusTab(i)"
+          >
+            @let tabLeadingIcon = item.leadingIcon();
+            @let tabTrailingIcon = item.trailingIcon();
+            <ng-container [ngTemplateOutlet]="item.prefixContent()" />
+            @if (tabLeadingIcon) {
+              <ids-icon [fontIcon]="tabLeadingIcon" />
+            }
+            <span class="ids-tab__label">{{ item.label() }}</span>
+            @if (tabTrailingIcon) {
+              <ids-icon [fontIcon]="tabTrailingIcon" />
+            }
+            <ng-container [ngTemplateOutlet]="item.suffixContent()" />
+            <span class="ids-tab__indicator">
+              <span class="ids-tab__line"></span>
+            </span>
+          </li>
+        }
+
+      </ul>
+    </div>
+  @if (_hasOverflow()) {
+    <button
+      type="button"
+      class="ids-tab-group__scroll-button ids-tab-group__scroll-button--next"
+      idsIconButton
+      [appearance]="'standard'"
+      [size]="size()"
+      [variant]="variant()"
+      [disabled]="disabled() || !_canScrollNext()"
+      [attr.aria-label]="
+        orientation() === 'horizontal'
+          ? 'Scroll tabs right'
+          : 'Scroll tabs down'
+      "
+      (click)="_scrollTabs(1)"
+    >
+      <ids-icon
+        [fontIcon]="
+          orientation() === 'horizontal'
+            ? 'chevron-right'
+            : 'chevron-down'
+        "
+      />
+    </button>
+  }
 </div>
 <ng-template cdkPortalOutlet />

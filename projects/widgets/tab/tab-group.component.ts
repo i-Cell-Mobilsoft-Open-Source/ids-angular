@@ -7,9 +7,10 @@ import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/ta
 
 import { CdkPortalOutlet, PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, effect, inject, input, isDevMode, output, signal, untracked, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, Component, computed, contentChildren, effect, ElementRef, inject, input, isDevMode, OnDestroy, output, signal, untracked, viewChild, viewChildren, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsOrientation, IdsOrientationType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
 const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -19,12 +20,15 @@ const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
     NgTemplateOutlet,
     PortalModule,
     IdsIconComponent,
+    IdsIconButtonComponent,
   ],
   templateUrl: './tab-group.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupDefaultConfig> implements AfterContentInit {
+export class IdsTabGroupComponent
+  extends ComponentBaseWithDefaults<IdsTabGroupDefaultConfig>
+  implements AfterContentInit, AfterViewInit, OnDestroy {
   protected override get _hostName(): string {
     return 'tab-group';
   }
@@ -71,6 +75,23 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     (this.orientation() === IdsOrientation.HORIZONTAL ? IdsTabIndicatorPosition.BOTTOM : IdsTabIndicatorPosition.LEFT),
   );
 
+  private readonly _scrollViewport =
+    viewChild.required<ElementRef<HTMLElement>>('tabScrollViewport');
+
+  private readonly _tabList =
+    viewChild.required<ElementRef<HTMLUListElement>>('tabList');
+
+  private readonly _tabElements =
+    viewChildren<ElementRef<HTMLElement>>('tabElement');
+
+  protected readonly _hasOverflow = signal(false);
+  protected readonly _canScrollPrevious = signal(false);
+  protected readonly _canScrollNext = signal(false);
+
+  private _resizeObserver?: ResizeObserver;
+
+  private readonly _scrollBoundaryTolerance = 1;
+
   constructor() {
     super();
 
@@ -112,17 +133,47 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     this.selectTab(0);
   }
 
+  public ngAfterViewInit(): void {
+    const viewport = this._scrollViewport().nativeElement;
+    const tabList = this._tabList().nativeElement;
+
+    this._resizeObserver = new ResizeObserver(() => {
+      this._updateScrollState();
+    });
+
+    this._resizeObserver.observe(viewport);
+    this._resizeObserver.observe(tabList);
+
+    queueMicrotask(() => {
+      this._updateScrollState();
+      this._scrollTabIntoView(this._selectedTabIndex(), false);
+    });
+  }
+
+  public ngOnDestroy(): void {
+    this._resizeObserver?.disconnect();
+  }
+
   public selectTab(index: number): void {
+    const selectedItem = this._items().at(index);
+    if (!selectedItem || selectedItem.parentOrSelfDisabled()) {
+      return;
+    }
     this._selectedTabIndex.set(index);
     this._focusedTabIndex.set(index);
-    const selectedItem = this._items().at(index);
-    const selectedPortal = new TemplatePortal(selectedItem!.content(), this._viewContainerRef);
-
-    if (this._portalOutlet().hasAttached()) {
-      this._portalOutlet().detach();
+    const selectedPortal = new TemplatePortal(
+      selectedItem.content(),
+      this._viewContainerRef,
+    );
+    const portalOutlet = this._portalOutlet();
+    if (portalOutlet.hasAttached()) {
+      portalOutlet.detach();
     }
-
-    this._portalOutlet().attach(selectedPortal);
+    portalOutlet.attach(selectedPortal);
+    queueMicrotask(() => {
+      this._scrollTabIntoView(index);
+      this._updateScrollState();
+    });
   }
 
   public focusTab(index: number): void {
@@ -226,6 +277,117 @@ export class IdsTabGroupComponent extends ComponentBaseWithDefaults<IdsTabGroupD
     if (!id) {
       return;
     }
-    queueMicrotask(() => document.getElementById(id)?.focus());
+    queueMicrotask(() => {
+      const tab = document.getElementById(id);
+      tab?.focus();
+      tab?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
+  }
+
+  protected _scrollTabs(direction: -1 | 1): void {
+    if (this.disabled()) {
+      return;
+    }
+    const viewport = this._scrollViewport().nativeElement;
+    const horizontal = this.orientation() === IdsOrientation.HORIZONTAL;
+
+    const viewportSize = horizontal
+      ? viewport.clientWidth
+      : viewport.clientHeight;
+
+    const scrollFactor = 0.8;
+    const distance = Math.max(viewportSize * scrollFactor, 1);
+
+    this._tabList().nativeElement.scrollBy({
+      left: horizontal ? distance * direction : 0,
+      top: horizontal ? 0 : distance * direction,
+      behavior: 'smooth',
+    });
+  }
+
+  protected _updateScrollState(): void {
+    const viewport = this._tabList().nativeElement;
+    const horizontal = this.orientation() === IdsOrientation.HORIZONTAL;
+    const tolerance = this._scrollBoundaryTolerance;
+
+    if (horizontal) {
+      const maxScroll = Math.max(
+        viewport.scrollWidth - viewport.clientWidth,
+        0,
+      );
+
+      this._hasOverflow.set(maxScroll > tolerance);
+      this._canScrollPrevious.set(viewport.scrollLeft > tolerance);
+      this._canScrollNext.set(
+        viewport.scrollLeft < maxScroll - tolerance,
+      );
+
+      return;
+    }
+
+    const maxScroll = Math.max(
+      viewport.scrollHeight - viewport.clientHeight,
+      0,
+    );
+
+    this._hasOverflow.set(maxScroll > tolerance);
+    this._canScrollPrevious.set(viewport.scrollTop > tolerance);
+    this._canScrollNext.set(
+      viewport.scrollTop < maxScroll - tolerance,
+    );
+  }
+
+  private _scrollTabIntoView(
+    index: number,
+    smooth = true,
+  ): void {
+    const viewport = this._scrollViewport().nativeElement;
+    const tab = this._tabElements().at(index)?.nativeElement;
+
+    if (!tab) {
+      return;
+    }
+
+    const horizontal = this.orientation() === IdsOrientation.HORIZONTAL;
+
+    if (horizontal) {
+      const viewportStart = viewport.scrollLeft;
+      const viewportEnd = viewportStart + viewport.clientWidth;
+
+      const tabStart = tab.offsetLeft;
+      const tabEnd = tabStart + tab.offsetWidth;
+
+      if (tabStart < viewportStart) {
+        viewport.scrollTo({
+          left: tabStart,
+          behavior: smooth ? 'smooth' : 'auto',
+        });
+      } else if (tabEnd > viewportEnd) {
+        viewport.scrollTo({
+          left: tabEnd - viewport.clientWidth,
+          behavior: smooth ? 'smooth' : 'auto',
+        });
+      }
+
+      return;
+    }
+
+    const viewportStart = viewport.scrollTop;
+    const viewportEnd = viewportStart + viewport.clientHeight;
+
+    const tabStart = tab.offsetTop;
+    const tabEnd = tabStart + tab.offsetHeight;
+
+    if (tabStart < viewportStart) {
+      viewport.scrollTo({
+        top: tabStart,
+        behavior: smooth ? 'smooth' : 'auto',
+      });
+    } else if (tabEnd > viewportEnd) {
+      viewport.scrollTo({
+        top: tabEnd - viewport.clientHeight,
+        behavior: smooth ? 'smooth' : 'auto',
+      });
+    }
   }
 }

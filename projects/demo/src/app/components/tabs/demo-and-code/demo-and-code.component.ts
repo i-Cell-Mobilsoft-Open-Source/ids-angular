@@ -5,14 +5,12 @@ import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 @Component({
   selector: 'app-demo-and-code',
   imports: [
     IdsChipComponent,
     IdsCardComponent,
     IdsIconComponent,
-    IdsIconButtonComponent,
     IdsButtonComponent,
   ],
   templateUrl: './demo-and-code.component.html',
@@ -25,14 +23,6 @@ export class DemoAndCodeComponent {
 
   public isOpen = signal(false);
   public isDark = signal(false);
-
-  public toggleFooter(): void {
-    this.isOpen.update((open) => !open);
-  }
-
-  public toggleDark(): void {
-    this.isDark.update((dark) => !dark);
-  }
 
   public onResetClick(): void {
     this.resetDemo.emit();

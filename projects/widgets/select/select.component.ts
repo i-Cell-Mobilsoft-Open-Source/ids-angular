@@ -5,8 +5,7 @@ import { IdsSelectTriggerDirective } from './select-trigger.directive';
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
-import { ScrollDispatcher } from '@angular/cdk/scrolling';
+import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -47,7 +46,7 @@ import {
   IdsOptionSelectionChange,
 } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { filter, first, Subscription } from 'rxjs';
+import { filter, first } from 'rxjs';
 
 const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
@@ -146,8 +145,6 @@ export class IdsSelectComponent
 
   private _panel = viewChild<ElementRef<HTMLElement>>('panel');
   private _overlayDir = viewChild(CdkConnectedOverlay);
-  private readonly _scrollDispatcher = inject(ScrollDispatcher);
-  private _ancestorScrollSubscription: Subscription | null = null;
 
   public options = contentChildren<IdsOptionComponent>(IdsOptionComponent, { descendants: true });
   public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
@@ -243,7 +240,6 @@ export class IdsSelectComponent
   }
 
   public ngOnDestroy(): void {
-    this._stopAncestorScrollTracking();
     this._keyManager?.destroy();
   }
 
@@ -398,12 +394,6 @@ export class IdsSelectComponent
     this._scrollOptionIntoView(this._keyManager?.activeItemIndex || 0);
   }
 
-  protected _handlePositionChange(change: ConnectedOverlayPositionChange): void {
-    if (this.isPanelOpen() && change.scrollableViewProperties.isOriginOutsideView) {
-      this.close();
-    }
-  }
-
   private _scrollOptionIntoView(index: number): void {
     const option = this.options()[index];
 
@@ -458,7 +448,6 @@ export class IdsSelectComponent
 
     this._overlayWidth = this._getOverlayWidth(this._preferredOverlayOrigin);
     this.isPanelOpen.set(true);
-    this._startAncestorScrollTracking();
     this._keyManager?.withHorizontalOrientation(null);
     this._highlightCorrectOption();
     this._changeDetectorRef.markForCheck();
@@ -467,53 +456,10 @@ export class IdsSelectComponent
   public close(): void {
     if (this.isPanelOpen()) {
       this.isPanelOpen.set(false);
-      this._stopAncestorScrollTracking();
       this._keyManager?.withHorizontalOrientation('ltr');
       this._changeDetectorRef.markForCheck();
       this._onTouched();
     }
-  }
-
-  private _startAncestorScrollTracking(): void {
-    this._stopAncestorScrollTracking();
-    this._ancestorScrollSubscription = this._scrollDispatcher
-      .ancestorScrolled(this._elementRef, 0)
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => {
-        if (!this._isOriginVisible()) {
-          this.close();
-        }
-      });
-  }
-
-  private _stopAncestorScrollTracking(): void {
-    this._ancestorScrollSubscription?.unsubscribe();
-    this._ancestorScrollSubscription = null;
-  }
-
-  private _isOriginVisible(): boolean {
-    const originElement = this._elementRef.nativeElement;
-    const originRect = originElement.getBoundingClientRect();
-
-    if (originRect.bottom <= 0 || originRect.top >= window.innerHeight || originRect.right <= 0 || originRect.left >= window.innerWidth) {
-      return false;
-    }
-
-    const scrollableAncestors = this._scrollDispatcher.getAncestorScrollContainers(this._elementRef);
-    const directAncestor = scrollableAncestors.pop();
-
-    if (!directAncestor) {
-      return true;
-    }
-
-    const containerRect = directAncestor.getElementRef().nativeElement.getBoundingClientRect();
-
-    return (
-      originRect.bottom > containerRect.top &&
-      originRect.top < containerRect.bottom &&
-      originRect.right > containerRect.left &&
-      originRect.left < containerRect.right
-    );
   }
 
   // #region ControlValueAccessor implementation

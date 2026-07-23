@@ -27,6 +27,20 @@
                 @if (subItem.icon) {
                   <ids-icon icon-leading [fontIcon]="subItem.icon" />
                 }
+
+                @for (subSubItem of subItem.children; track $index; let l = $index) {
+                  <ids-side-nav-item
+                    [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k + '-subsub-' + l"
+                    [label]="subSubItem.name!"
+                    [target]="subSubItem.path ?? ''"
+                    [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k + '-subsub-' + l]"
+                    [isActiveMatchOptions]="subsetMatchOptions"
+                  >
+                    @if (subSubItem.icon) {
+                      <ids-icon icon-leading [fontIcon]="subSubItem.icon" />
+                    }
+                  </ids-side-nav-item>
+                }
               </ids-side-nav-item>
             }
           </ids-side-nav-item>
@@ -65,6 +79,19 @@
                 >
                   @if (subItem.icon) {
                     <ids-icon icon-leading [fontIcon]="subItem.icon" />
+                  }
+                  @for (subSubItem of subItem.children; track $index; let l = $index) {
+                    <ids-side-nav-item
+                      [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k + '-subsub-' + l"
+                      [label]="subSubItem.name!"
+                      [target]="subSubItem.path ?? ''"
+                      [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k + '-subsub-' + l]"
+                      [isActiveMatchOptions]="subsetMatchOptions"
+                    >
+                      @if (subSubItem.icon) {
+                        <ids-icon icon-leading [fontIcon]="subSubItem.icon" />
+                      }
+                    </ids-side-nav-item>
                   }
                 </ids-side-nav-item>
               }

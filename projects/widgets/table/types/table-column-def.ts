@@ -55,6 +55,13 @@ export type IdsTableColumnDef<D> = {
   headerCellRenderer?: string | Type<IdsTableCellRenderer<D>>;
 
   /**
+   * Additional custom inputs passed to component-based header cell renderers.
+   *
+   * These are merged with the built-in renderer inputs (`rowData`, `colDef`, `cellValue`).
+   */
+  headerCellRendererInput?: Record<string, unknown>;
+
+  /**
    * The data cells' renderer, either built-in or external template or component.
    * Currently the following built-in renderers are available:
    * - 'strong': the label is displayed in a <strong> tag,

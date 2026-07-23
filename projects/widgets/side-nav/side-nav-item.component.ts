@@ -54,8 +54,10 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
       [attr.aria-current]="active()"
       [attr.aria-expanded]="!_expandable() ? null : _expanded() ? 'true' : 'false'"
       [attr.aria-label]="label()"
+      [attr.href]="disabled() ? null : (target() || null)"
       (keydown)="_onKeyDown($event)"
       (click)="_onClick($event)"
+      (auxclick)="_onAuxClick($event)"
     >
       @if (_iconLeading()) {
         <ng-content select="[icon-leading]" />
@@ -126,19 +128,44 @@ export class IdsSideNavItemComponent {
 
   protected _onClick(event: MouseEvent): void {
     if (this.disabled()) {
+      event.preventDefault();
       return;
     }
+
+    if ((event.ctrlKey || event.metaKey) && this.target()) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      this._openInNewTab();
+      return;
+    }
+
     const eventTarget = event.target as Element;
 
     if (!this.target()) {
+      event.preventDefault();
       this._toggle();
     } else if (
       eventTarget.localName === 'button' ||
       (eventTarget.localName === 'ids-icon' && !eventTarget.hasAttribute('icon-leading') && !eventTarget.hasAttribute('icon-trailing'))
     ) {
+      event.preventDefault();
       this._toggle();
     } else {
+      event.preventDefault();
       this._navigate();
+    }
+  }
+
+  protected _onAuxClick(event: MouseEvent): void {
+    if (this.disabled()) {
+      event.preventDefault();
+      return;
+    }
+
+    if (event.button === 1 && this.target()) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      this._openInNewTab();
     }
   }
 
@@ -178,5 +205,15 @@ export class IdsSideNavItemComponent {
     if (target) {
       this._router.navigateByUrl(target);
     }
+  }
+
+  private _openInNewTab(): void {
+    const target = this.target();
+    if (!target) {
+      return;
+    }
+
+    const absoluteUrl = new URL(target, window.location.origin).toString();
+    window.open(absoluteUrl, '_blank', 'noopener');
   }
 }

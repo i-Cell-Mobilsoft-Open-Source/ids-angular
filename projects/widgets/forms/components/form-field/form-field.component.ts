@@ -14,7 +14,7 @@ import { IdsSuccessMessageComponent } from '../message/success-message/success-m
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, ElementRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Validators } from '@angular/forms';
-import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IDS_CONTROL_CONTAINER, IdsSizeType } from '@i-cell/ids-angular/core';
 import { of, startWith, switchMap } from 'rxjs';
 
 const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
@@ -25,6 +25,12 @@ const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
   templateUrl: './form-field.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: IDS_CONTROL_CONTAINER,
+      useExisting: IdsFormFieldComponent,
+    },
+  ],
 })
 export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFieldDefaultConfig> {
   protected override get _hostName(): string {

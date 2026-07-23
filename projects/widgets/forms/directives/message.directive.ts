@@ -21,13 +21,14 @@ export class IdsMessageDirective extends ComponentBaseWithDefaults<IdsMessageDef
 
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsMessageVariantType>(this._defaultConfig.variant);
+  public disabled = input<boolean>(false);
   private _parentOrSelfSize = computed(() => this._parent?.size() ?? this.size());
   private _parentOrSelfVariant = computed(() => this._parent?.variant() ?? this.variant());
-  private _parentDisabled = computed(() => this._parent?.disabled());
+  private _parentOrSelfDisabled = computed(() => this._parent?.disabled() ?? this.disabled());
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
-    this._parentDisabled() ? 'disabled' : null,
+    this._parentOrSelfDisabled() ? 'disabled' : null,
   ]));
 }

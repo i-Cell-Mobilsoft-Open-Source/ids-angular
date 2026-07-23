@@ -24,27 +24,23 @@
             This is a notification with a long content and an action. Notice how the text wraps to multiple lines when the max-width is
             reached.
             @if (_notificationDemoService.helperModel.showAction1Button) {
-              <button
-                type="button"
+              <a
+                href="https://www.google.com"
+                target="_blank"
                 idsButton
                 idsNotificationActionButton
                 [appearance]="_notificationDemoService.helperModel.action1Appearance"
                 [size]="_notificationDemoService.helperModel.action1Size"
                 [disabled]="_notificationDemoService.helperModel.action1Disabled"
-                (click)="
-                  _notificationDemoService.onClick(
-                    _notificationDemoService.helperModel.action1Appearance + '-' + _notificationDemoService.helperModel.action1Size
-                  )
-                "
-              >
+               >
                 @if (_notificationDemoService.helperModel.action1HasLeadingIcon) {
                   <ids-icon icon-leading fontIcon="search" />
                 }
-                {{ _notificationDemoService.helperModel.action1Text }}
-                @if (_notificationDemoService.helperModel.action1HasTrailingIcon) {
-                  <ids-icon icon-trailing fontIcon="done" />
-                }
-              </button>
+                  {{ _notificationDemoService.helperModel.action1Text }}
+                  @if (_notificationDemoService.helperModel.action1HasTrailingIcon) {
+                    <ids-icon icon-trailing fontIcon="done" />
+                  }
+              </a>
             }
             @if (_notificationDemoService.helperModel.showAction2Button) {
               <button

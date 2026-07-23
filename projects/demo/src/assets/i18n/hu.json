@@ -51,6 +51,10 @@
     "STANDALONE": "Különálló",
     "GROUPED": "Csoportban"
   },
+  "BUTTONS": {
+    "MORE": "Több",
+    "LEARN_MORE": "Tudj meg többet"
+  },
   "CHECKBOX": {
     "FORMGROUP": "<form> taggal használva",
     "GROUPED_WITH_VALIDATOR": "Csoportban (validátorral)",
@@ -90,6 +94,43 @@
       "SHARK": "Cápa"
     }
   },
+  "SIDE_SHEET": {
+    "CUSTOMER": "Ügyfél",
+    "SAVE": "Mentés",
+    "OPEN": "Side sheet megnyitása",
+    "ADDRESS_SUGGESTIONS": "Címjavaslatok",
+    "USE_OFFICE_ADDRESS": "Irodai cím használata",
+    "USE_HOME_ADDRESS": "Saját cím használata",
+    "SELECT_COUNTRY": "Válasszon országot",
+    "LABEL": {
+      "FIRST_NAME": "Keresztnév",
+      "LAST_NAME": "Vezetéknév",
+      "EMAIL": "E-mail cím",
+      "PHONE": "Telefonszám",
+      "SHIPPING_ADDRESS": "Szállítási cím",
+      "CITY": "Város",
+      "POSTAL_CODE": "Irányítószám",
+      "COUNTRY": "Ország",
+      "DELIVERY_DATE": "Szállítási dátum"
+    },
+    "PLACEHOLDER": {
+      "FIRST_NAME": "Pl. István",
+      "LAST_NAME": "Pl. Kovács",
+      "EMAIL": "Pl. istvan@pelda.hu",
+      "PHONE": "Pl. +36 30 123 4567",
+      "SHIPPING_ADDRESS": "Pl. Bécsi út 271.",
+      "CITY": "Pl. Budapest",
+      "POSTAL_CODE": "Pl. 1037",
+      "DELIVERY_DATE": "Pl. 2026.06.15."
+    },
+    "COUNTRY": {
+      "HU": "Magyarország",
+      "UK": "Egyesült Királyság",
+      "DE": "Németország",
+      "FR": "Franciaország",
+      "US": "Egyesült Államok"
+    }
+  },
   "TABLE": {
     "COL": {
       "NAME": "Megnevezés",
@@ -111,5 +152,34 @@
       "COLLAPSE_DETAILS": "Részletek becsukása",
       "CHANGE_LANGUAGE": "Nyelvváltás"
     }
+  },
+  "EXAMPLES": {
+    "BUTTON": {
+      "APPEARANCES": {
+        "TITLE": "Button megjelenései",
+        "DESCRIPTION": "A button komponens megjelenései: filled, outlined, és text."
+      },
+      "VARIANTS": {
+        "TITLE": "Button változatai",
+        "DESCRIPTION": "A button komponens különböző változatai: primary(alapértelmezett), secondary, brand, surface, error, warning, success, light,light-fixed, és dark."
+      },
+      "SIZES": {
+        "TITLE": "Button méretei",
+        "DESCRIPTION": "A button komponens különböző méretei: dense, compact, comfortable és spacious."
+      },
+      "ICONS": {
+        "TITLE": "Button ikonokkal",
+        "DESCRIPTION": "A button komponens tartalmazhat ikont, amely a gomb bal és/vagy jobb oldalán helyezkedik el."
+      },
+      "LINKS": {
+        "TITLE": "Button linkek",
+        "DESCRIPTION": "A gombok linkként is használhatók az <a> tag segítségével."
+      },
+      "BUTTON_GROUP": {
+        "TITLE": "Button-group",
+        "DESCRIPTION": "A gombok csoportosíthatók, ezek rendszerezésre alkalmasak."
+      }
+    }
   }
+
 }

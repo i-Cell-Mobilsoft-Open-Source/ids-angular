@@ -156,7 +156,7 @@ export class NotificationDemoService {
       description: 'Text of button',
       type: 'string',
       default: '-',
-      demoDefault: 'Action1 button',
+      demoDefault: 'Link button',
     },
     action1HasLeadingIcon: {
       description: 'Whether the button has leading icon or not.',
@@ -200,7 +200,7 @@ export class NotificationDemoService {
       description: 'Text of button',
       type: 'string',
       default: '-',
-      demoDefault: 'Action2 button',
+      demoDefault: 'Simple Button',
     },
     action2HasLeadingIcon: {
       description: 'Whether the button has leading icon or not.',

@@ -108,6 +108,7 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
     if (!this._canOpen()) {
       return;
     }
+    this._notifyInputValueChange();
     this.autocomplete().setPanelOpen();
     this._keyManager?.withHorizontalOrientation(null);
 
@@ -427,6 +428,10 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
   private _updateInputValue(value: string): void {
     const input = this._inputElement.nativeElement;
     this._renderer.setProperty(input, 'value', value);
-    input.dispatchEvent(new Event('input', { bubbles: true }));
+    this._notifyInputValueChange();
+  }
+
+  private _notifyInputValueChange(): void {
+    this._inputElement.nativeElement.dispatchEvent(new Event('input', { bubbles: true }));
   }
 }

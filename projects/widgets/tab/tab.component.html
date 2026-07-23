@@ -1,4 +1,4 @@
-<ng-template>
+<ng-template #content>
   <div
     class="ids-tab-body-content"
     [attr.role]="'tabpanel'"
@@ -7,4 +7,12 @@
   >
     <ng-content />
   </div>
+</ng-template>
+
+<ng-template #prefixContent>
+  <ng-content select="[prefixContent]" />
+</ng-template>
+
+<ng-template #suffixContent>
+  <ng-content select="[suffixContent]" />
 </ng-template>

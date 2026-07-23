@@ -10,7 +10,10 @@
           <div class="checkbox-item">
             <h2>{{ "CHECKBOX.FORMGROUP" | translate }}</h2>
             <form [formGroup]="_checkboxDemoService.form">
-              <ids-checkbox formControlName="terms_and_conditions">
+              <ids-checkbox
+                [formControlName]="'terms_and_conditions'"
+                [readonly]="_checkboxDemoService.model.readonly"
+              >
                 I accept the terms and conditions
                 @if (_checkboxDemoService.helperModel.allowHint) {
                   <ids-hint-message>Accept the terms and conditions</ids-hint-message>
@@ -21,7 +24,9 @@
               </ids-checkbox>
 
               <ids-checkbox
-              formControlName="privacy_policy">
+                formControlName="privacy_policy"
+                [readonly]="_checkboxDemoService.model.readonly"
+              >
                 I accept the privacy policy
                 @if (_checkboxDemoService.helperModel.allowHint) {
                   <ids-hint-message>Accept the privacy policy</ids-hint-message>
@@ -31,7 +36,10 @@
                 </ids-error-message>
               </ids-checkbox>
 
-              <ids-checkbox formControlName="marketing_materials">
+              <ids-checkbox
+                formControlName="marketing_materials"
+                [readonly]="_checkboxDemoService.model.readonly"
+              >
                 I accept the marketing materials
                 @if (_checkboxDemoService.helperModel.allowHint) {
                   <ids-hint-message>Accept the marketing materials</ids-hint-message>
@@ -112,19 +120,25 @@
               [size]="_checkboxDemoService.groupModel.size"
               [variant]="_checkboxDemoService.groupModel.variant"
               [orientation]="_checkboxDemoService.groupModel.orientation"
-              [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk"
-            >
+              [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk">
               @if (_checkboxDemoService.groupInputHelperModel.allowHint) {
                 <ids-hint-message>Select at least two todos</ids-hint-message>
               }
               <ids-checkbox
                 [required]="_checkboxDemoService.groupModel.showAsterisk"
-                [(ngModel)]="_checkboxDemoService.group.toothBrushing">Tooth brushing</ids-checkbox>
-              <ids-checkbox
-                [(ngModel)]="_checkboxDemoService.group.bath">Bath</ids-checkbox>
+                [(ngModel)]="_checkboxDemoService.group.toothBrushing">
+                Tooth brushing
+              </ids-checkbox>
               <ids-checkbox
                 [required]="_checkboxDemoService.groupModel.showAsterisk"
-                [(ngModel)]="_checkboxDemoService.group.sleep">Sleep</ids-checkbox>
+                [(ngModel)]="_checkboxDemoService.group.bath">
+                Bath
+              </ids-checkbox>
+              <ids-checkbox
+                [required]="_checkboxDemoService.groupModel.showAsterisk"
+                [(ngModel)]="_checkboxDemoService.group.sleep">
+                Sleep
+              </ids-checkbox>
 
                 @if (_checkboxDemoService.groupModel.showAsterisk) {
                   <ids-error-message>
@@ -137,27 +151,26 @@
             <h2>{{ "CHECKBOX.GROUPED_WITH_VALIDATOR" | translate }}</h2>
             <form [formGroup]="_checkboxDemoService.formGroup">
               <div formGroupName="toppings">
-              <ids-checkbox-group
-                [label]="_checkboxDemoService.groupModel.groupLabel"
-                [allowParent]="_checkboxDemoService.groupModel.allowParent"
-                [parentLabel]="_checkboxDemoService.groupModel.parentLabel"
-                [size]="_checkboxDemoService.groupModel.size"
-                [variant]="_checkboxDemoService.groupModel.variant"
-                [orientation]="_checkboxDemoService.groupModel.orientation"
-                [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk"
-              >
-                @if (_checkboxDemoService.groupInputHelperModel.allowHint) {
-                  <ids-hint-message>Select at least two toppings</ids-hint-message>
-                }
-                <ids-checkbox
-                formControlName="cheese">Cheese</ids-checkbox>
-                <ids-checkbox formControlName="ham">Ham</ids-checkbox>
-                <ids-checkbox formControlName="corn">Corn</ids-checkbox>
-                <ids-checkbox formControlName="mushrooms">Mushrooms</ids-checkbox>
-                <ids-error-message>
-                  <ids-error-def code="minimumCountSelected"> {{ "CHECKBOX.ERROR.MINIMUM_COUNT_SELECTED" | translate: { minimumCount: 2 } }}</ids-error-def>
-                </ids-error-message>
-              </ids-checkbox-group>
+                <ids-checkbox-group
+                  [label]="_checkboxDemoService.groupModel.groupLabel"
+                  [allowParent]="_checkboxDemoService.groupModel.allowParent"
+                  [parentLabel]="_checkboxDemoService.groupModel.parentLabel"
+                  [size]="_checkboxDemoService.groupModel.size"
+                  [variant]="_checkboxDemoService.groupModel.variant"
+                  [orientation]="_checkboxDemoService.groupModel.orientation"
+                  [showAsterisk]="_checkboxDemoService.groupModel.showAsterisk"
+                >
+                  @if (_checkboxDemoService.groupInputHelperModel.allowHint) {
+                    <ids-hint-message>Select at least two toppings</ids-hint-message>
+                  }
+                  <ids-checkbox formControlName="cheese">Cheese</ids-checkbox>
+                  <ids-checkbox formControlName="ham">Ham</ids-checkbox>
+                  <ids-checkbox formControlName="corn">Corn</ids-checkbox>
+                  <ids-checkbox formControlName="mushrooms">Mushrooms</ids-checkbox>
+                  <ids-error-message>
+                    <ids-error-def code="minimumCountSelected"> {{ "CHECKBOX.ERROR.MINIMUM_COUNT_SELECTED" | translate: { minimumCount: 2 } }}</ids-error-def>
+                  </ids-error-message>
+                </ids-checkbox-group>
               </div>
               <div formGroupName="cheeses">
                 <ids-checkbox-group

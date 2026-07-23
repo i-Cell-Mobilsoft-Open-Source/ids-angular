@@ -1,50 +1,52 @@
 import { IdsCustomDialogBase } from './custom-dialog-base';
 
-import { DOCUMENT } from '@angular/common';
-import { ApplicationRef, EnvironmentInjector, Injectable, Injector, Provider, Signal, StaticProvider, Type, createComponent, inject } from '@angular/core';
+import { Dialog } from '@angular/cdk/dialog';
+import { Injectable, Signal, StaticProvider, Type, inject } from '@angular/core';
+import { IdsSizeType } from '@i-cell/ids-angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class IdsDialogService {
-  private _appRef = inject(ApplicationRef);
-  private _document = inject(DOCUMENT) as Document;
-  private _injector = inject(EnvironmentInjector);
+  private readonly _dialog = inject(Dialog);
 
   public open<C extends IdsCustomDialogBase<R>, R = unknown>(
     component: Type<C>,
-    options?: { providers?: (Provider | StaticProvider)[], inputs?: { [P in keyof C]?: C[P] extends Signal<infer T> ? T : C[P] } },
-  ): Observable<R | undefined> {
-    let elementInjector = undefined;
-
-    if (options?.providers) {
-      elementInjector = Injector.create({
-        parent: this._injector,
-        providers: options.providers,
-      });
-    }
-
-    const createOptions = {
-      environmentInjector: this._injector,
-      ...(elementInjector && { elementInjector }),
-    };
-    const dialogRef = createComponent(component, createOptions);
-
-    if (options?.inputs) {
-      Object.keys(options.inputs).forEach((key) => dialogRef.setInput(key, options.inputs![key as keyof C]));
-    }
-
-    this._document.body.appendChild(dialogRef.location.nativeElement);
-
-    this._appRef.attachView(dialogRef.hostView);
-
-    const onClose = dialogRef.instance.dialogResult.asObservable();
-
-    onClose.subscribe(() => {
-      this._document.body.removeChild(dialogRef.location.nativeElement);
-      dialogRef.destroy();
+    options?: {
+      providers?: StaticProvider[] | undefined,
+      inputs?: {
+        [P in keyof C]?: C[P] extends Signal<infer T> ? T : C[P];
+      };
+      showBackdrop?: boolean;
+      size?: IdsSizeType;
     },
-    );
+  ): Observable<R | undefined> {
+    const panelClass = [
+      'ids-dialog-overlay-panel',
+      'ids-dialog',
+      options?.showBackdrop === false ? '' : 'ids-dialog-with-backdrop',
+    ];
+    if (options?.size) {
+      panelClass.push(`ids-dialog-${options.size}`);
+    }
+    const dialogRef = this._dialog.open<R | undefined, unknown, C>(component, {
+      hasBackdrop: true,
+      disableClose: true,
+      panelClass,
+      backdropClass: options?.showBackdrop === false
+        ? 'ids-dialog-transparent-backdrop'
+        : 'ids-dialog-backdrop',
+      providers: options?.providers,
+    });
 
-    return onClose;
+    if (options?.inputs && dialogRef.componentRef) {
+      for (const key of Object.keys(options.inputs)) {
+        dialogRef.componentRef.setInput(
+          key,
+          options.inputs[key as keyof C],
+        );
+      }
+    }
+
+    return dialogRef.closed;
   }
 }

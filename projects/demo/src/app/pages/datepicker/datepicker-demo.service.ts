@@ -7,6 +7,7 @@ import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-con
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY, IdsDatepickerView, IdsDatepickerViewType } from '@i-cell/ids-angular/datepicker';
 import { IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/forms';
+import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel';
 
 const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 const datepickerDefaultConfig = IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY();
@@ -19,6 +20,7 @@ type DatepickerInputControls = {
   minDate: string,
   maxDate: string,
   view: IdsDatepickerViewType,
+  appearance: IdsOverlayPanelAppearanceType,
 };
 
 @Injectable()
@@ -54,6 +56,13 @@ export class DatepickerDemoService {
       default: datepickerDefaultConfig.view,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsDatepickerView),
+    },
+    appearance: {
+      description: 'The appearance of the datepicker\'s calendar popup',
+      type: 'IdsOverlayPanelAppearanceType',
+      default: datepickerDefaultConfig.appearance,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsOverlayPanelAppearance),
     },
   };
 

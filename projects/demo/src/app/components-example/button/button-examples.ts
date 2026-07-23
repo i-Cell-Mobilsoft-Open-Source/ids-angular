@@ -1,6 +1,7 @@
 import { ButtonAppearanceExampleComponent } from './button-appearance-example/button-appearance-example.component';
-import { ButtonDisabledExampleComponent } from './button-disabled-example/button-disabled-example.component';
+import { ButtonGroupExampleComponent } from './button-group-example/button-group-example.component';
 import { ButtonIconExampleComponent } from './button-icon-example/button-icon-example.component';
+import { ButtonLinkExampleComponent } from './button-link-example/button-link-example.component';
 import { ButtonSizeExampleComponent } from './button-size-example/button-size-example.component';
 import { ButtonVariantsExampleComponent } from './button-variants-example/button-variants-example.component';
 
@@ -9,8 +10,8 @@ import { IdsExampleDef } from '../../shared/ids-example-viewer/ids-example.model
 export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   {
     id: 'button-basic',
-    title: 'Basic buttons',
-    description: 'The three button appearances: filled, outlined, and text.',
+    title: 'EXAMPLES.BUTTON.APPEARANCES.TITLE',
+    description: 'EXAMPLES.BUTTON.APPEARANCES.DESCRIPTION',
     component: ButtonAppearanceExampleComponent,
     files: [
       {
@@ -21,8 +22,8 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'button-variants',
-    title: 'Button variants',
-    description: 'Filled buttons with different color variants.',
+    title: 'EXAMPLES.BUTTON.VARIANTS.TITLE',
+    description: 'EXAMPLES.BUTTON.VARIANTS.DESCRIPTION',
     component: ButtonVariantsExampleComponent,
     files: [
       {
@@ -33,8 +34,8 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
   },
   {
     id: 'button-sizes',
-    title: 'Button sizes',
-    description: 'Buttons with different size options.',
+    title: 'EXAMPLES.BUTTON.SIZES.TITLE',
+    description: 'EXAMPLES.BUTTON.SIZES.DESCRIPTION',
     component: ButtonSizeExampleComponent,
     files: [
       {
@@ -44,26 +45,38 @@ export const BUTTON_EXAMPLES: IdsExampleDef[] = [
     ],
   },
   {
-    id: 'button-disabled',
-    title: 'Disabled button',
-    description: 'A button in a disabled state.',
-    component: ButtonDisabledExampleComponent,
+    id: 'button-link',
+    title: 'EXAMPLES.BUTTON.LINKS.TITLE',
+    description: 'EXAMPLES.BUTTON.LINKS.DESCRIPTION',
+    component: ButtonLinkExampleComponent,
     files: [
       {
-        HTMLpath: 'assets/examples/button/button-disabled-example/button-disabled-example.component.html',
-        TSpath: 'assets/examples/button/button-disabled-example/button-disabled-example.component.ts',
+        HTMLpath: 'assets/examples/button/button-link-example/button-link-example.component.html',
+        TSpath: 'assets/examples/button/button-link-example/button-link-example.component.ts',
       },
     ],
   },
   {
     id: 'button-icon',
-    title: 'Button with icons',
-    description: 'Buttons with leading and trailing icons.',
+    title: 'EXAMPLES.BUTTON.ICONS.TITLE',
+    description: 'EXAMPLES.BUTTON.ICONS.DESCRIPTION',
     component: ButtonIconExampleComponent,
     files: [
       {
         HTMLpath: 'assets/examples/button/button-icon-example/button-icon-example.component.html',
         TSpath: 'assets/examples/button/button-icon-example/button-icon-example.component.ts',
+      },
+    ],
+  },
+  {
+    id: 'button-group',
+    title: 'EXAMPLES.BUTTON.BUTTON_GROUP.TITLE',
+    description: 'EXAMPLES.BUTTON.BUTTON_GROUP.DESCRIPTION',
+    component: ButtonGroupExampleComponent,
+    files: [
+      {
+        HTMLpath: 'assets/examples/button/button-group-example/button-group-example.component.html',
+        TSpath: 'assets/examples/button/button-group-example/button-group-example.component.ts',
       },
     ],
   },

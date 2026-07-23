@@ -88,7 +88,8 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
     rowData: this.rowData(),
     colDef: this.colDef(),
     cellValue: this._cellValue(),
-    ...(this.colDef().cellRendererInput ?? {}),
+    ...this._isHeader && (this.colDef().headerCellRendererInput ?? {}),
+    ...!this._isHeader && (this.colDef().cellRendererInput ?? {}),
   }));
 
   protected _cellTemplateName = computed(() => {

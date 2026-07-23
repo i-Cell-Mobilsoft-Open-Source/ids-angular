@@ -92,14 +92,40 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
     return control.errors && (control.touched || control.dirty) ? true : undefined;
   });
 
-  protected _parentCheckboxChecked = computed(() =>
-    this._childCheckboxes().every((child) =>
-      child.checkboxState() === IdsCheckboxState.CHECKED));
+  private readonly _childrenForParentState = computed(() => {
+    const children = this._childCheckboxes();
+    const enabledChildren = children.filter((child) => !child.disabled());
 
-  protected _parentCheckboxIndeterminate = computed(() =>
-    !this._parentCheckboxChecked() && this._childCheckboxes().some((child) =>
-      child.checkboxState() === IdsCheckboxState.CHECKED),
-  );
+    return enabledChildren.length > 0 ? enabledChildren : children;
+  });
+
+  protected _parentCheckboxChecked = computed(() => {
+    const children = this._childrenForParentState();
+
+    if (children.length === 0) {
+      return false;
+    }
+
+    return children.every((child) => child.checkboxState() === IdsCheckboxState.CHECKED);
+  });
+
+  protected _parentCheckboxIndeterminate = computed(() => {
+    const children = this._childrenForParentState();
+
+    if (children.length === 0) {
+      return false;
+    }
+
+    const checkedCount = children.filter((child) => child.checkboxState() === IdsCheckboxState.CHECKED).length;
+
+    return checkedCount > 0 && checkedCount < children.length;
+  });
+
+  protected _parentCheckboxDisabled = computed(() => {
+    const children = this._childCheckboxes();
+
+    return children.length > 0 && children.every((child) => child.disabled());
+  });
 
   protected get _shouldShowAsterisk(): boolean {
     return this.showAsterisk();
@@ -112,13 +138,13 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   });
 
   public selectAllChild(): void {
-    this._childCheckboxes().forEach((child) => {
+    this._childCheckboxes().filter((child) => !child.disabled()).forEach((child) => {
       child.select();
     });
   }
 
   public deselectAllChild(): void {
-    this._childCheckboxes().forEach((child) => {
+    this._childCheckboxes().filter((child) => !child.disabled()).forEach((child) => {
       child.deselect();
     });
   }

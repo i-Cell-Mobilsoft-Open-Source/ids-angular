@@ -5,22 +5,27 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
+import { NgStyle } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
-import { IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
-import { IdsRadioGroupDirective, IdsRadioComponent } from '@i-cell/ids-angular/radio';
+import { IdsErrorDefinitionDirective, IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
+import { IdsRadioGroupComponent, IdsRadioComponent } from '@i-cell/ids-angular/radio';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-radio-demo',
   imports: [
+    NgStyle,
     TryoutComponent,
     IdsCardComponent,
-    IdsRadioGroupDirective,
+    IdsRadioGroupComponent,
     IdsRadioComponent,
+    ReactiveFormsModule,
     FormsModule,
     IdsHintMessageComponent,
+    IdsErrorMessageComponent,
+    IdsErrorDefinitionDirective,
     TranslateModule,
     DemoAndCodeComponent,
     ControlTableComponent,

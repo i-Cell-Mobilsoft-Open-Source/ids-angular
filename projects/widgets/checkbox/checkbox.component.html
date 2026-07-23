@@ -6,14 +6,15 @@
     [class.ids-checkbox--selected]="_isChecked()"
     [id]="_inputId()"
     [disabled]="disabled()"
-    [attr.aria-checked]="_isIndeterminate() ? 'mixed' : null"
+    [attr.aria-checked]="_isIndeterminate() ? 'mixed' : _isChecked()"
     [attr.aria-label]="ariaLabel() || null"
     [attr.aria-labelledby]="ariaLabelledby()"
     [attr.aria-describedby]="ariaDescribedby()"
+    [attr.aria-readonly]="readonly()"
     [checked]="_isChecked()"
     [indeterminate]="_isIndeterminate()"
     [name]="name()"
-    [required]="required()"
+    [required]="_hasRequiredValidator()"
     [tabIndex]="!_isFocusable() ? -1 : tabIndex()"
     [value]="_nativeValue()"
     (blur)="onBlur()"
@@ -30,13 +31,13 @@
   </div>
 </div>
 
-<div class="ids-checkbox__label-wrapper">
+<div class="ids-checkbox__label-wrapper" (click)="onInputClick()" >
   <div class="ids-checkbox__label-container">
-    <label class="ids-checkbox__label" [for]="_inputId()">
+    @if (_hasRequiredValidator()) {
+      <span class="ids-form-field__required-marker"></span>
+    }
+    <label class="ids-checkbox__label" [for]="_inputId()" (click)="$event.stopPropagation()">
       <ng-content />
-      @if (_hasRequiredValidator) {
-        <span class="ids-form-field__required-marker"></span>
-      }
     </label>
   </div>
   @let messages = displayedMessages;

@@ -196,6 +196,28 @@
           "By default only one accordion item can be open at a time. Set the \"multi\" input to allow multiple items to be expanded simultaneously."
       }
     },
+    "AVATAR": {
+      "SIZES": {
+        "TITLE": "Avatar sizes",
+        "DESCRIPTION": "Avatars with different sizes: dense, compact, comfortable and spacious, available in both small and big size collections."
+      },
+      "VARIANTS": {
+        "TITLE": "Avatar variants",
+        "DESCRIPTION": "Avatars with different color variants: primary, secondary, dark, surface, and light."
+      },
+      "INITIALS": {
+        "TITLE": "Avatar with initials",
+        "DESCRIPTION": "Avatars can display a user's initials using the initials input."
+      },
+      "ICONS": {
+        "TITLE": "Avatar with icon",
+        "DESCRIPTION": "Avatars can display an icon by projecting an ids-icon element inside the avatar."
+      },
+      "IMAGES": {
+        "TITLE": "Avatar with images",
+        "DESCRIPTION": "Avatars can display a user profile image by projecting an img element with the idsAvatarImage directive."
+      }
+    },
     "BADGE": {
       "VARIANTS": {
         "TITLE": "Badge variants",

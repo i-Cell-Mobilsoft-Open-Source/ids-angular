@@ -154,6 +154,24 @@
     }
   },
   "EXAMPLES": {
+    "AVATAR": {
+      "SIZES": {
+        "TITLE": "Avatar méretek",
+        "DESCRIPTION": "Az avatar komponens különböző méretei: dense, compact, comfortable és spacious, elérhető mind a small, mind a big méretkészletekben."
+      },
+      "VARIANTS": {
+        "TITLE": "Avatar változatai",
+        "DESCRIPTION": "Az avatar komponens különböző változatai: primary, secondary, dark, surface, és light."
+      },
+      "INITIALS": {
+        "TITLE": "Avatar monogrammal",
+        "DESCRIPTION": "Az avatar komponens megjelenítheti a felhasználó monogramját vagy egyéb szöveges tartalmat."
+      },
+      "IMAGES": {
+        "TITLE": "Avatar képpel",
+        "DESCRIPTION": "Az avatar komponens megjelenítheti a felhasználó profilképét."
+      }
+    },
     "BUTTON": {
       "APPEARANCES": {
         "TITLE": "Button megjelenései",

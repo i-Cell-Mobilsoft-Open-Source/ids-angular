@@ -179,6 +179,79 @@
         "TITLE": "Button-group",
         "DESCRIPTION": "A gombok csoportosíthatók, ezek rendszerezésre alkalmasak."
       }
+    },
+    "CARD": {
+      "APPEARANCES": {
+        "TITLE": "Card megjelenései",
+        "DESCRIPTION": "A card komponens megjelenései: filled (alapértelmezett), outlined, és elevated.",
+        "CONTENT": {
+          "FILLED": "Filled kártya",
+          "OUTLINED": "Outlined kártya",
+          "ELEVATED": "Elevated kártya"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Card változatai",
+        "DESCRIPTION": "A card komponens különböző változatai: primary, secondary, brand, surface (alapértelmezett), success, warning, error, info, light, és dark.",
+        "CONTENT": {
+          "PRIMARY": "Primary",
+          "SECONDARY": "Secondary",
+          "BRAND": "Brand",
+          "SURFACE": "Surface",
+          "SUCCESS": "Success",
+          "WARNING": "Warning",
+          "ERROR": "Error",
+          "INFO": "Info",
+          "LIGHT": "Light",
+          "DARK": "Dark"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Card méretei",
+        "DESCRIPTION": "A card komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious.",
+        "CONTENT": {
+          "DENSE": "Dense",
+          "COMPACT": "Compact",
+          "COMFORTABLE": "Comfortable",
+          "SPACIOUS": "Spacious"
+        }
+      },
+      "ORIENTATION": {
+        "TITLE": "Card orientációja",
+        "DESCRIPTION": "A card-ok elrendezhetők függőlegesen vagy vízszintesen.",
+        "CONTENT": {
+          "VERTICAL_TITLE": "Függőleges kártya",
+          "VERTICAL_SUBTITLE": "Fejléc felül",
+          "VERTICAL_BODY": "A fejléc, a média és a törzs függőlegesen egymás alatt helyezkednek el.",
+          "HORIZONTAL_BODY": "Vízszintes kártya, a médiával a törzs tartalma mellett."
+        }
+      },
+      "MEDIA": {
+        "TITLE": "Card média",
+        "DESCRIPTION": "A card média tartalma kitölthető a card teljes szélességében, vagy megtartható az alapértelmezett margóval.",
+        "CONTENT": {
+          "STRETCHED": "A kitöltött média a kártya teljes szélességét elfoglalja.",
+          "NON_STRETCHED": "A nem kitöltött média megtartja a kártya alapértelmezett margóját."
+        }
+      },
+      "CLICKABLE": {
+        "TITLE": "Kattintható card",
+        "DESCRIPTION": "A card-ok kattinthatóvá válnak, ha click handler van rájuk kötve, és le is tilthatók.",
+        "CONTENT": {
+          "CLICKABLE": "Kattintható kártya",
+          "DISABLED": "Letiltott, kattintható kártya"
+        }
+      },
+      "FULL_COMPOSITION": {
+        "TITLE": "Teljes felépítés",
+        "DESCRIPTION": "Egy card, amely fejlécből (cím és alcím), médiából, törzsből és lábléc szekcióból épül fel, tartalom megjelenítéséhez.",
+        "CONTENT": {
+          "TITLE": "Pitypangos rét",
+          "SUBTITLE": "Természetfotózás",
+          "BODY": "Egy kártya felépülhet fejlécből (cím és alcím), médiából, törzsből és lábléc szekcióból, hogy gazdag tartalmat jelenítsen meg.",
+          "FOOTER_BUTTON": "Tudj meg többet"
+        }
+      }
     }
   }
 

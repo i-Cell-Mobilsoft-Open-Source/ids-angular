@@ -1,4 +1,5 @@
 import { IdsTabActivationMode, IdsTabActivationModeType } from './types/tab-activation-mode.type';
+import { IdsTabGroupAlignment, IdsTabGroupAlignmentType } from './types/tab-group-alignment.type';
 import { IdsTabGroupPosition, IdsTabGroupPositionType } from './types/tab-group-position.type';
 import { IdsTabGroupVariant, IdsTabGroupVariantType } from './types/tab-group-variant.type';
 import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
@@ -11,6 +12,7 @@ export interface IdsTabGroupDefaultConfig {
   variant?: IdsTabGroupVariantType,
   orientation?: IdsOrientationType,
   stretchTabs?: boolean,
+  tabAlignment?: IdsTabGroupAlignmentType,
   tabPosition?: IdsTabGroupPositionType,
   indicatorPosition?: IdsTabIndicatorPositionType,
   activationMode?: IdsTabActivationModeType,
@@ -30,7 +32,8 @@ export function IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY(): Required<IdsTabGroupDefa
     variant: IdsTabGroupVariant.PRIMARY,
     orientation: IdsOrientation.HORIZONTAL,
     stretchTabs: true,
-    tabPosition: IdsTabGroupPosition.START,
+    tabAlignment: IdsTabGroupAlignment.START,
+    tabPosition: IdsTabGroupPosition.LEFT,
     indicatorPosition: IdsTabIndicatorPosition.BOTTOM,
     activationMode: IdsTabActivationMode.MANUAL,
   };

@@ -11,6 +11,7 @@
           [variant]="_tabDemoService.model.variant"
           [orientation]="_tabDemoService.model.orientation"
           [stretchTabs]="_tabDemoService.model.stretchTabs"
+          [tabAlignment]="_tabDemoService.model.tabAlignment"
           [tabPosition]="_tabDemoService.model.tabPosition"
           [indicatorPosition]="_tabDemoService.model.indicatorPosition"
           [disabled]="_tabDemoService.model.disabled"
@@ -56,6 +57,30 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur voluptas numquam omnis dolorum iure, odio debitis
             sequi aut fugit magni, ullam eos natus quibusdam, ratione at repellendus harum eum.
           </ids-tab>
+        </ids-tab-group>
+
+        <ids-tab-group
+
+        [size]="_tabDemoService.model.size"
+          [variant]="_tabDemoService.model.variant"
+          [orientation]="_tabDemoService.model.orientation"
+          [stretchTabs]="_tabDemoService.model.stretchTabs"
+          [tabAlignment]="_tabDemoService.model.tabAlignment"
+          [tabPosition]="_tabDemoService.model.tabPosition"
+          [indicatorPosition]="_tabDemoService.model.indicatorPosition"
+          [disabled]="_tabDemoService.model.disabled"
+          [activationMode]="_tabDemoService.model.activationMode">
+          @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; track i) {
+            @if (i % 5 === 0) {
+              <ids-tab [label]="'Tab with a long label ' + i">
+                <span>Tab {{ i }}</span>
+              </ids-tab>
+            } @else {
+              <ids-tab [label]="'Tab ' + i">
+                <span>Tab {{ i }}</span>
+              </ids-tab>
+            }
+          }
         </ids-tab-group>
       </ng-container>
     </app-tryout>

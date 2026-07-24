@@ -1,6 +1,7 @@
 import { IDS_TAB_GROUP_DEFAULT_CONFIG, IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupDefaultConfig } from './tab-group-defaults';
 import { IdsTabComponent } from './tab.component';
 import { IdsTabActivationMode, IdsTabActivationModeType } from './types/tab-activation-mode.type';
+import { IdsTabGroupAlignmentType } from './types/tab-group-alignment.type';
 import { IdsTabGroupPositionType } from './types/tab-group-position.type';
 import { IdsTabGroupVariantType } from './types/tab-group-variant.type';
 import { IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from './types/tab-indicator-position.type';
@@ -43,6 +44,7 @@ export class IdsTabGroupComponent
   public variant = input<IdsTabGroupVariantType>(this._defaultConfig.variant);
   public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
   public stretchTabs = input(this._defaultConfig.stretchTabs, { transform: coerceBooleanAttribute });
+  public tabAlignment = input<IdsTabGroupAlignmentType>(this._defaultConfig.tabAlignment);
   public tabPosition = input<IdsTabGroupPositionType>(this._defaultConfig.tabPosition);
   public indicatorPosition = input<IdsTabIndicatorPositionType>();
   public disabled = input(false, { transform: coerceBooleanAttribute });
@@ -66,8 +68,9 @@ export class IdsTabGroupComponent
     this.orientation(),
     this.disabled() ? 'disabled' : null,
     this.stretchTabs() && this.orientation() === IdsOrientation.HORIZONTAL ? 'stretch-tabs' : null,
-    this.tabPosition() && !this.stretchTabs() ? this.tabPosition() : null,
+    this.tabAlignment() && !this.stretchTabs() ? this.tabAlignment() : null,
     `indicator-${this.indicatorPosition() ?? this._calculatedIndicatorPosition()}`,
+    this._verticalTabPosition(),
     this.activationMode(),
   ]));
 
@@ -255,6 +258,14 @@ export class IdsTabGroupComponent
     }
     this._focusTabElement(nextIndex);
   }
+
+  private _verticalTabPosition = computed(() => {
+    if (this.orientation() !== IdsOrientation.VERTICAL) {
+      return null;
+    }
+
+    return this.tabPosition();
+  });
 
   private _nextEnabledTabIndex(from: number, delta: number): number {
     const items = this._items();

@@ -6,6 +6,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  effect,
   ElementRef,
   HostListener,
   inject,
@@ -56,8 +57,18 @@ export class NavComponent implements AfterViewInit {
     matrixParams: 'ignored',
   };
 
+  private readonly _autoExpandedDeepestLevelIds = new Set<string>();
+
+  constructor() {
+    effect(() => {
+      this.menu();
+      this._openDeepestLevelItems();
+    });
+  }
+
   public ngAfterViewInit(): void {
     this.checkMenuItemOverflows();
+    this._openDeepestLevelItems();
   }
 
   @HostListener('window:resize')
@@ -71,7 +82,7 @@ export class NavComponent implements AfterViewInit {
   }
 
   public checkMenuItemOverflows(delay = 0): void {
-    setTimeout(() => {
+    this._scheduleAfter(() => {
       const menuItems = this._elementRef.nativeElement.querySelectorAll('ids-side-nav-item') as NodeListOf<HTMLElement>;
 
       this._menuItemsOverflow = Array.from(menuItems).reduce((items: Record<string, boolean>, menuItem: HTMLElement) => {
@@ -84,5 +95,54 @@ export class NavComponent implements AfterViewInit {
       }, {});
       this._cdr.markForCheck();
     }, delay);
+  }
+
+  private _openDeepestLevelItems(): void {
+    this._scheduleAfter(() => {
+      const menuItems = this._elementRef.nativeElement.querySelectorAll('ids-side-nav-item') as NodeListOf<HTMLElement>;
+
+      menuItems.forEach((menuItem) => {
+        if (!menuItem.id || this._autoExpandedDeepestLevelIds.has(menuItem.id)) {
+          return;
+        }
+
+        const isExpandable = menuItem.classList.contains('ids-side-nav-item-expandable');
+        if (!isExpandable) {
+          return;
+        }
+
+        const hasNestedExpandable =
+          menuItem.querySelector(':scope > .ids-side-nav-item-expandable-submenu .ids-side-nav-item-expandable') !== null;
+        if (hasNestedExpandable) {
+          return;
+        }
+
+        const anchor = menuItem.querySelector(':scope > a') as HTMLElement | null;
+        const toggleButton = anchor?.querySelector('button') as HTMLButtonElement | null;
+        const isExpanded = anchor?.getAttribute('aria-expanded') === 'true';
+
+        if (toggleButton && !isExpanded) {
+          toggleButton.click();
+        }
+
+        this._autoExpandedDeepestLevelIds.add(menuItem.id);
+      });
+
+      this._cdr.markForCheck();
+    });
+  }
+
+  private _scheduleAfter(callback: () => void, delay = 0): void {
+    const start = performance.now();
+
+    const tick = (now: number): void => {
+      if (now - start >= delay) {
+        callback();
+      } else {
+        requestAnimationFrame(tick);
+      }
+    };
+
+    requestAnimationFrame(tick);
   }
 }

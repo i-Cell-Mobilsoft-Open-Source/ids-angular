@@ -43,6 +43,12 @@ export const GET_NAVIGATION = gql`
                 generated
               }
             }
+            children {
+              depth
+              page {
+                title
+              }
+            }
           }
         }
       }

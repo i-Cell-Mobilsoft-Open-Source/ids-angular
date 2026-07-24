@@ -6,11 +6,45 @@ import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, effect, ElementRef, forwardRef, inject, input, isDevMode, OnDestroy, OnInit, signal, untracked, viewChild, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  contentChild,
+  contentChildren,
+  effect,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  isDevMode,
+  OnDestroy,
+  OnInit,
+  signal,
+  untracked,
+  viewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValueChangeEvent } from '@angular/forms';
 import { coerceNumberAttribute, createClassList } from '@i-cell/ids-angular/core';
-import { _countGroupLabelsBeforeOption, _getOptionScrollPosition, AbstractErrorStateMatcher, AbstractSuccessStateMatcher, formFieldControlClass, IDS_FORM_FIELD_CONTROL, IDS_OPTION_GROUP, IDS_OPTION_PARENT_COMPONENT, IdsFormFieldComponent, IdsFormFieldControl, IdsOptionComponent, IdsOptionGroupComponent, IdsOptionSelectionChange } from '@i-cell/ids-angular/forms';
+import {
+  _countGroupLabelsBeforeOption,
+  _getOptionScrollPosition,
+  AbstractErrorStateMatcher,
+  AbstractSuccessStateMatcher,
+  formFieldControlClass,
+  IDS_FORM_FIELD_CONTROL,
+  IDS_OPTION_GROUP,
+  IDS_OPTION_PARENT_COMPONENT,
+  IdsFormFieldComponent,
+  IdsFormFieldControl,
+  IdsOptionComponent,
+  IdsOptionGroupComponent,
+  IdsOptionSelectionChange,
+} from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { filter, first } from 'rxjs';
 
@@ -82,9 +116,9 @@ export class IdsSelectComponent
   public valueCompareFn = input<(o1: unknown, o2: unknown) => boolean>((o1: unknown, o2: unknown) => o1 === o2);
   public sortCompareFn = input<(a: IdsOptionComponent, b: IdsOptionComponent, options: Readonly<IdsOptionComponent[]>) => number>();
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
-  public typeaheadDebounceInterval = input<number, unknown>(
-    this._defaultConfig.typeaheadDebounceInterval, { transform: coerceNumberAttribute },
-  );
+  public typeaheadDebounceInterval = input<number, unknown>(this._defaultConfig.typeaheadDebounceInterval, {
+    transform: coerceNumberAttribute,
+  });
 
   public isPanelOpen = signal<boolean>(false);
   public parentSize = computed(() => this._parentFormField.parentOrSelfSize());
@@ -92,12 +126,17 @@ export class IdsSelectComponent
   private _focused = signal<boolean>(false);
 
   private _canOpen = computed(() => !this.isPanelOpen() && !this.disabled() && !this.readonly() && this.options().length > 0);
-  protected _hostClasses = computed(() => this._getHostClasses([
-    this.parentSize(),
-    this.parentVariant(),
-    this.disabled() ? 'disabled' : null,
-    this.readonly() ? 'readonly' : null,
-  ], [formFieldControlClass]));
+  protected _hostClasses = computed(() =>
+    this._getHostClasses(
+      [
+        this.parentSize(),
+        this.parentVariant(),
+        this.disabled() ? 'disabled' : null,
+        this.readonly() ? 'readonly' : null,
+      ],
+      [formFieldControlClass],
+    ),
+  );
 
   protected _panelClasses = computed(() => createClassList(`${this._hostClassName}-panel`, [
     this.parentSize(),
@@ -106,6 +145,7 @@ export class IdsSelectComponent
 
   private _panel = viewChild<ElementRef<HTMLElement>>('panel');
   private _overlayDir = viewChild(CdkConnectedOverlay);
+
   public options = contentChildren<IdsOptionComponent>(IdsOptionComponent, { descendants: true });
   public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
   protected _customTrigger = contentChild(IdsSelectTriggerDirective);
@@ -115,7 +155,7 @@ export class IdsSelectComponent
   private _selectionModel?: SelectionModel<IdsOptionComponent>;
   private readonly _subscribedOptions = new WeakSet<IdsOptionComponent>();
   private _onChange: (value: unknown) => void = () => {};
-  private _onTouched: () => unknown = () => { };
+  private _onTouched: () => unknown = () => {};
 
   protected readonly _empty = computed(() => {
     if (this.options().some((option) => option.selected())) {
@@ -294,11 +334,7 @@ export class IdsSelectComponent
   private _handleClosedPanelKeydown(event: KeyboardEvent): void {
     const manager = this._keyManager;
     const key = event.key;
-    const isArrowKey =
-      key === 'ArrowDown' ||
-      key === 'ArrowUp' ||
-      key === 'ArrowLeft' ||
-      key === 'ArrowRight';
+    const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp' || key === 'ArrowLeft' || key === 'ArrowRight';
     const isOpenKey = key === 'Enter' || key === ' ';
 
     if ((!manager?.isTyping() && isOpenKey && !hasModifierKey(event)) || isArrowKey) {
@@ -325,12 +361,7 @@ export class IdsSelectComponent
     if (isArrowKey && event.altKey) {
       event.preventDefault();
       this.close();
-    } else if (
-      !isTyping &&
-      (key === 'Enter' || key === ' ') &&
-      manager?.activeItem &&
-      !hasModifierKey(event)
-    ) {
+    } else if (!isTyping && (key === 'Enter' || key === ' ') && manager?.activeItem && !hasModifierKey(event)) {
       event.preventDefault();
       manager.activeItem.selectViaInteraction();
     } else if (!isTyping && this.multiSelect() && key === 'a' && event.ctrlKey) {
@@ -374,12 +405,7 @@ export class IdsSelectComponent
       if (index === 0 && labelCount === 1) {
         panel.scrollTop = 0;
       } else {
-        panel.scrollTop = _getOptionScrollPosition(
-          element.offsetTop,
-          element.offsetHeight,
-          panel.scrollTop,
-          panel.offsetHeight,
-        );
+        panel.scrollTop = _getOptionScrollPosition(element.offsetTop, element.offsetHeight, panel.scrollTop, panel.offsetHeight);
       }
     }
   }
@@ -389,27 +415,22 @@ export class IdsSelectComponent
       const options = this.options();
 
       const sortComparator = this.sortCompareFn();
-      this._selectionModel?.sort((a, b) => (sortComparator
-        ? sortComparator(a, b, options)
-        : options.indexOf(a) - options.indexOf(b)));
+      this._selectionModel?.sort((a, b) => (sortComparator ? sortComparator(a, b, options) : options.indexOf(a) - options.indexOf(b)));
     }
   }
 
-  private _getOverlayWidth(
-    preferredOrigin: ElementRef<ElementRef> | CdkOverlayOrigin | undefined,
-  ): string | number {
-    const refToMeasure
-      = preferredOrigin instanceof CdkOverlayOrigin
-        ? preferredOrigin.elementRef
-        : preferredOrigin || this._elementRef;
+  private _getOverlayWidth(preferredOrigin: ElementRef<ElementRef> | CdkOverlayOrigin | undefined): string | number {
+    const refToMeasure = preferredOrigin instanceof CdkOverlayOrigin ? preferredOrigin.elementRef : preferredOrigin || this._elementRef;
     return refToMeasure.nativeElement.getBoundingClientRect().width;
   }
 
   protected _panelAttached(): void {
-    this._overlayDir()?.positionChange.pipe(first()).subscribe(() => {
-      this._changeDetectorRef.detectChanges();
-      this._positioningSettled();
-    });
+    this._overlayDir()
+      ?.positionChange.pipe(first())
+      .subscribe(() => {
+        this._changeDetectorRef.detectChanges();
+        this._positioningSettled();
+      });
   }
 
   public toggle(): void {

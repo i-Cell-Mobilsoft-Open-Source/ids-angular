@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { ACCORDION_EXAMPLES } from '../../components-example/accordion/accordion-example';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +24,7 @@ import { Subscription } from 'rxjs';
     DemoAndCodeComponent,
     ControlTableComponent,
     TryoutControlComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './accordion-demo.component.html',
   styleUrls: ['../demo-page.scss'],
@@ -31,6 +34,8 @@ export class AccordionDemoComponent implements OnInit, OnDestroy {
 
   private _accordion = viewChild<IdsAccordionComponent>('accordion');
   private _resetSubscription: Subscription | undefined;
+
+  public readonly accordionExamples = ACCORDION_EXAMPLES;
 
   public ngOnInit(): void {
     this._resetSubscription = this._accordionDemoService.reset$.subscribe(() => {

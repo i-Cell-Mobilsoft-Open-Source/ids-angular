@@ -45,7 +45,6 @@ export class ControlTableComponent<T extends Record<string, T[keyof T]>> {
   public controlName = input<string | undefined>();
   public controlConfig = input<DemoControlConfig<T>>();
   public model = model.required<T>();
-  public modelChange = output<T>();
   public resetted = output<void>();
 
   protected _demoControl = DemoControl;

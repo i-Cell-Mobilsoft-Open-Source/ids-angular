@@ -1,0 +1,122 @@
+<app-demo-and-code (resetDemo)="_checkboxGroupDemoService.reset()">
+  <div demo class="w-full h-full flex justify-center items-center">
+    <app-tryout
+      [title]="'COMPONENTS.CHECKBOX_GROUP' | translate"
+      [hasDarkBackground]="_checkboxGroupDemoService.model.variant === 'light'"
+      (resetted)="_checkboxGroupDemoService.reset()"
+    >
+      <ng-container component>
+        <div component class="checkbox-grid">
+          <div class="checkbox-item">
+            <h2>{{ "COMMON.GROUPED" | translate }}</h2>
+            <ids-checkbox-group
+              [label]="_checkboxGroupDemoService.model.groupLabel"
+              [allowParent]="_checkboxGroupDemoService.model.allowParent"
+              [parentLabel]="_checkboxGroupDemoService.model.parentLabel"
+              [size]="_checkboxGroupDemoService.model.size"
+              [variant]="_checkboxGroupDemoService.model.variant"
+              [orientation]="_checkboxGroupDemoService.model.orientation"
+              [showAsterisk]="_checkboxGroupDemoService.model.showAsterisk"
+            >
+              @if (_checkboxGroupDemoService.helperModel.allowHint) {
+                <ids-hint-message>Select at least two todos</ids-hint-message>
+              }
+              <ids-checkbox
+                [required]="_checkboxGroupDemoService.model.showAsterisk"
+                [(ngModel)]="_checkboxGroupDemoService.group.toothBrushing"
+              >
+                Tooth brushing
+              </ids-checkbox>
+              <ids-checkbox [required]="_checkboxGroupDemoService.model.showAsterisk" [(ngModel)]="_checkboxGroupDemoService.group.bath">
+                Bath
+              </ids-checkbox>
+              <ids-checkbox [required]="_checkboxGroupDemoService.model.showAsterisk" [(ngModel)]="_checkboxGroupDemoService.group.sleep">
+                Sleep
+              </ids-checkbox>
+
+              @if (_checkboxGroupDemoService.model.showAsterisk) {
+                <ids-error-message>
+                  {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: "Options" } }}
+                </ids-error-message>
+              }
+            </ids-checkbox-group>
+          </div>
+          <div class="checkbox-item">
+            <h2>{{ "CHECKBOX.GROUPED_WITH_VALIDATOR" | translate }}</h2>
+            <form [formGroup]="_checkboxGroupDemoService.formGroup">
+              <div formGroupName="toppings">
+                <ids-checkbox-group
+                  [label]="_checkboxGroupDemoService.model.groupLabel"
+                  [allowParent]="_checkboxGroupDemoService.model.allowParent"
+                  [parentLabel]="_checkboxGroupDemoService.model.parentLabel"
+                  [size]="_checkboxGroupDemoService.model.size"
+                  [variant]="_checkboxGroupDemoService.model.variant"
+                  [orientation]="_checkboxGroupDemoService.model.orientation"
+                  [showAsterisk]="_checkboxGroupDemoService.model.showAsterisk"
+                >
+                  @if (_checkboxGroupDemoService.helperModel.allowHint) {
+                    <ids-hint-message>Select at least two toppings</ids-hint-message>
+                  }
+                  <ids-checkbox formControlName="cheese">Cheese</ids-checkbox>
+                  <ids-checkbox formControlName="ham">Ham</ids-checkbox>
+                  <ids-checkbox formControlName="corn">Corn</ids-checkbox>
+                  <ids-checkbox formControlName="mushrooms">Mushrooms</ids-checkbox>
+                  <ids-error-message>
+                    <ids-error-def code="minimumCountSelected">
+                      {{ "CHECKBOX.ERROR.MINIMUM_COUNT_SELECTED" | translate: { minimumCount: 2 } }}</ids-error-def
+                    >
+                  </ids-error-message>
+                </ids-checkbox-group>
+              </div>
+              <div formGroupName="cheeses">
+                <ids-checkbox-group
+                  [label]="_checkboxGroupDemoService.model.groupLabel"
+                  [allowParent]="_checkboxGroupDemoService.model.allowParent"
+                  [parentLabel]="_checkboxGroupDemoService.model.parentLabel"
+                  [size]="_checkboxGroupDemoService.model.size"
+                  [variant]="_checkboxGroupDemoService.model.variant"
+                  [orientation]="_checkboxGroupDemoService.model.orientation"
+                  [showAsterisk]="_checkboxGroupDemoService.model.showAsterisk"
+                >
+                  @if (_checkboxGroupDemoService.helperModel.allowHint) {
+                    <ids-hint-message>Select at least one cheese</ids-hint-message>
+                  }
+                  <ids-checkbox formControlName="cheddar">Cheddar</ids-checkbox>
+                  <ids-checkbox formControlName="mozzarella">Mozzarella</ids-checkbox>
+                  <ids-checkbox formControlName="parmesan">Parmesan</ids-checkbox>
+                  <ids-error-message>
+                    <ids-error-def code="minimumCountSelected">
+                      {{ "CHECKBOX.ERROR.MINIMUM_COUNT_SELECTED" | translate: { minimumCount: 1 } }}</ids-error-def
+                    >
+                  </ids-error-message>
+                </ids-checkbox-group>
+              </div>
+            </form>
+          </div>
+        </div>
+      </ng-container>
+    </app-tryout>
+  </div>
+
+  <div controls class="h-full">
+    <app-tryout-controls>
+      <app-control-table
+        controls
+        controlName="Checkbox group"
+        configType="input"
+        [controlConfig]="_checkboxGroupDemoService.groupInputControlConfig"
+        [(model)]="_checkboxGroupDemoService.model"
+        (resetted)="_checkboxGroupDemoService.reset()"
+      />
+
+      <app-control-table
+        controls
+        controlName="Checkbox group"
+        configType="helper"
+        [controlConfig]="_checkboxGroupDemoService.helperControlConfig"
+        [(model)]="_checkboxGroupDemoService.helperModel"
+        (resetted)="_checkboxGroupDemoService.reset()"
+      />
+    </app-tryout-controls>
+  </div>
+</app-demo-and-code>

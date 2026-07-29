@@ -11,7 +11,11 @@ import { Component, contentChildren, ViewEncapsulation } from '@angular/core';
   hostDirectives: [
     {
       directive: IdsMessageDirective,
-      inputs: ['disabled'],
+      inputs: [
+        'disabled',
+        'size',
+        'variant',
+      ],
     },
   ],
   encapsulation: ViewEncapsulation.None,

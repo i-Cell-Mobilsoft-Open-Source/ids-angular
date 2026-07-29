@@ -111,11 +111,7 @@ export class IdsExampleViewerComponent implements OnInit {
     if (container && currentExample?.component) {
       container.clear();
 
-      const componentRef = container.createComponent(currentExample.component);
-
-      const hostElement = componentRef.location.nativeElement as HTMLElement;
-
-      hostElement.classList.add('block', 'w-full');
+      container.createComponent(currentExample.component);
     }
   }
 

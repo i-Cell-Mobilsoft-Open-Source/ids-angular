@@ -154,6 +154,36 @@
     }
   },
   "EXAMPLES": {
+    "ACCORDION": {
+        "APPEARANCES": {
+          "TITLE": "Accordion megjelenései",
+          "DESCRIPTION": "Az accordion komponens megjelenései: filled, outlined, és text."
+        },
+        "SIZES": {
+          "TITLE": "Accordion méretei",
+          "DESCRIPTION": "Az accordion komponens különböző méretei: dense, compact, comfortable és spacious."
+        },
+        "ICON": {
+          "TITLE": "Accordion ikonokkal",
+          "DESCRIPTION": "Az accordion komponens tartalmazhat ikont, amely a fejléc bal és/vagy jobb oldalán helyezkedik el. Ha nem adja meg hogy trailing vagy leading, akkor az alapértelmezett beállítás a trailing icon lesz."
+        },
+        "HEADING_LEVEL": {
+          "TITLE": "Accordion címsor szintje",
+          "DESCRIPTION": "Az accordion komponens elemeinek címsor szintje testreszabható. Az alapértelmezett címsor szint 2."
+        },
+        "BUTTON_CONFIG": {
+          "TITLE": "Accordion gomb beállításai",
+          "DESCRIPTION": "Az accordion komponens gombjai testreszabhatók. Megadhatja a gomb típusát, színét és méretét. Az alapértelmezett beállítás egy filled gomb primary színvariánssal."
+        },
+        "DISABLED": {
+          "TITLE": "Disabled accordion",
+          "DESCRIPTION": "Az accordion komponens letiltható. Letiltott állapotban nem nyitható és nem zárható."
+        },
+        "MULTI": {
+          "TITLE": "Több elem egyidejű megnyitása",
+          "DESCRIPTION": "Alapértelmezetten egyszerre csak egy accordion elem lehet nyitva. A \"multi\" beállítással több elem is nyitva lehet egyszerre."
+        }
+    },
     "BUTTON": {
       "APPEARANCES": {
         "TITLE": "Button megjelenései",

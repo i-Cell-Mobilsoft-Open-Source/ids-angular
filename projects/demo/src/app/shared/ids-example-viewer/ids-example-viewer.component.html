@@ -19,7 +19,7 @@
     </button>
   </div>
 
-  <div class="flex items-center justify-center p-8">
+  <div class="p-8 w-full">
     <ng-container #dynamicHost />
   </div>
 
@@ -37,7 +37,8 @@
                 size="comfortable"
                 variant="primary"
                 idsTooltip="Copy code"
-                (click)="copyCode()">
+                (click)="copyCode()"
+              >
                 <ids-icon fontIcon="file-copy" />
               </button>
             </div>

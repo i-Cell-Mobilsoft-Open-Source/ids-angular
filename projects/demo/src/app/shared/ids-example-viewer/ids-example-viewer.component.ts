@@ -26,7 +26,6 @@ interface NormalizedTab {
 @Component({
   selector: 'ids-example-viewer',
   templateUrl: './ids-example-viewer.component.html',
-  styleUrl: './ids-example-viewer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     IdsCardComponent,
@@ -111,6 +110,7 @@ export class IdsExampleViewerComponent implements OnInit {
 
     if (container && currentExample?.component) {
       container.clear();
+
       container.createComponent(currentExample.component);
     }
   }

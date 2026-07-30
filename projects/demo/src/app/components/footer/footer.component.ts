@@ -1,9 +1,8 @@
 import { environment } from '../../../environments/environment.development';
-import { ComponentBlock } from '../../model/componentEntry';
 import { GlobalEntry } from '../../model/pageEntry';
 import { GraphqlService, StatamicNavNode } from '../../services/graphql.service';
 
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -17,9 +16,8 @@ import { startWith } from 'rxjs/operators';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
   public footerData?: GlobalEntry;
-  public componentBlocks: ComponentBlock[] = [];
 
   private _observer: MutationObserver | undefined;
   private _isDarkTheme = signal<boolean>(false);
@@ -84,6 +82,10 @@ export class FooterComponent implements OnInit {
         this.footerNavTree.set(footerNav?.tree || []);
         this.footerLinksNavTree.set(footerLink?.tree || []);
       });
+  }
+
+  public ngOnDestroy(): void {
+    this._observer?.disconnect();
   }
 
   public getLinkUrl(linkValue?: string): string {

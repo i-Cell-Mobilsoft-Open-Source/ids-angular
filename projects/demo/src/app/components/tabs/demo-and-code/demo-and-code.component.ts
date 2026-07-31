@@ -1,6 +1,6 @@
 import { ComponentDetailsComponent } from '../../../pages/components/component-details/component-details.component';
 
-import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
@@ -20,9 +20,6 @@ export class DemoAndCodeComponent {
 
   private _componentDetails = inject(ComponentDetailsComponent);
   protected _lastModified = this._componentDetails.lastModified;
-
-  public isOpen = signal(false);
-  public isDark = signal(false);
 
   public onResetClick(): void {
     this.resetDemo.emit();

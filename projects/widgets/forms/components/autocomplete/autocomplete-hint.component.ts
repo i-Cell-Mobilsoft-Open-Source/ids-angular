@@ -12,7 +12,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
   imports: [IdsHintMessageComponent],
   template: `
     <div class="ids-autocomplete-hint__wrapper">
-      <ids-hint-message>
+      <ids-hint-message [size]="size()" [variant]="variant()">
         <ng-content />
       </ids-hint-message>
     </div>

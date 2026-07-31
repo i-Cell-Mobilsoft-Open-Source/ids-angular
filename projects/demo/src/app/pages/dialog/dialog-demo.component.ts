@@ -5,9 +5,10 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, InjectionToken, inject, input } from '@angular/core';
+import { Component, computed, InjectionToken, inject, input, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsCustomDialogBase, IdsDialogComponent, IdsDialogHeaderDirective, IdsDialogService } from '@i-cell/ids-angular/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -174,6 +175,9 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
   public providedData = inject(CUSTOM_DIALOG_TOKEN);
   public inputData = input('');
   public dialogDemoService = inject<DialogDemoService>(DialogDemoService);
+
+  private readonly _idsDialog = viewChild(IdsDialogComponent);
+  public override size = computed<IdsSizeType | undefined>(() => this._idsDialog()?.size());
 }
 
 @Component({
@@ -220,7 +224,6 @@ export class DialogDemoComponent {
         inputData: 'This text is provided using input binding',
       },
       showBackdrop: this._dialogDemoService.model.showBackdrop,
-      size: this._dialogDemoService.model.size,
     }).subscribe((result) => console.info('Dialog result:', result));
   }
 }

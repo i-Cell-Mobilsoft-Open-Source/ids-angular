@@ -1,8 +1,7 @@
 import { IdsCustomDialogBase } from './custom-dialog-base';
 
-import { Dialog } from '@angular/cdk/dialog';
-import { Injectable, Signal, StaticProvider, Type, inject } from '@angular/core';
-import { IdsSizeType } from '@i-cell/ids-angular/core';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Injectable, Signal, StaticProvider, Type, afterNextRender, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -17,7 +16,6 @@ export class IdsDialogService {
         [P in keyof C]?: C[P] extends Signal<infer T> ? T : C[P];
       };
       showBackdrop?: boolean;
-      size?: IdsSizeType;
     },
   ): Observable<R | undefined> {
     const panelClass = [
@@ -25,9 +23,6 @@ export class IdsDialogService {
       'ids-dialog',
       options?.showBackdrop === false ? '' : 'ids-dialog-with-backdrop',
     ];
-    if (options?.size) {
-      panelClass.push(`ids-dialog-${options.size}`);
-    }
     const dialogRef = this._dialog.open<R | undefined, unknown, C>(component, {
       hasBackdrop: true,
       disableClose: true,
@@ -47,6 +42,25 @@ export class IdsDialogService {
       }
     }
 
+    this._applyDialogSizeFromComponent(dialogRef);
+
     return dialogRef.closed;
+  }
+
+  private _applyDialogSizeFromComponent<R, C extends IdsCustomDialogBase<R>>(
+    dialogRef: DialogRef<R | undefined, C>,
+  ): void {
+    const applySize = (): void => {
+      const resolvedSize = dialogRef.componentInstance?.size();
+      if (resolvedSize != null) {
+        dialogRef.addPanelClass(`ids-dialog-${resolvedSize}`);
+      }
+    };
+
+    if (dialogRef.componentRef) {
+      afterNextRender(applySize, { injector: dialogRef.componentRef.injector });
+    } else {
+      applySize();
+    }
   }
 }

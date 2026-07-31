@@ -7,6 +7,7 @@ import { BreadcrumbDemoService } from './pages/breadcrumb/breadcrumb-demo.servic
 import { ButtonDemoService } from './pages/button/button-demo.service';
 import { CardDemoService } from './pages/card/card-demo.service';
 import { CheckboxDemoService } from './pages/checkbox/checkbox-demo.service';
+import { CheckboxGroupDemoService } from './pages/checkbox-group/checkbox-group-demo.service';
 import { ChipDemoService } from './pages/chip/chip-demo.service';
 import { ComponentDetailsComponent } from './pages/components/component-details/component-details.component';
 import { DatepickerDemoService } from './pages/datepicker/datepicker-demo.service';
@@ -49,6 +50,8 @@ const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
   button: () => import('./pages/button/button-demo.component').then((module) => module.ButtonDemoComponent),
   card: () => import('./pages/card/card-demo.component').then((module) => module.CardDemoComponent),
   checkbox: () => import('./pages/checkbox/checkbox-demo.component').then((module) => module.CheckboxDemoComponent),
+  'checkbox-group': () =>
+    import('./pages/checkbox-group/checkbox-group-demo.component').then((module) => module.CheckboxGroupDemoComponent),
   chip: () => import('./pages/chip/chip-demo.component').then((module) => module.ChipDemoComponent),
   'date-picker': () => import('./pages/datepicker/datepicker-demo.component').then((module) => module.DatepickerDemoComponent),
   dialog: () => import('./pages/dialog/dialog-demo.component').then((module) => module.DialogDemoComponent),
@@ -138,6 +141,7 @@ export const routes: Routes = [
           buildComponentRoute('button', ButtonDemoService),
           buildComponentRoute('card', CardDemoService),
           buildComponentRoute('checkbox', CheckboxDemoService),
+          buildComponentRoute('checkbox-group', CheckboxGroupDemoService),
           buildComponentRoute('chip', ChipDemoService),
           buildComponentRoute('date-picker', DatepickerDemoService),
           buildComponentRoute('dialog', DialogDemoService),

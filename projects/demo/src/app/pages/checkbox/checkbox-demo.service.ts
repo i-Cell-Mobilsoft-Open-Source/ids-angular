@@ -1,19 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import {
-  IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY,
-  IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY,
-  IdsCheckboxVariant,
-  IdsCheckboxVariantType,
-} from '@i-cell/ids-angular/checkbox';
-import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IdsCheckboxVariant, IdsCheckboxVariantType } from '@i-cell/ids-angular/checkbox';
+import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
-const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
 
 type CheckboxInputControls = {
   size: IdsSizeType;
@@ -27,16 +21,6 @@ type CheckboxHelperControls = {
   allowHint: boolean;
 };
 
-type CheckboxGroupInputControls = {
-  groupLabel: string;
-  allowParent: boolean;
-  parentLabel: string;
-  size: IdsSizeType;
-  variant: IdsCheckboxVariantType;
-  orientation: IdsOrientationType;
-  showAsterisk: boolean;
-};
-
 @Injectable()
 export class CheckboxDemoService {
   public form = new FormGroup({
@@ -44,34 +28,6 @@ export class CheckboxDemoService {
     privacy_policy: new FormControl(false, []),
     marketing_materials: new FormControl(false, []),
   });
-
-  public formGroup = new FormGroup({
-    toppings: new FormGroup({
-      cheese: new FormControl(false, []),
-      ham: new FormControl(false, []),
-      corn: new FormControl(false, []),
-      mushrooms: new FormControl(false, []),
-    }, { validators: this._minimumCountSelectedValidator(2) }),
-    cheeses: new FormGroup({
-      cheddar: new FormControl(false, []),
-      mozzarella: new FormControl(false, []),
-      parmesan: new FormControl(false, []),
-    }, { validators: this._minimumCountSelectedValidator(1) }),
-  });
-
-  private _minimumCountSelectedValidator(minimumCount: number): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const group = control as FormGroup;
-
-      const checkedCount = Object.values(group.controls)
-        .filter((control) => control.value === true)
-        .length;
-
-      return checkedCount >= minimumCount
-        ? null
-        : { minimumCountSelected: true };
-    };
-  }
 
   public readonly inputControlConfig: DemoControlConfig<CheckboxInputControls> = {
     size: {
@@ -124,79 +80,16 @@ export class CheckboxDemoService {
           this.form.controls.terms_and_conditions.disable();
           this.form.controls.privacy_policy.disable();
           this.form.controls.marketing_materials.disable();
-          this.formGroup.controls.toppings.controls.cheese.disable();
-          this.formGroup.controls.toppings.controls.ham.disable();
-          this.formGroup.controls.cheeses.disable();
         } else {
           this.form.controls.terms_and_conditions.enable();
           this.form.controls.privacy_policy.enable();
           this.form.controls.marketing_materials.enable();
-          this.formGroup.controls.toppings.controls.cheese.enable();
-          this.formGroup.controls.toppings.controls.ham.enable();
-          this.formGroup.controls.cheeses.enable();
         }
       },
     },
   };
 
   public readonly helperControlConfig: DemoControlConfig<CheckboxHelperControls> = {
-    allowHint: {
-      description: 'Allow hint message',
-      type: 'boolean',
-      default: true,
-      control: DemoControl.SWITCH,
-    },
-  };
-
-  public readonly groupInputControlConfig: DemoControlConfig<CheckboxGroupInputControls> = {
-    groupLabel: {
-      description: 'Checkbox group\'s label.',
-      type: 'string',
-      default: '-',
-      demoDefault: 'Options',
-    },
-    allowParent: {
-      description: 'Whether to allow parent checkbox or not.',
-      type: 'boolean',
-      default: defaultGroupConfig.allowParent,
-      control: DemoControl.SWITCH,
-    },
-    parentLabel: {
-      description: 'Parent checkbox label.',
-      type: 'string',
-      default: '-',
-      demoDefault: 'Parent options',
-    },
-    size: {
-      description: 'Checkbox group size.',
-      type: 'IdsSizeType',
-      default: defaultGroupConfig.size,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsSize),
-    },
-    variant: {
-      description: 'Checkbox group variant.',
-      type: 'IdsCheckboxVariantType',
-      default: defaultGroupConfig.variant,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsCheckboxVariant),
-    },
-    orientation: {
-      description: 'Checkbox group variant.',
-      type: 'IdsOrientationType',
-      default: defaultGroupConfig.orientation,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsOrientation),
-    },
-    showAsterisk: {
-      description: 'Whether to show an asterisk before to the checkbox group label or not. IMPORTANT: This is only for display purposes.',
-      type: 'boolean',
-      default: false,
-      control: DemoControl.SWITCH,
-    },
-  };
-
-  public readonly groupInputHelperControlConfig: DemoControlConfig<CheckboxHelperControls> = {
     allowHint: {
       description: 'Allow hint message',
       type: 'boolean',
@@ -280,44 +173,20 @@ export class CheckboxDemoService {
     },
   ];
 
-  public readonly groupMethodControlConfig: DemoMethodConfig = [
-    {
-      name: 'selectAllChild()',
-      description: 'Selects all child checkboxes in the checkbox-group.',
-      returnType: 'void',
-    },
-    {
-      name: 'deselectAllChild()',
-      description: 'Deselects all child checkboxes in the checkbox-group.',
-      returnType: 'void',
-    },
-  ];
-
   public defaults = getDefaultFromDemoConfig<CheckboxInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<CheckboxHelperControls>(this.helperControlConfig);
-  public groupDefaults = getDefaultFromDemoConfig<CheckboxGroupInputControls>(this.groupInputControlConfig);
-  public groupInputHelperDefaults = getDefaultFromDemoConfig<CheckboxHelperControls>(this.groupInputHelperControlConfig);
 
   public model: CheckboxInputControls = { ...this.defaults };
   public helperModel: CheckboxHelperControls = { ...this.helperDefaults };
-  public groupModel: CheckboxGroupInputControls = { ...this.groupDefaults };
-  public groupInputHelperModel: CheckboxHelperControls = { ...this.groupInputHelperDefaults };
 
   public reset(): void {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
-    this.groupModel = { ...this.groupDefaults };
-    this.groupInputHelperModel = { ...this.groupInputHelperDefaults };
 
     this.standalone = {
       unselected: false,
       indeterminate: false,
       selected: true,
-    };
-    this.group = {
-      toothBrushing: true,
-      bath: true,
-      sleep: false,
     };
   }
 
@@ -327,30 +196,11 @@ export class CheckboxDemoService {
     selected: true,
   };
 
-  public group = {
-    toothBrushing: true,
-    bath: true,
-    sleep: false,
-  };
-
   public getMethodConfig(): DemoMethodConfig[] {
-    return [
-      this.methodControlConfig,
-      this.groupMethodControlConfig,
-    ];
-  }
-
-  public getMethodTitles(): string[] {
-    return [
-      'Standalone Checkbox Methods',
-      'Checkbox Group Methods',
-    ];
+    return [this.methodControlConfig];
   }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [
-      this.inputControlConfig,
-      this.groupInputControlConfig,
-    ];
+    return [this.inputControlConfig];
   }
 }

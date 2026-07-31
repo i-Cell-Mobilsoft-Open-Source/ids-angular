@@ -18,6 +18,7 @@
     "BUTTON": "Button",
     "CARD": "Card",
     "CHECKBOX": "Checkbox",
+    "CHECKBOX_GROUP": "Checkbox group",
     "CHIP": "Chip",
     "DATEPICKER": "Date picker",
     "DIALOG": "Dialog",

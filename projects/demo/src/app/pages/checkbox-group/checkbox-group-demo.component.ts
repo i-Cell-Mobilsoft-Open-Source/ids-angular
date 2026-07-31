@@ -1,4 +1,4 @@
-import { CheckboxDemoService } from './checkbox-demo.service';
+import { CheckboxGroupDemoService } from './checkbox-group-demo.service';
 
 import { ControlTableComponent } from '../../components/control-table/control-table.component';
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
@@ -7,15 +7,16 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IdsCheckboxComponent } from '@i-cell/ids-angular/checkbox';
+import { IdsCheckboxComponent, IdsCheckboxGroupComponent } from '@i-cell/ids-angular/checkbox';
 import { IdsErrorDefinitionDirective, IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-checkbox-demo',
+  selector: 'app-checkbox-group-demo',
   imports: [
     TryoutComponent,
     IdsCheckboxComponent,
+    IdsCheckboxGroupComponent,
     ReactiveFormsModule,
     FormsModule,
     IdsHintMessageComponent,
@@ -26,12 +27,12 @@ import { TranslateModule } from '@ngx-translate/core';
     TryoutControlComponent,
     ControlTableComponent,
   ],
-  templateUrl: './checkbox-demo.component.html',
+  templateUrl: './checkbox-group-demo.component.html',
   styleUrls: [
     '../demo-page.scss',
-    './checkbox-demo.component.scss',
+    './checkbox-group-demo.component.scss',
   ],
 })
-export class CheckboxDemoComponent {
-  protected _checkboxDemoService = inject(CheckboxDemoService);
+export class CheckboxGroupDemoComponent {
+  protected _checkboxGroupDemoService = inject(CheckboxGroupDemoService);
 }

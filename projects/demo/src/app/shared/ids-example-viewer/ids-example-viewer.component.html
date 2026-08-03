@@ -1,49 +1,64 @@
 <ids-card appearance="elevated" variant="light" size="compact" class="ids-example-viewer w-full">
-  <div class="flex items-start justify-between p-4">
-    <div>
-      <h3 class="text-label-xlarge-prominent">{{ example().title | translate }}</h3>
-      @if (example().description) {
-        <p class="mt-1 text-l">{{ example().description | translate }}</p>
-      }
-    </div>
-    <button
-      type="button"
-      idsIconButton
-      appearance="standard"
-      size="comfortable"
-      variant="primary"
-      [idsTooltip]="_isCodeVisible() ? 'Hide code' : 'Show code'"
-      (click)="toggleCode()"
-    >
-      <ids-icon [fontIcon]="_isCodeVisible() ? 'arrow-collapse' : 'arrow-expand'" />
-    </button>
-  </div>
-
-  <div class="flex items-center justify-center p-8">
-    <ng-container #dynamicHost />
-  </div>
-
-  @if (_isCodeVisible()) {
-    <div class="px-4">
-      <ids-tab-group stretchTabs="false" [selectedTabIndex]="_selectedTabIndex()" (selectedTabChange)="onTabChange($event)">
-        @for (tab of tabs(); track tab.path) {
-          <ids-tab [label]="tab.language">
-            <pre class="p-4 overflow-x-auto text-sm w-full"><code [innerHTML]="_highlightedCode()"></code></pre>
-            <div class="flex justify-end">
-              <button
-                type="button"
-                idsIconButton
-                appearance="standard"
-                size="comfortable"
-                variant="primary"
-                idsTooltip="Copy code"
-                (click)="copyCode()">
-                <ids-icon fontIcon="file-copy" />
-              </button>
-            </div>
-          </ids-tab>
+  <ids-card-header>
+    <div class="flex items-start justify-between p-4">
+      <div>
+        <h3 class="text-label-xlarge-prominent">{{ example().title | translate }}</h3>
+        @if (example().description) {
+          <p class="mt-1 text-l">{{ example().description | translate }}</p>
         }
-      </ids-tab-group>
+      </div>
     </div>
-  }
+  </ids-card-header>
+  <ids-card-body>
+      <div class="flex items-center justify-center p-8 example-bg">
+        <ng-container #dynamicHost />
+      </div>
+  
+      <div class="flex items-center justify-center code-bg py-2">
+        <button
+          type="button"
+          idsButton
+          size="comfortable"
+          appearance="text"
+          variant="light"
+          [idsTooltip]="_isCodeVisible() ? 'Hide code' : 'Show code'"
+          (click)="toggleCode()"
+        >
+          <div class="flex items-center gap-2">
+            <ids-icon sizeCollection="small" size="spacious" variant="light" [fontIcon]="_isCodeVisible() ? 'visibility-off-outline' : 'visibility-outline'"/>
+            {{ _isCodeVisible() ? "Hide code" : "Show code" }}
+          </div>
+        </button>
+      </div>
+      @if (_isCodeVisible()) {
+        <div class="px-4 code-bg">
+          <ids-tab-group
+            stretchTabs="false"
+            variant="light"
+            [selectedTabIndex]="_selectedTabIndex()"
+            (selectedTabChange)="onTabChange($event)"
+          >
+            @for (tab of tabs(); track tab.path) {
+              <ids-tab variant="light" [label]="tab.language">
+                <pre class="p-4 overflow-x-auto text-sm w-full"><code [innerHTML]="_highlightedCode()"></code></pre>
+                <div class="flex justify-end">
+                  <button
+                    type="button"
+                    idsIconButton
+                    appearance="standard"
+                    size="comfortable"
+                    variant="light"
+                    idsTooltip="Copy code"
+                    (click)="copyCode()"
+                  >
+                    <ids-icon fontIcon="file-copy" variant="light"/>
+                  </button>
+                </div>
+              </ids-tab>
+            }
+  
+          </ids-tab-group>
+        </div>
+      }
+  </ids-card-body>
 </ids-card>

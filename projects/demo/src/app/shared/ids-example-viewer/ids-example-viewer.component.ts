@@ -7,7 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject, input, OnInit, signal, viewChild, ViewContainerRef } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IdsCardComponent } from '@i-cell/ids-angular/card';
+import { IdsButtonComponent } from '@i-cell/ids-angular/button';
+import { IdsCardComponent, IdsCardBodyDirective, IdsCardHeaderComponent } from '@i-cell/ids-angular/card';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsSnackbarService } from '@i-cell/ids-angular/snackbar';
@@ -37,6 +38,9 @@ interface NormalizedTab {
     IdsTabComponent,
     IdsTabGroupExtensionDirective,
     TranslateModule,
+    IdsButtonComponent,
+    IdsCardBodyDirective,
+    IdsCardHeaderComponent,
   ],
 })
 export class IdsExampleViewerComponent implements OnInit {

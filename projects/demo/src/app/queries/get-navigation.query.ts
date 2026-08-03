@@ -14,6 +14,7 @@ export const GET_NAVIGATION = gql`
             id
             slug
           }
+          url
           ... on NavEntryPage_SideNav_Pages_Page {
             generated
           }

@@ -50,12 +50,18 @@
     </ids-segmented-control-toggle-item>
   </ids-segmented-control-toggle>
 </header>
-<ids-nav [menu]="dynamicMenu" />
-<main cdkScrollable>
-  @if (loadingService.isLoading()) {
-    <div class="flex flex-col items-center gap-4 py-10 px-8">
-      <ids-spinner size="comfortable" sizeCollection="big" variant="primary" />
-    </div>
-  }
-  <div class="router-outlet-wrapper" [class.hidden]="loadingService.isLoading()"><router-outlet /></div>
-</main>
+
+<div class="app-body">
+  <div class="app-content">
+    <ids-nav #navRef [menu]="dynamicMenu" />
+    <main #mainRef cdkScrollable>
+      @if (loadingService.isLoading()) {
+        <div class="flex flex-col items-center gap-4 py-10 px-8">
+          <ids-spinner size="comfortable" sizeCollection="big" variant="primary" />
+        </div>
+      }
+      <div class="router-outlet-wrapper" [class.hidden]="loadingService.isLoading()"><router-outlet /></div>
+    </main>
+  </div>
+  <app-footer />
+</div>

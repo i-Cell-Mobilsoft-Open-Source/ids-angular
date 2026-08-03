@@ -1,0 +1,10 @@
+
+.footer-glassy-bg {
+  border-radius: var(--container-border-radius-xl, 32px);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 0 34.015px 0 rgba(255, 255, 255, 0.05) inset,
+    0 2.268px 2.268px 0 rgba(255, 255, 255, 0.15) inset;
+  backdrop-filter: blur(36.36111068725586px);
+}
+

@@ -115,6 +115,7 @@ export class IdsExampleViewerComponent implements OnInit {
 
     if (container && currentExample?.component) {
       container.clear();
+
       container.createComponent(currentExample.component);
     }
   }

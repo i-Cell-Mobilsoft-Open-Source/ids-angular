@@ -1,6 +1,8 @@
 export interface EntryListData {
   id(id: number): number;
   title?: string;
+  filter?: boolean;
+  paginator?: boolean;
   hero_description?: string;
   hero_image_light?: { url?: string };
   hero_image_dark?: { url?: string };

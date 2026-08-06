@@ -1,5 +1,7 @@
 import { ContentCardData } from './contentCardData';
-export type ContentBlock = { type: 'heading'; heading: string } | (ContentCardData & { type: 'card' });
+export type ContentBlock = { type: 'heading'; heading: string } |
+  (ContentCardData & { type: 'card' }) |
+  { type: 'figma'; 'htmlCode': string };
 
 export interface ContentEntry {
   id?: string;
@@ -21,7 +23,7 @@ export interface ContentEntry {
   content?: ContentContent[];
 }
 
-export type ContentContent = SetContentCard | SetContentHeading;
+export type ContentContent = SetContentCard | SetContentHeading | SetContentFigmaIframe;
 
 export interface SetContentCard {
   __typename: 'Set_Content_Card';
@@ -63,4 +65,10 @@ export interface SetContentHeading {
   __typename: 'Set_Content_Heading';
   type: 'heading';
   heading: string;
+}
+
+export interface SetContentFigmaIframe {
+  __typename: 'Set_Content_FigmaIframe';
+  type: 'figma';
+  html_code: string;
 }

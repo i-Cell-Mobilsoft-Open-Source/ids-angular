@@ -18,6 +18,10 @@
         @case ("card") {
           <app-content-card [contentCardData]="block" [showCaption]="true"/>
         }
+
+        @case ("figma") {
+          <div class="w-full overflow-hidden [&_iframe]:max-w-full" [innerHTML]="block.htmlCode | safeHtml"></div>
+        }
       }
     }
   </div>

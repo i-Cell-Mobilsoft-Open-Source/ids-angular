@@ -5,7 +5,7 @@ import { IdsSelectTriggerDirective } from './select-trigger.directive';
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -102,8 +102,10 @@ export class IdsSelectComponent
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
   private readonly _parentFormField = inject(IdsFormFieldComponent);
+  private readonly _overlay = inject(Overlay);
 
   protected readonly _connectedPositions = selectConnectedPositions;
+  protected readonly _scrollStrategy: ScrollStrategy = this._overlay.scrollStrategies.block();
 
   protected _preferredOverlayOrigin: CdkOverlayOrigin | ElementRef | undefined;
   protected _overlayWidth: string | number = 0;

@@ -9,8 +9,6 @@ const jestConfig: Config = {
     '!**/index.ts',
     '!**/public-api.ts',
     '!**/jest.config.ts',
-    '!**/*.stories.ts',
-    '!**/.storybook/**',
     '!core/types/*',
     '!**/*.type.ts',
     '!**/*.model.ts',

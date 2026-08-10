@@ -352,7 +352,6 @@ export default tseslint.config(
       "**/public-api.ts",
       "cypress/",
       "cypress.config.ts",
-      "projects/widgets/.storybook",
     ],
   },
 );

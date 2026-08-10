@@ -87,14 +87,14 @@ export class ListPageComponent implements OnInit {
     });
   });
 
-  public paginatedContentDatas = computed(() => {
+  private _paginatedContentDatas = computed(() => {
     const startIndex = this.pageIndex() * this.pageSize();
     const endIndex = startIndex + this.pageSize();
     return this.filteredContentDatas().slice(startIndex, endIndex);
   });
 
   public visibleContentDatas = computed(() =>
-    (this.isPaginatorVisible() ? this.paginatedContentDatas() : this.filteredContentDatas()),
+    (this.isPaginatorVisible() ? this._paginatedContentDatas() : this.filteredContentDatas()),
   );
 
   private readonly _graphqlService = inject(GraphqlService);

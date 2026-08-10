@@ -2,7 +2,7 @@ import { IdsAvatarComponent } from './avatar.component';
 
 import { selectControlOptions } from '../.storybook/utils';
 
-import { IdsSize, IdsSurfaceVariant } from '@i-cell/ids-angular/core';
+import { IdsSize } from '@i-cell/ids-angular/core';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { argsToTemplate, Meta, StoryObj } from '@storybook/angular';
 

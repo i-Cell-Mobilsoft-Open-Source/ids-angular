@@ -2,7 +2,7 @@ import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.di
 import { IdsMessageDirective } from '../../../directives/message.directive';
 import { IDS_MESSAGE_PARENT_FORM_FIELD } from '../types/message-parent-form-field';
 
-import { Component, ViewEncapsulation, computed, contentChildren, inject } from '@angular/core';
+import { Component, ViewEncapsulation, computed, contentChildren, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentBase } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -11,6 +11,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   imports: [IdsIconComponent],
   templateUrl: './success-message.component.html',
   hostDirectives: [IdsMessageDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsSuccessMessageComponent extends ComponentBase {

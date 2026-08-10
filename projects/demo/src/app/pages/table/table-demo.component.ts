@@ -6,7 +6,17 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, DestroyRef, inject, Injectable, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  Injectable,
+  input,
+  OnInit,
+  viewChild,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -19,7 +29,9 @@ import {
   IdsTableIntl,
   IdsTableRequestFactory,
   IdsTableRowKeydownEvent,
-  IdsTableSortAscIconDirective, IdsTableSortDescIconDirective, IdsTableSortNoneIconDirective,
+  IdsTableSortAscIconDirective,
+  IdsTableSortDescIconDirective,
+  IdsTableSortNoneIconDirective,
   ServerSideDataSource,
 } from '@i-cell/ids-angular/table';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -35,6 +47,7 @@ export type TranslateLabelsType = keyof TranslateLabelsToIntlPropNamesType;
 @Component({
   selector: 'ids-table-translate-cell-renderer',
   imports: [TranslateModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '{{ cellValue() | translate }} {{ headerSuffix() }}',
 })
 export class TranslateCellRendererComponent extends IdsTableCellRenderer<PeriodicTableElement> {
@@ -44,6 +57,7 @@ export class TranslateCellRendererComponent extends IdsTableCellRenderer<Periodi
 @Component({
   selector: 'ids-table-suffixed-cell-renderer',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '{{ cellValue() }}{{ suffix() }}',
 })
 export class SuffixedCellRendererComponent extends IdsTableCellRenderer<PeriodicTableElement> {
@@ -85,6 +99,7 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Eager,
   viewProviders: [
     {
       provide: IdsTableIntl,
@@ -93,19 +108,18 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
   ],
 })
 export class TableDemoComponent implements OnInit {
-
   protected _tableDemoService = inject(TableDemoService);
   private _table = viewChild(IdsTableComponent);
   private _intl = inject(IdsTableIntl);
   private _destroyRef = inject(DestroyRef);
 
-  private _requestFactory: IdsTableRequestFactory<PeriodicTableElement> =
-    (paginationData, sortInfo) => this._tableDemoService.getPeriodicTable(paginationData, sortInfo);
+  private _requestFactory: IdsTableRequestFactory<PeriodicTableElement> = (paginationData, sortInfo) =>
+    this._tableDemoService.getPeriodicTable(paginationData, sortInfo);
 
   protected _dataSource = new ServerSideDataSource(this._requestFactory);
   protected _totalRows = toSignal<number, number>(
     this._dataSource.pageInfo$.pipe(
-      map((pageInfo) => (pageInfo?.totalRows || 0)),
+      map((pageInfo) => pageInfo?.totalRows || 0),
       takeUntilDestroyed(this._destroyRef),
     ),
     { initialValue: 0 },
@@ -114,24 +128,27 @@ export class TableDemoComponent implements OnInit {
   protected _currentPageIndex = 0;
 
   public ngOnInit(): void {
-    this._dataSource.pageIndex$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((pageIndex) => this._currentPageIndex = pageIndex);
-    this._tableDemoService.translate.stream(Object.keys(translateLabelsToIntlPropNames)).pipe(
-      tap((translations: Record<TranslateLabelsType, string>) => {
-        (Object.keys(translations) as TranslateLabelsType[]).forEach(
-          (key) => this._intl[translateLabelsToIntlPropNames[key]] = translations[key],
-        );
-        this._intl.numberFormat = new Intl.NumberFormat(this._tableDemoService.translate.currentLang, {
-          ...this._intl.numberFormat.resolvedOptions(),
-        });
-        this._tableDemoService.meltNumberFormat = this._tableDemoService.getMeltNumberFormat();
+    this._dataSource.pageIndex$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((pageIndex) => (this._currentPageIndex = pageIndex));
+    this._tableDemoService.translate
+      .stream(Object.keys(translateLabelsToIntlPropNames))
+      .pipe(
+        tap((translations: Record<TranslateLabelsType, string>) => {
+          (Object.keys(translations) as TranslateLabelsType[]).forEach(
+            (key) => (this._intl[translateLabelsToIntlPropNames[key]] = translations[key]),
+          );
+          this._intl.numberFormat = new Intl.NumberFormat(this._tableDemoService.translate.currentLang, {
+            ...this._intl.numberFormat.resolvedOptions(),
+          });
+          this._tableDemoService.meltNumberFormat = this._tableDemoService.getMeltNumberFormat();
 
-        queueMicrotask(() => {
-          this._intl.changes.next();
-          this._table()?.updateCellContents();
-        });
-      }),
-      takeUntilDestroyed(this._destroyRef),
-    ).subscribe();
+          queueMicrotask(() => {
+            this._intl.changes.next();
+            this._table()?.updateCellContents();
+          });
+        }),
+        takeUntilDestroyed(this._destroyRef),
+      )
+      .subscribe();
   }
 
   public onCellClick(): void {

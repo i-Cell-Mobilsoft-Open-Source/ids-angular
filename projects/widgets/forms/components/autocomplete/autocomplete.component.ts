@@ -31,6 +31,7 @@ import {
   forwardRef,
   AfterViewInit,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -93,22 +94,14 @@ const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
         </button>
       }
       @if (isLoading()) {
-        <ids-spinner
-          sizeCollection="small"
-          [variant]="spinnerVariant()"
-          [isTrack]="true"
-          [aria-label]="ariaLabelLoading()"
-        />
+        <ids-spinner sizeCollection="small" [variant]="spinnerVariant()" [isTrack]="true" [aria-label]="ariaLabelLoading()" />
       } @else {
-        <ids-icon
-          alt=""
-          aria-hidden="true"
-          [fontIcon]="trigger().autocomplete().panelOpen() ? 'chevron-up' : 'chevron-down'"
-        />
+        <ids-icon alt="" aria-hidden="true" [fontIcon]="trigger().autocomplete().panelOpen() ? 'chevron-up' : 'chevron-down'" />
       }
     </span>
   `,
   exportAs: 'idsAutocomplete',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: IDS_FORM_FIELD_CONTROL, useExisting: IdsAutocompleteComponent },
     { provide: IDS_OPTION_PARENT_COMPONENT, useExisting: IdsAutocompleteComponent },

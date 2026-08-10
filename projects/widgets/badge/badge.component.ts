@@ -3,12 +3,7 @@ import { IdsBadgeAppearanceType } from './types/badge-appearance.type';
 import { IdsBadgeVariantType } from './types/badge-variant.type';
 
 import { NgClass } from '@angular/common';
-import {
-  Component,
-  computed,
-  contentChildren,
-  input,
-} from '@angular/core';
+import { Component, computed, contentChildren, input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentBase, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -16,12 +11,13 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   selector: 'ids-badge',
   standalone: true,
   templateUrl: './badge.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     BadgeLimitPipe,
     NgClass,
   ],
 })
-export class IdsBadgeComponent extends ComponentBase  {
+export class IdsBadgeComponent extends ComponentBase {
   protected override get _hostName(): string {
     return 'badge';
   }

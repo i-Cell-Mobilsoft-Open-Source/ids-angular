@@ -5,7 +5,7 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { IdsBadgeDirective } from '@i-cell/ids-angular/badge';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -22,6 +22,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     DemoAndCodeComponent,
   ],
   templateUrl: './badge-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './badge-demo.component.scss',
 })
 export class BadgeDemoComponent {

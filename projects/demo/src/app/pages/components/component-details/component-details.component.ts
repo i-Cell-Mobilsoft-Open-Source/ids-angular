@@ -7,7 +7,7 @@ import { ComponentBlock, ComponentContent, ComponentEntry } from '../../../model
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
-import { Component, DestroyRef, OnInit, computed, inject, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, OnInit, computed, inject, signal, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterOutlet, RouterModule, NavigationEnd } from '@angular/router';
 import { IdsTabComponent } from '@i-cell/ids-angular/tab';
@@ -27,6 +27,7 @@ const SLUG_INDEX = 3;
     IdsTabGroupExtensionDirective,
   ],
   templateUrl: './component-details.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './component-details.component.scss',
 })
 export class ComponentDetailsComponent implements OnInit {

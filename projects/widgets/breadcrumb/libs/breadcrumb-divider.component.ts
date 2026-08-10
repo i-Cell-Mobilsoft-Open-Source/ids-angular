@@ -1,6 +1,6 @@
 import { IdsBreadcrumbDivider, IdsBreadcrumbDividerType } from '../public-api';
 
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -10,9 +10,10 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
   providers: [],
   host: {
     role: 'presentation',
-    'class': 'ids-breadcrumb-divider',
+    class: 'ids-breadcrumb-divider',
     '[attr.aria-hidden]': 'true',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (dividerType() === _dividerType.ICON) {
       <ids-icon aria-hidden="true" fontIcon="chevron-right" [size]="size()" />

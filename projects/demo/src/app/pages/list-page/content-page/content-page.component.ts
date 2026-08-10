@@ -1,3 +1,4 @@
+import { environment } from '../../../../environments/environment.development';
 import { ContentCardComponent } from '../../../components/content-card/content-card.component';
 import { ContentHeroComponent } from '../../../components/content-hero/content-hero.component';
 import { ContentBlock, ContentContent, ContentEntry } from '../../../model/contentEntry';
@@ -5,12 +6,11 @@ import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
 
 import { formatDate } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from 'projects/demo/src/environments/environment.development';
 import { combineLatest } from 'rxjs';
 import { filter, map, startWith, switchMap } from 'rxjs/operators';
 
@@ -23,6 +23,7 @@ import { filter, map, startWith, switchMap } from 'rxjs/operators';
     ContentCardComponent,
   ],
   templateUrl: './content-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './content-page.component.scss',
 })
 export class ContentPageComponent implements OnInit {

@@ -1,6 +1,6 @@
 import { HeroData } from '../../model/heroData';
 
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IdsAvatarComponent } from '@i-cell/ids-angular/avatar';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
@@ -20,6 +20,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
     IdsAvatarComponent,
   ],
   templateUrl: './content-hero.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './content-hero.component.scss',
 })
 export class ContentHeroComponent {

@@ -6,9 +6,18 @@ import { TryoutControlComponent } from '../../components/tryout/tryout-controls.
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { KeyValuePipe, TitleCasePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsLabelDirective, IdsOptionComponent, IdsOptionGroupComponent, IdsErrorDefinitionDirective, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
+import {
+  IdsErrorMessageComponent,
+  IdsFormFieldComponent,
+  IdsHintMessageComponent,
+  IdsLabelDirective,
+  IdsOptionComponent,
+  IdsOptionGroupComponent,
+  IdsErrorDefinitionDirective,
+  IdsSuccessMessageComponent,
+} from '@i-cell/ids-angular/forms';
 import { IdsSelectComponent, IdsSelectTriggerDirective } from '@i-cell/ids-angular/select';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -36,6 +45,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableComponent,
   ],
   templateUrl: './select-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     '../demo-page.scss',
     './select-demo.component.scss',

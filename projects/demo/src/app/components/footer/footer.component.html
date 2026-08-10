@@ -18,7 +18,7 @@
           <img
             alt="i-Cell mobilsoft logo"
             class="flex w-[120px] h-[85px] justify-center items-center"
-            [src]="footerData?.footer_logo?.[0]?.url"
+            [src]="$safeNavigationMigration(footerData?.footer_logo?.[0]?.url)"
           />
         </div>
         <div class="space-y-3">
@@ -38,7 +38,7 @@
         <div class="flex flex-wrap gap-2 w-[190px]">
           @for (cert of footerData?.footer_certs; track $index) {
             <div class="flex items-center justify-center">
-              <img [alt]="cert?.alt" [src]="cert?.url" />
+              <img [alt]="$safeNavigationMigration(cert?.alt)" [src]="$safeNavigationMigration(cert?.url)" />
             </div>
           }
         </div>
@@ -64,7 +64,11 @@
 
                 <div class="flex flex-col items-start gap-2">
                   @for (link of col.children; track link.page?.id || $index) {
-                    <a class="link-item" [href]="getLinkUrl(link.page?.slug)" (click)="handleLinkClick($event, link.page?.slug)">
+                    <a
+                      class="link-item"
+                      [href]="getLinkUrl($safeNavigationMigration(link.page?.slug))"
+                      (click)="handleLinkClick($event, $safeNavigationMigration(link.page?.slug))"
+                    >
                       {{ link.page?.title }}
                     </a>
                   }
@@ -96,7 +100,7 @@
       </div>
     </div>
   </div>
-  <div class="absolute right-0 -bottom-[6px] rotate-0 ">
+  <div class="absolute right-0 -bottom-[6px] rotate-0">
     <svg width="312" height="221" viewBox="0 0 312 221" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="179" cy="179" r="179" fill="url(#paint0_linear_10300_56499)" />
       <defs>

@@ -5,7 +5,7 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsCardBodyDirective } from '@i-cell/ids-angular/card/card-body.directive';
@@ -34,6 +34,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableComponent,
   ],
   templateUrl: './card-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     '../demo-page.scss',
     './card-demo.component.scss',

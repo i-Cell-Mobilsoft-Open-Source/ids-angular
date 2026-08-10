@@ -2,7 +2,7 @@ import { environment } from '../../../environments/environment.development';
 import { GlobalEntry } from '../../model/pageEntry';
 import { GraphqlService, StatamicNavNode } from '../../services/graphql.service';
 
-import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -14,6 +14,7 @@ import { startWith } from 'rxjs/operators';
   selector: 'app-footer',
   imports: [IdsIconComponent],
   templateUrl: './footer.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent implements OnInit, OnDestroy {

@@ -6,7 +6,17 @@ import { LoadingService } from './services/loading.service';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, DestroyRef, ElementRef, ViewEncapsulation, inject, signal, viewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  ElementRef,
+  ViewEncapsulation,
+  inject,
+  signal,
+  viewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet, Router, NavigationEnd } from '@angular/router';
@@ -35,6 +45,7 @@ export type Theme = 'light' | 'dark';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements AfterViewInit {

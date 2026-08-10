@@ -7,7 +7,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { BUTTON_EXAMPLES } from '../../components-example/button/button-examples';
 import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { IdsButtonComponent, IdsButtonGroupComponent } from '@i-cell/ids-angular/button';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslateModule } from '@ngx-translate/core';
@@ -25,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsExampleViewerComponent,
   ],
   templateUrl: './button-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     '../demo-page.scss',
     './button-demo.component.scss',

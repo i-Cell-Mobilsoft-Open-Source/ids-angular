@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 /**
  * Side navigation section
@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
   selector: 'ids-side-nav-section, ul[idsSideNavSection]',
   imports: [],
   template: '<ng-content />',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'ids-side-nav-section',
     role: 'tree',

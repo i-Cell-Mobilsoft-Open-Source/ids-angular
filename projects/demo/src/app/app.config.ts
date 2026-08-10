@@ -3,11 +3,11 @@ import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { NavigationNode } from './model/navigation';
 import { GraphqlService } from './services/graphql.service';
 
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, Router, Route } from '@angular/router';
-import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+import { ApolloClient, InMemoryCache } from '@apollo/client/core';
 import { IDS_ICON_DEFAULT_CONFIG, IdsIconDefaultConfig } from '@i-cell/ids-angular/icon';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -30,10 +30,9 @@ function extractGeneratedSlugs(nodes: NavigationNode[]): string[] {
 
 export function initializeDynamicRoutes(graphqlService: GraphqlService, router: Router): () => Promise<void> {
   return async() => {
-    const result = await firstValueFrom(graphqlService
-      .getNavigation()
-      .pipe(filter((res): res is { loading?: boolean } =>
-        !(res as { loading?: boolean }).loading))) as { data?: { navs?: NavigationNode[] } };
+    const result = (await firstValueFrom(
+      graphqlService.getNavigation().pipe(filter((res): res is { loading?: boolean } => !(res as { loading?: boolean }).loading)),
+    )) as { data?: { navs?: NavigationNode[] } };
 
     const navs = result.data?.navs || [];
     const generatedSlugs: string[] = [];
@@ -84,8 +83,8 @@ const iconDefaultConfig: IdsIconDefaultConfig = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([loadingInterceptor])),
-    provideApollo((): ApolloClientOptions => {
+    provideHttpClient(withXhr(), withInterceptors([loadingInterceptor])),
+    provideApollo((): ApolloClient.Options => {
       const httpLink = inject(HttpLink);
       return {
         cache: new InMemoryCache(),

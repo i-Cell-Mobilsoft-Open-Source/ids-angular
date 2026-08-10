@@ -5,7 +5,7 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -27,17 +27,16 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableComponent,
   ],
   templateUrl: './notification-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     '../demo-page.scss',
     './notification-demo.component.scss',
   ],
 })
 export class NotificationDemoComponent implements OnInit {
-
   protected _notificationDemoService = inject(NotificationDemoService);
 
   public ngOnInit(): void {
     this._notificationDemoService.loadIcons();
   }
-
 }

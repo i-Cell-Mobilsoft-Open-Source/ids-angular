@@ -82,7 +82,7 @@ export class IdsRadioGroupComponent
 
   private _selectionModel?: SelectionModel<IdsRadioComponent>;
   private _rawValue: unknown;
-  private _items = contentChildren(IdsRadioComponent, { descendants: true });
+  private _items = contentChildren<IdsRadioComponent>(forwardRef(() => IdsRadioComponent), { descendants: true });
 
   public name = input.required<string>();
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });

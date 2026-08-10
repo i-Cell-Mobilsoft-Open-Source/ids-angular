@@ -8,7 +8,7 @@ import { HeroData } from '../../model/heroData';
 import { StatamicComponentListItem } from '../../model/statamicComponentListItemData';
 import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,6 +17,7 @@ import { map } from 'rxjs';
 @Component({
   selector: 'app-components',
   templateUrl: './components.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     HeroComponent,
     RouterOutlet,

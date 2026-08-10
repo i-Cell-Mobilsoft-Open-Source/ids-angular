@@ -73,8 +73,8 @@
             ],
             "styles": [
               "projects/demo/src/styles.scss",
-              "node_modules/@i-cell/ids-styles/dist/components.css",
-              "node_modules/@i-cell/ids-styles/dist/accessibility.css"
+              "../ids-styles/dist/components.css",
+              "../ids-styles/dist/accessibility.css"
             ],
             "scripts": []
           },

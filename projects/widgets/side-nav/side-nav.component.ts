@@ -4,7 +4,7 @@ import { IDS_SIDE_NAV_ROUTER } from './tokens/ids-side-nav-router';
 import { IdsSideNavAppearanceType } from './types/side-nav-appearance.type';
 import { IdsSideNavVariantType } from './types/side-nav-variant.type';
 
-import { booleanAttribute, Component, computed, inject, input } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ComponentBaseWithDefaults, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import {
@@ -27,6 +27,7 @@ const defaultConfig = IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY();
   host: {
     class: 'ids-side-nav',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: IDS_ICON_BUTTON_PARENT,

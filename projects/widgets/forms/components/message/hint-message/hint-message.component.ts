@@ -2,7 +2,7 @@ import { IdsMessagePrefixDirective } from '../../../directives/message-prefix.di
 import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.directive';
 import { IdsMessageDirective } from '../../../directives/message.directive';
 
-import { Component, contentChildren, ViewEncapsulation } from '@angular/core';
+import { Component, contentChildren, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'ids-hint-message',
@@ -18,6 +18,7 @@ import { Component, contentChildren, ViewEncapsulation } from '@angular/core';
       ],
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsHintMessageComponent {

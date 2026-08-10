@@ -1,6 +1,6 @@
 import { IdsSideSheetHeader } from '../types/side-sheet.type';
 
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
@@ -9,6 +9,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
   selector: 'app-side-sheet-header',
   standalone: true,
   templateUrl: './side-sheet-header.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     IdsIconComponent,
     IdsIconButtonComponent,
@@ -34,5 +35,4 @@ export class SideSheetHeaderComponent {
   protected _onBack(): void {
     this.backClicked.emit();
   }
-
 }

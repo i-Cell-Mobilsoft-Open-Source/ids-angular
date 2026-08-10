@@ -1,14 +1,14 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon/icon.component';
 
 @Component({
   selector: 'app-badge',
   imports: [IdsIconComponent],
   templateUrl: './badge.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './badge.component.scss',
 })
-export class BadgeComponent  {
-
+export class BadgeComponent {
   public state = input<'do' | 'dont' | 'no_state' | undefined>();
 
   public bgClass = computed<string>(() => {
@@ -23,5 +23,4 @@ export class BadgeComponent  {
         return '';
     }
   });
-
 }

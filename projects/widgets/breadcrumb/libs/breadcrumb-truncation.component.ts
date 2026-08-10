@@ -3,7 +3,7 @@ import { IdsBreadcrumbListDirective } from './breadcrumb-list.directive';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { NgClass } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
+import { Component, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent, IdsIconButtonVariantType } from '@i-cell/ids-angular/icon-button';
@@ -19,6 +19,7 @@ import { IdsIconButtonComponent, IdsIconButtonVariantType } from '@i-cell/ids-an
     CdkTrapFocus,
     NgClass,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- ids-icon-button should have the same size and variant as the parent  -->
     <button

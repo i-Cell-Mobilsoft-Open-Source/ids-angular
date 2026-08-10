@@ -7,7 +7,7 @@ import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupPosition, IdsTabGroupPositionType, IdsTabGroupVariant, IdsTabGroupVariantType, IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from '@i-cell/ids-angular/tab';
+import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupAlignment, IdsTabGroupAlignmentType, IdsTabGroupPosition, IdsTabGroupPositionType, IdsTabGroupVariant, IdsTabGroupVariantType, IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from '@i-cell/ids-angular/tab';
 import { IdsTabActivationMode, IdsTabActivationModeType } from '@i-cell/ids-angular/tab/types/tab-activation-mode.type';
 
 const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -17,6 +17,7 @@ type TabInputControls = {
   variant: IdsTabGroupVariantType,
   orientation: IdsOrientationType,
   stretchTabs: boolean,
+  tabAlignment: IdsTabGroupAlignmentType,
   tabPosition: IdsTabGroupPositionType,
   indicatorPosition: IdsTabIndicatorPositionType,
   disabled: boolean,
@@ -69,8 +70,15 @@ export class TabDemoService {
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
-    tabPosition: {
+    tabAlignment: {
       description: 'Tab header position.',
+      type: 'IdsTabGroupAlignmentType',
+      default: defaultConfig.tabAlignment,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsTabGroupAlignment),
+    },
+    tabPosition: {
+      description: 'Tab position.',
       type: 'IdsTabGroupPositionType',
       default: defaultConfig.tabPosition,
       control: DemoControl.SELECT,

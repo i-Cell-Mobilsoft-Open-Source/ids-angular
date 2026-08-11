@@ -81,6 +81,10 @@ query GetDynamicDetail($slug: String!, $site: String!) {
             ... on Set_Content_Heading {
               heading
             }
+            ... on Set_Content_FigmaIframe {
+              id
+              html_code
+            }
           }
         }
       }

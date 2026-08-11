@@ -4,6 +4,7 @@ import { ContentHeroComponent } from '../../../components/content-hero/content-h
 import { ContentBlock, ContentContent, ContentEntry } from '../../../model/contentEntry';
 import { HeroData } from '../../../model/heroData';
 import { GraphqlService } from '../../../services/graphql.service';
+import { SafeHtmlPipe } from '../../../shared/pipes/safe-html.pipe';
 
 import { formatDate } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
@@ -21,6 +22,7 @@ import { filter, map, startWith, switchMap } from 'rxjs/operators';
     ContentHeroComponent,
     IdsCardComponent,
     ContentCardComponent,
+    SafeHtmlPipe,
   ],
   templateUrl: './content-page.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -149,6 +151,12 @@ export class ContentPageComponent implements OnInit {
     const blocks: ContentBlock[] = [];
 
     rawContent.forEach((block) => {
+      if (block.__typename === 'Set_Content_FigmaIframe') {
+        blocks.push({
+          type: 'figma',
+          htmlCode: block.html_code,
+        });
+      }
       if (block.__typename === 'Set_Content_Heading') {
         blocks.push({
           type: 'heading',

@@ -1,12 +1,14 @@
 import { routes } from './app.routes';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { NavigationNode } from './model/navigation';
+import { DynamicRoutesService } from './services/dynamic-routes.service';
 import { GraphqlService } from './services/graphql.service';
+import { CustomTitleStrategy } from './strategies/custom-title.strategy';
 
 import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, Router, Route } from '@angular/router';
+import { provideRouter, TitleStrategy, Router, Route } from '@angular/router';
 import { ApolloClient, InMemoryCache } from '@apollo/client/core';
 import { IDS_ICON_DEFAULT_CONFIG, IdsIconDefaultConfig } from '@i-cell/ids-angular/icon';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -14,7 +16,6 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideApollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { filter, firstValueFrom } from 'rxjs';
-
 function extractGeneratedSlugs(nodes: NavigationNode[]): string[] {
   const slugs: string[] = [];
   nodes.forEach((node) => {
@@ -104,10 +105,10 @@ export const appConfig: ApplicationConfig = {
     }),
     provideAnimations(),
     { provide: IDS_ICON_DEFAULT_CONFIG, useValue: iconDefaultConfig },
+    { provide: TitleStrategy, useClass: CustomTitleStrategy },
     provideAppInitializer(() => {
-      const graphqlService = inject(GraphqlService);
-      const router = inject(Router);
-      return initializeDynamicRoutes(graphqlService, router)();
+      const dynamicRoutesService = inject(DynamicRoutesService);
+      return dynamicRoutesService.initialize();
     }),
   ],
 };

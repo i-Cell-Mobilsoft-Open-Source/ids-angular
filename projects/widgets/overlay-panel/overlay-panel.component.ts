@@ -8,7 +8,7 @@ import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
 import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkMenu } from '@angular/cdk/menu';
-import { OverlayModule, CdkOverlayOrigin, CdkConnectedOverlay, ConnectedPosition } from '@angular/cdk/overlay';
+import { OverlayModule, CdkOverlayOrigin, CdkConnectedOverlay, ConnectedPosition, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -20,6 +20,7 @@ import {
   untracked,
   effect,
   model,
+  inject,
 } from '@angular/core';
 import { IdsSizeType, ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
@@ -44,6 +45,8 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
+  private readonly _overlay = inject(Overlay);
+
   public open = model<boolean>(false);
   public origin = input.required<CdkOverlayOrigin | ElementRef>();
   public positions = input<ConnectedPosition[]>(this._defaultConfig.positions);
@@ -54,6 +57,8 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   public panelClasses = input<string>('');
   public width = input<string | number>();
   public readonly overlayDir = viewChild(CdkConnectedOverlay);
+
+  protected readonly _scrollStrategy: ScrollStrategy = this._overlay.scrollStrategies.block();
 
   protected _hasCdkMenu = computed(() => !!this._cdkMenu());
   private _cdkMenu = contentChild(CdkMenu, { descendants: true });

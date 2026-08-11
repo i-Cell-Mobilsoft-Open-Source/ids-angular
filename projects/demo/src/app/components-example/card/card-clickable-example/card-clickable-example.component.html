@@ -1,0 +1,9 @@
+<div class="flex flex-wrap items-start gap-ids-container-gap-12">
+  <ids-card appearance="elevated" (click)="onCardClick()">
+    <ids-card-body>{{ "EXAMPLES.CARD.CLICKABLE.CONTENT.CLICKABLE" | translate }}</ids-card-body>
+  </ids-card>
+
+  <ids-card appearance="elevated" [disabled]="true" (click)="onCardClick()">
+    <ids-card-body>{{ "EXAMPLES.CARD.CLICKABLE.CONTENT.DISABLED" | translate }}</ids-card-body>
+  </ids-card>
+</div>

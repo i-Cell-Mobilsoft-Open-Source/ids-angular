@@ -105,15 +105,30 @@ export class IdsSideNavItemComponent {
   });
 
   public active = computed(() => (this.target() ? isActive(this.target(), this._router, this.isActiveMatchOptions())() : false));
+  public expanded = input(false, { transform: booleanAttribute });
 
   protected _expandable = computed(() => this._contentChildren().length > 0 || this._contentTemplate());
-  protected _expanded = linkedSignal(() => this._contentChildren().some((child) => child.active()));
+  protected _expanded = linkedSignal({
+    source: () => ({
+      fromInput: this.expanded(),
+      hasActiveChild: this._contentChildren().some((contentChild) => contentChild.active()),
+    }),
+    computation: ({ fromInput, hasActiveChild }, previous) => {
+      if (hasActiveChild) {
+        return true;
+      }
+      if (previous !== undefined && previous.source.fromInput === fromInput) {
+        return previous.value;
+      }
+      return fromInput;
+    },
+  });
+
   protected _iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
   protected _iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
   protected readonly _contentTemplate = contentChild('idsSideNavItemChildren', { read: TemplateRef });
   private readonly _contentChildren = contentChildren(IdsSideNavItemComponent);
   private _elementRef = inject(ElementRef);
-
   constructor() {
     effect(() => {
       const contentLength = this._contentChildren().length;

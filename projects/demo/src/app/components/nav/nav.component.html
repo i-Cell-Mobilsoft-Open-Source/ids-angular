@@ -1,5 +1,5 @@
 <nav idsSideNav>
-  @for (menuConfig of menu(); track $index; let i = $index) {
+  @for (menuConfig of _menu(); track $index; let i = $index) {
     <ids-side-nav-section>
       @if (!menuConfig.slug && !menuConfig.path) {
         <ids-side-nav-title [label]="menuConfig.name!" />
@@ -9,6 +9,7 @@
             [id]="'menu-item-' + i + '-child-' + j"
             [label]="menuItem.name!"
             [target]="menuItem.path ?? ''"
+            [expanded]="menuItem.$open ?? false"
             [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j]"
             [isActiveMatchOptions]="subsetMatchOptions"
           >
@@ -21,6 +22,7 @@
                 [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k"
                 [label]="subItem.name!"
                 [target]="subItem.path ?? ''"
+                [expanded]="subItem.$open ?? false"
                 [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k]"
                 [isActiveMatchOptions]="subsetMatchOptions"
               >
@@ -33,6 +35,7 @@
                     [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k + '-subsub-' + l"
                     [label]="subSubItem.name!"
                     [target]="subSubItem.path ?? ''"
+                    [expanded]="subSubItem.$open ?? false"
                     [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k + '-subsub-' + l]"
                     [isActiveMatchOptions]="subsetMatchOptions"
                   >
@@ -50,6 +53,7 @@
           [id]="'menu-item-' + i"
           [label]="menuConfig.name!"
           [target]="menuConfig.path ?? ''"
+          [expanded]="menuConfig.$open ?? false"
           [hasTooltip]="_menuItemsOverflow['menu-item-' + i]"
           [isActiveMatchOptions]="subsetMatchOptions"
         >
@@ -62,6 +66,7 @@
               [id]="'menu-item-' + i + '-child-' + j"
               [label]="childItem.name!"
               [target]="childItem.path ?? ''"
+              [expanded]="childItem.$open ?? false"
               [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j]"
               [isActiveMatchOptions]="subsetMatchOptions"
             >
@@ -74,6 +79,7 @@
                   [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k"
                   [label]="subItem.name!"
                   [target]="subItem.path ?? ''"
+                  [expanded]="subItem.$open ?? false"
                   [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k]"
                   [isActiveMatchOptions]="subsetMatchOptions"
                 >
@@ -85,6 +91,7 @@
                       [id]="'menu-item-' + i + '-child-' + j + '-sub-' + k + '-subsub-' + l"
                       [label]="subSubItem.name!"
                       [target]="subSubItem.path ?? ''"
+                      [expanded]="subSubItem.$open ?? false"
                       [hasTooltip]="_menuItemsOverflow['menu-item-' + i + '-child-' + j + '-sub-' + k + '-subsub-' + l]"
                       [isActiveMatchOptions]="subsetMatchOptions"
                     >

@@ -48,6 +48,8 @@ export class ListPageComponent implements OnInit {
   public pageIndex = signal<number>(0);
 
   public activeFilter = signal<string>('All');
+  public isFilterVisible = signal<boolean>(false);
+  public isPaginatorVisible = signal<boolean>(false);
 
   // Compute the list of available tags from the content data
   public availableTags = computed(() => {
@@ -69,7 +71,7 @@ export class ListPageComponent implements OnInit {
     const filter = this.activeFilter();
     const allData = this.contentDatas().sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 
-    if (filter === 'All') {
+    if (!this.isFilterVisible() || filter === 'All') {
       return allData;
     }
 
@@ -85,11 +87,15 @@ export class ListPageComponent implements OnInit {
     });
   });
 
-  public paginatedContentDatas = computed(() => {
+  private _paginatedContentDatas = computed(() => {
     const startIndex = this.pageIndex() * this.pageSize();
     const endIndex = startIndex + this.pageSize();
     return this.filteredContentDatas().slice(startIndex, endIndex);
   });
+
+  public visibleContentDatas = computed(() =>
+    (this.isPaginatorVisible() ? this._paginatedContentDatas() : this.filteredContentDatas()),
+  );
 
   private readonly _graphqlService = inject(GraphqlService);
   private readonly _route = inject(ActivatedRoute);
@@ -187,6 +193,8 @@ export class ListPageComponent implements OnInit {
           });
         }
 
+        this.isFilterVisible.set(entry?.filter ?? false);
+        this.isPaginatorVisible.set(entry?.paginator ?? false);
         this.contentDatas.set(contents.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '')));
 
         const lightUrl = entry?.hero_image_light?.url ? `${environment.cmsBaseUrl}${entry.hero_image_light.url}` : '';

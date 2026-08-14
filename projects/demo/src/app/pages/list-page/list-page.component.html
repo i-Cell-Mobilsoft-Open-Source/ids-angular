@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-16">
   <app-hero [heroData]="heroData()" />
-  @if (availableTags().length > 0) {
+  @if (isFilterVisible() && availableTags().length > 0) {
     <div class="flex justify-center items-center self-stretch gap-3">
       <ids-chip-group appearance="outlined" size="compact">
         <button idsChip type="button" appearance="outlined" size="compact" variant="secondary" (click)="onFilterChange('All')">
@@ -22,21 +22,23 @@
   }
   <!-- Debug output for componentDatas -->
   <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-    @for (contentData of paginatedContentDatas(); track $index) {
+    @for (contentData of visibleContentDatas(); track $index) {
       <app-content-card [contentCardData]="contentData" />
     }
   </div>
-  <div class="flex justify-center items center">
-    <ids-paginator
-      variant="surface"
-      [length]="filteredContentDatas().length"
-      [pageSize]="pageSize()"
-      [pageSizeOptions]="[8, 16, 32]"
-      [showFirstLastButton]="true"
-      [showPageInfo]="false"
-      (pageChanged)="onPageChange($event)"
-    />
-  </div>
+  @if (isPaginatorVisible()) {
+    <div class="flex justify-center items center">
+      <ids-paginator
+        variant="surface"
+        [length]="filteredContentDatas().length"
+        [pageSize]="pageSize()"
+        [pageSizeOptions]="[8, 16, 32]"
+        [showFirstLastButton]="true"
+        [showPageInfo]="false"
+        (pageChanged)="onPageChange($event)"
+      />
+    </div>
+  }
   <!-- Router outlet for the details pane (renders ComponentDetailsComponent as a child route) -->
   <div class="mt-8">
     <router-outlet />

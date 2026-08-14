@@ -9,6 +9,8 @@ export const GET_PAGES_LIST = (typeName: string): DocumentNode => gql`
         id
         title
         slug
+        filter
+        paginator
         hero_description
         hero_image_dark {
           url

@@ -11,6 +11,7 @@
   <div
     cdkTrapFocus
     [ngClass]="[panelClasses(), _panelClasses()]"
+    [style.visibility]="_originHidden() ? 'hidden' : null"
   >
     <ng-content/>
   </div>

@@ -66,14 +66,14 @@ export class TagDemoService {
 
   public readonly groupInputControlConfig: DemoControlConfig<TagGroupInputControls> = {
     appearance: {
-      description: 'Appearance of the tag.',
+      description: 'Appearance of the tag group.',
       type: 'IdsTagAppearanceType',
       default: defaultGroupConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTagAppearance),
     },
     size: {
-      description: 'Size of the tag.',
+      description: 'Size of the tag group.',
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
       control: DemoControl.SELECT,
@@ -102,6 +102,7 @@ export class TagDemoService {
   public getApiConfig(): DemoControlConfig<unknown>[] {
     return [
       this.inputControlConfig,
+      this.helperControlConfig,
       this.groupInputControlConfig,
     ];
   }

@@ -15,6 +15,7 @@ import { IdsTableVariant, IdsTableVariantType } from './types/table-variant.type
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, CdkHeaderRow, CdkHeaderRowDef, CdkNoDataRow, CdkRow, CdkRowDef, CdkTable, CdkTableDataSourceInput } from '@angular/cdk/table';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, inject, input, OnInit, output, signal, TemplateRef, viewChildren, ViewEncapsulation } from '@angular/core';
@@ -41,6 +42,7 @@ const defaultConfig = IDS_TABLE_DEFAULT_CONFIG_FACTORY();
     CdkHeaderCellDef,
     CdkHeaderRow,
     CdkHeaderRowDef,
+    CdkScrollable,
     CdkNoDataRow,
     CdkRow,
     CdkRowDef,

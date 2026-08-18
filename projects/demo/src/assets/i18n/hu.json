@@ -192,6 +192,28 @@
           "DESCRIPTION": "Alapértelmezetten egyszerre csak egy accordion elem lehet nyitva. A \"multi\" beállítással több elem is nyitva lehet egyszerre."
         }
     },
+    "BADGE": {
+      "VARIANTS": {
+        "TITLE": "Badge változatai",
+        "DESCRIPTION": "A badge komponens különböző változatai: primary, secondary, brand, surface (alapértelmezett), success, warning, error, light és dark."
+      },
+      "SIZES": {
+        "TITLE": "Badge méretei",
+        "DESCRIPTION": "A badge komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "ICONS": {
+        "TITLE": "Badge ikonokkal",
+        "DESCRIPTION": "A badge tartalmazhat leading ikont, ha a badgeShowLeadingElement be van kapcsolva."
+      },
+      "LIMIT": {
+        "TITLE": "Badge limit",
+        "DESCRIPTION": "A numerikus badge feliratok korlátozhatók a badgeLimit beállítással. A limit feletti értékek plusz jellel jelennek meg."
+      },
+      "EMPTY": {
+        "TITLE": "Üres badge",
+        "DESCRIPTION": "Felirat nélküli badge státuszjelzőként jelenik meg."
+      }
+    },
     "BUTTON": {
       "APPEARANCES": {
         "TITLE": "Button megjelenései",

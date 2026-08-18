@@ -294,6 +294,36 @@
           "FOOTER_BUTTON": "Learn more"
         }
       }
+    },
+    "CHIP": {
+      "APPEARANCES": {
+        "TITLE": "Chip appearances",
+        "DESCRIPTION": "The two chip appearances: filled (default) and outlined."
+      },
+      "VARIANTS": {
+        "TITLE": "Chip variants",
+        "DESCRIPTION": "Chips with different color variants: primary, secondary, surface (default), light, and dark."
+      },
+      "SIZES": {
+        "TITLE": "Chip sizes",
+        "DESCRIPTION": "Chips with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "INTERACTIVE": {
+        "TITLE": "Interactive chips",
+        "DESCRIPTION": "Use the ids-chip element for non-interactive chips, or the button[idsChip] selector for interactive chips. Interactive chips can also be disabled."
+      },
+      "ICONS": {
+        "TITLE": "Chip with icons",
+        "DESCRIPTION": "Chips can include an avatar, a leading icon, and/or a trailing icon button."
+      },
+      "REMOVABLE": {
+        "TITLE": "Removable chips",
+        "DESCRIPTION": "Interactive chips can be made removable. The removed event is emitted when the close button is clicked."
+      },
+      "CHIP_GROUP": {
+        "TITLE": "Chip group",
+        "DESCRIPTION": "Chips can be grouped together. Appearance, size and disabled state are inherited from the group."
+      }
     }
   }
 }

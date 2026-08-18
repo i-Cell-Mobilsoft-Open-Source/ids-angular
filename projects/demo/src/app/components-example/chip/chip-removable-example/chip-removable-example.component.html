@@ -1,0 +1,7 @@
+<div class="flex gap-ids-container-gap-4">
+  @for (chip of chips; track chip) {
+    <button type="button" idsChip [removable]="true" (removed)="onRemoved($event, $index)">
+      {{ chip }}
+    </button>
+  }
+</div>

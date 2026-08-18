@@ -290,6 +290,36 @@
           "FOOTER_BUTTON": "Tudj meg többet"
         }
       }
+    },
+    "CHIP": {
+      "APPEARANCES": {
+        "TITLE": "Chip megjelenései",
+        "DESCRIPTION": "A chip komponens megjelenései: filled (alapértelmezett) és outlined."
+      },
+      "VARIANTS": {
+        "TITLE": "Chip változatai",
+        "DESCRIPTION": "A chip komponens különböző változatai: primary, secondary, surface (alapértelmezett), light és dark."
+      },
+      "SIZES": {
+        "TITLE": "Chip méretei",
+        "DESCRIPTION": "A chip komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "INTERACTIVE": {
+        "TITLE": "Interaktív chipek",
+        "DESCRIPTION": "A nem interaktív chipekhez az ids-chip elemet, az interaktív chipekhez a button[idsChip] selectort használja. Az interaktív chipek letilthatók."
+      },
+      "ICONS": {
+        "TITLE": "Chip ikonokkal",
+        "DESCRIPTION": "A chip komponens tartalmazhat avatart, leading ikont és/vagy trailing icon gombot."
+      },
+      "REMOVABLE": {
+        "TITLE": "Eltávolítható chipek",
+        "DESCRIPTION": "Az interaktív chipek eltávolíthatóvá tehetők. A close gomb megnyomásakor a removed esemény emittálódik."
+      },
+      "CHIP_GROUP": {
+        "TITLE": "Chip-group",
+        "DESCRIPTION": "A chipek csoportosíthatók. A megjelenés, a méret és a disabled állapot a csoporttól öröklődik."
+      }
     }
   }
 

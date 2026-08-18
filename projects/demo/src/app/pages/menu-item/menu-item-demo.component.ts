@@ -6,7 +6,7 @@ import { TryoutControlComponent } from '../../components/tryout/tryout-controls.
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { CdkMenuBar } from '@angular/cdk/menu';
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -33,6 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
     '../demo-page.scss',
     './menu-item-demo.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class MenuItemDemoComponent {

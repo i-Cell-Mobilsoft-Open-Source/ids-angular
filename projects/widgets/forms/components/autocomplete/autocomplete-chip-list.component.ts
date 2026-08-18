@@ -1,7 +1,7 @@
 import { IdsAutocompleteTriggerDirective } from './autocomplete-trigger.directive';
 import { IdsOptionValue } from './types/option-value.type';
 
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { IdsChipAppearance, IdsChipAppearanceType, IdsChipComponent, IdsChipVariant, IdsChipVariantType } from '@i-cell/ids-angular/chip';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
@@ -11,6 +11,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
     class: 'ids-autocomplete-chip-list',
   },
   imports: [IdsChipComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @for (option of autocompleteTrigger().selected; track $index) {
       <button

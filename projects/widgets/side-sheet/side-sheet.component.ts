@@ -1,26 +1,19 @@
-import {
-  IDS_SIDE_SHEET_DEFAULT_CONFIG,
-  IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY,
-  IdsSideSheetDefaultConfig,
-} from './side-sheet-defaults';
+import { IDS_SIDE_SHEET_DEFAULT_CONFIG, IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY, IdsSideSheetDefaultConfig } from './side-sheet-defaults';
 import { SideSheetHeaderComponent } from './side-sheet-header/side-sheet-header.component';
 import {
   IdsBackdropTypeType,
-  IdsSideSheetPosition, IdsSideSheetPositionType,
+  IdsSideSheetPosition,
+  IdsSideSheetPositionType,
   IdsSideSheetType,
   IdsSideSheetTypeType,
-  IdsSideSheetHeader } from './types/side-sheet.type';
+  IdsSideSheetHeader,
+} from './types/side-sheet.type';
 
 import { trigger, transition, style, animate } from '@angular/animations';
 import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import {
-  Component,
-  computed,
-  input,
-  output,
-} from '@angular/core';
+import { Component, computed, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
@@ -49,6 +42,7 @@ const defaultConfig = IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY();
   host: {
     '[class.open]': 'open()',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     IdsIconButtonComponent,
     IdsIconComponent,
@@ -97,18 +91,19 @@ export class IdsSideSheetComponent extends ComponentBaseWithDefaults<IdsSideShee
     this.backClicked.emit();
   }
 
-  protected _hostClasses = computed(() => this._getHostClasses([
-    this.type(),
-    this.size(),
-    [
-      `${this.position()}`,
+  protected _hostClasses = computed(() =>
+    this._getHostClasses([
+      this.type(),
       this.size(),
-    ],
-    [
-      `${this.position()}-opacity`,
-      this.backdropOpacity(),
-    ],
-    this.backdropType(),
-  ]));
-
+      [
+        `${this.position()}`,
+        this.size(),
+      ],
+      [
+        `${this.position()}-opacity`,
+        this.backdropOpacity(),
+      ],
+      this.backdropType(),
+    ]),
+  );
 }

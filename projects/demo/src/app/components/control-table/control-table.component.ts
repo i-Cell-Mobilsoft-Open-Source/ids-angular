@@ -1,6 +1,6 @@
 import { DemoControl, DemoControlConfig, DemoControlItem } from '../../../types/demo-control.type';
 
-import { Component, computed, input, model, output } from '@angular/core';
+import { Component, computed, input, model, output, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsCardBodyDirective, IdsCardComponent, IdsCardHeaderComponent, IdsCardTitleDirective } from '@i-cell/ids-angular/card';
 import { IdsSentenceCasePipe } from '@i-cell/ids-angular/core';
@@ -37,6 +37,7 @@ const DEFAULT_CONTROL_TABLE_PADDING = 8;
     IdsDatepickerTriggerComponent,
   ],
   templateUrl: './control-table.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './control-table.component.scss',
 })
 export class ControlTableComponent<T extends Record<string, T[keyof T]>> {

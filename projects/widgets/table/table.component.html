@@ -27,27 +27,16 @@
 <!-- TODO: Loading spinner -->
 
 <div class="ids-table__horizontal-scroll">
-  <table
-    cdk-table
-    cdkDropListGroup
-    multiTemplateDataRows
-    [id]="id()"
-    [dataSource]="dataSource()"
-    (contentChanged)="_tableContentChanged()"
-    >
-    <caption><ng-content select="[idsTableCaption]"></ng-content></caption>
+  <table cdk-table cdkDropListGroup multiTemplateDataRows [id]="id()" [dataSource]="dataSource()" (contentChanged)="_tableContentChanged()">
+    <caption>
+      <ng-content select="[idsTableCaption]"></ng-content>
+    </caption>
 
     <!-- Column and row definitions for row selection -->
     <ng-container cdkColumnDef="$selectBoxes" sticky>
-      <th
-        *cdkHeaderCellDef
-        cdk-header-cell
-        scope="col"
-        role="cell"
-        class="ids-table__header-cell ids-table__header-cell--select-all-rows"
-      >
+      <th *cdkHeaderCellDef cdk-header-cell scope="col" role="cell" class="ids-table__header-cell ids-table__header-cell--select-all-rows">
         @let isRowSelected = rowSelection.hasValue();
-        @let isTableVariantPrimary = variant() === 'primary';
+        @let isTableVariantPrimary = variant() === "primary";
         <ids-checkbox
           [indeterminate]="isRowSelected && !_isAllSelected()"
           [checked]="isRowSelected && _isAllSelected()"
@@ -58,21 +47,17 @@
         >
         </ids-checkbox>
       </th>
-      <td
-        *cdkCellDef="let row; let idx = index"
-        cdk-cell
-        class="ids-table__cell ids-table__cell--row-select"
-      >
-          <ids-checkbox
-            class="ids-table__checkbox--row-selector"
-            [disabled]="_unselectableRows().has(row)"
-            [checked]="rowSelection.isSelected(row)"
-            [value]="row"
-            [aria-label]="_intl.rowSelectorAriaLabel"
-            (click)="$event.stopPropagation()"
-            (change)="$event ? rowSelection.toggle(row) : null"
-          >
-          </ids-checkbox>
+      <td *cdkCellDef="let row; let idx = index" cdk-cell class="ids-table__cell ids-table__cell--row-select">
+        <ids-checkbox
+          class="ids-table__checkbox--row-selector"
+          [disabled]="_unselectableRows().has(row)"
+          [checked]="rowSelection.isSelected(row)"
+          [value]="row"
+          [aria-label]="_intl.rowSelectorAriaLabel"
+          (click)="$event.stopPropagation()"
+          (change)="$event ? rowSelection.toggle(row) : null"
+        >
+        </ids-checkbox>
       </td>
     </ng-container>
 
@@ -131,16 +116,12 @@
     </ng-container>
 
     <!-- Column and row definitions for the actual data -->
-    @for (col of columnDefs(); track col.id; let colIndex = $index; let isLast = $last ) {
-      <ng-container
-        [cdkColumnDef]="col.id"
-        [sticky]="col.sticky && !col.stickyEnd"
-        [stickyEnd]="col.stickyEnd && !col.sticky"
-      >
+    @for (col of columnDefs(); track col.id; let colIndex = $index; let isLast = $last) {
+      <ng-container [cdkColumnDef]="col.id" [sticky]="col.sticky && !col.stickyEnd" [stickyEnd]="col.stickyEnd && !col.sticky">
         @let colSortable = col.sortable && enableSorting();
-        @let colNumeric = col.cellRenderer === 'numeric';
+        @let colNumeric = col.cellRenderer === "numeric";
         @let orderName = col.orderName || col.field || col.id;
-        @let sortDirection = colSortable && _sortState()?.sortBy === orderName ? _sortState()?.direction : null;
+        @let sortDirection = colSortable && _sortState()?.sortBy === orderName ? $safeNavigationMigration(_sortState()?.direction) : null;
         @let nextSortDirection = _getNextSortDirectionFor(orderName);
         <th
           *cdkHeaderCellDef
@@ -166,12 +147,15 @@
               (click)="_handleSortClick(orderName)"
             >
               @switch (sortDirection) {
-                @case ('asc') {
-                  <ng-container *ngTemplateOutlet="_sortAscIconTemplate()?.templateRef ?? defaultSortAscIcon"></ng-container>                }
-                @case ('desc') {
-                  <ng-container *ngTemplateOutlet="_sortDescIconTemplate()?.templateRef ?? defaultSortDescIcon"></ng-container>                }
+                @case ("asc") {
+                  <ng-container *ngTemplateOutlet="_sortAscIconTemplate()?.templateRef ?? defaultSortAscIcon"></ng-container>
+                }
+                @case ("desc") {
+                  <ng-container *ngTemplateOutlet="_sortDescIconTemplate()?.templateRef ?? defaultSortDescIcon"></ng-container>
+                }
                 @default {
-                  <ng-container *ngTemplateOutlet="_sortNoneIconTemplate()?.templateRef ?? defaultSortNoneIcon"></ng-container>                }
+                  <ng-container *ngTemplateOutlet="_sortNoneIconTemplate()?.templateRef ?? defaultSortNoneIcon"></ng-container>
+                }
               }
             </button>
           }
@@ -216,7 +200,7 @@
       cdk-row
       class="ids-table__row"
       [rowInfo]="{ rowData: row, index: idx }"
-      [ngClass]="(appearance() !== _appearanceZebra || idx % 2 === 0) ? 'ids-table__row--surface' : 'ids-table__row--secondary'"
+      [ngClass]="appearance() !== _appearanceZebra || idx % 2 === 0 ? 'ids-table__row--surface' : 'ids-table__row--secondary'"
       (click)="_handleRowClick($event, row)"
       (keydown)="_handleRowKeyDown($event, row)"
     ></tr>

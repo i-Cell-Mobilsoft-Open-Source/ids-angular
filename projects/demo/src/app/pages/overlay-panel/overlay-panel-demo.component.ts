@@ -7,15 +7,13 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { CdkMenu } from '@angular/cdk/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsPrefixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import {
-  IdsMenuItemComponent, IdsActiveIndicatorDirective,
-} from '@i-cell/ids-angular/menu';
+import { IdsMenuItemComponent, IdsActiveIndicatorDirective } from '@i-cell/ids-angular/menu';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -40,9 +38,9 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsMenuItemComponent,
     IdsActiveIndicatorDirective,
     CdkMenu,
-
   ],
   templateUrl: './overlay-panel-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../demo-page.scss'],
 })
 export class OverlayPanelDemoComponent {
@@ -51,7 +49,7 @@ export class OverlayPanelDemoComponent {
   // eslint-disable-next-line no-magic-numbers
   public items = Array(3);
 
-  protected _contentBtnTest(nr: string):void {
+  protected _contentBtnTest(nr: string): void {
     alert(`Button in overlay panel clicked! ${nr}`);
   }
 }

@@ -1,6 +1,6 @@
 import { IDS_SIDE_NAV_PARENT } from './tokens/ids-side-nav-parent';
 
-import { Component, contentChildren, inject, input } from '@angular/core';
+import { Component, contentChildren, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
 /**
@@ -23,6 +23,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
       <ng-content select="[icon-trailing]" />
     }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'ids-side-nav-title',
     role: 'treeitem',

@@ -1,7 +1,7 @@
 import { IdsHintMessageComponent } from '../message/hint-message/hint-message.component';
 import { IdsMessageVariant, IdsMessageVariantType } from '../message/types/message-variant.type';
 
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 @Component({
@@ -10,6 +10,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
     class: 'ids-autocomplete-hint',
   },
   imports: [IdsHintMessageComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="ids-autocomplete-hint__wrapper">
       <ids-hint-message [size]="size()" [variant]="variant()">

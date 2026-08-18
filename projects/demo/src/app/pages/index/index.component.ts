@@ -6,7 +6,7 @@ import { HeroData } from '../../model/heroData';
 import { PageEntry } from '../../model/pageEntry';
 import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
     HeroComponent,
     ContentCardComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './index.component.html',
 })
 export class IndexComponent implements OnInit, OnDestroy {

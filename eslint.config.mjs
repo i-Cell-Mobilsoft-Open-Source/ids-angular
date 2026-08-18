@@ -306,6 +306,13 @@ export default tseslint.config(
     },
   },
   {
+    name: "demo",
+    files: ["projects/demo/**/*.ts"],
+    rules: {
+      "@angular-eslint/prefer-on-push-component-change-detection": "off",
+    },
+  },
+  {
     name: "html",
     files: ["**/*.html"],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
@@ -345,7 +352,6 @@ export default tseslint.config(
       "**/public-api.ts",
       "cypress/",
       "cypress.config.ts",
-      "projects/widgets/.storybook",
     ],
   },
 );

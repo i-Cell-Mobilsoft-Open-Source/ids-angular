@@ -8,7 +8,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { CdkMenu } from '@angular/cdk/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsDatepickerDirective, IdsDatepickerTriggerComponent } from '@i-cell/ids-angular/datepicker';
@@ -54,6 +54,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     ControlTableComponent,
   ],
   templateUrl: './side-sheet-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./side-sheet-demo.component.scss'],
 })
 export class SideSheetDemoComponent {

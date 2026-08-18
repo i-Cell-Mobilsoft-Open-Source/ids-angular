@@ -1,11 +1,7 @@
-import {
-  IDS_SPINNER_DEFAULT_CONFIG,
-  IDS_SPINNER_DEFAULT_CONFIG_FACTORY,
-  IdsSpinnerDefaultConfig,
-} from './spinner-defaults';
+import { IDS_SPINNER_DEFAULT_CONFIG, IDS_SPINNER_DEFAULT_CONFIG_FACTORY, IdsSpinnerDefaultConfig } from './spinner-defaults';
 import { IdsSpinnerVariantType } from './types/spinner-variant.type';
 
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentBaseWithDefaults } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_SPINNER_DEFAULT_CONFIG_FACTORY();
@@ -13,13 +9,14 @@ const defaultConfig = IDS_SPINNER_DEFAULT_CONFIG_FACTORY();
 @Component({
   selector: 'ids-spinner',
   templateUrl: './spinner.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.aria-busy]': 'true',
     '[attr.aria-live]': '\'polite\'',
     '[attr.aria-label]': 'this.ariaLabel()',
   },
 })
-export class IdsSpinnerComponent extends ComponentBaseWithDefaults<IdsSpinnerDefaultConfig>  {
+export class IdsSpinnerComponent extends ComponentBaseWithDefaults<IdsSpinnerDefaultConfig> {
   protected override get _hostName(): string {
     return 'spinner';
   }
@@ -43,5 +40,4 @@ export class IdsSpinnerComponent extends ComponentBaseWithDefaults<IdsSpinnerDef
       this.size(),
     ],
   ]));
-
 }

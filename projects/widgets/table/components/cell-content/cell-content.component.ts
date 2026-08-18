@@ -2,7 +2,7 @@ import { IdsTableCellRenderer } from '../../directives/cell-renderer';
 import { IdsTableIntl } from '../../table-intl';
 
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, ElementRef, inject, input, signal, TemplateRef } from '@angular/core';
+import { Component, computed, ElementRef, inject, input, signal, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { isString } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -15,6 +15,7 @@ import { map, startWith } from 'rxjs';
 @Component({
   selector: 'th[idsCellContent],td[idsCellContent],th[idsHeaderCellContent],td[idsHeaderCellContent]',
   templateUrl: './cell-content.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     IdsIconComponent,
     NgComponentOutlet,
@@ -25,7 +26,12 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
   private _elementRef = inject(ElementRef);
   private _intl = inject(IdsTableIntl);
   private _isHeader = (this._elementRef.nativeElement as Element).hasAttribute('idsHeaderCellContent');
-  private _numberFormat = toSignal(this._intl.changes.pipe(map(() => this._intl.numberFormat), startWith(this._intl.numberFormat)));
+  private _numberFormat = toSignal(
+    this._intl.changes.pipe(
+      map(() => this._intl.numberFormat),
+      startWith(this._intl.numberFormat),
+    ),
+  );
 
   public externalCellTemplates = input<Map<string, TemplateRef<unknown>>>();
 
@@ -59,7 +65,7 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
         rawResult = valueFormatter(rawResult);
       }
 
-    // otherwise, provide value by 'valueGetter' function
+      // otherwise, provide value by 'valueGetter' function
     } else {
       const valueFn = this.colDef().valueGetter ?? ((): string => '');
       rawResult = valueFn(rowData) as string;
@@ -88,8 +94,8 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
     rowData: this.rowData(),
     colDef: this.colDef(),
     cellValue: this._cellValue(),
-    ...this._isHeader && (this.colDef().headerCellRendererInput ?? {}),
-    ...!this._isHeader && (this.colDef().cellRendererInput ?? {}),
+    ...(this._isHeader && (this.colDef().headerCellRendererInput ?? {})),
+    ...(!this._isHeader && (this.colDef().cellRendererInput ?? {})),
   }));
 
   protected _cellTemplateName = computed(() => {
@@ -103,7 +109,7 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
   protected _cellTemplate = computed(() => {
     const templateName = this._cellTemplateName();
     const templates = this.externalCellTemplates();
-    return isString(templateName) && templates?.has(templateName) ? templates.get(templateName) ?? null : null;
+    return isString(templateName) && templates?.has(templateName) ? (templates.get(templateName) ?? null) : null;
   });
 
   public updateValue(): void {

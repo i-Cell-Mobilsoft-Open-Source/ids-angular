@@ -1,6 +1,6 @@
 import { MethodTableElement } from './method-table-elements';
 
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import {
   IdsTableCellTemplateDirective,
@@ -18,6 +18,7 @@ import { of } from 'rxjs';
     IdsTableCellTemplateDirective,
   ],
   templateUrl: './method-table.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './method-table.component.scss',
 })
 export class MethodTableComponent implements OnInit {

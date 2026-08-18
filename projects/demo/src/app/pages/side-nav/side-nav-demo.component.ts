@@ -5,9 +5,14 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsSideNavComponent, IdsSideNavItemComponent, IdsSideNavSectionComponent, IdsSideNavTitleComponent } from '@i-cell/ids-angular/side-nav';
+import {
+  IdsSideNavComponent,
+  IdsSideNavItemComponent,
+  IdsSideNavSectionComponent,
+  IdsSideNavTitleComponent,
+} from '@i-cell/ids-angular/side-nav';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -24,6 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TryoutControlComponent,
     ControlTableComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './side-nav-demo.component.html',
 })
 export class SideNavDemoComponent {

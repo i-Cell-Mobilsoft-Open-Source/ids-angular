@@ -6,13 +6,12 @@ import { IDS_CHECKBOX_PARENT, IdsCheckboxParent } from './types/checkbox-parent'
 import { IdsCheckboxState } from './types/checkbox-state.type';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, signal, ViewEncapsulation } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlContainer } from '@angular/forms';
 import {
   coerceBooleanAttribute,
   ComponentBaseWithDefaults,
-  IdsOrientation,
   IdsOrientationType,
   IdsSizeType,
   IDS_CONTROL_CONTAINER,
@@ -130,12 +129,6 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   protected get _shouldShowAsterisk(): boolean {
     return this.showAsterisk();
   };
-
-  private _invalidParentOrientation = effect(() => {
-    if (this.allowParent() && this.orientation() === IdsOrientation.HORIZONTAL) {
-      throw this._createHostError('Parent checkbox can be used only in vertical orientation');
-    }
-  });
 
   public selectAllChild(): void {
     this._childCheckboxes().filter((child) => !child.disabled()).forEach((child) => {

@@ -290,6 +290,40 @@
           "FOOTER_BUTTON": "Tudj meg többet"
         }
       }
+    },
+    "CHECKBOX": {
+      "VARIANTS": {
+        "TITLE": "Checkbox változatai",
+        "DESCRIPTION": "A checkbox komponens különböző változatai: surface (alapértelmezett), light és dark."
+      },
+      "SIZES": {
+        "TITLE": "Checkbox méretei",
+        "DESCRIPTION": "A checkbox komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "STATES": {
+        "TITLE": "Checkbox állapotai",
+        "DESCRIPTION": "A checkbox lehet unchecked, checked vagy indeterminate."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled és readonly",
+        "DESCRIPTION": "A letiltott checkbox nem módosítható. A readonly checkbox megtartja az értékét, de nem interaktív."
+      },
+      "HINT": {
+        "TITLE": "Checkbox hint üzenettel",
+        "DESCRIPTION": "A checkbox label alá hint üzenet projektálható."
+      },
+      "NG_MODEL": {
+        "TITLE": "Checkbox ngModel-lel",
+        "DESCRIPTION": "A checkboxok Angular template-driven formokhoz ngModel-lel köthetők. A required input requiredTrue validatort ad a checkboxhoz."
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Checkbox FormControl-lal",
+        "DESCRIPTION": "A checkboxok Angular reactive formokhoz FormControl-lal köthetők. Kötelező checkboxhoz a Validators.requiredTrue validatort használja."
+      },
+      "FORM_CONTROL_NAME": {
+        "TITLE": "Checkbox formControlName-mel",
+        "DESCRIPTION": "A checkboxok egy FormGroup-on belül formControlName-mel köthetők. Kötelező checkboxhoz a Validators.requiredTrue validatort használja; a required input formControlName-mel nem használható."
+      }
     }
   }
 

@@ -288,7 +288,9 @@ export class IdsCheckboxComponent
     }
   }
 
-  public get displayedMessages(): 'error' | 'hint' | undefined {
+  protected _displayedMessages = computed((): 'error' | 'hint' | undefined => {
+    this._controlState();
+
     const control = this.controlDir()?.control;
     if (
       this._errorMessages().length > 0 &&
@@ -303,7 +305,7 @@ export class IdsCheckboxComponent
       return 'hint';
     }
     return undefined;
-  }
+  });
 
   private _assertRequiredInputIsSupported(): void {
     if (this.required() && this.controlDir() instanceof FormControlName) {

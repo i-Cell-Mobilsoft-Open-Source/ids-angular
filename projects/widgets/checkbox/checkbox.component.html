@@ -40,7 +40,7 @@
       <ng-content />
     </label>
   </div>
-  @let messages = displayedMessages;
+  @let messages = _displayedMessages();
   @if (messages) {
     <div class="ids-checkbox__message-container">
       @switch (messages) {

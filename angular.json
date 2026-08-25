@@ -61,15 +61,10 @@
               "projects/demo/src/assets",
               "projects/demo/src/robots.txt",
               {
-                "glob": "**/*",
-                "input": "node_modules/@i-cell/ids-tokens/css",
-                "output": "assets/ids-tokens"
-              },
-              {
                 "glob": "**/*.{html,ts}",
                 "input": "projects/demo/src/app/components-example",
                 "output": "/assets/examples"
-              },
+              }
             ],
             "styles": [
               "projects/demo/src/styles.scss",

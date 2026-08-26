@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { CHECKBOX_GROUP_EXAMPLES } from '../../components-example/checkbox-group/checkbox-group-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './checkbox-group-demo.component.html',
   styleUrls: [
@@ -35,4 +38,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class CheckboxGroupDemoComponent {
   protected _checkboxGroupDemoService = inject(CheckboxGroupDemoService);
+  public readonly checkboxGroupExamples = CHECKBOX_GROUP_EXAMPLES;
 }

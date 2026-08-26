@@ -244,6 +244,64 @@
         "DESCRIPTION": "Buttons can be grouped together to organize them."
       }
     },
+    "CHECKBOX_GROUP": {
+      "BASIC": {
+        "TITLE": "Basic checkbox group",
+        "DESCRIPTION": "A simple checkbox group with a label and multiple checkboxes bound via ngModel.",
+        "CONTENT": {
+          "FRUITS": "Fruits",
+          "APPLE": "Apple",
+          "BANANA": "Banana",
+          "CHERRY": "Cherry"
+        }
+      },
+      "ORIENTATION": {
+        "TITLE": "Checkbox group orientation",
+        "DESCRIPTION": "Checkbox groups can be oriented vertically (default) or horizontally.",
+        "CONTENT": {
+          "VERTICAL": "Vertical (default)",
+          "HORIZONTAL": "Horizontal",
+          "OPTION_A": "Option A",
+          "OPTION_B": "Option B"
+        }
+      },
+      "PARENT": {
+        "TITLE": "Parent checkbox",
+        "DESCRIPTION": "A checkbox group with a parent checkbox that selects or deselects all children.",
+        "CONTENT": {
+          "PERMISSIONS": "Permissions",
+          "SELECT_ALL": "Select all",
+          "READ": "Read",
+          "WRITE": "Write",
+          "EXECUTE": "Execute"
+        }
+      },
+      "REQUIRED": {
+        "TITLE": "Required validator",
+        "DESCRIPTION": "A checkbox group with a simple required validator using reactive forms.",
+        "CONTENT": {
+          "AGREEMENT": "Agreement",
+          "OPTIONS": "Options",
+          "PRIVACY": "I accept the privacy policy",
+          "MARKETING": "I accept marketing materials",
+          "SUBMIT": "Submit"
+        }
+      },
+      "CUSTOM_VALIDATOR": {
+        "TITLE": "Custom validator",
+        "DESCRIPTION": "A checkbox group with a custom validator that requires at least 2 options to be selected.",
+        "CONTENT": {
+          "TOPPINGS": "Pizza toppings",
+          "SELECT_ALL": "Select all",
+          "HINT": "Select at least 2 toppings",
+          "CHEESE": "Cheese",
+          "HAM": "Ham",
+          "CORN": "Corn",
+          "MUSHROOMS": "Mushrooms",
+          "SUBMIT": "Submit"
+        }
+      }
+    },
     "CARD": {
       "APPEARANCES": {
         "TITLE": "Card appearances",

@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div formGroupName="toppings">
+    <ids-checkbox-group
+      [label]="'EXAMPLES.CHECKBOX_GROUP.CUSTOM_VALIDATOR.CONTENT.TOPPINGS' | translate"
+      [parentLabel]="'EXAMPLES.CHECKBOX_GROUP.CUSTOM_VALIDATOR.CONTENT.SELECT_ALL' | translate"
+      [showAsterisk]="true"
+    >
+      <ids-hint-message>{{ "EXAMPLES.CHECKBOX_GROUP.CUSTOM_VALIDATOR.CONTENT.HINT" | translate }}</ids-hint-message>
+      <ids-checkbox formControlName="cheese">{{ "EXAMPLES.CHECKBOX_GROUP.CUSTOM_VALIDATOR.CONTENT.CHEESE" | translate }}</ids-checkbox>
+      <ids-checkbox formControlName="ham">{{ "EXAMPLES.CHECKBOX_GROUP.CUSTOM_VALIDATOR.CONTENT.HAM" | translate }}</ids-checkbox>
+      <ids-checkbox formControlName="corn">{{ "EXAMPLES.CHECKBOX_GROUP.CUSTOM_VALIDATOR.CONTENT.CORN" | translate }}</ids-checkbox>
+      <ids-checkbox formControlName="mushrooms">{{ "EXAMPLES.CHECKBOX_GROUP.CUSTOM_VALIDATOR.CONTENT.MUSHROOMS" | translate }}</ids-checkbox>
+      <ids-error-message>
+        <ids-error-def code="minimumCountSelected">
+          {{ "CHECKBOX.ERROR.MINIMUM_COUNT_SELECTED" | translate: { minimumCount: 2 } }}
+        </ids-error-def>
+      </ids-error-message>
+    </ids-checkbox-group>
+  </div>
+  <button type="submit" idsButton>{{ "EXAMPLES.CHECKBOX_GROUP.CUSTOM_VALIDATOR.CONTENT.SUBMIT" | translate }}</button>
+</form>

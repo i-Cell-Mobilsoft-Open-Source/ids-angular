@@ -120,3 +120,9 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
+
+<div examples class="flex flex-col gap-6 w-full pt-6 pb-2">
+  @for (example of checkboxGroupExamples; track example.id) {
+    <ids-example-viewer [example]="example" />
+  }
+</div>

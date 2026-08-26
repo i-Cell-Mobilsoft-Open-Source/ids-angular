@@ -240,6 +240,64 @@
         "DESCRIPTION": "A gombok csoportosíthatók, ezek rendszerezésre alkalmasak."
       }
     },
+    "CHECKBOX_GROUP": {
+      "BASIC": {
+        "TITLE": "Alap checkbox csoport",
+        "DESCRIPTION": "Egyszerű checkbox csoport címkével és több checkbox-szal, ngModel kötéssel.",
+        "CONTENT": {
+          "FRUITS": "Gyümölcsök",
+          "APPLE": "Alma",
+          "BANANA": "Banán",
+          "CHERRY": "Cseresznye"
+        }
+      },
+      "ORIENTATION": {
+        "TITLE": "Checkbox csoport orientáció",
+        "DESCRIPTION": "A checkbox csoportok elrendezhetők függőlegesen (alapértelmezett) vagy vízszintesen.",
+        "CONTENT": {
+          "VERTICAL": "Függőleges (alapértelmezett)",
+          "HORIZONTAL": "Vízszintes",
+          "OPTION_A": "A opció",
+          "OPTION_B": "B opció"
+        }
+      },
+      "PARENT": {
+        "TITLE": "Szülő checkbox",
+        "DESCRIPTION": "Checkbox csoport szülő checkbox-szal, amely az összes gyermeket kijelöli vagy törli.",
+        "CONTENT": {
+          "PERMISSIONS": "Jogosultságok",
+          "SELECT_ALL": "Összes kijelölése",
+          "READ": "Olvasás",
+          "WRITE": "Írás",
+          "EXECUTE": "Végrehajtás"
+        }
+      },
+      "REQUIRED": {
+        "TITLE": "Kötelező validátor",
+        "DESCRIPTION": "Checkbox csoport egyszerű kötelező validátorral, reaktív űrlapokkal.",
+        "CONTENT": {
+          "AGREEMENT": "Elfogadás",
+          "OPTIONS": "Opciók",
+          "PRIVACY": "Elfogadom az adatvédelmi irányelveket",
+          "MARKETING": "Elfogadom a marketing anyagokat",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "CUSTOM_VALIDATOR": {
+        "TITLE": "Egyéni validátor",
+        "DESCRIPTION": "Checkbox csoport egyéni validátorral, amely legalább 2 opció kiválasztását követeli meg.",
+        "CONTENT": {
+          "TOPPINGS": "Pizza feltétek",
+          "SELECT_ALL": "Összes kijelölése",
+          "HINT": "Válassz legalább 2 feltétet",
+          "CHEESE": "Sajt",
+          "HAM": "Sonka",
+          "CORN": "Kukorica",
+          "MUSHROOMS": "Gomba",
+          "SUBMIT": "Küldés"
+        }
+      }
+    },
     "CARD": {
       "APPEARANCES": {
         "TITLE": "Card megjelenései",

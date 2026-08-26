@@ -1,0 +1,10 @@
+<form class="flex flex-col gap-ids-container-gap-4" (ngSubmit)="onSubmit(acceptedModel)">
+  <ids-checkbox name="marketing" [(ngModel)]="marketing">I accept the marketing materials</ids-checkbox>
+  <ids-checkbox #acceptedModel="ngModel" name="accepted" [required]="true" [(ngModel)]="accepted">
+    I accept the terms and conditions
+    <ids-error-message>
+      <ids-error-def code="required">Terms and conditions is required.</ids-error-def>
+    </ids-error-message>
+  </ids-checkbox>
+  <button type="submit" idsButton>Submit</button>
+</form>

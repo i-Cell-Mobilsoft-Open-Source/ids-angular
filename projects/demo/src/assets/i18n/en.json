@@ -317,6 +317,40 @@
         }
       }
     },
+    "CHECKBOX": {
+      "VARIANTS": {
+        "TITLE": "Checkbox variants",
+        "DESCRIPTION": "Checkboxes with different color variants: surface (default), light, and dark."
+      },
+      "SIZES": {
+        "TITLE": "Checkbox sizes",
+        "DESCRIPTION": "Checkboxes with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "STATES": {
+        "TITLE": "Checkbox states",
+        "DESCRIPTION": "Checkboxes can be unchecked, checked, or indeterminate."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled and readonly",
+        "DESCRIPTION": "Disabled checkboxes cannot be changed. Readonly checkboxes keep their value but are not interactive."
+      },
+      "HINT": {
+        "TITLE": "Checkbox with hint",
+        "DESCRIPTION": "Checkboxes can project a hint message below the label."
+      },
+      "NG_MODEL": {
+        "TITLE": "Checkbox with ngModel",
+        "DESCRIPTION": "Bind checkboxes with Angular template-driven forms using ngModel. Use the required input to add a requiredTrue validator."
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Checkbox with FormControl",
+        "DESCRIPTION": "Bind checkboxes with Angular reactive forms using FormControl. Use Validators.requiredTrue for a required checkbox."
+      },
+      "FORM_CONTROL_NAME": {
+        "TITLE": "Checkbox with formControlName",
+        "DESCRIPTION": "Bind checkboxes inside a FormGroup using formControlName. Use Validators.requiredTrue on the control; the required input cannot be used with formControlName."
+      }
+    },
     "CHIP": {
       "APPEARANCES": {
         "TITLE": "Chip appearances",

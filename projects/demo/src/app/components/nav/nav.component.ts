@@ -1,53 +1,51 @@
 import { Menu } from './menu.interface';
 
-import { CdkMenuModule } from '@angular/cdk/menu';
 import {
-  AfterViewInit,
+  afterNextRender,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  computed,
+  effect,
   ElementRef,
   HostListener,
   inject,
+  Injector,
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { IsActiveMatchOptions, RouterModule } from '@angular/router';
+import { IsActiveMatchOptions } from '@angular/router';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import {
   IdsSideNavComponent,
+  IdsSideNavItemComponent,
   IdsSideNavSectionComponent,
   IdsSideNavTitleComponent,
-  IdsSideNavItemComponent,
 } from '@i-cell/ids-angular/side-nav';
-import { TranslateModule } from '@ngx-translate/core';
 
 const EXPAND_ANIMATION_DELAY = 300;
 
 @Component({
   selector: 'ids-nav',
   imports: [
-    RouterModule,
-    TranslateModule,
     IdsIconComponent,
     IdsSideNavComponent,
     IdsSideNavSectionComponent,
     IdsSideNavTitleComponent,
     IdsSideNavItemComponent,
-    CdkMenuModule,
   ],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class NavComponent implements AfterViewInit {
+export class NavComponent {
   private readonly _elementRef = inject(ElementRef);
   private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _injector = inject(Injector);
 
   protected _menuItemsOverflow: Record<string, boolean> = {};
   public menu = input<Menu[]>([]);
-  public open = false;
 
   public subsetMatchOptions: IsActiveMatchOptions = {
     paths: 'subset',
@@ -56,8 +54,13 @@ export class NavComponent implements AfterViewInit {
     matrixParams: 'ignored',
   };
 
-  public ngAfterViewInit(): void {
-    this.checkMenuItemOverflows();
+  protected readonly _menu = computed(() => this._markLeafExpandablesOpen(this.menu()));
+
+  constructor() {
+    effect(() => {
+      this._menu();
+      afterNextRender(() => this.checkMenuItemOverflows(), { injector: this._injector });
+    });
   }
 
   @HostListener('window:resize')
@@ -71,18 +74,45 @@ export class NavComponent implements AfterViewInit {
   }
 
   public checkMenuItemOverflows(delay = 0): void {
-    setTimeout(() => {
+    this._runAfter(() => {
       const menuItems = this._elementRef.nativeElement.querySelectorAll('ids-side-nav-item') as NodeListOf<HTMLElement>;
+      const overflow: Record<string, boolean> = {};
 
-      this._menuItemsOverflow = Array.from(menuItems).reduce((items: Record<string, boolean>, menuItem: HTMLElement) => {
-        const menuLabel = menuItem.querySelector(':scope > a > .ids-side-nav-item-label') as HTMLElement;
-        if (!menuLabel || menuLabel.offsetWidth === 0) {
-          return items;
+      for (const menuItem of Array.from(menuItems)) {
+        if (!menuItem.id) {
+          continue;
         }
-        const hasOverflow = menuLabel.scrollWidth > menuLabel.offsetWidth;
-        return { ...items, [menuItem.id]: hasOverflow };
-      }, {});
+        const menuLabel = menuItem.querySelector(':scope > a > .ids-side-nav-item-label') as HTMLElement | null;
+        if (!menuLabel || menuLabel.offsetWidth === 0) {
+          continue;
+        }
+        overflow[menuItem.id] = menuLabel.scrollWidth > menuLabel.offsetWidth;
+      }
+
+      this._menuItemsOverflow = overflow;
       this._cdr.markForCheck();
     }, delay);
+  }
+
+  private _markLeafExpandablesOpen(items: Menu[]): Menu[] {
+    return items.map((item) => {
+      const children = item.children?.length ? this._markLeafExpandablesOpen(item.children) : [];
+      const isExpandable = children.length > 0;
+      const hasNestedExpandable = children.some((child) => (child.children?.length ?? 0) > 0);
+
+      return {
+        ...item,
+        children,
+        $open: isExpandable && !hasNestedExpandable,
+      };
+    });
+  }
+
+  private _runAfter(callback: () => void, delay = 0): void {
+    if (delay <= 0) {
+      requestAnimationFrame(callback);
+      return;
+    }
+    window.setTimeout(callback, delay);
   }
 }

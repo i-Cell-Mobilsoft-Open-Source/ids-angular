@@ -196,6 +196,28 @@
           "By default only one accordion item can be open at a time. Set the \"multi\" input to allow multiple items to be expanded simultaneously."
       }
     },
+    "BADGE": {
+      "VARIANTS": {
+        "TITLE": "Badge variants",
+        "DESCRIPTION": "Badges with different color variants: primary, secondary, brand, surface (default), success, warning, error, light, and dark."
+      },
+      "SIZES": {
+        "TITLE": "Badge sizes",
+        "DESCRIPTION": "Badges with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "ICONS": {
+        "TITLE": "Badge with icons",
+        "DESCRIPTION": "Badges can include a leading icon when badgeShowLeadingElement is enabled."
+      },
+      "LIMIT": {
+        "TITLE": "Badge limit",
+        "DESCRIPTION": "Numeric badge labels can be capped with badgeLimit. Values above the limit are displayed with a plus suffix."
+      },
+      "EMPTY": {
+        "TITLE": "Empty badge",
+        "DESCRIPTION": "A badge without a label is rendered as a status indicator."
+      }
+    },
     "BUTTON": {
       "APPEARANCES": {
         "TITLE": "Button appearances",

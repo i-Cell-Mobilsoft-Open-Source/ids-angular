@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { BADGE_EXAMPLES } from '../../components-example/badge/badge-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { IdsBadgeDirective } from '@i-cell/ids-angular/badge';
@@ -20,10 +22,12 @@ import { TranslatePipe } from '@ngx-translate/core';
     TryoutControlComponent,
     ControlTableComponent,
     DemoAndCodeComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './badge-demo.component.html',
   styleUrl: './badge-demo.component.scss',
 })
 export class BadgeDemoComponent {
   protected _badgeDemoService = inject(BadgeDemoService);
+  public readonly badgeExamples = BADGE_EXAMPLES;
 }

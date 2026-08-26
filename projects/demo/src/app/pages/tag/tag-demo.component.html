@@ -13,7 +13,9 @@
             [size]="_tagDemoService.model.size"
             [variant]="_tagDemoService.model.variant"
             (click)="
-              _tagDemoService.onClick(_tagDemoService.model.appearance + '-' + _tagDemoService.model.size + '-' + _tagDemoService.model.variant)
+              _tagDemoService.onClick(
+                _tagDemoService.model.appearance + '-' + _tagDemoService.model.size + '-' + _tagDemoService.model.variant
+              )
             "
           >
             @if (_tagDemoService.helperModel.hasLeadingIcon) {
@@ -57,7 +59,6 @@
       </div>
     </app-tryout>
   </div>
-
   <div controls class="h-full">
     <app-tryout-controls>
       <app-control-table

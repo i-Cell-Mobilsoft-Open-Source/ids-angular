@@ -1,0 +1,9 @@
+<ids-checkbox-group
+  [label]="'EXAMPLES.CHECKBOX_GROUP.PARENT.CONTENT.PERMISSIONS' | translate"
+  [parentLabel]="'EXAMPLES.CHECKBOX_GROUP.PARENT.CONTENT.SELECT_ALL' | translate"
+  [allowParent]="true"
+>
+  <ids-checkbox [(ngModel)]="group.read">{{ "EXAMPLES.CHECKBOX_GROUP.PARENT.CONTENT.READ" | translate }}</ids-checkbox>
+  <ids-checkbox [(ngModel)]="group.write">{{ "EXAMPLES.CHECKBOX_GROUP.PARENT.CONTENT.WRITE" | translate }}</ids-checkbox>
+  <ids-checkbox [(ngModel)]="group.execute">{{ "EXAMPLES.CHECKBOX_GROUP.PARENT.CONTENT.EXECUTE" | translate }}</ids-checkbox>
+</ids-checkbox-group>

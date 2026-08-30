@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div formGroupName="terms">
+    <ids-checkbox-group [label]="'EXAMPLES.CHECKBOX_GROUP.REQUIRED.CONTENT.AGREEMENT' | translate" [showAsterisk]="true">
+      <ids-checkbox formControlName="privacy">{{ "EXAMPLES.CHECKBOX_GROUP.REQUIRED.CONTENT.PRIVACY" | translate }}</ids-checkbox>
+      <ids-checkbox formControlName="marketing">{{ "EXAMPLES.CHECKBOX_GROUP.REQUIRED.CONTENT.MARKETING" | translate }}</ids-checkbox>
+      <ids-error-message>
+        {{
+          "FORM_FIELD.ERROR.REQUIRED"
+            | translate: { fieldName: ("EXAMPLES.CHECKBOX_GROUP.REQUIRED.CONTENT.OPTIONS" | translate) }
+        }}
+      </ids-error-message>
+    </ids-checkbox-group>
+  </div>
+  <button type="submit" idsButton>{{ "EXAMPLES.CHECKBOX_GROUP.REQUIRED.CONTENT.SUBMIT" | translate }}</button>
+</form>

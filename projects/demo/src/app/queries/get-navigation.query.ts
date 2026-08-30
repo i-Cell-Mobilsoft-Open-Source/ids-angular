@@ -48,6 +48,10 @@ export const GET_NAVIGATION = gql`
               depth
               page {
                 title
+                ... on EntryInterface {
+                  id
+                  slug
+                }
               }
             }
           }

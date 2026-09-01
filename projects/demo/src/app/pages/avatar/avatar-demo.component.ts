@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { AVATAR_EXAMPLES } from '../../components-example/avatar/avatar-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './avatar-demo.component.html',
   styleUrls: [
@@ -32,4 +35,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class AvatarDemoComponent {
   protected _avatarDemoService = inject(AvatarDemoService);
+  public avatarExamples = AVATAR_EXAMPLES;
 }

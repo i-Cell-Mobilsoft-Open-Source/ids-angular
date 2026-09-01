@@ -17,17 +17,17 @@
     <ids-icon fontIcon="chevron-down" />
   </div>
 </div>
-<ng-template
-  cdk-connected-overlay
-  cdkConnectedOverlayLockPosition
-  [cdkConnectedOverlayOrigin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
-  [cdkConnectedOverlayOpen]="isPanelOpen()"
-  [cdkConnectedOverlayPositions]="_connectedPositions"
-  [cdkConnectedOverlayWidth]="_overlayWidth"
-  [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
-  (overlayOutsideClick)="close()"
-  (attach)="_panelAttached()"
-  (detach)="close()"
+<ids-overlay-panel
+  #overlayPanel
+  [origin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
+  [open]="isPanelOpen()"
+  [positions]="_connectedPositions"
+  [width]="_overlayWidth"
+  [size]="parentSize()"
+  [variant]="parentVariant()"
+  [panelClasses]="_overlayPanelClasses()"
+  (attached)="_panelAttached()"
+  (openChange)="_handlePanelOpenChange($event)"
 >
   <div
     #panel
@@ -42,4 +42,4 @@
   >
     <ng-content />
   </div>
-</ng-template>
+</ids-overlay-panel>

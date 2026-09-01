@@ -1,12 +1,12 @@
 import { IdsBreadcrumbListDirective } from './breadcrumb-list.directive';
 
-import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { NgClass } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent, IdsIconButtonVariantType } from '@i-cell/ids-angular/icon-button';
+import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';
 
 @Component({
   selector: 'li[idsBreadcrumbTruncation]',
@@ -15,8 +15,7 @@ import { IdsIconButtonComponent, IdsIconButtonVariantType } from '@i-cell/ids-an
     IdsIconButtonComponent,
     IdsIconComponent,
     CdkOverlayOrigin,
-    CdkConnectedOverlay,
-    CdkTrapFocus,
+    IdsOverlayPanelComponent,
     NgClass,
   ],
   template: `
@@ -33,20 +32,16 @@ import { IdsIconButtonComponent, IdsIconButtonVariantType } from '@i-cell/ids-an
     >
       <ids-icon aria-hidden="true" alt="" fontIcon="more-horiz" />
     </button>
-    <ng-template
-      cdkConnectedOverlay
-      cdkConnectedOverlayLockPosition
-      [cdkConnectedOverlayOrigin]="truncationMenuTrigger"
-      [cdkConnectedOverlayOpen]="isPanelOpen()"
-      [cdkConnectedOverlayPush]="true"
-      [cdkConnectedOverlayPanelClass]="panelClass()"
-      (overlayOutsideClick)="_close()"
-      (detach)="_close()"
+    <ids-overlay-panel
+      [origin]="truncationMenuTrigger"
+      [open]="isPanelOpen()"
+      [panelClasses]="_overlayPanelClasses()"
+      (openChange)="_handlePanelOpenChange($event)"
     >
-      <ol idsBreadcrumbList cdkTrapFocus cdkTrapFocusAutoCapture="true" [ngClass]="overlayClass()">
+      <ol idsBreadcrumbList [ngClass]="overlayClass()">
         <ng-content />
       </ol>
-    </ng-template>
+    </ids-overlay-panel>
   `,
 })
 export class IdsBreadcrumbTruncationComponent {
@@ -56,6 +51,11 @@ export class IdsBreadcrumbTruncationComponent {
   public size = input.required<IdsSizeType>();
   public variant = input.required<IdsIconButtonVariantType>();
   public isPanelOpen = signal<boolean>(false);
+
+  protected _overlayPanelClasses = computed(() => [
+    ...this.panelClass(),
+    'ids-breadcrumb-overlay-panel',
+  ].join(' '));
 
   protected _toggle(): void {
     this.isPanelOpen() ? this._close() : this._open();
@@ -70,6 +70,12 @@ export class IdsBreadcrumbTruncationComponent {
   protected _close(): void {
     if (this.isPanelOpen()) {
       this.isPanelOpen.set(false);
+    }
+  }
+
+  protected _handlePanelOpenChange(open: boolean): void {
+    if (!open) {
+      this._close();
     }
   }
 }

@@ -4,7 +4,7 @@ import { IdsMessageSuffixDirective } from '../../../directives/message-suffix.di
 import { IdsMessageDirective } from '../../../directives/message.directive';
 import { IdsErrorMessageMapping } from '../types/error-message-mapping';
 
-import { Component, ViewEncapsulation, computed, contentChildren, inject, signal } from '@angular/core';
+import { Component, ViewEncapsulation, computed, contentChildren, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
 import { ComponentBase, IDS_CONTROL_CONTAINER, IdsControlAccessor } from '@i-cell/ids-angular/core';
@@ -16,6 +16,7 @@ import { of, startWith, switchMap } from 'rxjs';
   imports: [IdsIconComponent],
   templateUrl: './error-message.component.html',
   hostDirectives: [IdsMessageDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class IdsErrorMessageComponent extends ComponentBase {
@@ -30,19 +31,12 @@ export class IdsErrorMessageComponent extends ComponentBase {
 
   private readonly _fallbackControlDir = signal<IdsControlAccessor | null>(null);
 
-  private readonly _controlDir =
-    this._controlContainer?.controlDir ?? this._fallbackControlDir;
+  private readonly _controlDir = this._controlContainer?.controlDir ?? this._fallbackControlDir;
 
-  private readonly _control = computed<AbstractControl | null>(() =>
-    this._controlDir()?.control ?? null,
-  );
+  private readonly _control = computed<AbstractControl | null>(() => this._controlDir()?.control ?? null);
 
   private readonly _controlStateChanges = toSignal(
-    toObservable(this._control).pipe(
-      switchMap((control) =>
-        control?.events.pipe(startWith(null)) ?? of(null),
-      ),
-    ),
+    toObservable(this._control).pipe(switchMap((control) => control?.events.pipe(startWith(null)) ?? of(null))),
     {
       initialValue: null,
       equal: () => false,
@@ -51,9 +45,7 @@ export class IdsErrorMessageComponent extends ComponentBase {
 
   private readonly _errorDefDirs = contentChildren(IdsErrorDefinitionDirective);
 
-  private readonly _errorDefs = computed(() => this._errorDefDirs().map((errorDefDir) =>
-    errorDefDir.toErrorMessageMapping(),
-  ));
+  private readonly _errorDefs = computed(() => this._errorDefDirs().map((errorDefDir) => errorDefDir.toErrorMessageMapping()));
 
   protected readonly _useValidationMode = computed(() => this._control() !== null && this._errorDefs().length > 0);
 
@@ -88,9 +80,7 @@ export class IdsErrorMessageComponent extends ComponentBase {
 
   public readonly suffixes = contentChildren(IdsMessageSuffixDirective);
 
-  private _selectMostImportantValidationError(
-    control: AbstractControl,
-  ): IdsErrorMessageMapping | null {
+  private _selectMostImportantValidationError(control: AbstractControl): IdsErrorMessageMapping | null {
     const errorDefs = this._errorDefs();
 
     if (!errorDefs.length || !control.errors) {
@@ -102,9 +92,7 @@ export class IdsErrorMessageComponent extends ComponentBase {
     return errorDefs.find((errorDef) => errorCodes.has(errorDef.code)) ?? null;
   }
 
-  protected _getValidationErrorMessage(
-    messageOrFn: IdsErrorMessageMapping['message'],
-  ): string {
+  protected _getValidationErrorMessage(messageOrFn: IdsErrorMessageMapping['message']): string {
     return messageOrFn instanceof Function ? messageOrFn() : messageOrFn;
   }
 }

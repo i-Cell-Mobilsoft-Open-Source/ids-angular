@@ -2,12 +2,13 @@ import { HeroData } from '../../model/heroData';
 import { SafeHtmlPipe } from '../../shared/pipes/safe-html.pipe';
 
 import { Location } from '@angular/common';
-import { Component, effect, input, OnDestroy, OnInit, inject as angularInject } from '@angular/core';
+import { Component, effect, input, OnDestroy, OnInit, inject as angularInject, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
   imports: [SafeHtmlPipe],
   templateUrl: './hero.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent implements OnDestroy, OnInit {

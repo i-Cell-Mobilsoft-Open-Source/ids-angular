@@ -6,7 +6,7 @@ import { TryoutControlComponent } from '../../components/tryout/tryout-controls.
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { NgStyle } from '@angular/common';
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsCardComponent } from '@i-cell/ids-angular/card';
 import { IdsErrorDefinitionDirective, IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
@@ -36,6 +36,7 @@ import { TranslateModule } from '@ngx-translate/core';
     '../demo-page.scss',
     './radio-demo.component.scss',
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioDemoComponent {

@@ -7,7 +7,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { ACCORDION_EXAMPLES } from '../../components-example/accordion/accordion-example';
 import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
-import { Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsAccordionComponent, IdsAccordionItemComponent } from '@i-cell/ids-angular/accordion';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,6 +27,7 @@ import { Subscription } from 'rxjs';
     IdsExampleViewerComponent,
   ],
   templateUrl: './accordion-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../demo-page.scss'],
 })
 export class AccordionDemoComponent implements OnInit, OnDestroy {

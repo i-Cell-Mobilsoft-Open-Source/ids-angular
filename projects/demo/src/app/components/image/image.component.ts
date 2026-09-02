@@ -1,10 +1,11 @@
 import { NgClass } from '@angular/common'; // <-- Import NgClass
-import { Component, input, OnInit, OnDestroy, computed, signal } from '@angular/core';
+import { Component, input, OnInit, OnDestroy, computed, signal, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-image',
   imports: [NgClass],
   templateUrl: './image.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './image.component.scss',
 })
 export class ImageComponent implements OnInit, OnDestroy {

@@ -5,7 +5,7 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { IdsSpinnerComponent } from '@i-cell/ids-angular/spinner/spinner.component';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -19,6 +19,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     ControlTableComponent,
     TryoutControlComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './spinner-demo.component.html',
 })
 export class SpinnerDemoComponent {

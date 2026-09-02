@@ -1,6 +1,9 @@
+packages:
+  - .
+  - projects/widgets
+
 allowBuilds:
-  '@compodoc/compodoc': false
-  '@parcel/watcher': false
+  "@parcel/watcher": false
   cypress: false
   esbuild: false
   lmdb: false

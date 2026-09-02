@@ -5,7 +5,7 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, inject, Injectable, signal, DoCheck } from '@angular/core';
+import { Component, inject, Injectable, signal, DoCheck, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsSizeType } from '@i-cell/ids-angular/core';
 import {
@@ -53,6 +53,7 @@ class DemoMessageState implements IdsMessageParentFormField {
     },
   ],
   templateUrl: './message-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './message-demo.component.scss',
 })
 export class MessageDemoComponent implements DoCheck {

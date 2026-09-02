@@ -7,7 +7,7 @@ import { HeroData } from '../../model/heroData';
 import { PageEntry } from '../../model/pageEntry';
 import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, DestroyRef, OnInit, inject, OnDestroy, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, OnDestroy, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
 type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & { type: 'card' });
@@ -18,6 +18,7 @@ type ComponentBlock = { type: 'heading'; heading: string } | (ContentCardData & 
     HeroComponent,
     ContentCardComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './issue-report.component.html',
 })
 export class IssueReportComponent implements OnInit, OnDestroy {

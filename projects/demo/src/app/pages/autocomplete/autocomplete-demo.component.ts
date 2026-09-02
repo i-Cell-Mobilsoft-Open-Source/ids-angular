@@ -6,7 +6,17 @@ import { TryoutControlComponent } from '../../components/tryout/tryout-controls.
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { AsyncPipe } from '@angular/common';
-import { Component, effect, inject, model, TemplateRef, untracked, viewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  model,
+  TemplateRef,
+  untracked,
+  viewChild,
+  ViewContainerRef,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsDividerComponent } from '@i-cell/ids-angular/divider/public-api';
 import {
@@ -46,6 +56,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TryoutControlComponent,
   ],
   templateUrl: './autocomplete-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../demo-page.scss'],
 })
 export class AutocompleteDemoComponent {

@@ -1,6 +1,6 @@
 import { PropTableElement } from './prop-table-element';
 
-import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, input, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import {
   IdsTableCellTemplateDirective,
@@ -21,6 +21,7 @@ import { of } from 'rxjs';
     TranslateModule,
   ],
   styleUrls: ['./prop-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class PropTableComponent implements OnInit {

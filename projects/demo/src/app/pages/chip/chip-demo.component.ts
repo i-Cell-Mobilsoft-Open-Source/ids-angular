@@ -7,7 +7,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { CHIP_EXAMPLES } from '../../components-example/chip/chip-examples';
 import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsAvatarComponent } from '@i-cell/ids-angular/avatar';
 import { IdsChipComponent, IdsChipGroupComponent } from '@i-cell/ids-angular/chip';
@@ -34,6 +34,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsExampleViewerComponent,
   ],
   templateUrl: './chip-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     '../demo-page.scss',
     './chip-demo.component.scss',

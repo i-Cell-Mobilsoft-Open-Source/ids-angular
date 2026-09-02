@@ -7,7 +7,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { CHECKBOX_EXAMPLES } from '../../components-example/checkbox/checkbox-examples';
 import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsCheckboxComponent } from '@i-cell/ids-angular/checkbox';
 import { IdsErrorDefinitionDirective, IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
@@ -30,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsExampleViewerComponent,
   ],
   templateUrl: './checkbox-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     '../demo-page.scss',
     './checkbox-demo.component.scss',

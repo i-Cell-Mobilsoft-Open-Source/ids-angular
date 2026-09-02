@@ -1,7 +1,7 @@
 import { ComponentDetailsComponent } from '../../../pages/components/component-details/component-details.component';
 import { ContentCardComponent } from '../../content-card/content-card.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 
 @Component({
@@ -10,6 +10,7 @@ import { IdsChipComponent } from '@i-cell/ids-angular/chip';
     IdsChipComponent,
     ContentCardComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './guidelines.component.html',
 })
 export class GuidelinesComponent {

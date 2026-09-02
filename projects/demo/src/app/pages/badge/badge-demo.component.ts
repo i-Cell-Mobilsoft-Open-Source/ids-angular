@@ -7,7 +7,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { BADGE_EXAMPLES } from '../../components-example/badge/badge-examples';
 import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { IdsBadgeDirective } from '@i-cell/ids-angular/badge';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -25,6 +25,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     IdsExampleViewerComponent,
   ],
   templateUrl: './badge-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './badge-demo.component.scss',
 })
 export class BadgeDemoComponent {

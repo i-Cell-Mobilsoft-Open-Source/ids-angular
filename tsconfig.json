@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -32,18 +31,18 @@
     ],
     "paths": {
       "@i-cell/ids-angular/*": [
-        "projects/widgets/*",
-        "projects/widgets"
+        "./projects/widgets/*",
+        "./projects/widgets"
       ],
       "@i-cell/ids-angular": [
-        "dist/widgets/*",
-        "dist/widgets"
+        "./dist/widgets/*",
+        "./dist/widgets"
       ],
       "@demo-utils/*": [
-        "projects/demo/src/utils/*"
+        "./projects/demo/src/utils/*"
       ],
       "@demo-types/*": [
-        "projects/demo/src/types/*"
+        "./projects/demo/src/types/*"
       ]
     }
   },

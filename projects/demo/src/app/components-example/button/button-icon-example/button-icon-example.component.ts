@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 
@@ -8,6 +8,7 @@ import { IdsIconComponent } from '@i-cell/ids-angular/icon';
     IdsButtonComponent,
     IdsIconComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './button-icon-example.component.html',
 })
 export class ButtonIconExampleComponent {}

@@ -48,7 +48,7 @@
               <ids-error-message>
                 <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
                 <ids-error-def code="minlength">
-                  @let inputRequiredLength = inputFieldModel.control.errors?.["minlength"]?.requiredLength;
+                  @let inputRequiredLength = $safeNavigationMigration(inputFieldModel.control.errors?.["minlength"]?.requiredLength);
                   {{ "FORM_FIELD.ERROR.MINLENGTH" | translate: { fieldName, requiredLength: inputRequiredLength } }}
                 </ids-error-def>
                 <ids-error-def code="pattern">{{ "FORM_FIELD.ERROR.PATTERN" | translate: { fieldName } }}</ids-error-def>
@@ -76,7 +76,8 @@
               <ids-error-message>
                 <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
                 <ids-error-def code="minlength">
-                  @let textareaRequiredLength = _formFieldDemoService.textarea.errors?.["minlength"]?.requiredLength;
+                  @let textareaRequiredLength =
+                    $safeNavigationMigration(_formFieldDemoService.textarea.errors?.["minlength"]?.requiredLength);
                   {{ "FORM_FIELD.ERROR.MINLENGTH" | translate: { fieldName, requiredLength: textareaRequiredLength } }}
                 </ids-error-def>
                 <ids-error-def code="pattern">{{ "FORM_FIELD.ERROR.PATTERN" | translate: { fieldName } }}</ids-error-def>

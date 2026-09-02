@@ -7,7 +7,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 import { AVATAR_EXAMPLES } from '../../components-example/avatar/avatar-examples';
 import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IdsAvatarComponent, IdsAvatarImageDirective } from '@i-cell/ids-angular/avatar';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -28,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsExampleViewerComponent,
   ],
   templateUrl: './avatar-demo.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     '../demo-page.scss',
     './avatar-demo.component.scss',

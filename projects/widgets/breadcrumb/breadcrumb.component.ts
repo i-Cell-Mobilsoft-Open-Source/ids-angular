@@ -9,7 +9,7 @@ import { IdsBreadcrumbHierarchyType } from './types/breadcrumb-hierarchy.type';
 import { IdsBreadcrumbVariantType } from './types/breadcrumb-variant.type';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, ElementRef, inject, input, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentBaseWithDefaults, createClassList, IdsSizeType, ResizeObserverService } from '@i-cell/ids-angular/core';
 import { IdsOverlayPanelAppearanceType, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel';
 import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
@@ -20,6 +20,7 @@ const defaultConfig = IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY();
   selector: 'ids-breadcrumb',
   standalone: true,
   templateUrl: './breadcrumb.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     IdsBreadcrumbDividerComponent,
     IdsBreadcrumbLinkDirective,

@@ -1,3 +1,4 @@
+import { environment } from '../../../environments/environment.development';
 import { ContentCardComponent } from '../../components/content-card/content-card.component';
 import { HeroComponent } from '../../components/hero/hero.component';
 import { ContentCardData } from '../../model/contentCardData';
@@ -5,14 +6,13 @@ import { EntryListData } from '../../model/entryListData';
 import { HeroData } from '../../model/heroData';
 import { GraphqlService } from '../../services/graphql.service';
 
-import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { IdsChipGroupComponent, IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from 'projects/demo/src/environments/environment.development';
 import { combineLatest, startWith } from 'rxjs';
 
 const PAGE_SIZE = 8;
@@ -30,6 +30,7 @@ const PAGE_SIZE = 8;
     RouterOutlet,
   ],
   templateUrl: './list-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './list-page.component.scss',
 })
 export class ListPageComponent implements OnInit {

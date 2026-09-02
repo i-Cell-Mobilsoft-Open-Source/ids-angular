@@ -15,6 +15,7 @@ import {
   linkedSignal,
   TemplateRef,
   untracked,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { isActive, IsActiveMatchOptions } from '@angular/router';
 import { coerceBooleanAttribute } from '@i-cell/ids-angular/core';
@@ -54,7 +55,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
       [attr.aria-current]="active()"
       [attr.aria-expanded]="!_expandable() ? null : _expanded() ? 'true' : 'false'"
       [attr.aria-label]="label()"
-      [attr.href]="disabled() ? null : (target() || null)"
+      [attr.href]="disabled() ? null : target() || null"
       (keydown)="_onKeyDown($event)"
       (click)="_onClick($event)"
       (auxclick)="_onAuxClick($event)"
@@ -82,6 +83,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
     }
     <ng-content select="ng-template" />
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'ids-side-nav-item',
     '[class.ids-side-nav-item-expandable]': '_expandable()',

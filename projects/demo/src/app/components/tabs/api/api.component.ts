@@ -3,7 +3,7 @@ import { ComponentDetailsComponent } from '../../../pages/components/component-d
 import { MethodTableComponent } from '../../method-table/method-table.component';
 import { PropTableComponent } from '../../prop-table/prop-table.component';
 
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
@@ -22,6 +22,7 @@ export interface IComponentDemoService {
     PropTableComponent,
     IdsChipComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './api.component.html',
 })
 export class ApiComponent implements OnInit {

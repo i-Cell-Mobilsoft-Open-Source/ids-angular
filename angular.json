@@ -69,7 +69,7 @@
                 "glob": "**/*.{html,ts}",
                 "input": "projects/demo/src/app/components-example",
                 "output": "/assets/examples"
-              },
+              }
             ],
             "styles": [
               "projects/demo/src/styles.scss",
@@ -183,51 +183,6 @@
               "projects/widgets/**/*.html"
             ],
             "eslintConfig": "projects/widgets/eslint.config.mjs"
-          }
-        },
-        "storybook": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "configDir": "projects/widgets/.storybook",
-            "browserTarget": "widgets:build",
-            "compodoc": true,
-            "compodocArgs": [
-              "-p",
-              "projects/widgets/.storybook/tsconfig.compodoc.json",
-              "-e",
-              "json",
-              "-d",
-              "projects/widgets"
-            ],
-            "port": 6006,
-            "styles": [
-              "node_modules/@i-cell/ids-tokens/css/tokens.css",
-              "node_modules/@i-cell/ids-styles/dist/components.css",
-              "projects/widgets/.storybook/styles.scss"
-            ],
-            "open": false
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "configDir": "projects/widgets/.storybook",
-            "browserTarget": "widgets:build",
-            "compodoc": true,
-            "compodocArgs": [
-              "-p",
-              "projects/widgets/.storybook/tsconfig.compodoc.json",
-              "-e",
-              "json",
-              "-d",
-              "projects/widgets"
-            ],
-            "outputDir": "dist/storybook/widgets",
-            "styles": [
-              "node_modules/@i-cell/ids-tokens/css/tokens.css",
-              "node_modules/@i-cell/ids-styles/dist/components.css",
-              "projects/widgets/.storybook/styles.scss"
-            ]
           }
         }
       }

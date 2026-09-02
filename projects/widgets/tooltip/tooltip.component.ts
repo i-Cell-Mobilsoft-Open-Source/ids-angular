@@ -4,7 +4,8 @@ import { IdsTooltipTextAlign } from './types/tooltip.type';
 
 import { ChangeDetectionStrategy, Component, computed, input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { IdsSizeType, ComponentBase } from '@i-cell/ids-angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'ids-tooltip',
@@ -25,6 +26,8 @@ export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
   }
 
   private readonly _onHide = new Subject<void>();
+  private readonly _hideSubject = new Subject<void>();
+  private _isHideTimerTicking = false;
 
   public message = input<string>();
   public position = input<IdsTooltipPositionType>();
@@ -36,31 +39,35 @@ export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
   public showPointer = input<boolean>();
 
   public triggerElement?: HTMLElement;
-  private _hideTimeout?: ReturnType<typeof setTimeout>;
 
-  protected _hostClasses = computed(() => this._getHostClasses([
-    this.size(),
-    this.variant(),
-    [
-      'position',
-      this.position(),
-    ],
-    [
-      'text-align',
-      this.textAlign(),
-    ],
-    this.showPointer() ? 'pointered' : null,
-  ]));
+  protected _hostClasses = computed(() =>
+    this._getHostClasses([
+      this.size(),
+      this.variant(),
+      [
+        'position',
+        this.position(),
+      ],
+      [
+        'text-align',
+        this.textAlign(),
+      ],
+      this.showPointer() ? 'pointered' : null,
+    ]),
+  );
 
   public get isHideTimerTicking(): boolean {
-    return Boolean(this._hideTimeout);
+    return this._isHideTimerTicking;
   }
 
   public hide(delay: number): void {
-    this._hideTimeout = setTimeout(() => {
-      this._hideTimeout = undefined;
-      this._onHide.next();
-    }, delay);
+    this._isHideTimerTicking = true;
+    timer(delay)
+      .pipe(takeUntil(this._hideSubject))
+      .subscribe(() => {
+        this._isHideTimerTicking = false;
+        this._onHide.next();
+      });
   }
 
   public afterHidden(): Observable<void> {
@@ -68,12 +75,12 @@ export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
   }
 
   public abortHide(): void {
-    clearTimeout(this._hideTimeout);
-    this._hideTimeout = undefined;
+    this._hideSubject.next();
+    this._isHideTimerTicking = false;
   }
 
   protected _handleMouseEnter(): void {
-    if (this._hideTimeout) {
+    if (this._isHideTimerTicking) {
       this.abortHide();
     }
   }
@@ -85,6 +92,7 @@ export class IdsTooltipComponent extends ComponentBase implements OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this._hideSubject.complete();
     this._onHide.complete();
   }
 }

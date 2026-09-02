@@ -15,6 +15,8 @@ import { DialogDemoService } from './pages/dialog/dialog-demo.service';
 import { DividerDemoService } from './pages/divider/divider-demo.service';
 import { FieldsetDemoService } from './pages/fieldset/fieldset-demo.service';
 import { FormFieldDemoService } from './pages/form-field/form-field-demo.service';
+import { FormFieldInputDemoService } from './pages/form-field-input/form-field-input-demo.service';
+import { FormFieldTextareaDemoService } from './pages/form-field-textarea/form-field-textarea-demo.service';
 import { IconDemoService } from './pages/icon/icon-demo.service';
 import { IconButtonDemoService } from './pages/icon-button/icon-button-demo.service';
 import { MenuItemDemoService } from './pages/menu-item/menu-item-demo.service';
@@ -58,6 +60,9 @@ const DEMO_IMPORTS: Record<string, () => Promise<Type<unknown>>> = {
   divider: () => import('./pages/divider/divider-demo.component').then((module) => module.DividerDemoComponent),
   fieldset: () => import('./pages/fieldset/fieldset-demo.component').then((module) => module.FieldsetDemoComponent),
   'form-field': () => import('./pages/form-field/form-field-demo.component').then((module) => module.FormFieldDemoComponent),
+  input: () => import('./pages/form-field-input/form-field-input-demo.component').then((module) => module.FormFieldInputDemoComponent),
+  textarea: () =>
+    import('./pages/form-field-textarea/form-field-textarea-demo.component').then((module) => module.FormFieldTextareaDemoComponent),
   icon: () => import('./pages/icon/icon-demo.component').then((module) => module.IconDemoComponent),
   'icon-button': () => import('./pages/icon-button/icon-button-demo.component').then((module) => module.IconButtonDemoComponent),
   'menu-item': () => import('./pages/menu-item/menu-item-demo.component').then((module) => module.MenuItemDemoComponent),
@@ -150,6 +155,8 @@ export const routes: Routes = [
           buildComponentRoute('divider', 'COMPONENTS.DIVIDER', DividerDemoService),
           buildComponentRoute('fieldset', 'COMPONENTS.FIELDSET', FieldsetDemoService),
           buildComponentRoute('form-field', 'COMPONENTS.FORM_FIELD', FormFieldDemoService),
+          buildComponentRoute('input', 'COMPONENTS.FORM_FIELD_INPUT', FormFieldInputDemoService),
+          buildComponentRoute('textarea', 'COMPONENTS.FORM_FIELD_TEXTAREA', FormFieldTextareaDemoService),
           buildComponentRoute('icon', 'COMPONENTS.ICON', IconDemoService),
           buildComponentRoute('icon-button', 'COMPONENTS.ICON_BUTTON', IconButtonDemoService),
           buildComponentRoute('menu-item', 'COMPONENTS.MENU_ITEM', MenuItemDemoService),

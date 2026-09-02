@@ -1,0 +1,17 @@
+@let fieldName = "FORM_FIELD.LABEL.NAME" | translate;
+
+<form class="flex flex-col gap-ids-container-gap-4 max-w-80" (submit)="onSubmit($event)">
+  <ids-form-field>
+    <ids-label>{{ fieldName }}</ids-label>
+    <input idsInput [placeholder]="'EXAMPLES.FORM_FIELD_INPUT.FORM_CONTROL.CONTENT.PLACEHOLDER' | translate" [formControl]="name" />
+    <ids-error-message>
+      <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
+    </ids-error-message>
+  </ids-form-field>
+  <div class="flex gap-ids-container-gap-4">
+    <button type="button" idsButton appearance="outlined" (click)="toggleRequired()">
+      {{ "EXAMPLES.FORM_FIELD_INPUT.FORM_CONTROL.CONTENT.TOGGLE_REQUIRED" | translate }}
+    </button>
+    <button type="submit" idsButton>{{ "EXAMPLES.FORM_FIELD_INPUT.FORM_CONTROL.CONTENT.SUBMIT" | translate }}</button>
+  </div>
+</form>

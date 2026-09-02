@@ -1,0 +1,13 @@
+<ids-form-field class="max-w-80">
+  <ids-label>{{ "EXAMPLES.FORM_FIELD_INPUT.ADORNMENTS.CONTENT.LABEL" | translate }}</ids-label>
+  <ids-icon idsLeadingIcon fontIcon="key" />
+  <span idsPrefix>{{ "EXAMPLES.FORM_FIELD_INPUT.ADORNMENTS.CONTENT.PREFIX" | translate }}</span>
+  <input idsInput [placeholder]="'EXAMPLES.FORM_FIELD_INPUT.ADORNMENTS.CONTENT.PLACEHOLDER' | translate" [(ngModel)]="input" />
+  <span idsSuffix>{{ "EXAMPLES.FORM_FIELD_INPUT.ADORNMENTS.CONTENT.SUFFIX" | translate }}</span>
+  <ids-icon idsTrailingIcon fontIcon="cart" />
+  <div idsFormFieldAction>
+    <button type="button" idsIconButton appearance="standard" variant="surface">
+      <ids-icon aria-hidden="true" alt="" fontIcon="search" />
+    </button>
+  </div>
+</ids-form-field>

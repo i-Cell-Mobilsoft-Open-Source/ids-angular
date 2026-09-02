@@ -30,6 +30,8 @@
     "DIVIDER": "Divider",
     "FIELDSET": "Fieldset",
     "FORM_FIELD": "Form field",
+    "FORM_FIELD_INPUT": "Form field input",
+    "FORM_FIELD_TEXTAREA": "Form field textarea",
     "ICON": "Icon",
     "ICON_BUTTON": "Icon button",
     "MENU_ITEM": "Menu item",
@@ -78,7 +80,7 @@
     },
     "ERROR": {
       "REQUIRED": "{{fieldName}} is required.",
-      "MINLENGTH": "{{fieldName}} must be at least {{minLength}} long.",
+      "MINLENGTH": "{{fieldName}} must be at least {{requiredLength}} characters long.",
       "PATTERN": "{{fieldName}} is invalid.",
       "DATE_FORMAT": "{{fieldName}} format invalid.",
       "DATE_MIN": "{{fieldName}} too early.",
@@ -429,6 +431,101 @@
       "FORM_CONTROL_NAME": {
         "TITLE": "Checkbox with formControlName",
         "DESCRIPTION": "Bind checkboxes inside a FormGroup using formControlName. Use Validators.requiredTrue on the control; the required input cannot be used with formControlName."
+      }
+    },
+    "FORM_FIELD_INPUT": {
+      "VARIANTS": {
+        "TITLE": "Form field variants",
+        "DESCRIPTION": "Form fields with different variants: surface (default) and light. Inputs can also be disabled or readonly.",
+        "CONTENT": {
+          "PLACEHOLDER_SURFACE": "Surface variant",
+          "PLACEHOLDER_LIGHT": "Light variant",
+          "VALUE_DISABLED": "Disabled value",
+          "VALUE_READONLY": "Readonly value"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Form field sizes",
+        "DESCRIPTION": "Form fields with different sizes: dense, compact (default), comfortable and spacious.",
+        "CONTENT": {
+          "PLACEHOLDER_DENSE": "Dense",
+          "PLACEHOLDER_COMPACT": "Compact",
+          "PLACEHOLDER_COMFORTABLE": "Comfortable",
+          "PLACEHOLDER_SPACIOUS": "Spacious"
+        }
+      },
+      "ADORNMENTS": {
+        "TITLE": "Input adornments",
+        "DESCRIPTION": "Form fields can include a leading icon, prefix, suffix, trailing icon, and an action button.",
+        "CONTENT": {
+          "LABEL": "Password",
+          "PREFIX": "Prefix",
+          "SUFFIX": "Suffix",
+          "PLACEHOLDER": "Enter password"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Input with ngModel",
+        "DESCRIPTION": "Bind inputs with Angular template-driven forms using ngModel inside ids-form-field. Project hint and error messages for validation feedback.",
+        "CONTENT": {
+          "PLACEHOLDER": "Enter your name",
+          "HINT": "Type at least 3 characters",
+          "SUBMIT": "Submit"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Input with FormControl",
+        "DESCRIPTION": "Bind inputs with Angular reactive forms using FormControl. Validators can be added or removed dynamically at runtime.",
+        "CONTENT": {
+          "PLACEHOLDER": "Enter your name",
+          "TOGGLE_REQUIRED": "Toggle required",
+          "SUBMIT": "Submit"
+        }
+      }
+    },
+    "FORM_FIELD_TEXTAREA": {
+      "VARIANTS": {
+        "TITLE": "Textarea variants",
+        "DESCRIPTION": "Form fields with different variants: surface (default) and light. Textareas can also be disabled or readonly.",
+        "CONTENT": {
+          "LABEL": "Description",
+          "PLACEHOLDER_SURFACE": "Surface variant",
+          "PLACEHOLDER_LIGHT": "Light variant",
+          "VALUE_DISABLED": "Disabled value",
+          "VALUE_READONLY": "Readonly value"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Textarea with FormControl",
+        "DESCRIPTION": "Bind a textarea with Angular reactive forms using FormControl inside ids-form-field.",
+        "CONTENT": {
+          "LABEL": "Description",
+          "PLACEHOLDER": "Enter a description",
+          "HINT": "Provide a short summary"
+        }
+      },
+      "VALIDATION": {
+        "TITLE": "Textarea validation",
+        "DESCRIPTION": "Textareas support reactive form validators. Project ids-error-message with ids-error-def entries for each validation error code.",
+        "CONTENT": {
+          "LABEL": "Comment",
+          "PLACEHOLDER": "Enter a comment",
+          "ERROR_REQUIRED": "Comment is required.",
+          "ERROR_MINLENGTH": "Comment must be at least 10 characters long.",
+          "ERROR_PATTERN": "Comment can only contain letters and spaces.",
+          "SUBMIT": "Submit"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Textarea sizes",
+        "DESCRIPTION": "Textareas inherit the form field size: dense, compact (default), comfortable and spacious.",
+        "CONTENT": {
+          "LABEL": "Description",
+          "PLACEHOLDER_DENSE": "Dense",
+          "PLACEHOLDER_COMPACT": "Compact",
+          "PLACEHOLDER_COMFORTABLE": "Comfortable",
+          "PLACEHOLDER_SPACIOUS": "Spacious"
+        }
       }
     },
     "CHIP": {

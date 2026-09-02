@@ -1,60 +1,23 @@
+import {
+  formFieldDefaults,
+  formFieldInputControlConfig,
+  formFieldMethodControlConfig,
+  FormFieldInputControls,
+  FormFieldInputHelperControls,
+  InputInputControls,
+} from './form-field-demo-shared';
+
 import { Injectable } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
-import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
-import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
-
-const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
-
-type FormFieldInputControls = {
-  size: IdsSizeType,
-  variant: IdsFormFieldVariantType,
-};
-
-type FormFieldHelperControls = {
-  hasLeadingIcon: boolean,
-  hasPrefix: boolean,
-  prefix: string,
-  hasSuffix: boolean,
-  suffix: string,
-  hasTrailingIcon: boolean,
-  hasAction: boolean,
-  label: string,
-  hintMessage: string,
-  dynamicRequired: boolean,
-};
-
-type InputInputControls = {
-  placeholder: string,
-  readonly: boolean,
-  disabled: boolean,
-  required: boolean,
-  canHandleSuccessState: boolean,
-};
 
 @Injectable()
 export class FormFieldDemoService {
-  public readonly formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
-    size: {
-      description: 'Size of the form field.',
-      type: 'IdsSizeType',
-      default: defaultConfig.size,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsSize),
-    },
-    variant: {
-      description: 'Variant of the form field.',
-      type: 'IdsFormFieldVariantType',
-      default: defaultConfig.variant,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsFormFieldVariant),
-    },
-  };
+  public readonly formFieldInputControlConfig = formFieldInputControlConfig;
 
-  public readonly formFieldHelperControlConfig: DemoControlConfig<FormFieldHelperControls> = {
+  public readonly formFieldHelperControlConfig: DemoControlConfig<FormFieldInputHelperControls> = {
     hasLeadingIcon: {
       description: 'Whether the form field has leading icon or not.',
       type: 'boolean',
@@ -127,78 +90,46 @@ export class FormFieldDemoService {
 
   public readonly inputInputControlConfig: DemoControlConfig<InputInputControls> = {
     placeholder: {
-      description: 'Input / textarea placeholder.',
+      description: 'Input placeholder.',
       type: 'string',
       default: '-',
       demoDefault: 'Placeholder',
     },
     readonly: {
-      description: 'Whether input / textarea is readonly or not.',
+      description: 'Whether input is readonly or not.',
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     disabled: {
-      description: 'Whether input / textarea is disabled or not.',
+      description: 'Whether input is disabled or not.',
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
-      onModelChange: (disable?: boolean) => {
-        if (disable) {
-          this.textarea.disable();
-        } else {
-          this.textarea.enable();
-        }
-      },
     },
     required: {
-      description: 'Whether input / textarea is required or not.',
+      description: 'Whether input is required or not.',
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
-      onModelChange: (isRequired?: boolean) => {
-        if (isRequired) {
-          this.textarea.addValidators(Validators.required);
-        } else {
-          this.textarea.removeValidators(Validators.required);
-        }
-      },
     },
     canHandleSuccessState: {
-      description: 'Whether input / textarea can handle success state with a success state matcher.',
+      description: 'Whether input can handle success state with a success state matcher.',
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
   };
 
-  public readonly formFieldMethodControlConfig: DemoMethodConfig = [
-    {
-      name: 'getConnectedOverlayOrigin()',
-      description: 'Gets the connected overlay origin element. This is the element to which the overlay will be connected.',
-      returnType: 'ElementRef',
-    },
-    {
-      name: 'containerClick(event: MouseEvent)',
-      description: 'Simulates a click on the form field container. ' +
-                  ' This is used to test if the form field can handle clicks on the container.',
-      returnType: 'void',
-      parameters: ['event'],
-      parameterTypes: ['MouseEvent'],
-      parameterDescriptions: ['The click event.'],
-    },
-  ];
-
-  public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this.formFieldInputControlConfig);
-  public formFieldHelperDefaults = getDefaultFromDemoConfig<FormFieldHelperControls>(this.formFieldHelperControlConfig);
+  public formFieldDefaults = formFieldDefaults;
+  public formFieldHelperDefaults = getDefaultFromDemoConfig<FormFieldInputHelperControls>(this.formFieldHelperControlConfig);
   public inputDefaults = getDefaultFromDemoConfig<InputInputControls>(this.inputInputControlConfig);
 
   public formFieldModel: FormFieldInputControls = { ...this.formFieldDefaults };
-  public formFieldHelperModel: FormFieldHelperControls = { ...this.formFieldHelperDefaults };
+  public formFieldHelperModel: FormFieldInputHelperControls = { ...this.formFieldHelperDefaults };
   public inputModel: InputInputControls = { ...this.inputDefaults };
 
   public input = '';
-  public textarea = new FormControl('');
   public dynamicInput = new FormControl('');
 
   public reset(): void {
@@ -207,15 +138,14 @@ export class FormFieldDemoService {
     this.inputModel = { ...this.inputDefaults };
 
     this.input = '';
-    this.textarea.setValue('');
     this.dynamicInput.setValue('');
     this.dynamicInput.removeValidators(Validators.required);
     this.dynamicInput.updateValueAndValidity();
   }
 
   public getMethodConfig(): DemoMethodConfig[] {
-    return [this.formFieldMethodControlConfig];
-  };
+    return [formFieldMethodControlConfig];
+  }
 
   public getApiConfig(): DemoControlConfig<unknown>[] {
     return [

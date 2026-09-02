@@ -60,6 +60,18 @@ export const COMPONENT_DATA = [
     imageLink: '#/components/form-field',
   },
   {
+    id: 29,
+    title: 'Form field input',
+    imageUrl: 'assets/images/tn/ids-icon-form-field-tn@2x.png',
+    imageLink: '#/components/form-field',
+  },
+  {
+    id: 28,
+    title: 'Form field textarea',
+    imageUrl: 'assets/images/tn/ids-icon-form-field-tn@2x.png',
+    imageLink: '#/components/form-field',
+  },
+  {
     id: 12,
     title: 'Icon',
     imageUrl: 'assets/images/tn/ids-icon-tn@2x.png',

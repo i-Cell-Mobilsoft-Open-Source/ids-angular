@@ -30,6 +30,8 @@
     "DIVIDER": "Divider",
     "FIELDSET": "Fieldset",
     "FORM_FIELD": "Form field",
+    "FORM_FIELD_INPUT": "Form field input",
+    "FORM_FIELD_TEXTAREA": "Form field textarea",
     "ICON": "Icon",
     "ICON_BUTTON": "Icon button",
     "MENU_ITEM": "Menu item",
@@ -421,6 +423,101 @@
       "FORM_CONTROL_NAME": {
         "TITLE": "Checkbox formControlName-mel",
         "DESCRIPTION": "A checkboxok egy FormGroup-on belül formControlName-mel köthetők. Kötelező checkboxhoz a Validators.requiredTrue validatort használja; a required input formControlName-mel nem használható."
+      }
+    },
+    "FORM_FIELD_INPUT": {
+      "VARIANTS": {
+        "TITLE": "Form field változatai",
+        "DESCRIPTION": "A form field komponens különböző változatai: surface (alapértelmezett) és light. Az input lehet disabled vagy readonly is.",
+        "CONTENT": {
+          "PLACEHOLDER_SURFACE": "Surface változat",
+          "PLACEHOLDER_LIGHT": "Light változat",
+          "VALUE_DISABLED": "Disabled érték",
+          "VALUE_READONLY": "Readonly érték"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Form field méretei",
+        "DESCRIPTION": "A form field komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious.",
+        "CONTENT": {
+          "PLACEHOLDER_DENSE": "Dense",
+          "PLACEHOLDER_COMPACT": "Compact",
+          "PLACEHOLDER_COMFORTABLE": "Comfortable",
+          "PLACEHOLDER_SPACIOUS": "Spacious"
+        }
+      },
+      "ADORNMENTS": {
+        "TITLE": "Input díszítő elemek",
+        "DESCRIPTION": "A form field tartalmazhat leading ikont, prefixet, suffixet, trailing ikont és action gombot.",
+        "CONTENT": {
+          "LABEL": "Jelszó",
+          "PREFIX": "Prefix",
+          "SUFFIX": "Suffix",
+          "PLACEHOLDER": "Adja meg a jelszavát"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Input ngModel-lel",
+        "DESCRIPTION": "Az inputok Angular template-driven formokhoz ngModel-lel köthetők ids-form-field-en belül. Hint és error üzenetek projektálhatók validációs visszajelzéshez.",
+        "CONTENT": {
+          "PLACEHOLDER": "Adja meg a nevét",
+          "HINT": "Legalább 3 karaktert adjon meg",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Input FormControl-lal",
+        "DESCRIPTION": "Az inputok Angular reactive formokhoz FormControl-lal köthetők. A validátorok futásidőben dinamikusan hozzáadhatók vagy eltávolíthatók.",
+        "CONTENT": {
+          "PLACEHOLDER": "Adja meg a nevét",
+          "TOGGLE_REQUIRED": "Kötelező kapcsoló",
+          "SUBMIT": "Küldés"
+        }
+      }
+    },
+    "FORM_FIELD_TEXTAREA": {
+      "VARIANTS": {
+        "TITLE": "Textarea változatai",
+        "DESCRIPTION": "A form field komponens különböző változatai: surface (alapértelmezett) és light. A textarea lehet disabled vagy readonly is.",
+        "CONTENT": {
+          "LABEL": "Leírás",
+          "PLACEHOLDER_SURFACE": "Surface változat",
+          "PLACEHOLDER_LIGHT": "Light változat",
+          "VALUE_DISABLED": "Disabled érték",
+          "VALUE_READONLY": "Readonly érték"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Textarea FormControl-lal",
+        "DESCRIPTION": "A textarea Angular reactive formokhoz FormControl-lal köthető ids-form-field-en belül.",
+        "CONTENT": {
+          "LABEL": "Leírás",
+          "PLACEHOLDER": "Adjon meg egy leírást",
+          "HINT": "Adjon meg egy rövid összefoglalót"
+        }
+      },
+      "VALIDATION": {
+        "TITLE": "Textarea validáció",
+        "DESCRIPTION": "A textarea támogatja a reactive form validátorokat. Az ids-error-message és ids-error-def elemekkel jeleníthetők meg a validációs hibák.",
+        "CONTENT": {
+          "LABEL": "Megjegyzés",
+          "PLACEHOLDER": "Adjon meg egy megjegyzést",
+          "ERROR_REQUIRED": "A megjegyzés kitöltése kötelező.",
+          "ERROR_MINLENGTH": "A megjegyzés legalább 10 karakter hosszú legyen.",
+          "ERROR_PATTERN": "A megjegyzés csak betűket és szóközöket tartalmazhat.",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Textarea méretei",
+        "DESCRIPTION": "A textarea a form field méretét örökli: dense, compact (alapértelmezett), comfortable és spacious.",
+        "CONTENT": {
+          "LABEL": "Leírás",
+          "PLACEHOLDER_DENSE": "Dense",
+          "PLACEHOLDER_COMPACT": "Compact",
+          "PLACEHOLDER_COMFORTABLE": "Comfortable",
+          "PLACEHOLDER_SPACIOUS": "Spacious"
+        }
       }
     },
     "CHIP": {

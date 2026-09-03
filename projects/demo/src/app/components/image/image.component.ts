@@ -33,7 +33,7 @@ export class ImageComponent implements OnInit, OnDestroy {
       case 'do':
         return '!border-solid !border-ids-container-border-success-default !border-2';
       case 'dont':
-        return '!border-solid !border-ids-container-border-warning-default !border-2';
+        return '!border-solid !border-ids-container-border-error-default !border-2';
       default:
         return ''; // Default class
     }

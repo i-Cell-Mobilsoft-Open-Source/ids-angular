@@ -452,6 +452,20 @@
         "TITLE": "Chip-group",
         "DESCRIPTION": "A chipek csoportosíthatók. A megjelenés, a méret és a disabled állapot a csoporttól öröklődik."
       }
+    },
+    "ICON": {
+      "VARIANTS": {
+        "TITLE": "Icon változatai",
+        "DESCRIPTION": "Az icon komponens különböző színváltozatai: primary, secondary, brand, surface (alapértelmezett), success, warning, error, light és dark."
+      },
+      "SIZES": {
+        "TITLE": "Icon méretei",
+        "DESCRIPTION": "Az icon komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious, elérhető mind a small, mind a big méretkészletekben."
+      },
+      "SET": {
+        "TITLE": "Különböző ikonok",
+        "DESCRIPTION": "Válogatás font és SVG ikonokból. A font ikonok a fontIcon, az SVG ikonok az svgIcon inputot használják. A kettő együtt nem használható."
+      }
     }
   }
 

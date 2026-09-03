@@ -460,6 +460,20 @@
         "TITLE": "Chip group",
         "DESCRIPTION": "Chips can be grouped together. Appearance, size and disabled state are inherited from the group."
       }
+    },
+    "ICON": {
+      "VARIANTS": {
+        "TITLE": "Icon variants",
+        "DESCRIPTION": "Icons with different color variants: primary, secondary, brand, surface (default), success, warning, error, light, and dark."
+      },
+      "SIZES": {
+        "TITLE": "Icon sizes",
+        "DESCRIPTION": "Icons with different sizes: dense, compact (default), comfortable and spacious, available in both small and big size collections."
+      },
+      "SET": {
+        "TITLE": "Different icons",
+        "DESCRIPTION": "A selection of font and SVG icons. Font icons use fontIcon; SVG icons use svgIcon. The two cannot be used together."
+      }
     }
   }
 }

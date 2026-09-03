@@ -240,6 +240,24 @@
         "DESCRIPTION": "A badge without a label is rendered as a status indicator."
       }
     },
+    "BREADCRUMB": {
+      "VARIANTS": {
+        "TITLE": "Breadcrumb variants",
+        "DESCRIPTION": "Breadcrumbs with different color variants: primary, surface (default), and light."
+      },
+      "SIZES": {
+        "TITLE": "Breadcrumb sizes",
+        "DESCRIPTION": "Breadcrumbs with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "DIVIDER_TYPES": {
+        "TITLE": "Breadcrumb divider types",
+        "DESCRIPTION": "Breadcrumbs can use an icon or a foreslash as the divider between items."
+      },
+      "TRUNCATED": {
+        "TITLE": "Truncated paths",
+        "DESCRIPTION": "When the path does not fit, remaining items collapse into an overlay panel. Open the truncation menu to compare overlay appearances, sizes, and variants."
+      }
+    },
     "BUTTON": {
       "APPEARANCES": {
         "TITLE": "Button appearances",

@@ -232,6 +232,24 @@
         "DESCRIPTION": "Felirat nélküli badge státuszjelzőként jelenik meg."
       }
     },
+    "BREADCRUMB": {
+      "VARIANTS": {
+        "TITLE": "Breadcrumb változatai",
+        "DESCRIPTION": "A breadcrumb komponens különböző színváltozatai: primary, surface (alapértelmezett) és light."
+      },
+      "SIZES": {
+        "TITLE": "Breadcrumb méretei",
+        "DESCRIPTION": "A breadcrumb komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "DIVIDER_TYPES": {
+        "TITLE": "Breadcrumb elválasztók",
+        "DESCRIPTION": "A breadcrumb elemek között ikon vagy perjel (foreslash) használható elválasztóként."
+      },
+      "TRUNCATED": {
+        "TITLE": "Csonkított útvonalak",
+        "DESCRIPTION": "Ha az útvonal nem fér ki, a rejtett elemek overlay panelben jelennek meg. Nyissa meg a csonkítási menüt a különböző megjelenések, méretek és változatok összehasonlításához."
+      }
+    },
     "BUTTON": {
       "APPEARANCES": {
         "TITLE": "Button megjelenései",

@@ -1,11 +1,10 @@
 .code-bg {
   border-bottom: 1px solid var(--smc-reference-container-color-border-surface-darker-70, #334155);
-  background: var(--smc-reference-container-color-bg-surface-darker-80, #1e293b);  
+  background: var(--smc-reference-container-color-bg-surface-darker-80, #1e293b);
 }
 
 .example-bg{
   border-right: 1px solid var(--smc-reference-container-color-border-surface-darker-20, #E2E8F0);
-  background: var(--smc-reference-container-color-bg-surface-default, #F8FAFC);
 }
 
 .code-bg pre,
@@ -18,5 +17,5 @@
 }
 
 .code-bg code .token.operator {
-    color: #f8f8f2; 
+    color: #f8f8f2;
 }

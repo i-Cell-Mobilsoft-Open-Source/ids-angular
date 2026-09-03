@@ -61,7 +61,7 @@
           }
           @if (data.description) {
             <div
-              class="text-left text-body-medium ids-page-surface [&_ol]:list-decimal [&_ul]:list-disc [&_ol]:pl-5 [&_ul]:pl-5"
+              class="prose text-left text-body-medium ids-page-surface [&_ol]:list-decimal [&_ul]:list-disc [&_ol]:pl-5 [&_ul]:pl-5"
               [class]="data.card?.orientation === 'horizontal' || fullDescription() ? '' : 'line-clamp-3'"
               [innerHTML]="data.description | safeHtml"
             ></div>

@@ -484,6 +484,28 @@
         "TITLE": "Különböző ikonok",
         "DESCRIPTION": "Válogatás font és SVG ikonokból. A font ikonok a fontIcon, az SVG ikonok az svgIcon inputot használják. A kettő együtt nem használható."
       }
+    },
+    "ICON_BUTTON": {
+      "APPEARANCES": {
+        "TITLE": "Icon button megjelenései",
+        "DESCRIPTION": "Az icon button komponens megjelenései: filled (alapértelmezett), outlined és standard."
+      },
+      "VARIANTS": {
+        "TITLE": "Icon button változatai",
+        "DESCRIPTION": "A filled icon button különböző színváltozatai: primary (alapértelmezett), secondary, brand, surface, info, success, warning, error, light és dark."
+      },
+      "SIZES": {
+        "TITLE": "Icon button méretei",
+        "DESCRIPTION": "Az icon button komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "LINKS": {
+        "TITLE": "Icon button linkek",
+        "DESCRIPTION": "Az icon button linkként is használható az <a> tag segítségével."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled icon button",
+        "DESCRIPTION": "A letiltott icon button nem kattintható. A disabled állapot filled, outlined és standard megjelenéssel is bemutatásra kerül."
+      }
     }
   }
 

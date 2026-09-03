@@ -492,6 +492,28 @@
         "TITLE": "Different icons",
         "DESCRIPTION": "A selection of font and SVG icons. Font icons use fontIcon; SVG icons use svgIcon. The two cannot be used together."
       }
+    },
+    "ICON_BUTTON": {
+      "APPEARANCES": {
+        "TITLE": "Icon button appearances",
+        "DESCRIPTION": "The three icon button appearances: filled (default), outlined, and standard."
+      },
+      "VARIANTS": {
+        "TITLE": "Icon button variants",
+        "DESCRIPTION": "Filled icon buttons with different color variants: primary (default), secondary, brand, surface, info, success, warning, error, light, and dark."
+      },
+      "SIZES": {
+        "TITLE": "Icon button sizes",
+        "DESCRIPTION": "Icon buttons with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "LINKS": {
+        "TITLE": "Icon button links",
+        "DESCRIPTION": "Icon buttons can be used as links by using the <a> tag."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled icon button",
+        "DESCRIPTION": "Disabled icon buttons cannot be clicked. Disabled state is shown for filled, outlined, and standard appearances."
+      }
     }
   }
 }

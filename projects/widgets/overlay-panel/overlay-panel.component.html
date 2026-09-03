@@ -5,7 +5,9 @@
   [cdkConnectedOverlayOpen]="open()"
   [cdkConnectedOverlayPanelClass]="_hostClasses()"
   [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
+  [cdkConnectedOverlayWidth]="width() ?? ''"
   (overlayOutsideClick)="_close()"
+  (attach)="_overlayAttached()"
   (detach)="_close()"
 >
   <div

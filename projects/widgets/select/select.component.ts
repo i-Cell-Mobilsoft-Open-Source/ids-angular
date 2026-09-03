@@ -5,7 +5,7 @@ import { IdsSelectTriggerDirective } from './select-trigger.directive';
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -46,7 +46,8 @@ import {
   IdsOptionSelectionChange,
 } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { filter, first } from 'rxjs';
+import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';
+import { filter } from 'rxjs';
 
 const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
 
@@ -56,8 +57,8 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
               ids-select[formControlName]:not([ngModel]):not([formControl])`,
   imports: [
     CdkOverlayOrigin,
-    CdkConnectedOverlay,
     IdsIconComponent,
+    IdsOverlayPanelComponent,
   ],
   templateUrl: './select.component.html',
   encapsulation: ViewEncapsulation.None,
@@ -102,10 +103,8 @@ export class IdsSelectComponent
   private readonly _changeDetectorRef = inject(ChangeDetectorRef);
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
   private readonly _parentFormField = inject(IdsFormFieldComponent);
-  private readonly _overlay = inject(Overlay);
 
   protected readonly _connectedPositions = selectConnectedPositions;
-  protected readonly _scrollStrategy: ScrollStrategy = this._overlay.scrollStrategies.block();
 
   protected _preferredOverlayOrigin: CdkOverlayOrigin | ElementRef | undefined;
   protected _overlayWidth: string | number = 0;
@@ -145,8 +144,9 @@ export class IdsSelectComponent
     this.parentVariant(),
   ]));
 
+  protected _overlayPanelClasses = computed(() => `${this._hostClassName}-overlay-panel`);
+
   private _panel = viewChild<ElementRef<HTMLElement>>('panel');
-  private _overlayDir = viewChild(CdkConnectedOverlay);
 
   public options = contentChildren<IdsOptionComponent>(IdsOptionComponent, { descendants: true });
   public optionGroups = contentChildren<IdsOptionGroupComponent>(IDS_OPTION_GROUP, { descendants: true });
@@ -427,12 +427,8 @@ export class IdsSelectComponent
   }
 
   protected _panelAttached(): void {
-    this._overlayDir()
-      ?.positionChange.pipe(first())
-      .subscribe(() => {
-        this._changeDetectorRef.detectChanges();
-        this._positioningSettled();
-      });
+    this._changeDetectorRef.detectChanges();
+    this._positioningSettled();
   }
 
   public toggle(): void {
@@ -461,6 +457,12 @@ export class IdsSelectComponent
       this._keyManager?.withHorizontalOrientation('ltr');
       this._changeDetectorRef.markForCheck();
       this._onTouched();
+    }
+  }
+
+  protected _handlePanelOpenChange(open: boolean): void {
+    if (!open) {
+      this.close();
     }
   }
 

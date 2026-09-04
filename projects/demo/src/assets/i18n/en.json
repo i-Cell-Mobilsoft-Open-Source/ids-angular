@@ -198,6 +198,109 @@
           "By default only one accordion item can be open at a time. Set the \"multi\" input to allow multiple items to be expanded simultaneously."
       }
     },
+    "AUTOCOMPLETE": {
+      "COMMON": {
+        "PLACEHOLDER": "Type to search...",
+        "CLEAR": "Clear",
+        "LOADING": "Loading...",
+        "NO_RESULTS": "No results found",
+        "FRUIT": "Fruit",
+        "FRUITS": "Fruits"
+      },
+      "FRUITS": {
+        "APPLE": "Apple",
+        "BANANA": "Banana",
+        "BLUEBERRY": "Blueberry",
+        "CHERRY": "Cherry",
+        "FIG": "Fig",
+        "GRAPE": "Grape",
+        "KIWI": "Kiwi",
+        "LEMON": "Lemon",
+        "MANGO": "Mango",
+        "ORANGE": "Orange",
+        "PAPAYA": "Papaya",
+        "PEACH": "Peach",
+        "PEAR": "Pear",
+        "PINEAPPLE": "Pineapple",
+        "RASPBERRY": "Raspberry",
+        "STRAWBERRY": "Strawberry"
+      },
+      "VARIANTS": {
+        "TITLE": "Autocomplete variants",
+        "DESCRIPTION": "Autocomplete inherits color variants from the form field: surface (default) and light.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Autocomplete sizes",
+        "DESCRIPTION": "Autocomplete inherits sizes from the form field: dense, compact (default), comfortable and spacious.",
+        "CONTENT": {
+          "DENSE": "dense",
+          "COMPACT": "compact",
+          "COMFORTABLE": "comfortable",
+          "SPACIOUS": "spacious"
+        }
+      },
+      "MULTISELECT": {
+        "TITLE": "Multiselect",
+        "DESCRIPTION": "Enable multiSelect to choose several options. Selected values appear as removable chips.",
+        "CONTENT": {
+          "HINT": "You can select multiple options."
+        }
+      },
+      "MIN_CHARS": {
+        "TITLE": "Minimum characters",
+        "DESCRIPTION": "Suggestions can wait until the query reaches a minimum character count. This example requires 2 characters.",
+        "CONTENT": {
+          "HINT": "Please provide at least {{count}} characters",
+          "FIELD_HINT": "Type at least {{count}} characters to see suggestions."
+        }
+      },
+      "LIMIT": {
+        "TITLE": "Result limit",
+        "DESCRIPTION": "Cap the number of suggestions and show a hint when more results are available. This example limits results to 2.",
+        "CONTENT": {
+          "TOO_MANY_RESULTS": "Too many results, please refine your search",
+          "FIELD_HINT": "Results are limited to {{count}} items."
+        }
+      },
+      "SPINNER_VARIANT": {
+        "TITLE": "Spinner variants",
+        "DESCRIPTION": "While loading, a spinner replaces the chevron. Compare spinner variants; these fields stay in a loading state."
+      },
+      "NG_MODEL": {
+        "TITLE": "Autocomplete with ngModel",
+        "DESCRIPTION": "Template-driven autocomplete inside a form field using ngModel for two-way binding and validation.",
+        "CONTENT": {
+          "HINT": "Select a fruit from the suggestions.",
+          "SUBMIT": "Submit"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Autocomplete with FormControl",
+        "DESCRIPTION": "Reactive autocomplete inside a form field bound with FormControl for programmatic validation.",
+        "CONTENT": {
+          "HINT": "Select a fruit from the suggestions.",
+          "SUBMIT": "Submit"
+        }
+      },
+      "PRESELECTED": {
+        "TITLE": "Preselected values",
+        "DESCRIPTION": "Autocomplete fields with initial values set via ngModel or FormControl, including async option loading.",
+        "CONTENT": {
+          "NG_MODEL_LABEL": "Fruit (template driven)",
+          "NG_MODEL_HINT": "Pre-selected using ngModel.",
+          "FORM_CONTROL_LABEL": "Fruit (model driven)",
+          "FORM_CONTROL_HINT": "Pre-selected using FormControl.",
+          "NG_MODEL_ASYNC_LABEL": "Fruit (template driven, async options, 10 seconds delay)",
+          "NG_MODEL_ASYNC_HINT": "Pre-selected with ngModel while options load from a simulated request.",
+          "FORM_CONTROL_ASYNC_LABEL": "Fruit (model driven, async options, 10 seconds delay)",
+          "FORM_CONTROL_ASYNC_HINT": "Pre-selected with FormControl while options load from a simulated request."
+        }
+      }
+    },
     "AVATAR": {
       "SIZES": {
         "TITLE": "Avatar sizes",

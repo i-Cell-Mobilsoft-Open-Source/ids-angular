@@ -1,0 +1,34 @@
+@let fieldName = "EXAMPLES.AUTOCOMPLETE.COMMON.FRUIT" | translate;
+
+<form class="flex flex-col gap-ids-container-gap-4 w-80" (submit)="onSubmit($event)">
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.FRUIT" | translate }}</ids-label>
+    <input
+      #autocompleteTrigger="idsAutocompleteTrigger"
+      type="text"
+      [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+      [idsAutocompleteTriggerFor]="autoComplete"
+      (input)="onInput($event)"
+    />
+    <ids-autocomplete
+      #autoComplete="idsAutocomplete"
+      [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+      [formControl]="fruit"
+      [trigger]="autocompleteTrigger"
+    >
+      @let filteredOptions = filterOptions(query);
+      @if (!filteredOptions.length) {
+        <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+      } @else {
+        @for (option of filteredOptions; track option) {
+          <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+        }
+      }
+    </ids-autocomplete>
+    <ids-hint-message>{{ "EXAMPLES.AUTOCOMPLETE.FORM_CONTROL.CONTENT.HINT" | translate }}</ids-hint-message>
+    <ids-error-message>
+      <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
+    </ids-error-message>
+  </ids-form-field>
+  <button type="submit" idsButton>{{ "EXAMPLES.AUTOCOMPLETE.FORM_CONTROL.CONTENT.SUBMIT" | translate }}</button>
+</form>

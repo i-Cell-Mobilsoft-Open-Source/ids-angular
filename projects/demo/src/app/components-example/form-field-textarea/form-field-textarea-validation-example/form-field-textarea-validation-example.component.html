@@ -1,0 +1,17 @@
+<form class="flex flex-col gap-ids-container-gap-4 max-w-80" (submit)="onSubmit($event)">
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.FORM_FIELD_TEXTAREA.VALIDATION.CONTENT.LABEL" | translate }}</ids-label>
+    <textarea
+      idsInput
+      rows="3"
+      [placeholder]="'EXAMPLES.FORM_FIELD_TEXTAREA.VALIDATION.CONTENT.PLACEHOLDER' | translate"
+      [formControl]="comment"
+    ></textarea>
+    <ids-error-message>
+      <ids-error-def code="required">{{ "EXAMPLES.FORM_FIELD_TEXTAREA.VALIDATION.CONTENT.ERROR_REQUIRED" | translate }}</ids-error-def>
+      <ids-error-def code="minlength">{{ "EXAMPLES.FORM_FIELD_TEXTAREA.VALIDATION.CONTENT.ERROR_MINLENGTH" | translate }}</ids-error-def>
+      <ids-error-def code="pattern">{{ "EXAMPLES.FORM_FIELD_TEXTAREA.VALIDATION.CONTENT.ERROR_PATTERN" | translate }}</ids-error-def>
+    </ids-error-message>
+  </ids-form-field>
+  <button type="submit" idsButton>{{ "EXAMPLES.FORM_FIELD_TEXTAREA.VALIDATION.CONTENT.SUBMIT" | translate }}</button>
+</form>

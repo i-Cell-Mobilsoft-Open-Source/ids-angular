@@ -3,7 +3,7 @@
 <app-demo-and-code (resetDemo)="_formFieldDemoService.reset()">
   <div demo class="w-full h-full flex justify-center items-center">
     <app-tryout
-      [title]="'COMPONENTS.FORM_FIELD' | translate"
+      [title]="'COMPONENTS.FORM_FIELD_INPUT' | translate"
       [hasDarkBackground]="_formFieldDemoService.formFieldModel.variant === 'light'"
       (resetted)="_formFieldDemoService.reset()"
     >
@@ -103,3 +103,9 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
+
+<div examples class="flex flex-col gap-6 w-full pt-6 pb-2">
+  @for (example of formFieldInputExamples; track example.id) {
+    <ids-example-viewer [example]="example" />
+  }
+</div>

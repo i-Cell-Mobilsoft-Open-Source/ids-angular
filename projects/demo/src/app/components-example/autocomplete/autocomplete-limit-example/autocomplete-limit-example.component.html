@@ -1,0 +1,32 @@
+<ids-form-field class="w-80">
+  <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.FRUIT" | translate }}</ids-label>
+  <input
+    #autocompleteTrigger="idsAutocompleteTrigger"
+    type="text"
+    [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+    [idsAutocompleteTriggerFor]="autoComplete"
+    (input)="onInput($event)"
+  />
+  <ids-autocomplete
+    #autoComplete="idsAutocomplete"
+    [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+    panelClasses="max-h-[50vh]"
+    [trigger]="autocompleteTrigger"
+    [(ngModel)]="value"
+  >
+    @if (!filteredOptions.length) {
+      <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+    } @else {
+      @if (exceedsLimit) {
+        <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.LIMIT.CONTENT.TOO_MANY_RESULTS" | translate }}</ids-autocomplete-hint>
+        <ids-divider variant="surface" />
+      }
+      @for (option of filteredOptions; track option) {
+        <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+      }
+    }
+  </ids-autocomplete>
+  <ids-hint-message>
+    {{ "EXAMPLES.AUTOCOMPLETE.LIMIT.CONTENT.FIELD_HINT" | translate: { count: limit } }}
+  </ids-hint-message>
+</ids-form-field>

@@ -1,13 +1,10 @@
-import {
-  IdsNestedBlockScrollStrategy,
-  markScrollLockTarget,
-  unmarkScrollLockTarget,
-} from './nested-block-scroll-strategy';
+import { IdsNestedBlockScrollStrategy } from './nested-block-scroll-strategy';
 import {
   IDS_OVERLAY_PANEL_DEFAULT_CONFIG,
   IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY,
   IdsOverlayPanelDefaultConfig,
 } from './overlay-panel-defaults';
+import { IdsOverlayScrollLockService } from './overlay-scroll-lock.service';
 import { IdsOverlayPanelAppearanceType } from './types/overlay-panel-appearance.type';
 import { IdsOverlayPanelVariantType } from './types/overlay-panel-variant.type';
 
@@ -62,6 +59,7 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
 
   private readonly _overlay = inject(Overlay);
   private readonly _overlayPanelDestroyRef = inject(DestroyRef);
+  private readonly _overlayScrollLock = inject(IdsOverlayScrollLockService);
 
   public open = model<boolean>(false);
   public origin = input.required<CdkOverlayOrigin | ElementRef>();
@@ -73,9 +71,12 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   public panelClasses = input<string>('');
   public width = input<string | number>();
   public attached = output<void>();
-  public readonly overlayDir = viewChild(CdkConnectedOverlay);
+  private readonly _overlayDir = viewChild(CdkConnectedOverlay);
 
-  protected readonly _scrollStrategy = new IdsNestedBlockScrollStrategy(this._overlay.scrollStrategies.block());
+  protected readonly _scrollStrategy = new IdsNestedBlockScrollStrategy(
+    this._overlay.scrollStrategies.block(),
+    this._overlayScrollLock,
+  );
 
   protected _hasCdkMenu = computed(() => !!this._cdkMenu());
   private _cdkMenu = contentChild(CdkMenu, { descendants: true });
@@ -94,7 +95,7 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
     });
 
     effect(() => {
-      const overlayRef = this.overlayDir()?.overlayRef;
+      const overlayRef = this._overlayDir()?.overlayRef;
       const overlayWidth = this.width();
 
       untracked(() => overlayRef?.updateSize({ width: overlayWidth }));
@@ -110,6 +111,14 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
 
     this._markOriginScrollAncestors();
     this.open.set(true);
+  }
+
+  public updatePosition(): void {
+    this._overlayDir()?.overlayRef?.updatePosition();
+  }
+
+  public updateSize(width: string | number | undefined = this.width()): void {
+    this._overlayDir()?.overlayRef?.updateSize({ width });
   }
 
   protected _close(): void {
@@ -129,54 +138,17 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   private _markOriginScrollAncestors(): void {
     this._unmarkOriginScrollAncestors();
 
-    const scrollableAncestors = this._getScrollableAncestors(this._getOriginElement());
+    const scrollableAncestors = this._overlayScrollLock.getScrollableAncestors(this.origin());
 
-    scrollableAncestors.forEach((element) => markScrollLockTarget(element));
+    this._overlayScrollLock.markScrollLockTargets(scrollableAncestors);
     this._markedScrollAncestors = scrollableAncestors;
     this._scrollStrategy.setScrollLockTargets(scrollableAncestors);
   }
 
   private _unmarkOriginScrollAncestors(): void {
-    this._markedScrollAncestors.forEach((element) => unmarkScrollLockTarget(element));
+    this._overlayScrollLock.unmarkScrollLockTargets(this._markedScrollAncestors);
     this._markedScrollAncestors = [];
     this._scrollStrategy.setScrollLockTargets([]);
-  }
-
-  private _getOriginElement(): HTMLElement {
-    const origin = this.origin();
-
-    return (origin instanceof CdkOverlayOrigin ? origin.elementRef : origin).nativeElement;
-  }
-
-  private _getScrollableAncestors(originElement: HTMLElement): HTMLElement[] {
-    const scrollableAncestors: HTMLElement[] = [];
-    const body = originElement.ownerDocument.body;
-    let currentElement = originElement.parentElement;
-
-    while (currentElement && currentElement !== body) {
-      if (this._isScrollable(currentElement)) {
-        scrollableAncestors.push(currentElement);
-      }
-
-      currentElement = currentElement.parentElement;
-    }
-
-    return scrollableAncestors;
-  }
-
-  private _isScrollable(element: HTMLElement): boolean {
-    const style = getComputedStyle(element);
-    const scrollableOverflowValues = [
-      'auto',
-      'scroll',
-      'overlay',
-    ];
-    const overflowXIsScrollable =
-      scrollableOverflowValues.includes(style.overflowX) && element.scrollWidth > element.clientWidth;
-    const overflowYIsScrollable =
-      scrollableOverflowValues.includes(style.overflowY) && element.scrollHeight > element.clientHeight;
-
-    return overflowXIsScrollable || overflowYIsScrollable;
   }
 
   protected _panelClasses = computed(() => this._getHostClasses([

@@ -5,15 +5,12 @@ import { IDS_DATE_FORMATTER } from './tokens/date-formatter';
 import { IDS_DATE_PARSER } from './tokens/date-parser';
 import { IdsDatepickerViewType } from './tokens/datepicker-view';
 
-import { hasModifierKey } from '@angular/cdk/keycodes';
-import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 import { afterNextRender, booleanAttribute, ComponentRef, Directive, effect, ElementRef, forwardRef, inject, Injector, input, OnChanges, output, signal, SimpleChanges, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { compareDates, deserializeDate, DirectiveBaseWithDefaults, equalDates, getValidDateOrNull, isValidDate } from '@i-cell/ids-angular/core';
 import { IdsFormFieldComponent } from '@i-cell/ids-angular/forms';
-import { IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel';
-import { filter, merge, Observable, Subscription } from 'rxjs';
+import { IdsOverlayPanelAppearanceType, ɵIdsOverlayRef, ɵIdsOverlayService } from '@i-cell/ids-angular/overlay-panel';
+import { filter, Observable, Subscription } from 'rxjs';
 
 const defaultConfig = IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY();
 
@@ -47,7 +44,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
   private _viewContainerRef = inject(ViewContainerRef);
   private _elementRef = inject(ElementRef);
   private _parent = inject(IdsFormFieldComponent);
-  private _overlay = inject(Overlay);
+  private _overlay = inject(ɵIdsOverlayService);
   private _injector = inject(Injector);
 
   public formatter = input(inject(IDS_DATE_FORMATTER));
@@ -94,9 +91,8 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
   private _onTouched: () => void = () => {};
   private _onValidatorChange: () => void = () => {};
 
-  private _overlayRef: OverlayRef | null = null;
+  private _overlayRef: ɵIdsOverlayRef<IdsCalendarComponent> | null = null;
   private _componentRef: ComponentRef<IdsCalendarComponent> | null = null;
-  private _scrollStrategy = this._overlay.scrollStrategies.reposition();
 
   private _overlayCloseSub = Subscription.EMPTY;
 
@@ -166,31 +162,47 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
       return;
     }
 
-    this._overlayRef = this._overlay.create(this._getOverlayConfig());
+    this._overlayRef = this._overlay.openComponent(IdsCalendarComponent, {
+      origin: this._parent.getConnectedOverlayOrigin(),
+      positions: datepickerConnectedPositions,
+      transformOriginSelector: '.mat-datepicker-content',
+      flexibleDimensions: false,
+      viewportMargin: 8,
+      lockedPosition: true,
+      hasBackdrop: true,
+      backdropClass: [],
+      direction: 'ltr',
+      panelClass: 'ids-datepicker-panel',
+      viewContainerRef: this._viewContainerRef,
+    });
 
-    this._overlayCloseSub = this._onOverlayClose(this._overlayRef).subscribe((event) => {
+    this._overlayCloseSub = this._overlayRef.closed.subscribe((event) => {
       event?.preventDefault();
       this.close();
     });
-    this._onPageNavigationKeydown(this._overlayRef).subscribe((event) => event?.preventDefault());
+    this._overlayCloseSub.add(
+      this._onPageNavigationKeydown(this._overlayRef).subscribe((event) => event?.preventDefault()),
+    );
 
-    this._componentRef = this._overlayRef.attach(new ComponentPortal(IdsCalendarComponent, this._viewContainerRef));
-    this._componentRef.setInput('value', this.value);
-    this._componentRef.setInput('min', this.minDate());
-    this._componentRef.setInput('max', this.maxDate());
-    this._componentRef.setInput('view', this.view());
-    this._componentRef.setInput('appearance', this.appearance());
-    this._componentRef.setInput('size', this._parent.size());
+    const componentRef = this._overlayRef.componentRef!;
 
-    this._componentRef.instance.selected.subscribe((selectedDate: Date) => {
+    this._componentRef = componentRef;
+    componentRef.setInput('value', this.value);
+    componentRef.setInput('min', this.minDate());
+    componentRef.setInput('max', this.maxDate());
+    componentRef.setInput('view', this.view());
+    componentRef.setInput('appearance', this.appearance());
+    componentRef.setInput('size', this._parent.size());
+
+    componentRef.instance.selected.subscribe((selectedDate: Date) => {
       this._onChange(selectedDate);
       this._setInputValue(this.value);
       this._isValid.set(this._isValidValue(this.value));
       this._parent.controlDir()?.control?.updateValueAndValidity();
       this.close();
     });
-    this._componentRef.instance.monthSelected.subscribe((selectedMonth: Date) => this.monthSelected.emit(selectedMonth));
-    this._componentRef.instance.yearSelected.subscribe((selectedYear: Date) => this.yearSelected.emit(selectedYear));
+    componentRef.instance.monthSelected.subscribe((selectedMonth: Date) => this.monthSelected.emit(selectedMonth));
+    componentRef.instance.yearSelected.subscribe((selectedYear: Date) => this.yearSelected.emit(selectedYear));
 
     this._opened.set(true);
   }
@@ -240,44 +252,15 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     this._elementRef.nativeElement.value = isValidDate(value) ? this.formatter()(value) : '';
   }
 
-  private _getOverlayConfig(): OverlayConfig {
-    const overlayViewportMargin = 8;
-    const positionStrategy = this._overlay
-      .position()
-      .flexibleConnectedTo(this._parent.getConnectedOverlayOrigin())
-      .withTransformOriginOn('.mat-datepicker-content')
-      .withFlexibleDimensions(false)
-      .withViewportMargin(overlayViewportMargin)
-      .withLockedPosition()
-      .withPositions(datepickerConnectedPositions);
-
-    return {
-      positionStrategy,
-      hasBackdrop: true,
-      backdropClass: [],
-      direction: 'ltr',
-      scrollStrategy: this._scrollStrategy,
-      panelClass: 'ids-datepicker-panel',
-    };
-  }
-
   private _disposeOverlay(): void {
     if (this._overlayRef) {
-      this._overlayRef.dispose();
+      this._overlayRef.close();
       this._overlayRef = null;
       this._componentRef = null;
     }
   }
 
-  private _onOverlayClose(overlayRef: OverlayRef): Observable<MouseEvent | KeyboardEvent | void> {
-    return merge(
-      overlayRef.backdropClick(),
-      overlayRef.detachments(),
-      overlayRef.keydownEvents().pipe(filter((event) => event.code === 'Escape' && !hasModifierKey(event))),
-    );
-  }
-
-  private _onPageNavigationKeydown(overlayRef: OverlayRef): Observable<KeyboardEvent> {
+  private _onPageNavigationKeydown(overlayRef: ɵIdsOverlayRef<IdsCalendarComponent>): Observable<KeyboardEvent> {
     return overlayRef.keydownEvents().pipe(filter((event) => [
       'ArrowUp',
       'ArrowDown',

@@ -538,6 +538,26 @@
         }
       }
     },
+    "DIVIDER": {
+      "SIZES": {
+        "TITLE": "Divider méretei",
+        "DESCRIPTION": "A divider komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "VARIANTS": {
+        "TITLE": "Divider változatai",
+        "DESCRIPTION": "A divider komponens különböző színváltozatai: primary (alapértelmezett), secondary, brand, surface, success, warning, error, info, light és dark."
+      },
+      "ORIENTATION": {
+        "TITLE": "Divider orientáció",
+        "DESCRIPTION": "A divider lehet vízszintes vagy függőleges. Vízszintesnél a width, függőlegesnél a height inputot használja.",
+        "CONTENT": {
+          "HORIZONTAL_FULL": "Vízszintes (100%)",
+          "HORIZONTAL_PARTIAL": "Vízszintes (10%)",
+          "VERTICAL_FULL": "Függőleges (100%)",
+          "VERTICAL_PARTIAL": "Függőleges (10%)"
+        }
+      }
+    },
     "CHIP": {
       "APPEARANCES": {
         "TITLE": "Chip megjelenései",

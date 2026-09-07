@@ -1,0 +1,42 @@
+<div class="flex flex-wrap items-start gap-ids-container-gap-16">
+  <div class="flex flex-col gap-ids-container-gap-8">
+    <span>{{ "EXAMPLES.DIALOG.COMMON.STATIC" | translate }}</span>
+    <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="staticDialog.open()">
+      {{ "EXAMPLES.DIALOG.COMMON.OPEN" | translate }}
+    </button>
+
+    <ids-dialog
+      #staticDialog="idsDialog"
+      [mainTitle]="'EXAMPLES.DIALOG.CUSTOM_HEADER.CONTENT.MAIN_TITLE' | translate"
+      [subTitle]="'EXAMPLES.DIALOG.CUSTOM_HEADER.CONTENT.SUB_TITLE' | translate"
+    >
+      <div *idsDialogHeader class="flex items-center gap-ids-container-gap-8">
+        <ids-icon fontIcon="warning" variant="brand" size="spacious" />
+        <div class="flex flex-col gap-ids-container-gap-2">
+          <h2 class="m-0">{{ "EXAMPLES.DIALOG.CUSTOM_HEADER.CONTENT.HEADER_TITLE" | translate }}</h2>
+          <p class="m-0">{{ "EXAMPLES.DIALOG.CUSTOM_HEADER.CONTENT.HEADER_SUBTITLE" | translate }}</p>
+        </div>
+      </div>
+
+      <div idsDialogContent>
+        <p>{{ "EXAMPLES.DIALOG.CUSTOM_HEADER.CONTENT.BODY" | translate }}</p>
+      </div>
+
+      <ng-container idsDialogActions>
+        <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="staticDialog.close()">
+          {{ "EXAMPLES.DIALOG.COMMON.CANCEL" | translate }}
+        </button>
+        <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="staticDialog.close()">
+          {{ "EXAMPLES.DIALOG.COMMON.OK" | translate }}
+        </button>
+      </ng-container>
+    </ids-dialog>
+  </div>
+
+  <div class="flex flex-col gap-ids-container-gap-8">
+    <span>{{ "EXAMPLES.DIALOG.COMMON.DYNAMIC" | translate }}</span>
+    <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="openDynamicDialog()">
+      {{ "EXAMPLES.DIALOG.COMMON.OPEN" | translate }}
+    </button>
+  </div>
+</div>

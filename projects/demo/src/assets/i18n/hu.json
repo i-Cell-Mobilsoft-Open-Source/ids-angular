@@ -765,6 +765,28 @@
         "DESCRIPTION": "Válogatás font és SVG ikonokból. A font ikonok a fontIcon, az SVG ikonok az svgIcon inputot használják. A kettő együtt nem használható."
       }
     },
+    "PAGINATOR": {
+      "VARIANTS": {
+        "TITLE": "Paginator változatai",
+        "DESCRIPTION": "A paginator komponens különböző változatai: primary, secondary, surface (alapértelmezett) és light."
+      },
+      "SIZES": {
+        "TITLE": "Paginator méretei",
+        "DESCRIPTION": "A paginator komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "COMPACT_LAYOUT": {
+        "TITLE": "Compact elrendezés",
+        "DESCRIPTION": "A compactLayout egyszerűsített paginatort ad oldalszám gombok nélkül. A showPrevNextLabel Previous és Next feliratokat ad hozzá compact módban."
+      },
+      "FIRST_LAST_BUTTON": {
+        "TITLE": "Első és utolsó gombok",
+        "DESCRIPTION": "A showFirstLastButton beállítással megjeleníthetők vagy elrejthetők az első és utolsó oldalra ugró gombok."
+      },
+      "TRUNCATED_PAGES": {
+        "TITLE": "Csonkított oldalak",
+        "DESCRIPTION": "Sok oldal esetén az oldalszám gombok a maxDisplayedItemCount alapján csonkítva jelennek meg. A showAllPages minden oldalszám gombot megjelenít."
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button megjelenései",

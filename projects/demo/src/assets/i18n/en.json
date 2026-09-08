@@ -709,6 +709,26 @@
         }
       }
     },
+    "DIVIDER": {
+      "SIZES": {
+        "TITLE": "Divider sizes",
+        "DESCRIPTION": "Dividers with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "VARIANTS": {
+        "TITLE": "Divider variants",
+        "DESCRIPTION": "Dividers with different color variants: primary (default), secondary, brand, surface, success, warning, error, info, light, and dark."
+      },
+      "ORIENTATION": {
+        "TITLE": "Divider orientation",
+        "DESCRIPTION": "Dividers can be horizontal or vertical. Use width for horizontal and height for vertical dividers.",
+        "CONTENT": {
+          "HORIZONTAL_FULL": "Horizontal (100%)",
+          "HORIZONTAL_PARTIAL": "Horizontal (10%)",
+          "VERTICAL_FULL": "Vertical (100%)",
+          "VERTICAL_PARTIAL": "Vertical (10%)"
+        }
+      }
+    },
     "CHIP": {
       "APPEARANCES": {
         "TITLE": "Chip appearances",

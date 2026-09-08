@@ -1,0 +1,121 @@
+<div class="flex flex-col gap-ids-container-gap-16 w-80">
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.PRESELECTED.CONTENT.NG_MODEL_LABEL" | translate }}</ids-label>
+    <input
+      #ngModelTrigger="idsAutocompleteTrigger"
+      type="text"
+      [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+      [idsAutocompleteTriggerFor]="ngModelAutocomplete"
+      (input)="onNgModelInput($event)"
+    />
+    <ids-autocomplete
+      #ngModelAutocomplete="idsAutocomplete"
+      [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+      [trigger]="ngModelTrigger"
+      [(ngModel)]="ngModelValue"
+    >
+      @let ngModelOptions = filterOptions(ngModelQuery);
+      @if (!ngModelOptions.length) {
+        <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+      } @else {
+        @for (option of ngModelOptions; track option) {
+          <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+        }
+      }
+    </ids-autocomplete>
+    <ids-hint-message>{{ "EXAMPLES.AUTOCOMPLETE.PRESELECTED.CONTENT.NG_MODEL_HINT" | translate }}</ids-hint-message>
+  </ids-form-field>
+
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.PRESELECTED.CONTENT.FORM_CONTROL_LABEL" | translate }}</ids-label>
+    <input
+      #formControlTrigger="idsAutocompleteTrigger"
+      type="text"
+      [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+      [idsAutocompleteTriggerFor]="formControlAutocomplete"
+      (input)="onFormControlInput($event)"
+    />
+    <ids-autocomplete
+      #formControlAutocomplete="idsAutocomplete"
+      [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+      [formControl]="formControlValue"
+      [trigger]="formControlTrigger"
+    >
+      @let formControlOptions = filterOptions(formControlQuery);
+      @if (!formControlOptions.length) {
+        <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+      } @else {
+        @for (option of formControlOptions; track option) {
+          <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+        }
+      }
+    </ids-autocomplete>
+    <ids-hint-message>{{ "EXAMPLES.AUTOCOMPLETE.PRESELECTED.CONTENT.FORM_CONTROL_HINT" | translate }}</ids-hint-message>
+  </ids-form-field>
+
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.PRESELECTED.CONTENT.NG_MODEL_ASYNC_LABEL" | translate }}</ids-label>
+    <input
+      #asyncNgModelTrigger="idsAutocompleteTrigger"
+      type="text"
+      [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+      [idsAutocompleteTriggerFor]="asyncNgModelAutocomplete"
+      (input)="onAsyncNgModelInput($event)"
+    />
+    <ids-autocomplete
+      #asyncNgModelAutocomplete="idsAutocomplete"
+      [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+      [ariaLabelLoading]="'EXAMPLES.AUTOCOMPLETE.COMMON.LOADING' | translate"
+      [isLoading]="asyncNgModelLoading()"
+      [trigger]="asyncNgModelTrigger"
+      [(ngModel)]="asyncNgModelValue"
+    >
+      @if (asyncNgModelLoading()) {
+        <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.LOADING" | translate }}</ids-autocomplete-hint>
+      } @else {
+        @let filteredAsyncNgModelOptions = filterAsyncOptions(asyncNgModelOptions(), asyncNgModelQuery);
+        @if (!filteredAsyncNgModelOptions.length) {
+          <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+        } @else {
+          @for (option of filteredAsyncNgModelOptions; track option) {
+            <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+          }
+        }
+      }
+    </ids-autocomplete>
+    <ids-hint-message>{{ "EXAMPLES.AUTOCOMPLETE.PRESELECTED.CONTENT.NG_MODEL_ASYNC_HINT" | translate }}</ids-hint-message>
+  </ids-form-field>
+
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.PRESELECTED.CONTENT.FORM_CONTROL_ASYNC_LABEL" | translate }}</ids-label>
+    <input
+      #asyncFormControlTrigger="idsAutocompleteTrigger"
+      type="text"
+      [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+      [idsAutocompleteTriggerFor]="asyncFormControlAutocomplete"
+      (input)="onAsyncFormControlInput($event)"
+    />
+    <ids-autocomplete
+      #asyncFormControlAutocomplete="idsAutocomplete"
+      [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+      [ariaLabelLoading]="'EXAMPLES.AUTOCOMPLETE.COMMON.LOADING' | translate"
+      [formControl]="asyncFormControlValue"
+      [isLoading]="asyncFormControlLoading()"
+      [trigger]="asyncFormControlTrigger"
+    >
+      @if (asyncFormControlLoading()) {
+        <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.LOADING" | translate }}</ids-autocomplete-hint>
+      } @else {
+        @let filteredAsyncFormControlOptions = filterAsyncOptions(asyncFormControlOptions(), asyncFormControlQuery);
+        @if (!filteredAsyncFormControlOptions.length) {
+          <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+        } @else {
+          @for (option of filteredAsyncFormControlOptions; track option) {
+            <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+          }
+        }
+      }
+    </ids-autocomplete>
+    <ids-hint-message>{{ "EXAMPLES.AUTOCOMPLETE.PRESELECTED.CONTENT.FORM_CONTROL_ASYNC_HINT" | translate }}</ids-hint-message>
+  </ids-form-field>
+</div>

@@ -1,0 +1,52 @@
+<div class="flex flex-col gap-ids-container-gap-16 w-80">
+  <ids-form-field variant="surface">
+    <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.VARIANTS.CONTENT.SURFACE" | translate }}</ids-label>
+    <input
+      #surfaceTrigger="idsAutocompleteTrigger"
+      type="text"
+      [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+      [idsAutocompleteTriggerFor]="surfaceAutocomplete"
+      (input)="onSurfaceInput($event)"
+    />
+    <ids-autocomplete
+      #surfaceAutocomplete="idsAutocomplete"
+      [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+      [trigger]="surfaceTrigger"
+      [(ngModel)]="surfaceValue"
+    >
+      @let surfaceOptions = filterOptions(surfaceQuery);
+      @if (!surfaceOptions.length) {
+        <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+      } @else {
+        @for (option of surfaceOptions; track option) {
+          <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+        }
+      }
+    </ids-autocomplete>
+  </ids-form-field>
+  <ids-form-field variant="light">
+    <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.VARIANTS.CONTENT.LIGHT" | translate }}</ids-label>
+    <input
+      #lightTrigger="idsAutocompleteTrigger"
+      type="text"
+      [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+      [idsAutocompleteTriggerFor]="lightAutocomplete"
+      (input)="onLightInput($event)"
+    />
+    <ids-autocomplete
+      #lightAutocomplete="idsAutocomplete"
+      [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+      [trigger]="lightTrigger"
+      [(ngModel)]="lightValue"
+    >
+      @let lightOptions = filterOptions(lightQuery);
+      @if (!lightOptions.length) {
+        <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+      } @else {
+        @for (option of lightOptions; track option) {
+          <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+        }
+      }
+    </ids-autocomplete>
+  </ids-form-field>
+</div>

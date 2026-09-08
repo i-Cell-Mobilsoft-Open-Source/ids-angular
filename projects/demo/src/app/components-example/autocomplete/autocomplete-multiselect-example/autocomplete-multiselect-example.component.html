@@ -1,0 +1,23 @@
+<ids-form-field class="w-80">
+  <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.FRUITS" | translate }}</ids-label>
+  <ids-autocomplete-chip-list [for]="autocompleteTrigger" />
+  <input
+    #autocompleteTrigger="idsAutocompleteTrigger"
+    type="text"
+    [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+    [idsAutocompleteTriggerFor]="autoComplete"
+    (input)="onInput($event)"
+  />
+  <ids-autocomplete
+    #autoComplete="idsAutocomplete"
+    [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+    [multiSelect]="true"
+    [trigger]="autocompleteTrigger"
+    [(ngModel)]="value"
+  >
+    @for (option of filteredOptions; track option) {
+      <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+    }
+  </ids-autocomplete>
+  <ids-hint-message>{{ "EXAMPLES.AUTOCOMPLETE.MULTISELECT.CONTENT.HINT" | translate }}</ids-hint-message>
+</ids-form-field>

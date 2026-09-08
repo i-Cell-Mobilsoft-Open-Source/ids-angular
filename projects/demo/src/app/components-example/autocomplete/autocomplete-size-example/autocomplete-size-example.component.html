@@ -1,0 +1,117 @@
+<div class="flex flex-col gap-ids-container-gap-16 w-80">
+  <div class="flex flex-col gap-ids-container-gap-8">
+    <span>{{ "EXAMPLES.AUTOCOMPLETE.SIZES.CONTENT.DENSE" | translate }}</span>
+    <ids-form-field size="dense">
+      <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.FRUIT" | translate }}</ids-label>
+      <input
+        #denseTrigger="idsAutocompleteTrigger"
+        type="text"
+        [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+        [idsAutocompleteTriggerFor]="denseAutocomplete"
+        (input)="onInput('dense', $event)"
+      />
+      <ids-autocomplete
+        #denseAutocomplete="idsAutocomplete"
+        [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+        [trigger]="denseTrigger"
+        [(ngModel)]="values.dense"
+      >
+        @let denseOptions = filterOptions(queries.dense);
+        @if (!denseOptions.length) {
+          <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+        } @else {
+          @for (option of denseOptions; track option) {
+            <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+          }
+        }
+      </ids-autocomplete>
+    </ids-form-field>
+  </div>
+
+  <div class="flex flex-col gap-ids-container-gap-8">
+    <span>{{ "EXAMPLES.AUTOCOMPLETE.SIZES.CONTENT.COMPACT" | translate }}</span>
+    <ids-form-field size="compact">
+      <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.FRUIT" | translate }}</ids-label>
+      <input
+        #compactTrigger="idsAutocompleteTrigger"
+        type="text"
+        [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+        [idsAutocompleteTriggerFor]="compactAutocomplete"
+        (input)="onInput('compact', $event)"
+      />
+      <ids-autocomplete
+        #compactAutocomplete="idsAutocomplete"
+        [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+        [trigger]="compactTrigger"
+        [(ngModel)]="values.compact"
+      >
+        @let compactOptions = filterOptions(queries.compact);
+        @if (!compactOptions.length) {
+          <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+        } @else {
+          @for (option of compactOptions; track option) {
+            <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+          }
+        }
+      </ids-autocomplete>
+    </ids-form-field>
+  </div>
+
+  <div class="flex flex-col gap-ids-container-gap-8">
+    <span>{{ "EXAMPLES.AUTOCOMPLETE.SIZES.CONTENT.COMFORTABLE" | translate }}</span>
+    <ids-form-field size="comfortable">
+      <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.FRUIT" | translate }}</ids-label>
+      <input
+        #comfortableTrigger="idsAutocompleteTrigger"
+        type="text"
+        [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+        [idsAutocompleteTriggerFor]="comfortableAutocomplete"
+        (input)="onInput('comfortable', $event)"
+      />
+      <ids-autocomplete
+        #comfortableAutocomplete="idsAutocomplete"
+        [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+        [trigger]="comfortableTrigger"
+        [(ngModel)]="values.comfortable"
+      >
+        @let comfortableOptions = filterOptions(queries.comfortable);
+        @if (!comfortableOptions.length) {
+          <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+        } @else {
+          @for (option of comfortableOptions; track option) {
+            <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+          }
+        }
+      </ids-autocomplete>
+    </ids-form-field>
+  </div>
+
+  <div class="flex flex-col gap-ids-container-gap-8">
+    <span>{{ "EXAMPLES.AUTOCOMPLETE.SIZES.CONTENT.SPACIOUS" | translate }}</span>
+    <ids-form-field size="spacious">
+      <ids-label>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.FRUIT" | translate }}</ids-label>
+      <input
+        #spaciousTrigger="idsAutocompleteTrigger"
+        type="text"
+        [placeholder]="'EXAMPLES.AUTOCOMPLETE.COMMON.PLACEHOLDER' | translate"
+        [idsAutocompleteTriggerFor]="spaciousAutocomplete"
+        (input)="onInput('spacious', $event)"
+      />
+      <ids-autocomplete
+        #spaciousAutocomplete="idsAutocomplete"
+        [ariaLabelClear]="'EXAMPLES.AUTOCOMPLETE.COMMON.CLEAR' | translate"
+        [trigger]="spaciousTrigger"
+        [(ngModel)]="values.spacious"
+      >
+        @let spaciousOptions = filterOptions(queries.spacious);
+        @if (!spaciousOptions.length) {
+          <ids-autocomplete-hint>{{ "EXAMPLES.AUTOCOMPLETE.COMMON.NO_RESULTS" | translate }}</ids-autocomplete-hint>
+        } @else {
+          @for (option of spaciousOptions; track option) {
+            <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+          }
+        }
+      </ids-autocomplete>
+    </ids-form-field>
+  </div>
+</div>

@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { AUTOCOMPLETE_EXAMPLES } from '../../components-example/autocomplete/autocomplete-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject, model, TemplateRef, untracked, viewChild, ViewContainerRef } from '@angular/core';
@@ -44,6 +46,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     TryoutComponent,
     TryoutControlComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './autocomplete-demo.component.html',
   styleUrls: ['../demo-page.scss'],
@@ -51,6 +54,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class AutocompleteDemoComponent {
   protected _autocompleteDemoService = inject(AutocompleteDemoService);
   protected _value = model();
+  public readonly autocompleteExamples = AUTOCOMPLETE_EXAMPLES;
 
   private _viewContainer = viewChild('container', { read: ViewContainerRef });
   private _template = viewChild('template', { read: TemplateRef<unknown> });

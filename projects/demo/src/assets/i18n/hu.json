@@ -194,6 +194,109 @@
         "DESCRIPTION": "Alapértelmezetten egyszerre csak egy accordion elem lehet nyitva. A \"multi\" beállítással több elem is nyitva lehet egyszerre."
       }
     },
+    "AUTOCOMPLETE": {
+      "COMMON": {
+        "PLACEHOLDER": "Kezdjen el gépelni...",
+        "CLEAR": "Törlés",
+        "LOADING": "Betöltés...",
+        "NO_RESULTS": "Nincs találat",
+        "FRUIT": "Gyümölcs",
+        "FRUITS": "Gyümölcsök"
+      },
+      "FRUITS": {
+        "APPLE": "Alma",
+        "BANANA": "Banán",
+        "BLUEBERRY": "Áfonya",
+        "CHERRY": "Cseresznye",
+        "FIG": "Füge",
+        "GRAPE": "Szőlő",
+        "KIWI": "Kivi",
+        "LEMON": "Citrom",
+        "MANGO": "Mangó",
+        "ORANGE": "Narancs",
+        "PAPAYA": "Papaja",
+        "PEACH": "Barack",
+        "PEAR": "Körte",
+        "PINEAPPLE": "Ananász",
+        "RASPBERRY": "Málna",
+        "STRAWBERRY": "Eper"
+      },
+      "VARIANTS": {
+        "TITLE": "Autocomplete változatai",
+        "DESCRIPTION": "Az autocomplete színváltozatait a form field határozza meg: surface (alapértelmezett) és light.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Autocomplete méretei",
+        "DESCRIPTION": "Az autocomplete méreteit a form field határozza meg: dense, compact (alapértelmezett), comfortable és spacious.",
+        "CONTENT": {
+          "DENSE": "dense",
+          "COMPACT": "compact",
+          "COMFORTABLE": "comfortable",
+          "SPACIOUS": "spacious"
+        }
+      },
+      "MULTISELECT": {
+        "TITLE": "Többszörös választás",
+        "DESCRIPTION": "A multiSelect beállítással több opció is kiválasztható. A kiválasztott értékek eltávolítható chipekként jelennek meg.",
+        "CONTENT": {
+          "HINT": "Több opció is kiválasztható."
+        }
+      },
+      "MIN_CHARS": {
+        "TITLE": "Minimum karakterszám",
+        "DESCRIPTION": "A javaslatok megjeleníthetők csak egy minimális karakterszám elérése után. Ez a minta 2 karaktert vár.",
+        "CONTENT": {
+          "HINT": "Adjon meg legalább {{count}} karaktert",
+          "FIELD_HINT": "Írjon be legalább {{count}} karaktert a javaslatok megjelenítéséhez."
+        }
+      },
+      "LIMIT": {
+        "TITLE": "Eredménylimit",
+        "DESCRIPTION": "A javaslatok száma korlátozható, és hint jelenik meg, ha további találatok is vannak. Ez a minta 2 elemre korlátoz.",
+        "CONTENT": {
+          "TOO_MANY_RESULTS": "Túl sok találat, pontosítsa a keresést",
+          "FIELD_HINT": "Az eredmények száma legfeljebb {{count}} elem."
+        }
+      },
+      "SPINNER_VARIANT": {
+        "TITLE": "Spinner változatai",
+        "DESCRIPTION": "Betöltés közben a chevron helyett spinner jelenik meg. Hasonlítsa össze a spinner változatokat; ezek a mezők végig betöltő állapotban maradnak."
+      },
+      "NG_MODEL": {
+        "TITLE": "Autocomplete ngModel-lel",
+        "DESCRIPTION": "Template-driven autocomplete form field-ben ngModel kétirányú kötéssel és validációval.",
+        "CONTENT": {
+          "HINT": "Válasszon egy gyümölcsöt a javaslatok közül.",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Autocomplete FormControl-lal",
+        "DESCRIPTION": "Reaktív autocomplete form field-ben FormControl kötéssel programozott validációhoz.",
+        "CONTENT": {
+          "HINT": "Válasszon egy gyümölcsöt a javaslatok közül.",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "PRESELECTED": {
+        "TITLE": "Előre kiválasztott értékek",
+        "DESCRIPTION": "Autocomplete mezők kezdeti értékkel ngModel vagy FormControl használatával, beleértve az aszinkron opcióbetöltést is.",
+        "CONTENT": {
+          "NG_MODEL_LABEL": "Gyümölcs (template driven)",
+          "NG_MODEL_HINT": "Előre kiválasztva ngModel-lel.",
+          "FORM_CONTROL_LABEL": "Gyümölcs (model driven)",
+          "FORM_CONTROL_HINT": "Előre kiválasztva FormControl-lal.",
+          "NG_MODEL_ASYNC_LABEL": "Gyümölcs (template driven, aszinkron opciók, 10 másodperces késleltetés)",
+          "NG_MODEL_ASYNC_HINT": "Előre kiválasztva ngModel-lel, miközben az opciók szimulált kérésből töltődnek.",
+          "FORM_CONTROL_ASYNC_LABEL": "Gyümölcs (model driven, aszinkron opciók, 10 másodperces késleltetés)",
+          "FORM_CONTROL_ASYNC_HINT": "Előre kiválasztva FormControl-lal, miközben az opciók szimulált kérésből töltődnek."
+        }
+      }
+    },
     "AVATAR": {
       "SIZES": {
         "TITLE": "Avatar méretek",

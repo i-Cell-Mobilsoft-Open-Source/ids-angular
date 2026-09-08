@@ -1,0 +1,48 @@
+<div class="flex flex-col gap-8 max-w-2xl w-full">
+  <div class="grid gap-2">
+    <span>appearances</span>
+    <ids-notification
+      variant="info"
+      title="Button appearances"
+      class="w-full"
+      [closable]="false"
+      [displayActionsAtBottom]="true"
+    >
+      {{ "EXAMPLES.NOTIFICATION.BOTTOM_ACTION_STYLES.CONTENT.APPEARANCES_MESSAGE" | translate }}
+      <button type="button" idsButton idsNotificationActionButton appearance="filled" size="compact">
+        Filled
+      </button>
+      <button type="button" idsButton idsNotificationActionButton appearance="outlined" size="compact">
+        Outlined
+      </button>
+      <button type="button" idsButton idsNotificationActionButton appearance="text" size="compact">
+        Text
+      </button>
+    </ids-notification>
+  </div>
+
+  <div class="grid gap-2">
+    <span>sizes</span>
+    <ids-notification
+      variant="info"
+      title="Button sizes"
+      class="w-full"
+      [closable]="false"
+      [displayActionsAtBottom]="true"
+    >
+      {{ "EXAMPLES.NOTIFICATION.BOTTOM_ACTION_STYLES.CONTENT.SIZES_MESSAGE" | translate }}
+      <button type="button" idsButton idsNotificationActionButton appearance="outlined" size="dense">
+        Dense
+      </button>
+      <button type="button" idsButton idsNotificationActionButton appearance="outlined" size="compact">
+        Compact
+      </button>
+      <button type="button" idsButton idsNotificationActionButton appearance="outlined" size="comfortable">
+        Comfortable
+      </button>
+      <button type="button" idsButton idsNotificationActionButton appearance="outlined" size="spacious">
+        Spacious
+      </button>
+    </ids-notification>
+  </div>
+</div>

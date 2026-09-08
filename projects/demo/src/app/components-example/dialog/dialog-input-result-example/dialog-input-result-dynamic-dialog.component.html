@@ -1,0 +1,22 @@
+<ids-dialog [mainTitle]="'EXAMPLES.DIALOG.INPUT_RESULT.CONTENT.MAIN_TITLE' | translate">
+  <div idsDialogContent>
+    <ids-form-field class="pr-2 pl-2 w-full">
+      <ids-label>{{ "EXAMPLES.DIALOG.INPUT_RESULT.CONTENT.INPUT_LABEL" | translate }}</ids-label>
+      <input
+        idsInput
+        name="dialogInput"
+        [placeholder]="'EXAMPLES.DIALOG.INPUT_RESULT.CONTENT.INPUT_PLACEHOLDER' | translate"
+        [(ngModel)]="dialogInput"
+      />
+    </ids-form-field>
+  </div>
+
+  <ng-container idsDialogActions>
+    <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="close()">
+      {{ "EXAMPLES.DIALOG.COMMON.CANCEL" | translate }}
+    </button>
+    <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="onConfirm()">
+      {{ "EXAMPLES.DIALOG.COMMON.OK" | translate }}
+    </button>
+  </ng-container>
+</ids-dialog>

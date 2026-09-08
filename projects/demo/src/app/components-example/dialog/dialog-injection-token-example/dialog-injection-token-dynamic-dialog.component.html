@@ -1,0 +1,18 @@
+<ids-dialog
+  [mainTitle]="'EXAMPLES.DIALOG.INJECTION_TOKEN.CONTENT.MAIN_TITLE' | translate"
+  [subTitle]="'EXAMPLES.DIALOG.INJECTION_TOKEN.CONTENT.SUB_TITLE' | translate"
+>
+  <div idsDialogContent class="flex flex-col gap-ids-container-gap-8">
+    <p class="m-0">{{ "EXAMPLES.DIALOG.INJECTION_TOKEN.CONTENT.LABEL" | translate }}</p>
+    <p class="m-0">{{ _message }}</p>
+  </div>
+
+  <ng-container idsDialogActions>
+    <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="close()">
+      {{ "EXAMPLES.DIALOG.COMMON.CANCEL" | translate }}
+    </button>
+    <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="close()">
+      {{ "EXAMPLES.DIALOG.COMMON.OK" | translate }}
+    </button>
+  </ng-container>
+</ids-dialog>

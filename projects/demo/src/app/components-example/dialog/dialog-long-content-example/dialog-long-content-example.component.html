@@ -1,0 +1,34 @@
+<div class="flex flex-wrap items-start gap-ids-container-gap-16">
+  <div class="flex flex-col gap-ids-container-gap-8">
+    <span>{{ "EXAMPLES.DIALOG.COMMON.STATIC" | translate }}</span>
+    <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="staticDialog.open()">
+      {{ "EXAMPLES.DIALOG.COMMON.OPEN" | translate }}
+    </button>
+
+    <ids-dialog
+      #staticDialog="idsDialog"
+      [mainTitle]="'EXAMPLES.DIALOG.LONG_CONTENT.CONTENT.MAIN_TITLE' | translate"
+      [subTitle]="'EXAMPLES.DIALOG.LONG_CONTENT.CONTENT.SUB_TITLE' | translate"
+    >
+      <div idsDialogContent class="flex flex-col gap-ids-container-gap-8">
+        <p class="m-0">{{ "EXAMPLES.DIALOG.LONG_CONTENT.CONTENT.PARAGRAPH" | translate }}</p>
+      </div>
+
+      <ng-container idsDialogActions>
+        <button type="button" idsButton appearance="text" size="comfortable" variant="primary" (click)="staticDialog.close()">
+          {{ "EXAMPLES.DIALOG.COMMON.CANCEL" | translate }}
+        </button>
+        <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="staticDialog.close()">
+          {{ "EXAMPLES.DIALOG.COMMON.OK" | translate }}
+        </button>
+      </ng-container>
+    </ids-dialog>
+  </div>
+
+  <div class="flex flex-col gap-ids-container-gap-8">
+    <span>{{ "EXAMPLES.DIALOG.COMMON.DYNAMIC" | translate }}</span>
+    <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="openDynamicDialog()">
+      {{ "EXAMPLES.DIALOG.COMMON.OPEN" | translate }}
+    </button>
+  </div>
+</div>

@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { DIALOG_EXAMPLES } from '../../components-example/dialog/dialog-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, computed, InjectionToken, inject, input, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -192,6 +194,7 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './dialog-demo.component.html',
   styleUrls: [
@@ -200,6 +203,8 @@ export class CustomDialogComponent extends IdsCustomDialogBase {
   ],
 })
 export class DialogDemoComponent {
+  protected readonly _dialogExamples = DIALOG_EXAMPLES;
+
   protected _dialogDemoService = inject(DialogDemoService);
 
   private _dialogService = inject(IdsDialogService);

@@ -9,7 +9,7 @@ import { afterNextRender, booleanAttribute, ComponentRef, Directive, effect, Ele
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { compareDates, deserializeDate, DirectiveBaseWithDefaults, equalDates, getValidDateOrNull, isValidDate } from '@i-cell/ids-angular/core';
 import { IdsFormFieldComponent } from '@i-cell/ids-angular/forms';
-import { IdsOverlayPanelAppearanceType, ɵIdsOverlayRef, ɵIdsOverlayService } from '@i-cell/ids-angular/overlay-panel';
+import { IdsInternalOverlayRef, IdsInternalOverlayService, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel';
 import { filter, Observable, Subscription } from 'rxjs';
 
 const defaultConfig = IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY();
@@ -44,7 +44,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
   private _viewContainerRef = inject(ViewContainerRef);
   private _elementRef = inject(ElementRef);
   private _parent = inject(IdsFormFieldComponent);
-  private _overlay = inject(ɵIdsOverlayService);
+  private _overlay = inject(IdsInternalOverlayService);
   private _injector = inject(Injector);
 
   public formatter = input(inject(IDS_DATE_FORMATTER));
@@ -91,7 +91,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
   private _onTouched: () => void = () => {};
   private _onValidatorChange: () => void = () => {};
 
-  private _overlayRef: ɵIdsOverlayRef<IdsCalendarComponent> | null = null;
+  private _overlayRef: IdsInternalOverlayRef<IdsCalendarComponent> | null = null;
   private _componentRef: ComponentRef<IdsCalendarComponent> | null = null;
 
   private _overlayCloseSub = Subscription.EMPTY;
@@ -260,7 +260,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     }
   }
 
-  private _onPageNavigationKeydown(overlayRef: ɵIdsOverlayRef<IdsCalendarComponent>): Observable<KeyboardEvent> {
+  private _onPageNavigationKeydown(overlayRef: IdsInternalOverlayRef<IdsCalendarComponent>): Observable<KeyboardEvent> {
     return overlayRef.keydownEvents().pipe(filter((event) => [
       'ArrowUp',
       'ArrowDown',

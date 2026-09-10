@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { PAGINATOR_EXAMPLES } from '../../components-example/paginator/paginator-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,10 +22,12 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './paginator-demo.component.html',
   styleUrls: ['../demo-page.scss'],
 })
 export class PaginatorDemoComponent {
   protected _paginatorDemoService = inject(PaginatorDemoService);
+  public readonly paginatorExamples = PAGINATOR_EXAMPLES;
 }

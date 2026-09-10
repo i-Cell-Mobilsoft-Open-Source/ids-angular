@@ -834,6 +834,28 @@
         "DESCRIPTION": "A selection of font and SVG icons. Font icons use fontIcon; SVG icons use svgIcon. The two cannot be used together."
       }
     },
+    "PAGINATOR": {
+      "VARIANTS": {
+        "TITLE": "Paginator variants",
+        "DESCRIPTION": "Paginators with different color variants: primary, secondary, surface (default), and light."
+      },
+      "SIZES": {
+        "TITLE": "Paginator sizes",
+        "DESCRIPTION": "Paginators with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "COMPACT_LAYOUT": {
+        "TITLE": "Compact layout",
+        "DESCRIPTION": "Use compactLayout for a simplified paginator without page buttons. showPrevNextLabel adds Previous and Next labels in compact mode."
+      },
+      "FIRST_LAST_BUTTON": {
+        "TITLE": "First and last buttons",
+        "DESCRIPTION": "Use showFirstLastButton to show or hide the first and last page navigation buttons."
+      },
+      "TRUNCATED_PAGES": {
+        "TITLE": "Truncated pages",
+        "DESCRIPTION": "When there are many pages, page buttons are truncated using maxDisplayedItemCount. Set showAllPages to display every page button."
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button appearances",

@@ -759,6 +759,67 @@
         "DESCRIPTION": "Chips can be grouped together. Appearance, size and disabled state are inherited from the group."
       }
     },
+    "NOTIFICATION": {
+      "VARIANTS": {
+        "TITLE": "Notification variants",
+        "DESCRIPTION": "Notifications with different color variants: surface, light, dark, info, success, warning, and error.",
+        "CONTENT": {
+          "SURFACE_TITLE": "Surface notification",
+          "SURFACE_MESSAGE": "Notification message for the surface variant.",
+          "LIGHT_TITLE": "Light notification",
+          "LIGHT_MESSAGE": "Notification message for the light variant.",
+          "DARK_TITLE": "Dark notification",
+          "DARK_MESSAGE": "Notification message for the dark variant.",
+          "INFO_TITLE": "Info notification",
+          "INFO_MESSAGE": "Notification message for the info variant.",
+          "SUCCESS_TITLE": "Success notification",
+          "SUCCESS_MESSAGE": "Notification message for the success variant.",
+          "WARNING_TITLE": "Warning notification",
+          "WARNING_MESSAGE": "Notification message for the warning variant.",
+          "ERROR_TITLE": "Error notification",
+          "ERROR_MESSAGE": "Notification message for the error variant."
+        }
+      },
+      "APPEARANCES": {
+        "TITLE": "Notification appearances",
+        "DESCRIPTION": "The two notification appearances: filled and outlined.",
+        "CONTENT": {
+          "FILLED_TITLE": "Filled notification",
+          "FILLED_MESSAGE": "Notification with filled appearance.",
+          "OUTLINED_TITLE": "Outlined notification",
+          "OUTLINED_MESSAGE": "Notification with outlined appearance."
+        }
+      },
+      "ICONS": {
+        "TITLE": "Notification with icon",
+        "DESCRIPTION": "Notifications can include a leading icon to reinforce the message type.",
+        "CONTENT": {
+          "TITLE": "Information",
+          "MESSAGE": "Notifications can display a leading icon to reinforce the message type."
+        }
+      },
+      "ACTION_BUTTONS": {
+        "TITLE": "Action buttons",
+        "DESCRIPTION": "Notifications support action buttons with leading and trailing icons. Actions can appear on the right or at the bottom via displayActionsAtBottom. Buttons can be disabled individually.",
+        "CONTENT": {
+          "ACTIONS_ON_THE_RIGHT": "actions on the right",
+          "ACTIONS_AT_BOTTOM": "actions at bottom",
+          "TITLE": "Action required",
+          "MESSAGE_RIGHT": "Actions appear next to the message when displayActionsAtBottom is false.",
+          "MESSAGE_BOTTOM": "Actions move below the message when displayActionsAtBottom is true.",
+          "VIEW_DETAILS": "View details",
+          "DISMISS": "Dismiss"
+        }
+      },
+      "BOTTOM_ACTION_STYLES": {
+        "TITLE": "Bottom action button styles",
+        "DESCRIPTION": "When displayActionsAtBottom is enabled, action buttons can use different appearances (filled, outlined, text) and sizes (dense, compact, comfortable, spacious).",
+        "CONTENT": {
+          "APPEARANCES_MESSAGE": "Action buttons support filled, outlined, and text appearances.",
+          "SIZES_MESSAGE": "Action buttons support dense, compact, comfortable, and spacious sizes."
+        }
+      }
+    },
     "ICON": {
       "VARIANTS": {
         "TITLE": "Icon variants",

@@ -751,6 +751,67 @@
         "DESCRIPTION": "A chipek csoportosíthatók. A megjelenés, a méret és a disabled állapot a csoporttól öröklődik."
       }
     },
+    "NOTIFICATION": {
+      "VARIANTS": {
+        "TITLE": "Notification változatai",
+        "DESCRIPTION": "A notification komponens különböző változatai: surface, light, dark, info, success, warning és error.",
+        "CONTENT": {
+          "SURFACE_TITLE": "Surface értesítés",
+          "SURFACE_MESSAGE": "Értesítés üzenet a surface változathoz.",
+          "LIGHT_TITLE": "Light értesítés",
+          "LIGHT_MESSAGE": "Értesítés üzenet a light változathoz.",
+          "DARK_TITLE": "Dark értesítés",
+          "DARK_MESSAGE": "Értesítés üzenet a dark változathoz.",
+          "INFO_TITLE": "Info értesítés",
+          "INFO_MESSAGE": "Értesítés üzenet az info változathoz.",
+          "SUCCESS_TITLE": "Success értesítés",
+          "SUCCESS_MESSAGE": "Értesítés üzenet a success változathoz.",
+          "WARNING_TITLE": "Warning értesítés",
+          "WARNING_MESSAGE": "Értesítés üzenet a warning változathoz.",
+          "ERROR_TITLE": "Error értesítés",
+          "ERROR_MESSAGE": "Értesítés üzenet az error változathoz."
+        }
+      },
+      "APPEARANCES": {
+        "TITLE": "Notification megjelenései",
+        "DESCRIPTION": "A notification komponens megjelenései: filled és outlined.",
+        "CONTENT": {
+          "FILLED_TITLE": "Filled értesítés",
+          "FILLED_MESSAGE": "Értesítés filled megjelenéssel.",
+          "OUTLINED_TITLE": "Outlined értesítés",
+          "OUTLINED_MESSAGE": "Értesítés outlined megjelenéssel."
+        }
+      },
+      "ICONS": {
+        "TITLE": "Notification ikonnal",
+        "DESCRIPTION": "A notification komponens tartalmazhat leading ikont az üzenet típusának kiemelésére.",
+        "CONTENT": {
+          "TITLE": "Információ",
+          "MESSAGE": "Az értesítés megjeleníthet leading ikont az üzenet típusának kiemelésére."
+        }
+      },
+      "ACTION_BUTTONS": {
+        "TITLE": "Action gombok",
+        "DESCRIPTION": "A notification komponens támogat action gombokat leading és trailing ikonokkal. A gombok a jobb oldalon vagy alul jelenhetnek meg a displayActionsAtBottom beállítással. A gombok egyenként letilthatók.",
+        "CONTENT": {
+          "ACTIONS_ON_THE_RIGHT": "gombok jobbra",
+          "ACTIONS_AT_BOTTOM": "gombok alul",
+          "TITLE": "Művelet szükséges",
+          "MESSAGE_RIGHT": "A gombok az üzenet mellett jelennek meg, ha a displayActionsAtBottom értéke false.",
+          "MESSAGE_BOTTOM": "A gombok az üzenet alatt jelennek meg, ha a displayActionsAtBottom értéke true.",
+          "VIEW_DETAILS": "Részletek",
+          "DISMISS": "Elutasítás"
+        }
+      },
+      "BOTTOM_ACTION_STYLES": {
+        "TITLE": "Alul megjelenő action gomb stílusok",
+        "DESCRIPTION": "Ha a displayActionsAtBottom engedélyezett, az action gombok különböző megjelenéseket (filled, outlined, text) és méreteket (dense, compact, comfortable, spacious) használhatnak.",
+        "CONTENT": {
+          "APPEARANCES_MESSAGE": "Az action gombok támogatják a filled, outlined és text megjelenéseket.",
+          "SIZES_MESSAGE": "Az action gombok támogatják a dense, compact, comfortable és spacious méreteket."
+        }
+      }
+    },
     "ICON": {
       "VARIANTS": {
         "TITLE": "Icon változatai",

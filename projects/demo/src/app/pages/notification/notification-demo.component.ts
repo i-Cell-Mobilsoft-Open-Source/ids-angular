@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { NOTIFICATION_EXAMPLES } from '../../components-example/notification/notification-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './notification-demo.component.html',
   styleUrls: [
@@ -35,6 +38,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class NotificationDemoComponent implements OnInit {
 
   protected _notificationDemoService = inject(NotificationDemoService);
+  public readonly notificationExamples = NOTIFICATION_EXAMPLES;
 
   public ngOnInit(): void {
     this._notificationDemoService.loadIcons();

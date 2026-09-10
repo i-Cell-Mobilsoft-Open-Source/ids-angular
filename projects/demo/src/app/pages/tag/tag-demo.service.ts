@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_TAG_DEFAULT_CONFIG_FACTORY, IDS_TAG_GROUP_DEFAULT_CONFIG_FACTORY, IdsTagAppearance, IdsTagAppearanceType, IdsTagVariant, IdsTagVariantType } from '@i-cell/ids-angular/tag';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_TAG_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -25,6 +28,8 @@ type TagGroupInputControls = {
 };
 @Injectable()
 export class TagDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly inputControlConfig: DemoControlConfig<TagInputControls> = {
     appearance: {
       description: 'Appearance of the tag.',
@@ -99,11 +104,20 @@ export class TagDemoService {
     this.groupModel = { ...this.groupDefaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.inputControlConfig,
-      this.helperControlConfig,
-      this.groupInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.TAG', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.TAG', 'API.PROPERTY_GROUP.HELPER'),
+        config: this.helperControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.TAG', 'API.PROPERTY_GROUP.GROUP'),
+        config: this.groupInputControlConfig,
+      },
     ];
   }
 }

@@ -1,9 +1,12 @@
 import { Location } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY, IdsBackdropType, IdsBackdropTypeType, IdsSideSheetHeader, IdsSideSheetHeaderType, IdsSideSheetPosition, IdsSideSheetPositionType, IdsSideSheetType } from '@i-cell/ids-angular/side-sheet';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY();
 
@@ -25,6 +28,8 @@ type SideSheetInputControls = {
 };
 @Injectable()
 export class SideSheetDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   protected _idsSideSheetType = IdsSideSheetType;
   protected _idsSideSheetHeaderType = IdsSideSheetHeader;
 
@@ -164,7 +169,12 @@ export class SideSheetDemoService {
     { value: 'us', viewValue: 'SIDE_SHEET.COUNTRY.US' },
   ];
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SIDE_SHEET', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+    ];
   }
 }

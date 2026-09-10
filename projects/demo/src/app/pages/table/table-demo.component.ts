@@ -8,6 +8,7 @@ import { TryoutComponent } from '../../components/tryout/tryout.component';
 
 import { Component, DestroyRef, inject, Injectable, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsPaginatorComponent } from '@i-cell/ids-angular/paginator';
@@ -19,7 +20,9 @@ import {
   IdsTableIntl,
   IdsTableRequestFactory,
   IdsTableRowKeydownEvent,
-  IdsTableSortAscIconDirective, IdsTableSortDescIconDirective, IdsTableSortNoneIconDirective,
+  IdsTableSortAscIconDirective,
+  IdsTableSortDescIconDirective,
+  IdsTableSortNoneIconDirective,
   ServerSideDataSource,
 } from '@i-cell/ids-angular/table';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -76,6 +79,7 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
     IdsTableSortDescIconDirective,
     IdsTableSortNoneIconDirective,
     IdsTableComponent,
+    FormsModule,
     TranslateModule,
     TryoutComponent,
     DemoAndCodeComponent,

@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import {
   IDS_BUTTON_DEFAULT_CONFIG_FACTORY,
   IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY,
@@ -11,6 +13,7 @@ import {
   IdsButtonVariantType,
 } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -35,6 +38,8 @@ export type ButtonGroupInputControls = {
 
 @Injectable()
 export class ButtonDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly inputControlConfig: DemoControlConfig<ButtonInputControls> = {
     appearance: {
       description: 'Button appearance.',
@@ -121,10 +126,16 @@ export class ButtonDemoService {
     this.groupModel = { ...this.groupDefaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.inputControlConfig,
-      this.groupInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.BUTTON', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.BUTTON', 'API.PROPERTY_GROUP.GROUP'),
+        config: this.groupInputControlConfig,
+      },
     ];
   }
 }

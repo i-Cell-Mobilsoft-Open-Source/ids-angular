@@ -5,21 +5,20 @@
   @if (_propConfig.length > 0) {
     <h2>Properties</h2>
     <div class="flex flex-col gap-ids-container-gap-8">
-      @for (config of _propConfig; track config; let i = $index) {
-        <app-prop-table class="pb-ids-container-padding-12" [config]="[config]"/>
+      @for (apiConfig of _propConfig; track apiConfig; let i = $index) {
+        <h3>{{ apiConfig.title }}</h3>
+        <app-prop-table class="pb-ids-container-padding-12" [config]="[apiConfig.config]" />
       }
-
     </div>
   }
   @if (_methodConfig.length > 0) {
     <h2>Methods</h2>
     <div class="flex flex-col gap-ids-container-gap-8">
-
       @for (config of _methodConfig; track config; let i = $index) {
         @if (_methodTitles[i]) {
-          <h3 >{{ _methodTitles[i] }}</h3>
+          <h3>{{ _methodTitles[i] }}</h3>
         }
-        <app-method-table class="pb-ids-container-padding-12" [config]="config"/>
+        <app-method-table class="pb-ids-container-padding-12" [config]="config" />
       }
     </div>
   }

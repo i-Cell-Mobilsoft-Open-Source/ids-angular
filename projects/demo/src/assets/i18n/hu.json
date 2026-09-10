@@ -787,6 +787,17 @@
         "DESCRIPTION": "A letiltott icon button nem kattintható. A disabled állapot filled, outlined és standard megjelenéssel is bemutatásra kerül."
       }
     }
+  },
+  "API": {
+    "PROPERTY_TABLE_TITLE": "{{ component }} {{ property }}",
+    "PROPERTY_GROUP": {
+      "DEFAULT": "tulajdonságok",
+      "GROUP": "csoport tulajdonságok",
+      "HELPER": "helper tulajdonságok",
+      "INPUT": "input tulajdonságok",
+      "MEDIA": "média tulajdonságok",
+      "SAMPLE": "minta tulajdonságok",
+      "MULTIPLE": "multiple tulajdonságok"
+    }
   }
-
 }

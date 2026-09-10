@@ -5,10 +5,12 @@ import { environment } from '../../../environments/environment';
 
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { compare, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import {
   IDS_TABLE_DEFAULT_CONFIG_FACTORY,
@@ -250,8 +252,8 @@ export class TableDemoService {
     },
     {
       name: 'updateCellContents()',
-      description: 'Refresh rendered cell values.'+
-      ' Useful if for eg. the `value` getter function is not pure and the values need to be refreshed manually.',
+      description: 'Refresh rendered cell values.' +
+        ' Useful if for eg. the `value` getter function is not pure and the values need to be refreshed manually.',
       returnType: 'void',
     },
   ];
@@ -268,7 +270,12 @@ export class TableDemoService {
     return [this.methodControlConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this.translate, 'COMPONENTS.TABLE', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+    ];
   }
 }

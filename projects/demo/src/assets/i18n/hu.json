@@ -826,6 +826,20 @@
         "DESCRIPTION": "Válogatás font és SVG ikonokból. A font ikonok a fontIcon, az SVG ikonok az svgIcon inputot használják. A kettő együtt nem használható."
       }
     },
+    "SPINNER": {
+      "VARIANTS": {
+        "TITLE": "Spinner változatai",
+        "DESCRIPTION": "A spinner komponens különböző színváltozatai: surface (alapértelmezett), primary, secondary, brand, light, error, success és warning."
+      },
+      "SIZES": {
+        "TITLE": "Spinner méretei",
+        "DESCRIPTION": "A spinner komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious, elérhető mind a small, mind a big méretkészletekben."
+      },
+      "TRACK": {
+        "TITLE": "Spinner track",
+        "DESCRIPTION": "Az isTrack beállítással megjeleníthető vagy elrejthető a kör alakú track az aktív indikátor mögött."
+      }
+    },
     "PAGINATOR": {
       "VARIANTS": {
         "TITLE": "Paginator változatai",

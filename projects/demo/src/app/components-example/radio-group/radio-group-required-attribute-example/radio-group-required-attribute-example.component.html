@@ -1,0 +1,13 @@
+<ids-radio-group
+  name="radio-required-attribute"
+  required
+  [label]="'EXAMPLES.RADIO_GROUP.REQUIRED_ATTRIBUTE.CONTENT.LABEL' | translate"
+  [(ngModel)]="selection"
+>
+  <ids-radio value="chicken">{{ "EXAMPLES.RADIO_GROUP.COMMON.CHICKEN" | translate }}</ids-radio>
+  <ids-radio value="beef">{{ "EXAMPLES.RADIO_GROUP.COMMON.BEEF" | translate }}</ids-radio>
+  <ids-radio value="pork">{{ "EXAMPLES.RADIO_GROUP.COMMON.PORK" | translate }}</ids-radio>
+  <ids-error-message>
+    {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: ("EXAMPLES.RADIO_GROUP.REQUIRED_ATTRIBUTE.CONTENT.FIELD_NAME" | translate) } }}
+  </ids-error-message>
+</ids-radio-group>

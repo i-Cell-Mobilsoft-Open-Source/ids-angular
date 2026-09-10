@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { RADIO_GROUP_EXAMPLES } from '../../components-example/radio-group/radio-group-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { NgStyle } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
@@ -30,6 +32,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     ControlTableComponent,
     TryoutControlComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './radio-demo.component.html',
   styleUrls: [
@@ -40,4 +43,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class RadioDemoComponent {
   protected _radioDemoService = inject(RadioDemoService);
+  public readonly radioGroupExamples = RADIO_GROUP_EXAMPLES;
 }

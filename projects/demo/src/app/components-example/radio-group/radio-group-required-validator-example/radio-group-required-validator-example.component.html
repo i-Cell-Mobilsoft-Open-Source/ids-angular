@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ids-radio-group
+    formControlName="selection"
+    name="radio-required-validator"
+    [label]="'EXAMPLES.RADIO_GROUP.REQUIRED_VALIDATOR.CONTENT.LABEL' | translate"
+  >
+    <ids-radio value="chicken">{{ "EXAMPLES.RADIO_GROUP.COMMON.CHICKEN" | translate }}</ids-radio>
+    <ids-radio value="beef">{{ "EXAMPLES.RADIO_GROUP.COMMON.BEEF" | translate }}</ids-radio>
+    <ids-radio value="pork">{{ "EXAMPLES.RADIO_GROUP.COMMON.PORK" | translate }}</ids-radio>
+    <ids-error-message>
+      <ids-error-def code="required">
+        {{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName: ("EXAMPLES.RADIO_GROUP.REQUIRED_VALIDATOR.CONTENT.FIELD_NAME" | translate) } }}
+      </ids-error-def>
+    </ids-error-message>
+  </ids-radio-group>
+  <button type="submit" class="mt-4" idsButton>{{ "EXAMPLES.RADIO_GROUP.REQUIRED_VALIDATOR.CONTENT.SUBMIT" | translate }}</button>
+</form>

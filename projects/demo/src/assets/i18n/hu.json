@@ -439,6 +439,73 @@
         }
       }
     },
+    "RADIO_GROUP": {
+      "COMMON": {
+        "CHICKEN": "Csirke",
+        "BEEF": "Marha",
+        "PORK": "Sertés",
+        "FISH": "Hal",
+        "LAMB": "Bárány",
+        "TURKEY": "Pulyka"
+      },
+      "VARIANTS": {
+        "TITLE": "Radio group változatai",
+        "DESCRIPTION": "A radio group komponens különböző változatai: surface (alapértelmezett), light és dark.",
+        "CONTENT": {
+          "LABEL": "Hús választás"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Radio group méretei",
+        "DESCRIPTION": "A radio group komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious.",
+        "CONTENT": {
+          "LABEL": "Hús választás"
+        }
+      },
+      "ORIENTATION": {
+        "TITLE": "Radio group orientációja",
+        "DESCRIPTION": "A radio group függőlegesen (alapértelmezett) vagy vízszintesen rendezhető. Vízszintes módban a korlátozott szélességű konténerben az opciók több sorba törnek.",
+        "CONTENT": {
+          "VERTICAL": "Függőleges (alapértelmezett)",
+          "HORIZONTAL": "Vízszintes"
+        }
+      },
+      "LABEL_POSITION": {
+        "TITLE": "Radio group label pozíció",
+        "DESCRIPTION": "A labelPosition beállítással a rádiógombok címkéi függőleges csoportban jobbra vagy balra, vízszintes csoportban felülre vagy alulra kerülhetnek.",
+        "CONTENT": {
+          "VERTICAL_RIGHT": "Függőleges, címke jobbra",
+          "VERTICAL_LEFT": "Függőleges, címke balra",
+          "HORIZONTAL_TOP": "Vízszintes, címke felül",
+          "HORIZONTAL_BOTTOM": "Vízszintes, címke alul"
+        }
+      },
+      "REQUIRED_VALIDATOR": {
+        "TITLE": "Required validator",
+        "DESCRIPTION": "Radio group Validators.required validátorral a form controlon. A required attribútum nem használható formControlName-nel együtt.",
+        "CONTENT": {
+          "LABEL": "Hús választás",
+          "FIELD_NAME": "Hús választás",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "REQUIRED_ATTRIBUTE": {
+        "TITLE": "Required attribútum",
+        "DESCRIPTION": "Radio group required attribútummal és ngModel-lel. Ezt a megközelítést reaktív formokon kívül használja.",
+        "CONTENT": {
+          "LABEL": "Hús választás",
+          "FIELD_NAME": "Hús választás"
+        }
+      },
+      "LABEL_HINT": {
+        "TITLE": "Csoport címke és hint",
+        "DESCRIPTION": "Radio group csoport címkével és a címke alá projektált ids-hint-message elemmel.",
+        "CONTENT": {
+          "LABEL": "Hús választás",
+          "HINT": "Válasszon egy lehetőséget a listából."
+        }
+      }
+    },
     "CARD": {
       "APPEARANCES": {
         "TITLE": "Card megjelenései",

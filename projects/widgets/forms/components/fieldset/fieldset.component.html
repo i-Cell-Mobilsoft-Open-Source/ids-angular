@@ -1,7 +1,7 @@
 <legend class="ids-fieldset-legend">{{ legend() }}</legend>
 @if (_hasMessage()) {
   <div class="ids-fieldset-message">
-    <ng-content select="[idsFieldsetMessage]" />
+    <ng-content select="ids-hint-message[idsFieldsetMessage]" />
   </div>
 }
 <ng-content select="ids-fieldset-row" />

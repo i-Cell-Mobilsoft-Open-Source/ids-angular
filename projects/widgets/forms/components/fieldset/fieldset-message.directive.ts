@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[idsFieldsetMessage]',
+  selector: 'ids-hint-message[idsFieldsetMessage]',
   standalone: true,
 })
 export class IdsFieldsetMessageDirective {}

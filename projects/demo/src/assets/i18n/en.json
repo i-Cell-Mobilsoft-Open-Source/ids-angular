@@ -937,6 +937,54 @@
         "DESCRIPTION": "When there are many pages, page buttons are truncated using maxDisplayedItemCount. Set showAllPages to display every page button."
       }
     },
+    "SWITCH": {
+      "COMMON": {
+        "LABEL": "Enable notifications"
+      },
+      "VARIANTS": {
+        "TITLE": "Switch variants",
+        "DESCRIPTION": "Switches with different color variants: primary, surface (default), and light."
+      },
+      "SIZES": {
+        "TITLE": "Switch sizes",
+        "DESCRIPTION": "Switches with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "LABEL_POSITION": {
+        "TITLE": "Switch label position",
+        "DESCRIPTION": "Use labelPosition to place the label on the left or right of the switch."
+      },
+      "ICONS": {
+        "TITLE": "Switch with icons",
+        "DESCRIPTION": "Switches can display an icon on the handle or on the track via hasIcon and iconPosition."
+      },
+      "STATES": {
+        "TITLE": "Switch states",
+        "DESCRIPTION": "Switches can be off or on.",
+        "CONTENT": {
+          "OFF": "Off",
+          "ON": "On"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled and readonly",
+        "DESCRIPTION": "Disabled switches cannot be toggled. Readonly switches keep their value but are not interactive.",
+        "CONTENT": {
+          "DISABLED": "Disabled off",
+          "DISABLED_ON": "Disabled on",
+          "READONLY": "Readonly off",
+          "READONLY_ON": "Readonly on"
+        }
+      },
+      "GROUP": {
+        "TITLE": "Switch group",
+        "DESCRIPTION": "Switches can be grouped with ids-switch-group to share size, icon, and label position settings.",
+        "CONTENT": {
+          "EMAIL": "Email notifications",
+          "SMS": "SMS notifications",
+          "PUSH": "Push notifications"
+        }
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button appearances",

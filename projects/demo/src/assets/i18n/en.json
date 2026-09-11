@@ -901,6 +901,20 @@
         "DESCRIPTION": "A selection of font and SVG icons. Font icons use fontIcon; SVG icons use svgIcon. The two cannot be used together."
       }
     },
+    "SPINNER": {
+      "VARIANTS": {
+        "TITLE": "Spinner variants",
+        "DESCRIPTION": "Spinners with different color variants: surface (default), primary, secondary, brand, light, error, success, and warning."
+      },
+      "SIZES": {
+        "TITLE": "Spinner sizes",
+        "DESCRIPTION": "Spinners with different sizes: dense, compact (default), comfortable and spacious, available in both small and big size collections."
+      },
+      "TRACK": {
+        "TITLE": "Spinner track",
+        "DESCRIPTION": "Use isTrack to show or hide the circular track behind the active indicator."
+      }
+    },
     "PAGINATOR": {
       "VARIANTS": {
         "TITLE": "Paginator variants",

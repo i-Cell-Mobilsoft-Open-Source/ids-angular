@@ -447,6 +447,73 @@
         }
       }
     },
+    "RADIO_GROUP": {
+      "COMMON": {
+        "CHICKEN": "Chicken",
+        "BEEF": "Beef",
+        "PORK": "Pork",
+        "FISH": "Fish",
+        "LAMB": "Lamb",
+        "TURKEY": "Turkey"
+      },
+      "VARIANTS": {
+        "TITLE": "Radio group variants",
+        "DESCRIPTION": "Radio groups with different color variants: surface (default), light, and dark.",
+        "CONTENT": {
+          "LABEL": "Meat selection"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Radio group sizes",
+        "DESCRIPTION": "Radio groups with different sizes: dense, compact (default), comfortable and spacious.",
+        "CONTENT": {
+          "LABEL": "Meat selection"
+        }
+      },
+      "ORIENTATION": {
+        "TITLE": "Radio group orientation",
+        "DESCRIPTION": "Radio groups can be oriented vertically (default) or horizontally. In horizontal mode, options wrap to multiple rows when the container width is limited.",
+        "CONTENT": {
+          "VERTICAL": "Vertical (default)",
+          "HORIZONTAL": "Horizontal"
+        }
+      },
+      "LABEL_POSITION": {
+        "TITLE": "Radio group label position",
+        "DESCRIPTION": "Use labelPosition to place radio labels on the right or left in vertical groups, or on top or bottom in horizontal groups.",
+        "CONTENT": {
+          "VERTICAL_RIGHT": "Vertical, label right",
+          "VERTICAL_LEFT": "Vertical, label left",
+          "HORIZONTAL_TOP": "Horizontal, label top",
+          "HORIZONTAL_BOTTOM": "Horizontal, label bottom"
+        }
+      },
+      "REQUIRED_VALIDATOR": {
+        "TITLE": "Required validator",
+        "DESCRIPTION": "A radio group with Validators.required on the form control. The required attribute cannot be used with formControlName.",
+        "CONTENT": {
+          "LABEL": "Meat selection",
+          "FIELD_NAME": "Meat selection",
+          "SUBMIT": "Submit"
+        }
+      },
+      "REQUIRED_ATTRIBUTE": {
+        "TITLE": "Required attribute",
+        "DESCRIPTION": "A radio group with the required attribute and ngModel. Use this approach outside of reactive forms.",
+        "CONTENT": {
+          "LABEL": "Meat selection",
+          "FIELD_NAME": "Meat selection"
+        }
+      },
+      "LABEL_HINT": {
+        "TITLE": "Group label and hint",
+        "DESCRIPTION": "A radio group with a group label and a projected ids-hint-message below the label.",
+        "CONTENT": {
+          "LABEL": "Meat selection",
+          "HINT": "Choose one option from the list."
+        }
+      }
+    },
     "CARD": {
       "APPEARANCES": {
         "TITLE": "Card appearances",

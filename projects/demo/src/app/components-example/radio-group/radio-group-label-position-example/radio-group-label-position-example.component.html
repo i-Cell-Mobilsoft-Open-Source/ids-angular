@@ -1,0 +1,53 @@
+<div class="flex flex-col gap-8 w-full">
+  <div class="grid gap-2">
+    <span>right</span>
+    <ids-radio-group
+      name="radio-label-position-right"
+      orientation="vertical"
+      labelPosition="right"
+      [label]="'EXAMPLES.RADIO_GROUP.LABEL_POSITION.CONTENT.VERTICAL_RIGHT' | translate"
+    >
+      <ids-radio value="chicken">{{ "EXAMPLES.RADIO_GROUP.COMMON.CHICKEN" | translate }}</ids-radio>
+      <ids-radio value="beef">{{ "EXAMPLES.RADIO_GROUP.COMMON.BEEF" | translate }}</ids-radio>
+    </ids-radio-group>
+  </div>
+
+  <div class="grid gap-2">
+    <span>left</span>
+    <ids-radio-group
+      name="radio-label-position-left"
+      orientation="vertical"
+      labelPosition="left"
+      [label]="'EXAMPLES.RADIO_GROUP.LABEL_POSITION.CONTENT.VERTICAL_LEFT' | translate"
+    >
+      <ids-radio value="chicken">{{ "EXAMPLES.RADIO_GROUP.COMMON.CHICKEN" | translate }}</ids-radio>
+      <ids-radio value="beef">{{ "EXAMPLES.RADIO_GROUP.COMMON.BEEF" | translate }}</ids-radio>
+    </ids-radio-group>
+  </div>
+
+  <div class="grid gap-2">
+    <span>top</span>
+    <ids-radio-group
+      name="radio-label-position-top"
+      orientation="horizontal"
+      labelPosition="top"
+      [label]="'EXAMPLES.RADIO_GROUP.LABEL_POSITION.CONTENT.HORIZONTAL_TOP' | translate"
+    >
+      <ids-radio value="chicken">{{ "EXAMPLES.RADIO_GROUP.COMMON.CHICKEN" | translate }}</ids-radio>
+      <ids-radio value="beef">{{ "EXAMPLES.RADIO_GROUP.COMMON.BEEF" | translate }}</ids-radio>
+    </ids-radio-group>
+  </div>
+
+  <div class="grid gap-2">
+    <span>bottom</span>
+    <ids-radio-group
+      name="radio-label-position-bottom"
+      orientation="horizontal"
+      labelPosition="bottom"
+      [label]="'EXAMPLES.RADIO_GROUP.LABEL_POSITION.CONTENT.HORIZONTAL_BOTTOM' | translate"
+    >
+      <ids-radio value="chicken">{{ "EXAMPLES.RADIO_GROUP.COMMON.CHICKEN" | translate }}</ids-radio>
+      <ids-radio value="beef">{{ "EXAMPLES.RADIO_GROUP.COMMON.BEEF" | translate }}</ids-radio>
+    </ids-radio-group>
+  </div>
+</div>

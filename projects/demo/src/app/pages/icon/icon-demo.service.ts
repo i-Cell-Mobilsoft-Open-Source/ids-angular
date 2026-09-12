@@ -1,12 +1,15 @@
 import { IconService } from '../../core/services/icon.service';
 
-import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconVariant, IdsIconVariantType } from '@i-cell/ids-angular/icon';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
@@ -20,6 +23,8 @@ type IconInputControls = {
 };
 @Injectable()
 export class IconDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
 
@@ -98,7 +103,12 @@ export class IconDemoService {
     this.model = { ...this.defaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig()];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.ICON', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig(),
+      },
+    ];
   }
 }

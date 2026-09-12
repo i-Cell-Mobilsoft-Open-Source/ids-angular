@@ -7,14 +7,19 @@ import {
   InputInputControls,
 } from './form-field-demo-shared';
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class FormFieldDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly formFieldInputControlConfig = formFieldInputControlConfig;
 
   public readonly formFieldHelperControlConfig: DemoControlConfig<FormFieldInputHelperControls> = {
@@ -147,10 +152,16 @@ export class FormFieldDemoService {
     return [formFieldMethodControlConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.formFieldInputControlConfig,
-      this.inputInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.FORM_FIELD', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.formFieldInputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.FORM_FIELD_INPUT', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputInputControlConfig,
+      },
     ];
   }
 }

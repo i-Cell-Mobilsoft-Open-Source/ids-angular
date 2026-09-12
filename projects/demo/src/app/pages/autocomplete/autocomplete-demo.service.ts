@@ -1,11 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
 import { IdsSpinnerVariantType, IdsSpinnerVariant } from '@i-cell/ids-angular/spinner';
+import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, delay, distinctUntilChanged, EMPTY, map, Observable, Subject, tap } from 'rxjs';
 
 const USER_INPUT_DEBOUNCE_TIME = 300;
@@ -78,6 +81,8 @@ type InputOption = {
 
 @Injectable()
 export class AutocompleteDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   private _resetSubject = new Subject<void>();
   public reset$ = this._resetSubject.asObservable();
 
@@ -209,8 +214,13 @@ export class AutocompleteDemoService {
     this._resetSubject.next();
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.AUTOCOMPLETE', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+    ];
   }
 
   private _fixedOptionsListFilterFn(options: InputOption[], value: string | null | undefined): InputOption[] {

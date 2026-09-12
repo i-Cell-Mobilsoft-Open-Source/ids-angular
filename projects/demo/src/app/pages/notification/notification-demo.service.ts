@@ -1,13 +1,16 @@
 import { IconService } from '../../core/services/icon.service';
 
-import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsButtonAppearance, IdsButtonAppearanceType } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY, IdsNotificationAppearance, IdsNotificationAppearanceType, IdsNotificationVariant, IdsNotificationVariantType } from '@i-cell/ids-angular/notification';
+import { TranslateService } from '@ngx-translate/core';
 
 type NotificationInputControls = {
   size: IdsSizeType,
@@ -44,6 +47,8 @@ const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
 
 @Injectable()
 export class NotificationDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
   public displayComponent = signal<boolean>(true);
@@ -258,7 +263,12 @@ export class NotificationDemoService {
     this.displayComponent.set(true);
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig()];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.NOTIFICATION', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig(),
+      },
+    ];
   }
 }

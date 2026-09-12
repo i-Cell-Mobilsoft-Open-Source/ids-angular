@@ -3,3 +3,5 @@ export * from './types/overlay-panel-variant.type';
 export * from './nested-block-scroll-strategy';
 export * from './overlay-panel-defaults';
 export * from './overlay-panel.component';
+export * from './overlay-ref';
+export * from './overlay.service';

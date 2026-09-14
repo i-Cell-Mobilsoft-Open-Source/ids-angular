@@ -22,6 +22,7 @@ import {
   ElementRef,
   inject,
   viewChild,
+  signal,
   model,
   computed,
   input,
@@ -61,6 +62,7 @@ const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
         [open]="panelOpen()"
         [size]="parentSize()"
         [panelClasses]="_panelClasses()"
+        [width]="_overlayWidth()"
       >
         <div
           #panel
@@ -159,6 +161,7 @@ export class IdsAutocompleteComponent
   public onTouched: () => unknown = () => {};
 
   protected _overlayOrigin!: ElementRef;
+  protected _overlayWidth = signal<string | number>('');
   private readonly _parentFormField = inject(IdsFormFieldComponent);
 
   // holds actual value internally
@@ -275,7 +278,7 @@ export class IdsAutocompleteComponent
 
   public setPanelOpen(): void {
     this._overlayOrigin = this._parentFormField?.getConnectedOverlayOrigin();
-    this.overlayPanel()?.overlayDir()?.overlayRef?.updateSize({ width: this._overlayOrigin.nativeElement.getBoundingClientRect().width });
+    this._overlayWidth.set(this._overlayOrigin.nativeElement.getBoundingClientRect().width);
     this._observeOverlayOrigin();
     this.panelOpen.set(true);
   }
@@ -286,8 +289,8 @@ export class IdsAutocompleteComponent
 
   private _observeOverlayOrigin(): void {
     const observer = new ResizeObserver(() => {
-      this.overlayPanel()?.overlayDir()?.overlayRef?.updatePosition();
-      this.overlayPanel()?.overlayDir()?.overlayRef?.updateSize({ width: this._overlayOrigin.nativeElement.getBoundingClientRect().width });
+      this._overlayWidth.set(this._overlayOrigin.nativeElement.getBoundingClientRect().width);
+      this.overlayPanel()?.updatePosition();
     });
 
     observer.observe(this._overlayOrigin.nativeElement);

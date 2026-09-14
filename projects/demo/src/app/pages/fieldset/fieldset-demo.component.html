@@ -13,7 +13,13 @@
           [variant]="_fieldsetDemoService.model.variant"
         >
           @if (_fieldsetDemoService.helperModel.showMessage) {
-            <span idsFieldsetMessage>This is a fieldset message</span>
+            <ids-hint-message
+              idsFieldsetMessage
+              [size]="_fieldsetDemoService.model.size"
+              [variant]="_fieldsetDemoService.model.variant"
+            >
+              This is a fieldset message
+            </ids-hint-message>
           }
           <ids-fieldset-row>
             <ids-form-field>

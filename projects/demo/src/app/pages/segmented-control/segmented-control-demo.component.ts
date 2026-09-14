@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { SEGMENTED_CONTROL_EXAMPLES } from '../../components-example/segmented-control/segmented-control-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './segmented-control-demo.component.html',
   styleUrls: [
@@ -33,4 +36,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class SegmentedControlDemoComponent {
   protected _segmentedControlDemoService = inject(SegmentedControlDemoService);
+  public readonly segmentedControlExamples = SEGMENTED_CONTROL_EXAMPLES;
 }

@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
+import { TranslateService } from '@ngx-translate/core';
 
 type ScrollbarWidthType = 'auto' | 'thin' | 'none';
 type ScrollbarGutterType = 'auto' | 'stable' | 'stable both-edges';
@@ -16,6 +19,8 @@ type ScrollbarHelperControls = {
 };
 @Injectable()
 export class ScrollbarDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly controlConfig: DemoControlConfig<ScrollbarInputControls> = {
     'scrollbar-color': {
       description: 'Scrollbar color.',
@@ -69,7 +74,12 @@ export class ScrollbarDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.controlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SCROLLBAR', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.controlConfig,
+      },
+    ];
   }
 }

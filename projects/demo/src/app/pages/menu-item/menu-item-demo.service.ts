@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY, IdsMenuItemAppearance, IdsMenuItemAppearanceType, IdsMenuItemVariant, IdsMenuItemVariantType } from '@i-cell/ids-angular/menu';
+import { TranslateService } from '@ngx-translate/core';
 
 const menuItemDefaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
 const numberOfItems = 3;
@@ -25,6 +28,8 @@ type MenuItemHelperControls = {
 };
 @Injectable()
 export class MenuItemDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly menuItemInputControlConfig: DemoControlConfig<MenuItemInputControls> = {
     appearance: {
       description: 'Menu item appearance.',
@@ -111,7 +116,12 @@ export class MenuItemDemoService {
     this.menuItemHelperModel = { ...this.menuItemHelperDefaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.menuItemInputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.MENU_ITEM', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.menuItemInputControlConfig,
+      },
+    ];
   }
 }

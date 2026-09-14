@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IDS_AVATAR_DEFAULT_CONFIG_FACTORY, IdsAvatarVariant, IdsAvatarVariantType } from '@i-cell/ids-angular/avatar';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_AVATAR_DEFAULT_CONFIG_FACTORY();
 
@@ -16,6 +19,8 @@ type AvatarInputControls = {
 
 @Injectable()
 export class AvatarDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly inputControlConfig: DemoControlConfig<AvatarInputControls> = {
     initials: {
       description: 'Avatar initials.',
@@ -54,7 +59,12 @@ export class AvatarDemoService {
     this.model = { ...this.defaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.AVATAR', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+    ];
   }
 }

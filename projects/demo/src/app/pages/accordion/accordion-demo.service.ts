@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IDS_ACCORDION_DEFAULT_CONFIG_FACTORY, IdsAccordionAppearance, IdsAccordionAppearanceType, IdsAccordionHeadingLevel, IdsAccordionHeadingLevelType } from '@i-cell/ids-angular/accordion';
 import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButtonVariantType } from '@i-cell/ids-angular/button';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 
 const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
@@ -28,6 +31,8 @@ type AccordionInputControls = {
 
 @Injectable()
 export class AccordionDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   private _resetSubject = new Subject<void>();
   public reset$ = this._resetSubject.asObservable();
 
@@ -142,8 +147,13 @@ export class AccordionDemoService {
     return [this.methodConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.ACCORDION', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+    ];
   }
 }
 

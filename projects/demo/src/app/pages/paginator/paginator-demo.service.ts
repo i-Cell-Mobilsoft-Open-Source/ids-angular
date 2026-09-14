@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import {
   IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY,
@@ -12,6 +14,7 @@ import {
   IdsPaginatorVariant,
   IdsPaginatorVariantType,
 } from '@i-cell/ids-angular/paginator';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_PAGINATOR_DEFAULT_CONFIG_FACTORY();
 
@@ -35,6 +38,8 @@ type PaginatorInputControls = {
 
 @Injectable()
 export class PaginatorDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public inputControlConfig: DemoControlConfig<PaginatorInputControls> = {
     length: {
       description: 'The total number of items to paginate.',
@@ -200,7 +205,12 @@ export class PaginatorDemoService {
     return [this.methodControlConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.PAGINATOR', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+    ];
   }
 }

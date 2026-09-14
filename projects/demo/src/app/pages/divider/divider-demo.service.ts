@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_DIVIDER_DEFAULT_CONFIG_FACTORY, IdsDividerVariant, IdsDividerVariantType } from '@i-cell/ids-angular/divider';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
 
@@ -17,6 +20,8 @@ type DividerInputControls = {
 
 @Injectable()
 export class DividerDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly inputControlConfig: DemoControlConfig<DividerInputControls> = {
     orientation: {
       description: 'Divider orientation.',
@@ -61,7 +66,12 @@ export class DividerDemoService {
     this.model = { ...this.defaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.DIVIDER', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+    ];
   }
 }

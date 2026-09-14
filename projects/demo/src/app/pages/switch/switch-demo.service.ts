@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SWITCH_DEFAULT_CONFIG_FACTORY, IdsSwitchIconPosition, IdsSwitchIconPositionType, IdsSwitchLabelPosition, IdsSwitchLabelPositionType, IdsSwitchVariant, IdsSwitchVariantType } from '@i-cell/ids-angular/switch';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
@@ -31,6 +34,8 @@ type SwitchGroupInputControls = {
 
 @Injectable()
 export class SwitchDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly inputControlConfig: DemoControlConfig<SwitchInputControls> = {
     label: {
       description: 'Switch label.',
@@ -208,10 +213,16 @@ export class SwitchDemoService {
     return [this.methodControlConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.inputControlConfig,
-      this.groupInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SWITCH', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SWITCH', 'API.PROPERTY_GROUP.GROUP'),
+        config: this.groupInputControlConfig,
+      },
     ];
   }
 }

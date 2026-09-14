@@ -1,14 +1,17 @@
 import { IconService } from '../../core/services/icon.service';
 
-import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupAlignment, IdsTabGroupAlignmentType, IdsTabGroupPosition, IdsTabGroupPositionType, IdsTabGroupVariant, IdsTabGroupVariantType, IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from '@i-cell/ids-angular/tab';
 import { IdsTabActivationMode, IdsTabActivationModeType } from '@i-cell/ids-angular/tab/types/tab-activation-mode.type';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -44,6 +47,8 @@ type TabHelperControls = {
 
 @Injectable({ providedIn: 'root' })
 export class TabDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
   public isLoaded = signal(false);
@@ -323,10 +328,16 @@ export class TabDemoService {
     return [this.methodControlConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.inputControlConfig,
-      this.tabPropControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.TAB', 'API.PROPERTY_GROUP.GROUP'),
+        config: this.inputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.TAB', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.tabPropControlConfig,
+      },
     ];
   }
 }

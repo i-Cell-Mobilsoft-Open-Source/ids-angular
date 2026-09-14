@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY, IdsSideNavAppearance, IdsSideNavAppearanceType, IdsSideNavVariant, IdsSideNavVariantType } from '@i-cell/ids-angular/side-nav';
+import { TranslateService } from '@ngx-translate/core';
 
 type SideNavInputControls = {
   appearance: IdsSideNavAppearanceType;
@@ -25,6 +28,8 @@ type SideNavHelperControls = {
 const sideNavDefaultConfig = IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class SideNavDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly sideNavInputControlConfig: DemoControlConfig<SideNavInputControls> = {
     appearance: {
       description: 'Side nav appearance.',
@@ -111,7 +116,12 @@ export class SideNavDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.sideNavInputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SIDE_NAV', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.sideNavInputControlConfig,
+      },
+    ];
   }
 }

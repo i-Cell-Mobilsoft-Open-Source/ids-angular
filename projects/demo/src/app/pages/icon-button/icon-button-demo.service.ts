@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import {
   IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY,
@@ -10,6 +12,7 @@ import {
   IdsIconButtonVariant,
   IdsIconButtonVariantType,
 } from '@i-cell/ids-angular/icon-button';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
 
@@ -23,6 +26,8 @@ type IconButtonInputControls = {
 
 @Injectable()
 export class IconButtonDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly inputControlConfig: DemoControlConfig<IconButtonInputControls> = {
     size: {
       description: 'Icon Button size.',
@@ -71,7 +76,12 @@ export class IconButtonDemoService {
     this.model = { ...this.defaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.inputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.ICON_BUTTON', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+    ];
   }
 }

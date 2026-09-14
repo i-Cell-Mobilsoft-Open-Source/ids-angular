@@ -16,7 +16,8 @@ import {
   IdsSuffixDirective,
   IdsErrorDefinitionDirective,
 } from '@i-cell/ids-angular/forms';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon'; import { TranslateModule } from '@ngx-translate/core';
+import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-datepicker-demo',

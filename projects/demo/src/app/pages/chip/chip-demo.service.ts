@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import {
   IDS_CHIP_DEFAULT_CONFIG_FACTORY,
   IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY,
@@ -13,6 +15,7 @@ import {
   IdsChipVariantType,
 } from '@i-cell/ids-angular/chip';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -50,6 +53,8 @@ const chipList: { label: string; variant: IdsChipVariantType }[] = [
 
 @Injectable()
 export class ChipDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly inputControlConfig: DemoControlConfig<ChipInputControls> = {
     appearance: {
       description: 'Chip appearance.',
@@ -191,10 +196,16 @@ export class ChipDemoService {
     return [this.methodControlConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.inputControlConfig,
-      this.groupInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CHIP', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CHIP', 'API.PROPERTY_GROUP.GROUP'),
+        config: this.groupInputControlConfig,
+      },
     ];
   }
 }

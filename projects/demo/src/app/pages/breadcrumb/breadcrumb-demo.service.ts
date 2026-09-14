@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import {
   IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY,
   IdsBreadcrumbDivider,
@@ -17,6 +19,7 @@ import {
   IdsOverlayPanelVariant,
   IdsOverlayPanelVariantType,
 } from '@i-cell/ids-angular/overlay-panel';
+import { TranslateService } from '@ngx-translate/core';
 
 type BreadcrumbInputControls = {
   size: IdsSizeType;
@@ -35,6 +38,8 @@ const breadcrumbDefaultConfig = IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY();
 
 @Injectable()
 export class BreadcrumbDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly breadcrumbInputControlConfig: DemoControlConfig<BreadcrumbInputControls> = {
     size: {
       description: 'Breadcrumb size.',
@@ -101,6 +106,37 @@ export class BreadcrumbDemoService {
     },
   ];
 
+  public scrollTestHierarchy: IdsBreadcrumbHierarchyType[] = [
+    {
+      label: 'Home',
+      path: '/index',
+    },
+    {
+      label: 'Products',
+      path: '/products',
+    },
+    {
+      label: 'Design system',
+      path: '/products/design-system',
+    },
+    {
+      label: 'Components',
+      path: '/products/design-system/components',
+    },
+    {
+      label: 'Navigation',
+      path: '/products/design-system/components/navigation',
+    },
+    {
+      label: 'Breadcrumb',
+      path: '/products/design-system/components/navigation/breadcrumb',
+    },
+    {
+      label: 'Truncation overlay',
+      path: '/products/design-system/components/navigation/breadcrumb/truncation-overlay',
+    },
+  ];
+
   public breadcrumbModel: BreadcrumbInputControls = { ...this.breadcrumbDefaults };
   public overlayPanelModel: OverlayPanelInputControls = { ...this.overlayPanelDefaults };
 
@@ -109,10 +145,16 @@ export class BreadcrumbDemoService {
     this.overlayPanelModel = { ...this.overlayPanelDefaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.breadcrumbInputControlConfig,
-      this.overlayPanelInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.BREADCRUMB', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.breadcrumbInputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OVERLAY_PANEL', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.overlayPanelInputControlConfig,
+      },
     ];
   }
 }

@@ -1,9 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
 import { IDS_SELECT_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/select';
@@ -259,10 +261,16 @@ export class SelectDemoService {
     return [this.selectMethodControlConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.formFieldInputControlConfig,
-      this.selectInputControlConfig,
+      {
+        title: getDemoApiTitle(this.translate, 'COMPONENTS.FORM_FIELD', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.formFieldInputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this.translate, 'COMPONENTS.SELECT', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.selectInputControlConfig,
+      },
     ];
   }
 }

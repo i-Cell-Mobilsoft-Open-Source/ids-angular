@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxVariant, IdsCheckboxVariantType } from '@i-cell/ids-angular/checkbox';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -25,6 +28,8 @@ type CheckboxGroupHelperControls = {
 
 @Injectable()
 export class CheckboxGroupDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public formGroup = new FormGroup({
     toppings: new FormGroup(
       {
@@ -152,7 +157,12 @@ export class CheckboxGroupDemoService {
     return [this.methodControlConfig];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
-    return [this.groupInputControlConfig];
+  public getApiConfig(): DemoApiControlConfig[] {
+    return [
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CHECKBOX_GROUP', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.groupInputControlConfig,
+      },
+    ];
   }
 }

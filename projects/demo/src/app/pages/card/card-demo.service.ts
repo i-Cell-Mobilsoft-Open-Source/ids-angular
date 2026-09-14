@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import {
   IDS_CARD_DEFAULT_CONFIG_FACTORY,
   IdsCardAppearance,
@@ -10,6 +12,7 @@ import {
   IdsCardVariantType,
 } from '@i-cell/ids-angular/card';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
 
@@ -31,6 +34,8 @@ type CardHelperControls = {
 
 @Injectable()
 export class CardDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly inputControlConfig: DemoControlConfig<CardInputControls> = {
     appearance: {
       description: 'Card appearance.',
@@ -104,10 +109,16 @@ export class CardDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.inputControlConfig,
-      this.mediaInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CARD', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.inputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CARD', 'API.PROPERTY_GROUP.MEDIA'),
+        config: this.mediaInputControlConfig,
+      },
     ];
   }
 }

@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSizeType, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 export type OptionSelectControls = {
   size: IdsSizeType;
@@ -32,6 +35,7 @@ type AnimalOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class OptionDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
 
   public readonly selectControlConfig: DemoControlConfig<OptionSelectControls> = {
     size: {
@@ -175,11 +179,20 @@ export class OptionDemoService {
     return [this.optionMethodControls];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.selectControlConfig,
-      this.sampleInputControlConfig,
-      this.multipleInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SELECT', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.selectControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OPTION', 'API.PROPERTY_GROUP.SAMPLE'),
+        config: this.sampleInputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OPTION', 'API.PROPERTY_GROUP.MULTIPLE'),
+        config: this.multipleInputControlConfig,
+      },
     ];
   }
 }

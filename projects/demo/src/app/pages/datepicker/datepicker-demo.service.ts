@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
+import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY, IdsDatepickerView, IdsDatepickerViewType } from '@i-cell/ids-angular/datepicker';
 import { IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/forms';
 import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cell/ids-angular/overlay-panel';
+import { TranslateService } from '@ngx-translate/core';
 
 const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 const datepickerDefaultConfig = IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY();
@@ -25,6 +28,8 @@ type DatepickerInputControls = {
 
 @Injectable()
 export class DatepickerDemoService {
+  private readonly _apiTitleTranslate = inject(TranslateService);
+
   public readonly formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
     size: {
       description: 'Size of the form field.',
@@ -150,6 +155,7 @@ export class DatepickerDemoService {
   public datepickerModel: DatepickerInputControls = { ...this.datepickerDefaults };
 
   public input = '';
+  public nestedScrollInput = '';
   public control = new FormControl('');
 
   public reset(): void {
@@ -157,6 +163,7 @@ export class DatepickerDemoService {
     this.datepickerModel = { ...this.datepickerDefaults };
 
     this.input = '';
+    this.nestedScrollInput = '';
     this.control.setValue('');
   }
 
@@ -174,10 +181,16 @@ export class DatepickerDemoService {
     ];
   }
 
-  public getApiConfig(): DemoControlConfig<unknown>[] {
+  public getApiConfig(): DemoApiControlConfig[] {
     return [
-      this.formFieldInputControlConfig,
-      this.datepickerInputControlConfig,
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.FORM_FIELD', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.formFieldInputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.DATEPICKER', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.datepickerInputControlConfig,
+      },
     ];
   }
 }

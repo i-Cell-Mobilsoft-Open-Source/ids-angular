@@ -929,6 +929,60 @@
         "DESCRIPTION": "Sok oldal esetén az oldalszám gombok a maxDisplayedItemCount alapján csonkítva jelennek meg. A showAllPages minden oldalszám gombot megjelenít."
       }
     },
+    "SEGMENTED_CONTROL": {
+      "COMMON": {
+        "DAY": "Nap",
+        "WEEK": "Hét",
+        "MONTH": "Hónap",
+        "FIELD_NAME": "Nézet"
+      },
+      "VARIANTS": {
+        "TITLE": "Segmented control változatai",
+        "DESCRIPTION": "A segmented control komponens különböző színváltozatai: primary, surface (alapértelmezett) és light."
+      },
+      "SIZES": {
+        "TITLE": "Segmented control méretei",
+        "DESCRIPTION": "A segmented control komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "MULTI_SELECT": {
+        "TITLE": "Többszörös kiválasztás",
+        "DESCRIPTION": "A multiSelect beállítással több elem is kiválasztható. A kötött értéknek tömbnek kell lennie.",
+        "CONTENT": {
+          "EMAIL": "E-mail",
+          "SMS": "SMS",
+          "PUSH": "Push"
+        }
+      },
+      "ICONS": {
+        "TITLE": "Segmented control ikonnal",
+        "DESCRIPTION": "Az elemek tartalmazhatnak ids-icon-t. Kiválasztáskor az aktív pipa ikon váltja fel az elem ikonját.",
+        "CONTENT": {
+          "LIST": "Lista",
+          "GRID": "Rács",
+          "MAP": "Térkép"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled segmented control",
+        "DESCRIPTION": "Az egész vezérlő vagy egyes elemek letilthatók."
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Segmented control FormControl-lal",
+        "DESCRIPTION": "Reactive FormControl kötése az ids-segmented-control-hoz validációhoz és form integrációhoz.",
+        "CONTENT": {
+          "LABEL": "Válasszon nézetet",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Segmented control ngModel-lel",
+        "DESCRIPTION": "ngModel kötése az ids-segmented-control-hoz template-driven formokhoz required validációval.",
+        "CONTENT": {
+          "LABEL": "Válasszon nézetet",
+          "SUBMIT": "Küldés"
+        }
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button megjelenései",

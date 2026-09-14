@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { TOOLTIP_EXAMPLES } from '../../components-example/tooltip/tooltip-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrls: [
@@ -31,4 +34,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class TooltipDemoComponent {
   protected _tooltipDemoService = inject(TooltipDemoService);
+  public readonly tooltipExamples = TOOLTIP_EXAMPLES;
 }

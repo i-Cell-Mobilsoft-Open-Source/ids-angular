@@ -1,0 +1,18 @@
+@let fieldName = "EXAMPLES.DATEPICKER.WEEKEND_VALIDATOR.CONTENT.FIELD_NAME" | translate;
+
+<form class="flex flex-col gap-ids-container-gap-4 max-w-80" [formGroup]="form" (submit)="onSubmit($event)">
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.DATEPICKER.WEEKEND_VALIDATOR.CONTENT.LABEL" | translate }}</ids-label>
+    <input #datepicker="idsDatepicker" idsInput idsDatepicker formControlName="date" />
+    <ids-datepicker-trigger idsSuffix [for]="datepicker" />
+    <ids-hint-message>{{ "EXAMPLES.DATEPICKER.WEEKEND_VALIDATOR.CONTENT.HINT" | translate }}</ids-hint-message>
+    <ids-error-message>
+      <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
+      <ids-error-def code="mondayTuesday">{{ "EXAMPLES.DATEPICKER.WEEKEND_VALIDATOR.CONTENT.ERROR" | translate }}</ids-error-def>
+      <ids-error-def code="idsDateFormat">{{ "FORM_FIELD.ERROR.DATE_FORMAT" | translate: { fieldName } }}</ids-error-def>
+      <ids-error-def code="idsDateMin">{{ "FORM_FIELD.ERROR.DATE_MIN" | translate: { fieldName } }}</ids-error-def>
+      <ids-error-def code="idsDateMax">{{ "FORM_FIELD.ERROR.DATE_MAX" | translate: { fieldName } }}</ids-error-def>
+    </ids-error-message>
+  </ids-form-field>
+  <button type="submit" idsButton>{{ "EXAMPLES.DATEPICKER.WEEKEND_VALIDATOR.CONTENT.SUBMIT" | translate }}</button>
+</form>

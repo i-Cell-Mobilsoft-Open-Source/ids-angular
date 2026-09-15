@@ -1,0 +1,14 @@
+@let fieldName = "EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.FIELD_NAME" | translate;
+
+<form class="flex flex-col gap-ids-container-gap-4" (submit)="onSubmit($event)">
+  <p>{{ "EXAMPLES.SEGMENTED_CONTROL_TOGGLE.FORM_CONTROL.CONTENT.LABEL" | translate }}</p>
+  <ids-segmented-control-toggle [formControl]="view">
+    <ids-segmented-control-toggle-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.DAY' | translate" />
+    <ids-segmented-control-toggle-item value="week" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.WEEK' | translate" />
+    <ids-segmented-control-toggle-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.MONTH' | translate" />
+  </ids-segmented-control-toggle>
+  @if (view.touched && view.invalid) {
+    <ids-error-message>{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-message>
+  }
+  <button type="submit" idsButton>{{ "EXAMPLES.SEGMENTED_CONTROL_TOGGLE.FORM_CONTROL.CONTENT.SUBMIT" | translate }}</button>
+</form>

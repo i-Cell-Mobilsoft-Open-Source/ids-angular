@@ -933,6 +933,43 @@
         "DESCRIPTION": "When there are many pages, page buttons are truncated using maxDisplayedItemCount. Set showAllPages to display every page button."
       }
     },
+    "TOOLTIP": {
+      "COMMON": {
+        "TRIGGER": "Hover me",
+        "MESSAGE": "Helpful information about this action."
+      },
+      "VARIANTS": {
+        "TITLE": "Tooltip variants",
+        "DESCRIPTION": "Tooltips with different color variants: dark (default) and light."
+      },
+      "SIZES": {
+        "TITLE": "Tooltip sizes",
+        "DESCRIPTION": "Tooltips with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "POSITIONS": {
+        "TITLE": "Tooltip positions",
+        "DESCRIPTION": "Use idsTooltipPosition to place the tooltip relative to the trigger element. All eight positions are supported."
+      },
+      "TEXT_ALIGN": {
+        "TITLE": "Tooltip text alignment",
+        "DESCRIPTION": "Use idsTooltipTextAlign to control how text is aligned inside the tooltip.",
+        "CONTENT": {
+          "LONG_MESSAGE": "This is a longer tooltip message that wraps to multiple lines when the available width is limited."
+        }
+      },
+      "POINTER": {
+        "TITLE": "Tooltip pointer",
+        "DESCRIPTION": "Use idsTooltipShowPointer to show or hide the pointer that connects the tooltip to its trigger."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled tooltip",
+        "DESCRIPTION": "Use idsTooltipDisabled to prevent the tooltip from appearing on hover or focus.",
+        "CONTENT": {
+          "ENABLED": "Tooltip enabled",
+          "DISABLED": "Tooltip disabled"
+        }
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button appearances",

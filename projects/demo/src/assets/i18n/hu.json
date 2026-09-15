@@ -929,6 +929,68 @@
         "DESCRIPTION": "Sok oldal esetén az oldalszám gombok a maxDisplayedItemCount alapján csonkítva jelennek meg. A showAllPages minden oldalszám gombot megjelenít."
       }
     },
+    "SEGMENTED_CONTROL_TOGGLE": {
+      "COMMON": {
+        "DAY": "Nap",
+        "WEEK": "Hét",
+        "MONTH": "Hónap",
+        "FIELD_NAME": "Nézet"
+      },
+      "VARIANTS": {
+        "TITLE": "Segmented control toggle változatai",
+        "DESCRIPTION": "A segmented control toggle komponens különböző konténer változatai: surface (alapértelmezett) és light."
+      },
+      "BUTTON_VARIANTS": {
+        "TITLE": "Gomb változatok",
+        "DESCRIPTION": "A buttonVariant beállítással a kiválasztott toggle elem stílusa állítható: primary, surface (alapértelmezett) és light."
+      },
+      "APPEARANCES": {
+        "TITLE": "Segmented control toggle megjelenései",
+        "DESCRIPTION": "A segmented control toggle komponens megjelenései: filled (alapértelmezett) és outlined."
+      },
+      "SIZES": {
+        "TITLE": "Segmented control toggle méretei",
+        "DESCRIPTION": "A segmented control toggle komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "ICONS": {
+        "TITLE": "Segmented control toggle ikonnal",
+        "DESCRIPTION": "Az elemek tartalmazhatnak ids-icon-t. Kiválasztáskor alapértelmezetten az aktív pipa ikon váltja fel az elem ikonját. A showActiveIcon false értékre állításával kiválasztáskor is megmarad az elem ikonja.",
+        "CONTENT": {
+          "LIST": "Lista",
+          "GRID": "Rács",
+          "MAP": "Térkép"
+        }
+      },
+      "ITEM_CONTENT": {
+        "TITLE": "Elem tartalom beállítások",
+        "DESCRIPTION": "A toggle elemek támogatják az ikonokat, címkéket, suffix tartalmat és az aktív ikon viselkedésének beállítását.",
+        "CONTENT": {
+          "MAIL": "Levelezés",
+          "ACCOUNT": "Fiók",
+          "TIME": "Idő"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled segmented control toggle",
+        "DESCRIPTION": "Az egész vezérlő vagy egyes elemek letilthatók."
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Segmented control toggle FormControl-lal",
+        "DESCRIPTION": "Reactive FormControl kötése az ids-segmented-control-toggle-hoz validációhoz és form integrációhoz.",
+        "CONTENT": {
+          "LABEL": "Válasszon nézetet",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Segmented control toggle ngModel-lel",
+        "DESCRIPTION": "ngModel kötése az ids-segmented-control-toggle-hoz template-driven formokhoz required validációval.",
+        "CONTENT": {
+          "LABEL": "Válasszon nézetet",
+          "SUBMIT": "Küldés"
+        }
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button megjelenései",

@@ -1,4 +1,4 @@
-<ids-card appearance="elevated" variant="light" size="compact" class="ids-example-viewer w-full">
+<ids-card appearance="elevated" variant="light" size="dense" class="ids-example-viewer w-full">
   <ids-card-header>
     <div class="flex items-start justify-between p-4">
       <div>
@@ -10,7 +10,7 @@
     </div>
   </ids-card-header>
   <ids-card-body>
-      <div class="flex items-center justify-center p-8 example-bg">
+      <div class="flex items-center justify-center p-4 example-bg">
         <ng-container #dynamicHost />
       </div>
 
@@ -18,7 +18,7 @@
         <button
           type="button"
           idsButton
-          size="comfortable"
+          size="compact"
           appearance="text"
           variant="light"
           [idsTooltip]="_isCodeVisible() ? 'Hide code' : 'Show code'"
@@ -35,6 +35,7 @@
           <ids-tab-group
             stretchTabs="false"
             variant="light"
+            size="dense"
             [selectedTabIndex]="_selectedTabIndex()"
             (selectedTabChange)="onTabChange($event)"
           >

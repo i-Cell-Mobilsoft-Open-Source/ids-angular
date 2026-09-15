@@ -933,6 +933,68 @@
         "DESCRIPTION": "When there are many pages, page buttons are truncated using maxDisplayedItemCount. Set showAllPages to display every page button."
       }
     },
+    "SEGMENTED_CONTROL_TOGGLE": {
+      "COMMON": {
+        "DAY": "Day",
+        "WEEK": "Week",
+        "MONTH": "Month",
+        "FIELD_NAME": "View"
+      },
+      "VARIANTS": {
+        "TITLE": "Segmented control toggle variants",
+        "DESCRIPTION": "Segmented control toggles with different container variants: surface (default) and light."
+      },
+      "BUTTON_VARIANTS": {
+        "TITLE": "Button variants",
+        "DESCRIPTION": "Use buttonVariant to style the selected toggle item: primary, surface (default), and light."
+      },
+      "APPEARANCES": {
+        "TITLE": "Segmented control toggle appearances",
+        "DESCRIPTION": "Segmented control toggles with different appearances: filled (default) and outlined."
+      },
+      "SIZES": {
+        "TITLE": "Segmented control toggle sizes",
+        "DESCRIPTION": "Segmented control toggles with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "ICONS": {
+        "TITLE": "Segmented control toggle with icons",
+        "DESCRIPTION": "Items can include an ids-icon. When selected, the active checkmark icon replaces the item icon by default. Set showActiveIcon to false to keep the item icon visible when selected.",
+        "CONTENT": {
+          "LIST": "List",
+          "GRID": "Grid",
+          "MAP": "Map"
+        }
+      },
+      "ITEM_CONTENT": {
+        "TITLE": "Item content options",
+        "DESCRIPTION": "Toggle items support icons, labels, suffix content, and configurable active icon behavior.",
+        "CONTENT": {
+          "MAIL": "Mail",
+          "ACCOUNT": "Account",
+          "TIME": "Time"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled segmented control toggle",
+        "DESCRIPTION": "The entire control or individual items can be disabled."
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Segmented control toggle with FormControl",
+        "DESCRIPTION": "Bind a reactive FormControl to ids-segmented-control-toggle for validation and form integration.",
+        "CONTENT": {
+          "LABEL": "Select a view",
+          "SUBMIT": "Submit"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Segmented control toggle with ngModel",
+        "DESCRIPTION": "Bind ngModel to ids-segmented-control-toggle for template-driven forms with required validation.",
+        "CONTENT": {
+          "LABEL": "Select a view",
+          "SUBMIT": "Submit"
+        }
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button appearances",

@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-8">
+  <div class="grid gap-2">
+    <span>disabled off</span>
+    <ids-switch [disabled]="true" [label]="'EXAMPLES.SWITCH.DISABLED.CONTENT.DISABLED' | translate" [(ngModel)]="disabledOff" />
+  </div>
+
+  <div class="grid gap-2">
+    <span>disabled on</span>
+    <ids-switch [disabled]="true" [label]="'EXAMPLES.SWITCH.DISABLED.CONTENT.DISABLED_ON' | translate" [(ngModel)]="disabledOn" />
+  </div>
+
+  <div class="grid gap-2">
+    <span>readonly off</span>
+    <ids-switch [readonly]="true" [label]="'EXAMPLES.SWITCH.DISABLED.CONTENT.READONLY' | translate" [(ngModel)]="readonlyOff" />
+  </div>
+
+  <div class="grid gap-2">
+    <span>readonly on</span>
+    <ids-switch [readonly]="true" [label]="'EXAMPLES.SWITCH.DISABLED.CONTENT.READONLY_ON' | translate" [(ngModel)]="readonlyOn" />
+  </div>
+</div>

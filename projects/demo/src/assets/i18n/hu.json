@@ -929,6 +929,54 @@
         "DESCRIPTION": "Sok oldal esetén az oldalszám gombok a maxDisplayedItemCount alapján csonkítva jelennek meg. A showAllPages minden oldalszám gombot megjelenít."
       }
     },
+    "SWITCH": {
+      "COMMON": {
+        "LABEL": "Értesítések engedélyezése"
+      },
+      "VARIANTS": {
+        "TITLE": "Switch változatai",
+        "DESCRIPTION": "A switch komponens különböző változatai: primary, surface (alapértelmezett) és light."
+      },
+      "SIZES": {
+        "TITLE": "Switch méretei",
+        "DESCRIPTION": "A switch komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "LABEL_POSITION": {
+        "TITLE": "Switch label pozíció",
+        "DESCRIPTION": "A labelPosition beállítással a címke a switch bal vagy jobb oldalára kerülhet."
+      },
+      "ICONS": {
+        "TITLE": "Switch ikonnal",
+        "DESCRIPTION": "A switch megjeleníthet ikont a handle-en vagy a track-en a hasIcon és iconPosition beállításokkal."
+      },
+      "STATES": {
+        "TITLE": "Switch állapotok",
+        "DESCRIPTION": "A switch lehet ki (off) vagy be (on) kapcsolva.",
+        "CONTENT": {
+          "OFF": "Ki",
+          "ON": "Be"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled és readonly",
+        "DESCRIPTION": "A disabled switch nem kapcsolható. A readonly switch megtartja az értékét, de nem interaktív.",
+        "CONTENT": {
+          "DISABLED": "Disabled kikapcsolva",
+          "DISABLED_ON": "Disabled bekapcsolva",
+          "READONLY": "Readonly kikapcsolva",
+          "READONLY_ON": "Readonly bekapcsolva"
+        }
+      },
+      "GROUP": {
+        "TITLE": "Switch group",
+        "DESCRIPTION": "A switchek ids-switch-group-pal csoportosíthatók, amely megosztja a méret, ikon és label pozíció beállításokat.",
+        "CONTENT": {
+          "EMAIL": "E-mail értesítések",
+          "SMS": "SMS értesítések",
+          "PUSH": "Push értesítések"
+        }
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button megjelenései",

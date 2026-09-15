@@ -1,0 +1,13 @@
+@let fieldName = "EXAMPLES.DATEPICKER.COMMON.FIELD_NAME" | translate;
+
+<ids-form-field class="max-w-80">
+  <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+  <input #datepicker="idsDatepicker" idsInput idsDatepicker [minDate]="minDate" [maxDate]="maxDate" [(ngModel)]="date" />
+  <ids-datepicker-trigger idsSuffix [for]="datepicker" />
+  <ids-hint-message>{{ "EXAMPLES.DATEPICKER.MIN_MAX.CONTENT.HINT" | translate }}</ids-hint-message>
+  <ids-error-message>
+    <ids-error-def code="idsDateFormat">{{ "FORM_FIELD.ERROR.DATE_FORMAT" | translate: { fieldName } }}</ids-error-def>
+    <ids-error-def code="idsDateMin">{{ "FORM_FIELD.ERROR.DATE_MIN" | translate: { fieldName } }}</ids-error-def>
+    <ids-error-def code="idsDateMax">{{ "FORM_FIELD.ERROR.DATE_MAX" | translate: { fieldName } }}</ids-error-def>
+  </ids-error-message>
+</ids-form-field>

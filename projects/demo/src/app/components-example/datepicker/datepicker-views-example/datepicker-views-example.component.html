@@ -1,0 +1,22 @@
+<div class="flex flex-col gap-4 max-w-80">
+  <span>day</span>
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #dayPicker="idsDatepicker" idsInput idsDatepicker view="day" [(ngModel)]="day" />
+    <ids-datepicker-trigger idsSuffix [for]="dayPicker" />
+  </ids-form-field>
+
+  <span>month</span>
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #monthPicker="idsDatepicker" idsInput idsDatepicker view="month" [(ngModel)]="month" />
+    <ids-datepicker-trigger idsSuffix [for]="monthPicker" />
+  </ids-form-field>
+
+  <span>year</span>
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #yearPicker="idsDatepicker" idsInput idsDatepicker view="year" [(ngModel)]="year" />
+    <ids-datepicker-trigger idsSuffix [for]="yearPicker" />
+  </ids-form-field>
+</div>

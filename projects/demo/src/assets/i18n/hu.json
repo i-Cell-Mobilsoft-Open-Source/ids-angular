@@ -818,6 +818,32 @@
         "DESCRIPTION": "A chipek csoportosíthatók. A megjelenés, a méret és a disabled állapot a csoporttól öröklődik."
       }
     },
+    "TAG": {
+      "APPEARANCES": {
+        "TITLE": "Tag megjelenései",
+        "DESCRIPTION": "A tag komponens megjelenései: filled (alapértelmezett) és outlined."
+      },
+      "VARIANTS": {
+        "TITLE": "Tag változatai",
+        "DESCRIPTION": "A tag komponens különböző változatai: primary (alapértelmezett), secondary, surface, brand, light, dark, info, success, warning és error."
+      },
+      "SIZES": {
+        "TITLE": "Tag méretei",
+        "DESCRIPTION": "A tag komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "INTERACTIVE": {
+        "TITLE": "Interaktív tagek",
+        "DESCRIPTION": "A nem interaktív tagekhez az ids-tag elemet, az interaktív link tagekhez az a[idsTag] selectort használja."
+      },
+      "ICONS": {
+        "TITLE": "Tag ikonokkal",
+        "DESCRIPTION": "A tag komponens tartalmazhat leading és/vagy trailing ikont."
+      },
+      "TAG_GROUP": {
+        "TITLE": "Tag-group",
+        "DESCRIPTION": "A tagek csoportosíthatók. A megjelenés és a méret a csoporttól öröklődik; a variant tagonként állítható."
+      }
+    },
     "NOTIFICATION": {
       "VARIANTS": {
         "TITLE": "Notification változatai",

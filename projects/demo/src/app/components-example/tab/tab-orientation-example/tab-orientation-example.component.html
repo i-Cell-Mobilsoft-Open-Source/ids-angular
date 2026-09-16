@@ -1,0 +1,13 @@
+<div class="flex flex-col gap-4 w-full">
+  <span>horizontal</span>
+  <ids-tab-group orientation="horizontal">
+    <ids-tab [label]="'EXAMPLES.TAB.COMMON.TAB_1' | translate">{{ "EXAMPLES.TAB.COMMON.CONTENT_1" | translate }}</ids-tab>
+    <ids-tab [label]="'EXAMPLES.TAB.COMMON.TAB_2' | translate">{{ "EXAMPLES.TAB.COMMON.CONTENT_2" | translate }}</ids-tab>
+  </ids-tab-group>
+
+  <span>vertical</span>
+  <ids-tab-group class="h-32" orientation="vertical">
+    <ids-tab [label]="'EXAMPLES.TAB.COMMON.TAB_1' | translate">{{ "EXAMPLES.TAB.COMMON.CONTENT_1" | translate }}</ids-tab>
+    <ids-tab [label]="'EXAMPLES.TAB.COMMON.TAB_2' | translate">{{ "EXAMPLES.TAB.COMMON.CONTENT_2" | translate }}</ids-tab>
+  </ids-tab-group>
+</div>

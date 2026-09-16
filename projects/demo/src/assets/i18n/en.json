@@ -933,6 +933,82 @@
         "DESCRIPTION": "When there are many pages, page buttons are truncated using maxDisplayedItemCount. Set showAllPages to display every page button."
       }
     },
+    "TAB": {
+      "COMMON": {
+        "TAB_1": "Overview",
+        "TAB_2": "Details",
+        "CONTENT_1": "Overview tab content.",
+        "CONTENT_2": "Details tab content."
+      },
+      "SCROLLABLE": {
+        "TAB_1": "Tab 1",
+        "TAB_2": "Tab 2",
+        "TAB_3": "Tab 3",
+        "TAB_4": "Tab 4",
+        "TAB_6": "Tab 6",
+        "TAB_7": "Tab 7",
+        "TAB_8": "Tab 8",
+        "TAB_9": "Tab 9",
+        "TAB_11": "Tab 11",
+        "TAB_12": "Tab 12",
+        "LONG_5": "Tab with a long label 5",
+        "LONG_10": "Tab with a long label 10",
+        "CONTENT": "Content for tab {{number}}."
+      },
+      "SIZES": {
+        "TITLE": "Tab sizes",
+        "DESCRIPTION": "Tab groups with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "VARIANTS": {
+        "TITLE": "Tab variants",
+        "DESCRIPTION": "Tab groups with different color variants: primary (default), surface, and light."
+      },
+      "ORIENTATION": {
+        "TITLE": "Tab orientation",
+        "DESCRIPTION": "Use orientation to arrange tabs horizontally (default) or vertically."
+      },
+      "ALIGNMENT": {
+        "TITLE": "Tab alignment",
+        "DESCRIPTION": "Use tabAlignment with stretchTabs disabled to align tabs horizontally: start (default), center, or end. Overflowing tabs are not stretchable."
+      },
+      "POSITION": {
+        "TITLE": "Tab position",
+        "DESCRIPTION": "In vertical orientation, use tabPosition to place the tab list on the left (default), right, or top."
+      },
+      "INDICATOR_POSITION": {
+        "TITLE": "Indicator position",
+        "DESCRIPTION": "Use indicatorPosition to place the active indicator. Horizontal tabs support top and bottom (default). Vertical tabs support left (default) and right."
+      },
+      "STRETCH_TABS": {
+        "TITLE": "Stretch tabs",
+        "DESCRIPTION": "Use stretchTabs to make tab headers fill the available width (default) or size to their content."
+      },
+      "ITEM_PROPERTIES": {
+        "TITLE": "Tab item properties",
+        "DESCRIPTION": "Individual tabs support leadingIcon, trailingIcon, and disabled state.",
+        "CONTENT": {
+          "LEADING_ICON": "Mail",
+          "TRAILING_ICON": "Info",
+          "DISABLED": "Disabled",
+          "LEADING_CONTENT": "This tab has a leading icon.",
+          "TRAILING_CONTENT": "This tab has a trailing icon.",
+          "DISABLED_CONTENT": "This tab is disabled and cannot be selected."
+        }
+      },
+      "PREFIX_SUFFIX": {
+        "TITLE": "Prefix and suffix content",
+        "DESCRIPTION": "Project content into the tab header using prefixContent and suffixContent. The prefix button uses stopPropagation to avoid selecting the tab on click.",
+        "CONTENT": {
+          "TAB_1": "Settings",
+          "TAB_2": "Details",
+          "PREFIX_BUTTON": "Action",
+          "SUFFIX_LABEL": "Hover me",
+          "SUFFIX_TOOLTIP": "Additional information about this tab.",
+          "PANEL_1": "Settings tab content.",
+          "PANEL_2": "Details tab content."
+        }
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button appearances",

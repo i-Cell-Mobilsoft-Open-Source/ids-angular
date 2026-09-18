@@ -822,6 +822,32 @@
         "DESCRIPTION": "Chips can be grouped together. Appearance, size and disabled state are inherited from the group."
       }
     },
+    "TAG": {
+      "APPEARANCES": {
+        "TITLE": "Tag appearances",
+        "DESCRIPTION": "The two tag appearances: filled (default) and outlined."
+      },
+      "VARIANTS": {
+        "TITLE": "Tag variants",
+        "DESCRIPTION": "Tags with different color variants: primary (default), secondary, surface, brand, light, dark, info, success, warning, and error."
+      },
+      "SIZES": {
+        "TITLE": "Tag sizes",
+        "DESCRIPTION": "Tags with different sizes: dense, compact (default), comfortable, and spacious."
+      },
+      "INTERACTIVE": {
+        "TITLE": "Interactive tags",
+        "DESCRIPTION": "Use the ids-tag element for non-interactive tags, or the a[idsTag] selector for interactive link tags."
+      },
+      "ICONS": {
+        "TITLE": "Tag with icons",
+        "DESCRIPTION": "Tags can include a leading icon and/or a trailing icon."
+      },
+      "TAG_GROUP": {
+        "TITLE": "Tag group",
+        "DESCRIPTION": "Tags can be grouped together. Appearance and size are inherited from the group; variant is set per tag."
+      }
+    },
     "NOTIFICATION": {
       "VARIANTS": {
         "TITLE": "Notification variants",

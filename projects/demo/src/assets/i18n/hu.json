@@ -955,6 +955,82 @@
         "DESCRIPTION": "Sok oldal esetén az oldalszám gombok a maxDisplayedItemCount alapján csonkítva jelennek meg. A showAllPages minden oldalszám gombot megjelenít."
       }
     },
+    "TAB": {
+      "COMMON": {
+        "TAB_1": "Áttekintés",
+        "TAB_2": "Részletek",
+        "CONTENT_1": "Áttekintés tab tartalma.",
+        "CONTENT_2": "Részletek tab tartalma."
+      },
+      "SCROLLABLE": {
+        "TAB_1": "Tab 1",
+        "TAB_2": "Tab 2",
+        "TAB_3": "Tab 3",
+        "TAB_4": "Tab 4",
+        "TAB_6": "Tab 6",
+        "TAB_7": "Tab 7",
+        "TAB_8": "Tab 8",
+        "TAB_9": "Tab 9",
+        "TAB_11": "Tab 11",
+        "TAB_12": "Tab 12",
+        "LONG_5": "Hosszú címke 5",
+        "LONG_10": "Hosszú címke 10",
+        "CONTENT": "{{number}}. tab tartalma."
+      },
+      "SIZES": {
+        "TITLE": "Tab méretei",
+        "DESCRIPTION": "A tab csoport különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "VARIANTS": {
+        "TITLE": "Tab változatai",
+        "DESCRIPTION": "A tab csoport különböző színváltozatai: primary (alapértelmezett), surface és light."
+      },
+      "ORIENTATION": {
+        "TITLE": "Tab orientáció",
+        "DESCRIPTION": "Az orientation beállítással a tabok vízszintesen (alapértelmezett) vagy függőlegesen rendezhetők."
+      },
+      "ALIGNMENT": {
+        "TITLE": "Tab igazítás",
+        "DESCRIPTION": "A tabAlignment stretchTabs kikapcsolásával a tabok vízszintesen igazíthatók: start (alapértelmezett), center vagy end. A túlcsorduló taboknál nem értelmezett."
+      },
+      "POSITION": {
+        "TITLE": "Tab pozíció",
+        "DESCRIPTION": "Függőleges orientációban a tabPosition beállítással a tab lista balra (alapértelmezett), jobbra vagy felülre helyezhető."
+      },
+      "INDICATOR_POSITION": {
+        "TITLE": "Indikátor pozíció",
+        "DESCRIPTION": "Az indicatorPosition beállítással az aktív indikátor helye állítható. Vízszintes taboknál top és bottom (alapértelmezett), függőleges taboknál left (alapértelmezett) és right."
+      },
+      "STRETCH_TABS": {
+        "TITLE": "Stretch tabs",
+        "DESCRIPTION": "A stretchTabs beállítással a tab fejlécek kitölthetik a rendelkezésre álló szélességet (alapértelmezett), vagy a tartalmukhoz igazodhatnak."
+      },
+      "ITEM_PROPERTIES": {
+        "TITLE": "Tab elem tulajdonságok",
+        "DESCRIPTION": "Az egyes tabok támogatják a leadingIcon, trailingIcon és disabled állapot beállítását.",
+        "CONTENT": {
+          "LEADING_ICON": "Levelezés",
+          "TRAILING_ICON": "Info",
+          "DISABLED": "Disabled",
+          "LEADING_CONTENT": "Ennek a tabnak van leading ikonja.",
+          "TRAILING_CONTENT": "Ennek a tabnak van trailing ikonja.",
+          "DISABLED_CONTENT": "Ez a tab disabled, nem választható ki."
+        }
+      },
+      "PREFIX_SUFFIX": {
+        "TITLE": "Prefix és suffix tartalom",
+        "DESCRIPTION": "A prefixContent és suffixContent attribútumokkal tartalom vetíthető a tab fejlécbe. A prefix gomb stopPropagation-t használ, hogy kattintáskor ne válassza ki a tabot.",
+        "CONTENT": {
+          "TAB_1": "Beállítások",
+          "TAB_2": "Részletek",
+          "PREFIX_BUTTON": "Művelet",
+          "SUFFIX_LABEL": "Vidd fölé az egeret",
+          "SUFFIX_TOOLTIP": "További információ erről a tabról.",
+          "PANEL_1": "Beállítások tab tartalma.",
+          "PANEL_2": "Részletek tab tartalma."
+        }
+      }
+    },
     "DATEPICKER": {
       "COMMON": {
         "LABEL": "Dátum",

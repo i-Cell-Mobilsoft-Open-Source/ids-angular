@@ -1,0 +1,25 @@
+<ids-tab-group>
+  <ids-tab [label]="'EXAMPLES.TAB.PREFIX_SUFFIX.CONTENT.TAB_1' | translate">
+    <button
+      prefixContent
+      type="button"
+      idsButton
+      size="dense"
+      (click)="$event.stopPropagation()"
+    >
+      {{ "EXAMPLES.TAB.PREFIX_SUFFIX.CONTENT.PREFIX_BUTTON" | translate }}
+    </button>
+    <span
+      suffixContent
+      class="ids-tab-demo__suffix"
+      [idsTooltip]="'EXAMPLES.TAB.PREFIX_SUFFIX.CONTENT.SUFFIX_TOOLTIP' | translate"
+      [idsTooltipShowDelay]="0"
+    >
+      {{ "EXAMPLES.TAB.PREFIX_SUFFIX.CONTENT.SUFFIX_LABEL" | translate }}
+    </span>
+    {{ "EXAMPLES.TAB.PREFIX_SUFFIX.CONTENT.PANEL_1" | translate }}
+  </ids-tab>
+  <ids-tab [label]="'EXAMPLES.TAB.PREFIX_SUFFIX.CONTENT.TAB_2' | translate">
+    {{ "EXAMPLES.TAB.PREFIX_SUFFIX.CONTENT.PANEL_2" | translate }}
+  </ids-tab>
+</ids-tab-group>

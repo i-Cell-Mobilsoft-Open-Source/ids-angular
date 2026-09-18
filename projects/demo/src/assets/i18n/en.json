@@ -822,6 +822,32 @@
         "DESCRIPTION": "Chips can be grouped together. Appearance, size and disabled state are inherited from the group."
       }
     },
+    "TAG": {
+      "APPEARANCES": {
+        "TITLE": "Tag appearances",
+        "DESCRIPTION": "The two tag appearances: filled (default) and outlined."
+      },
+      "VARIANTS": {
+        "TITLE": "Tag variants",
+        "DESCRIPTION": "Tags with different color variants: primary (default), secondary, surface, brand, light, dark, info, success, warning, and error."
+      },
+      "SIZES": {
+        "TITLE": "Tag sizes",
+        "DESCRIPTION": "Tags with different sizes: dense, compact (default), comfortable, and spacious."
+      },
+      "INTERACTIVE": {
+        "TITLE": "Interactive tags",
+        "DESCRIPTION": "Use the ids-tag element for non-interactive tags, or the a[idsTag] selector for interactive link tags."
+      },
+      "ICONS": {
+        "TITLE": "Tag with icons",
+        "DESCRIPTION": "Tags can include a leading icon and/or a trailing icon."
+      },
+      "TAG_GROUP": {
+        "TITLE": "Tag group",
+        "DESCRIPTION": "Tags can be grouped together. Appearance and size are inherited from the group; variant is set per tag."
+      }
+    },
     "NOTIFICATION": {
       "VARIANTS": {
         "TITLE": "Notification variants",
@@ -1006,6 +1032,145 @@
           "SUFFIX_TOOLTIP": "Additional information about this tab.",
           "PANEL_1": "Settings tab content.",
           "PANEL_2": "Details tab content."
+        }
+      }
+    },
+    "SEGMENTED_CONTROL": {
+      "COMMON": {
+        "DAY": "Day",
+        "WEEK": "Week",
+        "MONTH": "Month",
+        "FIELD_NAME": "View"
+      },
+      "VARIANTS": {
+        "TITLE": "Segmented control variants",
+        "DESCRIPTION": "Segmented controls with different color variants: primary, surface (default), and light."
+      },
+      "SIZES": {
+        "TITLE": "Segmented control sizes",
+        "DESCRIPTION": "Segmented controls with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "MULTI_SELECT": {
+        "TITLE": "Multi selection",
+        "DESCRIPTION": "Use multiSelect to allow selecting multiple items. The bound value must be an array.",
+        "CONTENT": {
+          "EMAIL": "Email",
+          "SMS": "SMS",
+          "PUSH": "Push"
+        }
+      },
+      "ICONS": {
+        "TITLE": "Segmented control with icons",
+        "DESCRIPTION": "Items can include an ids-icon. When selected, the active checkmark icon replaces the item icon.",
+        "CONTENT": {
+          "LIST": "List",
+          "GRID": "Grid",
+          "MAP": "Map"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled segmented control",
+        "DESCRIPTION": "The entire control or individual items can be disabled."
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Segmented control with FormControl",
+        "DESCRIPTION": "Bind a reactive FormControl to ids-segmented-control for validation and form integration.",
+        "CONTENT": {
+          "LABEL": "Select a view",
+          "SUBMIT": "Submit"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Segmented control with ngModel",
+        "DESCRIPTION": "Bind ngModel to ids-segmented-control for template-driven forms with required validation.",
+        "CONTENT": {
+          "LABEL": "Select a view",
+          "SUBMIT": "Submit"
+        }
+      }
+    },
+    "SWITCH": {
+      "COMMON": {
+        "LABEL": "Enable notifications"
+      },
+      "VARIANTS": {
+        "TITLE": "Switch variants",
+        "DESCRIPTION": "Switches with different color variants: primary, surface (default), and light."
+      },
+      "SIZES": {
+        "TITLE": "Switch sizes",
+        "DESCRIPTION": "Switches with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "LABEL_POSITION": {
+        "TITLE": "Switch label position",
+        "DESCRIPTION": "Use labelPosition to place the label on the left or right of the switch."
+      },
+      "ICONS": {
+        "TITLE": "Switch with icons",
+        "DESCRIPTION": "Switches can display an icon on the handle or on the track via hasIcon and iconPosition."
+      },
+      "STATES": {
+        "TITLE": "Switch states",
+        "DESCRIPTION": "Switches can be off or on.",
+        "CONTENT": {
+          "OFF": "Off",
+          "ON": "On"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled and readonly",
+        "DESCRIPTION": "Disabled switches cannot be toggled. Readonly switches keep their value but are not interactive.",
+        "CONTENT": {
+          "DISABLED": "Disabled off",
+          "DISABLED_ON": "Disabled on",
+          "READONLY": "Readonly off",
+          "READONLY_ON": "Readonly on"
+        }
+      },
+      "GROUP": {
+        "TITLE": "Switch group",
+        "DESCRIPTION": "Switches can be grouped with ids-switch-group to share size, icon, and label position settings.",
+        "CONTENT": {
+          "EMAIL": "Email notifications",
+          "SMS": "SMS notifications",
+          "PUSH": "Push notifications"
+        }
+      }
+    },
+    "TOOLTIP": {
+      "COMMON": {
+        "TRIGGER": "Hover me",
+        "MESSAGE": "Helpful information about this action."
+      },
+      "VARIANTS": {
+        "TITLE": "Tooltip variants",
+        "DESCRIPTION": "Tooltips with different color variants: dark (default) and light."
+      },
+      "SIZES": {
+        "TITLE": "Tooltip sizes",
+        "DESCRIPTION": "Tooltips with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "POSITIONS": {
+        "TITLE": "Tooltip positions",
+        "DESCRIPTION": "Use idsTooltipPosition to place the tooltip relative to the trigger element. All eight positions are supported."
+      },
+      "TEXT_ALIGN": {
+        "TITLE": "Tooltip text alignment",
+        "DESCRIPTION": "Use idsTooltipTextAlign to control how text is aligned inside the tooltip.",
+        "CONTENT": {
+          "LONG_MESSAGE": "This is a longer tooltip message that wraps to multiple lines when the available width is limited."
+        }
+      },
+      "POINTER": {
+        "TITLE": "Tooltip pointer",
+        "DESCRIPTION": "Use idsTooltipShowPointer to show or hide the pointer that connects the tooltip to its trigger."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled tooltip",
+        "DESCRIPTION": "Use idsTooltipDisabled to prevent the tooltip from appearing on hover or focus.",
+        "CONTENT": {
+          "ENABLED": "Tooltip enabled",
+          "DISABLED": "Tooltip disabled"
         }
       }
     },

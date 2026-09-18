@@ -1,0 +1,14 @@
+@let fieldName = "EXAMPLES.SEGMENTED_CONTROL.COMMON.FIELD_NAME" | translate;
+
+<form class="flex flex-col gap-ids-container-gap-4" (ngSubmit)="onSubmit(viewModel)">
+  <p>{{ "EXAMPLES.SEGMENTED_CONTROL.NG_MODEL.CONTENT.LABEL" | translate }}</p>
+  <ids-segmented-control #viewModel="ngModel" name="view" required [(ngModel)]="view">
+    <ids-segmented-control-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.DAY' | translate" />
+    <ids-segmented-control-item value="week" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.WEEK' | translate" />
+    <ids-segmented-control-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.MONTH' | translate" />
+  </ids-segmented-control>
+  @if (viewModel.touched && viewModel.invalid) {
+    <ids-error-message>{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-message>
+  }
+  <button type="submit" idsButton>{{ "EXAMPLES.SEGMENTED_CONTROL.NG_MODEL.CONTENT.SUBMIT" | translate }}</button>
+</form>

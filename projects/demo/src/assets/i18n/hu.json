@@ -818,6 +818,32 @@
         "DESCRIPTION": "A chipek csoportosíthatók. A megjelenés, a méret és a disabled állapot a csoporttól öröklődik."
       }
     },
+    "TAG": {
+      "APPEARANCES": {
+        "TITLE": "Tag megjelenései",
+        "DESCRIPTION": "A tag komponens megjelenései: filled (alapértelmezett) és outlined."
+      },
+      "VARIANTS": {
+        "TITLE": "Tag változatai",
+        "DESCRIPTION": "A tag komponens különböző változatai: primary (alapértelmezett), secondary, surface, brand, light, dark, info, success, warning és error."
+      },
+      "SIZES": {
+        "TITLE": "Tag méretei",
+        "DESCRIPTION": "A tag komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "INTERACTIVE": {
+        "TITLE": "Interaktív tagek",
+        "DESCRIPTION": "A nem interaktív tagekhez az ids-tag elemet, az interaktív link tagekhez az a[idsTag] selectort használja."
+      },
+      "ICONS": {
+        "TITLE": "Tag ikonokkal",
+        "DESCRIPTION": "A tag komponens tartalmazhat leading és/vagy trailing ikont."
+      },
+      "TAG_GROUP": {
+        "TITLE": "Tag-group",
+        "DESCRIPTION": "A tagek csoportosíthatók. A megjelenés és a méret a csoporttól öröklődik; a variant tagonként állítható."
+      }
+    },
     "NOTIFICATION": {
       "VARIANTS": {
         "TITLE": "Notification változatai",
@@ -1002,6 +1028,145 @@
           "SUFFIX_TOOLTIP": "További információ erről a tabról.",
           "PANEL_1": "Beállítások tab tartalma.",
           "PANEL_2": "Részletek tab tartalma."
+        }
+      }
+    },
+    "SEGMENTED_CONTROL": {
+      "COMMON": {
+        "DAY": "Nap",
+        "WEEK": "Hét",
+        "MONTH": "Hónap",
+        "FIELD_NAME": "Nézet"
+      },
+      "VARIANTS": {
+        "TITLE": "Segmented control változatai",
+        "DESCRIPTION": "A segmented control komponens különböző színváltozatai: primary, surface (alapértelmezett) és light."
+      },
+      "SIZES": {
+        "TITLE": "Segmented control méretei",
+        "DESCRIPTION": "A segmented control komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "MULTI_SELECT": {
+        "TITLE": "Többszörös kiválasztás",
+        "DESCRIPTION": "A multiSelect beállítással több elem is kiválasztható. A kötött értéknek tömbnek kell lennie.",
+        "CONTENT": {
+          "EMAIL": "E-mail",
+          "SMS": "SMS",
+          "PUSH": "Push"
+        }
+      },
+      "ICONS": {
+        "TITLE": "Segmented control ikonnal",
+        "DESCRIPTION": "Az elemek tartalmazhatnak ids-icon-t. Kiválasztáskor az aktív pipa ikon váltja fel az elem ikonját.",
+        "CONTENT": {
+          "LIST": "Lista",
+          "GRID": "Rács",
+          "MAP": "Térkép"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled segmented control",
+        "DESCRIPTION": "Az egész vezérlő vagy egyes elemek letilthatók."
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Segmented control FormControl-lal",
+        "DESCRIPTION": "Reactive FormControl kötése az ids-segmented-control-hoz validációhoz és form integrációhoz.",
+        "CONTENT": {
+          "LABEL": "Válasszon nézetet",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Segmented control ngModel-lel",
+        "DESCRIPTION": "ngModel kötése az ids-segmented-control-hoz template-driven formokhoz required validációval.",
+        "CONTENT": {
+          "LABEL": "Válasszon nézetet",
+          "SUBMIT": "Küldés"
+        }
+      }
+    },
+    "SWITCH": {
+      "COMMON": {
+        "LABEL": "Értesítések engedélyezése"
+      },
+      "VARIANTS": {
+        "TITLE": "Switch változatai",
+        "DESCRIPTION": "A switch komponens különböző változatai: primary, surface (alapértelmezett) és light."
+      },
+      "SIZES": {
+        "TITLE": "Switch méretei",
+        "DESCRIPTION": "A switch komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "LABEL_POSITION": {
+        "TITLE": "Switch label pozíció",
+        "DESCRIPTION": "A labelPosition beállítással a címke a switch bal vagy jobb oldalára kerülhet."
+      },
+      "ICONS": {
+        "TITLE": "Switch ikonnal",
+        "DESCRIPTION": "A switch megjeleníthet ikont a handle-en vagy a track-en a hasIcon és iconPosition beállításokkal."
+      },
+      "STATES": {
+        "TITLE": "Switch állapotok",
+        "DESCRIPTION": "A switch lehet ki (off) vagy be (on) kapcsolva.",
+        "CONTENT": {
+          "OFF": "Ki",
+          "ON": "Be"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled és readonly",
+        "DESCRIPTION": "A disabled switch nem kapcsolható. A readonly switch megtartja az értékét, de nem interaktív.",
+        "CONTENT": {
+          "DISABLED": "Disabled kikapcsolva",
+          "DISABLED_ON": "Disabled bekapcsolva",
+          "READONLY": "Readonly kikapcsolva",
+          "READONLY_ON": "Readonly bekapcsolva"
+        }
+      },
+      "GROUP": {
+        "TITLE": "Switch group",
+        "DESCRIPTION": "A switchek ids-switch-group-pal csoportosíthatók, amely megosztja a méret, ikon és label pozíció beállításokat.",
+        "CONTENT": {
+          "EMAIL": "E-mail értesítések",
+          "SMS": "SMS értesítések",
+          "PUSH": "Push értesítések"
+        }
+      }
+    },
+    "TOOLTIP": {
+      "COMMON": {
+        "TRIGGER": "Vidd fölé az egeret",
+        "MESSAGE": "Hasznos információ erről a műveletről."
+      },
+      "VARIANTS": {
+        "TITLE": "Tooltip változatai",
+        "DESCRIPTION": "A tooltip komponens különböző színváltozatai: dark (alapértelmezett) és light."
+      },
+      "SIZES": {
+        "TITLE": "Tooltip méretei",
+        "DESCRIPTION": "A tooltip komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "POSITIONS": {
+        "TITLE": "Tooltip pozíciók",
+        "DESCRIPTION": "Az idsTooltipPosition beállítással a tooltip a trigger elemhez képest pozicionálható. Mind a nyolc pozíció támogatott."
+      },
+      "TEXT_ALIGN": {
+        "TITLE": "Tooltip szöveg igazítás",
+        "DESCRIPTION": "Az idsTooltipTextAlign beállítással szabályozható a tooltipen belüli szöveg igazítása.",
+        "CONTENT": {
+          "LONG_MESSAGE": "Ez egy hosszabb tooltip üzenet, amely több sorba tör, ha a rendelkezésre álló szélesség korlátozott."
+        }
+      },
+      "POINTER": {
+        "TITLE": "Tooltip pointer",
+        "DESCRIPTION": "Az idsTooltipShowPointer beállítással megjeleníthető vagy elrejthető a tooltipet a triggerhez kötő pointer."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled tooltip",
+        "DESCRIPTION": "Az idsTooltipDisabled beállítással megakadályozható, hogy a tooltip megjelenjen hover vagy focus esetén.",
+        "CONTENT": {
+          "ENABLED": "Tooltip engedélyezve",
+          "DISABLED": "Tooltip letiltva"
         }
       }
     },

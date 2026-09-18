@@ -1,0 +1,30 @@
+<div class="flex flex-col gap-8">
+  <div class="grid gap-2">
+    <span>dark</span>
+    <button
+      type="button"
+      idsButton
+      idsTooltipVariant="dark"
+      [idsTooltipShowDelay]="0"
+      [idsTooltip]="'EXAMPLES.TOOLTIP.COMMON.MESSAGE' | translate"
+    >
+      {{ "EXAMPLES.TOOLTIP.COMMON.TRIGGER" | translate }}
+    </button>
+  </div>
+
+  <div class="grid gap-2 bg-black">
+    <span class="text-white">light</span>
+    <div class="p-4 inline-block">
+      <button
+        type="button"
+        idsButton
+        variant="light"
+        idsTooltipVariant="light"
+        [idsTooltipShowDelay]="0"
+        [idsTooltip]="'EXAMPLES.TOOLTIP.COMMON.MESSAGE' | translate"
+      >
+        {{ "EXAMPLES.TOOLTIP.COMMON.TRIGGER" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

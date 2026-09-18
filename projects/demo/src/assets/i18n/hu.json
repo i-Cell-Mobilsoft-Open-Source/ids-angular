@@ -1031,6 +1031,56 @@
         }
       }
     },
+    "DATEPICKER": {
+      "COMMON": {
+        "LABEL": "Dátum",
+        "FIELD_NAME": "Dátum"
+      },
+      "NG_MODEL": {
+        "TITLE": "Datepicker ngModel-lel",
+        "DESCRIPTION": "Az idsDatepicker ids-form-field-en belüli inputon használható ngModel-lel template-driven formokhoz.",
+        "CONTENT": {
+          "SUBMIT": "Küldés"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Datepicker FormControl-lal",
+        "DESCRIPTION": "Reactive FormControl kötése az idsDatepicker-hoz validációhoz és form integrációhoz.",
+        "CONTENT": {
+          "SUBMIT": "Küldés"
+        }
+      },
+      "VIEWS": {
+        "TITLE": "Datepicker nézetek",
+        "DESCRIPTION": "A view beállítással a naptár popup kezdő nézete állítható: day (alapértelmezett), month vagy year."
+      },
+      "MIN_MAX": {
+        "TITLE": "Min és max dátum",
+        "DESCRIPTION": "A minDate és maxDate beállítással korlátozhatók a választható dátumok. A tartományon kívüli érték idsDateMin és idsDateMax hibát jelez.",
+        "CONTENT": {
+          "HINT": "A választható dátumok 2025. január 15. és 31. között vannak."
+        }
+      },
+      "APPEARANCE": {
+        "TITLE": "Naptár megjelenés",
+        "DESCRIPTION": "Az appearance beállítással a naptár popup stílusa állítható: filled, outlined vagy elevated (alapértelmezett)."
+      },
+      "SIZES": {
+        "TITLE": "Datepicker méretei",
+        "DESCRIPTION": "A datepicker mérete a szülő ids-form-field-ből öröklődik: dense, compact (alapértelmezett), comfortable és spacious. A naptár popup ugyanazt a méretet használja."
+      },
+      "WEEKEND_VALIDATOR": {
+        "TITLE": "Egyedi dátum validátor",
+        "DESCRIPTION": "Egyedi validátorok adhatók a FormGroup controljához. Ez a példa elutasítja a hétfői és keddi dátumokat.",
+        "CONTENT": {
+          "LABEL": "Időpont dátuma",
+          "FIELD_NAME": "Időpont dátuma",
+          "HINT": "A hétfő és kedd nem elérhető. Válasszon szerdától vasárnapig terjedő dátumot.",
+          "ERROR": "A hétfő és kedd nem elérhető.",
+          "SUBMIT": "Küldés"
+        }
+      }
+    },
     "SEGMENTED_CONTROL": {
       "COMMON": {
         "DAY": "Nap",

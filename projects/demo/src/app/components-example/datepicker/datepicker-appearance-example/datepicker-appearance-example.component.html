@@ -1,0 +1,22 @@
+<div class="flex flex-col gap-4 max-w-80">
+  <span>filled</span>
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #filledPicker="idsDatepicker" idsInput idsDatepicker appearance="filled" [(ngModel)]="filled" />
+    <ids-datepicker-trigger idsSuffix [for]="filledPicker" />
+  </ids-form-field>
+
+  <span>outlined</span>
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #outlinedPicker="idsDatepicker" idsInput idsDatepicker appearance="outlined" [(ngModel)]="outlined" />
+    <ids-datepicker-trigger idsSuffix [for]="outlinedPicker" />
+  </ids-form-field>
+
+  <span>elevated</span>
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #elevatedPicker="idsDatepicker" idsInput idsDatepicker appearance="elevated" [(ngModel)]="elevated" />
+    <ids-datepicker-trigger idsSuffix [for]="elevatedPicker" />
+  </ids-form-field>
+</div>

@@ -1035,6 +1035,56 @@
         }
       }
     },
+    "DATEPICKER": {
+      "COMMON": {
+        "LABEL": "Date",
+        "FIELD_NAME": "Date"
+      },
+      "NG_MODEL": {
+        "TITLE": "Datepicker with ngModel",
+        "DESCRIPTION": "Use idsDatepicker on an input inside ids-form-field with ngModel for template-driven forms.",
+        "CONTENT": {
+          "SUBMIT": "Submit"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Datepicker with FormControl",
+        "DESCRIPTION": "Bind a reactive FormControl to idsDatepicker for validation and form integration.",
+        "CONTENT": {
+          "SUBMIT": "Submit"
+        }
+      },
+      "VIEWS": {
+        "TITLE": "Datepicker views",
+        "DESCRIPTION": "Use view to set the starting calendar popup view: day (default), month, or year."
+      },
+      "MIN_MAX": {
+        "TITLE": "Min and max dates",
+        "DESCRIPTION": "Use minDate and maxDate to restrict selectable dates. Built-in idsDateMin and idsDateMax validation errors are shown when the value is out of range.",
+        "CONTENT": {
+          "HINT": "Selectable dates are limited to January 15–31, 2025."
+        }
+      },
+      "APPEARANCE": {
+        "TITLE": "Calendar appearance",
+        "DESCRIPTION": "Use appearance to style the calendar popup: filled, outlined, or elevated (default)."
+      },
+      "SIZES": {
+        "TITLE": "Datepicker sizes",
+        "DESCRIPTION": "Datepicker size is inherited from the parent ids-form-field: dense, compact (default), comfortable and spacious. The calendar popup uses the same size."
+      },
+      "WEEKEND_VALIDATOR": {
+        "TITLE": "Custom date validator",
+        "DESCRIPTION": "Add custom validators on a FormGroup control to restrict selection. This example rejects Monday and Tuesday dates.",
+        "CONTENT": {
+          "LABEL": "Appointment date",
+          "FIELD_NAME": "Appointment date",
+          "HINT": "Monday and Tuesday are not available. Select a date from Wednesday through Sunday.",
+          "ERROR": "Monday and Tuesday are not available.",
+          "SUBMIT": "Submit"
+        }
+      }
+    },
     "SEGMENTED_CONTROL": {
       "COMMON": {
         "DAY": "Day",

@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { DATEPICKER_EXAMPLES } from '../../components-example/datepicker/datepicker-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +40,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './datepicker-demo.component.html',
   styleUrls: [
@@ -47,4 +50,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class DatepickerDemoComponent {
   protected _datepickerDemoService = inject(DatepickerDemoService);
+  public readonly datepickerExamples = DATEPICKER_EXAMPLES;
 }

@@ -1003,6 +1003,43 @@
         }
       }
     },
+    "TOOLTIP": {
+      "COMMON": {
+        "TRIGGER": "Vidd fölé az egeret",
+        "MESSAGE": "Hasznos információ erről a műveletről."
+      },
+      "VARIANTS": {
+        "TITLE": "Tooltip változatai",
+        "DESCRIPTION": "A tooltip komponens különböző színváltozatai: dark (alapértelmezett) és light."
+      },
+      "SIZES": {
+        "TITLE": "Tooltip méretei",
+        "DESCRIPTION": "A tooltip komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "POSITIONS": {
+        "TITLE": "Tooltip pozíciók",
+        "DESCRIPTION": "Az idsTooltipPosition beállítással a tooltip a trigger elemhez képest pozicionálható. Mind a nyolc pozíció támogatott."
+      },
+      "TEXT_ALIGN": {
+        "TITLE": "Tooltip szöveg igazítás",
+        "DESCRIPTION": "Az idsTooltipTextAlign beállítással szabályozható a tooltipen belüli szöveg igazítása.",
+        "CONTENT": {
+          "LONG_MESSAGE": "Ez egy hosszabb tooltip üzenet, amely több sorba tör, ha a rendelkezésre álló szélesség korlátozott."
+        }
+      },
+      "POINTER": {
+        "TITLE": "Tooltip pointer",
+        "DESCRIPTION": "Az idsTooltipShowPointer beállítással megjeleníthető vagy elrejthető a tooltipet a triggerhez kötő pointer."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled tooltip",
+        "DESCRIPTION": "Az idsTooltipDisabled beállítással megakadályozható, hogy a tooltip megjelenjen hover vagy focus esetén.",
+        "CONTENT": {
+          "ENABLED": "Tooltip engedélyezve",
+          "DISABLED": "Tooltip letiltva"
+        }
+      }
+    },
     "ICON_BUTTON": {
       "APPEARANCES": {
         "TITLE": "Icon button megjelenései",

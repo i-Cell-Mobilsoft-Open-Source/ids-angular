@@ -959,6 +959,60 @@
         "DESCRIPTION": "When there are many pages, page buttons are truncated using maxDisplayedItemCount. Set showAllPages to display every page button."
       }
     },
+    "SEGMENTED_CONTROL": {
+      "COMMON": {
+        "DAY": "Day",
+        "WEEK": "Week",
+        "MONTH": "Month",
+        "FIELD_NAME": "View"
+      },
+      "VARIANTS": {
+        "TITLE": "Segmented control variants",
+        "DESCRIPTION": "Segmented controls with different color variants: primary, surface (default), and light."
+      },
+      "SIZES": {
+        "TITLE": "Segmented control sizes",
+        "DESCRIPTION": "Segmented controls with different sizes: dense, compact (default), comfortable and spacious."
+      },
+      "MULTI_SELECT": {
+        "TITLE": "Multi selection",
+        "DESCRIPTION": "Use multiSelect to allow selecting multiple items. The bound value must be an array.",
+        "CONTENT": {
+          "EMAIL": "Email",
+          "SMS": "SMS",
+          "PUSH": "Push"
+        }
+      },
+      "ICONS": {
+        "TITLE": "Segmented control with icons",
+        "DESCRIPTION": "Items can include an ids-icon. When selected, the active checkmark icon replaces the item icon.",
+        "CONTENT": {
+          "LIST": "List",
+          "GRID": "Grid",
+          "MAP": "Map"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled segmented control",
+        "DESCRIPTION": "The entire control or individual items can be disabled."
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Segmented control with FormControl",
+        "DESCRIPTION": "Bind a reactive FormControl to ids-segmented-control for validation and form integration.",
+        "CONTENT": {
+          "LABEL": "Select a view",
+          "SUBMIT": "Submit"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Segmented control with ngModel",
+        "DESCRIPTION": "Bind ngModel to ids-segmented-control for template-driven forms with required validation.",
+        "CONTENT": {
+          "LABEL": "Select a view",
+          "SUBMIT": "Submit"
+        }
+      }
+    },
     "SWITCH": {
       "COMMON": {
         "LABEL": "Enable notifications"

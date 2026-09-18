@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-8">
+  <div class="grid gap-2">
+    <span>disabled</span>
+    <ids-segmented-control disabled [(ngModel)]="disabled">
+      <ids-segmented-control-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.DAY' | translate" />
+      <ids-segmented-control-item value="week" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.WEEK' | translate" />
+      <ids-segmented-control-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.MONTH' | translate" />
+    </ids-segmented-control>
+  </div>
+
+  <div class="grid gap-2">
+    <span>disabled item</span>
+    <ids-segmented-control [(ngModel)]="disabledItem">
+      <ids-segmented-control-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.DAY' | translate" />
+      <ids-segmented-control-item value="week" [disabled]="true" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.WEEK' | translate" />
+      <ids-segmented-control-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL.COMMON.MONTH' | translate" />
+    </ids-segmented-control>
+  </div>
+</div>

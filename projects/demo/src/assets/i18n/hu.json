@@ -844,6 +844,87 @@
         "DESCRIPTION": "A tagek csoportosíthatók. A megjelenés és a méret a csoporttól öröklődik; a variant tagonként állítható."
       }
     },
+    "SNACKBAR": {
+      "COMMON": {
+        "OPEN": "Snackbar megnyitása"
+      },
+      "BASIC": {
+        "TITLE": "Alap snackbar",
+        "DESCRIPTION": "Snackbar megnyitása az IdsSnackbarService.add() metódussal. A service overlay-ben jeleníti meg a snackbarokat.",
+        "CONTENT": {
+          "MESSAGE": "Ez egy egyszerű snackbar üzenet."
+        }
+      },
+      "DEFAULT_CONFIG": {
+        "TITLE": "Alapértelmezett konfiguráció",
+        "DESCRIPTION": "A position, size, viewportMargin és newestAtStartPosition alkalmazás-szintű alapértelmezések. Az IDS_SNACKBAR_DEFAULT_CONFIG providerrel az app.config.ts-ben felülírhatók az IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY értékei az egész alkalmazásra.",
+        "CONTENT": {
+          "MESSAGE": "Snackbar megnyitva az aktuális alkalmazás alapértelmezett konfigurációjával."
+        }
+      },
+      "POSITION": {
+        "TITLE": "Snackbar pozíció",
+        "DESCRIPTION": "A pozíció nem állítható snackbaronként futásidőben. Az elkülönített pozíciók kipróbálásához adjon meg IDS_SNACKBAR_DEFAULT_CONFIG-ot az IdsSnackbarService-szel együtt egy dedikált injectorban, ahogy a kódminta mutatja.",
+        "CONTENT": {
+          "MESSAGE": "Snackbar pozíció: {{position}}."
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Snackbar változatai",
+        "DESCRIPTION": "A snackbar komponens különböző változatai: dark (alapértelmezett), info, success, warning és error. A szemantikus változatok alapértelmezett leading ikont kapnak.",
+        "CONTENT": {
+          "DARK_MESSAGE": "Snackbar üzenet a dark változathoz.",
+          "INFO_MESSAGE": "Snackbar üzenet az info változathoz.",
+          "SUCCESS_MESSAGE": "Snackbar üzenet a success változathoz.",
+          "WARNING_MESSAGE": "Snackbar üzenet a warning változathoz.",
+          "ERROR_MESSAGE": "Snackbar üzenet az error változathoz."
+        }
+      },
+      "AUTO_CLOSE": {
+        "TITLE": "Automatikus bezárás",
+        "DESCRIPTION": "Ha az autoClose true, a snackbar automatikusan bezáródik az üzenet hossza és az action-ök száma alapján számolt idő után. Hover esetén a timer szünetel.",
+        "CONTENT": {
+          "MESSAGE": "Ez a snackbar automatikusan bezáródik. Hover esetén a timer szünetel."
+        }
+      },
+      "DISMISS": {
+        "TITLE": "Bezárható snackbar",
+        "DESCRIPTION": "Az allowDismiss beállítással megjelenik egy close gomb. closeButtonLabel nélkül icon gomb, labellel pedig szöveges gomb jelenik meg.",
+        "CONTENT": {
+          "WITH_ICON_BUTTON": "Icon close gombbal",
+          "WITH_LABEL_BUTTON": "Feliratos close gombbal",
+          "ICON_MESSAGE": "Zárja be ezt a snackbart az icon gombbal.",
+          "LABEL_MESSAGE": "Zárja be ezt a snackbart a feliratos close gombbal.",
+          "CLOSE": "Bezárás"
+        }
+      },
+      "ACTIONS": {
+        "TITLE": "Action gombok",
+        "DESCRIPTION": "A snackbar tartalmazhat action gombokat. Action kattintásakor lefut a callback, majd a snackbar bezáródik.",
+        "CONTENT": {
+          "MESSAGE": "Valami hiba történt. Újrapróbálhatja vagy bezárhatja a snackbart.",
+          "ACTION": "Újra",
+          "CLOSE": "Bezárás"
+        }
+      },
+      "URGENT": {
+        "TITLE": "Sürgős snackbar",
+        "DESCRIPTION": "Ha az urgent true, a snackbar role=\"alert\" értéket kap role=\"status\" helyett, azonnali képernyőolvasó bejelentéshez.",
+        "CONTENT": {
+          "MESSAGE": "Sürgős snackbar: azonnali beavatkozás szükséges."
+        }
+      },
+      "MULTIPLE": {
+        "TITLE": "Több snackbar",
+        "DESCRIPTION": "A service egymásra rakja a snackbarokat. Minden add() hívás egy új snackbart ad hozzá az overlay csoporthoz.",
+        "CONTENT": {
+          "OPEN_MULTIPLE": "Három snackbar megnyitása",
+          "FIRST_MESSAGE": "Első snackbar a stackben.",
+          "SECOND_MESSAGE": "Második snackbar a stackben.",
+          "THIRD_MESSAGE": "Harmadik snackbar a stackben."
+        }
+      }
+    },
     "NOTIFICATION": {
       "VARIANTS": {
         "TITLE": "Notification változatai",

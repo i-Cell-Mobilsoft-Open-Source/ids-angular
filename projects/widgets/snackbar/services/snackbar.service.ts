@@ -3,10 +3,11 @@ import { IdsSnackbarGroupComponent } from '../snackbar-group.component';
 import { getSnackbarGlobalPositionStrategy } from '../snackbar-position-strategies';
 import { IdsSnackbarData } from '../types/snackbar-data.type';
 import { IdsSnackbarInnerData } from '../types/snackbar-inner-data.type';
+import { IdsSnackbarVariant } from '../types/snackbar-variant.type';
 
 import { Overlay, OverlayConfig, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injector, Injectable, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -18,13 +19,13 @@ const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 export class IdsSnackbarService {
   private readonly _router = inject(Router);
   private readonly _overlay = inject(Overlay);
+  private readonly _injector = inject(Injector);
   private readonly _defaultConfig = {
     ...defaultConfig,
     ...inject(IDS_SNACKBAR_DEFAULT_CONFIG, { optional: true }),
   };
 
   private _overlayRef?: OverlayRef;
-  private _snackbarGroupPortal = new ComponentPortal(IdsSnackbarGroupComponent, null);
   private _snackbarNextUniqueId = 0;
   private _snackbars = signal<IdsSnackbarInnerData[]>([]);
 
@@ -53,7 +54,7 @@ export class IdsSnackbarService {
   private _attachGroup(): void {
     if (!this._overlayRef?.hasAttached()) {
       this._overlayRef = this._createOverlay();
-      this._overlayRef.attach(this._snackbarGroupPortal);
+      this._overlayRef.attach(new ComponentPortal(IdsSnackbarGroupComponent, null, this._injector));
     }
   }
 
@@ -89,6 +90,7 @@ export class IdsSnackbarService {
         {
           id,
           ...snackbar,
+          variant: snackbar.variant ?? IdsSnackbarVariant.INFO,
         },
       ];
     });

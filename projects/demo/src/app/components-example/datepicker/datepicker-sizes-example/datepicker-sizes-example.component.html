@@ -1,0 +1,29 @@
+<div class="flex flex-col gap-4 max-w-80">
+  <span>dense</span>
+  <ids-form-field size="dense">
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #densePicker="idsDatepicker" idsInput idsDatepicker [(ngModel)]="date" />
+    <ids-datepicker-trigger idsSuffix [for]="densePicker" />
+  </ids-form-field>
+
+  <span>compact</span>
+  <ids-form-field size="compact">
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #compactPicker="idsDatepicker" idsInput idsDatepicker [(ngModel)]="date" />
+    <ids-datepicker-trigger idsSuffix [for]="compactPicker" />
+  </ids-form-field>
+
+  <span>comfortable</span>
+  <ids-form-field size="comfortable">
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #comfortablePicker="idsDatepicker" idsInput idsDatepicker [(ngModel)]="date" />
+    <ids-datepicker-trigger idsSuffix [for]="comfortablePicker" />
+  </ids-form-field>
+
+  <span>spacious</span>
+  <ids-form-field size="spacious">
+    <ids-label>{{ "EXAMPLES.DATEPICKER.COMMON.LABEL" | translate }}</ids-label>
+    <input #spaciousPicker="idsDatepicker" idsInput idsDatepicker [(ngModel)]="date" />
+    <ids-datepicker-trigger idsSuffix [for]="spaciousPicker" />
+  </ids-form-field>
+</div>

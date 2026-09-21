@@ -1,0 +1,26 @@
+<div class="flex flex-col gap-8">
+  <div class="grid gap-2">
+    <span>enabled</span>
+    <button
+      type="button"
+      idsButton
+      [idsTooltipShowDelay]="0"
+      [idsTooltip]="'EXAMPLES.TOOLTIP.COMMON.MESSAGE' | translate"
+    >
+      {{ "EXAMPLES.TOOLTIP.DISABLED.CONTENT.ENABLED" | translate }}
+    </button>
+  </div>
+
+  <div class="grid gap-2">
+    <span>disabled</span>
+    <button
+      type="button"
+      idsButton
+      [idsTooltipDisabled]="true"
+      [idsTooltipShowDelay]="0"
+      [idsTooltip]="'EXAMPLES.TOOLTIP.COMMON.MESSAGE' | translate"
+    >
+      {{ "EXAMPLES.TOOLTIP.DISABLED.CONTENT.DISABLED" | translate }}
+    </button>
+  </div>
+</div>

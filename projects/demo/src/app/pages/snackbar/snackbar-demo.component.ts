@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { SNACKBAR_EXAMPLES } from '../../components-example/snackbar/snackbar-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     ControlTableComponent,
     TryoutControlComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './snackbar-demo.component.html',
   styleUrls: [
@@ -29,4 +32,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class SnackbarDemoComponent {
   protected _snackbarDemoService = inject(SnackbarDemoService);
+  public readonly snackbarExamples = SNACKBAR_EXAMPLES;
 }

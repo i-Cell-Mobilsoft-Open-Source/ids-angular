@@ -848,6 +848,87 @@
         "DESCRIPTION": "Tags can be grouped together. Appearance and size are inherited from the group; variant is set per tag."
       }
     },
+    "SNACKBAR": {
+      "COMMON": {
+        "OPEN": "Open snackbar"
+      },
+      "BASIC": {
+        "TITLE": "Basic snackbar",
+        "DESCRIPTION": "Open a snackbar via IdsSnackbarService.add(). Snackbars are rendered in an overlay by the service.",
+        "CONTENT": {
+          "MESSAGE": "This is a basic snackbar message."
+        }
+      },
+      "DEFAULT_CONFIG": {
+        "TITLE": "Default configuration",
+        "DESCRIPTION": "Position, size, viewportMargin, and newestAtStartPosition are application-level defaults. Provide IDS_SNACKBAR_DEFAULT_CONFIG in app.config.ts to override IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY values for the whole app.",
+        "CONTENT": {
+          "MESSAGE": "Snackbar opened with the current application default configuration."
+        }
+      },
+      "POSITION": {
+        "TITLE": "Snackbar position",
+        "DESCRIPTION": "Position cannot be set per snackbar at runtime. To preview positions in isolation, provide IDS_SNACKBAR_DEFAULT_CONFIG together with IdsSnackbarService in a dedicated injector, as shown in the code sample.",
+        "CONTENT": {
+          "MESSAGE": "Snackbar at position: {{position}}."
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Snackbar variants",
+        "DESCRIPTION": "Snackbars with different color variants: dark (default), info, success, warning, and error. Semantic variants show a default leading icon.",
+        "CONTENT": {
+          "DARK_MESSAGE": "Snackbar message for the dark variant.",
+          "INFO_MESSAGE": "Snackbar message for the info variant.",
+          "SUCCESS_MESSAGE": "Snackbar message for the success variant.",
+          "WARNING_MESSAGE": "Snackbar message for the warning variant.",
+          "ERROR_MESSAGE": "Snackbar message for the error variant."
+        }
+      },
+      "AUTO_CLOSE": {
+        "TITLE": "Auto-close",
+        "DESCRIPTION": "When autoClose is true, the snackbar closes automatically after a duration based on message length and action count. Hovering pauses the timer.",
+        "CONTENT": {
+          "MESSAGE": "This snackbar closes automatically. Hover to pause the timer."
+        }
+      },
+      "DISMISS": {
+        "TITLE": "Dismissible snackbar",
+        "DESCRIPTION": "Set allowDismiss to show a close control. Without closeButtonLabel an icon button is shown; with closeButtonLabel a text button is used instead.",
+        "CONTENT": {
+          "WITH_ICON_BUTTON": "With icon close button",
+          "WITH_LABEL_BUTTON": "With labeled close button",
+          "ICON_MESSAGE": "Dismiss this snackbar using the icon button.",
+          "LABEL_MESSAGE": "Dismiss this snackbar using the labeled close button.",
+          "CLOSE": "Close"
+        }
+      },
+      "ACTIONS": {
+        "TITLE": "Action buttons",
+        "DESCRIPTION": "Snackbars can include action buttons. Clicking an action runs the callback and closes the snackbar.",
+        "CONTENT": {
+          "MESSAGE": "Something went wrong. You can retry or close the snackbar.",
+          "ACTION": "Retry",
+          "CLOSE": "Close"
+        }
+      },
+      "URGENT": {
+        "TITLE": "Urgent snackbar",
+        "DESCRIPTION": "When urgent is true, the snackbar uses role=\"alert\" instead of role=\"status\" for immediate screen reader announcement.",
+        "CONTENT": {
+          "MESSAGE": "Urgent snackbar: action required immediately."
+        }
+      },
+      "MULTIPLE": {
+        "TITLE": "Multiple snackbars",
+        "DESCRIPTION": "The service stacks multiple snackbars. Each call to add() queues another snackbar in the overlay group.",
+        "CONTENT": {
+          "OPEN_MULTIPLE": "Open three snackbars",
+          "FIRST_MESSAGE": "First snackbar in the stack.",
+          "SECOND_MESSAGE": "Second snackbar in the stack.",
+          "THIRD_MESSAGE": "Third snackbar in the stack."
+        }
+      }
+    },
     "NOTIFICATION": {
       "VARIANTS": {
         "TITLE": "Notification variants",

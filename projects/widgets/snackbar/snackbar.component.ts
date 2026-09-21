@@ -42,6 +42,8 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
   public message = input.required<string>();
   public variant = input<IdsSnackbarVariantType | undefined>();
   public icon = input<string | undefined>();
+
+  protected _variant = computed(() => this.variant() ?? IdsSnackbarVariant.INFO);
   public actions = input<IdsSnackbarAction[] | undefined>([]);
   public allowDismiss = input<boolean, boolean | undefined>(false, { transform: coerceBooleanAttribute });
   public closeButtonLabel = input<string | undefined>();
@@ -58,28 +60,28 @@ export class IdsSnackbarComponent extends ComponentBase implements AfterViewInit
 
   protected _hostClasses = computed(() =>
     this._getHostClasses([
-      this.variant(),
+      this._variant(),
       this.allowDismiss() && !this.closeButtonLabel() ? 'width-close-x-button' : null,
     ]),
   );
 
   protected _role = computed(() => (this.urgent() ? 'alert' : 'status'));
   protected _buttonVariant = computed(() =>
-    (this.variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE),
+    (this._variant() === IdsSnackbarVariant.DARK ? IdsButtonVariant.LIGHT : IdsButtonVariant.SURFACE),
   );
 
   private _defaultIcon = computed<string | null>(() => {
-    switch (this.variant()) {
+    switch (this._variant()) {
       case IdsSnackbarVariant.DARK:
         return null;
       case IdsSnackbarVariant.INFO:
-        return 'exclamation-circle';
+        return 'information-circle-outline';
       case IdsSnackbarVariant.SUCCESS:
-        return 'check-circle';
+        return 'done-circle-outline';
       case IdsSnackbarVariant.WARNING:
-        return 'exclamation-triangle';
+        return 'warning-outline';
       case IdsSnackbarVariant.ERROR:
-        return 'exclamation-circle';
+        return 'alert-circle-outline';
 
       default:
         return null;

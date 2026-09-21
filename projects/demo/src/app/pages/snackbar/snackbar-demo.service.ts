@@ -104,7 +104,7 @@ export class SnackbarDemoService {
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
-      disabled: true,
+      disabled: false,
     },
     position: {
       description: 'Snackbar position. Position is an application-wide default value. Can not overwrite at runtime.',
@@ -112,7 +112,7 @@ export class SnackbarDemoService {
       default: defaultConfig.position,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSnackbarPosition),
-      disabled: true,
+      disabled: false,
     },
     newestAtStartPosition: {
       description: 'Whether the newest snackbar opens in start position, or not.' +
@@ -120,13 +120,13 @@ export class SnackbarDemoService {
       type: 'boolean',
       default: defaultConfig.newestAtStartPosition,
       control: DemoControl.SWITCH,
-      disabled: true,
+      disabled: false,
     },
     viewportMargin: {
       description: 'Viewport margin. viewportMargin is an application-wide default value. Can not overwrite at runtime.',
       type: 'number',
       default: defaultConfig.viewportMargin,
-      disabled: true,
+      disabled: false,
       control: DemoControl.NUMBER,
       min: 0,
       step: 1,

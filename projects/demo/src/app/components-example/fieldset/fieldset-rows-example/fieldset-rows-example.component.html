@@ -1,0 +1,18 @@
+<fieldset idsFieldset [legend]="'EXAMPLES.FIELDSET.ROWS.CONTENT.LEGEND' | translate">
+  <ids-fieldset-row>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.FIELDSET.ROWS.CONTENT.STREET" | translate }}</ids-label>
+      <input idsInput [(ngModel)]="street" />
+    </ids-form-field>
+  </ids-fieldset-row>
+  <ids-fieldset-row>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.FIELDSET.ROWS.CONTENT.CITY" | translate }}</ids-label>
+      <input idsInput [(ngModel)]="city" />
+    </ids-form-field>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.FIELDSET.ROWS.CONTENT.ZIP" | translate }}</ids-label>
+      <input idsInput [(ngModel)]="zip" />
+    </ids-form-field>
+  </ids-fieldset-row>
+</fieldset>

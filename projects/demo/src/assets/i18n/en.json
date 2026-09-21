@@ -772,6 +772,55 @@
         }
       }
     },
+    "FIELDSET": {
+      "BASIC": {
+        "TITLE": "Basic fieldset",
+        "DESCRIPTION": "A fieldset groups related form fields with a legend. Use ids-fieldset-row to lay out form fields within the fieldset.",
+        "CONTENT": {
+          "LEGEND": "Personal data",
+          "FIRST_NAME": "First name",
+          "FIRST_NAME_PLACEHOLDER": "E.g. Steve",
+          "LAST_NAME": "Last name",
+          "LAST_NAME_PLACEHOLDER": "E.g. Smith"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Fieldset variants",
+        "DESCRIPTION": "Fieldsets with different color variants: surface (default) and light.",
+        "CONTENT": {
+          "SURFACE_LEGEND": "Surface fieldset",
+          "LIGHT_LEGEND": "Light fieldset",
+          "EMAIL": "Email"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Fieldset sizes",
+        "DESCRIPTION": "Fieldsets with different sizes: dense, compact (default), comfortable, and spacious.",
+        "CONTENT": {
+          "LABEL": "Name"
+        }
+      },
+      "MESSAGE": {
+        "TITLE": "Fieldset message",
+        "DESCRIPTION": "Project an ids-hint-message with the idsFieldsetMessage attribute to show helper text below the legend.",
+        "CONTENT": {
+          "LEGEND": "Contact details",
+          "FIELDSET_MESSAGE": "Provide a phone number we can reach you on.",
+          "PHONE": "Phone number",
+          "PHONE_HINT": "Include country code if applicable."
+        }
+      },
+      "ROWS": {
+        "TITLE": "Fieldset rows",
+        "DESCRIPTION": "Each ids-fieldset-row lays out its form fields in a row. Use multiple rows to group fields vertically and multiple fields per row for horizontal layout.",
+        "CONTENT": {
+          "LEGEND": "Address",
+          "STREET": "Street",
+          "CITY": "City",
+          "ZIP": "ZIP code"
+        }
+      }
+    },
     "DIVIDER": {
       "SIZES": {
         "TITLE": "Divider sizes",

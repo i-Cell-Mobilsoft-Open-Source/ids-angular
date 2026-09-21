@@ -45,8 +45,8 @@ importers:
         specifier: ^4.1.6
         version: 4.2.3(graphql@16.14.2)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(rxjs@7.8.2)
       '@i-cell/ids-styles':
-        specifier: ^0.0.74
-        version: 0.0.74
+        specifier: ^0.1.0
+        version: 0.1.1
       '@i-cell/ids-tokens':
         specifier: 0.0.46
         version: 0.0.46
@@ -1952,8 +1952,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@i-cell/ids-styles@0.0.74':
-    resolution: {integrity: sha512-LVoU+5rshSM7X6JGUNRNDOl9oQFl5q+nvM72uQ1cNqbmlvRddZR+MvX4HCAOc0QL33bgB+1l5tPnZXDuL7XPzw==}
+  '@i-cell/ids-styles@0.1.1':
+    resolution: {integrity: sha512-sRS5rqC5989iILrWBZH8Oyj/onqQ3sHjcCIs4qriGRsDrYnvE8jvGZkzDNxUhK0Iq/OZPiYFoxwzPen0uVLFog==}
 
   '@i-cell/ids-tokens@0.0.46':
     resolution: {integrity: sha512-xwzFGeshmCkv7WCyDr+7nFdFyvFncCHSAFuk+uiriPuPHQDBHtPUSbibxwkxyjL/1FadcPT/O0cvL94HPzG55A==}
@@ -11335,7 +11335,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@i-cell/ids-styles@0.0.74': {}
+  '@i-cell/ids-styles@0.1.1': {}
 
   '@i-cell/ids-tokens@0.0.46': {}
 

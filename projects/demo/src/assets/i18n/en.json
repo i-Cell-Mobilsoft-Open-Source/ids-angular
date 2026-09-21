@@ -297,6 +297,104 @@
         }
       }
     },
+    "SELECT": {
+      "COMMON": {
+        "PLACEHOLDER": "Select a fruit",
+        "LOADING": "Loading...",
+        "FRUIT": "Fruit",
+        "FRUITS": "Fruits"
+      },
+      "FRUITS": {
+        "APPLE": "Apple",
+        "BANANA": "Banana",
+        "CHERRY": "Cherry",
+        "GRAPE": "Grape",
+        "ORANGE": "Orange"
+      },
+      "VARIANTS": {
+        "TITLE": "Select variants",
+        "DESCRIPTION": "Select inherits color variants from the form field: surface (default) and light.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Select sizes",
+        "DESCRIPTION": "Select inherits sizes from the form field: dense, compact (default), comfortable and spacious.",
+        "CONTENT": {
+          "DENSE": "dense",
+          "COMPACT": "compact",
+          "COMFORTABLE": "comfortable",
+          "SPACIOUS": "spacious"
+        }
+      },
+      "MULTISELECT": {
+        "TITLE": "Multiselect",
+        "DESCRIPTION": "Enable multiSelect to choose several options. Selected values appear as removable chips in the trigger.",
+        "CONTENT": {
+          "HINT": "You can select multiple options."
+        }
+      },
+      "CUSTOM_TRIGGER": {
+        "TITLE": "Custom trigger",
+        "DESCRIPTION": "Project content with the ids-select-trigger element to replace the default trigger display. Commonly used with multiselect to summarize multiple selections.",
+        "CONTENT": {
+          "HINT": "The trigger shows the first selected item and a count of additional selections.",
+          "OTHER": "other",
+          "OTHERS": "others"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled and readonly",
+        "DESCRIPTION": "Use disabled to prevent interaction and exclude the value from submission. Use readonly to display the value without opening the panel.",
+        "CONTENT": {
+          "DISABLED_EMPTY": "Disabled, no value",
+          "DISABLED_WITH_VALUE": "Disabled, with value",
+          "READONLY_EMPTY": "Readonly, no value",
+          "READONLY_WITH_VALUE": "Readonly, with value"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Select with ngModel",
+        "DESCRIPTION": "Template-driven select inside a form field using ngModel for two-way binding and validation.",
+        "CONTENT": {
+          "HINT": "Select a fruit from the list.",
+          "SUBMIT": "Submit"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Select with FormControl",
+        "DESCRIPTION": "Reactive select inside a form field bound with FormControl for programmatic validation.",
+        "CONTENT": {
+          "HINT": "Select a fruit from the list.",
+          "SUBMIT": "Submit"
+        }
+      },
+      "SUCCESS_STATE": {
+        "TITLE": "Success state",
+        "DESCRIPTION": "Enable canHandleSuccessState to show a success message when the control is valid and touched or the form is submitted. Uses a custom validator that rejects cherry.",
+        "CONTENT": {
+          "HINT": "Cherry is not allowed. Submit the form to show validation or success state.",
+          "CHERRY_ERROR": "Cherry is not allowed.",
+          "SUBMIT": "Submit"
+        }
+      },
+      "PRESELECTED": {
+        "TITLE": "Preselected values",
+        "DESCRIPTION": "Select fields with initial values set via ngModel or FormControl, including async option loading with a 10 second delay.",
+        "CONTENT": {
+          "NG_MODEL_LABEL": "Fruit (template driven)",
+          "NG_MODEL_HINT": "Pre-selected using ngModel.",
+          "FORM_CONTROL_LABEL": "Fruit (model driven)",
+          "FORM_CONTROL_HINT": "Pre-selected using FormControl.",
+          "NG_MODEL_ASYNC_LABEL": "Fruit (template driven, async options, 10 seconds delay)",
+          "NG_MODEL_ASYNC_HINT": "Pre-selected with ngModel while options load from a simulated request.",
+          "FORM_CONTROL_ASYNC_LABEL": "Fruit (model driven, async options, 10 seconds delay)",
+          "FORM_CONTROL_ASYNC_HINT": "Pre-selected with FormControl while options load from a simulated request."
+        }
+      }
+    },
     "AVATAR": {
       "SIZES": {
         "TITLE": "Avatar sizes",

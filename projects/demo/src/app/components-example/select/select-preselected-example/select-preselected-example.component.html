@@ -1,0 +1,81 @@
+<div class="flex flex-col gap-ids-container-gap-16 w-80">
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.SELECT.PRESELECTED.CONTENT.NG_MODEL_LABEL" | translate }}</ids-label>
+    <ids-select
+      [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+      [(ngModel)]="ngModelValue"
+    >
+      <ids-option value="APPLE" [viewValue]="'EXAMPLES.SELECT.FRUITS.APPLE' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.APPLE" | translate }}
+      </ids-option>
+      <ids-option value="BANANA" [viewValue]="'EXAMPLES.SELECT.FRUITS.BANANA' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.BANANA" | translate }}
+      </ids-option>
+      <ids-option value="CHERRY" [viewValue]="'EXAMPLES.SELECT.FRUITS.CHERRY' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.CHERRY" | translate }}
+      </ids-option>
+      <ids-option value="GRAPE" [viewValue]="'EXAMPLES.SELECT.FRUITS.GRAPE' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.GRAPE" | translate }}
+      </ids-option>
+      <ids-option value="ORANGE" [viewValue]="'EXAMPLES.SELECT.FRUITS.ORANGE' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.ORANGE" | translate }}
+      </ids-option>
+    </ids-select>
+    <ids-hint-message>{{ "EXAMPLES.SELECT.PRESELECTED.CONTENT.NG_MODEL_HINT" | translate }}</ids-hint-message>
+  </ids-form-field>
+
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.SELECT.PRESELECTED.CONTENT.FORM_CONTROL_LABEL" | translate }}</ids-label>
+    <ids-select
+      [formControl]="formControlValue"
+      [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+    >
+      <ids-option value="APPLE" [viewValue]="'EXAMPLES.SELECT.FRUITS.APPLE' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.APPLE" | translate }}
+      </ids-option>
+      <ids-option value="BANANA" [viewValue]="'EXAMPLES.SELECT.FRUITS.BANANA' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.BANANA" | translate }}
+      </ids-option>
+      <ids-option value="CHERRY" [viewValue]="'EXAMPLES.SELECT.FRUITS.CHERRY' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.CHERRY" | translate }}
+      </ids-option>
+      <ids-option value="GRAPE" [viewValue]="'EXAMPLES.SELECT.FRUITS.GRAPE' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.GRAPE" | translate }}
+      </ids-option>
+      <ids-option value="ORANGE" [viewValue]="'EXAMPLES.SELECT.FRUITS.ORANGE' | translate">
+        {{ "EXAMPLES.SELECT.FRUITS.ORANGE" | translate }}
+      </ids-option>
+    </ids-select>
+    <ids-hint-message>{{ "EXAMPLES.SELECT.PRESELECTED.CONTENT.FORM_CONTROL_HINT" | translate }}</ids-hint-message>
+  </ids-form-field>
+
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.SELECT.PRESELECTED.CONTENT.NG_MODEL_ASYNC_LABEL" | translate }}</ids-label>
+    <ids-select
+      [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+      [(ngModel)]="asyncNgModelValue"
+    >
+      @if (!asyncNgModelLoading()) {
+        @for (option of asyncNgModelOptions(); track option) {
+          <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+        }
+      }
+    </ids-select>
+    <ids-hint-message>{{ "EXAMPLES.SELECT.PRESELECTED.CONTENT.NG_MODEL_ASYNC_HINT" | translate }}</ids-hint-message>
+  </ids-form-field>
+
+  <ids-form-field>
+    <ids-label>{{ "EXAMPLES.SELECT.PRESELECTED.CONTENT.FORM_CONTROL_ASYNC_LABEL" | translate }}</ids-label>
+    <ids-select
+      [formControl]="asyncFormControlValue"
+      [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+    >
+      @if (!asyncFormControlLoading()) {
+        @for (option of asyncFormControlOptions(); track option) {
+          <ids-option [value]="option" [viewValue]="getFruitLabel(option)">{{ getFruitLabel(option) }}</ids-option>
+        }
+      }
+    </ids-select>
+    <ids-hint-message>{{ "EXAMPLES.SELECT.PRESELECTED.CONTENT.FORM_CONTROL_ASYNC_HINT" | translate }}</ids-hint-message>
+  </ids-form-field>
+</div>

@@ -1,0 +1,89 @@
+<div class="flex flex-col gap-8 w-80">
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.SELECT.DISABLED.CONTENT.DISABLED_EMPTY" | translate }}</span>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.SELECT.COMMON.FRUIT" | translate }}</ids-label>
+      <ids-select
+        [disabled]="true"
+        [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+        [(ngModel)]="disabledEmptyValue"
+      >
+        <ids-option value="APPLE" [viewValue]="'EXAMPLES.SELECT.FRUITS.APPLE' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.APPLE" | translate }}
+        </ids-option>
+        <ids-option value="BANANA" [viewValue]="'EXAMPLES.SELECT.FRUITS.BANANA' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.BANANA" | translate }}
+        </ids-option>
+        <ids-option value="CHERRY" [viewValue]="'EXAMPLES.SELECT.FRUITS.CHERRY' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.CHERRY" | translate }}
+        </ids-option>
+      </ids-select>
+    </ids-form-field>
+  </div>
+
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.SELECT.DISABLED.CONTENT.DISABLED_WITH_VALUE" | translate }}</span>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.SELECT.COMMON.FRUIT" | translate }}</ids-label>
+      <ids-select
+        [disabled]="true"
+        [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+        [(ngModel)]="disabledValue"
+      >
+        <ids-option value="APPLE" [viewValue]="'EXAMPLES.SELECT.FRUITS.APPLE' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.APPLE" | translate }}
+        </ids-option>
+        <ids-option value="BANANA" [viewValue]="'EXAMPLES.SELECT.FRUITS.BANANA' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.BANANA" | translate }}
+        </ids-option>
+        <ids-option value="CHERRY" [viewValue]="'EXAMPLES.SELECT.FRUITS.CHERRY' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.CHERRY" | translate }}
+        </ids-option>
+      </ids-select>
+    </ids-form-field>
+  </div>
+
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.SELECT.DISABLED.CONTENT.READONLY_EMPTY" | translate }}</span>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.SELECT.COMMON.FRUIT" | translate }}</ids-label>
+      <ids-select
+        [readonly]="true"
+        [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+        [(ngModel)]="readonlyEmptyValue"
+      >
+        <ids-option value="APPLE" [viewValue]="'EXAMPLES.SELECT.FRUITS.APPLE' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.APPLE" | translate }}
+        </ids-option>
+        <ids-option value="BANANA" [viewValue]="'EXAMPLES.SELECT.FRUITS.BANANA' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.BANANA" | translate }}
+        </ids-option>
+        <ids-option value="CHERRY" [viewValue]="'EXAMPLES.SELECT.FRUITS.CHERRY' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.CHERRY" | translate }}
+        </ids-option>
+      </ids-select>
+    </ids-form-field>
+  </div>
+
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.SELECT.DISABLED.CONTENT.READONLY_WITH_VALUE" | translate }}</span>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.SELECT.COMMON.FRUIT" | translate }}</ids-label>
+      <ids-select
+        [readonly]="true"
+        [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+        [(ngModel)]="readonlyValue"
+      >
+        <ids-option value="APPLE" [viewValue]="'EXAMPLES.SELECT.FRUITS.APPLE' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.APPLE" | translate }}
+        </ids-option>
+        <ids-option value="BANANA" [viewValue]="'EXAMPLES.SELECT.FRUITS.BANANA' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.BANANA" | translate }}
+        </ids-option>
+        <ids-option value="CHERRY" [viewValue]="'EXAMPLES.SELECT.FRUITS.CHERRY' | translate">
+          {{ "EXAMPLES.SELECT.FRUITS.CHERRY" | translate }}
+        </ids-option>
+      </ids-select>
+    </ids-form-field>
+  </div>
+</div>

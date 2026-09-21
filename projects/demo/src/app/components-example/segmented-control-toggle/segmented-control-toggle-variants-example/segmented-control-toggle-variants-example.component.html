@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-4 items-center">
+  <span>surface</span>
+  <ids-segmented-control-toggle variant="surface" [(ngModel)]="surface">
+    <ids-segmented-control-toggle-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.DAY' | translate" />
+    <ids-segmented-control-toggle-item value="week" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.WEEK' | translate" />
+    <ids-segmented-control-toggle-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.MONTH' | translate" />
+  </ids-segmented-control-toggle>
+
+  <span>light</span>
+  <div class="bg-black p-4 inline-block">
+    <ids-segmented-control-toggle variant="light" [(ngModel)]="light">
+      <ids-segmented-control-toggle-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.DAY' | translate" />
+      <ids-segmented-control-toggle-item value="week" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.WEEK' | translate" />
+      <ids-segmented-control-toggle-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.MONTH' | translate" />
+    </ids-segmented-control-toggle>
+  </div>
+</div>

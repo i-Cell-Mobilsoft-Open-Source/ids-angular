@@ -1,0 +1,40 @@
+<div class="flex flex-col gap-4 items-center">
+  <ids-segmented-control-toggle [(ngModel)]="iconOnly">
+    <ids-segmented-control-toggle-item value="mail" [aria-label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.MAIL' | translate">
+      <ids-icon fontIcon="mail" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="account" [aria-label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.ACCOUNT' | translate">
+      <ids-icon fontIcon="account" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="time" [aria-label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.TIME' | translate">
+      <ids-icon fontIcon="access-time" />
+    </ids-segmented-control-toggle-item>
+  </ids-segmented-control-toggle>
+
+  <ids-segmented-control-toggle [showActiveIcon]="false" [(ngModel)]="labelWithoutActiveIcon">
+    <ids-segmented-control-toggle-item value="mail" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.MAIL' | translate">
+      <ids-icon fontIcon="mail" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="account" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.ACCOUNT' | translate">
+      <ids-icon fontIcon="account" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="time" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.TIME' | translate">
+      <ids-icon fontIcon="access-time" />
+    </ids-segmented-control-toggle-item>
+  </ids-segmented-control-toggle>
+
+  <ids-segmented-control-toggle [(ngModel)]="withSuffix">
+    <ids-segmented-control-toggle-item value="mail" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.MAIL' | translate">
+      <ids-icon fontIcon="mail" />
+      <span suffixContent>$</span>
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="account" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.ACCOUNT' | translate">
+      <ids-icon fontIcon="account" />
+      <span suffixContent>$</span>
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="time" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ITEM_CONTENT.CONTENT.TIME' | translate">
+      <ids-icon fontIcon="access-time" />
+      <span suffixContent>$</span>
+    </ids-segmented-control-toggle-item>
+  </ids-segmented-control-toggle>
+</div>

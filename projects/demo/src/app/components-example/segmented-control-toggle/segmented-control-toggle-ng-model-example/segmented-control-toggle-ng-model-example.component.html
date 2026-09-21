@@ -1,0 +1,14 @@
+@let fieldName = "EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.FIELD_NAME" | translate;
+
+<form class="flex flex-col gap-ids-container-gap-4" (ngSubmit)="onSubmit(viewModel)">
+  <p>{{ "EXAMPLES.SEGMENTED_CONTROL_TOGGLE.NG_MODEL.CONTENT.LABEL" | translate }}</p>
+  <ids-segmented-control-toggle #viewModel="ngModel" name="view" required [(ngModel)]="view">
+    <ids-segmented-control-toggle-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.DAY' | translate" />
+    <ids-segmented-control-toggle-item value="week" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.WEEK' | translate" />
+    <ids-segmented-control-toggle-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.MONTH' | translate" />
+  </ids-segmented-control-toggle>
+  @if (viewModel.touched && viewModel.invalid) {
+    <ids-error-message>{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-message>
+  }
+  <button type="submit" idsButton>{{ "EXAMPLES.SEGMENTED_CONTROL_TOGGLE.NG_MODEL.CONTENT.SUBMIT" | translate }}</button>
+</form>

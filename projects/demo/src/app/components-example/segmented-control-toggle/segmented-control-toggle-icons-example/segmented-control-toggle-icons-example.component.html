@@ -1,0 +1,25 @@
+<div class="flex flex-col gap-4 items-center">
+  <ids-segmented-control-toggle [(ngModel)]="selection">
+    <ids-segmented-control-toggle-item value="list" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ICONS.CONTENT.LIST' | translate">
+      <ids-icon fontIcon="format-list-bulleted" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="grid" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ICONS.CONTENT.GRID' | translate">
+      <ids-icon fontIcon="view-grid" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="map" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ICONS.CONTENT.MAP' | translate">
+      <ids-icon fontIcon="map" />
+    </ids-segmented-control-toggle-item>
+  </ids-segmented-control-toggle>
+
+  <ids-segmented-control-toggle [showActiveIcon]="false" [(ngModel)]="selectionWithoutActiveIcon">
+    <ids-segmented-control-toggle-item value="list" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ICONS.CONTENT.LIST' | translate">
+      <ids-icon fontIcon="format-list-bulleted" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="grid" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ICONS.CONTENT.GRID' | translate">
+      <ids-icon fontIcon="view-grid" />
+    </ids-segmented-control-toggle-item>
+    <ids-segmented-control-toggle-item value="map" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.ICONS.CONTENT.MAP' | translate">
+      <ids-icon fontIcon="map" />
+    </ids-segmented-control-toggle-item>
+  </ids-segmented-control-toggle>
+</div>

@@ -1,0 +1,13 @@
+<div class="flex flex-col gap-4 items-center">
+  <ids-segmented-control-toggle [disabled]="true" [(ngModel)]="disabled">
+    <ids-segmented-control-toggle-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.DAY' | translate" />
+    <ids-segmented-control-toggle-item value="week" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.WEEK' | translate" />
+    <ids-segmented-control-toggle-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.MONTH' | translate" />
+  </ids-segmented-control-toggle>
+
+  <ids-segmented-control-toggle [(ngModel)]="disabledItem">
+    <ids-segmented-control-toggle-item value="day" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.DAY' | translate" />
+    <ids-segmented-control-toggle-item value="week" [disabled]="true" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.WEEK' | translate" />
+    <ids-segmented-control-toggle-item value="month" [label]="'EXAMPLES.SEGMENTED_CONTROL_TOGGLE.COMMON.MONTH' | translate" />
+  </ids-segmented-control-toggle>
+</div>

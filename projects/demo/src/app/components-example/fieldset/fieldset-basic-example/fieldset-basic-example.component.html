@@ -1,0 +1,14 @@
+<fieldset idsFieldset [legend]="'EXAMPLES.FIELDSET.BASIC.CONTENT.LEGEND' | translate">
+  <ids-fieldset-row>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.FIELDSET.BASIC.CONTENT.FIRST_NAME" | translate }}</ids-label>
+      <input idsInput [placeholder]="'EXAMPLES.FIELDSET.BASIC.CONTENT.FIRST_NAME_PLACEHOLDER' | translate" [(ngModel)]="firstName" />
+    </ids-form-field>
+  </ids-fieldset-row>
+  <ids-fieldset-row>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.FIELDSET.BASIC.CONTENT.LAST_NAME" | translate }}</ids-label>
+      <input idsInput [placeholder]="'EXAMPLES.FIELDSET.BASIC.CONTENT.LAST_NAME_PLACEHOLDER' | translate" [(ngModel)]="lastName" />
+    </ids-form-field>
+  </ids-fieldset-row>
+</fieldset>

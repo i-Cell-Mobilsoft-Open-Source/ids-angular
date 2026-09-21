@@ -1,0 +1,12 @@
+<fieldset idsFieldset [legend]="'EXAMPLES.FIELDSET.MESSAGE.CONTENT.LEGEND' | translate">
+  <ids-hint-message idsFieldsetMessage>
+    {{ "EXAMPLES.FIELDSET.MESSAGE.CONTENT.FIELDSET_MESSAGE" | translate }}
+  </ids-hint-message>
+  <ids-fieldset-row>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.FIELDSET.MESSAGE.CONTENT.PHONE" | translate }}</ids-label>
+      <input idsInput type="tel" [(ngModel)]="phone" />
+      <ids-hint-message>{{ "EXAMPLES.FIELDSET.MESSAGE.CONTENT.PHONE_HINT" | translate }}</ids-hint-message>
+    </ids-form-field>
+  </ids-fieldset-row>
+</fieldset>

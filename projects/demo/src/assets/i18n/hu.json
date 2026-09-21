@@ -768,6 +768,55 @@
         }
       }
     },
+    "FIELDSET": {
+      "BASIC": {
+        "TITLE": "Alap fieldset",
+        "DESCRIPTION": "A fieldset kapcsolódó form mezőket csoportosít egy címmel. Az ids-fieldset-row segítségével rendezheti a mezőket a fieldseten belül.",
+        "CONTENT": {
+          "LEGEND": "Személyes adatok",
+          "FIRST_NAME": "Keresztnév",
+          "FIRST_NAME_PLACEHOLDER": "Pl. Péter",
+          "LAST_NAME": "Vezetéknév",
+          "LAST_NAME_PLACEHOLDER": "Pl. Nagy"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Fieldset változatai",
+        "DESCRIPTION": "A fieldset komponens különböző változatai: surface (alapértelmezett) és light.",
+        "CONTENT": {
+          "SURFACE_LEGEND": "Surface fieldset",
+          "LIGHT_LEGEND": "Light fieldset",
+          "EMAIL": "E-mail"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Fieldset méretei",
+        "DESCRIPTION": "A fieldset komponens különböző méretei: dense, compact (alapértelmezett), comfortable és spacious.",
+        "CONTENT": {
+          "LABEL": "Név"
+        }
+      },
+      "MESSAGE": {
+        "TITLE": "Fieldset üzenet",
+        "DESCRIPTION": "Az idsFieldsetMessage attribútummal ellátott ids-hint-message a cím alatt jeleníthet meg súgószöveget.",
+        "CONTENT": {
+          "LEGEND": "Elérhetőség",
+          "FIELDSET_MESSAGE": "Adjon meg egy telefonszámot, ahol elérhetjük.",
+          "PHONE": "Telefonszám",
+          "PHONE_HINT": "Adja meg az országkódot is, ha szükséges."
+        }
+      },
+      "ROWS": {
+        "TITLE": "Fieldset sorok",
+        "DESCRIPTION": "Minden ids-fieldset-row a form mezőit egy sorban rendezi. Több sorral függőlegesen, soronként több mezővel vízszintesen csoportosíthat.",
+        "CONTENT": {
+          "LEGEND": "Cím",
+          "STREET": "Utca",
+          "CITY": "Város",
+          "ZIP": "Irányítószám"
+        }
+      }
+    },
     "DIVIDER": {
       "SIZES": {
         "TITLE": "Divider méretei",

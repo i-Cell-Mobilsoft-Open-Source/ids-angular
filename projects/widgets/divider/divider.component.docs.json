@@ -1,0 +1,37 @@
+{
+  "height": {
+    "description": {
+      "en": "Divider height as css property.",
+      "hu": "Az elválasztó magassága CSS tulajdonságként."
+    },
+    "type": "string"
+  },
+  "orientation": {
+    "description": {
+      "en": "Divider orientation.",
+      "hu": "Az elválasztó orientációja."
+    },
+    "type": "IdsOrientationType"
+  },
+  "size": {
+    "description": {
+      "en": "Divider size.",
+      "hu": "Az elválasztó mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Divider variant.",
+      "hu": "Az elválasztó variánsa."
+    },
+    "type": "IdsDividerVariantType"
+  },
+  "width": {
+    "description": {
+      "en": "Divider width as css property.",
+      "hu": "Az elválasztó szélessége CSS tulajdonságként."
+    },
+    "type": "string"
+  }
+}

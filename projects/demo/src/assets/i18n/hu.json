@@ -797,7 +797,11 @@
       "INPUT": "input tulajdonságok",
       "MEDIA": "média tulajdonságok",
       "SAMPLE": "minta tulajdonságok",
-      "MULTIPLE": "multiple tulajdonságok"
+      "MULTIPLE": "multiple tulajdonságok",
+      "CHIP_LIST": "chip lista tulajdonságok",
+      "HINT": "hint tulajdonságok",
+      "CELL_RENDERER": "cell renderer tulajdonságok",
+      "CELL_CONTENT": "cell content tulajdonságok"
     }
   }
 }

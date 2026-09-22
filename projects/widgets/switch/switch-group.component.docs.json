@@ -1,0 +1,30 @@
+{
+  "hasIcon": {
+    "description": {
+      "en": "Whether the switch has icon.",
+      "hu": "A switchnek van-e ikonja."
+    },
+    "type": "boolean"
+  },
+  "iconPosition": {
+    "description": {
+      "en": "Where the icon should be shown in switch.",
+      "hu": "Hol jelenjen meg az ikon a switchen belül."
+    },
+    "type": "IdsSwitchIconPositionType"
+  },
+  "labelPosition": {
+    "description": {
+      "en": "Where the label should be shown in switch.",
+      "hu": "Hol jelenjen meg a címke a switchen belül."
+    },
+    "type": "IdsSwitchLabelPositionType"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the switch.",
+      "hu": "A switch mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

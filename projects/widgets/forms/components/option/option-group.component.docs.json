@@ -1,0 +1,16 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether the option is disabled or not.",
+      "hu": "Az opció le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "label": {
+    "description": {
+      "en": "Label of the option group.",
+      "hu": "Az opciócsoport címkéje."
+    },
+    "type": "string"
+  }
+}

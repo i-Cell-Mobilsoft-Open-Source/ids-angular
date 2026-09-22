@@ -1,4 +1,5 @@
 import { IconService } from '../../core/services/icon.service';
+import { WidgetDocsService } from '../../services/widget-docs.service';
 
 import { inject, Injectable, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -10,6 +11,8 @@ import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_ICON_DEFAULT_CONFIG_FACTORY, IdsIconVariant, IdsIconVariantType } from '@i-cell/ids-angular/icon';
 import { TranslateService } from '@ngx-translate/core';
+
+const ICON_DOCS_PATH = 'icon/icon.component.docs.json';
 
 const defaultConfig = IDS_ICON_DEFAULT_CONFIG_FACTORY();
 
@@ -24,6 +27,7 @@ type IconInputControls = {
 @Injectable()
 export class IconDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
@@ -32,28 +36,28 @@ export class IconDemoService {
 
   public inputControlConfig = signal<DemoControlConfig<IconInputControls>>({
     size: {
-      description: 'Icon size.',
+      description: this._widgetDocs.getDescription(ICON_DOCS_PATH, 'size', 'Icon size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     sizeCollection: {
-      description: 'Icon size collection.',
+      description: this._widgetDocs.getDescription(ICON_DOCS_PATH, 'sizeCollection', 'Icon size collection.'),
       type: 'IdsSizeCollectionType',
       default: defaultConfig.sizeCollection,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSizeCollection),
     },
     variant: {
-      description: 'Icon variant.',
+      description: this._widgetDocs.getDescription(ICON_DOCS_PATH, 'variant', 'Icon variant.'),
       type: 'IdsIconVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsIconVariant),
     },
     fontIcon: {
-      description: 'Name of font icon.',
+      description: this._widgetDocs.getDescription(ICON_DOCS_PATH, 'fontIcon', 'Name of font icon.'),
       type: 'string',
       default: '-',
       demoDefault: 'key',
@@ -61,7 +65,7 @@ export class IconDemoService {
       list: [],
     },
     svgIcon: {
-      description: 'Name of svg icon file',
+      description: this._widgetDocs.getDescription(ICON_DOCS_PATH, 'svgIcon', 'Name of svg icon file'),
       type: 'IdsIconVariantType',
       default: '-',
       demoDefault: 'key',
@@ -69,7 +73,11 @@ export class IconDemoService {
       list: [],
     },
     'aria-hidden': {
-      description: 'Determinate whether the component is hidden or not for screen readers.',
+      description: this._widgetDocs.getDescription(
+        ICON_DOCS_PATH,
+        'aria-hidden',
+        'Determinate whether the component is hidden or not for screen readers.',
+      ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,

@@ -1,0 +1,16 @@
+{
+  "dividerType": {
+    "description": {
+      "en": "Divider type.",
+      "hu": "Az elválasztó típusa."
+    },
+    "type": "IdsBreadcrumbDividerType"
+  },
+  "size": {
+    "description": {
+      "en": "Breadcrumb size.",
+      "hu": "A breadcrumb mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

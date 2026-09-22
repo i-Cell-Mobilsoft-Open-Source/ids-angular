@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -9,18 +11,21 @@ import { IdsSizeType, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
+const OPTION_DOCS_PATH = 'forms/components/option/option.component.docs.json';
+const OPTION_GROUP_DOCS_PATH = 'forms/components/option/option-group.component.docs.json';
+
 export type OptionSelectControls = {
   size: IdsSizeType;
   variant: IdsFormFieldVariantType;
 };
 
 export type SampleOptionControls = {
-  hasDisabledElement: boolean;
+  disabled: boolean;
 
 };
 
 export type MultipleOptionControls = {
-  hasDisabledElement: boolean;
+  disabled: boolean;
 };
 
 type SampleOption = {
@@ -36,6 +41,7 @@ type AnimalOptions = {
 @Injectable({ providedIn: 'root' })
 export class OptionDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly selectControlConfig: DemoControlConfig<OptionSelectControls> = {
     size: {
@@ -55,8 +61,8 @@ export class OptionDemoService {
   };
 
   public readonly sampleInputControlConfig: DemoControlConfig<SampleOptionControls> = {
-    hasDisabledElement: {
-      description: 'Whether there is an option that is disabled.',
+    disabled: {
+      description: this._widgetDocs.getDescription(OPTION_DOCS_PATH, 'disabled', 'Whether the option is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -65,11 +71,63 @@ export class OptionDemoService {
   };
 
   public readonly multipleInputControlConfig: DemoControlConfig<MultipleOptionControls> = {
-    hasDisabledElement: {
-      description: 'Whether there is an option that is disabled in multiple selection.',
+    disabled: {
+      description: this._widgetDocs.getDescription(OPTION_DOCS_PATH, 'disabled', 'Whether the option is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+    },
+  };
+
+  public readonly optionPropControlConfig: DemoControlConfig<unknown> = {
+    value: {
+      description: this._widgetDocs.getDescription(OPTION_DOCS_PATH, 'value', 'Value of the option.'),
+      type: 'T',
+      default: '-',
+    },
+    viewValue: {
+      description: this._widgetDocs.getDescription(
+        OPTION_DOCS_PATH,
+        'viewValue',
+        'Explicit display text of the option (alias: "viewValue"). Falls back to the projected content when not set.',
+      ),
+      type: 'string',
+      default: '-',
+    },
+    selectionChange: {
+      description: this._widgetDocs.getDescription(
+        OPTION_DOCS_PATH,
+        'selectionChange',
+        'Emitted when the selection state of the option changes.',
+      ),
+      type: 'EventEmitter<IdsOptionSelectionChange<T>>',
+      default: '-',
+    },
+    selectionUnchanged: {
+      description: this._widgetDocs.getDescription(
+        OPTION_DOCS_PATH,
+        'selectionUnchanged',
+        'Emitted when the option is selected/clicked but the selection state does not change.',
+      ),
+      type: 'EventEmitter<IdsOptionSelectionChange<T>>',
+      default: '-',
+    },
+  };
+
+  public readonly optionGroupPropControlConfig: DemoControlConfig<unknown> = {
+    label: {
+      description: this._widgetDocs.getDescription(OPTION_GROUP_DOCS_PATH, 'label', 'Label of the option group.'),
+      type: 'string',
+      default: '-',
+    },
+    disabled: {
+      description: this._widgetDocs.getDescription(
+        OPTION_GROUP_DOCS_PATH,
+        'disabled',
+        'Whether all options within the option group are disabled or not.',
+      ),
+      type: 'boolean',
+      default: false,
     },
   };
 
@@ -192,6 +250,14 @@ export class OptionDemoService {
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OPTION', 'API.PROPERTY_GROUP.MULTIPLE'),
         config: this.multipleInputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OPTION', 'API.PROPERTY_GROUP.DEFAULT'),
+        config: this.optionPropControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OPTION', 'API.PROPERTY_GROUP.GROUP'),
+        config: this.optionGroupPropControlConfig,
       },
     ];
   }

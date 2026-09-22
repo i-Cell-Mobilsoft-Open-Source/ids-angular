@@ -20,7 +20,7 @@
                 [appearance]="_menuItemDemoService.menuItemModel.appearance"
                 [size]="_menuItemDemoService.menuItemModel.size"
                 [variant]="_menuItemDemoService.menuItemModel.variant"
-                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? _menuItemDemoService.menuItemModel.label : ''"
                 [disabled]="_menuItemDemoService.menuItemModel.disabled"
               >
                 @if (_menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
@@ -45,7 +45,7 @@
                 [appearance]="_menuItemDemoService.menuItemModel.appearance"
                 [size]="_menuItemDemoService.menuItemModel.size"
                 [variant]="_menuItemDemoService.menuItemModel.variant"
-                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? _menuItemDemoService.menuItemModel.label : ''"
                 [disabled]="_menuItemDemoService.menuItemModel.disabled"
               >
                 @if (_menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {

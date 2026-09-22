@@ -801,7 +801,11 @@
       "INPUT": "input properties",
       "MEDIA": "media properties",
       "SAMPLE": "sample properties",
-      "MULTIPLE": "multiple properties"
+      "MULTIPLE": "multiple properties",
+      "CHIP_LIST": "chip list properties",
+      "HINT": "hint properties",
+      "CELL_RENDERER": "cell renderer properties",
+      "CELL_CONTENT": "cell content properties"
     }
   }
 }

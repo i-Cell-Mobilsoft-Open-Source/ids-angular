@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -15,6 +17,9 @@ import {
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
+const BUTTON_DOCS_PATH = 'button/button.component.docs.json';
+const BUTTON_GROUP_DOCS_PATH = 'button/button-group.component.docs.json';
+
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -23,13 +28,13 @@ export type ButtonInputControls = {
   size: IdsSizeType;
   variant: IdsButtonVariantType;
   disabled: boolean;
-  asLink: boolean;
 };
 
 export type ButtonHelperControls = {
   text: string;
   hasLeadingIcon: boolean;
   hasTrailingIcon: boolean;
+  asLink: boolean;
 };
 
 export type ButtonGroupInputControls = {
@@ -39,37 +44,32 @@ export type ButtonGroupInputControls = {
 @Injectable()
 export class ButtonDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly inputControlConfig: DemoControlConfig<ButtonInputControls> = {
     appearance: {
-      description: 'Button appearance.',
+      description: this._widgetDocs.getDescription(BUTTON_DOCS_PATH, 'appearance', 'Button appearance.'),
       type: 'IdsButtonAppearanceType',
       default: defaultConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
     size: {
-      description: 'Button size.',
+      description: this._widgetDocs.getDescription(BUTTON_DOCS_PATH, 'size', 'Button size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Button variant.',
+      description: this._widgetDocs.getDescription(BUTTON_DOCS_PATH, 'variant', 'Button variant.'),
       type: 'IdsButtonVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonVariant),
     },
     disabled: {
-      description: 'Whether the button is disabled or not.',
-      type: 'boolean',
-      default: false,
-      control: DemoControl.SWITCH,
-    },
-    asLink: {
-      description: 'Whether the idsButton is a link (or button).',
+      description: this._widgetDocs.getDescription(BUTTON_DOCS_PATH, 'disabled', 'Whether the button is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -96,11 +96,17 @@ export class ButtonDemoService {
       default: true,
       control: DemoControl.SWITCH,
     },
+    asLink: {
+      description: 'Whether the idsButton is a link (or button).',
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+    },
   };
 
   public readonly groupInputControlConfig: DemoControlConfig<ButtonGroupInputControls> = {
     size: {
-      description: 'All button size in a group.',
+      description: this._widgetDocs.getDescription(BUTTON_GROUP_DOCS_PATH, 'size', 'All button size in a group.'),
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
       control: DemoControl.SELECT,

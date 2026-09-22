@@ -1,6 +1,6 @@
 import { PropTableElement } from './prop-table-element';
 
-import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, effect, input, Signal, ViewEncapsulation } from '@angular/core';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import {
   IdsTableCellTemplateDirective,
@@ -23,7 +23,7 @@ import { of } from 'rxjs';
   styleUrls: ['./prop-table.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PropTableComponent implements OnInit {
+export class PropTableComponent {
   public config = input.required<DemoControlConfig<unknown>[]>();
 
   protected _dataSource: ServerSideDataSource<PropTableElement>;
@@ -64,10 +64,8 @@ export class PropTableComponent implements OnInit {
         paginationParams: { totalRows: 0, rows: 100, page: 1 },
       }),
     );
-  }
 
-  public ngOnInit(): void {
-    this._updateDataSource();
+    effect(() => this._updateDataSource());
   }
 
   private _updateDataSource(): void {
@@ -99,7 +97,7 @@ export class PropTableComponent implements OnInit {
     type ControlItem = {
       list?: string[];
       type?: string;
-      description?: string;
+      description?: string | Signal<string>;
       default?: unknown;
     };
 
@@ -128,9 +126,11 @@ export class PropTableComponent implements OnInit {
         values = ['-'];
       }
 
+      const description = typeof item.description === 'function' ? item.description() : item.description;
+
       return {
         name: key,
-        description: item.description || '',
+        description: description || '',
         type: item.type,
         values: values,
         default: item.default === undefined ? undefined : String(item.default),

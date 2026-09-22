@@ -1,4 +1,5 @@
 import { IconService } from '../../core/services/icon.service';
+import { WidgetDocsService } from '../../services/widget-docs.service';
 
 import { inject, Injectable, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,6 +12,8 @@ import { IdsButtonAppearance, IdsButtonAppearanceType } from '@i-cell/ids-angula
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY, IdsNotificationAppearance, IdsNotificationAppearanceType, IdsNotificationVariant, IdsNotificationVariantType } from '@i-cell/ids-angular/notification';
 import { TranslateService } from '@ngx-translate/core';
+
+const NOTIFICATION_DOCS_PATH = 'notification/notification.component.docs.json';
 
 type NotificationInputControls = {
   size: IdsSizeType,
@@ -48,6 +51,7 @@ const defaultConfig = IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class NotificationDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
@@ -56,28 +60,28 @@ export class NotificationDemoService {
 
   public inputControlConfig = signal<DemoControlConfig<NotificationInputControls>>({
     appearance: {
-      description: 'Notification appearance.',
+      description: this._widgetDocs.getDescription(NOTIFICATION_DOCS_PATH, 'appearance', 'Notification appearance.'),
       type: 'IdsNotificationAppearanceType',
       default: defaultConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsNotificationAppearance),
     },
     size: {
-      description: 'Notification size.',
+      description: this._widgetDocs.getDescription(NOTIFICATION_DOCS_PATH, 'size', 'Notification size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Notification variant.',
+      description: this._widgetDocs.getDescription(NOTIFICATION_DOCS_PATH, 'variant', 'Notification variant.'),
       type: 'IdsNotificationVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsNotificationVariant),
     },
     icon: {
-      description: 'Name of leading icon.',
+      description: this._widgetDocs.getDescription(NOTIFICATION_DOCS_PATH, 'icon', 'Name of leading icon.'),
       type: 'string',
       default: '-',
       demoDefault: '',
@@ -85,45 +89,57 @@ export class NotificationDemoService {
       list: [],
     },
     title: {
-      description: 'Title of notification',
+      description: this._widgetDocs.getDescription(NOTIFICATION_DOCS_PATH, 'title', 'Title of notification'),
       type: 'string',
       default: '-',
       demoDefault: 'Sample Title',
     },
     closable: {
-      description: 'Whether the notification is closable or not.',
+      description: this._widgetDocs.getDescription(NOTIFICATION_DOCS_PATH, 'closable', 'Whether the notification is closable or not.'),
       type: 'boolean',
       default: defaultConfig.closable,
       control: DemoControl.SWITCH,
     },
     closeButtonSize: {
-      description: 'Close Button size.',
+      description: this._widgetDocs.getDescription(NOTIFICATION_DOCS_PATH, 'closeButtonSize', 'Close Button size.'),
       type: 'IdsSizeType',
       default: defaultConfig.closeButtonSize,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     closeButtonLabel: {
-      description: 'Title of close button',
+      description: this._widgetDocs.getDescription(NOTIFICATION_DOCS_PATH, 'closeButtonLabel', 'Title of close button'),
       type: 'string',
       default: '-',
       demoDefault: '',
     },
     closeLabelButtonAppearance: {
-      description: 'Close Label Button appearance.',
+      description: this._widgetDocs.getDescription(
+        NOTIFICATION_DOCS_PATH,
+        'closeLabelButtonAppearance',
+        'Close Label Button appearance.',
+      ),
       type: 'IdsButtonAppearanceType',
       default: defaultConfig.closeLabelButtonAppearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
     urgent: {
-      description: 'Whether the notification is urgent or not. It changes the role of the notification.',
+      description: this._widgetDocs.getDescription(
+        NOTIFICATION_DOCS_PATH,
+        'urgent',
+        'Whether the notification is urgent or not. It changes the role of the notification.',
+      ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     displayActionsAtBottom: {
-      description: 'Whether display the notification actions at bottom or not.',
+      description: this._widgetDocs.getDescription(
+        NOTIFICATION_DOCS_PATH,
+        'displayActionsAtBottom',
+        'Whether display the notification actions at bottom or not.',
+      ),
       type: 'boolean',
       default: defaultConfig.displayActionsAtBottom,
       control: DemoControl.SWITCH,
@@ -263,11 +279,23 @@ export class NotificationDemoService {
     this.displayComponent.set(true);
   }
 
+  public readonly propControlConfig: DemoControlConfig<unknown> = {
+    closed: {
+      description: this._widgetDocs.getDescription(
+        NOTIFICATION_DOCS_PATH,
+        'closed',
+        'Emitted when the notification is closed (either via the close button or programmatically).',
+      ),
+      type: 'EventEmitter<void>',
+      default: '-',
+    },
+  };
+
   public getApiConfig(): DemoApiControlConfig[] {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.NOTIFICATION', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.inputControlConfig(),
+        config: { ...this.inputControlConfig(), ...this.propControlConfig },
       },
     ];
   }

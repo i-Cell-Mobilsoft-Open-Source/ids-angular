@@ -1,0 +1,9 @@
+{
+  "externalCellTemplates": {
+    "description": {
+      "en": "Map of externally provided cell templates (keyed by template name) usable as custom cell content.",
+      "hu": "Külsőleg megadott cellasablonok térképe (sablonnév szerint kulcsolva), egyedi cellatartalomként felhasználható."
+    },
+    "type": "Map<string, TemplateRef<unknown>>"
+  }
+}

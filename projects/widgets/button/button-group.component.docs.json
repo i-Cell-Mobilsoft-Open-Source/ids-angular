@@ -1,0 +1,9 @@
+{
+  "size": {
+    "description": {
+      "en": "Button size.",
+      "hu": "A gomb mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

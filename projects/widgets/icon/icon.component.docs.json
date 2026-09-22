@@ -1,0 +1,44 @@
+{
+  "aria-hidden": {
+    "description": {
+      "en": "Determinate whether the component is hidden or not for screen readers.",
+      "hu": "Meghatározza, hogy a komponens rejtett-e a képernyőolvasók számára."
+    },
+    "type": "boolean"
+  },
+  "fontIcon": {
+    "description": {
+      "en": "Name of font icon.",
+      "hu": "A font ikon neve."
+    },
+    "type": "string"
+  },
+  "size": {
+    "description": {
+      "en": "Icon size.",
+      "hu": "Az ikon mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "sizeCollection": {
+    "description": {
+      "en": "Icon size collection.",
+      "hu": "Az ikon méretgyűjteménye."
+    },
+    "type": "IdsSizeCollectionType"
+  },
+  "svgIcon": {
+    "description": {
+      "en": "Name of svg icon file",
+      "hu": "Az svg ikon fájl neve."
+    },
+    "type": "IdsIconVariantType"
+  },
+  "variant": {
+    "description": {
+      "en": "Icon variant.",
+      "hu": "Az ikon variánsa."
+    },
+    "type": "IdsIconVariantType"
+  }
+}

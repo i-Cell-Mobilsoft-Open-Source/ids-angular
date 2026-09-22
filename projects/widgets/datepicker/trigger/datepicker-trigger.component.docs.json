@@ -1,0 +1,9 @@
+{
+  "size": {
+    "description": {
+      "en": "Size of the form field.",
+      "hu": "A form field mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

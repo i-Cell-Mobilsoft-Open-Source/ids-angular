@@ -1,0 +1,86 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Accordion appearance.",
+      "hu": "Az accordion megjelenése."
+    },
+    "type": "IdsAccordionAppearanceType"
+  },
+  "btnAppearance": {
+    "description": {
+      "en": "Button appearance.",
+      "hu": "A gomb megjelenése."
+    },
+    "type": "IdsButtonAppearanceType"
+  },
+  "btnSize": {
+    "description": {
+      "en": "Button size.",
+      "hu": "A gomb mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "btnVariant": {
+    "description": {
+      "en": "Button variant.",
+      "hu": "A gomb variánsa."
+    },
+    "type": "IdsButtonVariantType"
+  },
+  "collapseBtnLabel": {
+    "description": {
+      "en": "Label for collapse all button.",
+      "hu": "Az összes összecsukása gomb címkéje."
+    },
+    "type": "string"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the accordion is disabled or not.",
+      "hu": "Az accordion le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "expandBtnLabel": {
+    "description": {
+      "en": "Label for expand all button.",
+      "hu": "Az összes kinyitása gomb címkéje."
+    },
+    "type": "string"
+  },
+  "hasLeadingIcon": {
+    "description": {
+      "en": "Whether the button has leading icon or not.",
+      "hu": "A gombnak van-e vezető ikonja."
+    },
+    "type": "boolean"
+  },
+  "hasTrailingIcon": {
+    "description": {
+      "en": "Whether the button has trailing icon or not.",
+      "hu": "A gombnak van-e trailing ikonja."
+    },
+    "type": "boolean"
+  },
+  "headingLevel": {
+    "description": {
+      "en": "Heading level.",
+      "hu": "A címsor szintje (heading level)."
+    },
+    "type": "IdsAccordionHeadingLevelType"
+  },
+  "multi": {
+    "description": {
+      "en": "Allow multiple accordion items to be open.",
+      "hu": "Egyszerre több accordion elem is nyitva lehet."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Accordion size.",
+      "hu": "Az accordion mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

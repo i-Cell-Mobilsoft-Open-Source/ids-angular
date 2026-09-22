@@ -1,0 +1,44 @@
+{
+  "changes": {
+    "description": {
+      "en": "Emitted when the selection state of the item changes.",
+      "hu": "Akkor emittálódik, amikor az elem kiválasztási állapota megváltozik."
+    },
+    "type": "EventEmitter<IdsSegmentedControlToggleItemChange>"
+  },
+  "label": {
+    "description": {
+      "en": "Label of the segmented control toggle item.",
+      "hu": "A segmented control toggle elem címkéje."
+    },
+    "type": "string"
+  },
+  "ariaLabel": {
+    "description": {
+      "en": "aria-label for the segmented control toggle item.",
+      "hu": "aria-label a segmented control toggle elemhez."
+    },
+    "type": "string"
+  },
+  "labeledby": {
+    "description": {
+      "en": "aria-labeledby for the segmented control toggle item.",
+      "hu": "aria-labeledby a segmented control toggle elemhez."
+    },
+    "type": "string"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the segmented control toggle item.",
+      "hu": "A segmented control toggle elem name attribútuma."
+    },
+    "type": "string"
+  },
+  "value": {
+    "description": {
+      "en": "Value of the segmented control toggle item.",
+      "hu": "A segmented control toggle elem értéke."
+    },
+    "type": "unknown"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "describedby": {
+    "description": {
+      "en": "aria-describedby for the radio item.",
+      "hu": "aria-describedby a radio elemhez."
+    },
+    "type": "string"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the radio is disabled or not.",
+      "hu": "A radio le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "inputId": {
+    "description": {
+      "en": "Id of the radio item's native input element.",
+      "hu": "A radio elem natív input elemének id-je."
+    },
+    "type": "string"
+  },
+  "label": {
+    "description": {
+      "en": "aria-label for the radio item.",
+      "hu": "aria-label a radio elemhez."
+    },
+    "type": "string"
+  },
+  "labelledby": {
+    "description": {
+      "en": "aria-labelledby for the radio item.",
+      "hu": "aria-labelledby a radio elemhez."
+    },
+    "type": "string"
+  },
+  "tabIndex": {
+    "description": {
+      "en": "Tab index of the radio item.",
+      "hu": "A radio elem tabindexe."
+    },
+    "type": "number"
+  },
+  "value": {
+    "description": {
+      "en": "Value of the radio item.",
+      "hu": "A radio elem értéke."
+    },
+    "type": "unknown"
+  }
+}

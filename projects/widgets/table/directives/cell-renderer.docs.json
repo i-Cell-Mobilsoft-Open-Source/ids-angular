@@ -1,0 +1,23 @@
+{
+  "cellValue": {
+    "description": {
+      "en": "The current cell's value, coerced to a string, passed to a custom cell renderer component.",
+      "hu": "Az aktuális cella értéke, string típusra alakítva, egyedi cellarenderelő komponensnek átadva."
+    },
+    "type": "string"
+  },
+  "colDef": {
+    "description": {
+      "en": "The column definition the cell belongs to, passed to a custom cell renderer component. Required.",
+      "hu": "Az oszlopdefiníció, amelyhez a cella tartozik, egyedi cellarenderelő komponensnek átadva. Kötelező."
+    },
+    "type": "IdsTableColumnDef<D>"
+  },
+  "rowData": {
+    "description": {
+      "en": "The full row data object, passed to a custom cell renderer component.",
+      "hu": "A teljes sor adatobjektuma, egyedi cellarenderelő komponensnek átadva."
+    },
+    "type": "D"
+  }
+}

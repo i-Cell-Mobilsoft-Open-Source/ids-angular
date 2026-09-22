@@ -1,0 +1,51 @@
+{
+  "message": {
+    "description": {
+      "en": "The text displayed inside the tooltip.",
+      "hu": "A tooltipen belül megjelenített szöveg."
+    },
+    "type": "string"
+  },
+  "position": {
+    "description": {
+      "en": "The position of the tooltip relative to the target element.",
+      "hu": "A tooltip pozíciója a célelemhez képest."
+    },
+    "type": "IdsTooltipPositionType"
+  },
+  "showPointer": {
+    "description": {
+      "en": "Whether to show tooltip pointer or not.",
+      "hu": "Megjelenjen-e a tooltip mutatónyila (pointer)."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "The size of the tooltip.",
+      "hu": "A tooltip mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "textAlign": {
+    "description": {
+      "en": "The text alignment inside the tooltip.",
+      "hu": "A szöveg igazítása a tooltipen belül."
+    },
+    "type": "IdsTooltipTextAlign"
+  },
+  "tooltipClass": {
+    "description": {
+      "en": "Additional CSS class(es) to apply to the tooltip.",
+      "hu": "A tooltipre alkalmazott további CSS osztály(ok)."
+    },
+    "type": "string"
+  },
+  "variant": {
+    "description": {
+      "en": "The variant or style of the tooltip.",
+      "hu": "A tooltip variánsa vagy stílusa."
+    },
+    "type": "IdsTooltipVariantType"
+  }
+}

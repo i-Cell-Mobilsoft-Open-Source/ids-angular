@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -8,6 +10,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_MESSAGE_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariantType, IdsMessageVariant } from '@i-cell/ids-angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
+const MESSAGE_DOCS_PATH = 'forms/directives/message.directive.docs.json';
 const defaultConfig = IDS_MESSAGE_DEFAULT_CONFIG_FACTORY();
 
 type MessageInputControls = {
@@ -30,17 +33,18 @@ type InputInputControls = {
 @Injectable()
 export class MessageDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly messageInputControlConfig: DemoControlConfig<MessageInputControls> = {
     size: {
-      description: 'Size of the message component.',
+      description: this._widgetDocs.getDescription(MESSAGE_DOCS_PATH, 'size', 'Size of the message component.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Variant of the message component.',
+      description: this._widgetDocs.getDescription(MESSAGE_DOCS_PATH, 'variant', 'Variant of the message component.'),
       type: 'IdsFormFieldVariantType',
       default: defaultConfig.variant as IdsFormFieldVariantType,
       control: DemoControl.SELECT,
@@ -83,7 +87,7 @@ export class MessageDemoService {
 
   public readonly messageInputControlConfigInput: DemoControlConfig<InputInputControls> = {
     disabled: {
-      description: 'Whether the message component is disabled or not.',
+      description: this._widgetDocs.getDescription(MESSAGE_DOCS_PATH, 'disabled', 'Whether the message component is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,

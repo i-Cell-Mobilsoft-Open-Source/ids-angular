@@ -1,0 +1,65 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Overlay panel appearance.",
+      "hu": "Az overlay panel megjelenése."
+    },
+    "type": "IdsOverlayPanelAppearanceType"
+  },
+  "attached": {
+    "description": {
+      "en": "Emitted when the overlay panel has been attached to the DOM.",
+      "hu": "Akkor emittálódik, amikor az overlay panel csatlakozott a DOM-hoz."
+    },
+    "type": "EventEmitter<void>"
+  },
+  "open": {
+    "description": {
+      "en": "Whether the overlay panel is open or not. Two-way bindable.",
+      "hu": "Az overlay panel nyitva van-e. Kétirányúan köthető."
+    },
+    "type": "boolean"
+  },
+  "origin": {
+    "description": {
+      "en": "The element the overlay panel is anchored/connected to.",
+      "hu": "Az elem, amelyhez az overlay panel horgonyzódik/kapcsolódik."
+    },
+    "type": "CdkOverlayOrigin | ElementRef"
+  },
+  "panelClasses": {
+    "description": {
+      "en": "Additional CSS class(es) applied to the overlay panel.",
+      "hu": "Az overlay panelre alkalmazott további CSS osztály(ok)."
+    },
+    "type": "string"
+  },
+  "positions": {
+    "description": {
+      "en": "Array of connected positions used to position the overlay panel relative to its origin.",
+      "hu": "A kapcsolt pozíciók tömbje, amelyek az overlay panelt a origin-jéhez képest pozicionálják."
+    },
+    "type": "ConnectedPosition[]"
+  },
+  "size": {
+    "description": {
+      "en": "Overlay panel size.",
+      "hu": "Az overlay panel mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Overlay panel variant.",
+      "hu": "Az overlay panel variánsa."
+    },
+    "type": "IdsOverlayPanelVariantType"
+  },
+  "width": {
+    "description": {
+      "en": "Width of the overlay panel.",
+      "hu": "Az overlay panel szélessége."
+    },
+    "type": "string | number"
+  }
+}

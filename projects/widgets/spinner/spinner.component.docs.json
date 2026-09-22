@@ -1,0 +1,37 @@
+{
+  "ariaLabel": {
+    "description": {
+      "en": "Accessible label of the spinner (rendered as the aria-label attribute).",
+      "hu": "A spinner akadálymentesítési címkéje (az aria-label attribútumként jelenik meg)."
+    },
+    "type": "string"
+  },
+  "isTrack": {
+    "description": {
+      "en": "Spinner is track.",
+      "hu": "A spinner sávot (track) is megjelenít-e."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Spinner size.",
+      "hu": "A spinner mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "sizeCollection": {
+    "description": {
+      "en": "Spinner size collection.",
+      "hu": "A spinner méret gyűjteménye (size collection)."
+    },
+    "type": "IdsSizeCollectionType"
+  },
+  "variant": {
+    "description": {
+      "en": "Spinner variant.",
+      "hu": "A spinner variánsa."
+    },
+    "type": "IdsSpinnerVariantType"
+  }
+}

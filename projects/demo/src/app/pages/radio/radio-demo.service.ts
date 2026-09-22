@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
@@ -10,6 +12,9 @@ import { IdsOrientation, IdsOrientationType, IdsPosition, IdsPositionType, IdsSi
 import { IdsValidators } from '@i-cell/ids-angular/forms';
 import { IDS_RADIO_DEFAULT_CONFIG_FACTORY, IdsRadioVariant, IdsRadioVariantType } from '@i-cell/ids-angular/radio';
 import { TranslateService } from '@ngx-translate/core';
+
+const RADIO_GROUP_DOCS_PATH = 'radio/radio-group.component.docs.json';
+const RADIO_ITEM_DOCS_PATH = 'radio/radio.component.docs.json';
 
 const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 
@@ -34,6 +39,7 @@ type RadioHelperControls = {
 @Injectable()
 export class RadioDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public form = new FormGroup({
     selection: new FormControl(null, []),
@@ -41,13 +47,17 @@ export class RadioDemoService {
 
   public inputControlConfig: DemoControlConfig<RadioInputControls> = {
     name: {
-      description: 'Name for radio items. Name is provided for group, but items get it.',
+      description: this._widgetDocs.getDescription(
+        RADIO_GROUP_DOCS_PATH,
+        'name',
+        'Name for radio items. Name is provided for group, but items get it.',
+      ),
       type: 'string',
       default: '-',
       demoDefault: 'numbers',
     },
     required: {
-      description: 'Whether the radio is required or not.',
+      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'required', 'Whether the radio is required or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -61,7 +71,7 @@ export class RadioDemoService {
       },
     },
     disabled: {
-      description: 'Whether the radio is disabled or not.',
+      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'disabled', 'Whether the radio is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -74,28 +84,28 @@ export class RadioDemoService {
       },
     },
     size: {
-      description: 'Size of the radio.',
+      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'size', 'Size of the radio.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Variant of the radio.',
+      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'variant', 'Variant of the radio.'),
       type: 'IdsRadioVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsRadioVariant),
     },
     orientation: {
-      description: 'Orientation of the radio.',
+      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'orientation', 'Orientation of the radio.'),
       type: 'IdsRadioVariantType',
       default: defaultConfig.orientation,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
     labelPosition: {
-      description: 'Position of the radio\'s label.',
+      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'labelPosition', 'Position of the radio\'s label.'),
       type: 'IdsPositionType',
       default: defaultConfig.labelPosition,
       control: DemoControl.SELECT,
@@ -147,6 +157,47 @@ export class RadioDemoService {
     },
   ];
 
+  public readonly groupPropControlConfig: DemoControlConfig<unknown> = {
+    groupLabel: {
+      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'groupLabel', 'Label of the radio group (alias: "label").'),
+      type: 'string',
+      default: '',
+    },
+  };
+
+  public readonly itemPropControlConfig: DemoControlConfig<unknown> = {
+    inputId: {
+      description: this._widgetDocs.getDescription(RADIO_ITEM_DOCS_PATH, 'inputId', 'Id of the radio item\'s native input element.'),
+      type: 'string',
+      default: '-',
+    },
+    value: {
+      description: this._widgetDocs.getDescription(RADIO_ITEM_DOCS_PATH, 'value', 'Value of the radio item.'),
+      type: 'unknown',
+      default: '-',
+    },
+    tabIndex: {
+      description: this._widgetDocs.getDescription(RADIO_ITEM_DOCS_PATH, 'tabIndex', 'Tab index of the radio item.'),
+      type: 'number',
+      default: 0,
+    },
+    'aria-label': {
+      description: this._widgetDocs.getDescription(RADIO_ITEM_DOCS_PATH, 'label', 'aria-label for the radio item.'),
+      type: 'string',
+      default: '-',
+    },
+    'aria-labelledby': {
+      description: this._widgetDocs.getDescription(RADIO_ITEM_DOCS_PATH, 'labelledby', 'aria-labelledby for the radio item.'),
+      type: 'string',
+      default: '-',
+    },
+    'aria-describedby': {
+      description: this._widgetDocs.getDescription(RADIO_ITEM_DOCS_PATH, 'describedby', 'aria-describedby for the radio item.'),
+      type: 'string',
+      default: '-',
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<RadioInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<RadioHelperControls>(this.helperControlConfig);
 
@@ -174,7 +225,11 @@ export class RadioDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.RADIO', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.inputControlConfig,
+        config: { ...this.inputControlConfig, ...this.itemPropControlConfig },
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.RADIO', 'API.PROPERTY_GROUP.GROUP'),
+        config: this.groupPropControlConfig,
       },
     ];
   }

@@ -1,0 +1,23 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Appearance of the tag.",
+      "hu": "A tag megjelenése."
+    },
+    "type": "IdsTagAppearanceType"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the tag.",
+      "hu": "A tag mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the tag.",
+      "hu": "A tag variánsa."
+    },
+    "type": "IdsTagVariantType"
+  }
+}

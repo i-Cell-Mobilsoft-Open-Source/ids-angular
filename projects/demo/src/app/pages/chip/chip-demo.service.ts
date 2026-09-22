@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -17,6 +19,9 @@ import {
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
+const CHIP_DOCS_PATH = 'chip/chip.component.docs.json';
+const CHIP_GROUP_DOCS_PATH = 'chip/chip-group.component.docs.json';
+
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -26,6 +31,7 @@ type ChipInputControls = {
   variant: IdsChipVariantType;
   removable: boolean;
   disabled: boolean;
+  tabIndex: number;
 };
 
 type ChipHelperControls = {
@@ -54,40 +60,60 @@ const chipList: { label: string; variant: IdsChipVariantType }[] = [
 @Injectable()
 export class ChipDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly inputControlConfig: DemoControlConfig<ChipInputControls> = {
     appearance: {
-      description: 'Chip appearance.',
+      description: this._widgetDocs.getDescription(CHIP_DOCS_PATH, 'appearance', 'Chip appearance.'),
       type: 'IdsChipAppearanceType',
       default: defaultConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsChipAppearance),
     },
     size: {
-      description: 'Chip size.',
+      description: this._widgetDocs.getDescription(CHIP_DOCS_PATH, 'size', 'Chip size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Chip variant.',
+      description: this._widgetDocs.getDescription(CHIP_DOCS_PATH, 'variant', 'Chip variant.'),
       type: 'IdsChipVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsChipVariant),
     },
     removable: {
-      description: 'Whether the chip is removable or not.',
+      description: this._widgetDocs.getDescription(CHIP_DOCS_PATH, 'removable', 'Whether the chip is removable or not.'),
       type: 'boolean',
       default: defaultConfig.removable,
       control: DemoControl.SWITCH,
     },
     disabled: {
-      description: 'Whether the chip is disabled or not.',
+      description: this._widgetDocs.getDescription(CHIP_DOCS_PATH, 'disabled', 'Whether the chip is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+    },
+    tabIndex: {
+      description: this._widgetDocs.getDescription(CHIP_DOCS_PATH, 'tabIndex', 'Tab index of the chip.'),
+      type: 'number',
+      default: 0,
+      control: DemoControl.NUMBER,
+      step: 1,
+    },
+  };
+
+  public readonly propControlConfig: DemoControlConfig<unknown> = {
+    removed: {
+      description: this._widgetDocs.getDescription(
+        CHIP_DOCS_PATH,
+        'removed',
+        'Emitted when the chip is removed (via the remove/trailing icon button).',
+      ),
+      type: 'EventEmitter<IdsChipRemoveEvent>',
+      default: '-',
     },
   };
 
@@ -120,21 +146,21 @@ export class ChipDemoService {
 
   public readonly groupInputControlConfig: DemoControlConfig<ChipGroupInputControls> = {
     appearance: {
-      description: 'Chip group appearance.',
+      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'appearance', 'Chip group appearance.'),
       type: 'IdsChipAppearanceType',
       default: defaultGroupConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsChipAppearance),
     },
     size: {
-      description: 'Chip group size.',
+      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'size', 'Chip group size.'),
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     disabled: {
-      description: 'Whether the chip group is disabled or not.',
+      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'disabled', 'Whether the chip group is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -200,7 +226,7 @@ export class ChipDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CHIP', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.inputControlConfig,
+        config: { ...this.inputControlConfig, ...this.propControlConfig },
       },
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CHIP', 'API.PROPERTY_GROUP.GROUP'),

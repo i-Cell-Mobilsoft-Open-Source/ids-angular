@@ -1,0 +1,44 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Appearance of the segmented control.",
+      "hu": "A segmented control megjelenése."
+    },
+    "type": "IdsSegmentedControlAppearanceType"
+  },
+  "multiSelect": {
+    "description": {
+      "en": "Whether the segmented control allows selecting multiple items at once.",
+      "hu": "A segmented control engedélyezi-e egyszerre több elem kiválasztását."
+    },
+    "type": "boolean"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the segmented control, used for form submission.",
+      "hu": "A segmented control name attribútuma, űrlapküldéshez használva."
+    },
+    "type": "string"
+  },
+  "showActiveIcon": {
+    "description": {
+      "en": "Whether the active icon should be shown or not.",
+      "hu": "Megjelenjen-e az aktív állapot ikonja."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the segmented control.",
+      "hu": "A segmented control mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the segmented control.",
+      "hu": "A segmented control variánsa."
+    },
+    "type": "IdsSegmentedControlVariantType"
+  }
+}

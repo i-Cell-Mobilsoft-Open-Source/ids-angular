@@ -1,0 +1,79 @@
+{
+  "activationMode": {
+    "description": {
+      "en": "Tab activation mode.",
+      "hu": "A tab aktiválási módja."
+    },
+    "type": "IdsTabActivationModeType"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the tab item is disabled or not.",
+      "hu": "A tab elem le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "indicatorPosition": {
+    "description": {
+      "en": "Tab indicator position.",
+      "hu": "A tab indikátorának pozíciója."
+    },
+    "type": "IdsTabIndicatorPositionType"
+  },
+  "orientation": {
+    "description": {
+      "en": "Tab orientation.",
+      "hu": "A tab orientációja."
+    },
+    "type": "IdsOrientationType"
+  },
+  "selectedTabChange": {
+    "description": {
+      "en": "Emits the index of the selected tab whenever the selected tab changes.",
+      "hu": "A kiválasztott tab indexét emittálja, amikor a kiválasztott tab megváltozik."
+    },
+    "type": "EventEmitter<number>"
+  },
+  "setTabIndex": {
+    "description": {
+      "en": "Optionally sets the selected tab index after initialization.",
+      "hu": "Opcionálisan beállítja a kiválasztott tab indexét inicializálás után."
+    },
+    "type": "number"
+  },
+  "size": {
+    "description": {
+      "en": "Tab size.",
+      "hu": "A tab mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "stretchTabs": {
+    "description": {
+      "en": "Whether the tab header is stretched or not.",
+      "hu": "A tab fejléce nyújtott-e (stretched)."
+    },
+    "type": "boolean"
+  },
+  "tabAlignment": {
+    "description": {
+      "en": "Tab header position.",
+      "hu": "A tab fejlécének pozíciója."
+    },
+    "type": "IdsTabGroupAlignmentType"
+  },
+  "tabPosition": {
+    "description": {
+      "en": "Tab position.",
+      "hu": "A tab pozíciója."
+    },
+    "type": "IdsTabGroupPositionType"
+  },
+  "variant": {
+    "description": {
+      "en": "Tab variant.",
+      "hu": "A tab variánsa."
+    },
+    "type": "IdsTabGroupVariantType"
+  }
+}

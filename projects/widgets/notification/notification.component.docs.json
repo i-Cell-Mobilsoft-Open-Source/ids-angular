@@ -1,0 +1,86 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Notification appearance.",
+      "hu": "A notifikáció megjelenése."
+    },
+    "type": "IdsNotificationAppearanceType"
+  },
+  "closable": {
+    "description": {
+      "en": "Whether the notification is closable or not.",
+      "hu": "A notifikáció bezárható-e vagy sem."
+    },
+    "type": "boolean"
+  },
+  "closeButtonLabel": {
+    "description": {
+      "en": "Title of close button",
+      "hu": "A bezáró gomb szövege."
+    },
+    "type": "string"
+  },
+  "closeButtonSize": {
+    "description": {
+      "en": "Close Button size.",
+      "hu": "A bezáró gomb mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "closeLabelButtonAppearance": {
+    "description": {
+      "en": "Close Label Button appearance.",
+      "hu": "A bezáró gomb megjelenése."
+    },
+    "type": "IdsButtonAppearanceType"
+  },
+  "closed": {
+    "description": {
+      "en": "Emitted when the notification is closed (either via the close button or programmatically).",
+      "hu": "Akkor emittálódik, amikor a notification bezáródik (a bezáró gombbal vagy programozott módon)."
+    },
+    "type": "EventEmitter<void>"
+  },
+  "displayActionsAtBottom": {
+    "description": {
+      "en": "Whether display the notification actions at bottom or not.",
+      "hu": "A notifikáció műveletei alul jelenjenek-e meg vagy sem."
+    },
+    "type": "boolean"
+  },
+  "icon": {
+    "description": {
+      "en": "Name of leading icon.",
+      "hu": "A vezető ikon neve."
+    },
+    "type": "string"
+  },
+  "size": {
+    "description": {
+      "en": "Notification size.",
+      "hu": "A notifikáció mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "title": {
+    "description": {
+      "en": "Title of notification",
+      "hu": "A notifikáció címe."
+    },
+    "type": "string"
+  },
+  "urgent": {
+    "description": {
+      "en": "Whether the notification is urgent or not. It changes the role of the notification.",
+      "hu": "A notifikáció sürgős-e vagy sem. Ez megváltoztatja a notifikáció role attribútumát."
+    },
+    "type": "boolean"
+  },
+  "variant": {
+    "description": {
+      "en": "Notification variant.",
+      "hu": "A notifikáció variánsa."
+    },
+    "type": "IdsNotificationVariantType"
+  }
+}

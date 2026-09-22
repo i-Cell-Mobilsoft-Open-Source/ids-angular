@@ -1,0 +1,23 @@
+{
+  "legend": {
+    "description": {
+      "en": "Fieldset legend.",
+      "hu": "A fieldset legendája (címkéje)."
+    },
+    "type": "string"
+  },
+  "size": {
+    "description": {
+      "en": "Fieldset size.",
+      "hu": "A fieldset mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Fieldset variant.",
+      "hu": "A fieldset variánsa."
+    },
+    "type": "IdsFormFieldVariantType"
+  }
+}

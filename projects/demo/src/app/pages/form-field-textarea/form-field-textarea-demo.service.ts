@@ -1,9 +1,9 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
 import {
-  formFieldDefaults,
-  formFieldInputControlConfig,
   formFieldMethodControlConfig,
   FormFieldInputControls,
   FormFieldTextareaHelperControls,
+  getFormFieldInputControlConfig,
   InputInputControls,
 } from '../form-field/form-field-demo-shared';
 
@@ -16,11 +16,14 @@ import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-con
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { TranslateService } from '@ngx-translate/core';
 
+const INPUT_DOCS_PATH = 'forms/components/input/input.directive.docs.json';
+
 @Injectable()
 export class FormFieldTextareaDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
-  public readonly formFieldInputControlConfig = formFieldInputControlConfig;
+  public readonly formFieldInputControlConfig = getFormFieldInputControlConfig(this._widgetDocs);
 
   public readonly formFieldTextareaHelperControlConfig: DemoControlConfig<FormFieldTextareaHelperControls> = {
     label: {
@@ -39,19 +42,19 @@ export class FormFieldTextareaDemoService {
 
   public readonly textareaInputControlConfig: DemoControlConfig<InputInputControls> = {
     placeholder: {
-      description: 'Textarea placeholder.',
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'placeholder', 'Textarea placeholder.'),
       type: 'string',
       default: '-',
       demoDefault: 'Placeholder',
     },
     readonly: {
-      description: 'Whether textarea is readonly or not.',
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'readonly', 'Whether textarea is readonly or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     disabled: {
-      description: 'Whether textarea is disabled or not.',
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'disabled', 'Whether textarea is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -64,7 +67,7 @@ export class FormFieldTextareaDemoService {
       },
     },
     required: {
-      description: 'Whether textarea is required or not.',
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'required', 'Whether textarea is required or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -78,14 +81,45 @@ export class FormFieldTextareaDemoService {
       },
     },
     canHandleSuccessState: {
-      description: 'Whether textarea can handle success state with a success state matcher.',
+      description: this._widgetDocs.getDescription(
+        INPUT_DOCS_PATH,
+        'canHandleSuccessState',
+        'Whether textarea can handle success state with a success state matcher.',
+      ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
+    name: {
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'name', 'Name of the textarea, used for form submission.'),
+      type: 'string',
+      default: '',
+      control: DemoControl.TEXT,
+    },
   };
 
-  public formFieldDefaults = formFieldDefaults;
+  public readonly textareaPropControlConfig: DemoControlConfig<unknown> = {
+    errorStateMatcher: {
+      description: this._widgetDocs.getDescription(
+        INPUT_DOCS_PATH,
+        'errorStateMatcher',
+        'Matcher instance used to determine whether the textarea should show an error state.',
+      ),
+      type: 'AbstractErrorStateMatcher',
+      default: '-',
+    },
+    successStateMatcher: {
+      description: this._widgetDocs.getDescription(
+        INPUT_DOCS_PATH,
+        'successStateMatcher',
+        'Matcher instance used to determine whether the textarea should show a success state.',
+      ),
+      type: 'AbstractSuccessStateMatcher',
+      default: '-',
+    },
+  };
+
+  public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this.formFieldInputControlConfig);
   public formFieldHelperDefaults = getDefaultFromDemoConfig<FormFieldTextareaHelperControls>(this.formFieldTextareaHelperControlConfig);
   public inputDefaults = getDefaultFromDemoConfig<InputInputControls>(this.textareaInputControlConfig);
 
@@ -118,7 +152,7 @@ export class FormFieldTextareaDemoService {
       },
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.FORM_FIELD_TEXTAREA', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.textareaInputControlConfig,
+        config: { ...this.textareaInputControlConfig, ...this.textareaPropControlConfig },
       },
     ];
   }

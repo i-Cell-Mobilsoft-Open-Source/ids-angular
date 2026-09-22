@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { Location } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
@@ -7,6 +9,8 @@ import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY, IdsBackdropType, IdsBackdropTypeType, IdsSideSheetHeader, IdsSideSheetHeaderType, IdsSideSheetPosition, IdsSideSheetPositionType, IdsSideSheetType } from '@i-cell/ids-angular/side-sheet';
 import { TranslateService } from '@ngx-translate/core';
+
+const SIDE_SHEET_DOCS_PATH = 'side-sheet/side-sheet.component.docs.json';
 
 const defaultConfig = IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY();
 
@@ -21,14 +25,18 @@ type SideSheetInputControls = {
   backdropType: IdsBackdropTypeType;
   backdropOpacity: IdsSizeType;
   isClosable: boolean;
-  isShowFooter: boolean;
   isShowHeader: boolean;
   closeTooltipText: string;
   size: string;
 };
+
+type SideSheetHelperControls = {
+  isShowFooter: boolean;
+};
 @Injectable()
 export class SideSheetDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   protected _idsSideSheetType = IdsSideSheetType;
   protected _idsSideSheetHeaderType = IdsSideSheetHeader;
@@ -37,103 +45,117 @@ export class SideSheetDemoService {
 
   public inputControlConfig: DemoControlConfig<SideSheetInputControls> = {
     size: {
-      description: 'Side sheet size.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'size', 'Side sheet size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       list: Object.values(IdsSize),
       control: 'select',
     },
     type: {
-      description: 'Side sheet type.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'type', 'Side sheet type.'),
       type: 'IdsSideSheetType',
       default: defaultConfig.type,
       list: Object.values(IdsSideSheetType),
       control: 'select',
     },
     title: {
-      description: 'Side sheet title.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'title', 'Side sheet title.'),
       type: 'string',
       default: 'Title',
       control: 'text',
     },
     position: {
-      description: 'Side sheet position.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'position', 'Side sheet position.'),
       type: 'IdsSideSheetPosition',
       default: defaultConfig.position,
       list: Object.values(IdsSideSheetPosition),
       control: 'select',
     },
     header: {
-      description: 'Side sheet header.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'header', 'Side sheet header.'),
       type: 'IdsSideSheetHeader',
       default: defaultConfig.header,
       list: Object.values(IdsSideSheetHeader),
       control: 'select',
     },
     backButton: {
-      description: 'Is side sheet back button shown. Only applies to default header.',
+      description: this._widgetDocs.getDescription(
+        SIDE_SHEET_DOCS_PATH,
+        'backButton',
+        'Is side sheet back button shown. Only applies to default header.',
+      ),
       type: 'boolean',
       default: false,
       control: 'switch',
     },
     isScrollable: {
-      description: 'Is side sheet scrollable.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'isScrollable', 'Is side sheet scrollable.'),
       type: 'boolean',
       default: defaultConfig.isScrollable,
       control: 'switch',
     },
     isBackdrop: {
-      description: 'Is side sheet backdrop enabled.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'isBackdrop', 'Is side sheet backdrop enabled.'),
       type: 'boolean',
       default: defaultConfig.isBackdrop,
       control: 'switch',
     },
     backdropType: {
-      description: 'Backdrop type.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'backdropType', 'Backdrop type.'),
       type: 'IdsBackdropType',
       default: defaultConfig.backdropType,
       list: Object.values(IdsBackdropType),
       control: 'select',
     },
     backdropOpacity: {
-      description: 'Backdrop opacity.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'backdropOpacity', 'Backdrop opacity.'),
       type: 'IdsSizeType',
       default: IdsSize.COMPACT,
       list: Object.values(IdsSize),
       control: 'select',
     },
     isClosable: {
-      description: 'Is side sheet closable.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'isClosable', 'Is side sheet closable.'),
       type: 'boolean',
       default: defaultConfig.isClosable,
       control: 'switch',
     },
-    isShowFooter: {
-      description: 'Is side sheet footer shown.',
-      type: 'boolean',
-      default: defaultConfig.isShowFooter,
-      control: 'switch',
-    },
     isShowHeader: {
-      description: 'Controls the visibility of the header. Applies only when using the default header type.',
+      description: this._widgetDocs.getDescription(
+        SIDE_SHEET_DOCS_PATH,
+        'isShowHeader',
+        'Controls the visibility of the header. Applies only when using the default header type.',
+      ),
       type: 'boolean',
       default: true,
       control: 'switch',
     },
     closeTooltipText: {
-      description: 'Tooltip text for the close button.',
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'closeTooltipText', 'Tooltip text for the close button.'),
       type: 'string',
       default: defaultConfig.closeTooltipText,
       control: 'text',
     },
   };
 
+  public helperControlConfig: DemoControlConfig<SideSheetHelperControls> = {
+    isShowFooter: {
+      description: 'Is side sheet footer shown.',
+      type: 'boolean',
+      default: defaultConfig.isShowFooter,
+      control: 'switch',
+    },
+  };
+
   public defaults = getDefaultFromDemoConfig<SideSheetInputControls>(this.inputControlConfig);
+  public helperDefaults = getDefaultFromDemoConfig<SideSheetHelperControls>(this.helperControlConfig);
 
   public model: SideSheetInputControls = { ...this.defaults };
+  public helperModel: SideSheetHelperControls = { ...this.helperDefaults };
 
   public reset(): void {
     this.model = { ...this.defaults };
+    this.helperModel = { ...this.helperDefaults };
     this.firstName = '';
     this.lastName = '';
     this.email = '';
@@ -169,11 +191,33 @@ export class SideSheetDemoService {
     { value: 'us', viewValue: 'SIDE_SHEET.COUNTRY.US' },
   ];
 
+  public readonly propControlConfig: DemoControlConfig<unknown> = {
+    open: {
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'open', 'Whether the side sheet is open or not.'),
+      type: 'boolean',
+      default: false,
+    },
+    closed: {
+      description: this._widgetDocs.getDescription(SIDE_SHEET_DOCS_PATH, 'closed', 'Emitted when the side sheet is closed.'),
+      type: 'EventEmitter<void>',
+      default: '-',
+    },
+    backClicked: {
+      description: this._widgetDocs.getDescription(
+        SIDE_SHEET_DOCS_PATH,
+        'backClicked',
+        'Emitted when the back button (in the default header) is clicked.',
+      ),
+      type: 'EventEmitter<void>',
+      default: '-',
+    },
+  };
+
   public getApiConfig(): DemoApiControlConfig[] {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SIDE_SHEET', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.inputControlConfig,
+        config: { ...this.inputControlConfig, ...this.propControlConfig },
       },
     ];
   }

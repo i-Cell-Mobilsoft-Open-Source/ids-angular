@@ -1,0 +1,65 @@
+{
+  "actions": {
+    "description": {
+      "en": "Array of actions (label + callback) rendered as buttons inside the snackbar.",
+      "hu": "Akciók tömbje (címke + callback), amelyek gombokként jelennek meg a snackbaren belül."
+    },
+    "type": "IdsSnackbarAction[]"
+  },
+  "allowDismiss": {
+    "description": {
+      "en": "Whether the the user can close the snackbar or not.",
+      "hu": "A felhasználó bezárhatja-e a snackbart."
+    },
+    "type": "boolean"
+  },
+  "autoClose": {
+    "description": {
+      "en": "Whether the snackbar should close automatically or not. The duration is a computed data based on some constant value.",
+      "hu": "A snackbar automatikusan bezáródjon-e. Az időtartam egy konstans érték alapján számított adat."
+    },
+    "type": "boolean"
+  },
+  "closeButtonLabel": {
+    "description": {
+      "en": "Custom close button. If any text is provided, the close button will be a button with this text against the default \"x\" button.",
+      "hu": "Egyedi bezáró gomb. Ha bármilyen szöveg meg van adva, a bezáró gomb egy, ezzel a szöveggel ellátott gomb lesz az alapértelmezett \"x\" gomb helyett."
+    },
+    "type": "string"
+  },
+  "closed": {
+    "description": {
+      "en": "Emitted when the snackbar is closed.",
+      "hu": "Akkor emittálódik, amikor a snackbar bezáródik."
+    },
+    "type": "EventEmitter<void>"
+  },
+  "icon": {
+    "description": {
+      "en": "Custom icon for snackbar. Overwites default icon. Default icon depends on variant.",
+      "hu": "Egyedi ikon a snackbarhez. Felülírja az alapértelmezett ikont. Az alapértelmezett ikon a variánstól függ."
+    },
+    "type": "string"
+  },
+  "message": {
+    "description": {
+      "en": "Snackbar message",
+      "hu": "A snackbar üzenete"
+    },
+    "type": "string"
+  },
+  "urgent": {
+    "description": {
+      "en": "Whether the snackbar is urgent or not. It changes the role of the snackbar.",
+      "hu": "A snackbar sürgős-e. Ez megváltoztatja a snackbar accessibility role-ját."
+    },
+    "type": "boolean"
+  },
+  "variant": {
+    "description": {
+      "en": "Snackbar variant.",
+      "hu": "A snackbar variánsa."
+    },
+    "type": "IdsSnackbarVariantType"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "label": {
+    "description": {
+      "en": "Label of the side nav item (used as the accessible name and tooltip text).",
+      "hu": "A side nav elem címkéje (akadálymentesítési névként és tooltip szövegként is szolgál)."
+    },
+    "type": "string"
+  }
+}

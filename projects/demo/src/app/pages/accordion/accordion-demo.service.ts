@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -10,6 +12,9 @@ import { IdsButtonAppearance, IdsButtonAppearanceType, IdsButtonVariant, IdsButt
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
+
+const ACCORDION_DOCS_PATH = 'accordion/accordion.component.docs.json';
+const ACCORDION_ITEM_DOCS_PATH = 'accordion/accordion-item/accordion-item.component.docs.json';
 
 const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 
@@ -32,89 +37,94 @@ type AccordionInputControls = {
 @Injectable()
 export class AccordionDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   private _resetSubject = new Subject<void>();
   public reset$ = this._resetSubject.asObservable();
 
   public readonly inputControlConfig: DemoControlConfig<AccordionInputControls> = {
     size: {
-      description: 'Accordion size.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'size', 'Accordion size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     appearance: {
-      description: 'Accordion appearance.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'appearance', 'Accordion appearance.'),
       type: 'IdsAccordionAppearanceType',
       default: defaultConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsAccordionAppearance),
     },
     headingLevel: {
-      description: 'Heading level.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'headingLevel', 'Heading level.'),
       type: 'IdsAccordionHeadingLevelType',
       default: defaultConfig.headingLevel,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsAccordionHeadingLevel),
     },
     summary: {
-      description: 'Summary of accordion',
+      description: this._widgetDocs.getDescription(ACCORDION_ITEM_DOCS_PATH, 'summary', 'Summary of accordion'),
       type: 'string',
       default: '-',
       demoDefault: 'Summary text',
     },
     disabled: {
-      description: 'Whether the accordion is disabled or not.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'disabled', 'Whether the accordion is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     multi: {
-      description: 'Allow multiple accordion items to be open.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'multi', 'Allow multiple accordion items to be open.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     btnSize: {
-      description: 'Button size.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'btnSize', 'Button size.'),
       type: 'IdsSizeType',
       default: defaultConfig.btnSize,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     btnAppearance: {
-      description: 'Button appearance.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'btnAppearance', 'Button appearance.'),
       type: 'IdsButtonAppearanceType',
       default: defaultConfig.btnAppearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonAppearance),
     },
     btnVariant: {
-      description: 'Button variant.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'btnVariant', 'Button variant.'),
       type: 'IdsButtonVariantType',
       default: defaultConfig.btnVariant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonVariant),
     },
     expandBtnLabel: {
-      description: 'Label for expand all button.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'expandBtnLabel', 'Label for expand all button.'),
       type: 'string',
       default: defaultConfig.expandBtnLabel,
     },
     collapseBtnLabel: {
-      description: 'Label for collapse all button.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'collapseBtnLabel', 'Label for collapse all button.'),
       type: 'string',
       default: defaultConfig.collapseBtnLabel,
     },
     hasLeadingIcon: {
-      description: 'Whether the button has leading icon or not.',
+      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'hasLeadingIcon', 'Whether the button has leading icon or not.'),
       type: 'boolean',
       default: defaultConfig.hasLeadingIcon,
       control: DemoControl.SWITCH,
     },
     hasTrailingIcon: {
-      description: 'Whether the button has trailing icon or not.',
+      description: this._widgetDocs.getDescription(
+        ACCORDION_DOCS_PATH,
+        'hasTrailingIcon',
+        'Whether the button has trailing icon or not.',
+      ),
       type: 'boolean',
       default: defaultConfig.hasTrailingIcon,
       control: DemoControl.SWITCH,

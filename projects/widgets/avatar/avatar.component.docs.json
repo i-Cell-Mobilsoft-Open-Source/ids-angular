@@ -1,0 +1,30 @@
+{
+  "initials": {
+    "description": {
+      "en": "Avatar initials.",
+      "hu": "Az avatar monogramja."
+    },
+    "type": "string"
+  },
+  "size": {
+    "description": {
+      "en": "Avatar size.",
+      "hu": "Az avatar mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "sizeCollection": {
+    "description": {
+      "en": "Avatar sizeCollection.",
+      "hu": "Az avatar mérethez tartozó ikon/kép gyűjtemény (sizeCollection)."
+    },
+    "type": "IdsSizeCollectionType"
+  },
+  "variant": {
+    "description": {
+      "en": "Avatar variant.",
+      "hu": "Az avatar variánsa."
+    },
+    "type": "IdsAvatarVariantType"
+  }
+}

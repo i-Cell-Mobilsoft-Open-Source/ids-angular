@@ -1,0 +1,16 @@
+{
+  "size": {
+    "description": {
+      "en": "Breadcrumb size.",
+      "hu": "A breadcrumb mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Breadcrumb variant.",
+      "hu": "A breadcrumb variánsa."
+    },
+    "type": "IdsBadgeVariantType"
+  }
+}

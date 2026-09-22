@@ -1,0 +1,44 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Badge appearance.",
+      "hu": "A badge megjelenése."
+    },
+    "type": "IdsBadgeAppearanceType"
+  },
+  "label": {
+    "description": {
+      "en": "Badge text.",
+      "hu": "A badge szövege."
+    },
+    "type": "string"
+  },
+  "limit": {
+    "description": {
+      "en": "Badge limit.",
+      "hu": "A badge-en megjeleníthető érték felső korlátja."
+    },
+    "type": "number"
+  },
+  "showLeadingElement": {
+    "description": {
+      "en": "Has leading icon.",
+      "hu": "Van-e vezető ikonja."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Badge size.",
+      "hu": "A badge mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Badge variant.",
+      "hu": "A badge variánsa."
+    },
+    "type": "IdsBadgeVariantType"
+  }
+}

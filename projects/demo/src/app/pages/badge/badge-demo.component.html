@@ -4,13 +4,14 @@
       <div component>
         <div
           idsBadge
+          [badgeAppearance]="_badgeDemoService.model.appearance"
           [badgeVariant]="_badgeDemoService.model.variant"
           [badgeSize]="_badgeDemoService.model.size"
           [badgeLabel]="_badgeDemoService.model.label"
-          [badgeShowLeadingElement]="_badgeDemoService.model.hasLeadingIcon"
+          [badgeShowLeadingElement]="_badgeDemoService.model.showLeadingElement"
           [badgeLimit]="_badgeDemoService.model.limit"
         >
-          @if (_badgeDemoService.model.hasLeadingIcon) {
+          @if (_badgeDemoService.model.showLeadingElement) {
             <ids-icon icon-leading fontIcon="search" />
           }
           Text

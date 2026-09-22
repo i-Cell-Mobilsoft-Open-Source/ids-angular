@@ -1,4 +1,5 @@
 import { IconService } from '../../core/services/icon.service';
+import { WidgetDocsService } from '../../services/widget-docs.service';
 
 import { inject, Injectable, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -12,6 +13,9 @@ import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cel
 import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupAlignment, IdsTabGroupAlignmentType, IdsTabGroupPosition, IdsTabGroupPositionType, IdsTabGroupVariant, IdsTabGroupVariantType, IdsTabIndicatorPosition, IdsTabIndicatorPositionType } from '@i-cell/ids-angular/tab';
 import { IdsTabActivationMode, IdsTabActivationModeType } from '@i-cell/ids-angular/tab/types/tab-activation-mode.type';
 import { TranslateService } from '@ngx-translate/core';
+
+const TAB_GROUP_DOCS_PATH = 'tab/tab-group.component.docs.json';
+const TAB_DOCS_PATH = 'tab/tab.component.docs.json';
 
 const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -48,6 +52,7 @@ type TabHelperControls = {
 @Injectable({ providedIn: 'root' })
 export class TabDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   private readonly _iconService = inject(IconService);
   private readonly _destroyRef = inject(DestroyRef);
@@ -55,65 +60,86 @@ export class TabDemoService {
 
   public inputControlConfig: DemoControlConfig<TabInputControls> = {
     size: {
-      description: 'Tab size.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'size', 'Tab size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Tab variant.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'variant', 'Tab variant.'),
       type: 'IdsTabGroupVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTabGroupVariant),
     },
     orientation: {
-      description: 'Tab orientation.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'orientation', 'Tab orientation.'),
       type: 'IdsOrientationType',
       default: defaultConfig.orientation,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
     tabAlignment: {
-      description: 'Tab header position.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'tabAlignment', 'Tab header position.'),
       type: 'IdsTabGroupAlignmentType',
       default: defaultConfig.tabAlignment,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTabGroupAlignment),
     },
     tabPosition: {
-      description: 'Tab position.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'tabPosition', 'Tab position.'),
       type: 'IdsTabGroupPositionType',
       default: defaultConfig.tabPosition,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTabGroupPosition),
     },
     indicatorPosition: {
-      description: 'Tab indicator position.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'indicatorPosition', 'Tab indicator position.'),
       type: 'IdsTabIndicatorPositionType',
       default: defaultConfig.indicatorPosition,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTabIndicatorPosition),
     },
     stretchTabs: {
-      description: 'Whether the tab header is stretched or not.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'stretchTabs', 'Whether the tab header is stretched or not.'),
       type: 'boolean',
       default: defaultConfig.stretchTabs,
       control: DemoControl.SWITCH,
     },
     disabled: {
-      description: 'Whether the tab group is disabled or not.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'disabled', 'Whether the tab group is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     activationMode: {
-      description: 'Tab activation mode.',
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'activationMode', 'Tab activation mode.'),
       type: 'IdsTabActivationModeType',
       default: defaultConfig.activationMode,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTabActivationMode),
+    },
+  };
+
+  public readonly tabGroupPropControlConfig: DemoControlConfig<unknown> = {
+    setTabIndex: {
+      description: this._widgetDocs.getDescription(
+        TAB_GROUP_DOCS_PATH,
+        'setTabIndex',
+        'Optionally sets the selected tab index after initialization.',
+      ),
+      type: 'number',
+      default: '-',
+    },
+    selectedTabChange: {
+      description: this._widgetDocs.getDescription(
+        TAB_GROUP_DOCS_PATH,
+        'selectedTabChange',
+        'Emits the index of the selected tab whenever the selected tab changes.',
+      ),
+      type: 'EventEmitter<number>',
+      default: '-',
     },
   };
 
@@ -224,27 +250,18 @@ export class TabDemoService {
 
   public readonly tabPropControlConfig: DemoControlConfig<unknown> = {
     label: {
-      description: 'Whether the tab item is disabled or not.',
-      type: 'boolean',
-      default: false,
-      control: DemoControl.SWITCH,
+      description: this._widgetDocs.getDescription(TAB_DOCS_PATH, 'label', 'Label of the tab item.'),
+      type: 'string',
+      default: '-',
     },
     disabled: {
-      description: 'Whether the tab item is disabled or not.',
+      description: this._widgetDocs.getDescription(TAB_DOCS_PATH, 'disabled', 'Whether the tab item is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
-    content: {
-      description: 'Projected tab panel content.',
-      type: 'template',
-      default: '-',
-      demoDefault: '',
-      control: null,
-      list: [],
-    },
     leadingIcon: {
-      description: 'Name of the leading icon.',
+      description: this._widgetDocs.getDescription(TAB_DOCS_PATH, 'leadingIcon', 'Name of the leading icon.'),
       type: 'string',
       default: '-',
       demoDefault: '',
@@ -252,27 +269,11 @@ export class TabDemoService {
       list: [],
     },
     trailingIcon: {
-      description: 'Name of the trailing icon.',
+      description: this._widgetDocs.getDescription(TAB_DOCS_PATH, 'trailingIcon', 'Name of the trailing icon.'),
       type: 'string',
       default: '-',
       demoDefault: '',
       control: DemoControl.SELECT,
-      list: [],
-    },
-    prefixContent: {
-      description: 'Projected content before the leading icon (prefixContent attribute).',
-      type: 'template',
-      default: '-',
-      demoDefault: '',
-      control: null,
-      list: [],
-    },
-    suffixContent: {
-      description: 'Projected content after the trailing icon (suffixContent attribute).',
-      type: 'template',
-      default: '-',
-      demoDefault: '',
-      control: null,
       list: [],
     },
   };
@@ -332,7 +333,7 @@ export class TabDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.TAB', 'API.PROPERTY_GROUP.GROUP'),
-        config: this.inputControlConfig,
+        config: { ...this.inputControlConfig, ...this.tabGroupPropControlConfig },
       },
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.TAB', 'API.PROPERTY_GROUP.DEFAULT'),

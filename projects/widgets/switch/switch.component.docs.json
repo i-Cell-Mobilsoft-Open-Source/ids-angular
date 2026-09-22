@@ -1,0 +1,93 @@
+{
+  "describedby": {
+    "description": {
+      "en": "aria-describedby for switch.",
+      "hu": "aria-describedby a switchhez."
+    },
+    "type": "string"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the switch is disabled or not.",
+      "hu": "A switch le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "hasIcon": {
+    "description": {
+      "en": "Whether the switch has icon.",
+      "hu": "A switchnek van-e ikonja."
+    },
+    "type": "boolean"
+  },
+  "iconPosition": {
+    "description": {
+      "en": "Where the icon should be shown in switch.",
+      "hu": "Hol jelenjen meg az ikon a switchen belül."
+    },
+    "type": "IdsSwitchIconPositionType"
+  },
+  "label": {
+    "description": {
+      "en": "Switch label.",
+      "hu": "A switch címkéje."
+    },
+    "type": "string"
+  },
+  "ariaLabel": {
+    "description": {
+      "en": "aria-label for switch.",
+      "hu": "aria-label a switchhez."
+    },
+    "type": "string"
+  },
+  "labelPosition": {
+    "description": {
+      "en": "Where the label should be shown in switch.",
+      "hu": "Hol jelenjen meg a címke a switchen belül."
+    },
+    "type": "IdsSwitchLabelPositionType"
+  },
+  "labelledby": {
+    "description": {
+      "en": "aria-labelledby for switch.",
+      "hu": "aria-labelledby a switchhez."
+    },
+    "type": "string"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the switch input, used for form submission.",
+      "hu": "A switch input name attribútuma, űrlapküldéshez használva."
+    },
+    "type": "string"
+  },
+  "readonly": {
+    "description": {
+      "en": "Whether the switch is readonly or not.",
+      "hu": "A switch csak olvasható-e (readonly)."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the switch.",
+      "hu": "A switch mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "tabIndex": {
+    "description": {
+      "en": "Tab index of the switch.",
+      "hu": "A switch tabindexe."
+    },
+    "type": "number"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the switch.",
+      "hu": "A switch variánsa."
+    },
+    "type": "IdsSwitchVariantType"
+  }
+}

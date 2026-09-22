@@ -1,0 +1,44 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Card appearance.",
+      "hu": "A kártya megjelenése."
+    },
+    "type": "IdsCardAppearanceType"
+  },
+  "click": {
+    "description": {
+      "en": "Emitted when the card is clicked (only when the card has a click handler attached).",
+      "hu": "Akkor emittálódik, amikor a kártyára kattintanak (csak akkor, ha a kártyához van kattintás-kezelő csatolva)."
+    },
+    "type": "EventEmitter<void>"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the card is disabled or not.",
+      "hu": "A kártya le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "orientation": {
+    "description": {
+      "en": "Card orientation.",
+      "hu": "A kártya orientációja."
+    },
+    "type": "IdsOrientationType"
+  },
+  "size": {
+    "description": {
+      "en": "Card size.",
+      "hu": "A kártya mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Card variant.",
+      "hu": "A kártya variánsa."
+    },
+    "type": "IdsCardVariantType"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Chip appearance.",
+      "hu": "A chip megjelenése."
+    },
+    "type": "IdsChipAppearanceType"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the chip is disabled or not.",
+      "hu": "A chip le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Chip size.",
+      "hu": "A chip mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

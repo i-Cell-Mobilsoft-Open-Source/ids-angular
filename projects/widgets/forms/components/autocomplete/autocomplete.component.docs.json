@@ -1,0 +1,128 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Appearance of the autocomplete's clear/dropdown trigger button.",
+      "hu": "Az autocomplete törlés/lenyitás gombjának megjelenése."
+    },
+    "type": "IdsIconButtonAppearanceType"
+  },
+  "ariaLabel": {
+    "description": {
+      "en": "aria-label for the autocomplete input.",
+      "hu": "aria-label az autocomplete inputhoz."
+    },
+    "type": "string"
+  },
+  "ariaLabelLoading": {
+    "description": {
+      "en": "aria-label for the loading spinner shown inside the autocomplete field.",
+      "hu": "aria-label az autocomplete mezőn belül megjelenő töltés-spinnerhez."
+    },
+    "type": "string"
+  },
+  "ariaLabelledby": {
+    "description": {
+      "en": "aria-labelledby for the autocomplete input.",
+      "hu": "aria-labelledby az autocomplete inputhoz."
+    },
+    "type": "string"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the field is disabled or not.",
+      "hu": "A mező le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "errorStateMatcher": {
+    "description": {
+      "en": "Matcher instance used to determine whether the autocomplete should show an error state.",
+      "hu": "Az autocomplete hibaállapotának megjelenítését meghatározó matcher-példány."
+    },
+    "type": "AbstractErrorStateMatcher"
+  },
+  "isLoading": {
+    "description": {
+      "en": "Whether the autocomplete is currently in a loading state (shows the spinner).",
+      "hu": "Az autocomplete jelenleg töltési állapotban van-e (ekkor a spinnert jeleníti meg)."
+    },
+    "type": "boolean"
+  },
+  "multiSelect": {
+    "description": {
+      "en": "Whether the field allows multiple selections.",
+      "hu": "A mező engedélyezi-e a többszörös kiválasztást."
+    },
+    "type": "boolean"
+  },
+  "panelClasses": {
+    "description": {
+      "en": "Additional CSS class(es) applied to the autocomplete's overlay panel.",
+      "hu": "Az autocomplete overlay paneljére alkalmazott további CSS osztály(ok)."
+    },
+    "type": "string"
+  },
+  "panelOpen": {
+    "description": {
+      "en": "Whether the autocomplete's suggestion panel is open or not. Two-way bindable.",
+      "hu": "Az autocomplete javaslatpanelje nyitva van-e. Kétirányúan köthető."
+    },
+    "type": "boolean"
+  },
+  "required": {
+    "description": {
+      "en": "Whether the field is required or not.",
+      "hu": "A mező kötelező-e."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the auto complete field.",
+      "hu": "Az autocomplete mező mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "sortCompareFn": {
+    "description": {
+      "en": "Function used to sort selected options (only relevant when multiSelect is true).",
+      "hu": "A kiválasztott opciók rendezésére használt függvény (csak akkor releváns, ha a multiSelect igaz)."
+    },
+    "type": "(a: IdsOptionValue, b: IdsOptionValue) => number"
+  },
+  "successStateMatcher": {
+    "description": {
+      "en": "Matcher instance used to determine whether the autocomplete should show a success state.",
+      "hu": "Az autocomplete sikeres állapotának megjelenítését meghatározó matcher-példány."
+    },
+    "type": "AbstractSuccessStateMatcher"
+  },
+  "tabIndex": {
+    "description": {
+      "en": "Tab index of the autocomplete input.",
+      "hu": "Az autocomplete input tabindexe."
+    },
+    "type": "number"
+  },
+  "trigger": {
+    "description": {
+      "en": "The IdsAutocompleteTriggerDirective instance the autocomplete is connected to. Required.",
+      "hu": "Az IdsAutocompleteTriggerDirective példány, amelyhez az autocomplete kapcsolódik. Kötelező."
+    },
+    "type": "IdsAutocompleteTriggerDirective"
+  },
+  "valueCompareFn": {
+    "description": {
+      "en": "Function used to compare option values when determining selection state.",
+      "hu": "A kiválasztási állapot meghatározásakor az opció-értékek összehasonlítására használt függvény."
+    },
+    "type": "(o1: unknown, o2: unknown) => boolean"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the auto complete field.",
+      "hu": "Az autocomplete mező variánsa."
+    },
+    "type": "IdsFormFieldVariantType"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "changes": {
+    "description": {
+      "en": "Emitted when the selection state of the item changes.",
+      "hu": "Akkor emittálódik, amikor az elem kiválasztási állapota megváltozik."
+    },
+    "type": "EventEmitter<IdsSegmentedControlItemChange>"
+  },
+  "label": {
+    "description": {
+      "en": "Label of the segmented control item.",
+      "hu": "A segmented control elem címkéje."
+    },
+    "type": "string"
+  },
+  "ariaLabel": {
+    "description": {
+      "en": "aria-label for the segmented control item.",
+      "hu": "aria-label a segmented control elemhez."
+    },
+    "type": "string"
+  },
+  "labeledby": {
+    "description": {
+      "en": "aria-labeledby for the segmented control item.",
+      "hu": "aria-labeledby a segmented control elemhez."
+    },
+    "type": "string"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the segmented control item.",
+      "hu": "A segmented control elem name attribútuma."
+    },
+    "type": "string"
+  },
+  "tabIndex": {
+    "description": {
+      "en": "Tab index of the segmented control item.",
+      "hu": "A segmented control elem tabindexe."
+    },
+    "type": "number"
+  },
+  "value": {
+    "description": {
+      "en": "Value of the segmented control item.",
+      "hu": "A segmented control elem értéke."
+    },
+    "type": "unknown"
+  }
+}

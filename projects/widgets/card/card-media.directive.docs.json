@@ -1,0 +1,9 @@
+{
+  "stretch": {
+    "description": {
+      "en": "Whether the image is stretchable or not.",
+      "hu": "A kép nyújtható-e."
+    },
+    "type": "boolean"
+  }
+}

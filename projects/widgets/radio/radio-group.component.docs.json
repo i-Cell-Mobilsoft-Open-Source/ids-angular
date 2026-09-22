@@ -1,0 +1,65 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether the radio is disabled or not.",
+      "hu": "A radio le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "groupLabel": {
+    "description": {
+      "en": "Label of the radio group (alias: \"label\").",
+      "hu": "A radio csoport címkéje (alias: \"label\")."
+    },
+    "type": "string"
+  },
+  "label": {
+    "description": {
+      "en": "aria-label for the radio item.",
+      "hu": "aria-label a radio elemhez."
+    },
+    "type": "string"
+  },
+  "labelPosition": {
+    "description": {
+      "en": "Position of the radio's label.",
+      "hu": "A radio címkéjének pozíciója."
+    },
+    "type": "IdsPositionType"
+  },
+  "name": {
+    "description": {
+      "en": "Name for radio items. Name is provided for group, but items get it.",
+      "hu": "A radio elemek name attribútuma. A csoporton van megadva, de az elemek kapják meg."
+    },
+    "type": "string"
+  },
+  "orientation": {
+    "description": {
+      "en": "Orientation of the radio.",
+      "hu": "A radio orientációja."
+    },
+    "type": "IdsRadioVariantType"
+  },
+  "required": {
+    "description": {
+      "en": "Whether the radio is required or not.",
+      "hu": "A radio kötelező-e."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the radio.",
+      "hu": "A radio mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the radio.",
+      "hu": "A radio variánsa."
+    },
+    "type": "IdsRadioVariantType"
+  }
+}

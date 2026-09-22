@@ -1,11 +1,12 @@
 import {
-  formFieldDefaults,
-  formFieldInputControlConfig,
   formFieldMethodControlConfig,
   FormFieldInputControls,
   FormFieldInputHelperControls,
+  getFormFieldInputControlConfig,
   InputInputControls,
 } from './form-field-demo-shared';
+
+import { WidgetDocsService } from '../../services/widget-docs.service';
 
 import { inject, Injectable } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
@@ -16,11 +17,14 @@ import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-con
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { TranslateService } from '@ngx-translate/core';
 
+const INPUT_DOCS_PATH = 'forms/components/input/input.directive.docs.json';
+
 @Injectable()
 export class FormFieldDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
-  public readonly formFieldInputControlConfig = formFieldInputControlConfig;
+  public readonly formFieldInputControlConfig = getFormFieldInputControlConfig(this._widgetDocs);
 
   public readonly formFieldHelperControlConfig: DemoControlConfig<FormFieldInputHelperControls> = {
     hasLeadingIcon: {
@@ -95,38 +99,78 @@ export class FormFieldDemoService {
 
   public readonly inputInputControlConfig: DemoControlConfig<InputInputControls> = {
     placeholder: {
-      description: 'Input placeholder.',
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'placeholder', 'Input placeholder.'),
       type: 'string',
       default: '-',
       demoDefault: 'Placeholder',
     },
     readonly: {
-      description: 'Whether input is readonly or not.',
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'readonly', 'Whether input is readonly or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     disabled: {
-      description: 'Whether input is disabled or not.',
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'disabled', 'Whether input is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     required: {
-      description: 'Whether input is required or not.',
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'required', 'Whether input is required or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     canHandleSuccessState: {
-      description: 'Whether input can handle success state with a success state matcher.',
+      description: this._widgetDocs.getDescription(
+        INPUT_DOCS_PATH,
+        'canHandleSuccessState',
+        'Whether input can handle success state with a success state matcher.',
+      ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
+    name: {
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'name', 'Name of the input, used for form submission.'),
+      type: 'string',
+      default: '',
+      control: DemoControl.TEXT,
+    },
   };
 
-  public formFieldDefaults = formFieldDefaults;
+  public readonly inputPropControlConfig: DemoControlConfig<unknown> = {
+    type: {
+      description: this._widgetDocs.getDescription(
+        INPUT_DOCS_PATH,
+        'type',
+        'Type of the input (e.g. text, email, number, password).',
+      ),
+      type: 'IdsInputType',
+      default: 'text',
+    },
+    errorStateMatcher: {
+      description: this._widgetDocs.getDescription(
+        INPUT_DOCS_PATH,
+        'errorStateMatcher',
+        'Matcher instance used to determine whether the input should show an error state.',
+      ),
+      type: 'AbstractErrorStateMatcher',
+      default: '-',
+    },
+    successStateMatcher: {
+      description: this._widgetDocs.getDescription(
+        INPUT_DOCS_PATH,
+        'successStateMatcher',
+        'Matcher instance used to determine whether the input should show a success state.',
+      ),
+      type: 'AbstractSuccessStateMatcher',
+      default: '-',
+    },
+  };
+
+  public formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(this.formFieldInputControlConfig);
   public formFieldHelperDefaults = getDefaultFromDemoConfig<FormFieldInputHelperControls>(this.formFieldHelperControlConfig);
   public inputDefaults = getDefaultFromDemoConfig<InputInputControls>(this.inputInputControlConfig);
 
@@ -160,7 +204,7 @@ export class FormFieldDemoService {
       },
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.FORM_FIELD_INPUT', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.inputInputControlConfig,
+        config: { ...this.inputInputControlConfig, ...this.inputPropControlConfig },
       },
     ];
   }

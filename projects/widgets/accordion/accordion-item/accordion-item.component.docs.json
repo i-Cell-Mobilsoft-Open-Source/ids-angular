@@ -1,0 +1,30 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether the accordion is disabled or not.",
+      "hu": "Az accordion le van-e tiltva."
+    },
+    "type": "boolean"
+  },
+  "hasLeadingIcon": {
+    "description": {
+      "en": "Whether the button has leading icon or not.",
+      "hu": "A gombnak van-e vezető ikonja."
+    },
+    "type": "boolean"
+  },
+  "hasTrailingIcon": {
+    "description": {
+      "en": "Whether the button has trailing icon or not.",
+      "hu": "A gombnak van-e trailing ikonja."
+    },
+    "type": "boolean"
+  },
+  "summary": {
+    "description": {
+      "en": "Summary of accordion",
+      "hu": "Az accordion elem összefoglalója"
+    },
+    "type": "string"
+  }
+}

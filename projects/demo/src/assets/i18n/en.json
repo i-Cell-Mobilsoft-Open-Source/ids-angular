@@ -1053,6 +1053,108 @@
         "DESCRIPTION": "A selection of font and SVG icons. Font icons use fontIcon; SVG icons use svgIcon. The two cannot be used together."
       }
     },
+    "SIDE_NAV": {
+      "BASIC": {
+        "TITLE": "Basic side navigation",
+        "DESCRIPTION": "A side navigation with sections, titles, and items. Use ids-side-nav-section, ids-side-nav-title, and ids-side-nav-item to structure the menu.",
+        "CONTENT": {
+          "SECTION": "Main menu",
+          "HOME": "Home",
+          "DESIGN_TOKENS": "Design tokens",
+          "AVATAR": "Avatar"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Side navigation variants",
+        "DESCRIPTION": "Side navigation with different color variants: surface (default) and light.",
+        "CONTENT": {
+          "SURFACE": "Surface navigation",
+          "LIGHT": "Light navigation",
+          "HOME": "Home",
+          "SEARCH": "Search"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Side navigation sizes",
+        "DESCRIPTION": "Side navigation with different sizes: dense, compact (default), comfortable, and spacious.",
+        "CONTENT": {
+          "HOME": "Home",
+          "SEARCH": "Search"
+        }
+      },
+      "NESTED": {
+        "TITLE": "Nested side navigation",
+        "DESCRIPTION": "Items with nested children become expandable. Set expanded to open a submenu by default.",
+        "CONTENT": {
+          "SECTION": "Navigation",
+          "HOME": "Home",
+          "COMPONENTS": "Components",
+          "AVATAR": "Avatar",
+          "SEARCH": "Search",
+          "SIDE_NAV": "Side navigation"
+        }
+      },
+      "ICONS": {
+        "TITLE": "Side navigation with icons",
+        "DESCRIPTION": "Section titles and items can include leading and trailing icons via content projection.",
+        "CONTENT": {
+          "SECTION": "Shop",
+          "HOME": "Home",
+          "SETTINGS": "Settings"
+        }
+      },
+      "TRAILING_ICON_TOOLTIP": {
+        "TITLE": "Trailing icon with tooltip",
+        "DESCRIPTION": "Project trailing icons with icon-trailing and set hasTooltip on items to show the label in a tooltip on hover.",
+        "CONTENT": {
+          "SECTION": "Navigation",
+          "HOME": "Home",
+          "AVATAR": "Avatar",
+          "SEARCH": "Search"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled side navigation item",
+        "DESCRIPTION": "Set disabled on an item to prevent navigation and interaction.",
+        "CONTENT": {
+          "SECTION": "Navigation",
+          "HOME": "Home",
+          "ARCHIVED": "Archived (disabled)",
+          "SEARCH": "Search"
+        }
+      },
+      "ACTIVE_INDICATOR": {
+        "TITLE": "Active indicator",
+        "DESCRIPTION": "Enable hasActiveIndicator to show a visual marker on the active route. Items use the target input with the Angular router for active state.",
+        "CONTENT": {
+          "SECTION": "Navigation",
+          "HOME": "Home",
+          "CURRENT": "Current page",
+          "SEARCH": "Search"
+        }
+      },
+      "ICON_ONLY": {
+        "TITLE": "Icon-only side navigation",
+        "DESCRIPTION": "Set hasLabel to false to hide item labels. Use hasTooltip on items so labels appear on hover.",
+        "CONTENT": {
+          "SECTION": "Menu",
+          "HOME": "Home",
+          "AVATAR": "Avatar",
+          "SEARCH": "Search"
+        }
+      },
+      "SEMANTIC": {
+        "TITLE": "Semantic side navigation",
+        "DESCRIPTION": "Use ul[idsSideNavSection] and li[idsSideNavItem] for semantic list markup. Nested children in li elements are provided via an ng-template marked with #idsSideNavItemChildren.",
+        "CONTENT": {
+          "SECTION": "Semantic menu",
+          "HOME": "Home",
+          "COMPONENTS": "Components",
+          "AVATAR": "Avatar",
+          "SEARCH": "Search"
+        }
+      }
+    },
     "SPINNER": {
       "VARIANTS": {
         "TITLE": "Spinner variants",

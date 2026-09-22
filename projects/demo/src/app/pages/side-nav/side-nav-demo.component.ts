@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { SIDE_NAV_EXAMPLES } from '../../components-example/side-nav/side-nav-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, inject } from '@angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
@@ -23,9 +25,11 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './side-nav-demo.component.html',
 })
 export class SideNavDemoComponent {
   protected _sideNavDemoService = inject(SideNavDemoService);
+  public readonly sideNavExamples = SIDE_NAV_EXAMPLES;
 }

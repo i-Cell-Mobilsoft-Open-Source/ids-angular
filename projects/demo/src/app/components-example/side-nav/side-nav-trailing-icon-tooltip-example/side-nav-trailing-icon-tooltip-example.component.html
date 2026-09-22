@@ -1,0 +1,32 @@
+<nav idsSideNav>
+  <ids-side-nav-section>
+    <ids-side-nav-title [label]="'EXAMPLES.SIDE_NAV.TRAILING_ICON_TOOLTIP.CONTENT.SECTION' | translate">
+      <ids-icon icon-leading fontIcon="cart" />
+      <ids-icon icon-trailing fontIcon="chevron-down" />
+    </ids-side-nav-title>
+    <ids-side-nav-item
+      target="components/side-nav/demo"
+      [label]="'EXAMPLES.SIDE_NAV.TRAILING_ICON_TOOLTIP.CONTENT.HOME' | translate"
+      [hasTooltip]="true"
+    >
+      <ids-icon icon-leading fontIcon="home" />
+      <ids-icon icon-trailing fontIcon="chevron-right" />
+    </ids-side-nav-item>
+    <ids-side-nav-item
+      target="components/avatar/demo"
+      [label]="'EXAMPLES.SIDE_NAV.TRAILING_ICON_TOOLTIP.CONTENT.AVATAR' | translate"
+      [hasTooltip]="true"
+    >
+      <ids-icon icon-leading fontIcon="account" />
+      <ids-icon icon-trailing fontIcon="chevron-right" />
+    </ids-side-nav-item>
+    <ids-side-nav-item
+      target="components/button/demo"
+      [label]="'EXAMPLES.SIDE_NAV.TRAILING_ICON_TOOLTIP.CONTENT.SEARCH' | translate"
+      [hasTooltip]="true"
+    >
+      <ids-icon icon-leading fontIcon="search" />
+      <ids-icon icon-trailing fontIcon="chevron-right" />
+    </ids-side-nav-item>
+  </ids-side-nav-section>
+</nav>

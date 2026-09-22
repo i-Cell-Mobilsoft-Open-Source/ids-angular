@@ -1,0 +1,18 @@
+<nav idsSideNav>
+  <ids-side-nav-section>
+    <ids-side-nav-title [label]="'EXAMPLES.SIDE_NAV.DISABLED.CONTENT.SECTION' | translate"/>
+    <ids-side-nav-item target="components/side-nav/demo" [label]="'EXAMPLES.SIDE_NAV.DISABLED.CONTENT.HOME' | translate">
+      <ids-icon icon-leading fontIcon="home" />
+    </ids-side-nav-item>
+    <ids-side-nav-item
+      target="components/avatar/demo"
+      [label]="'EXAMPLES.SIDE_NAV.DISABLED.CONTENT.ARCHIVED' | translate"
+      [disabled]="true"
+    >
+      <ids-icon icon-leading fontIcon="file-document-alert-outline" />
+    </ids-side-nav-item>
+    <ids-side-nav-item target="components/button/demo" [label]="'EXAMPLES.SIDE_NAV.DISABLED.CONTENT.SEARCH' | translate">
+      <ids-icon icon-leading fontIcon="search" />
+    </ids-side-nav-item>
+  </ids-side-nav-section>
+</nav>

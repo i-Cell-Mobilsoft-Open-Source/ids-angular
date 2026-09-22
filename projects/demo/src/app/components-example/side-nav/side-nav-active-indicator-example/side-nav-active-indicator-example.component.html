@@ -1,0 +1,17 @@
+<nav idsSideNav [hasActiveIndicator]="true">
+  <ids-side-nav-section>
+    <ids-side-nav-title [label]="'EXAMPLES.SIDE_NAV.ACTIVE_INDICATOR.CONTENT.SECTION' | translate"/>
+    <ids-side-nav-item target="components/avatar/demo" [label]="'EXAMPLES.SIDE_NAV.ACTIVE_INDICATOR.CONTENT.HOME' | translate">
+      <ids-icon icon-leading fontIcon="home" />
+    </ids-side-nav-item>
+    <ids-side-nav-item
+      [label]="'EXAMPLES.SIDE_NAV.ACTIVE_INDICATOR.CONTENT.CURRENT' | translate"
+      [target]="_currentUrl"
+    >
+      <ids-icon icon-leading fontIcon="menu" />
+    </ids-side-nav-item>
+    <ids-side-nav-item target="components/button/demo" [label]="'EXAMPLES.SIDE_NAV.ACTIVE_INDICATOR.CONTENT.SEARCH' | translate">
+      <ids-icon icon-leading fontIcon="search" />
+    </ids-side-nav-item>
+  </ids-side-nav-section>
+</nav>

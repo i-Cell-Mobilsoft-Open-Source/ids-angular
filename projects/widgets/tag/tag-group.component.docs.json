@@ -2,14 +2,14 @@
   "appearance": {
     "description": {
       "en": "Appearance of the tag.",
-      "hu": "A tag megjelenése."
+      "hu": "A címke megjelenési módja."
     },
     "type": "IdsTagAppearanceType"
   },
   "size": {
     "description": {
       "en": "Size of the tag.",
-      "hu": "A tag mérete."
+      "hu": "A címke mérete."
     },
     "type": "IdsSizeType"
   }

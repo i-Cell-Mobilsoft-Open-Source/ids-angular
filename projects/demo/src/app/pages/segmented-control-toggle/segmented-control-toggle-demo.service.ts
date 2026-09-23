@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -13,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const SEGMENTED_CONTROL_TOGGLE_DOCS_PATH = 'segmented-control-toggle/segmented-control-toggle.directive.docs.json';
 const SEGMENTED_CONTROL_TOGGLE_ITEM_DOCS_PATH = 'segmented-control-toggle/segmented-control-toggle-item.component.docs.json';
+const SEGMENTED_CONTROL_TOGGLE_ITEM_SLOTS_DOCS_PATH = 'segmented-control-toggle/segmented-control-toggle-item.component.slots.docs.json';
 const defaultConfig = IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY();
 
 type SegmentedControlToggleInputControls = {
@@ -160,6 +162,24 @@ export class SegmentedControlToggleDemoService {
       type: 'string',
       default: '-',
     },
+    valueCompareFn: {
+      description: this._widgetDocs.getDescription(
+        SEGMENTED_CONTROL_TOGGLE_DOCS_PATH,
+        'valueCompareFn',
+        'Function used to compare segmented control toggle items for the purpose of selection matching.',
+      ),
+      type: '(o1: IdsSegmentedControlToggleItemComponent, o2: IdsSegmentedControlToggleItemComponent) => boolean',
+      default: '-',
+    },
+    itemChanges: {
+      description: this._widgetDocs.getDescription(
+        SEGMENTED_CONTROL_TOGGLE_DOCS_PATH,
+        'itemChanges',
+        'Emitted when the selected segmented control toggle item(s) change.',
+      ),
+      type: 'EventEmitter<IdsSegmentedControlToggleItemChange>',
+      default: '-',
+    },
   };
 
   public readonly itemPropControlConfig: DemoControlConfig<unknown> = {
@@ -251,8 +271,41 @@ export class SegmentedControlToggleDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SEGMENTED_CONTROL_TOGGLE', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: { ...this.inputControlConfig, ...this.propControlConfig, ...this.itemPropControlConfig },
+        config: { ...this.inputControlConfig, ...this.propControlConfig },
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SEGMENTED_CONTROL_TOGGLE', 'API.PROPERTY_GROUP.ITEM'),
+        config: this.itemPropControlConfig,
       },
     ];
+  }
+
+  public readonly itemSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'icon',
+      selector: 'ids-icon',
+      description: this._widgetDocs.getDescription(
+        SEGMENTED_CONTROL_TOGGLE_ITEM_SLOTS_DOCS_PATH,
+        'icon',
+        'Projected <ids-icon> element shown before the label, unless the built-in active/selected icon is shown instead.',
+      ),
+    },
+    {
+      name: 'suffixContent',
+      selector: '[suffixContent]',
+      description: this._widgetDocs.getDescription(
+        SEGMENTED_CONTROL_TOGGLE_ITEM_SLOTS_DOCS_PATH,
+        'suffixContent',
+        'Content projected after the label (marked with the suffixContent attribute).',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.itemSlotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Segmented control toggle item'];
   }
 }

@@ -2,21 +2,21 @@
   "disabled": {
     "description": {
       "en": "Whether the message component is disabled or not.",
-      "hu": "A message komponens le van-e tiltva."
+      "hu": "Az üzenet letiltása."
     },
     "type": "boolean"
   },
   "size": {
     "description": {
       "en": "Size of the message component.",
-      "hu": "A message komponens mérete."
+      "hu": "Az üzenet mérete."
     },
     "type": "IdsSizeType"
   },
   "variant": {
     "description": {
       "en": "Variant of the message component.",
-      "hu": "A message komponens variánsa."
+      "hu": "Az üzenet stílusváltozata."
     },
     "type": "IdsFormFieldVariantType"
   }

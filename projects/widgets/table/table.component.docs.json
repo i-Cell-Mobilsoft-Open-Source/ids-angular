@@ -2,126 +2,126 @@
   "appearance": {
     "description": {
       "en": "Table appearance.",
-      "hu": "A táblázat megjelenése."
+      "hu": "A táblázat megjelenési módja."
     },
     "type": "IdsTableAppearanceType"
   },
   "cellClick": {
     "description": {
       "en": "Emits when a cell of the table is clicked.",
-      "hu": "Emittál, amikor a táblázat egyik cellájára kattintanak."
+      "hu": "Az esemény akkor következik be, amikor a táblázat egyik cellájára kattintanak."
     },
     "type": "EventEmitter<IdsTableCellClickEvent<D>>"
   },
   "clearSelectionOnChange": {
     "description": {
       "en": "Whether to clear row selection if the table's content changes or not.",
-      "hu": "Törlődjön-e a sorkiválasztás, ha a táblázat tartalma megváltozik."
+      "hu": "A kijelölés törlése a táblázat tartalmának változásakor."
     },
     "type": "boolean"
   },
   "columnDefs": {
     "description": {
       "en": "Column definitions describing the table's columns (labels, fields, renderers, sorting, stickiness, etc.). Required.",
-      "hu": "A táblázat oszlopait leíró oszlopdefiníciók (címkék, mezők, renderelők, rendezhetőség, rögzítettség stb.). Kötelező."
+      "hu": "A táblázat oszlopait leíró oszlopdefiníciók (címkék, mezők, megjelenítők, rendezhetőség, rögzítettség stb.). Kötelező."
     },
     "type": "IdsTableColumnDef<D>[]"
   },
   "contentChanged": {
     "description": {
       "en": "Emits when the table's rendered content changes (e.g. after data/sort/page change).",
-      "hu": "Emittál, amikor a táblázat renderelt tartalma megváltozik (pl. adat-, rendezés- vagy oldalváltás után)."
+      "hu": "A megjelenített táblázattartalom változásakor jelző esemény, például adatfrissítés, rendezés vagy lapozás után."
     },
     "type": "EventEmitter<void>"
   },
   "dataSource": {
     "description": {
       "en": "The data source used to fetch/display the table's rows (e.g. a ServerSideDataSource or a plain array). Required.",
-      "hu": "A táblázat soraiért felelős adatforrás (pl. egy ServerSideDataSource vagy egy sima tömb). Kötelező."
+      "hu": "A táblázat sorainak adatforrása, például ServerSideDataSource vagy adattömb. Kötelező megadni."
     },
     "type": "CdkTableDataSourceInput<D>"
   },
   "detailStickyColumns": {
     "description": {
-      "en": "Whether to span the detail cell to the table's full width or don't span sticky columns.",
-      "hu": "A detail cella a táblázat teljes szélességét fedje-e le, vagy hagyja ki a rögzített (sticky) oszlopokat."
+      "en": "Whether detail rows exclude sticky columns. When false, detail rows span the full table width.",
+      "hu": "A részletező sor kihagyja a rögzített oszlopokat. Kikapcsolva a táblázat teljes szélességét kitölti."
     },
     "type": "boolean"
   },
   "detailTemplateName": {
     "description": {
       "en": "Name of the `idsCellTemplate` used to render the master-detail row content.",
-      "hu": "A master-detail sor tartalmának renderelésére használt `idsCellTemplate` neve."
+      "hu": "A részletező sor tartalmához használt idsCellTemplate sablon neve."
     },
     "type": "string"
   },
   "enableRowSelection": {
     "description": {
-      "en": "Whether the row selection is disabled or not.",
-      "hu": "A sorkiválasztás le van-e tiltva."
+      "en": "Whether row selection is enabled.",
+      "hu": "A táblázatsorok kijelölésének engedélyezése."
     },
     "type": "boolean"
   },
   "enableSorting": {
     "description": {
-      "en": "Whether the sorting feature is disabled or not.",
-      "hu": "A rendezés funkció le van-e tiltva."
+      "en": "Whether column sorting is enabled.",
+      "hu": "Az oszlopok szerinti rendezés engedélyezése."
     },
     "type": "boolean"
   },
   "fixedHeader": {
     "description": {
       "en": "Whether the header is fixed to the top or not.",
-      "hu": "A fejléc a tetejéhez van-e rögzítve."
+      "hu": "A fejléc rögzítése görgetés közben."
     },
     "type": "boolean"
   },
   "hasDetailRow": {
     "description": {
       "en": "Function that decides, per row, whether the master-detail row should be shown for it.",
-      "hu": "Soronként eldöntő függvény, hogy az adott sorhoz meg kell-e jeleníteni a master-detail sort."
+      "hu": "Soronként eldönti, hogy megjeleníthető-e részletező tartalom."
     },
     "type": "(index: number, data: D) => boolean"
   },
   "isRowSelectable": {
     "description": {
       "en": "Function that decides, per row, whether the row can be selected.",
-      "hu": "Soronként eldöntő függvény, hogy az adott sor kiválasztható-e."
+      "hu": "Soronként eldönti, hogy az adott sor kijelölhető-e."
     },
     "type": "(index: number, data: D) => boolean"
   },
   "masterDetail": {
     "description": {
-      "en": "Whether the master-detail feature is disabled or not.",
-      "hu": "A master-detail funkció le van-e tiltva."
+      "en": "Whether expandable detail rows are enabled.",
+      "hu": "A sorokhoz tartozó részletező nézet engedélyezése."
     },
     "type": "boolean"
   },
   "noRowsToShowOverlayBelow": {
     "description": {
       "en": "Whether to render a \"no rows to show\" overlay below the table or as a row in the table.",
-      "hu": "A \"nincs megjeleníthető sor\" overlay a táblázat alatt vagy a táblázat egy soraként jelenjen-e meg."
+      "hu": "Üres táblázatnál az üzenet a táblázat alatt jelenik meg. Kikapcsolva a táblázat egyik sorában látható."
     },
     "type": "boolean"
   },
   "rowClick": {
     "description": {
       "en": "Emits when a row of the table is clicked.",
-      "hu": "Emittál, amikor a táblázat egyik sorára kattintanak."
+      "hu": "Az esemény akkor következik be, amikor a táblázat egyik sorára kattintanak."
     },
     "type": "EventEmitter<IdsTableRowClickEvent<D>>"
   },
   "rowKeydown": {
     "description": {
       "en": "Emits when a keydown event happens on a row of the table.",
-      "hu": "Emittál, amikor egy billentyűlenyomás történik a táblázat egy során."
+      "hu": "A táblázatsoron történt billentyűlenyomáskor jelző esemény."
     },
     "type": "EventEmitter<IdsTableRowKeydownEvent<D>>"
   },
   "showDetailHeader": {
     "description": {
       "en": "Whether to show the master-detail column label or not.",
-      "hu": "Megjelenjen-e a master-detail oszlop címkéje."
+      "hu": "A részletező oszlop fejlécének megjelenítése."
     },
     "type": "boolean"
   },
@@ -135,21 +135,21 @@
   "sortChange": {
     "description": {
       "en": "Emits when the user changes the sorting of the table.",
-      "hu": "Emittál, amikor a felhasználó megváltoztatja a táblázat rendezését."
+      "hu": "Az esemény akkor következik be, amikor a felhasználó megváltoztatja a táblázat rendezését."
     },
     "type": "EventEmitter<IdsTableSortInfo | null>"
   },
   "variant": {
     "description": {
       "en": "Table variant.",
-      "hu": "A táblázat variánsa."
+      "hu": "A táblázat stílusváltozata."
     },
     "type": "IdsTableVariantType"
   },
   "withBorder": {
     "description": {
       "en": "Whether to show the table's border or not.",
-      "hu": "Megjelenjen-e a táblázat kerete."
+      "hu": "A táblázat szegélyének megjelenítése."
     },
     "type": "boolean"
   }

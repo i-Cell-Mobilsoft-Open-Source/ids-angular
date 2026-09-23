@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -15,6 +16,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 const RADIO_GROUP_DOCS_PATH = 'radio/radio-group.component.docs.json';
 const RADIO_ITEM_DOCS_PATH = 'radio/radio.component.docs.json';
+const RADIO_ITEM_SLOTS_DOCS_PATH = 'radio/radio.component.slots.docs.json';
+const RADIO_GROUP_SLOTS_DOCS_PATH = 'radio/radio-group.component.slots.docs.json';
 
 const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
 
@@ -71,7 +74,7 @@ export class RadioDemoService {
       },
     },
     disabled: {
-      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'disabled', 'Whether the radio is disabled or not.'),
+      description: this._widgetDocs.getDescription(RADIO_GROUP_DOCS_PATH, 'disabled', 'Whether the radio group is disabled.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -163,6 +166,24 @@ export class RadioDemoService {
       type: 'string',
       default: '',
     },
+    valueCompareFn: {
+      description: this._widgetDocs.getDescription(
+        RADIO_GROUP_DOCS_PATH,
+        'valueCompareFn',
+        'Function used to compare radio items for the purpose of selection matching.',
+      ),
+      type: '(o1: IdsRadioComponent, o2: IdsRadioComponent) => boolean',
+      default: '-',
+    },
+    itemChanges: {
+      description: this._widgetDocs.getDescription(
+        RADIO_GROUP_DOCS_PATH,
+        'itemChanges',
+        'Emitted when the selected radio item changes.',
+      ),
+      type: 'EventEmitter<IdsRadioChangeEvent>',
+      default: '-',
+    },
   };
 
   public readonly itemPropControlConfig: DemoControlConfig<unknown> = {
@@ -231,6 +252,69 @@ export class RadioDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.RADIO', 'API.PROPERTY_GROUP.GROUP'),
         config: this.groupPropControlConfig,
       },
+    ];
+  }
+
+  public readonly itemSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        RADIO_ITEM_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the radio item, used as its label.',
+      ),
+    },
+    {
+      name: 'hintMessage',
+      selector: 'ids-hint-message',
+      description: this._widgetDocs.getDescription(
+        RADIO_ITEM_SLOTS_DOCS_PATH,
+        'hintMessage',
+        'Projected <ids-hint-message> element, shown below the radio item\'s label when a hint message is set.',
+      ),
+    },
+  ];
+
+  public readonly groupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'hintMessage',
+      selector: 'ids-hint-message',
+      description: this._widgetDocs.getDescription(
+        RADIO_GROUP_SLOTS_DOCS_PATH,
+        'hintMessage',
+        'Projected <ids-hint-message> element, shown next to the group\'s legend.',
+      ),
+    },
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        RADIO_GROUP_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the radio group, i.e. the projected <ids-radio> items.',
+      ),
+    },
+    {
+      name: 'errorMessage',
+      selector: 'ids-error-message',
+      description: this._widgetDocs.getDescription(
+        RADIO_GROUP_SLOTS_DOCS_PATH,
+        'errorMessage',
+        'Projected <ids-error-message> element, shown below the radio list when the group is in an error state.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [
+      this.itemSlotControlConfig,
+      this.groupSlotControlConfig,
+    ];
+  }
+
+  public getSlotTitles(): string[] {
+    return [
+      'Radio',
+      'Radio group',
     ];
   }
 }

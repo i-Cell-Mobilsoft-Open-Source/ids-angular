@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -17,6 +18,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 
 const ICON_BUTTON_DOCS_PATH = 'icon-button/icon-button.component.docs.json';
+const ICON_BUTTON_SLOTS_DOCS_PATH = 'icon-button/icon-button.component.slots.docs.json';
 
 const defaultConfig = IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY();
 
@@ -108,5 +110,33 @@ export class IconButtonDemoService {
         config: this.inputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        ICON_BUTTON_SLOTS_DOCS_PATH,
+        'content',
+        'Custom content of the icon button, projected when allowCustomContent is enabled.',
+      ),
+    },
+    {
+      name: 'icon',
+      selector: 'ids-icon',
+      description: this._widgetDocs.getDescription(
+        ICON_BUTTON_SLOTS_DOCS_PATH,
+        'icon',
+        'The icon(s) of the icon button, projected via ids-icon elements when allowCustomContent is disabled.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Icon button'];
   }
 }

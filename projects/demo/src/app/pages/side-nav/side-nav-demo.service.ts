@@ -10,6 +10,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY, IdsSideNavAppearance, IdsSideNavAppearanceType, IdsSideNavVariant, IdsSideNavVariantType } from '@i-cell/ids-angular/side-nav';
 import { TranslateService } from '@ngx-translate/core';
 
+const SIDE_NAV_TITLE_DOCS_PATH = 'side-nav/side-nav-title.component.docs.json';
 const SIDE_NAV_DOCS_PATH = 'side-nav/side-nav.component.docs.json';
 const SIDE_NAV_ITEM_DOCS_PATH = 'side-nav/side-nav-item.component.docs.json';
 
@@ -161,11 +162,27 @@ export class SideNavDemoService {
     },
   };
 
+  public readonly titlePropControlConfig: DemoControlConfig<unknown> = {
+    label: {
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_TITLE_DOCS_PATH,
+        'label',
+        'Label displayed as the side navigation section title. Required.',
+      ),
+      type: 'string',
+      default: '-',
+    },
+  };
+
   public getApiConfig(): DemoApiControlConfig[] {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SIDE_NAV', 'API.PROPERTY_GROUP.DEFAULT'),
         config: { ...this.sideNavInputControlConfig, ...this.itemPropControlConfig },
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SIDE_NAV', 'API.PROPERTY_GROUP.TITLE'),
+        config: this.titlePropControlConfig,
       },
     ];
   }

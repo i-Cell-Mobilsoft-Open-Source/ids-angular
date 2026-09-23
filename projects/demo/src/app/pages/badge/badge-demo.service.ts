@@ -50,7 +50,11 @@ export class BadgeDemoService {
       control: 'select',
     },
     showLeadingElement: {
-      description: this._widgetDocs.getDescription(BADGE_DOCS_PATH, 'showLeadingElement', 'Has leading icon.'),
+      description: this._widgetDocs.getDescription(
+        BADGE_DOCS_PATH,
+        'showLeadingElement',
+        'Indicates that the badge contains an element before its label and uses the corresponding layout.',
+      ),
       type: 'boolean',
       control: 'switch',
       default: defaultConfig.showLeadingElement,
@@ -62,7 +66,11 @@ export class BadgeDemoService {
       demoDefault: '1000',
     },
     limit: {
-      description: this._widgetDocs.getDescription(BADGE_DOCS_PATH, 'limit', 'Badge limit.'),
+      description: this._widgetDocs.getDescription(
+        BADGE_DOCS_PATH,
+        'limit',
+        'Maximum displayed numeric value. Values above the limit use a plus suffix, for example "99+".',
+      ),
       type: 'number',
       default: null,
       demoDefault: 100,

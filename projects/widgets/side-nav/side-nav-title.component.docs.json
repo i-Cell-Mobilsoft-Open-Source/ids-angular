@@ -1,8 +1,8 @@
 {
   "label": {
     "description": {
-      "en": "Label of the side nav item (used as the accessible name and tooltip text).",
-      "hu": "A side nav elem címkéje (akadálymentesítési névként és tooltip szövegként is szolgál)."
+      "en": "Label displayed as the side navigation section title. Required.",
+      "hu": "A navigációs szakasz címe. Kötelező megadni."
     },
     "type": "string"
   }

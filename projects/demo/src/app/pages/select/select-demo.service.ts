@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -15,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const FORM_FIELD_DOCS_PATH = 'forms/components/form-field/form-field.component.docs.json';
 const SELECT_DOCS_PATH = 'select/select.component.docs.json';
+const SELECT_SLOTS_DOCS_PATH = 'select/select.component.slots.docs.json';
 
 const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
@@ -120,7 +122,7 @@ export class SelectDemoService {
       description: this._widgetDocs.getDescription(
         SELECT_DOCS_PATH,
         'typeaheadDebounceInterval',
-        'Number in millisec. Can not overwrite at runtime.',
+        'Debounce interval in milliseconds for keyboard typeahead search. Can be changed at runtime.',
       ),
       type: 'number',
       default: selectDefaultConfig.typeaheadDebounceInterval,
@@ -343,5 +345,33 @@ export class SelectDemoService {
         config: { ...this.selectInputControlConfig, ...this.selectPropControlConfig },
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'trigger',
+      selector: 'ids-select-trigger',
+      description: this._widgetDocs.getDescription(
+        SELECT_SLOTS_DOCS_PATH,
+        'trigger',
+        'Projected <ids-select-trigger> element used to render a custom trigger value instead of the default selected text.',
+      ),
+    },
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        SELECT_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the select, i.e. the projected <ids-option>/<ids-option-group> elements shown in the dropdown panel.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Select'];
   }
 }

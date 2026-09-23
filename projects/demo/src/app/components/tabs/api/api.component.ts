@@ -2,11 +2,13 @@ import { CURRENT_DEMO_SERVICE } from '../../../app.routes';
 import { ComponentDetailsComponent } from '../../../pages/components/component-details/component-details.component';
 import { MethodTableComponent } from '../../method-table/method-table.component';
 import { PropTableComponent } from '../../prop-table/prop-table.component';
+import { SlotTableComponent } from '../../slot-table/slot-table.component';
 
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,6 +16,8 @@ export interface IComponentDemoService {
   getApiConfig(): DemoApiControlConfig[];
   getMethodConfig?(): DemoMethodConfig[];
   getMethodTitles?(): string[];
+  getSlotConfig?(): DemoSlotConfig[];
+  getSlotTitles?(): string[];
 }
 
 @Component({
@@ -22,6 +26,7 @@ export interface IComponentDemoService {
   imports: [
     MethodTableComponent,
     PropTableComponent,
+    SlotTableComponent,
     IdsChipComponent,
   ],
   templateUrl: './api.component.html',
@@ -30,6 +35,8 @@ export class ApiComponent implements OnInit {
   protected _propConfig: DemoApiControlConfig[] = [];
   protected _methodConfig: DemoMethodConfig[] = [];
   protected _methodTitles: string[] = [];
+  protected _slotConfig: DemoSlotConfig[] = [];
+  protected _slotTitles: string[] = [];
 
   private _service = inject(CURRENT_DEMO_SERVICE);
 
@@ -47,5 +54,7 @@ export class ApiComponent implements OnInit {
     this._methodConfig = this._service.getMethodConfig?.() ?? [];
     this._propConfig = this._service.getApiConfig();
     this._methodTitles = this._service.getMethodTitles?.() ?? [];
+    this._slotConfig = this._service.getSlotConfig?.() ?? [];
+    this._slotTitles = this._service.getSlotTitles?.() ?? [];
   }
 }

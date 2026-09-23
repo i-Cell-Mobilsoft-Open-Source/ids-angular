@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -12,6 +13,7 @@ import { IDS_DIALOG_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
 const DIALOG_DOCS_PATH = 'dialog/dialog.component.docs.json';
+const DIALOG_SLOTS_DOCS_PATH = 'dialog/dialog.component.slots.docs.json';
 
 const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
 
@@ -129,5 +131,34 @@ export class DialogDemoService {
         config: this.inputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'idsDialogContent',
+      selector: '[idsDialogContent]',
+      description: this._widgetDocs.getDescription(
+        DIALOG_SLOTS_DOCS_PATH,
+        'idsDialogContent',
+        'Content projected into the scrollable body area of the dialog (marked with the idsDialogContent attribute).',
+      ),
+    },
+    {
+      name: 'idsDialogActions',
+      selector: '[idsDialogActions]',
+      description: this._widgetDocs.getDescription(
+        DIALOG_SLOTS_DOCS_PATH,
+        'idsDialogActions',
+        'Content projected into the footer of the dialog (marked with the idsDialogActions attribute), typically action buttons.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Dialog'];
   }
 }

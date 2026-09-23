@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -11,6 +12,7 @@ import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONF
 import { TranslateService } from '@ngx-translate/core';
 
 const FIELDSET_DOCS_PATH = 'forms/components/fieldset/fieldset.component.docs.json';
+const FIELDSET_SLOTS_DOCS_PATH = 'forms/components/fieldset/fieldset.component.slots.docs.json';
 
 type FieldsetInputControls = {
   size: IdsSizeType;
@@ -79,5 +81,34 @@ export class FieldsetDemoService {
         config: this.inputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'idsFieldsetMessage',
+      selector: '[idsFieldsetMessage]',
+      description: this._widgetDocs.getDescription(
+        FIELDSET_SLOTS_DOCS_PATH,
+        'idsFieldsetMessage',
+        'Content projected into the fieldset\'s message area, below the legend (marked with the idsFieldsetMessage attribute).',
+      ),
+    },
+    {
+      name: 'row',
+      selector: 'ids-fieldset-row',
+      description: this._widgetDocs.getDescription(
+        FIELDSET_SLOTS_DOCS_PATH,
+        'row',
+        'Projected <ids-fieldset-row> elements, used to lay out the fieldset\'s form controls in rows.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Fieldset'];
   }
 }

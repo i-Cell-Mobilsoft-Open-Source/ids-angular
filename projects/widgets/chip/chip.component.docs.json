@@ -2,28 +2,28 @@
   "appearance": {
     "description": {
       "en": "Chip appearance.",
-      "hu": "A chip megjelenése."
+      "hu": "A chip megjelenési módja."
     },
     "type": "IdsChipAppearanceType"
   },
   "disabled": {
     "description": {
       "en": "Whether the chip is disabled or not.",
-      "hu": "A chip le van-e tiltva."
+      "hu": "A chip letiltása."
     },
     "type": "boolean"
   },
   "removable": {
     "description": {
       "en": "Whether the chip is removable or not.",
-      "hu": "A chip eltávolítható-e."
+      "hu": "Az eltávolító gomb megjelenítése a chipen."
     },
     "type": "boolean"
   },
   "removed": {
     "description": {
       "en": "Emitted when the chip is removed (via the remove/trailing icon button).",
-      "hu": "Akkor emittálódik, amikor a chipet eltávolítják (az eltávolító/trailing ikon gombon keresztül)."
+      "hu": "Az eltávolító gomb megnyomásakor jelző esemény."
     },
     "type": "EventEmitter<IdsChipRemoveEvent>"
   },
@@ -37,14 +37,14 @@
   "tabIndex": {
     "description": {
       "en": "Tab index of the chip.",
-      "hu": "A chip tabindexe."
+      "hu": "A billentyűzetes fókuszsorrendet beállító tabindex érték."
     },
     "type": "number"
   },
   "variant": {
     "description": {
       "en": "Chip variant.",
-      "hu": "A chip variánsa."
+      "hu": "A chip stílusváltozata."
     },
     "type": "IdsChipVariantType"
   }

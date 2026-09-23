@@ -2,49 +2,49 @@
   "describedby": {
     "description": {
       "en": "aria-describedby for the radio item.",
-      "hu": "aria-describedby a radio elemhez."
+      "hu": "A kiegészítő leírást tartalmazó HTML-elemek azonosítói, szóközzel elválasztva (aria-describedby)."
     },
     "type": "string"
   },
   "disabled": {
     "description": {
       "en": "Whether the radio is disabled or not.",
-      "hu": "A radio le van-e tiltva."
+      "hu": "A választógomb letiltása."
     },
     "type": "boolean"
   },
   "inputId": {
     "description": {
       "en": "Id of the radio item's native input element.",
-      "hu": "A radio elem natív input elemének id-je."
+      "hu": "A választógomb belső input elemének HTML-azonosítója."
     },
     "type": "string"
   },
   "label": {
     "description": {
       "en": "aria-label for the radio item.",
-      "hu": "aria-label a radio elemhez."
+      "hu": "A képernyőolvasók számára megadott megnevezés (aria-label)."
     },
     "type": "string"
   },
   "labelledby": {
     "description": {
       "en": "aria-labelledby for the radio item.",
-      "hu": "aria-labelledby a radio elemhez."
+      "hu": "A feliratot tartalmazó HTML-elemek azonosítói, szóközzel elválasztva."
     },
     "type": "string"
   },
   "tabIndex": {
     "description": {
       "en": "Tab index of the radio item.",
-      "hu": "A radio elem tabindexe."
+      "hu": "A billentyűzetes fókuszsorrendet beállító tabindex érték."
     },
     "type": "number"
   },
   "value": {
     "description": {
       "en": "Value of the radio item.",
-      "hu": "A radio elem értéke."
+      "hu": "A választógombhoz rendelt érték."
     },
     "type": "unknown"
   }

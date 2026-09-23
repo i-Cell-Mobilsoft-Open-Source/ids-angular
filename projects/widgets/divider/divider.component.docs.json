@@ -9,7 +9,7 @@
   "orientation": {
     "description": {
       "en": "Divider orientation.",
-      "hu": "Az elválasztó orientációja."
+      "hu": "Vízszintes vagy függőleges elrendezés."
     },
     "type": "IdsOrientationType"
   },
@@ -23,7 +23,7 @@
   "variant": {
     "description": {
       "en": "Divider variant.",
-      "hu": "Az elválasztó variánsa."
+      "hu": "Az elválasztó stílusváltozata."
     },
     "type": "IdsDividerVariantType"
   },

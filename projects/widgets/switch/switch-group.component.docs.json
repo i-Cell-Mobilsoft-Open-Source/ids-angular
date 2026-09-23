@@ -2,28 +2,28 @@
   "hasIcon": {
     "description": {
       "en": "Whether the switch has icon.",
-      "hu": "A switchnek van-e ikonja."
+      "hu": "Az állapotjelző ikon megjelenítése a kapcsolón."
     },
     "type": "boolean"
   },
   "iconPosition": {
     "description": {
       "en": "Where the icon should be shown in switch.",
-      "hu": "Hol jelenjen meg az ikon a switchen belül."
+      "hu": "Az ikon helye a kapcsolón belül."
     },
     "type": "IdsSwitchIconPositionType"
   },
   "labelPosition": {
     "description": {
       "en": "Where the label should be shown in switch.",
-      "hu": "Hol jelenjen meg a címke a switchen belül."
+      "hu": "A felirat elhelyezkedése a vezérlőhöz képest."
     },
     "type": "IdsSwitchLabelPositionType"
   },
   "size": {
     "description": {
       "en": "Size of the switch.",
-      "hu": "A switch mérete."
+      "hu": "A kapcsoló mérete."
     },
     "type": "IdsSizeType"
   }

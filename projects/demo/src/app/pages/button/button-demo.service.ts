@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -19,6 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const BUTTON_DOCS_PATH = 'button/button.component.docs.json';
 const BUTTON_GROUP_DOCS_PATH = 'button/button-group.component.docs.json';
+const BUTTON_SLOTS_DOCS_PATH = 'button/button.component.slots.docs.json';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -106,7 +108,7 @@ export class ButtonDemoService {
 
   public readonly groupInputControlConfig: DemoControlConfig<ButtonGroupInputControls> = {
     size: {
-      description: this._widgetDocs.getDescription(BUTTON_GROUP_DOCS_PATH, 'size', 'All button size in a group.'),
+      description: this._widgetDocs.getDescription(BUTTON_GROUP_DOCS_PATH, 'size', 'Size of the buttons in the group.'),
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
       control: DemoControl.SELECT,
@@ -143,5 +145,42 @@ export class ButtonDemoService {
         config: this.groupInputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'iconLeading',
+      selector: '[icon-leading]',
+      description: this._widgetDocs.getDescription(
+        BUTTON_SLOTS_DOCS_PATH,
+        'iconLeading',
+        'Content projected before the label (marked with the icon-leading attribute), typically an icon.',
+      ),
+    },
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        BUTTON_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the button, i.e. the button\'s label.',
+      ),
+    },
+    {
+      name: 'iconTrailing',
+      selector: '[icon-trailing]',
+      description: this._widgetDocs.getDescription(
+        BUTTON_SLOTS_DOCS_PATH,
+        'iconTrailing',
+        'Content projected after the label (marked with the icon-trailing attribute), typically an icon.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Button'];
   }
 }

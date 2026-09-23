@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -11,6 +12,8 @@ import { IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY, IdsMenuItemAppearance, IdsMenuIte
 import { TranslateService } from '@ngx-translate/core';
 
 const MENU_ITEM_DOCS_PATH = 'menu/menu-item/menu-item.component.docs.json';
+const ACTIVE_INDICATOR_DOCS_PATH = 'menu/active-indicator/active-indicator.directive.docs.json';
+const MENU_ITEM_SLOTS_DOCS_PATH = 'menu/menu-item/menu-item.component.slots.docs.json';
 
 const menuItemDefaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
 const numberOfItems = 3;
@@ -27,9 +30,12 @@ type MenuItemHelperControls = {
   hasLeadingIcon: boolean,
   hasTrailingIcon: boolean,
   showLabel: boolean;
-  active: boolean;
   extraHeight: boolean;
   testBackgroundColor: 'none' | 'dark',
+};
+
+type ActiveIndicatorInputControls = {
+  active: boolean;
 };
 @Injectable()
 export class MenuItemDemoService {
@@ -91,12 +97,6 @@ export class MenuItemDemoService {
       default: menuItemDefaultConfig.showLabel,
       control: DemoControl.SWITCH,
     },
-    active: {
-      description: 'Whether the menu item is active or not.',
-      type: 'boolean',
-      default: false,
-      control: DemoControl.SWITCH,
-    },
     extraHeight: {
       description: 'Add extra height to the menu item\'s wrapper to distance the active indicator from it (for testing purposes).',
       type: 'boolean',
@@ -115,17 +115,33 @@ export class MenuItemDemoService {
     },
   };
 
+  public readonly activeIndicatorInputControlConfig: DemoControlConfig<ActiveIndicatorInputControls> = {
+    active: {
+      description: this._widgetDocs.getDescription(
+        ACTIVE_INDICATOR_DOCS_PATH,
+        'active',
+        'Whether the active indicator is shown as active or not. Required.',
+      ),
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
+    },
+  };
+
   public menuItemDefaults = getDefaultFromDemoConfig<MenuItemInputControls>(this.menuItemInputControlConfig);
   public menuItemHelperDefaults = getDefaultFromDemoConfig<MenuItemHelperControls>(this.menuItemHelperControlConfig);
+  public activeIndicatorDefaults = getDefaultFromDemoConfig<ActiveIndicatorInputControls>(this.activeIndicatorInputControlConfig);
 
   public menuItemModel: MenuItemInputControls = { ...this.menuItemDefaults };
   public menuItemHelperModel: MenuItemHelperControls = { ...this.menuItemHelperDefaults };
+  public activeIndicatorModel: ActiveIndicatorInputControls = { ...this.activeIndicatorDefaults };
 
   public items = Array(numberOfItems);
 
   public reset(): void {
     this.menuItemModel = { ...this.menuItemDefaults };
     this.menuItemHelperModel = { ...this.menuItemHelperDefaults };
+    this.activeIndicatorModel = { ...this.activeIndicatorDefaults };
   }
 
   public getApiConfig(): DemoApiControlConfig[] {
@@ -134,6 +150,39 @@ export class MenuItemDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.MENU_ITEM', 'API.PROPERTY_GROUP.DEFAULT'),
         config: this.menuItemInputControlConfig,
       },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.MENU_ITEM', 'API.PROPERTY_GROUP.ACTIVE_INDICATOR'),
+        config: this.activeIndicatorInputControlConfig,
+      },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'iconLeading',
+      selector: 'ids-icon[icon-leading]',
+      description: this._widgetDocs.getDescription(
+        MENU_ITEM_SLOTS_DOCS_PATH,
+        'iconLeading',
+        'Content projected before the label (marked with the icon-leading attribute), typically an ids-icon.',
+      ),
+    },
+    {
+      name: 'iconTrailing',
+      selector: 'ids-icon[icon-trailing]',
+      description: this._widgetDocs.getDescription(
+        MENU_ITEM_SLOTS_DOCS_PATH,
+        'iconTrailing',
+        'Content projected after the label (marked with the icon-trailing attribute), typically an ids-icon.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Menu item'];
   }
 }

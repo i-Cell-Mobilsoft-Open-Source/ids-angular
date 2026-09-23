@@ -1,36 +1,36 @@
 {
   "appearance": {
     "description": {
-      "en": "Appearance of the chips inside the autocomplete chip list.",
-      "hu": "Az autocomplete chip listájában lévő chipek megjelenése."
+      "en": "Appearance of the chips in the list.",
+      "hu": "A chiplista elemeinek megjelenési módja."
     },
     "type": "IdsChipAppearanceType"
   },
   "for": {
     "description": {
       "en": "The IdsAutocompleteTriggerDirective to connect the chip list to (typically the same as the autocomplete's trigger). Required.",
-      "hu": "Az IdsAutocompleteTriggerDirective, amelyhez a chip listát kell kapcsolni (jellemzően megegyezik az autocomplete triggerével). Kötelező."
+      "hu": "A chiplistához kapcsolt IdsAutocompleteTriggerDirective példány. Kötelező megadni."
     },
     "type": "IdsAutocompleteTriggerDirective"
   },
   "options": {
     "description": {
       "en": "Array of currently selected options rendered as chips (typically bound automatically via the \"for\" trigger).",
-      "hu": "A jelenleg kiválasztott, chipként megjelenített opciók tömbje (jellemzően automatikusan kötődik a \"for\" trigger-en keresztül)."
+      "hu": "A chipként megjelenítendő kiválasztott elemek listája."
     },
     "type": "IdsOptionValue[]"
   },
   "size": {
     "description": {
-      "en": "Size of the chips inside the autocomplete chip list.",
-      "hu": "Az autocomplete chip listájában lévő chipek mérete."
+      "en": "Size of the chips in the list.",
+      "hu": "A chiplista elemeinek mérete."
     },
     "type": "IdsSizeType"
   },
   "variant": {
     "description": {
-      "en": "Variant of the chips inside the autocomplete chip list.",
-      "hu": "Az autocomplete chip listájában lévő chipek variánsa."
+      "en": "Variant of the chips in the list.",
+      "hu": "A chiplista elemeinek stílusváltozata."
     },
     "type": "IdsChipVariantType"
   }

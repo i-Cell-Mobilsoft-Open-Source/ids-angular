@@ -41,14 +41,22 @@ export class SpinnerDemoService {
       control: 'select',
     },
     sizeCollection: {
-      description: this._widgetDocs.getDescription(SPINNER_DOCS_PATH, 'sizeCollection', 'Spinner size collection.'),
+      description: this._widgetDocs.getDescription(
+        SPINNER_DOCS_PATH,
+        'sizeCollection',
+        'Size collection used together with size to determine the rendered dimensions.',
+      ),
       type: 'IdsSizeCollectionType',
       default: defaultConfig.sizeCollection,
       list: Object.values(IdsSizeCollection),
       control: 'select',
     },
     isTrack: {
-      description: this._widgetDocs.getDescription(SPINNER_DOCS_PATH, 'isTrack', 'Spinner is track.'),
+      description: this._widgetDocs.getDescription(
+        SPINNER_DOCS_PATH,
+        'isTrack',
+        'Whether to show the background track behind the rotating indicator.',
+      ),
       type: 'boolean',
       default: defaultConfig.isTrack,
       control: 'switch',

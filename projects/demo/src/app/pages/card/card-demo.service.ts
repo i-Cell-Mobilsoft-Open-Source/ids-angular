@@ -16,6 +16,9 @@ import {
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
+const CARD_FOOTER_DOCS_PATH = 'card/card-footer.directive.docs.json';
+const CARD_BODY_DOCS_PATH = 'card/card-body.directive.docs.json';
+const CARD_HEADER_DOCS_PATH = 'card/card-header.component.docs.json';
 const CARD_DOCS_PATH = 'card/card.component.docs.json';
 const CARD_MEDIA_DOCS_PATH = 'card/card-media.directive.docs.json';
 
@@ -93,7 +96,11 @@ export class CardDemoService {
 
   public readonly mediaInputControlConfig: DemoControlConfig<CardMediaInputControls> = {
     stretch: {
-      description: this._widgetDocs.getDescription(CARD_MEDIA_DOCS_PATH, 'stretch', 'Whether the image is stretchable or not.'),
+      description: this._widgetDocs.getDescription(
+        CARD_MEDIA_DOCS_PATH,
+        'stretch',
+        'Whether this card section fills its available area without padding.',
+      ),
       type: 'boolean',
       default: true,
       control: DemoControl.SWITCH,
@@ -127,6 +134,42 @@ export class CardDemoService {
     this.helperModel = { ...this.helperDefaults };
   }
 
+  public readonly headerPropControlConfig: DemoControlConfig<unknown> = {
+    stretch: {
+      description: this._widgetDocs.getDescription(
+        CARD_HEADER_DOCS_PATH,
+        'stretch',
+        'Whether this card section fills its available area without padding.',
+      ),
+      type: 'boolean',
+      default: false,
+    },
+  };
+
+  public readonly bodyPropControlConfig: DemoControlConfig<unknown> = {
+    stretch: {
+      description: this._widgetDocs.getDescription(
+        CARD_BODY_DOCS_PATH,
+        'stretch',
+        'Whether this card section fills its available area without padding.',
+      ),
+      type: 'boolean',
+      default: false,
+    },
+  };
+
+  public readonly footerPropControlConfig: DemoControlConfig<unknown> = {
+    stretch: {
+      description: this._widgetDocs.getDescription(
+        CARD_FOOTER_DOCS_PATH,
+        'stretch',
+        'Whether this card section fills its available area without padding.',
+      ),
+      type: 'boolean',
+      default: false,
+    },
+  };
+
   public getApiConfig(): DemoApiControlConfig[] {
     return [
       {
@@ -136,6 +179,18 @@ export class CardDemoService {
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CARD', 'API.PROPERTY_GROUP.MEDIA'),
         config: this.mediaInputControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CARD', 'API.PROPERTY_GROUP.HEADER'),
+        config: this.headerPropControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CARD', 'API.PROPERTY_GROUP.BODY'),
+        config: this.bodyPropControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CARD', 'API.PROPERTY_GROUP.FOOTER'),
+        config: this.footerPropControlConfig,
       },
     ];
   }

@@ -9,13 +9,14 @@ import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-con
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
-import { IdsSpinnerVariantType, IdsSpinnerVariant } from '@i-cell/ids-angular/spinner';
+import { IdsSpinnerVariant, IdsSpinnerVariantType } from '@i-cell/ids-angular/spinner';
 import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, delay, distinctUntilChanged, EMPTY, map, Observable, Subject, tap } from 'rxjs';
 
 const AUTOCOMPLETE_DOCS_PATH = 'forms/components/autocomplete/autocomplete.component.docs.json';
 const AUTOCOMPLETE_CHIP_LIST_DOCS_PATH = 'forms/components/autocomplete/autocomplete-chip-list.component.docs.json';
 const AUTOCOMPLETE_HINT_DOCS_PATH = 'forms/components/autocomplete/autocomplete-hint.component.docs.json';
+const AUTOCOMPLETE_TRIGGER_DOCS_PATH = 'forms/components/autocomplete/autocomplete-trigger.directive.docs.json';
 
 const USER_INPUT_DEBOUNCE_TIME = 300;
 const SIMULATED_LOADING_TIME = 300;
@@ -65,6 +66,8 @@ type AutocompleteInputControls = {
   disabled: boolean;
   required: boolean;
   multiSelect: boolean;
+  ariaLabelClear: string;
+  spinnerVariant: IdsSpinnerVariantType;
 };
 
 type AutocompleteHelperControls = {
@@ -72,8 +75,6 @@ type AutocompleteHelperControls = {
   minChars: number;
   hint: string;
   limit: number;
-  ariaLabelClear: string;
-  spinnerVariant: IdsSpinnerVariantType;
   hintLoading: string;
   hintNoResults: string;
   hintMinChars: string;
@@ -95,14 +96,14 @@ export class AutocompleteDemoService {
 
   public readonly inputControlConfig: DemoControlConfig<AutocompleteInputControls> = {
     size: {
-      description: this._widgetDocs.getDescription(AUTOCOMPLETE_DOCS_PATH, 'size', 'Size of the auto complete field.'),
+      description: this._widgetDocs.getDescription(AUTOCOMPLETE_DOCS_PATH, 'size', 'Size of the surrounding form field.'),
       type: 'IdsSizeType',
       default: IdsSize.COMPACT,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: this._widgetDocs.getDescription(AUTOCOMPLETE_DOCS_PATH, 'variant', 'Variant of the auto complete field.'),
+      description: this._widgetDocs.getDescription(AUTOCOMPLETE_DOCS_PATH, 'variant', 'Variant of the surrounding form field.'),
       type: 'IdsFormFieldVariantType',
       default: IdsFormFieldVariant.SURFACE,
       control: DemoControl.SELECT,
@@ -131,6 +132,27 @@ export class AutocompleteDemoService {
         }
       },
     },
+    ariaLabelClear: {
+      description: this._widgetDocs.getDescription(
+        AUTOCOMPLETE_DOCS_PATH,
+        'ariaLabelClear',
+        'aria-label for the autocomplete\'s clear button.',
+      ),
+      type: 'string',
+      default: '',
+      control: DemoControl.TEXT,
+    },
+    spinnerVariant: {
+      description: this._widgetDocs.getDescription(
+        AUTOCOMPLETE_DOCS_PATH,
+        'spinnerVariant',
+        'Variant of the spinner displayed in the autocomplete field.',
+      ),
+      type: 'IdsSpinnerVariantType',
+      default: IdsSpinnerVariant.SURFACE,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsSpinnerVariant),
+    },
   };
 
   public readonly helperControlConfig: DemoControlConfig<AutocompleteHelperControls> = {
@@ -153,18 +175,6 @@ export class AutocompleteDemoService {
       description: 'Hint shown if the number of suggestions exceeds this limit',
       type: 'number',
       default: 10,
-    },
-    ariaLabelClear: {
-      description: 'Aria label for the clear button',
-      type: 'string',
-      default: 'Clear',
-    },
-    spinnerVariant: {
-      description: 'Variant of the spinner displayed in the autocomplete field.',
-      type: 'IdsSpinnerVariantType',
-      default: IdsSpinnerVariant.SURFACE,
-      control: DemoControl.SELECT,
-      list: convertEnumToStringArray(IdsSpinnerVariant),
     },
     hintLoading: {
       description: 'Hint text displayed while loading options.',
@@ -208,7 +218,11 @@ export class AutocompleteDemoService {
       default: false,
     },
     ariaLabel: {
-      description: this._widgetDocs.getDescription(AUTOCOMPLETE_DOCS_PATH, 'ariaLabel', 'aria-label for the autocomplete input.'),
+      description: this._widgetDocs.getDescription(
+        AUTOCOMPLETE_DOCS_PATH,
+        'ariaLabel',
+        'Accessible name of the suggestion list (aria-label).',
+      ),
       type: 'string',
       default: '',
     },
@@ -216,7 +230,7 @@ export class AutocompleteDemoService {
       description: this._widgetDocs.getDescription(
         AUTOCOMPLETE_DOCS_PATH,
         'ariaLabelledby',
-        'aria-labelledby for the autocomplete input.',
+        'IDs of the elements that label the suggestion list (aria-labelledby).',
       ),
       type: 'string',
       default: '',
@@ -257,7 +271,7 @@ export class AutocompleteDemoService {
       description: this._widgetDocs.getDescription(
         AUTOCOMPLETE_DOCS_PATH,
         'appearance',
-        'Appearance of the autocomplete\'s clear/dropdown trigger button.',
+        'Appearance of the clear button.',
       ),
       type: 'IdsIconButtonAppearanceType',
       default: 'standard',
@@ -323,7 +337,7 @@ export class AutocompleteDemoService {
       description: this._widgetDocs.getDescription(
         AUTOCOMPLETE_CHIP_LIST_DOCS_PATH,
         'appearance',
-        'Appearance of the chips inside the autocomplete chip list.',
+        'Appearance of the chips in the list.',
       ),
       type: 'IdsChipAppearanceType',
       default: 'outlined',
@@ -332,7 +346,7 @@ export class AutocompleteDemoService {
       description: this._widgetDocs.getDescription(
         AUTOCOMPLETE_CHIP_LIST_DOCS_PATH,
         'size',
-        'Size of the chips inside the autocomplete chip list.',
+        'Size of the chips in the list.',
       ),
       type: 'IdsSizeType',
       default: IdsSize.DENSE,
@@ -341,7 +355,7 @@ export class AutocompleteDemoService {
       description: this._widgetDocs.getDescription(
         AUTOCOMPLETE_CHIP_LIST_DOCS_PATH,
         'variant',
-        'Variant of the chips inside the autocomplete chip list.',
+        'Variant of the chips in the list.',
       ),
       type: 'IdsChipVariantType',
       default: 'surface',
@@ -362,6 +376,18 @@ export class AutocompleteDemoService {
       description: this._widgetDocs.getDescription(AUTOCOMPLETE_HINT_DOCS_PATH, 'size', 'Size of the autocomplete hint message.'),
       type: 'IdsSizeType',
       default: IdsSize.COMFORTABLE,
+    },
+  };
+
+  public readonly triggerPropControlConfig: DemoControlConfig<unknown> = {
+    autocomplete: {
+      description: this._widgetDocs.getDescription(
+        AUTOCOMPLETE_TRIGGER_DOCS_PATH,
+        'autocomplete',
+        'The IdsAutocompleteComponent instance the input is connected to. Required.',
+      ),
+      type: 'IdsAutocompleteComponent',
+      default: '-',
     },
   };
 
@@ -411,6 +437,10 @@ export class AutocompleteDemoService {
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.AUTOCOMPLETE', 'API.PROPERTY_GROUP.HINT'),
         config: this.hintPropControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.AUTOCOMPLETE', 'API.PROPERTY_GROUP.TRIGGER'),
+        config: this.triggerPropControlConfig,
       },
     ];
   }

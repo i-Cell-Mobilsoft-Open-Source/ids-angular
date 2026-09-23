@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -13,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const SEGMENTED_CONTROL_DOCS_PATH = 'segmented-control/segmented-control.directive.docs.json';
 const SEGMENTED_CONTROL_ITEM_DOCS_PATH = 'segmented-control/segmented-control-item.component.docs.json';
+const SEGMENTED_CONTROL_ITEM_SLOTS_DOCS_PATH = 'segmented-control/segmented-control-item.component.slots.docs.json';
 const defaultConfig = IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY();
 
 type SegmentedControlInputControls = {
@@ -149,6 +151,24 @@ export class SegmentedControlDemoService {
       type: 'boolean',
       default: false,
     },
+    valueCompareFn: {
+      description: this._widgetDocs.getDescription(
+        SEGMENTED_CONTROL_DOCS_PATH,
+        'valueCompareFn',
+        'Function used to compare segmented control items for the purpose of selection matching.',
+      ),
+      type: '(o1: IdsSegmentedControlItemComponent, o2: IdsSegmentedControlItemComponent) => boolean',
+      default: '-',
+    },
+    itemChanges: {
+      description: this._widgetDocs.getDescription(
+        SEGMENTED_CONTROL_DOCS_PATH,
+        'itemChanges',
+        'Emitted when the selected segmented control item(s) change.',
+      ),
+      type: 'EventEmitter<IdsSegmentedControlItemChange>',
+      default: '-',
+    },
   };
 
   public readonly itemPropControlConfig: DemoControlConfig<unknown> = {
@@ -239,8 +259,41 @@ export class SegmentedControlDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SEGMENTED_CONTROL', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: { ...this.inputControlConfig, ...this.propControlConfig, ...this.itemPropControlConfig },
+        config: { ...this.inputControlConfig, ...this.propControlConfig },
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SEGMENTED_CONTROL', 'API.PROPERTY_GROUP.ITEM'),
+        config: this.itemPropControlConfig,
       },
     ];
+  }
+
+  public readonly itemSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'icon',
+      selector: 'ids-icon',
+      description: this._widgetDocs.getDescription(
+        SEGMENTED_CONTROL_ITEM_SLOTS_DOCS_PATH,
+        'icon',
+        'Projected <ids-icon> element shown before the label, unless the built-in active/selected icon is shown instead.',
+      ),
+    },
+    {
+      name: 'suffixContent',
+      selector: '[suffixContent]',
+      description: this._widgetDocs.getDescription(
+        SEGMENTED_CONTROL_ITEM_SLOTS_DOCS_PATH,
+        'suffixContent',
+        'Content projected after the label (marked with the suffixContent attribute).',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.itemSlotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Segmented control item'];
   }
 }

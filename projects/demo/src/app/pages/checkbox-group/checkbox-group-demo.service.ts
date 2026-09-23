@@ -5,6 +5,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn 
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -13,6 +14,7 @@ import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cel
 import { TranslateService } from '@ngx-translate/core';
 
 const CHECKBOX_GROUP_DOCS_PATH = 'checkbox/checkbox-group.component.docs.json';
+const CHECKBOX_GROUP_SLOTS_DOCS_PATH = 'checkbox/checkbox-group.component.slots.docs.json';
 
 const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -99,7 +101,11 @@ export class CheckboxGroupDemoService {
       list: convertEnumToStringArray(IdsCheckboxVariant),
     },
     orientation: {
-      description: this._widgetDocs.getDescription(CHECKBOX_GROUP_DOCS_PATH, 'orientation', 'Checkbox group variant.'),
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_DOCS_PATH,
+        'orientation',
+        'Horizontal or vertical arrangement of the checkboxes.',
+      ),
       type: 'IdsOrientationType',
       default: defaultGroupConfig.orientation,
       control: DemoControl.SELECT,
@@ -173,5 +179,43 @@ export class CheckboxGroupDemoService {
         config: this.groupInputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'hintMessage',
+      selector: 'ids-hint-message',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_SLOTS_DOCS_PATH,
+        'hintMessage',
+        'Projected <ids-hint-message> element, shown next to the group\'s legend.',
+      ),
+    },
+    {
+      name: 'checkbox',
+      selector: 'ids-checkbox',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_SLOTS_DOCS_PATH,
+        'checkbox',
+        'Projected <ids-checkbox> elements that make up the group\'s list of checkboxes.',
+      ),
+    },
+    {
+      name: 'errorMessage',
+      selector: 'ids-error-message',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_SLOTS_DOCS_PATH,
+        'errorMessage',
+        'Projected <ids-error-message> element, shown below the checkbox list when the group is in an error state.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Checkbox group'];
   }
 }

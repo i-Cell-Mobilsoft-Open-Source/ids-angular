@@ -1,0 +1,62 @@
+{
+  "label": {
+    "description": {
+      "en": "Projected <ids-label> element used as the form field's label.",
+      "hu": "Az űrlapmező feliratát megadó <ids-label> elem."
+    }
+  },
+  "idsLeadingIcon": {
+    "description": {
+      "en": "Projected <ids-icon> element (marked with the idsLeadingIcon attribute) shown before the input.",
+      "hu": "Beillesztett <ids-icon> elem (idsLeadingIcon attribútummal megjelölve), amely a beviteli mező előtt jelenik meg."
+    }
+  },
+  "idsPrefix": {
+    "description": {
+      "en": "Content projected before the input (marked with the idsPrefix attribute), e.g. static text or an adornment.",
+      "hu": "A beviteli mező elé beillesztett tartalom (idsPrefix attribútummal megjelölve), pl. statikus szöveg vagy díszítőelem."
+    }
+  },
+  "content": {
+    "description": {
+      "en": "Default content of the form field, typically the native or IDS input control.",
+      "hu": "Az űrlapmező beviteli vezérlője, például natív input vagy IDS-komponens."
+    }
+  },
+  "idsSuffix": {
+    "description": {
+      "en": "Content projected after the input (marked with the idsSuffix attribute), e.g. static text or an adornment.",
+      "hu": "A beviteli mező után beillesztett tartalom (idsSuffix attribútummal megjelölve), pl. statikus szöveg vagy díszítőelem."
+    }
+  },
+  "idsTrailingIcon": {
+    "description": {
+      "en": "Projected <ids-icon> element (marked with the idsTrailingIcon attribute) shown after the input.",
+      "hu": "Beillesztett <ids-icon> elem (idsTrailingIcon attribútummal megjelölve), amely a beviteli mező után jelenik meg."
+    }
+  },
+  "idsFormFieldAction": {
+    "description": {
+      "en": "Content projected as an action next to the field (marked with the idsFormFieldAction attribute), e.g. a button.",
+      "hu": "A mező mellé, műveletként beillesztett tartalom (idsFormFieldAction attribútummal megjelölve), pl. egy gomb."
+    }
+  },
+  "errorMessage": {
+    "description": {
+      "en": "Projected <ids-error-message> element, shown in the subscript area when the field is in an error state.",
+      "hu": "Beillesztett <ids-error-message> elem, amely hibaállapot esetén jelenik meg a mező alatti területen."
+    }
+  },
+  "successMessage": {
+    "description": {
+      "en": "Projected <ids-success-message> element, shown in the subscript area when the field is in a success state.",
+      "hu": "Beillesztett <ids-success-message> elem, amely sikeres állapot esetén jelenik meg a mező alatti területen."
+    }
+  },
+  "hintMessage": {
+    "description": {
+      "en": "Projected <ids-hint-message> element, shown in the subscript area by default.",
+      "hu": "Beillesztett <ids-hint-message> elem, amely alapértelmezetten a mező alatti területen jelenik meg."
+    }
+  }
+}

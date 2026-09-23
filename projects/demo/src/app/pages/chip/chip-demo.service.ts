@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -21,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const CHIP_DOCS_PATH = 'chip/chip.component.docs.json';
 const CHIP_GROUP_DOCS_PATH = 'chip/chip-group.component.docs.json';
+const CHIP_SLOTS_DOCS_PATH = 'chip/chip.component.slots.docs.json';
 
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -146,21 +148,21 @@ export class ChipDemoService {
 
   public readonly groupInputControlConfig: DemoControlConfig<ChipGroupInputControls> = {
     appearance: {
-      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'appearance', 'Chip group appearance.'),
+      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'appearance', 'Appearance of the chips in the group.'),
       type: 'IdsChipAppearanceType',
       default: defaultGroupConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsChipAppearance),
     },
     size: {
-      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'size', 'Chip group size.'),
+      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'size', 'Size of the chips in the group.'),
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     disabled: {
-      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'disabled', 'Whether the chip group is disabled or not.'),
+      description: this._widgetDocs.getDescription(CHIP_GROUP_DOCS_PATH, 'disabled', 'Whether the chips in the group are disabled.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -233,5 +235,52 @@ export class ChipDemoService {
         config: this.groupInputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'avatar',
+      selector: 'ids-avatar',
+      description: this._widgetDocs.getDescription(
+        CHIP_SLOTS_DOCS_PATH,
+        'avatar',
+        'Projected <ids-avatar> element shown at the start of the chip.',
+      ),
+    },
+    {
+      name: 'idsLeadingIcon',
+      selector: '[idsLeadingIcon]',
+      description: this._widgetDocs.getDescription(
+        CHIP_SLOTS_DOCS_PATH,
+        'idsLeadingIcon',
+        'Content projected before the label (marked with the idsLeadingIcon attribute), typically an <ids-icon>.',
+      ),
+    },
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        CHIP_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the chip, i.e. the chip\'s label.',
+      ),
+    },
+    {
+      name: 'actionButton',
+      selector: 'button[idsIconButton]',
+      description: this._widgetDocs.getDescription(
+        CHIP_SLOTS_DOCS_PATH,
+        'actionButton',
+        'Custom action button projected instead of the built-in remove button (marked with the idsIconButton attribute), '
+          + 'rendered only when removable is false.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Chip'];
   }
 }

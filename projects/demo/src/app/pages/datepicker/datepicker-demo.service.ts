@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -15,7 +16,9 @@ import { IdsOverlayPanelAppearance, IdsOverlayPanelAppearanceType } from '@i-cel
 import { TranslateService } from '@ngx-translate/core';
 
 const DATEPICKER_TRIGGER_DOCS_PATH = 'datepicker/trigger/datepicker-trigger.component.docs.json';
+const FORM_FIELD_DOCS_PATH = 'forms/components/form-field/form-field.component.docs.json';
 const DATEPICKER_DOCS_PATH = 'datepicker/datepicker.directive.docs.json';
+const DATEPICKER_TRIGGER_SLOTS_DOCS_PATH = 'datepicker/trigger/datepicker-trigger.component.slots.docs.json';
 
 const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 const datepickerDefaultConfig = IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY();
@@ -38,7 +41,7 @@ export class DatepickerDemoService {
 
   public readonly formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
     size: {
-      description: this._widgetDocs.getDescription(DATEPICKER_TRIGGER_DOCS_PATH, 'size', 'Size of the form field.'),
+      description: this._widgetDocs.getDescription(FORM_FIELD_DOCS_PATH, 'size', 'Form field size.'),
       type: 'IdsSizeType',
       default: formFieldDefaultConfig.size,
       control: DemoControl.SELECT,
@@ -243,6 +246,28 @@ export class DatepickerDemoService {
     ];
   }
 
+  public readonly triggerPropControlConfig: DemoControlConfig<unknown> = {
+    datepicker: {
+      description: this._widgetDocs.getDescription(
+        DATEPICKER_TRIGGER_DOCS_PATH,
+        'datepicker',
+        'The IdsDatepickerDirective instance the trigger opens the calendar popup for (alias: "for"). Required.',
+      ),
+      type: 'IdsDatepickerDirective',
+      default: '-',
+    },
+    ariaLabel: {
+      description: this._widgetDocs.getDescription(DATEPICKER_TRIGGER_DOCS_PATH, 'ariaLabel', 'aria-label for the trigger button.'),
+      type: 'string | null',
+      default: null,
+    },
+    size: {
+      description: this._widgetDocs.getDescription(DATEPICKER_TRIGGER_DOCS_PATH, 'size', 'Size of the datepicker trigger button.'),
+      type: 'IdsSizeType',
+      default: IdsSize.DENSE,
+    },
+  };
+
   public getApiConfig(): DemoApiControlConfig[] {
     return [
       {
@@ -253,6 +278,30 @@ export class DatepickerDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.DATEPICKER', 'API.PROPERTY_GROUP.DEFAULT'),
         config: { ...this.datepickerInputControlConfig, ...this.datepickerPropControlConfig },
       },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.DATEPICKER', 'API.PROPERTY_GROUP.TRIGGER_COMPONENT'),
+        config: this.triggerPropControlConfig,
+      },
     ];
+  }
+
+  public readonly triggerSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'icon',
+      selector: '[slot="icon"]',
+      description: this._widgetDocs.getDescription(
+        DATEPICKER_TRIGGER_SLOTS_DOCS_PATH,
+        'icon',
+        'Content projected into the trigger button (marked with slot="icon"). Defaults to a calendar icon if nothing is projected.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.triggerSlotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Datepicker trigger'];
   }
 }

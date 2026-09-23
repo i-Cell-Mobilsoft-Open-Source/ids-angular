@@ -2,14 +2,14 @@
   "appearance": {
     "description": {
       "en": "Button appearance.",
-      "hu": "A gomb megjelenése."
+      "hu": "A gomb megjelenési módja."
     },
     "type": "IdsButtonAppearanceType"
   },
   "disabled": {
     "description": {
       "en": "Whether the button is disabled or not.",
-      "hu": "A gomb le van-e tiltva."
+      "hu": "A gomb letiltása."
     },
     "type": "boolean"
   },
@@ -23,7 +23,7 @@
   "variant": {
     "description": {
       "en": "Button variant.",
-      "hu": "A gomb variánsa."
+      "hu": "A gomb stílusváltozata."
     },
     "type": "IdsButtonVariantType"
   }

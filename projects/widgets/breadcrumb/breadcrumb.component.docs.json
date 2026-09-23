@@ -9,42 +9,42 @@
   "hierarchy": {
     "description": {
       "en": "Array of breadcrumb items (label, path, disabled) describing the navigation hierarchy.",
-      "hu": "A navigációs hierarchiát leíró breadcrumb elemek tömbje (label, path, disabled)."
+      "hu": "A navigációs útvonal elemei: felirat, útvonal és letiltott állapot (label, path, disabled)."
     },
     "type": "IdsBreadcrumbHierarchyType[]"
   },
   "overlayAppearance": {
     "description": {
       "en": "Overlay panel appearance.",
-      "hu": "Az overlay panel megjelenése."
+      "hu": "A lenyíló panel megjelenési módja."
     },
     "type": "IdsOverlayPanelAppearanceType"
   },
   "overlaySize": {
     "description": {
       "en": "Overlay panel size.",
-      "hu": "Az overlay panel mérete."
+      "hu": "A lenyíló panel mérete."
     },
     "type": "IdsSizeType"
   },
   "overlayVariant": {
     "description": {
       "en": "Overlay panel variant.",
-      "hu": "Az overlay panel variánsa."
+      "hu": "A lenyíló panel stílusváltozata."
     },
     "type": "IdsOverlayPanelVariantType"
   },
   "size": {
     "description": {
       "en": "Breadcrumb size.",
-      "hu": "A breadcrumb mérete."
+      "hu": "A morzsamenü mérete."
     },
     "type": "IdsSizeType"
   },
   "variant": {
     "description": {
       "en": "Breadcrumb variant.",
-      "hu": "A breadcrumb variánsa."
+      "hu": "A morzsamenü stílusváltozata."
     },
     "type": "IdsBadgeVariantType"
   }

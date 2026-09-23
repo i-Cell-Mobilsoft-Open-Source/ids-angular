@@ -2,49 +2,49 @@
   "allowParent": {
     "description": {
       "en": "Whether to allow parent checkbox or not.",
-      "hu": "Engedélyezett-e a szülő checkbox."
+      "hu": "A csoport összes elemét egyszerre kijelölő jelölőnégyzet megjelenítése."
     },
     "type": "boolean"
   },
   "groupLabel": {
     "description": {
       "en": "Checkbox group's label.",
-      "hu": "A checkbox csoport címkéje."
+      "hu": "A jelölőnégyzetek csoportjának felirata."
     },
     "type": "string"
   },
   "orientation": {
     "description": {
-      "en": "Checkbox group variant.",
-      "hu": "A checkbox csoport variánsa."
+      "en": "Horizontal or vertical arrangement of the checkboxes.",
+      "hu": "A jelölőnégyzetek vízszintes vagy függőleges elrendezése."
     },
     "type": "IdsOrientationType"
   },
   "parentCheckboxLabel": {
     "description": {
       "en": "Parent checkbox label.",
-      "hu": "A szülő checkbox címkéje."
+      "hu": "Az összes elemet kijelölő jelölőnégyzet felirata."
     },
     "type": "string"
   },
   "showAsterisk": {
     "description": {
       "en": "Whether to show an asterisk before to the checkbox group label or not. IMPORTANT: This is only for display purposes.",
-      "hu": "Megjelenjen-e csillag a checkbox csoport címkéje előtt. FONTOS: ez csak megjelenítési célt szolgál."
+      "hu": "Csillag megjelenítése a csoport felirata előtt. Csak vizuális jelzés, nem teszi kötelezővé a kitöltést."
     },
     "type": "boolean"
   },
   "size": {
     "description": {
       "en": "Checkbox group size.",
-      "hu": "A checkbox csoport mérete."
+      "hu": "A jelölőnégyzetek csoportja mérete."
     },
     "type": "IdsSizeType"
   },
   "variant": {
     "description": {
       "en": "Checkbox group variant.",
-      "hu": "A checkbox csoport variánsa."
+      "hu": "A jelölőnégyzetek csoportja stílusváltozata."
     },
     "type": "IdsCheckboxVariantType"
   }

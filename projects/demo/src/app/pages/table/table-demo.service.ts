@@ -9,6 +9,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -28,9 +29,11 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { map, Observable } from 'rxjs';
 
+const CELL_TEMPLATE_DOCS_PATH = 'table/directives/cell-template.docs.json';
 const TABLE_DOCS_PATH = 'table/table.component.docs.json';
 const CELL_RENDERER_DOCS_PATH = 'table/directives/cell-renderer.docs.json';
 const CELL_CONTENT_DOCS_PATH = 'table/components/cell-content/cell-content.component.docs.json';
+const TABLE_SLOTS_DOCS_PATH = 'table/table.component.slots.docs.json';
 
 export type TableInputControls = {
   appearance: IdsTableAppearanceType;
@@ -199,7 +202,7 @@ export class TableDemoService {
       description: this._widgetDocs.getDescription(
         TABLE_DOCS_PATH,
         'enableRowSelection',
-        'Whether the row selection is disabled or not.',
+        'Whether row selection is enabled.',
       ),
       type: 'boolean',
       default: defaultConfig.enableRowSelection,
@@ -216,7 +219,7 @@ export class TableDemoService {
       control: DemoControl.SWITCH,
     },
     enableSorting: {
-      description: this._widgetDocs.getDescription(TABLE_DOCS_PATH, 'enableSorting', 'Whether the sorting feature is disabled or not.'),
+      description: this._widgetDocs.getDescription(TABLE_DOCS_PATH, 'enableSorting', 'Whether column sorting is enabled.'),
       type: 'boolean',
       default: defaultConfig.enableSorting,
       control: DemoControl.SWITCH,
@@ -225,7 +228,7 @@ export class TableDemoService {
       description: this._widgetDocs.getDescription(
         TABLE_DOCS_PATH,
         'masterDetail',
-        'Whether the master-detail feature is disabled or not.',
+        'Whether expandable detail rows are enabled.',
       ),
       type: 'boolean',
       default: defaultConfig.masterDetail,
@@ -245,7 +248,7 @@ export class TableDemoService {
       description: this._widgetDocs.getDescription(
         TABLE_DOCS_PATH,
         'detailStickyColumns',
-        'Whether to span the detail cell to the table\'s full width or don\'t span sticky columns.',
+        'Whether detail rows exclude sticky columns. When false, detail rows span the full table width.',
       ),
       type: 'boolean',
       default: defaultConfig.detailStickyColumns,
@@ -427,6 +430,18 @@ export class TableDemoService {
     return [this.methodControlConfig];
   }
 
+  public readonly cellTemplatePropControlConfig: DemoControlConfig<unknown> = {
+    templateName: {
+      description: this._widgetDocs.getDescription(
+        CELL_TEMPLATE_DOCS_PATH,
+        'templateName',
+        'Name used to reference this cell template (alias: "idsCellTemplate"). Required.',
+      ),
+      type: 'string',
+      default: '-',
+    },
+  };
+
   public getApiConfig(): DemoApiControlConfig[] {
     return [
       {
@@ -441,6 +456,39 @@ export class TableDemoService {
         title: getDemoApiTitle(this.translate, 'COMPONENTS.TABLE', 'API.PROPERTY_GROUP.CELL_CONTENT'),
         config: this.cellContentPropControlConfig,
       },
+      {
+        title: getDemoApiTitle(this.translate, 'COMPONENTS.TABLE', 'API.PROPERTY_GROUP.CELL_TEMPLATE'),
+        config: this.cellTemplatePropControlConfig,
+      },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'idsNoRowsToShow',
+      selector: '[idsNoRowsToShow]',
+      description: this._widgetDocs.getDescription(
+        TABLE_SLOTS_DOCS_PATH,
+        'idsNoRowsToShow',
+        'Content projected into the empty-state message shown when the table has no rows (marked with the idsNoRowsToShow attribute).',
+      ),
+    },
+    {
+      name: 'idsTableCaption',
+      selector: '[idsTableCaption]',
+      description: this._widgetDocs.getDescription(
+        TABLE_SLOTS_DOCS_PATH,
+        'idsTableCaption',
+        'Content projected into the table\'s native <caption> element (marked with the idsTableCaption attribute).',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Table'];
   }
 }

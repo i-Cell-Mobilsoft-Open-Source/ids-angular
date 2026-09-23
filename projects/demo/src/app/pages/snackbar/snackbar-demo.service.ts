@@ -102,7 +102,7 @@ export class SnackbarDemoService {
       description: this._widgetDocs.getDescription(
         SNACKBAR_DOCS_PATH,
         'urgent',
-        'Whether the snackbar is urgent or not. It changes the role of the snackbar.',
+        'Whether to announce the notification as urgent: uses role="alert" instead of role="status".',
       ),
       type: 'boolean',
       default: false,

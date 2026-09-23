@@ -2,63 +2,63 @@
   "appearance": {
     "description": {
       "en": "The appearance of the datepicker's calendar popup",
-      "hu": "A datepicker naptár popupjának megjelenése"
+      "hu": "A naptár felugró paneljének megjelenési módja."
     },
     "type": "IdsOverlayPanelAppearanceType"
   },
   "formatter": {
     "description": {
       "en": "Function used to format a Date value into the text shown in the input.",
-      "hu": "A Date értéket az inputban megjelenő szöveggé formázó függvény."
+      "hu": "A Date értéket a beviteli mezőben megjelenő szöveggé alakító függvény."
     },
     "type": "(date: Date) => string"
   },
   "maxDate": {
     "description": {
       "en": "The datepicker's maximum date",
-      "hu": "A datepicker maximálisan választható dátuma"
+      "hu": "A legkésőbbi kiválasztható dátum."
     },
     "type": "Date"
   },
   "minDate": {
     "description": {
       "en": "The datepicker's minimum date",
-      "hu": "A datepicker minimálisan választható dátuma"
+      "hu": "A legkorábbi kiválasztható dátum."
     },
     "type": "Date"
   },
   "monthSelected": {
     "description": {
       "en": "Emitted when a month is selected in the calendar popup.",
-      "hu": "Akkor emittálódik, amikor egy hónapot választanak ki a naptár popupban."
+      "hu": "Hónap kiválasztásakor jelző esemény."
     },
     "type": "EventEmitter<Date>"
   },
   "openedInput": {
     "description": {
       "en": "Whether the datepicker's calendar popup should be open initially (alias: \"opened\").",
-      "hu": "A datepicker naptár popupja induláskor nyitva legyen-e (alias: \"opened\")."
+      "hu": "A naptár kezdeti nyitott állapota; a sablonban opened néven köthető."
     },
     "type": "boolean"
   },
   "parser": {
     "description": {
       "en": "Function used to parse the text typed in the input back into a Date value.",
-      "hu": "Az inputba begépelt szöveget Date értékké visszaalakító (parse-oló) függvény."
+      "hu": "A beírt szöveget dátummá alakító függvény."
     },
     "type": "(value: string) => Date | null"
   },
   "view": {
     "description": {
       "en": "The starting view of the datepicker's calendar popup (day, month, year)",
-      "hu": "A datepicker naptár popupjának kezdő nézete (nap, hónap, év)"
+      "hu": "A naptár kezdő nézete: nap-, hónap- vagy évválasztás."
     },
     "type": "IdsDatepickerView"
   },
   "yearSelected": {
     "description": {
       "en": "Emitted when a year is selected in the calendar popup.",
-      "hu": "Akkor emittálódik, amikor egy évet választanak ki a naptár popupban."
+      "hu": "Év kiválasztásakor jelző esemény."
     },
     "type": "EventEmitter<Date>"
   }

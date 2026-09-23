@@ -2,112 +2,112 @@
   "backButton": {
     "description": {
       "en": "Is side sheet back button shown. Only applies to default header.",
-      "hu": "Látszik-e a side sheet vissza gombja. Csak az alapértelmezett fejlécnél érvényes."
+      "hu": "A visszalépés gomb megjelenítése az alapértelmezett fejlécben."
     },
     "type": "boolean"
   },
   "backClicked": {
     "description": {
       "en": "Emitted when the back button (in the default header) is clicked.",
-      "hu": "Akkor emittálódik, amikor a vissza gombra kattintanak (az alapértelmezett fejlécben)."
+      "hu": "A fejléc visszalépés gombjának megnyomásakor jelző esemény."
     },
     "type": "EventEmitter<void>"
   },
   "backdropOpacity": {
     "description": {
       "en": "Backdrop opacity.",
-      "hu": "A háttértakarás (backdrop) átlátszatlansága."
+      "hu": "A háttérréteg átlátszatlansága."
     },
     "type": "IdsSizeType"
   },
   "backdropType": {
     "description": {
       "en": "Backdrop type.",
-      "hu": "A háttértakarás (backdrop) típusa."
+      "hu": "A háttérréteg típusa."
     },
     "type": "IdsBackdropType"
   },
   "closeTooltipText": {
     "description": {
       "en": "Tooltip text for the close button.",
-      "hu": "A bezáró gomb tooltip szövege."
+      "hu": "A bezáró gomb súgóbuborékjának szövege."
     },
     "type": "string"
   },
   "closed": {
     "description": {
       "en": "Emitted when the side sheet is closed.",
-      "hu": "Akkor emittálódik, amikor a side sheet bezáródik."
+      "hu": "Az oldalpanel bezárásakor jelző esemény."
     },
     "type": "EventEmitter<void>"
   },
   "header": {
     "description": {
       "en": "Side sheet header.",
-      "hu": "A side sheet fejléce."
+      "hu": "A fejléc típusa: alapértelmezett vagy egyedi."
     },
     "type": "IdsSideSheetHeader"
   },
   "isBackdrop": {
     "description": {
       "en": "Is side sheet backdrop enabled.",
-      "hu": "Engedélyezve van-e a side sheet háttértakarása (backdrop)."
+      "hu": "Az oldalpanel mögötti háttérréteg megjelenítése."
     },
     "type": "boolean"
   },
   "isClosable": {
     "description": {
       "en": "Is side sheet closable.",
-      "hu": "Bezárható-e a side sheet."
+      "hu": "A bezáró gomb megjelenítése."
     },
     "type": "boolean"
   },
   "isScrollable": {
     "description": {
       "en": "Is side sheet scrollable.",
-      "hu": "Görgethető-e a side sheet."
+      "hu": "Az oldalpanel tartalmának görgetése engedélyezett."
     },
     "type": "boolean"
   },
   "isShowHeader": {
     "description": {
       "en": "Controls the visibility of the header. Applies only when using the default header type.",
-      "hu": "A fejléc láthatóságát vezérli. Csak az alapértelmezett fejléctípus használatakor érvényes."
+      "hu": "Az alapértelmezett fejléc megjelenítése. Egyedi fejlécnél nincs hatása."
     },
     "type": "boolean"
   },
   "open": {
     "description": {
       "en": "Whether the side sheet is open or not.",
-      "hu": "A side sheet nyitva van-e."
+      "hu": "Az oldalpanel nyitott állapota."
     },
     "type": "boolean"
   },
   "position": {
     "description": {
       "en": "Side sheet position.",
-      "hu": "A side sheet pozíciója."
+      "hu": "Az oldalpanel elhelyezkedése: bal vagy jobb oldal."
     },
     "type": "IdsSideSheetPosition"
   },
   "size": {
     "description": {
       "en": "Side sheet size.",
-      "hu": "A side sheet mérete."
+      "hu": "Az oldalpanel mérete."
     },
     "type": "IdsSizeType"
   },
   "title": {
     "description": {
       "en": "Side sheet title.",
-      "hu": "A side sheet címe."
+      "hu": "Az oldalpanel címe."
     },
     "type": "string"
   },
   "type": {
     "description": {
       "en": "Side sheet type.",
-      "hu": "A side sheet típusa."
+      "hu": "Az oldalpanel megjelenítési módja: a tartalom részeként vagy fölötte."
     },
     "type": "IdsSideSheetType"
   }

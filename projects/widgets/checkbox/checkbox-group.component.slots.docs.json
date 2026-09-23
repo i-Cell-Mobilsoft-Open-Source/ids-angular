@@ -1,0 +1,20 @@
+{
+  "hintMessage": {
+    "description": {
+      "en": "Projected <ids-hint-message> element, shown next to the group's legend.",
+      "hu": "Beillesztett <ids-hint-message> elem, amely a csoport felirata mellett jelenik meg."
+    }
+  },
+  "checkbox": {
+    "description": {
+      "en": "Projected <ids-checkbox> elements that make up the group's list of checkboxes.",
+      "hu": "A csoport jelölőnégyzetei (<ids-checkbox> elemek)."
+    }
+  },
+  "errorMessage": {
+    "description": {
+      "en": "Projected <ids-error-message> element, shown below the checkbox list when the group is in an error state.",
+      "hu": "Beillesztett <ids-error-message> elem, amely hibaállapot esetén jelenik meg a jelölőnégyzetek alatt."
+    }
+  }
+}

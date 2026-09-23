@@ -43,7 +43,11 @@ export class IconDemoService {
       list: convertEnumToStringArray(IdsSize),
     },
     sizeCollection: {
-      description: this._widgetDocs.getDescription(ICON_DOCS_PATH, 'sizeCollection', 'Icon size collection.'),
+      description: this._widgetDocs.getDescription(
+        ICON_DOCS_PATH,
+        'sizeCollection',
+        'Size collection used together with size to determine the rendered dimensions.',
+      ),
       type: 'IdsSizeCollectionType',
       default: defaultConfig.sizeCollection,
       control: DemoControl.SELECT,
@@ -76,7 +80,7 @@ export class IconDemoService {
       description: this._widgetDocs.getDescription(
         ICON_DOCS_PATH,
         'aria-hidden',
-        'Determinate whether the component is hidden or not for screen readers.',
+        'Whether the icon is hidden from screen readers.',
       ),
       type: 'boolean',
       default: false,

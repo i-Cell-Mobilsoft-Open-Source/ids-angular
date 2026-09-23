@@ -5,6 +5,7 @@ import { inject, Injectable, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -14,6 +15,7 @@ import { IDS_NOTIFICATION_DEFAULT_CONFIG_FACTORY, IdsNotificationAppearance, Ids
 import { TranslateService } from '@ngx-translate/core';
 
 const NOTIFICATION_DOCS_PATH = 'notification/notification.component.docs.json';
+const NOTIFICATION_SLOTS_DOCS_PATH = 'notification/notification.component.slots.docs.json';
 
 type NotificationInputControls = {
   size: IdsSizeType,
@@ -128,7 +130,7 @@ export class NotificationDemoService {
       description: this._widgetDocs.getDescription(
         NOTIFICATION_DOCS_PATH,
         'urgent',
-        'Whether the notification is urgent or not. It changes the role of the notification.',
+        'Whether to announce the notification as urgent: uses role="alert" instead of role="status".',
       ),
       type: 'boolean',
       default: false,
@@ -298,5 +300,33 @@ export class NotificationDemoService {
         config: { ...this.inputControlConfig(), ...this.propControlConfig },
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        NOTIFICATION_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the notification, i.e. the notification\'s message.',
+      ),
+    },
+    {
+      name: 'actionButton',
+      selector: '[idsNotificationActionButton]',
+      description: this._widgetDocs.getDescription(
+        NOTIFICATION_SLOTS_DOCS_PATH,
+        'actionButton',
+        'Action button(s) or link(s) projected into the notification (marked with the idsNotificationActionButton attribute).',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Notification'];
   }
 }

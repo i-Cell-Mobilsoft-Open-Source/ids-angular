@@ -2,49 +2,49 @@
   "changes": {
     "description": {
       "en": "Emitted when the selection state of the item changes.",
-      "hu": "Akkor emittálódik, amikor az elem kiválasztási állapota megváltozik."
+      "hu": "Az elem kijelölési állapotának változásakor jelző esemény."
     },
     "type": "EventEmitter<IdsSegmentedControlItemChange>"
   },
   "label": {
     "description": {
       "en": "Label of the segmented control item.",
-      "hu": "A segmented control elem címkéje."
+      "hu": "A szegmens felirata."
     },
     "type": "string"
   },
   "ariaLabel": {
     "description": {
       "en": "aria-label for the segmented control item.",
-      "hu": "aria-label a segmented control elemhez."
+      "hu": "A képernyőolvasók számára megadott megnevezés (aria-label)."
     },
     "type": "string"
   },
   "labeledby": {
     "description": {
       "en": "aria-labeledby for the segmented control item.",
-      "hu": "aria-labeledby a segmented control elemhez."
+      "hu": "A feliratot tartalmazó HTML-elemek azonosítói, szóközzel elválasztva."
     },
     "type": "string"
   },
   "name": {
     "description": {
       "en": "Name of the segmented control item.",
-      "hu": "A segmented control elem name attribútuma."
+      "hu": "A szegmensválasztó name attribútuma."
     },
     "type": "string"
   },
   "tabIndex": {
     "description": {
       "en": "Tab index of the segmented control item.",
-      "hu": "A segmented control elem tabindexe."
+      "hu": "A billentyűzetes fókuszsorrendet beállító tabindex érték."
     },
     "type": "number"
   },
   "value": {
     "description": {
       "en": "Value of the segmented control item.",
-      "hu": "A segmented control elem értéke."
+      "hu": "A szegmenshez rendelt érték."
     },
     "type": "unknown"
   }

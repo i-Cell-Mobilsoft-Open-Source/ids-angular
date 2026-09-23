@@ -1,0 +1,14 @@
+{
+  "idsNoRowsToShow": {
+    "description": {
+      "en": "Content projected into the empty-state message shown when the table has no rows (marked with the idsNoRowsToShow attribute). Defaults to \"No rows to show\" if nothing is projected.",
+      "hu": "Üres táblázatnál megjelenő egyedi üzenet, idsNoRowsToShow attribútummal. Ha nincs megadva, az alapértelmezett üzenet látható."
+    }
+  },
+  "idsTableCaption": {
+    "description": {
+      "en": "Content projected into the table's native <caption> element (marked with the idsTableCaption attribute).",
+      "hu": "A táblázat <caption> elemének tartalma, idsTableCaption attribútummal."
+    }
+  }
+}

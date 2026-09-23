@@ -791,6 +791,13 @@
   "API": {
     "PROPERTY_TABLE_TITLE": "{{ component }} {{ property }}",
     "PROPERTY_GROUP": {
+      "TITLE": "címsor tulajdonságai",
+      "CELL_TEMPLATE": "cellasablon direktíva tulajdonságai",
+      "ERROR_DEFINITION": "hibadefiníció direktíva tulajdonságai",
+      "PSEUDO_CHECKBOX": "pszeudo-checkbox tulajdonságai",
+      "HEADER": "fejléc tulajdonságai",
+      "BODY": "törzs tulajdonságai",
+      "FOOTER": "lábléc tulajdonságai",
       "DEFAULT": "tulajdonságok",
       "GROUP": "csoport tulajdonságok",
       "HELPER": "helper tulajdonságok",
@@ -801,7 +808,11 @@
       "CHIP_LIST": "chip lista tulajdonságok",
       "HINT": "hint tulajdonságok",
       "CELL_RENDERER": "cell renderer tulajdonságok",
-      "CELL_CONTENT": "cell content tulajdonságok"
+      "CELL_CONTENT": "cell content tulajdonságok",
+      "TRIGGER": "trigger direktíva tulajdonságok",
+      "TRIGGER_COMPONENT": "trigger tulajdonságok",
+      "ITEM": "item tulajdonságok",
+      "ACTIVE_INDICATOR": "active indicator direktíva tulajdonságok"
     }
   }
 }

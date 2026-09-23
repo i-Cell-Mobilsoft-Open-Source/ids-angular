@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -10,7 +11,9 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_MESSAGE_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariantType, IdsMessageVariant } from '@i-cell/ids-angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
+const ERROR_DEFINITION_DOCS_PATH = 'forms/components/message/error-message/error-definition.directive.docs.json';
 const MESSAGE_DOCS_PATH = 'forms/directives/message.directive.docs.json';
+const MESSAGE_SLOTS_DOCS_PATH = 'forms/directives/message.directive.slots.docs.json';
 const defaultConfig = IDS_MESSAGE_DEFAULT_CONFIG_FACTORY();
 
 type MessageInputControls = {
@@ -109,6 +112,18 @@ export class MessageDemoService {
     this.inputModel = { ...this.inputDefaults };
   }
 
+  public readonly errorDefinitionPropControlConfig: DemoControlConfig<unknown> = {
+    code: {
+      description: this._widgetDocs.getDescription(
+        ERROR_DEFINITION_DOCS_PATH,
+        'code',
+        'Validation error code associated with the message inside ids-error-def. Required.',
+      ),
+      type: 'string',
+      default: '-',
+    },
+  };
+
   public getApiConfig(): DemoApiControlConfig[] {
     return [
       {
@@ -119,6 +134,47 @@ export class MessageDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.MESSAGE', 'API.PROPERTY_GROUP.INPUT'),
         config: this.messageInputControlConfigInput,
       },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.MESSAGE', 'API.PROPERTY_GROUP.ERROR_DEFINITION'),
+        config: this.errorDefinitionPropControlConfig,
+      },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'idsMessagePrefix',
+      selector: '[idsMessagePrefix]',
+      description: this._widgetDocs.getDescription(
+        MESSAGE_SLOTS_DOCS_PATH,
+        'idsMessagePrefix',
+        'Content projected before the message text (marked with the idsMessagePrefix attribute), e.g. an icon.',
+      ),
+    },
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        MESSAGE_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the message, i.e. the message text itself.',
+      ),
+    },
+    {
+      name: 'idsMessageSuffix',
+      selector: '[idsMessageSuffix]',
+      description: this._widgetDocs.getDescription(
+        MESSAGE_SLOTS_DOCS_PATH,
+        'idsMessageSuffix',
+        'Content projected after the message text (marked with the idsMessageSuffix attribute), e.g. a secondary text or action.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Message'];
   }
 }

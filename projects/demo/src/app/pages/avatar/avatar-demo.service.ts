@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -11,6 +12,7 @@ import { IdsSize, IdsSizeCollection, IdsSizeCollectionType, IdsSizeType } from '
 import { TranslateService } from '@ngx-translate/core';
 
 const AVATAR_DOCS_PATH = 'avatar/avatar.component.docs.json';
+const AVATAR_SLOTS_DOCS_PATH = 'avatar/avatar.component.slots.docs.json';
 
 const defaultConfig = IDS_AVATAR_DEFAULT_CONFIG_FACTORY();
 
@@ -41,7 +43,11 @@ export class AvatarDemoService {
       list: convertEnumToStringArray(IdsSize),
     },
     sizeCollection: {
-      description: this._widgetDocs.getDescription(AVATAR_DOCS_PATH, 'sizeCollection', 'Avatar sizeCollection.'),
+      description: this._widgetDocs.getDescription(
+        AVATAR_DOCS_PATH,
+        'sizeCollection',
+        'Size collection used together with size to determine the rendered dimensions.',
+      ),
       type: 'IdsSizeCollectionType',
       default: defaultConfig.sizeCollection,
       control: DemoControl.SELECT,
@@ -71,5 +77,34 @@ export class AvatarDemoService {
         config: this.inputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'icon',
+      selector: 'ids-icon',
+      description: this._widgetDocs.getDescription(
+        AVATAR_SLOTS_DOCS_PATH,
+        'icon',
+        'Projected <ids-icon> element shown when the avatar has no initials or image set.',
+      ),
+    },
+    {
+      name: 'image',
+      selector: 'img[src]',
+      description: this._widgetDocs.getDescription(
+        AVATAR_SLOTS_DOCS_PATH,
+        'image',
+        'Projected <img> element (with a src attribute) shown when the avatar displays an image.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Avatar'];
   }
 }

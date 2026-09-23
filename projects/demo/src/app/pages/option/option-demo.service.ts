@@ -11,6 +11,7 @@ import { IdsSizeType, IdsSize } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
+const PSEUDO_CHECKBOX_DOCS_PATH = 'forms/components/pseudo-checkbox/pseudo-checkbox.component.docs.json';
 const OPTION_DOCS_PATH = 'forms/components/option/option.component.docs.json';
 const OPTION_GROUP_DOCS_PATH = 'forms/components/option/option-group.component.docs.json';
 
@@ -124,7 +125,7 @@ export class OptionDemoService {
       description: this._widgetDocs.getDescription(
         OPTION_GROUP_DOCS_PATH,
         'disabled',
-        'Whether all options within the option group are disabled or not.',
+        'Whether all options in the group are disabled.',
       ),
       type: 'boolean',
       default: false,
@@ -237,6 +238,32 @@ export class OptionDemoService {
     return [this.optionMethodControls];
   }
 
+  public readonly pseudoCheckboxPropControlConfig: DemoControlConfig<unknown> = {
+    checkboxState: {
+      description: this._widgetDocs.getDescription(
+        PSEUDO_CHECKBOX_DOCS_PATH,
+        'checkboxState',
+        'State of the pseudo-checkbox: unchecked, checked or indeterminate.',
+      ),
+      type: 'IdsPseudoCheckboxStateType',
+      default: 'unchecked',
+      list: [
+        'unchecked',
+        'checked',
+        'indeterminate',
+      ],
+    },
+    disabled: {
+      description: this._widgetDocs.getDescription(
+        PSEUDO_CHECKBOX_DOCS_PATH,
+        'disabled',
+        'Whether the pseudo-checkbox is disabled.',
+      ),
+      type: 'boolean',
+      default: false,
+    },
+  };
+
   public getApiConfig(): DemoApiControlConfig[] {
     return [
       {
@@ -258,6 +285,10 @@ export class OptionDemoService {
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OPTION', 'API.PROPERTY_GROUP.GROUP'),
         config: this.optionGroupPropControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OPTION', 'API.PROPERTY_GROUP.PSEUDO_CHECKBOX'),
+        config: this.pseudoCheckboxPropControlConfig,
       },
     ];
   }

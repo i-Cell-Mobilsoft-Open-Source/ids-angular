@@ -15,15 +15,15 @@
   },
   "sizeCollection": {
     "description": {
-      "en": "Avatar sizeCollection.",
-      "hu": "Az avatar mérethez tartozó ikon/kép gyűjtemény (sizeCollection)."
+      "en": "Size collection used together with size to determine the rendered dimensions.",
+      "hu": "A méretezéshez használt méretkészlet; a size értékkel együtt határozza meg a tényleges méretet."
     },
     "type": "IdsSizeCollectionType"
   },
   "variant": {
     "description": {
       "en": "Avatar variant.",
-      "hu": "Az avatar variánsa."
+      "hu": "Az avatar stílusváltozata."
     },
     "type": "IdsAvatarVariantType"
   }

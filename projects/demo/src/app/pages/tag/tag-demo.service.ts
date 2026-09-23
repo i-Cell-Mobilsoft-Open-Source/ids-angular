@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -12,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const TAG_DOCS_PATH = 'tag/tag.component.docs.json';
 const TAG_GROUP_DOCS_PATH = 'tag/tag-group.component.docs.json';
+const TAG_SLOTS_DOCS_PATH = 'tag/tag.component.slots.docs.json';
 
 const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_TAG_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -77,14 +79,14 @@ export class TagDemoService {
 
   public readonly groupInputControlConfig: DemoControlConfig<TagGroupInputControls> = {
     appearance: {
-      description: this._widgetDocs.getDescription(TAG_GROUP_DOCS_PATH, 'appearance', 'Appearance of the tag group.'),
+      description: this._widgetDocs.getDescription(TAG_GROUP_DOCS_PATH, 'appearance', 'Appearance of the tag.'),
       type: 'IdsTagAppearanceType',
       default: defaultGroupConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTagAppearance),
     },
     size: {
-      description: this._widgetDocs.getDescription(TAG_GROUP_DOCS_PATH, 'size', 'Size of the tag group.'),
+      description: this._widgetDocs.getDescription(TAG_GROUP_DOCS_PATH, 'size', 'Size of the tag.'),
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
       control: DemoControl.SELECT,
@@ -121,5 +123,42 @@ export class TagDemoService {
         config: this.groupInputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'iconLeading',
+      selector: 'ids-icon[icon-leading]',
+      description: this._widgetDocs.getDescription(
+        TAG_SLOTS_DOCS_PATH,
+        'iconLeading',
+        'Content projected before the label (marked with the icon-leading attribute), typically an ids-icon.',
+      ),
+    },
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        TAG_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the tag, i.e. the tag\'s label.',
+      ),
+    },
+    {
+      name: 'iconTrailing',
+      selector: 'ids-icon[icon-trailing]',
+      description: this._widgetDocs.getDescription(
+        TAG_SLOTS_DOCS_PATH,
+        'iconTrailing',
+        'Content projected after the label (marked with the icon-trailing attribute), typically an ids-icon.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Tag'];
   }
 }

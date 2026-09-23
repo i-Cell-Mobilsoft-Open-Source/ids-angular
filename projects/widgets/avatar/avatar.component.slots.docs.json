@@ -1,0 +1,14 @@
+{
+  "icon": {
+    "description": {
+      "en": "Projected <ids-icon> element shown when the avatar has no initials or image set. Defaults to a generic account icon if nothing is projected.",
+      "hu": "Az avatarba helyezett <ids-icon>, amely kép és monogram hiányában jelenik meg. Ha nincs megadva, az alapértelmezett felhasználói ikon látható."
+    }
+  },
+  "image": {
+    "description": {
+      "en": "Projected <img> element (with a src attribute) shown when the avatar displays an image.",
+      "hu": "Az avatar képeként megjelenő <img> elem, src attribútummal."
+    }
+  }
+}

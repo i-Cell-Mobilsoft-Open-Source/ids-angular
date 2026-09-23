@@ -1,0 +1,20 @@
+{
+  "content": {
+    "description": {
+      "en": "Default content of the tab panel, projected into the tab's body when the tab is active.",
+      "hu": "Az aktív fülhöz tartozó panel tartalma."
+    }
+  },
+  "prefixContent": {
+    "description": {
+      "en": "Content projected before the tab's label in the tab header, e.g. an action button.",
+      "hu": "A fül felirata előtt megjelenő tartalom, például egy műveleti gomb."
+    }
+  },
+  "suffixContent": {
+    "description": {
+      "en": "Content projected after the tab's label in the tab header, e.g. a tooltip trigger.",
+      "hu": "A fül felirata után megjelenő tartalom, például egy súgóikon."
+    }
+  }
+}

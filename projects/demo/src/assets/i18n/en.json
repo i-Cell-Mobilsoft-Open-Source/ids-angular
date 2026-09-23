@@ -795,6 +795,13 @@
   "API": {
     "PROPERTY_TABLE_TITLE": "{{ component }} {{ property }}",
     "PROPERTY_GROUP": {
+      "TITLE": "title properties",
+      "CELL_TEMPLATE": "cell template directive properties",
+      "ERROR_DEFINITION": "error definition directive properties",
+      "PSEUDO_CHECKBOX": "pseudo-checkbox properties",
+      "HEADER": "header properties",
+      "BODY": "body properties",
+      "FOOTER": "footer properties",
       "DEFAULT": "properties",
       "GROUP": "group properties",
       "HELPER": "helper properties",
@@ -805,7 +812,11 @@
       "CHIP_LIST": "chip list properties",
       "HINT": "hint properties",
       "CELL_RENDERER": "cell renderer properties",
-      "CELL_CONTENT": "cell content properties"
+      "CELL_CONTENT": "cell content properties",
+      "TRIGGER": "trigger directive properties",
+      "TRIGGER_COMPONENT": "trigger properties",
+      "ITEM": "item properties",
+      "ACTIVE_INDICATOR": "active indicator directive properties"
     }
   }
 }

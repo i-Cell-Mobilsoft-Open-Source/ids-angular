@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -13,6 +14,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 const CHECKBOX_DOCS_PATH = 'checkbox/checkbox.component.docs.json';
+const CHECKBOX_SLOTS_DOCS_PATH = 'checkbox/checkbox.component.slots.docs.json';
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 
@@ -66,7 +68,7 @@ export class CheckboxDemoService {
       control: DemoControl.SWITCH,
     },
     required: {
-      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'required', 'Whether the checkbox is required or not.'),
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'required', 'Whether the checkbox must be checked.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -301,5 +303,42 @@ export class CheckboxDemoService {
         config: { ...this.inputControlConfig, ...this.propControlConfig },
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the checkbox, used as its label.',
+      ),
+    },
+    {
+      name: 'errorMessage',
+      selector: 'ids-error-message',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_SLOTS_DOCS_PATH,
+        'errorMessage',
+        'Projected <ids-error-message> element, shown in the message area when the checkbox is in an error state.',
+      ),
+    },
+    {
+      name: 'hintMessage',
+      selector: 'ids-hint-message',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_SLOTS_DOCS_PATH,
+        'hintMessage',
+        'Projected <ids-hint-message> element, shown in the message area by default.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Checkbox'];
   }
 }

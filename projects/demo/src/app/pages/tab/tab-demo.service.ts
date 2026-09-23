@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -16,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const TAB_GROUP_DOCS_PATH = 'tab/tab-group.component.docs.json';
 const TAB_DOCS_PATH = 'tab/tab.component.docs.json';
+const TAB_SLOTS_DOCS_PATH = 'tab/tab.component.slots.docs.json';
 
 const defaultConfig = IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY();
 
@@ -81,7 +83,7 @@ export class TabDemoService {
       list: convertEnumToStringArray(IdsOrientation),
     },
     tabAlignment: {
-      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'tabAlignment', 'Tab header position.'),
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'tabAlignment', 'Alignment of the tabs within the tab header.'),
       type: 'IdsTabGroupAlignmentType',
       default: defaultConfig.tabAlignment,
       control: DemoControl.SELECT,
@@ -108,7 +110,7 @@ export class TabDemoService {
       control: DemoControl.SWITCH,
     },
     disabled: {
-      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'disabled', 'Whether the tab group is disabled or not.'),
+      description: this._widgetDocs.getDescription(TAB_GROUP_DOCS_PATH, 'disabled', 'Whether the tab item is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -289,6 +291,35 @@ export class TabDemoService {
     },
   ];
 
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        TAB_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the tab panel, projected into the tab\'s body when the tab is active.',
+      ),
+    },
+    {
+      name: 'prefixContent',
+      selector: '[prefixContent]',
+      description: this._widgetDocs.getDescription(
+        TAB_SLOTS_DOCS_PATH,
+        'prefixContent',
+        'Content projected before the tab\'s label in the tab header, e.g. an action button.',
+      ),
+    },
+    {
+      name: 'suffixContent',
+      selector: '[suffixContent]',
+      description: this._widgetDocs.getDescription(
+        TAB_SLOTS_DOCS_PATH,
+        'suffixContent',
+        'Content projected after the tab\'s label in the tab header, e.g. a tooltip trigger.',
+      ),
+    },
+  ];
+
   public defaults = getDefaultFromDemoConfig<TabInputControls>(this.inputControlConfig);
   public helperDefaults = getDefaultFromDemoConfig<TabHelperControls>(this.helperControlConfig());
 
@@ -327,6 +358,14 @@ export class TabDemoService {
 
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
+  }
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Tab'];
   }
 
   public getApiConfig(): DemoApiControlConfig[] {

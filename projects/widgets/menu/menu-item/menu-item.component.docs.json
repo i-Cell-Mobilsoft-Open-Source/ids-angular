@@ -2,35 +2,35 @@
   "appearance": {
     "description": {
       "en": "Menu item appearance.",
-      "hu": "A menu item megjelenése."
+      "hu": "A menüpont megjelenési módja."
     },
     "type": "IdsMenuItemAppearanceType"
   },
   "disabled": {
     "description": {
       "en": "Whether the menu item is disabled or not",
-      "hu": "A menu item le van-e tiltva"
+      "hu": "A menüpont letiltása."
     },
     "type": "boolean"
   },
   "label": {
     "description": {
       "en": "Label text of the menu item.",
-      "hu": "A menu item címkeszövege."
+      "hu": "A menüpont felirata."
     },
     "type": "string"
   },
   "size": {
     "description": {
       "en": "Menu item size.",
-      "hu": "A menu item mérete."
+      "hu": "A menüpont mérete."
     },
     "type": "IdsSizeType"
   },
   "variant": {
     "description": {
       "en": "Menu item variant.",
-      "hu": "A menu item variánsa."
+      "hu": "A menüpont stílusváltozata."
     },
     "type": "IdsMenuItemVariantType"
   }

@@ -1,0 +1,8 @@
+{
+  "icon": {
+    "description": {
+      "en": "Content projected into the trigger button (marked with slot=\"icon\"). Defaults to a calendar icon if nothing is projected.",
+      "hu": "A naptárat megnyitó gomb egyedi ikonja, slot=\"icon\" jelöléssel. Ha nincs megadva, az alapértelmezett naptárikon jelenik meg."
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "stretch": {
     "description": {
-      "en": "Whether the image is stretchable or not.",
-      "hu": "A kép nyújtható-e."
+      "en": "Whether this card section fills its available area without padding.",
+      "hu": "A médiatartalom belső térköz nélkül tölti ki a rendelkezésére álló területet."
     },
     "type": "boolean"
   }

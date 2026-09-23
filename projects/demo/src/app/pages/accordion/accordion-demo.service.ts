@@ -65,7 +65,7 @@ export class AccordionDemoService {
       list: convertEnumToStringArray(IdsAccordionHeadingLevel),
     },
     summary: {
-      description: this._widgetDocs.getDescription(ACCORDION_ITEM_DOCS_PATH, 'summary', 'Summary of accordion'),
+      description: this._widgetDocs.getDescription(ACCORDION_ITEM_DOCS_PATH, 'summary', 'Text displayed in the accordion item heading.'),
       type: 'string',
       default: '-',
       demoDefault: 'Summary text',
@@ -114,7 +114,11 @@ export class AccordionDemoService {
       default: defaultConfig.collapseBtnLabel,
     },
     hasLeadingIcon: {
-      description: this._widgetDocs.getDescription(ACCORDION_DOCS_PATH, 'hasLeadingIcon', 'Whether the button has leading icon or not.'),
+      description: this._widgetDocs.getDescription(
+        ACCORDION_DOCS_PATH,
+        'hasLeadingIcon',
+        'Whether to show an icon before the accordion item heading.',
+      ),
       type: 'boolean',
       default: defaultConfig.hasLeadingIcon,
       control: DemoControl.SWITCH,
@@ -123,7 +127,7 @@ export class AccordionDemoService {
       description: this._widgetDocs.getDescription(
         ACCORDION_DOCS_PATH,
         'hasTrailingIcon',
-        'Whether the button has trailing icon or not.',
+        'Whether to show an icon after the accordion item heading.',
       ),
       type: 'boolean',
       default: defaultConfig.hasTrailingIcon,

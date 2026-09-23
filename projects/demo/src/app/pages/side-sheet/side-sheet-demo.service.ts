@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -11,6 +12,7 @@ import { IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY, IdsBackdropType, IdsBackdropType
 import { TranslateService } from '@ngx-translate/core';
 
 const SIDE_SHEET_DOCS_PATH = 'side-sheet/side-sheet.component.docs.json';
+const SIDE_SHEET_SLOTS_DOCS_PATH = 'side-sheet/side-sheet.component.slots.docs.json';
 
 const defaultConfig = IDS_SIDE_SHEET_DEFAULT_CONFIG_FACTORY();
 
@@ -220,5 +222,42 @@ export class SideSheetDemoService {
         config: { ...this.inputControlConfig, ...this.propControlConfig },
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        SIDE_SHEET_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the side sheet, rendered in the scrollable content area.',
+      ),
+    },
+    {
+      name: 'customHeader',
+      selector: '[slot="customHeader"]',
+      description: this._widgetDocs.getDescription(
+        SIDE_SHEET_SLOTS_DOCS_PATH,
+        'customHeader',
+        'Content projected into the header area (marked with slot="customHeader") when the header input is set to "custom".',
+      ),
+    },
+    {
+      name: 'footer',
+      selector: '[slot="footer"]',
+      description: this._widgetDocs.getDescription(
+        SIDE_SHEET_SLOTS_DOCS_PATH,
+        'footer',
+        'Content projected into the footer area of the side sheet (marked with slot="footer"), typically action buttons.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Side sheet'];
   }
 }

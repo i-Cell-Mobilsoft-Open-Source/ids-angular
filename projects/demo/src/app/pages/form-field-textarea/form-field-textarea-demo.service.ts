@@ -42,19 +42,19 @@ export class FormFieldTextareaDemoService {
 
   public readonly textareaInputControlConfig: DemoControlConfig<InputInputControls> = {
     placeholder: {
-      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'placeholder', 'Textarea placeholder.'),
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'placeholder', 'Input placeholder.'),
       type: 'string',
       default: '-',
       demoDefault: 'Placeholder',
     },
     readonly: {
-      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'readonly', 'Whether textarea is readonly or not.'),
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'readonly', 'Whether the input is readonly or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     disabled: {
-      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'disabled', 'Whether textarea is disabled or not.'),
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'disabled', 'Whether the input is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -67,7 +67,7 @@ export class FormFieldTextareaDemoService {
       },
     },
     required: {
-      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'required', 'Whether textarea is required or not.'),
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'required', 'Whether the input is required or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -84,14 +84,14 @@ export class FormFieldTextareaDemoService {
       description: this._widgetDocs.getDescription(
         INPUT_DOCS_PATH,
         'canHandleSuccessState',
-        'Whether textarea can handle success state with a success state matcher.',
+        'Whether the input can handle success state with a success state matcher.',
       ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     name: {
-      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'name', 'Name of the textarea, used for form submission.'),
+      description: this._widgetDocs.getDescription(INPUT_DOCS_PATH, 'name', 'Name of the input, used for form submission.'),
       type: 'string',
       default: '',
       control: DemoControl.TEXT,
@@ -103,7 +103,7 @@ export class FormFieldTextareaDemoService {
       description: this._widgetDocs.getDescription(
         INPUT_DOCS_PATH,
         'errorStateMatcher',
-        'Matcher instance used to determine whether the textarea should show an error state.',
+        'Matcher instance used to determine whether the input should show an error state.',
       ),
       type: 'AbstractErrorStateMatcher',
       default: '-',
@@ -112,7 +112,7 @@ export class FormFieldTextareaDemoService {
       description: this._widgetDocs.getDescription(
         INPUT_DOCS_PATH,
         'successStateMatcher',
-        'Matcher instance used to determine whether the textarea should show a success state.',
+        'Matcher instance used to determine whether the input should show a success state.',
       ),
       type: 'AbstractSuccessStateMatcher',
       default: '-',

@@ -2,35 +2,35 @@
   "allowCustomContent": {
     "description": {
       "en": "Whether the icon button allows arbitrary projected content instead of only ids-icon.",
-      "hu": "Az icon button engedélyez-e tetszőleges projektált tartalmat a puszta ids-icon helyett."
+      "hu": "Az ids-icon mellett más, a gombba helyezett tartalmat is engedélyez."
     },
     "type": "boolean"
   },
   "appearance": {
     "description": {
       "en": "Icon Button appearance.",
-      "hu": "Az icon button megjelenése."
+      "hu": "Az ikongomb megjelenési módja."
     },
     "type": "IdsIconButtonAppearanceType"
   },
   "disabled": {
     "description": {
       "en": "Whether the icon button is disabled or not.",
-      "hu": "Az icon button le van-e tiltva."
+      "hu": "Az ikongomb letiltása."
     },
     "type": "boolean"
   },
   "size": {
     "description": {
       "en": "Icon Button size.",
-      "hu": "Az icon button mérete."
+      "hu": "Az ikongomb mérete."
     },
     "type": "IdsSizeType"
   },
   "variant": {
     "description": {
       "en": "Icon Button variant.",
-      "hu": "Az icon button variánsa."
+      "hu": "Az ikongomb stílusváltozata."
     },
     "type": "IdsIconButtonVariantType"
   }

@@ -2,14 +2,14 @@
   "size": {
     "description": {
       "en": "Form field size.",
-      "hu": "A form field mérete."
+      "hu": "Az űrlapmező mérete."
     },
     "type": "IdsSizeType"
   },
   "variant": {
     "description": {
       "en": "Form field variant.",
-      "hu": "A form field variánsa."
+      "hu": "Az űrlapmező stílusváltozata."
     },
     "type": "IdsFormFieldVariantType"
   }

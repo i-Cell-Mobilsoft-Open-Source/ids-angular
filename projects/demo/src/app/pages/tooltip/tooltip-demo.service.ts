@@ -137,7 +137,7 @@ export class TooltipDemoService {
       description: this._widgetDocs.getDescription(
         TOOLTIP_DOCS_PATH,
         'ignoreClipped',
-        'Whether to ignore viewport clipping and always show the tooltip at the configured position.',
+        'Whether to keep the tooltip open when it is clipped by a scrollable container.',
       ),
       type: 'boolean',
       default: false,

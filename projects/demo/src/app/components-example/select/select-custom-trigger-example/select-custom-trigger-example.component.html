@@ -1,0 +1,39 @@
+<ids-form-field class="w-80">
+  <ids-label>{{ "EXAMPLES.SELECT.COMMON.FRUITS" | translate }}</ids-label>
+  <ids-select
+    [multiSelect]="true"
+    [placeholder]="'EXAMPLES.SELECT.COMMON.PLACEHOLDER' | translate"
+    [(ngModel)]="value"
+  >
+    <ids-select-trigger>
+      {{ getFruitLabel(value[0]) }}
+      @if (value.length > 1) {
+        <span class="select-custom-trigger-example__additional">
+          (
+            +{{ value.length - 1 }}
+          @if (value.length === 2) {
+            {{ "EXAMPLES.SELECT.CUSTOM_TRIGGER.CONTENT.OTHER" | translate }}
+          } @else {
+            {{ "EXAMPLES.SELECT.CUSTOM_TRIGGER.CONTENT.OTHERS" | translate }}
+          })
+        </span>
+      }
+    </ids-select-trigger>
+    <ids-option value="APPLE" [viewValue]="'EXAMPLES.SELECT.FRUITS.APPLE' | translate">
+      {{ "EXAMPLES.SELECT.FRUITS.APPLE" | translate }}
+    </ids-option>
+    <ids-option value="BANANA" [viewValue]="'EXAMPLES.SELECT.FRUITS.BANANA' | translate">
+      {{ "EXAMPLES.SELECT.FRUITS.BANANA" | translate }}
+    </ids-option>
+    <ids-option value="CHERRY" [viewValue]="'EXAMPLES.SELECT.FRUITS.CHERRY' | translate">
+      {{ "EXAMPLES.SELECT.FRUITS.CHERRY" | translate }}
+    </ids-option>
+    <ids-option value="GRAPE" [viewValue]="'EXAMPLES.SELECT.FRUITS.GRAPE' | translate">
+      {{ "EXAMPLES.SELECT.FRUITS.GRAPE" | translate }}
+    </ids-option>
+    <ids-option value="ORANGE" [viewValue]="'EXAMPLES.SELECT.FRUITS.ORANGE' | translate">
+      {{ "EXAMPLES.SELECT.FRUITS.ORANGE" | translate }}
+    </ids-option>
+  </ids-select>
+  <ids-hint-message>{{ "EXAMPLES.SELECT.CUSTOM_TRIGGER.CONTENT.HINT" | translate }}</ids-hint-message>
+</ids-form-field>

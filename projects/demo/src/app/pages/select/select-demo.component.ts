@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { SELECT_EXAMPLES } from '../../components-example/select/select-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
@@ -34,6 +36,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './select-demo.component.html',
   styleUrls: [
@@ -43,4 +46,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class SelectDemoComponent {
   protected _selectDemoService = inject(SelectDemoService);
+  public readonly selectExamples = SELECT_EXAMPLES;
 }

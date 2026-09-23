@@ -297,6 +297,104 @@
         }
       }
     },
+    "SELECT": {
+      "COMMON": {
+        "PLACEHOLDER": "Válasszon gyümölcsöt",
+        "LOADING": "Betöltés...",
+        "FRUIT": "Gyümölcs",
+        "FRUITS": "Gyümölcsök"
+      },
+      "FRUITS": {
+        "APPLE": "Alma",
+        "BANANA": "Banán",
+        "CHERRY": "Cseresznye",
+        "GRAPE": "Szőlő",
+        "ORANGE": "Narancs"
+      },
+      "VARIANTS": {
+        "TITLE": "Select változatai",
+        "DESCRIPTION": "A select színváltozatait a form field határozza meg: surface (alapértelmezett) és light.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Select méretei",
+        "DESCRIPTION": "A select méreteit a form field határozza meg: dense, compact (alapértelmezett), comfortable és spacious.",
+        "CONTENT": {
+          "DENSE": "dense",
+          "COMPACT": "compact",
+          "COMFORTABLE": "comfortable",
+          "SPACIOUS": "spacious"
+        }
+      },
+      "MULTISELECT": {
+        "TITLE": "Többszörös választás",
+        "DESCRIPTION": "A multiSelect beállítással több opció is kiválasztható. A kiválasztott értékek eltávolítható chipekként jelennek meg a triggerben.",
+        "CONTENT": {
+          "HINT": "Több opció is kiválasztható."
+        }
+      },
+      "CUSTOM_TRIGGER": {
+        "TITLE": "Egyedi trigger",
+        "DESCRIPTION": "Az ids-select-trigger elemmel vetíthető egyedi tartalom a trigger helyére. Gyakran használják multiselect esetén a kiválasztott elemek összegzésére.",
+        "CONTENT": {
+          "HINT": "A trigger az első kiválasztott elemet és a további kiválasztások számát jeleníti meg.",
+          "OTHER": "további",
+          "OTHERS": "további"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled és readonly",
+        "DESCRIPTION": "A disabled megakadályozza az interakciót és kizárja az értéket a beküldésből. A readonly megjeleníti az értéket anélkül, hogy megnyitható lenne a panel.",
+        "CONTENT": {
+          "DISABLED_EMPTY": "Disabled, nincs érték",
+          "DISABLED_WITH_VALUE": "Disabled, van érték",
+          "READONLY_EMPTY": "Readonly, nincs érték",
+          "READONLY_WITH_VALUE": "Readonly, van érték"
+        }
+      },
+      "NG_MODEL": {
+        "TITLE": "Select ngModel-lel",
+        "DESCRIPTION": "Template-driven select form field-ben ngModel kétirányú kötéssel és validációval.",
+        "CONTENT": {
+          "HINT": "Válasszon egy gyümölcsöt a listából.",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "FORM_CONTROL": {
+        "TITLE": "Select FormControl-lal",
+        "DESCRIPTION": "Reaktív select form field-ben FormControl kötéssel programozott validációhoz.",
+        "CONTENT": {
+          "HINT": "Válasszon egy gyümölcsöt a listából.",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "SUCCESS_STATE": {
+        "TITLE": "Success állapot",
+        "DESCRIPTION": "A canHandleSuccessState bekapcsolásával success üzenet jelenik meg, ha a mező valid és touched, vagy a form el lett küldve. Egyedi validátor tiltja a cseresznye kiválasztását.",
+        "CONTENT": {
+          "HINT": "A cseresznye nem választható. Küldje el a formot a validációs vagy success állapot megjelenítéséhez.",
+          "CHERRY_ERROR": "A cseresznye nem választható.",
+          "SUBMIT": "Küldés"
+        }
+      },
+      "PRESELECTED": {
+        "TITLE": "Előre kiválasztott értékek",
+        "DESCRIPTION": "Select mezők kezdeti értékkel ngModel vagy FormControl használatával, beleértve a 10 másodperces késleltetéssel betöltött aszinkron opciókat is.",
+        "CONTENT": {
+          "NG_MODEL_LABEL": "Gyümölcs (template driven)",
+          "NG_MODEL_HINT": "Előre kiválasztva ngModel-lel.",
+          "FORM_CONTROL_LABEL": "Gyümölcs (model driven)",
+          "FORM_CONTROL_HINT": "Előre kiválasztva FormControl-lal.",
+          "NG_MODEL_ASYNC_LABEL": "Gyümölcs (template driven, aszinkron opciók, 10 másodperces késleltetés)",
+          "NG_MODEL_ASYNC_HINT": "Előre kiválasztva ngModel-lel, miközben az opciók szimulált kérésből töltődnek.",
+          "FORM_CONTROL_ASYNC_LABEL": "Gyümölcs (model driven, aszinkron opciók, 10 másodperces késleltetés)",
+          "FORM_CONTROL_ASYNC_HINT": "Előre kiválasztva FormControl-lal, miközben az opciók szimulált kérésből töltődnek."
+        }
+      }
+    },
     "AVATAR": {
       "SIZES": {
         "TITLE": "Avatar méretek",

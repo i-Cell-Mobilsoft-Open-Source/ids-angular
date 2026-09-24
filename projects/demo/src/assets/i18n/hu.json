@@ -1147,6 +1147,108 @@
         "DESCRIPTION": "Válogatás font és SVG ikonokból. A font ikonok a fontIcon, az SVG ikonok az svgIcon inputot használják. A kettő együtt nem használható."
       }
     },
+    "SIDE_NAV": {
+      "BASIC": {
+        "TITLE": "Alap oldalsó navigáció",
+        "DESCRIPTION": "Oldalsó navigáció szekciókkal, címekkel és elemekkel. A menü felépítéséhez használja az ids-side-nav-section, ids-side-nav-title és ids-side-nav-item komponenseket.",
+        "CONTENT": {
+          "SECTION": "Főmenü",
+          "HOME": "Kezdőlap",
+          "DESIGN_TOKENS": "Design tokenek",
+          "AVATAR": "Avatar"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Oldalsó navigáció változatai",
+        "DESCRIPTION": "Az oldalsó navigáció különböző színváltozatai: surface (alapértelmezett) és light.",
+        "CONTENT": {
+          "SURFACE": "Surface navigáció",
+          "LIGHT": "Light navigáció",
+          "HOME": "Kezdőlap",
+          "SEARCH": "Keresés"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Oldalsó navigáció méretei",
+        "DESCRIPTION": "Az oldalsó navigáció különböző méretei: dense, compact (alapértelmezett), comfortable és spacious.",
+        "CONTENT": {
+          "HOME": "Kezdőlap",
+          "SEARCH": "Keresés"
+        }
+      },
+      "NESTED": {
+        "TITLE": "Beágyazott oldalsó navigáció",
+        "DESCRIPTION": "A beágyazott gyermekekkel rendelkező elemek kinyithatók. Az expanded beállítással alapértelmezetten nyitott almenüt adhat meg.",
+        "CONTENT": {
+          "SECTION": "Navigáció",
+          "HOME": "Kezdőlap",
+          "COMPONENTS": "Komponensek",
+          "AVATAR": "Avatar",
+          "SEARCH": "Keresés",
+          "SIDE_NAV": "Oldalsó navigáció"
+        }
+      },
+      "ICONS": {
+        "TITLE": "Oldalsó navigáció ikonokkal",
+        "DESCRIPTION": "A szekciócímek és elemek leading és trailing ikonokat kaphatnak content projectionnel.",
+        "CONTENT": {
+          "SECTION": "Bolt",
+          "HOME": "Kezdőlap",
+          "SETTINGS": "Beállítások"
+        }
+      },
+      "TRAILING_ICON_TOOLTIP": {
+        "TITLE": "Trailing ikon tooltip-pel",
+        "DESCRIPTION": "A trailing ikonokat icon-trailing content projectionnel adhatja meg, az elemeken pedig a hasTooltip beállításával a felirat hoverre tooltipben jelenik meg.",
+        "CONTENT": {
+          "SECTION": "Navigáció",
+          "HOME": "Kezdőlap",
+          "AVATAR": "Avatar",
+          "SEARCH": "Keresés"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Letiltott oldalsó navigációs elem",
+        "DESCRIPTION": "Az elem disabled beállításával megakadályozható a navigáció és az interakció.",
+        "CONTENT": {
+          "SECTION": "Navigáció",
+          "HOME": "Kezdőlap",
+          "ARCHIVED": "Archivált (letiltva)",
+          "SEARCH": "Keresés"
+        }
+      },
+      "ACTIVE_INDICATOR": {
+        "TITLE": "Aktív jelző",
+        "DESCRIPTION": "A hasActiveIndicator engedélyezésével vizuális jelölő jelenik meg az aktív útvonalon. Az elemek a target inputtal és az Angular routerrel határozzák meg az aktív állapotot.",
+        "CONTENT": {
+          "SECTION": "Navigáció",
+          "HOME": "Kezdőlap",
+          "CURRENT": "Aktuális oldal",
+          "SEARCH": "Keresés"
+        }
+      },
+      "ICON_ONLY": {
+        "TITLE": "Csak ikonos oldalsó navigáció",
+        "DESCRIPTION": "A hasLabel false értékre állításával elrejthetők az elemek feliratai. Az elemeken hasTooltip használatával a feliratok hoverre jelennek meg.",
+        "CONTENT": {
+          "SECTION": "Menü",
+          "HOME": "Kezdőlap",
+          "AVATAR": "Avatar",
+          "SEARCH": "Keresés"
+        }
+      },
+      "SEMANTIC": {
+        "TITLE": "Szemantikus oldalsó navigáció",
+        "DESCRIPTION": "Használja az ul[idsSideNavSection] és li[idsSideNavItem] szelektorokat szemantikus lista markuphoz. A li elemek beágyazott gyermekei #idsSideNavItemChildren ng-template-ben adhatók meg.",
+        "CONTENT": {
+          "SECTION": "Szemantikus menü",
+          "HOME": "Kezdőlap",
+          "COMPONENTS": "Komponensek",
+          "AVATAR": "Avatar",
+          "SEARCH": "Keresés"
+        }
+      }
+    },
     "SPINNER": {
       "VARIANTS": {
         "TITLE": "Spinner változatai",

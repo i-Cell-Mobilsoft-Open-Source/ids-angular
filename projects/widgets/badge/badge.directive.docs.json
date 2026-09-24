@@ -1,0 +1,44 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Badge appearance.",
+      "hu": "A jelvény megjelenési módja."
+    },
+    "type": "IdsBadgeAppearanceType"
+  },
+  "label": {
+    "description": {
+      "en": "Badge text.",
+      "hu": "A jelvény szövege."
+    },
+    "type": "string"
+  },
+  "limit": {
+    "description": {
+      "en": "Maximum displayed numeric value. Values above the limit use a plus suffix, for example \"99+\".",
+      "hu": "A számszerű érték megjelenítési felső határa. Például 99-es határ fölött „99+” jelenik meg."
+    },
+    "type": "number"
+  },
+  "showLeadingElement": {
+    "description": {
+      "en": "Indicates that the badge contains an element before its label and uses the corresponding layout.",
+      "hu": "Jelzi, hogy a jelvény a szöveg előtt kiegészítő elemet tartalmaz; ennek megfelelő elrendezést használ."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Badge size.",
+      "hu": "A jelvény mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Badge variant.",
+      "hu": "A jelvény stílusváltozata."
+    },
+    "type": "IdsBadgeVariantType"
+  }
+}

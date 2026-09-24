@@ -1,0 +1,30 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Button appearance.",
+      "hu": "A gomb megjelenési módja."
+    },
+    "type": "IdsButtonAppearanceType"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the button is disabled or not.",
+      "hu": "A gomb letiltása."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Button size.",
+      "hu": "A gomb mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Button variant.",
+      "hu": "A gomb stílusváltozata."
+    },
+    "type": "IdsButtonVariantType"
+  }
+}

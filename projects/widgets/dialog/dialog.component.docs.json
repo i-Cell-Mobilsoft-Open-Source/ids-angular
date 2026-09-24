@@ -1,0 +1,44 @@
+{
+  "isCloseButtonDisabled": {
+    "description": {
+      "en": "Whether the close button is disabled or not.",
+      "hu": "A bezáró gomb letiltása."
+    },
+    "type": "boolean"
+  },
+  "mainTitle": {
+    "description": {
+      "en": "Dialog main title.",
+      "hu": "A párbeszédablak főcíme."
+    },
+    "type": "string"
+  },
+  "showBackdrop": {
+    "description": {
+      "en": "Whether to show dialog backdrop or not.",
+      "hu": "A párbeszédablak mögötti háttérréteg megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "showCloseButton": {
+    "description": {
+      "en": "Whether to show close button or not.",
+      "hu": "A bezáró gomb megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Dialog size.",
+      "hu": "A párbeszédablak mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "subTitle": {
+    "description": {
+      "en": "Dialog sub title.",
+      "hu": "A párbeszédablak alcíme."
+    },
+    "type": "string"
+  }
+}

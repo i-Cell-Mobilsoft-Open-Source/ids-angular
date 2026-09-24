@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -21,17 +23,18 @@ import {
 } from '@i-cell/ids-angular/overlay-panel';
 import { TranslateService } from '@ngx-translate/core';
 
+const BREADCRUMB_DOCS_PATH = 'breadcrumb/breadcrumb.component.docs.json';
+
 type BreadcrumbInputControls = {
   size: IdsSizeType;
   variant: IdsBreadcrumbVariantType;
   dividerType: IdsBreadcrumbDividerType;
-  hierarchy?: IdsBreadcrumbHierarchyType;
 };
 
 type OverlayPanelInputControls = {
-  appearance: IdsOverlayPanelAppearanceType;
-  size: IdsSizeType;
-  variant: IdsOverlayPanelVariantType;
+  overlayAppearance: IdsOverlayPanelAppearanceType;
+  overlaySize: IdsSizeType;
+  overlayVariant: IdsOverlayPanelVariantType;
 };
 
 const breadcrumbDefaultConfig = IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY();
@@ -39,24 +42,25 @@ const breadcrumbDefaultConfig = IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class BreadcrumbDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly breadcrumbInputControlConfig: DemoControlConfig<BreadcrumbInputControls> = {
     size: {
-      description: 'Breadcrumb size.',
+      description: this._widgetDocs.getDescription(BREADCRUMB_DOCS_PATH, 'size', 'Breadcrumb size.'),
       type: 'IdsSizeType',
       control: 'select',
       list: convertEnumToStringArray(IdsSize),
       default: breadcrumbDefaultConfig.size,
     },
     variant: {
-      description: 'Breadcrumb variant.',
+      description: this._widgetDocs.getDescription(BREADCRUMB_DOCS_PATH, 'variant', 'Breadcrumb variant.'),
       type: 'IdsBadgeVariantType',
       control: 'select',
       list: convertEnumToStringArray(IdsBreadcrumbVariant),
       default: breadcrumbDefaultConfig.variant,
     },
     dividerType: {
-      description: 'Divider type.',
+      description: this._widgetDocs.getDescription(BREADCRUMB_DOCS_PATH, 'dividerType', 'Divider type.'),
       type: 'IdsBreadcrumbDividerType',
       control: 'select',
       list: convertEnumToStringArray(IdsBreadcrumbDivider),
@@ -64,23 +68,35 @@ export class BreadcrumbDemoService {
     },
   };
 
+  public readonly breadcrumbPropControlConfig: DemoControlConfig<unknown> = {
+    hierarchy: {
+      description: this._widgetDocs.getDescription(
+        BREADCRUMB_DOCS_PATH,
+        'hierarchy',
+        'Array of breadcrumb items (label, path, disabled) describing the navigation hierarchy.',
+      ),
+      type: 'IdsBreadcrumbHierarchyType[]',
+      default: [],
+    },
+  };
+
   public readonly overlayPanelInputControlConfig: DemoControlConfig<OverlayPanelInputControls> = {
-    appearance: {
-      description: 'Overlay panel appearance.',
+    overlayAppearance: {
+      description: this._widgetDocs.getDescription(BREADCRUMB_DOCS_PATH, 'overlayAppearance', 'Overlay panel appearance.'),
       type: 'IdsOverlayPanelAppearanceType',
       default: breadcrumbDefaultConfig.overlayAppearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOverlayPanelAppearance),
     },
-    size: {
-      description: 'Overlay panel size.',
+    overlaySize: {
+      description: this._widgetDocs.getDescription(BREADCRUMB_DOCS_PATH, 'overlaySize', 'Overlay panel size.'),
       type: 'IdsSizeType',
       default: breadcrumbDefaultConfig.overlaySize,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
-    variant: {
-      description: 'Overlay panel variant.',
+    overlayVariant: {
+      description: this._widgetDocs.getDescription(BREADCRUMB_DOCS_PATH, 'overlayVariant', 'Overlay panel variant.'),
       type: 'IdsOverlayPanelVariantType',
       default: breadcrumbDefaultConfig.overlayVariant,
       control: DemoControl.SELECT,
@@ -149,7 +165,7 @@ export class BreadcrumbDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.BREADCRUMB', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.breadcrumbInputControlConfig,
+        config: { ...this.breadcrumbInputControlConfig, ...this.breadcrumbPropControlConfig },
       },
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OVERLAY_PANEL', 'API.PROPERTY_GROUP.DEFAULT'),

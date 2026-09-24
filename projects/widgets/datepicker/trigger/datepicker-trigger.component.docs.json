@@ -1,0 +1,23 @@
+{
+  "size": {
+    "description": {
+      "en": "Size of the datepicker trigger button.",
+      "hu": "A naptárat megnyitó gomb mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "datepicker": {
+    "description": {
+      "en": "The IdsDatepickerDirective instance the trigger opens the calendar popup for (alias: \"for\"). Required.",
+      "hu": "A gombhoz kapcsolt dátumválasztó példánya. A sablonban for néven köthető; kötelező megadni."
+    },
+    "type": "IdsDatepickerDirective"
+  },
+  "ariaLabel": {
+    "description": {
+      "en": "aria-label for the trigger button.",
+      "hu": "A képernyőolvasók számára megadott megnevezés (aria-label)."
+    },
+    "type": "string | null"
+  }
+}

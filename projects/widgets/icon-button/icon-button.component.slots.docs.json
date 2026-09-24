@@ -1,0 +1,14 @@
+{
+  "content": {
+    "description": {
+      "en": "Custom content of the icon button, projected when allowCustomContent is enabled.",
+      "hu": "Az ikongomb egyedi tartalma, ha az allowCustomContent értéke true."
+    }
+  },
+  "icon": {
+    "description": {
+      "en": "The icon(s) of the icon button, projected via ids-icon elements when allowCustomContent is disabled.",
+      "hu": "Az ikongombba helyezett ids-icon elemek, ha az allowCustomContent értéke false."
+    }
+  }
+}

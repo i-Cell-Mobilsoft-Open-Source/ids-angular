@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -7,6 +9,8 @@ import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_DIVIDER_DEFAULT_CONFIG_FACTORY, IdsDividerVariant, IdsDividerVariantType } from '@i-cell/ids-angular/divider';
 import { TranslateService } from '@ngx-translate/core';
+
+const DIVIDER_DOCS_PATH = 'divider/divider.component.docs.json';
 
 const defaultConfig = IDS_DIVIDER_DEFAULT_CONFIG_FACTORY();
 
@@ -21,37 +25,38 @@ type DividerInputControls = {
 @Injectable()
 export class DividerDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly inputControlConfig: DemoControlConfig<DividerInputControls> = {
     orientation: {
-      description: 'Divider orientation.',
+      description: this._widgetDocs.getDescription(DIVIDER_DOCS_PATH, 'orientation', 'Divider orientation.'),
       type: 'IdsOrientationType',
       default: defaultConfig.orientation,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
     size: {
-      description: 'Divider size.',
+      description: this._widgetDocs.getDescription(DIVIDER_DOCS_PATH, 'size', 'Divider size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Divider variant.',
+      description: this._widgetDocs.getDescription(DIVIDER_DOCS_PATH, 'variant', 'Divider variant.'),
       type: 'IdsDividerVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsDividerVariant),
     },
     width: {
-      description: 'Divider width as css property.',
+      description: this._widgetDocs.getDescription(DIVIDER_DOCS_PATH, 'width', 'Divider width as css property.'),
       type: 'string',
       default: defaultConfig.width,
       demoDefault: '100%',
     },
     height: {
-      description: 'Divider height as css property.',
+      description: this._widgetDocs.getDescription(DIVIDER_DOCS_PATH, 'height', 'Divider height as css property.'),
       type: 'string',
       default: defaultConfig.height,
       demoDefault: '100%',

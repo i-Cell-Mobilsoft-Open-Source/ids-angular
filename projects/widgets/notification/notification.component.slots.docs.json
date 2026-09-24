@@ -1,0 +1,14 @@
+{
+  "content": {
+    "description": {
+      "en": "Default content of the notification, i.e. the notification's message.",
+      "hu": "A értesítés alapértelmezett tartalma, azaz a értesítés üzenete."
+    }
+  },
+  "actionButton": {
+    "description": {
+      "en": "Action button(s) or link(s) projected into the notification (marked with the idsNotificationActionButton attribute).",
+      "hu": "Az értesítés műveleti gombjai vagy hivatkozásai, idsNotificationActionButton attribútummal."
+    }
+  }
+}

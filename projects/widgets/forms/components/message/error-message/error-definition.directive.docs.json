@@ -1,0 +1,9 @@
+{
+  "code": {
+    "description": {
+      "en": "Validation error code associated with the message inside ids-error-def. Required.",
+      "hu": "Az ids-error-def tartalmához rendelt validációs hibakód. Kötelező."
+    },
+    "type": "string"
+  }
+}

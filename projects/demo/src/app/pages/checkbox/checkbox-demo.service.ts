@@ -1,14 +1,20 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY, IdsCheckboxVariant, IdsCheckboxVariantType } from '@i-cell/ids-angular/checkbox';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
+
+const CHECKBOX_DOCS_PATH = 'checkbox/checkbox.component.docs.json';
+const CHECKBOX_SLOTS_DOCS_PATH = 'checkbox/checkbox.component.slots.docs.json';
 
 const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
 
@@ -18,6 +24,11 @@ type CheckboxInputControls = {
   readonly: boolean;
   required: boolean;
   disabled: boolean;
+  name: string;
+  tabIndex: number;
+  'aria-label': string;
+  'aria-labelledby': string;
+  'aria-describedby': string;
 };
 
 type CheckboxHelperControls = {
@@ -27,6 +38,7 @@ type CheckboxHelperControls = {
 @Injectable()
 export class CheckboxDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public form = new FormGroup({
     terms_and_conditions: new FormControl(false, []),
@@ -36,27 +48,27 @@ export class CheckboxDemoService {
 
   public readonly inputControlConfig: DemoControlConfig<CheckboxInputControls> = {
     size: {
-      description: 'Checkbox size.',
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'size', 'Checkbox size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Checkbox variant.',
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'variant', 'Checkbox variant.'),
       type: 'IdsCheckboxVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsCheckboxVariant),
     },
     readonly: {
-      description: 'Whether the checkbox is readonly or not.',
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'readonly', 'Whether the checkbox is readonly or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     required: {
-      description: 'Whether the checkbox is required or not.',
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'required', 'Whether the checkbox must be checked.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -76,7 +88,7 @@ export class CheckboxDemoService {
       },
     },
     disabled: {
-      description: 'Whether the checkbox is disabled or not.',
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'disabled', 'Whether the checkbox is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -91,6 +103,85 @@ export class CheckboxDemoService {
           this.form.controls.marketing_materials.enable();
         }
       },
+    },
+    name: {
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'name', 'Name of the checkbox, used for form submission.'),
+      type: 'string',
+      default: '',
+      control: DemoControl.TEXT,
+    },
+    tabIndex: {
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'tabIndex', 'Tab index of the checkbox.'),
+      type: 'number',
+      default: 0,
+      control: DemoControl.NUMBER,
+      step: 1,
+    },
+    'aria-label': {
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'label', 'aria-label for the checkbox.'),
+      type: 'string',
+      default: '-',
+      demoDefault: '',
+    },
+    'aria-labelledby': {
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'labelledby', 'aria-labelledby for the checkbox.'),
+      type: 'string',
+      default: '-',
+      demoDefault: '',
+    },
+    'aria-describedby': {
+      description: this._widgetDocs.getDescription(CHECKBOX_DOCS_PATH, 'describedby', 'aria-describedby for the checkbox.'),
+      type: 'string',
+      default: '-',
+      demoDefault: '',
+    },
+  };
+
+  public readonly propControlConfig: DemoControlConfig<unknown> = {
+    value: {
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_DOCS_PATH,
+        'value',
+        'Value associated with the checkbox (used to identify the checkbox, e.g. in forms).',
+      ),
+      type: 'unknown',
+      default: '-',
+    },
+    checked: {
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_DOCS_PATH,
+        'checked',
+        'Whether the checkbox is checked. Typically bound via ngModel/formControl.',
+      ),
+      type: 'boolean',
+      default: false,
+    },
+    indeterminate: {
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_DOCS_PATH,
+        'indeterminate',
+        'Whether the checkbox is in an indeterminate state.',
+      ),
+      type: 'boolean',
+      default: false,
+    },
+    change: {
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_DOCS_PATH,
+        'change',
+        'Emitted when the checked state of the checkbox changes.',
+      ),
+      type: 'EventEmitter<IdsCheckBoxChangeEvent>',
+      default: '-',
+    },
+    indeterminateChange: {
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_DOCS_PATH,
+        'indeterminateChange',
+        'Emitted when the indeterminate state of the checkbox changes.',
+      ),
+      type: 'EventEmitter<boolean>',
+      default: '-',
     },
   };
 
@@ -209,8 +300,45 @@ export class CheckboxDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CHECKBOX', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.inputControlConfig,
+        config: { ...this.inputControlConfig, ...this.propControlConfig },
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the checkbox, used as its label.',
+      ),
+    },
+    {
+      name: 'errorMessage',
+      selector: 'ids-error-message',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_SLOTS_DOCS_PATH,
+        'errorMessage',
+        'Projected <ids-error-message> element, shown in the message area when the checkbox is in an error state.',
+      ),
+    },
+    {
+      name: 'hintMessage',
+      selector: 'ids-hint-message',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_SLOTS_DOCS_PATH,
+        'hintMessage',
+        'Projected <ids-hint-message> element, shown in the message area by default.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Checkbox'];
   }
 }

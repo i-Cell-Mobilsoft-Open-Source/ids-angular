@@ -1,8 +1,11 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -10,6 +13,10 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
 import { IDS_SELECT_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/select';
 import { TranslateService } from '@ngx-translate/core';
+
+const FORM_FIELD_DOCS_PATH = 'forms/components/form-field/form-field.component.docs.json';
+const SELECT_DOCS_PATH = 'select/select.component.docs.json';
+const SELECT_SLOTS_DOCS_PATH = 'select/select.component.slots.docs.json';
 
 const formFieldDefaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
@@ -29,6 +36,7 @@ type SelectInputControls = {
   'aria-labelledby': string;
   typeaheadDebounceInterval: number;
   canHandleSuccessState: boolean;
+  tabIndex: number;
 };
 
 type SelectHelperControls = {
@@ -47,16 +55,18 @@ type AnimalOptions = {
 
 @Injectable()
 export class SelectDemoService {
+  private readonly _widgetDocs = inject(WidgetDocsService);
+
   public readonly formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
     size: {
-      description: 'Form field size.',
+      description: this._widgetDocs.getDescription(FORM_FIELD_DOCS_PATH, 'size', 'Form field size.'),
       type: 'IdsSizeType',
       default: formFieldDefaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Form field variant.',
+      description: this._widgetDocs.getDescription(FORM_FIELD_DOCS_PATH, 'variant', 'Form field variant.'),
       type: 'IdsFormFieldVariantType',
       default: formFieldDefaultConfig.variant,
       control: DemoControl.SELECT,
@@ -66,19 +76,19 @@ export class SelectDemoService {
 
   public readonly selectInputControlConfig: DemoControlConfig<SelectInputControls> = {
     placeholder: {
-      description: 'Select placeholder.',
+      description: this._widgetDocs.getDescription(SELECT_DOCS_PATH, 'placeholder', 'Select placeholder.'),
       type: 'string',
       default: '-',
       demoDefault: 'Select animal',
     },
     required: {
-      description: 'Whether the select is required or not.',
+      description: this._widgetDocs.getDescription(SELECT_DOCS_PATH, 'required', 'Whether the select is required or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     disabled: {
-      description: 'Whether the select is disabled or not.',
+      description: this._widgetDocs.getDescription(SELECT_DOCS_PATH, 'disabled', 'Whether the select is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -91,25 +101,29 @@ export class SelectDemoService {
       },
     },
     readonly: {
-      description: 'Whether the select is readonly or not.',
+      description: this._widgetDocs.getDescription(SELECT_DOCS_PATH, 'readonly', 'Whether the select is readonly or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     'aria-label': {
-      description: 'aria-label tag for the select.',
+      description: this._widgetDocs.getDescription(SELECT_DOCS_PATH, 'label', 'aria-label tag for the select.'),
       type: 'string',
       default: '-',
       demoDefault: 'animal',
     },
     'aria-labelledby': {
-      description: 'aria-labelledby tag for select.',
+      description: this._widgetDocs.getDescription(SELECT_DOCS_PATH, 'labelledby', 'aria-labelledby tag for select.'),
       type: 'string',
       default: '-',
       demoDefault: 'animal',
     },
     typeaheadDebounceInterval: {
-      description: 'Number in millisec. Can not overwrite at runtime.',
+      description: this._widgetDocs.getDescription(
+        SELECT_DOCS_PATH,
+        'typeaheadDebounceInterval',
+        'Debounce interval in milliseconds for keyboard typeahead search. Can be changed at runtime.',
+      ),
       type: 'number',
       default: selectDefaultConfig.typeaheadDebounceInterval,
       min: 0,
@@ -117,10 +131,69 @@ export class SelectDemoService {
       disabled: true,
     },
     canHandleSuccessState: {
-      description: 'Whether the select can handle success state with a success state matcher.',
+      description: this._widgetDocs.getDescription(
+        SELECT_DOCS_PATH,
+        'canHandleSuccessState',
+        'Whether the select can handle success state with a success state matcher.',
+      ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
+    },
+    tabIndex: {
+      description: this._widgetDocs.getDescription(SELECT_DOCS_PATH, 'tabIndex', 'Tab index of the select.'),
+      type: 'number',
+      default: 0,
+      control: DemoControl.NUMBER,
+      step: 1,
+    },
+  };
+
+  public readonly selectPropControlConfig: DemoControlConfig<unknown> = {
+    multiSelect: {
+      description: this._widgetDocs.getDescription(
+        SELECT_DOCS_PATH,
+        'multiSelect',
+        'Whether the select allows selecting multiple options at once.',
+      ),
+      type: 'boolean',
+      default: false,
+    },
+    valueCompareFn: {
+      description: this._widgetDocs.getDescription(
+        SELECT_DOCS_PATH,
+        'valueCompareFn',
+        'Function used to compare option values when determining selection state.',
+      ),
+      type: '(o1: unknown, o2: unknown) => boolean',
+      default: '-',
+    },
+    sortCompareFn: {
+      description: this._widgetDocs.getDescription(
+        SELECT_DOCS_PATH,
+        'sortCompareFn',
+        'Function used to sort selected options (only relevant when multiSelect is true).',
+      ),
+      type: '(a: IdsOptionComponent, b: IdsOptionComponent, options: readonly IdsOptionComponent[]) => number',
+      default: '-',
+    },
+    errorStateMatcher: {
+      description: this._widgetDocs.getDescription(
+        SELECT_DOCS_PATH,
+        'errorStateMatcher',
+        'Matcher instance used to determine whether the select should show an error state.',
+      ),
+      type: 'AbstractErrorStateMatcher',
+      default: '-',
+    },
+    successStateMatcher: {
+      description: this._widgetDocs.getDescription(
+        SELECT_DOCS_PATH,
+        'successStateMatcher',
+        'Matcher instance used to determine whether the select should show a success state.',
+      ),
+      type: 'AbstractSuccessStateMatcher',
+      default: '-',
     },
   };
 
@@ -269,8 +342,36 @@ export class SelectDemoService {
       },
       {
         title: getDemoApiTitle(this.translate, 'COMPONENTS.SELECT', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.selectInputControlConfig,
+        config: { ...this.selectInputControlConfig, ...this.selectPropControlConfig },
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'trigger',
+      selector: 'ids-select-trigger',
+      description: this._widgetDocs.getDescription(
+        SELECT_SLOTS_DOCS_PATH,
+        'trigger',
+        'Projected <ids-select-trigger> element used to render a custom trigger value instead of the default selected text.',
+      ),
+    },
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        SELECT_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the select, i.e. the projected <ids-option>/<ids-option-group> elements shown in the dropdown panel.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Select'];
   }
 }

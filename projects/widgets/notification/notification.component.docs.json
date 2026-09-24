@@ -1,0 +1,86 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Notification appearance.",
+      "hu": "Az értesítés megjelenési módja."
+    },
+    "type": "IdsNotificationAppearanceType"
+  },
+  "closable": {
+    "description": {
+      "en": "Whether the notification is closable or not.",
+      "hu": "A felhasználó bezárhatja az értesítést."
+    },
+    "type": "boolean"
+  },
+  "closeButtonLabel": {
+    "description": {
+      "en": "Title of close button",
+      "hu": "A bezáró gomb felirata. Megadásakor az ikon helyett szöveges gomb jelenik meg."
+    },
+    "type": "string"
+  },
+  "closeButtonSize": {
+    "description": {
+      "en": "Close Button size.",
+      "hu": "A bezáró gomb mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "closeLabelButtonAppearance": {
+    "description": {
+      "en": "Close Label Button appearance.",
+      "hu": "A feliratos bezáró gomb megjelenési módja."
+    },
+    "type": "IdsButtonAppearanceType"
+  },
+  "closed": {
+    "description": {
+      "en": "Emitted when the notification is closed (either via the close button or programmatically).",
+      "hu": "Az értesítés bezárásakor jelző esemény."
+    },
+    "type": "EventEmitter<void>"
+  },
+  "displayActionsAtBottom": {
+    "description": {
+      "en": "Whether display the notification actions at bottom or not.",
+      "hu": "A műveleti gombok az értesítés alján jelennek meg."
+    },
+    "type": "boolean"
+  },
+  "icon": {
+    "description": {
+      "en": "Name of leading icon.",
+      "hu": "Az értesítés szövege előtt megjelenő ikon neve."
+    },
+    "type": "string"
+  },
+  "size": {
+    "description": {
+      "en": "Notification size.",
+      "hu": "Az értesítés mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "title": {
+    "description": {
+      "en": "Title of notification",
+      "hu": "Az értesítés címe."
+    },
+    "type": "string"
+  },
+  "urgent": {
+    "description": {
+      "en": "Whether to announce the notification as urgent: uses role=\"alert\" instead of role=\"status\".",
+      "hu": "Sürgős üzenetként jelzi az értesítést a képernyőolvasóknak: a role értéke alert, egyébként status."
+    },
+    "type": "boolean"
+  },
+  "variant": {
+    "description": {
+      "en": "Notification variant.",
+      "hu": "Az értesítés stílusváltozata."
+    },
+    "type": "IdsNotificationVariantType"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "trigger": {
+    "description": {
+      "en": "Projected <ids-select-trigger> element used to render a custom trigger value instead of the default selected text.",
+      "hu": "A zárt választómező egyedi tartalma (<ids-select-trigger>), amely a kiválasztott érték szokásos szövege helyett jelenik meg."
+    }
+  },
+  "content": {
+    "description": {
+      "en": "Default content of the select, i.e. the projected <ids-option>/<ids-option-group> elements shown in the dropdown panel.",
+      "hu": "A legördülő listában megjelenő <ids-option> és <ids-option-group> elemek."
+    }
+  }
+}

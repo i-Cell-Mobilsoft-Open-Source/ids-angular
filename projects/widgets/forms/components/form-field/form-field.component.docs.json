@@ -1,0 +1,16 @@
+{
+  "size": {
+    "description": {
+      "en": "Form field size.",
+      "hu": "Az űrlapmező mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Form field variant.",
+      "hu": "Az űrlapmező stílusváltozata."
+    },
+    "type": "IdsFormFieldVariantType"
+  }
+}

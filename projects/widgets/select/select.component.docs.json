@@ -1,0 +1,100 @@
+{
+  "canHandleSuccessState": {
+    "description": {
+      "en": "Whether the select can handle success state with a success state matcher.",
+      "hu": "Engedélyezi a sikeres állapot jelzését a successStateMatcher alapján."
+    },
+    "type": "boolean"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the select is disabled or not.",
+      "hu": "A választómező letiltása."
+    },
+    "type": "boolean"
+  },
+  "errorStateMatcher": {
+    "description": {
+      "en": "Matcher instance used to determine whether the select should show an error state.",
+      "hu": "Az a szabályrendszer, amely eldönti, mikor jelenjen meg a mező hibás állapotban."
+    },
+    "type": "AbstractErrorStateMatcher"
+  },
+  "label": {
+    "description": {
+      "en": "aria-label tag for the select.",
+      "hu": "A képernyőolvasók számára megadott megnevezés (aria-label)."
+    },
+    "type": "string"
+  },
+  "labelledby": {
+    "description": {
+      "en": "aria-labelledby tag for select.",
+      "hu": "A feliratot tartalmazó HTML-elemek azonosítói, szóközzel elválasztva."
+    },
+    "type": "string"
+  },
+  "multiSelect": {
+    "description": {
+      "en": "Whether the select allows selecting multiple options at once.",
+      "hu": "Egyszerre több elem kiválasztásának engedélyezése."
+    },
+    "type": "boolean"
+  },
+  "placeholder": {
+    "description": {
+      "en": "Select placeholder.",
+      "hu": "Az üres mezőben megjelenő helyőrző szöveg."
+    },
+    "type": "string"
+  },
+  "readonly": {
+    "description": {
+      "en": "Whether the select is readonly or not.",
+      "hu": "Csak olvasható állapot: a felhasználó nem módosíthatja az értéket."
+    },
+    "type": "boolean"
+  },
+  "required": {
+    "description": {
+      "en": "Whether the select is required or not.",
+      "hu": "Megadja, hogy kötelező-e értéket választani vagy megadni."
+    },
+    "type": "boolean"
+  },
+  "sortCompareFn": {
+    "description": {
+      "en": "Function used to sort selected options (only relevant when multiSelect is true).",
+      "hu": "A kiválasztott elemek sorrendjét meghatározó összehasonlító függvény. Többszörös kiválasztásnál használatos."
+    },
+    "type": "(a: IdsOptionComponent, b: IdsOptionComponent, options: readonly IdsOptionComponent[]) => number"
+  },
+  "successStateMatcher": {
+    "description": {
+      "en": "Matcher instance used to determine whether the select should show a success state.",
+      "hu": "Az a szabályrendszer, amely eldönti, mikor jelenjen meg a mező sikeres állapotban."
+    },
+    "type": "AbstractSuccessStateMatcher"
+  },
+  "tabIndex": {
+    "description": {
+      "en": "Tab index of the select.",
+      "hu": "A billentyűzetes fókuszsorrendet beállító tabindex érték."
+    },
+    "type": "number"
+  },
+  "typeaheadDebounceInterval": {
+    "description": {
+      "en": "Debounce interval in milliseconds for keyboard typeahead search. Can be changed at runtime.",
+      "hu": "A billentyűzettel begépelt keresés várakozási ideje ezredmásodpercben. Futás közben is módosítható."
+    },
+    "type": "number"
+  },
+  "valueCompareFn": {
+    "description": {
+      "en": "Function used to compare option values when determining selection state.",
+      "hu": "A kiválasztás egyeztetéséhez használt összehasonlító függvény."
+    },
+    "type": "(o1: unknown, o2: unknown) => boolean"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Appearance of the chips in the group.",
+      "hu": "A csoport chipjeinek megjelenési módja."
+    },
+    "type": "IdsChipAppearanceType"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the chips in the group are disabled.",
+      "hu": "A csoport chipjeinek letiltása."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the chips in the group.",
+      "hu": "A csoport chipjeinek mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

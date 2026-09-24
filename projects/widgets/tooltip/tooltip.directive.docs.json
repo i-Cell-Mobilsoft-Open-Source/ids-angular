@@ -1,0 +1,86 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Determines if the tooltip is disabled.",
+      "hu": "A súgóbuborék letiltása."
+    },
+    "type": "boolean"
+  },
+  "hideDelay": {
+    "description": {
+      "en": "The delay (in milliseconds) before the tooltip disappears after losing focus.",
+      "hu": "Az elrejtés késleltetése ezredmásodpercben."
+    },
+    "type": "number"
+  },
+  "ignoreClipped": {
+    "description": {
+      "en": "Whether to keep the tooltip open when it is clipped by a scrollable container.",
+      "hu": "Nem rejti el a súgóbuborékot, ha annak egy része a görgethető területen kívülre kerül."
+    },
+    "type": "boolean"
+  },
+  "message": {
+    "description": {
+      "en": "The text displayed inside the tooltip.",
+      "hu": "A súgóbuborék szövege."
+    },
+    "type": "string"
+  },
+  "position": {
+    "description": {
+      "en": "The position of the tooltip relative to the target element.",
+      "hu": "A súgóbuborék helye a kapcsolódó elemhez képest."
+    },
+    "type": "IdsTooltipPositionType"
+  },
+  "showDelay": {
+    "description": {
+      "en": "The delay (in milliseconds) before the tooltip appears after hovering.",
+      "hu": "A megjelenés késleltetése ezredmásodpercben az egérmutató ráhelyezése után."
+    },
+    "type": "number"
+  },
+  "showPointer": {
+    "description": {
+      "en": "Whether to show tooltip pointer or not.",
+      "hu": "A kapcsolódó elem felé mutató nyíl megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "The size of the tooltip.",
+      "hu": "A súgóbuborék mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "textAlign": {
+    "description": {
+      "en": "The text alignment inside the tooltip.",
+      "hu": "A súgóbuborék szövegének igazítása."
+    },
+    "type": "IdsTooltipTextAlign"
+  },
+  "tooltipClass": {
+    "description": {
+      "en": "Additional CSS class(es) to apply to the tooltip.",
+      "hu": "A súgóbuborékhoz hozzáadott CSS-osztályok."
+    },
+    "type": "string"
+  },
+  "touchGestures": {
+    "description": {
+      "en": "Specifies the touch gestures behavior for the tooltip (auto, on, off).",
+      "hu": "Az érintéses vezérlés módja: auto (automatikus), on (bekapcsolva) vagy off (kikapcsolva)."
+    },
+    "type": "IdsTooltipTouchGestures"
+  },
+  "variant": {
+    "description": {
+      "en": "The variant or style of the tooltip.",
+      "hu": "A súgóbuborék stílusváltozata."
+    },
+    "type": "IdsTooltipVariantType"
+  }
+}

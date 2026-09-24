@@ -1,0 +1,9 @@
+{
+  "size": {
+    "description": {
+      "en": "Size of the buttons in the group.",
+      "hu": "A csoport gombjainak mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

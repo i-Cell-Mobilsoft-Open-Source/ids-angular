@@ -1,0 +1,107 @@
+{
+  "change": {
+    "description": {
+      "en": "Emitted when the checked state of the checkbox changes.",
+      "hu": "A bejelölt állapot változásakor jelző esemény."
+    },
+    "type": "EventEmitter<IdsCheckBoxChangeEvent>"
+  },
+  "checked": {
+    "description": {
+      "en": "Whether the checkbox is checked. Typically bound via ngModel/formControl.",
+      "hu": "A jelölőnégyzet bejelölt állapota. Általában ngModel vagy formControl köti az űrlap értékéhez."
+    },
+    "type": "boolean"
+  },
+  "describedby": {
+    "description": {
+      "en": "aria-describedby for the checkbox.",
+      "hu": "A kiegészítő leírást tartalmazó HTML-elemek azonosítói, szóközzel elválasztva (aria-describedby)."
+    },
+    "type": "string"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the checkbox is disabled or not.",
+      "hu": "A jelölőnégyzet letiltása."
+    },
+    "type": "boolean"
+  },
+  "indeterminate": {
+    "description": {
+      "en": "Whether the checkbox is in an indeterminate state.",
+      "hu": "Részleges kijelölést jelző állapot, például amikor egy csoportnak csak néhány eleme van bejelölve."
+    },
+    "type": "boolean"
+  },
+  "indeterminateChange": {
+    "description": {
+      "en": "Emitted when the indeterminate state of the checkbox changes.",
+      "hu": "A részleges kijelölést jelző állapot változásakor jelző esemény."
+    },
+    "type": "EventEmitter<boolean>"
+  },
+  "label": {
+    "description": {
+      "en": "aria-label for the checkbox.",
+      "hu": "A képernyőolvasók számára megadott megnevezés (aria-label)."
+    },
+    "type": "string"
+  },
+  "labelledby": {
+    "description": {
+      "en": "aria-labelledby for the checkbox.",
+      "hu": "A feliratot tartalmazó HTML-elemek azonosítói, szóközzel elválasztva."
+    },
+    "type": "string"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the checkbox, used for form submission.",
+      "hu": "A jelölőnégyzet name attribútuma."
+    },
+    "type": "string"
+  },
+  "readonly": {
+    "description": {
+      "en": "Whether the checkbox is readonly or not.",
+      "hu": "Csak olvasható állapot: a felhasználó nem módosíthatja az értéket."
+    },
+    "type": "boolean"
+  },
+  "required": {
+    "description": {
+      "en": "Whether the checkbox must be checked.",
+      "hu": "A jelölőnégyzet bejelölése kötelező."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Checkbox size.",
+      "hu": "A jelölőnégyzet mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "tabIndex": {
+    "description": {
+      "en": "Tab index of the checkbox.",
+      "hu": "A billentyűzetes fókuszsorrendet beállító tabindex érték."
+    },
+    "type": "number"
+  },
+  "value": {
+    "description": {
+      "en": "Value associated with the checkbox (used to identify the checkbox, e.g. in forms).",
+      "hu": "A jelölőnégyzethez rendelt érték, például az űrlapon belüli azonosításhoz."
+    },
+    "type": "unknown"
+  },
+  "variant": {
+    "description": {
+      "en": "Checkbox variant.",
+      "hu": "A jelölőnégyzet stílusváltozata."
+    },
+    "type": "IdsCheckboxVariantType"
+  }
+}

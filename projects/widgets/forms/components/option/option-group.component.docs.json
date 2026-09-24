@@ -1,0 +1,16 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether all options in the group are disabled.",
+      "hu": "A csoport összes választási lehetőségének letiltása."
+    },
+    "type": "boolean"
+  },
+  "label": {
+    "description": {
+      "en": "Label of the option group.",
+      "hu": "A választási lehetőségek csoportjának felirata."
+    },
+    "type": "string"
+  }
+}

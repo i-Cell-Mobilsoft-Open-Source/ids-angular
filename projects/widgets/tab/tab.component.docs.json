@@ -1,0 +1,30 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether the tab item is disabled or not.",
+      "hu": "A fül letiltása."
+    },
+    "type": "boolean"
+  },
+  "label": {
+    "description": {
+      "en": "Label of the tab item.",
+      "hu": "A fül felirata."
+    },
+    "type": "string"
+  },
+  "leadingIcon": {
+    "description": {
+      "en": "Name of the leading icon.",
+      "hu": "A fül felirata előtt megjelenő ikon neve."
+    },
+    "type": "string"
+  },
+  "trailingIcon": {
+    "description": {
+      "en": "Name of the trailing icon.",
+      "hu": "A fül felirata után megjelenő ikon neve."
+    },
+    "type": "string"
+  }
+}

@@ -1,16 +1,21 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
-import { IDS_BADGE_DEFAULT_CONFIG_FACTORY, IdsBadgeVariant, IdsBadgeVariantType } from '@i-cell/ids-angular/badge';
+import { IDS_BADGE_DEFAULT_CONFIG_FACTORY, IdsBadgeAppearance, IdsBadgeAppearanceType, IdsBadgeVariant, IdsBadgeVariantType } from '@i-cell/ids-angular/badge';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
+const BADGE_DOCS_PATH = 'badge/badge.component.docs.json';
+
 type BadgeInputControls = {
+  appearance: IdsBadgeAppearanceType;
   size: IdsSizeType;
   variant: IdsBadgeVariantType;
-  hasLeadingIcon: boolean;
+  showLeadingElement: boolean;
   label: string;
   limit: number | null;
 };
@@ -20,36 +25,52 @@ const defaultConfig = IDS_BADGE_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class BadgeDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly inputControlConfig: DemoControlConfig<BadgeInputControls> = {
+    appearance: {
+      description: this._widgetDocs.getDescription(BADGE_DOCS_PATH, 'appearance', 'Badge appearance.'),
+      type: 'IdsBadgeAppearanceType',
+      default: defaultConfig.appearance,
+      list: Object.values(IdsBadgeAppearance),
+      control: 'select',
+    },
     size: {
-      description: 'Badge size.',
+      description: this._widgetDocs.getDescription(BADGE_DOCS_PATH, 'size', 'Badge size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       list: Object.values(IdsSize),
       control: 'select',
     },
     variant: {
-      description: 'Badge variant.',
+      description: this._widgetDocs.getDescription(BADGE_DOCS_PATH, 'variant', 'Badge variant.'),
       type: 'IdsBadgeVariantType',
       default: defaultConfig.variant,
       list: Object.values(IdsBadgeVariant),
       control: 'select',
     },
-    hasLeadingIcon: {
-      description: 'Has leading icon.',
+    showLeadingElement: {
+      description: this._widgetDocs.getDescription(
+        BADGE_DOCS_PATH,
+        'showLeadingElement',
+        'Indicates that the badge contains an element before its label and uses the corresponding layout.',
+      ),
       type: 'boolean',
       control: 'switch',
       default: defaultConfig.showLeadingElement,
     },
     label: {
-      description: 'Badge text.',
+      description: this._widgetDocs.getDescription(BADGE_DOCS_PATH, 'label', 'Badge text.'),
       type: 'string',
       default: '',
       demoDefault: '1000',
     },
     limit: {
-      description: 'Badge limit.',
+      description: this._widgetDocs.getDescription(
+        BADGE_DOCS_PATH,
+        'limit',
+        'Maximum displayed numeric value. Values above the limit use a plus suffix, for example "99+".',
+      ),
       type: 'number',
       default: null,
       demoDefault: 100,

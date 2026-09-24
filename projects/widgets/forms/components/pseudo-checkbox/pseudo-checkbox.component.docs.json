@@ -1,0 +1,16 @@
+{
+  "checkboxState": {
+    "description": {
+      "en": "State of the pseudo-checkbox: unchecked, checked or indeterminate.",
+      "hu": "A jelölés állapota: unchecked (üres), checked (bejelölt) vagy indeterminate (részlegesen kijelölt)."
+    },
+    "type": "IdsPseudoCheckboxStateType"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the pseudo-checkbox is disabled.",
+      "hu": "A jelölést megjelenítő komponens letiltása."
+    },
+    "type": "boolean"
+  }
+}

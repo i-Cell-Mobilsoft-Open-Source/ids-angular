@@ -1,0 +1,20 @@
+{
+  "hintMessage": {
+    "description": {
+      "en": "Projected <ids-hint-message> element, shown next to the group's legend.",
+      "hu": "Beillesztett <ids-hint-message> elem, amely a csoport felirata mellett jelenik meg."
+    }
+  },
+  "content": {
+    "description": {
+      "en": "Default content of the radio group, i.e. the projected <ids-radio> items.",
+      "hu": "A csoport választógombjai (<ids-radio> elemek)."
+    }
+  },
+  "errorMessage": {
+    "description": {
+      "en": "Projected <ids-error-message> element, shown below the radio list when the group is in an error state.",
+      "hu": "Beillesztett <ids-error-message> elem, amely hibaállapot esetén jelenik meg a választógombok alatt."
+    }
+  }
+}

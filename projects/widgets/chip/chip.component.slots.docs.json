@@ -1,0 +1,26 @@
+{
+  "avatar": {
+    "description": {
+      "en": "Projected <ids-avatar> element shown at the start of the chip.",
+      "hu": "Beillesztett <ids-avatar> elem, amely a chip elején jelenik meg."
+    }
+  },
+  "idsLeadingIcon": {
+    "description": {
+      "en": "Content projected before the label (marked with the idsLeadingIcon attribute), typically an <ids-icon>.",
+      "hu": "A felirat elé beillesztett tartalom (idsLeadingIcon attribútummal megjelölve), jellemzően egy <ids-icon>."
+    }
+  },
+  "content": {
+    "description": {
+      "en": "Default content of the chip, i.e. the chip's label.",
+      "hu": "A chip alapértelmezett tartalma, azaz a chip felirata."
+    }
+  },
+  "actionButton": {
+    "description": {
+      "en": "Custom action button projected instead of the built-in remove button (marked with the idsIconButton attribute), rendered only when removable is false.",
+      "hu": "Egyedi műveleti gomb idsIconButton attribútummal. A beépített eltávolító gomb helyett jelenik meg, ha a removable értéke false."
+    }
+  }
+}

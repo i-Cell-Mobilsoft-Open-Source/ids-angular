@@ -1,0 +1,65 @@
+{
+  "actions": {
+    "description": {
+      "en": "Array of actions (label + callback) rendered as buttons inside the snackbar.",
+      "hu": "Az értesítés műveleti gombjai: minden elemhez felirat és végrehajtandó függvény tartozik."
+    },
+    "type": "IdsSnackbarAction[]"
+  },
+  "allowDismiss": {
+    "description": {
+      "en": "Whether the the user can close the snackbar or not.",
+      "hu": "A felhasználó bezárhatja az értesítést."
+    },
+    "type": "boolean"
+  },
+  "autoClose": {
+    "description": {
+      "en": "Whether the snackbar should close automatically or not. The duration is a computed data based on some constant value.",
+      "hu": "Az értesítés automatikus bezárása a számított megjelenítési idő leteltével."
+    },
+    "type": "boolean"
+  },
+  "closeButtonLabel": {
+    "description": {
+      "en": "Custom close button. If any text is provided, the close button will be a button with this text against the default \"x\" button.",
+      "hu": "A bezáró gomb felirata. Megadásakor az ikon helyett szöveges gomb jelenik meg."
+    },
+    "type": "string"
+  },
+  "closed": {
+    "description": {
+      "en": "Emitted when the snackbar is closed.",
+      "hu": "Az átmeneti értesítés bezárásakor jelző esemény."
+    },
+    "type": "EventEmitter<void>"
+  },
+  "icon": {
+    "description": {
+      "en": "Custom icon for snackbar. Overwites default icon. Default icon depends on variant.",
+      "hu": "Egyedi ikon, amely felülírja a stílusváltozathoz tartozó alapértelmezett ikont."
+    },
+    "type": "string"
+  },
+  "message": {
+    "description": {
+      "en": "Snackbar message",
+      "hu": "Az átmeneti értesítés szövege."
+    },
+    "type": "string"
+  },
+  "urgent": {
+    "description": {
+      "en": "Whether to announce the notification as urgent: uses role=\"alert\" instead of role=\"status\".",
+      "hu": "Sürgős üzenetként jelzi az értesítést a képernyőolvasóknak: a role értéke alert, egyébként status."
+    },
+    "type": "boolean"
+  },
+  "variant": {
+    "description": {
+      "en": "Snackbar variant.",
+      "hu": "Az átmeneti értesítés stílusváltozata."
+    },
+    "type": "IdsSnackbarVariantType"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "icon": {
+    "description": {
+      "en": "Projected <ids-icon> element shown before the label, unless the built-in active/selected icon is shown instead.",
+      "hu": "Beillesztett <ids-icon> elem, amely a felirat előtt jelenik meg, kivéve ha helyette a beépített aktív/kiválasztott ikon látszik."
+    }
+  },
+  "suffixContent": {
+    "description": {
+      "en": "Content projected after the label (marked with the suffixContent attribute).",
+      "hu": "A felirat után beillesztett tartalom (suffixContent attribútummal megjelölve)."
+    }
+  }
+}

@@ -1,13 +1,19 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_DIALOG_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/dialog';
 import { TranslateService } from '@ngx-translate/core';
+
+const DIALOG_DOCS_PATH = 'dialog/dialog.component.docs.json';
+const DIALOG_SLOTS_DOCS_PATH = 'dialog/dialog.component.slots.docs.json';
 
 const defaultConfig = IDS_DIALOG_DEFAULT_CONFIG_FACTORY();
 
@@ -28,41 +34,46 @@ type DialogHelperControls = {
 @Injectable()
 export class DialogDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly inputControlConfig: DemoControlConfig<DialogInputControls> = {
     size: {
-      description: 'Dialog size.',
+      description: this._widgetDocs.getDescription(DIALOG_DOCS_PATH, 'size', 'Dialog size.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     mainTitle: {
-      description: 'Dialog main title.',
+      description: this._widgetDocs.getDescription(DIALOG_DOCS_PATH, 'mainTitle', 'Dialog main title.'),
       type: 'string',
       default: '-',
       demoDefault: 'Dialog main title',
     },
     subTitle: {
-      description: 'Dialog sub title.',
+      description: this._widgetDocs.getDescription(DIALOG_DOCS_PATH, 'subTitle', 'Dialog sub title.'),
       type: 'string',
       default: '-',
       demoDefault: 'Dialog sub title',
     },
     showCloseButton: {
-      description: 'Whether to show close button or not.',
+      description: this._widgetDocs.getDescription(DIALOG_DOCS_PATH, 'showCloseButton', 'Whether to show close button or not.'),
       type: 'boolean',
       default: defaultConfig.showCloseButton,
       control: DemoControl.SWITCH,
     },
     isCloseButtonDisabled: {
-      description: 'Whether the close button is disabled or not.',
+      description: this._widgetDocs.getDescription(
+        DIALOG_DOCS_PATH,
+        'isCloseButtonDisabled',
+        'Whether the close button is disabled or not.',
+      ),
       type: 'boolean',
       default: defaultConfig.isCloseButtonDisabled,
       control: DemoControl.SWITCH,
     },
     showBackdrop: {
-      description: 'Whether to show dialog backdrop or not.',
+      description: this._widgetDocs.getDescription(DIALOG_DOCS_PATH, 'showBackdrop', 'Whether to show dialog backdrop or not.'),
       type: 'boolean',
       default: defaultConfig.showBackdrop,
       control: DemoControl.SWITCH,
@@ -120,5 +131,34 @@ export class DialogDemoService {
         config: this.inputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'idsDialogContent',
+      selector: '[idsDialogContent]',
+      description: this._widgetDocs.getDescription(
+        DIALOG_SLOTS_DOCS_PATH,
+        'idsDialogContent',
+        'Content projected into the scrollable body area of the dialog (marked with the idsDialogContent attribute).',
+      ),
+    },
+    {
+      name: 'idsDialogActions',
+      selector: '[idsDialogActions]',
+      description: this._widgetDocs.getDescription(
+        DIALOG_SLOTS_DOCS_PATH,
+        'idsDialogActions',
+        'Content projected into the footer of the dialog (marked with the idsDialogActions attribute), typically action buttons.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Dialog'];
   }
 }

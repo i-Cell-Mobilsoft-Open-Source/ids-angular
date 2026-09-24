@@ -1,3 +1,5 @@
+import { Signal } from '@angular/core';
+
 export const DemoControl = {
   CHECKBOX: 'checkbox',
   SWITCH: 'switch',
@@ -12,7 +14,7 @@ export const DemoControl = {
 export type DemoControlType = (typeof DemoControl)[keyof typeof DemoControl];
 
 export type DemoControlItem<T> = {
-  description: string,
+  description: string | Signal<string>,
   type: string,
   default: T,
   demoDefault?: T,

@@ -1,0 +1,51 @@
+{
+  "dividerType": {
+    "description": {
+      "en": "Divider type.",
+      "hu": "Az elválasztó típusa."
+    },
+    "type": "IdsBreadcrumbDividerType"
+  },
+  "hierarchy": {
+    "description": {
+      "en": "Array of breadcrumb items (label, path, disabled) describing the navigation hierarchy.",
+      "hu": "A navigációs útvonal elemei: felirat, útvonal és letiltott állapot (label, path, disabled)."
+    },
+    "type": "IdsBreadcrumbHierarchyType[]"
+  },
+  "overlayAppearance": {
+    "description": {
+      "en": "Overlay panel appearance.",
+      "hu": "A lenyíló panel megjelenési módja."
+    },
+    "type": "IdsOverlayPanelAppearanceType"
+  },
+  "overlaySize": {
+    "description": {
+      "en": "Overlay panel size.",
+      "hu": "A lenyíló panel mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "overlayVariant": {
+    "description": {
+      "en": "Overlay panel variant.",
+      "hu": "A lenyíló panel stílusváltozata."
+    },
+    "type": "IdsOverlayPanelVariantType"
+  },
+  "size": {
+    "description": {
+      "en": "Breadcrumb size.",
+      "hu": "A morzsamenü mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Breadcrumb variant.",
+      "hu": "A morzsamenü stílusváltozata."
+    },
+    "type": "IdsBadgeVariantType"
+  }
+}

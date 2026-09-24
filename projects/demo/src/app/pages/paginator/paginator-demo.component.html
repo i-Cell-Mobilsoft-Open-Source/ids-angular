@@ -7,6 +7,7 @@
     >
       <ng-container component>
         <ids-paginator
+          [(pageIndex)]="_paginatorDemoService.model.pageIndex"
           [length]="_paginatorDemoService.model.length"
           [pageSize]="_paginatorDemoService.model.pageSize"
           [pageSizeOptions]="_paginatorDemoService.model.pageSizeOptions"

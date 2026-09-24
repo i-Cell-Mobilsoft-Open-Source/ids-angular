@@ -1,0 +1,114 @@
+{
+  "compactLayout": {
+    "description": {
+      "en": "Whether to use a compact layout for the paginator.",
+      "hu": "A lapozó helytakarékos elrendezésének használata."
+    },
+    "type": "boolean"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the paginator is disabled.",
+      "hu": "A lapozó letiltása."
+    },
+    "type": "boolean"
+  },
+  "length": {
+    "description": {
+      "en": "The total number of items to paginate.",
+      "hu": "A lapozandó elemek teljes száma."
+    },
+    "type": "number"
+  },
+  "maxDisplayedItemCount": {
+    "description": {
+      "en": "The maximum number of items to display in the paginator.",
+      "hu": "A lapozóban egyszerre megjeleníthető oldalgombok legnagyobb száma."
+    },
+    "type": "number"
+  },
+  "pageButtonAppearance": {
+    "description": {
+      "en": "The appearance of the paginator buttons",
+      "hu": "Az oldalgombok megjelenési módja."
+    },
+    "type": "IdsIconButtonAppearanceType"
+  },
+  "pageChanged": {
+    "description": {
+      "en": "Emitted whenever the current page changes, with details about the new page.",
+      "hu": "Oldalváltáskor jelző esemény, az új oldal adataival."
+    },
+    "type": "EventEmitter<IdsPaginatorPageChangeEvent>"
+  },
+  "pageIndex": {
+    "description": {
+      "en": "The current (0-based) page index. Two-way bindable.",
+      "hu": "Az aktuális oldal nullától induló indexe. Kétirányú adatkötéssel is használható."
+    },
+    "type": "number"
+  },
+  "pageSize": {
+    "description": {
+      "en": "The number of items per page.",
+      "hu": "Az oldalankénti elemek száma."
+    },
+    "type": "number"
+  },
+  "pageSizeOptions": {
+    "description": {
+      "en": "Array of available page size options.",
+      "hu": "A választható oldalankénti elemszámok."
+    },
+    "type": "number[]"
+  },
+  "showAllPages": {
+    "description": {
+      "en": "Whether to display all pages in the paginator.",
+      "hu": "Az összes oldal gombjának megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "showFirstLastButton": {
+    "description": {
+      "en": "Whether to show \"First\" and \"Last\" buttons in the paginator.",
+      "hu": "Az első és utolsó oldalra ugró gombok megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "showPageButtons": {
+    "description": {
+      "en": "Whether to display individual page buttons.",
+      "hu": "Az egyes oldalakra ugró gombok megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "showPageInfo": {
+    "description": {
+      "en": "Whether to display page information (e.g., \"Page 1 of 10\").",
+      "hu": "Az aktuális oldalszám és az összes oldal számának megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "showPrevNextLabel": {
+    "description": {
+      "en": "Whether to display labels for \"Previous\" and \"Next\" buttons. Works only when compactLayout is true.",
+      "hu": "Felirat megjelenítése az előző és következő oldal gombján. Csak compactLayout esetén érvényes."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "The size of the paginator component",
+      "hu": "A lapozó mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "The variant/style of the paginator",
+      "hu": "A lapozó stílusváltozata."
+    },
+    "type": "IdsIconButtonVariantType"
+  }
+}

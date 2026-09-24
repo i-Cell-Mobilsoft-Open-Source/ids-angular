@@ -1,0 +1,37 @@
+{
+  "appearance": {
+    "description": {
+      "en": "The appearance of the datepicker's calendar popup",
+      "hu": "A naptár felugró paneljének megjelenési módja."
+    },
+    "type": "IdsOverlayPanelAppearanceType"
+  },
+  "monthSelected": {
+    "description": {
+      "en": "Emitted when a month is selected in the calendar popup.",
+      "hu": "Hónap kiválasztásakor jelző esemény."
+    },
+    "type": "EventEmitter<Date>"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the calendar.",
+      "hu": "A naptár mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "view": {
+    "description": {
+      "en": "The starting view of the datepicker's calendar popup (day, month, year)",
+      "hu": "A naptár kezdő nézete: nap-, hónap- vagy évválasztás."
+    },
+    "type": "IdsDatepickerView"
+  },
+  "yearSelected": {
+    "description": {
+      "en": "Emitted when a year is selected in the calendar popup.",
+      "hu": "Év kiválasztásakor jelző esemény."
+    },
+    "type": "EventEmitter<Date>"
+  }
+}

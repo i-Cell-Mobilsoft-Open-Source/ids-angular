@@ -1,0 +1,16 @@
+{
+  "size": {
+    "description": {
+      "en": "Size of the autocomplete hint message.",
+      "hu": "A kiegészítési javaslatok súgószövege mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the autocomplete hint message.",
+      "hu": "A kiegészítési javaslatok súgószövege stílusváltozata."
+    },
+    "type": "IdsMessageVariantType"
+  }
+}

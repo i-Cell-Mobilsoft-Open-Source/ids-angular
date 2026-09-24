@@ -1,0 +1,9 @@
+{
+  "label": {
+    "description": {
+      "en": "Label displayed as the side navigation section title. Required.",
+      "hu": "A navigációs szakasz címe. Kötelező megadni."
+    },
+    "type": "string"
+  }
+}

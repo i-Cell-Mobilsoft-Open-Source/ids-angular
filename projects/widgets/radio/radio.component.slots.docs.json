@@ -1,0 +1,14 @@
+{
+  "content": {
+    "description": {
+      "en": "Default content of the radio item, used as its label.",
+      "hu": "A választógomb felirataként megjelenő tartalom."
+    }
+  },
+  "hintMessage": {
+    "description": {
+      "en": "Projected <ids-hint-message> element, shown below the radio item's label when a hint message is set.",
+      "hu": "A választógomb felirata alatt megjelenő kiegészítő üzenet (<ids-hint-message>)."
+    }
+  }
+}

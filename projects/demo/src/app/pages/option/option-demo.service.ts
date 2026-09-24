@@ -66,7 +66,7 @@ export class OptionDemoService {
 
   public readonly multipleInputControlConfig: DemoControlConfig<MultipleOptionControls> = {
     hasDisabledElement: {
-      description: 'Whether there is an option that is disabled in multiple selection.',
+      description: 'Whether the Land option group is disabled in multiple selection.',
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,

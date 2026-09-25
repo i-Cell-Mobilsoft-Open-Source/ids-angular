@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { MENU_ITEM_EXAMPLES } from '../../components-example/menu-item/menu-item-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { CdkMenuBar } from '@angular/cdk/menu';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
@@ -27,6 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DemoAndCodeComponent,
     ControlTableComponent,
     TryoutControlComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './menu-item-demo.component.html',
   styleUrls: [
@@ -37,4 +40,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class MenuItemDemoComponent {
   protected _menuItemDemoService = inject(MenuItemDemoService);
+  public readonly menuItemExamples = MENU_ITEM_EXAMPLES;
 }

@@ -1,0 +1,20 @@
+<div cdkMenuBar class="flex flex-wrap gap-8">
+  <div idsActiveIndicator [active]="true">
+    <button
+      type="button"
+      idsMenuItem
+      [label]="'EXAMPLES.MENU_ITEM.ACTIVE_INDICATOR.CONTENT.ACTIVE' | translate"
+    >
+      <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="home" />
+    </button>
+  </div>
+  <div idsActiveIndicator [active]="false">
+    <button
+      type="button"
+      idsMenuItem
+      [label]="'EXAMPLES.MENU_ITEM.ACTIVE_INDICATOR.CONTENT.INACTIVE' | translate"
+    >
+      <ids-icon icon-leading aria-hidden="true" alt="" fontIcon="search" />
+    </button>
+  </div>
+</div>

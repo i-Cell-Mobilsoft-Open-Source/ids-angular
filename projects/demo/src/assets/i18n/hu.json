@@ -1072,6 +1072,71 @@
         }
       }
     },
+    "MENU_ITEM": {
+      "BASIC": {
+        "TITLE": "Alap menu item",
+        "DESCRIPTION": "Menu item buttonként, idsMenuItem direktívával és label inputtal.",
+        "CONTENT": {
+          "LABEL": "Menüpont"
+        }
+      },
+      "LINK": {
+        "TITLE": "Menu item link",
+        "DESCRIPTION": "Navigációs menüelemekhez használja az a[idsMenuItem] szelektort routerLinkkel.",
+        "CONTENT": {
+          "LABEL": "Ugrás a menu item demóhoz"
+        }
+      },
+      "APPEARANCES": {
+        "TITLE": "Menu item megjelenései",
+        "DESCRIPTION": "A menu item különböző megjelenései: filled és text (alapértelmezett).",
+        "CONTENT": {
+          "FILLED": "Filled",
+          "TEXT": "Text"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Menu item változatai",
+        "DESCRIPTION": "A menu item különböző színváltozatai: surface (alapértelmezett) és light.",
+        "CONTENT": {
+          "SURFACE": "Surface menu item",
+          "LIGHT": "Light menu item"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Menu item méretei",
+        "DESCRIPTION": "A menu item különböző méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "ICONS": {
+        "TITLE": "Menu item ikonokkal",
+        "DESCRIPTION": "A menu item leading és/vagy trailing ikont kaphat content projectionnel.",
+        "CONTENT": {
+          "LEADING": "Leading ikon",
+          "TRAILING": "Trailing ikon",
+          "BOTH": "Mindkét ikon"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Letiltott menu item",
+        "DESCRIPTION": "A button és link menu itemek disabled beállításával letilthatók.",
+        "CONTENT": {
+          "BUTTON": "Letiltott gomb",
+          "LINK": "Letiltott link"
+        }
+      },
+      "ICON_ONLY": {
+        "TITLE": "Csak ikonos menu item",
+        "DESCRIPTION": "A label input elhagyásával csak ikonnal jeleníthet meg menu itemet."
+      },
+      "ACTIVE_INDICATOR": {
+        "TITLE": "Aktív jelző",
+        "DESCRIPTION": "A menu itemet idsActiveIndicator wrapperrel vonja körbe, az active beállítással pedig megjeleníthető az aktív állapot jelölője.",
+        "CONTENT": {
+          "ACTIVE": "Aktív elem",
+          "INACTIVE": "Inaktív elem"
+        }
+      }
+    },
     "NOTIFICATION": {
       "VARIANTS": {
         "TITLE": "Notification változatai",

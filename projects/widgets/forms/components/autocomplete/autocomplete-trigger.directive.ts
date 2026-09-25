@@ -45,6 +45,7 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
   private readonly _renderer = inject(Renderer2);
   private readonly _injector = inject(Injector);
+  private _isProgrammaticSelectionUpdate = false;
 
   public get selected(): IdsOptionValue[] {
     return this._selectionModel?.selected ?? [];
@@ -56,10 +57,9 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
   }
 
   public get selectedOptions(): IdsOptionComponent[] {
-    const selectedValues = this.selected.map((option) => option.value) ?? [];
     return this.autocomplete()
       .options()
-      .filter((option) => selectedValues.includes(option.value()));
+      .filter((option) => this._selectionModel?.isSelected(this._getAsOptionValue(option)));
   }
 
   constructor() {
@@ -84,6 +84,10 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
     this._selectionModel = new SelectionModel<IdsOptionValue>(true, undefined, true, this.autocomplete().valueCompareFn());
 
     this._selectionModel.changed.subscribe(() => {
+      if (this._isProgrammaticSelectionUpdate) {
+        return;
+      }
+
       if (this.autocomplete().multiSelect()) {
         this._selectionModel?.sort(this.autocomplete().sortCompareFn());
       } else {
@@ -153,20 +157,22 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
     this.open();
   }
 
-  public setSelectionByValue(value: unknown | unknown[]): void {
-    if (this.autocomplete().multiSelect() && value !== null) {
-      if (!Array.isArray(value)) {
-        throw this.autocomplete().createHostError('value must be an array in multiple-selection mode');
-      } else {
-        value.forEach((currentValue: unknown) => this._selectValue(currentValue));
+  public setSelectionByOptionValues(optionValues: readonly IdsOptionValue[]): void {
+    this._isProgrammaticSelectionUpdate = true;
+    try {
+      this._selectionModel?.setSelection(...optionValues);
+      if (this.autocomplete().multiSelect()) {
+        this._selectionModel?.sort(this.autocomplete().sortCompareFn());
       }
+      this._updateCurrentSelection();
+    } finally {
+      this._isProgrammaticSelectionUpdate = false;
+    }
+
+    if (!this.autocomplete().multiSelect()) {
+      this._updateInputValue(optionValues[0]?.viewValue ?? '');
     } else {
-      const correspondingOption = this._selectValue(value);
-      if (correspondingOption) {
-        this._keyManager?.updateActiveItem(correspondingOption);
-      } else if (!this.autocomplete().panelOpen()) {
-        this._keyManager?.updateActiveItem(-1);
-      }
+      this._updateInputValue('');
     }
   }
 
@@ -386,23 +392,7 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
   }
 
   private _selectValue(value: unknown): IdsOptionComponent | undefined {
-    const valueCompareFn = this.autocomplete().valueCompareFn();
-    const correspondingOption = this.autocomplete()
-      .options()
-      .find((option) => {
-        if (this._selectionModel && this._selectionModel.isSelected(this._getAsOptionValue(option))) {
-          return false;
-        }
-
-        try {
-          return valueCompareFn?.(option.value(), value);
-        } catch(error) {
-          if (isDevMode()) {
-            console.warn(error);
-          }
-          return false;
-        }
-      });
+    const correspondingOption = this._findOptionByValue(value, true);
     if (correspondingOption) {
       correspondingOption.selected.set(true);
       const correspondingOptionValue = this._getAsOptionValue(correspondingOption);
@@ -410,6 +400,25 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
     }
 
     return correspondingOption;
+  }
+
+  private _findOptionByValue(value: unknown, excludeSelected = false): IdsOptionComponent | undefined {
+    return this.autocomplete()
+      .options()
+      .find((option) => {
+        if (excludeSelected && this._selectionModel?.isSelected(this._getAsOptionValue(option))) {
+          return false;
+        }
+
+        try {
+          return this.autocomplete().valueCompareFn()(option.value(), value);
+        } catch(error) {
+          if (isDevMode()) {
+            console.warn(error);
+          }
+          return false;
+        }
+      });
   }
 
   private _updateCurrentSelection(): void {

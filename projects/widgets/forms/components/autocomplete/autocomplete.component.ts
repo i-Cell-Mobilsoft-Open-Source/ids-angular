@@ -27,6 +27,7 @@ import {
   computed,
   input,
   effect,
+  isDevMode,
   untracked,
   booleanAttribute,
   forwardRef,
@@ -142,6 +143,8 @@ export class IdsAutocompleteComponent
     (o1: unknown, o2: unknown) => JSON.stringify(o1) === JSON.stringify(o2),
   );
 
+  public displayWith = input<(value: unknown) => string>();
+
   public trigger = input.required<IdsAutocompleteTriggerDirective>();
   public panelClasses = input<string>('');
 
@@ -166,6 +169,10 @@ export class IdsAutocompleteComponent
 
   // holds actual value internally
   private _value: unknown | unknown[];
+  private _pendingValue: unknown | unknown[] | null = null;
+  private readonly _hasPendingValue = signal(false);
+  private readonly _pendingValueVersion = signal(0);
+  private _optionValues: IdsOptionValue[] = [];
 
   // declarations of IdsFormFieldControl variables
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_AUTOCOMPLETE_DEFAULT_CONFIG);
@@ -195,6 +202,29 @@ export class IdsAutocompleteComponent
         }
       });
     });
+
+    effect(() => {
+      const options = this.options();
+
+      untracked(() => this._rememberOptionValues(options));
+    });
+
+    effect(() => {
+      const hasPendingValue = this._hasPendingValue();
+      this._pendingValueVersion();
+      this.options();
+      this.displayWith();
+
+      if (!hasPendingValue) {
+        return;
+      }
+
+      untracked(() => {
+        if (this._synchronizeSelection(this._pendingValue)) {
+          this._hasPendingValue.set(false);
+        }
+      });
+    });
   }
 
   public ngOnInit(): void {
@@ -220,12 +250,10 @@ export class IdsAutocompleteComponent
 
   // #region ControlValueAccessor implementation
   public writeValue(value: unknown | unknown[]): void {
-    if (value !== null) {
-      this._patchValue(value);
-    } else {
-      this.trigger()?.clear();
-    }
     this._value = value;
+    this._pendingValue = value;
+    this._hasPendingValue.set(true);
+    this._pendingValueVersion.update((version) => version + 1);
   }
 
   public registerOnChange(fn: (value: unknown) => void): void {
@@ -296,20 +324,81 @@ export class IdsAutocompleteComponent
     observer.observe(this._overlayOrigin.nativeElement);
   }
 
-  // "async" way to patch value to ensure options are loaded before setting selection
-  private _patchValue(value: unknown | unknown[]): void {
-    const patchEffect = effect(
-      () => {
-        const options = this.options();
+  private _synchronizeSelection(value: unknown | unknown[] | null): boolean {
+    const optionValues = this._getOptionValues(value);
 
-        untracked(() => {
-          if (options.length > 0) {
-            this.trigger().setSelectionByValue(value);
-            patchEffect.destroy();
-          }
-        });
-      },
-      { injector: this._injector, manualCleanup: true },
-    );
+    if (optionValues === undefined) {
+      return false;
+    }
+
+    this.trigger().setSelectionByOptionValues(optionValues);
+    return true;
+  }
+
+  private _getOptionValues(value: unknown | unknown[] | null): IdsOptionValue[] | undefined {
+    const values = this._getSelectionValues(value);
+    const optionValues = values.map((currentValue) => this._getOptionValue(currentValue));
+
+    if (optionValues.some((optionValue) => optionValue === undefined)) {
+      return undefined;
+    }
+
+    return optionValues.filter((optionValue): optionValue is IdsOptionValue => optionValue !== undefined);
+  }
+
+  private _getSelectionValues(value: unknown | unknown[] | null): unknown[] {
+    if (value === null) {
+      return [];
+    }
+
+    if (!this.multiSelect()) {
+      return [value];
+    }
+
+    if (!Array.isArray(value)) {
+      throw this.createHostError('value must be an array in multiple-selection mode');
+    }
+
+    return value;
+  }
+
+  private _getOptionValue(value: unknown): IdsOptionValue | undefined {
+    const displayWith = this.displayWith();
+
+    if (displayWith) {
+      try {
+        return { value, viewValue: displayWith(value) };
+      } catch(error) {
+        if (isDevMode()) {
+          console.warn(error);
+        }
+      }
+    }
+
+    return this._optionValues.find((optionValue) => this._valuesMatch(optionValue.value, value));
+  }
+
+  private _rememberOptionValues(options: readonly IdsOptionComponent[]): void {
+    options.forEach((option) => {
+      const optionValue: IdsOptionValue = { value: option.value(), viewValue: option.viewValue() };
+      const knownOptionIndex = this._optionValues.findIndex((knownOption) => this._valuesMatch(knownOption.value, optionValue.value));
+
+      if (knownOptionIndex === -1) {
+        this._optionValues.push(optionValue);
+      } else {
+        this._optionValues[knownOptionIndex] = optionValue;
+      }
+    });
+  }
+
+  private _valuesMatch(firstValue: unknown, secondValue: unknown): boolean {
+    try {
+      return this.valueCompareFn()(firstValue, secondValue);
+    } catch(error) {
+      if (isDevMode()) {
+        console.warn(error);
+      }
+      return false;
+    }
   }
 }

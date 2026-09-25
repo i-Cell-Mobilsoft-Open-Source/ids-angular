@@ -1,4 +1,6 @@
 <div role="presentation" class="ids-option-group__label" [id]="_labelId()">
   <div class="ids-option-group__text">{{ label() }}</div>
 </div>
-<ng-content select="ids-option, ng-container" />
+<div class="ids-option-list">
+  <ng-content select="ids-option, ng-container" />
+</div>

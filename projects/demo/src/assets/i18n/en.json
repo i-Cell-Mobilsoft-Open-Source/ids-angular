@@ -1076,6 +1076,71 @@
         }
       }
     },
+    "MENU_ITEM": {
+      "BASIC": {
+        "TITLE": "Basic menu item",
+        "DESCRIPTION": "A menu item rendered as a button with the idsMenuItem directive and a label input.",
+        "CONTENT": {
+          "LABEL": "Menu item"
+        }
+      },
+      "LINK": {
+        "TITLE": "Menu item link",
+        "DESCRIPTION": "Use the a[idsMenuItem] selector with routerLink for navigation menu items.",
+        "CONTENT": {
+          "LABEL": "Go to menu item demo"
+        }
+      },
+      "APPEARANCES": {
+        "TITLE": "Menu item appearances",
+        "DESCRIPTION": "Menu items with different appearances: filled and text (default).",
+        "CONTENT": {
+          "FILLED": "Filled",
+          "TEXT": "Text"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Menu item variants",
+        "DESCRIPTION": "Menu items with different color variants: surface (default) and light.",
+        "CONTENT": {
+          "SURFACE": "Surface menu item",
+          "LIGHT": "Light menu item"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Menu item sizes",
+        "DESCRIPTION": "Menu items with different sizes: dense, compact (default), comfortable, and spacious."
+      },
+      "ICONS": {
+        "TITLE": "Menu item with icons",
+        "DESCRIPTION": "Menu items can include a leading icon and/or a trailing icon via content projection.",
+        "CONTENT": {
+          "LEADING": "Leading icon",
+          "TRAILING": "Trailing icon",
+          "BOTH": "Both icons"
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled menu item",
+        "DESCRIPTION": "Set disabled on button and link menu items to prevent interaction.",
+        "CONTENT": {
+          "BUTTON": "Disabled button",
+          "LINK": "Disabled link"
+        }
+      },
+      "ICON_ONLY": {
+        "TITLE": "Icon-only menu item",
+        "DESCRIPTION": "Omit the label input to render menu items with icons only."
+      },
+      "ACTIVE_INDICATOR": {
+        "TITLE": "Active indicator",
+        "DESCRIPTION": "Wrap a menu item with idsActiveIndicator and set active to show an active state marker.",
+        "CONTENT": {
+          "ACTIVE": "Active item",
+          "INACTIVE": "Inactive item"
+        }
+      }
+    },
     "NOTIFICATION": {
       "VARIANTS": {
         "TITLE": "Notification variants",

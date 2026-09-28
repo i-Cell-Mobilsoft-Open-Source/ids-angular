@@ -1,0 +1,14 @@
+{
+  "idsDialogContent": {
+    "description": {
+      "en": "Content projected into the scrollable body area of the dialog (marked with the idsDialogContent attribute).",
+      "hu": "A párbeszédablak görgethető tartalmi területére beillesztett tartalom (idsDialogContent attribútummal megjelölve)."
+    }
+  },
+  "idsDialogActions": {
+    "description": {
+      "en": "Content projected into the footer of the dialog (marked with the idsDialogActions attribute), typically action buttons.",
+      "hu": "A párbeszédablak láblécébe beillesztett tartalom (idsDialogActions attribútummal megjelölve), jellemzően műveleti gombok."
+    }
+  }
+}

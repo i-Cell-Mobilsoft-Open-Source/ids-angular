@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable, computed } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -9,6 +11,8 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY, IdsSnackbarAction, IdsSnackbarPosition, IdsSnackbarPositionType, IdsSnackbarService, IdsSnackbarVariant, IdsSnackbarVariantType } from '@i-cell/ids-angular/snackbar';
 import { TranslateService } from '@ngx-translate/core';
 
+const SNACKBAR_DOCS_PATH = 'snackbar/snackbar.component.docs.json';
+
 type SnackbarInputControls = {
   message: string,
   variant: IdsSnackbarVariantType,
@@ -17,7 +21,6 @@ type SnackbarInputControls = {
   closeButtonLabel: string | undefined,
   autoClose: boolean,
   urgent: boolean,
-  clearOnNavigation: boolean,
 };
 
 type SnackbarHelperControls = {
@@ -26,6 +29,7 @@ type SnackbarHelperControls = {
   position: IdsSnackbarPositionType,
   newestAtStartPosition: boolean
   viewportMargin: number
+  clearOnNavigation: boolean,
 };
 
 const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
@@ -33,6 +37,7 @@ const defaultConfig = IDS_SNACKBAR_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class SnackbarDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   private readonly _snackbarService = inject(IdsSnackbarService);
   private readonly _customActions: IdsSnackbarAction[] = [{ label: 'Log to console', action: this.action }];
@@ -40,53 +45,67 @@ export class SnackbarDemoService {
 
   public inputControlConfig: DemoControlConfig<SnackbarInputControls> = {
     message: {
-      description: 'Snackbar message',
+      description: this._widgetDocs.getDescription(SNACKBAR_DOCS_PATH, 'message', 'Snackbar message'),
       type: 'string',
       default: '-',
       demoDefault: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
     },
     variant: {
-      description: 'Snackbar variant.',
+      description: this._widgetDocs.getDescription(SNACKBAR_DOCS_PATH, 'variant', 'Snackbar variant.'),
       type: 'IdsSnackbarVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSnackbarVariant),
     },
     icon: {
-      description: 'Custom icon for snackbar. Overwites default icon. Default icon depends on variant.',
+      description: this._widgetDocs.getDescription(
+        SNACKBAR_DOCS_PATH,
+        'icon',
+        'Custom icon for snackbar. Overwites default icon. Default icon depends on variant.',
+      ),
       type: 'string',
       default: '-',
       demoDefault: '',
     },
     allowDismiss: {
-      description: 'Whether the the user can close the snackbar or not.',
+      description: this._widgetDocs.getDescription(
+        SNACKBAR_DOCS_PATH,
+        'allowDismiss',
+        'Whether the the user can close the snackbar or not.',
+      ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     closeButtonLabel: {
-      description: 'Custom close button. If any text is provided,' +
+      description: this._widgetDocs.getDescription(
+        SNACKBAR_DOCS_PATH,
+        'closeButtonLabel',
+        'Custom close button. If any text is provided,' +
         ' the close button will be a button with this text against the default "x" button',
+      ),
       type: 'string',
       default: '-',
       demoDefault: '',
     },
     autoClose: {
-      description: 'Whether the snackbar should close automatically or not. The duration is a computed data based on some constant value.',
+      description: this._widgetDocs.getDescription(
+        SNACKBAR_DOCS_PATH,
+        'autoClose',
+        'Whether the snackbar should close automatically or not. The duration is a computed data based on some constant value.',
+      ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     urgent: {
-      description: 'Whether the snackbar is urgent or not. It changes the role of the snackbar.',
+      description: this._widgetDocs.getDescription(
+        SNACKBAR_DOCS_PATH,
+        'urgent',
+        'Whether to announce the notification as urgent: uses role="alert" instead of role="status".',
+      ),
       type: 'boolean',
       default: false,
-      control: DemoControl.SWITCH,
-    },
-    clearOnNavigation: {
-      description: 'Whether the snackbar should be cleared automatically on navigation or not.',
-      type: 'boolean',
-      default: true,
       control: DemoControl.SWITCH,
     },
   };
@@ -130,6 +149,12 @@ export class SnackbarDemoService {
       control: DemoControl.NUMBER,
       min: 0,
       step: 1,
+    },
+    clearOnNavigation: {
+      description: 'Whether the snackbar should be cleared automatically on navigation or not.',
+      type: 'boolean',
+      default: true,
+      control: DemoControl.SWITCH,
     },
   };
 
@@ -176,7 +201,7 @@ export class SnackbarDemoService {
       closeButtonLabel: this.model.closeButtonLabel,
       autoClose: this.model.autoClose,
       urgent: this.model.urgent,
-      clearOnNavigation: this.model.clearOnNavigation,
+      clearOnNavigation: this.helperModel.clearOnNavigation,
     });
   }
 
@@ -188,6 +213,23 @@ export class SnackbarDemoService {
     this.model = { ...this.defaults };
     this.helperModel = { ...this.helperDefaults };
   }
+
+  public readonly propControlConfig: DemoControlConfig<unknown> = {
+    actions: {
+      description: this._widgetDocs.getDescription(
+        SNACKBAR_DOCS_PATH,
+        'actions',
+        'Array of actions (label + callback) rendered as buttons inside the snackbar.',
+      ),
+      type: 'IdsSnackbarAction[]',
+      default: [],
+    },
+    closed: {
+      description: this._widgetDocs.getDescription(SNACKBAR_DOCS_PATH, 'closed', 'Emitted when the snackbar is closed.'),
+      type: 'EventEmitter<void>',
+      default: '-',
+    },
+  };
 
   public getMethodConfig(): DemoMethodConfig[] {
     return [
@@ -207,7 +249,7 @@ export class SnackbarDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SNACKBAR', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.inputControlConfig,
+        config: { ...this.inputControlConfig, ...this.propControlConfig },
       },
     ];
   }

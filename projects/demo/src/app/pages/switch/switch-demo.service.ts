@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -8,6 +10,9 @@ import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SWITCH_DEFAULT_CONFIG_FACTORY, IdsSwitchIconPosition, IdsSwitchIconPositionType, IdsSwitchLabelPosition, IdsSwitchLabelPositionType, IdsSwitchVariant, IdsSwitchVariantType } from '@i-cell/ids-angular/switch';
 import { TranslateService } from '@ngx-translate/core';
+
+const SWITCH_DOCS_PATH = 'switch/switch.component.docs.json';
+const SWITCH_GROUP_DOCS_PATH = 'switch/switch-group.component.docs.json';
 
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
@@ -20,6 +25,8 @@ type SwitchInputControls = {
   iconPosition: IdsSwitchIconPositionType,
   labelPosition: IdsSwitchLabelPositionType,
   disabled: boolean,
+  name: string,
+  tabIndex: number,
   'aria-label': string,
   'aria-labelledby': string,
   'aria-describedby': string,
@@ -35,74 +42,88 @@ type SwitchGroupInputControls = {
 @Injectable()
 export class SwitchDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly inputControlConfig: DemoControlConfig<SwitchInputControls> = {
     label: {
-      description: 'Switch label.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'label', 'Switch label.'),
       type: 'string',
       default: '-',
       demoDefault: 'Switch label',
     },
     readonly: {
-      description: 'Whether the switch is readonly or not.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'readonly', 'Whether the switch is readonly or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     size: {
-      description: 'Size of the switch.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'size', 'Size of the switch.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Variant of the switch.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'variant', 'Variant of the switch.'),
       type: 'IdsSwitchVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchVariant),
     },
     hasIcon: {
-      description: 'Whether the switch has icon.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'hasIcon', 'Whether the switch has icon.'),
       type: 'boolean',
       default: defaultConfig.hasIcon,
       control: DemoControl.SWITCH,
     },
     iconPosition: {
-      description: 'Where the icon should be shown in switch.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'iconPosition', 'Where the icon should be shown in switch.'),
       type: 'IdsSwitchIconPositionType',
       default: defaultConfig.iconPosition,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchIconPosition),
     },
     labelPosition: {
-      description: 'Where the label should be shown in switch.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'labelPosition', 'Where the label should be shown in switch.'),
       type: 'IdsSwitchLabelPositionType',
       default: defaultConfig.labelPosition,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchLabelPosition),
     },
     disabled: {
-      description: 'Whether the switch is disabled or not.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'disabled', 'Whether the switch is disabled or not.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
+    name: {
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'name', 'Name of the switch input, used for form submission.'),
+      type: 'string',
+      default: '',
+      control: DemoControl.TEXT,
+    },
+    tabIndex: {
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'tabIndex', 'Tab index of the switch.'),
+      type: 'number',
+      default: 0,
+      control: DemoControl.NUMBER,
+      step: 1,
+    },
     'aria-label': {
-      description: 'aria-label for switch.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'ariaLabel', 'aria-label for switch.'),
       type: 'string',
       default: '-',
       demoDefault: 'switch',
     },
     'aria-labelledby': {
-      description: 'aria-labelledby for switch.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'labelledby', 'aria-labelledby for switch.'),
       type: 'string',
       default: '-',
       demoDefault: '',
     },
     'aria-describedby': {
-      description: 'aria-describedby for switch.',
+      description: this._widgetDocs.getDescription(SWITCH_DOCS_PATH, 'describedby', 'aria-describedby for switch.'),
       type: 'string',
       default: '-',
       demoDefault: '',
@@ -111,27 +132,35 @@ export class SwitchDemoService {
 
   public readonly groupInputControlConfig: DemoControlConfig<SwitchGroupInputControls> = {
     size: {
-      description: 'Size of the switch.',
+      description: this._widgetDocs.getDescription(SWITCH_GROUP_DOCS_PATH, 'size', 'Size of the switch.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     hasIcon: {
-      description: 'Whether the switch has icon.',
+      description: this._widgetDocs.getDescription(SWITCH_GROUP_DOCS_PATH, 'hasIcon', 'Whether the switch has icon.'),
       type: 'boolean',
       default: defaultConfig.hasIcon,
       control: DemoControl.SWITCH,
     },
     iconPosition: {
-      description: 'Where the icon should be shown in switch.',
+      description: this._widgetDocs.getDescription(
+        SWITCH_GROUP_DOCS_PATH,
+        'iconPosition',
+        'Where the icon should be shown in switch.',
+      ),
       type: 'IdsSwitchIconPositionType',
       default: defaultConfig.iconPosition,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSwitchIconPosition),
     },
     labelPosition: {
-      description: 'Where the label should be shown in switch.',
+      description: this._widgetDocs.getDescription(
+        SWITCH_GROUP_DOCS_PATH,
+        'labelPosition',
+        'Where the label should be shown in switch.',
+      ),
       type: 'IdsSwitchLabelPositionType',
       default: defaultConfig.labelPosition,
       control: DemoControl.SELECT,

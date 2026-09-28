@@ -6,7 +6,7 @@
       (resetted)="_iconButtonDemoService.reset()"
     >
       <ng-container component>
-        @if (_iconButtonDemoService.model.asLink) {
+        @if (_iconButtonDemoService.helperModel.asLink) {
           <a
             href=""
             idsIconButton
@@ -14,6 +14,7 @@
             [size]="_iconButtonDemoService.model.size"
             [variant]="_iconButtonDemoService.model.variant"
             [disabled]="_iconButtonDemoService.model.disabled"
+            [allowCustomContent]="_iconButtonDemoService.model.allowCustomContent"
           >
             <ids-icon aria-hidden="true" alt="" fontIcon="search" />
           </a>
@@ -25,6 +26,7 @@
             [variant]="_iconButtonDemoService.model.variant"
             [appearance]="_iconButtonDemoService.model.appearance"
             [disabled]="_iconButtonDemoService.model.disabled"
+            [allowCustomContent]="_iconButtonDemoService.model.allowCustomContent"
             (click)="
               _iconButtonDemoService.onClick(
                 _iconButtonDemoService.model.appearance +
@@ -49,6 +51,14 @@
         configType="input"
         [controlConfig]="_iconButtonDemoService.inputControlConfig"
         [(model)]="_iconButtonDemoService.model"
+        (resetted)="_iconButtonDemoService.reset()"
+      />
+
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_iconButtonDemoService.helperControlConfig"
+        [(model)]="_iconButtonDemoService.helperModel"
         (resetted)="_iconButtonDemoService.reset()"
       />
     </app-tryout-controls>

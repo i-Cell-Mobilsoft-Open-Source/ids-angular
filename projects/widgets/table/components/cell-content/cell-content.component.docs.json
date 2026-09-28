@@ -1,0 +1,9 @@
+{
+  "externalCellTemplates": {
+    "description": {
+      "en": "Map of externally provided cell templates (keyed by template name) usable as custom cell content.",
+      "hu": "Egyedi cellatartalmakhoz használható külső sablonok, sablonnév szerint tárolva egy Map objektumban."
+    },
+    "type": "Map<string, TemplateRef<unknown>>"
+  }
+}

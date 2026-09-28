@@ -1,0 +1,23 @@
+{
+  "legend": {
+    "description": {
+      "en": "Fieldset legend.",
+      "hu": "A mezőcsoport felirata."
+    },
+    "type": "string"
+  },
+  "size": {
+    "description": {
+      "en": "Fieldset size.",
+      "hu": "A mezőcsoport mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Fieldset variant.",
+      "hu": "A mezőcsoport stílusváltozata."
+    },
+    "type": "IdsFormFieldVariantType"
+  }
+}

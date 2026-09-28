@@ -1,0 +1,20 @@
+{
+  "idsMessagePrefix": {
+    "description": {
+      "en": "Content projected before the message text (marked with the idsMessagePrefix attribute), e.g. an icon. Error and success messages render a default icon here if nothing is projected.",
+      "hu": "Az üzenet szövege elé beillesztett tartalom (idsMessagePrefix attribútummal megjelölve), pl. egy ikon. Hibát vagy sikert jelző üzeneteknél alapértelmezett ikon jelenik meg itt, ha nincs megadva egyedi tartalom."
+    }
+  },
+  "content": {
+    "description": {
+      "en": "Default content of the message, i.e. the message text itself.",
+      "hu": "Az üzenet alapértelmezett tartalma, azaz maga az üzenetszöveg."
+    }
+  },
+  "idsMessageSuffix": {
+    "description": {
+      "en": "Content projected after the message text (marked with the idsMessageSuffix attribute), e.g. a secondary text or action.",
+      "hu": "Az üzenet szövege után beillesztett tartalom (idsMessageSuffix attribútummal megjelölve), pl. egy másodlagos szöveg vagy művelet."
+    }
+  }
+}

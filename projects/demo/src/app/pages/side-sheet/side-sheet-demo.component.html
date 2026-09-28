@@ -24,7 +24,7 @@
             <h2 id="side-sheet-title">{{ 'SIDE_SHEET.CUSTOMER' | translate }}</h2>
           </header>
         </div>
-        @if (_sideSheetService.model.isShowFooter) {
+        @if (_sideSheetService.helperModel.isShowFooter) {
           <div slot="footer">
             <button type="button" class="demo-save-btn" idsButton size="comfortable">
               <span>{{ 'SIDE_SHEET.SAVE' | translate }}</span>
@@ -192,6 +192,14 @@
         configType="input"
         [controlConfig]="_sideSheetService.inputControlConfig"
         [(model)]="_sideSheetService.model"
+        (resetted)="_sideSheetService.reset()"
+      />
+
+      <app-control-table
+        controls
+        configType="input"
+        [controlConfig]="_sideSheetService.helperControlConfig"
+        [(model)]="_sideSheetService.helperModel"
         (resetted)="_sideSheetService.reset()"
       />
     </app-tryout-controls>

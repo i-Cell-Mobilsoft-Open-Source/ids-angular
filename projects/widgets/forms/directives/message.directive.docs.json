@@ -1,0 +1,23 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether the message component is disabled or not.",
+      "hu": "Az üzenet letiltása."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the message component.",
+      "hu": "Az üzenet mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the message component.",
+      "hu": "Az üzenet stílusváltozata."
+    },
+    "type": "IdsFormFieldVariantType"
+  }
+}

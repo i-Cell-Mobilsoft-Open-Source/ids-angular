@@ -1,0 +1,37 @@
+{
+  "ariaLabel": {
+    "description": {
+      "en": "Accessible label of the spinner (rendered as the aria-label attribute).",
+      "hu": "A képernyőolvasók számára megadott megnevezés (aria-label)."
+    },
+    "type": "string"
+  },
+  "isTrack": {
+    "description": {
+      "en": "Whether to show the background track behind the rotating indicator.",
+      "hu": "A forgó jelzés mögötti teljes háttérkör megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Spinner size.",
+      "hu": "A folyamatjelző mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "sizeCollection": {
+    "description": {
+      "en": "Size collection used together with size to determine the rendered dimensions.",
+      "hu": "A méretezéshez használt méretkészlet; a size értékkel együtt határozza meg a tényleges méretet."
+    },
+    "type": "IdsSizeCollectionType"
+  },
+  "variant": {
+    "description": {
+      "en": "Spinner variant.",
+      "hu": "A folyamatjelző stílusváltozata."
+    },
+    "type": "IdsSpinnerVariantType"
+  }
+}

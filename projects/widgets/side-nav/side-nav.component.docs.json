@@ -1,0 +1,23 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Side nav appearance.",
+      "hu": "Az oldalsó navigáció megjelenési módja."
+    },
+    "type": "IdsSideNavAppearanceType"
+  },
+  "size": {
+    "description": {
+      "en": "Side nav size.",
+      "hu": "Az oldalsó navigáció mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Side nav variant.",
+      "hu": "Az oldalsó navigáció stílusváltozata."
+    },
+    "type": "IdsSideNavVariantType"
+  }
+}

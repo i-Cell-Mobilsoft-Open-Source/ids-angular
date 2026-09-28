@@ -1,0 +1,58 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Appearance of the segmented control toggle.",
+      "hu": "A szegmenskapcsoló megjelenési módja."
+    },
+    "type": "IdsSegmentedControlToggleAppearanceType"
+  },
+  "buttonVariant": {
+    "description": {
+      "en": "Variant of the segmented control toggle buttons.",
+      "hu": "A szegmenskapcsoló gombjainak stílusváltozata."
+    },
+    "type": "IdsSegmentedControlToggleButtonVariantType"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the segmented control toggle, used for form submission.",
+      "hu": "A szegmenskapcsoló name attribútuma."
+    },
+    "type": "string"
+  },
+  "showActiveIcon": {
+    "description": {
+      "en": "Whether the active icon should be shown or not.",
+      "hu": "A kiválasztott állapotot jelző ikon megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the segmented control toggle.",
+      "hu": "A szegmenskapcsoló mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the segmented control toggle.",
+      "hu": "A szegmenskapcsoló stílusváltozata."
+    },
+    "type": "IdsSegmentedControlToggleVariantType"
+  },
+  "valueCompareFn": {
+    "description": {
+      "en": "Function used to compare segmented control toggle items for the purpose of selection matching.",
+      "hu": "A kiválasztás egyeztetéséhez használt összehasonlító függvény."
+    },
+    "type": "(o1: IdsSegmentedControlToggleItemComponent, o2: IdsSegmentedControlToggleItemComponent) => boolean"
+  },
+  "itemChanges": {
+    "description": {
+      "en": "Emitted when the selected segmented control toggle item(s) change.",
+      "hu": "A kijelölés változásakor jelző esemény."
+    },
+    "type": "EventEmitter<IdsSegmentedControlToggleItemChange>"
+  }
+}

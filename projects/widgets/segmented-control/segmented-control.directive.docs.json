@@ -1,0 +1,58 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Appearance of the segmented control.",
+      "hu": "A szegmensválasztó megjelenési módja."
+    },
+    "type": "IdsSegmentedControlAppearanceType"
+  },
+  "multiSelect": {
+    "description": {
+      "en": "Whether the segmented control allows selecting multiple items at once.",
+      "hu": "Egyszerre több elem kiválasztásának engedélyezése."
+    },
+    "type": "boolean"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the segmented control, used for form submission.",
+      "hu": "A szegmensválasztó name attribútuma."
+    },
+    "type": "string"
+  },
+  "showActiveIcon": {
+    "description": {
+      "en": "Whether the active icon should be shown or not.",
+      "hu": "A kiválasztott állapotot jelző ikon megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the segmented control.",
+      "hu": "A szegmensválasztó mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the segmented control.",
+      "hu": "A szegmensválasztó stílusváltozata."
+    },
+    "type": "IdsSegmentedControlVariantType"
+  },
+  "valueCompareFn": {
+    "description": {
+      "en": "Function used to compare segmented control items for the purpose of selection matching.",
+      "hu": "A kiválasztás egyeztetéséhez használt összehasonlító függvény."
+    },
+    "type": "(o1: IdsSegmentedControlItemComponent, o2: IdsSegmentedControlItemComponent) => boolean"
+  },
+  "itemChanges": {
+    "description": {
+      "en": "Emitted when the selected segmented control item(s) change.",
+      "hu": "A kijelölés változásakor jelző esemény."
+    },
+    "type": "EventEmitter<IdsSegmentedControlItemChange>"
+  }
+}

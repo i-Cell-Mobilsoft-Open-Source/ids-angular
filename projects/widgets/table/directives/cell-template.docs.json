@@ -1,0 +1,9 @@
+{
+  "templateName": {
+    "description": {
+      "en": "Name used to reference this cell template (alias: \"idsCellTemplate\"). Required.",
+      "hu": "A cellasablon hivatkozási neve (alias: \"idsCellTemplate\"). Kötelező."
+    },
+    "type": "string"
+  }
+}

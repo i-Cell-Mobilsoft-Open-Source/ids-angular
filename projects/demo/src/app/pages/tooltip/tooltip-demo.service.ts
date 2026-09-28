@@ -1,3 +1,5 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
@@ -9,8 +11,10 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY, IdsTooltipPosition, IdsTooltipPositionType, IdsTooltipTextAlign, IdsTooltipTouchGestures, IdsTooltipVariant, IdsTooltipVariantType } from '@i-cell/ids-angular/tooltip';
 import { TranslateService } from '@ngx-translate/core';
 
+const TOOLTIP_DOCS_PATH = 'tooltip/tooltip.directive.docs.json';
+
 type TooltipInputControls = {
-  tooltipText: string,
+  message: string,
   position: IdsTooltipPositionType,
   size: IdsSizeType,
   variant: IdsTooltipVariantType,
@@ -20,16 +24,19 @@ type TooltipInputControls = {
   touchGestures: IdsTooltipTouchGestures,
   textAlign: IdsTooltipTextAlign,
   showPointer: boolean,
+  tooltipClass: string,
+  ignoreClipped: boolean,
 };
 
 const defaultConfig = IDS_TOOLTIP_DEFAULT_CONFIG_FACTORY();
 @Injectable()
 export class TooltipDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public readonly inputControlConfig: DemoControlConfig<TooltipInputControls> = {
-    tooltipText: {
-      description: 'The text displayed inside the tooltip.',
+    message: {
+      description: this._widgetDocs.getDescription(TOOLTIP_DOCS_PATH, 'message', 'The text displayed inside the tooltip.'),
       type: 'string',
       default: '-',
 
@@ -37,46 +44,62 @@ export class TooltipDemoService {
       control: DemoControl.TEXT,
     },
     position: {
-      description: 'The position of the tooltip relative to the target element.',
+      description: this._widgetDocs.getDescription(
+        TOOLTIP_DOCS_PATH,
+        'position',
+        'The position of the tooltip relative to the target element.',
+      ),
       type: 'IdsTooltipPositionType',
       default: defaultConfig.position,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTooltipPosition),
     },
     size: {
-      description: 'The size of the tooltip.',
+      description: this._widgetDocs.getDescription(TOOLTIP_DOCS_PATH, 'size', 'The size of the tooltip.'),
       type: 'IdsSizeType',
       default: defaultConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'The variant or style of the tooltip.',
+      description: this._widgetDocs.getDescription(TOOLTIP_DOCS_PATH, 'variant', 'The variant or style of the tooltip.'),
       type: 'IdsTooltipVariantType',
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsTooltipVariant),
     },
     showDelay: {
-      description: 'The delay (in milliseconds) before the tooltip appears after hovering.',
+      description: this._widgetDocs.getDescription(
+        TOOLTIP_DOCS_PATH,
+        'showDelay',
+        'The delay (in milliseconds) before the tooltip appears after hovering.',
+      ),
       type: 'number',
       default: defaultConfig.showDelay,
       control: DemoControl.TEXT,
     },
     hideDelay: {
-      description: 'The delay (in milliseconds) before the tooltip disappears after losing focus.',
+      description: this._widgetDocs.getDescription(
+        TOOLTIP_DOCS_PATH,
+        'hideDelay',
+        'The delay (in milliseconds) before the tooltip disappears after losing focus.',
+      ),
       type: 'number',
       default: defaultConfig.hideDelay,
       control: DemoControl.TEXT,
     },
     disabled: {
-      description: 'Determines if the tooltip is disabled.',
+      description: this._widgetDocs.getDescription(TOOLTIP_DOCS_PATH, 'disabled', 'Determines if the tooltip is disabled.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
     },
     touchGestures: {
-      description: 'Specifies the touch gestures behavior for the tooltip (auto, on, off).',
+      description: this._widgetDocs.getDescription(
+        TOOLTIP_DOCS_PATH,
+        'touchGestures',
+        'Specifies the touch gestures behavior for the tooltip (auto, on, off).',
+      ),
       type: 'IdsTooltipTouchGestures',
       default: 'auto',
       control: DemoControl.SELECT,
@@ -87,7 +110,7 @@ export class TooltipDemoService {
       ],
     },
     textAlign: {
-      description: 'The text alignment inside the tooltip.',
+      description: this._widgetDocs.getDescription(TOOLTIP_DOCS_PATH, 'textAlign', 'The text alignment inside the tooltip.'),
       type: 'IdsTooltipTextAlign',
       default: 'auto',
       control: DemoControl.SELECT,
@@ -99,9 +122,25 @@ export class TooltipDemoService {
       ],
     },
     showPointer: {
-      description: 'Whether to show tooltip pointer or not.',
+      description: this._widgetDocs.getDescription(TOOLTIP_DOCS_PATH, 'showPointer', 'Whether to show tooltip pointer or not.'),
       type: 'boolean',
       default: defaultConfig.showPointer,
+      control: DemoControl.SWITCH,
+    },
+    tooltipClass: {
+      description: this._widgetDocs.getDescription(TOOLTIP_DOCS_PATH, 'tooltipClass', 'Additional CSS class(es) to apply to the tooltip.'),
+      type: 'string',
+      default: '',
+      control: DemoControl.TEXT,
+    },
+    ignoreClipped: {
+      description: this._widgetDocs.getDescription(
+        TOOLTIP_DOCS_PATH,
+        'ignoreClipped',
+        'Whether to keep the tooltip open when it is clipped by a scrollable container.',
+      ),
+      type: 'boolean',
+      default: false,
       control: DemoControl.SWITCH,
     },
   };

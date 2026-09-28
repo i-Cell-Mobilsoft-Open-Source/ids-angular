@@ -1,10 +1,12 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
-import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariant, IdsFormFieldVariantType } from '@i-cell/ids-angular/forms';
 
+const FORM_FIELD_DOCS_PATH = 'forms/components/form-field/form-field.component.docs.json';
 const defaultConfig = IDS_FORM_FIELD_DEFAULT_CONFIG_FACTORY();
 
 export type FormFieldInputControls = {
@@ -36,24 +38,27 @@ export type InputInputControls = {
   disabled: boolean,
   required: boolean,
   canHandleSuccessState: boolean,
+  name: string,
 };
 
-export const formFieldInputControlConfig: DemoControlConfig<FormFieldInputControls> = {
-  size: {
-    description: 'Size of the form field.',
-    type: 'IdsSizeType',
-    default: defaultConfig.size,
-    control: DemoControl.SELECT,
-    list: convertEnumToStringArray(IdsSize),
-  },
-  variant: {
-    description: 'Variant of the form field.',
-    type: 'IdsFormFieldVariantType',
-    default: defaultConfig.variant,
-    control: DemoControl.SELECT,
-    list: convertEnumToStringArray(IdsFormFieldVariant),
-  },
-};
+export function getFormFieldInputControlConfig(widgetDocs: WidgetDocsService): DemoControlConfig<FormFieldInputControls> {
+  return {
+    size: {
+      description: widgetDocs.getDescription(FORM_FIELD_DOCS_PATH, 'size', 'Size of the form field.'),
+      type: 'IdsSizeType',
+      default: defaultConfig.size,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsSize),
+    },
+    variant: {
+      description: widgetDocs.getDescription(FORM_FIELD_DOCS_PATH, 'variant', 'Variant of the form field.'),
+      type: 'IdsFormFieldVariantType',
+      default: defaultConfig.variant,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsFormFieldVariant),
+    },
+  };
+}
 
 export const formFieldMethodControlConfig: DemoMethodConfig = [
   {
@@ -71,5 +76,3 @@ export const formFieldMethodControlConfig: DemoMethodConfig = [
     parameterDescriptions: ['The click event.'],
   },
 ];
-
-export const formFieldDefaults = getDefaultFromDemoConfig<FormFieldInputControls>(formFieldInputControlConfig);

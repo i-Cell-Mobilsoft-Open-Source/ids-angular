@@ -15,7 +15,7 @@
               >
                 <ids-option-group label="Land">
                   @for (option of _optionDemoService.animals.land; track $index) {
-                    <ids-option [value]="option.value" [disabled]="_optionDemoService.sampleOptionModel.hasDisabledElement">{{ option.viewValue }}</ids-option>
+                    <ids-option [value]="option.value" [disabled]="_optionDemoService.sampleOptionModel.disabled">{{ option.viewValue }}</ids-option>
                   }
                 </ids-option-group>
                 <ids-option-group label="Aquatic">
@@ -40,7 +40,7 @@
               >
                 <ids-option-group label="Land">
                   @for (option of _optionDemoService.animals.land; track $index) {
-                    <ids-option [value]="option.value" [disabled]="_optionDemoService.multipleSelectionModel.hasDisabledElement">{{ option.viewValue }}</ids-option>
+                    <ids-option [value]="option.value" [disabled]="_optionDemoService.multipleSelectionModel.disabled">{{ option.viewValue }}</ids-option>
                   }
                 </ids-option-group>
                 <ids-option-group label="Aquatic">

@@ -1,0 +1,30 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether the accordion is disabled or not.",
+      "hu": "A harmonikamenü eleme letiltása."
+    },
+    "type": "boolean"
+  },
+  "hasLeadingIcon": {
+    "description": {
+      "en": "Whether to show an icon before the accordion item heading.",
+      "hu": "Ikon megjelenítése a fejléc szövege előtt."
+    },
+    "type": "boolean"
+  },
+  "hasTrailingIcon": {
+    "description": {
+      "en": "Whether to show an icon after the accordion item heading.",
+      "hu": "Ikon megjelenítése a fejléc szövege után."
+    },
+    "type": "boolean"
+  },
+  "summary": {
+    "description": {
+      "en": "Text displayed in the accordion item heading.",
+      "hu": "A harmonikamenü elemének fejlécében megjelenő szöveg."
+    },
+    "type": "string"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether the radio group is disabled.",
+      "hu": "A választógombok csoportjának letiltása."
+    },
+    "type": "boolean"
+  },
+  "groupLabel": {
+    "description": {
+      "en": "Label of the radio group (alias: \"label\").",
+      "hu": "A választógombok csoportjának felirata. A sablonban label néven köthető."
+    },
+    "type": "string"
+  },
+  "label": {
+    "description": {
+      "en": "aria-label for the radio item.",
+      "hu": "A képernyőolvasók számára megadott megnevezés (aria-label)."
+    },
+    "type": "string"
+  },
+  "labelPosition": {
+    "description": {
+      "en": "Position of the radio's label.",
+      "hu": "A felirat elhelyezkedése a vezérlőhöz képest."
+    },
+    "type": "IdsPositionType"
+  },
+  "name": {
+    "description": {
+      "en": "Name for radio items. Name is provided for group, but items get it.",
+      "hu": "A csoport választógombjainak közös name attribútuma."
+    },
+    "type": "string"
+  },
+  "orientation": {
+    "description": {
+      "en": "Orientation of the radio.",
+      "hu": "Vízszintes vagy függőleges elrendezés."
+    },
+    "type": "IdsRadioVariantType"
+  },
+  "required": {
+    "description": {
+      "en": "Whether the radio is required or not.",
+      "hu": "A csoport egyik elemének kiválasztása kötelező."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the radio.",
+      "hu": "A választógombok csoportja mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the radio.",
+      "hu": "A választógombok csoportja stílusváltozata."
+    },
+    "type": "IdsRadioVariantType"
+  },
+  "valueCompareFn": {
+    "description": {
+      "en": "Function used to compare radio items for the purpose of selection matching.",
+      "hu": "A kiválasztás egyeztetéséhez használt összehasonlító függvény."
+    },
+    "type": "(o1: IdsRadioComponent, o2: IdsRadioComponent) => boolean"
+  },
+  "itemChanges": {
+    "description": {
+      "en": "Emitted when the selected radio item changes.",
+      "hu": "A kiválasztott választógomb változásakor jelző esemény."
+    },
+    "type": "EventEmitter<IdsRadioChangeEvent>"
+  }
+}

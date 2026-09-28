@@ -1,0 +1,20 @@
+{
+  "content": {
+    "description": {
+      "en": "Default content of the checkbox, used as its label.",
+      "hu": "A jelölőnégyzet felirataként megjelenő tartalom."
+    }
+  },
+  "errorMessage": {
+    "description": {
+      "en": "Projected <ids-error-message> element, shown in the message area when the checkbox is in an error state.",
+      "hu": "Beillesztett <ids-error-message> elem, amely hibaállapot esetén jelenik meg az üzenetterületen."
+    }
+  },
+  "hintMessage": {
+    "description": {
+      "en": "Projected <ids-hint-message> element, shown in the message area by default.",
+      "hu": "Beillesztett <ids-hint-message> elem, amely alapértelmezetten az üzenetterületen jelenik meg."
+    }
+  }
+}

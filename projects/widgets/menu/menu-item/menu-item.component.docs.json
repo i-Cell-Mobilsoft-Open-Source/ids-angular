@@ -1,0 +1,37 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Menu item appearance.",
+      "hu": "A menüpont megjelenési módja."
+    },
+    "type": "IdsMenuItemAppearanceType"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the menu item is disabled or not",
+      "hu": "A menüpont letiltása."
+    },
+    "type": "boolean"
+  },
+  "label": {
+    "description": {
+      "en": "Label text of the menu item.",
+      "hu": "A menüpont felirata."
+    },
+    "type": "string"
+  },
+  "size": {
+    "description": {
+      "en": "Menu item size.",
+      "hu": "A menüpont mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "variant": {
+    "description": {
+      "en": "Menu item variant.",
+      "hu": "A menüpont stílusváltozata."
+    },
+    "type": "IdsMenuItemVariantType"
+  }
+}

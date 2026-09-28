@@ -1,0 +1,9 @@
+{
+  "autocomplete": {
+    "description": {
+      "en": "The IdsAutocompleteComponent instance the input is connected to. Required.",
+      "hu": "A beviteli mezőhöz kapcsolt IdsAutocompleteComponent példány. Kötelező megadni."
+    },
+    "type": "IdsAutocompleteComponent"
+  }
+}

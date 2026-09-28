@@ -1,0 +1,20 @@
+{
+  "content": {
+    "description": {
+      "en": "Default content of the side sheet, rendered in the scrollable content area.",
+      "hu": "Az oldalpanel alapértelmezett tartalma, amely a görgethető tartalmi területen jelenik meg."
+    }
+  },
+  "customHeader": {
+    "description": {
+      "en": "Content projected into the header area (marked with slot=\"customHeader\") when the header input is set to \"custom\".",
+      "hu": "Az oldalpanel egyedi fejléce, slot=\"customHeader\" jelöléssel. Akkor jelenik meg, ha a header értéke \"custom\"."
+    }
+  },
+  "footer": {
+    "description": {
+      "en": "Content projected into the footer area of the side sheet (marked with slot=\"footer\"), typically action buttons.",
+      "hu": "Az oldalpanel láblécének területére beillesztett tartalom (slot=\"footer\" jelöléssel), jellemzően műveleti gombok."
+    }
+  }
+}

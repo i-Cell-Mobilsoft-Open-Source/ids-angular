@@ -1,0 +1,14 @@
+{
+  "idsFieldsetMessage": {
+    "description": {
+      "en": "Content projected into the fieldset's message area, below the legend (marked with the idsFieldsetMessage attribute).",
+      "hu": "A mezőcsoport felirata alatt megjelenő üzenet, idsFieldsetMessage attribútummal."
+    }
+  },
+  "row": {
+    "description": {
+      "en": "Projected <ids-fieldset-row> elements, used to lay out the fieldset's form controls in rows.",
+      "hu": "A mezőcsoport vezérlőit sorokba rendező <ids-fieldset-row> elemek."
+    }
+  }
+}

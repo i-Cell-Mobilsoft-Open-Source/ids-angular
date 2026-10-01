@@ -7,7 +7,7 @@ const postcss = require('postcss');
 const safeParser = require('postcss-safe-parser');
 
 // read file from path and extract data as JS object
-const cssData = fs.readFileSync('node_modules/@i-cell/ids-tokens/css/smc/smc-reference.css', 'utf-8');
+const cssData = fs.readFileSync('projects/demo/src/assets/ids_css/smc/smc-reference.css', 'utf-8');
 const data = extract(cssData);
 
 // process tokens

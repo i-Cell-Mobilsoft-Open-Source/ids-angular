@@ -61,11 +61,6 @@
               "projects/demo/src/assets",
               "projects/demo/src/robots.txt",
               {
-                "glob": "**/*",
-                "input": "node_modules/@i-cell/ids-tokens/css",
-                "output": "assets/ids-tokens"
-              },
-              {
                 "glob": "**/*.{html,ts}",
                 "input": "projects/demo/src/app/components-example",
                 "output": "/assets/examples"
@@ -206,7 +201,7 @@
             ],
             "port": 6006,
             "styles": [
-              "node_modules/@i-cell/ids-tokens/css/tokens.css",
+              "projects/demo/src/assets/ids_css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css",
               "projects/widgets/.storybook/styles.scss"
             ],
@@ -229,7 +224,7 @@
             ],
             "outputDir": "dist/storybook/widgets",
             "styles": [
-              "node_modules/@i-cell/ids-tokens/css/tokens.css",
+              "projects/demo/src/assets/ids_css/tokens.css",
               "node_modules/@i-cell/ids-styles/dist/components.css",
               "projects/widgets/.storybook/styles.scss"
             ]

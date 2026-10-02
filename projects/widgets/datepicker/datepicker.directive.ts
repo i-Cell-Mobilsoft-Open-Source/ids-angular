@@ -236,6 +236,11 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
 
   protected _handleBlur(): void {
     this._onTouched();
+
+    const date = getValidDateOrNull(this.parser()(this._elementRef.nativeElement.value));
+    if (date) {
+      this._setInputValue(date);
+    }
   }
 
   protected _handleKeydown(event: KeyboardEvent): void {

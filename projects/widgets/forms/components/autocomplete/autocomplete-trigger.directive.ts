@@ -81,7 +81,7 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this._selectionModel = new SelectionModel<IdsOptionValue>(true, undefined, true, this.autocomplete().valueCompareFn());
+    this._selectionModel = new SelectionModel<IdsOptionValue>(true, undefined, true, this._compareOptionValues);
 
     this._selectionModel.changed.subscribe(() => {
       if (this._isProgrammaticSelectionUpdate) {
@@ -137,9 +137,7 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
   }
 
   public removeOption(optionValue: IdsOptionValue): void {
-    const option = this.autocomplete()
-      .options()
-      .find((opt) => opt.value() === optionValue.value);
+    const option = this._findOptionByValue(optionValue.value);
     if (option) {
       this._handleOptionChange({
         source: option,
@@ -410,15 +408,22 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
           return false;
         }
 
-        try {
-          return this.autocomplete().valueCompareFn()(option.value(), value);
-        } catch(error) {
-          if (isDevMode()) {
-            console.warn(error);
-          }
-          return false;
-        }
+        return this._valuesMatch(option.value(), value);
       });
+  }
+
+  private readonly _compareOptionValues = (first: IdsOptionValue, second: IdsOptionValue): boolean =>
+    this._valuesMatch(first.value, second.value);
+
+  private _valuesMatch(firstValue: unknown, secondValue: unknown): boolean {
+    try {
+      return this.autocomplete().valueCompareFn()(firstValue, secondValue);
+    } catch(error) {
+      if (isDevMode()) {
+        console.warn(error);
+      }
+      return false;
+    }
   }
 
   private _updateCurrentSelection(): void {

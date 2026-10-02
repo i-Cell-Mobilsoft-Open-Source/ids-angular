@@ -204,9 +204,12 @@ export class IdsAutocompleteComponent
     });
 
     effect(() => {
-      const options = this.options();
+      const optionValues = this.options().map((option) => ({
+        value: option.value(),
+        viewValue: option.viewValue(),
+      }));
 
-      untracked(() => this._rememberOptionValues(options));
+      untracked(() => this._rememberOptionValues(optionValues));
     });
 
     effect(() => {
@@ -378,9 +381,8 @@ export class IdsAutocompleteComponent
     return this._optionValues.find((optionValue) => this._valuesMatch(optionValue.value, value));
   }
 
-  private _rememberOptionValues(options: readonly IdsOptionComponent[]): void {
-    options.forEach((option) => {
-      const optionValue: IdsOptionValue = { value: option.value(), viewValue: option.viewValue() };
+  private _rememberOptionValues(optionValues: readonly IdsOptionValue[]): void {
+    optionValues.forEach((optionValue) => {
       const knownOptionIndex = this._optionValues.findIndex((knownOption) => this._valuesMatch(knownOption.value, optionValue.value));
 
       if (knownOptionIndex === -1) {

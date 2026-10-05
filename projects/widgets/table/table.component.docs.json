@@ -97,6 +97,13 @@
     },
     "type": "boolean"
   },
+  "masterDetailToggleColumnId": {
+    "description": {
+      "en": "Visible data column ID for the master-detail toggle. By default, or for an unknown or hidden column, the toggle remains in a separate sticky-end column. Requires masterDetail. The target cell retains its content; showDetailHeader only applies to the separate column.",
+      "hu": "A master-detail gombot tartalmazó látható adatoszlop azonosítója. Alapértelmezésben, illetve ismeretlen vagy rejtett oszlop esetén a gomb külön, jobb szélre rögzített oszlopban marad. A masterDetail bekapcsolása szükséges. A célcella tartalma megmarad; a showDetailHeader csak a külön oszlopra vonatkozik."
+    },
+    "type": "string | null"
+  },
   "noRowsToShowOverlayBelow": {
     "description": {
       "en": "Whether to render a \"no rows to show\" overlay below the table or as a row in the table.",

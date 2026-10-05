@@ -44,6 +44,7 @@ export type TableInputControls = {
   clearSelectionOnChange: boolean;
   enableSorting: boolean;
   masterDetail: boolean;
+  masterDetailToggleColumnId: string | null;
   showDetailHeader: boolean;
   detailStickyColumns: boolean;
   withBorder: boolean;
@@ -233,6 +234,17 @@ export class TableDemoService {
       type: 'boolean',
       default: defaultConfig.masterDetail,
       control: DemoControl.SWITCH,
+    },
+    masterDetailToggleColumnId: {
+      description: this._widgetDocs.getDescription(TABLE_DOCS_PATH, 'masterDetailToggleColumnId',
+        'Visible data column ID for the master-detail toggle.'),
+      type: 'string | null',
+      default: defaultConfig.masterDetailToggleColumnId,
+      control: DemoControl.SELECT,
+      list: [
+        '',
+        ...this.colDefs.filter((column) => column.visible !== false).map((column) => column.id),
+      ],
     },
     showDetailHeader: {
       description: this._widgetDocs.getDescription(

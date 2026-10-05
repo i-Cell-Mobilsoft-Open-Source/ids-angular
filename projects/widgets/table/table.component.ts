@@ -17,7 +17,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { SelectionModel } from '@angular/cdk/collections';
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, CdkHeaderRow, CdkHeaderRowDef, CdkNoDataRow, CdkRow, CdkRowDef, CdkTable, CdkTableDataSourceInput } from '@angular/cdk/table';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, inject, input, OnInit, output, signal, TemplateRef, viewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, effect, inject, input, isDevMode, OnInit, output, signal, TemplateRef, viewChildren, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { IdsCheckboxComponent } from '@i-cell/ids-angular/checkbox';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
@@ -96,6 +96,7 @@ export class IdsTableComponent<D>
   public enableSorting = input<boolean, unknown>(this._defaultConfig.enableSorting, { transform: coerceBooleanAttribute });
   /** Enable master-detail rows */
   public masterDetail = input<boolean, unknown>(this._defaultConfig.masterDetail, { transform: coerceBooleanAttribute });
+  public masterDetailToggleColumnId = input<string | null>(this._defaultConfig.masterDetailToggleColumnId);
   /** Name of the detail row renderer template */
   public detailTemplateName = input(this._defaultConfig.detailTemplateName);
   /** If true the detail cell will not span sticky and stickyEnd columns. If false the detail cell will span the table's full width */
@@ -178,7 +179,7 @@ export class IdsTableComponent<D>
   /** The row selection model for the table */
   public rowSelection: SelectionModel<D> = new SelectionModel<D>(true, [], true);
 
-  protected _expandedRows = new Set<D>();
+  protected _expandedRows = signal<ReadonlySet<D>>(new Set<D>());
   protected _allRowsExpanded = signal<boolean>(false);
 
   protected _sortState = signal<IdsTableSortInfo | null>(null);
@@ -193,6 +194,21 @@ export class IdsTableComponent<D>
     this.variant(),
     (this.withBorder() ? 'with-border' : null),
   ]));
+
+  protected _masterDetailToggleColumn = computed(() => {
+    const columnId = this.masterDetailToggleColumnId();
+    return this.masterDetail() && columnId ?
+      this.columnDefs().find((column) => column.id === columnId && column.visible !== false) ?? null : null;
+  });
+
+  protected _hasSeparateMasterDetailColumn = computed(() => this.masterDetail() && !this._masterDetailToggleColumn());
+
+  private _validateMasterDetailToggleColumn = effect(() => {
+    const columnId = this.masterDetailToggleColumnId();
+    if (isDevMode() && this.masterDetail() && columnId && !this._masterDetailToggleColumn()) {
+      console.warn(`ids-table: masterDetailToggleColumnId "${columnId}" is not a visible column. Using the separate master-detail column.`);
+    }
+  });
 
   protected _actualColumns = computed(() => {
     const cols = this.columnDefs()
@@ -217,7 +233,7 @@ export class IdsTableComponent<D>
         }, [[], [], []])
       .flat();
 
-    if (this.masterDetail()) {
+    if (this._hasSeparateMasterDetailColumn()) {
       cols.push('$masterDetail');
     }
 
@@ -234,25 +250,33 @@ export class IdsTableComponent<D>
       .map((colDef) => ({ ...colDef, visible: true })),
   );
 
+  private _detailSpansStickyColumns = computed(() => !this.detailStickyColumns() ||
+    (!!this._masterDetailToggleColumn() && !this.columnDefs().some((column) =>
+      column.visible !== false && !column.sticky && !column.stickyEnd)),
+  );
+
   protected _detailRowTemplates = computed(() => {
-    if (!this.detailStickyColumns()) {
+    if (this._detailSpansStickyColumns()) {
       return ['$expandedDetail'];
     }
 
+    const columnDefs = this._masterDetailToggleColumn() ?
+      this.columnDefs().filter((column) => column.visible !== false) : this.columnDefs();
+
     return [
       ...(this.enableRowSelection() ? ['$empty'] : []),
-      ...this.columnDefs().filter((colDef) => colDef.sticky).map(() => '$empty'),
+      ...columnDefs.filter((colDef) => colDef.sticky).map(() => '$empty'),
       '$expandedDetail',
-      ...this.columnDefs().filter((colDef) => colDef.stickyEnd).map(() => '$emptyEnd'),
-      ...(this.masterDetail() ? ['$emptyEnd'] : []),
+      ...columnDefs.filter((colDef) => colDef.stickyEnd).map(() => '$emptyEnd'),
+      ...(this._hasSeparateMasterDetailColumn() ? ['$emptyEnd'] : []),
     ];
   });
 
   protected _detailColSpan = computed(() => {
     const colDefs = this.columnDefs();
-    let detailColSpan = colDefs.length;
+    let detailColSpan = this._masterDetailToggleColumn() ? this._actualColumns().length : colDefs.length;
 
-    if (this.detailStickyColumns()) {
+    if (!this._detailSpansStickyColumns()) {
       detailColSpan = colDefs.filter((def) => (!def.sticky && !def.stickyEnd && def.visible !== false)).length;
     }
 
@@ -329,11 +353,13 @@ export class IdsTableComponent<D>
    * Open up all row details.
    */
   public expandAll(): void {
+    const expandedRows = new Set(this._expandedRows());
     this.rowData().forEach((rowData, idx) => {
-      if (!this._expandedRows.has(rowData) && this.hasDetailRow()(idx, rowData)) {
-        this._expandedRows.add(rowData);
+      if (!expandedRows.has(rowData) && this.hasDetailRow()(idx, rowData)) {
+        expandedRows.add(rowData);
       }
     });
+    this._expandedRows.set(expandedRows);
     this._cdRef.markForCheck();
   }
 
@@ -341,7 +367,7 @@ export class IdsTableComponent<D>
    * Closes all opened row details.
    */
   public collapseAll(): void {
-    this._expandedRows.clear();
+    this._expandedRows.set(new Set<D>());
     this._cdRef.markForCheck();
   }
 
@@ -389,11 +415,13 @@ export class IdsTableComponent<D>
   }
 
   protected _handleMasterDetailClick(rowData: D): void {
-    if (this._expandedRows.has(rowData)) {
-      this._expandedRows.delete(rowData);
+    const expandedRows = new Set(this._expandedRows());
+    if (expandedRows.has(rowData)) {
+      expandedRows.delete(rowData);
     } else {
-      this._expandedRows.add(rowData);
+      expandedRows.add(rowData);
     }
+    this._expandedRows.set(expandedRows);
     this._cdRef.markForCheck();
   }
 

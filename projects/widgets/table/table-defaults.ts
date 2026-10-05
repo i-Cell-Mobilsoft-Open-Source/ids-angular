@@ -13,6 +13,7 @@ export interface IdsTableDefaultConfig {
   fixedHeader?: boolean,
   enableSorting?: boolean,
   masterDetail?: boolean,
+  masterDetailToggleColumnId?: string | null,
   detailTemplateName?: string,
   detailStickyColumns?: boolean,
   showDetailHeader?: boolean,
@@ -38,6 +39,7 @@ export function IDS_TABLE_DEFAULT_CONFIG_FACTORY(): Required<IdsTableDefaultConf
     fixedHeader: false,
     enableSorting: false,
     masterDetail: false,
+    masterDetailToggleColumnId: null,
     detailTemplateName: DEFAULT_MASTER_DETAIL_TEMPLATE_NAME,
     detailStickyColumns: true,
     showDetailHeader: false,
@@ -47,4 +49,3 @@ export function IDS_TABLE_DEFAULT_CONFIG_FACTORY(): Required<IdsTableDefaultConf
     withBorder: false,
   };
 }
-

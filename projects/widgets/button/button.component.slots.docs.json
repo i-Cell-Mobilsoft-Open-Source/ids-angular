@@ -1,0 +1,20 @@
+{
+  "iconLeading": {
+    "description": {
+      "en": "Content projected before the label (marked with the icon-leading attribute), typically an icon.",
+      "hu": "A felirat elé beillesztett tartalom (icon-leading attribútummal megjelölve), jellemzően egy ikon."
+    }
+  },
+  "content": {
+    "description": {
+      "en": "Default content of the button, i.e. the button's label.",
+      "hu": "A gomb alapértelmezett tartalma, azaz a gomb felirata."
+    }
+  },
+  "iconTrailing": {
+    "description": {
+      "en": "Content projected after the label (marked with the icon-trailing attribute), typically an icon.",
+      "hu": "A felirat után beillesztett tartalom (icon-trailing attribútummal megjelölve), jellemzően egy ikon."
+    }
+  }
+}

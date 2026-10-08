@@ -1,0 +1,51 @@
+{
+  "message": {
+    "description": {
+      "en": "The text displayed inside the tooltip.",
+      "hu": "A súgóbuborék szövege."
+    },
+    "type": "string"
+  },
+  "position": {
+    "description": {
+      "en": "The position of the tooltip relative to the target element.",
+      "hu": "A súgóbuborék helye a kapcsolódó elemhez képest."
+    },
+    "type": "IdsTooltipPositionType"
+  },
+  "showPointer": {
+    "description": {
+      "en": "Whether to show tooltip pointer or not.",
+      "hu": "A kapcsolódó elem felé mutató nyíl megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "The size of the tooltip.",
+      "hu": "A súgóbuborék mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "textAlign": {
+    "description": {
+      "en": "The text alignment inside the tooltip.",
+      "hu": "A súgóbuborék szövegének igazítása."
+    },
+    "type": "IdsTooltipTextAlign"
+  },
+  "tooltipClass": {
+    "description": {
+      "en": "Additional CSS class(es) to apply to the tooltip.",
+      "hu": "A súgóbuborékhoz hozzáadott CSS-osztályok."
+    },
+    "type": "string"
+  },
+  "variant": {
+    "description": {
+      "en": "The variant or style of the tooltip.",
+      "hu": "A súgóbuborék stílusváltozata."
+    },
+    "type": "IdsTooltipVariantType"
+  }
+}

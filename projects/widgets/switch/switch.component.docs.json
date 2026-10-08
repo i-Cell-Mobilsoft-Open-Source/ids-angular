@@ -1,0 +1,93 @@
+{
+  "describedby": {
+    "description": {
+      "en": "aria-describedby for switch.",
+      "hu": "A kiegészítő leírást tartalmazó HTML-elemek azonosítói, szóközzel elválasztva (aria-describedby)."
+    },
+    "type": "string"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the switch is disabled or not.",
+      "hu": "A kapcsoló letiltása."
+    },
+    "type": "boolean"
+  },
+  "hasIcon": {
+    "description": {
+      "en": "Whether the switch has icon.",
+      "hu": "Az állapotjelző ikon megjelenítése a kapcsolón."
+    },
+    "type": "boolean"
+  },
+  "iconPosition": {
+    "description": {
+      "en": "Where the icon should be shown in switch.",
+      "hu": "Az ikon helye a kapcsolón belül."
+    },
+    "type": "IdsSwitchIconPositionType"
+  },
+  "label": {
+    "description": {
+      "en": "Switch label.",
+      "hu": "A kapcsoló felirata."
+    },
+    "type": "string"
+  },
+  "ariaLabel": {
+    "description": {
+      "en": "aria-label for switch.",
+      "hu": "A képernyőolvasók számára megadott megnevezés (aria-label)."
+    },
+    "type": "string"
+  },
+  "labelPosition": {
+    "description": {
+      "en": "Where the label should be shown in switch.",
+      "hu": "A felirat elhelyezkedése a vezérlőhöz képest."
+    },
+    "type": "IdsSwitchLabelPositionType"
+  },
+  "labelledby": {
+    "description": {
+      "en": "aria-labelledby for switch.",
+      "hu": "A feliratot tartalmazó HTML-elemek azonosítói, szóközzel elválasztva."
+    },
+    "type": "string"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the switch input, used for form submission.",
+      "hu": "A kapcsoló name attribútuma."
+    },
+    "type": "string"
+  },
+  "readonly": {
+    "description": {
+      "en": "Whether the switch is readonly or not.",
+      "hu": "Csak olvasható állapot: a felhasználó nem módosíthatja az értéket."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Size of the switch.",
+      "hu": "A kapcsoló mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "tabIndex": {
+    "description": {
+      "en": "Tab index of the switch.",
+      "hu": "A billentyűzetes fókuszsorrendet beállító tabindex érték."
+    },
+    "type": "number"
+  },
+  "variant": {
+    "description": {
+      "en": "Variant of the switch.",
+      "hu": "A kapcsoló stílusváltozata."
+    },
+    "type": "IdsSwitchVariantType"
+  }
+}

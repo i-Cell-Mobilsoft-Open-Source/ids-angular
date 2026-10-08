@@ -1,0 +1,86 @@
+{
+  "appearance": {
+    "description": {
+      "en": "Accordion appearance.",
+      "hu": "A harmonikamenü megjelenési módja."
+    },
+    "type": "IdsAccordionAppearanceType"
+  },
+  "btnAppearance": {
+    "description": {
+      "en": "Button appearance.",
+      "hu": "Az összes elemet nyitó és összecsukó gombok megjelenési módja."
+    },
+    "type": "IdsButtonAppearanceType"
+  },
+  "btnSize": {
+    "description": {
+      "en": "Button size.",
+      "hu": "Az összes elemet nyitó és összecsukó gombok mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "btnVariant": {
+    "description": {
+      "en": "Button variant.",
+      "hu": "Az összes elemet nyitó és összecsukó gombok stílusváltozata."
+    },
+    "type": "IdsButtonVariantType"
+  },
+  "collapseBtnLabel": {
+    "description": {
+      "en": "Label for collapse all button.",
+      "hu": "Az összes elemet összecsukó gomb felirata."
+    },
+    "type": "string"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the accordion is disabled or not.",
+      "hu": "A harmonikamenü letiltása."
+    },
+    "type": "boolean"
+  },
+  "expandBtnLabel": {
+    "description": {
+      "en": "Label for expand all button.",
+      "hu": "Az összes elemet kinyitó gomb felirata."
+    },
+    "type": "string"
+  },
+  "hasLeadingIcon": {
+    "description": {
+      "en": "Whether to show an icon before the accordion item heading.",
+      "hu": "Ikon megjelenítése a fejléc szövege előtt."
+    },
+    "type": "boolean"
+  },
+  "hasTrailingIcon": {
+    "description": {
+      "en": "Whether to show an icon after the accordion item heading.",
+      "hu": "Ikon megjelenítése a fejléc szövege után."
+    },
+    "type": "boolean"
+  },
+  "headingLevel": {
+    "description": {
+      "en": "Heading level.",
+      "hu": "A fejléc HTML-címsorszintje."
+    },
+    "type": "IdsAccordionHeadingLevelType"
+  },
+  "multi": {
+    "description": {
+      "en": "Allow multiple accordion items to be open.",
+      "hu": "Egyszerre több elem is nyitva tartható."
+    },
+    "type": "boolean"
+  },
+  "size": {
+    "description": {
+      "en": "Accordion size.",
+      "hu": "A harmonikamenü mérete."
+    },
+    "type": "IdsSizeType"
+  }
+}

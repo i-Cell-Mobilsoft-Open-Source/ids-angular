@@ -1,0 +1,58 @@
+{
+  "backButton": {
+    "description": {
+      "en": "Is side sheet back button shown. Only applies to default header.",
+      "hu": "A visszalépés gomb megjelenítése az alapértelmezett fejlécben."
+    },
+    "type": "boolean"
+  },
+  "backClicked": {
+    "description": {
+      "en": "Emitted when the back button (in the default header) is clicked.",
+      "hu": "A fejléc visszalépés gombjának megnyomásakor jelző esemény."
+    },
+    "type": "EventEmitter<void>"
+  },
+  "closeTooltipText": {
+    "description": {
+      "en": "Tooltip text for the close button.",
+      "hu": "A bezáró gomb súgóbuborékjának szövege."
+    },
+    "type": "string"
+  },
+  "closed": {
+    "description": {
+      "en": "Emitted when the side sheet is closed.",
+      "hu": "A bezáró gomb megnyomásakor jelző esemény."
+    },
+    "type": "EventEmitter<void>"
+  },
+  "header": {
+    "description": {
+      "en": "Side sheet header.",
+      "hu": "A fejléc típusa: alapértelmezett vagy egyedi."
+    },
+    "type": "IdsSideSheetHeader"
+  },
+  "isClosable": {
+    "description": {
+      "en": "Is side sheet closable.",
+      "hu": "A bezáró gomb megjelenítése."
+    },
+    "type": "boolean"
+  },
+  "isShowHeader": {
+    "description": {
+      "en": "Controls the visibility of the header. Applies only when using the default header type.",
+      "hu": "Az alapértelmezett fejléc megjelenítése. Egyedi fejlécnél nincs hatása."
+    },
+    "type": "boolean"
+  },
+  "title": {
+    "description": {
+      "en": "Side sheet title.",
+      "hu": "Az oldalpanel címe."
+    },
+    "type": "string"
+  }
+}

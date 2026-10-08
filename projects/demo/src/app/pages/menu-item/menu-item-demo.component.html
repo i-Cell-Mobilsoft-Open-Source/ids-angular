@@ -11,8 +11,8 @@
             <h2>Button</h2>
             <div
               idsActiveIndicator
-              [active]="_menuItemDemoService.menuItemHelperModel.active"
-              [class.extra-height]="_menuItemDemoService.menuItemHelperModel.active && _menuItemDemoService.menuItemHelperModel.extraHeight"
+              [active]="_menuItemDemoService.activeIndicatorModel.active"
+              [class.extra-height]="_menuItemDemoService.activeIndicatorModel.active && _menuItemDemoService.menuItemHelperModel.extraHeight"
             >
               <button
                 type="button"
@@ -20,7 +20,7 @@
                 [appearance]="_menuItemDemoService.menuItemModel.appearance"
                 [size]="_menuItemDemoService.menuItemModel.size"
                 [variant]="_menuItemDemoService.menuItemModel.variant"
-                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? _menuItemDemoService.menuItemModel.label : ''"
                 [disabled]="_menuItemDemoService.menuItemModel.disabled"
               >
                 @if (_menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
@@ -36,8 +36,8 @@
             <h2>Link</h2>
             <div
               idsActiveIndicator
-              [active]="_menuItemDemoService.menuItemHelperModel.active"
-              [class.extra-height]="_menuItemDemoService.menuItemHelperModel.active && _menuItemDemoService.menuItemHelperModel.extraHeight"
+              [active]="_menuItemDemoService.activeIndicatorModel.active"
+              [class.extra-height]="_menuItemDemoService.activeIndicatorModel.active && _menuItemDemoService.menuItemHelperModel.extraHeight"
             >
               <a
                 idsMenuItem
@@ -45,7 +45,7 @@
                 [appearance]="_menuItemDemoService.menuItemModel.appearance"
                 [size]="_menuItemDemoService.menuItemModel.size"
                 [variant]="_menuItemDemoService.menuItemModel.variant"
-                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? 'Menu item label' : ''"
+                [label]="_menuItemDemoService.menuItemHelperModel.showLabel ? _menuItemDemoService.menuItemModel.label : ''"
                 [disabled]="_menuItemDemoService.menuItemModel.disabled"
               >
                 @if (_menuItemDemoService.menuItemHelperModel.hasLeadingIcon) {
@@ -80,6 +80,20 @@
         [(model)]="_menuItemDemoService.menuItemHelperModel"
         (resetted)="_menuItemDemoService.reset()"
       />
+      <app-control-table
+        controls
+        controlName="Active indicator"
+        configType="input"
+        [controlConfig]="_menuItemDemoService.activeIndicatorInputControlConfig"
+        [(model)]="_menuItemDemoService.activeIndicatorModel"
+        (resetted)="_menuItemDemoService.reset()"
+      />
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
+
+<div examples class="flex flex-col gap-6 w-full pt-6 pb-2">
+  @for (example of menuItemExamples; track example.id) {
+    <ids-example-viewer [example]="example" />
+  }
+</div>

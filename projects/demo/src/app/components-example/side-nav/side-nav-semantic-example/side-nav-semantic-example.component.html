@@ -1,0 +1,33 @@
+<nav idsSideNav>
+  <ul idsSideNavSection>
+    <li idsSideNavTitle [label]="'EXAMPLES.SIDE_NAV.SEMANTIC.CONTENT.SECTION' | translate">
+      <ids-icon icon-leading fontIcon="cctv" />
+    </li>
+    <li
+      idsSideNavItem
+      target="components/side-nav/demo"
+      [label]="'EXAMPLES.SIDE_NAV.SEMANTIC.CONTENT.HOME' | translate"
+    >
+      <ids-icon icon-leading fontIcon="home" />
+    </li>
+    <li idsSideNavItem [label]="'EXAMPLES.SIDE_NAV.SEMANTIC.CONTENT.COMPONENTS' | translate" [expanded]="true">
+      <ids-icon icon-leading fontIcon="more-horiz" />
+      <ng-template #idsSideNavItemChildren>
+        <li
+          idsSideNavItem
+          target="components/avatar/demo"
+          [label]="'EXAMPLES.SIDE_NAV.SEMANTIC.CONTENT.AVATAR' | translate"
+        >
+          <ids-icon icon-leading fontIcon="account" />
+        </li>
+        <li
+          idsSideNavItem
+          target="components/button/demo"
+          [label]="'EXAMPLES.SIDE_NAV.SEMANTIC.CONTENT.SEARCH' | translate"
+        >
+          <ids-icon icon-leading fontIcon="search" />
+        </li>
+      </ng-template>
+    </li>
+  </ul>
+</nav>

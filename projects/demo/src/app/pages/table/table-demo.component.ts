@@ -157,4 +157,8 @@ export class TableDemoComponent implements OnInit {
   protected _hasDetailRow(index: number, rowData: PeriodicTableElement): boolean {
     return !!rowData.summary;
   }
+
+  protected _isRowSelectable(index: number, rowData: PeriodicTableElement): boolean {
+    return !!rowData.number && rowData.number > 0;
+  }
 }

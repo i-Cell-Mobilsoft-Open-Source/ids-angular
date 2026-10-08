@@ -1,0 +1,30 @@
+{
+  "expanded": {
+    "description": {
+      "en": "Whether the expandable side nav item is expanded initially.",
+      "hu": "A lenyitható menüpont kezdeti nyitott állapota."
+    },
+    "type": "boolean"
+  },
+  "isActiveMatchOptions": {
+    "description": {
+      "en": "Router \"isActive\" match options used to determine the active state of the side nav item.",
+      "hu": "Az útvonalegyezés szabályai, amelyek alapján a menüpont aktívnak számít."
+    },
+    "type": "IsActiveMatchOptions"
+  },
+  "label": {
+    "description": {
+      "en": "Label of the side nav item (used as the accessible name and tooltip text).",
+      "hu": "A menüpont felirata; az akadálymentes megnevezéshez és a súgóbuborékhoz is ezt használja."
+    },
+    "type": "string"
+  },
+  "templateChildren": {
+    "description": {
+      "en": "Custom template rendered as the content of the side nav item, instead of the default label/icon layout.",
+      "hu": "A menüpont tartalmához használt egyedi sablon az alapértelmezett felirat és ikonok helyett."
+    },
+    "type": "TemplateRef<HTMLElement>"
+  }
+}

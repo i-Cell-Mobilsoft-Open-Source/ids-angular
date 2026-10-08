@@ -34,7 +34,7 @@
         class="ids-tab-group__header"
         role="tablist"
         [attr.aria-orientation]="orientation()"
-        [class.ids-tab-group__header--has-overflow]="!_hasOverflow()"
+        [class.ids-tab-group__header--has-overflow]="_hasOverflow()"
         (keydown)="_onTabListKeydown($event)"
       >
         <span class="ids-tab-group__indicator"></span>

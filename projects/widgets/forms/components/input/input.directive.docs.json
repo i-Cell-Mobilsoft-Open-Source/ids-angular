@@ -1,0 +1,65 @@
+{
+  "canHandleSuccessState": {
+    "description": {
+      "en": "Whether the input can handle success state with a success state matcher.",
+      "hu": "Engedélyezi a sikeres állapot jelzését a successStateMatcher alapján."
+    },
+    "type": "boolean"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the input is disabled or not.",
+      "hu": "A beviteli mező letiltása."
+    },
+    "type": "boolean"
+  },
+  "errorStateMatcher": {
+    "description": {
+      "en": "Matcher instance used to determine whether the input should show an error state.",
+      "hu": "Az a szabályrendszer, amely eldönti, mikor jelenjen meg a mező hibás állapotban."
+    },
+    "type": "AbstractErrorStateMatcher"
+  },
+  "name": {
+    "description": {
+      "en": "Name of the input, used for form submission.",
+      "hu": "A beviteli mező name attribútuma."
+    },
+    "type": "string"
+  },
+  "placeholder": {
+    "description": {
+      "en": "Input placeholder.",
+      "hu": "Az üres mezőben megjelenő helyőrző szöveg."
+    },
+    "type": "string"
+  },
+  "readonly": {
+    "description": {
+      "en": "Whether the input is readonly or not.",
+      "hu": "Csak olvasható állapot: a felhasználó nem módosíthatja az értéket."
+    },
+    "type": "boolean"
+  },
+  "required": {
+    "description": {
+      "en": "Whether the input is required or not.",
+      "hu": "Megadja, hogy kötelező-e értéket választani vagy megadni."
+    },
+    "type": "boolean"
+  },
+  "successStateMatcher": {
+    "description": {
+      "en": "Matcher instance used to determine whether the input should show a success state.",
+      "hu": "Az a szabályrendszer, amely eldönti, mikor jelenjen meg a mező sikeres állapotban."
+    },
+    "type": "AbstractSuccessStateMatcher"
+  },
+  "type": {
+    "description": {
+      "en": "Type of the input (e.g. text, email, number, password).",
+      "hu": "A beviteli mező típusa, például text, email, number vagy password."
+    },
+    "type": "IdsInputType"
+  }
+}

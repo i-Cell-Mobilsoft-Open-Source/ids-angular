@@ -1,8 +1,11 @@
+import { WidgetDocsService } from '../../services/widget-docs.service';
+
 import { inject, Injectable } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -10,12 +13,15 @@ import { IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY, IdsCheckboxVariant, IdsCheck
 import { IdsOrientation, IdsOrientationType, IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
+const CHECKBOX_GROUP_DOCS_PATH = 'checkbox/checkbox-group.component.docs.json';
+const CHECKBOX_GROUP_SLOTS_DOCS_PATH = 'checkbox/checkbox-group.component.slots.docs.json';
+
 const defaultGroupConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
 
 type CheckboxGroupInputControls = {
   groupLabel: string;
   allowParent: boolean;
-  parentLabel: string;
+  parentCheckboxLabel: string;
   size: IdsSizeType;
   variant: IdsCheckboxVariantType;
   orientation: IdsOrientationType;
@@ -29,6 +35,7 @@ type CheckboxGroupHelperControls = {
 @Injectable()
 export class CheckboxGroupDemoService {
   private readonly _apiTitleTranslate = inject(TranslateService);
+  private readonly _widgetDocs = inject(WidgetDocsService);
 
   public formGroup = new FormGroup({
     toppings: new FormGroup(
@@ -62,46 +69,54 @@ export class CheckboxGroupDemoService {
 
   public readonly groupInputControlConfig: DemoControlConfig<CheckboxGroupInputControls> = {
     groupLabel: {
-      description: 'Checkbox group\'s label.',
+      description: this._widgetDocs.getDescription(CHECKBOX_GROUP_DOCS_PATH, 'groupLabel', 'Checkbox group\'s label.'),
       type: 'string',
       default: '-',
       demoDefault: 'Options',
     },
     allowParent: {
-      description: 'Whether to allow parent checkbox or not.',
+      description: this._widgetDocs.getDescription(CHECKBOX_GROUP_DOCS_PATH, 'allowParent', 'Whether to allow parent checkbox or not.'),
       type: 'boolean',
       default: defaultGroupConfig.allowParent,
       control: DemoControl.SWITCH,
     },
-    parentLabel: {
-      description: 'Parent checkbox label.',
+    parentCheckboxLabel: {
+      description: this._widgetDocs.getDescription(CHECKBOX_GROUP_DOCS_PATH, 'parentCheckboxLabel', 'Parent checkbox label.'),
       type: 'string',
       default: '-',
       demoDefault: 'Parent options',
     },
     size: {
-      description: 'Checkbox group size.',
+      description: this._widgetDocs.getDescription(CHECKBOX_GROUP_DOCS_PATH, 'size', 'Checkbox group size.'),
       type: 'IdsSizeType',
       default: defaultGroupConfig.size,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsSize),
     },
     variant: {
-      description: 'Checkbox group variant.',
+      description: this._widgetDocs.getDescription(CHECKBOX_GROUP_DOCS_PATH, 'variant', 'Checkbox group variant.'),
       type: 'IdsCheckboxVariantType',
       default: defaultGroupConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsCheckboxVariant),
     },
     orientation: {
-      description: 'Checkbox group variant.',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_DOCS_PATH,
+        'orientation',
+        'Horizontal or vertical arrangement of the checkboxes.',
+      ),
       type: 'IdsOrientationType',
       default: defaultGroupConfig.orientation,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOrientation),
     },
     showAsterisk: {
-      description: 'Whether to show an asterisk before to the checkbox group label or not. IMPORTANT: This is only for display purposes.',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_DOCS_PATH,
+        'showAsterisk',
+        'Whether to show an asterisk before to the checkbox group label or not. IMPORTANT: This is only for display purposes.',
+      ),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,
@@ -164,5 +179,43 @@ export class CheckboxGroupDemoService {
         config: this.groupInputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'hintMessage',
+      selector: 'ids-hint-message',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_SLOTS_DOCS_PATH,
+        'hintMessage',
+        'Projected <ids-hint-message> element, shown next to the group\'s legend.',
+      ),
+    },
+    {
+      name: 'checkbox',
+      selector: 'ids-checkbox',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_SLOTS_DOCS_PATH,
+        'checkbox',
+        'Projected <ids-checkbox> elements that make up the group\'s list of checkboxes.',
+      ),
+    },
+    {
+      name: 'errorMessage',
+      selector: 'ids-error-message',
+      description: this._widgetDocs.getDescription(
+        CHECKBOX_GROUP_SLOTS_DOCS_PATH,
+        'errorMessage',
+        'Projected <ids-error-message> element, shown below the checkbox list when the group is in an error state.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Checkbox group'];
   }
 }

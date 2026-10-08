@@ -1,5 +1,6 @@
 import { IDS_DIALOG_DEFAULT_CONFIG, IDS_DIALOG_DEFAULT_CONFIG_FACTORY, IdsDialogDefaultConfig } from './dialog-defaults';
 import { IdsDialogHeaderDirective } from './dialog-header.directive';
+import { IdsDialogScrollStrategyService } from './dialog-scroll-strategy.service';
 
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { NgTemplateOutlet } from '@angular/common';
@@ -45,6 +46,7 @@ export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefau
   }
 
   protected readonly _dialog = inject(Dialog);
+  private readonly _scrollStrategy = inject(IdsDialogScrollStrategyService);
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIALOG_DEFAULT_CONFIG);
   protected _dialogRef = inject<DialogRef<unknown>>(DialogRef, { optional: true });
 
@@ -88,6 +90,7 @@ export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefau
       ariaModal: true,
       restoreFocus: true,
       autoFocus: 'first-tabbable',
+      scrollStrategy: this._scrollStrategy.create(),
     });
 
     this._dialogRef.closed.subscribe(() => {
@@ -105,4 +108,3 @@ export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefau
   }
 
 }
-

@@ -48,6 +48,7 @@
                 [aria-labelledby]="_selectDemoService.selectModel['aria-labelledby']"
                 [typeaheadDebounceInterval]="_selectDemoService.selectModel.typeaheadDebounceInterval"
                 [canHandleSuccessState]="_selectDemoService.selectModel.canHandleSuccessState"
+                [tabIndex]="_selectDemoService.selectModel.tabIndex"
                 [(ngModel)]="_selectDemoService.singleSelectionValue"
               >
                 @for (group of _selectDemoService.animals | keyvalue; track $index) {

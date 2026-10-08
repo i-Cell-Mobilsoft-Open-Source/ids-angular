@@ -1,0 +1,79 @@
+{
+  "activationMode": {
+    "description": {
+      "en": "Tab activation mode.",
+      "hu": "A fülek aktiválási módja: automatikusan fókuszáláskor vagy külön billentyűnyomásra."
+    },
+    "type": "IdsTabActivationModeType"
+  },
+  "disabled": {
+    "description": {
+      "en": "Whether the tab item is disabled or not.",
+      "hu": "A fülcsoport letiltása."
+    },
+    "type": "boolean"
+  },
+  "indicatorPosition": {
+    "description": {
+      "en": "Tab indicator position.",
+      "hu": "Az aktív fület jelölő vonal elhelyezkedése."
+    },
+    "type": "IdsTabIndicatorPositionType"
+  },
+  "orientation": {
+    "description": {
+      "en": "Tab orientation.",
+      "hu": "Vízszintes vagy függőleges elrendezés."
+    },
+    "type": "IdsOrientationType"
+  },
+  "selectedTabChange": {
+    "description": {
+      "en": "Emits the index of the selected tab whenever the selected tab changes.",
+      "hu": "Fülváltáskor jelző esemény, a kiválasztott fül indexével."
+    },
+    "type": "EventEmitter<number>"
+  },
+  "setTabIndex": {
+    "description": {
+      "en": "Optionally sets the selected tab index after initialization.",
+      "hu": "A kiválasztandó fül indexe."
+    },
+    "type": "number"
+  },
+  "size": {
+    "description": {
+      "en": "Tab size.",
+      "hu": "A fülcsoport mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "stretchTabs": {
+    "description": {
+      "en": "Whether the tab header is stretched or not.",
+      "hu": "A fülek kitöltik a rendelkezésre álló helyet."
+    },
+    "type": "boolean"
+  },
+  "tabAlignment": {
+    "description": {
+      "en": "Alignment of the tabs within the tab header.",
+      "hu": "A fülek igazítása a fejlécen belül."
+    },
+    "type": "IdsTabGroupAlignmentType"
+  },
+  "tabPosition": {
+    "description": {
+      "en": "Tab position.",
+      "hu": "A fülsor elhelyezkedése a tartalomhoz képest."
+    },
+    "type": "IdsTabGroupPositionType"
+  },
+  "variant": {
+    "description": {
+      "en": "Tab variant.",
+      "hu": "A fülcsoport stílusváltozata."
+    },
+    "type": "IdsTabGroupVariantType"
+  }
+}

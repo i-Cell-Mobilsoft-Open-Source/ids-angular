@@ -1,0 +1,37 @@
+{
+  "disabled": {
+    "description": {
+      "en": "Whether the option is disabled or not.",
+      "hu": "A választási lehetőség letiltása."
+    },
+    "type": "boolean"
+  },
+  "selectionChange": {
+    "description": {
+      "en": "Emitted when the selection state of the option changes.",
+      "hu": "A kijelölési állapot változásakor jelző esemény."
+    },
+    "type": "EventEmitter<IdsOptionSelectionChange<T>>"
+  },
+  "selectionUnchanged": {
+    "description": {
+      "en": "Emitted when the option is selected/clicked but the selection state does not change.",
+      "hu": "Az elem kiválasztásakor jelző esemény, ha a kijelölési állapot változatlan maradt."
+    },
+    "type": "EventEmitter<IdsOptionSelectionChange<T>>"
+  },
+  "value": {
+    "description": {
+      "en": "Value of the option.",
+      "hu": "A választási lehetőséghez rendelt érték."
+    },
+    "type": "T"
+  },
+  "viewValue": {
+    "description": {
+      "en": "Explicit display text of the option (alias: \"viewValue\"). Falls back to the projected content when not set.",
+      "hu": "Az elem megjelenítendő szövege. Ha nincs megadva, a komponens a befoglalt tartalom szövegét használja."
+    },
+    "type": "string"
+  }
+}

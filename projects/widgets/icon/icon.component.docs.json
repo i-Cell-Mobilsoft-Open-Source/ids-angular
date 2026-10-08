@@ -1,0 +1,44 @@
+{
+  "aria-hidden": {
+    "description": {
+      "en": "Whether the icon is hidden from screen readers.",
+      "hu": "Elrejti az ikont a képernyőolvasók elől."
+    },
+    "type": "boolean"
+  },
+  "fontIcon": {
+    "description": {
+      "en": "Name of font icon.",
+      "hu": "Az ikonbetűkészletből használt ikon neve."
+    },
+    "type": "string"
+  },
+  "size": {
+    "description": {
+      "en": "Icon size.",
+      "hu": "Az ikon mérete."
+    },
+    "type": "IdsSizeType"
+  },
+  "sizeCollection": {
+    "description": {
+      "en": "Size collection used together with size to determine the rendered dimensions.",
+      "hu": "A méretezéshez használt méretkészlet; a size értékkel együtt határozza meg a tényleges méretet."
+    },
+    "type": "IdsSizeCollectionType"
+  },
+  "svgIcon": {
+    "description": {
+      "en": "Name of svg icon file",
+      "hu": "A megjelenítendő SVG-ikon neve."
+    },
+    "type": "IdsIconVariantType"
+  },
+  "variant": {
+    "description": {
+      "en": "Icon variant.",
+      "hu": "Az ikon stílusváltozata."
+    },
+    "type": "IdsIconVariantType"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "active": {
+    "description": {
+      "en": "Whether the active indicator is shown as active or not. Required.",
+      "hu": "Az aktív állapotot jelző kiemelés bekapcsolása. Kötelező megadni."
+    },
+    "type": "boolean"
+  }
+}

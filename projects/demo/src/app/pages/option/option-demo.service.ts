@@ -73,7 +73,10 @@ export class OptionDemoService {
 
   public readonly multipleInputControlConfig: DemoControlConfig<MultipleOptionControls> = {
     disabled: {
-      description: this._widgetDocs.getDescription(OPTION_DOCS_PATH, 'disabled', 'Whether the option is disabled or not.'),
+      description: this._widgetDocs.getDescription(
+        OPTION_GROUP_DOCS_PATH,
+        'disabled',
+        'Whether the Land option group is disabled in multiple selection.'),
       type: 'boolean',
       default: false,
       control: DemoControl.SWITCH,

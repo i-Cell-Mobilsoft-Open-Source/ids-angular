@@ -10,10 +10,12 @@
 
 @include cdk.overlay();
 
+html.ids-theme-light,
 html:has(input[color-scheme]) {
   color-scheme: light;
 }
 
+html.ids-theme-dark,
 html:has(input[color-scheme]:checked) {
   color-scheme: dark;
 }

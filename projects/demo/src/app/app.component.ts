@@ -5,6 +5,7 @@ import { GraphqlService } from './services/graphql.service';
 import { LoadingService } from './services/loading.service';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
+import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, DestroyRef, ElementRef, ViewEncapsulation, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -56,6 +57,9 @@ export class AppComponent implements AfterViewInit {
 
   private _componentLevelDepth: number | undefined;
   private _navTree: StatamicNavNode[] = [];
+  private readonly _linkID = 'ids-tokens';
+  private readonly _doc = inject(DOCUMENT);
+
   constructor() {
     this._initLanguage();
     this._changeTheme('light');
@@ -157,6 +161,42 @@ export class AppComponent implements AfterViewInit {
     return element.scrollTop <= threshold;
   }
 
+  private async _setTokens(href: string): Promise<void> {
+    const head = this._doc.head;
+    const current = this._doc.getElementById(this._linkID) as HTMLLinkElement | null;
+
+    if (current?.href && new URL(current.href).pathname.endsWith(href)) {
+      return;
+    }
+
+    const next = this._doc.createElement('link');
+    next.rel = 'stylesheet';
+    next.href = href;
+    next.setAttribute('data-tokens', 'next');
+
+    await new Promise<void>((resolve, reject) => {
+      next.onload = (): void => resolve();
+      next.onerror = (): void => reject(new Error(`Failed to load: ${href}`));
+      head.appendChild(next);
+    });
+
+    if (current) {
+      head.removeChild(current);
+    }
+    next.id = this._linkID;
+    next.removeAttribute('data-tokens');
+  }
+
+  protected _changeStyle(style: 'default' | 'alt'): Promise<void> | undefined {
+    if (style === 'default') {
+      return this._setTokens('assets/ids_css/tokens.css');
+    } else if (style === 'alt') {
+      return this._setTokens('assets/ids_css_dap/tokens.css');
+    } else {
+      return undefined;
+    }
+  }
+
   private _findDeepestLevel(tree: readonly StatamicNavNode[], currentDepth = 0): number {
     if (!tree || tree.length === 0) {
       return currentDepth;
@@ -199,7 +239,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   private _initLanguage(): void {
-    this._translate.addLangs(['hu', 'en']);
+    this._translate.addLangs([
+      'hu',
+      'en',
+    ]);
     this._translate.setFallbackLang('en');
 
     const urlLang = location.pathname.split('/')[1];

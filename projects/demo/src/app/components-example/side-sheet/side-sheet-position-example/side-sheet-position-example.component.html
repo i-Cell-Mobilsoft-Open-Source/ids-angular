@@ -1,0 +1,28 @@
+<div class="flex flex-wrap gap-4">
+ <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="_openLeft()">
+    {{ "EXAMPLES.SIDE_SHEET.COMMON.OPEN_LEFT" | translate }}
+  </button>
+  <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="_openRight()">
+    {{ "EXAMPLES.SIDE_SHEET.COMMON.OPEN_RIGHT" | translate }}
+  </button>
+</div>
+
+  <ids-side-sheet
+    type="overlay"
+    position="right"
+    [open]="_rightOpen"
+    [title]="'EXAMPLES.SIDE_SHEET.POSITION.CONTENT.RIGHT_TITLE' | translate"
+    (closed)="_closeRight()"
+  >
+    <p>{{ "EXAMPLES.SIDE_SHEET.POSITION.CONTENT.RIGHT_BODY" | translate }}</p>
+  </ids-side-sheet>
+
+  <ids-side-sheet
+    type="overlay"
+    position="left"
+    [open]="_leftOpen"
+    [title]="'EXAMPLES.SIDE_SHEET.POSITION.CONTENT.LEFT_TITLE' | translate"
+    (closed)="_closeLeft()"
+  >
+    <p>{{ "EXAMPLES.SIDE_SHEET.POSITION.CONTENT.LEFT_BODY" | translate }}</p>
+  </ids-side-sheet>

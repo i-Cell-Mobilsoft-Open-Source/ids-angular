@@ -1,0 +1,12 @@
+.side-sheet-sizes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.side-sheet-sizes-item {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}

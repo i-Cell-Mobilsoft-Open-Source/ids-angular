@@ -14,7 +14,6 @@ import {
   CdkConnectedOverlay,
   CdkOverlayOrigin,
   ConnectedPosition,
-  Overlay,
   OverlayModule,
 } from '@angular/cdk/overlay';
 import { NgClass } from '@angular/common';
@@ -34,7 +33,7 @@ import {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsDocumentScrollStrategyService, IdsSizeType } from '@i-cell/ids-angular/core';
 
 const defaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
 
@@ -57,7 +56,7 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
 
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_OVERLAY_PANEL_DEFAULT_CONFIG);
 
-  private readonly _overlay = inject(Overlay);
+  private readonly _documentScrollStrategy = inject(IdsDocumentScrollStrategyService);
   private readonly _overlayPanelDestroyRef = inject(DestroyRef);
   private readonly _overlayScrollLock = inject(IdsOverlayScrollLockService);
 
@@ -74,7 +73,7 @@ export class IdsOverlayPanelComponent extends ComponentBaseWithDefaults<IdsOverl
   private readonly _overlayDir = viewChild(CdkConnectedOverlay);
 
   protected readonly _scrollStrategy = new IdsNestedBlockScrollStrategy(
-    this._overlay.scrollStrategies.block(),
+    this._documentScrollStrategy.create(),
     this._overlayScrollLock,
   );
 

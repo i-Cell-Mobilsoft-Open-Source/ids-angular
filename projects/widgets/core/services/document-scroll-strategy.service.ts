@@ -2,24 +2,21 @@ import { Overlay, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
 import { DOCUMENT, inject, Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class IdsDialogScrollStrategyService {
+export class IdsDocumentScrollStrategyService {
   private readonly _document = inject(DOCUMENT);
   private readonly _blockScrollStrategy = inject(Overlay).scrollStrategies.block();
   private _lockCount = 0;
   private _usesBlockScrollStrategy = false;
 
   public create(): ScrollStrategy {
-    return new IdsDialogScrollStrategy(this);
+    return new IdsDocumentScrollStrategy(this);
   }
 
   public lock(): void {
-    if (this._lockCount++ > 0) {
-      return;
-    }
+    this._lockCount++;
 
-    this._usesBlockScrollStrategy = !this._isDocumentScrollAlreadyBlocked();
-
-    if (this._usesBlockScrollStrategy) {
+    if (!this._isDocumentScrollAlreadyBlocked()) {
+      this._usesBlockScrollStrategy = true;
       this._blockScrollStrategy.enable();
     }
   }
@@ -54,10 +51,10 @@ export class IdsDialogScrollStrategyService {
   }
 }
 
-class IdsDialogScrollStrategy implements ScrollStrategy {
+class IdsDocumentScrollStrategy implements ScrollStrategy {
   private _enabled = false;
 
-  constructor(private readonly _scrollLock: IdsDialogScrollStrategyService) {}
+  constructor(private readonly _scrollLock: IdsDocumentScrollStrategyService) {}
 
   public attach(overlayRef: OverlayRef): void {
     void overlayRef;

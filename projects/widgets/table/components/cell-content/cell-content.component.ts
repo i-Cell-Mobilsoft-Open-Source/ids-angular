@@ -1,5 +1,7 @@
 import { IdsTableCellRenderer } from '../../directives/cell-renderer';
 import { IdsTableIntl } from '../../table-intl';
+import { IdsTableDetailTogglePosition, IdsTableDetailTogglePositionType } from '../../types/table-detail-toggle-position.type';
+import { IdsTableDetailTrigger } from '../../types/table-detail-trigger';
 
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, ElementRef, inject, input, signal, TemplateRef } from '@angular/core';
@@ -28,6 +30,19 @@ export class IdsCellContentComponent<D> extends IdsTableCellRenderer<D> {
   private _numberFormat = toSignal(this._intl.changes.pipe(map(() => this._intl.numberFormat), startWith(this._intl.numberFormat)));
 
   public externalCellTemplates = input<Map<string, TemplateRef<unknown>>>();
+  public rowIndex = input<number>();
+  public detailTrigger = input<IdsTableDetailTrigger | null>(null);
+  public detailTemplate = input<TemplateRef<unknown> | null>(null);
+  public defaultDetailToggle = input<TemplateRef<unknown> | null>(null);
+  public detailTogglePosition = input<IdsTableDetailTogglePositionType>(IdsTableDetailTogglePosition.BEFORE);
+
+  protected _templateContext = computed(() => ({
+    $implicit: this.rowData(),
+    index: this.rowIndex(),
+    colDef: this.colDef(),
+    cellValue: this._cellValue(),
+    detail: this.detailTrigger(),
+  }));
 
   private _cellRendererDef = computed(() => (this._isHeader ? this.colDef().headerCellRenderer : this.colDef().cellRenderer));
   private _updateCellContent = signal(true);

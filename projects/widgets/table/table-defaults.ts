@@ -1,10 +1,13 @@
 import { IdsTableAppearance, IdsTableAppearanceType } from './types/table-appearance.type';
+import { IdsTableDetailTogglePosition, IdsTableDetailTogglePositionType } from './types/table-detail-toggle-position.type';
+import { IdsTableDetailTriggerMode, IdsTableDetailTriggerModeType } from './types/table-detail-trigger-mode.type';
 import { IdsTableVariant, IdsTableVariantType } from './types/table-variant.type';
 
 import { InjectionToken } from '@angular/core';
 import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 
 export const DEFAULT_MASTER_DETAIL_TEMPLATE_NAME = 'detail';
+export const DEFAULT_MASTER_DETAIL_TRIGGER_TEMPLATE_NAME = 'detailTrigger';
 
 export interface IdsTableDefaultConfig {
   appearance?: IdsTableAppearanceType,
@@ -14,6 +17,9 @@ export interface IdsTableDefaultConfig {
   enableSorting?: boolean,
   masterDetail?: boolean,
   masterDetailToggleColumnId?: string | null,
+  masterDetailTogglePosition?: IdsTableDetailTogglePositionType,
+  masterDetailTriggerMode?: IdsTableDetailTriggerModeType,
+  masterDetailTriggerTemplateName?: string,
   detailTemplateName?: string,
   detailStickyColumns?: boolean,
   showDetailHeader?: boolean,
@@ -40,6 +46,9 @@ export function IDS_TABLE_DEFAULT_CONFIG_FACTORY(): Required<IdsTableDefaultConf
     enableSorting: false,
     masterDetail: false,
     masterDetailToggleColumnId: null,
+    masterDetailTogglePosition: IdsTableDetailTogglePosition.BEFORE,
+    masterDetailTriggerMode: IdsTableDetailTriggerMode.DEFAULT,
+    masterDetailTriggerTemplateName: DEFAULT_MASTER_DETAIL_TRIGGER_TEMPLATE_NAME,
     detailTemplateName: DEFAULT_MASTER_DETAIL_TEMPLATE_NAME,
     detailStickyColumns: true,
     showDetailHeader: false,

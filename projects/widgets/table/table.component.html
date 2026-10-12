@@ -24,19 +24,20 @@
   <ids-icon [fontIcon]="'adjustments-horizontal'"></ids-icon>
 </ng-template>
 
-<ng-template #masterDetailToggle let-row let-idx="index">
-  @let rowExpanded = _expandedRows().has(row);
-  @if (hasDetailRow()(idx, row)) {
+<ng-template #masterDetailToggle let-detail let-reserveSpace="reserveSpace">
+  @if (detail.hasDetailRow) {
     <button
       type="button"
       idsIconButton
       class="ids-table__button--master-detail"
-      [attr.aria-expanded]="rowExpanded || false"
-      [attr.aria-label]="_intl.getDetailExpandButtonAriaLabel(row) || null"
-      (click)="_handleMasterDetailClick(row)"
+      [size]="_detailToggleSize"
+      [idsTableDetailTrigger]="detail"
+      [attr.aria-label]="detail.ariaLabel || null"
     >
-      <ids-icon aria-hidden="true" alt="" [fontIcon]="rowExpanded ? 'chevron-up' : 'chevron-down'" />
+      <ids-icon aria-hidden="true" alt="" [fontIcon]="detail.expanded ? 'chevron-up' : 'chevron-down'" />
     </button>
+  } @else if (reserveSpace) {
+    <span class="ids-table__detail-toggle-placeholder" aria-hidden="true" [class]="'ids-table__detail-toggle-placeholder-' + _detailToggleSize"></span>
   }
 </ng-template>
 
@@ -111,7 +112,12 @@
         class="ids-table__cell ids-table__cell--master-detail-toggle"
         [class.ids-table__cell--master-detail-toggle-expand]="showDetailHeader()"
       >
-        <ng-container *ngTemplateOutlet="masterDetailToggle; context: { $implicit: row, index: idx }" />
+        @let detail = _getDetailTrigger(row, idx);
+        @if (_customDetailTrigger()) {
+          <ng-container *ngTemplateOutlet="_detailTriggerTemplate(); context: { $implicit: row, index: idx, colDef: null, cellValue: null, detail: detail }" />
+        } @else {
+          <ng-container *ngTemplateOutlet="masterDetailToggle; context: { $implicit: detail }" />
+        }
       </td>
     </ng-container>
     <!-- Column definition for the detail cells -->
@@ -188,18 +194,17 @@
             class="ids-table__cell ids-table__cell--identifier"
             role="gridcell"
             scope="row"
-            [class.ids-table__cell--master-detail-toggle-embedded]="col === _masterDetailToggleColumn()"
             [class]="col.cellClasses || ''"
             [colDef]="col"
             [rowData]="row"
+            [rowIndex]="idx"
+            [detailTrigger]="col === _masterDetailToggleColumn() ? _getDetailTrigger(row, idx) : null"
+            [detailTemplate]="col === _masterDetailToggleColumn() ? _detailTriggerTemplate() : null"
+            [defaultDetailToggle]="col === _masterDetailToggleColumn() && !_customDetailTrigger() ? masterDetailToggle : null"
+            [detailTogglePosition]="masterDetailTogglePosition()"
             [externalCellTemplates]="_cellTemplatesByName()"
             (click)="_handleCellClick($event, row, col)"
           >
-            <ng-container colStart>
-              @if (col === _masterDetailToggleColumn()) {
-                <ng-container *ngTemplateOutlet="masterDetailToggle; context: { $implicit: row, index: idx }" />
-              }
-            </ng-container>
           </th>
         } @else {
           <td
@@ -207,18 +212,17 @@
             cdk-cell
             class="ids-table__cell"
             idsCellContent
-            [class.ids-table__cell--master-detail-toggle-embedded]="col === _masterDetailToggleColumn()"
             [class]="col.cellClasses || ''"
             [colDef]="col"
             [rowData]="row"
+            [rowIndex]="idx"
+            [detailTrigger]="col === _masterDetailToggleColumn() ? _getDetailTrigger(row, idx) : null"
+            [detailTemplate]="col === _masterDetailToggleColumn() ? _detailTriggerTemplate() : null"
+            [defaultDetailToggle]="col === _masterDetailToggleColumn() && !_customDetailTrigger() ? masterDetailToggle : null"
+            [detailTogglePosition]="masterDetailTogglePosition()"
             [externalCellTemplates]="_cellTemplatesByName()"
             (click)="_handleCellClick($event, row, col)"
           >
-            <ng-container colStart>
-              @if (col === _masterDetailToggleColumn()) {
-                <ng-container *ngTemplateOutlet="masterDetailToggle; context: { $implicit: row, index: idx }" />
-              }
-            </ng-container>
           </td>
         }
       </ng-container>

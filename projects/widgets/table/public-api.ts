@@ -1,6 +1,7 @@
 export * from './datasource/server-side-datasource';
 export * from './directives/cell-renderer';
 export * from './directives/cell-template';
+export * from './directives/detail-trigger';
 export * from './directives/sort-icon-template';
 export * from './types/pagination-params';
 export * from './types/request-factory';
@@ -9,6 +10,9 @@ export * from './types/response-data';
 export * from './types/table-appearance.type';
 export * from './types/table-cell-click-event';
 export * from './types/table-column-def';
+export * from './types/table-detail-toggle-position.type';
+export * from './types/table-detail-trigger';
+export * from './types/table-detail-trigger-mode.type';
 export * from './types/table-row-click-event';
 export * from './types/table-row-keydown-event';
 export * from './types/table-sort-direction';

@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { WidgetDocsService } from '../../services/widget-docs.service';
 
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
@@ -19,6 +19,10 @@ import {
   IdsTableAppearance,
   IdsTableAppearanceType,
   IdsTableColumnDef,
+  IdsTableDetailTogglePosition,
+  IdsTableDetailTogglePositionType,
+  IdsTableDetailTriggerMode,
+  IdsTableDetailTriggerModeType,
   IdsTableRequestPaginationData,
   IdsTableResponseData,
   IdsTableSortDirection,
@@ -45,6 +49,9 @@ export type TableInputControls = {
   enableSorting: boolean;
   masterDetail: boolean;
   masterDetailToggleColumnId: string | null;
+  masterDetailTogglePosition: IdsTableDetailTogglePositionType;
+  masterDetailTriggerMode: IdsTableDetailTriggerModeType;
+  masterDetailTriggerTemplateName: string;
   showDetailHeader: boolean;
   detailStickyColumns: boolean;
   withBorder: boolean;
@@ -133,6 +140,7 @@ export class TableDemoService {
     },
     {
       id: 'symbol',
+      field: 'symbol',
       label: 'TABLE.COL.SYMBOL',
       headerCellRenderer: 'translate2',
       cellRenderer: 'symbol',
@@ -244,6 +252,31 @@ export class TableDemoService {
       list: [
         '',
         ...this.colDefs.filter((column) => column.visible !== false).map((column) => column.id),
+      ],
+    },
+    masterDetailTogglePosition: {
+      description: this._widgetDocs.getDescription(TABLE_DOCS_PATH, 'masterDetailTogglePosition', 'Position of the default detail toggle.'),
+      type: 'IdsTableDetailTogglePositionType',
+      default: defaultConfig.masterDetailTogglePosition,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsTableDetailTogglePosition),
+    },
+    masterDetailTriggerMode: {
+      description: this._widgetDocs.getDescription(TABLE_DOCS_PATH, 'masterDetailTriggerMode', 'Default or custom detail trigger.'),
+      type: 'IdsTableDetailTriggerModeType',
+      default: defaultConfig.masterDetailTriggerMode,
+      control: DemoControl.SELECT,
+      list: convertEnumToStringArray(IdsTableDetailTriggerMode),
+    },
+    masterDetailTriggerTemplateName: {
+      description: this._widgetDocs.getDescription(TABLE_DOCS_PATH, 'masterDetailTriggerTemplateName',
+        'Custom detail trigger template name.'),
+      type: 'string',
+      default: defaultConfig.masterDetailTriggerTemplateName,
+      control: DemoControl.SELECT,
+      list: [
+        defaultConfig.masterDetailTriggerTemplateName,
+        'missingTemplate',
       ],
     },
     showDetailHeader: {
@@ -430,17 +463,40 @@ export class TableDemoService {
     },
   ];
 
-  public defaults = getDefaultFromDemoConfig<TableInputControls>(this.inputControlConfig);
+  public readonly excludedDetailSymbol = signal('');
 
-  public model: TableInputControls = { ...this.defaults };
+  public readonly demoInputControlConfig = {
+    ...this.inputControlConfig,
+    excludedDetailSymbol: {
+      description: 'Demo only: rows with this exact symbol have no detail row or trigger.',
+      type: 'string',
+      default: '',
+      control: DemoControl.TEXT,
+      onModelChange: (value?: string): void => this.excludedDetailSymbol.set(value ?? ''),
+    },
+  };
+
+  public defaults = getDefaultFromDemoConfig<TableInputControls & { excludedDetailSymbol: string }>(this.demoInputControlConfig);
+
+  public model = { ...this.defaults };
 
   public reset(): void {
     this.model = { ...this.defaults };
+    this.excludedDetailSymbol.set(this.defaults.excludedDetailSymbol);
   }
 
   public getMethodConfig(): DemoMethodConfig[] {
     return [this.methodControlConfig];
   }
+
+  public readonly detailTriggerPropControlConfig: DemoControlConfig<unknown> = {
+    idsTableDetailTrigger: {
+      description: this._widgetDocs.getDescription('table/directives/detail-trigger.docs.json', 'idsTableDetailTrigger',
+        'Binds the detail context to a native button, with IDS-owned state and accessibility.'),
+      type: 'IdsTableDetailTrigger',
+      default: '-',
+    },
+  };
 
   public readonly cellTemplatePropControlConfig: DemoControlConfig<unknown> = {
     templateName: {
@@ -471,6 +527,10 @@ export class TableDemoService {
       {
         title: getDemoApiTitle(this.translate, 'COMPONENTS.TABLE', 'API.PROPERTY_GROUP.CELL_TEMPLATE'),
         config: this.cellTemplatePropControlConfig,
+      },
+      {
+        title: getDemoApiTitle(this.translate, 'COMPONENTS.TABLE', 'API.PROPERTY_GROUP.DETAIL_TRIGGER'),
+        config: this.detailTriggerPropControlConfig,
       },
     ];
   }

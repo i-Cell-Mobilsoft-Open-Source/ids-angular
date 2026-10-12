@@ -5,6 +5,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { TABLE_EXAMPLES } from '../../components-example/table/table-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { Component, DestroyRef, inject, Injectable, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
@@ -85,6 +87,7 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
     DemoAndCodeComponent,
     TryoutControlComponent,
     ControlTableComponent,
+    IdsExampleViewerComponent,
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
@@ -97,6 +100,7 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
   ],
 })
 export class TableDemoComponent implements OnInit {
+  public readonly tableExamples = TABLE_EXAMPLES;
 
   protected _tableDemoService = inject(TableDemoService);
   private _table = viewChild(IdsTableComponent);

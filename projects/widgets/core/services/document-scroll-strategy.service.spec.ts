@@ -1,16 +1,16 @@
-import { IdsDialogScrollStrategyService } from './dialog-scroll-strategy.service';
+import { IdsDocumentScrollStrategyService } from './document-scroll-strategy.service';
 
 import { Overlay } from '@angular/cdk/overlay';
 import { TestBed } from '@angular/core/testing';
 
-describe('IdsDialogScrollStrategyService', () => {
+describe('IdsDocumentScrollStrategyService', () => {
   const blockScrollStrategy = {
     attach: jest.fn(),
     disable: jest.fn(),
     enable: jest.fn(),
   };
 
-  let service: IdsDialogScrollStrategyService;
+  let service: IdsDocumentScrollStrategyService;
   let originalBodyOverflow: string;
   let originalHtmlOverflow: string;
 
@@ -23,7 +23,7 @@ describe('IdsDialogScrollStrategyService', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        IdsDialogScrollStrategyService,
+        IdsDocumentScrollStrategyService,
         {
           provide: Overlay,
           useValue: {
@@ -35,7 +35,7 @@ describe('IdsDialogScrollStrategyService', () => {
       ],
     });
 
-    service = TestBed.inject(IdsDialogScrollStrategyService);
+    service = TestBed.inject(IdsDocumentScrollStrategyService);
   });
 
   afterEach(() => {
@@ -64,7 +64,7 @@ describe('IdsDialogScrollStrategyService', () => {
     expect(blockScrollStrategy.enable).not.toHaveBeenCalled();
   });
 
-  it('keeps the document locked until every dialog closes', () => {
+  it('keeps the document locked until every overlay closes', () => {
     const firstStrategy = service.create();
     const secondStrategy = service.create();
 
@@ -72,7 +72,7 @@ describe('IdsDialogScrollStrategyService', () => {
     secondStrategy.enable();
     firstStrategy.disable();
 
-    expect(blockScrollStrategy.enable).toHaveBeenCalledTimes(1);
+    expect(blockScrollStrategy.enable).toHaveBeenCalledTimes(2);
     expect(blockScrollStrategy.disable).not.toHaveBeenCalled();
 
     secondStrategy.disable();

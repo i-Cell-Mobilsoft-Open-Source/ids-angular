@@ -13,6 +13,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { ElementRef, Injectable, Injector, StaticProvider, ViewContainerRef, inject } from '@angular/core';
+import { IdsDocumentScrollStrategyService } from '@i-cell/ids-angular/core';
 
 export type IdsOverlayOrigin = CdkOverlayOrigin | ElementRef<HTMLElement>;
 
@@ -45,6 +46,7 @@ export class IdsOverlayService {
   private readonly _overlay = inject(Overlay);
   private readonly _injector = inject(Injector);
   private readonly _scrollLock = inject(IdsOverlayScrollLockService);
+  private readonly _documentScrollStrategy = inject(IdsDocumentScrollStrategyService);
 
   public openComponent<TComponent>(
     component: ComponentType<TComponent>,
@@ -115,14 +117,14 @@ export class IdsOverlayService {
     }
 
     if (scrollStrategy === 'nested-block') {
-      const nestedBlockScrollStrategy = new IdsNestedBlockScrollStrategy(this._overlay.scrollStrategies.block(), this._scrollLock);
+      const nestedBlockScrollStrategy = new IdsNestedBlockScrollStrategy(this._documentScrollStrategy.create(), this._scrollLock);
 
       nestedBlockScrollStrategy.setScrollLockTargets(scrollLockTargets);
 
       return nestedBlockScrollStrategy;
     }
 
-    return this._overlay.scrollStrategies[scrollStrategy]();
+    return scrollStrategy === 'block' ? this._documentScrollStrategy.create() : this._overlay.scrollStrategies[scrollStrategy]();
   }
 
   private _getScrollLockTargets(config: IdsOverlayOpenConfig): HTMLElement[] {

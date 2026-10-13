@@ -1,5 +1,6 @@
 import { IdsCellContentComponent } from './components/cell-content/cell-content.component';
 import { IdsTableCellTemplateDirective } from './directives/cell-template';
+import { IdsTableDetailTriggerDirective } from './directives/detail-trigger';
 import { RowInfoHolderDirective } from './directives/row-info-holder';
 import { IdsTableSortAscIconDirective, IdsTableSortDescIconDirective, IdsTableSortNoneIconDirective } from './directives/sort-icon-template';
 import { DEFAULT_MASTER_DETAIL_TEMPLATE_NAME, IDS_TABLE_DEFAULT_CONFIG, IDS_TABLE_DEFAULT_CONFIG_FACTORY, IdsTableDefaultConfig } from './table-defaults';
@@ -7,6 +8,9 @@ import { IdsTableIntl } from './table-intl';
 import { IdsTableAppearance, IdsTableAppearanceType } from './types/table-appearance.type';
 import { IdsTableCellClickEvent } from './types/table-cell-click-event';
 import { IdsTableColumnDef } from './types/table-column-def';
+import { IdsTableDetailTogglePositionType } from './types/table-detail-toggle-position.type';
+import { IdsTableDetailTrigger } from './types/table-detail-trigger';
+import { IdsTableDetailTriggerMode, IdsTableDetailTriggerModeType } from './types/table-detail-trigger-mode.type';
 import { IdsTableRowClickEvent } from './types/table-row-click-event';
 import { IdsTableRowKeydownEvent } from './types/table-row-keydown-event';
 import { IdsTableSortDirection, IdsTableSortDirectionType } from './types/table-sort-direction';
@@ -17,12 +21,12 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { SelectionModel } from '@angular/cdk/collections';
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef, CdkHeaderRow, CdkHeaderRowDef, CdkNoDataRow, CdkRow, CdkRowDef, CdkTable, CdkTableDataSourceInput } from '@angular/cdk/table';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, inject, input, OnInit, output, signal, TemplateRef, viewChildren, ViewEncapsulation } from '@angular/core';
+import { afterRenderEffect, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, contentChildren, effect, inject, input, isDevMode, OnInit, output, signal, TemplateRef, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { IdsCheckboxComponent } from '@i-cell/ids-angular/checkbox';
 import { coerceBooleanAttribute, ComponentBaseWithDefaults, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonComponent, IdsIconButtonParent, IdsIconButtonVariant, IdsIconButtonVariantType } from '@i-cell/ids-angular/icon-button';
+import { IDS_ICON_BUTTON_DEFAULT_CONFIG, IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY, IDS_ICON_BUTTON_PARENT, IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonComponent, IdsIconButtonParent, IdsIconButtonVariant, IdsIconButtonVariantType } from '@i-cell/ids-angular/icon-button';
 
 const defaultConfig = IDS_TABLE_DEFAULT_CONFIG_FACTORY();
 
@@ -34,6 +38,7 @@ const defaultConfig = IDS_TABLE_DEFAULT_CONFIG_FACTORY();
     IdsIconComponent,
     IdsIconButtonComponent,
     IdsTableCellTemplateDirective,
+    IdsTableDetailTriggerDirective,
     CdkCell,
     CdkCellDef,
     CdkColumnDef,
@@ -74,11 +79,14 @@ export class IdsTableComponent<D>
   protected readonly _appearanceZebra = IdsTableAppearance.ZEBRA;
   protected readonly _defaultMasterDetailTemplateName = DEFAULT_MASTER_DETAIL_TEMPLATE_NAME;
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_TABLE_DEFAULT_CONFIG);
+  protected readonly _detailToggleSize = inject(IDS_ICON_BUTTON_DEFAULT_CONFIG).size ?? IDS_ICON_BUTTON_DEFAULT_CONFIG_FACTORY().size;
 
   private _cdRef = inject(ChangeDetectorRef);
   protected _intl = inject(IdsTableIntl);
 
   private _viewCellTemplates = viewChildren(IdsTableCellTemplateDirective);
+  private _cdkTable = viewChild(CdkTable<D>);
+  private _refreshingDetailRows = false;
   private _rowDataHolders = viewChildren(RowInfoHolderDirective<D>);
   private _selectorCheckboxes = viewChildren(IdsCheckboxComponent);
   private _cellContentRenderers = viewChildren(IdsCellContentComponent<D>);
@@ -96,6 +104,10 @@ export class IdsTableComponent<D>
   public enableSorting = input<boolean, unknown>(this._defaultConfig.enableSorting, { transform: coerceBooleanAttribute });
   /** Enable master-detail rows */
   public masterDetail = input<boolean, unknown>(this._defaultConfig.masterDetail, { transform: coerceBooleanAttribute });
+  public masterDetailToggleColumnId = input<string | null>(this._defaultConfig.masterDetailToggleColumnId);
+  public masterDetailTogglePosition = input<IdsTableDetailTogglePositionType>(this._defaultConfig.masterDetailTogglePosition);
+  public masterDetailTriggerMode = input<IdsTableDetailTriggerModeType>(this._defaultConfig.masterDetailTriggerMode);
+  public masterDetailTriggerTemplateName = input(this._defaultConfig.masterDetailTriggerTemplateName);
   /** Name of the detail row renderer template */
   public detailTemplateName = input(this._defaultConfig.detailTemplateName);
   /** If true the detail cell will not span sticky and stickyEnd columns. If false the detail cell will span the table's full width */
@@ -178,7 +190,7 @@ export class IdsTableComponent<D>
   /** The row selection model for the table */
   public rowSelection: SelectionModel<D> = new SelectionModel<D>(true, [], true);
 
-  protected _expandedRows = new Set<D>();
+  protected _expandedRows = signal<ReadonlySet<D>>(new Set<D>());
   protected _allRowsExpanded = signal<boolean>(false);
 
   protected _sortState = signal<IdsTableSortInfo | null>(null);
@@ -193,6 +205,21 @@ export class IdsTableComponent<D>
     this.variant(),
     (this.withBorder() ? 'with-border' : null),
   ]));
+
+  protected _masterDetailToggleColumn = computed(() => {
+    const columnId = this.masterDetailToggleColumnId();
+    return this.masterDetail() && columnId ?
+      this.columnDefs().find((column) => column.id === columnId && column.visible !== false) ?? null : null;
+  });
+
+  protected _hasSeparateMasterDetailColumn = computed(() => this.masterDetail() && !this._masterDetailToggleColumn());
+
+  private _validateMasterDetailToggleColumn = effect(() => {
+    const columnId = this.masterDetailToggleColumnId();
+    if (isDevMode() && this.masterDetail() && columnId && !this._masterDetailToggleColumn()) {
+      console.warn(`ids-table: masterDetailToggleColumnId "${columnId}" is not a visible column. Using the separate master-detail column.`);
+    }
+  });
 
   protected _actualColumns = computed(() => {
     const cols = this.columnDefs()
@@ -217,7 +244,7 @@ export class IdsTableComponent<D>
         }, [[], [], []])
       .flat();
 
-    if (this.masterDetail()) {
+    if (this._hasSeparateMasterDetailColumn()) {
       cols.push('$masterDetail');
     }
 
@@ -234,25 +261,33 @@ export class IdsTableComponent<D>
       .map((colDef) => ({ ...colDef, visible: true })),
   );
 
+  private _detailSpansStickyColumns = computed(() => !this.detailStickyColumns() ||
+    (!!this._masterDetailToggleColumn() && !this.columnDefs().some((column) =>
+      column.visible !== false && !column.sticky && !column.stickyEnd)),
+  );
+
   protected _detailRowTemplates = computed(() => {
-    if (!this.detailStickyColumns()) {
+    if (this._detailSpansStickyColumns()) {
       return ['$expandedDetail'];
     }
 
+    const columnDefs = this._masterDetailToggleColumn() ?
+      this.columnDefs().filter((column) => column.visible !== false) : this.columnDefs();
+
     return [
       ...(this.enableRowSelection() ? ['$empty'] : []),
-      ...this.columnDefs().filter((colDef) => colDef.sticky).map(() => '$empty'),
+      ...columnDefs.filter((colDef) => colDef.sticky).map(() => '$empty'),
       '$expandedDetail',
-      ...this.columnDefs().filter((colDef) => colDef.stickyEnd).map(() => '$emptyEnd'),
-      ...(this.masterDetail() ? ['$emptyEnd'] : []),
+      ...columnDefs.filter((colDef) => colDef.stickyEnd).map(() => '$emptyEnd'),
+      ...(this._hasSeparateMasterDetailColumn() ? ['$emptyEnd'] : []),
     ];
   });
 
   protected _detailColSpan = computed(() => {
     const colDefs = this.columnDefs();
-    let detailColSpan = colDefs.length;
+    let detailColSpan = this._masterDetailToggleColumn() ? this._actualColumns().length : colDefs.length;
 
-    if (this.detailStickyColumns()) {
+    if (!this._detailSpansStickyColumns()) {
       detailColSpan = colDefs.filter((def) => (!def.sticky && !def.stickyEnd && def.visible !== false)).length;
     }
 
@@ -277,6 +312,49 @@ export class IdsTableComponent<D>
   );
 
   protected _detailTemplate = computed(() => this._cellTemplatesByName().get(this.detailTemplateName()));
+
+  protected _customDetailTrigger = computed(() => this.masterDetailTriggerMode() === IdsTableDetailTriggerMode.CUSTOM);
+
+  protected _detailTriggerTemplate = computed(() => (this._customDetailTrigger() ?
+    this._cellTemplatesByName().get(this.masterDetailTriggerTemplateName()) ?? null : null),
+  );
+
+  private _validateDetailTriggerTemplate = afterRenderEffect(() => {
+    if (isDevMode() && this.masterDetail() && this._customDetailTrigger() && !this._detailTriggerTemplate()) {
+      console.warn(`ids-table: custom master-detail trigger template "${this.masterDetailTriggerTemplateName()}" was not found. ` +
+        'No default trigger will be rendered.');
+    }
+  });
+
+  private _refreshDetailRows = afterRenderEffect(() => {
+    const hasDetailRow = this.hasDetailRow();
+    const masterDetail = this.masterDetail();
+    const table = this._cdkTable();
+
+    if (!masterDetail || !table) {
+      return;
+    }
+
+    untracked(() => {
+      const expandedRows = new Set(this._expandedRows());
+      this.rowData().forEach((row, index) => {
+        if (!hasDetailRow(index, row)) {
+          expandedRows.delete(row);
+        }
+      });
+      if (expandedRows.size !== this._expandedRows().size) {
+        this._expandedRows.set(expandedRows);
+      }
+
+      this._refreshingDetailRows = true;
+      try {
+        table.renderRows();
+      } finally {
+        this._refreshingDetailRows = false;
+      }
+      this._cdRef.markForCheck();
+    });
+  });
 
   protected _hasNoRows = computed<boolean>(() => this.rowData().length === 0);
 
@@ -329,11 +407,13 @@ export class IdsTableComponent<D>
    * Open up all row details.
    */
   public expandAll(): void {
+    const expandedRows = new Set(this._expandedRows());
     this.rowData().forEach((rowData, idx) => {
-      if (!this._expandedRows.has(rowData) && this.hasDetailRow()(idx, rowData)) {
-        this._expandedRows.add(rowData);
+      if (!expandedRows.has(rowData) && this.hasDetailRow()(idx, rowData)) {
+        expandedRows.add(rowData);
       }
     });
+    this._expandedRows.set(expandedRows);
     this._cdRef.markForCheck();
   }
 
@@ -341,7 +421,7 @@ export class IdsTableComponent<D>
    * Closes all opened row details.
    */
   public collapseAll(): void {
-    this._expandedRows.clear();
+    this._expandedRows.set(new Set<D>());
     this._cdRef.markForCheck();
   }
 
@@ -355,7 +435,7 @@ export class IdsTableComponent<D>
   protected _tableContentChanged(): void {
     this.contentChanged.emit();
 
-    if (this.clearSelectionOnChange()) {
+    if (!this._refreshingDetailRows && this.clearSelectionOnChange()) {
       this.rowSelection.clear();
     }
   }
@@ -388,12 +468,28 @@ export class IdsTableComponent<D>
     this.rowKeydown.emit({ event, rowData });
   }
 
-  protected _handleMasterDetailClick(rowData: D): void {
-    if (this._expandedRows.has(rowData)) {
-      this._expandedRows.delete(rowData);
-    } else {
-      this._expandedRows.add(rowData);
+  protected _getDetailTrigger(rowData: D, index: number): IdsTableDetailTrigger {
+    const hasDetailRow = this.masterDetail() && this.hasDetailRow()(index, rowData);
+    return {
+      expanded: hasDetailRow && this._expandedRows().has(rowData),
+      hasDetailRow,
+      ariaLabel: this._intl.getDetailExpandButtonAriaLabel(rowData),
+      toggle: () => this._handleMasterDetailClick(rowData),
+    };
+  }
+
+  private _handleMasterDetailClick(rowData: D): void {
+    const index = this.rowData().indexOf(rowData);
+    if (!this.masterDetail() || index < 0 || !this.hasDetailRow()(index, rowData)) {
+      return;
     }
+    const expandedRows = new Set(this._expandedRows());
+    if (expandedRows.has(rowData)) {
+      expandedRows.delete(rowData);
+    } else {
+      expandedRows.add(rowData);
+    }
+    this._expandedRows.set(expandedRows);
     this._cdRef.markForCheck();
   }
 

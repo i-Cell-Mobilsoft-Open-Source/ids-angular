@@ -6,7 +6,7 @@ import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-a
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
 
-import { Component, DestroyRef, inject, Injectable, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
+import { Component, computed, DestroyRef, inject, Injectable, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
@@ -17,6 +17,7 @@ import {
   IdsTableCellTemplateDirective,
   IdsTableColumnDef,
   IdsTableComponent,
+  IdsTableDetailTriggerDirective,
   IdsTableIntl,
   IdsTableRequestFactory,
   IdsTableRowKeydownEvent,
@@ -79,6 +80,7 @@ export class TableDemoTableIntl extends IdsTableIntl<PeriodicTableElement> {
     IdsTableSortDescIconDirective,
     IdsTableSortNoneIconDirective,
     IdsTableComponent,
+    IdsTableDetailTriggerDirective,
     FormsModule,
     TranslateModule,
     TryoutComponent,
@@ -107,6 +109,13 @@ export class TableDemoComponent implements OnInit {
     (paginationData, sortInfo) => this._tableDemoService.getPeriodicTable(paginationData, sortInfo);
 
   protected _dataSource = new ServerSideDataSource(this._requestFactory);
+
+  protected _hasDetailRow = computed(() => {
+    const excludedSymbol = this._tableDemoService.excludedDetailSymbol();
+    return (_index: number, row: PeriodicTableElement): boolean =>
+      !!row.summary && (!excludedSymbol || row.symbol !== excludedSymbol);
+  });
+
   protected _totalRows = toSignal<number, number>(
     this._dataSource.pageInfo$.pipe(
       map((pageInfo) => (pageInfo?.totalRows || 0)),
@@ -152,10 +161,6 @@ export class TableDemoComponent implements OnInit {
 
   public onContentChanged(): void {
     console.info('onContentChanged');
-  }
-
-  protected _hasDetailRow(index: number, rowData: PeriodicTableElement): boolean {
-    return !!rowData.summary;
   }
 
   protected _isRowSelectable(index: number, rowData: PeriodicTableElement): boolean {

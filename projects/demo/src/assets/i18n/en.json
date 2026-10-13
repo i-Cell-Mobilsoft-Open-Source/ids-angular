@@ -157,6 +157,10 @@
     "LABEL": {
       "DETAIL_HEADER": "Actions"
     },
+    "DETAIL_TRIGGERS": {
+      "OPEN": "Show details",
+      "CLOSE": "Hide details"
+    },
     "BUTTON": {
       "EXPAND_DETAILS": "Expand details",
       "COLLAPSE_DETAILS": "Collapse details",
@@ -1790,6 +1794,7 @@
     "PROPERTY_GROUP": {
       "TITLE": "title properties",
       "CELL_TEMPLATE": "cell template directive properties",
+      "DETAIL_TRIGGER": "detail trigger directive properties",
       "ERROR_DEFINITION": "error definition directive properties",
       "PSEUDO_CHECKBOX": "pseudo-checkbox properties",
       "HEADER": "header properties",

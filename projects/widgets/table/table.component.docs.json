@@ -97,6 +97,34 @@
     },
     "type": "boolean"
   },
+  "masterDetailToggleColumnId": {
+    "description": {
+      "en": "Visible data column ID for the master-detail toggle. By default, or for an unknown or hidden column, the toggle remains in a separate sticky-end column. Requires masterDetail. The target cell retains its content; showDetailHeader only applies to the separate column.",
+      "hu": "A master-detail gombot tartalmazó látható adatoszlop azonosítója. Alapértelmezésben, illetve ismeretlen vagy rejtett oszlop esetén a gomb külön, jobb szélre rögzített oszlopban marad. A masterDetail bekapcsolása szükséges. A célcella tartalma megmarad; a showDetailHeader csak a külön oszlopra vonatkozik."
+    },
+    "type": "string | null"
+  },
+  "masterDetailTogglePosition": {
+    "description": {
+      "en": "Places the default chevron before or after the existing target data-cell content. Defaults to before. Ignored in custom mode and in the separate detail column.",
+      "hu": "Az alap chevront a céladatoszlop meglévő tartalma elé vagy mögé helyezi. Alapérték: before. Egyedi módban és a külön detail oszlopban nincs hatása."
+    },
+    "type": "IdsTableDetailTogglePositionType"
+  },
+  "masterDetailTriggerMode": {
+    "description": {
+      "en": "Default renders the IDS chevron. Custom renders the complete cell using masterDetailTriggerTemplateName; the template controls content and order. No automatic chevron fallback. Missing templates warn in development, leave separate cells empty and preserve normal data-cell content.",
+      "hu": "Default módban az IDS chevron jelenik meg. Custom módban a masterDetailTriggerTemplateName sablon adja a teljes cellát, annak tartalmát és sorrendjét. Nincs automatikus chevron fallback. Hiányzó sablonnál fejlesztői figyelmeztetés jelenik meg, a külön cella üres marad, az adatoszlop eredeti tartalma megmarad."
+    },
+    "type": "IdsTableDetailTriggerModeType"
+  },
+  "masterDetailTriggerTemplateName": {
+    "description": {
+      "en": "Name of the existing idsCellTemplate used for custom trigger cells. Defaults to detailTrigger. Context: $implicit (row), index (data index), colDef and cellValue (null for the separate column), detail (expanded, hasDetailRow, ariaLabel, toggle()). Bind detail to button[idsTableDetailTrigger]. Omitting a trigger is intentional; expandAll can still open eligible rows. A false hasDetailRow prevents opening, including via toggle().",
+      "hu": "Az egyedi triggercellához használt idsCellTemplate neve. Alapérték: detailTrigger. Kontextus: $implicit (sor), index (adatindex), colDef és cellValue (külön oszlopnál null), detail (expanded, hasDetailRow, ariaLabel, toggle()). A detail értéket a button[idsTableDetailTrigger] direktívához kell kötni. A trigger elhagyása szándékos; az expandAll továbbra is megnyitja az engedélyezett sorokat. Hamis hasDetailRow esetén a toggle() sem nyithatja meg a sort."
+    },
+    "type": "string"
+  },
   "noRowsToShowOverlayBelow": {
     "description": {
       "en": "Whether to render a \"no rows to show\" overlay below the table or as a row in the table.",

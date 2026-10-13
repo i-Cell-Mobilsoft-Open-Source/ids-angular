@@ -24,6 +24,23 @@
   <ids-icon [fontIcon]="'adjustments-horizontal'"></ids-icon>
 </ng-template>
 
+<ng-template #masterDetailToggle let-detail let-reserveSpace="reserveSpace">
+  @if (detail.hasDetailRow) {
+    <button
+      type="button"
+      idsIconButton
+      class="ids-table__button--master-detail"
+      [size]="_detailToggleSize"
+      [idsTableDetailTrigger]="detail"
+      [attr.aria-label]="detail.ariaLabel || null"
+    >
+      <ids-icon aria-hidden="true" alt="" [fontIcon]="detail.expanded ? 'chevron-up' : 'chevron-down'" />
+    </button>
+  } @else if (reserveSpace) {
+    <span class="ids-table__detail-toggle-placeholder" aria-hidden="true" [class]="'ids-table__detail-toggle-placeholder-' + _detailToggleSize"></span>
+  }
+</ng-template>
+
 <!-- TODO: Loading spinner -->
 
 <div class="ids-table__horizontal-scroll">
@@ -90,31 +107,23 @@
         }
       </th>
       <td
-        *cdkCellDef="let row; let idx = $index"
+        *cdkCellDef="let row; let idx = dataIndex"
         cdk-cell
         class="ids-table__cell ids-table__cell--master-detail-toggle"
         [class.ids-table__cell--master-detail-toggle-expand]="showDetailHeader()"
       >
-        @let hasDetail = hasDetailRow()(idx, row);
-        @let rowExpanded = _expandedRows.has(row);
-        @if (hasDetail) {
-          <button
-            type="button"
-            idsIconButton
-            class="ids-table__button--master-detail"
-            [attr.aria-expanded]="rowExpanded || false"
-            [attr.aria-label]="_intl.getDetailExpandButtonAriaLabel(row) || null"
-            (click)="_handleMasterDetailClick(row)"
-          >
-            <ids-icon aria-hidden="true" alt="" [fontIcon]="rowExpanded ? 'chevron-up' : 'chevron-down'" />
-          </button>
+        @let detail = _getDetailTrigger(row, idx);
+        @if (_customDetailTrigger()) {
+          <ng-container *ngTemplateOutlet="_detailTriggerTemplate(); context: { $implicit: row, index: idx, colDef: null, cellValue: null, detail: detail }" />
+        } @else {
+          <ng-container *ngTemplateOutlet="masterDetailToggle; context: { $implicit: detail }" />
         }
       </td>
     </ng-container>
     <!-- Column definition for the detail cells -->
     <ng-container cdkColumnDef="$expandedDetail">
       <td *cdkCellDef="let row; let idx = index" cdk-cell class="ids-table__cell ids-table__detail-cell" [attr.colspan]="_detailColSpan()">
-        <div class="ids-table__detail-cell--content-wrapper" [@detailExpand]="_expandedRows.has(row) ? 'expanded' : 'collapsed'">
+        <div class="ids-table__detail-cell--content-wrapper" [@detailExpand]="_expandedRows().has(row) ? 'expanded' : 'collapsed'">
           @let isDefaultTemplate = _detailTemplate() === _defaulDetailTemplate();
           @let context = isDefaultTemplate ? { $implicit: row, cols: _hiddenColumns() } : { $implicit: row };
           <ng-container *ngTemplateOutlet="_detailTemplate() ?? defaultDetail; context: context"></ng-container>
@@ -179,7 +188,7 @@
 
         @if (col.identifier) {
           <th
-            *cdkCellDef="let row; let idx = index"
+            *cdkCellDef="let row; let idx = dataIndex"
             cdk-cell
             idsCellContent
             class="ids-table__cell ids-table__cell--identifier"
@@ -188,21 +197,33 @@
             [class]="col.cellClasses || ''"
             [colDef]="col"
             [rowData]="row"
+            [rowIndex]="idx"
+            [detailTrigger]="col === _masterDetailToggleColumn() ? _getDetailTrigger(row, idx) : null"
+            [detailTemplate]="col === _masterDetailToggleColumn() ? _detailTriggerTemplate() : null"
+            [defaultDetailToggle]="col === _masterDetailToggleColumn() && !_customDetailTrigger() ? masterDetailToggle : null"
+            [detailTogglePosition]="masterDetailTogglePosition()"
             [externalCellTemplates]="_cellTemplatesByName()"
             (click)="_handleCellClick($event, row, col)"
-          ></th>
+          >
+          </th>
         } @else {
           <td
-            *cdkCellDef="let row; let idx = index"
+            *cdkCellDef="let row; let idx = dataIndex"
             cdk-cell
             class="ids-table__cell"
             idsCellContent
             [class]="col.cellClasses || ''"
             [colDef]="col"
             [rowData]="row"
+            [rowIndex]="idx"
+            [detailTrigger]="col === _masterDetailToggleColumn() ? _getDetailTrigger(row, idx) : null"
+            [detailTemplate]="col === _masterDetailToggleColumn() ? _detailTriggerTemplate() : null"
+            [defaultDetailToggle]="col === _masterDetailToggleColumn() && !_customDetailTrigger() ? masterDetailToggle : null"
+            [detailTogglePosition]="masterDetailTogglePosition()"
             [externalCellTemplates]="_cellTemplatesByName()"
             (click)="_handleCellClick($event, row, col)"
-          ></td>
+          >
+          </td>
         }
       </ng-container>
     }
@@ -227,7 +248,7 @@
         *cdkRowDef="let row; columns: _detailRowTemplates(); when: hasDetailRow()"
         cdk-row
         class="ids-table__detail-row ids-table__row--surface"
-        [class.ids-table__detail-row--expanded]="_expandedRows.has(row) || _allRowsExpanded()"
+        [class.ids-table__detail-row--expanded]="_expandedRows().has(row) || _allRowsExpanded()"
       ></tr>
     }
 

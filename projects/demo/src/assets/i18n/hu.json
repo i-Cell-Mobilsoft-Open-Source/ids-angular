@@ -157,6 +157,10 @@
     "LABEL": {
       "DETAIL_HEADER": "Műveletek"
     },
+    "DETAIL_TRIGGERS": {
+      "OPEN": "Részletek megjelenítése",
+      "CLOSE": "Részletek elrejtése"
+    },
     "BUTTON": {
       "EXPAND_DETAILS": "Részletek kinyitása",
       "COLLAPSE_DETAILS": "Részletek becsukása",
@@ -1786,6 +1790,7 @@
     "PROPERTY_GROUP": {
       "TITLE": "címsor tulajdonságai",
       "CELL_TEMPLATE": "cellasablon direktíva tulajdonságai",
+      "DETAIL_TRIGGER": "részletező trigger direktíva tulajdonságai",
       "ERROR_DEFINITION": "hibadefiníció direktíva tulajdonságai",
       "PSEUDO_CHECKBOX": "pszeudo-checkbox tulajdonságai",
       "HEADER": "fejléc tulajdonságai",

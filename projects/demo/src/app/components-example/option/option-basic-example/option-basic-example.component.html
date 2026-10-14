@@ -1,0 +1,14 @@
+<ids-form-field class="w-80">
+  <ids-label>{{ "EXAMPLES.OPTION.COMMON.LABEL" | translate }}</ids-label>
+  <ids-select
+    [placeholder]="'EXAMPLES.OPTION.COMMON.PLACEHOLDER' | translate"
+    [(ngModel)]="_value"
+  >
+    @for (fruit of _fruits; track fruit.value) {
+      <ids-option [value]="fruit.value" [viewValue]="fruit.labelKey | translate">
+        {{ fruit.labelKey | translate }}
+      </ids-option>
+    }
+  </ids-select>
+  <ids-hint-message>{{ "EXAMPLES.OPTION.BASIC.CONTENT.HINT" | translate }}</ids-hint-message>
+</ids-form-field>

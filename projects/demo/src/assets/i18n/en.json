@@ -1206,6 +1206,55 @@
         }
       }
     },
+    "OPTION": {
+      "COMMON": {
+        "LABEL": "Fruit",
+        "PLACEHOLDER": "Select a fruit",
+        "ANIMAL_LABEL": "Animal",
+        "ANIMAL_PLACEHOLDER": "Select an animal"
+      },
+      "BASIC": {
+        "TITLE": "Basic options",
+        "DESCRIPTION": "Project ids-option elements inside ids-select (or another option parent). Set value for the model and use projected content or viewValue for the label.",
+        "CONTENT": {
+          "HINT": "Open the list to see each ids-option in the panel."
+        }
+      },
+      "VIEW_VALUE": {
+        "TITLE": "Option viewValue",
+        "DESCRIPTION": "Use viewValue when the closed select should show different text than the rich content inside the option panel.",
+        "CONTENT": {
+          "BANANA_DETAIL": "Rich description shown only in the panel",
+          "HINT": "The trigger shows the short viewValue; the panel can show extra detail."
+        }
+      },
+      "GROUPS": {
+        "TITLE": "Option groups",
+        "DESCRIPTION": "Wrap related options in ids-option-group and set label for the group heading.",
+        "CONTENT": {
+          "LAND": "Land",
+          "AQUATIC": "Aquatic",
+          "HINT": "Groups organize long option lists and improve screen reader navigation."
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Disabled options and groups",
+        "DESCRIPTION": "Disable individual options with disabled on ids-option, or every option in a group with disabled on ids-option-group.",
+        "CONTENT": {
+          "DISABLED_OPTION": "Disabled option",
+          "DISABLED_OPTION_HINT": "Cat cannot be selected; other land animals remain available.",
+          "DISABLED_GROUP": "Disabled group",
+          "DISABLED_GROUP_HINT": "The Land group is disabled; Aquatic options are still selectable."
+        }
+      },
+      "MULTISELECT": {
+        "TITLE": "Options in multiselect",
+        "DESCRIPTION": "When the parent select uses multiSelect, each ids-option shows a pseudo-checkbox and a check icon when selected.",
+        "CONTENT": {
+          "HINT": "Selected options show checkboxes in the panel and chips in the trigger."
+        }
+      }
+    },
     "ICON": {
       "VARIANTS": {
         "TITLE": "Icon variants",

@@ -1725,6 +1725,102 @@
         }
       }
     },
+    "OVERLAY_PANEL": {
+      "COMMON": {
+        "OPEN": "Panel megnyitása",
+        "CLOSE": "Panel bezárása",
+        "SAMPLE_CONTENT": "Overlay panel tartalom"
+      },
+      "BASIC": {
+        "TITLE": "Alap overlay panel",
+        "DESCRIPTION": "Az ids-overlay-panel a cdkOverlayOrigin triggerhez köthető az origin inputtal. Nyitás/zárás toggle()-lal vagy open kötéssel.",
+        "CONTENT": {
+          "BODY": "Ez az overlay panel a fenti gombhoz van kötve."
+        }
+      },
+      "APPEARANCES": {
+        "TITLE": "Overlay panel megjelenések",
+        "DESCRIPTION": "Overlay panelek különböző megjelenéssel: filled (alapértelmezett), outlined és elevated.",
+        "CONTENT": {
+          "FILLED": "Filled",
+          "OUTLINED": "Outlined",
+          "ELEVATED": "Elevated"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Overlay panel változatok",
+        "DESCRIPTION": "Overlay panelek surface és light változatban. A light változathoz sötét háttér ajánlott.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Overlay panel méretek",
+        "DESCRIPTION": "Overlay panelek különböző méretekkel: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "MENU": {
+        "TITLE": "Overlay panel menüvel",
+        "DESCRIPTION": "A panelbe cdkMenu és idsMenuItem gombok helyezhetők legördülő menühöz. Menüpont kattintásakor a panel bezárásához állítsd az open jelet false-ra (lásd a Done tételt).",
+        "CONTENT": {
+          "OPEN_MENU": "Menü megnyitása",
+          "ITEM_1": "Szerkesztés",
+          "ITEM_2": "Másolás",
+          "ITEM_3": "Törlés",
+          "ITEM_CLOSE": "Kész (bezárja a panelt)"
+        }
+      }
+    },
+    "MESSAGE": {
+      "COMMON": {
+        "HINT": "Használj legalább 8 karaktert betűkkel és számokkal.",
+        "SUCCESS": "A módosítások sikeresen mentve.",
+        "ERROR": "Valami hiba történt. Próbáld újra.",
+        "SUFFIX": "Opcionális"
+      },
+      "HINT": {
+        "DEFAULT": "Alapértelmezett",
+        "DISABLED": "Letiltva",
+        "TITLE": "Hint üzenet",
+        "DESCRIPTION": "Az ids-hint-message segítő szöveg mezők alatt vagy önálló útmutatóként."
+      },
+      "SUCCESS": {
+        "TITLE": "Success üzenet",
+        "DESCRIPTION": "Az ids-success-message sikeres validációt vagy befejezett műveletet jelez."
+      },
+      "ERROR": {
+        "TITLE": "Error üzenet",
+        "DESCRIPTION": "Az ids-error-message hibaszöveghez használható. Önálló üzenethez sima tartalom, validációhoz ids-error-def bejegyzések."
+      },
+      "SUFFIX": {
+        "TITLE": "Message suffix",
+        "DESCRIPTION": "Opcionális záró tartalom idsMessageSuffix attribútummal hint, success és error üzeneteknél."
+      },
+      "SIZES": {
+        "TITLE": "Message méretek",
+        "DESCRIPTION": "Az üzenetek méretei: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "VARIANTS": {
+        "TITLE": "Message változatok",
+        "DESCRIPTION": "Az üzenetek változatai: surface (alapértelmezett), light és dark. A háttér illeszkedjen a változathoz.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light",
+          "DARK": "Dark"
+        }
+      },
+      "VALIDATION": {
+        "TITLE": "Validációs üzenetek",
+        "DESCRIPTION": "ids-form-field-en belül az ids-error-message ids-error-def bejegyzésekkel mutatja az első illeszkedő hibát, ha a mező touched vagy dirty.",
+        "CONTENT": {
+          "LABEL": "E-mail",
+          "PLACEHOLDER": "nev@pelda.hu",
+          "HINT": "Az e-mail címedet nem osztjuk meg.",
+          "INVALID_EMAIL": "Adj meg érvényes e-mail címet.",
+          "SUBMIT": "Küldés"
+        }
+      }
+    },
     "TOOLTIP": {
       "COMMON": {
         "TRIGGER": "Vidd fölé az egeret",

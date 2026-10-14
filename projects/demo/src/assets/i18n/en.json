@@ -1729,6 +1729,102 @@
         }
       }
     },
+    "OVERLAY_PANEL": {
+      "COMMON": {
+        "OPEN": "Open overlay",
+        "CLOSE": "Close overlay",
+        "SAMPLE_CONTENT": "Overlay panel content"
+      },
+      "BASIC": {
+        "TITLE": "Basic overlay panel",
+        "DESCRIPTION": "Anchor ids-overlay-panel to a cdkOverlayOrigin trigger with the origin input. Toggle open state with toggle() or bind open.",
+        "CONTENT": {
+          "BODY": "This overlay panel is connected to the button above."
+        }
+      },
+      "APPEARANCES": {
+        "TITLE": "Overlay panel appearances",
+        "DESCRIPTION": "Overlay panels with different appearances: filled (default), outlined, and elevated.",
+        "CONTENT": {
+          "FILLED": "Filled",
+          "OUTLINED": "Outlined",
+          "ELEVATED": "Elevated"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Overlay panel variants",
+        "DESCRIPTION": "Overlay panels with surface and light variants. Use a dark background for the light variant.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Overlay panel sizes",
+        "DESCRIPTION": "Overlay panels with different sizes: dense, compact (default), comfortable, and spacious."
+      },
+      "MENU": {
+        "TITLE": "Overlay panel with menu",
+        "DESCRIPTION": "Project a cdkMenu with idsMenuItem buttons inside the overlay panel for dropdown-style menus. Call closePanel (or set open to false) on a menu item click to dismiss the overlay after an action.",
+        "CONTENT": {
+          "OPEN_MENU": "Open menu",
+          "ITEM_1": "Edit",
+          "ITEM_2": "Duplicate",
+          "ITEM_3": "Delete",
+          "ITEM_CLOSE": "Done (closes overlay)"
+        }
+      }
+    },
+    "MESSAGE": {
+      "COMMON": {
+        "HINT": "Use at least 8 characters with letters and numbers.",
+        "SUCCESS": "Your changes were saved successfully.",
+        "ERROR": "Something went wrong. Please try again.",
+        "SUFFIX": "Optional"
+      },
+      "HINT": {
+        "DEFAULT": "Default",
+        "DISABLED": "Disabled",
+        "TITLE": "Hint message",
+        "DESCRIPTION": "Use ids-hint-message for helper text below form fields or as standalone guidance."
+      },
+      "SUCCESS": {
+        "TITLE": "Success message",
+        "DESCRIPTION": "Use ids-success-message to confirm successful validation or completed actions."
+      },
+      "ERROR": {
+        "TITLE": "Error message",
+        "DESCRIPTION": "Use ids-error-message for error text. Project plain content for standalone messages, or ids-error-def mappings for form validation."
+      },
+      "SUFFIX": {
+        "TITLE": "Message suffix",
+        "DESCRIPTION": "Add optional trailing content with idsMessageSuffix on hint, success, and error messages."
+      },
+      "SIZES": {
+        "TITLE": "Message sizes",
+        "DESCRIPTION": "Messages support size: dense, compact (default), comfortable, and spacious."
+      },
+      "VARIANTS": {
+        "TITLE": "Message variants",
+        "DESCRIPTION": "Messages support variant: surface (default), light, and dark. Choose a background that matches the variant.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light",
+          "DARK": "Dark"
+        }
+      },
+      "VALIDATION": {
+        "TITLE": "Validation messages",
+        "DESCRIPTION": "Inside ids-form-field, ids-error-message with ids-error-def entries shows the first matching validation error when the control is touched or dirty.",
+        "CONTENT": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "name@example.com",
+          "HINT": "We will never share your email.",
+          "INVALID_EMAIL": "Enter a valid email address.",
+          "SUBMIT": "Submit"
+        }
+      }
+    },
     "TOOLTIP": {
       "COMMON": {
         "TRIGGER": "Hover me",

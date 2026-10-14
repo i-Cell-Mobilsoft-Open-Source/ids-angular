@@ -37,11 +37,16 @@ export class IdsDaySelectorComponent extends IdsCalendarPage {
   protected _weekdayLabels = computed<string[]>(() =>
     this._days().slice(0, daysPerWeek).map((date: Date) => this._intl.getWeekdayHeaderLabel(date) ?? ''));
 
-  public override hasPreviousPage(): boolean {
-    const dayOnPrevPage = addDays(this._gridStartDate(), -1);
-    const min = this.min() ?? dayOnPrevPage;
+  private _isRangeEmpty = computed(() => {
+    const min = this.min();
+    const max = this.max();
+    return isValidDate(min) && isValidDate(max) && compareDates(min, max) > 0;
+  });
 
-    return compareDates(dayOnPrevPage, min) > -1;
+  public override hasPreviousPage(): boolean {
+    const min = this.min();
+
+    return !this._isRangeEmpty() && (!isValidDate(min) || compareDates(startOfMonth(min), this._currentMonth()) < 0);
   }
 
   public override gotoPreviousPage(): void {
@@ -50,10 +55,9 @@ export class IdsDaySelectorComponent extends IdsCalendarPage {
   }
 
   public override hasNextPage(): boolean {
-    const dayOnNextPage = addDays(this._gridEndDate(), 1);
-    const max = this.max() ?? dayOnNextPage;
+    const max = this.max();
 
-    return compareDates(dayOnNextPage, max) < 1;
+    return !this._isRangeEmpty() && (!isValidDate(max) || compareDates(startOfMonth(max), this._currentMonth()) > 0);
   }
 
   public override gotoNextPage(): void {

@@ -482,6 +482,42 @@ export class TableDemoService {
         'Content projected into the table\'s native <caption> element (marked with the idsTableCaption attribute).',
       ),
     },
+    {
+      name: 'idsCellTemplate',
+      selector: 'ng-template[idsCellTemplate]',
+      description: this._widgetDocs.getDescription(
+        TABLE_SLOTS_DOCS_PATH,
+        'idsCellTemplate',
+        'Named cell template. Set idsCellTemplate to the name referenced by the column cellRenderer or headerCellRenderer.',
+      ),
+    },
+    {
+      name: 'idsTableSortAscIcon',
+      selector: 'ng-template[idsTableSortAscIcon]',
+      description: this._widgetDocs.getDescription(
+        TABLE_SLOTS_DOCS_PATH,
+        'idsTableSortAscIcon',
+        'Custom icon template for ascending column sorting.',
+      ),
+    },
+    {
+      name: 'idsTableSortDescIcon',
+      selector: 'ng-template[idsTableSortDescIcon]',
+      description: this._widgetDocs.getDescription(
+        TABLE_SLOTS_DOCS_PATH,
+        'idsTableSortDescIcon',
+        'Custom icon template for descending column sorting.',
+      ),
+    },
+    {
+      name: 'idsTableSortNoneIcon',
+      selector: 'ng-template[idsTableSortNoneIcon]',
+      description: this._widgetDocs.getDescription(
+        TABLE_SLOTS_DOCS_PATH,
+        'idsTableSortNoneIcon',
+        'Custom icon template for an unsorted column.',
+      ),
+    },
   ];
 
   public getSlotConfig(): DemoSlotConfig[] {

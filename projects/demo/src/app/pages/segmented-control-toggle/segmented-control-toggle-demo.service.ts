@@ -12,6 +12,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SEGMENTED_CONTROL_TOGGLE_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlToggleAppearance, IdsSegmentedControlToggleAppearanceType, IdsSegmentedControlToggleButtonVariant, IdsSegmentedControlToggleButtonVariantType, IdsSegmentedControlToggleVariant, IdsSegmentedControlToggleVariantType } from '@i-cell/ids-angular/segmented-control-toggle';
 import { TranslateService } from '@ngx-translate/core';
 
+const GROUP_SLOTS_DOCS_PATH = 'segmented-control-toggle/segmented-control-toggle.directive.slots.docs.json';
 const SEGMENTED_CONTROL_TOGGLE_DOCS_PATH = 'segmented-control-toggle/segmented-control-toggle.directive.docs.json';
 const SEGMENTED_CONTROL_TOGGLE_ITEM_DOCS_PATH = 'segmented-control-toggle/segmented-control-toggle-item.component.docs.json';
 const SEGMENTED_CONTROL_TOGGLE_ITEM_SLOTS_DOCS_PATH = 'segmented-control-toggle/segmented-control-toggle-item.component.slots.docs.json';
@@ -301,11 +302,29 @@ export class SegmentedControlToggleDemoService {
     },
   ];
 
+  public readonly groupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'items',
+      selector: 'ids-segmented-control-toggle-item',
+      description: this._widgetDocs.getDescription(
+        GROUP_SLOTS_DOCS_PATH,
+        'items',
+        'Direct child items managed by the segmented control toggle.',
+      ),
+    },
+  ];
+
   public getSlotConfig(): DemoSlotConfig[] {
-    return [this.itemSlotControlConfig];
+    return [
+      this.itemSlotControlConfig,
+      this.groupSlotControlConfig,
+    ];
   }
 
   public getSlotTitles(): string[] {
-    return ['Segmented control toggle item'];
+    return [
+      'Segmented control toggle item',
+      'Segmented control toggle',
+    ];
   }
 }

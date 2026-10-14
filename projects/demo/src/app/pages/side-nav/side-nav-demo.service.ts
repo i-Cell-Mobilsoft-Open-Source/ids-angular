@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -10,9 +11,13 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SIDE_NAV_DEFAULT_CONFIG_FACTORY, IdsSideNavAppearance, IdsSideNavAppearanceType, IdsSideNavVariant, IdsSideNavVariantType } from '@i-cell/ids-angular/side-nav';
 import { TranslateService } from '@ngx-translate/core';
 
+const SIDE_NAV_SECTION_SLOTS_DOCS_PATH = 'side-nav/side-nav-section.component.slots.docs.json';
 const SIDE_NAV_TITLE_DOCS_PATH = 'side-nav/side-nav-title.component.docs.json';
 const SIDE_NAV_DOCS_PATH = 'side-nav/side-nav.component.docs.json';
 const SIDE_NAV_ITEM_DOCS_PATH = 'side-nav/side-nav-item.component.docs.json';
+const SIDE_NAV_TITLE_SLOTS_DOCS_PATH = 'side-nav/side-nav-title.component.slots.docs.json';
+const SIDE_NAV_SLOTS_DOCS_PATH = 'side-nav/side-nav.component.slots.docs.json';
+const SIDE_NAV_ITEM_SLOTS_DOCS_PATH = 'side-nav/side-nav-item.component.slots.docs.json';
 
 type SideNavInputControls = {
   appearance: IdsSideNavAppearanceType;
@@ -184,6 +189,107 @@ export class SideNavDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.SIDE_NAV', 'API.PROPERTY_GROUP.TITLE'),
         config: this.titlePropControlConfig,
       },
+    ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_SLOTS_DOCS_PATH,
+        'content',
+        'Projected side navigation content, typically sections, titles and items.',
+      ),
+    },
+  ];
+
+  public readonly titleSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'iconLeading',
+      selector: '[icon-leading]',
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_TITLE_SLOTS_DOCS_PATH,
+        'iconLeading',
+        'Content projected before the side nav title label (marked with the icon-leading attribute).',
+      ),
+    },
+    {
+      name: 'iconTrailing',
+      selector: '[icon-trailing]',
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_TITLE_SLOTS_DOCS_PATH,
+        'iconTrailing',
+        'Content projected after the side nav title label (marked with the icon-trailing attribute).',
+      ),
+    },
+  ];
+
+  public readonly itemSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'iconLeading',
+      selector: '[icon-leading]',
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_ITEM_SLOTS_DOCS_PATH,
+        'iconLeading',
+        'Content projected before the side nav item label (marked with the icon-leading attribute).',
+      ),
+    },
+    {
+      name: 'iconTrailing',
+      selector: '[icon-trailing]',
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_ITEM_SLOTS_DOCS_PATH,
+        'iconTrailing',
+        'Content projected after the side nav item label (marked with the icon-trailing attribute).',
+      ),
+    },
+    {
+      name: 'items',
+      selector: 'ids-side-nav-item,[idsSideNavItem]',
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_ITEM_SLOTS_DOCS_PATH,
+        'items',
+        'Nested side nav items projected into the expandable submenu.',
+      ),
+    },
+    {
+      name: 'template',
+      selector: 'ng-template',
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_ITEM_SLOTS_DOCS_PATH,
+        'template',
+        'Custom submenu template. Add the #idsSideNavItemChildren reference to the ng-template '
+          + 'so its content is rendered in the expandable submenu.',
+      ),
+    },
+  ];
+
+  public readonly sectionSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        SIDE_NAV_SECTION_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the side navigation section, typically a title and navigation items.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [
+      this.slotControlConfig,
+      this.titleSlotControlConfig,
+      this.itemSlotControlConfig,
+      this.sectionSlotControlConfig,
+    ];
+  }
+
+  public getSlotTitles(): string[] {
+    return [
+      'Side nav',
+      'Side nav title',
+      'Side nav item',
+      'Side nav section',
     ];
   }
 }

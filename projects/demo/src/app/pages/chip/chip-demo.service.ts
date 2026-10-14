@@ -23,6 +23,7 @@ import { TranslateService } from '@ngx-translate/core';
 const CHIP_DOCS_PATH = 'chip/chip.component.docs.json';
 const CHIP_GROUP_DOCS_PATH = 'chip/chip-group.component.docs.json';
 const CHIP_SLOTS_DOCS_PATH = 'chip/chip.component.slots.docs.json';
+const CHIP_GROUP_SLOTS_DOCS_PATH = 'chip/chip-group.component.slots.docs.json';
 
 const defaultConfig = IDS_CHIP_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_CHIP_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -276,11 +277,29 @@ export class ChipDemoService {
     },
   ];
 
+  public readonly groupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      selector: 'ids-chip, button[idsChip]',
+      description: this._widgetDocs.getDescription(
+        CHIP_GROUP_SLOTS_DOCS_PATH,
+        'content',
+        'Chips projected into the chip group.',
+      ),
+    },
+  ];
+
   public getSlotConfig(): DemoSlotConfig[] {
-    return [this.slotControlConfig];
+    return [
+      this.slotControlConfig,
+      this.groupSlotControlConfig,
+    ];
   }
 
   public getSlotTitles(): string[] {
-    return ['Chip'];
+    return [
+      'Chip',
+      'Chip group',
+    ];
   }
 }

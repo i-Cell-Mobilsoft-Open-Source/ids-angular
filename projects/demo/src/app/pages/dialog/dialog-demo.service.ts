@@ -152,6 +152,15 @@ export class DialogDemoService {
         'Content projected into the footer of the dialog (marked with the idsDialogActions attribute), typically action buttons.',
       ),
     },
+    {
+      name: 'idsDialogHeader',
+      selector: 'ng-template[idsDialogHeader]',
+      description: this._widgetDocs.getDescription(
+        DIALOG_SLOTS_DOCS_PATH,
+        'idsDialogHeader',
+        'Custom header template rendered instead of the default dialog header.',
+      ),
+    },
   ];
 
   public getSlotConfig(): DemoSlotConfig[] {

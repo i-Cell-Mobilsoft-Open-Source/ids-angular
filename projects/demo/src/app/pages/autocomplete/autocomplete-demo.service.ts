@@ -4,6 +4,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -17,6 +18,8 @@ const AUTOCOMPLETE_DOCS_PATH = 'forms/components/autocomplete/autocomplete.compo
 const AUTOCOMPLETE_CHIP_LIST_DOCS_PATH = 'forms/components/autocomplete/autocomplete-chip-list.component.docs.json';
 const AUTOCOMPLETE_HINT_DOCS_PATH = 'forms/components/autocomplete/autocomplete-hint.component.docs.json';
 const AUTOCOMPLETE_TRIGGER_DOCS_PATH = 'forms/components/autocomplete/autocomplete-trigger.directive.docs.json';
+const AUTOCOMPLETE_SLOTS_DOCS_PATH = 'forms/components/autocomplete/autocomplete.component.slots.docs.json';
+const AUTOCOMPLETE_HINT_SLOTS_DOCS_PATH = 'forms/components/autocomplete/autocomplete-hint.component.slots.docs.json';
 
 const USER_INPUT_DEBOUNCE_TIME = 300;
 const SIMULATED_LOADING_TIME = 300;
@@ -442,6 +445,42 @@ export class AutocompleteDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.AUTOCOMPLETE', 'API.PROPERTY_GROUP.TRIGGER'),
         config: this.triggerPropControlConfig,
       },
+    ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        AUTOCOMPLETE_SLOTS_DOCS_PATH,
+        'content',
+        'Projected option content rendered in the autocomplete panel.',
+      ),
+    },
+  ];
+
+  public readonly hintSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        AUTOCOMPLETE_HINT_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the autocomplete hint message.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [
+      this.slotControlConfig,
+      this.hintSlotControlConfig,
+    ];
+  }
+
+  public getSlotTitles(): string[] {
+    return [
+      'Autocomplete',
+      'Autocomplete hint',
     ];
   }
 

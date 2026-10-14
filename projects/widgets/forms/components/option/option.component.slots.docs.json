@@ -1,0 +1,8 @@
+{
+  "content": {
+    "description": {
+      "en": "Default content of the option, used as its visible label.",
+      "hu": "Az opció alapértelmezett tartalma, amely látható feliratként jelenik meg."
+    }
+  }
+}

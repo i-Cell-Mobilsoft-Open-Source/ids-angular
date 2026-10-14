@@ -1,0 +1,8 @@
+{
+  "content": {
+    "description": {
+      "en": "Default content of the accordion item, rendered in the expandable content area.",
+      "hu": "Az accordion elem alapértelmezett tartalma, amely a lenyitható tartalmi területen jelenik meg."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "content": {
+    "description": {
+      "en": "Default content of the card.",
+      "hu": "A kártya alapértelmezett tartalma."
+    }
+  },
+  "footer": {
+    "description": {
+      "en": "Content projected into the card footer area.",
+      "hu": "A kártya láblécébe beillesztett tartalom."
+    }
+  }
+}

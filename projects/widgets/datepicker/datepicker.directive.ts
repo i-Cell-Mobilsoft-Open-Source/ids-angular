@@ -66,10 +66,10 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
       return;
     }
 
-    if (!equalDates(min, calendar.min())) {
+    if (min?.getTime() !== calendar.min()?.getTime()) {
       this._componentRef?.setInput('min', min);
     }
-    if (!equalDates(max, calendar.max())) {
+    if (max?.getTime() !== calendar.max()?.getTime()) {
       this._componentRef?.setInput('max', max);
     }
     if (view !== calendar.view()) {

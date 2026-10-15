@@ -484,7 +484,7 @@ export class TableDemoService {
     },
     {
       name: 'idsCellTemplate',
-      selector: 'ng-template[idsCellTemplate]',
+      selector: 'ng-template[idsCellTemplate], [*idsCellTemplate]',
       description: this._widgetDocs.getDescription(
         TABLE_SLOTS_DOCS_PATH,
         'idsCellTemplate',
@@ -493,7 +493,7 @@ export class TableDemoService {
     },
     {
       name: 'idsTableSortAscIcon',
-      selector: 'ng-template[idsTableSortAscIcon]',
+      selector: 'ng-template[idsTableSortAscIcon], [*idsTableSortAscIcon]',
       description: this._widgetDocs.getDescription(
         TABLE_SLOTS_DOCS_PATH,
         'idsTableSortAscIcon',
@@ -502,7 +502,7 @@ export class TableDemoService {
     },
     {
       name: 'idsTableSortDescIcon',
-      selector: 'ng-template[idsTableSortDescIcon]',
+      selector: 'ng-template[idsTableSortDescIcon], [*idsTableSortDescIcon]',
       description: this._widgetDocs.getDescription(
         TABLE_SLOTS_DOCS_PATH,
         'idsTableSortDescIcon',
@@ -511,7 +511,7 @@ export class TableDemoService {
     },
     {
       name: 'idsTableSortNoneIcon',
-      selector: 'ng-template[idsTableSortNoneIcon]',
+      selector: 'ng-template[idsTableSortNoneIcon], [*idsTableSortNoneIcon]',
       description: this._widgetDocs.getDescription(
         TABLE_SLOTS_DOCS_PATH,
         'idsTableSortNoneIcon',

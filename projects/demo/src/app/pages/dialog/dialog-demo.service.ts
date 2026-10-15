@@ -154,7 +154,7 @@ export class DialogDemoService {
     },
     {
       name: 'idsDialogHeader',
-      selector: 'ng-template[idsDialogHeader]',
+      selector: 'ng-template[idsDialogHeader], [*idsDialogHeader]',
       description: this._widgetDocs.getDescription(
         DIALOG_SLOTS_DOCS_PATH,
         'idsDialogHeader',

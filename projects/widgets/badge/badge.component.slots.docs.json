@@ -1,0 +1,8 @@
+{
+  "iconLeading": {
+    "description": {
+      "en": "Icon projected before the badge label. Use an ids-icon element with the icon-leading attribute.",
+      "hu": "A badge felirata elé beillesztett ikon. Használj icon-leading attribútummal ellátott ids-icon elemet."
+    }
+  }
+}

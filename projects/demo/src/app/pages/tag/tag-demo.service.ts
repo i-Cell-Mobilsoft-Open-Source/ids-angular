@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 const TAG_DOCS_PATH = 'tag/tag.component.docs.json';
 const TAG_GROUP_DOCS_PATH = 'tag/tag-group.component.docs.json';
 const TAG_SLOTS_DOCS_PATH = 'tag/tag.component.slots.docs.json';
+const TAG_GROUP_SLOTS_DOCS_PATH = 'tag/tag-group.component.slots.docs.json';
 
 const defaultConfig = IDS_TAG_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_TAG_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -154,11 +155,29 @@ export class TagDemoService {
     },
   ];
 
+  public readonly groupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      selector: 'ids-tag, a[idsTag]',
+      description: this._widgetDocs.getDescription(
+        TAG_GROUP_SLOTS_DOCS_PATH,
+        'content',
+        'Tags projected into the tag group.',
+      ),
+    },
+  ];
+
   public getSlotConfig(): DemoSlotConfig[] {
-    return [this.slotControlConfig];
+    return [
+      this.slotControlConfig,
+      this.groupSlotControlConfig,
+    ];
   }
 
   public getSlotTitles(): string[] {
-    return ['Tag'];
+    return [
+      'Tag',
+      'Tag group',
+    ];
   }
 }

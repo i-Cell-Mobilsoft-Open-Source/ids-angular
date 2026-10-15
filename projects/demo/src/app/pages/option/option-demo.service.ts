@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -14,6 +15,8 @@ import { TranslateService } from '@ngx-translate/core';
 const PSEUDO_CHECKBOX_DOCS_PATH = 'forms/components/pseudo-checkbox/pseudo-checkbox.component.docs.json';
 const OPTION_DOCS_PATH = 'forms/components/option/option.component.docs.json';
 const OPTION_GROUP_DOCS_PATH = 'forms/components/option/option-group.component.docs.json';
+const OPTION_SLOTS_DOCS_PATH = 'forms/components/option/option.component.slots.docs.json';
+const OPTION_GROUP_SLOTS_DOCS_PATH = 'forms/components/option/option-group.component.slots.docs.json';
 
 export type OptionSelectControls = {
   size: IdsSizeType;
@@ -293,6 +296,43 @@ export class OptionDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.OPTION', 'API.PROPERTY_GROUP.PSEUDO_CHECKBOX'),
         config: this.pseudoCheckboxPropControlConfig,
       },
+    ];
+  }
+
+  public readonly optionSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        OPTION_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the option, used as its visible label.',
+      ),
+    },
+  ];
+
+  public readonly optionGroupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      selector: 'ids-option, ng-container',
+      description: this._widgetDocs.getDescription(
+        OPTION_GROUP_SLOTS_DOCS_PATH,
+        'content',
+        'Options projected into the option group.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [
+      this.optionSlotControlConfig,
+      this.optionGroupSlotControlConfig,
+    ];
+  }
+
+  public getSlotTitles(): string[] {
+    return [
+      'Option',
+      'Option group',
     ];
   }
 }

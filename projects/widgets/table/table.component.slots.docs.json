@@ -10,5 +10,29 @@
       "en": "Content projected into the table's native <caption> element (marked with the idsTableCaption attribute).",
       "hu": "A táblázat <caption> elemének tartalma, idsTableCaption attribútummal."
     }
+  },
+  "idsCellTemplate": {
+    "description": {
+      "en": "Named cell template. Set idsCellTemplate to the name referenced by the column cellRenderer or headerCellRenderer.",
+      "hu": "Névvel azonosított cellasablon. Az idsCellTemplate értéke az oszlop cellRenderer vagy headerCellRenderer beállításában hivatkozott név."
+    }
+  },
+  "idsTableSortAscIcon": {
+    "description": {
+      "en": "Custom icon template for ascending column sorting.",
+      "hu": "A növekvő oszloprendezés egyedi ikonsablonja."
+    }
+  },
+  "idsTableSortDescIcon": {
+    "description": {
+      "en": "Custom icon template for descending column sorting.",
+      "hu": "A csökkenő oszloprendezés egyedi ikonsablonja."
+    }
+  },
+  "idsTableSortNoneIcon": {
+    "description": {
+      "en": "Custom icon template for an unsorted column.",
+      "hu": "A rendezetlen oszlop egyedi ikonsablonja."
+    }
   }
 }

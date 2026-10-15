@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
 import { IDS_BADGE_DEFAULT_CONFIG_FACTORY, IdsBadgeAppearance, IdsBadgeAppearanceType, IdsBadgeVariant, IdsBadgeVariantType } from '@i-cell/ids-angular/badge';
@@ -10,6 +11,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 const BADGE_DOCS_PATH = 'badge/badge.component.docs.json';
+const BADGE_SLOTS_DOCS_PATH = 'badge/badge.component.slots.docs.json';
 
 type BadgeInputControls = {
   appearance: IdsBadgeAppearanceType;
@@ -92,5 +94,25 @@ export class BadgeDemoService {
         config: this.inputControlConfig,
       },
     ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'iconLeading',
+      selector: 'ids-icon[icon-leading]',
+      description: this._widgetDocs.getDescription(
+        BADGE_SLOTS_DOCS_PATH,
+        'iconLeading',
+        'Icon projected before the badge label. Use an ids-icon element with the icon-leading attribute.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.slotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Badge'];
   }
 }

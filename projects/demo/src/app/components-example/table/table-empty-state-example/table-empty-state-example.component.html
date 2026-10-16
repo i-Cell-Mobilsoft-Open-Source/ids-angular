@@ -1,0 +1,6 @@
+<ids-table [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+  <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+    {{ value | translate }}
+  </ng-template>
+  <div idsNoRowsToShow>{{ "EXAMPLES.TABLE.EMPTY_STATE.CONTENT.NO_ROWS" | translate }}</div>
+</ids-table>

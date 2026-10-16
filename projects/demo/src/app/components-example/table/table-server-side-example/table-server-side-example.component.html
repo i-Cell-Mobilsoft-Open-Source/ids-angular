@@ -1,0 +1,28 @@
+<div class="table-server-side">
+  <ids-paginator
+    [length]="_totalRows()"
+    [pageSize]="_pageSize"
+    [pageSizeOptions]="_pageSizeOptions"
+    [disabled]="_isLoading()"
+    [(pageIndex)]="_currentPageIndex"
+    (pageChanged)="_dataSource.page($event)"
+  />
+  <div class="table-server-side__table">
+    @if (_isLoading()) {
+      <div class="table-server-side__loading">
+        <ids-spinner variant="primary" [aria-label]="'EXAMPLES.TABLE.SERVER_SIDE.LOADING' | translate" />
+      </div>
+    }
+    <ids-table
+      enableSorting
+      [columnDefs]="_columnDefs"
+      [dataSource]="_dataSource"
+      [class.table-server-side__table-content--loading]="_isLoading()"
+      (sortChange)="_dataSource.sort($event)"
+    >
+      <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+        {{ value | translate }}
+      </ng-template>
+    </ids-table>
+  </div>
+</div>

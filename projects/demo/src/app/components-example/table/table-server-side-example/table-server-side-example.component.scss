@@ -1,0 +1,25 @@
+.table-server-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.table-server-side__table {
+  position: relative;
+}
+
+.table-server-side__loading {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255 255 255 / 60%);
+}
+
+.table-server-side__table-content--loading {
+  pointer-events: none;
+  opacity: 0.5;
+}

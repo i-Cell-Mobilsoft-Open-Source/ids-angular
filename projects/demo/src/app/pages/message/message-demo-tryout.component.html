@@ -1,0 +1,26 @@
+@if (_messageDemoService.helperModel.isError) {
+  <ids-error-message>
+    {{ _messageDemoService.helperModel.message }}
+    @if (_messageDemoService.helperModel.hasSuffix) {
+      <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
+    }
+  </ids-error-message>
+}
+
+@if (_messageDemoService.helperModel.isSuccess) {
+  <ids-success-message>
+    {{ _messageDemoService.helperModel.message }}
+    @if (_messageDemoService.helperModel.hasSuffix) {
+      <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
+    }
+  </ids-success-message>
+}
+
+@if (!_messageDemoService.helperModel.isError && !_messageDemoService.helperModel.isSuccess) {
+  <ids-hint-message>
+    {{ _messageDemoService.helperModel.message }}
+    @if (_messageDemoService.helperModel.hasSuffix) {
+      <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
+    }
+  </ids-hint-message>
+}

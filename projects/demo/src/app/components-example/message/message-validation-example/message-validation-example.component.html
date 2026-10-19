@@ -1,0 +1,22 @@
+@let fieldName = "EXAMPLES.MESSAGE.VALIDATION.CONTENT.LABEL" | translate;
+
+<form class="flex flex-col gap-ids-container-gap-4 max-w-80" (ngSubmit)="_onSubmit(emailField)">
+  <ids-form-field>
+    <ids-label>{{ fieldName }}</ids-label>
+    <input
+      #emailField="ngModel"
+      idsInput
+      email
+      name="email"
+      required
+      [placeholder]="'EXAMPLES.MESSAGE.VALIDATION.CONTENT.PLACEHOLDER' | translate"
+      [(ngModel)]="_email"
+    />
+    <ids-hint-message>{{ "EXAMPLES.MESSAGE.VALIDATION.CONTENT.HINT" | translate }}</ids-hint-message>
+    <ids-error-message>
+      <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
+      <ids-error-def code="email">{{ "EXAMPLES.MESSAGE.VALIDATION.CONTENT.INVALID_EMAIL" | translate }}</ids-error-def>
+    </ids-error-message>
+  </ids-form-field>
+  <button type="submit" idsButton>{{ "EXAMPLES.MESSAGE.VALIDATION.CONTENT.SUBMIT" | translate }}</button>
+</form>

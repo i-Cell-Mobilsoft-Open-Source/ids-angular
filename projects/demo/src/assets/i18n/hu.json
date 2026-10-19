@@ -1202,6 +1202,55 @@
         }
       }
     },
+    "OPTION": {
+      "COMMON": {
+        "LABEL": "Gyümölcs",
+        "PLACEHOLDER": "Válassz gyümölcsöt",
+        "ANIMAL_LABEL": "Állat",
+        "ANIMAL_PLACEHOLDER": "Válassz állatot"
+      },
+      "BASIC": {
+        "TITLE": "Alap opciók",
+        "DESCRIPTION": "Az ids-option elemeket ids-select (vagy más option szülő) belsejébe helyezd. A value a modell értéke; a felirathoz használj befoglalt tartalmat vagy viewValue-t.",
+        "CONTENT": {
+          "HINT": "Nyisd meg a listát az ids-option elemek megtekintéséhez."
+        }
+      },
+      "VIEW_VALUE": {
+        "TITLE": "Option viewValue",
+        "DESCRIPTION": "A viewValue akkor kell, ha a zárt select rövidebb szöveget mutasson, mint a panelben megjelenő tartalom.",
+        "CONTENT": {
+          "BANANA_DETAIL": "Részletes leírás, csak a panelben látszik",
+          "HINT": "A trigger a rövid viewValue-t mutatja; a panelben lehet extra részlet."
+        }
+      },
+      "GROUPS": {
+        "TITLE": "Option csoportok",
+        "DESCRIPTION": "Kapcsolódó opciókat ids-option-group-ba csomagolj, és adj meg label feliratot a csoportnak.",
+        "CONTENT": {
+          "LAND": "Szárazföldi",
+          "AQUATIC": "Vízi",
+          "HINT": "A csoportok rendezik a hosszú listákat és javítják a képernyőolvasós navigációt."
+        }
+      },
+      "DISABLED": {
+        "TITLE": "Letiltott opciók és csoportok",
+        "DESCRIPTION": "Egy opciót az ids-option disabled tulajdonságával, egy csoport összes elemét az ids-option-group disabled értékével tilthatod le.",
+        "CONTENT": {
+          "DISABLED_OPTION": "Letiltott opció",
+          "DISABLED_OPTION_HINT": "A macska nem választható; a többi szárazföldi állat elérhető.",
+          "DISABLED_GROUP": "Letiltott csoport",
+          "DISABLED_GROUP_HINT": "A szárazföldi csoport le van tiltva; a vízi opciók továbbra is választhatók."
+        }
+      },
+      "MULTISELECT": {
+        "TITLE": "Opciók multiselectben",
+        "DESCRIPTION": "Ha a szülő select multiSelect módban van, minden ids-option pszeudo-jelölőnégyzetet kap, kijelöléskor pedig pipa ikont.",
+        "CONTENT": {
+          "HINT": "A kijelölt opciók jelölőnégyzetet mutatnak a panelben, chipet a triggerben."
+        }
+      }
+    },
     "ICON": {
       "VARIANTS": {
         "TITLE": "Icon változatai",

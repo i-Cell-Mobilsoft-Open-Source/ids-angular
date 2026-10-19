@@ -6,33 +6,7 @@
       (resetted)="_messageDemoService.reset();"
     >
       <div component class="message-grid">
-
-        @if (_messageDemoService.helperModel.isError) {
-          <ids-error-message>
-            {{ _messageDemoService.helperModel.message }}
-            @if (_messageDemoService.helperModel.hasSuffix) {
-              <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
-            }
-          </ids-error-message>
-        }
-
-        @if (_messageDemoService.helperModel.isSuccess) {
-          <ids-success-message >
-            {{ _messageDemoService.helperModel.message }}
-            @if (_messageDemoService.helperModel.hasSuffix) {
-              <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
-            }
-          </ids-success-message>
-        }
-
-        @if (!_messageDemoService.helperModel.isError && !_messageDemoService.helperModel.isSuccess) {
-          <ids-hint-message>
-            {{ _messageDemoService.helperModel.message }}
-            @if (_messageDemoService.helperModel.hasSuffix) {
-              <span idsMessageSuffix>{{ _messageDemoService.helperModel.suffix }}</span>
-            }
-          </ids-hint-message>
-        }
+        <app-message-demo-tryout />
       </div>
     </app-tryout>
   </div>
@@ -66,3 +40,9 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
+
+<div examples class="flex flex-col gap-6 w-full pt-6 pb-2">
+  @for (example of messageExamples; track example.id) {
+    <ids-example-viewer [example]="example" />
+  }
+</div>

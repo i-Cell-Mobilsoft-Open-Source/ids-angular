@@ -1,0 +1,26 @@
+{
+  "iconLeading": {
+    "description": {
+      "en": "Content projected before the side nav item label (marked with the icon-leading attribute).",
+      "hu": "A menüpont felirata elé beillesztett tartalom (icon-leading attribútummal jelölve)."
+    }
+  },
+  "iconTrailing": {
+    "description": {
+      "en": "Content projected after the side nav item label (marked with the icon-trailing attribute).",
+      "hu": "A menüpont felirata után beillesztett tartalom (icon-trailing attribútummal jelölve)."
+    }
+  },
+  "items": {
+    "description": {
+      "en": "Nested side nav items projected into the expandable submenu.",
+      "hu": "A lenyitható almenübe beillesztett, egymásba ágyazott menüpontok."
+    }
+  },
+  "template": {
+    "description": {
+      "en": "Custom submenu template. Add the #idsSideNavItemChildren reference to the ng-template so its content is rendered in the expandable submenu.",
+      "hu": "Egyedi almenüsablon. Az ng-template elemen add meg a #idsSideNavItemChildren referenciát, hogy a tartalma megjelenjen a lenyitható almenüben."
+    }
+  }
+}

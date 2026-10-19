@@ -21,6 +21,7 @@ import { TranslateService } from '@ngx-translate/core';
 const BUTTON_DOCS_PATH = 'button/button.component.docs.json';
 const BUTTON_GROUP_DOCS_PATH = 'button/button-group.component.docs.json';
 const BUTTON_SLOTS_DOCS_PATH = 'button/button.component.slots.docs.json';
+const BUTTON_GROUP_SLOTS_DOCS_PATH = 'button/button-group.component.slots.docs.json';
 
 const defaultConfig = IDS_BUTTON_DEFAULT_CONFIG_FACTORY();
 const defaultGroupConfig = IDS_BUTTON_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -176,11 +177,29 @@ export class ButtonDemoService {
     },
   ];
 
+  public readonly groupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      selector: 'button[idsButton], button[idsIconButton]',
+      description: this._widgetDocs.getDescription(
+        BUTTON_GROUP_SLOTS_DOCS_PATH,
+        'content',
+        'Buttons projected into the group (idsButton and idsIconButton elements).',
+      ),
+    },
+  ];
+
   public getSlotConfig(): DemoSlotConfig[] {
-    return [this.slotControlConfig];
+    return [
+      this.slotControlConfig,
+      this.groupSlotControlConfig,
+    ];
   }
 
   public getSlotTitles(): string[] {
-    return ['Button'];
+    return [
+      'Button',
+      'Button group',
+    ];
   }
 }

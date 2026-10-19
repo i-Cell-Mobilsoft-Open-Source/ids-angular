@@ -3,6 +3,7 @@ import { WidgetDocsService } from '../../services/widget-docs.service';
 import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -21,6 +22,8 @@ const CARD_BODY_DOCS_PATH = 'card/card-body.directive.docs.json';
 const CARD_HEADER_DOCS_PATH = 'card/card-header.component.docs.json';
 const CARD_DOCS_PATH = 'card/card.component.docs.json';
 const CARD_MEDIA_DOCS_PATH = 'card/card-media.directive.docs.json';
+const CARD_HEADER_SLOTS_DOCS_PATH = 'card/card-header.component.slots.docs.json';
+const CARD_SLOTS_DOCS_PATH = 'card/card.component.slots.docs.json';
 
 const defaultConfig = IDS_CARD_DEFAULT_CONFIG_FACTORY();
 
@@ -192,6 +195,60 @@ export class CardDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CARD', 'API.PROPERTY_GROUP.FOOTER'),
         config: this.footerPropControlConfig,
       },
+    ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        CARD_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the card.',
+      ),
+    },
+    {
+      name: 'footer',
+      selector: 'ids-card-footer,footer[idsCardFooter]',
+      description: this._widgetDocs.getDescription(
+        CARD_SLOTS_DOCS_PATH,
+        'footer',
+        'Content projected into the card footer area.',
+      ),
+    },
+  ];
+
+  public readonly headerSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'headline',
+      selector: 'ids-card-title, [idsCardTitle], ids-card-subtitle, [idsCardSubtitle]',
+      description: this._widgetDocs.getDescription(
+        CARD_HEADER_SLOTS_DOCS_PATH,
+        'headline',
+        'Projected title and subtitle content rendered in the card header headline area.',
+      ),
+    },
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        CARD_HEADER_SLOTS_DOCS_PATH,
+        'content',
+        'Additional content projected into the card header.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [
+      this.slotControlConfig,
+      this.headerSlotControlConfig,
+    ];
+  }
+
+  public getSlotTitles(): string[] {
+    return [
+      'Card',
+      'Card header',
     ];
   }
 }

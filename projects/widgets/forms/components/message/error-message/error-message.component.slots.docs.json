@@ -1,0 +1,8 @@
+{
+  "errorDefinitions": {
+    "description": {
+      "en": "Custom validation messages mapped by the code attribute. Define messages in descending priority order.",
+      "hu": "A code attribútummal hibakódhoz rendelt egyedi validációs üzenetek, csökkenő prioritási sorrendben megadva."
+    }
+  }
+}

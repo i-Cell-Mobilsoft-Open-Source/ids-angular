@@ -11,6 +11,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsFormFieldVariant, IdsFormFieldVariantType, IDS_FIELDSET_DEFAULT_CONFIG_FACTORY } from '@i-cell/ids-angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
+const FIELDSET_ROW_SLOTS_DOCS_PATH = 'forms/components/fieldset/fieldset-row/fieldset-row.component.slots.docs.json';
 const FIELDSET_DOCS_PATH = 'forms/components/fieldset/fieldset.component.docs.json';
 const FIELDSET_SLOTS_DOCS_PATH = 'forms/components/fieldset/fieldset.component.slots.docs.json';
 
@@ -86,7 +87,7 @@ export class FieldsetDemoService {
   public readonly slotControlConfig: DemoSlotConfig = [
     {
       name: 'idsFieldsetMessage',
-      selector: '[idsFieldsetMessage]',
+      selector: 'ids-hint-message[idsFieldsetMessage]',
       description: this._widgetDocs.getDescription(
         FIELDSET_SLOTS_DOCS_PATH,
         'idsFieldsetMessage',
@@ -104,11 +105,28 @@ export class FieldsetDemoService {
     },
   ];
 
+  public readonly rowSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        FIELDSET_ROW_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the fieldset row, typically form fields.',
+      ),
+    },
+  ];
+
   public getSlotConfig(): DemoSlotConfig[] {
-    return [this.slotControlConfig];
+    return [
+      this.slotControlConfig,
+      this.rowSlotControlConfig,
+    ];
   }
 
   public getSlotTitles(): string[] {
-    return ['Fieldset'];
+    return [
+      'Fieldset',
+      'Fieldset row',
+    ];
   }
 }

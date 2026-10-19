@@ -1,0 +1,14 @@
+{
+  "headline": {
+    "description": {
+      "en": "Projected title and subtitle content rendered in the card header headline area.",
+      "hu": "A kártya fejlécének címterületén megjelenő cím és alcím."
+    }
+  },
+  "content": {
+    "description": {
+      "en": "Additional content projected into the card header.",
+      "hu": "A kártya fejlécébe beillesztett további tartalom."
+    }
+  }
+}

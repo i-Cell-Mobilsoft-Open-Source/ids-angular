@@ -1,0 +1,14 @@
+{
+  "iconLeading": {
+    "description": {
+      "en": "Content projected before the side nav title label (marked with the icon-leading attribute).",
+      "hu": "Az oldalsó navigáció címének felirata elé beillesztett tartalom (icon-leading attribútummal jelölve)."
+    }
+  },
+  "iconTrailing": {
+    "description": {
+      "en": "Content projected after the side nav title label (marked with the icon-trailing attribute).",
+      "hu": "Az oldalsó navigáció címének felirata után beillesztett tartalom (icon-trailing attribútummal jelölve)."
+    }
+  }
+}

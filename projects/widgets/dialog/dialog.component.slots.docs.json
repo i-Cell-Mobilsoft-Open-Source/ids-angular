@@ -10,5 +10,11 @@
       "en": "Content projected into the footer of the dialog (marked with the idsDialogActions attribute), typically action buttons.",
       "hu": "A párbeszédablak láblécébe beillesztett tartalom (idsDialogActions attribútummal megjelölve), jellemzően műveleti gombok."
     }
+  },
+  "idsDialogHeader": {
+    "description": {
+      "en": "Custom header template rendered instead of the default dialog header.",
+      "hu": "Az alapértelmezett párbeszédablak-fejléc helyett megjelenő egyedi fejlécsablon."
+    }
   }
 }

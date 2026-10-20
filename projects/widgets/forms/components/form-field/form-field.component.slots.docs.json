@@ -43,20 +43,20 @@
   },
   "errorMessage": {
     "description": {
-      "en": "Projected <ids-error-message> element, shown in the subscript area when the field is in an error state.",
-      "hu": "Beillesztett <ids-error-message> elem, amely hibaállapot esetén jelenik meg a mező alatti területen."
+      "en": "Error message shown between the field and its hints when the field is in an error state.",
+      "hu": "Hibaállapotban a mező és a súgóüzenetek között megjelenő hibaüzenet."
     }
   },
   "successMessage": {
     "description": {
-      "en": "Projected <ids-success-message> element, shown in the subscript area when the field is in a success state.",
-      "hu": "Beillesztett <ids-success-message> elem, amely sikeres állapot esetén jelenik meg a mező alatti területen."
+      "en": "Success message shown between the field and its hints. Error messages take precedence.",
+      "hu": "Sikeres állapotban a mező és a súgóüzenetek között megjelenő üzenet. A hibaüzenet elsőbbséget élvez."
     }
   },
   "hintMessage": {
     "description": {
-      "en": "Projected <ids-hint-message> element, shown in the subscript area by default.",
-      "hu": "Beillesztett <ids-hint-message> elem, amely alapértelmezetten a mező alatti területen jelenik meg."
+      "en": "Hint shown below the field, remaining visible below error or success messages.",
+      "hu": "A mező alatt megjelenő súgóüzenet, amely hiba vagy sikeres állapotban is látható marad az állapotüzenet alatt."
     }
   }
 }

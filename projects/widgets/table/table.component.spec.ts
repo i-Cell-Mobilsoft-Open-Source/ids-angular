@@ -128,12 +128,12 @@ it('keeps the default toggle in the last sticky-end column and opens and closes 
   toggleButton().click();
   await render();
   expect(toggleButton().getAttribute('aria-expanded')).toBe('true');
-  expect(toggleButton().textContent).toContain('chevron-up');
+  expect(toggleButton().querySelector('ids-icon')?.getAttribute('fonticon')).toBe('chevron-up');
   expect(element.querySelector('.ids-table__detail-row--expanded')?.textContent).toContain('Details for First');
   toggleButton().click();
   await render();
   expect(toggleButton().getAttribute('aria-expanded')).toBe('false');
-  expect(toggleButton().textContent).toContain('chevron-down');
+  expect(toggleButton().querySelector('ids-icon')?.getAttribute('fonticon')).toBe('chevron-down');
   expect(element.querySelector('.ids-table__detail-row--expanded')).toBeNull();
 });
 
@@ -144,7 +144,9 @@ it.each([
   host.target = target;
   await render();
   expect(element.querySelector('.ids-table__cell--master-detail-toggle')).toBeNull();
-  expect(toggleButton().closest('td, th')?.classList.contains(`cdk-column-${target}`)).toBe(true);
+  // CdkCell only matches td[cdk-cell], so identifier cells (th) have no cdk-column-* class
+  const targetCellClass = target === 'name' ? 'ids-table__cell--identifier' : `cdk-column-${target}`;
+  expect(toggleButton().closest('td, th')?.classList.contains(targetCellClass)).toBe(true);
   expect(element.querySelector('.cdk-column-permissions strong')?.textContent).toBe('Read');
   expect(element.querySelectorAll('.ids-table__button--master-detail')).toHaveLength(1);
   toggleButton().click();

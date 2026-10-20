@@ -14,6 +14,8 @@ describe('IdsPaginatorComponent', () => {
 
     fixture = TestBed.createComponent(IdsPaginatorComponent);
     component = fixture.componentInstance;
+    const length = 100;
+    fixture.componentRef.setInput('length', length);
     fixture.detectChanges();
   });
 

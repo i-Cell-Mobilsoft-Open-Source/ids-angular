@@ -40,6 +40,8 @@ describe('IdsDocumentScrollStrategyService', () => {
 
   afterEach(() => {
     document.body.style.overflow = originalBodyOverflow;
+    document.body.style.overflowX = '';
+    document.body.style.overflowY = '';
     document.documentElement.style.overflow = originalHtmlOverflow;
   });
 
@@ -56,7 +58,8 @@ describe('IdsDocumentScrollStrategyService', () => {
   });
 
   it('does not add a second document lock when body scrolling is already blocked', () => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.overflowY = 'hidden';
     const strategy = service.create();
 
     strategy.enable();

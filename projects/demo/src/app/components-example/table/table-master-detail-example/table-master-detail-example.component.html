@@ -1,0 +1,18 @@
+<div class="table-master-detail-actions">
+  <button idsButton type="button" (click)="table.expandAll()">{{ "TABLE.BUTTON.EXPAND_DETAILS" | translate }}</button>
+  <button idsButton type="button" variant="error" (click)="table.collapseAll()">
+    {{ "TABLE.BUTTON.COLLAPSE_DETAILS" | translate }}
+  </button>
+</div>
+<ids-table
+  #table="idsTable"
+  masterDetail
+  [columnDefs]="_columnDefs"
+  [dataSource]="_dataSource"
+  [hasDetailRow]="_hasDetailRow"
+>
+  <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+    {{ value | translate }}
+  </ng-template>
+  <span *idsCellTemplate="'detail'; let row">{{ row.description }}</span>
+</ids-table>

@@ -1462,6 +1462,80 @@
         "DESCRIPTION": "Az isTrack beállítással megjeleníthető vagy elrejthető a kör alakú track az aktív indikátor mögött."
       }
     },
+    "TABLE": {
+      "COMMON": {
+        "COL_NAME": "Név",
+        "COL_ROLE": "Szerepkör",
+        "COL_STATUS": "Státusz",
+        "COL_SCORE": "Pontszám"
+      },
+      "BASIC": {
+        "TITLE": "Alap táblázat",
+        "DESCRIPTION": "Egyszerű táblázat oszlopdefiníciókkal és kliens oldali adatforrással. A fejlécek lokalizálásához használj headerCellRenderer-t idsCellTemplate-tel és a translate pipe-pal."
+      },
+      "APPEARANCES": {
+        "TITLE": "Táblázat megjelenések",
+        "DESCRIPTION": "Táblázatok különböző sormegjelenéssel: line-division (alapértelmezett), zebra és plain.",
+        "CONTENT": {
+          "LINE_DIVISION": "Line division",
+          "ZEBRA": "Zebra",
+          "PLAIN": "Plain"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Táblázat változatok",
+        "DESCRIPTION": "Táblázatok különböző színváltozatokkal: primary, secondary és surface (alapértelmezett).",
+        "CONTENT": {
+          "PRIMARY": "Primary",
+          "SECONDARY": "Secondary",
+          "SURFACE": "Surface"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Táblázat méretek",
+        "DESCRIPTION": "Táblázatok különböző méretekkel: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "SORTING": {
+        "TITLE": "Rendezés",
+        "DESCRIPTION": "Rendezhető oszlopok engedélyezése az enableSorting-gel. A sortChange esemény kezelésével frissíthető az adatforrás."
+      },
+      "SERVER_SIDE": {
+        "TITLE": "Szerver oldali adat paginatorral",
+        "DESCRIPTION": "Használj ServerSideDataSource-ot request factory-vel és ids-paginatorral lapozott adatok betöltéséhez. A sortChange eseményt a dataSource.sort(), az oldalváltást a dataSource.page() kezeli. A dataSource.isLoading$ feliratkozásával megjeleníthető a betöltés állapota.",
+        "LOADING": "Táblázat adatok betöltése"
+      },
+      "ROW_SELECTION": {
+        "TITLE": "Sorkiválasztás",
+        "DESCRIPTION": "Sorkiválasztás engedélyezése az enableRowSelection-nel. Az isRowSelectable kizárhat bizonyos sorokat."
+      },
+      "MASTER_DETAIL": {
+        "TITLE": "Master detail",
+        "DESCRIPTION": "Sorok kibontása további tartalommal a masterDetail, hasDetailRow és egy detail cell sablon segítségével."
+      },
+      "CELL_TEMPLATE": {
+        "TITLE": "Cella sablon",
+        "DESCRIPTION": "Egyedi cellamegjelenítés idsCellTemplate-tel. A cellRenderer értékének egyeznie kell a sablon nevével."
+      },
+      "CUSTOM_CELL_TEMPLATES": {
+        "TITLE": "Fejléc és cella sablonok",
+        "DESCRIPTION": "A headerCellRenderer és cellRenderer beállításokkal, illeszkedő idsCellTemplate definíciókkal egyszerre szabhatod testre a fejléc- és adatsor-cellákat."
+      },
+      "WITH_BORDER": {
+        "TITLE": "Kerettel",
+        "DESCRIPTION": "Külső keret hozzáadása a táblázathoz a withBorder beállítással."
+      },
+      "FIXED_HEADER": {
+        "TITLE": "Rögzített fejléc",
+        "DESCRIPTION": "A fejléc görgetés közbeni rögzítéséhez kapcsold be a fixedHeader beállítást, és helyezd a táblázatot egy korlátozott magasságú, overflow: auto konténerbe."
+      },
+      "EMPTY_STATE": {
+        "TITLE": "Üres állapot",
+        "DESCRIPTION": "Üres dataSource esetén üzenet jelenik meg. Az idsNoRowsToShow attribútummal testreszabható a megjelenő szöveg.",
+        "CONTENT": {
+          "NO_ROWS": "Nincs megjeleníthető felhasználó."
+        }
+      }
+    },
     "PAGINATOR": {
       "VARIANTS": {
         "TITLE": "Paginator változatai",

@@ -1466,6 +1466,80 @@
         "DESCRIPTION": "Use isTrack to show or hide the circular track behind the active indicator."
       }
     },
+    "TABLE": {
+      "COMMON": {
+        "COL_NAME": "Name",
+        "COL_ROLE": "Role",
+        "COL_STATUS": "Status",
+        "COL_SCORE": "Score"
+      },
+      "BASIC": {
+        "TITLE": "Basic table",
+        "DESCRIPTION": "A simple table with column definitions and a client-side data source array. Use headerCellRenderer with an idsCellTemplate and the translate pipe to localize column headers."
+      },
+      "APPEARANCES": {
+        "TITLE": "Table appearances",
+        "DESCRIPTION": "Tables with different row styling: line-division (default), zebra, and plain.",
+        "CONTENT": {
+          "LINE_DIVISION": "Line division",
+          "ZEBRA": "Zebra",
+          "PLAIN": "Plain"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Table variants",
+        "DESCRIPTION": "Tables with different color variants: primary, secondary, and surface (default).",
+        "CONTENT": {
+          "PRIMARY": "Primary",
+          "SECONDARY": "Secondary",
+          "SURFACE": "Surface"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Table sizes",
+        "DESCRIPTION": "Tables with different sizes: dense, compact (default), comfortable, and spacious."
+      },
+      "SORTING": {
+        "TITLE": "Sorting",
+        "DESCRIPTION": "Enable sorting on sortable columns with enableSorting. Handle sortChange to update the data source."
+      },
+      "SERVER_SIDE": {
+        "TITLE": "Server-side data with paginator",
+        "DESCRIPTION": "Use ServerSideDataSource with a request factory and ids-paginator to load paged data. Handle sortChange with dataSource.sort() and page changes with dataSource.page(). Subscribe to dataSource.isLoading$ to show a loading indicator while data is fetched.",
+        "LOADING": "Loading table data"
+      },
+      "ROW_SELECTION": {
+        "TITLE": "Row selection",
+        "DESCRIPTION": "Enable row selection with enableRowSelection. Use isRowSelectable to exclude specific rows."
+      },
+      "MASTER_DETAIL": {
+        "TITLE": "Master detail",
+        "DESCRIPTION": "Expand rows to show additional content with masterDetail, hasDetailRow, and a detail cell template."
+      },
+      "CELL_TEMPLATE": {
+        "TITLE": "Cell template",
+        "DESCRIPTION": "Customize cell rendering with idsCellTemplate. Set cellRenderer on the column definition to match the template name."
+      },
+      "CUSTOM_CELL_TEMPLATES": {
+        "TITLE": "Header and cell templates",
+        "DESCRIPTION": "Use headerCellRenderer and cellRenderer with matching idsCellTemplate definitions to customize both header and body cells in the same table."
+      },
+      "WITH_BORDER": {
+        "TITLE": "With border",
+        "DESCRIPTION": "Add an outer border around the table with withBorder."
+      },
+      "FIXED_HEADER": {
+        "TITLE": "Fixed header",
+        "DESCRIPTION": "Keep the header visible while scrolling by enabling fixedHeader and placing the table inside a container with a limited height and overflow: auto."
+      },
+      "EMPTY_STATE": {
+        "TITLE": "Empty state",
+        "DESCRIPTION": "When dataSource is empty, a message is shown. Customize it by projecting content with the idsNoRowsToShow attribute.",
+        "CONTENT": {
+          "NO_ROWS": "No users found."
+        }
+      }
+    },
     "PAGINATOR": {
       "VARIANTS": {
         "TITLE": "Paginator variants",

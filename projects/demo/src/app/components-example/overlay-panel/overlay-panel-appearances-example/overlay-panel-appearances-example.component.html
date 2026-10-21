@@ -1,0 +1,58 @@
+<div class="flex flex-col gap-ids-container-gap-8 w-full">
+  <div class="grid gap-2 px-3">
+    <span>{{ "EXAMPLES.OVERLAY_PANEL.APPEARANCES.CONTENT.FILLED" | translate }}</span>
+    <button
+      #filledOrigin="cdkOverlayOrigin"
+      type="button"
+      cdkOverlayOrigin
+      idsButton
+      appearance="outlined"
+      size="compact"
+      variant="primary"
+      (click)="filledPanel.toggle()"
+    >
+      {{ (filledPanel.open() ? "EXAMPLES.OVERLAY_PANEL.COMMON.CLOSE" : "EXAMPLES.OVERLAY_PANEL.COMMON.OPEN") | translate }}
+    </button>
+    <ids-overlay-panel #filledPanel appearance="filled" [origin]="filledOrigin">
+      <p class="min-w-48 px-4 py-3">{{ "EXAMPLES.OVERLAY_PANEL.COMMON.SAMPLE_CONTENT" | translate }}</p>
+    </ids-overlay-panel>
+  </div>
+
+  <div class="grid gap-2 px-3">
+    <span>{{ "EXAMPLES.OVERLAY_PANEL.APPEARANCES.CONTENT.ELEVATED" | translate }}</span>
+    <button
+      #elevatedOrigin="cdkOverlayOrigin"
+      type="button"
+      cdkOverlayOrigin
+      idsButton
+      appearance="outlined"
+      size="compact"
+      variant="primary"
+      (click)="elevatedPanel.toggle()"
+    >
+      {{ (elevatedPanel.open() ? "EXAMPLES.OVERLAY_PANEL.COMMON.CLOSE" : "EXAMPLES.OVERLAY_PANEL.COMMON.OPEN") | translate }}
+    </button>
+    <ids-overlay-panel #elevatedPanel appearance="elevated" [origin]="elevatedOrigin">
+      <p class="min-w-48 px-4 py-3">{{ "EXAMPLES.OVERLAY_PANEL.COMMON.SAMPLE_CONTENT" | translate }}</p>
+    </ids-overlay-panel>
+  </div>
+
+  <div class="grid gap-2 px-3">
+    <span>{{ "EXAMPLES.OVERLAY_PANEL.APPEARANCES.CONTENT.OUTLINED" | translate }}</span>
+    <button
+      #outlinedOrigin="cdkOverlayOrigin"
+      type="button"
+      cdkOverlayOrigin
+      idsButton
+      appearance="outlined"
+      size="compact"
+      variant="primary"
+      (click)="outlinedPanel.toggle()"
+    >
+      {{ (outlinedPanel.open() ? "EXAMPLES.OVERLAY_PANEL.COMMON.CLOSE" : "EXAMPLES.OVERLAY_PANEL.COMMON.OPEN") | translate }}
+    </button>
+    <ids-overlay-panel #outlinedPanel appearance="outlined" [origin]="outlinedOrigin">
+      <p class="min-w-48 px-4 py-3">{{ "EXAMPLES.OVERLAY_PANEL.COMMON.SAMPLE_CONTENT" | translate }}</p>
+    </ids-overlay-panel>
+  </div>
+</div>

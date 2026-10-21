@@ -1778,6 +1778,52 @@
         }
       }
     },
+    "OVERLAY_PANEL": {
+      "COMMON": {
+        "OPEN": "Open overlay",
+        "CLOSE": "Close overlay",
+        "SAMPLE_CONTENT": "Overlay panel content"
+      },
+      "BASIC": {
+        "TITLE": "Basic overlay panel",
+        "DESCRIPTION": "Anchor ids-overlay-panel to a cdkOverlayOrigin trigger with the origin input. Toggle open state with toggle() or bind open.",
+        "CONTENT": {
+          "BODY": "This overlay panel is connected to the button above."
+        }
+      },
+      "APPEARANCES": {
+        "TITLE": "Overlay panel appearances",
+        "DESCRIPTION": "Overlay panels with different appearances: filled (default), outlined, and elevated.",
+        "CONTENT": {
+          "FILLED": "Filled",
+          "OUTLINED": "Outlined",
+          "ELEVATED": "Elevated"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Overlay panel variants",
+        "DESCRIPTION": "Overlay panels with surface and light variants. Use a dark background for the light variant.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Overlay panel sizes",
+        "DESCRIPTION": "Overlay panels with different sizes: dense, compact (default), comfortable, and spacious."
+      },
+      "MENU": {
+        "TITLE": "Overlay panel with menu",
+        "DESCRIPTION": "Project a cdkMenu with idsMenuItem buttons inside the overlay panel for dropdown-style menus. Call closePanel (or set open to false) on a menu item click to dismiss the overlay after an action.",
+        "CONTENT": {
+          "OPEN_MENU": "Open menu",
+          "ITEM_1": "Edit",
+          "ITEM_2": "Duplicate",
+          "ITEM_3": "Delete",
+          "ITEM_CLOSE": "Done (closes overlay)"
+        }
+      }
+    },
     "MESSAGE": {
       "COMMON": {
         "HINT": "Use at least 8 characters with letters and numbers.",

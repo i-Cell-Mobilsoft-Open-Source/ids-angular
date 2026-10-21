@@ -1774,6 +1774,52 @@
         }
       }
     },
+    "OVERLAY_PANEL": {
+      "COMMON": {
+        "OPEN": "Panel megnyitása",
+        "CLOSE": "Panel bezárása",
+        "SAMPLE_CONTENT": "Overlay panel tartalom"
+      },
+      "BASIC": {
+        "TITLE": "Alap overlay panel",
+        "DESCRIPTION": "Az ids-overlay-panel a cdkOverlayOrigin triggerhez köthető az origin inputtal. Nyitás/zárás toggle()-lal vagy open kötéssel.",
+        "CONTENT": {
+          "BODY": "Ez az overlay panel a fenti gombhoz van kötve."
+        }
+      },
+      "APPEARANCES": {
+        "TITLE": "Overlay panel megjelenések",
+        "DESCRIPTION": "Overlay panelek különböző megjelenéssel: filled (alapértelmezett), outlined és elevated.",
+        "CONTENT": {
+          "FILLED": "Filled",
+          "OUTLINED": "Outlined",
+          "ELEVATED": "Elevated"
+        }
+      },
+      "VARIANTS": {
+        "TITLE": "Overlay panel változatok",
+        "DESCRIPTION": "Overlay panelek surface és light változatban. A light változathoz sötét háttér ajánlott.",
+        "CONTENT": {
+          "SURFACE": "Surface",
+          "LIGHT": "Light"
+        }
+      },
+      "SIZES": {
+        "TITLE": "Overlay panel méretek",
+        "DESCRIPTION": "Overlay panelek különböző méretekkel: dense, compact (alapértelmezett), comfortable és spacious."
+      },
+      "MENU": {
+        "TITLE": "Overlay panel menüvel",
+        "DESCRIPTION": "A panelbe cdkMenu és idsMenuItem gombok helyezhetők legördülő menühöz. Menüpont kattintásakor a panel bezárásához állítsd az open jelet false-ra (lásd a Done tételt).",
+        "CONTENT": {
+          "OPEN_MENU": "Menü megnyitása",
+          "ITEM_1": "Szerkesztés",
+          "ITEM_2": "Másolás",
+          "ITEM_3": "Törlés",
+          "ITEM_CLOSE": "Kész (bezárja a panelt)"
+        }
+      }
+    },
     "MESSAGE": {
       "COMMON": {
         "HINT": "Használj legalább 8 karaktert betűkkel és számokkal.",

@@ -1,0 +1,39 @@
+<div class="flex flex-col gap-ids-container-gap-8 w-full">
+  <div class="grid gap-2 px-3">
+    <span>{{ "EXAMPLES.OVERLAY_PANEL.VARIANTS.CONTENT.SURFACE" | translate }}</span>
+    <button
+      #surfaceOrigin="cdkOverlayOrigin"
+      type="button"
+      cdkOverlayOrigin
+      idsButton
+      appearance="outlined"
+      size="compact"
+      variant="primary"
+      (click)="surfacePanel.toggle()"
+    >
+      {{ (surfacePanel.open() ? "EXAMPLES.OVERLAY_PANEL.COMMON.CLOSE" : "EXAMPLES.OVERLAY_PANEL.COMMON.OPEN") | translate }}
+    </button>
+    <ids-overlay-panel #surfacePanel variant="surface" [origin]="surfaceOrigin">
+      <p class="min-w-48 px-4 py-3">{{ "EXAMPLES.OVERLAY_PANEL.COMMON.SAMPLE_CONTENT" | translate }}</p>
+    </ids-overlay-panel>
+  </div>
+
+  <div class="grid gap-2 rounded-lg p-3 bg-[var(--ids-color-surface-inverse,#1a1a1a)]">
+    <span class="text-white">{{ "EXAMPLES.OVERLAY_PANEL.VARIANTS.CONTENT.LIGHT" | translate }}</span>
+    <button
+      #lightOrigin="cdkOverlayOrigin"
+      type="button"
+      cdkOverlayOrigin
+      idsButton
+      appearance="outlined"
+      size="compact"
+      variant="light"
+      (click)="lightPanel.toggle()"
+    >
+      {{ (lightPanel.open() ? "EXAMPLES.OVERLAY_PANEL.COMMON.CLOSE" : "EXAMPLES.OVERLAY_PANEL.COMMON.OPEN") | translate }}
+    </button>
+    <ids-overlay-panel #lightPanel variant="light" [origin]="lightOrigin">
+      <p class="min-w-48 px-4 py-3">{{ "EXAMPLES.OVERLAY_PANEL.COMMON.SAMPLE_CONTENT" | translate }}</p>
+    </ids-overlay-panel>
+  </div>
+</div>

@@ -4,6 +4,8 @@ import { ControlTableComponent } from '../../components/control-table/control-ta
 import { DemoAndCodeComponent } from '../../components/tabs/demo-and-code/demo-and-code.component';
 import { TryoutControlComponent } from '../../components/tryout/tryout-controls.component';
 import { TryoutComponent } from '../../components/tryout/tryout.component';
+import { OVERLAY_PANEL_EXAMPLES } from '../../components-example/overlay-panel/overlay-panel-examples';
+import { IdsExampleViewerComponent } from '../../shared/ids-example-viewer/ids-example-viewer.component';
 
 import { CdkMenu } from '@angular/cdk/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -40,12 +42,15 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsMenuItemComponent,
     IdsActiveIndicatorDirective,
     CdkMenu,
+    IdsExampleViewerComponent,
 
   ],
   templateUrl: './overlay-panel-demo.component.html',
   styleUrls: ['../demo-page.scss'],
 })
 export class OverlayPanelDemoComponent {
+  public readonly overlayPanelExamples = OVERLAY_PANEL_EXAMPLES;
+
   protected _overlayPanelDemoService = inject(OverlayPanelDemoService);
 
   // eslint-disable-next-line no-magic-numbers

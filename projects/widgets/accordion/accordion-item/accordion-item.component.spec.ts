@@ -137,23 +137,25 @@ describe('IdsAccordionItemComponent opening and closing', () => {
     expect(item(0).isExpanded).toBe(true);
   });
 
-  it('should not react to the header click or the public API when disabled', async() => {
+  it('should not react to the header click or the public API when the item is disabled', async() => {
     host.firstDisabled = true;
     await render();
 
     header(0).click();
-    item(0).open();
-    item(0).toggle();
-    await render();
     expect(item(0).isExpanded).toBe(false);
+    item(0).open();
+    expect(item(0).isExpanded).toBe(false);
+    item(0).toggle();
+    expect(item(0).isExpanded).toBe(false);
+  });
 
-    item(1).close();
+  it('should not open through the public API when the accordion is disabled', async() => {
     host.accordionDisabled = true;
     await render();
-    item(1).open();
-    item(1).close();
-    await render();
-    expect(item(1).isExpanded).toBe(false);
+
+    item(0).open();
+
+    expect(item(0).isExpanded).toBe(false);
   });
 
   it('should not close an expanded item through the public API when the accordion is disabled', async() => {
@@ -161,7 +163,6 @@ describe('IdsAccordionItemComponent opening and closing', () => {
     await render();
 
     item(1).close();
-    await render();
 
     expect(item(1).isExpanded).toBe(true);
   });

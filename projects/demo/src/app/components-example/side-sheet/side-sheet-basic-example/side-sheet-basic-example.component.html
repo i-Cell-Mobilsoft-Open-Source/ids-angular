@@ -1,0 +1,27 @@
+<ids-side-sheet
+  type="inline"
+  [open]="_inlineOpen"
+  [title]="'EXAMPLES.SIDE_SHEET.BASIC.CONTENT.INLINE_TITLE' | translate"
+  (closed)="_inlineOpen = false"
+>
+  <p>{{ "EXAMPLES.SIDE_SHEET.BASIC.CONTENT.INLINE_BODY" | translate }}</p>
+</ids-side-sheet>
+
+<div class="flex flex-wrap gap-4">
+  <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="_inlineOpen = true">
+    {{ "EXAMPLES.SIDE_SHEET.BASIC.CONTENT.OPEN_INLINE" | translate }}
+  </button>
+  <button type="button" idsButton appearance="filled" size="comfortable" variant="primary" (click)="_overlayOpen = true">
+    {{ "EXAMPLES.SIDE_SHEET.BASIC.CONTENT.OPEN_OVERLAY" | translate }}
+  </button>
+</div>
+
+<ids-side-sheet
+  type="overlay"
+  [open]="_overlayOpen"
+  [isBackdrop]="true"
+  [title]="'EXAMPLES.SIDE_SHEET.BASIC.CONTENT.OVERLAY_TITLE' | translate"
+  (closed)="_overlayOpen = false"
+>
+  <p>{{ "EXAMPLES.SIDE_SHEET.BASIC.CONTENT.OVERLAY_BODY" | translate }}</p>
+</ids-side-sheet>

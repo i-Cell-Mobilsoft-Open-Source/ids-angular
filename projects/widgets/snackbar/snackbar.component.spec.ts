@@ -14,6 +14,7 @@ describe('IdsSnackbarComponent', () => {
 
     fixture = TestBed.createComponent(IdsSnackbarComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('message', 'Test message');
     fixture.detectChanges();
   });
 

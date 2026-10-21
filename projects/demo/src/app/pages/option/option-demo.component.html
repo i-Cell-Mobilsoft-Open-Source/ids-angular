@@ -38,9 +38,9 @@
                 [multiSelect]="true"
                 [(ngModel)]="_optionDemoService.multiSelectionValue"
               >
-                <ids-option-group label="Land">
+                <ids-option-group label="Land" [disabled]="_optionDemoService.multipleSelectionModel.disabled">
                   @for (option of _optionDemoService.animals.land; track $index) {
-                    <ids-option [value]="option.value" [disabled]="_optionDemoService.multipleSelectionModel.disabled">{{ option.viewValue }}</ids-option>
+                    <ids-option [value]="option.value">{{ option.viewValue }}</ids-option>
                   }
                 </ids-option-group>
                 <ids-option-group label="Aquatic">
@@ -87,3 +87,9 @@
     </app-tryout-controls>
   </div>
 </app-demo-and-code>
+
+<div examples class="flex flex-col gap-6 w-full pt-6 pb-2">
+  @for (example of optionExamples; track example.id) {
+    <ids-example-viewer [example]="example" />
+  }
+</div>

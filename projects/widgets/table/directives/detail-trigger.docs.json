@@ -1,0 +1,9 @@
+{
+  "idsTableDetailTrigger": {
+    "description": {
+      "en": "Bind the custom cell context's detail object to a native button (including button[idsChip] and button[idsIconButton]). IDS owns toggling and aria-expanded/aria-disabled. Native Enter/Space activation is preserved without extra key handlers. Supply visible button text or an aria-label for icon-only controls. Click and key events bubble to the cell/row as with the default trigger. Non-button hosts are not supported.",
+      "hu": "Az egyedi cellakontextus detail objektumát natív gombhoz kell kötni (button[idsChip] és button[idsIconButton] is használható). A nyitást és az aria-expanded/aria-disabled értékét az IDS kezeli. Az Enter/Space natív működése külön billentyűkezelő nélkül megmarad. A gomb kapjon látható szöveget, csak ikon esetén aria-labelt. A kattintás és billentyűesemények az alap triggerhez hasonlóan továbbterjednek a cellára/sorra. Nem button elem nem támogatott."
+    },
+    "type": "IdsTableDetailTrigger"
+  }
+}

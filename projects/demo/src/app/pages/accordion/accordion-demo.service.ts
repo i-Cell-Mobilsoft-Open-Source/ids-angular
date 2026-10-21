@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -15,6 +16,8 @@ import { Subject } from 'rxjs';
 
 const ACCORDION_DOCS_PATH = 'accordion/accordion.component.docs.json';
 const ACCORDION_ITEM_DOCS_PATH = 'accordion/accordion-item/accordion-item.component.docs.json';
+const ACCORDION_SLOTS_DOCS_PATH = 'accordion/accordion.component.slots.docs.json';
+const ACCORDION_ITEM_SLOTS_DOCS_PATH = 'accordion/accordion-item/accordion-item.component.slots.docs.json';
 
 const defaultConfig = IDS_ACCORDION_DEFAULT_CONFIG_FACTORY();
 
@@ -169,5 +172,40 @@ export class AccordionDemoService {
       },
     ];
   }
-}
 
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        ACCORDION_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the accordion, i.e. the projected accordion items.',
+      ),
+    },
+  ];
+
+  public readonly itemSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        ACCORDION_ITEM_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the accordion item, rendered in the expandable content area.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [
+      this.slotControlConfig,
+      this.itemSlotControlConfig,
+    ];
+  }
+
+  public getSlotTitles(): string[] {
+    return [
+      'Accordion',
+      'Accordion item',
+    ];
+  }
+}

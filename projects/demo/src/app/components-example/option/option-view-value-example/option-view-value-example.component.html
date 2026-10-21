@@ -1,0 +1,22 @@
+<ids-form-field class="w-80">
+  <ids-label>{{ "EXAMPLES.OPTION.COMMON.LABEL" | translate }}</ids-label>
+  <ids-select
+    [placeholder]="'EXAMPLES.OPTION.COMMON.PLACEHOLDER' | translate"
+    [(ngModel)]="_value"
+  >
+    <ids-option
+      value="BANANA"
+      [viewValue]="'EXAMPLES.SELECT.FRUITS.BANANA' | translate"
+    >
+      <span class="font-medium">{{ "EXAMPLES.SELECT.FRUITS.BANANA" | translate }}</span>
+      <span class="block text-sm opacity-70">{{ "EXAMPLES.OPTION.VIEW_VALUE.CONTENT.BANANA_DETAIL" | translate }}</span>
+    </ids-option>
+    <ids-option value="CHERRY" [viewValue]="'EXAMPLES.SELECT.FRUITS.CHERRY' | translate">
+      {{ "EXAMPLES.SELECT.FRUITS.CHERRY" | translate }}
+    </ids-option>
+    <ids-option value="GRAPE" [viewValue]="'EXAMPLES.SELECT.FRUITS.GRAPE' | translate">
+      {{ "EXAMPLES.SELECT.FRUITS.GRAPE" | translate }}
+    </ids-option>
+  </ids-select>
+  <ids-hint-message>{{ "EXAMPLES.OPTION.VIEW_VALUE.CONTENT.HINT" | translate }}</ids-hint-message>
+</ids-form-field>

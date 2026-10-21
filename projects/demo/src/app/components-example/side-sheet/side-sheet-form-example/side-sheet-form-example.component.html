@@ -1,0 +1,33 @@
+<ids-side-sheet
+  type="inline"
+  [open]="true"
+  [isShowHeader]="false"
+>
+  <div class="p-2">
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.SIDE_SHEET.FORM.CONTENT.FIRST_NAME" | translate }}</ids-label>
+      <input
+        idsInput
+        [placeholder]="'EXAMPLES.SIDE_SHEET.FORM.CONTENT.FIRST_NAME_PLACEHOLDER' | translate"
+        [(ngModel)]="_firstName"
+      />
+    </ids-form-field>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.SIDE_SHEET.FORM.CONTENT.LAST_NAME" | translate }}</ids-label>
+      <input
+        idsInput
+        [placeholder]="'EXAMPLES.SIDE_SHEET.FORM.CONTENT.LAST_NAME_PLACEHOLDER' | translate"
+        [(ngModel)]="_lastName"
+      />
+    </ids-form-field>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.SIDE_SHEET.FORM.CONTENT.EMAIL" | translate }}</ids-label>
+      <input
+        idsInput
+        type="email"
+        [placeholder]="'EXAMPLES.SIDE_SHEET.FORM.CONTENT.EMAIL_PLACEHOLDER' | translate"
+        [(ngModel)]="_email"
+      />
+    </ids-form-field>
+  </div>
+</ids-side-sheet>

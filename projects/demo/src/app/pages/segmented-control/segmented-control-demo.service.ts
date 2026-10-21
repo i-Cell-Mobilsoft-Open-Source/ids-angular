@@ -12,6 +12,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_SEGMENTED_CONTROL_DEFAULT_CONFIG_FACTORY, IdsSegmentedControlAppearance, IdsSegmentedControlAppearanceType, IdsSegmentedControlVariant, IdsSegmentedControlVariantType } from '@i-cell/ids-angular/segmented-control';
 import { TranslateService } from '@ngx-translate/core';
 
+const GROUP_SLOTS_DOCS_PATH = 'segmented-control/segmented-control.directive.slots.docs.json';
 const SEGMENTED_CONTROL_DOCS_PATH = 'segmented-control/segmented-control.directive.docs.json';
 const SEGMENTED_CONTROL_ITEM_DOCS_PATH = 'segmented-control/segmented-control-item.component.docs.json';
 const SEGMENTED_CONTROL_ITEM_SLOTS_DOCS_PATH = 'segmented-control/segmented-control-item.component.slots.docs.json';
@@ -289,11 +290,29 @@ export class SegmentedControlDemoService {
     },
   ];
 
+  public readonly groupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'items',
+      selector: 'ids-segmented-control-item',
+      description: this._widgetDocs.getDescription(
+        GROUP_SLOTS_DOCS_PATH,
+        'items',
+        'Direct child items managed by the segmented control.',
+      ),
+    },
+  ];
+
   public getSlotConfig(): DemoSlotConfig[] {
-    return [this.itemSlotControlConfig];
+    return [
+      this.itemSlotControlConfig,
+      this.groupSlotControlConfig,
+    ];
   }
 
   public getSlotTitles(): string[] {
-    return ['Segmented control item'];
+    return [
+      'Segmented control item',
+      'Segmented control',
+    ];
   }
 }

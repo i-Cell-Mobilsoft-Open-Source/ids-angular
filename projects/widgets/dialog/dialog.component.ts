@@ -14,7 +14,7 @@ import {
   input,
   viewChild,
 } from '@angular/core';
-import { ComponentBaseWithDefaults, IdsDetectScrollableDirective, IdsSizeType } from '@i-cell/ids-angular/core';
+import { ComponentBaseWithDefaults, IdsDetectScrollableDirective, IdsDocumentScrollStrategyService, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 
@@ -45,6 +45,7 @@ export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefau
   }
 
   protected readonly _dialog = inject(Dialog);
+  private readonly _scrollStrategy = inject(IdsDocumentScrollStrategyService);
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_DIALOG_DEFAULT_CONFIG);
   protected _dialogRef = inject<DialogRef<unknown>>(DialogRef, { optional: true });
 
@@ -88,6 +89,7 @@ export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefau
       ariaModal: true,
       restoreFocus: true,
       autoFocus: 'first-tabbable',
+      scrollStrategy: this._scrollStrategy.create(),
     });
 
     this._dialogRef.closed.subscribe(() => {
@@ -105,4 +107,3 @@ export class IdsDialogComponent extends ComponentBaseWithDefaults<IdsDialogDefau
   }
 
 }
-

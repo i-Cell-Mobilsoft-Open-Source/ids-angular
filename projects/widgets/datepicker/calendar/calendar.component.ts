@@ -7,7 +7,7 @@ import { IdsDatepickerView, IdsDatepickerViewType } from '../tokens/datepicker-v
 import { IdsYearSelectorComponent } from '../year-selector/year-selector.component';
 
 import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, linkedSignal, OnInit, output, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, linkedSignal, OnInit, output, untracked, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { clampDate, ComponentBaseWithDefaults, IdsSize, IdsSizeType, isValidDate, startOfMonth, startOfYear } from '@i-cell/ids-angular/core';
@@ -91,11 +91,21 @@ export class IdsCalendarComponent extends ComponentBaseWithDefaults<object> impl
     this._view() === IdsDatepickerView.DAY ? this._intl.switchToYearSelectorLabel : this._intl.switchToDaySelectorLabel
   ));
 
-  protected _focusedDate: Date = new Date();
+  protected _focusedDate = linkedSignal<{ min: Date | null; max: Date | null }, Date>({
+    source: () => ({
+      min: this.min(),
+      max: this.max(),
+    }),
+    computation: ({ min, max }, previous): Date => {
+      const date = previous ? previous.value : untracked(() => this.value());
+      const safeValue = isValidDate(date) ? date : new Date();
+      return clampDate(safeValue, min, max);
+    },
+    equal: (previous, current) => previous.getTime() === current.getTime(),
+  });
 
   public ngOnInit(): void {
     this._intl.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this._cdRef.markForCheck());
-    this._setFocusedDate(this.value());
   }
 
   protected _selectYear(selectedYear: Date): void {
@@ -144,7 +154,7 @@ export class IdsCalendarComponent extends ComponentBaseWithDefaults<object> impl
 
   private _setFocusedDate(date: Date | null): void {
     const safeValue = isValidDate(date) ? date : new Date();
-    this._focusedDate = clampDate(safeValue, this.min(), this.max());
+    this._focusedDate.set(clampDate(safeValue, this.min(), this.max()));
     this._cdRef.markForCheck();
   }
 }

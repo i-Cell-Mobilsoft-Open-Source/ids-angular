@@ -19,12 +19,20 @@ export class IdsNestedBlockScrollStrategy implements ScrollStrategy {
   }
 
   public enable(): void {
+    if (this._enabled) {
+      return;
+    }
+
     this._enabled = true;
     this._blockScrollStrategy.enable();
     this._lockMarkedElements();
   }
 
   public disable(): void {
+    if (!this._enabled) {
+      return;
+    }
+
     this._enabled = false;
     this._unlockElements();
     this._blockScrollStrategy.disable();

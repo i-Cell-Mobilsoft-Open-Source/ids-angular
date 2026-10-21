@@ -1,0 +1,50 @@
+<div class="flex flex-col gap-ids-container-gap-16 w-80">
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.OPTION.DISABLED.CONTENT.DISABLED_OPTION" | translate }}</span>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.OPTION.COMMON.ANIMAL_LABEL" | translate }}</ids-label>
+      <ids-select
+        [placeholder]="'EXAMPLES.OPTION.COMMON.ANIMAL_PLACEHOLDER' | translate"
+        [(ngModel)]="_disabledOptionValue"
+      >
+        @for (animal of _landAnimals; track animal.value) {
+          <ids-option
+            [value]="animal.value"
+            [viewValue]="animal.labelKey | translate"
+            [disabled]="animal.value === 'cat'"
+          >
+            {{ animal.labelKey | translate }}
+          </ids-option>
+        }
+      </ids-select>
+      <ids-hint-message>{{ "EXAMPLES.OPTION.DISABLED.CONTENT.DISABLED_OPTION_HINT" | translate }}</ids-hint-message>
+    </ids-form-field>
+  </div>
+
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.OPTION.DISABLED.CONTENT.DISABLED_GROUP" | translate }}</span>
+    <ids-form-field>
+      <ids-label>{{ "EXAMPLES.OPTION.COMMON.ANIMAL_LABEL" | translate }}</ids-label>
+      <ids-select
+        [placeholder]="'EXAMPLES.OPTION.COMMON.ANIMAL_PLACEHOLDER' | translate"
+        [(ngModel)]="_disabledGroupValue"
+      >
+        <ids-option-group [label]="'EXAMPLES.OPTION.GROUPS.CONTENT.LAND' | translate" [disabled]="true">
+          @for (animal of _landAnimals; track animal.value) {
+            <ids-option [value]="animal.value" [viewValue]="animal.labelKey | translate">
+              {{ animal.labelKey | translate }}
+            </ids-option>
+          }
+        </ids-option-group>
+        <ids-option-group [label]="'EXAMPLES.OPTION.GROUPS.CONTENT.AQUATIC' | translate">
+          @for (animal of _aquaticAnimals; track animal.value) {
+            <ids-option [value]="animal.value" [viewValue]="animal.labelKey | translate">
+              {{ animal.labelKey | translate }}
+            </ids-option>
+          }
+        </ids-option-group>
+      </ids-select>
+      <ids-hint-message>{{ "EXAMPLES.OPTION.DISABLED.CONTENT.DISABLED_GROUP_HINT" | translate }}</ids-hint-message>
+    </ids-form-field>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<ids-form-field class="w-80">
+  <ids-label>{{ "EXAMPLES.OPTION.COMMON.ANIMAL_LABEL" | translate }}</ids-label>
+  <ids-select
+    [placeholder]="'EXAMPLES.OPTION.COMMON.ANIMAL_PLACEHOLDER' | translate"
+    [(ngModel)]="_value"
+  >
+    <ids-option-group [label]="'EXAMPLES.OPTION.GROUPS.CONTENT.LAND' | translate">
+      @for (animal of _landAnimals; track animal.value) {
+        <ids-option [value]=" animal.value" [viewValue]="animal.labelKey | translate">
+          {{ animal.labelKey | translate }}
+        </ids-option>
+      }
+    </ids-option-group>
+    <ids-option-group [label]="'EXAMPLES.OPTION.GROUPS.CONTENT.AQUATIC' | translate">
+      @for (animal of _aquaticAnimals; track animal.value) {
+        <ids-option [value]="animal.value" [viewValue]="animal.labelKey | translate">
+          {{ animal.labelKey | translate }}
+        </ids-option>
+      }
+    </ids-option-group>
+  </ids-select>
+  <ids-hint-message>{{ "EXAMPLES.OPTION.GROUPS.CONTENT.HINT" | translate }}</ids-hint-message>
+</ids-form-field>

@@ -1,0 +1,8 @@
+{
+  "items": {
+    "description": {
+      "en": "Direct child items managed by the segmented control.",
+      "hu": "A segmented control által kezelt közvetlen gyermekelemek."
+    }
+  }
+}

@@ -66,10 +66,10 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
       return;
     }
 
-    if (!equalDates(min, calendar.min())) {
+    if (min?.getTime() !== calendar.min()?.getTime()) {
       this._componentRef?.setInput('min', min);
     }
-    if (!equalDates(max, calendar.max())) {
+    if (max?.getTime() !== calendar.max()?.getTime()) {
       this._componentRef?.setInput('max', max);
     }
     if (view !== calendar.view()) {
@@ -236,6 +236,11 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
 
   protected _handleBlur(): void {
     this._onTouched();
+
+    const date = getValidDateOrNull(this.parser()(this._elementRef.nativeElement.value));
+    if (date) {
+      this._setInputValue(date);
+    }
   }
 
   protected _handleKeydown(event: KeyboardEvent): void {

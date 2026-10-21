@@ -1,34 +1,51 @@
 <ng-content select="[colStart]" />
 
-@if (_cellRendererComp()) {
-  <ng-container *ngComponentOutlet="_cellRendererComp(); inputs: _cellRendererInputs()" />
+@if (detailTemplate(); as template) {
+  <ng-container *ngTemplateOutlet="template; context: _templateContext()" />
+} @else if (defaultDetailToggle()) {
+  <div class="ids-table__cell-content--with-detail-toggle">
+    @if (detailTogglePosition() === 'before') {
+      <ng-container *ngTemplateOutlet="defaultDetailToggle(); context: { $implicit: detailTrigger(), reserveSpace: true }" />
+    }
+    <div class="ids-table__detail-cell-content">
+      <ng-container *ngTemplateOutlet="cellContent" />
+    </div>
+    @if (detailTogglePosition() === 'after') {
+      <ng-container *ngTemplateOutlet="defaultDetailToggle(); context: { $implicit: detailTrigger(), reserveSpace: true }" />
+    }
+  </div>
 } @else {
-  @switch (_cellTemplateName()) {
-    @case ('strong') {
-      <strong class="ids-cell-content ids-cell-content__strong">{{ _cellValue() }}</strong>
-    }
-    @case ('numeric') {
-      <div class="ids-cell-content ids-cell-content__numeric">{{ _numericCellValue() }}</div>
-    }
-    @case ('icon') {
-      <ids-icon
-        class="ids-cell-content ids-cell-content__icon"
-        [fontIcon]="_stringCellValue()"
-        [aria-hidden]="true"
-      />
-    }
-    <!-- TODO: label-description template (needs further discussion) -->
-    @default {
-      @let template = _cellTemplate();
-      @if (template) {
-        <!-- external template ref -->
-        <ng-container *ngTemplateOutlet="template; context: { $implicit: rowData(), colDef: colDef(), cellValue: _cellValue() }" />
-      } @else {
-        <!-- default basic cell content -->
-        <div class="ids-cell-content ids-cell-content__default">{{ _cellValue() }}</div>
-      }
-    }
-  }
+  <ng-container *ngTemplateOutlet="cellContent" />
 }
 
 <ng-content select="[colEnd]" />
+
+<ng-template #cellContent>
+  @if (_cellRendererComp()) {
+    <ng-container *ngComponentOutlet="_cellRendererComp(); inputs: _cellRendererInputs()" />
+  } @else {
+    @switch (_cellTemplateName()) {
+      @case ('strong') {
+        <strong class="ids-cell-content ids-cell-content__strong">{{ _cellValue() }}</strong>
+      }
+      @case ('numeric') {
+        <div class="ids-cell-content ids-cell-content__numeric">{{ _numericCellValue() }}</div>
+      }
+      @case ('icon') {
+        <ids-icon
+          class="ids-cell-content ids-cell-content__icon"
+          [fontIcon]="_stringCellValue()"
+          [aria-hidden]="true"
+        />
+      }
+      @default {
+        @let template = _cellTemplate();
+        @if (template) {
+          <ng-container *ngTemplateOutlet="template; context: _templateContext()" />
+        } @else {
+          <div class="ids-cell-content ids-cell-content__default">{{ _cellValue() }}</div>
+        }
+      }
+    }
+  }
+</ng-template>

@@ -12,6 +12,8 @@ const jestConfig: Config = {
     '!core/types/*',
     '!**/*.type.ts',
     '!**/*.model.ts',
+    '!**/*.stories.ts',
+    '!**/.storybook/**',
   ],
   coverageThreshold: {
     global: {

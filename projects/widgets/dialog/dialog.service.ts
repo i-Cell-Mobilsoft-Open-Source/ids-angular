@@ -2,11 +2,13 @@ import { IdsCustomDialogBase } from './custom-dialog-base';
 
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Injectable, Signal, StaticProvider, Type, afterNextRender, inject } from '@angular/core';
+import { IdsDocumentScrollStrategyService } from '@i-cell/ids-angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class IdsDialogService {
   private readonly _dialog = inject(Dialog);
+  private readonly _scrollStrategy = inject(IdsDocumentScrollStrategyService);
 
   public open<C extends IdsCustomDialogBase<R>, R = unknown>(
     component: Type<C>,
@@ -31,6 +33,7 @@ export class IdsDialogService {
         ? 'ids-dialog-transparent-backdrop'
         : 'ids-dialog-backdrop',
       providers: options?.providers,
+      scrollStrategy: this._scrollStrategy.create(),
     });
 
     if (options?.inputs && dialogRef.componentRef) {

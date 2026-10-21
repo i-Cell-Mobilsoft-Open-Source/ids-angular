@@ -313,7 +313,7 @@ export class NotificationDemoService {
     },
     {
       name: 'actionButton',
-      selector: '[idsNotificationActionButton]',
+      selector: 'button[idsNotificationActionButton], a[idsNotificationActionButton]',
       description: this._widgetDocs.getDescription(
         NOTIFICATION_SLOTS_DOCS_PATH,
         'actionButton',

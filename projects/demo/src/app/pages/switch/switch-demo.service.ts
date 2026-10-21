@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -13,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const SWITCH_DOCS_PATH = 'switch/switch.component.docs.json';
 const SWITCH_GROUP_DOCS_PATH = 'switch/switch-group.component.docs.json';
+const SWITCH_GROUP_SLOTS_DOCS_PATH = 'switch/switch-group.component.slots.docs.json';
 
 const defaultConfig = IDS_SWITCH_DEFAULT_CONFIG_FACTORY();
 
@@ -253,5 +255,25 @@ export class SwitchDemoService {
         config: this.groupInputControlConfig,
       },
     ];
+  }
+
+  public readonly groupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      selector: 'ids-switch',
+      description: this._widgetDocs.getDescription(
+        SWITCH_GROUP_SLOTS_DOCS_PATH,
+        'content',
+        'Switch elements projected into the switch group.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [this.groupSlotControlConfig];
+  }
+
+  public getSlotTitles(): string[] {
+    return ['Switch group'];
   }
 }

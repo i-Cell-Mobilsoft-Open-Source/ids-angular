@@ -11,6 +11,7 @@ import { IdsSize, IdsSizeType } from '@i-cell/ids-angular/core';
 import { IDS_MESSAGE_DEFAULT_CONFIG_FACTORY, IdsFormFieldVariantType, IdsMessageVariant } from '@i-cell/ids-angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
+const ERROR_MESSAGE_SLOTS_DOCS_PATH = 'forms/components/message/error-message/error-message.component.slots.docs.json';
 const ERROR_DEFINITION_DOCS_PATH = 'forms/components/message/error-message/error-definition.directive.docs.json';
 const MESSAGE_DOCS_PATH = 'forms/directives/message.directive.docs.json';
 const MESSAGE_SLOTS_DOCS_PATH = 'forms/directives/message.directive.slots.docs.json';
@@ -170,11 +171,29 @@ export class MessageDemoService {
     },
   ];
 
+  public readonly errorSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'errorDefinitions',
+      selector: 'ids-error-def',
+      description: this._widgetDocs.getDescription(
+        ERROR_MESSAGE_SLOTS_DOCS_PATH,
+        'errorDefinitions',
+        'Custom validation messages mapped by the code attribute. Define messages in descending priority order.',
+      ),
+    },
+  ];
+
   public getSlotConfig(): DemoSlotConfig[] {
-    return [this.slotControlConfig];
+    return [
+      this.slotControlConfig,
+      this.errorSlotControlConfig,
+    ];
   }
 
   public getSlotTitles(): string[] {
-    return ['Message'];
+    return [
+      'Message',
+      'Error message',
+    ];
   }
 }

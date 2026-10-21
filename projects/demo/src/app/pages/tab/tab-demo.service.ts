@@ -15,6 +15,7 @@ import { IDS_TAB_GROUP_DEFAULT_CONFIG_FACTORY, IdsTabGroupAlignment, IdsTabGroup
 import { IdsTabActivationMode, IdsTabActivationModeType } from '@i-cell/ids-angular/tab/types/tab-activation-mode.type';
 import { TranslateService } from '@ngx-translate/core';
 
+const TAB_GROUP_SLOTS_DOCS_PATH = 'tab/tab-group.component.slots.docs.json';
 const TAB_GROUP_DOCS_PATH = 'tab/tab-group.component.docs.json';
 const TAB_DOCS_PATH = 'tab/tab.component.docs.json';
 const TAB_SLOTS_DOCS_PATH = 'tab/tab.component.slots.docs.json';
@@ -360,12 +361,30 @@ export class TabDemoService {
     return [this.methodControlConfig];
   }
 
+  public readonly groupSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'items',
+      selector: 'ids-tab',
+      description: this._widgetDocs.getDescription(
+        TAB_GROUP_SLOTS_DOCS_PATH,
+        'items',
+        'Direct child tabs used to render the tab headers and the active tab panel.',
+      ),
+    },
+  ];
+
   public getSlotConfig(): DemoSlotConfig[] {
-    return [this.slotControlConfig];
+    return [
+      this.slotControlConfig,
+      this.groupSlotControlConfig,
+    ];
   }
 
   public getSlotTitles(): string[] {
-    return ['Tab'];
+    return [
+      'Tab',
+      'Tab group',
+    ];
   }
 
   public getApiConfig(): DemoApiControlConfig[] {

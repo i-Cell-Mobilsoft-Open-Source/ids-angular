@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemoApiControlConfig } from '@demo-types/demo-api-control.type';
 import { DemoControl, DemoControlConfig } from '@demo-types/demo-control.type';
 import { DemoMethodConfig } from '@demo-types/demo-method.type';
+import { DemoSlotConfig } from '@demo-types/demo-slot.type';
 import { convertEnumToStringArray } from '@demo-utils/convert-enum-to-string-array';
 import { getDefaultFromDemoConfig } from '@demo-utils/get-defaults-from-demo-config';
 import { getDemoApiTitle } from '@demo-utils/get-demo-api-title';
@@ -14,6 +15,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 const OVERLAY_PANEL_DOCS_PATH = 'overlay-panel/overlay-panel.component.docs.json';
 const MENU_ITEM_DOCS_PATH = 'menu/menu-item/menu-item.component.docs.json';
+const OVERLAY_PANEL_SLOTS_DOCS_PATH = 'overlay-panel/overlay-panel.component.slots.docs.json';
+const MENU_ITEM_SLOTS_DOCS_PATH = 'menu/menu-item/menu-item.component.slots.docs.json';
 
 const overlayPanelDefaultConfig = IDS_OVERLAY_PANEL_DEFAULT_CONFIG_FACTORY();
 const menuItemDefaultConfig = IDS_MENU_ITEM_DEFAULT_CONFIG_FACTORY();
@@ -232,6 +235,52 @@ export class OverlayPanelDemoService {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.MENU_ITEM', 'API.PROPERTY_GROUP.DEFAULT'),
         config: this.menuItemInputControlConfig,
       },
+    ];
+  }
+
+  public readonly slotControlConfig: DemoSlotConfig = [
+    {
+      name: 'content',
+      description: this._widgetDocs.getDescription(
+        OVERLAY_PANEL_SLOTS_DOCS_PATH,
+        'content',
+        'Default content of the overlay panel.',
+      ),
+    },
+  ];
+
+  public readonly menuItemSlotControlConfig: DemoSlotConfig = [
+    {
+      name: 'iconLeading',
+      selector: 'ids-icon[icon-leading]',
+      description: this._widgetDocs.getDescription(
+        MENU_ITEM_SLOTS_DOCS_PATH,
+        'iconLeading',
+        'Content projected before the menu item label (marked with the icon-leading attribute), typically an ids-icon.',
+      ),
+    },
+    {
+      name: 'iconTrailing',
+      selector: 'ids-icon[icon-trailing]',
+      description: this._widgetDocs.getDescription(
+        MENU_ITEM_SLOTS_DOCS_PATH,
+        'iconTrailing',
+        'Content projected after the menu item label (marked with the icon-trailing attribute), typically an ids-icon.',
+      ),
+    },
+  ];
+
+  public getSlotConfig(): DemoSlotConfig[] {
+    return [
+      this.slotControlConfig,
+      this.menuItemSlotControlConfig,
+    ];
+  }
+
+  public getSlotTitles(): string[] {
+    return [
+      'Overlay panel',
+      'Menu item',
     ];
   }
 }

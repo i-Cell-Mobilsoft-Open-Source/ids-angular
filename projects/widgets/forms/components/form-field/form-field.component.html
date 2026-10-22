@@ -39,20 +39,18 @@
 </div>
 
 <div class="ids-form-field__subscript-wrapper">
-  @let messages = _displayedMessages();
-  @if (messages) {
+  @let stateMessage = _displayedStateMessage();
+  @if (stateMessage || _hasHintMessages()) {
     <div class="ids-form-field__message-container">
-      @switch (messages) {
+      @switch (stateMessage) {
         @case ("error") {
           <ng-content select="ids-error-message" />
         }
         @case ("success") {
           <ng-content select="ids-success-message" />
         }
-        @case ("hint") {
-          <ng-content select="ids-hint-message" />
-        }
       }
+      <ng-content select="ids-hint-message" />
     </div>
   }
 </div>

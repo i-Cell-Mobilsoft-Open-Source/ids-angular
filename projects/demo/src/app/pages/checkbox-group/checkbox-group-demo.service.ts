@@ -49,9 +49,9 @@ export class CheckboxGroupDemoService {
     ),
     cheeses: new FormGroup(
       {
-        cheddar: new FormControl(false, []),
-        mozzarella: new FormControl(false, []),
-        parmesan: new FormControl(false, []),
+        cheddar: new FormControl({ value: false, disabled: true }, []),
+        mozzarella: new FormControl({ value: false, disabled: true }, []),
+        parmesan: new FormControl({ value: false, disabled: true }, []),
       },
       { validators: this._minimumCountSelectedValidator(1) },
     ),

@@ -74,15 +74,14 @@ export class IdsFormFieldComponent extends ComponentBaseWithDefaults<IdsFormFiel
   ]),
   );
 
-  protected _displayedMessages = computed<'error' | 'success' | 'hint' | undefined>(() => {
+  protected _hasHintMessages = computed(() => this._hintMessages().length > 0);
+
+  protected _displayedStateMessage = computed<'error' | 'success' | undefined>(() => {
     if (this._errorMessages().length > 0 && this._hasErrorState()) {
       return 'error';
     }
     if (this._successMessages().length > 0 && this._hasSuccessState()) {
       return 'success';
-    }
-    if (this._hintMessages().length > 0) {
-      return 'hint';
     }
     return undefined;
   });

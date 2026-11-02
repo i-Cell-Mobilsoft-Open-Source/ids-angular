@@ -35,6 +35,7 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BUTTON_DEFAULT_CONFIG);
 
   public appearance = input<IdsButtonAppearanceType>(this._defaultConfig.appearance);
+  public active = input(false, { transform: coerceBooleanAttribute });
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsButtonVariantType>(this._defaultConfig.variant);
   public disabled = input(false, { transform: (value: boolean | string) => coerceBooleanAttribute(value) });
@@ -72,6 +73,7 @@ export class IdsButtonComponent extends ComponentBaseWithDefaults<IdsButtonDefau
     this._parentOrSelfSize(),
     this._parentOrSelfVariant(),
     this.disabled() ? 'disabled' : null,
+    this.active() && !this.disabled() ? 'active' : null,
   ]));
 
   private _disableLink(link: HTMLAnchorElement): void {

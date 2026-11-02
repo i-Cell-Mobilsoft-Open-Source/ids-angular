@@ -1,4 +1,11 @@
 {
+  "active": {
+    "description": {
+      "en": "Persistent active appearance using pressed colors, independent of pointer press. Ignored while disabled. Does not toggle automatically or set aria-pressed.",
+      "hu": "Tartós aktív megjelenés a lenyomott állapot színeivel, a tényleges lenyomástól függetlenül. Letiltott állapotban nem érvényesül. Nem kapcsolódik automatikusan, és nem állít aria-pressed attribútumot."
+    },
+    "type": "boolean"
+  },
   "appearance": {
     "description": {
       "en": "Button appearance.",

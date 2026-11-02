@@ -31,6 +31,7 @@ export type ButtonInputControls = {
   size: IdsSizeType;
   variant: IdsButtonVariantType;
   disabled: boolean;
+  active: boolean;
 };
 
 export type ButtonHelperControls = {
@@ -70,6 +71,16 @@ export class ButtonDemoService {
       default: defaultConfig.variant,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsButtonVariant),
+    },
+    active: {
+      description: this._widgetDocs.getDescription(
+        BUTTON_DOCS_PATH,
+        'active',
+        'Persistent active appearance using pressed colors, independent of pointer press.',
+      ),
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
     },
     disabled: {
       description: this._widgetDocs.getDescription(BUTTON_DOCS_PATH, 'disabled', 'Whether the button is disabled or not.'),

@@ -17,6 +17,7 @@
                 [size]="_buttonDemoService.model.size"
                 [variant]="_buttonDemoService.model.variant"
                 [disabled]="_buttonDemoService.model.disabled"
+                [active]="_buttonDemoService.model.active"
               >
                 {{ _buttonDemoService.helperModel.text }}
               </a>
@@ -28,6 +29,7 @@
                 [size]="_buttonDemoService.model.size"
                 [variant]="_buttonDemoService.model.variant"
                 [disabled]="_buttonDemoService.model.disabled"
+                [active]="_buttonDemoService.model.active"
                 (click)="
                   _buttonDemoService.onClick(
                     _buttonDemoService.model.appearance + '-' + _buttonDemoService.model.variant + '-' + _buttonDemoService.model.size

@@ -1,9 +1,12 @@
-<label class="ids-form-field__label" [for]="_inputId()">
-  @if (hasRequiredValidator()) {
-    <span class="ids-form-field__required-marker"></span>
-  }
-  <ng-content select="ids-label" />
-</label>
+<div class="ids-form-field__label-wrapper">
+  <label class="ids-form-field__label" [for]="_inputId()">
+    @if (hasRequiredValidator()) {
+      <span class="ids-form-field__required-marker"></span>
+    }
+    <ng-content select="ids-label" />
+  </label>
+  <ng-content select="[idsLabelSuffix]" />
+</div>
 
 <div #fieldWrapper class="ids-form-field__field-wrapper">
   <div class="ids-form-field__field-wrapper__container" (click)="containerClick($event)">

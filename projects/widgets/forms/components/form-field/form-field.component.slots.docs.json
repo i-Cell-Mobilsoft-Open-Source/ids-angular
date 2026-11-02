@@ -58,5 +58,11 @@
       "en": "Hint shown below the field, remaining visible below error or success messages.",
       "hu": "A mező alatt megjelenő súgóüzenet, amely hiba vagy sikeres állapotban is látható marad az állapotüzenet alatt."
     }
+  },
+  "idsLabelSuffix": {
+    "description": {
+      "en": "An element projected to the right of the label, outside the native label element, e.g. a button with a custom tooltip. Mark the element with the static idsLabelSuffix attribute; no directive import is needed. Independent of hint, error and success messages. Wrap multiple items in a single marked element.",
+      "hu": "A felirat jobb oldalán, a natív label elemen kívül megjelenő elem, például saját tooltipet nyitó gomb. Az elemet statikus idsLabelSuffix attribútummal jelöld; direktíva importálása nem szükséges. A hint-, hiba- és sikerüzenetektől független. Több elemet egyetlen megjelölt elembe csomagolj."
+    }
   }
 }

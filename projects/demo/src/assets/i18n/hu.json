@@ -73,6 +73,11 @@
     }
   },
   "FORM_FIELD": {
+    "LABEL_ACTION": {
+      "TITLE": "Label slot",
+      "DESCRIPTION": "",
+      "HELP": "Segítség a mező kitöltéséhez"
+    },
     "LABEL": {
       "NAME": "Név",
       "DATE_TEMPLATE": "Dátum választó (template driven)",

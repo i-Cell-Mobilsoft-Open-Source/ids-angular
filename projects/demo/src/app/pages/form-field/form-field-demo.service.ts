@@ -209,6 +209,15 @@ export class FormFieldDemoService {
       ),
     },
     {
+      name: 'idsLabelSuffix',
+      selector: '[idsLabelSuffix]',
+      description: this._widgetDocs.getDescription(
+        FORM_FIELD_SLOTS_DOCS_PATH,
+        'idsLabelSuffix',
+        'Content projected to the right of the label, e.g. a button with a custom tooltip, independent of validation messages.',
+      ),
+    },
+    {
       name: 'idsLeadingIcon',
       selector: 'ids-icon[idsLeadingIcon]',
       description: this._widgetDocs.getDescription(

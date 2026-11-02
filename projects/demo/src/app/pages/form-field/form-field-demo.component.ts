@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdsErrorMessageComponent, IdsFormFieldComponent, IdsHintMessageComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuffixDirective, IdsFormFieldActionDirective, IdsErrorDefinitionDirective, IdsSuccessMessageComponent } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -22,6 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsPrefixDirective,
     IdsSuffixDirective,
     IdsFormFieldActionDirective,
+
+    IdsTooltipDirective,
     IdsIconButtonComponent,
     IdsIconComponent,
     IdsHintMessageComponent,

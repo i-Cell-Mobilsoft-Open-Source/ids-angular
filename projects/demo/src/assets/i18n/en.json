@@ -73,6 +73,11 @@
     }
   },
   "FORM_FIELD": {
+    "LABEL_ACTION": {
+      "TITLE": "Hint tooltip beside the label",
+      "DESCRIPTION": "",
+      "HELP": "Help with this field"
+    },
     "LABEL": {
       "NAME": "Name",
       "DATE_TEMPLATE": "Date picker (template driven)",

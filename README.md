@@ -26,8 +26,7 @@ Component styling continues to come from the current `@i-cell/ids-styles` depend
 
 Refreshing the default folder replaces its entire contents with the selected export,
 including removal of files absent from the source. There is no separate
-`compatibility.css` layer. See [the token refresh guide](docs/local-css-token-refresh.md)
-for the exact commands, validation steps, and details of the current refresh.
+`compatibility.css` layer.
 
 The `@i-cell/ids-tokens` dependency is retained for existing Cypress reference test data;
 application CSS and the Tailwind token parser do not load tokens from that package.

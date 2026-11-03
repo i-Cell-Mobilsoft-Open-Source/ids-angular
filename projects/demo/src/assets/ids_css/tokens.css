@@ -1,7 +1,6 @@
 /* IDS Design Token CSS - Auto-generated */
 /* Import order: foundation → component */
 
-@import "./compatibility.css";
 @import "./base/base.css";
 @import "./smc/smc-colors.css";
 @import "./smc/smc-layout.css";

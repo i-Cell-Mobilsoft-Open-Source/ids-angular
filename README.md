@@ -12,22 +12,22 @@ The demo loads local CSS tokens using the Core/DÁP control:
 
 The switch loads the selected stylesheet before removing the previous one, as on `main`.
 Storybook and the Tailwind token parser use the default `ids_css` folder.
-The default generated `base`, `smc`, and `component` files were imported from
-`icell-internal-demo-frontend` commit `0054017`.
+The default `ids_css` folder is a complete copy of `src/assets/ids_css` from this
+repository's `IDS_CSS` branch, currently pinned to commit
+`46054992226fb20928c279574e6063e6caa2edb5`.
+The destination is `projects/demo/src/assets/ids_css`; the source and destination
+paths differ. The legacy `projects/demo/src/assets/ids_css` folder on `IDS_CSS`
+is not the current export source.
 The DÁP CSS files were copied from this repository's `main` branch
 (commit `05c85743`, `projects/demo/src/assets/ids_css`).
 The light/dark control switches theme classes independently of the CSS source.
 The theme classes also set `color-scheme` for the DÁP export's `light-dark()` colors.
 Component styling continues to come from the current `@i-cell/ids-styles` dependency.
 
-The default folder's `compatibility.css` contains the token names missing from its export, copied from
-`@i-cell/ids-tokens` 0.0.46 so newer components retain their existing defaults.
-It is imported first, allowing the generated files to override these defaults.
-When updating the default folder's generated CSS, preserve its `compatibility.css` file
-and its import in `tokens.css`.
-Run `pnpm parse-tokens` after updating `smc/smc-reference.css` to regenerate Tailwind mappings,
-Run `node scripts/check-local-tokens.cjs` to check local imports and token references in both folders,
-then `pnpm ng build demo --configuration=development` to check the demo.
+Refreshing the default folder replaces its entire contents with the selected export,
+including removal of files absent from the source. There is no separate
+`compatibility.css` layer. See [the token refresh guide](docs/local-css-token-refresh.md)
+for the exact commands, validation steps, and details of the current refresh.
 
 The `@i-cell/ids-tokens` dependency is retained for existing Cypress reference test data;
 application CSS and the Tailwind token parser do not load tokens from that package.

@@ -27,6 +27,7 @@ type IconButtonInputControls = {
   variant: IdsIconButtonVariantType;
   appearance: IdsIconButtonAppearanceType;
   disabled: boolean;
+  active: boolean;
   allowCustomContent: boolean;
 };
 
@@ -60,6 +61,16 @@ export class IconButtonDemoService {
       default: defaultConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsIconButtonAppearance),
+    },
+    active: {
+      description: this._widgetDocs.getDescription(
+        ICON_BUTTON_DOCS_PATH,
+        'active',
+        'Persistent active appearance using pressed colors, independent of pointer press.',
+      ),
+      type: 'boolean',
+      default: false,
+      control: DemoControl.SWITCH,
     },
     disabled: {
       description: this._widgetDocs.getDescription(ICON_BUTTON_DOCS_PATH, 'disabled', 'Whether the icon button is disabled or not.'),

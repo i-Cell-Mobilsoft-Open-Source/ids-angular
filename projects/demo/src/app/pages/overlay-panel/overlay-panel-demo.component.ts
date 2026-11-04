@@ -15,6 +15,7 @@ import { IdsButtonComponent } from '@i-cell/ids-angular/button';
 import { IdsChipComponent } from '@i-cell/ids-angular/chip';
 import { IdsPrefixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import {
   IdsMenuItemComponent, IdsActiveIndicatorDirective,
 } from '@i-cell/ids-angular/menu';
@@ -35,6 +36,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ControlTableComponent,
     TryoutControlComponent,
     IdsButtonComponent,
+    IdsIconButtonComponent,
     OverlayModule,
     IdsChipComponent,
     IdsPrefixDirective,

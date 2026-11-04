@@ -14,6 +14,8 @@
           appearance="outlined"
           size="compact"
           variant="primary"
+          [active]="overlayPanel.open()"
+          [attr.aria-expanded]="overlayPanel.open()"
           (click)="overlayPanel.toggle()"
         >
           {{ overlayPanel.open() ? 'Close overlay' : 'Open overlay' }}
@@ -81,6 +83,31 @@
               </div>
             </div>
           }
+        </ids-overlay-panel>
+        <button
+          #iconOrigin="cdkOverlayOrigin"
+          type="button"
+          cdkOverlayOrigin
+          idsIconButton
+          appearance="outlined"
+          class="ms-4"
+          [active]="iconOverlayPanel.open()"
+          [attr.aria-expanded]="iconOverlayPanel.open()"
+          [attr.aria-label]="'COMPONENTS.OVERLAY_PANEL' | translate"
+          (click)="iconOverlayPanel.toggle()"
+        >
+          <ids-icon aria-hidden="true" alt="" fontIcon="more-vert" />
+        </button>
+        <ids-overlay-panel
+          #iconOverlayPanel
+          [origin]="iconOrigin"
+          [appearance]="_overlayPanelDemoService.overlayPanelModel.appearance"
+          [size]="_overlayPanelDemoService.overlayPanelModel.size"
+          [variant]="_overlayPanelDemoService.overlayPanelModel.variant"
+        >
+          <button idsButton type="button" (click)="iconOverlayPanel.open.set(false)">
+            {{ 'EXAMPLES.OVERLAY_PANEL.COMMON.CLOSE' | translate }}
+          </button>
         </ids-overlay-panel>
       </ng-container>
     </app-tryout>

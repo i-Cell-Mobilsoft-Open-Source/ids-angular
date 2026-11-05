@@ -440,6 +440,15 @@
       }
     },
     "BREADCRUMB": {
+      "WIDTH": {
+        "TITLE": "Tartalomhoz igazodó csonkolás",
+        "DESCRIPTION": "Módosítsa a konténer szélességét és a linkek szélességkorlátját. A rövid feliratok nagy korlát mellett is férjenek el. Rendkívül szűk konténerben az aktuális oldal és a menügomb túlcsordulhat.",
+        "CONTAINER": "Konténer szélessége",
+        "MAX_WIDTH": "Link maximális szélessége",
+        "HOME": "Nyitóoldal",
+        "TRAFFIC": "Forgalmi adatok – gépjármű",
+        "YEAR": "Összes év"
+      },
       "VARIANTS": {
         "TITLE": "Breadcrumb változatai",
         "DESCRIPTION": "A breadcrumb komponens különböző színváltozatai: primary, surface (alapértelmezett) és light."

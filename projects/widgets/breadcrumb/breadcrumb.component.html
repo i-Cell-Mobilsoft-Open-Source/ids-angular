@@ -1,8 +1,30 @@
-<nav class="ids-breadcrumb">
+<nav #container class="ids-breadcrumb">
+  <div class="ids-breadcrumb-measurement" aria-hidden="true" inert>
+    <ol #measurement idsBreadcrumbList>
+      <li>
+        <span [class]="_measurementTriggerClasses()">
+          <ids-icon aria-hidden="true" alt="" fontIcon="more-horiz" />
+        </span>
+      </li>
+      <li idsBreadcrumbDivider [dividerType]="dividerType()" [size]="size()"></li>
+      @for (item of hierarchy(); track $index; let isLast = $last) {
+        <li>
+          @if (isLast) {
+            <span idsBreadcrumbPage>{{ item.label }}</span>
+          } @else {
+            <span class="ids-breadcrumb-link">{{ item.label }}</span>
+          }
+        </li>
+        @if (!isLast) {
+          <li idsBreadcrumbDivider [dividerType]="dividerType()" [size]="size()"></li>
+        }
+      }
+    </ol>
+  </div>
   <ol idsBreadcrumbList>
     @if (_truncation().length) {
       <li idsBreadcrumbTruncation [panelClass]="_hostClasses()" [overlayClass]="_overlayClasses()" [size]="size()" [variant]="variant()">
-        @for (breadcrumbItem of _truncation(); track $index; let isLast = $last) {
+        @for (breadcrumbItem of _truncation(); track breadcrumbItem) {
           <li>
             <ng-container *ngTemplateOutlet="breadcrumbLink; context: { breadcrumbItem }" />
           </li>
@@ -10,7 +32,7 @@
       </li>
       <li idsBreadcrumbDivider [dividerType]="dividerType()" [size]="size()"></li>
     }
-    @for (breadcrumbItem of _breadcrumbs(); track $index; let isLast = $last) {
+    @for (breadcrumbItem of _breadcrumbs(); track breadcrumbItem; let isLast = $last) {
       <li>
         @if (isLast) {
           <span idsBreadcrumbPage>{{ breadcrumbItem.label }}</span>

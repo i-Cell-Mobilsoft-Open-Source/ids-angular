@@ -2,10 +2,23 @@ import { BreadcrumbDividerTypesExampleComponent } from './breadcrumb-divider-typ
 import { BreadcrumbSizeExampleComponent } from './breadcrumb-size-example/breadcrumb-size-example.component';
 import { BreadcrumbTruncatedExampleComponent } from './breadcrumb-truncated-example/breadcrumb-truncated-example.component';
 import { BreadcrumbVariantsExampleComponent } from './breadcrumb-variants-example/breadcrumb-variants-example.component';
+import { BreadcrumbWidthExampleComponent } from './breadcrumb-width-example/breadcrumb-width-example.component';
 
 import { IdsExampleDef } from '../../shared/ids-example-viewer/ids-example.model';
 
 export const BREADCRUMB_EXAMPLES: IdsExampleDef[] = [
+  {
+    id: 'breadcrumb-width',
+    title: 'EXAMPLES.BREADCRUMB.WIDTH.TITLE',
+    description: 'EXAMPLES.BREADCRUMB.WIDTH.DESCRIPTION',
+    component: BreadcrumbWidthExampleComponent,
+    files: [
+      {
+        HTMLpath: 'assets/examples/breadcrumb/breadcrumb-width-example/breadcrumb-width-example.component.html',
+        TSpath: 'assets/examples/breadcrumb/breadcrumb-width-example/breadcrumb-width-example.component.ts',
+      },
+    ],
+  },
   {
     id: 'breadcrumb-variants',
     title: 'EXAMPLES.BREADCRUMB.VARIANTS.TITLE',

@@ -4,14 +4,14 @@ import { IdsBreadcrumbLinkDirective } from './libs/breadcrumb-link.directive';
 import { IdsBreadcrumbListDirective } from './libs/breadcrumb-list.directive';
 import { IdsBreadcrumbPageDirective } from './libs/breadcrumb-page.directive';
 import { IdsBreadcrumbTruncationComponent } from './libs/breadcrumb-truncation.component';
+import { areWidthsStale, BreadcrumbWidths, calcTruncationIndex } from './libs/breadcrumb-truncation.util';
 import { IdsBreadcrumbDividerType } from './types/breadcrumb-divider.type';
 import { IdsBreadcrumbHierarchyType } from './types/breadcrumb-hierarchy.type';
 import { IdsBreadcrumbVariantType } from './types/breadcrumb-variant.type';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { afterRenderEffect, Component, computed, ElementRef, input, signal, viewChild } from '@angular/core';
-import { ComponentBaseWithDefaults, createClassList, IdsSizeType } from '@i-cell/ids-angular/core';
-import { IdsIconComponent } from '@i-cell/ids-angular/icon';
+import { afterRenderEffect, Component, computed, effect, ElementRef, inject, input, linkedSignal, signal, untracked, viewChild } from '@angular/core';
+import { ComponentBaseWithDefaults, createClassList, IdsSizeType, ResizeObserverService } from '@i-cell/ids-angular/core';
 import { IdsOverlayPanelAppearanceType, IdsOverlayPanelVariantType } from '@i-cell/ids-angular/overlay-panel';
 import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
@@ -29,7 +29,6 @@ const defaultConfig = IDS_BREADCRUMB_DEFAULT_CONFIG_FACTORY();
     IdsBreadcrumbTruncationComponent,
     IdsTooltipDirective,
     NgTemplateOutlet,
-    IdsIconComponent,
   ],
 })
 export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcrumbDefaultConfig> {
@@ -46,31 +45,48 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
   public overlaySize = input<IdsSizeType>(this._defaultConfig.overlaySize);
   public overlayVariant = input<IdsOverlayPanelVariantType>(this._defaultConfig.overlayVariant);
 
-  private _items = computed<(IdsBreadcrumbHierarchyType & { hasTooltip?: boolean })[]>(() =>
-    this.hierarchy().map((item) => ({ ...item })),
-  );
+  // Items whose label is clipped and therefore needs a tooltip; entries of removed items are dropped
+  protected _clippedItems = linkedSignal<IdsBreadcrumbHierarchyType[], ReadonlySet<IdsBreadcrumbHierarchyType>>({
+    source: this.hierarchy,
+    computation: (hierarchy, previous) => new Set([...(previous?.value ?? [])].filter((item) => hierarchy.includes(item))),
+  });
+
+  // While measuring, every item is rendered so that its natural width can be read
+  protected _measuring = signal(true);
 
   // The breadcrumbs that are currently visible in the breadcrumb component
-  protected _breadcrumbs = computed<(IdsBreadcrumbHierarchyType & { hasTooltip?: boolean })[]>(() =>
-    this._items().slice(this._truncationIndex()),
+  protected _breadcrumbs = computed<IdsBreadcrumbHierarchyType[]>(() =>
+    this.hierarchy().slice(this._effectiveTruncationIndex()),
   );
 
   // The breadcrumbs that are currently truncated and shown on overlay
-  protected _truncation = computed<(IdsBreadcrumbHierarchyType & { hasTooltip?: boolean })[]>(() =>
-    this._items().slice(0, this._truncationIndex()),
+  protected _truncation = computed<IdsBreadcrumbHierarchyType[]>(() =>
+    this.hierarchy().slice(0, this._effectiveTruncationIndex()),
   );
+
+  // Item widths depend only on these, so a new hierarchy array with the same labels does not need a new measurement
+  private _measurementKey = computed(() => [
+    this.hierarchy().map((item) => item.label).join('\u0000'),
+    this.size(),
+    this.dividerType(),
+    this.variant(),
+  ].join('|'));
+
+  protected _setClipped(item: IdsBreadcrumbHierarchyType, clipped: boolean): void {
+    this._clippedItems.update((items) => {
+      const next = new Set(items);
+      clipped ? next.add(item) : next.delete(item);
+      return next;
+    });
+  }
 
   private _truncationIndex = signal(0);
+  private _effectiveTruncationIndex = computed(() => (this._measuring() ? 0 : this._truncationIndex()));
+  private _resizeObserver = inject(ResizeObserverService);
   private _container = viewChild.required<ElementRef<HTMLElement>>('container');
-  private _measurement = viewChild.required<ElementRef<HTMLOListElement>>('measurement');
+  private _list = viewChild.required<ElementRef<HTMLOListElement>>('list');
 
-  protected _measurementTriggerClasses = computed(() =>
-    createClassList('ids-icon-button', [
-      'standard',
-      this.size(),
-      this.variant(),
-    ]),
-  );
+  private _widths: BreadcrumbWidths | null = null;
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
@@ -88,34 +104,76 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
 
   constructor() {
     super();
+    effect(() => {
+      this._measurementKey();
+      untracked(() => this._measuring.set(true));
+    });
+
+    // Re-runs only when the measuring phase or the truncation changes, which also changes the rendered elements
     afterRenderEffect({
       read: (onCleanup) => {
-        this.hierarchy();
-        this.size();
-        this.dividerType();
-        this.variant();
-        const container = this._container().nativeElement;
-        const measurement = this._measurement().nativeElement;
-        const observer = new ResizeObserver(() => this._measure());
-        observer.observe(container);
-        observer.observe(measurement);
-        Array.from(measurement.children).forEach((child) => observer.observe(child));
-        onCleanup(() => observer.disconnect());
-        this._measure();
+        const measuring = this._measuring();
+        this._truncationIndex();
+        untracked(() => (measuring ? this._measure() : this._observe(onCleanup)));
       },
     });
   }
 
   private _measure(): void {
-    const container = this._container().nativeElement;
-    const measurement = this._measurement().nativeElement;
+    this._captureWidths(this._list().nativeElement);
+    this._layout();
+    this._measuring.set(false);
+  }
+
+  // Resizing the container only re-layouts, while a resized item (e.g. font or theme change) triggers a new measurement
+  private _observe(onCleanup: (cleanupFn: () => void) => void): void {
+    const targets = [
+      this._container().nativeElement,
+      ...Array.from(this._list().nativeElement.children),
+    ];
+    const subscriptions = targets.map((target) => this._resizeObserver.observe(target).subscribe(() => this._handleResize()));
+    onCleanup(() => {
+      subscriptions.forEach((subscription) => subscription.unsubscribe());
+      targets.forEach((target) => this._resizeObserver.unobserve(target));
+    });
+  }
+
+  private _captureWidths(list: HTMLOListElement): void {
+    const [
+      trigger,
+      divider,
+      ...content
+    ] = Array.from(list.children, (child) => child.getBoundingClientRect().width);
+    this._widths = {
+      gap: parseFloat(getComputedStyle(list).columnGap) || 0,
+      trigger,
+      divider,
+      content,
+    };
+  }
+
+  private _handleResize(): void {
+    if (this._measuring()) {
+      return;
+    }
+    const widths = this._widths;
+    const renderedWidths = Array.from(this._list().nativeElement.children, (child) => child.getBoundingClientRect().width);
+    if (!widths || areWidthsStale(widths, renderedWidths, this._truncationIndex())) {
+      this._measuring.set(true);
+    } else {
+      this._layout();
+    }
+  }
+
+  private _layout(): void {
+    const widths = this._widths;
     const itemCount = this.hierarchy().length;
-    if (itemCount < 2) {
+    if (!widths || itemCount < 2) {
       this._truncationIndex.set(0);
       return;
     }
 
-    const style = getComputedStyle(container);
+    const style = getComputedStyle(this._container().nativeElement);
     const availableWidth = parseFloat(style.width) - (style.boxSizing === 'border-box'
       ? parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
         + parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth)
@@ -124,26 +182,6 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
       return;
     }
 
-    const gap = parseFloat(getComputedStyle(measurement).columnGap) || 0;
-    const widths = Array.from(measurement.children, (child) => child.getBoundingClientRect().width);
-    const [
-      triggerWidth,
-      dividerWidth,
-      ...contentWidths
-    ] = widths;
-    let contentWidth = contentWidths.reduce((total, width) => total + width, 0) + gap * (contentWidths.length - 1);
-    if (contentWidth <= availableWidth) {
-      this._truncationIndex.set(0);
-      return;
-    }
-
-    const prefixWidth = triggerWidth + dividerWidth + gap * 2;
-    for (let index = 0; index < itemCount - 1; index++) {
-      contentWidth -= contentWidths[index * 2] + contentWidths[index * 2 + 1] + gap * 2;
-      if (prefixWidth + contentWidth <= availableWidth || index === itemCount - 2) {
-        this._truncationIndex.set(index + 1);
-        return;
-      }
-    }
+    this._truncationIndex.set(calcTruncationIndex(widths, itemCount, availableWidth));
   }
 }

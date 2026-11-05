@@ -1,28 +1,6 @@
 <nav #container class="ids-breadcrumb">
-  <div class="ids-breadcrumb-measurement" aria-hidden="true" inert>
-    <ol #measurement idsBreadcrumbList>
-      <li>
-        <span [class]="_measurementTriggerClasses()">
-          <ids-icon aria-hidden="true" alt="" fontIcon="more-horiz" />
-        </span>
-      </li>
-      <li idsBreadcrumbDivider [dividerType]="dividerType()" [size]="size()"></li>
-      @for (item of hierarchy(); track $index; let isLast = $last) {
-        <li>
-          @if (isLast) {
-            <span idsBreadcrumbPage>{{ item.label }}</span>
-          } @else {
-            <span class="ids-breadcrumb-link">{{ item.label }}</span>
-          }
-        </li>
-        @if (!isLast) {
-          <li idsBreadcrumbDivider [dividerType]="dividerType()" [size]="size()"></li>
-        }
-      }
-    </ol>
-  </div>
-  <ol idsBreadcrumbList>
-    @if (_truncation().length) {
+  <ol #list idsBreadcrumbList>
+    @if (_measuring() || _truncation().length) {
       <li idsBreadcrumbTruncation [panelClass]="_hostClasses()" [overlayClass]="_overlayClasses()" [size]="size()" [variant]="variant()">
         @for (breadcrumbItem of _truncation(); track breadcrumbItem) {
           <li>
@@ -52,10 +30,10 @@
     idsBreadcrumbLink
     [link]="!breadcrumbItem.disabled ? breadcrumbItem.path : null"
     [idsTooltip]="breadcrumbItem.label"
-    [idsTooltipDisabled]="!breadcrumbItem.hasTooltip"
+    [idsTooltipDisabled]="!_clippedItems().has(breadcrumbItem)"
     [idsTooltipIgnoreClipped]="true"
     [disabled]="!!breadcrumbItem.disabled"
-    (hasTooltip)="breadcrumbItem.hasTooltip = $event"
+    (hasTooltip)="_setClipped(breadcrumbItem, $event)"
   >
     {{ breadcrumbItem.label }}
   </a>

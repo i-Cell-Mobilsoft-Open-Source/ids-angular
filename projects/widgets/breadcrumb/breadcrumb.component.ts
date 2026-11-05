@@ -4,10 +4,11 @@ import { IdsBreadcrumbLinkDirective } from './libs/breadcrumb-link.directive';
 import { IdsBreadcrumbListDirective } from './libs/breadcrumb-list.directive';
 import { IdsBreadcrumbPageDirective } from './libs/breadcrumb-page.directive';
 import { IdsBreadcrumbTruncationComponent } from './libs/breadcrumb-truncation.component';
-import { areWidthsStale, BreadcrumbWidths, calcTruncationIndex } from './libs/breadcrumb-truncation.util';
+import { areWidthsStale, calcTruncationIndex } from './libs/breadcrumb-truncation.util';
 import { IdsBreadcrumbDividerType } from './types/breadcrumb-divider.type';
 import { IdsBreadcrumbHierarchyType } from './types/breadcrumb-hierarchy.type';
 import { IdsBreadcrumbVariantType } from './types/breadcrumb-variant.type';
+import { IdsBreadcrumbWidthsType } from './types/breadcrumb-widths.type';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { afterRenderEffect, Component, computed, effect, ElementRef, inject, input, linkedSignal, signal, untracked, viewChild } from '@angular/core';
@@ -36,7 +37,9 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
     return 'breadcrumb';
   }
 
+  // Must be declared before the inputs that use it
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_BREADCRUMB_DEFAULT_CONFIG);
+
   public hierarchy = input<IdsBreadcrumbHierarchyType[]>([]);
   public dividerType = input<IdsBreadcrumbDividerType>(this._defaultConfig.dividerType);
   public size = input<IdsSizeType>(this._defaultConfig.size);
@@ -45,14 +48,14 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
   public overlaySize = input<IdsSizeType>(this._defaultConfig.overlaySize);
   public overlayVariant = input<IdsOverlayPanelVariantType>(this._defaultConfig.overlayVariant);
 
+  // While measuring, every item is rendered so that its natural width can be read
+  protected _measuring = signal(true);
+
   // Items whose label is clipped and therefore needs a tooltip; entries of removed items are dropped
   protected _clippedItems = linkedSignal<IdsBreadcrumbHierarchyType[], ReadonlySet<IdsBreadcrumbHierarchyType>>({
     source: this.hierarchy,
     computation: (hierarchy, previous) => new Set([...(previous?.value ?? [])].filter((item) => hierarchy.includes(item))),
   });
-
-  // While measuring, every item is rendered so that its natural width can be read
-  protected _measuring = signal(true);
 
   // The breadcrumbs that are currently visible in the breadcrumb component
   protected _breadcrumbs = computed<IdsBreadcrumbHierarchyType[]>(() =>
@@ -63,30 +66,6 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
   protected _truncation = computed<IdsBreadcrumbHierarchyType[]>(() =>
     this.hierarchy().slice(0, this._effectiveTruncationIndex()),
   );
-
-  // Item widths depend only on these, so a new hierarchy array with the same labels does not need a new measurement
-  private _measurementKey = computed(() => [
-    this.hierarchy().map((item) => item.label).join('\u0000'),
-    this.size(),
-    this.dividerType(),
-    this.variant(),
-  ].join('|'));
-
-  protected _setClipped(item: IdsBreadcrumbHierarchyType, clipped: boolean): void {
-    this._clippedItems.update((items) => {
-      const next = new Set(items);
-      clipped ? next.add(item) : next.delete(item);
-      return next;
-    });
-  }
-
-  private _truncationIndex = signal(0);
-  private _effectiveTruncationIndex = computed(() => (this._measuring() ? 0 : this._truncationIndex()));
-  private _resizeObserver = inject(ResizeObserverService);
-  private _container = viewChild.required<ElementRef<HTMLElement>>('container');
-  private _list = viewChild.required<ElementRef<HTMLOListElement>>('list');
-
-  private _widths: BreadcrumbWidths | null = null;
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
@@ -102,6 +81,22 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
     ]),
   );
 
+  private _truncationIndex = signal(0);
+  private _effectiveTruncationIndex = computed(() => (this._measuring() ? 0 : this._truncationIndex()));
+
+  // Item widths depend only on these, so a new hierarchy array with the same labels does not need a new measurement
+  private _measurementKey = computed(() => [
+    this.hierarchy().map((item) => item.label).join('\u0000'),
+    this.size(),
+    this.dividerType(),
+    this.variant(),
+  ].join('|'));
+
+  private _widths: IdsBreadcrumbWidthsType | null = null;
+  private _resizeObserver = inject(ResizeObserverService);
+  private _container = viewChild.required<ElementRef<HTMLElement>>('container');
+  private _list = viewChild.required<ElementRef<HTMLOListElement>>('list');
+
   constructor() {
     super();
     effect(() => {
@@ -116,6 +111,14 @@ export class IdsBreadcrumbComponent extends ComponentBaseWithDefaults<IdsBreadcr
         this._truncationIndex();
         untracked(() => (measuring ? this._measure() : this._observe(onCleanup)));
       },
+    });
+  }
+
+  protected _setClipped(item: IdsBreadcrumbHierarchyType, clipped: boolean): void {
+    this._clippedItems.update((items) => {
+      const next = new Set(items);
+      clipped ? next.add(item) : next.delete(item);
+      return next;
     });
   }
 

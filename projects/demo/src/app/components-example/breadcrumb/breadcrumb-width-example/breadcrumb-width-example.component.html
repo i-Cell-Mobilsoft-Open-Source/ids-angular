@@ -7,7 +7,7 @@
     {{ "EXAMPLES.BREADCRUMB.WIDTH.MAX_WIDTH" | translate }}: {{ maxWidth }}px
     <input type="range" min="40" max="1000" step="1" [(ngModel)]="maxWidth" />
   </label>
-  <div class="max-w-full border border-dashed p-4" [style.width.px]="width">
+  <div class="max-w-full p-4 dashed-container" [style.width.px]="width">
     <ids-breadcrumb
       size="compact"
       [style.--ids-comp-breadcrumb-navigation-link-size-max-width-compact]="maxWidth + 'px'"

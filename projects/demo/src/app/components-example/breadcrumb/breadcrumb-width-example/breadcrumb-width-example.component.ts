@@ -14,6 +14,11 @@ const DEFAULT_MAX_WIDTH = 1000;
     TranslatePipe,
   ],
   templateUrl: './breadcrumb-width-example.component.html',
+  styles: `
+    .dashed-container {
+      border: 1px dashed currentColor;
+    }
+  `,
 })
 export class BreadcrumbWidthExampleComponent {
   public width = DEFAULT_WIDTH;

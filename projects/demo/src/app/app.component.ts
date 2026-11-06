@@ -189,9 +189,9 @@ export class AppComponent implements AfterViewInit {
 
   protected _changeStyle(style: 'default' | 'alt'): Promise<void> | undefined {
     if (style === 'default') {
-      return this._setTokens('assets/ids-tokens/tokens.css');
-    } else if (style === 'alt') {
       return this._setTokens('assets/ids_css/tokens.css');
+    } else if (style === 'alt') {
+      return this._setTokens('assets/ids_css_dap/tokens.css');
     } else {
       return undefined;
     }

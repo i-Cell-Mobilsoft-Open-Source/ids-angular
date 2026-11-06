@@ -1,8 +1,8 @@
-<nav class="ids-breadcrumb">
-  <ol idsBreadcrumbList>
-    @if (_truncation().length) {
+<nav #container class="ids-breadcrumb">
+  <ol #list idsBreadcrumbList>
+    @if (_measuring() || _truncation().length) {
       <li idsBreadcrumbTruncation [panelClass]="_hostClasses()" [overlayClass]="_overlayClasses()" [size]="size()" [variant]="variant()">
-        @for (breadcrumbItem of _truncation(); track $index; let isLast = $last) {
+        @for (breadcrumbItem of _truncation(); track breadcrumbItem) {
           <li>
             <ng-container *ngTemplateOutlet="breadcrumbLink; context: { breadcrumbItem }" />
           </li>
@@ -10,7 +10,7 @@
       </li>
       <li idsBreadcrumbDivider [dividerType]="dividerType()" [size]="size()"></li>
     }
-    @for (breadcrumbItem of _breadcrumbs(); track $index; let isLast = $last) {
+    @for (breadcrumbItem of _breadcrumbs(); track breadcrumbItem; let isLast = $last) {
       <li>
         @if (isLast) {
           <span idsBreadcrumbPage>{{ breadcrumbItem.label }}</span>
@@ -30,10 +30,10 @@
     idsBreadcrumbLink
     [link]="!breadcrumbItem.disabled ? breadcrumbItem.path : null"
     [idsTooltip]="breadcrumbItem.label"
-    [idsTooltipDisabled]="!breadcrumbItem.hasTooltip"
+    [idsTooltipDisabled]="!_clippedItems().has(breadcrumbItem)"
     [idsTooltipIgnoreClipped]="true"
     [disabled]="!!breadcrumbItem.disabled"
-    (hasTooltip)="breadcrumbItem.hasTooltip = $event"
+    (hasTooltip)="_setClipped(breadcrumbItem, $event)"
   >
     {{ breadcrumbItem.label }}
   </a>

@@ -449,6 +449,15 @@
       }
     },
     "BREADCRUMB": {
+      "WIDTH": {
+        "TITLE": "Content-based truncation",
+        "DESCRIPTION": "Resize the container and change the link width limit. Short labels should fit even with a large limit. In extremely narrow containers, the current page and menu button may overflow.",
+        "CONTAINER": "Container width",
+        "MAX_WIDTH": "Maximum link width",
+        "HOME": "Home",
+        "TRAFFIC": "Traffic data – motor vehicles",
+        "YEAR": "All years"
+      },
       "VARIANTS": {
         "TITLE": "Breadcrumb variants",
         "DESCRIPTION": "Breadcrumbs with different color variants: primary, surface (default), and light."

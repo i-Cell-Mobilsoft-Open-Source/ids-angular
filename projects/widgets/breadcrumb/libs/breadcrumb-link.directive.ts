@@ -1,4 +1,4 @@
-import { afterNextRender, Directive, ElementRef, inject, input, output } from '@angular/core';
+import { afterEveryRender, afterNextRender, DestroyRef, Directive, ElementRef, inject, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Directive({
@@ -21,11 +21,23 @@ export class IdsBreadcrumbLinkDirective {
   public readonly hasTooltip = output<boolean>();
 
   constructor() {
-    const host = inject(ElementRef).nativeElement;
+    const host = inject<ElementRef<HTMLAnchorElement>>(ElementRef).nativeElement;
+    const destroyRef = inject(DestroyRef);
+    let previous: boolean | undefined;
+    const updateTooltip = (): void => {
+      const clipped = host.offsetWidth < host.scrollWidth;
+      if (clipped !== previous) {
+        previous = clipped;
+        this.hasTooltip.emit(clipped);
+      }
+    };
 
+    afterEveryRender({ read: updateTooltip });
     afterNextRender({
       read: () => {
-        this.hasTooltip.emit(host.offsetWidth < host.scrollWidth);
+        const observer = new ResizeObserver(updateTooltip);
+        observer.observe(host);
+        destroyRef.onDestroy(() => observer.disconnect());
       },
     });
   }

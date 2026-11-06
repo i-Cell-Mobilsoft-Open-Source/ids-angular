@@ -1,0 +1,5 @@
+<ids-table [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+  <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+    {{ value | translate }}
+  </ng-template>
+</ids-table>

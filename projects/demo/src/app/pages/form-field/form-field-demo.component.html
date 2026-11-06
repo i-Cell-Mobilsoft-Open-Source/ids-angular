@@ -56,6 +56,30 @@
           </ids-form-field>
         </div>
 
+        <div class="form-field-label-suffix-example">
+          <h2>{{ "FORM_FIELD.LABEL_ACTION.TITLE" | translate }}</h2>
+          <p>{{ "FORM_FIELD.LABEL_ACTION.DESCRIPTION" | translate }}</p>
+          <ids-form-field [size]="_formFieldDemoService.formFieldModel.size" [variant]="_formFieldDemoService.formFieldModel.variant">
+            <ids-label>{{ _formFieldDemoService.formFieldHelperModel.label }}</ids-label>
+            <button
+              idsLabelSuffix
+              idsIconButton
+              type="button"
+              appearance="standard"
+              size="dense"
+              [variant]="_formFieldDemoService.formFieldModel.variant"
+              [idsTooltip]="_formFieldDemoService.formFieldHelperModel.hintMessage"
+              [attr.aria-label]="'FORM_FIELD.LABEL_ACTION.HELP' | translate"
+            >
+              <ids-icon aria-hidden="true" alt="" fontIcon="help-circle" />
+            </button>
+            <input idsInput required ngModel="" [placeholder]="_formFieldDemoService.inputModel.placeholder" />
+            <ids-error-message>
+              <ids-error-def code="required">{{ "FORM_FIELD.ERROR.REQUIRED" | translate: { fieldName } }}</ids-error-def>
+            </ids-error-message>
+          </ids-form-field>
+        </div>
+
         <div class="form-field-dynamic-required">
           <h2>Dynamic required validation</h2>
           <ids-form-field [size]="_formFieldDemoService.formFieldModel.size" [variant]="_formFieldDemoService.formFieldModel.variant">

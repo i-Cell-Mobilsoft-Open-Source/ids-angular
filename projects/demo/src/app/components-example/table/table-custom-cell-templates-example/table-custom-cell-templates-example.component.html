@@ -1,0 +1,20 @@
+<ids-table [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+  <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+    {{ value | translate }}
+  </ng-template>
+
+  <ng-template let-value="cellValue" idsCellTemplate="nameHeader">
+    <span class="table-custom-cell-templates__header">
+      <ids-icon fontIcon="person" />
+      {{ value | translate }}
+    </span>
+  </ng-template>
+  <strong *idsCellTemplate="'nameCell'; let row" class="table-custom-cell-templates__name">{{ row.name }}</strong>
+
+  <ng-template let-value="cellValue" idsCellTemplate="statusHeader">
+    <span class="table-custom-cell-templates__header table-custom-cell-templates__header--status">
+      {{ value | translate }}
+    </span>
+  </ng-template>
+  <span *idsCellTemplate="'statusCell'; let row" [class]="_statusClass(row)">{{ row.status }}</span>
+</ids-table>

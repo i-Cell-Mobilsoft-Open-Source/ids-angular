@@ -1,0 +1,10 @@
+<ids-table
+  enableSorting
+  [columnDefs]="_columnDefs"
+  [dataSource]="_dataSource"
+  (sortChange)="_onSortChange($event)"
+>
+  <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+    {{ value | translate }}
+  </ng-template>
+</ids-table>

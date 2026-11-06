@@ -1,0 +1,26 @@
+<div class="flex flex-col gap-8 w-full">
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.TABLE.VARIANTS.CONTENT.PRIMARY" | translate }}</span>
+    <ids-table variant="primary" [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+      <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+        {{ value | translate }}
+      </ng-template>
+    </ids-table>
+  </div>
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.TABLE.VARIANTS.CONTENT.SECONDARY" | translate }}</span>
+    <ids-table variant="secondary" [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+      <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+        {{ value | translate }}
+      </ng-template>
+    </ids-table>
+  </div>
+  <div class="grid gap-2">
+    <span>{{ "EXAMPLES.TABLE.VARIANTS.CONTENT.SURFACE" | translate }}</span>
+    <ids-table variant="surface" [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+      <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+        {{ value | translate }}
+      </ng-template>
+    </ids-table>
+  </div>
+</div>

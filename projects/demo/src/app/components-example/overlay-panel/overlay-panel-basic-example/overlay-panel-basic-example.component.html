@@ -1,0 +1,16 @@
+<button
+  #origin="cdkOverlayOrigin"
+  type="button"
+  cdkOverlayOrigin
+  idsButton
+  appearance="outlined"
+  size="compact"
+  variant="primary"
+  (click)="panel.toggle()"
+>
+  {{ (panel.open() ? "EXAMPLES.OVERLAY_PANEL.COMMON.CLOSE" : "EXAMPLES.OVERLAY_PANEL.COMMON.OPEN") | translate }}
+</button>
+
+<ids-overlay-panel #panel [origin]="origin">
+  <p class="min-w-48 px-4 py-3">{{ "EXAMPLES.OVERLAY_PANEL.BASIC.CONTENT.BODY" | translate }}</p>
+</ids-overlay-panel>

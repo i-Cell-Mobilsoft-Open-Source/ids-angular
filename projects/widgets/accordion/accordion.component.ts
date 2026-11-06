@@ -121,6 +121,8 @@ export class IdsAccordionComponent extends ComponentBaseWithDefaults<IdsAccordio
         items[items.length - 1].focus();
         break;
       }
+      // Unreachable: every key in navigationKeys has its own case above.
+      /* istanbul ignore next */
       default:
         return;
     }

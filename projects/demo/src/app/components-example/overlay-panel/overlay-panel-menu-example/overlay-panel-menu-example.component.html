@@ -1,0 +1,34 @@
+<button
+  #origin="cdkOverlayOrigin"
+  type="button"
+  cdkOverlayOrigin
+  idsButton
+  appearance="outlined"
+  size="compact"
+  variant="primary"
+  (click)="panel.toggle()"
+>
+  {{ (panel.open() ? "EXAMPLES.OVERLAY_PANEL.COMMON.CLOSE" : "EXAMPLES.OVERLAY_PANEL.MENU.CONTENT.OPEN_MENU") | translate }}
+</button>
+
+<ids-overlay-panel #panel [origin]="origin">
+  <div cdkMenu>
+    <button type="button" idsMenuItem [label]="'EXAMPLES.OVERLAY_PANEL.MENU.CONTENT.ITEM_1' | translate">
+      <ids-icon icon-leading aria-hidden="true" fontIcon="edit" />
+    </button>
+    <button type="button" idsMenuItem [label]="'EXAMPLES.OVERLAY_PANEL.MENU.CONTENT.ITEM_2' | translate">
+      <ids-icon icon-leading aria-hidden="true" fontIcon="file-copy" />
+    </button>
+    <button type="button" idsMenuItem [label]="'EXAMPLES.OVERLAY_PANEL.MENU.CONTENT.ITEM_3' | translate">
+      <ids-icon icon-leading aria-hidden="true" fontIcon="delete" />
+    </button>
+    <button
+      type="button"
+      idsMenuItem
+      [label]="'EXAMPLES.OVERLAY_PANEL.MENU.CONTENT.ITEM_CLOSE' | translate"
+      (click)="_closePanel(panel)"
+    >
+      <ids-icon icon-leading aria-hidden="true" fontIcon="close" />
+    </button>
+  </div>
+</ids-overlay-panel>

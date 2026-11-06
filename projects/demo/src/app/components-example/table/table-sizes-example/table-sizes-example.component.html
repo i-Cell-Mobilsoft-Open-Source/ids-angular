@@ -1,0 +1,34 @@
+<div class="table-sizes-grid">
+  <div class="table-sizes-item">
+    <span>Dense</span>
+    <ids-table size="dense" [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+      <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+        {{ value | translate }}
+      </ng-template>
+    </ids-table>
+  </div>
+  <div class="table-sizes-item">
+    <span>Compact</span>
+    <ids-table size="compact" [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+      <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+        {{ value | translate }}
+      </ng-template>
+    </ids-table>
+  </div>
+  <div class="table-sizes-item">
+    <span>Comfortable</span>
+    <ids-table size="comfortable" [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+      <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+        {{ value | translate }}
+      </ng-template>
+    </ids-table>
+  </div>
+  <div class="table-sizes-item">
+    <span>Spacious</span>
+    <ids-table size="spacious" [columnDefs]="_columnDefs" [dataSource]="_dataSource">
+      <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+        {{ value | translate }}
+      </ng-template>
+    </ids-table>
+  </div>
+</div>

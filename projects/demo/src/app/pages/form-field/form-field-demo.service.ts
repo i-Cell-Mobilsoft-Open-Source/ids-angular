@@ -209,6 +209,15 @@ export class FormFieldDemoService {
       ),
     },
     {
+      name: 'idsLabelSuffix',
+      selector: '[idsLabelSuffix]',
+      description: this._widgetDocs.getDescription(
+        FORM_FIELD_SLOTS_DOCS_PATH,
+        'idsLabelSuffix',
+        'Content projected to the right of the label, e.g. a button with a custom tooltip, independent of validation messages.',
+      ),
+    },
+    {
       name: 'idsLeadingIcon',
       selector: 'ids-icon[idsLeadingIcon]',
       description: this._widgetDocs.getDescription(
@@ -267,7 +276,7 @@ export class FormFieldDemoService {
       description: this._widgetDocs.getDescription(
         FORM_FIELD_SLOTS_DOCS_PATH,
         'errorMessage',
-        'Projected <ids-error-message> element, shown in the subscript area when the field is in an error state.',
+        'Error message shown between the field and its hints when the field is in an error state.',
       ),
     },
     {
@@ -276,7 +285,7 @@ export class FormFieldDemoService {
       description: this._widgetDocs.getDescription(
         FORM_FIELD_SLOTS_DOCS_PATH,
         'successMessage',
-        'Projected <ids-success-message> element, shown in the subscript area when the field is in a success state.',
+        'Success message shown between the field and its hints. Error messages take precedence.',
       ),
     },
     {
@@ -285,7 +294,7 @@ export class FormFieldDemoService {
       description: this._widgetDocs.getDescription(
         FORM_FIELD_SLOTS_DOCS_PATH,
         'hintMessage',
-        'Projected <ids-hint-message> element, shown in the subscript area by default.',
+        'Hint shown below the field, remaining visible below error or success messages.',
       ),
     },
   ];

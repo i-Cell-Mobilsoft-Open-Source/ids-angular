@@ -1,0 +1,23 @@
+.table-custom-cell-templates__header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+
+  &--status {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+}
+
+.table-custom-cell-templates__name {
+  font-weight: 600;
+}
+
+.table-custom-cell-templates__status--active {
+  color: var(--ids-color-success, #2e7d32);
+}
+
+.table-custom-cell-templates__status--inactive {
+  color: var(--ids-color-on-surface-variant, #666);
+}

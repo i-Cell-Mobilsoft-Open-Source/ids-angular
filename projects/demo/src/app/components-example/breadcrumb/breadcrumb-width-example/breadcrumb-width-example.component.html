@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-4">
+  <label>
+    {{ "EXAMPLES.BREADCRUMB.WIDTH.CONTAINER" | translate }}: {{ width }}px
+    <input type="range" min="100" max="1000" step="1" [(ngModel)]="width" />
+  </label>
+  <label>
+    {{ "EXAMPLES.BREADCRUMB.WIDTH.MAX_WIDTH" | translate }}: {{ maxWidth }}px
+    <input type="range" min="40" max="1000" step="1" [(ngModel)]="maxWidth" />
+  </label>
+  <div class="max-w-full p-4 dashed-container" [style.width.px]="width">
+    <ids-breadcrumb
+      size="compact"
+      [style.--ids-comp-breadcrumb-navigation-link-size-max-width-compact]="maxWidth + 'px'"
+      [hierarchy]="[
+        { label: ('EXAMPLES.BREADCRUMB.WIDTH.HOME' | translate), path: '/index' },
+        { label: ('EXAMPLES.BREADCRUMB.WIDTH.TRAFFIC' | translate), path: '/components' },
+        { label: ('EXAMPLES.BREADCRUMB.WIDTH.YEAR' | translate), path: '/components/breadcrumb' }
+      ]"
+    />
+  </div>
+</div>

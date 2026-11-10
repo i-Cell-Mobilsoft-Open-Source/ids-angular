@@ -13,11 +13,10 @@ The demo loads local CSS tokens using the Core/DÁP control:
 The switch loads the selected stylesheet before removing the previous one, as on `main`.
 Storybook and the Tailwind token parser use the default `ids_css` folder.
 The default `ids_css` folder is a complete copy of `projects/demo/src/assets/ids_css`
-from this repository's `IDS_CSS` branch, currently pinned to commit
-`87a8f23038ed01db9fea3ba2fff21824cc4ec8ae`.
+from this repository's `IDS_CSS` branch.
 The token store exports to the same path, so the source and destination paths match.
-The DÁP CSS files were copied from this repository's `main` branch
-(commit `05c85743`, `projects/demo/src/assets/ids_css`).
+The DÁP CSS files are the previous contents of `projects/demo/src/assets/ids_css`
+from this repository's `main` branch.
 The light/dark control switches theme classes independently of the CSS source.
 The theme classes also set `color-scheme` for the DÁP export's `light-dark()` colors.
 Component styling continues to come from the current `@i-cell/ids-styles` dependency.

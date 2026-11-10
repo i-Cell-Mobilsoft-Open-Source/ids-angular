@@ -3,6 +3,7 @@ import { TableBasicExampleComponent } from './table-basic-example/table-basic-ex
 import { TableCustomCellTemplatesExampleComponent } from './table-custom-cell-templates-example/table-custom-cell-templates-example.component';
 import { TableEmptyStateExampleComponent } from './table-empty-state-example/table-empty-state-example.component';
 import { TableFixedHeaderExampleComponent } from './table-fixed-header-example/table-fixed-header-example.component';
+import { TableMasterDetailCustomTriggerExampleComponent } from './table-master-detail-custom-trigger-example/table-master-detail-custom-trigger-example.component';
 import { TableMasterDetailExampleComponent } from './table-master-detail-example/table-master-detail-example.component';
 import { TableRowSelectionExampleComponent } from './table-row-selection-example/table-row-selection-example.component';
 import { TableServerSideExampleComponent } from './table-server-side-example/table-server-side-example.component';
@@ -125,6 +126,21 @@ export const TABLE_EXAMPLES: IdsExampleDef[] = [
       {
         HTMLpath: 'assets/examples/table/table-master-detail-example/table-master-detail-example.component.html',
         TSpath: 'assets/examples/table/table-master-detail-example/table-master-detail-example.component.ts',
+      },
+      ...TABLE_EXAMPLE_SHARED_FILES,
+    ],
+  },
+  {
+    id: 'table-master-detail-custom-trigger',
+    title: 'EXAMPLES.TABLE.MASTER_DETAIL_CUSTOM_TRIGGER.TITLE',
+    description: 'EXAMPLES.TABLE.MASTER_DETAIL_CUSTOM_TRIGGER.DESCRIPTION',
+    component: TableMasterDetailCustomTriggerExampleComponent,
+    files: [
+      {
+        HTMLpath:
+          'assets/examples/table/table-master-detail-custom-trigger-example/table-master-detail-custom-trigger-example.component.html',
+        TSpath:
+          'assets/examples/table/table-master-detail-custom-trigger-example/table-master-detail-custom-trigger-example.component.ts',
       },
       ...TABLE_EXAMPLE_SHARED_FILES,
     ],

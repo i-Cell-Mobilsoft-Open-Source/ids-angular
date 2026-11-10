@@ -150,7 +150,7 @@ export const routes: Routes = [
           buildComponentRoute('checkbox', 'COMPONENTS.CHECKBOX', CheckboxDemoService),
           buildComponentRoute('checkbox-group', 'COMPONENTS.CHECKBOX_GROUP', CheckboxGroupDemoService),
           buildComponentRoute('chip', 'COMPONENTS.CHIP', ChipDemoService),
-          buildComponentRoute('date-picker', 'COMPONENTS.DATE_PICKER', DatepickerDemoService),
+          buildComponentRoute('date-picker', 'COMPONENTS.DATEPICKER', DatepickerDemoService),
           buildComponentRoute('dialog', 'COMPONENTS.DIALOG', DialogDemoService),
           buildComponentRoute('divider', 'COMPONENTS.DIVIDER', DividerDemoService),
           buildComponentRoute('fieldset', 'COMPONENTS.FIELDSET', FieldsetDemoService),

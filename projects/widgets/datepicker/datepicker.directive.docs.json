@@ -55,6 +55,13 @@
     },
     "type": "IdsDatepickerView"
   },
+  "yearsPerPage": {
+    "description": {
+      "en": "Number of years shown per page (positive integer) in the year selector.",
+      "hu": "Az évválasztó egy oldalán megjelenő évek száma (pozitív egész szám)."
+    },
+    "type": "number"
+  },
   "yearSelected": {
     "description": {
       "en": "Emitted when a year is selected in the calendar popup.",

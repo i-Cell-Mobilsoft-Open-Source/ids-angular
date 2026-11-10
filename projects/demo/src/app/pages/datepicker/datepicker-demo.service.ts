@@ -28,10 +28,11 @@ type FormFieldInputControls = {
 };
 
 type DatepickerInputControls = {
+  appearance: IdsOverlayPanelAppearanceType,
   minDate: string,
   maxDate: string,
   view: IdsDatepickerViewType,
-  appearance: IdsOverlayPanelAppearanceType,
+  yearsPerPage: number,
 };
 
 @Injectable()
@@ -85,6 +86,16 @@ export class DatepickerDemoService {
       default: datepickerDefaultConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOverlayPanelAppearance),
+    },
+    yearsPerPage: {
+      description: this._widgetDocs.getDescription(
+        DATEPICKER_DOCS_PATH,
+        'yearsPerPage',
+        'The number of years displayed per page in the year view of the datepicker\'s calendar popup',
+      ),
+      type: 'number',
+      default: datepickerDefaultConfig.yearsPerPage,
+      control: DemoControl.NUMBER,
     },
   };
 

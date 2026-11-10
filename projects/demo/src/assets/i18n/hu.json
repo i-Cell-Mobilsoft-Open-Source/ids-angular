@@ -1671,6 +1671,13 @@
         "TITLE": "Datepicker nézetek",
         "DESCRIPTION": "A view beállítással a naptár popup kezdő nézete állítható: day (alapértelmezett), month vagy year."
       },
+      "YEARS_PER_PAGE": {
+        "TITLE": "Testreszabható oldalméret az évválasztóban",
+        "DESCRIPTION": "A yearsPerPage beállítással az évválasztó egy oldalán megjelenő évek száma állítható. Válasszon oldalméretet, majd nyissa meg a naptárt a kipróbáláshoz. Az alapérték 24; a részleges sorok is támogatottak.",
+        "CONTENT": {
+          "LABEL": "Évek száma oldalanként"
+        }
+      },
       "MIN_MAX": {
         "TITLE": "Min és max dátum",
         "DESCRIPTION": "A minDate és maxDate beállítással korlátozhatók a választható dátumok. A tartományon kívüli érték idsDateMin és idsDateMax hibát jelez.",

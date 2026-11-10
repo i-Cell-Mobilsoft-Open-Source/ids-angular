@@ -38,13 +38,20 @@
   </button>
 </div>
 @switch (_view()) {
-  @case ('day') {
+  @case ("day") {
     <ids-day-selector [value]="value()" [min]="min()" [max]="max()" [(focusedDate)]="_focusedDate" (selected)="_selectDate($event)" />
   }
-  @case ('month') {
+  @case ("month") {
     <ids-month-selector [value]="value()" [min]="min()" [max]="max()" [(focusedDate)]="_focusedDate" (selected)="_selectMonth($event)" />
   }
-  @case ('year') {
-    <ids-year-selector [value]="value()" [min]="min()" [max]="max()" [(focusedDate)]="_focusedDate" (selected)="_selectYear($event)" />
+  @case ("year") {
+    <ids-year-selector
+      [value]="value()"
+      [min]="min()"
+      [max]="max()"
+      [yearsPerPage]="yearsPerPage()"
+      [(focusedDate)]="_focusedDate"
+      (selected)="_selectYear($event)"
+    />
   }
 }

@@ -3,7 +3,7 @@ import { IdsCalendarPage } from './calendar-page';
 import { IdsDatepickerIntl } from '../datepicker-intl';
 import { IdsDaySelectorComponent } from '../day-selector/day-selector.component';
 import { IdsMonthSelectorComponent } from '../month-selector/month-selector.component';
-import { IdsDatepickerView, IdsDatepickerViewType } from '../tokens/datepicker-view';
+import { IdsDatepickerView, IdsDatepickerViewType } from '../types/datepicker-view';
 import { IdsYearSelectorComponent } from '../year-selector/year-selector.component';
 
 import { CdkTrapFocus } from '@angular/cdk/a11y';
@@ -48,6 +48,7 @@ export class IdsCalendarComponent extends ComponentBaseWithDefaults<object> impl
   public appearance = input.required<IdsOverlayPanelAppearanceType>();
   public min = input<Date | null>(null);
   public max = input<Date | null>(null);
+  public yearsPerPage = input.required<number>();
 
   public selected = output<Date>();
   public monthSelected = output<Date>();

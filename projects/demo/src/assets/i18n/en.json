@@ -1675,6 +1675,13 @@
         "TITLE": "Datepicker views",
         "DESCRIPTION": "Use view to set the starting calendar popup view: day (default), month, or year."
       },
+      "YEARS_PER_PAGE": {
+        "TITLE": "Customizable years per page",
+        "DESCRIPTION": "Use yearsPerPage to customize the number of years displayed in the year selector. Choose a page size, then open the calendar to try it. The default is 24; partial rows are supported.",
+        "CONTENT": {
+          "LABEL": "Years per page"
+        }
+      },
       "MIN_MAX": {
         "TITLE": "Min and max dates",
         "DESCRIPTION": "Use minDate and maxDate to restrict selectable dates. Built-in idsDateMin and idsDateMax validation errors are shown when the value is out of range.",

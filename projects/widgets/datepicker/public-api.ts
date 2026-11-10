@@ -1,4 +1,4 @@
-export * from './tokens/datepicker-view';
+export * from './types/datepicker-view';
 export * from './tokens/date-formatter';
 export * from './tokens/date-parser';
 export * from './trigger/datepicker-trigger.component';

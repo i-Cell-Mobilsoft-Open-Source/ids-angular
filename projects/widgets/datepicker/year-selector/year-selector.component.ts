@@ -1,10 +1,9 @@
 import { IdsCalendarPage } from '../calendar/calendar-page';
 
-import { ChangeDetectionStrategy, Component, computed, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { addYears, clampDate, createNormalizedDate, isValidDate, positiveModulus } from '@i-cell/ids-angular/core';
 
 const yearsPerRow = 4;
-const yearsPerPage = 24;
 
 @Component({
   selector: 'ids-year-selector',
@@ -24,6 +23,8 @@ const yearsPerPage = 24;
   },
 })
 export class IdsYearSelectorComponent extends IdsCalendarPage {
+  public yearsPerPage = input.required<number>();
+
   private _firstYearOnPage = computed(() => {
     const focusedYear = this.focusedDate().getFullYear();
     const firstYearOffset = this._getFirstYearOffset(focusedYear, this.min()?.getFullYear(), this.max()?.getFullYear());
@@ -34,7 +35,7 @@ export class IdsYearSelectorComponent extends IdsCalendarPage {
 
   protected _years = computed(() => {
     const firstYearOnPage = this._firstYearOnPage();
-    const years = Array.from({ length: yearsPerPage }).map((_nil, index) => firstYearOnPage + index);
+    const years = Array.from({ length: this.yearsPerPage() }).map((_nil, index) => firstYearOnPage + index);
 
     return years;
   });
@@ -56,7 +57,8 @@ export class IdsYearSelectorComponent extends IdsCalendarPage {
 
   public override hasNextPage(): boolean {
     const max = Number.isFinite(this.max()?.getFullYear()) ? this.max()!.getFullYear() : Number.POSITIVE_INFINITY;
-    const lastYearOnPage = Number.isFinite(this._firstYearOnPage()) ? this._firstYearOnPage() + yearsPerPage - 1 : Number.POSITIVE_INFINITY;
+    const firstYearOnPage = this._firstYearOnPage();
+    const lastYearOnPage = Number.isFinite(firstYearOnPage) ? firstYearOnPage + this.yearsPerPage() - 1 : Number.POSITIVE_INFINITY;
 
     return lastYearOnPage < max;
   }
@@ -65,7 +67,7 @@ export class IdsYearSelectorComponent extends IdsCalendarPage {
     const firstYearOnPage = this._firstYearOnPage();
     const currentFocusedDate = this.focusedDate();
     this.focusedDate.set(
-      createNormalizedDate(firstYearOnPage + yearsPerPage, currentFocusedDate.getMonth(), currentFocusedDate.getDate()));
+      createNormalizedDate(firstYearOnPage + this.yearsPerPage(), currentFocusedDate.getMonth(), currentFocusedDate.getDate()));
   }
 
   protected _selectYear(event: MouseEvent, year: number): void {
@@ -120,20 +122,20 @@ export class IdsYearSelectorComponent extends IdsCalendarPage {
         focusedDate = new Date(this._years().at(-1)!, focusedDate.getMonth(), focusedDate.getDate());
         break;
       case 'PageUp':
-        focusedDate = addYears(focusedDate, -yearsPerPage);
+        focusedDate = addYears(focusedDate, -this.yearsPerPage());
         break;
       case 'PageDown':
-        focusedDate = addYears(focusedDate, yearsPerPage);
+        focusedDate = addYears(focusedDate, this.yearsPerPage());
         break;
     }
 
     this.focusedDate.set(clampDate(focusedDate, this.min(), this.max()));
   }
 
-  private _getFirstYearOffset(focusedYear: number, minYear?: number, maxYear: number = (yearsPerPage - 1)): number {
+  private _getFirstYearOffset(focusedYear: number, minYear?: number, maxYear: number = (this.yearsPerPage() - 1)): number {
     // If we have a max year we calculate an offset so that the max year will be the last in the years list
     // Otherwise if we have a min year we calculate an offset so that the min year will be the first in the years list
-    const minMaxOffset = maxYear - yearsPerPage + 1 || minYear || 0;
-    return positiveModulus(focusedYear - minMaxOffset, yearsPerPage);
+    const minMaxOffset = maxYear - this.yearsPerPage() + 1 || minYear || 0;
+    return positiveModulus(focusedYear - minMaxOffset, this.yearsPerPage());
   }
 }

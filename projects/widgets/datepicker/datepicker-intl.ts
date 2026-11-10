@@ -20,8 +20,8 @@ export class IdsDatepickerIntl {
   public prevYearLabel = 'Previous year';
   public nextYearLabel = 'Next year';
 
-  public prevYearsPageLabel = 'Previous 24 years';
-  public nextYearsPageLabel = 'Next 24 years';
+  public prevYearsPageLabel = 'Previous page of years';
+  public nextYearsPageLabel = 'Next page of years';
 
   public switchToDaySelectorLabel = 'Choose date';
   public switchToYearSelectorLabel = 'Choose year and month';

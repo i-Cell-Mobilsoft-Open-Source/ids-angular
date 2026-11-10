@@ -5,6 +5,7 @@ import { DatepickerNgModelExampleComponent } from './datepicker-ng-model-example
 import { DatepickerSizesExampleComponent } from './datepicker-sizes-example/datepicker-sizes-example.component';
 import { DatepickerViewsExampleComponent } from './datepicker-views-example/datepicker-views-example.component';
 import { DatepickerWeekendValidatorExampleComponent } from './datepicker-weekend-validator-example/datepicker-weekend-validator-example.component';
+import { DatepickerYearsPerPageExampleComponent } from './datepicker-years-per-page-example/datepicker-years-per-page-example.component';
 
 import { IdsExampleDef } from '../../shared/ids-example-viewer/ids-example.model';
 
@@ -68,6 +69,18 @@ export const DATEPICKER_EXAMPLES: IdsExampleDef[] = [
       {
         HTMLpath: `${samplesFolder}/datepicker-views-example/datepicker-views-example.component.html`,
         TSpath: `${samplesFolder}/datepicker-views-example/datepicker-views-example.component.ts`,
+      },
+    ],
+  },
+  {
+    id: 'datepicker-years-per-page',
+    title: 'EXAMPLES.DATEPICKER.YEARS_PER_PAGE.TITLE',
+    description: 'EXAMPLES.DATEPICKER.YEARS_PER_PAGE.DESCRIPTION',
+    component: DatepickerYearsPerPageExampleComponent,
+    files: [
+      {
+        HTMLpath: `${samplesFolder}/datepicker-years-per-page-example/datepicker-years-per-page-example.component.html`,
+        TSpath: `${samplesFolder}/datepicker-years-per-page-example/datepicker-years-per-page-example.component.ts`,
       },
     ],
   },

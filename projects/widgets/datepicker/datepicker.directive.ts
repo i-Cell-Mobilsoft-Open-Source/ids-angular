@@ -3,7 +3,7 @@ import { IDS_DATEPICKER_DEFAULT_CONFIG, IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY, I
 import { datepickerConnectedPositions } from './datepicker-positions';
 import { IDS_DATE_FORMATTER } from './tokens/date-formatter';
 import { IDS_DATE_PARSER } from './tokens/date-parser';
-import { IdsDatepickerViewType } from './tokens/datepicker-view';
+import { IdsDatepickerViewType } from './types/datepicker-view';
 
 import { afterNextRender, booleanAttribute, ComponentRef, Directive, effect, ElementRef, forwardRef, inject, Injector, input, OnChanges, output, signal, SimpleChanges, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
@@ -54,11 +54,13 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
   public appearance = input<IdsOverlayPanelAppearanceType>(this._defaultConfig.appearance);
   public minDate = input(null, { transform: (value: unknown) => getValidDateOrNull(deserializeDate(value)) });
   public maxDate = input(null, { transform: (value: unknown) => getValidDateOrNull(deserializeDate(value)) });
+  public yearsPerPage = input(this._validateYearsPerPage(this._defaultConfig.yearsPerPage), { transform: this._validateYearsPerPage });
 
   private _inputChanges = effect(() => {
     const min = this.minDate();
     const max = this.maxDate();
     const view = this.view();
+    const yearsPerPage = this.yearsPerPage();
     const size = this._parent.size();
     const calendar = this._componentRef?.instance;
 
@@ -74,6 +76,9 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     }
     if (view !== calendar.view()) {
       this._componentRef?.setInput('view', view);
+    }
+    if (yearsPerPage !== calendar.yearsPerPage()) {
+      this._componentRef?.setInput('yearsPerPage', yearsPerPage);
     }
     if (size !== calendar.size()) {
       this._componentRef?.setInput('size', size);
@@ -191,6 +196,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     componentRef.setInput('min', this.minDate());
     componentRef.setInput('max', this.maxDate());
     componentRef.setInput('view', this.view());
+    componentRef.setInput('yearsPerPage', this.yearsPerPage());
     componentRef.setInput('appearance', this.appearance());
     componentRef.setInput('size', this._parent.size());
 
@@ -274,5 +280,13 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
       'PageUp',
       'PageDown',
     ].includes(event.code)));
+  }
+
+  private _validateYearsPerPage(value: number): number {
+    if (!Number.isSafeInteger(value) || value <= 0) {
+      throw new RangeError('yearsPerPage must be a positive safe integer.');
+    }
+
+    return value;
   }
 }

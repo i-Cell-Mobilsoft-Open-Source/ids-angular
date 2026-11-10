@@ -535,7 +535,7 @@
       },
       "DISABLED": {
         "TITLE": "All options disabled",
-        "DESCRIPTION": "When every child checkbox is disabled, the group gets a disabled state: the parent checkbox (if allowParent is true) is disabled too, and the group label uses the disabled text color.",
+        "DESCRIPTION": "When every child checkbox is disabled, the parent checkbox (if allowParent is true) is disabled too. The group label uses the disabled text color.",
         "CONTENT": {
           "NOTIFICATIONS": "Notifications",
           "SELECT_ALL": "Select all",

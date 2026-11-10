@@ -531,7 +531,7 @@
       },
       "DISABLED": {
         "TITLE": "Minden opció letiltva",
-        "DESCRIPTION": "Ha minden gyermek checkbox le van tiltva, a csoport disabled állapotba kerül: a szülő checkbox (allowParent esetén) szintén letiltott, a csoport címke pedig a letiltott szövegszínt kapja.",
+        "DESCRIPTION": "Ha minden checkbox le van tiltva, a szülő checkbox (allowParent esetén) szintén letiltott. A csoport címke a letiltott szövegszínt kapja.",
         "CONTENT": {
           "NOTIFICATIONS": "Értesítések",
           "SELECT_ALL": "Összes kijelölése",

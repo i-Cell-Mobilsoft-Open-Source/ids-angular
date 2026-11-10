@@ -529,6 +529,18 @@
           "EXECUTE": "Végrehajtás"
         }
       },
+      "DISABLED": {
+        "TITLE": "Minden opció letiltva",
+        "DESCRIPTION": "Ha minden gyermek checkbox le van tiltva, a csoport disabled állapotba kerül: a szülő checkbox (allowParent esetén) szintén letiltott, a csoport címke pedig a letiltott szövegszínt kapja.",
+        "CONTENT": {
+          "NOTIFICATIONS": "Értesítések",
+          "SELECT_ALL": "Összes kijelölése",
+          "EMAIL": "E-mail",
+          "SMS": "SMS",
+          "PUSH": "Push",
+          "HINT": "Hasonlítsd össze a csoport címke színét egy aktív checkbox csoportéval — jelzi, hogy az egész csoport inaktív."
+        }
+      },
       "REQUIRED": {
         "TITLE": "Kötelező validátor",
         "DESCRIPTION": "Checkbox csoport egyszerű kötelező validátorral, reaktív űrlapokkal.",

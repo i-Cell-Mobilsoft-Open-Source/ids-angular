@@ -533,6 +533,18 @@
           "EXECUTE": "Execute"
         }
       },
+      "DISABLED": {
+        "TITLE": "All options disabled",
+        "DESCRIPTION": "When every child checkbox is disabled, the group gets a disabled state: the parent checkbox (if allowParent is true) is disabled too, and the group label uses the disabled text color.",
+        "CONTENT": {
+          "NOTIFICATIONS": "Notifications",
+          "SELECT_ALL": "Select all",
+          "EMAIL": "Email",
+          "SMS": "SMS",
+          "PUSH": "Push",
+          "HINT": "Compare the group label color with an enabled checkbox group — it reflects that the whole group is inactive."
+        }
+      },
       "REQUIRED": {
         "TITLE": "Required validator",
         "DESCRIPTION": "A checkbox group with a simple required validator using reactive forms.",

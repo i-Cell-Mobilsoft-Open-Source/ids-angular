@@ -1,5 +1,6 @@
 import { CheckboxGroupBasicExampleComponent } from './checkbox-group-basic-example/checkbox-group-basic-example.component';
 import { CheckboxGroupCustomValidatorExampleComponent } from './checkbox-group-custom-validator-example/checkbox-group-custom-validator-example.component';
+import { CheckboxGroupDisabledExampleComponent } from './checkbox-group-disabled-example/checkbox-group-disabled-example.component';
 import { CheckboxGroupOrientationExampleComponent } from './checkbox-group-orientation-example/checkbox-group-orientation-example.component';
 import { CheckboxGroupParentExampleComponent } from './checkbox-group-parent-example/checkbox-group-parent-example.component';
 import { CheckboxGroupRequiredExampleComponent } from './checkbox-group-required-example/checkbox-group-required-example.component';
@@ -40,6 +41,18 @@ export const CHECKBOX_GROUP_EXAMPLES: IdsExampleDef[] = [
       {
         HTMLpath: 'assets/examples/checkbox-group/checkbox-group-parent-example/checkbox-group-parent-example.component.html',
         TSpath: 'assets/examples/checkbox-group/checkbox-group-parent-example/checkbox-group-parent-example.component.ts',
+      },
+    ],
+  },
+  {
+    id: 'checkbox-group-disabled',
+    title: 'EXAMPLES.CHECKBOX_GROUP.DISABLED.TITLE',
+    description: 'EXAMPLES.CHECKBOX_GROUP.DISABLED.DESCRIPTION',
+    component: CheckboxGroupDisabledExampleComponent,
+    files: [
+      {
+        HTMLpath: 'assets/examples/checkbox-group/checkbox-group-disabled-example/checkbox-group-disabled-example.component.html',
+        TSpath: 'assets/examples/checkbox-group/checkbox-group-disabled-example/checkbox-group-disabled-example.component.ts',
       },
     ],
   },

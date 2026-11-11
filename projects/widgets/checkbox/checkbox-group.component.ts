@@ -75,6 +75,7 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
     this.variant(),
     this.orientation(),
     this.allowParent() ? 'indeterminated' : null,
+    this._parentCheckboxDisabled() ? 'disabled' : null,
   ]));
 
   protected _hasHint = computed(() => Boolean(this.hintMessage().length));

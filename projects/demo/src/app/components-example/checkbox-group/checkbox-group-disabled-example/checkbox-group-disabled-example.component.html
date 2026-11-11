@@ -1,0 +1,16 @@
+<ids-checkbox-group
+  [label]="'EXAMPLES.CHECKBOX_GROUP.DISABLED.CONTENT.NOTIFICATIONS' | translate"
+  [parentLabel]="'EXAMPLES.CHECKBOX_GROUP.DISABLED.CONTENT.SELECT_ALL' | translate"
+  [allowParent]="true"
+>
+  <ids-hint-message>{{ "EXAMPLES.CHECKBOX_GROUP.DISABLED.CONTENT.HINT" | translate }}</ids-hint-message>
+  <ids-checkbox [disabled]="true" [(ngModel)]="group.email">
+    {{ "EXAMPLES.CHECKBOX_GROUP.DISABLED.CONTENT.EMAIL" | translate }}
+  </ids-checkbox>
+  <ids-checkbox [disabled]="true" [(ngModel)]="group.sms">
+    {{ "EXAMPLES.CHECKBOX_GROUP.DISABLED.CONTENT.SMS" | translate }}
+  </ids-checkbox>
+  <ids-checkbox [disabled]="true" [(ngModel)]="group.push">
+    {{ "EXAMPLES.CHECKBOX_GROUP.DISABLED.CONTENT.PUSH" | translate }}
+  </ids-checkbox>
+</ids-checkbox-group>

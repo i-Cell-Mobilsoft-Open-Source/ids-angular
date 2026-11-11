@@ -1538,6 +1538,10 @@
         "TITLE": "Master detail",
         "DESCRIPTION": "Sorok kibontása további tartalommal a masterDetail, hasDetailRow és egy detail cell sablon segítségével."
       },
+      "MASTER_DETAIL_CUSTOM_TRIGGER": {
+        "TITLE": "Master detail: egyéni trigger adatoszlopban",
+        "DESCRIPTION": "Az alap master-detail minta a sor végén külön, rögzített oszlopba teszi a chevron gombot. Itt a vezérlő egy meglévő adatoszlopba kerül: a masterDetailToggleColumnId értéke status, ezért a Státusz cella továbbra is mutatja az értéket, és mellette jelenik meg a nyitó/záró gomb. Az alapértelmezett chevron helyett saját gomb is megadható a [idsTableDetailTrigger] direktívával, a detail kontextus objektumra kötve."
+      },
       "CELL_TEMPLATE": {
         "TITLE": "Cella sablon",
         "DESCRIPTION": "Egyedi cellamegjelenítés idsCellTemplate-tel. A cellRenderer értékének egyeznie kell a sablon nevével."

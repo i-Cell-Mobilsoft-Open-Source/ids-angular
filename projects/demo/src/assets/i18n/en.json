@@ -1542,6 +1542,10 @@
         "TITLE": "Master detail",
         "DESCRIPTION": "Expand rows to show additional content with masterDetail, hasDetailRow, and a detail cell template."
       },
+      "MASTER_DETAIL_CUSTOM_TRIGGER": {
+        "TITLE": "Master detail: custom trigger in a column",
+        "DESCRIPTION": "The basic master-detail template places the chevron button in a separate, fixed column at the end of the row. Here, the control is placed in an existing data column: the value of `masterDetailToggleColumnId` is `status`, so the Status cell continues to display the value, and the open/close button appears next to it. Instead of the default chevron, you can specify your own button using the `[idsTableDetailTrigger]` directive, bound to the `detail` context object."
+      },
       "CELL_TEMPLATE": {
         "TITLE": "Cell template",
         "DESCRIPTION": "Customize cell rendering with idsCellTemplate. Set cellRenderer on the column definition to match the template name."

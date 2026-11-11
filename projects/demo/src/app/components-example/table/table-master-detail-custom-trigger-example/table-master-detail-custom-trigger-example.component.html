@@ -1,0 +1,38 @@
+<div class="table-master-detail-actions">
+  <button idsButton type="button" (click)="table.expandAll()">{{ "TABLE.BUTTON.EXPAND_DETAILS" | translate }}</button>
+  <button idsButton type="button" variant="error" (click)="table.collapseAll()">
+    {{ "TABLE.BUTTON.COLLAPSE_DETAILS" | translate }}
+  </button>
+</div>
+<ids-table
+  #table="idsTable"
+  masterDetail
+  [columnDefs]="_columnDefs"
+  [dataSource]="_dataSource"
+  [hasDetailRow]="_hasDetailRow"
+  [masterDetailToggleColumnId]="_masterDetailToggleColumnId"
+  [masterDetailTogglePosition]="_masterDetailTogglePosition"
+  [masterDetailTriggerMode]="_masterDetailTriggerMode"
+  [masterDetailTriggerTemplateName]="_detailTriggerTemplateName"
+>
+  <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+    {{ value | translate }}
+  </ng-template>
+  <ng-template let-detail="detail" let-value="cellValue" idsCellTemplate="statusDetailTrigger">
+    <div class="flex items-center gap-2 w-full">
+      <span class="min-w-0 flex-1">{{ value }}</span>
+      @if (detail.hasDetailRow) {
+        <button
+          idsButton
+          type="button"
+          appearance="outlined"
+          size="compact"
+          [idsTableDetailTrigger]="detail"
+        >
+          {{ (detail.expanded ? "TABLE.DETAIL_TRIGGERS.CLOSE" : "TABLE.DETAIL_TRIGGERS.OPEN") | translate }}
+        </button>
+      }
+    </div>
+  </ng-template>
+  <span *idsCellTemplate="'detail'; let row">{{ row.description }}</span>
+</ids-table>

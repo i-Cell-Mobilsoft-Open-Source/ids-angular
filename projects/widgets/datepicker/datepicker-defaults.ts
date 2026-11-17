@@ -8,6 +8,7 @@ const DEFAULT_YEARS_PER_PAGE = 24;
 export interface IdsDatepickerDefaultConfig {
   view?: IdsDatepickerViewType,
   appearance?: IdsOverlayPanelAppearanceType,
+  allowAdjacentMonthSelection?: boolean,
   yearsPerPage?: number,
 }
 
@@ -23,6 +24,7 @@ export function IDS_DATEPICKER_DEFAULT_CONFIG_FACTORY(): Required<IdsDatepickerD
   return {
     view: IdsDatepickerView.DAY,
     appearance: IdsOverlayPanelAppearance.ELEVATED,
+    allowAdjacentMonthSelection: true,
     yearsPerPage: DEFAULT_YEARS_PER_PAGE,
   };
 }

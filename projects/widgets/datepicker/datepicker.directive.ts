@@ -50,6 +50,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
   public formatter = input(inject(IDS_DATE_FORMATTER));
   public parser = input(inject(IDS_DATE_PARSER));
 
+  public allowAdjacentMonthSelection = input(this._defaultConfig.allowAdjacentMonthSelection, { transform: booleanAttribute });
   public view = input<IdsDatepickerViewType>(this._defaultConfig.view);
   public appearance = input<IdsOverlayPanelAppearanceType>(this._defaultConfig.appearance);
   public minDate = input(null, { transform: (value: unknown) => getValidDateOrNull(deserializeDate(value)) });
@@ -59,6 +60,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
   private _inputChanges = effect(() => {
     const min = this.minDate();
     const max = this.maxDate();
+    const allowAdjacentMonthSelection = this.allowAdjacentMonthSelection();
     const view = this.view();
     const yearsPerPage = this.yearsPerPage();
     const size = this._parent.size();
@@ -73,6 +75,9 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     }
     if (max?.getTime() !== calendar.max()?.getTime()) {
       this._componentRef?.setInput('max', max);
+    }
+    if (allowAdjacentMonthSelection !== calendar.allowAdjacentMonthSelection()) {
+      this._componentRef?.setInput('allowAdjacentMonthSelection', allowAdjacentMonthSelection);
     }
     if (view !== calendar.view()) {
       this._componentRef?.setInput('view', view);
@@ -195,6 +200,7 @@ export class IdsDatepickerDirective extends DirectiveBaseWithDefaults<IdsDatepic
     componentRef.setInput('value', this.value);
     componentRef.setInput('min', this.minDate());
     componentRef.setInput('max', this.maxDate());
+    componentRef.setInput('allowAdjacentMonthSelection', this.allowAdjacentMonthSelection());
     componentRef.setInput('view', this.view());
     componentRef.setInput('yearsPerPage', this.yearsPerPage());
     componentRef.setInput('appearance', this.appearance());

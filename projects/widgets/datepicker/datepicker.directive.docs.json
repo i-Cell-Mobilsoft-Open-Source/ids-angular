@@ -1,4 +1,11 @@
 {
+  "allowAdjacentMonthSelection": {
+    "description": {
+      "en": "Allow selection of visible days from the previous or next month (default: true). When false, these days are disabled. Minimum and maximum date limits always apply.",
+      "hu": "Az előző és a következő hónap látható napjai alapértelmezetten kiválaszthatók. Ha az érték false, ezek a napok tiltottak. A dátumhatárok mindig érvényesek."
+    },
+    "type": "boolean"
+  },
   "appearance": {
     "description": {
       "en": "The appearance of the datepicker's calendar popup",

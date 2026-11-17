@@ -1,6 +1,6 @@
 import { IdsCalendarPage } from '../calendar/calendar-page';
 
-import { ChangeDetectionStrategy, Component, computed, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { addDays, addMonths, addYears, clampDate, compareDates, endOfMonth, endOfWeek, equalDates, getDatesBetween, isValidDate, startOfMonth, startOfWeek } from '@i-cell/ids-angular/core';
 
 const firstDayOfWeekOffset = 1;
@@ -24,6 +24,8 @@ const daysPerWeek = 7;
   },
 })
 export class IdsDaySelectorComponent extends IdsCalendarPage {
+  public allowAdjacentMonthSelection = input.required<boolean>();
+
   public override headerLabel = computed<string>(() => (this._intl.getDaySelectorHeaderLabel(this._currentMonth()) ?? ''));
 
   protected _currentMonth = computed<Date>(() => startOfMonth(this.focusedDate()));

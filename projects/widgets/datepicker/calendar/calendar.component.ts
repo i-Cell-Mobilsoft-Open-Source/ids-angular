@@ -48,6 +48,7 @@ export class IdsCalendarComponent extends ComponentBaseWithDefaults<object> impl
   public appearance = input.required<IdsOverlayPanelAppearanceType>();
   public min = input<Date | null>(null);
   public max = input<Date | null>(null);
+  public allowAdjacentMonthSelection = input.required<boolean>();
   public yearsPerPage = input.required<number>();
 
   public selected = output<Date>();

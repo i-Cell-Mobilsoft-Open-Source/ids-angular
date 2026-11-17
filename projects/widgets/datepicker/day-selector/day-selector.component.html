@@ -9,7 +9,8 @@
     @let isSelected = _isDateSelected(day);
     @let isFocused = _isDateFocused(day);
     @let isToday = _isDateToday(day);
-    @let isDisabled = _isDateDisabled(day) || !_isDateInCurrentMonth(day);
+    @let isAdjacentMonth = !_isDateInCurrentMonth(day);
+    @let isDisabled = _isDateDisabled(day) || (isAdjacentMonth && !allowAdjacentMonthSelection());
     @let tabIndex = isFocused ? 0 : -1;
     @let ariaLabel = _intl.getDayAriaLabel(day);
     <div class="ids-calendar-cell" [class.ids-calendar-cell-selected]="isSelected">
@@ -21,6 +22,7 @@
         [attr.aria-pressed]="isSelected"
         [attr.aria-current]="isToday"
         [tabIndex]="tabIndex"
+        [class.ids-calendar-button-not-current-month]="isAdjacentMonth && !isDisabled && !isSelected && !isToday"
         [class.ids-calendar-button-today]="isToday"
         [class.ids-calendar-button-selected]="isSelected"
         [class.ids-calendar-button-focused]="isFocused"

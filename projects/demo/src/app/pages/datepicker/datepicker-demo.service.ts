@@ -32,6 +32,7 @@ type DatepickerInputControls = {
   minDate: string,
   maxDate: string,
   view: IdsDatepickerViewType,
+  allowAdjacentMonthSelection: boolean,
   yearsPerPage: number,
 };
 
@@ -86,6 +87,16 @@ export class DatepickerDemoService {
       default: datepickerDefaultConfig.appearance,
       control: DemoControl.SELECT,
       list: convertEnumToStringArray(IdsOverlayPanelAppearance),
+    },
+    allowAdjacentMonthSelection: {
+      description: this._widgetDocs.getDescription(
+        DATEPICKER_DOCS_PATH,
+        'allowAdjacentMonthSelection',
+        'Allow selection of visible days from the previous or next month.',
+      ),
+      type: 'boolean',
+      default: datepickerDefaultConfig.allowAdjacentMonthSelection,
+      control: DemoControl.SWITCH,
     },
     yearsPerPage: {
       description: this._widgetDocs.getDescription(

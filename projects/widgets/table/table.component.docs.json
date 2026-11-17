@@ -62,6 +62,13 @@
     },
     "type": "boolean"
   },
+  "rowSelectorCheckboxSize": {
+    "description": {
+      "en": "Size of the row selector checkboxes.",
+      "hu": "A sorválasztó jelölőnégyzetek mérete."
+    },
+    "type": "IdsSizeType"
+  },
   "enableSorting": {
     "description": {
       "en": "Whether column sorting is enabled.",

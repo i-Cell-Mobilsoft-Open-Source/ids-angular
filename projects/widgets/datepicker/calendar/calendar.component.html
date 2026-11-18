@@ -39,7 +39,14 @@
 </div>
 @switch (_view()) {
   @case ("day") {
-    <ids-day-selector [value]="value()" [min]="min()" [max]="max()" [(focusedDate)]="_focusedDate" (selected)="_selectDate($event)" />
+    <ids-day-selector
+      [value]="value()"
+      [min]="min()"
+      [max]="max()"
+      [allowAdjacentMonthSelection]="allowAdjacentMonthSelection()"
+      [(focusedDate)]="_focusedDate"
+      (selected)="_selectDate($event)"
+    />
   }
   @case ("month") {
     <ids-month-selector [value]="value()" [min]="min()" [max]="max()" [(focusedDate)]="_focusedDate" (selected)="_selectMonth($event)" />

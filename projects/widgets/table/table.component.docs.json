@@ -64,8 +64,8 @@
   },
   "rowSelectorCheckboxSize": {
     "description": {
-      "en": "Size of the row selector checkboxes.",
-      "hu": "A sorválasztó jelölőnégyzetek mérete."
+      "en": "Size of the row selector checkboxes (defaults to the table size).",
+      "hu": "A sorválasztó jelölőnégyzetek mérete (alapértelmezetten a táblázat méretéhez igazodik)."
     },
     "type": "IdsSizeType"
   },

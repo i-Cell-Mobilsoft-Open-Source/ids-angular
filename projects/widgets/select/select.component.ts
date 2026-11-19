@@ -498,12 +498,7 @@ export class IdsSelectComponent
       return;
     }
 
-    this.options().forEach((option) => {
-      option.setInactiveStyles();
-      option.selected.set(false);
-    });
-
-    this._selectionModel.clear();
+    this._clearSelection();
 
     const value = this._rawValue;
 
@@ -577,6 +572,7 @@ export class IdsSelectComponent
   private _clearSelection(): void {
     this._selectionModel?.clear();
     this.options().forEach((option) => {
+      option.setInactiveStyles();
       option.selected.set(false);
     });
   }

@@ -21,6 +21,8 @@
                   [aria-labelledby]="_selectDemoService.selectModel['aria-labelledby']"
                   [typeaheadDebounceInterval]="_selectDemoService.selectModel.typeaheadDebounceInterval"
                   [canHandleSuccessState]="_selectDemoService.selectModel.canHandleSuccessState"
+                  [clearable]="_selectDemoService.selectModel.clearable"
+                  [ariaLabelClear]="_selectDemoService.selectModel.ariaLabelClear"
                 >
                   @for (group of _selectDemoService.animals | keyvalue; track group.key) {
                     <ids-option-group [label]="group.key | titlecase">
@@ -49,6 +51,8 @@
                 [typeaheadDebounceInterval]="_selectDemoService.selectModel.typeaheadDebounceInterval"
                 [canHandleSuccessState]="_selectDemoService.selectModel.canHandleSuccessState"
                 [tabIndex]="_selectDemoService.selectModel.tabIndex"
+                [clearable]="_selectDemoService.selectModel.clearable"
+                [ariaLabelClear]="_selectDemoService.selectModel.ariaLabelClear"
                 [(ngModel)]="_selectDemoService.singleSelectionValue"
               >
                 @for (group of _selectDemoService.animals | keyvalue; track $index) {
@@ -81,6 +85,8 @@
                 [aria-labelledby]="_selectDemoService.selectModel['aria-labelledby']"
                 [typeaheadDebounceInterval]="_selectDemoService.selectModel.typeaheadDebounceInterval"
                 [canHandleSuccessState]="_selectDemoService.selectModel.canHandleSuccessState"
+                [clearable]="_selectDemoService.selectModel.clearable"
+                [ariaLabelClear]="_selectDemoService.selectModel.ariaLabelClear"
                 [(ngModel)]="_selectDemoService.multiSelectionValue"
               >
                 @if (_selectDemoService.selectHelperModel.useCustomTrigger) {

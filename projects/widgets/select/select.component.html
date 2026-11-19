@@ -12,10 +12,16 @@
       </span>
     }
   </div>
-
-  <div class="ids-select__arrow">
-    <ids-icon fontIcon="chevron-down" />
-  </div>
+  <span class="ids-select__indicators">
+    @if (this.clearable() && !this.readonly() && !this._empty()) {
+      <ids-clear-value
+        [label]="ariaLabelClear()"
+        [disabled]="disabled()"
+        (clear)="_handleClearValue()"
+      />
+    }
+    <ids-icon alt="" aria-hidden="true" [fontIcon]="isPanelOpen() ? 'chevron-up' : 'chevron-down'" />
+  </span>
 </div>
 <ids-overlay-panel
   #overlayPanel

@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { AbstractErrorStateMatcher, AbstractSuccessStateMatcher, ErrorStateMatcher, SuccessStateMatcher } from '@i-cell/ids-angular/forms';
 
 export interface IdsSelectDefaultConfig {
+  clearable?: boolean
   errorStateMatcher?: typeof AbstractErrorStateMatcher
   successStateMatcher?: typeof AbstractSuccessStateMatcher
   typeaheadDebounceInterval: number
@@ -17,6 +18,7 @@ export const IDS_SELECT_DEFAULT_CONFIG = new InjectionToken<IdsSelectDefaultConf
 
 export function IDS_SELECT_DEFAULT_CONFIG_FACTORY(): Required<IdsSelectDefaultConfig> {
   return {
+    clearable: false,
     errorStateMatcher: ErrorStateMatcher,
     successStateMatcher: SuccessStateMatcher,
     typeaheadDebounceInterval: 200,

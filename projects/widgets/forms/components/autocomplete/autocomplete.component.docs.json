@@ -15,8 +15,8 @@
   },
   "ariaLabelClear": {
     "description": {
-      "en": "aria-label for the autocomplete's clear button.",
-      "hu": "A törlőgomb képernyőolvasóknak szánt megnevezése."
+      "en": "Tooltip label and aria-label attribute for the clear button of the autocomplete.",
+      "hu": "A mező törlését végző gomb tooltip címkéje és aria-label attribútuma."
     },
     "type": "string"
   },

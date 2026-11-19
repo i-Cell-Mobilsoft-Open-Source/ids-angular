@@ -1,3 +1,4 @@
+import { SelectClearableExampleComponent } from './select-clearable-example/select-clearable-example.component';
 import { SelectCustomTriggerExampleComponent } from './select-custom-trigger-example/select-custom-trigger-example.component';
 import { SelectDisabledExampleComponent } from './select-disabled-example/select-disabled-example.component';
 import { SelectFormControlExampleComponent } from './select-form-control-example/select-form-control-example.component';
@@ -116,6 +117,18 @@ export const SELECT_EXAMPLES: IdsExampleDef[] = [
       {
         HTMLpath: 'assets/examples/select/select-preselected-example/select-preselected-example.component.html',
         TSpath: 'assets/examples/select/select-preselected-example/select-preselected-example.component.ts',
+      },
+    ],
+  },
+  {
+    id: 'select-clearable',
+    title: 'EXAMPLES.SELECT.CLEARABLE.TITLE',
+    description: 'EXAMPLES.SELECT.CLEARABLE.DESCRIPTION',
+    component: SelectClearableExampleComponent,
+    files: [
+      {
+        HTMLpath: 'assets/examples/select/select-clearable-example/select-clearable-example.component.html',
+        TSpath: 'assets/examples/select/select-clearable-example/select-clearable-example.component.ts',
       },
     ],
   },

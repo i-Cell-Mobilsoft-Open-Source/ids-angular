@@ -304,6 +304,13 @@
           "FORM_CONTROL_ASYNC_LABEL": "Fruit (model driven, async options, 10 seconds delay)",
           "FORM_CONTROL_ASYNC_HINT": "Pre-selected with FormControl while options load from a simulated request."
         }
+      },
+      "CLEARABLE": {
+        "TITLE": "Clear value(s)",
+        "DESCRIPTION": "With the clearable setting, the selected value can be removed from the trigger with a single click.",
+        "CONTENT": {
+          "CLEAR": "Clear"
+        }
       }
     },
     "SELECT": {
@@ -401,6 +408,13 @@
           "NG_MODEL_ASYNC_HINT": "Pre-selected with ngModel while options load from a simulated request.",
           "FORM_CONTROL_ASYNC_LABEL": "Fruit (model driven, async options, 10 seconds delay)",
           "FORM_CONTROL_ASYNC_HINT": "Pre-selected with FormControl while options load from a simulated request."
+        }
+      },
+      "CLEARABLE": {
+        "TITLE": "Clear value(s)",
+        "DESCRIPTION": "With the clearable setting, the selected value can be cleared from the trigger with a single click.",
+        "CONTENT": {
+          "CLEAR": "Clear"
         }
       }
     },

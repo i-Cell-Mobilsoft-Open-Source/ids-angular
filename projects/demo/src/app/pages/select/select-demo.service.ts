@@ -34,6 +34,8 @@ type SelectInputControls = {
   readonly: boolean;
   'aria-label': string;
   'aria-labelledby': string;
+  ariaLabelClear: string;
+  clearable: boolean;
   typeaheadDebounceInterval: number;
   canHandleSuccessState: boolean;
   tabIndex: number;
@@ -117,6 +119,22 @@ export class SelectDemoService {
       type: 'string',
       default: '-',
       demoDefault: 'animal',
+    },
+    clearable: {
+      description: this._widgetDocs.getDescription(SELECT_DOCS_PATH, 'clearable', 'Whether the select is clearable or not.'),
+      type: 'boolean',
+      default: selectDefaultConfig.clearable,
+      control: DemoControl.SWITCH,
+    },
+    ariaLabelClear: {
+      description: this._widgetDocs.getDescription(
+        SELECT_DOCS_PATH,
+        'ariaLabelClear',
+        'Tooltip label and aria-Label for the clear button.',
+      ),
+      type: 'string',
+      default: '',
+      demoDefault: 'clear',
     },
     typeaheadDebounceInterval: {
       description: this._widgetDocs.getDescription(

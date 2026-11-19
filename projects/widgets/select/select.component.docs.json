@@ -6,6 +6,20 @@
     },
     "type": "boolean"
   },
+  "clearable": {
+    "description": {
+      "en": "Whether the select is clearable or not.",
+      "hu": "Engedélyezi a mező törlését."
+    },
+    "type": "boolean"
+  },
+  "ariaLabelClear": {
+    "description": {
+      "en": "Tooltip label and aria-label attribute for the clear button of the select.",
+      "hu": "A mező törlését végző gomb tooltip címkéje és aria-label attribútuma."
+    },
+    "type": "string"
+  },
   "disabled": {
     "description": {
       "en": "Whether the select is disabled or not.",

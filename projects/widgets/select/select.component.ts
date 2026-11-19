@@ -39,6 +39,7 @@ import {
   IDS_FORM_FIELD_CONTROL,
   IDS_OPTION_GROUP,
   IDS_OPTION_PARENT_COMPONENT,
+  IdsClearValueComponent,
   IdsFormFieldComponent,
   IdsFormFieldControl,
   IdsOptionComponent,
@@ -57,6 +58,7 @@ const defaultConfig = IDS_SELECT_DEFAULT_CONFIG_FACTORY();
               ids-select[formControlName]:not([ngModel]):not([formControl])`,
   imports: [
     CdkOverlayOrigin,
+    IdsClearValueComponent,
     IdsIconComponent,
     IdsOverlayPanelComponent,
   ],
@@ -114,6 +116,8 @@ export class IdsSelectComponent
   public readonly successStateMatcher = input<AbstractSuccessStateMatcher>(inject(this._defaultConfig.successStateMatcher));
   public ariaLabel = input<string>('', { alias: 'aria-label' });
   public ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
+  public ariaLabelClear = input<string>('');
+  public clearable = input<boolean>(this._defaultConfig.clearable);
   public valueCompareFn = input<(o1: unknown, o2: unknown) => boolean>((o1: unknown, o2: unknown) => o1 === o2);
   public sortCompareFn = input<(a: IdsOptionComponent, b: IdsOptionComponent, options: Readonly<IdsOptionComponent[]>) => number>();
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
@@ -460,6 +464,23 @@ export class IdsSelectComponent
     }
   }
 
+  public clear(): void {
+    if (this.disabled() || this.readonly()) {
+      return;
+    }
+
+    this._clearSelection();
+    this._rawValue = this.multiSelect() ? [] : undefined;
+    this._keyManager?.updateActiveItem(-1);
+    this._handleChange();
+    this._onTouched();
+  }
+
+  protected _handleClearValue(): void {
+    this.clear();
+    this.focus();
+  }
+
   protected _handlePanelOpenChange(open: boolean): void {
     if (!open) {
       this.close();
@@ -525,6 +546,10 @@ export class IdsSelectComponent
   // #endregion
 
   private _selectValue(value: unknown): IdsOptionComponent | undefined {
+    if (value == null) {
+      return undefined;
+    }
+
     const valueCompareFn = this.valueCompareFn();
     const correspondingOption = this.options().find((option) => {
       if (this._selectionModel?.isSelected(option)) {

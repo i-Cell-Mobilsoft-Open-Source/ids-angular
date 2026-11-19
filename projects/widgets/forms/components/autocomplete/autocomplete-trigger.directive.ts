@@ -152,7 +152,6 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
 
   public focus(options?: FocusOptions): void {
     this._inputElement.nativeElement.focus(options);
-    this.open();
   }
 
   public setSelectionByOptionValues(optionValues: readonly IdsOptionValue[]): void {
@@ -324,9 +323,12 @@ export class IdsAutocompleteTriggerDirective implements OnInit, OnDestroy {
     const isArrowKey = key === 'ArrowDown' || key === 'ArrowUp' || key === 'ArrowLeft' || key === 'ArrowRight';
     const isOpenKey = key === 'Enter' || key === ' ';
     const isEscapeKey = key === 'Escape';
+    const isSearchKey = /^[\p{L}\p{N}]$/u.test(key) && !hasModifierKey(event, 'ctrlKey', 'metaKey', 'altKey');
 
     if ((manager && !manager.isTyping() && isOpenKey && !hasModifierKey(event)) || isArrowKey) {
       event.preventDefault();
+      this.open();
+    } else if (isSearchKey) {
       this.open();
     } else if (!this.autocomplete().multiSelect() && !isEscapeKey) {
       const previouslySelectedOption = this.selectedOptions[0];

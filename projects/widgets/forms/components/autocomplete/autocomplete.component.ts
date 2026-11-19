@@ -6,6 +6,7 @@ import {
 import { IdsAutocompleteTriggerDirective } from './autocomplete-trigger.directive';
 import { IdsOptionValue } from './types/option-value.type';
 
+import { IdsClearValueComponent } from '../../common/clear-value/clear-value.component';
 import { AbstractErrorStateMatcher } from '../../common/error/error-state';
 import { AbstractSuccessStateMatcher } from '../../common/success/success-state';
 import { formFieldControlClass, IdsFormFieldControl } from '../form-field/form-field-control';
@@ -38,21 +39,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceNumberAttribute } from '@i-cell/ids-angular/core';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
-import { IdsIconButtonAppearance, IdsIconButtonAppearanceType, IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
 import { IdsOverlayPanelComponent } from '@i-cell/ids-angular/overlay-panel';
 import { IdsSpinnerComponent, IdsSpinnerVariant, IdsSpinnerVariantType } from '@i-cell/ids-angular/spinner';
-import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
 
 const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
 
 @Component({
   selector: 'ids-autocomplete',
   imports: [
+    IdsClearValueComponent,
     IdsIconComponent,
-    IdsIconButtonComponent,
     IdsOverlayPanelComponent,
     IdsSpinnerComponent,
-    IdsTooltipDirective,
   ],
   template: `
     @if (panelOpen()) {
@@ -78,22 +76,13 @@ const defaultConfig = IDS_AUTOCOMPLETE_DEFAULT_CONFIG_FACTORY();
         </div>
       </ids-overlay-panel>
     }
-    <span class="ids-autocomplete-suffix">
-      @if (trigger().selected.length > 0 || trigger().hasInputValue) {
-        <button
-          type="button"
-          idsIconButton
-          [appearance]="appearance()"
-          [variant]="parentVariant()"
+    <span class="ids-autocomplete__indicators">
+      @if (!readonly() && (trigger().selected.length > 0 || trigger().hasInputValue)) {
+        <ids-clear-value
+          [label]="ariaLabelClear()"
           [disabled]="disabled()"
-          [ariaLabel]="ariaLabelClear()"
-          [idsTooltip]="ariaLabelClear()"
-          [idsTooltipDisabled]="!ariaLabelClear()"
-          [idsTooltipIgnoreClipped]="true"
-          (click)="trigger().clear()"
-        >
-          <ids-icon alt="" aria-hidden="true" fontIcon="close" />
-        </button>
+          (clear)="_handleClearValue()"
+        />
       }
       @if (isLoading()) {
         <ids-spinner
@@ -154,7 +143,6 @@ export class IdsAutocompleteComponent
   public overlayPanel = viewChild<IdsOverlayPanelComponent>('overlayPanel');
   public panel = viewChild('panel', { read: ElementRef<HTMLElement> });
 
-  public appearance = input<IdsIconButtonAppearanceType>(IdsIconButtonAppearance.STANDARD);
   public parentSize = computed(() => this._parentFormField.parentOrSelfSize());
   public parentVariant = computed(() => this._parentFormField.parentOrSelfVariant());
   public spinnerVariant = input<IdsSpinnerVariantType>(IdsSpinnerVariant.SURFACE);
@@ -278,17 +266,18 @@ export class IdsAutocompleteComponent
   }
 
   // #region IdsFormFieldControl implementation
-  public onContainerClick = (event: Event): void => {
+  public onContainerClick = (): void => {
     if (!this.readonly() && !this.disabled()) {
-      const target = event.target as HTMLElement;
-      // 'clear' button should not trigger focus on the input
-      if (target.parentElement?.tagName === 'BUTTON' || (target.tagName === 'IDS-ICON' && target.parentElement?.tagName === 'BUTTON')) {
-        return;
-      }
       this.trigger().focus();
+      this.trigger().open();
     }
   };
   // #endregion
+
+  protected _handleClearValue(): void {
+    this.trigger().clear();
+    this.trigger().focus();
+  }
 
   // #region required as `IDS_OPTION_PARENT`, but not used here as it cannot handle option content changes.
   // Selection is handled by `_updateCurrentSelection` method of `AutocompleteTriggerDirective`

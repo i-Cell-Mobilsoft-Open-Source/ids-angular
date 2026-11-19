@@ -143,6 +143,7 @@ export class AutocompleteDemoService {
       ),
       type: 'string',
       default: '',
+      demoDefault: 'clear',
       control: DemoControl.TEXT,
     },
     spinnerVariant: {

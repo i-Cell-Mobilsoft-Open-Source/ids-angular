@@ -1,3 +1,4 @@
+export * from './common/clear-value/clear-value.component';
 export * from './common/error/error-state';
 export * from './common/success/success-state';
 export * from './components/autocomplete/autocomplete.component';

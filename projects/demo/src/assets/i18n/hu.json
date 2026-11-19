@@ -402,6 +402,13 @@
           "FORM_CONTROL_ASYNC_LABEL": "Gyümölcs (model driven, aszinkron opciók, 10 másodperces késleltetés)",
           "FORM_CONTROL_ASYNC_HINT": "Előre kiválasztva FormControl-lal, miközben az opciók szimulált kérésből töltődnek."
         }
+      },
+      "CLEARABLE": {
+        "TITLE": "Érték(ek) törlése",
+        "DESCRIPTION": "A clearable beállítással a kiválasztott érték törölhető a triggerből egy kattintással.",
+        "CONTENT": {
+          "CLEAR": "Törlés"
+        }
       }
     },
     "AVATAR": {

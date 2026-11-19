@@ -118,6 +118,8 @@ export class IdsTableComponent<D>
   public hasDetailRow = input<(index: number, data: D) => boolean>(() => false);
   /** Enable row selection feature */
   public enableRowSelection = input<boolean, unknown>(this._defaultConfig.enableRowSelection, { transform: coerceBooleanAttribute });
+  /** The size of the row selector checkbox */
+  public rowSelectorCheckboxSize = input<IdsSizeType | null>(null);
   /** Clear row selection if the table's content changes */
   public clearSelectionOnChange = input<boolean, unknown>(this._defaultConfig.clearSelectionOnChange,
     { transform: coerceBooleanAttribute });

@@ -1,10 +1,23 @@
-<ids-table
-  enableRowSelection
-  [columnDefs]="_columnDefs"
-  [dataSource]="_dataSource"
-  [isRowSelectable]="_isRowSelectable"
->
-  <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
-    {{ value | translate }}
-  </ng-template>
-</ids-table>
+<div class="w-full flex flex-col items-center gap-8">
+  <ids-table
+    enableRowSelection
+    [columnDefs]="_columnDefs"
+    [dataSource]="_dataSource"
+    [rowSelectorCheckboxSize]="_rowSelectorCheckboxSize"
+    [isRowSelectable]="_isRowSelectable"
+  >
+    <ng-template let-value="cellValue" idsCellTemplate="translateHeader">
+      {{ value | translate }}
+    </ng-template>
+  </ids-table>
+
+  <ids-form-field class="w-80">
+    <ids-label>{{ "EXAMPLES.TABLE.ROW_SELECTION.CUSTOM_ROW_SELECTOR_SIZE" | translate }}</ids-label>
+    <ids-select [(ngModel)]="_rowSelectorCheckboxSize">
+      <ids-option [value]="null">{{ "EXAMPLES.TABLE.ROW_SELECTION.DEFAULT" | translate }}</ids-option>
+      @for (size of _sizes; track size) {
+        <ids-option [value]="size">{{ size }}</ids-option>
+      }
+    </ids-select>
+  </ids-form-field>
+</div>

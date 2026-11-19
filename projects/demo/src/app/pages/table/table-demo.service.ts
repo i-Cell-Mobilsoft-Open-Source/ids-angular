@@ -45,6 +45,7 @@ export type TableInputControls = {
   variant: IdsTableVariantType;
   fixedHeader: boolean;
   enableRowSelection: boolean;
+  rowSelectorCheckboxSize: IdsSizeType | null;
   clearSelectionOnChange: boolean;
   enableSorting: boolean;
   masterDetail: boolean;
@@ -216,6 +217,16 @@ export class TableDemoService {
       type: 'boolean',
       default: defaultConfig.enableRowSelection,
       control: DemoControl.SWITCH,
+    },
+    rowSelectorCheckboxSize: {
+      description: this._widgetDocs.getDescription(TABLE_DOCS_PATH, 'rowSelectorCheckboxSize', 'Size of the row selector checkboxes.'),
+      type: 'IdsSizeType | null',
+      default: null,
+      control: DemoControl.SELECT,
+      list: [
+        '',
+        ...convertEnumToStringArray(IdsSize),
+      ],
     },
     clearSelectionOnChange: {
       description: this._widgetDocs.getDescription(

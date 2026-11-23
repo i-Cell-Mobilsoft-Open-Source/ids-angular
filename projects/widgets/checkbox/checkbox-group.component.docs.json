@@ -1,4 +1,18 @@
 {
+  "ariaLabel": {
+    "description": {
+      "en": "Accessible name of the checkbox group (alias: aria-label). Overrides the visible legend as the accessible name.",
+      "hu": "A jelölőnégyzet-csoport akadálymentes neve (alias: aria-label). Felülírja a látható feliratból származó akadálymentes nevet."
+    },
+    "type": "string"
+  },
+  "ariaLabelledBy": {
+    "description": {
+      "en": "Space-separated IDs of elements naming the checkbox group (alias: aria-labelledby). Takes precedence over aria-label and the legend.",
+      "hu": "A csoportot megnevező elemek szóközzel elválasztott azonosítói (alias: aria-labelledby). Elsőbbséget élvez az aria-label és a legend értékével szemben."
+    },
+    "type": "string"
+  },
   "allowParent": {
     "description": {
       "en": "Whether to allow parent checkbox or not.",

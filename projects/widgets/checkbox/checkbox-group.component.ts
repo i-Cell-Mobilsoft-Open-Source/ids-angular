@@ -6,7 +6,7 @@ import { IDS_CHECKBOX_PARENT, IdsCheckboxParent } from './types/checkbox-parent'
 import { IdsCheckboxState } from './types/checkbox-state.type';
 import { IdsCheckboxVariantType } from './types/checkbox-variant.type';
 
-import { ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, inject, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlContainer } from '@angular/forms';
 import {
@@ -27,10 +27,6 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
   templateUrl: './checkbox-group.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    'role': 'group',
-    '[attr.aria-labelledby]': '_groupLabelId()',
-  },
   providers: [
     {
       provide: IDS_CONTROL_CONTAINER,
@@ -42,7 +38,8 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
     },
   ],
 })
-export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsCheckboxGroupDefaultConfig> implements IdsCheckboxParent {
+export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsCheckboxGroupDefaultConfig>
+  implements IdsCheckboxParent, OnInit {
   protected override get _hostName(): string {
     return 'checkbox-group';
   }
@@ -50,9 +47,14 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_CHECKBOX_GROUP_DEFAULT_CONFIG);
 
   private readonly _controlContainer = inject(ControlContainer, { skipSelf: true, optional: true });
+  private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly _hostAriaLabel = signal<string | null>(null);
+  private readonly _hostAriaLabelledBy = signal<string | null>(null);
   private _childCheckboxes = contentChildren(IDS_CHECKBOX_GROUP_CHILD);
   public showAsterisk = input(false, { transform: coerceBooleanAttribute });
   public groupLabel = input<string>('', { alias: 'label' });
+  public ariaLabel = input<string>('', { alias: 'aria-label' });
+  public ariaLabelledBy = input<string>('', { alias: 'aria-labelledby' });
   public allowParent = input<boolean>(this._defaultConfig.allowParent);
   public parentCheckboxLabel = input<string>('', { alias: 'parentLabel' });
   public size = input<IdsSizeType | null>(this._defaultConfig.size);
@@ -70,6 +72,8 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
   );
 
   protected _groupLabelId = computed(() =>  `${this.id()}-label`);
+  protected _accessibleLabel = computed(() => this.ariaLabel() || this._hostAriaLabel() || null);
+  protected _accessibleLabelledBy = computed(() => this.ariaLabelledBy() || this._hostAriaLabelledBy() || null);
   protected _hostClasses = computed(() => this._getHostClasses([
     this.size(),
     this.variant(),
@@ -135,6 +139,23 @@ export class IdsCheckboxGroupComponent extends ComponentBaseWithDefaults<IdsChec
     this._childCheckboxes().filter((child) => !child.disabled()).forEach((child) => {
       child.select();
     });
+  }
+
+  public ngOnInit(): void {
+    if (typeof MutationObserver !== 'undefined') {
+      const host = this._elementRef.nativeElement;
+      const updateAccessibleName = (): void => {
+        this._hostAriaLabel.set(host.getAttribute('aria-label'));
+        this._hostAriaLabelledBy.set(host.getAttribute('aria-labelledby'));
+      };
+      const observer = new MutationObserver(updateAccessibleName);
+      observer.observe(host, { attributes: true, attributeFilter: [
+        'aria-label',
+        'aria-labelledby',
+      ] });
+      this._destroyRef.onDestroy(() => observer.disconnect());
+      updateAccessibleName();
+    }
   }
 
   public deselectAllChild(): void {

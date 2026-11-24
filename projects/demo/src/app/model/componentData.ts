@@ -1,5 +1,6 @@
 export interface ComponentData {
-  id: number;
+  id: string | number;
+  parentTitle?: string;
   title: string;
   slug: string;
   imageUrl: string;

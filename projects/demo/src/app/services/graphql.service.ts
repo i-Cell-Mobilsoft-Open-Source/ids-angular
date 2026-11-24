@@ -34,6 +34,7 @@ export interface StatamicNavNode {
 export interface StatamicNavTreeBranch {
   children?: StatamicNavTreeBranch[];
   page?: {
+    __typename?: string;
     id: string;
     title: string;
     slug: string;
@@ -119,11 +120,11 @@ export class GraphqlService {
     });
   }
 
-  public getComponentsList(): Observable<unknown> {
+  public getComponentsList(site = this._currentLang()): Observable<unknown> {
     return this._apollo.query({
       query: GET_COMPONENTS_LIST,
       variables: {
-        site: this._currentLang(),
+        site,
       },
       fetchPolicy: 'network-only',
     });

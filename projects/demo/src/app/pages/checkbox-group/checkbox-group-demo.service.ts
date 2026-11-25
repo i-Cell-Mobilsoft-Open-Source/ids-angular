@@ -176,7 +176,19 @@ export class CheckboxGroupDemoService {
     return [
       {
         title: getDemoApiTitle(this._apiTitleTranslate, 'COMPONENTS.CHECKBOX_GROUP', 'API.PROPERTY_GROUP.DEFAULT'),
-        config: this.groupInputControlConfig,
+        config: {
+          ...this.groupInputControlConfig,
+          ariaLabel: {
+            description: this._widgetDocs.getDescription(CHECKBOX_GROUP_DOCS_PATH, 'ariaLabel'),
+            type: 'string',
+            default: '',
+          },
+          ariaLabelledBy: {
+            description: this._widgetDocs.getDescription(CHECKBOX_GROUP_DOCS_PATH, 'ariaLabelledBy'),
+            type: 'string',
+            default: '',
+          },
+        },
       },
     ];
   }

@@ -180,6 +180,13 @@ module.exports = {
         '16/9': '16 / 9',
         '16/10': '16 / 10',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            'max-width': '1280px',
+          }
+        },
+      }
     },
   },
   plugins: [

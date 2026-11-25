@@ -17,10 +17,10 @@ const jestConfig: Config = {
   ],
   coverageThreshold: {
     global: {
-      statements: 60,
-      branches: 40,
-      functions: 60,
-      lines: 60,
+      statements: 70,
+      branches: 50,
+      functions: 70,
+      lines: 70,
     },
   },
   maxWorkers: '50%',

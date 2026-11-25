@@ -10,6 +10,7 @@ import {
   Component,
   computed,
   contentChildren,
+  ElementRef,
   forwardRef,
   inject,
   Injector,
@@ -64,7 +65,6 @@ const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
   ],
   host: {
     '(keydown)': '_handleKeyDown($event)',
-    'role': 'radiogroup',
   },
 })
 export class IdsRadioGroupComponent
@@ -77,6 +77,9 @@ export class IdsRadioGroupComponent
   protected readonly _defaultConfig = this._getDefaultConfig(defaultConfig, IDS_RADIO_DEFAULT_CONFIG);
 
   private readonly _injector = inject(Injector);
+  private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly _hostAriaLabel = signal<string | null>(null);
+  private readonly _hostAriaLabelledBy = signal<string | null>(null);
   private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
   private readonly _parentForm = inject(NgForm, { optional: true });
 
@@ -87,6 +90,10 @@ export class IdsRadioGroupComponent
   public name = input.required<string>();
   public required = input<boolean, unknown>(false, { transform: coerceBooleanAttribute });
   public groupLabel = input<string>('', { alias: 'label' });
+  public ariaLabel = input<string>('', { alias: 'aria-label' });
+  public ariaLabelledBy = input<string>('', { alias: 'aria-labelledby' });
+  protected _accessibleLabel = computed(() => this.ariaLabel() || this._hostAriaLabel() || null);
+  protected _accessibleLabelledBy = computed(() => this.ariaLabelledBy() || this._hostAriaLabelledBy() || null);
   public size = input<IdsSizeType>(this._defaultConfig.size);
   public variant = input<IdsRadioVariantType>(this._defaultConfig.variant);
   public orientation = input<IdsOrientationType>(this._defaultConfig.orientation);
@@ -94,7 +101,7 @@ export class IdsRadioGroupComponent
   public isDisabled = signal<boolean>(false);
   public controlDir = signal<NgControl | null>(null);
 
-  protected _groupLabelId = computed(() =>  `${this.id()}-label`);
+  protected _groupLabelId = computed(() => `${this.id()}-label`);
   protected _hasHint = computed(() => Boolean(this.hintMessage().length));
   private _hasSelection = computed(() => this._items().some((item) => item.selected()));
   private _isInForm = (): boolean => !!(this._parentFormGroup || this._parentForm);
@@ -224,6 +231,20 @@ export class IdsRadioGroupComponent
   }
 
   public ngOnInit(): void {
+    if (typeof MutationObserver !== 'undefined') {
+      const host = this._elementRef.nativeElement;
+      const updateAccessibleName = (): void => {
+        this._hostAriaLabel.set(host.getAttribute('aria-label'));
+        this._hostAriaLabelledBy.set(host.getAttribute('aria-labelledby'));
+      };
+      const observer = new MutationObserver(updateAccessibleName);
+      observer.observe(host, { attributes: true, attributeFilter: [
+        'aria-label',
+        'aria-labelledby',
+      ] });
+      this._destroyRef.onDestroy(() => observer.disconnect());
+      updateAccessibleName();
+    }
     this.controlDir.set(
       this._injector.get(NgControl, null, { self: true, optional: true }),
     );

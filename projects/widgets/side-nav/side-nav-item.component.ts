@@ -6,6 +6,7 @@ import {
   booleanAttribute,
   Component,
   computed,
+  DestroyRef,
   contentChild,
   contentChildren,
   effect,
@@ -13,8 +14,12 @@ import {
   inject,
   input,
   linkedSignal,
+  signal,
   TemplateRef,
+  viewChild,
   untracked,
+  afterEveryRender,
+  afterNextRender,
 } from '@angular/core';
 import { isActive, IsActiveMatchOptions } from '@angular/router';
 import { coerceBooleanAttribute } from '@i-cell/ids-angular/core';
@@ -42,7 +47,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
     <a
       idsTooltipPosition="east"
       [idsTooltip]="label()"
-      [idsTooltipDisabled]="!hasTooltip() || !label() || disabled()"
+      [idsTooltipDisabled]="(!_labelClipped() && !hasTooltip()) || !label() || disabled()"
       [idsTooltipIgnoreClipped]="true"
       [class.ids-side-nav-item-single]="!_expandable()"
       [class.ids-side-nav-item-expandable-summary]="_expandable()"
@@ -63,7 +68,7 @@ import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip';
         <ng-content select="[icon-leading]" />
       }
       @if (_parent?.hasLabel()) {
-        <span class="ids-side-nav-item-label">{{ label() }}</span>
+        <span #labelRef class="ids-side-nav-item-label">{{ label() }}</span>
       }
       @if (_iconTrailing()) {
         <ng-content select="[icon-trailing]" />
@@ -127,7 +132,9 @@ export class IdsSideNavItemComponent {
   protected _iconLeading = contentChildren<IdsIconComponent>('[icon-leading]');
   protected _iconTrailing = contentChildren<IdsIconComponent>('[icon-trailing]');
   protected readonly _contentTemplate = contentChild('idsSideNavItemChildren', { read: TemplateRef });
+  protected readonly _labelClipped = signal(false);
   private readonly _contentChildren = contentChildren(IdsSideNavItemComponent);
+  private readonly _labelRef = viewChild<ElementRef<HTMLElement>>('labelRef');
   private _elementRef = inject(ElementRef);
   constructor() {
     effect(() => {
@@ -138,6 +145,21 @@ export class IdsSideNavItemComponent {
           this._elementRef.nativeElement.style.setProperty('--submenu-items-count', contentLength.toString());
         }
       });
+    });
+
+    const host = inject(ElementRef).nativeElement;
+    const destroyRef = inject(DestroyRef);
+    const update = (): void => {
+      const element = this._labelRef()?.nativeElement;
+      this._labelClipped.set(!!element && element.scrollWidth > element.clientWidth);
+    };
+    afterEveryRender({ read: update });
+    afterNextRender({
+      read: () => {
+        const observer = new ResizeObserver(update);
+        observer.observe(host);
+        destroyRef.onDestroy(() => observer.disconnect());
+      },
     });
   }
 

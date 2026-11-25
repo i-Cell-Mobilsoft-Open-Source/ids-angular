@@ -24,7 +24,7 @@ export class IdsMessageDirective extends ComponentBaseWithDefaults<IdsMessageDef
   public disabled = input<boolean>(false);
   private _parentOrSelfSize = computed(() => this._parent?.size() ?? this.size());
   private _parentOrSelfVariant = computed(() => this._parent?.variant() ?? this.variant());
-  private _parentOrSelfDisabled = computed(() => this._parent?.disabled() ?? this.disabled());
+  private _parentOrSelfDisabled = computed(() => this._parent?.disabled?.() ?? this.disabled());
 
   protected _hostClasses = computed(() => this._getHostClasses([
     this._parentOrSelfSize(),

@@ -19,7 +19,7 @@ export class IdsSuccessMessageComponent extends ComponentBase {
   }
 
   private readonly _parent = inject(IDS_MESSAGE_PARENT_FORM_FIELD, { skipSelf: true, optional: true });
-  protected readonly _isDisabled = computed(() => this._parent?.disabled() ?? false);
+  protected readonly _isDisabled = computed(() => this._parent?.disabled?.() ?? false);
   protected _hostClasses = computed(() => this._getHostClasses([]));
 
   public suffixes = contentChildren(IdsMessageSuffixDirective);

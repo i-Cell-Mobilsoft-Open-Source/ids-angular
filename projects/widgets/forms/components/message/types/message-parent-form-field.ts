@@ -1,12 +1,12 @@
-import { IdsFormFieldVariantType } from '../../form-field/types/form-field-variant.type';
+import { IdsMessageVariantType } from './message-variant.type';
 
 import { InjectionToken, Signal } from '@angular/core';
 import { IdsSizeType } from '@i-cell/ids-angular/core';
 
 export interface IdsMessageParentFormField {
-  disabled: Signal<boolean>;
-  size: Signal<IdsSizeType>;
-  variant: Signal<IdsFormFieldVariantType>;
+  disabled?: Signal<boolean>;
+  size: Signal<IdsSizeType | null>;
+  variant: Signal<IdsMessageVariantType | null>;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention

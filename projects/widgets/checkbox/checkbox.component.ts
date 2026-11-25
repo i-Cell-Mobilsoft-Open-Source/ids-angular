@@ -16,7 +16,7 @@ import {
   isString,
   IDS_CONTROL_CONTAINER,
 } from '@i-cell/ids-angular/core';
-import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import { IDS_MESSAGE_PARENT_FORM_FIELD, IdsMessageParentFormField, IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { of, startWith, switchMap } from 'rxjs';
 
@@ -27,6 +27,13 @@ const defaultConfig = IDS_CHECKBOX_DEFAULT_CONFIG_FACTORY();
   imports: [IdsIconComponent],
   templateUrl: './checkbox.component.html',
   providers: [
+    {
+      provide: IDS_MESSAGE_PARENT_FORM_FIELD,
+      useFactory: (): IdsMessageParentFormField => {
+        const checkbox = inject(IdsCheckboxComponent);
+        return { size: checkbox.parentOrSelfSize, variant: checkbox.parentOrSelfVariant };
+      },
+    },
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: IdsCheckboxComponent,
@@ -84,8 +91,8 @@ export class IdsCheckboxComponent
   protected _isIndeterminate = computed(() => this._checkboxState() === IdsCheckboxState.INDETERMINATE);
   protected _isFocusable = computed(() => !this.disabled());
   protected _hostClasses = computed(() => this._getHostClasses([
-    this._parentOrSelfSize(),
-    this._parentOrSelfVariant(),
+    this.parentOrSelfSize(),
+    this.parentOrSelfVariant(),
     this.disabled() || this.readonly() ? 'disabled' : null,
   ]),
   );
@@ -95,8 +102,8 @@ export class IdsCheckboxComponent
     return isString(value) ? value : undefined;
   });
 
-  private _parentOrSelfSize = computed(() => this._checkboxGroup?.size() ?? this.size());
-  private _parentOrSelfVariant = computed(() => this._checkboxGroup?.variant() ?? this.variant());
+  public parentOrSelfSize = computed(() => this._checkboxGroup?.size() ?? this.size());
+  public parentOrSelfVariant = computed(() => this._checkboxGroup?.variant() ?? this.variant());
 
   private _onChange: (value: unknown) => void = () => { };
   private _onTouched: () => unknown = () => { };

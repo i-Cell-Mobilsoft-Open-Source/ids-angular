@@ -20,6 +20,7 @@ query GetComponentsList($site: String!) {
           children {
             children {
               page {
+                __typename
                 title
                 ... on NavEntryPage_SideNav_Components_Component {
                   id
@@ -31,6 +32,23 @@ query GetComponentsList($site: String!) {
                     url
                   }
                   slug
+                }
+              }
+              children {
+                page {
+                  __typename
+                  title
+                  ... on NavEntryPage_SideNav_Components_Component {
+                    id
+                    comp_description
+                    comp_img_dark_mode {
+                      url
+                    }
+                    comp_img_light_mode {
+                      url
+                    }
+                    slug
+                  }
                 }
               }
             }

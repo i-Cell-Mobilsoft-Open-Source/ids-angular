@@ -1,5 +1,5 @@
 export interface StatamicComponentListItem {
-  id: number;
+  id: string | number;
   title: string;
   slug: string;
   comp_img_light_mode: Array<{ url?: string }>;

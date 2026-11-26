@@ -42,7 +42,13 @@ import {
   IdsSizeType,
   IdsVerticalPosition,
 } from '@i-cell/ids-angular/core';
-import { IdsErrorMessageComponent, IdsHintMessageComponent, IdsValidators } from '@i-cell/ids-angular/forms';
+import {
+  IDS_MESSAGE_PARENT_FORM_FIELD,
+  IdsErrorMessageComponent,
+  IdsHintMessageComponent,
+  IdsMessageParentFormField,
+  IdsValidators,
+} from '@i-cell/ids-angular/forms';
 import { of, startWith, switchMap } from 'rxjs';
 
 const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
@@ -61,6 +67,13 @@ const defaultConfig = IDS_RADIO_DEFAULT_CONFIG_FACTORY();
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => IdsRadioGroupComponent),
       multi: true,
+    },
+    {
+      provide: IDS_MESSAGE_PARENT_FORM_FIELD,
+      useFactory: (): IdsMessageParentFormField => {
+        const group = inject(IdsRadioGroupComponent);
+        return { size: group.size, variant: group.variant, disabled: group.isDisabled };
+      },
     },
   ],
   host: {

@@ -19,27 +19,27 @@
               [label]="_radioDemoService.helperModel.showGroupLabel ? _radioDemoService.model.name + '-simple' : ''"
             >
               @if (_radioDemoService.helperModel.showGroupHintMessage) {
-                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
 
               <ids-radio value="chicken">Chicken
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
               </ids-radio>
               <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled">Beef
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
               </ids-radio>
               <ids-radio value="pork">Pork
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
               </ids-radio>
               <ids-radio value="fish">Fish
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
               </ids-radio>
               <ids-error-message>
@@ -61,27 +61,27 @@
             [(ngModel)]="_radioDemoService.simpleValue"
           >
             @if (_radioDemoService.helperModel.showGroupHintMessage) {
-              <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+              <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
             }
 
             <ids-radio value="chicken">Chicken
               @if (_radioDemoService.helperModel.allowHint) {
-                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-radio>
             <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled">Beef
               @if (_radioDemoService.helperModel.allowHint) {
-                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-radio>
             <ids-radio value="pork">Pork
               @if (_radioDemoService.helperModel.allowHint) {
-                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-radio>
             <ids-radio value="fish">Fish
               @if (_radioDemoService.helperModel.allowHint) {
-                <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
               }
             </ids-radio>
 
@@ -107,33 +107,33 @@
             [(ngModel)]="_radioDemoService.wrappedValue"
           >
             @if (_radioDemoService.helperModel.showGroupHintMessage) {
-              <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+              <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
             }
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="chicken">Chicken
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
               </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="beef" [disabled]="_radioDemoService.helperModel.onlyOneItemIsDisabled || _radioDemoService.model.disabled">Beef
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message [disabled]="_radioDemoService.model.disabled || _radioDemoService.helperModel.onlyOneItemIsDisabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
               </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="pork">Pork
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
               </ids-radio>
             </ids-card>
             <ids-card appearance="outlined" size="comfortable">
               <ids-radio value="fish">Fish
                 @if (_radioDemoService.helperModel.allowHint) {
-                  <ids-hint-message [disabled]="_radioDemoService.model.disabled">{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
+                  <ids-hint-message>{{ _radioDemoService.helperModel.hintMessage }}</ids-hint-message>
                 }
               </ids-radio>
             </ids-card>

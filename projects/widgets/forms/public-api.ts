@@ -21,6 +21,7 @@ export * from './components/message/error-message/error-message.component';
 export * from './components/message/hint-message/hint-message.component';
 export * from './components/message/success-message/success-message.component';
 export * from './components/message/types/error-message-mapping';
+export * from './components/message/types/message-parent-form-field';
 export * from './components/message/types/message-variant.type';
 export * from './components/message/types/message.type';
 export * from './components/message/message-defaults';

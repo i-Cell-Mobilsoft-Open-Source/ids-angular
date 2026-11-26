@@ -1,10 +1,12 @@
 import { IdsRadioGroupComponent } from './radio-group.component';
 import { IdsRadioComponent } from './radio.component';
+import { IdsRadioVariantType } from './types/radio-variant.type';
 
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
+import { IdsSizeType } from '@i-cell/ids-angular/core';
+import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 const { computeAccessibleName } = jest.requireActual<{
   computeAccessibleName: (element: Element) => string,
 }>('dom-accessibility-api');
@@ -132,5 +134,94 @@ describe('IdsRadioGroupComponent', () => {
     first.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
     expect(keydown).toHaveBeenCalledTimes(1);
     group.removeEventListener('keydown', keydown);
+  });
+});
+
+@Component({
+  imports: [
+    IdsRadioGroupComponent,
+    IdsRadioComponent,
+    IdsHintMessageComponent,
+    IdsErrorMessageComponent,
+    ReactiveFormsModule,
+  ],
+  template: `
+    <ids-radio-group name="messages" label="Options" [size]="size()" [variant]="variant()" [formControl]="control">
+      <ids-hint-message>Group hint</ids-hint-message>
+      <ids-radio value="a" [disabled]="firstDisabled()">First<ids-hint-message>First hint</ids-hint-message></ids-radio>
+      <ids-radio value="b">Second<ids-hint-message>Second hint</ids-hint-message></ids-radio>
+      <ids-error-message>Group error</ids-error-message>
+    </ids-radio-group>
+  `,
+})
+class MessageHostComponent {
+  public size = signal<IdsSizeType>('compact');
+  public variant = signal<IdsRadioVariantType>('surface');
+  public firstDisabled = signal(false);
+  public control = new FormControl('a');
+}
+
+describe('IdsRadioGroupComponent messages', () => {
+  let fixture: ComponentFixture<MessageHostComponent>;
+  let messages: HTMLElement[];
+
+  beforeEach(async() => {
+    fixture = TestBed.createComponent(MessageHostComponent);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    messages = Array.from(fixture.nativeElement.querySelectorAll('ids-hint-message, ids-error-message'));
+  });
+
+  const everyMessageHas = (className: string): boolean =>
+    messages.every((message) => message.classList.contains(className));
+  const noMessageHas = (className: string): boolean =>
+    messages.every((message) => !message.classList.contains(className));
+
+  it('renders group and item messages with the group defaults', () => {
+    const expectedMessageCount = 4;
+    expect(messages.length).toBe(expectedMessageCount);
+    expect(everyMessageHas('ids-message-compact')).toBe(true);
+    expect(everyMessageHas('ids-message-surface')).toBe(true);
+  });
+
+  it('inherits the size of the group', () => {
+    fixture.componentInstance.size.set('spacious');
+    fixture.detectChanges();
+
+    expect(everyMessageHas('ids-message-spacious')).toBe(true);
+    expect(noMessageHas('ids-message-compact')).toBe(true);
+  });
+
+  it('inherits the variant of the group', () => {
+    fixture.componentInstance.variant.set('dark');
+    fixture.detectChanges();
+
+    expect(everyMessageHas('ids-message-dark')).toBe(true);
+    expect(noMessageHas('ids-message-surface')).toBe(true);
+  });
+
+  it('inherits the disabled state of the group', () => {
+    fixture.componentInstance.control.disable();
+    fixture.detectChanges();
+    expect(everyMessageHas('ids-message-disabled')).toBe(true);
+
+    fixture.componentInstance.control.enable();
+    fixture.detectChanges();
+    expect(noMessageHas('ids-message-disabled')).toBe(true);
+  });
+
+  it('disables only the hint of a disabled radio item', () => {
+    const firstHint = fixture.nativeElement.querySelector('ids-radio[value="a"] ids-hint-message') as HTMLElement;
+    const otherMessages = messages.filter((message) => message !== firstHint);
+
+    fixture.componentInstance.firstDisabled.set(true);
+    fixture.detectChanges();
+    expect(firstHint.classList).toContain('ids-message-disabled');
+    expect(otherMessages.every((message) => !message.classList.contains('ids-message-disabled'))).toBe(true);
+
+    fixture.componentInstance.firstDisabled.set(false);
+    fixture.detectChanges();
+    expect(firstHint.classList).not.toContain('ids-message-disabled');
   });
 });

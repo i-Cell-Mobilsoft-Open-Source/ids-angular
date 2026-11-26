@@ -1539,7 +1539,9 @@
       },
       "ROW_SELECTION": {
         "TITLE": "Sorkiválasztás",
-        "DESCRIPTION": "Sorkiválasztás engedélyezése az enableRowSelection-nel. Az isRowSelectable kizárhat bizonyos sorokat."
+        "DESCRIPTION": "Sorkiválasztás engedélyezése az enableRowSelection-nel. Az isRowSelectable kizárhat bizonyos sorokat.",
+        "CUSTOM_ROW_SELECTOR_SIZE": "Egyéni sorválasztó méret",
+        "DEFAULT": "alapértelmezett (táblázat méretéhez igazítás)"
       },
       "MASTER_DETAIL": {
         "TITLE": "Master detail",

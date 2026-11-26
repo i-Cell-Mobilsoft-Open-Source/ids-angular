@@ -71,6 +71,7 @@
           [disabled]="_isSelectAllDisabled()"
           [aria-label]="_intl.headerSelectorAriaLabel"
           [variant]="isTableVariantPrimary && isRowSelected ? 'light' : 'surface'"
+          [size]="rowSelectorCheckboxSize() ?? size()"
           (change)="$event ? _masterToggle() : null"
         >
         </ids-checkbox>
@@ -86,6 +87,7 @@
             [checked]="rowSelection.isSelected(row)"
             [value]="row"
             [aria-label]="_intl.rowSelectorAriaLabel"
+            [size]="rowSelectorCheckboxSize() ?? size()"
             (click)="$event.stopPropagation()"
             (change)="$event ? rowSelection.toggle(row) : null"
           >

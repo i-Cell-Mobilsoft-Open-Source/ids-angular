@@ -1550,7 +1550,9 @@
       },
       "ROW_SELECTION": {
         "TITLE": "Row selection",
-        "DESCRIPTION": "Enable row selection with enableRowSelection. Use isRowSelectable to exclude specific rows."
+        "DESCRIPTION": "Enable row selection with enableRowSelection. Use isRowSelectable to exclude specific rows.",
+        "CUSTOM_ROW_SELECTOR_SIZE": "Custom row selector size",
+        "DEFAULT": "default (alignment to table size)"
       },
       "MASTER_DETAIL": {
         "TITLE": "Master detail",

@@ -823,8 +823,8 @@
         }
       },
       "ADORNMENTS": {
-        "TITLE": "Input díszítő elemek",
-        "DESCRIPTION": "A form field tartalmazhat leading ikont, prefixet, suffixet, trailing ikont és action gombot.",
+        "TITLE": "Díszítő elemek",
+        "DESCRIPTION": "A form field tartalmazhat leading ikont, prefixet, suffixet, trailing ikont, action gombot és label suffixet.",
         "CONTENT": {
           "LABEL": "Jelszó",
           "PREFIX": "Prefix",

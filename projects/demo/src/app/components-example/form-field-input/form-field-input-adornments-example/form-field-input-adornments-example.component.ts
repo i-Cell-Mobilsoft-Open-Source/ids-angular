@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { IdsFormFieldActionDirective, IdsFormFieldComponent, IdsInputDirective, IdsLabelDirective, IdsPrefixDirective, IdsSuffixDirective } from '@i-cell/ids-angular/forms';
 import { IdsIconComponent } from '@i-cell/ids-angular/icon';
 import { IdsIconButtonComponent } from '@i-cell/ids-angular/icon-button';
+import { IdsTooltipDirective } from '@i-cell/ids-angular/tooltip/public-api';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -16,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IdsFormFieldActionDirective,
     IdsIconComponent,
     IdsIconButtonComponent,
+    IdsTooltipDirective,
     FormsModule,
     TranslateModule,
   ],

@@ -827,8 +827,8 @@
         }
       },
       "ADORNMENTS": {
-        "TITLE": "Input adornments",
-        "DESCRIPTION": "Form fields can include a leading icon, prefix, suffix, trailing icon, and an action button.",
+        "TITLE": "Form field adornments",
+        "DESCRIPTION": "Form fields can include a leading icon, prefix, suffix, trailing icon, an action button, and a label suffix.",
         "CONTENT": {
           "LABEL": "Password",
           "PREFIX": "Prefix",

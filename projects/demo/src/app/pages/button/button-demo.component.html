@@ -19,7 +19,13 @@
                 [disabled]="_buttonDemoService.model.disabled"
                 [active]="_buttonDemoService.model.active"
               >
+                @if (_buttonDemoService.helperModel.hasLeadingIcon) {
+                  <ids-icon icon-leading fontIcon="search" />
+                }
                 {{ _buttonDemoService.helperModel.text }}
+                @if (_buttonDemoService.helperModel.hasTrailingIcon) {
+                  <ids-icon icon-trailing fontIcon="done" />
+                }
               </a>
             } @else {
               <button

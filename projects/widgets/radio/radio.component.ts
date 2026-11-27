@@ -1,9 +1,14 @@
 import { IdsRadioGroupComponent } from './radio-group.component';
 import { IdsRadioChangeEvent } from './types/radio-events.class';
 
-import { ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, inject, input, OnInit, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, inject, input, OnInit, output, Signal, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { coerceNumberAttribute, ComponentBase } from '@i-cell/ids-angular/core';
-import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
+import {
+  IDS_MESSAGE_PARENT_FORM_FIELD,
+  IdsErrorMessageComponent,
+  IdsHintMessageComponent,
+  IdsMessageParentFormField,
+} from '@i-cell/ids-angular/forms';
 
 @Component({
   selector: 'ids-radio',
@@ -11,6 +16,20 @@ import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-a
   templateUrl: './radio.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: IDS_MESSAGE_PARENT_FORM_FIELD,
+      useFactory: (): IdsMessageParentFormField => {
+        const radio = inject(IdsRadioComponent);
+        const group = inject(IdsRadioGroupComponent, { optional: true });
+        return {
+          size: computed(() => group?.size() ?? null),
+          variant: computed(() => group?.variant() ?? null),
+          disabled: radio.isDisabled,
+        };
+      },
+    },
+  ],
 })
 export class IdsRadioComponent extends ComponentBase implements OnInit {
   protected override get _hostName(): string {
@@ -29,7 +48,7 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
   public tabIndex = input<number, unknown>(0, { transform: coerceNumberAttribute });
   public disabled = input<boolean>(false);
 
-  protected _isDisabled = computed(() => this.disabled() || this._group?.isDisabled());
+  protected _isDisabled = computed(() => this.disabled() || (this._group?.isDisabled() ?? false));
   protected _name = computed(() => this._group?.name());
   protected _required = computed(() => this._group?.hasRequiredValidator() ?? false);
   protected _hasErrorState = computed(() => this._group?.hasErrorState() ?? false);
@@ -47,6 +66,10 @@ export class IdsRadioComponent extends ComponentBase implements OnInit {
   public errorMessages = contentChildren(IdsErrorMessageComponent, { descendants: true });
 
   public readonly changes = output<IdsRadioChangeEvent>();
+
+  public get isDisabled(): Signal<boolean> {
+    return this._isDisabled;
+  }
 
   public ngOnInit(): void {
     if (!this._group) {

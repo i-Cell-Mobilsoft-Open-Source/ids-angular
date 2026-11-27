@@ -16,7 +16,7 @@ import {
   IdsSizeType,
   IDS_CONTROL_CONTAINER,
 } from '@i-cell/ids-angular/core';
-import { IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
+import { IDS_MESSAGE_PARENT_FORM_FIELD, IdsMessageParentFormField, IdsErrorMessageComponent, IdsHintMessageComponent } from '@i-cell/ids-angular/forms';
 import { of, startWith, switchMap } from 'rxjs';
 
 const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
@@ -28,6 +28,13 @@ const defaultConfig = IDS_CHECKBOX_GROUP_DEFAULT_CONFIG_FACTORY();
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
+    {
+      provide: IDS_MESSAGE_PARENT_FORM_FIELD,
+      useFactory: (): IdsMessageParentFormField => {
+        const checkbox = inject(IdsCheckboxGroupComponent);
+        return { size: checkbox.size, variant: checkbox.variant };
+      },
+    },
     {
       provide: IDS_CONTROL_CONTAINER,
       useExisting: IdsCheckboxGroupComponent,

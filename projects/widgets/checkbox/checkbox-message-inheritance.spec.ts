@@ -71,33 +71,35 @@ describe('Checkbox message inheritance', () => {
 
     const expectedMessageCount = 6;
 
-    for (const size of [
+    const sizes = [
       'dense',
       'compact',
       'comfortable',
       'spacious',
-    ] as const) {
-      for (const variant of [
-        'surface',
-        'light',
-        'dark',
-      ] as const) {
-        host.size = size;
-        host.groupSize = size;
-        host.variant = variant;
-        host.groupVariant = variant;
-        fixture.detectChanges();
+    ] as const;
+    const variants = [
+      'surface',
+      'light',
+      'dark',
+    ] as const;
+    const sizeVariantMatrix = sizes.flatMap((size) => variants.map((variant) => ({ size, variant })));
 
-        const messages = element.querySelectorAll('ids-hint-message, ids-error-message');
-        expect(messages).toHaveLength(expectedMessageCount);
-        messages.forEach((message) => {
-          expect(message.classList.contains(`ids-message-${size}`)).toBe(true);
-          expect(message.classList.contains(`ids-message-${variant}`)).toBe(true);
-          const classes = Array.from(message.classList);
-          expect(classes.filter((name) => /^ids-message-(dense|compact|comfortable|spacious)$/.test(name))).toHaveLength(1);
-          expect(classes.filter((name) => /^ids-message-(surface|light|dark)$/.test(name))).toHaveLength(1);
-        });
-      }
+    for (const { size, variant } of sizeVariantMatrix) {
+      host.size = size;
+      host.groupSize = size;
+      host.variant = variant;
+      host.groupVariant = variant;
+      fixture.detectChanges();
+
+      const messages = element.querySelectorAll('ids-hint-message, ids-error-message');
+      expect(messages).toHaveLength(expectedMessageCount);
+      messages.forEach((message) => {
+        expect(message.classList.contains(`ids-message-${size}`)).toBe(true);
+        expect(message.classList.contains(`ids-message-${variant}`)).toBe(true);
+        const classes = Array.from(message.classList);
+        expect(classes.filter((name) => /^ids-message-(dense|compact|comfortable|spacious)$/.test(name))).toHaveLength(1);
+        expect(classes.filter((name) => /^ids-message-(surface|light|dark)$/.test(name))).toHaveLength(1);
+      });
     }
     expect(element.querySelector('ids-hint-message')?.classList.contains('ids-message-disabled')).toBe(true);
   });
